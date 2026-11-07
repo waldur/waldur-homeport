@@ -807,6 +807,16 @@ overrides:
       label: Created before
       component: DateField
 
+  proposal_my_tasks:
+    filters:
+      - due
+    due:
+      label: Due
+      placeholder: 'Any deadline'
+      enumOverrides:
+        overdue: Overdue
+        due_soon: Due soon
+
   proposal_my_requested_resources:
     filters:
       - proposal_state
@@ -833,6 +843,22 @@ overrides:
       - round_uuid
       - organization_uuid
       - created_by_uuid
+      - panel_uuid
+      - post_award_status
+      - final_report_overdue
+    post_award_status:
+      label: Extension or final report
+      isMulti: true
+      enumOverrides:
+        extension_requested: Extension request submitted
+        extension_in_assessment: Pending extension request assessment
+        extension_pending_results: Pending extension request results
+        project_extended: Project extended
+        pending_final_report: Pending final report
+        final_report_submitted: Final report submitted
+        project_completed: Project completed
+    final_report_overdue:
+      label: Final report overdue
     state:
       isMulti: true
       enumOverrides:
@@ -854,13 +880,20 @@ overrides:
         uuid: props.callUuid
       searchParam: false
     organization_uuid:
-      label: Organization
+      label: Organization running the call
       name: organization_uuid
       operationId: customers_list
     created_by_uuid:
       label: Applicant
       name: applicant
       operationId: users_list
+    panel_uuid:
+      label: Panel
+      name: panel
+      operationId: proposal_protected_calls_panels_list
+      extraPath:
+        uuid: props.callUuid
+      searchParam: false
 
   proposal_public_calls:
     initialValues:
@@ -873,8 +906,8 @@ overrides:
       - has_active_round
     state:
       isMulti: true
+      # The public list holds no draft: a draft is its managers' to see.
       enumOverrides:
-        draft: Draft
         active: Active
         archived: Archived
     has_active_round:
@@ -1120,7 +1153,7 @@ overrides:
         uuid: props.callUuid
       searchParam: false
     organization_uuid:
-      label: Organization
+      label: Organization running the call
       name: organization_uuid
       operationId: customers_list
     reviewer_uuid:
@@ -1351,6 +1384,37 @@ overrides:
       name: created_by
       operationId: users_list
       searchParam: full_name
+
+  proposal_offering_demand:
+    componentName: OfferingDemandFilter
+    filters:
+      - offering_uuid
+      - call_uuid
+      - round_uuid
+      - state_group
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_provider_offerings_list
+      extraQuery:
+        customer_uuid: props.providerUuid
+    call_uuid:
+      label: Call
+      name: call
+      operationId: proposal_public_calls_list
+      extraQuery:
+        offerings_provider_uuid: props.providerUuid
+    round_uuid:
+      label: Round
+      name: round
+      options: props.roundOptions
+    state_group:
+      label: Proposals
+      isMulti: true
+      enumOverrides:
+        pending: Pending
+        accepted: Accepted
+        closed: Closed
 
   hpc_workspaces_jobs:
     filters:

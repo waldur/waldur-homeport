@@ -163,6 +163,88 @@ export const HintsAndCounts: Story = {
 };
 
 /**
+ * Counts take a colour from the status variants (`neutral` by default,
+ * `info`, `success`, `warning`, `danger`) and a `countLabel` a screen reader
+ * hears after the title in place of the bare number, so the colour is never
+ * the only signal. `TabNav` items take the same three props.
+ */
+export const ColouredCounts: Story = {
+  render: () => (
+    <div className="p-5 max-w-xl flex flex-col gap-6">
+      <Tabs
+        defaultValue="check"
+        items={[
+          {
+            value: 'check',
+            title: 'Check',
+            count: 7,
+            countVariant: 'danger',
+            countLabel: '2 errors, 5 warnings',
+            content: <Panel>Findings</Panel>,
+          },
+          {
+            value: 'notifications',
+            title: 'Notifications',
+            count: 3,
+            countVariant: 'warning',
+            countLabel: '3 warnings',
+            content: <Panel>Rules</Panel>,
+          },
+          {
+            value: 'passed',
+            title: 'Scenarios',
+            count: 12,
+            countVariant: 'success',
+            countLabel: '12 passed',
+            content: <Panel>Scenarios</Panel>,
+          },
+          {
+            value: 'new',
+            title: 'Inbox',
+            count: 2,
+            countVariant: 'info',
+            countLabel: '2 new',
+            content: <Panel>Inbox</Panel>,
+          },
+          {
+            value: 'all',
+            title: 'All',
+            count: 40,
+            content: <Panel>Everything</Panel>,
+          },
+        ]}
+      />
+      <TabNav
+        activeKey="validation"
+        items={[
+          {
+            key: 'manage',
+            title: 'Manage',
+            link: <Anchor href="#manage" />,
+          },
+          {
+            key: 'validation',
+            title: 'Validation',
+            link: <Anchor href="#validation" />,
+            count: 7,
+            countVariant: 'danger',
+            countLabel: '2 errors, 5 warnings',
+            tooltip: '2 errors, 5 warnings',
+          },
+          { key: 'edit', title: 'Edit', link: <Anchor href="#edit" /> },
+        ]}
+      />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole('tab', { name: /^Check\s*, 2 errors, 5 warnings$/ }),
+    ).toBeInTheDocument();
+  },
+};
+
+/**
  * `automatic` (the default) selects as focus moves, which is what the old
  * Bootstrap tabs did; `manual` moves focus with the arrow keys and selects on
  * Enter or Space.

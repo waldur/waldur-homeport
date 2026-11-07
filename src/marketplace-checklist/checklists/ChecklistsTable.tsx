@@ -41,6 +41,11 @@ export const ChecklistsTable: FC<TableWithPortal> = ({ portal }) => {
           },
         },
         {
+          title: translate('Organization'),
+          render: ({ row }) =>
+            row.customer ? row.customer_name : translate('Shared'),
+        },
+        {
           title: translate('Questions'),
           render: ({ row }) => row.questions_count ?? '0',
         },

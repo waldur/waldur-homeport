@@ -1,4 +1,5 @@
 import { ClipboardTextIcon, EyeIcon } from '@phosphor-icons/react';
+import { ProposalWorkflowStepInstance } from 'waldur-js-client';
 
 import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
@@ -14,8 +15,11 @@ import {
   ProjectDurationNote,
   useProjectDuration,
 } from '@/proposals/ProjectDurationNote';
+import { isOpenEnded } from '@/proposals/roundCutoff';
 import { Proposal } from '@/proposals/types';
 import { VStepperFormStepCard, VStepperFormStepProps } from '@/wizard';
+
+import { isReviewStep } from '../reviewStage';
 
 const ProposalDetailsDialog = lazyComponent(() =>
   import('../ProposalDetailsDialog').then((module) => ({
@@ -29,7 +33,7 @@ const ProposalReviewsDialog = lazyComponent(() =>
   })),
 );
 
-const DetailsOverviewButton = ({ proposal, reviews }) => {
+const DetailsOverviewButton = ({ proposal, reviews, workflowStates }) => {
   const { openDialog } = useModal();
   return (
     <BaseButton
@@ -37,6 +41,8 @@ const DetailsOverviewButton = ({ proposal, reviews }) => {
         openDialog(ProposalDetailsDialog, {
           proposal,
           reviews,
+          workflowStates,
+          size: 'lg',
         })
       }
       label={translate('More details')}
@@ -47,11 +53,21 @@ const DetailsOverviewButton = ({ proposal, reviews }) => {
   );
 };
 
-const ReviewsButton = ({ proposal }) => {
+const ReviewsButton = ({ proposal, workflowStates, forApplicant }) => {
   const { openDialog } = useModal();
   return (
     <BaseButton
-      onClick={() => openDialog(ProposalReviewsDialog, { proposal })}
+      onClick={() =>
+        // Wide enough for an expanded review, and anchored to the top so it
+        // grows downwards as reviews load and expand instead of jumping.
+        openDialog(ProposalReviewsDialog, {
+          proposal,
+          workflowStates,
+          forApplicant,
+          size: 'xl',
+          centered: false,
+        })
+      }
       label={translate('Reviews')}
       iconNode={<ClipboardTextIcon weight="bold" />}
       variant="tertiary"
@@ -65,6 +81,16 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
   // Only surfaced where reviews are relevant (call-manager proposal view); the
   // backend also scopes review visibility.
   const canViewReviews: boolean = props.params.canViewReviews;
+  // The applicant team, once the call shares reviews with them.
+  const applicantReadsReviews: boolean = props.params.applicantReadsReviews;
+  // Offered where the call's workflow has a step for reviews, or the
+  // proposal holds reviews all the same: assigned by hand, or written before
+  // the call's workflow changed. Hidden, they could be reached from nowhere.
+  const workflowStates: ProposalWorkflowStepInstance[] | undefined =
+    props.params.workflowStates;
+  const hasReviewStep =
+    (workflowStates?.some(isReviewStep) ?? false) ||
+    props.params.reviews?.length > 0;
   const projectDuration = useProjectDuration(proposal);
   return (
     <VStepperFormStepCard
@@ -72,13 +98,20 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
       title={translate('Details overview')}
       actions={
         <div className="flex gap-1.5">
-          {canViewReviews && <ReviewsButton proposal={proposal} />}
+          {((canViewReviews && hasReviewStep) || applicantReadsReviews) && (
+            <ReviewsButton
+              proposal={proposal}
+              workflowStates={workflowStates}
+              forApplicant={applicantReadsReviews && !canViewReviews}
+            />
+          )}
           {/* Without call context the dialog holds only review tabs; with no
               reviews either it opens empty, so don't offer it. */}
           {(showsCallContext() || props.params.reviews?.length > 0) && (
             <DetailsOverviewButton
               proposal={proposal}
               reviews={props.params.reviews}
+              workflowStates={workflowStates}
             />
           )}
         </div>
@@ -102,7 +135,11 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
               : translate('Submission closes')
           }
           value={
-            <EndingField endDate={proposal.round?.cutoff_time} dateFirst />
+            <EndingField
+              endDate={proposal.round?.cutoff_time}
+              openEnded={isOpenEnded(proposal.round)}
+              dateFirst
+            />
           }
         />
         {showsCallContext() && (
@@ -112,7 +149,12 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
             hideIfEmpty={false}
           />
         )}
-        {projectDuration && <ProjectDurationNote duration={projectDuration} />}
+        {projectDuration && (
+          <ProjectDurationNote
+            duration={projectDuration}
+            chosen={Boolean(proposal.requested_duration_months)}
+          />
+        )}
         {/* The applicant's name is withheld from evaluators when the call
             conceals it; leave the row out rather than show an empty cell. */}
         {proposal.created_by_name && (

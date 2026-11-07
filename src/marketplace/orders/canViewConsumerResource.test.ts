@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ENV } from '@/core/config';
 import { PermissionEnum } from '@/permissions/enums';
 
-import { canViewConsumerResource } from './utils';
+import { canViewConsumerResource, shouldLinkProviderResource } from './utils';
 
 const scope = {
   customerUuid: 'consumer-uuid',
@@ -102,6 +102,41 @@ describe('canViewConsumerResource', () => {
         ]),
         scope,
       ),
+    ).toBe(false);
+  });
+});
+
+describe('shouldLinkProviderResource', () => {
+  const order = {
+    customer_uuid: 'consumer',
+    project_uuid: 'project',
+    marketplace_resource_uuid: 'resource',
+    provider_uuid: 'provider',
+    offering_uuid: 'offering-a',
+  };
+  const offeringManager = (offering: string) =>
+    ({
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'offering',
+          scope_uuid: offering,
+          customer_uuid: 'provider',
+          role_name: 'OFFERING.MANAGER',
+        },
+      ],
+    }) as any;
+
+  it('sends the offering manager to the provider view of the resource', () => {
+    expect(
+      shouldLinkProviderResource(offeringManager('offering-a'), order),
+    ).toBe(true);
+  });
+
+  it('does not for the manager of another offering', () => {
+    expect(
+      shouldLinkProviderResource(offeringManager('offering-b'), order),
     ).toBe(false);
   });
 });

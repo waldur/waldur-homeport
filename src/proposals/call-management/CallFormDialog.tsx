@@ -10,6 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME, STALE_TIME } from '@/core/constants';
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -31,7 +32,13 @@ interface CallFormData {
 }
 
 interface CallFormDialogProps {
-  resolve: { call?; refetch };
+  resolve: {
+    call?;
+    refetch;
+    /** The organisation the call is created in, where the page is not one
+     *  organisation's (Manage calls lists every one the user runs calls of). */
+    customerUuid?: string;
+  };
 }
 
 const ManagerInitializer: FC<{ manager; isEdit: boolean }> = ({
@@ -48,11 +55,12 @@ const ManagerInitializer: FC<{ manager; isEdit: boolean }> = ({
 };
 
 export const CallFormDialog: FC<CallFormDialogProps> = ({
-  resolve: { call, refetch: resolveRefetch },
+  resolve: { call, refetch: resolveRefetch, customerUuid: chosenCustomerUuid },
 }) => {
   const { showErrorResponse, showSuccess } = useNotify();
   const { closeDialog } = useModal();
   const customer = useCustomer();
+  const customerUuid = chosenCustomerUuid ?? customer?.uuid;
   const router = useRouter();
 
   const {
@@ -61,10 +69,10 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
     error: errorManager,
     refetch,
   } = useQuery({
-    queryKey: ['CallManagingOrganizations', customer.uuid],
+    queryKey: ['CallManagingOrganizations', customerUuid],
     queryFn: () =>
       callManagingOrganisationsList({
-        query: { customer_uuid: customer.uuid },
+        query: { customer_uuid: customerUuid },
       }).then((response) => response.data[0]),
     staleTime: SHORT_STALE_TIME,
   });
@@ -74,15 +82,15 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
     isLoading: loadingChecklists,
     error: errorChecklists,
   } = useQuery({
-    queryKey: ['AvailableComplianceChecklists', customer.uuid],
+    queryKey: ['AvailableComplianceChecklists', customerUuid],
     queryFn: () =>
       proposalProtectedCallsAvailableComplianceChecklistsList({
         query: {
           checklist_type: 'proposal_compliance',
-          customer_uuid: customer.uuid,
+          customer_uuid: customerUuid,
         },
       }).then((response) => response.data),
-    enabled: !!customer?.uuid,
+    enabled: !!customerUuid,
     staleTime: STALE_TIME,
   });
 
@@ -130,8 +138,10 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
             ? translate('Unable to update call.')
             : translate('Unable to create call.'),
         );
-        if (e.response && e.response.status === 400) {
-          return e.response.data;
+        // A refused field -- a form of another organisation, say -- is
+        // shown under the field as well.
+        if ((e?.status ?? e?.response?.status) === 400) {
+          return getErrorBody(e);
         }
       }
     },

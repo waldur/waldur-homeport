@@ -60,6 +60,13 @@ const UNKNOWN_CLASS_HOOKS = [
   // react-select's BEM names, kept by waldur-ui's Select (tailwindStyles.ts)
   // for tests/components/select.py and a few stylesheets.
   '^metronic-select(?:-container|__[\\w-]+)$',
+  // The call workflow's SVG diagrams (proposals/workflow-description/diagram)
+  // style these through the <style> element each one renders, which no
+  // stylesheet the rule reads can see.
+  '^(?:wd|wg|pg)-[\\w-]+$',
+  // Marks a disabled step's row for the role and notification matrices'
+  // tests; its badge, not a style, tells the user.
+  '^step-row--disabled$',
 ];
 
 export default tseslint

@@ -7,12 +7,14 @@ import { saveFile } from '@/core/saveFile';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
+import { resolveFileUrl } from './resolveFileUrl';
+
 export const downloadFile = async (
   url: string,
   name: string,
   signal?: AbortSignal,
 ) => {
-  const blob = await get<Blob>(url, signal);
+  const blob = await get<Blob>(resolveFileUrl(url), signal);
   saveFile(blob, name);
 };
 

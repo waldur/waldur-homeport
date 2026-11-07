@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -78,5 +78,54 @@ describe('ResourceRequestsSummary', () => {
     for (const cell of cells) {
       expect(cell).not.toHaveClass('ellipsis');
     }
+  });
+
+  it('marks only the requests the award changed', async () => {
+    const twoRequests = [
+      requests[0],
+      {
+        ...requests[0],
+        uuid: 'req-2',
+        requested_offering: {
+          ...requests[0].requested_offering,
+          uuid: 'call-offering-gpu',
+          offering_name: 'GPU Burst',
+        },
+      },
+    ];
+    vi.mocked(proposalProposalsResourcesList).mockImplementation(
+      () =>
+        Promise.resolve({
+          data: twoRequests,
+          response: new Response(null, {
+            headers: {
+              'content-type': 'application/json',
+              'x-result-count': '2',
+            },
+          }),
+        }) as any,
+    );
+    const awardRows = [
+      { uuid: 'a1', requested: twoRequests[0], change: 'unchanged' },
+      { uuid: 'a2', requested: twoRequests[1], change: 'changed' },
+    ] as any;
+    renderWithProviders(
+      <DrawerProvider>
+        <Provider store={configureStore()({ tables: {} })}>
+          <ResourceRequestsSummary proposal={proposal} awardRows={awardRows} />
+        </Provider>
+      </DrawerProvider>,
+    );
+    await userEvent.click(screen.getByText('Resource requests'));
+
+    const changed = await screen.findByRole('row', { name: /GPU Burst/ });
+    expect(within(changed).getByText('Changed')).toBeInTheDocument();
+    const unchanged = screen.getByRole('row', {
+      name: /HPC Standard Allocation/,
+    });
+    expect(
+      within(unchanged).queryByText('As requested'),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('As requested')).not.toBeInTheDocument();
   });
 });

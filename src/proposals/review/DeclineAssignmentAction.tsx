@@ -16,11 +16,20 @@ export const DeclineAssignmentAction: FC<DeclineAssignmentActionProps> = ({
   item,
   batchUuid,
 }) => {
-  const { mutate, isPending } = useManagedMutation<any, any, void>({
-    mutationFn: () =>
+  // The confirmation resolves with the reason typed into it, which the call
+  // manager reads on the batch: a conflict of interest is reported this way.
+  const { mutate, isPending } = useManagedMutation<
+    any,
+    any,
+    { input?: string } | void
+  >({
+    mutationFn: (result) =>
       assignmentItemsDecline({
         path: { uuid: item.uuid },
-        body: { reason: translate('User declined') },
+        body: {
+          reason:
+            (result && result.input?.trim()) || translate('User declined'),
+        },
       }),
     successMessage: translate('Assignment declined.'),
     errorMessage: translate('Unable to decline.'),
@@ -37,13 +46,19 @@ export const DeclineAssignmentAction: FC<DeclineAssignmentActionProps> = ({
       options: {
         positiveButton: translate('Decline'),
         positiveButtonVariant: 'danger',
+        showInput: true,
+        inputLabel: translate('Reason'),
+        inputPlaceholder: translate(
+          'Optional, for example a conflict of interest',
+        ),
+        inputRequired: false,
       },
     },
   });
 
   return (
     <BaseButton
-      onClick={mutate}
+      onClick={() => mutate()}
       label={translate('Decline')}
       iconNode={<XIcon weight="bold" />}
       variant="danger"

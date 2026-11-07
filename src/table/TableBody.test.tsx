@@ -51,6 +51,44 @@ describe('TableBody', () => {
     expect(screen.getAllByRole('cell')).toHaveLength(COLUMNS.length);
   });
 
+  it('renders a row-header column as th scope=row', () => {
+    renderWrapper({
+      columns: [{ ...COLUMNS[0], rowHeader: true }, COLUMNS[1]],
+    });
+    const header = screen.getByRole('rowheader', {
+      name: 'OpenStack Instance',
+    });
+    expect(header.tagName).toBe('TH');
+    expect(header).toHaveAttribute('scope', 'row');
+    expect(screen.getAllByRole('cell')).toHaveLength(1);
+  });
+
+  it('renders a full-width group header above a row that opens a group', () => {
+    const rows = [
+      { uuid: 1, type: 'A', name: 'one', group: 'x' },
+      { uuid: 2, type: 'B', name: 'two', group: 'x' },
+      { uuid: 3, type: 'C', name: 'three', group: 'y' },
+    ];
+    renderWrapper({
+      rows,
+      rowActions: () => null,
+      rowGroupHeader: ({ row, rowIndex, rows: all }) =>
+        rowIndex === 0 || all[rowIndex - 1].group !== row.group
+          ? `Group ${row.group}`
+          : null,
+    });
+    const headers = screen.getAllByTestId('table-group-header');
+    expect(headers.map((header) => header.textContent)).toEqual([
+      'Group x',
+      'Group y',
+    ]);
+    // Spans the data columns and the actions column.
+    expect(headers[0]).toHaveAttribute('colspan', String(COLUMNS.length + 1));
+    expect(screen.getAllByRole('cell')).toHaveLength(
+      rows.length * (COLUMNS.length + 1),
+    );
+  });
+
   it('should not render expandable indicator if expandable component is not provided', () => {
     renderWrapper();
     expect(screen.queryByTestId('row-expander')).not.toBeInTheDocument();

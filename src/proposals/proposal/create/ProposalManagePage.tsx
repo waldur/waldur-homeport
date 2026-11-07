@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo } from 'react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   proposalProposalsRetrieve,
   proposalPublicCallsRetrieve,
@@ -10,28 +10,56 @@ import {
 import { useBreadcrumbs } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { getQueryParams } from '@/core/filters';
+import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import {
   useCallManagedProposalBreadcrumbItems,
+  useParticipantProposalBreadcrumbItems,
   useProposalBreadcrumbItems,
+  useProviderProposalBreadcrumbItems,
+  useResultsProposalBreadcrumbItems,
 } from '@/proposals/breadcrumbs';
 import { usesCallVocabulary } from '@/proposals/presentation';
-import { canEditProposal, canSubmitProposal } from '@/proposals/team/teamRules';
+import { ProposalEditLockContext } from '@/proposals/team/proposalEditLock';
+import {
+  canEditProposal,
+  canRevokeAnyProposalRole,
+  canSubmitProposal,
+  getGrantableProposalRoleNames,
+  isOnProposalTeam,
+} from '@/proposals/team/teamRules';
 import { Proposal } from '@/proposals/types';
-import { useUser } from '@/workspace/hooks';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
+import { getOpenChangeRequests } from '../changeRequests';
 import { DownloadProposalPdfAction } from '../DownloadProposalPdfAction';
+import { ProposalPreviewAction } from '../preview/ProposalPreviewAction';
 import { ProposalDetails } from '../ProposalDetails';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
+import { OFFERING_TEAM_PROPOSAL_STATE, useProposalView } from '../proposalView';
+import { ProposalViewNotice } from '../ProposalViewNotice';
 import { WorkflowTimeline } from '../WorkflowTimeline';
 
+import { ProposalEditLock } from './ProposalEditLock';
 import { ProposalHeader } from './ProposalHeader';
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
+import {
+  getLatestRejectedOwnReview,
+  getRejectedOwnReview,
+  RejectedReviewNotice,
+} from './RejectedReviewNotice';
+
+// Drawn only on the call team's view of a proposal.
+const ProposalStepsGantt = lazyComponent(() =>
+  import('@/proposals/workflow-description/diagram/ProposalStepsGantt').then(
+    (module) => ({ default: module.ProposalStepsGantt }),
+  ),
+);
 
 /**
  * Sets the applicant's breadcrumb chain.
@@ -43,6 +71,37 @@ import { ProposalSubmissionStep } from './ProposalSubmissionStep';
  */
 const ApplicantBreadcrumbs = ({ proposal }: { proposal: Proposal }) => {
   useBreadcrumbs(useProposalBreadcrumbItems(proposal));
+  return null;
+};
+
+/** The chain of someone who opened it from an organisation's call results. */
+const ResultsBreadcrumbs = ({
+  organizationUuid,
+  proposal,
+}: {
+  organizationUuid: string;
+  proposal: Proposal;
+}) => {
+  const user = useUser();
+  const customer = useCustomer();
+  const name =
+    (customer?.uuid === organizationUuid ? customer.name : undefined) ??
+    user?.permissions?.find(
+      (permission) => permission.customer_uuid === organizationUuid,
+    )?.customer_name;
+  useBreadcrumbs(
+    useResultsProposalBreadcrumbItems(
+      { uuid: organizationUuid, name },
+      proposal,
+    ),
+  );
+  return null;
+};
+
+/** The chain of someone working on the proposal off its team. */
+const ParticipantBreadcrumbs = ({ proposal }: { proposal: Proposal }) => {
+  const user = useUser();
+  useBreadcrumbs(useParticipantProposalBreadcrumbItems(user, proposal));
   return null;
 };
 
@@ -62,11 +121,56 @@ const CallManagerBreadcrumbs = ({
   return null;
 };
 
+/**
+ * The provider's chain, for a proposal opened from the provider's proposals.
+ * Its name comes from the grant that lets the user act for it, else from the
+ * organisation the provider pages left open.
+ */
+const ProviderBreadcrumbs = ({
+  providerUuid,
+  proposal,
+}: {
+  providerUuid: string;
+  proposal: Proposal;
+}) => {
+  const user = useUser();
+  const customer = useCustomer();
+  const name =
+    user?.permissions?.find(
+      (permission) => permission.customer_uuid === providerUuid,
+    )?.customer_name ??
+    (customer?.uuid === providerUuid ? customer.name : undefined) ??
+    proposal.offering_team_providers?.find((item) => item.uuid === providerUuid)
+      ?.name;
+  useBreadcrumbs(
+    useProviderProposalBreadcrumbItems({ uuid: providerUuid, name }, proposal),
+  );
+  return null;
+};
+
 export const ProposalManagePage = () => {
   const {
     state,
-    params: { proposal_uuid },
+    params: { proposal_uuid, review_uuid, provider, uuid, panels, results },
   } = useCurrentStateAndParams();
+  const router = useRouter();
+  // A link from before the offering team had its own view, `?provider=`,
+  // opens that view.
+  const legacyProvider = state.name === 'proposals.manage-proposal' && provider;
+  useEffect(() => {
+    if (legacyProvider) {
+      router.stateService.go(
+        OFFERING_TEAM_PROPOSAL_STATE,
+        { uuid: legacyProvider, proposal_uuid, review_uuid, panels },
+        { location: 'replace' },
+      );
+    }
+  }, [legacyProvider, proposal_uuid, review_uuid, panels, router]);
+
+  // A link to one review: from "My reviews", a notification, the review page.
+  // Read from the route rather than getQueryParams(), which turns a bare uuid
+  // into a filter's `{ uuid }` object and so never matched a review.
+  const reviewUuid: string | undefined = review_uuid || undefined;
 
   const {
     data: proposal,
@@ -82,6 +186,15 @@ export const ProposalManagePage = () => {
       }).then((response) => response.data),
 
     refetchOnWindowFocus: false,
+    // Leaving for the "not found" page drops the uuid from the route a
+    // render before the page unmounts: no request for a proposal "{uuid}".
+    enabled: Boolean(proposal_uuid),
+    // A reviewer whose review was rejected has lost the access it gave. The
+    // page explains that itself (below) instead of the global "not found",
+    // whether they came by their review's link or by the proposal's own.
+    meta: reviewUuid
+      ? { skipGlobalErrorRedirect: true }
+      : { handlesErrorStatuses: [404] },
   });
 
   const isDraft = proposal?.state === 'draft';
@@ -97,11 +210,51 @@ export const ProposalManagePage = () => {
   const user = useUser();
 
   const isEditPage = state.name === 'proposals.manage-proposal';
-  const isCallManagerView = state.name?.startsWith('call-management');
+  const { view } = useProposalView(proposal);
+  const isCallManagerView = view === 'call_manager';
+  const isOfferingTeamView = view === 'offering_team';
+  const providerUuid: string | undefined = isOfferingTeamView
+    ? uuid
+    : undefined;
   // Proposal administrators edit the draft as well; submitting stays with
   // its creator, its managers and staff.
   const hasPermissionToEdit = proposal && canEditProposal(user, proposal);
   const hasPermissionToSubmit = proposal && canSubmitProposal(user, proposal);
+  // Changes asked of the applicant reopen the form for the parts unlocked.
+  const changesRequested = getOpenChangeRequests(proposal).length > 0;
+  const formOpen =
+    (proposal?.state === 'draft' || changesRequested) &&
+    isEditPage &&
+    hasPermissionToEdit;
+  // Someone off the proposal's team who could change it -- its form, or its
+  // team -- staff, say: it stays locked until they unlock editing on
+  // purpose, for this visit only.
+  // In their own view, the call's managers and organisers change a
+  // submitted proposal's team as part of running the call: no lock there.
+  // Staff hold no such grant and keep it.
+  const holdsCall = Boolean(
+    proposal &&
+    user?.permissions?.some(
+      (grant) =>
+        (grant.role_name === 'CALL.MANAGER' &&
+          grant.scope_uuid === proposal.call_uuid) ||
+        (grant.role_name === 'CUSTOMER.CALL_ORGANIZER' &&
+          grant.scope_uuid === proposal.call_managing_organisation_uuid),
+    ),
+  );
+  const editsAsOutsider =
+    Boolean(proposal) &&
+    !(isCallManagerView && holdsCall) &&
+    !isOnProposalTeam(user, proposal) &&
+    (Boolean(formOpen) ||
+      getGrantableProposalRoleNames(user, proposal).length > 0 ||
+      canRevokeAnyProposalRole(user, proposal));
+  const [unlockedFor, setUnlockedFor] = useState<string | null>(null);
+  const editingUnlocked = !editsAsOutsider || unlockedFor === proposal?.uuid;
+  const lockValue = useMemo(
+    () => ({ locked: !editingUnlocked }),
+    [editingUnlocked],
+  );
 
   const { data: call } = useQuery({
     queryKey: ['ProposalCall', proposal?.call_uuid],
@@ -122,6 +275,8 @@ export const ProposalManagePage = () => {
             'proposal_field_config',
             // Tells the applicant when review of a submitted proposal starts.
             'evaluation_start',
+            // The lengths the applicant chooses the project's duration from.
+            'allowed_duration_months',
             // Cast: compliance_checklist* are protected-call fields, so the
             // list is not assignable to keyof PublicCall.
           ] as any,
@@ -154,9 +309,8 @@ export const ProposalManagePage = () => {
   // but if another review was selected, use it by reading from the url query `review_uuid`
   const userReview = useMemo(() => {
     if (!reviews?.length) return null;
-    const params = getQueryParams();
-    if (params['review_uuid']) {
-      const review = reviews.find((rw) => rw.uuid === params['review_uuid']);
+    if (reviewUuid) {
+      const review = reviews.find((rw) => rw.uuid === reviewUuid);
       if (review) return review;
     }
     const userReviews = reviews.filter(
@@ -173,7 +327,7 @@ export const ProposalManagePage = () => {
     }
     // Sort by state, so that can take prefered review
     return userReviews.sort((a, b) => (a.state < b.state ? 1 : -1))[0];
-  }, [reviews, user]);
+  }, [reviews, reviewUuid, user]);
 
   const submittedReviews = useMemo(
     () =>
@@ -183,25 +337,91 @@ export const ProposalManagePage = () => {
     [reviews],
   );
 
-  if (isLoading || isLoadingReviews) {
+  const rejectedReview = useMemo(
+    () => getRejectedOwnReview(reviews, reviewUuid, user),
+    [reviews, reviewUuid, user],
+  );
+  // Without a review's link, a proposal the viewer can no longer open is
+  // explained by their own latest rejected review of it, if any.
+  const lostAccessReview = useMemo(
+    () =>
+      (error as any)?.response?.status === 404
+        ? (rejectedReview ?? getLatestRejectedOwnReview(reviews, user))
+        : null,
+    [error, rejectedReview, reviews, user],
+  );
+
+  // Nothing to explain: the link is as dead as any other, and says so the
+  // way every other missing page does.
+  const unexplainedNotFound =
+    (error as any)?.response?.status === 404 &&
+    !isLoadingReviews &&
+    !lostAccessReview;
+  useEffect(() => {
+    if (unexplainedNotFound) goToNotFound();
+  }, [unexplainedNotFound]);
+
+  if (
+    legacyProvider ||
+    isLoading ||
+    isLoadingReviews ||
+    (!proposal && !error)
+  ) {
     return <LoadingSpinner />;
   } else if (error) {
+    // The reviewer's own reviews stay readable after the proposal does not:
+    // say why the link no longer opens it rather than report a failure.
+    if (lostAccessReview) {
+      return (
+        <RejectedReviewNotice
+          review={lostAccessReview}
+          hasAccess={false}
+          className="mt-4"
+        />
+      );
+    }
     return <LoadingErred loadData={refetch} />;
   }
 
   return (
-    <>
-      <SidebarLayout.Header className="pb-4">
+    <ProposalEditLockContext.Provider value={lockValue}>
+      <SidebarLayout.Header className="pb-4" fluid>
         <div className="w-full">
           {isCallManagerView ? (
             <CallManagerBreadcrumbs call={call} proposal={proposal} />
-          ) : (
+          ) : providerUuid ? (
+            <ProviderBreadcrumbs
+              providerUuid={providerUuid}
+              proposal={proposal}
+            />
+          ) : isOnProposalTeam(user, proposal) ? (
             <ApplicantBreadcrumbs proposal={proposal} />
+          ) : results ? (
+            <ResultsBreadcrumbs
+              organizationUuid={results}
+              proposal={proposal}
+            />
+          ) : (
+            <ParticipantBreadcrumbs proposal={proposal} />
+          )}
+          {rejectedReview && (
+            <RejectedReviewNotice
+              review={rejectedReview}
+              hasAccess
+              className="mb-4"
+            />
           )}
           <ProposalRoleBasedTabs
             review={userReview}
             proposal={proposal}
             call={call}
+          />
+          {/* The applicant preview says so itself (ProposalDetails), where
+              it knows whether the viewer also works on the page. */}
+          <ProposalViewNotice
+            proposal={proposal}
+            preview={false}
+            providerUuid={providerUuid}
           />
           <ProposalHeader
             proposal={proposal}
@@ -209,10 +429,25 @@ export const ProposalManagePage = () => {
             // A utility, not a decision: beside the title, not in the sidebar.
             actions={
               isCallManagerView ? (
-                <DownloadProposalPdfAction proposal={proposal} />
+                <div className="flex flex-wrap gap-1.5">
+                  {proposal.state !== 'draft' && (
+                    <ProposalPreviewAction proposal={proposal} />
+                  )}
+                  <DownloadProposalPdfAction proposal={proposal} />
+                </div>
               ) : undefined
             }
           />
+          {editsAsOutsider && (
+            <ProposalEditLock
+              proposal={proposal}
+              unlocked={editingUnlocked}
+              formEditable={Boolean(formOpen)}
+              onChange={(unlocked) =>
+                setUnlockedFor(unlocked ? proposal.uuid : null)
+              }
+            />
+          )}
           {/* No stepper while the proposal is a draft: the applicant hasn't
               submitted yet, so no workflow has started — the page shows the
               editable submission form instead. The stepper only appears from
@@ -220,13 +455,30 @@ export const ProposalManagePage = () => {
           {proposal.state !== 'draft' && (
             <WorkflowTimeline
               proposal={proposal}
-              showDetails={isCallManagerView}
+              // The call team and an offering's team follow the real steps;
+              // the applicant, and a preview of their page, the stand-ins.
+              showDetails={isCallManagerView || isOfferingTeamView}
               evaluationStart={call?.evaluation_start}
+            />
+          )}
+          {/* Planned against actual, for the call team only: the endpoint
+              answers anyone else 404 and this then draws nothing. */}
+          {proposal.state !== 'draft' && isCallManagerView && (
+            <ProposalStepsGantt
+              proposalUuid={proposal.uuid}
+              // Evaluated at the round's cut-off, a submitted proposal starts
+              // no step before it: its plan starts there.
+              startsAt={
+                call?.evaluation_start === 'at_cutoff' &&
+                proposal.state === 'submitted'
+                  ? proposal.round?.cutoff_time
+                  : undefined
+              }
             />
           )}
         </div>
       </SidebarLayout.Header>
-      {proposal.state === 'draft' && isEditPage && hasPermissionToEdit ? (
+      {formOpen && editingUnlocked ? (
         <ProposalSubmissionStep
           proposal={proposal}
           call={call}
@@ -242,6 +494,6 @@ export const ProposalManagePage = () => {
           refetch={refetch}
         />
       )}
-    </>
+    </ProposalEditLockContext.Provider>
   );
 };

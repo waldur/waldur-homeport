@@ -90,23 +90,26 @@ export const TableNav = ({ tabs }: { tabs: TableTab[] }) => {
       className="min-w-0 grow pt-3"
       scrollable
       bordered={false}
-      items={tabs.map((tab) =>
-        tab.onSelect
+      items={tabs.map((tab) => {
+        const shared = {
+          key: tab.key,
+          title: tab.title,
+          count: tab.count,
+          countVariant: tab.countVariant,
+          countLabel: tab.countLabel,
+        };
+        return tab.onSelect
           ? {
-              key: tab.key,
-              title: tab.title,
-              count: tab.count,
+              ...shared,
               onClick: () => tab.onSelect(tab.key),
             }
           : {
-              key: tab.key,
-              title: tab.title,
-              count: tab.count,
+              ...shared,
               link: (
                 <Link state={tab.state ?? state.name} params={tab.params} />
               ),
-            },
-      )}
+            };
+      })}
     />
   );
 };

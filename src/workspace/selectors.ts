@@ -7,6 +7,7 @@ import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import {
   hasConsumerPermission,
   hasPermission,
+  hasPermissionOnAnyOfferingOf,
 } from '@/permissions/hasPermission';
 import { type RootState } from '@/store/reducers';
 
@@ -217,6 +218,60 @@ export const canAccessProviderOffering = (
     })
   );
 };
+
+/**
+ * Route guard for a provider workspace page that an offering manager also
+ * uses for the offerings they manage. The provider workspace admits
+ * organization and service provider roles; this also admits a holder of
+ * `permission` on any offering of the provider (any offering role when no
+ * permission is given). The backend then scopes the page's data to those
+ * offerings.
+ */
+const canAccessProviderAsOfferingRole =
+  (permission?: string) =>
+  (
+    state: RootState,
+    transition?: { params: () => { uuid?: string } },
+  ): boolean =>
+    canAccessServiceProviderWorkspace(state) ||
+    hasPermissionOnAnyOfferingOf(
+      getUser(state),
+      transition?.params()?.uuid ?? getCustomer(state)?.uuid,
+      permission,
+    );
+
+/**
+ * Route guard for a proposal opened as an offering's team: the provider's
+ * workspace people, and anyone holding a role on one of its offerings -- its
+ * managers, and those a slot of a step can be handed to. Checked against the
+ * provider the route names, since the page resolves no organization.
+ */
+export const canOpenOfferingTeamProposal = (
+  state: RootState,
+  transition?: { params: () => { uuid?: string } },
+): boolean => {
+  const user = getUser(state);
+  const providerUuid = transition?.params()?.uuid;
+  return (
+    checkIsStaffOrSupport(user) ||
+    (!!providerUuid &&
+      (checkCanAccessServiceProvider({ uuid: providerUuid }, user) ||
+        !!hasPermissionOnAnyOfferingOf(user, providerUuid)))
+  );
+};
+
+/** The provider's "Requests for offerings" list. */
+export const canAccessOfferingRequests = canAccessProviderAsOfferingRole(
+  PermissionEnum.ACCEPT_REQUESTED_OFFERING,
+);
+
+/** The provider's Orders list. */
+export const canAccessProviderOrders = canAccessProviderAsOfferingRole(
+  PermissionEnum.LIST_ORDERS,
+);
+
+/** The provider's Resources list and resource pages. */
+export const canAccessProviderResources = canAccessProviderAsOfferingRole();
 
 /**
  * Does the user hold `permission` on the provider organization? Support staff

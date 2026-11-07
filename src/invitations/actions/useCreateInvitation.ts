@@ -32,7 +32,7 @@ export const useCreateInvitation = (
 
   const canInvite = useMemo(
     () =>
-      context.roleTypes.some((roleType) => {
+      !!context.roleTypes?.some((roleType) => {
         let scope: any = context.scope;
         if (roleType === 'call_organizer') {
           scope = context.scope.manager_uuid;

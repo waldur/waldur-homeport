@@ -257,4 +257,34 @@ describe('TabsList', () => {
     expect(isCurrent('tab-reviewer')).toBe(true);
     expect(isCurrent('tab-user-details')).toBe(false);
   });
+
+  it('draws a page tab count, read as its label', () => {
+    tabs.current = [
+      {
+        title: 'Check',
+        to: 'protected-call.validation',
+        params: { tab: 'check' },
+        count: 7,
+        countVariant: 'danger',
+        countLabel: '2 errors, 5 warnings',
+      },
+      {
+        title: 'Roles',
+        to: 'protected-call.validation',
+        params: { tab: 'roles' },
+      },
+    ];
+    mockRouterOn('protected-call.validation', { tab: 'check' });
+
+    render(<TabsList />);
+
+    const link = screen.getByRole('link', {
+      name: 'Check, 2 errors, 5 warnings',
+    });
+    expect(within(link).getByText('7')).toHaveAttribute(
+      'data-count-variant',
+      'danger',
+    );
+    expect(screen.getByRole('link', { name: 'Roles' })).toBeInTheDocument();
+  });
 });

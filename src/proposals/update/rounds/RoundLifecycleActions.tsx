@@ -1,5 +1,7 @@
 import {
+  ArrowsDownUpIcon,
   CheckCircleIcon,
+  CheckSquareOffsetIcon,
   GavelIcon,
   ListChecksIcon,
   MegaphoneIcon,
@@ -18,6 +20,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { canAllocateInSubmissionOrder } from '@/proposals/budgets';
 import { getRoundLifecycleActions } from '@/proposals/roundLifecycle';
 import { Call } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -26,6 +29,12 @@ const PublishRoundResultsDialog = lazyComponent(() =>
   import('@/proposals/round/lifecycle/PublishRoundResultsDialog').then((m) => ({
     default: m.PublishRoundResultsDialog,
   })),
+);
+
+const AllocateInSubmissionOrderDialog = lazyComponent(() =>
+  import('@/proposals/round/lifecycle/AllocateInSubmissionOrderDialog').then(
+    (m) => ({ default: m.AllocateInSubmissionOrderDialog }),
+  ),
 );
 
 const CompleteRoundDialog = lazyComponent(() =>
@@ -38,6 +47,12 @@ const EditRoundCompletionRuleDialog = lazyComponent(() =>
   import('@/proposals/round/lifecycle/EditRoundCompletionRuleDialog').then(
     (m) => ({ default: m.EditRoundCompletionRuleDialog }),
   ),
+);
+
+const CompleteRoundStepDialog = lazyComponent(() =>
+  import('@/proposals/round/lifecycle/CompleteRoundStepDialog').then((m) => ({
+    default: m.CompleteRoundStepDialog,
+  })),
 );
 
 const RecordRoundAdoptionDialog = lazyComponent(() =>
@@ -68,7 +83,7 @@ export const RoundLifecycleActions: FC<RoundLifecycleActionsProps> = ({
   canUpdate,
 }) => {
   const { openDialog } = useModal();
-  const available = getRoundLifecycleActions(row);
+  const available = getRoundLifecycleActions(row, call);
   const path = { uuid: call.uuid, obj_uuid: row.uuid };
 
   const close = useManagedMutation<any, any, void>({
@@ -149,14 +164,39 @@ export const RoundLifecycleActions: FC<RoundLifecycleActionsProps> = ({
       {show(available.publishResults) && (
         <ActionItem
           title={translate('Publish results')}
-          disabled={callInactive}
-          tooltip={inactiveReason}
+          disabled={callInactive || available.awaitingAdoption}
+          tooltip={
+            inactiveReason ??
+            (available.awaitingAdoption
+              ? row.lifecycle_state === 'deciding'
+                ? translate(
+                    'Record the adoption of the results before publishing them.',
+                  )
+                : translate(
+                    'Start deciding and record the adoption of the results before publishing them.',
+                  )
+              : undefined)
+          }
           action={() =>
             openDialog(PublishRoundResultsDialog, {
               resolve: { round: row, call, refetch },
             })
           }
           iconNode={<MegaphoneIcon weight="bold" />}
+        />
+      )}
+      {canUpdate && canAllocateInSubmissionOrder(row) && (
+        <ActionItem
+          title={translate('Allocate in submission order')}
+          disabled={callInactive}
+          tooltip={inactiveReason}
+          action={() =>
+            openDialog(AllocateInSubmissionOrderDialog, {
+              resolve: { round: row, call, refetch },
+              size: 'xl',
+            })
+          }
+          iconNode={<ArrowsDownUpIcon weight="bold" />}
         />
       )}
       {show(available.complete) && (
@@ -177,6 +217,18 @@ export const RoundLifecycleActions: FC<RoundLifecycleActionsProps> = ({
               : undefined)
           }
           iconNode={<CheckCircleIcon weight="bold" />}
+        />
+      )}
+      {canUpdate && (row.proposals?.length ?? 0) > 0 && (
+        <ActionItem
+          title={translate('Complete a step for the round')}
+          action={() =>
+            openDialog(CompleteRoundStepDialog, {
+              resolve: { round: row, call, refetch },
+              size: 'lg',
+            })
+          }
+          iconNode={<CheckSquareOffsetIcon weight="bold" />}
         />
       )}
       {canUpdate && available.completionRule && (

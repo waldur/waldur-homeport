@@ -13,22 +13,22 @@ import { useArrowSettings } from '../api';
 const SETUP_FLOW_DIAGRAM = `
 flowchart TB
     subgraph setup["Initial Setup"]
-        A[Staff clicks 'Setup Arrow Integration'] --> B["Enter API credentials"]
-        B --> C["Validate credentials"]
+        A[Staff clicks 'Setup Arrow Integration'] --> B["Enter API URL and key"]
+        B --> C["Validate credentials (whoami)"]
         C --> D{Valid?}
         D -->|No| B
         D -->|Yes| E["Discover Arrow customers"]
     end
 
     subgraph mapping["Customer Mapping"]
-        E --> F["Map Arrow customers to Waldur organizations"]
-        F --> G["Select which customers to sync"]
-        G --> H["Save settings & mappings"]
+        E --> F["Map Arrow customers to Waldur organizations (suggested by name)"]
+        F --> G["Preview settings and available export types"]
+        G --> H["Save & Complete"]
     end
 
     subgraph result["Ready"]
-        H --> I["Arrow Integration Active"]
-        I --> J["Billing sync can begin"]
+        H --> I["Arrow Integration saved, sync disabled"]
+        I --> J["Edit settings: set export type reference, enable sync"]
     end
 
     style D fill:var(--status-warning-bg-strong),color:var(--text-primary)
@@ -54,7 +54,8 @@ flowchart LR
     A1 -->|"partner_reference, partner_name"| W1
     A2 -->|"Reference, CompanyName"| W2
     A3 -->|"Total sell/buy price"| W3
-    A4 -->|"Customer Total Price, Total Wholesale Price"| W4
+    A4 -->|"Sell/Buy Total Price or Customer Total Price/Total Wholesale Price"| W4
+    A4 -->|"ARS Subscription ID: final prices"| W3
 
     W2 -->|"waldur_customer"| C["Customer"]
     W3 -->|"resource"| R["Resource"]
@@ -67,38 +68,45 @@ flowchart LR
 const BILLING_SYNC_DIAGRAM = `
 flowchart TB
     subgraph trigger["Sync Trigger"]
-        A["Manual trigger or scheduled job"] --> B["POST /billing-sync/"]
+        A["Every 6 hours for the current month while sync is enabled"] --> B["Billing sync for one month"]
+        A2["'Sync billing' for a chosen month"] --> B
     end
 
     subgraph fetch["Data Fetching"]
-        B --> C["Fetch billing export from Arrow API"]
+        B --> C["Fetch billing export (export type reference) from Arrow API"]
         C --> D["Group lines by End User Company Name"]
     end
 
     subgraph grouping["Customer Matching"]
-        D --> D1["Match End User Company Name → arrow_company_name"]
+        D --> D1["Match End User Company Name → arrow_company_name of active mappings"]
         D1 --> E["Process each customer's lines"]
     end
 
     subgraph process["Line Processing"]
         E --> F["For each billing line"]
-        F --> G["Identify line via Order Id (Sequence as fallback)"]
-        G --> H["Parse prices: Customer Total Price / Total Wholesale Price"]
-        H --> I["Create InvoiceItem + BillingSyncItem"]
+        F --> G["Identify line via Sequence (Order Id as fallback)"]
+        G --> H["Parse prices: Sell/Buy Total Price, else Customer Total Price / Total Wholesale Price"]
+        H --> H2{"Price is zero?"}
+        H2 -->|Yes| H3["Skip line"]
+        H2 -->|No| I["Create InvoiceItem + BillingSyncItem in the report month's invoice, or update a changed price"]
     end
 
     subgraph sync["Sync Complete"]
         I --> J["Aggregate sell_total / buy_total"]
         J --> K["Mark ArrowBillingSync as 'synced'"]
+        K --> L["After the month ends: 'validated' (checked every 12 hours)"]
+        L --> M["With ARROW_AUTO_RECONCILIATION: compensate changed line prices, 'reconciled'"]
     end
 
+    style H2 fill:var(--status-warning-bg-strong),color:var(--text-primary)
     style K fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
 
 const getReconciliationDiagram = (priceLabel: string) => `
 flowchart TB
     subgraph fetch["Fetch Billing Export"]
-        A["Fetch billing data for period"] --> B["Parse billing lines"]
+        A0["Every 6 hours for the previous and current month, or 'Reconcile'"] --> A["Fetch billing export for the month"]
+        A --> B["Parse billing lines"]
     end
 
     subgraph match["Match Records"]
@@ -110,10 +118,10 @@ flowchart TB
 
     subgraph reconcile["Reconciliation"]
         E --> G["Compare consumed_${priceLabel} vs final_${priceLabel}"]
-        G --> H{Amounts match?}
+        G --> H{"Difference under 0.01?"}
         H -->|Yes| I["Finalize record"]
         H -->|No| J["Create compensation item"]
-        J --> K["adjustment = final_${priceLabel} - consumed_${priceLabel}"]
+        J --> K["adjustment = final_${priceLabel} - consumed_${priceLabel}, in the current month's invoice"]
         K --> I
     end
 
@@ -124,27 +132,21 @@ flowchart TB
 
 const CONSUMPTION_FLOW_DIAGRAM = `
 flowchart TB
-    subgraph source["Arrow Consumption Data"]
-        A["License subscriptions"]
-        B["Cloud resources"]
-        C["Service fees"]
+    subgraph source["Waldur Resources"]
+        A["Resources in OK state with an arrow_license_reference attribute"]
     end
 
-    subgraph sync["Consumption Sync"]
-        A & B & C --> D["Fetch from Arrow API"]
-        D --> E["Create/Update consumption records"]
-    end
-
-    subgraph mapping["Resource Mapping"]
-        E --> F{Mapped to Waldur?}
-        F -->|Yes| G["Link to Waldur project/resource"]
-        F -->|No| H["Store as unmapped"]
+    subgraph sync["Hourly Consumption Sync (current month)"]
+        A --> D["Fetch monthly consumption per license (prediction API as fallback)"]
+        D --> F{Record finalized or no consumption?}
+        F -->|Yes| G["Skip"]
+        F -->|No| E["Create/update consumption record"]
+        E --> H["Update cloud_cost usage and provisional invoice item"]
     end
 
     subgraph finalize["Finalization"]
-        G --> I["Calculate sell/buy prices"]
-        H --> I
-        I --> J["Mark as finalized at period end"]
+        H --> I["Billing export check finds lines by ARS Subscription ID"]
+        I --> J["Record finalized and reconciled"]
     end
 
     style F fill:var(--status-warning-bg-strong),color:var(--text-primary)
@@ -154,22 +156,26 @@ flowchart TB
 const SYNC_STATES = [
   {
     state: 'pending',
-    description: translate('Billing sync has been scheduled but not started'),
-  },
-  {
-    state: 'syncing',
-    description: translate('Data is being fetched from Arrow and processed'),
+    description: translate(
+      'The billing sync record exists, but its lines are not processed yet',
+    ),
   },
   {
     state: 'synced',
     description: translate(
-      'All data has been fetched and processed successfully',
+      'Billing lines are processed into invoice items. Syncing the month again updates changed prices.',
     ),
   },
   {
-    state: 'failed',
+    state: 'validated',
     description: translate(
-      'An error occurred during sync - check logs for details',
+      'The report month has ended, so the billing is treated as validated (checked every 12 hours). Later syncs leave it unchanged.',
+    ),
+  },
+  {
+    state: 'reconciled',
+    description: translate(
+      'Compensation items were created for lines whose price changed since the first sync',
     ),
   },
 ];
@@ -178,25 +184,25 @@ const KEY_CONCEPTS = [
   {
     term: translate('Customer Mapping'),
     description: translate(
-      'Links an Arrow customer (by their company name / End User Company Name) to a Waldur organization. This determines where consumption records and billing data are attributed.',
+      'Links an Arrow customer (by reference, e.g. XSP661245) to a Waldur organization. Billing sync matches export lines to the mapping by End User Company Name and bills that organization. Consumption records follow the organization of their resource.',
     ),
   },
   {
     term: translate('Billing Sync'),
     description: translate(
-      'Periodic job that fetches billing reports from Arrow for a specific month/year. Creates line items that can be reconciled with Waldur invoices.',
+      'Fetches the Arrow billing export for one month and creates an invoice item for each non-zero line in that month\'s invoice of the mapped organization. Runs every 6 hours for the current month while sync is enabled, or on demand with "Sync billing". Needs an export type reference.',
     ),
   },
   {
     term: translate('Consumption Record'),
     description: translate(
-      'Individual usage record from Arrow (e.g., a license subscription, cloud resource usage). Contains pricing, dates, and can be linked to Waldur resources.',
+      'The consumption of one Arrow license in one month, for one Waldur resource. Holds the provisional amounts from the consumption API and, once the billing export arrives, the final amounts.',
     ),
   },
   {
     term: translate('Reconciliation'),
     description: translate(
-      'Process of comparing Arrow billing amounts with Waldur invoice amounts to ensure they match. Creates compensation items for discrepancies.',
+      "Compares the final amounts in the Arrow billing export with what Waldur already invoiced: a license's provisional consumption, or a billing line's price at its first sync. A difference becomes a compensation item in the current month's invoice.",
     ),
   },
   {
@@ -208,13 +214,13 @@ const KEY_CONCEPTS = [
   {
     term: translate('Vendor Offering Mapping'),
     description: translate(
-      'Links an Arrow vendor name to a Waldur marketplace offering and billing plan. Required for importing Arrow licenses — the import wizard uses these mappings to determine which offering to create resources under.',
+      'Links an Arrow vendor name to a Waldur marketplace offering and, optionally, a billing plan. Required for importing Arrow licenses — the import wizard uses these mappings to determine which offering to create resources under.',
     ),
   },
   {
     term: translate('Consumption History Sync'),
     description: translate(
-      'Backport historical consumption data for a resource. Fetches Arrow consumption for a date range (default: last 12 months) and creates usage records for billing.',
+      'Backport historical consumption data for a resource. Fetches Arrow consumption for its backend ID over a date range (default: the last 12 months, including the current one) and creates usage records for billing. Finalized months are skipped.',
     ),
   },
 ];
@@ -244,7 +250,7 @@ flowchart TB
     subgraph result["Result"]
         I --> J["Create Waldur resources"]
         J --> K["Set backend_id = License Reference"]
-        K --> L["Ready for consumption sync"]
+        K --> L["Ready for 'Sync consumption history'"]
     end
 
     style J fill:var(--status-success-bg-strong),color:var(--text-primary)
@@ -260,11 +266,13 @@ flowchart LR
     end
 
     subgraph sync["For Each Month"]
-        C --> D["Fetch Arrow consumption API"]
+        C --> D["Fetch Arrow consumption API for the backend ID"]
         D --> E["Aggregate sell/buy amounts"]
         E --> F{Already finalized?}
         F -->|Yes| G["Skip period"]
-        F -->|No| H["Create/update record"]
+        F -->|No| N{Any consumption?}
+        N -->|No| G2["Skip period"]
+        N -->|Yes| H["Create/update record"]
     end
 
     subgraph result["Result"]
@@ -283,7 +291,7 @@ const getInvoiceItemTypes = (priceLabel: string, prefix: string) => [
     type: translate('Provisional'),
     source: 'arrow_consumption',
     trigger: translate(
-      'Created/updated during real-time consumption sync. Used for end-of-month invoice generation.',
+      'Created/updated during consumption sync, in the invoice of the consumption month. Used for end-of-month invoice generation. On reconciliation its source becomes "arrow_finalized".',
     ),
     nameFormat: `${prefix}: {Resource.name}`,
     quantity: '1',
@@ -292,22 +300,54 @@ const getInvoiceItemTypes = (priceLabel: string, prefix: string) => [
       'source: "arrow_consumption"',
       'license_reference',
       'consumed_sell, consumed_buy',
+      'sync_type: "real_time"',
     ],
   },
   {
     type: translate('Compensation'),
     source: 'arrow_reconciliation',
     trigger: translate(
-      'Created when final billing export arrives and differs from provisional amount. Added to current month invoice.',
+      'Created when final billing export arrives and differs from provisional amount by 0.01 or more. Added to current month invoice.',
     ),
     nameFormat: `${prefix} adjustment: {Resource.name} (additional charge|credit for {billing_period})`,
     quantity: '1',
     unitPrice: `final_${priceLabel} - consumed_${priceLabel}`,
     details: [
       'source: "arrow_reconciliation"',
-      'license_reference',
-      `consumed_${priceLabel}, final_${priceLabel}`,
+      'original_period, license_reference',
+      'consumed_sell, final_sell',
       'adjustment',
+    ],
+  },
+  {
+    type: translate('Billing line'),
+    source: 'arrow',
+    trigger: translate(
+      'Created by billing sync for each non-zero billing export line, in the invoice of the report month.',
+    ),
+    nameFormat: '{Vendor Name} - {Product Name}',
+    quantity: 'Quantity',
+    unitPrice: `${priceLabel} total price`,
+    details: [
+      'source: "arrow"',
+      'arrow_line_reference',
+      'vendor_name, subscription_reference',
+      'classification',
+    ],
+  },
+  {
+    type: translate('Billing line compensation'),
+    source: 'arrow_reconciliation',
+    trigger: translate(
+      'Created when reconciling a validated billing sync finds a line whose price changed since the first sync, or that is gone. Added to current month invoice.',
+    ),
+    nameFormat: `${prefix} adjustment: {line description} (additional charge|credit)`,
+    quantity: '1',
+    unitPrice: 'final_price - original_price',
+    details: [
+      'source: "arrow_reconciliation"',
+      'original_line_reference, original_period',
+      'original_price, final_price',
     ],
   },
 ];
@@ -349,7 +389,7 @@ const BILLING_SYNC_ITEM_FIELDS = [
     arrowField: 'export[].Product Name || Friendly Name || Description',
     waldurField: 'invoice_item.name',
     description: translate(
-      'Product description for invoice item. Tries Product Name, Friendly Name, then Description.',
+      'Invoice item name: "{vendor} - {product}", the product taken from Product Name, Friendly Name, then Description.',
     ),
   },
   {
@@ -358,10 +398,10 @@ const BILLING_SYNC_ITEM_FIELDS = [
     description: translate('Arrow vendor subscription reference ID'),
   },
   {
-    arrowField: 'export[].Order Id (Sequence as fallback)',
+    arrowField: 'export[].Sequence (Order Id as fallback)',
     waldurField: 'arrow_line_reference',
     description: translate(
-      'Unique line identifier. Uses Order Id, with Sequence as a fallback.',
+      'Unique line identifier. Uses Sequence, with Order Id as a fallback. Lines with neither are skipped.',
     ),
   },
   {
@@ -374,7 +414,7 @@ const BILLING_SYNC_ITEM_FIELDS = [
       'export[].Sell Total Price || Customer Total Price / Buy Total Price || Total Wholesale Price',
     waldurField: 'original_price',
     description: translate(
-      'Invoice price from billing export. Sell price tries "Sell Total Price" then "Customer Total Price". Buy price tries "Buy Total Price" then "Total Wholesale Price".',
+      'Invoiced price at the first sync, by the invoice price source; reconciliation compares against it. Sell price tries "Sell Total Price" then "Customer Total Price". Buy price tries "Buy Total Price" then "Total Wholesale Price".',
     ),
   },
   {
@@ -406,14 +446,14 @@ const CONSUMPTION_RECORD_FIELDS = [
     arrowField: 'Sum of "Total sell price"',
     waldurField: 'consumed_sell',
     description: translate(
-      'Aggregated sell amount from consumption API. Defaults to 0 if the license has no consumption data for the period.',
+      'Aggregated sell amount from consumption API, or the consumed amount from the prediction API when the consumption API fails. No record is created for a period without consumption.',
     ),
   },
   {
     arrowField: 'Sum of "Total buy price"',
     waldurField: 'consumed_buy',
     description: translate(
-      'Aggregated buy amount from consumption API. Defaults to 0 if the license has no consumption data for the period.',
+      'Aggregated buy amount from consumption API, with the same fallback as consumed_sell.',
     ),
   },
   {
@@ -459,14 +499,14 @@ const RESOURCE_ATTRIBUTE_FIELDS = [
     arrowField: 'ARS Subscription ID',
     waldurField: 'attributes["arrow_license_reference"]',
     description: translate(
-      'Must be set on Resource to enable consumption sync. During reconciliation, matched against the "ARS Subscription ID" field in the billing export.',
+      'Must be set on Resource for the scheduled consumption sync, and becomes the consumption record\'s license reference, which reconciliation matches against "ARS Subscription ID". Billing sync also links export lines to the resource by it. Import and linking do not set it.',
     ),
   },
   {
     arrowField: 'License Reference (XSP...)',
     waldurField: 'backend_id',
     description: translate(
-      'Arrow license reference set during import or manual linking. Used for matching billing and consumption data.',
+      'Arrow license reference set by import, by linking resources, or with "Set backend ID". Used by "Sync consumption history" and by the customer billing summary.',
     ),
   },
   {
@@ -478,12 +518,12 @@ const RESOURCE_ATTRIBUTE_FIELDS = [
 
 const SETTINGS_FIELDS = [
   {
-    arrowField: 'whoami.partner_info.reference',
+    arrowField: 'whoami.reference',
     waldurField: 'partner_reference',
     description: translate('Arrow partner reference (auto-discovered)'),
   },
   {
-    arrowField: 'whoami.partner_info.name',
+    arrowField: 'whoami.companyName',
     waldurField: 'partner_name',
     description: translate('Arrow partner name (auto-discovered)'),
   },
@@ -498,15 +538,17 @@ const SETTINGS_FIELDS = [
     description: translate('API key for authentication'),
   },
   {
-    arrowField: 'User selection',
+    arrowField: 'User input',
     waldurField: 'export_type_reference',
-    description: translate('Billing export template reference'),
+    description: translate(
+      'Billing export template reference. Set it in the settings after setup; billing sync does not run without it.',
+    ),
   },
   {
     arrowField: 'User input',
     waldurField: 'classification_filter',
     description: translate(
-      'Filter for IAAS/SAAS classification. Optional — used to pre-filter billing export data.',
+      'IAAS/SAAS classification (default: IAAS). Stored only: billing and consumption sync do not filter by it.',
     ),
   },
   {
@@ -527,7 +569,7 @@ const SETTINGS_FIELDS = [
     arrowField: 'User selection',
     waldurField: 'sync_enabled',
     description: translate(
-      'Whether automatic periodic sync is enabled for this integration',
+      'Turns the scheduled billing sync, validation check, consumption sync and billing export check on. Off after setup; "Pause sync" and "Resume sync" toggle it. Consumption sync and the billing export check also need ARROW_CONSUMPTION_SYNC_ENABLED.',
     ),
   },
 ];
@@ -603,7 +645,7 @@ export const ArrowHowItWorksDialog: FC = () => {
             variant="info"
             title={translate('What is Arrow Integration?')}
             body={translate(
-              'Arrow Integration connects Waldur to ArrowSphere, a cloud distribution platform. This integration enables automatic synchronization of billing data, consumption records, and customer information between the two systems.',
+              'Arrow Integration connects Waldur to ArrowSphere, a cloud distribution platform. It maps Arrow customers to Waldur organizations and brings Arrow billing data and license consumption into Waldur invoices. Data flows from Arrow to Waldur only.',
             )}
           />
           {settings && (
@@ -643,7 +685,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Initial setup flow')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations.',
+              'The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations. It saves the settings with sync disabled and no export type reference: set both in the settings to start syncing.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -665,7 +707,7 @@ export const ArrowHowItWorksDialog: FC = () => {
             <h5 className="mb-2.5">{translate('ArrowSettings')}</h5>
             <p className="text-quaternary small mb-2.5">
               {translate(
-                'Stores API configuration and partner info. Only one active settings record per deployment.',
+                'Stores API configuration and partner info. Only one active settings record per deployment; completing setup again replaces it.',
               )}
             </p>
             <FieldMappingTable
@@ -741,7 +783,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Billing synchronization')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Billing sync fetches monthly billing reports from Arrow and creates corresponding records in Waldur.',
+              'Billing sync fetches monthly billing reports from Arrow and creates corresponding records in Waldur. Billing sync records that are validated or reconciled are not updated again.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -754,7 +796,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Reconciliation process')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'After syncing, reconciliation compares Arrow amounts with Waldur invoices. Discrepancies create compensation items.',
+              'Consumption records are reconciled against the billing export every 6 hours while consumption sync is enabled, for the previous and current month, or for one month with "Reconcile". Discrepancies create compensation items.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -800,7 +842,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Invoice item creation')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Arrow integration creates two types of invoice items depending on the sync stage.',
+              'Arrow integration creates these invoice items: consumption sync and its reconciliation create the first two, billing sync and its reconciliation the other two.',
             )}
           </p>
           <SimpleTable<InvoiceItemType>
@@ -854,7 +896,7 @@ export const ArrowHowItWorksDialog: FC = () => {
               },
             ]}
             rows={invoiceItemTypes}
-            rowKey="source"
+            rowKey="type"
           />
           <AlertItem
             type="floating"
@@ -872,7 +914,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-3">{translate('Consumption records')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Consumption records track individual usage items from Arrow and can be mapped to Waldur resources for detailed reporting.',
+              "Consumption records track each linked license's consumption per month. The hourly consumption sync runs only while ARROW_CONSUMPTION_SYNC_ENABLED and the settings' sync are both on.",
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -903,7 +945,7 @@ export const ArrowHowItWorksDialog: FC = () => {
             className="mt-3"
             title={translate('Resources tab:')}
             body={translate(
-              'The Resources tab shows all Waldur resources that can be linked to Arrow. Use "Set backend ID" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.',
+              'The Resources tab shows all Waldur resources that are not terminated. Use "Set backend ID" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.',
             )}
           />
         </section>

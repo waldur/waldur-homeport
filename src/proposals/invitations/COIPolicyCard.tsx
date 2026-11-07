@@ -36,7 +36,7 @@ export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
           <h4 className="mb-1">{translate('Conflict of interest policy')}</h4>
           <p className="text-quaternary mb-0">
             {translate(
-              'This call has a conflict of interest policy. No proposals are shared with you yet: when specific proposals are assigned to you, you will be asked to declare any conflicts before you review them.',
+              'This call has a conflict of interest policy. No proposals are shared with you yet: when specific proposals are assigned to you, decline any you have a conflict with and give the conflict as the reason.',
             )}
           </p>
         </div>

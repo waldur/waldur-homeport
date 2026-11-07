@@ -2,10 +2,9 @@ import { dump, load } from 'js-yaml';
 
 import { translate } from '@/i18n';
 
-// The largest request the packaged API ingress accepts (proxy-body-size in
-// waldur-helm's ingress-api.yaml). A bigger import would be refused there, with
-// a bare 413, before it reaches the backend.
-export const MAX_CALL_EXPORT_SIZE = 10 * 1024 * 1024;
+// The largest call document the backend accepts (CALL_DATA_MAX_BYTES in the
+// proposal serializers). A bigger file would only be refused there.
+export const MAX_CALL_EXPORT_SIZE = 2 * 1024 * 1024;
 
 /**
  * Renders a call export document as YAML. Key order is kept as the backend

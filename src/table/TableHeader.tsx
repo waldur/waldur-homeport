@@ -162,6 +162,7 @@ const TableTh = ({
   onTogglePin,
 }) => (
   <th
+    scope="col"
     className={
       classNames(
         column.orderField && 'sorting-column',

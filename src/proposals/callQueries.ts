@@ -45,3 +45,25 @@ export const useCallFixedDuration = (callUuid?: string) => {
   });
   return data?.fixed_duration_in_days ?? null;
 };
+
+const ALLOWED_DURATION_FIELDS = ['allowed_duration_months'] as const;
+
+/**
+ * The lengths, in months, a call lets the applicant choose the project's
+ * duration from; empty when it offers no choice.
+ */
+export const useCallAllowedDurations = (callUuid?: string): number[] => {
+  const { data } = useQuery({
+    queryKey: publicCallKey(callUuid, ALLOWED_DURATION_FIELDS),
+    queryFn: () =>
+      proposalPublicCallsRetrieve({
+        path: { uuid: callUuid },
+        query: { field: ALLOWED_DURATION_FIELDS },
+      }).then(
+        (response) => response.data as Pick<Call, 'allowed_duration_months'>,
+      ),
+    enabled: Boolean(callUuid),
+    refetchOnWindowFocus: false,
+  });
+  return data?.allowed_duration_months ?? [];
+};

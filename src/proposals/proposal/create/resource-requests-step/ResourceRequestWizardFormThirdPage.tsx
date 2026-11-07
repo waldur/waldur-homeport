@@ -8,7 +8,10 @@ import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { PurchaseOrderFields } from '@/proposals/PurchaseOrderFields';
 import { getPurchaseOrderRequirement } from '@/proposals/purchaseOrderRequirement';
 import { computeRequestedCost } from '@/proposals/requestedResourceCost';
-import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
+import {
+  pricesConcealed,
+  RequestedResourceCostLabel,
+} from '@/proposals/RequestedResourceCostLabel';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const ResourceRequestWizardFormThirdPage: FunctionComponent<
@@ -46,7 +49,7 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
           orderForm
         />
       ) : null}
-      {cost.known ? (
+      {cost.known && !pricesConcealed() ? (
         <div className="flex justify-between items-baseline border-t border-t-secondary pt-3 mt-3">
           <span className="font-medium">{translate('Estimated cost')}</span>
           <span className="text-base">

@@ -8,6 +8,8 @@ export interface CallExportFilter {
   created_by_uuid?: string;
   reviewer_uuid?: string;
   proposal_uuid?: string;
+  /** Proposals selected in the list: the export covers these alone. */
+  proposal_uuids?: string[];
 }
 
 const UUID_FILTERS = [
@@ -29,6 +31,9 @@ export const buildCallExportUrl = (
   const query = new URLSearchParams();
   UUID_FILTERS.filter((key) => filter?.[key]).forEach((key) =>
     query.set(key, filter[key] as string),
+  );
+  filter?.proposal_uuids?.forEach((uuid) =>
+    query.append('proposal_uuid', uuid),
   );
   filter?.state?.forEach((state) => query.append(stateParameter, state));
   if (search) {

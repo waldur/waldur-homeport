@@ -172,14 +172,19 @@ TableDropdownToggle.displayName = 'TableDropdownToggle';
  */
 const AddDropdownToggle = forwardRef<
   HTMLButtonElement,
-  { size?: ButtonSize } & ComponentPropsWithoutRef<'button'>
->(({ size, className, ...rest }, ref) => (
+  {
+    size?: ButtonSize;
+    variant?: ButtonVariant;
+    /** What the button adds, where "Add" alone does not say it. */
+    label?: ReactNode;
+  } & ComponentPropsWithoutRef<'button'>
+>(({ size, variant = 'primary', className, label, ...rest }, ref) => (
   <button
     ref={ref}
     type="button"
     className={classNames(
       'group/toggle',
-      buttonVariants({ variant: 'primary', size }),
+      buttonVariants({ variant, size }),
       className,
     )}
     data-testid="actions-toggle"
@@ -190,7 +195,7 @@ const AddDropdownToggle = forwardRef<
       size={getButtonIconSize(size)}
       className="shrink-0"
     />
-    {translate('Add')}
+    {label || translate('Add')}
     <ButtonCaret size={size} />
   </button>
 ));
@@ -223,7 +228,8 @@ export interface ActionsMenuProps extends Omit<
    * The trigger: `kebab` (the icon-only three dots, the default),
    * `labeled` (a button with a caret, "Actions" unless `label` is given),
    * `add` (the primary "+ Add" button) or an element of your own, which
-   * must forward its ref.
+   * must forward its ref. `variant` restyles the `add` button too, e.g. a
+   * quiet `tertiary` where adding is the exception.
    */
   toggle?: ActionsMenuToggle;
   label?: ReactNode;
@@ -251,8 +257,10 @@ const renderToggle = ({
     return (
       <AddDropdownToggle
         size={size}
+        variant={variant}
         className={toggleClassName}
         disabled={disabled}
+        label={label}
       />
     );
   }

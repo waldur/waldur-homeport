@@ -12,25 +12,21 @@ import { WorkflowStepConfigDialog } from './WorkflowStepConfigDialog';
 interface OwnProps {
   row: CallWorkflowStep;
   call: Call;
-  // All configured steps: the dialog's enable switch needs them to resolve
-  // this step's dependencies and dependents.
-  steps: CallWorkflowStep[];
   refetch(): void;
 }
 
 export const WorkflowStepConfigureAction = ({
   row,
   call,
-  steps,
   refetch,
 }: OwnProps) => {
   const { openDialog } = useModal();
   const open = useCallback(() => {
     openDialog(WorkflowStepConfigDialog, {
-      resolve: { call, step: row, steps, refetch },
-      size: 'md',
+      resolve: { call, step: row, refetch },
+      size: 'lg',
     });
-  }, [call, row, steps, refetch, openDialog]);
+  }, [call, row, refetch, openDialog]);
 
   return (
     <ActionItem

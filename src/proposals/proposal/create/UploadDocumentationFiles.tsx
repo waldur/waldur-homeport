@@ -8,19 +8,30 @@ import {
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
+import { useConfirmApplicantChange } from '@/proposals/proposal/actingForApplicant';
 import { useNotify } from '@/store/notify';
 
-import { DocumentationFiles } from './DocumentationFiles';
+import { DocumentationFiles, sameFile } from './DocumentationFiles';
 
 export const UploadDocumentationFiles = (props) => {
-  const { showErrorResponse, showSuccess } = useNotify();
+  const { showErrorResponse, showInfo, showSuccess } = useNotify();
 
   const handleDrop = (newFiles: File[]) => {
-    // Combine existing pending files with new files
-    const existingFiles = props.input.value
+    const existingFiles: File[] = props.input.value
       ? Array.from(props.input.value as FileList)
       : [];
-    const combinedFiles = [...existingFiles, ...newFiles];
+    // A file dropped twice is listed once; the backend refuses a second copy
+    // of a stored one by content, which this cannot see before the upload.
+    const combinedFiles = [...existingFiles];
+    newFiles.forEach((file) => {
+      if (combinedFiles.some((pending) => sameFile(pending, file))) {
+        showInfo(
+          translate('{file} is already in the list.', { file: file.name }),
+        );
+      } else {
+        combinedFiles.push(file);
+      }
+    });
     props.input.onChange(combinedFiles);
   };
 
@@ -42,11 +53,17 @@ export const UploadDocumentationFiles = (props) => {
     },
   });
 
+  const confirmChange = useConfirmApplicantChange(props.proposal);
   const handleDeleteExisting = useCallback(
-    (file: ProposalDocumentation) => {
-      deleteDocument(file.uuid);
+    async (file: ProposalDocumentation) => {
+      const confirmed = await confirmChange(
+        translate('Remove {file} from the proposal.', {
+          file: file.file_name,
+        }),
+      );
+      if (confirmed) deleteDocument(file.uuid);
     },
-    [deleteDocument],
+    [confirmChange, deleteDocument],
   );
 
   return (

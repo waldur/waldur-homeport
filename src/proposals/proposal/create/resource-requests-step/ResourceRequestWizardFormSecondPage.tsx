@@ -17,9 +17,13 @@ import { SelectField, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PrepaidMonthsModeProvider } from '@/marketplace/details/plan/prepaidDurationMode';
+import { ReadOnlyComponentsProvider } from '@/marketplace/details/plan/readOnlyComponents';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { fixedRuleComponents } from '@/proposals/budgets';
 import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
+
+import { RequestBudgetBounds } from './RequestBudgetBounds';
 
 const PREPAID_MONTHS_FIELD = `attributes.${PREPAID_DURATION_MONTHS}`;
 
@@ -33,8 +37,8 @@ const isFallback = (offering: unknown) =>
 export const ResourceRequestWizardFormSecondPage: FunctionComponent<
   WizardFormStepProps
 > = (props) => {
-  const { values } = useFormState({
-    subscription: { values: true },
+  const { values, hasValidationErrors } = useFormState({
+    subscription: { values: true, hasValidationErrors: true },
   });
   const form = useForm();
   const { offering, mainOffering, plan, limits, attributes } = values;
@@ -104,6 +108,16 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
     return fallback;
   }, [queryData.data, offering]);
 
+  // A component the call fixes is set by RequestBudgetBounds and shown, not
+  // typed: the request carries the call's amount.
+  const fixedComponents = useMemo(
+    () =>
+      isAward || !offering?.uuid
+        ? new Set<string>()
+        : fixedRuleComponents(call?.component_rules, offering.uuid),
+    [isAward, offering?.uuid, call?.component_rules],
+  );
+
   // Archived plans cannot be awarded; the backend refuses them.
   const planOptions = useMemo(
     () => (offeringDetails?.plans ?? []).filter((p: any) => !p.archived),
@@ -142,7 +156,14 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
     }
   }, [offeringDetails, mainOffering, plan, form]);
   return (
-    <WizardForm {...props}>
+    <WizardForm
+      {...props}
+      submitTooltip={
+        hasValidationErrors
+          ? translate('Correct the highlighted fields to continue.')
+          : undefined
+      }
+    >
       {queryData.isLoading ? (
         <LoadingSpinner />
       ) : offeringDetails ? (
@@ -184,14 +205,26 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
                 </div>
                 <PlanDescriptionButton />
               </div>
-              <PrepaidMonthsModeProvider value={prepaidMonthsMode}>
-                <TabbedPlanComponents
-                  offering={offeringDetails}
-                  plan={plan}
+              {!isAward && offering?.uuid && (
+                <RequestBudgetBounds
+                  rules={call?.component_rules}
+                  requestedOfferingUuid={offering.uuid}
+                  components={offeringDetails.components ?? []}
                   limits={limits}
-                  customer={{ url: mainOffering?.customer_uuid }}
-                  prepaidDurationMonths={attributes?.[PREPAID_DURATION_MONTHS]}
                 />
+              )}
+              <PrepaidMonthsModeProvider value={prepaidMonthsMode}>
+                <ReadOnlyComponentsProvider value={fixedComponents}>
+                  <TabbedPlanComponents
+                    offering={offeringDetails}
+                    plan={plan}
+                    limits={limits}
+                    customer={{ url: mainOffering?.customer_uuid }}
+                    prepaidDurationMonths={
+                      attributes?.[PREPAID_DURATION_MONTHS]
+                    }
+                  />
+                </ReadOnlyComponentsProvider>
               </PrepaidMonthsModeProvider>
             </>
           )}

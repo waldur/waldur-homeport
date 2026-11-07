@@ -3,6 +3,15 @@ import { useMemo } from 'react';
 import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
 
+/** Where a call's draft assignment batches are sent from. */
+export const ASSIGNMENT_BATCHES_STATE = 'protected-call.manage';
+
+export const assignmentBatchesParams = (callUuid: string) => ({
+  call_uuid: callUuid,
+  tab: 'reviewer-pool',
+  pool_tab: 'assignment_batches',
+});
+
 export const useReviewerPoolTabs = (): TableTab[] => {
   return useMemo(
     () => [

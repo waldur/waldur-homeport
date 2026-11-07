@@ -4,13 +4,13 @@ import {
   proposalProtectedCallsRoundsList,
 } from 'waldur-js-client';
 
-import { Code } from 'waldur-ui';
-
 import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
+import { formatRoundCutoff } from '@/proposals/roundCutoff';
 import { Call } from '@/proposals/types';
 import {
+  canReadRoundCommittee,
   getCallReadOnlyReason,
   getRoundMenuAccess,
   getRoundStatus,
@@ -63,6 +63,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
         <RoundLifecycleBadge
           state={row.lifecycle_state}
           heldDecisionsCount={row.held_decisions_count}
+          awaitingAdoption={Boolean(call.adoption_required && !row.adopted_at)}
         />
       </div>
     );
@@ -93,9 +94,18 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
 
   const ExpandableRow = useCallback(
     (props: { row: ProtectedRound }) => (
-      <RoundExpandableRow row={props.row} call={call} />
+      <RoundExpandableRow
+        row={props.row}
+        call={call}
+        // Closing rounds alone does not open the committee's record.
+        committee={
+          canReadRoundCommittee(user, call, props.row)
+            ? { canEdit: canUpdate, callUuid: call.uuid, refetch }
+            : undefined
+        }
+      />
     ),
-    [call],
+    [call, canUpdate, user, refetch],
   );
 
   return (
@@ -110,11 +120,9 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
         {
           title: translate('Round ID'),
           render: ({ row }) => (
-            <Code className="font-medium wrap-anywhere">{row.slug}</Code>
+            <span className="font-medium text-primary">{row.slug}</span>
           ),
           copyField: (row) => row.slug,
-          width: '22%',
-          ellipsis: false,
         },
         {
           title: translate('Start date'),
@@ -124,7 +132,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
         },
         {
           title: translate('Cutoff date'),
-          render: ({ row }) => <>{formatDateTime(row.cutoff_time)}</>,
+          render: ({ row }) => <>{formatRoundCutoff(row)}</>,
           width: '16%',
           ellipsis: false,
         },

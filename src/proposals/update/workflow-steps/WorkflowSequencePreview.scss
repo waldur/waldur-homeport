@@ -2,8 +2,17 @@
   display: grid;
   align-items: start;
   position: relative;
-  gap: 0.5rem;
-  padding: 0 1rem;
+  gap: 6.5px;
+  margin: 0;
+  padding: 0 13px;
+  list-style: none;
+
+  &__parallel {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
   &__node {
     display: flex;
@@ -11,7 +20,7 @@
     align-items: center;
     text-align: center;
     position: relative;
-    padding: 0 0.5rem;
+    padding: 0 6.5px;
     z-index: 1;
   }
 
@@ -36,5 +45,50 @@
     background: var(--bg-primary);
     z-index: 1;
     line-height: 0;
+  }
+
+  // A stage whose steps start together: a label on the line in place of the
+  // bullet, and the steps stacked on a quiet band below it.
+  &__marker {
+    display: inline-flex;
+    align-items: center;
+    gap: 3.25px;
+    height: 24px;
+    padding: 0 8.12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-divider);
+    background: var(--bg-primary);
+    color: var(--text-quaternary);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  &__step {
+    width: 100%;
+  }
+
+  &__node--parallel {
+    padding-bottom: 6.5px;
+
+    // The band starts below the line, so it never covers the connector.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 6.5px;
+      background: var(--bg-secondary);
+      z-index: -1;
+    }
+
+    .workflow-sequence__step + .workflow-sequence__step {
+      margin-top: 9.75px;
+      padding-top: 3.25px;
+      border-top: 1px solid var(--border-divider);
+    }
   }
 }

@@ -15,6 +15,7 @@ import { SecretField } from './SecretField';
 import { CreatableSelectField } from './select/CreatableSelectField';
 import { SelectField } from './select/SelectField';
 import { SliderNumberField } from './SliderNumberField';
+import { StringField } from './StringField';
 import { TextField } from './TextField';
 import { TimezoneField } from './TimezoneField';
 import { withFormGroup } from './withFormGroup';
@@ -27,7 +28,6 @@ export {
   FieldError,
   NumberGroup,
   RadioGroup,
-  StringGroup,
   SubmitButton,
 } from 'waldur-form';
 
@@ -40,6 +40,9 @@ export { SelectField } from './select/SelectField';
 export { TextField } from './TextField';
 export { BaseSecretField } from './SecretField';
 
+// Built here, not taken from waldur-form: this StringField can show a
+// character count.
+export const StringGroup = withFormGroup(StringField);
 export const SelectGroup = withFormGroup(SelectField);
 export const TextGroup = withFormGroup(TextField);
 export const AsyncSelectGroup = withFormGroup(AsyncSelect);

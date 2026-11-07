@@ -10,8 +10,15 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, StringGroup, SelectGroup, TextGroup } from '@/form';
+import {
+  AsyncSelectGroup,
+  SubmitButton,
+  StringGroup,
+  SelectGroup,
+  TextGroup,
+} from '@/form';
 import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -19,12 +26,19 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { checklistTypeOptions } from '../utils';
 
+const loadOrganizations = organizationAutocomplete({
+  field: ['name', 'uuid'],
+  o: 'name',
+});
+
 interface ChecklistFormDialogProps {
   resolve: {
     checklistUuid?: string;
     refetch: () => void;
   };
-  initialValues?: PatchedChecklistRequest;
+  initialValues?: Omit<PatchedChecklistRequest, 'customer'> & {
+    customer?: { uuid: string; name: string } | null;
+  };
 }
 
 export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
@@ -39,6 +53,8 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
         name: formData.name,
         description: formData.description,
         checklist_type: formData.checklist_type,
+        // Empty: a checklist the whole portal shares.
+        customer: formData.customer?.uuid ?? null,
       };
       if (isEdit) {
         return checklistsAdminPartialUpdate({
@@ -114,6 +130,23 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               simpleValue
               label={translate('Checklist type')}
               required
+              space={4}
+            />
+
+            <AsyncSelectGroup
+              name="customer"
+              label={translate('Organization')}
+              description={translate(
+                'Only the calls of this organization use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.',
+              )}
+              placeholder={translate('Shared by the whole portal')}
+              loadOptions={loadOrganizations}
+              debounceTimeout={500}
+              defaultOptions
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              noOptionsMessage={() => translate('No organizations found')}
+              isClearable={true}
               space={4}
             />
 

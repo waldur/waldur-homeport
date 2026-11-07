@@ -1,11 +1,10 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   RequestedOffering,
   proposalProtectedCallsOfferingsList,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { CallOfferingStateField } from '@/proposals/details/CallOfferingStateField';
 import { Call } from '@/proposals/types';
 import { UnpreviewableDiscountWarning } from '@/proposals/UnpreviewableDiscountWarning';
 import { getCallReadOnlyReason } from '@/proposals/utils';
@@ -18,6 +17,7 @@ import { renderFieldOrDash } from '@/table/utils';
 import { AddOfferingButton } from './AddOfferingButton';
 import { CallOfferingExpandableRow } from './CallOfferingExpandableRow';
 import { CallOfferingPurchaseOrderField } from './CallOfferingPurchaseOrderField';
+import { CallOfferingRequestStateField } from './CallOfferingRequestStateField';
 import { CallOfferingRowActions } from './CallOfferingRowActions';
 
 interface CallOfferingsSectionProps {
@@ -32,6 +32,26 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       path: { uuid: props.call.uuid },
     }),
   });
+  const readOnlyReason = props.isReadOnly
+    ? getCallReadOnlyReason(props.call)
+    : undefined;
+  const refetch = tableProps.fetch;
+  // The component rules are edited in the row: it needs the call, and a
+  // stable identity so an expanded row is not remounted on every render.
+  const ExpandableRow = useMemo(
+    () =>
+      function CallOfferingRow({ row }: { row: RequestedOffering }) {
+        return (
+          <CallOfferingExpandableRow
+            row={row}
+            call={props.call}
+            refetch={refetch}
+            readOnlyReason={readOnlyReason}
+          />
+        );
+      },
+    [props.call, refetch, readOnlyReason],
+  );
 
   return (
     <Table<RequestedOffering>
@@ -41,7 +61,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
         {
           title: translate('Offering name'),
           render: ({ row }) => (
-            <span className="inline-flex items-center gap-1.5">
+            <span className="inline-flex items-center gap-1.5 font-medium text-primary">
               {row.offering_name}
               <UnpreviewableDiscountWarning
                 planComponents={(row.plan_details as any)?.components}
@@ -68,10 +88,13 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
         },
         {
           title: translate('State'),
-          render: CallOfferingStateField,
+          render: CallOfferingRequestStateField,
         },
       ]}
       title={translate('Offerings')}
+      subtitle={translate(
+        'Expand an offering to set what a proposal may request of each of its components.',
+      )}
       verboseName={translate('Offerings')}
       tableActions={
         <AddOfferingButton
@@ -83,7 +106,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
           }
         />
       }
-      expandableRow={CallOfferingExpandableRow}
+      expandableRow={ExpandableRow}
       rowActions={({ row }) =>
         props.isReadOnly ? (
           <ActionsDropdown
@@ -91,7 +114,11 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
             tooltip={getCallReadOnlyReason(props.call)}
           />
         ) : (
-          <CallOfferingRowActions row={row} refetch={tableProps.fetch} />
+          <CallOfferingRowActions
+            row={row}
+            callUuid={props.call.uuid}
+            refetch={tableProps.fetch}
+          />
         )
       }
       showPageSizeSelector

@@ -57,7 +57,7 @@ export const ExportCallDialog: FC<ExportCallDialogProps> = ({ resolve }) => {
         showWarning(
           translate('The export is too large to import'),
           translate(
-            'Portals accept call files up to 10 MB. Export again without documents and attach them to the imported call.',
+            'Portals accept call files up to 2 MB. Export again without documents and attach them to the imported call.',
           ),
         );
       }

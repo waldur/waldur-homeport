@@ -2,7 +2,9 @@ import { FieldValidator } from 'final-form';
 import React, { ComponentType, ReactNode } from 'react';
 
 import { Fetcher, FetcherOptions, TableRequest } from 'waldur-api-client';
+import type { TabCountProps } from 'waldur-ui';
 
+import type { ExportFormat } from './exporters/types';
 import { TableFiltersGroup } from './TableFilterService';
 
 export type { Fetcher, FetcherOptions, TableRequest };
@@ -67,6 +69,11 @@ export interface Column<RowType = any> {
   ellipsis?: boolean;
   /** In px or % */
   width?: string;
+  /**
+   * Render this column's cells as row headers (`<th scope="row">`), so a
+   * screen reader announces the row's name with every other cell of it.
+   */
+  rowHeader?: boolean;
 }
 
 export type DisplayMode = 'table' | 'grid';
@@ -148,7 +155,8 @@ export type TableWithPortal<T = {}> = {
   activeTab?: string;
 } & T;
 
-export interface TableTab {
+/** `count`, `countVariant` and `countLabel` draw a count after the title. */
+export interface TableTab extends TabCountProps {
   key: string;
   title: ReactNode;
   /** A count badge after the title. `undefined` shows no badge. */
@@ -183,6 +191,13 @@ interface TablePortal {
 export interface TableFullExport {
   label: string;
   description?: string;
+  /**
+   * The file it writes. CSV when left out, and then the dialog adds that it
+   * covers every page; another format's description says what it holds.
+   */
+  format?: ExportFormat;
+  /** Shown when the download fails, in place of the table's own message. */
+  errorMessage?: string;
   /** `query` is the table's search term; `signal` aborts the download. */
   download(options: { query?: string; signal?: AbortSignal }): Promise<void>;
 }
@@ -220,6 +235,17 @@ export interface TableProps<RowType = any> extends TableState {
   bodyClassName?: string;
   id?: string;
   rowClass?: (({ row }: { row: RowType }) => string) | string;
+  /**
+   * A full-width header row rendered above `row`, which opens a group of
+   * the rows that follow it (a stage, a phase). Return null for a row that
+   * does not open a group. The rows themselves stay in one list, so sorting,
+   * expansion and row actions work as usual.
+   */
+  rowGroupHeader?: (args: {
+    row: RowType;
+    rowIndex: number;
+    rows: RowType[];
+  }) => React.ReactNode;
   /** Opt-in row-click handler; ignored when clicking inner buttons/links. */
   onRowClick?: (row: RowType) => void;
   hoverable?: boolean;

@@ -8,7 +8,7 @@ import {
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { isProposalRequestEnabled } from '@/marketplace/serviceAccessMode';
+import { isMarketplaceVisible } from '@/marketplace/serviceAccessMode';
 import { useModal } from '@/modal/actions';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { router as globalRouter } from '@/router';
@@ -21,7 +21,7 @@ vi.mock('@/features/connect', () => ({
 }));
 
 vi.mock('@/marketplace/serviceAccessMode', () => ({
-  isProposalRequestEnabled: vi.fn(),
+  isMarketplaceVisible: vi.fn(),
 }));
 
 vi.mock('@/proposals/presentation', () => ({
@@ -116,7 +116,7 @@ const callWithScheduledRoundOnly = () => ({
 
 /** Both routes open: applying reachable, ordering permitted. */
 const bothAvailable = () => {
-  vi.mocked(isProposalRequestEnabled).mockReturnValue(true);
+  vi.mocked(isMarketplaceVisible).mockReturnValue(true);
   vi.mocked(isFeatureVisible).mockReturnValue(false);
   vi.mocked(hasPermissionOnAnyScope).mockReturnValue(true);
 };
@@ -163,13 +163,76 @@ describe('useOfferingAccess', () => {
       expect(result.current.visible).toBe(true);
     });
 
-    it('is hidden in catalogue_only when applying is off too', () => {
+    it('is hidden in catalogue_only when no call takes the offering', () => {
       vi.mocked(isFeatureVisible).mockImplementation(
         (feature) => feature === MarketplaceFeatures.catalogue_only,
       );
-      vi.mocked(isProposalRequestEnabled).mockReturnValue(false);
 
-      expect(render().result.current.visible).toBe(false);
+      expect(render({ open_for_proposals: false }).result.current.visible).toBe(
+        false,
+      );
+    });
+
+    // Calls-only mode has no shop: its offering pages are reached from the
+    // offerings its calls list, and apply through a call.
+    it('offers only applying where the marketplace is not shown', async () => {
+      vi.mocked(isMarketplaceVisible).mockReturnValue(false);
+
+      await click();
+
+      // One call, one round, nothing to order: straight to the form.
+      expect(chooserCalls()).toHaveLength(0);
+      expect(proposalFormCalls()).toHaveLength(1);
+    });
+
+    // A tenant's instance and volume offerings are private to its project,
+    // which already holds the allocation.
+    it('still orders from a private offering where the marketplace is not shown', async () => {
+      vi.mocked(isMarketplaceVisible).mockReturnValue(false);
+
+      await click({ shared: false, open_for_proposals: false });
+
+      expect(globalRouter.stateService.go).toHaveBeenCalledWith(
+        'marketplace-offering-public',
+        { offering_uuid: 'offering-uuid' },
+      );
+    });
+
+    // Staff keep the shop where the marketplace is not shown, so the offering
+    // page orders just as the deploy form it leads to accepts them.
+    it('still orders for staff where the marketplace is not shown', async () => {
+      vi.mocked(isMarketplaceVisible).mockReturnValue(false);
+      vi.mocked(useUser).mockReturnValue({
+        uuid: 'user-1',
+        is_staff: true,
+      } as any);
+
+      await click({ open_for_proposals: false });
+
+      expect(globalRouter.stateService.go).toHaveBeenCalledWith(
+        'marketplace-offering-public',
+        { offering_uuid: 'offering-uuid' },
+      );
+    });
+
+    it('only applies where the marketplace is hidden from end users', async () => {
+      vi.mocked(isFeatureVisible).mockImplementation(
+        (feature) =>
+          feature === MarketplaceFeatures.hide_marketplace_from_end_users,
+      );
+
+      await click();
+
+      expect(chooserCalls()).toHaveLength(0);
+      expect(proposalFormCalls()).toHaveLength(1);
+    });
+
+    it('offers nothing where the marketplace is not shown and no call takes the offering', () => {
+      vi.mocked(isMarketplaceVisible).mockReturnValue(false);
+
+      expect(render({ open_for_proposals: false }).result.current.visible).toBe(
+        false,
+      );
     });
 
     it('is visible for an offering only reachable through a call', () => {

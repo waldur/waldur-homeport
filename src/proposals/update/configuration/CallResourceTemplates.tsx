@@ -58,7 +58,9 @@ export const CallResourceTemplates: FC<CallResourceTemplatesProps> = (
         columns={[
           {
             title: translate('Name'),
-            render: ({ row }) => <>{row.name}</>,
+            render: ({ row }) => (
+              <span className="font-medium text-primary">{row.name}</span>
+            ),
           },
           {
             title: translate('Offering'),

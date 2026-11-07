@@ -17,13 +17,26 @@ import {
   useState,
 } from 'react';
 
-import { cn, Tooltip, Menu } from 'waldur-ui';
+import { cn, Tooltip, Menu, TabCount } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { NavMenuLink } from '@/navigation/NavMenu';
 import { getTabbableAfter } from '@/navigation/tabbables';
 
+import { Tab } from './Tab';
 import { isDescendantOf, useTabs } from './useTabs';
+
+/** A page tab's title, followed by its count when it has one. */
+const PageTabTitle: FC<{ tab: Tab }> = ({ tab }) => (
+  <>
+    {tab.title}
+    <TabCount
+      count={tab.count}
+      countVariant={tab.countVariant}
+      countLabel={tab.countLabel}
+    />
+  </>
+);
 
 /**
  * A page tab, ported from Metronic's `.menu-link` in Toolbar.tsx's old
@@ -163,7 +176,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
             className={TAB_CLASSNAME}
             aria-current={active ? 'true' : undefined}
           >
-            {parentTab.title}
+            <PageTabTitle tab={parentTab} />
             {/* Takes the label's colour; flips to point up while open. */}
             <CaretDownIcon
               size={16.9}
@@ -251,10 +264,14 @@ export const TabsList: FC = () => {
                   doesn't give it its `text-anchor` style. */}
               {parentTab.disabled && parentTab.disabledReason ? (
                 <Tooltip label={parentTab.disabledReason}>
-                  <span>{parentTab.title}</span>
+                  <span className="inline-flex items-center">
+                    <PageTabTitle tab={parentTab} />
+                  </span>
                 </Tooltip>
               ) : (
-                <span>{parentTab.title}</span>
+                <span className="inline-flex items-center">
+                  <PageTabTitle tab={parentTab} />
+                </span>
               )}
             </TabLink>
           </li>

@@ -6,6 +6,7 @@ import { translate } from '@/i18n';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { requestListState, requestListTitle } from '@/proposals/presentation';
 import { ProposalBreadcrumbPopover } from '@/proposals/proposal/ProposalBreadcrumbPopover';
+import { getMyWorkTitle } from '@/proposals/review/myWorkTitle';
 import { Call, Proposal } from '@/proposals/types';
 
 /**
@@ -49,6 +50,39 @@ export const useProposalBreadcrumbItems = (
       },
     ],
     [proposal?.name],
+  );
+
+/**
+ * Where a proposal sits for someone working on it who is not on its team --
+ * an evaluator, or someone a contribution was handed to: their own work,
+ * which is where they came from, not the applicant's list of proposals.
+ */
+export const useParticipantProposalBreadcrumbItems = (
+  user: Parameters<typeof getMyWorkTitle>[0],
+  proposal: Pick<Proposal, 'name'>,
+): IBreadcrumbItem[] =>
+  useMemo(
+    () => [
+      {
+        key: 'profile',
+        text: translate('Profile'),
+        to: 'profile.details',
+      },
+      {
+        key: 'my-work',
+        text: getMyWorkTitle(user),
+        to: 'reviews-tasks',
+        ellipsis: 'xl',
+      },
+      {
+        key: 'proposal',
+        // No maxLength: BreadcrumbItem middle-truncates the active crumb
+        // itself and ignores the prop there.
+        text: proposal?.name || '...',
+        active: true,
+      },
+    ],
+    [user, proposal?.name],
   );
 
 /**
@@ -117,5 +151,78 @@ export const useCallManagedProposalBreadcrumbItems = (
       },
     ],
     [call, proposal],
+  );
+};
+
+/**
+ * Where a proposal sits for a provider who opened it from its proposals:
+ * the organisation, its proposals, this one. Not the applicant's chain
+ * through the profile, which is not where the provider came from.
+ */
+export const useProviderProposalBreadcrumbItems = (
+  provider: { uuid: string; name?: string },
+  proposal: Pick<Proposal, 'name'>,
+): IBreadcrumbItem[] => {
+  const { getOrganizationsBreadcrumbItem, getOrganizationBreadcrumbItem } =
+    usePresetBreadcrumbItems();
+
+  return useMemo(
+    () => [
+      getOrganizationsBreadcrumbItem(),
+      getOrganizationBreadcrumbItem({
+        uuid: provider.uuid,
+        name: provider.name || '...',
+      }),
+      {
+        key: 'provider-proposals',
+        text: translate('Proposals'),
+        to: 'marketplace-provider-call-proposals',
+        params: { uuid: provider.uuid },
+      },
+      {
+        key: 'proposal',
+        // No maxLength: BreadcrumbItem middle-truncates the active crumb
+        // itself and ignores the prop there.
+        text: proposal?.name || '...',
+        active: true,
+      },
+    ],
+    [provider.uuid, provider.name, proposal?.name],
+  );
+};
+
+/**
+ * Where a proposal sits for someone who opened it from an organisation's
+ * published call results -- an organisation reader, say: the organisation,
+ * its call results, this one. They hold no tasks page and are not on the
+ * proposal's team, so neither of those chains leads back.
+ */
+export const useResultsProposalBreadcrumbItems = (
+  organization: { uuid: string; name?: string },
+  proposal: Pick<Proposal, 'name'>,
+): IBreadcrumbItem[] => {
+  const { getOrganizationsBreadcrumbItem, getOrganizationBreadcrumbItem } =
+    usePresetBreadcrumbItems();
+
+  return useMemo(
+    () => [
+      getOrganizationsBreadcrumbItem(),
+      getOrganizationBreadcrumbItem({
+        uuid: organization.uuid,
+        name: organization.name || '...',
+      }),
+      {
+        key: 'call-results',
+        text: translate('Call results'),
+        to: 'organization.call-results',
+        params: { uuid: organization.uuid },
+      },
+      {
+        key: 'proposal',
+        text: proposal?.name || '...',
+        active: true,
+      },
+    ],
+    [organization.uuid, organization.name, proposal?.name],
   );
 };

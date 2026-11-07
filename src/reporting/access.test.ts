@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ENV } from '@/core/config';
 
-import { categoryPermissions, getReportingOrganizations } from './access';
+import { getReportingOrganizations } from './access';
 import { states } from './routes';
 
 const stateByName = Object.fromEntries(
@@ -59,10 +59,17 @@ const member = {
   ],
 };
 
+// The reports and their lists: not the layout states, nor the redirect of a
+// retired URL, which shows nothing of its own.
 const reportStates = states
   .map((state) => state.name)
   .filter(
-    (name) => !['reporting', 'reporting-dashboard-layout'].includes(name),
+    (name) =>
+      ![
+        'reporting',
+        'reporting-dashboard-layout',
+        'reporting-proposals-retired',
+      ].includes(name),
   );
 
 const VIEW_REPORTING = 'CUSTOMER.VIEW_REPORTING';
@@ -94,6 +101,13 @@ afterEach(() => {
 });
 
 describe('reporting access', () => {
+  // The Proposals category's old reports live on in the call reports: their
+  // URLs land there, and the page decides who may stay.
+  it('sends the retired proposal report URLs to the call reports', () => {
+    const retired = stateByName['reporting-proposals-retired'];
+    expect(retired.redirectTo).toBe('reporting-proposals-list');
+  });
+
   it('lets staff reach every reporting state', () => {
     reportStates.forEach((name) => expect(canEnter(name, staff)).toBe(true));
   });
@@ -101,31 +115,9 @@ describe('reporting access', () => {
   // Their endpoints answer support users with 403.
   it('keeps support out of the reports built on staff-only endpoints only', () => {
     const unreachable = reportStates.filter((name) => !canEnter(name, support));
-    expect(unreachable.sort()).toEqual(
-      [
-        'reporting-call-performance',
-        'reporting-call-performance-analytics',
-        'reporting-projects-by-affiliated-organization',
-        'reporting-proposals',
-        'reporting-proposals-list',
-        'reporting-resource-demand',
-        'reporting-resource-demand-analytics',
-        'reporting-review-progress',
-        'reporting-review-progress-analytics',
-      ].sort(),
-    );
-  });
-
-  it('opens a category to a user who may open any one of its reports', () => {
-    const allows = (keys: string[], user) =>
-      categoryPermissions(keys).every((permission) =>
-        permission({ workspace: { user } } as any),
-      );
-    expect(allows(['call-performance', 'review-progress'], support)).toBe(
-      false,
-    );
-    expect(allows(['call-performance', 'quotas'], support)).toBe(true);
-    expect(allows(['call-performance'], staff)).toBe(true);
+    expect(unreachable).toEqual([
+      'reporting-projects-by-affiliated-organization',
+    ]);
   });
 
   it.each([
@@ -197,5 +189,49 @@ describe('reporting access', () => {
   it('keeps owners out when no scoped report is enabled', () => {
     (ENV.plugins as any).WALDUR_CORE.ENABLED_REPORTING_SCREENS = ['growth'];
     expect(canEnter('reporting-dashboard', owner)).toBe(false);
+  });
+});
+
+describe('the call reports', () => {
+  const callManager = {
+    is_staff: false,
+    is_support: false,
+    permissions: [
+      {
+        scope_type: 'call',
+        scope_uuid: 'call-1',
+        customer_uuid: 'c1',
+        role_name: 'CALL.MANAGER',
+      },
+    ],
+  };
+  const page = 'reporting-proposals-list';
+
+  // Across every organization: staff, and support, who read.
+  it.each([
+    ['staff', staff, true],
+    ['support', support, true],
+    ['an organization owner', owner, false],
+    ['a call manager', callManager, false],
+    ['an anonymous visitor', null, false],
+  ])('%s: %s', (_label, user, expected) => {
+    expect(canEnter(page, user)).toBe(expected);
+  });
+
+  it('is not offered when the reporting screen is switched off', () => {
+    (ENV.plugins as any).WALDUR_CORE.ENABLED_REPORTING_SCREENS = ['quotas'];
+    expect(canEnter(page, staff)).toBe(false);
+    expect(canEnter(page, support)).toBe(false);
+  });
+
+  it('is not offered where calls run outside Waldur', () => {
+    ENV.FEATURES = { marketplace: { call_only: true } } as any;
+    expect(canEnter(page, staff)).toBe(false);
+  });
+
+  it('shows only with call management', () => {
+    expect(stateByName[page].data.feature).toBe(
+      'marketplace.show_call_management_functionality',
+    );
   });
 });

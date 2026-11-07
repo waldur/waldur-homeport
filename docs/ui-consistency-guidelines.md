@@ -96,6 +96,31 @@ getNoResultMessage({
 });
 ```
 
+### 1.2.1 Inline and In-Dialog Empty States
+
+`NoResult` is for a whole table or page. For "nothing here" inside a dialog, a
+card, an expanded row or a list, use waldur-ui's lighter `EmptyState` instead
+of a hand-written `<p className="text-muted">No …</p>`:
+
+```tsx
+import { EmptyState } from 'waldur-ui';
+
+// A dialog section or panel: a dashed frame, message centred (size="md", the default)
+<EmptyState message={translate('No presets match the search.')} />
+
+// Inside a row or a card: one muted line
+<EmptyState size="sm" message={translate('No compliance questions.')} />
+
+// With a heading and a next step
+<EmptyState
+  title={translate('No proposals at this step')}
+  message={translate('No proposal of this round is at this step now.')}
+  action={<BaseButton variant="tertiary" size="sm" label={translate('Pick another step')} onClick={…} />}
+/>
+```
+
+A missing field value is still a dash (1.3), not an `EmptyState`.
+
 ### 1.3 Inline Empty Values
 
 **Standard**: Use `DASH_ESCAPE_CODE` (—) for null/undefined values in displays:

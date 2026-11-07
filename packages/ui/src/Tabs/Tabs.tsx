@@ -21,7 +21,7 @@ import {
 import { Tooltip } from '../Tooltip';
 
 import { resolveTabValue } from './resolveTabValue';
-import { TabCount } from './TabCount';
+import { TabCount, type TabCountProps } from './TabCount';
 import {
   tabListVariants,
   tabScrollClassName,
@@ -43,12 +43,11 @@ const TabsContext = createContext<TabsContextValue>({
 });
 
 /** One tab of the `items` data form of `Tabs`. */
-export interface TabsItem {
+export interface TabsItem extends TabCountProps {
   value: string;
   title: ReactNode;
   /** The panel. Mounted according to `mount`. */
   content?: ReactNode;
-  count?: number;
   countLoading?: boolean;
   hint?: ReactNode;
   tooltip?: ReactNode;
@@ -163,6 +162,8 @@ export const Tabs = forwardRef<
                     key={item.value}
                     value={item.value}
                     count={item.count}
+                    countVariant={item.countVariant}
+                    countLabel={item.countLabel}
                     countLoading={item.countLoading}
                     hint={item.hint}
                     tooltip={item.tooltip}
@@ -285,9 +286,10 @@ export const TabsList = forwardRef<
 );
 TabsList.displayName = 'TabsList';
 
-export interface TabsTriggerProps extends ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Trigger
-> {
+export interface TabsTriggerProps
+  extends
+    ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>,
+    TabCountProps {
   tooltip?: ReactNode;
   /**
    * Help text: shown as the tooltip (unless `tooltip` is set) and marked with
@@ -295,8 +297,6 @@ export interface TabsTriggerProps extends ComponentPropsWithoutRef<
    * and cannot sit inside the tab's button.
    */
   hint?: ReactNode;
-  /** A count badge after the title. `undefined` shows no badge. */
-  count?: number;
   /** A spinner replaces the count badge's number while this is true. */
   countLoading?: boolean;
 }
@@ -311,6 +311,8 @@ export const TabsTrigger = forwardRef<
       tooltip,
       hint,
       count,
+      countVariant,
+      countLabel,
       countLoading,
       disabled,
       children,
@@ -345,6 +347,8 @@ export const TabsTrigger = forwardRef<
         ) : null}
         <TabCount
           count={count}
+          countVariant={countVariant}
+          countLabel={countLabel}
           loading={countLoading}
           active={activeValue === props.value}
         />

@@ -15,24 +15,25 @@ export const ReviewViewAction = ({ row }) => {
     );
   };
 
-  if (
-    state.name !== 'call-management.review-list' &&
-    row.state !== 'in_review'
-  ) {
+  const managing = state.name === 'call-management.review-list';
+  // The reviewer's own list, where a finished review stays readable.
+  const ownList = state.parent === 'reviews';
+  const continuing = !managing && row.state === 'in_review';
+  if (!managing && !ownList && !continuing) {
     return null;
   }
 
-  const title =
-    state.name === 'call-management.review-list'
-      ? translate('View')
-      : translate('Continue review');
+  const title = managing
+    ? translate('View')
+    : continuing
+      ? translate('Continue review')
+      : translate('View review');
 
-  const icon =
-    state.name === 'call-management.review-list' ? (
-      <EyeIcon weight="bold" />
-    ) : (
-      <PencilSimpleIcon weight="bold" />
-    );
+  const icon = continuing ? (
+    <PencilSimpleIcon weight="bold" />
+  ) : (
+    <EyeIcon weight="bold" />
+  );
 
   return <ActionItem title={title} action={callback} iconNode={icon} />;
 };

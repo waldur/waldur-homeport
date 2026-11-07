@@ -9,6 +9,7 @@ import { Proposal } from '@/proposals/types';
 import { invalidateProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { useUser } from '@/workspace/hooks';
 
+import { useProposalEditLocked } from './proposalEditLock';
 import {
   canInviteToProposal,
   canManageProposalTeam,
@@ -39,6 +40,9 @@ const useProposalManagerCount = (proposal: Proposal | undefined) =>
       }).then((response) => response.data.length),
     enabled: Boolean(proposal?.uuid),
     refetchOnWindowFocus: false,
+    // Not everyone who reads the proposal reads its team; a 403 here leaves
+    // the count unknown rather than leaving the page.
+    meta: { skipGlobalErrorRedirect: true },
   }).data;
 
 /**
@@ -71,9 +75,28 @@ export const useProposalTeamRules = (proposal: Proposal | undefined) => {
     [managerCount],
   );
 
+  const locked = useProposalEditLocked();
+
   return useMemo(() => {
     if (!proposal) {
       return undefined;
+    }
+    // Locked until the viewer, off the team, unlocks editing: the team reads
+    // as it is, and nobody is added, invited or removed meanwhile.
+    if (locked) {
+      return {
+        grantableRoles: [],
+        dropdown: null,
+        canManageTeam: false,
+        canOversee: canOverseeProposal(user, proposal),
+        readOnly: true,
+        canRemoveRow: () => false,
+        getRemoveDisabledReason: getRemoveReason,
+        teamNote: translate(
+          'Read-only until you unlock editing at the top of the page.',
+        ),
+        onTeamChange,
+      };
     }
     const grantableRoles = getGrantableProposalRoleNames(user, proposal);
     const canChangeTeam = grantableRoles.length > 0;
@@ -82,9 +105,13 @@ export const useProposalTeamRules = (proposal: Proposal | undefined) => {
         ? null
         : proposal.state === 'draft'
           ? translate('Only a proposal manager can change the proposal team.')
-          : translate(
-              'The team is fixed after submission; the call manager can change it.',
-            );
+          : proposal.state === 'accepted'
+            ? translate(
+                'The team is settled once the award is accepted: manage the people on the awarded project instead.',
+              )
+            : translate(
+                'The team is fixed after submission; the call manager can change it.',
+              );
     return {
       grantableRoles,
       /** Add member and invite: offered when any role may be granted. */
@@ -104,5 +131,5 @@ export const useProposalTeamRules = (proposal: Proposal | undefined) => {
       teamNote,
       onTeamChange,
     };
-  }, [user, proposal, canRemoveRow, getRemoveReason, onTeamChange]);
+  }, [user, proposal, locked, canRemoveRow, getRemoveReason, onTeamChange]);
 };

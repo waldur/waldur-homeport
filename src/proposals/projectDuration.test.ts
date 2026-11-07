@@ -16,6 +16,15 @@ describe('project duration', () => {
     expect(getProjectDuration(0, 90)).toEqual({ days: 90 });
   });
 
+  // A call offering a list of lengths lets the one chosen from it decide,
+  // whatever the subscriptions run for; a fixed duration still wins.
+  it('lets the chosen length decide over the subscriptions', () => {
+    expect(getProjectDuration(2, null, 6)).toEqual({ months: 6 });
+    expect(getProjectDuration(12, null, 3)).toEqual({ months: 3 });
+    expect(getProjectDuration(2, 90, 6)).toEqual({ days: 90 });
+    expect(getProjectDuration(2, null, null)).toEqual({ months: 2 });
+  });
+
   it('lets the longest subscription decide when the call fixes nothing', () => {
     expect(getProjectDuration(2, null)).toEqual({ months: 2 });
     expect(getProjectDuration(6, 0)).toEqual({ months: 6 });

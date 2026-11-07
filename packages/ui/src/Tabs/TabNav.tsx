@@ -11,7 +11,7 @@ import { translate } from 'waldur-i18n-runtime';
 import { cn } from '../cn';
 import { Tooltip } from '../Tooltip';
 
-import { TabCount } from './TabCount';
+import { TabCount, type TabCountProps } from './TabCount';
 import {
   tabListVariants,
   tabScrollClassName,
@@ -20,7 +20,7 @@ import {
 import { useScrollActiveTabIntoView } from './useScrollActiveTabIntoView';
 
 /** One tab of a `TabNav`. */
-export interface TabNavItemDef {
+export interface TabNavItemDef extends TabCountProps {
   key: string;
   title: ReactNode;
   /** A count badge after the title. `undefined` shows no badge. */
@@ -167,18 +167,25 @@ const TabNavItem = ({
   const {
     key,
     title,
-    count,
     link,
     onClick,
     disabled,
     tooltip,
     className,
     testId,
+    count,
+    countVariant,
+    countLabel,
   } = item;
   const label = (
     <>
       {title}
-      <TabCount count={count} active={current} />
+      <TabCount
+        count={count}
+        countVariant={countVariant}
+        countLabel={countLabel}
+        active={current}
+      />
     </>
   );
   const isLink = Boolean(link);

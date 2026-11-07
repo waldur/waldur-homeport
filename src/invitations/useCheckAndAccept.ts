@@ -11,6 +11,7 @@ import { useNotify } from '@/store/notify';
 import { UsersService, getCurrentUser } from '@/user/UsersService';
 import { useSetUser } from '@/workspace/hooks';
 
+import { getInvitationLandingState } from './getInvitationLandingState';
 import { InvitationConfirmDialog } from './InvitationConfirmDialog';
 
 export function useCheckAndAccept(token: string) {
@@ -71,18 +72,12 @@ export function useCheckAndAccept(token: string) {
             onConfirm: ({ invitation }) => {
               acceptMutation.mutate(undefined, {
                 onSuccess: () => {
-                  UsersService.refreshCurrentUser().then(() => {
-                    if (invitation?.project_uuid) {
-                      router.stateService.go('project.dashboard', {
-                        uuid: invitation.project_uuid,
-                      });
-                    } else if (invitation?.customer_uuid) {
-                      router.stateService.go('organization.dashboard', {
-                        uuid: invitation.customer_uuid,
-                      });
-                    } else {
-                      router.stateService.go('profile.details');
-                    }
+                  UsersService.refreshCurrentUser().then((user) => {
+                    const { state, params } = getInvitationLandingState(
+                      invitation,
+                      user,
+                    );
+                    router.stateService.go(state, params);
                   });
                 },
               });
@@ -105,5 +100,11 @@ export function useCheckAndAccept(token: string) {
     }
   }, [token, openDialog, acceptMutation, router, showError]);
 
-  return { checkAndAccept, isPending: acceptMutation.isPending };
+  // Success stays true until the redirect leaves the page, so the processing
+  // message does not flicker away between the answer and the navigation.
+  return {
+    checkAndAccept,
+    isPending: acceptMutation.isPending,
+    isAccepting: acceptMutation.isPending || acceptMutation.isSuccess,
+  };
 }

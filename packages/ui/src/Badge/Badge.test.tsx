@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Badge } from './Badge';
 
@@ -188,5 +189,77 @@ describe('Badge', () => {
       />,
     );
     expect(screen.getByTestId('only-icon-lg')).toHaveClass('size-7');
+  });
+
+  describe('as a button', () => {
+    it('is a button that Tab reaches and a click fires', async () => {
+      const user = userEvent.setup();
+      const onClick = vi.fn();
+      render(
+        <>
+          <button type="button">Before</button>
+          <Badge as="button" aria-label="Open the mail" onClick={onClick}>
+            Applicant
+          </Badge>
+        </>,
+      );
+
+      const badge = screen.getByRole('button', { name: 'Open the mail' });
+      expect(badge).toHaveAttribute('type', 'button');
+      expect(badge).toHaveClass('badge', 'focus-visible:outline-2');
+
+      await user.tab();
+      await user.tab();
+      expect(badge).toHaveFocus();
+
+      await user.click(badge);
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('is pressed with Enter and Space', async () => {
+      const user = userEvent.setup();
+      const onClick = vi.fn();
+      render(
+        <Badge as="button" onClick={onClick}>
+          S
+        </Badge>,
+      );
+
+      screen.getByRole('button', { name: 'S' }).focus();
+      await user.keyboard('{Enter}');
+      await user.keyboard(' ');
+      expect(onClick).toHaveBeenCalledTimes(2);
+    });
+
+    it('keeps the badge look and forwards the ref to the button', () => {
+      const ref = createRef<HTMLElement>();
+      render(
+        <Badge as="button" ref={ref} variant="neutral" size="sm" tone="outline">
+          R
+        </Badge>,
+      );
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+      expect(ref.current).toHaveAttribute('data-variant', 'neutral');
+      expect(ref.current).toHaveAttribute('data-tone', 'outline');
+    });
+
+    it('stays a span with an onClick of its own', () => {
+      render(<Badge onClick={() => undefined}>Plain</Badge>);
+      expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    });
+
+    it('takes disabled', async () => {
+      const user = userEvent.setup();
+      const onClick = vi.fn();
+      render(
+        <Badge as="button" disabled onClick={onClick}>
+          Off
+        </Badge>,
+      );
+      const badge = screen.getByRole('button', { name: 'Off' });
+      expect(badge).toBeDisabled();
+      await user.click(badge);
+      expect(onClick).not.toHaveBeenCalled();
+    });
   });
 });

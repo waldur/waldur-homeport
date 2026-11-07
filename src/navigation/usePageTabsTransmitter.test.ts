@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { describe, expect, it, vi } from 'vitest';
 
+import { useExtraTabs } from './context';
 import { PageBarTab } from './types';
 import { usePageTabsTransmitter } from './usePageTabsTransmitter';
 
@@ -69,5 +70,17 @@ describe('usePageTabsTransmitter', () => {
     expect(openPage([accounting, reviewer], { tab: 'components' })).toBe(
       'components',
     );
+  });
+
+  // A tab link keeps the page's params; a tab clears the ones it must not
+  // carry along.
+  it('sets the extra params a tab gives on its link', () => {
+    openPage([{ ...details, linkParams: { report: null } }, reviewer], {
+      tab: 'reviewer',
+      report: 'budgets',
+    });
+    const tabs = vi.mocked(useExtraTabs).mock.lastCall[0];
+    expect(tabs[0].params).toEqual({ report: null, tab: 'details' });
+    expect(tabs[1].params).toEqual({ tab: 'reviewer' });
   });
 });

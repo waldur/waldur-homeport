@@ -7,35 +7,39 @@ import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
+import { continuouslyOpenLabel } from './roundCutoff';
+
 export const EndingField = ({
   endDate,
   dateFirst = false,
   hasFixedDuration = false,
+  openEnded = false,
+}: {
+  endDate?: string | null;
+  dateFirst?: boolean;
+  hasFixedDuration?: boolean;
+  /** A round without a cut-off: no end, open until closed. */
+  openEnded?: boolean;
 }) => {
   const data = useMemo(() => {
     if (!endDate) return {};
     const endDateParsed = parseDate(endDate);
     const diffNowDays = endDateParsed.diffNow().as('days');
-    // Only an approaching deadline is urgent. Once it passes there is nothing
-    // left to act on, and "Has ended" already says so without flagging an
-    // error on states where ending is a normal outcome, such as an accepted
-    // proposal whose call has closed.
-    const textClass = diffNowDays > 0 && diffNowDays <= 4 ? 'text-danger' : '';
     return {
       text:
         diffNowDays > 0 ? endDateParsed.toRelative() : translate('Has ended'),
       date: dateFirst
         ? endDateParsed.toFormat('DDD')
         : endDateParsed.toISODate(),
-      textClass,
     };
   }, [endDate]);
 
   if (!endDate) {
-    return <>{DASH_ESCAPE_CODE}</>;
+    return <>{openEnded ? continuouslyOpenLabel() : DASH_ESCAPE_CODE}</>;
   }
   return (
-    <div className={data.textClass}>
+    // Plain text, however near: the app does not colour a date red.
+    <div>
       {dateFirst ? (
         <>
           {data.date} ({data.text})

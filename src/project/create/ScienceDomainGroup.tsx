@@ -15,6 +15,8 @@ interface ScienceDomainGroupProps {
   // Marks the sub-domain as mandatory. The parent domain is a navigation aid
   // for picking one, so only the sub-domain carries the asterisk.
   required?: boolean;
+  // Shows the choice without letting it change.
+  disabled?: boolean;
   // Shows the selector whatever the project.science_domain feature says, for
   // a caller that has decided that itself: the proposal form, through
   // getFieldStates, shows a science domain its call requires.
@@ -24,6 +26,7 @@ interface ScienceDomainGroupProps {
 export const ScienceDomainGroup = ({
   initialDomain = null,
   required = false,
+  disabled = false,
   alwaysShown = false,
 }: ScienceDomainGroupProps = {}) => {
   const form = useForm();
@@ -128,6 +131,7 @@ export const ScienceDomainGroup = ({
           getOptionLabel={(option) => option.name}
           isClearable={true}
           isLoading={loadingDomains}
+          isDisabled={disabled}
           placeholder={translate('Select science domain...')}
         />
       </FormGroup>
@@ -138,7 +142,7 @@ export const ScienceDomainGroup = ({
         getOptionLabel={(option) => option.name}
         isClearable={true}
         isLoading={loadingSubDomains}
-        isDisabled={!selectedDomain}
+        isDisabled={disabled || !selectedDomain}
         placeholder={
           selectedDomain
             ? translate('Select sub-domain...')

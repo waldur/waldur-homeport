@@ -2,22 +2,25 @@ import {
   ArrowCounterClockwiseIcon,
   ArrowRightIcon,
   CheckCircleIcon,
+  NotePencilIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import {
+  ProposalWorkflowStepInstance,
   proposalProposalsAdvanceWorkflowStep,
+  proposalProposalsCancelChangeRequest,
   proposalProposalsRejectWorkflowStep,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
+import { formatDateTime } from '@/core/dateUtils';
+import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 import { Proposal } from '../types';
@@ -27,10 +30,30 @@ import {
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
 import { ReopenDecisionDialog } from '../workflow/ReopenDecisionDialog';
+import { RequestChangesDialog } from '../workflow/RequestChangesDialog';
+import { ScoreGateAlert } from '../workflow/ScoreGate';
+import { activeStepsOf } from '../workflow/stages';
+
+import { changeRequestPartLabel, getStepChangeRequest } from './changeRequests';
+import { proposalRunsKey } from './postAwardQueries';
+import { STEP_ACTIONS_SECTION_ID, stepActionAccess } from './stepActions';
+
+/**
+ * Whether the viewer completes a step without managing the call: they hold
+ * its completer's call role (a panel member on an assignment step, say) or
+ * the evaluator role that completes it. The backend checks again.
+ */
+type CompletesStep =
+  boolean | ((step: ProposalWorkflowStepInstance) => boolean);
 
 interface WorkflowStepActionsProps {
   proposal: Proposal;
   refetch: () => void;
+  /**
+   * Whether the viewer completes an active step without managing the call,
+   * for every active step alike or decided per step.
+   */
+  completesActiveStep?: CompletesStep;
 }
 
 // Call-manager controls for driving the per-proposal workflow engine. The call
@@ -40,60 +63,80 @@ interface WorkflowStepActionsProps {
 // completed by the applicant on their own view. The backend
 // (can_act_on_active_workflow_step) is the authority; this only decides what to
 // surface.
+//
+// Steps of one stage run at the same time: each active step gets its own
+// card, and every action names the step it is about, so acting on one never
+// touches the other.
 export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
   proposal,
   refetch,
+  completesActiveStep,
 }) => {
-  const user = useUser();
-  const { openDialog } = useModal();
-
   const { data } = useQuery({
     queryKey: proposalWorkflowStatesKey(proposal.uuid),
     queryFn: () => fetchProposalWorkflowStates(proposal.uuid),
   });
 
-  const activeStep = useMemo(
-    () => (data ?? []).find((s) => s.status === 'active'),
-    [data],
+  const activeSteps = useMemo(() => activeStepsOf(data), [data]);
+  const completes = (step: ProposalWorkflowStepInstance) =>
+    typeof completesActiveStep === 'function'
+      ? completesActiveStep(step)
+      : !!completesActiveStep;
+
+  // Parked for a manual advance, or a held decision, there is no active
+  // step; the proposal's own actions still need a card.
+  if (!activeSteps.length) {
+    return <StepActionsCard proposal={proposal} refetch={refetch} first />;
+  }
+  return (
+    <>
+      {activeSteps.map((step, index) => (
+        <StepActionsCard
+          key={step.uuid}
+          proposal={proposal}
+          refetch={refetch}
+          activeStep={step}
+          completesActiveStep={completes(step)}
+          first={index === 0}
+        />
+      ))}
+    </>
   );
+};
 
-  const awaitingManualAdvance = proposal.awaiting_manual_advance ?? false;
+interface StepActionsCardProps {
+  proposal: Proposal;
+  refetch: () => void;
+  activeStep?: ProposalWorkflowStepInstance;
+  completesActiveStep?: boolean;
+  /** The first card carries the proposal's own actions and the section id. */
+  first: boolean;
+}
 
-  const canManage =
-    user?.is_staff ||
-    hasPermission(user, {
-      permission: PermissionEnum.APPROVE_AND_REJECT_PROPOSALS,
-      scopeId: proposal.call_uuid,
-      callOrganizerId: proposal.call_managing_organisation_uuid,
-    });
+const StepActionsCard: FC<StepActionsCardProps> = ({
+  proposal,
+  refetch,
+  activeStep,
+  completesActiveStep,
+  first,
+}) => {
+  const user = useUser();
+  const { openDialog } = useModal();
 
-  // A manager may complete/reject any non-applicant step; award_response is the
-  // applicant's own action (surfaced elsewhere). Staff may act on any.
-  // Reopening a held decision is narrower than acting on a step: staff, or
-  // CALL.UPDATE on the call or its managing organisation, and never the
-  // applicant (mirrors the backend's user_can_manage_held_decision). Support
-  // sees the held decision but may not change it.
-  // Only before the round publishes its results: a decision still held after
-  // that is one whose release failed, which publishing again retries and the
-  // backend refuses to reopen.
-  const roundPublished =
-    proposal.round?.lifecycle_state === 'results_published' ||
-    proposal.round?.lifecycle_state === 'closed';
-  const canReopenDecision =
-    proposal.decision_held === true &&
-    !roundPublished &&
-    (user?.is_staff ||
-      (user?.uuid !== proposal.created_by_uuid &&
-        hasPermission(user, {
-          permission: PermissionEnum.UPDATE_CALL,
-          scopeId: proposal.call_uuid,
-          callOrganizerId: proposal.call_managing_organisation_uuid,
-        })));
-
-  const canActOnActiveStep =
-    !!activeStep &&
-    (user?.is_staff ||
-      (canManage && activeStep.responsible_role !== 'applicant'));
+  const {
+    awaitingManualAdvance,
+    canManage,
+    canReopenDecision,
+    canActOnActiveStep,
+    evaluatorCompletes,
+    shown,
+  } = stepActionAccess({
+    user,
+    proposal,
+    activeStep,
+    completesActiveStep,
+    withProposalActions: first,
+  });
 
   // Completion is gated by the step's required checklist (enforced backend-side
   // in _enforce_step_gates). Reflect that in the button so the manager sees why
@@ -112,7 +155,10 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
     },
     successMessage: translate('Workflow advanced.'),
     errorMessage: translate('Unable to advance the workflow.'),
-    invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
+    invalidateQueries: [
+      { queryKey: proposalWorkflowStatesKey(proposal.uuid) },
+      { queryKey: proposalRunsKey(proposal.uuid) },
+    ],
   });
 
   const rejectStep = useManagedMutation<any, any, { input: string }>({
@@ -134,13 +180,129 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
     },
     successMessage: translate('Proposal rejected.'),
     errorMessage: translate('Unable to reject the proposal.'),
+    invalidateQueries: [
+      { queryKey: proposalWorkflowStatesKey(proposal.uuid) },
+      { queryKey: proposalRunsKey(proposal.uuid) },
+    ],
+  });
+
+  // The step waits on the applicant's changes: it is neither completed nor
+  // rejected meanwhile, and the request is cancelled first. Only its own
+  // request holds it: a step running beside it is decided as usual, and may
+  // ask for changes of its own, which the applicant answers together.
+  const openRequest = getStepChangeRequest(proposal, activeStep);
+  const actsOnStep =
+    evaluatorCompletes || (!!canManage && !!canActOnActiveStep);
+  const canRequestChanges =
+    actsOnStep && !!activeStep?.allows_change_requests && !openRequest;
+
+  const cancelRequest = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      proposalProposalsCancelChangeRequest({
+        path: { uuid: proposal.uuid },
+        body: { change_request_uuid: openRequest!.uuid },
+      }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Cancel the request for changes? The parts unlocked are locked again and the step is yours to decide.',
+      ),
+    },
+    successMessage: translate('The request for changes has been canceled.'),
+    errorMessage: translate('Unable to cancel the request for changes.'),
     invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
   });
 
-  if (!canManage && !canReopenDecision) return null;
+  if (!shown) return null;
+
+  // A step run once per round is never completed on one proposal.
+  const roundScoped = !!activeStep?.round_scoped;
+
+  const completeButton = (
+    <BaseButton
+      variant="primary"
+      disabled={completeBlockedByChecklist}
+      disabledReason={
+        completeBlockedByChecklist
+          ? (activeStep?.contributor_source ?? 'none') !== 'none'
+            ? // Its form is filled on the contributions, by those who
+              // contribute: nothing to answer here.
+              translate(
+                'The required questions are answered on the step’s contributions, by those who contribute to it.',
+              )
+            : translate(
+                'Answer the required checklist questions before completing this step.',
+              )
+          : undefined
+      }
+      onClick={() =>
+        openDialog(CompleteWorkflowStepDialog, {
+          resolve: { proposal, step: activeStep, refetch },
+        })
+      }
+      className="w-full mt-1.5"
+      iconNode={<CheckCircleIcon weight="bold" />}
+      label={translate('Complete step')}
+      size="lg"
+    />
+  );
+
+  // Every contribution is in and the gates are met: the step waits for the
+  // viewer alone. Completing may carry a decision, so it is never done for
+  // them; they are told it is their turn.
+  const readyToComplete =
+    !!activeStep?.ready_to_complete &&
+    (evaluatorCompletes || (!!canManage && !!canActOnActiveStep));
+
+  // Why the step stands still and what moves it, for those overseeing it.
+  const waitingFor =
+    canManage && !readyToComplete
+      ? activeStep?.waiting_for || activeStep?.awaiting_lead
+      : undefined;
+
+  // A request still open is withdrawn here: small, as an aside to it.
+  const cancelRequestButton = (
+    <BaseButton
+      variant="tertiary"
+      onClick={() => cancelRequest.mutate()}
+      pending={cancelRequest.isPending}
+      iconNode={<XCircleIcon weight="bold" />}
+      label={translate('Cancel request for changes')}
+      size="sm"
+      // Its label wraps: unwrapped, it is wider than the sidebar's notice.
+      className="h-auto max-w-full whitespace-normal text-start"
+    />
+  );
 
   return (
-    <>
+    <Panel
+      id={first ? STEP_ACTIONS_SECTION_ID : undefined}
+      title={translate('Current step')}
+      subtitle={activeStep?.step_name}
+      cardBordered
+      className="mb-4"
+    >
+      {waitingFor && (
+        <AlertItem
+          variant="warning"
+          className="mb-1.5"
+          title={translate('The step cannot move on yet')}
+          body={waitingFor}
+          data-testid="step-waiting-for"
+        />
+      )}
+      {(canManage || evaluatorCompletes) && (
+        <ScoreGateAlert gate={activeStep?.score_gate} className="mb-1.5" />
+      )}
+      {readyToComplete && (
+        <AlertItem
+          variant="success"
+          className="mb-1.5"
+          title={translate('All contributions are in — complete the step.')}
+          data-testid="step-ready-to-complete"
+        />
+      )}
       {canReopenDecision && (
         <BaseButton
           variant="tertiary"
@@ -166,28 +328,72 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
           size="lg"
         />
       )}
-      {canManage && canActOnActiveStep && (
+      {openRequest && actsOnStep && (
+        <AlertItem
+          variant="info"
+          className="mb-1.5"
+          title={translate("Waiting for the applicant's changes")}
+          body={
+            <>
+              <p className="mb-1" style={{ whiteSpace: 'pre-wrap' }}>
+                {openRequest.message}
+              </p>
+              <p className="mb-1">
+                {translate('Unlocked: {parts}.', {
+                  parts: openRequest.unlocked_parts
+                    .map(changeRequestPartLabel)
+                    .join(', '),
+                })}
+              </p>
+              {openRequest.due_at && (
+                <p className="mb-0">
+                  {translate('Due {date}.', {
+                    date: formatDateTime(openRequest.due_at),
+                  })}
+                </p>
+              )}
+              {/* Under the request, not beside it: the sidebar is narrow. */}
+              {canManage && <div className="mt-2.5">{cancelRequestButton}</div>}
+            </>
+          }
+          data-testid="changes-requested"
+        />
+      )}
+      {/* Inside the notice of the request where the viewer sees it: an
+          aside to the request, not one of the step's decisions. */}
+      {openRequest && canManage && !actsOnStep && (
+        <div className="mt-1.5">{cancelRequestButton}</div>
+      )}
+      {canRequestChanges && (
+        <BaseButton
+          variant="tertiary"
+          onClick={() =>
+            openDialog(RequestChangesDialog, {
+              resolve: { proposal, step: activeStep, refetch },
+            })
+          }
+          className="w-full mt-1.5"
+          iconNode={<NotePencilIcon weight="bold" />}
+          label={translate('Request changes')}
+          size="lg"
+          data-testid="request-changes"
+        />
+      )}
+      {roundScoped && (canManage || evaluatorCompletes) && (
+        <AlertItem
+          variant="info"
+          className="mb-1.5"
+          title={translate('Completed for the whole round')}
+          body={translate(
+            "This step runs once per round: it is completed by its round reports, or by the call managers for the round, from the round's row on the call's Rounds tab.",
+          )}
+          data-testid="step-round-scoped"
+        />
+      )}
+      {evaluatorCompletes && !openRequest && !roundScoped && completeButton}
+      {canManage && canActOnActiveStep && !openRequest && (
         <>
-          <BaseButton
-            variant="primary"
-            disabled={completeBlockedByChecklist}
-            disabledReason={
-              completeBlockedByChecklist
-                ? translate(
-                    'Answer the required checklist questions before completing this step.',
-                  )
-                : undefined
-            }
-            onClick={() =>
-              openDialog(CompleteWorkflowStepDialog, {
-                resolve: { proposal, step: activeStep, refetch },
-              })
-            }
-            className="w-full mt-1.5"
-            iconNode={<CheckCircleIcon weight="bold" />}
-            label={translate('Complete step')}
-            size="lg"
-          />
+          {roundScoped ? null : completeButton}
           <BaseButton
             variant="danger"
             onClick={() => rejectStep.mutate()}
@@ -198,6 +404,6 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
           />
         </>
       )}
-    </>
+    </Panel>
   );
 };

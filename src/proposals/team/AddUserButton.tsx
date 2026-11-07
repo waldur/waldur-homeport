@@ -28,8 +28,11 @@ export const AddUserButton: React.FC<
     /** Decided by the caller when the scope has rules of its own, e.g. a
      * proposal whose call managers may add its managers. */
     canAddUser?: boolean;
+    /** Asked before the dialog opens; it stays shut unless this resolves
+     * to true. */
+    beforeOpen?: () => Promise<boolean>;
   }
-> = ({ canAddUser: canAddUserOverride, ...props }) => {
+> = ({ canAddUser: canAddUserOverride, beforeOpen, ...props }) => {
   const { openDialog } = useModal();
   const user = useUser();
 
@@ -53,7 +56,10 @@ export const AddUserButton: React.FC<
   return (
     <ActionItem
       title={translate('Member')}
-      action={() => openDialog(AddUserDialog, props)}
+      action={async () => {
+        if (beforeOpen && !(await beforeOpen())) return;
+        openDialog(AddUserDialog, props);
+      }}
       iconNode={<UserPlusIcon weight="bold" />}
       disabled={!canAddUser}
       tooltip={

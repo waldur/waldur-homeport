@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { ReviewerSuggestion } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -21,67 +23,32 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
 }) => {
   const { suggestion } = resolve;
 
+  // The person in the dialog's own title, the rest as key/value rows.
   return (
     <ModalDialog
-      title={translate('Reviewer profile')}
+      title={suggestion.reviewer_name}
+      subtitle={suggestion.reviewer_email}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="flex flex-col gap-3">
-        {/* Header with name and email */}
-        <div className="flex items-start gap-2.5">
-          <div className="flex items-center justify-center rounded-full bg-brand-subtle text-brand size-16 text-2xl">
-            {suggestion.reviewer_name
-              .split(' ')
-              .map((n) => n[0])
-              .join('')
-              .slice(0, 2)
-              .toUpperCase()}
-          </div>
-          <div>
-            <h4 className="mb-1">{suggestion.reviewer_name}</h4>
-            <div className="text-quaternary">{suggestion.reviewer_email}</div>
-          </div>
-        </div>
-
-        {/* Biography */}
-        {suggestion.reviewer_biography && (
-          <div>
-            <h6 className="text-quaternary mb-1.5">{translate('Biography')}</h6>
-            <p className="mb-0">{suggestion.reviewer_biography}</p>
-          </div>
-        )}
-
-        {/* Affinity Scores */}
-        <div>
-          <h6 className="text-quaternary mb-1.5">
-            {translate('Match scores')}
-          </h6>
-          <div className="flex gap-3">
-            <div>
-              <div className="text-quaternary small">
-                {translate('Affinity')}
-              </div>
-              <div className="text-base font-medium text-success">
-                {formatScore(suggestion.affinity_score)}
-              </div>
-            </div>
-            <div>
-              <div className="text-quaternary small">
-                {translate('Keywords')}
-              </div>
-              <div className="text-base font-medium">
-                {formatScore(suggestion.keyword_score)}
-              </div>
-            </div>
-            <div>
-              <div className="text-quaternary small">{translate('Text')}</div>
-              <div className="text-base font-medium">
-                {formatScore(suggestion.text_score)}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PropertyList variant="summary">
+        <PropertyItem
+          label={translate('Biography')}
+          value={suggestion.reviewer_biography}
+          hideIfEmpty={false}
+        />
+        <PropertyItem
+          label={translate('Affinity')}
+          value={formatScore(suggestion.affinity_score)}
+        />
+        <PropertyItem
+          label={translate('Keywords')}
+          value={formatScore(suggestion.keyword_score)}
+        />
+        <PropertyItem
+          label={translate('Text')}
+          value={formatScore(suggestion.text_score)}
+        />
+      </PropertyList>
     </ModalDialog>
   );
 };

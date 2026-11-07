@@ -67,6 +67,8 @@ export const getSteps = (
         variant: 'danger',
         labelClass: 'text-danger',
         icon: <XIcon size={16} weight="bold" />,
+        // The note on a rejected request is why it was rejected.
+        description: note ? [note.text] : undefined,
       };
     }
     // Everything up to `currentStateIndex` is done, so the step after it is

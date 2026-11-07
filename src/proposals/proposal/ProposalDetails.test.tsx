@@ -9,7 +9,8 @@ import { ProposalDetails } from './ProposalDetails';
 
 // The sections around the compliance one load data of their own and are
 // covered by their own tests; here they only take up their place on the page.
-vi.mock('./AllocationOutcomeSection', () => ({
+vi.mock('./AllocationOutcomeSection', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./AllocationOutcomeSection')>()),
   AllocationOutcomeSection: () => null,
   AllocationStartBanner: () => null,
 }));
@@ -30,14 +31,35 @@ vi.mock('./create/utils', () => ({
   CreateManualAssignmentDialog: () => null,
   useCanCreateReview: () => false,
 }));
-vi.mock('./StepChecklistSection', () => ({ StepChecklistSection: () => null }));
-vi.mock('./TechnicalAssessmentSection', () => ({
-  TechnicalAssessmentSection: () => null,
+vi.mock('./StepChecklistSection', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./StepChecklistSection')>()),
+  StepChecklistSection: () => null,
+}));
+vi.mock('./contributions/StepContributionsSection', async (importOriginal) => ({
+  ...(await importOriginal<
+    typeof import('./contributions/StepContributionsSection')
+  >()),
+  StepContributionsSection: () => null,
 }));
 vi.mock('./WorkflowStepActions', () => ({ WorkflowStepActions: () => null }));
-vi.mock('../team/ProposalUsersListSummary', () => ({
-  ProposalUsersListSummary: () => null,
-}));
+// The team list renders its own card, which the open state reaches through
+// `section`: kept, with nothing in it.
+vi.mock('../team/ProposalUsersListSummary', async () => {
+  const { AccordionCard } = await import('waldur-ui');
+  return {
+    ProposalUsersListSummary: ({ section }) =>
+      section ? (
+        <AccordionCard
+          id={section.id}
+          title={section.title}
+          subtitle={section.subtitle}
+          {...section.openProps}
+        >
+          {null}
+        </AccordionCard>
+      ) : null,
+  };
+});
 vi.mock('@/proposals/ProposalCostTotal', () => ({
   ProposalCostTotal: () => null,
 }));
@@ -59,7 +81,7 @@ vi.mock('@/proposals/awardedResources', async (importOriginal) => ({
 vi.mock('@/wizard', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@/wizard')>()),
   FormSteps: ({ steps }) => (
-    <ul aria-label="Progress">
+    <ul aria-label="On this page">
       {steps.map((step) => (
         <li key={step.id}>{step.label}</li>
       ))}
@@ -78,7 +100,7 @@ const renderDetails = () =>
     <ProposalDetails proposal={proposal} refetch={vi.fn()} />,
   );
 
-const progress = () => screen.getByRole('list', { name: 'Progress' });
+const progress = () => screen.getByRole('list', { name: 'On this page' });
 
 const teamToggle = () => screen.getByRole('button', { name: /^Project team/ });
 
@@ -120,7 +142,7 @@ describe('ProposalDetails compliance section', () => {
     expect(teamToggle()).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('drops the section and opens the team for a viewer who is refused', async () => {
+  it('drops the section for a viewer who is refused, the team staying folded', async () => {
     vi.mocked(proposalProposalsChecklistRetrieve).mockRejectedValue({
       response: { status: 403, data: { detail: 'Not allowed.' } },
     });
@@ -133,7 +155,8 @@ describe('ProposalDetails compliance section', () => {
       ).not.toBeInTheDocument(),
     );
     expect(complianceCard()).not.toBeInTheDocument();
-    expect(teamToggle()).toHaveAttribute('aria-expanded', 'true');
+    // The team is reference: folded, whether or not compliance is shown.
+    expect(teamToggle()).toHaveAttribute('aria-expanded', 'false');
   });
 
   // A request that is still pending, refused once the test says so.
@@ -172,5 +195,32 @@ describe('ProposalDetails compliance section', () => {
     refuse();
     await waitFor(() => expect(complianceCard()).not.toBeInTheDocument());
     expect(teamToggle()).toHaveAttribute('aria-expanded', 'false');
+  });
+});
+
+describe('ProposalDetails read as the applicant view', () => {
+  it('says what the applicant was asked to change', () => {
+    renderWithProviders(
+      <ProposalDetails
+        proposal={{
+          ...proposal,
+          state: 'in_review',
+          open_change_requests: [
+            {
+              uuid: 'request-1',
+              step_name: 'Administrative check',
+              message: 'Please rename it.',
+              unlocked_parts: ['field:name'],
+              due_at: null,
+              is_open: true,
+            },
+          ],
+        }}
+        refetch={vi.fn()}
+      />,
+    );
+    expect(screen.getByTestId('change-request-notice')).toHaveTextContent(
+      'Please rename it.',
+    );
   });
 });

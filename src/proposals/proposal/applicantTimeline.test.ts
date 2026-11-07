@@ -34,11 +34,15 @@ describe('applicant timeline', () => {
     const result = getApplicantTimeline([
       step({
         step: 'expert_review',
+        kind: 'assessment',
+        outcome_set: 'reviewed',
         status: 'completed',
         applicant_visible: true,
       }),
       step({
         step: 'panel_review',
+        kind: 'decision',
+        outcome_set: 'approval',
         status: 'pending',
         applicant_visible: true,
       }),
@@ -50,16 +54,36 @@ describe('applicant timeline', () => {
     ]);
   });
 
+  // The step's popover reads what the call exposed straight from it.
+  it('passes an exposed step through with its own description and outcome', () => {
+    const exposed = step({
+      step: 'expert_review',
+      kind: 'assessment',
+      outcome_set: 'reviewed',
+      status: 'completed',
+      applicant_visible: true,
+      step_description: 'Peer review by domain experts.',
+      outcome: 'reviewed',
+      outcome_reason: 'Scores consolidated.',
+    });
+
+    expect(getApplicantTimeline([exposed])).toEqual([exposed]);
+  });
+
   it('drops an internal step that has already run', () => {
     // The steps around it carry the progress, so it leaves no trace.
     const result = getApplicantTimeline([
       step({
         step: 'administrative_check',
+        kind: 'decision',
+        outcome_set: 'eligibility',
         status: 'completed',
         applicant_visible: false,
       }),
       step({
         step: 'expert_review',
+        kind: 'assessment',
+        outcome_set: 'reviewed',
         status: 'pending',
         applicant_visible: true,
       }),
@@ -75,17 +99,21 @@ describe('applicant timeline', () => {
     const result = getApplicantTimeline([
       step({
         step: 'administrative_check',
+        kind: 'decision',
+        outcome_set: 'eligibility',
         status: 'active',
         applicant_visible: false,
       }),
       step({
         step: 'expert_review',
+        kind: 'assessment',
+        outcome_set: 'reviewed',
         status: 'pending',
         applicant_visible: true,
       }),
     ]);
 
-    expect(names(result)).toEqual(['Evaluation', 'Name of expert_review']);
+    expect(names(result)).toEqual(['Internal check', 'Name of expert_review']);
     expect(result[0].status).toBe('active');
   });
 
@@ -96,16 +124,23 @@ describe('applicant timeline', () => {
     const result = getApplicantTimeline([
       step({
         step: 'expert_review',
+        kind: 'assessment',
+        outcome_set: 'reviewed',
         status: 'completed',
         applicant_visible: true,
       }),
       step({
         step: 'panel_review',
+        kind: 'decision',
+        outcome_set: 'approval',
         status: 'completed',
         applicant_visible: true,
       }),
       step({
         step: 'allocation_decision',
+        kind: 'decision',
+        outcome_set: 'approval',
+        is_allocation_decision: true,
         status: 'active',
         applicant_visible: false,
       }),
@@ -119,6 +154,8 @@ describe('applicant timeline', () => {
     const result = getApplicantTimeline([
       step({
         step: 'panel_review',
+        kind: 'decision',
+        outcome_set: 'approval',
         status: 'active',
         applicant_visible: false,
         step_description: 'Collective panel evaluation.',
@@ -133,13 +170,14 @@ describe('applicant timeline', () => {
           checklist_name: 'Panel review',
           checklist_completed: false,
           unanswered_required_count: 2,
+          can_read: true,
         },
       }),
     ]);
 
     expect(result[0]).toMatchObject({
-      step_name: 'Evaluation',
-      step_description: '',
+      step_name: 'Internal check',
+      step_description: 'A step the call team handles internally.',
       responsible_role: null,
       outcome: null,
       outcome_reason: '',
@@ -155,6 +193,8 @@ describe('applicant timeline', () => {
     const result = getApplicantTimeline([
       step({
         step: 'award_response',
+        kind: 'applicant_action',
+        outcome_set: 'acceptance',
         status: 'active',
         applicant_visible: false,
       }),
@@ -163,16 +203,65 @@ describe('applicant timeline', () => {
     expect(names(result)).toEqual(['Awaiting your response']);
   });
 
+  // Steps are told apart by kind and flags, not by the key a call gave them.
+  it('recognises an award response and the decision under any name', () => {
+    const award = getApplicantTimeline([
+      step({
+        step: 'accept-the-grant',
+        kind: 'applicant_action',
+        outcome_set: 'acceptance',
+        status: 'active',
+        applicant_visible: false,
+      }),
+    ]);
+    const decision = getApplicantTimeline([
+      step({
+        step: 'board-decision',
+        kind: 'decision',
+        outcome_set: 'approval',
+        is_allocation_decision: true,
+        status: 'active',
+        applicant_visible: false,
+      }),
+    ]);
+
+    expect(names(award)).toEqual(['Awaiting your response']);
+    expect(names(decision)).toEqual(['Decision']);
+    // Their names already say what they are; neither carries the call's own
+    // description.
+    expect(award[0].step_description).toBe('');
+    expect(decision[0].step_description).toBe('');
+  });
+
+  // An applicant step that answers with "submitted" is no award response.
+  it('does not take any applicant step for the award response', () => {
+    const result = getApplicantTimeline([
+      step({
+        step: 'response-to-reviews',
+        kind: 'applicant_action',
+        outcome_set: 'submitted',
+        status: 'active',
+        applicant_visible: false,
+      }),
+    ]);
+
+    expect(names(result)).toEqual(['Internal check']);
+  });
+
   it('leaves nothing behind when every step is internal and none is running', () => {
     // The coarse Submission -> Review -> Decision tracker takes over.
     const result = getApplicantTimeline([
       step({
         step: 'administrative_check',
+        kind: 'decision',
+        outcome_set: 'eligibility',
         status: 'completed',
         applicant_visible: false,
       }),
       step({
         step: 'expert_review',
+        kind: 'assessment',
+        outcome_set: 'reviewed',
         status: 'pending',
         applicant_visible: false,
       }),

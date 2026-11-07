@@ -1,13 +1,17 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import {
-  proposalRequestedOfferingsAccept,
-  ProviderRequestedOffering,
-} from 'waldur-js-client';
+import { ProviderRequestedOffering } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@/i18n';
-import { useManagedMutation } from '@/modal/useManagedMutation';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
+
+const AcceptOfferingRequestDialog = lazyComponent(() =>
+  import('./AcceptOfferingRequestDialog').then((module) => ({
+    default: module.AcceptOfferingRequestDialog,
+  })),
+);
 
 interface AcceptOfferingRequestActionProps {
   row: ProviderRequestedOffering;
@@ -17,29 +21,17 @@ interface AcceptOfferingRequestActionProps {
 export const AcceptOfferingRequestAction: FC<
   AcceptOfferingRequestActionProps
 > = ({ row, refetch }) => {
-  const { mutate: accept, isPending } = useManagedMutation<any, any, void>({
-    mutationFn: () =>
-      proposalRequestedOfferingsAccept({ path: { uuid: row.uuid } }),
-    refetch,
-    confirmation: {
-      title: translate('Accepting offering request'),
-      body: translate(
-        'Are you sure you want to accept the {name} offering request?',
-        {
-          name: <b>{row.offering_name}</b>,
-        },
-        formatJsxTemplate,
-      ),
-    },
-    successMessage: translate('Offering request has been accepted.'),
-    errorMessage: translate('Unable to accept offering request.'),
-  });
+  const { openDialog } = useModal();
   return (
     <ActionItem
-      action={() => accept()}
+      action={() =>
+        openDialog(AcceptOfferingRequestDialog, {
+          resolve: { row, refetch },
+          size: 'lg',
+        })
+      }
       title={translate('Accept')}
       iconNode={<CheckIcon weight="bold" />}
-      disabled={isPending}
     />
   );
 };

@@ -3,6 +3,8 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { RoleDetails } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
@@ -15,6 +17,7 @@ import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
 import { UserListOptionInline } from '@/project/team/UserListOptionInline';
 
+import { ProposalExpiryHint } from './ProposalExpiryHint';
 import { addTeamUser, getTeamScopeType } from './teamApi';
 import { AddUserDialogProps } from './types';
 
@@ -34,6 +37,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   scope,
   roleTypes,
   roles,
+  onInviteByMail,
 }) => {
   const saveUserMutation = useManagedMutation<any, any, AddUserDialogFormData>({
     mutationFn: (formData) =>
@@ -86,6 +90,21 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               getOptionValue={(option) => option.uuid}
               getOptionLabel={getOptionLabel}
               components={{ Option: UserListOptionInline }}
+              noOptionsMessage={() =>
+                onInviteByMail ? (
+                  <>
+                    {translate('Not found?')}{' '}
+                    <BaseButton
+                      variant="text-primary"
+                      size="sm"
+                      label={translate('Invite them by email')}
+                      onClick={onInviteByMail}
+                    />
+                  </>
+                ) : (
+                  translate('No users found.')
+                )
+              }
               validate={required}
             />
 
@@ -93,6 +112,9 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               <RoleGroup types={roleTypes} roleNames={roles} />
             )}
             <ExpirationTimeGroup />
+            {getTeamScopeType(roleTypes) === 'proposal' && (
+              <ProposalExpiryHint proposal={scope} />
+            )}
           </ModalDialog>
         </form>
       )}

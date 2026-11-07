@@ -24,6 +24,12 @@ export const queryClient = new QueryClient({
       if (query?.meta?.skipGlobalErrorRedirect) {
         return;
       }
+      // Or only for the statuses they explain themselves -- a 404 a page
+      // accounts for -- and every other error is redirected as usual.
+      const handled = query?.meta?.handlesErrorStatuses;
+      if (Array.isArray(handled) && handled.includes(error?.response?.status)) {
+        return;
+      }
       // Don't redirect for "Invalid page" errors - tables handle this by resetting pagination
       // SDK throws error body directly: { detail: "Invalid page." }
       // Axios-style errors have: error.response.data.detail

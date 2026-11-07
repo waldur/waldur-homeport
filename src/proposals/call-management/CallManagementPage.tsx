@@ -34,7 +34,7 @@ import { CallRowActions } from '../transfer/CallRowActions';
 import { ImportCallButton } from '../transfer/ImportCallButton';
 import { formatCallState, getCallStateOptions } from '../utils';
 
-import { CallCreateButton } from './CallCreateButton';
+import { CallCreateButton, ManageCallsCreateButton } from './CallCreateButton';
 import { CallExpandableRow } from './CallExpandableRow';
 
 interface CallManagementPageProps {
@@ -176,7 +176,11 @@ export const CallManagementPage: FunctionComponent<CallManagementPageProps> = ({
       tableActions={
         <>
           <ImportCallButton refetch={tableProps.fetch} />
-          <CallCreateButton refetch={tableProps.fetch} />
+          {scopeToCustomer ? (
+            <CallCreateButton refetch={tableProps.fetch} />
+          ) : (
+            <ManageCallsCreateButton refetch={tableProps.fetch} />
+          )}
         </>
       }
       rowActions={({ row }) => (

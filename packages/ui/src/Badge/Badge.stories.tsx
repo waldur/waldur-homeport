@@ -7,6 +7,7 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 
 import {
   Badge,
@@ -419,10 +420,10 @@ export const Interactive: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-2.5 p-5">
       <Badge
+        as="button"
         variant="primary"
         shape="pill"
         tone="outline"
-        className="cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors"
         onClick={() => alert('Badge clicked')}
       >
         Clickable Badge
@@ -447,6 +448,59 @@ export const Interactive: Story = {
       </Badge>
     </div>
   ),
+};
+
+/**
+ * `as="button"` renders a `<button type="button">` that keeps the badge's
+ * look: reachable by Tab, pressed with Enter or Space, with a focus ring that
+ * stands off the badge so it shows on solid fills too. Give it an
+ * `aria-label` when the text alone does not say what pressing it does.
+ */
+export const AsButton: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-2.5 p-5">
+      <Badge
+        as="button"
+        variant="primary"
+        size="sm"
+        leftIcon={<InfoIcon weight="bold" />}
+        shape="pill"
+        tone="solid"
+        aria-label="Open the mail to the applicant"
+        onClick={() => undefined}
+      >
+        Applicant
+      </Badge>
+      <Badge
+        as="button"
+        variant="neutral"
+        size="sm"
+        tone="outline"
+        aria-label="Sees the step"
+        onClick={() => undefined}
+      >
+        S
+      </Badge>
+      <Badge
+        as="button"
+        variant="warning"
+        tone="light"
+        onClick={() => undefined}
+      >
+        3 to fix
+      </Badge>
+      <Badge as="button" variant="neutral" tone="outline" disabled>
+        Disabled
+      </Badge>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const badge = canvas.getByRole('button', { name: 'Sees the step' });
+    await userEvent.tab();
+    await userEvent.tab();
+    await expect(badge).toHaveFocus();
+  },
 };
 
 /**

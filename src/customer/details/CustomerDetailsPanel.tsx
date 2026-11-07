@@ -371,10 +371,8 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
 
   return (
     <EditFieldProvider scope={props.customer} callback={props.callback}>
-      <TabbedSection
-        title={translate('Details')}
-        hideActions={!props.canUpdate}
-      >
+      {/* Untitled: the page's tab already names it. */}
+      <TabbedSection hideActions={!props.canUpdate}>
         <TabbedSection.Tab
           id="basic"
           title={translate('Basic info')}

@@ -1,18 +1,11 @@
-import { FC, useCallback, useMemo } from 'react';
-import { useForm, useFormState } from 'react-final-form';
+import { FC, useMemo } from 'react';
 
 import { BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
-import {
-  getDependentSteps,
-  getEnabledStepIds,
-  getMissingDependencies,
-  stepLabel,
-} from '@/proposals/workflow/constants';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { OfferViaCallStep } from './offerViaCall';
-import { OfferViaCallFormData, selectableSteps } from './offerViaCallForm';
+import { selectableSteps } from './offerViaCallForm';
 
 /** Progress through the chain of API calls the last step sets off. */
 const chainStepLabel = (step: OfferViaCallStep): string => {
@@ -36,73 +29,28 @@ const chainStepLabel = (step: OfferViaCallStep): string => {
   }
 };
 
-/**
- * Checkboxes for the call's workflow, honouring the catalogue's dependencies
- * the way the call configuration screens do: a step whose dependency is off
- * cannot be switched on — the panel review consolidates expert reviews, so
- * turning it on for the operator would be deciding for them that the call
- * runs an expert review too. Switching a dependency back off still cascades,
- * because the alternative is a dependent the backend would refuse to activate.
- */
+/** Checkboxes for the steps a new call is seeded with. */
 export const WorkflowStepsField: FC<{ disabled?: boolean }> = ({
   disabled,
 }) => {
-  const form = useForm();
-  const { values } = useFormState<OfferViaCallFormData>({
-    subscription: { values: true },
-  });
-  const definitions = useMemo(selectableSteps, []);
-
-  const enabled = useMemo(
-    () =>
-      getEnabledStepIds(
-        Object.entries(values.steps || {}).map(([step, is_enabled]) => ({
-          step: step as any,
-          is_enabled,
-        })),
-      ),
-    [values.steps],
-  );
-
-  const cascadeOff = useCallback(
-    (definition) => {
-      getDependentSteps(definition.id).forEach((id) =>
-        form.change(`steps.${id}`, false),
-      );
-    },
-    [form],
-  );
-
+  const steps = useMemo(selectableSteps, []);
   return (
     <>
-      {definitions.map((definition) => {
-        const missing = getMissingDependencies(definition.id, enabled);
-        const blocked = missing.length > 0 && !enabled.has(definition.id);
-        return (
-          <BooleanGroup
-            key={definition.id}
-            name={`steps.${definition.id}`}
-            label={definition.name}
-            description={definition.description}
-            disabled={disabled || definition.mandatory || blocked}
-            tooltip={
-              definition.mandatory
-                ? translate('Every call ends in an allocation decision.')
-                : blocked
-                  ? translate('Enable {steps} first.', {
-                      steps: missing.map(stepLabel).join(', '),
-                    })
-                  : undefined
-            }
-            onChange={(checked: boolean) => {
-              if (!checked) {
-                cascadeOff(definition);
-              }
-            }}
-            space={1.5}
-          />
-        );
-      })}
+      {steps.map((step) => (
+        <BooleanGroup
+          key={step.key}
+          name={`steps.${step.key}`}
+          label={step.name}
+          description={step.description}
+          disabled={disabled || step.mandatory}
+          tooltip={
+            step.mandatory
+              ? translate('Every call ends in an allocation decision.')
+              : undefined
+          }
+          space={1.5}
+        />
+      ))}
     </>
   );
 };

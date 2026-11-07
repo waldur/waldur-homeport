@@ -1,5 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { ProposalCanSubmitResponse } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -14,6 +14,8 @@ import { FormSteps } from '@/wizard';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;
+  /** Deleting the draft, for whoever may: shown below Save as draft. */
+  deleteAction?: ReactNode;
   isSaving?: boolean;
   /** Whether the form holds edits that Save as draft has not sent yet. */
   hasUnsavedChanges?: boolean;
@@ -22,6 +24,8 @@ interface CompletionPageSidebarProps extends SidebarProps {
   resourceRows?: any[];
   /** The call's fixed duration, for the summary's project length. */
   fixedDurationDays?: number | null;
+  /** The length chosen from the call's list, for the summary. */
+  chosenDurationMonths?: number | null;
   /**
    * What the backend says about submitting, and why not when it refuses.
    * The steps below only know whether a section was filled in; this covers
@@ -38,6 +42,8 @@ interface CompletionPageSidebarProps extends SidebarProps {
   /** Whether the viewer may submit the proposal. A proposal administrator
    * edits it but leaves submitting to a proposal manager. */
   canSubmitProposal?: boolean;
+  /** The proposal was sent back for changes: its submit sends them. */
+  changesRequested?: boolean;
 }
 
 export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
@@ -97,6 +103,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
       <ProposalCostTotal
         rows={props.resourceRows || []}
         fixedDurationDays={props.fixedDurationDays}
+        chosenDurationMonths={props.chosenDurationMonths}
         panel
       />
       {props.editable && (
@@ -108,7 +115,11 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
           ) : (
             <FloatingSubmitButton
               submitting={props.submitting}
-              label={translate('Submit')}
+              label={
+                props.changesRequested
+                  ? translate('Submit changes')
+                  : translate('Submit')
+              }
               variant="primary"
               disabled={
                 props.isSaving ||
@@ -122,7 +133,11 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
 
           <BaseButton
             onClick={props.saveAsDraft}
-            label={translate('Save as draft')}
+            label={
+              props.changesRequested
+                ? translate('Save changes')
+                : translate('Save as draft')
+            }
             variant="secondary"
             className="w-full mt-1.5"
             disabled={props.submitting || !props.hasUnsavedChanges}
@@ -140,6 +155,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
               {translate('You have unsaved changes')}
             </p>
           )}
+          {props.deleteAction}
           <TosNotification />
         </>
       )}

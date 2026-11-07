@@ -12,7 +12,10 @@ import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { openEndedRoundBlockedReason } from '@/proposals/roundCutoff';
 import { AllocationTime, Call } from '@/proposals/types';
+import { roundTimesInZone } from '@/proposals/utils';
+import { findAllocationDecision } from '@/proposals/workflow/constants';
 import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
@@ -20,7 +23,6 @@ import {
 import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
-import { WizardFormSecondPage } from './WizardFormSecondPage';
 import { WizardFormThirdPage } from './WizardFormThirdPage';
 
 interface CallRoundCreateDialogProps {
@@ -37,19 +39,17 @@ const steps: ProgressStep[] = [
     completed: false,
   },
   {
-    key: 'review',
-    label: translate('Review'),
-    completed: false,
-  },
-  {
     key: 'allocation',
     label: translate('Allocation'),
     completed: false,
   },
 ];
 
-const validate = (values: ProtectedRoundRequest) => {
+const validate = (values: ProtectedRoundRequest & { open_ended?: boolean }) => {
   const errors: any = {};
+  if (values.open_ended || !values.cutoff_time) {
+    return errors;
+  }
   if (parseDate(values.start_time) > parseDate(values.cutoff_time)) {
     errors.cutoff_time = translate('Cutoff date must be after start date');
   }
@@ -61,25 +61,35 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
 ) => {
   const { closeDialog } = useModal();
 
-  // Allocation timing is a call-level policy on the allocation_decision step;
+  // Allocation timing is a call-level policy on the allocation decision step;
   // the round only needs an allocation date when the call uses fixed-date mode.
   const { data: workflowSteps } = useQuery({
     queryKey: callWorkflowStepsKey(props.resolve.call.uuid),
     queryFn: () => fetchCallWorkflowSteps(props.resolve.call.uuid),
   });
-  const allocationMode = (workflowSteps?.find(
-    (s) => s.step === 'allocation_decision',
-  )?.allocation_time || 'on_decision') as AllocationTime;
+  const allocationMode = (findAllocationDecision(workflowSteps)
+    ?.allocation_time || 'on_decision') as AllocationTime;
+
+  const openEndedBlocked = openEndedRoundBlockedReason(
+    props.resolve.call,
+    allocationMode,
+  );
 
   const wizardForms = useMemo(
     () => [
-      WizardFormFirstPage,
-      WizardFormSecondPage,
+      (stepProps) => (
+        <WizardFormFirstPage
+          {...stepProps}
+          openEndedBlockedReason={openEndedBlocked}
+        />
+      ),
+      // No review page: a review is due when its workflow step is, set per
+      // round on the round's steps.
       (stepProps) => (
         <WizardFormThirdPage {...stepProps} allocationMode={allocationMode} />
       ),
     ],
-    [allocationMode],
+    [allocationMode, openEndedBlocked],
   );
 
   const createRoundMutation = useManagedMutation<
@@ -115,6 +125,7 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
   const createRound = useCallback(
     async (
       formData: ProtectedRoundRequest & {
+        open_ended?: boolean;
         repeats?: boolean;
         cadence?: string;
         custom_interval_months?: number | null;
@@ -125,15 +136,19 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
       try {
         if (formData.repeats) {
           await bulkCreateRoundsMutation.mutateAsync({
-            start_time: formData.start_time,
+            start_time: roundTimesInZone(formData).start_time,
             cadence: formData.cadence as any,
             custom_interval_months: formData.custom_interval_months ?? null,
             submission_window_days: formData.submission_window_days!,
             number_of_rounds: formData.number_of_rounds!,
-            review_duration_in_days: formData.review_duration_in_days,
           });
         } else {
-          await createRoundMutation.mutateAsync(formData);
+          const { open_ended, ...round } = formData;
+          await createRoundMutation.mutateAsync(
+            roundTimesInZone(
+              open_ended ? { ...round, cutoff_time: null } : round,
+            ),
+          );
         }
         closeDialog();
       } catch {

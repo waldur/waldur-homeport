@@ -1,21 +1,41 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback } from 'react';
 import { proposalProposalsListUsersList } from 'waldur-js-client';
 
-import { BaseEventsList } from '@/events/BaseEventsList';
-import { translate } from '@/i18n';
+import { AccordionCard } from 'waldur-ui';
+
+import { formatJsxTemplate, translate } from '@/i18n';
+import { PROPOSAL_ACTIVITY_SECTION_ID } from '@/proposals/activity/ProposalActivitySection';
 import { Proposal } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
-import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { useTable } from '@/table/useTable';
 
+import {
+  applicantChangeNote,
+  useActingForApplicant,
+  useConfirmApplicantChange,
+} from '../proposal/actingForApplicant';
 import { FieldReviewComments } from '../proposal/create-review/FieldReviewComments';
+import { useSectionOpenState } from '../proposal/sectionOpen';
 
+import { isAccessDenied } from './teamApi';
 import { TeamDropdownActions } from './TeamDropdownActions';
-import { TEAM_EVENT_TYPES } from './teamRules';
 import { useProposalTeamRules } from './useProposalTeamRules';
 import { UsersList } from './UsersList';
 
 import '@/proposals/flushTable.scss';
+
+/**
+ * The collapsible card the proposal page lists the team in. Given, the list
+ * renders it itself, so that adding someone sits in the card's header -- in
+ * sight while the card is collapsed, as it does for the award.
+ */
+interface TeamSection {
+  id: string;
+  title: string;
+  subtitle?: string;
+  /** The card's open state, as `sectionOpenProps` gives it. */
+  openProps: Record<string, any>;
+}
 
 export const ProposalUsersListSummary: FC<{
   scope: Proposal;
@@ -23,12 +43,16 @@ export const ProposalUsersListSummary: FC<{
   // Set by the proposal detail for reviewer-only viewers: role expiration is
   // team-admin metadata concealed from reviewers (backend also drops it).
   hideExpiration?: boolean;
+  section?: TeamSection;
 }> = (props) => {
   const usersTable = useTable({
     table: `ProposalUsersList`,
     fetchData: createFetcher(proposalProposalsListUsersList, {
       path: { uuid: props.scope.uuid },
     }),
+    // A viewer who may not read the team gets a 403: no access, not an
+    // error, so the section renders nothing instead of leaving the page.
+    meta: { skipGlobalErrorRedirect: true },
   });
 
   // Once the proposal is submitted, staff and the call's managers and
@@ -42,28 +66,44 @@ export const ProposalUsersListSummary: FC<{
     onTeamChange();
   }, [fetchUsers, onTeamChange]);
 
-  // Staff and the call's managers also see who changed the team, including
-  // changes made after submission.
-  const canViewTeamLog = rules.canOversee;
-  const eventsFilter = useMemo(
-    () => ({
-      scope: props.scope.url,
-      event_type: TEAM_EVENT_TYPES,
-    }),
-    [props.scope.url],
+  // Who changed the team, and when, is part of the proposal's activity.
+  const openState = useSectionOpenState();
+  const showActivity = useCallback(() => {
+    openState?.setOpen(PROPOSAL_ACTIVITY_SECTION_ID, true);
+    document
+      .getElementById(PROPOSAL_ACTIVITY_SECTION_ID)
+      ?.scrollIntoView({ behavior: 'smooth' });
+  }, [openState]);
+
+  // After submission the team is the applicant's; staff and the call team
+  // change it only as an exception, so adding is not offered as the call to
+  // action, and every change says it is made for the applicant.
+  const actingForApplicant = useActingForApplicant(props.scope);
+  const confirmChange = useConfirmApplicantChange(props.scope);
+  const confirmAdd = useCallback(
+    () =>
+      confirmChange(translate('Add someone to the applicant team.'), {
+        title: translate('Change the applicant team'),
+        applicantTold: false,
+      }),
+    [confirmChange],
   );
+
+  const addActions = rules.dropdown ? (
+    <TeamDropdownActions
+      scope={props.scope}
+      roleTypes={['proposal']}
+      {...rules.dropdown}
+      refetchUsers={refetchUsers}
+      variant={actingForApplicant ? 'tertiary' : undefined}
+      beforeOpen={actingForApplicant ? confirmAdd : undefined}
+    />
+  ) : null;
 
   const usersList = (
     <>
-      {rules.dropdown ? (
-        <div className="flex justify-end pt-2.5">
-          <TeamDropdownActions
-            scope={props.scope}
-            roleTypes={['proposal']}
-            {...rules.dropdown}
-            refetchUsers={refetchUsers}
-          />
-        </div>
+      {addActions && !props.section ? (
+        <div className="flex justify-end pt-2.5">{addActions}</div>
       ) : null}
       {rules.teamNote ? (
         <p className="text-quaternary py-2.5 mb-0">{rules.teamNote}</p>
@@ -77,49 +117,69 @@ export const ProposalUsersListSummary: FC<{
         readOnly={rules.readOnly}
         canRemoveRow={rules.canRemoveRow}
         getRemoveDisabledReason={rules.getRemoveDisabledReason}
-        refetch={refetchUsers}
-        cardBordered={false}
-        hasActionBar={false}
-        tableFooter={
-          <FieldReviewComments
-            reviews={props.reviews}
-            fieldName="comment_team"
-            space={0}
-          />
+        removeConfirmationNote={
+          actingForApplicant ? applicantChangeNote(false) : undefined
         }
+        refetch={refetchUsers}
+        // A frame only to set it apart from the comments below it.
+        cardBordered={Boolean(
+          props.reviews?.some((review) => review?.comment_team),
+        )}
+        hasActionBar={false}
+      />
+      {/* About the whole team, not a row of it: below the table. */}
+      <FieldReviewComments
+        reviews={props.reviews}
+        fieldName="comment_team"
+        nested
+        space={0}
+        className="mt-4"
       />
     </>
   );
 
-  if (!canViewTeamLog) {
-    return <div className="proposal-flush-table">{usersList}</div>;
+  if (isAccessDenied(usersTable.error)) {
+    return null;
   }
 
+  const body = (
+    <div className="proposal-flush-table">
+      {usersList}
+      {openState ? (
+        <p className="text-quaternary pt-2.5 mb-0">
+          {translate(
+            'Who added or removed whom, and when, is listed under {activity}.',
+            {
+              activity: (
+                <button
+                  type="button"
+                  className="text-link"
+                  onClick={showActivity}
+                >
+                  {translate('Activity')}
+                </button>
+              ),
+            },
+            formatJsxTemplate,
+          )}
+        </p>
+      ) : null}
+    </div>
+  );
+
+  if (!props.section) {
+    return body;
+  }
+  const { section } = props;
   return (
-    <EmbeddedTabs
-      defaultValue="users"
-      className="min-h-[175px]"
-      tabs={[
-        {
-          key: 'users',
-          title: translate('Users'),
-          content: <div className="proposal-flush-table">{usersList}</div>,
-        },
-        {
-          key: 'permissions',
-          title: translate('Permissions'),
-          content: (
-            <BaseEventsList
-              table={`proposal-team-log${props.scope.url}`}
-              filter={eventsFilter}
-              cardBordered={false}
-              hasActionBar={false}
-              fullWidth
-              minHeight="auto"
-            />
-          ),
-        },
-      ]}
-    />
+    <AccordionCard
+      id={section.id}
+      title={section.title}
+      subtitle={section.subtitle}
+      actions={addActions ?? undefined}
+      {...section.openProps}
+    >
+      {body}
+    </AccordionCard>
   );
 };

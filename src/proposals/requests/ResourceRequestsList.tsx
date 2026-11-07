@@ -45,7 +45,12 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
   const values = useFilterValues(tableId);
 
   const filter = useMemo(() => {
-    const selected = selectProposalMyRequestedResourcesFilter(values);
+    // The user's own requests: staff and support read every proposal, and
+    // that reach is the administration's list, not theirs (`involved`).
+    const selected = {
+      ...selectProposalMyRequestedResourcesFilter(values),
+      involved: true,
+    };
     // The offering tab is already scoped to one offering, so its own filter
     // wins over anything the picker could say.
     return offeringUuid

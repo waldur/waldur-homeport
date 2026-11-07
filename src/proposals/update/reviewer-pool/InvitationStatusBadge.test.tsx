@@ -11,9 +11,9 @@ describe('getInvitationStatusVariant', () => {
     ['accepted', 'success'],
     ['pending', 'warning'],
     ['declined', 'danger'],
-    ['expired', 'secondary'],
+    ['expired', 'neutral'],
     // A status the backend adds later still renders, just neutrally.
-    ['unknown', 'primary'],
+    ['unknown', 'neutral'],
   ])('maps %s to %s', (status, variant) => {
     expect(getInvitationStatusVariant(status)).toBe(variant);
   });

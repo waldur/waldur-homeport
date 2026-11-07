@@ -9,9 +9,10 @@ import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useOpenEndedRoundBlockedReason } from '@/proposals/roundCutoff';
 import { Call } from '@/proposals/types';
 import { WizardFormFirstPage } from '@/proposals/update/rounds/WizardFormFirstPage';
-import { getRoundInitialValues } from '@/proposals/utils';
+import { getRoundInitialValues, roundTimesInZone } from '@/proposals/utils';
 import { WizardFormContainer } from '@/wizard';
 
 interface EditRoundSubmissionDialogProps {
@@ -22,8 +23,13 @@ interface EditRoundSubmissionDialogProps {
   };
 }
 
-const validate = (values: ProtectedRoundRequest) => {
+type RoundFormValues = ProtectedRoundRequest & { open_ended?: boolean };
+
+const validate = (values: RoundFormValues) => {
   const errors: any = {};
+  if (values.open_ended || !values.cutoff_time) {
+    return errors;
+  }
   if (parseDate(values.start_time) > parseDate(values.cutoff_time)) {
     errors.cutoff_time = translate('Cutoff date must be after start date');
   }
@@ -37,7 +43,27 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
     () => getRoundInitialValues(props.resolve.round),
     [props.resolve.round],
   );
+  const formInitialValues = useMemo(
+    () => ({
+      ...initialValues,
+      open_ended: !props.resolve.round.cutoff_time,
+    }),
+    [initialValues, props.resolve.round.cutoff_time],
+  );
   const { closeDialog } = useModal();
+  const openEndedBlocked = useOpenEndedRoundBlockedReason(props.resolve.call);
+  const wizardForms = useMemo(
+    () => [
+      (stepProps) => (
+        <WizardFormFirstPage
+          {...stepProps}
+          openEndedBlockedReason={openEndedBlocked}
+          allowRepeats={false}
+        />
+      ),
+    ],
+    [openEndedBlocked],
+  );
 
   const updateRoundMutation = useManagedMutation<
     any,
@@ -50,10 +76,10 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
           uuid: props.resolve.call.uuid,
           obj_uuid: props.resolve.round.uuid,
         },
-        body: {
+        body: roundTimesInZone({
           ...initialValues,
           ...formData,
-        },
+        }),
       }),
     successMessage: translate('Round has been updated.'),
     errorMessage: translate('Unable to update round.'),
@@ -62,8 +88,10 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
   });
 
   const submit = useCallback(
-    (formData: ProtectedRoundRequest) =>
-      updateRoundMutation.mutateAsync(formData),
+    ({ open_ended, ...formData }: RoundFormValues) =>
+      updateRoundMutation.mutateAsync(
+        open_ended ? { ...formData, cutoff_time: null } : formData,
+      ),
     [updateRoundMutation],
   );
 
@@ -77,8 +105,8 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
       steps={[
         { key: 'submission', label: translate('Submission'), completed: false },
       ]}
-      wizardForms={[WizardFormFirstPage]}
-      initialValues={initialValues}
+      wizardForms={wizardForms}
+      initialValues={formInitialValues}
       validate={validate}
     />
   );

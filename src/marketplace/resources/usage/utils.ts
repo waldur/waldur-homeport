@@ -3,6 +3,7 @@ import {
   PublicOfferingDetails,
   marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesOfferingRetrieve,
+  marketplacePublicOfferingsRetrieve,
   marketplaceComponentUserUsagesList,
   marketplaceComponentUsagesList,
   OfferingComponent,
@@ -362,25 +363,57 @@ const getUsageBasedOfferingComponents = (components: OfferingComponent[]) => {
     .sort((a, b) => a.name.localeCompare(b.name));
 };
 
+/**
+ * The offering of a resource, read through the resource. A call manager who
+ * reads a resource their call allocated, without any role on its project, is
+ * refused that endpoint; the offering's public view serves them instead when
+ * its uuid is known.
+ */
+export const retrieveResourceOffering = async (
+  resource_uuid: string,
+  offering_uuid?: string,
+): Promise<PublicOfferingDetails> => {
+  try {
+    return (
+      await marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resource_uuid },
+      })
+    ).data;
+  } catch (error) {
+    if (offering_uuid && error?.response?.status === 404) {
+      return (
+        await marketplacePublicOfferingsRetrieve({
+          path: { uuid: offering_uuid },
+        })
+      ).data;
+    }
+    throw error;
+  }
+};
+
 export const getComponentsAndUsages = async (
   resource_uuid: string,
   months: number,
   // Provider-side roles read the offering through the provider endpoint; the
   // consumer one answers them with 404.
-  { providerView = false }: { providerView?: boolean } = {},
+  {
+    providerView = false,
+    offeringUuid,
+  }: { providerView?: boolean; offeringUuid?: string } = {},
 ) => {
-  const retrieveOffering = providerView
-    ? marketplaceProviderResourcesOfferingRetrieve
-    : marketplaceResourcesOfferingRetrieve;
   if (!resource_uuid) {
     return { components: null, usages: null, userUsages: null };
   }
 
   let offering: PublicOfferingDetails;
   try {
-    offering = await retrieveOffering({
-      path: { uuid: resource_uuid },
-    }).then((response) => response.data);
+    offering = providerView
+      ? (
+          await marketplaceProviderResourcesOfferingRetrieve({
+            path: { uuid: resource_uuid },
+          })
+        ).data
+      : await retrieveResourceOffering(resource_uuid, offeringUuid);
   } catch (error) {
     if (error?.response?.status === 404) {
       return { components: [], usages: [], userUsages: [] };

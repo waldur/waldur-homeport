@@ -71,6 +71,25 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
       ) : (
         <i>{project.customer_name}</i>
       )}
+
+      {project.awarded_proposal && (
+        <div className="text-quaternary text-xs mt-1">
+          {translate('Awarded through')}{' '}
+          {/* Only the proposal's team and the call's overseers open it; a
+              collaborator added later reads where the project came from. */}
+          {project.awarded_proposal.can_read ? (
+            <Link
+              state="proposals.manage-proposal"
+              params={{ proposal_uuid: project.awarded_proposal.proposal_uuid }}
+              label={project.awarded_proposal.proposal_name}
+            />
+          ) : (
+            project.awarded_proposal.proposal_name
+          )}
+          {' · '}
+          {project.awarded_proposal.call_name}
+        </div>
+      )}
     </div>
   );
 };

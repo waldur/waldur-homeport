@@ -140,6 +140,45 @@ describe('useCheckAndAccept', () => {
       });
     });
 
+    it('lands a proposal member on the proposal, not the organization', async () => {
+      vi.mocked(userInvitationsAccept).mockResolvedValue({ data: {} } as any);
+      mockRefreshCurrentUser.mockResolvedValue({
+        is_staff: false,
+        permissions: [],
+      });
+
+      const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
+        wrapper: createTestWrapper().wrapper,
+      });
+
+      act(() => {
+        result.current.checkAndAccept();
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const onConfirm = vi.mocked(useModal().openDialog).mock.calls[0][1]
+        .resolve.onConfirm;
+
+      act(() => {
+        onConfirm({
+          invitation: {
+            scope_type: 'proposal',
+            scope_uuid: 'proposal-1',
+            customer_uuid: 'customer-1',
+          },
+        });
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 50));
+
+      expect(router.stateService.go).toHaveBeenCalledWith(
+        'proposals.manage-proposal',
+        { proposal_uuid: 'proposal-1' },
+      );
+      expect(result.current.isAccepting).toBe(true);
+    });
+
     it('should show error for 404 response', async () => {
       vi.mocked(userInvitationsAccept).mockRejectedValue({
         response: { status: 404 },

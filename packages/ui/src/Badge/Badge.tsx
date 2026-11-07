@@ -1,5 +1,11 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { forwardRef, HTMLAttributes, ReactNode } from 'react';
+import {
+  ButtonHTMLAttributes,
+  forwardRef,
+  HTMLAttributes,
+  ReactNode,
+  Ref,
+} from 'react';
 
 import { cn } from '../cn';
 import { Tooltip, type TooltipProps } from '../Tooltip';
@@ -224,8 +230,29 @@ const badgeVariants = cva(
   },
 );
 
+/**
+ * A badge rendered as a button: reachable by Tab, pressed with Enter or Space,
+ * and ringed when focused. The ring stands 2px off the badge so it shows on a
+ * solid fill of the brand colour too; the gap takes the surface behind it, in
+ * light and dark alike. The global `:focus-visible` outline is the same width
+ * and colour, so this only moves it out.
+ */
+const BUTTON_CLASSES =
+  'cursor-pointer select-none appearance-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[var(--focus-ring-color)] focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60';
+
 export interface BadgeProps
-  extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
+  extends
+    HTMLAttributes<HTMLElement>,
+    Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
+    VariantProps<typeof badgeVariants> {
+  /**
+   * `'button'` renders a `<button type="button">` with the badge's look, for
+   * a badge that does something when pressed (opens a dialog, a tooltip). Pass
+   * `aria-label` when the text alone does not say what it does. Not inferred
+   * from `onClick`: a Tooltip or Popover trigger wrapping the badge hands it
+   * one of its own.
+   */
+  as?: 'span' | 'button';
   variant?: BadgeVariant;
   tone?: BadgeTone;
   shape?: BadgeShape;
@@ -238,9 +265,10 @@ export interface BadgeProps
   tooltipProps?: Partial<TooltipProps>;
 }
 
-export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+export const Badge = forwardRef<HTMLElement, BadgeProps>(
   (
     {
+      as = 'span',
       className,
       variant = 'primary',
       tone = 'outline',
@@ -253,11 +281,13 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       hasBullet,
       tooltip,
       tooltipProps,
+      disabled,
       children,
       ...props
     },
     ref,
   ) => {
+    const isButton = as === 'button';
     void alignIcon;
 
     const hasContent =
@@ -266,18 +296,19 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       children !== false &&
       (typeof children !== 'string' || children.trim().length > 0);
 
-    const badgeElement = (
-      <span
-        ref={ref}
-        data-variant={variant}
-        data-tone={tone}
-        className={cn(
-          badgeVariants({ size, shape, onlyIcon }),
-          BADGE_STYLES[variant][tone],
-          className,
-        )}
-        {...props}
-      >
+    const shared = {
+      'data-variant': variant,
+      'data-tone': tone,
+      className: cn(
+        badgeVariants({ size, shape, onlyIcon }),
+        BADGE_STYLES[variant][tone],
+        isButton && BUTTON_CLASSES,
+        className,
+      ),
+      ...props,
+    };
+    const content = (
+      <>
         {hasBullet && (
           <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-current" />
         )}
@@ -304,6 +335,20 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
             {rightIcon}
           </span>
         )}
+      </>
+    );
+    const badgeElement = isButton ? (
+      <button
+        ref={ref as Ref<HTMLButtonElement>}
+        type="button"
+        disabled={disabled}
+        {...shared}
+      >
+        {content}
+      </button>
+    ) : (
+      <span ref={ref} {...shared}>
+        {content}
       </span>
     );
 

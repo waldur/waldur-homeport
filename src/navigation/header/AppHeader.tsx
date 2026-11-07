@@ -11,8 +11,10 @@ import {
 } from 'waldur-ui';
 
 import { isAssistantEnabled } from '@/ai-assistant/utils';
-import { DEFAULT_REDIRECT_STATE, isSignInStep } from '@/auth/authNavigation';
+import { isSignInStep } from '@/auth/authNavigation';
+import { getLandingState } from '@/auth/landingState';
 import { getIconUrl } from '@/core/api';
+import { ENV } from '@/core/config';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
@@ -52,7 +54,11 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
 }) => {
   const { state } = useCurrentStateAndParams();
   const user = useUser();
-  const imageUrl = getIconUrl('sidebar_logo_mobile');
+  // Only a configured logo is asked for: an unset one answers 404, and the
+  // header showed nothing in its place anyway.
+  const imageUrl = ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE
+    ? getIconUrl('sidebar_logo_mobile')
+    : undefined;
   const [errorImg, setErrorImg] = useState(false);
 
   // The chat-bubble drawer now hosts both Helpdesk and Team chat, so it must
@@ -73,7 +79,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
     if (previous && !isSignInStep(previous)) {
       window.history.back();
     } else {
-      router.stateService.go(DEFAULT_REDIRECT_STATE);
+      router.stateService.go(getLandingState());
     }
   };
 

@@ -25,6 +25,14 @@ import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
 import { ReviewerProfileAddDropdown } from './ReviewerProfileAddDropdown';
+import {
+  publicationRequiresApproval,
+  reviewerProfilesEnabled,
+} from './reviewerSettings';
+import {
+  isInGoodStanding,
+  ReviewerStandingBadge,
+} from './ReviewerStandingBadge';
 
 type TabKey = 'info' | 'affiliations' | 'expertise' | 'publications';
 
@@ -68,6 +76,11 @@ export const ReviewerProfilePanel = ({
     setIsRefreshing(false);
   }, [queryClient, activeTab]);
 
+  const publicationPending =
+    !profile.is_published && profile.publication_request?.state === 'pending';
+  const publicationRejected =
+    !profile.is_published && profile.publication_request?.state === 'rejected';
+
   const handlePublish = useCallback(async () => {
     try {
       await confirm(
@@ -82,11 +95,15 @@ export const ReviewerProfilePanel = ({
 
     setIsPublishing(true);
     try {
-      await reviewerProfilesPublish();
+      const { data } = await reviewerProfilesPublish();
       showSuccess(
-        translate(
-          'Profile published successfully. Your profile is now discoverable by call managers.',
-        ),
+        data?.publication_pending
+          ? translate(
+              'Publication requested. Your profile becomes discoverable once the platform operator approves it.',
+            )
+          : translate(
+              'Profile published successfully. Your profile is now discoverable by call managers.',
+            ),
       );
       refetch?.();
     } catch (error) {
@@ -144,11 +161,16 @@ export const ReviewerProfilePanel = ({
                   <Badge variant="success" tone="outline">
                     {translate('Published')}
                   </Badge>
+                ) : publicationPending ? (
+                  <Badge variant="warning" tone="outline">
+                    {translate('Awaiting approval')}
+                  </Badge>
                 ) : (
                   <Badge variant="neutral" tone="outline">
                     {translate('Not published')}
                   </Badge>
                 )}
+                <ReviewerStandingBadge standing={profile.standing} />
                 <BaseButton
                   tooltip={translate('Refresh')}
                   variant="text-secondary"
@@ -172,6 +194,31 @@ export const ReviewerProfilePanel = ({
                   })}
                 </span>
               )}
+              {publicationPending && (
+                <span className="text-quaternary font-normal text-xs">
+                  {translate(
+                    'The platform operator reviews new profiles before call managers can find them.',
+                  )}
+                </span>
+              )}
+              {publicationRejected && (
+                <span className="text-danger font-normal text-xs">
+                  {profile.publication_request?.review_comment
+                    ? translate('Publication declined: {comment}', {
+                        comment: profile.publication_request.review_comment,
+                      })
+                    : translate(
+                        'Publication declined by the platform operator.',
+                      )}
+                </span>
+              )}
+              {!isInGoodStanding(profile.standing) && (
+                <span className="text-danger font-normal text-xs">
+                  {translate(
+                    'You are not offered new review work at the moment. Contact the platform operator for details.',
+                  )}
+                </span>
+              )}
             </div>
 
             {/* Right side: Controls */}
@@ -185,15 +232,27 @@ export const ReviewerProfilePanel = ({
                   label={translate('Unpublish profile')}
                   size="lg"
                 />
-              ) : (
+              ) : publicationPending ? (
+                <BaseButton
+                  variant="secondary"
+                  onClick={handleUnpublish}
+                  pending={isPublishing}
+                  label={translate('Withdraw request')}
+                  size="lg"
+                />
+              ) : reviewerProfilesEnabled() ? (
                 <BaseButton
                   variant="primary"
                   onClick={handlePublish}
                   pending={isPublishing}
-                  label={translate('Publish profile')}
+                  label={
+                    publicationRequiresApproval()
+                      ? translate('Request publication')
+                      : translate('Publish profile')
+                  }
                   size="lg"
                 />
-              )}
+              ) : null}
             </div>
           </div>
         </CardHeader>

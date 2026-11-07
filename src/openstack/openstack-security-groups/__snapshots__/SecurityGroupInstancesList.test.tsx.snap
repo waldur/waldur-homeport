@@ -43,6 +43,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
               >
                 <th
                   data-pin-key="column-0"
+                  scope="col"
                 >
                   <div
                     class="th-content"
@@ -72,6 +73,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                 </th>
                 <th
                   data-pin-key="column-1"
+                  scope="col"
                 >
                   <div
                     class="th-content"
@@ -101,6 +103,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                 </th>
                 <th
                   data-pin-key="column-2"
+                  scope="col"
                 >
                   <div
                     class="th-content"
@@ -130,6 +133,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                 </th>
                 <th
                   data-pin-key="column-3"
+                  scope="col"
                 >
                   <div
                     class="th-content"

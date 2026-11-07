@@ -21,12 +21,13 @@ import {
   CallState,
   ProposalState,
 } from '@/proposals/types';
+import { useUser } from '@/workspace/hooks';
 import {
   checkIsOwnerOrStaff,
   checkIsStaffOrSupport,
 } from '@/workspace/selectors';
 
-// Allocation timing is a call-level policy on the allocation_decision workflow
+// Allocation timing is a call-level policy on the allocation decision workflow
 // step (not per-round): 'on_decision' provisions immediately, 'fixed_date' uses
 // the round's allocation date.
 export const getAllocationTimeOptions = () =>
@@ -197,6 +198,30 @@ export const getCallStatus = (
   }
 };
 
+const ROUND_TIME_FIELDS = ['start_time', 'cutoff_time', 'allocation_date'];
+const HAS_ZONE = /(?:Z|[+-]\d{2}:?\d{2})$/;
+
+/**
+ * The round form's times as instants the server can store.
+ *
+ * The pickers give a wall-clock time with no zone, meant in the time zone
+ * the form names; the server would read such a time as UTC and shift it by
+ * the zone's offset. A time left as it was loaded keeps its own offset.
+ */
+export const roundTimesInZone = <T extends Record<string, any>>(
+  values: T,
+): T => {
+  const zone = values.timezone || DateTime.local().zoneName;
+  const result: Record<string, any> = { ...values };
+  for (const field of ROUND_TIME_FIELDS) {
+    const value = result[field];
+    if (typeof value === 'string' && value && !HAS_ZONE.test(value)) {
+      result[field] = DateTime.fromISO(value, { zone }).toISO();
+    }
+  }
+  return result as T;
+};
+
 export const getRoundInitialValues = (
   round: ProtectedRound,
 ): ProtectedRoundRequest => ({
@@ -261,6 +286,15 @@ export const getRoundMenuAccess = (
     : null;
 };
 
+/**
+ * Mirrors the backend gate on the call's reports: CALL.UPDATE on the call or
+ * its organisation, or staff and support. Narrower than
+ * `canAccessCallManagement`, which also admits organization owners and so
+ * opens the Manage page to some who may not read its reports.
+ */
+export const canReadCallReports = (user: User, call: Call): boolean =>
+  canUpdateCall(user, call) || Boolean(checkIsStaffOrSupport(user));
+
 /** Mirrors the backend gate on the export endpoints. Narrower than
  * `canAccessCallManagement`, which also admits organization owners. */
 export const canExportCall = (user: User, call: Call): boolean =>
@@ -319,6 +353,48 @@ export const isOnCallTeam = (
     ),
   ) ||
     canAccessCallManagement(user, call));
+
+const isOnTeamOfRoundProposal = (
+  user: User,
+  round?: { proposals?: { uuid: string }[] | null } | null,
+): boolean => {
+  const proposalUuids = new Set(
+    (round?.proposals ?? []).map((proposal) => proposal.uuid),
+  );
+  return Boolean(
+    proposalUuids.size &&
+    user.permissions?.some(
+      (permission) =>
+        permission.scope_type === 'proposal' &&
+        proposalUuids.has(permission.scope_uuid),
+    ),
+  );
+};
+
+/**
+ * Whether the user reads the committee's record of the call's rounds -- their
+ * ranking and meeting notes: whoever manages the call, and its panel members.
+ * Reviewers and applicants do not. Given a round, nobody but staff on the team
+ * of one of its proposals does either. The backend also leaves out whoever has
+ * a conflict of interest on record with one of them, which the user's roles do
+ * not show.
+ */
+export const canReadRoundCommittee = (
+  user: User | null | undefined,
+  call: Call | null | undefined,
+  round?: { proposals?: { uuid: string }[] | null } | null,
+): boolean =>
+  Boolean(user && call) &&
+  (canAccessCallManagement(user, call) ||
+    Boolean(
+      user.permissions?.some(
+        (permission) =>
+          permission.scope_type === 'call' &&
+          permission.scope_uuid === call.uuid &&
+          permission.role_name === RoleEnum.CALL_PANEL_MEMBER,
+      ),
+    )) &&
+  (Boolean(user.is_staff) || !isOnTeamOfRoundProposal(user, round));
 
 /**
  * Whether the user may manage the call's reviewers — invite to the pool,
@@ -386,12 +462,15 @@ export const useCallBreadcrumbItems = (
 export const usePublicCallBreadcrumbItems = (
   call: Pick<Call, 'name'>,
 ): IBreadcrumbItem[] => {
+  // A signed-in user goes back to the calls area they browse calls in, with
+  // its tabs; only an anonymous visitor to the bare public list.
+  const user = useUser();
   return useMemo(
     () => [
       {
         key: 'calls-list',
         text: translate('Calls for proposals'),
-        to: 'public-calls.list-public',
+        to: user ? 'calls-for-proposals-dashboard' : 'public-calls.list-public',
       },
       {
         key: 'call',
@@ -400,7 +479,7 @@ export const usePublicCallBreadcrumbItems = (
         active: true,
       },
     ],
-    [call],
+    [call, user],
   );
 };
 

@@ -39,7 +39,7 @@ const DISCLOSURE_LEVEL_LABELS: Record<string, string> = {
   full_details: translate('Full proposal details'),
 };
 
-const fetchCallCoiConfiguration = async (callUuid: string) => {
+export const fetchCallCoiConfiguration = async (callUuid: string) => {
   const response = await proposalProtectedCallsCoiConfigurationRetrieve({
     path: { uuid: callUuid },
   });
@@ -229,7 +229,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             name="include_same_department"
             label={translate('Detect same department')}
             description={translate(
-              'Flag a conflict when reviewer and proposal team member are in the same department',
+              'Flag a conflict when the reviewer and a proposal team member currently list the same department at the same organization in their reviewer profiles. Team members without a reviewer profile are not checked.',
             )}
             disabled={isReadOnly}
             renderValue={(value) =>
@@ -240,7 +240,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             name="include_same_institution"
             label={translate('Detect same institution')}
             description={translate(
-              'Flag a conflict when reviewer and proposal team member are at the same institution',
+              'Flag a conflict when the reviewer is, or was within the lookback period, affiliated with the applicant organization.',
             )}
             disabled={isReadOnly}
             renderValue={(value) =>
@@ -302,7 +302,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             name="recusal_required_types"
             label={translate('Types requiring recusal')}
             description={translate(
-              'Conflict types that require the reviewer to withdraw from reviewing the proposal entirely',
+              'Detected or declared conflicts of these types are recorded as real and cannot be waived with a management plan: a call manager dismisses one as a false positive or recuses the reviewer.',
             )}
             options={getAvailableTypeOptions(config, 'recusal_required_types')}
             isMulti
@@ -315,7 +315,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             name="management_allowed_types"
             label={translate('Types allowing management plan')}
             description={translate(
-              'Conflict types where the reviewer may continue with an approved management plan',
+              'Conflicts of these types are recorded as apparent: a call manager may waive one with a management plan and let the reviewer continue.',
             )}
             options={getAvailableTypeOptions(
               config,
@@ -331,7 +331,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             name="disclosure_only_types"
             label={translate('Types requiring disclosure only')}
             description={translate(
-              'Conflict types that only need to be disclosed but do not require further action',
+              'Conflicts of these types are recorded as potential. Each still waits for a call manager to dismiss or waive it, and the reviewer is not assigned the proposal until then.',
             )}
             options={getAvailableTypeOptions(config, 'disclosure_only_types')}
             isMulti

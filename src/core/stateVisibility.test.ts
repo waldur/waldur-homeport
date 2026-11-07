@@ -21,14 +21,14 @@ const registry = {
   },
   'profile.details': { name: 'profile.details' },
   // A child of a gated parent, gated on a flag of its own.
-  'reporting-proposals': {
-    name: 'reporting-proposals',
+  'gated-section': {
+    name: 'gated-section',
     parent: 'layout',
     data: { feature: 'marketplace.show_call_management_functionality' },
   },
-  'reporting-call-performance': {
-    name: 'reporting-call-performance',
-    parent: 'reporting-proposals',
+  'gated-section-report': {
+    name: 'gated-section-report',
+    parent: 'gated-section',
     data: { feature: 'marketplace.show_experimental_ui_components' },
   },
 };
@@ -65,7 +65,7 @@ describe('isStateVisible', () => {
 
   // The child's own flag is on, so only walking the ancestors catches this.
   it('is false when an ancestor is gated off', () => {
-    expect(isStateVisible('reporting-call-performance')).toBe(false);
+    expect(isStateVisible('gated-section-report')).toBe(false);
   });
 
   // Concealment is for switched-off features; a typo must stay loud.

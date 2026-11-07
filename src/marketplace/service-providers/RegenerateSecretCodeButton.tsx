@@ -1,3 +1,4 @@
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import {
@@ -5,8 +6,7 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
-
+import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -51,11 +51,12 @@ export const RegenerateSecretCodeButton: FC<
   });
 
   return (
-    <BaseButton
-      label={translate('Regenerate')}
+    // The row's own action, as the pencil beside the other fields.
+    <CompactEditButton
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
+      tooltip={translate('Regenerate API secret code')}
       onClick={() => mutate()}
       pending={isPending}
-      variant="primary"
     />
   );
 };

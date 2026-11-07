@@ -6,6 +6,11 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import {
+  applicantChangeNote,
+  useActingForApplicant,
+  useConfirmApplicantChange,
+} from '@/proposals/proposal/actingForApplicant';
 import { Proposal, ProposalResource } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
@@ -25,14 +30,19 @@ interface ResourceRequestItemActionsProps {
 
 const EditResourceRequestAction = ({ row, proposal, refetch }) => {
   const { openDialog } = useModal();
-  const openEditResourceDialog = useCallback(
-    () =>
-      openDialog(ResourceRequestFormDialog, {
-        resolve: { resourceRequest: row, proposal, refetch },
-        size: 'lg',
+  const confirmChange = useConfirmApplicantChange(proposal);
+  const openEditResourceDialog = useCallback(async () => {
+    const confirmed = await confirmChange(
+      translate('Change the {name} resource request.', {
+        name: row.requested_offering.offering_name,
       }),
-    [row, proposal, refetch],
-  );
+    );
+    if (!confirmed) return;
+    openDialog(ResourceRequestFormDialog, {
+      resolve: { resourceRequest: row, proposal, refetch },
+      size: 'lg',
+    });
+  }, [confirmChange, openDialog, row, proposal, refetch]);
   return (
     <ActionItem
       action={openEditResourceDialog}
@@ -43,6 +53,7 @@ const EditResourceRequestAction = ({ row, proposal, refetch }) => {
 };
 
 const RemoveResourceRequestAction = ({ row, proposal, refetch }) => {
+  const actingForApplicant = useActingForApplicant(proposal);
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       proposalProposalsResourcesDestroy({
@@ -50,12 +61,19 @@ const RemoveResourceRequestAction = ({ row, proposal, refetch }) => {
       }),
     confirmation: {
       title: translate('Removing resource request'),
-      body: translate(
-        'Are you sure you want to remove the {name} resource request?',
-        {
-          name: <b>{row.requested_offering.offering_name}</b>,
-        },
-        formatJsxTemplate,
+      body: (
+        <>
+          {translate(
+            'Are you sure you want to remove the {name} resource request?',
+            {
+              name: <b>{row.requested_offering.offering_name}</b>,
+            },
+            formatJsxTemplate,
+          )}
+          {actingForApplicant && (
+            <p className="mt-1.5 mb-0">{applicantChangeNote()}</p>
+          )}
+        </>
       ),
     },
     successMessage: translate('Resource request has been deleted.'),

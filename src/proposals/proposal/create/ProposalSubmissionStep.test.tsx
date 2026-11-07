@@ -7,6 +7,7 @@ import {
   proposalProposalsUpdateProjectDetails,
 } from 'waldur-js-client';
 
+import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
@@ -29,6 +30,12 @@ vi.mock('@/proposals/useProposalResourceRows', () => ({
   useProposalResourceRows: () => ({ data: resourceRows.current }),
 }));
 
+// What the Project details step requires; a test sets it before rendering.
+const projectStep = vi.hoisted(() => ({
+  required: false,
+  requiredFields: [] as string[],
+}));
+
 // One stand-in step: fills resources_init through change(), the way the
 // resource table does, and has one real input for typed text. A second one
 // reports whether the resource requests count as complete.
@@ -46,8 +53,13 @@ vi.mock('./steps', () => ({
     {
       id: 'step-project',
       label: 'Project details',
+      required: projectStep.required,
+      requiredFields: projectStep.requiredFields,
       component: ({ params }) => (
         <>
+          <span data-testid="project-complete">
+            {String(params.isCompleted)}
+          </span>
           <button
             type="button"
             onClick={() => params.change('resources_init', [{ uuid: 'r1' }])}
@@ -127,6 +139,115 @@ describe('ProposalSubmissionStep', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resourceRows.current = undefined;
+    projectStep.required = false;
+    projectStep.requiredFields = [];
+  });
+
+  it('names a file the proposal refuses and keeps it pending', async () => {
+    vi.mocked(proposalProposalsUpdateProjectDetails).mockResolvedValue(
+      {} as any,
+    );
+    const refusal = {
+      status: 400,
+      file: ['This file is already attached to the proposal.'],
+    };
+    vi.mocked(proposalProposalsAttachDocument).mockRejectedValue(refusal);
+    const { showErrorResponse, showSuccess } = useNotify();
+    renderStep();
+    await userEvent.click(screen.getByText('Attach'));
+
+    await userEvent.click(screen.getByText('Save as draft'));
+    await waitFor(() =>
+      expect(proposalProposalsAttachDocument).toHaveBeenCalledTimes(1),
+    );
+
+    await waitFor(() =>
+      expect(showErrorResponse).toHaveBeenCalledWith(
+        refusal,
+        'cv.pdf was not attached',
+      ),
+    );
+    // The rest of the draft was saved; the refused file is still listed as
+    // unsaved for the applicant to remove.
+    expect(showSuccess).toHaveBeenCalled();
+    expect(screen.getByTestId('dirty')).toHaveTextContent(
+      'supporting_documentation',
+    );
+  });
+
+  it('fails the save when an upload breaks for another reason', async () => {
+    vi.mocked(proposalProposalsUpdateProjectDetails).mockResolvedValue(
+      {} as any,
+    );
+    const outage = { status: 500, detail: 'Internal error' };
+    vi.mocked(proposalProposalsAttachDocument).mockRejectedValue(outage);
+    const { showErrorResponse, showSuccess } = useNotify();
+    renderStep();
+    await userEvent.click(screen.getByText('Attach'));
+
+    await userEvent.click(screen.getByText('Save as draft'));
+
+    await waitFor(() =>
+      expect(showErrorResponse).toHaveBeenCalledWith(
+        outage,
+        'Something went wrong',
+      ),
+    );
+    expect(showSuccess).not.toHaveBeenCalled();
+  });
+
+  describe('a call that requires documents', () => {
+    beforeEach(() => {
+      projectStep.required = true;
+      projectStep.requiredFields = ['supporting_documentation'];
+    });
+
+    it('completes the step with a document already on the proposal', () => {
+      renderWithProviders(
+        <ProposalSubmissionStep
+          proposal={{
+            ...proposal,
+            supporting_documentation: [{ uuid: 'd1', file_name: 'cv.pdf' }],
+          }}
+          refetch={vi.fn()}
+          reviews={[]}
+        />,
+      );
+      expect(screen.getByTestId('project-complete')).toHaveTextContent('true');
+    });
+
+    it('leaves the step open until a file is picked or stored', async () => {
+      renderWithProviders(
+        <ProposalSubmissionStep
+          proposal={{ ...proposal, supporting_documentation: [] }}
+          refetch={vi.fn()}
+          reviews={[]}
+        />,
+      );
+      expect(screen.getByTestId('project-complete')).toHaveTextContent('false');
+      await userEvent.click(screen.getByText('Attach'));
+      expect(screen.getByTestId('project-complete')).toHaveTextContent('true');
+    });
+
+    it('stays complete after Save as draft moves the file to the proposal', async () => {
+      vi.mocked(proposalProposalsUpdateProjectDetails).mockResolvedValue(
+        {} as any,
+      );
+      vi.mocked(proposalProposalsAttachDocument).mockResolvedValue({} as any);
+      const { refetchProposal } = renderStep();
+      await userEvent.click(screen.getByText('Attach'));
+      expect(screen.getByTestId('project-complete')).toHaveTextContent('true');
+
+      await userEvent.click(screen.getByText('Save as draft'));
+      await waitFor(() =>
+        expect(proposalProposalsAttachDocument).toHaveBeenCalledTimes(1),
+      );
+      refetchProposal({
+        supporting_documentation: [{ uuid: 'd1', file_name: 'cv.pdf' }],
+      });
+
+      expect(screen.getByTestId('project-complete')).toHaveTextContent('true');
+    });
   });
 
   // waldur/waldur-homeport#129 on GitHub: the step was ticked green while a

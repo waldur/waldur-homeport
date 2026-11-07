@@ -6,6 +6,8 @@ import {
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionContext } from '@/resource/actions/types';
@@ -14,6 +16,7 @@ import {
   LEGACY_SITE_AGENT_PLUGIN,
   SITE_AGENT_PLUGIN,
 } from '@/site-agent/constants';
+import { useUser } from '@/workspace/hooks';
 
 import { useIsProviderAction } from './ProviderActionContext';
 import { getMarketplaceResourceUuid } from './utils';
@@ -40,10 +43,25 @@ export const PullMarketplaceResourceAction = ({
   refetch,
   ...rest
 }) => {
+  const user = useUser();
   const validationState = useValidators(validators, resource);
-  const pull = useIsProviderAction()
+  const isProvider = useIsProviderAction();
+  const pull = isProvider
     ? marketplaceProviderResourcesPull
     : marketplaceResourcesPull;
+  // A pull talks to the provider's backend: it takes a permission of its own
+  // on either side, not just seeing the resource.
+  const canPull = isProvider
+    ? hasPermission(user, {
+        permission: PermissionEnum.PULL_RESOURCE,
+        customerId: resource.provider_uuid,
+        offeringId: resource.offering_uuid,
+      })
+    : hasPermission(user, {
+        permission: PermissionEnum.PULL_RESOURCE,
+        projectId: resource.project_uuid,
+        customerId: resource.customer_uuid,
+      });
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
@@ -58,6 +76,7 @@ export const PullMarketplaceResourceAction = ({
   });
 
   if (
+    !canPull ||
     !getMarketplaceResourceUuid(resource) ||
     !SUPPORTED_OFFERING_TYPES.includes(
       resource.marketplace_offering_type || resource.offering_type,

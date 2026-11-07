@@ -96,7 +96,6 @@ export interface CallOfferingFormData {
   attributes: AttributesType;
   description: string;
   plan: Plan;
-  limits?: Limits;
 }
 
 export interface ProposalResource {

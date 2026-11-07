@@ -24,6 +24,11 @@ interface OwnProps {
   className?: string;
   showIndustry?: boolean;
   showKind?: boolean;
+  /**
+   * Set when the caller already knows whether the viewer can open the project,
+   * e.g. because it fetched it; otherwise decided from the viewer's roles.
+   */
+  canAccess?: boolean;
   onClick?(): void;
 }
 
@@ -36,14 +41,12 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
   children,
   showIndustry = true,
   showKind,
+  canAccess: knownAccess,
   onClick,
 }) => {
   const user = useUser();
-  const canAccess = canAccessProjectDashboard(
-    user,
-    row.uuid,
-    row.customer_uuid,
-  );
+  const canAccess =
+    knownAccess ?? canAccessProjectDashboard(user, row.uuid, row.customer_uuid);
   const options = projectKindOptions();
   const kind = options[row.kind] || options.default;
   const Icon = kind.icon;

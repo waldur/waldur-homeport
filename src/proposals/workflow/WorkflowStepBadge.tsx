@@ -9,6 +9,7 @@ import {
   fetchProposalWorkflowStates,
   proposalWorkflowStatesKey,
 } from './queries';
+import { activeStepsOf } from './stages';
 
 interface WorkflowStepBadgeProps {
   proposalUuid: string;
@@ -37,16 +38,17 @@ export const WorkflowStepBadge: FC<WorkflowStepBadgeProps> = ({
   const visible = data.filter((s) => s.status !== 'skipped');
   if (visible.length === 0) return null;
 
-  const active = visible.find((s) => s.status === 'active');
-  const activeIndex = active ? visible.indexOf(active) : -1;
+  // Steps of one stage run at once: the badge names all of them.
+  const active = activeStepsOf(visible);
+  const activeIndex = active.length ? visible.indexOf(active[0]) : -1;
 
-  if (active && activeIndex >= 0) {
+  if (active.length && activeIndex >= 0) {
     return (
       <Badge variant="primary" shape="pill" tone="outline">
         {translate('Step {current} of {total}: {name}', {
           current: activeIndex + 1,
           total: visible.length,
-          name: active.step_name,
+          name: active.map((step) => step.step_name).join(' · '),
         })}
       </Badge>
     );

@@ -17,7 +17,7 @@ export const LinkResourcesAction = ({ row }: { row: ArrowCustomerMapping }) => {
 
   return (
     <ActionItem
-      title={translate('LinkIcon resources')}
+      title={translate('Link resources')}
       action={() => {
         openDialog(LinkResourcesDialog, {
           resolve: { mapping: row },

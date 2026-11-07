@@ -21,7 +21,7 @@ export const InvitationFAQCard: FC = () => {
     {
       question: translate('What if I have a conflict of interest?'),
       answer: translate(
-        'When you receive specific proposal assignments (Step 2), you can declare any conflicts of interest. The system may also automatically detect some conflicts based on institutional affiliations or co-authorship.',
+        'When you receive specific proposal assignments (Step 2), decline any proposal you have a conflict with and give the conflict as the reason. The system may also automatically detect some conflicts based on institutional affiliations or co-authorship.',
       ),
     },
     {

@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { proposalProposalsListUsersList } from 'waldur-js-client';
 
@@ -7,11 +8,14 @@ import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
+import { SectionOpenProvider } from '../proposal/sectionOpen';
+
 import { ProposalUsersListSummary } from './ProposalUsersListSummary';
 
-const { usersListProps, dropdownProps } = vi.hoisted(() => ({
+const { usersListProps, dropdownProps, tableError } = vi.hoisted(() => ({
   usersListProps: { value: null as any },
   dropdownProps: { value: null as any },
+  tableError: { value: null as any },
 }));
 
 vi.mock('./UsersList', () => ({
@@ -28,10 +32,8 @@ vi.mock('./TeamDropdownActions', () => ({
   },
 }));
 
-vi.mock('@/events/BaseEventsList', () => ({ BaseEventsList: () => null }));
-
 vi.mock('@/table/useTable', () => ({
-  useTable: () => ({ fetch: vi.fn(), rows: [] }),
+  useTable: () => ({ fetch: vi.fn(), rows: [], error: tableError.value }),
 }));
 
 const proposal = (state: string) =>
@@ -105,6 +107,16 @@ describe('ProposalUsersListSummary', () => {
     vi.restoreAllMocks();
     usersListProps.value = null;
     dropdownProps.value = null;
+    tableError.value = null;
+  });
+
+  it('renders nothing for a viewer refused the team', () => {
+    // An offering manager assessing the proposal may not read its team.
+    tableError.value = { response: { status: 403 } };
+    const props = renderAs(callManager, 'submitted');
+    expect(props).toBeNull();
+    expect(screen.queryByText('Team changes')).not.toBeInTheDocument();
+    expect(dropdownProps.value).toBeNull();
   });
 
   it('is read-only for the applicant once the proposal is submitted', () => {
@@ -133,14 +145,17 @@ describe('ProposalUsersListSummary', () => {
     expect(screen.queryByText(FIXED_NOTE)).not.toBeInTheDocument();
   });
 
-  it('shows the team change log to a call manager', () => {
-    renderAs(callManager, 'submitted');
-    expect(screen.getByText('Permissions')).toBeInTheDocument();
-  });
-
-  it('hides the team change log from the applicant', () => {
-    renderAs(applicant, 'submitted');
-    expect(screen.queryByText('Permissions')).not.toBeInTheDocument();
+  it('has no team change log of its own: it points to the activity', async () => {
+    const setOpen = vi.fn();
+    vi.mocked(workspaceHooks.useUser).mockReturnValue(callManager as any);
+    renderWithProviders(
+      <SectionOpenProvider value={{ isOpen: () => false, setOpen }}>
+        <ProposalUsersListSummary scope={proposal('submitted')} />
+      </SectionOpenProvider>,
+    );
+    expect(screen.queryByText('Team changes')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Activity' }));
+    expect(setOpen).toHaveBeenCalledWith('step-activity', true);
   });
 
   it('disables Remove on the last proposal manager', async () => {

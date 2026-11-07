@@ -248,17 +248,22 @@ export const TeamSection: FC<
             },
             {
               key: 'permissions',
-              title: translate('Permissions'),
+              title: translate('Team changes'),
               hidden: !showManagementTabs,
               content: (
-                <BaseEventsList
-                  table={`permissions-log${props.scope.url}`}
-                  filter={eventsFilter}
-                  cardBordered={false}
-                  hasActionBar={false}
-                  fullWidth
-                  minHeight="auto"
-                />
+                <>
+                  <p className="text-quaternary py-2.5 mb-0">
+                    {translate('Who added or removed whom, and when.')}
+                  </p>
+                  <BaseEventsList
+                    table={`permissions-log${props.scope.url}`}
+                    filter={eventsFilter}
+                    cardBordered={false}
+                    hasActionBar={false}
+                    fullWidth
+                    minHeight="auto"
+                  />
+                </>
               ),
             },
           ]}

@@ -3,6 +3,7 @@ import {
   proposalProposalsResourcesList,
   proposalProposalsRetrieve,
   ProposalReview,
+  proposalReviewsRetrieve,
 } from 'waldur-js-client';
 
 import { PropertyList, PropertyItem } from 'waldur-ui';
@@ -11,6 +12,8 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
+
+import { ReviewDetails } from './ReviewExpandableRow';
 
 const loadProposalData = async (proposal_uuid: string) => {
   const proposal = await proposalProposalsRetrieve({
@@ -32,6 +35,15 @@ export const ReviewsExpandableRow = ({ row }: { row: ProposalReview }) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['proposal', row.proposal],
     queryFn: () => loadProposalData(row.proposal_uuid),
+    refetchOnWindowFocus: false,
+  });
+  // The reviewer's own review, in full: list results leave out its comments.
+  const { data: review } = useQuery({
+    queryKey: ['ReviewDetail', row.uuid],
+    queryFn: () =>
+      proposalReviewsRetrieve({ path: { uuid: row.uuid } }).then(
+        (response) => response.data,
+      ),
     refetchOnWindowFocus: false,
   });
   if (isLoading) {
@@ -79,6 +91,12 @@ export const ReviewsExpandableRow = ({ row }: { row: ProposalReview }) => {
           </PropertyList>
         </div>
       </div>
+      {review && (
+        <div className="mt-5">
+          <h6 className="mb-2.5">{translate('Your review')}</h6>
+          <ReviewDetails review={review} />
+        </div>
+      )}
     </ExpandableContainer>
   );
 };

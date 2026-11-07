@@ -3,6 +3,7 @@ import { proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { SubmissionDeadlineField } from '@/proposals/proposal/SubmissionDeadlineField';
 import { getNonCanceledProposalStates } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
@@ -17,7 +18,6 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
-import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
 import { ProposalRowActions } from './ProposalRowActions';
@@ -31,7 +31,6 @@ export const CustomerProposalsList: FC = () => {
   const filter = useMemo(
     () => ({
       organization_uuid: customer?.uuid,
-      o: ['-round__cutoff_time'],
       state: getNonCanceledProposalStates(),
       ...formFilters,
     }),
@@ -49,6 +48,8 @@ export const CustomerProposalsList: FC = () => {
   return (
     <Table
       {...tableProps}
+      // Newest first: what just came in is on top.
+      initialSorting={{ field: 'created', mode: 'desc' }}
       columns={[
         {
           title: translate('Proposal'),
@@ -83,8 +84,8 @@ export const CustomerProposalsList: FC = () => {
           orderField: 'round__cutoff_time',
         },
         {
-          title: translate('Ending'),
-          render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
+          title: translate('Submission deadline'),
+          render: SubmissionDeadlineField,
           className: 'whitespace-nowrap',
         },
         {

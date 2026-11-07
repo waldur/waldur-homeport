@@ -217,7 +217,7 @@ export const CustomerBillingSummaryDialog: FC<
                     </p>
                     <p className="mb-0">
                       {translate(
-                        'None of your {count} resources have a backend_id set. Set the backend_id to the Arrow license reference to enable consumption tracking.',
+                        "None of the organization's {count} resources have a backend_id set. Set it to the Arrow license reference to show the resource's consumption here and to sync its consumption history.",
                         { count: data.total_customer_resources },
                       )}
                     </p>

@@ -47,7 +47,6 @@ export const ProposalReviewsFilter: FunctionComponent<
       title={translate('State')}
       name="state"
       getValueLabel={(value: ProposalReviewStateOption) => value?.label}
-      placeholder={translate('State')}
       options={ProposalReviewStateOptions}
       getOptionValue={(option: ProposalReviewStateOption) =>
         String(option.value)
@@ -55,23 +54,23 @@ export const ProposalReviewsFilter: FunctionComponent<
       getOptionLabel={(option: ProposalReviewStateOption) => option.label}
       isClearable={true}
       isMulti={true}
+      placeholder={translate('State')}
     />
     <AsyncSelectFilter
       title={translate('Call')}
       name="call"
       getValueLabel={(value: PublicCall) => value?.name}
-      placeholder={translate('Call')}
       loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
       defaultOptions
       getOptionValue={(option: PublicCall) => String(option.uuid || '')}
       getOptionLabel={(option: PublicCall) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Call')}
     />
     <AsyncSelectFilter
       title={translate('Round')}
       name="round"
       getValueLabel={(value: ProtectedRound) => value?.name}
-      placeholder={translate('Round')}
       loadOptions={createLoadOptions(
         proposalProtectedCallsRoundsList,
         null as any,
@@ -82,17 +81,18 @@ export const ProposalReviewsFilter: FunctionComponent<
       getOptionValue={(option: ProtectedRound) => String(option.uuid || '')}
       getOptionLabel={(option: ProtectedRound) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Round')}
     />
     <AsyncSelectFilter
-      title={translate('Organization')}
+      title={translate('Organization running the call')}
       name="organization_uuid"
       getValueLabel={(value: Customer) => value?.name}
-      placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
       defaultOptions
       getOptionValue={(option: Customer) => String(option.uuid || '')}
       getOptionLabel={(option: Customer) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Organization running the call')}
     />
     <AsyncSelectFilter
       title={translate('Reviewer')}
@@ -100,7 +100,6 @@ export const ProposalReviewsFilter: FunctionComponent<
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-      placeholder={translate('Reviewer')}
       loadOptions={createLoadOptions(usersList, 'query')}
       defaultOptions
       getOptionValue={(option: User) => String(option.uuid || '')}
@@ -108,12 +107,12 @@ export const ProposalReviewsFilter: FunctionComponent<
         String(option.full_name || option.username || option.email || '')
       }
       isClearable={true}
+      placeholder={translate('Reviewer')}
     />
     <AsyncSelectFilter
       title={translate('Proposal')}
       name="proposal"
       getValueLabel={(value: Proposal) => value?.name}
-      placeholder={translate('Proposal')}
       loadOptions={createLoadOptions(proposalProposalsList, 'name', {
         call_uuid: props.callUuid,
       })}
@@ -121,6 +120,7 @@ export const ProposalReviewsFilter: FunctionComponent<
       getOptionValue={(option: Proposal) => String(option.uuid || '')}
       getOptionLabel={(option: Proposal) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Proposal')}
     />
   </>
 );

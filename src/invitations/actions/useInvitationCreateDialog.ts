@@ -12,6 +12,7 @@ import {
   mapExistingRoleResponse,
 } from '@/permissions/existingRoles';
 import { Role } from '@/permissions/types';
+import { filterGrantableRoles } from '@/permissions/utils';
 import {
   getOnlyOneProjectManagerTooltip,
   isProjectManagerRole,
@@ -85,10 +86,20 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     const baseRoles = customerUuid ? (scopedRoles ?? []) : ENV.roles;
     const _roles = context.roles
       ? baseRoles.filter((role) => context.roles.includes(role.name))
-      : baseRoles.filter(
-          (role) =>
-            InvitationPolicyService.canManageRole(context, role) &&
-            role.is_active,
+      : filterGrantableRoles(
+          baseRoles.filter(
+            (role) =>
+              InvitationPolicyService.canManageRole(context, role) &&
+              role.is_active,
+          ),
+          context.user,
+          // On a project team managed through a project role, nothing beyond
+          // that role is offered (as the backend refuses it).
+          {
+            customerId: context.customer?.uuid,
+            projectId: context.project?.uuid,
+            scopeId: context.scope?.uuid,
+          },
         );
     if (defaultProject) {
       return disableTakenProjectManager(_roles);

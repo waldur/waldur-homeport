@@ -17,7 +17,15 @@ describe('ProposalStateBadge', () => {
 
   it('shows the tentative outcome of a held decision', async () => {
     vi.mocked(proposalProposalsWorkflowStatesList).mockResolvedValue({
-      data: [{ step: 'allocation_decision', outcome: 'approved' }],
+      data: [
+        {
+          step: 'allocation_decision',
+          kind: 'decision',
+          outcome_set: 'approval',
+          is_allocation_decision: true,
+          outcome: 'approved',
+        },
+      ],
     } as any);
     renderWithProviders(
       <ProposalStateBadge row={{ ...row, decision_held: true }} />,
@@ -41,7 +49,15 @@ describe('ProposalStateBadge', () => {
 
   it('does not refetch the outcome when the window regains focus', async () => {
     vi.mocked(proposalProposalsWorkflowStatesList).mockResolvedValue({
-      data: [{ step: 'allocation_decision', outcome: 'approved' }],
+      data: [
+        {
+          step: 'allocation_decision',
+          kind: 'decision',
+          outcome_set: 'approval',
+          is_allocation_decision: true,
+          outcome: 'approved',
+        },
+      ],
     } as any);
     const { queryClient } = renderWithProviders(
       <ProposalStateBadge row={{ ...row, decision_held: true }} />,
@@ -80,4 +96,38 @@ describe('ProposalStateBadge', () => {
       expect(proposalProposalsWorkflowStatesList).not.toHaveBeenCalled();
     },
   );
+
+  const labelled = {
+    ...row,
+    status_labels: [
+      {
+        step: 'technical_assessment',
+        label: 'Under Technical Assessment',
+      },
+      { step: 'rapporteur_assignment', label: 'Rapporteurs assigned' },
+    ],
+  };
+
+  it('leaves the stage labels to the expanded row in a list', () => {
+    renderWithProviders(<ProposalStateBadge row={labelled} />);
+    expect(screen.getByText('In review')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Under Technical Assessment'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('shows the labels the call configured for the current stage', () => {
+    renderWithProviders(<ProposalStateBadge row={labelled} withLabels />);
+    expect(screen.getByText('Under Technical Assessment')).toBeInTheDocument();
+    expect(screen.getByText('Rapporteurs assigned')).toBeInTheDocument();
+    // Under the state, which stays a short badge.
+    expect(screen.getByText('In review')).toBeInTheDocument();
+  });
+
+  it('keeps the state without configured labels', () => {
+    renderWithProviders(
+      <ProposalStateBadge row={{ ...row, status_labels: [] }} />,
+    );
+    expect(screen.getByText('In review')).toBeInTheDocument();
+  });
 });

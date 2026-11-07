@@ -110,6 +110,7 @@ exports[`InternalIpsList > renders list 1`] = `
               >
                 <th
                   data-pin-key="column-0"
+                  scope="col"
                 >
                   <div
                     class="th-content"
@@ -139,6 +140,7 @@ exports[`InternalIpsList > renders list 1`] = `
                 </th>
                 <th
                   data-pin-key="column-1"
+                  scope="col"
                 >
                   <div
                     class="th-content"
@@ -168,6 +170,7 @@ exports[`InternalIpsList > renders list 1`] = `
                 </th>
                 <th
                   data-pin-key="column-2"
+                  scope="col"
                 >
                   <div
                     class="th-content"
@@ -197,6 +200,7 @@ exports[`InternalIpsList > renders list 1`] = `
                 </th>
                 <th
                   data-pin-key="column-3"
+                  scope="col"
                 >
                   <div
                     class="th-content"

@@ -127,7 +127,7 @@ describe('ImportCallDialog', () => {
       <ImportCallDialog resolve={{ managerUuid: 'manager-uuid' }} />,
     );
     const file = exportFile();
-    Object.defineProperty(file, 'size', { value: 11 * 1024 * 1024 });
+    Object.defineProperty(file, 'size', { value: 3 * 1024 * 1024 });
     await user.upload(screen.getByTestId('file-uploader'), file);
 
     expect(

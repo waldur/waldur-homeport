@@ -120,6 +120,8 @@ For list actions that affect the table globally, instead of using `tableActions`
   rowClass={({ row }) => row.status === 'erred' ? 'table-danger' : ''}
   ```
 
+- **`rowGroupHeader`**: Pass a callback `({ row, rowIndex, rows }) => ReactNode` to render a full-width header row (`tr.table-group-header > th[colspan]`) above a row that opens a group — a stage, a phase. Return `null` for every other row. The rows stay one list, so expansion and row actions are unchanged; pair it with `rowClass` to mark the group's rows. Don't hide a cell's content to make room for a group: use the header. Reference: `src/proposals/update/workflow-steps/WorkflowStepsSection.tsx`.
+
 - **`equalColWidth`**: Set to `true` to give all columns without an explicit width set the exact same width. By default, the first data column is allocated double the width of the remaining columns.
 - **Row & Card Hover Shadows (`hoverShadow`, `hoverable`)**:
   - `hoverShadow`: Defaults to `true`, displaying shadow elevation on cell/card hover. Can be customized with a boolean or a mode config object: `hoverShadow={{ table: true, grid: false }}`.

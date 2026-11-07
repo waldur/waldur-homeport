@@ -64,7 +64,11 @@ export const AffiliationsSection = ({
   const columns: Column<ReviewerAffiliation>[] = [
     {
       title: translate('Organization'),
-      render: ({ row }) => row.organization_name_display,
+      render: ({ row }) => (
+        <span className="font-medium text-primary">
+          {row.organization_name_display}
+        </span>
+      ),
     },
     {
       title: translate('Department'),

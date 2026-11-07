@@ -32,7 +32,10 @@ import { FieldReviewComments } from '@/proposals/proposal/create-review/FieldRev
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { PurchaseOrderCell } from '@/proposals/PurchaseOrderCell';
 import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
-import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
+import {
+  pricesConcealed,
+  RequestedResourceCostLabel,
+} from '@/proposals/RequestedResourceCostLabel';
 import { ProposalReview } from '@/proposals/types';
 import { selectAllRows } from '@/table/actions';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -369,7 +372,9 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
       columns={[
         {
           title: translate('Template name'),
-          render: ({ row }) => <>{row.name}</>,
+          render: ({ row }) => (
+            <span className="font-medium text-primary">{row.name}</span>
+          ),
         },
         {
           title: translate('Offering'),
@@ -378,17 +383,21 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
         // No count of preconfigured attributes: the expanded row lists the
         // attributes themselves, and the column it cost was pushing the cost
         // and the purchase order off the right edge of the table.
-        {
-          // Estimated, not billed: priced here from the template's own amounts
-          // and the plan's price list, the same way a saved request is.
-          title: translate('Estimated cost'),
-          render: ({ row }) => (
-            <RequestedResourceCostLabel
-              cost={getRequestedResourceCost(templateAsRequest(row))}
-              stacked
-            />
-          ),
-        },
+        // Estimated, not billed: priced here from the template's own amounts
+        // and the plan's price list, the same way a saved request is.
+        ...(pricesConcealed()
+          ? []
+          : [
+              {
+                title: translate('Estimated cost'),
+                render: ({ row }) => (
+                  <RequestedResourceCostLabel
+                    cost={getRequestedResourceCost(templateAsRequest(row))}
+                    stacked
+                  />
+                ),
+              },
+            ]),
         ...(showPurchaseOrder
           ? [
               {
@@ -440,12 +449,6 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
           {/* What the proposal would cost is what is selected, not what the
               call offers — an unselected template is not being asked for. */}
           <ProposalCostTotal rows={chosenTemplates.map(templateAsRequest)} />
-          <FieldReviewComments
-            reviews={reviews}
-            fieldName="comment_resource_requests"
-            space={0}
-            className="mt-4"
-          />
         </>
       }
     />
@@ -503,6 +506,14 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
         />
       ) : null}
       {table}
+      {/* About every request, not a row of them: below the table. */}
+      <FieldReviewComments
+        reviews={reviews}
+        fieldName="comment_resource_requests"
+        nested
+        space={0}
+        className="mt-4"
+      />
     </>
   );
   if (!single) {

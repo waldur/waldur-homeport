@@ -19,6 +19,7 @@ import { useUser } from '@/workspace/hooks';
 
 import { EndingField } from '../EndingField';
 
+import { useMyWorkTitle } from './myWorkTitle';
 import { OwnReviewStateRenderer } from './OwnReviewStateRenderer';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewsExpandableRow } from './ReviewsExpandableRow';
@@ -29,6 +30,7 @@ import { useMyReviewsTabs } from './tabs';
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
 export const MyReviewsPage: FC = () => {
+  const myWorkTitle = useMyWorkTitle();
   const user = useUser();
   const values = useFilterValues('MyReviewsList');
   const filterValues = useMemo(
@@ -68,17 +70,17 @@ export const MyReviewsPage: FC = () => {
     <div className="flex flex-col" style={{ gap: 16 }}>
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard onProfileStatus={handleProfileStatus} />
-      {/* Only show reviews content if user has a profile */}
-      {hasProfile && (
+      {/* The table carries the tabs, so it renders without a profile too:
+          an evaluator holds proposal roles and needs no reviewer profile. */}
+      {hasProfile !== null && (
         <>
-          {/* Stats widgets */}
-          <ReviewStatsWidgets />
+          {hasProfile && <ReviewStatsWidgets />}
 
           {/* Reviews table with tabs */}
           <Table<ProposalReview>
             {...tableProps}
             formId={ProposalReviewsFilterFormId}
-            title={translate('My reviews')}
+            title={myWorkTitle}
             tabs={tabs}
             columns={[
               {
@@ -90,10 +92,15 @@ export const MyReviewsPage: FC = () => {
               },
               {
                 title: translate('Proposal name'),
+                // Opens the review: in progress to continue it, finished to
+                // read it.
                 render: ({ row }) => (
-                  <span className="text-secondary font-medium">
-                    {row.proposal_name}
-                  </span>
+                  <Link
+                    state="proposal-review"
+                    params={{ review_uuid: row.uuid }}
+                    label={row.proposal_name}
+                    className="font-medium"
+                  />
                 ),
                 keys: ['proposal_name'],
                 id: 'proposal',

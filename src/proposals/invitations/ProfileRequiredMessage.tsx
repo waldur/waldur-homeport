@@ -38,7 +38,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
         <div className="flex flex-col items-center gap-3">
           <div className="flex items-center gap-2.5">
             <Badge
-              variant={hasProfile ? 'success' : 'secondary'}
+              variant={hasProfile ? 'success' : 'neutral'}
               shape="circle"
               tone="outline"
               className="p-1.5"
@@ -51,7 +51,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
           </div>
           <div className="flex items-center gap-2.5">
             <Badge
-              variant={isPublished ? 'success' : 'secondary'}
+              variant={isPublished ? 'success' : 'neutral'}
               shape="circle"
               tone="outline"
               className="p-1.5"

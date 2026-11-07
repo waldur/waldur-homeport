@@ -78,6 +78,7 @@ export function TableView() {
         columns={visibleColumns}
         rowClass={display.rowClass}
         rowValidate={display.rowValidate}
+        rowGroupHeader={display.rowGroupHeader}
         rowKey={config.rowKey}
         expandableRow={slots.expandableRow}
         isRowExpandable={config.isRowExpandable}

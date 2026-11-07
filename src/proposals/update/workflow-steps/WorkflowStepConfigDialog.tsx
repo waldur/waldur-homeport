@@ -1,503 +1,319 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { FORM_ERROR } from 'final-form';
+import { useQueryClient } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
-import { FC, useCallback, useMemo } from 'react';
-import { Form } from 'react-final-form';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { Form, FormRenderProps } from 'react-final-form';
 import {
   CallWorkflowStep,
-  proposalProtectedCallsStepChecklistsList,
   PatchedCallWorkflowStepRequest,
   proposalProtectedCallsWorkflowStepsPartialUpdate,
-  WorkflowCriterionRequest,
+  StepKind,
 } from 'waldur-js-client';
 
-import { required } from '@/core/validators';
-import {
-  BooleanGroup,
-  FormGroup,
-  NumberGroup,
-  RadioGroup,
-  SelectGroup,
-  SubmitButton,
-} from '@/form';
+import { AlertItem, BaseButton } from 'waldur-ui';
+
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { AllocationTime, Call } from '@/proposals/types';
-import { getAllocationTimeOptions } from '@/proposals/utils';
+import { Call } from '@/proposals/types';
+import { findKind, stepName } from '@/proposals/workflow/constants';
 import {
-  getEnabledStepIds,
-  getMissingDependencies,
-  RESPONSIBLE_ROLE_OPTIONS,
-  ResponsibleRoleEnum,
-  responsibleRoleLabel,
-  stepDefinition,
-  stepLabel,
-  TRANSITION_MODE_OPTIONS,
-  TransitionModeEnum,
-  transitionModeDescription,
-  transitionModeLabel,
-} from '@/proposals/workflow/constants';
-import { callWorkflowStepsKey } from '@/proposals/workflow/queries';
-
-import { CriteriaListField } from './CriteriaListField';
+  callWorkflowStepsKey,
+  useWorkflowStepKinds,
+} from '@/proposals/workflow/queries';
 import {
-  disableCascadeConfirmation,
-  disableDependents,
-  getEnabledDependents,
-} from './setStepEnabled';
+  callWorkflowCheckKey,
+  callWorkflowDescriptionKey,
+  callWorkflowHistoryKey,
+} from '@/proposals/workflow-description/queries';
+import { useNotify } from '@/store/notify';
 
-interface WorkflowStepConfigProps {
-  call: Call;
-  step: CallWorkflowStep;
-  // Every configured step of the call — the enable switch resolves its
-  // dependencies and dependents against the current enabled state.
-  steps: CallWorkflowStep[];
-  refetch?(): void;
-}
+import { StepCheckPage } from './StepCheckPage';
+import {
+  allocationDecisionLockedReason,
+  buildStepBody,
+  fieldFormName,
+  StepFormPage,
+  stepFormPages,
+  StepFormValues,
+  stepFormValues,
+  stepSubmissionErrors,
+} from './stepForm';
+import {
+  StepFormBackButton,
+  StepFormNextButton,
+  StepFormPageIndicator,
+  submitShowingErrors,
+  useStepFormPage,
+} from './StepFormWizard';
+import { WorkflowStepFormFields } from './WorkflowStepFormFields';
 
 interface Props {
-  resolve: WorkflowStepConfigProps;
+  resolve: {
+    call: Call;
+    step: CallWorkflowStep;
+    refetch?(): void;
+    /** The page the dialog opens on, such as the one holding a field. */
+    initialPage?: StepFormPage;
+    /** A field to focus on that page: the one a check finding names. */
+    initialField?: string;
+  };
 }
 
-interface CriterionInput {
-  name: string;
-  order: number;
+const FORM_MUTATORS = { ...arrayMutators };
+
+interface StepConfigFormProps {
+  kind: StepKind | undefined;
+  call: Call;
+  step: CallWorkflowStep;
+  isLoading: boolean;
+  showEnableSwitch: boolean;
+  initialPage?: StepFormPage;
+  initialField?: string;
 }
 
-interface FormValues {
-  is_enabled: boolean;
-  duration_in_days: number | null;
-  min_reviewers: number | null;
-  min_score_threshold: string | null;
-  blind_review: boolean;
-  requires_coi_confirmation: boolean;
-  applicant_visible: boolean;
-  checklist: string | null;
-  checklist_required: boolean;
-  responsible_role: ResponsibleRoleEnum | null;
-  transition_mode: TransitionModeEnum | null;
-  criteria: CriterionInput[];
-  include_award_response: boolean;
-  allocation_time: AllocationTime;
-}
+/**
+ * Focus the control of ``field`` once the dialog shows it, and bring it into
+ * view: a check finding opens the dialog on the field that fixes it.
+ */
+const useFocusField = (field: string | undefined) => {
+  useEffect(() => {
+    if (!field) return;
+    const name = fieldFormName(field);
+    const timer = window.setTimeout(() => {
+      const target = document.querySelector<HTMLElement>(
+        `.step-form-dialog-body [name="${name}"]`,
+      );
+      if (!target) return;
+      const control = target.matches(
+        'input:not([type="hidden"]), select, textarea',
+      )
+        ? target
+        : target.parentElement?.querySelector<HTMLElement>(
+            'input:not([type="hidden"]), select, textarea, button',
+          );
+      (control ?? target).scrollIntoView?.({ block: 'center' });
+      (control ?? target).focus?.();
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [field]);
+};
 
-export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
-  const { call, step, steps, refetch } = resolve;
-  const definition = stepDefinition(step.step);
-  const showReviewExtras = step.step === 'expert_review';
-  const showAllocationExtras = step.step === 'allocation_decision';
-  // A mandatory step always runs and the backend rejects disabling it, so it
-  // gets no switch at all — the padlock on the table row carries that story.
-  // A toggle-managed step (award_response) is switched through Allocation
-  // decision's "Include award response" instead; a switch here would leave
-  // that flag on while the step is off, until the next save re-enables it.
-  const showEnableSwitch =
-    !definition?.mandatory && !definition?.managedByToggle;
-
-  const enabledStepIds = useMemo(() => getEnabledStepIds(steps), [steps]);
-
-  // Enabling is rejected by the backend until every dependency is enabled, so
-  // gate the switch on the same rule the row action uses.
-  const missingDependencies = useMemo(
-    () =>
-      step.is_enabled ? [] : getMissingDependencies(step.step, enabledStepIds),
-    [step, enabledStepIds],
-  );
-
-  // Turning this step off takes its dependents with it. The switch allows
-  // that; the submit asks the same question the row action asks.
-  const enabledDependents = useMemo(
-    () => (step.is_enabled ? getEnabledDependents(step, steps) : []),
-    [step, steps],
-  );
-
-  const enableBlocked = missingDependencies.length > 0;
-
-  const enableHelpText = enableBlocked
-    ? translate('Enable {steps} first.', {
-        steps: missingDependencies.map(stepLabel).join(', '),
-      })
-    : enabledDependents.length > 0
-      ? translate(
-          'Turning this off also disables {dependents}, which depends on it.',
-          {
-            dependents: enabledDependents
-              .map((s) => stepLabel(s.step))
-              .join(', '),
-          },
-        )
-      : translate(
-          'When off, the step is skipped: it stays out of the workflow preview and no proposal ever enters it.',
-        );
-
-  const responsibleRoleOptions = useMemo(
-    () =>
-      RESPONSIBLE_ROLE_OPTIONS.map((value) => ({
-        value,
-        label: responsibleRoleLabel(value),
-      })),
-    [],
-  );
-
-  const transitionModeChoices = useMemo(
-    () =>
-      TRANSITION_MODE_OPTIONS.map((value) => ({
-        value,
-        label: transitionModeLabel(value),
-        tooltip: transitionModeDescription(value),
-      })),
-    [],
-  );
-
-  // Use the call-manager-accessible catalogue (WORKFLOW_STEP-typed only), not
-  // the staff-only checklist admin API which returns 403 for call managers.
-  const { data: checklists } = useQuery({
-    queryKey: ['workflowStepChecklists'],
-    queryFn: () =>
-      proposalProtectedCallsStepChecklistsList().then(
-        (response) => response.data ?? [],
-      ),
-    refetchOnWindowFocus: false,
+/**
+ * The step's settings a page at a time. Save is on every page: a call
+ * manager often comes to change one field.
+ */
+const StepConfigForm: FC<
+  FormRenderProps<StepFormValues> & StepConfigFormProps
+> = ({
+  handleSubmit,
+  form,
+  submitting,
+  pristine,
+  values,
+  submitError,
+  dirtySinceLastSubmit,
+  kind,
+  call,
+  step,
+  isLoading,
+  showEnableSwitch,
+  initialPage,
+  initialField,
+}) => {
+  useFocusField(isLoading ? undefined : initialField);
+  const pages = stepFormPages(kind, values, {
+    showEnableSwitch,
+    withCheck: true,
   });
-
-  const checklistOptions = useMemo(
-    () =>
-      (checklists ?? []).map((c) => ({
-        value: c.uuid,
-        label: c.name,
-      })),
-    [checklists],
+  const { page, setPage, isFirst, isLast, goBack, goNext } = useStepFormPage(
+    pages,
+    initialPage,
   );
-
-  const initialValues = useMemo<FormValues>(
-    () => ({
-      is_enabled: step.is_enabled ?? true,
-      duration_in_days: step.duration_in_days ?? null,
-      min_reviewers: step.min_reviewers ?? null,
-      min_score_threshold: step.min_score_threshold ?? null,
-      blind_review: step.blind_review ?? false,
-      requires_coi_confirmation: step.requires_coi_confirmation ?? false,
-      applicant_visible: step.applicant_visible ?? false,
-      checklist: step.checklist ?? '',
-      checklist_required: step.checklist_required ?? true,
-      // Coerce SDK's BlankEnum ('') to null so the SelectField shows the placeholder.
-      responsible_role: (step.responsible_role ||
-        null) as ResponsibleRoleEnum | null,
-      // Default to automatic_on_completion when backend returns null/BlankEnum
-      // so the field always reflects an actual mode rather than an empty state.
-      transition_mode: (step.transition_mode ||
-        'automatic_on_completion') as TransitionModeEnum,
-      criteria: (step.criteria ?? [])
-        .slice()
-        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-        .map((c, index) => ({ name: c.name ?? '', order: index })),
-      include_award_response: step.include_award_response ?? false,
-      allocation_time: (step.allocation_time ||
-        'on_decision') as AllocationTime,
-    }),
-    [step],
+  // A page opened from the Check page's Change link goes back to it.
+  const [returnToCheck, setReturnToCheck] = useState(false);
+  const selectPage = useCallback(
+    (next: StepFormPage) => {
+      setReturnToCheck(false);
+      setPage(next);
+    },
+    [setPage],
   );
+  return (
+    <form
+      onSubmit={(event) =>
+        submitShowingErrors(event, handleSubmit, form, pages, setPage)
+      }
+    >
+      <ModalDialog
+        title={translate('Configure step: {name}', {
+          name: stepName(step),
+        })}
+        subtitle={kind?.name}
+        extra={
+          <StepFormPageIndicator
+            pages={pages}
+            page={page}
+            onSelect={selectPage}
+          />
+        }
+        extraClassName="py-0"
+        bodyClassName="step-form-dialog-body"
+        footer={
+          <>
+            <StepFormBackButton isFirst={isFirst} goBack={goBack} />
+            <CloseDialogButton className="min-w-[125px]" />
+            {returnToCheck && page !== 'check' ? (
+              <BaseButton
+                variant="secondary"
+                size="lg"
+                className="min-w-[125px]"
+                label={translate('Back to check')}
+                onClick={() => selectPage('check')}
+              />
+            ) : (
+              <StepFormNextButton isLast={isLast} goNext={goNext} />
+            )}
+            <SubmitButton
+              disabled={pristine}
+              disabledReason={
+                pristine
+                  ? translate('Change a value to enable saving.')
+                  : undefined
+              }
+              submitting={submitting}
+              label={translate('Save')}
+              className="min-w-[125px]"
+            />
+          </>
+        }
+      >
+        {submitError && !dirtySinceLastSubmit && (
+          <AlertItem variant="error" title={submitError} className="mb-3" />
+        )}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            {page === 'check' && (
+              <StepCheckPage
+                pages={pages}
+                kind={kind}
+                values={values}
+                callUuid={call.uuid}
+                step={step}
+                showEnableSwitch={showEnableSwitch}
+                onChange={(target) => {
+                  setPage(target);
+                  setReturnToCheck(true);
+                }}
+              />
+            )}
+            <WorkflowStepFormFields
+              kind={kind}
+              values={values}
+              pages={pages}
+              page={page}
+              callUuid={call.uuid}
+              reviewsHiddenFromApplicants={!call.reviews_visible_to_submitters}
+              customerUuid={call.customer_uuid}
+              step={step}
+              showEnableSwitch={showEnableSwitch}
+              allocationDecisionLockedReason={allocationDecisionLockedReason(
+                call,
+              )}
+            />
+          </>
+        )}
+      </ModalDialog>
+    </form>
+  );
+};
 
-  const { confirm } = useModal();
+/**
+ * Configures one call step: its name, and the fields its kind is configured
+ * with. The kind itself is fixed once the step exists.
+ */
+export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
+  const { call, step, refetch, initialPage, initialField } = resolve;
+  const { data: kinds, isLoading } = useWorkflowStepKinds();
+  const kind = findKind(kinds, step.kind);
+  const { showErrorResponse } = useNotify();
+  // The allocation decision always runs and the backend refuses to disable
+  // it, so it gets no switch -- the padlock on its row says as much.
+  const showEnableSwitch = !step.is_mandatory;
+
+  const initialValues = useMemo(() => stepFormValues(step), [step]);
+
   const queryClient = useQueryClient();
-
-  // Pull the table back in line with the backend after a failed save. Past
-  // its first request a cascading save may already have changed something (a
-  // dependent disabled, the step itself still on) -- useManagedMutation only
-  // refetches on success, so the failure path has to ask for it.
-  const reconcile = useCallback(() => {
-    queryClient.invalidateQueries({
-      queryKey: callWorkflowStepsKey(call.uuid),
-    });
-    refetch?.();
-  }, [queryClient, call.uuid, refetch]);
 
   const submitMutation = useManagedMutation<
     unknown,
     unknown,
-    { body: PatchedCallWorkflowStepRequest; cascade: boolean }
+    PatchedCallWorkflowStepRequest
   >({
-    mutationFn: async ({ body, cascade }) => {
-      const patch = (patchBody: PatchedCallWorkflowStepRequest) =>
-        proposalProtectedCallsWorkflowStepsPartialUpdate({
-          path: { uuid: call.uuid, obj_uuid: step.uuid },
-          body: patchBody,
-        });
-      if (!cascade) {
-        return patch(body);
-      }
-      // Switching the step off with dependents: the form fields go first, so
-      // a rejected form changes nothing; then the dependents, so none ever
-      // outlives its dependency; then the step itself.
-      const { is_enabled, ...fields } = body;
-      await patch(fields);
-      await disableDependents(call.uuid, step, steps);
-      return patch({ is_enabled });
-    },
+    mutationFn: (body) =>
+      proposalProtectedCallsWorkflowStepsPartialUpdate({
+        path: { uuid: call.uuid, obj_uuid: step.uuid },
+        body,
+      }),
     successMessage: translate('Workflow step configuration updated.'),
-    errorMessage: translate('Unable to update workflow step configuration.'),
     refetch,
-    invalidateQueries: [{ queryKey: callWorkflowStepsKey(call.uuid) }],
-    onError: reconcile,
+    invalidateQueries: [
+      { queryKey: callWorkflowStepsKey(call.uuid) },
+      { queryKey: callWorkflowDescriptionKey(call.uuid) },
+      { queryKey: callWorkflowCheckKey(call.uuid) },
+      { queryKey: callWorkflowHistoryKey(call.uuid) },
+    ],
   });
 
   const onSubmit = useCallback(
-    async (values: FormValues) => {
-      const criteria: WorkflowCriterionRequest[] | undefined = showReviewExtras
-        ? (values.criteria ?? [])
-            .map((c, index) => ({
-              name: (c.name ?? '').trim(),
-              order: index,
-            }))
-            .filter((c) => c.name.length > 0)
-        : undefined;
+    async (values: StepFormValues) => {
       const body: PatchedCallWorkflowStepRequest = {
-        // Only when the user actually moved the switch, so saving an unrelated
-        // field never re-enables a step somebody else has since turned off.
+        ...buildStepBody(values, kind),
+        // Only when the user actually moved the switch, so saving an
+        // unrelated field never re-enables a step somebody else has since
+        // turned off.
         ...(values.is_enabled !== step.is_enabled
           ? { is_enabled: values.is_enabled }
           : {}),
-        duration_in_days: values.duration_in_days || null,
-        min_reviewers: values.min_reviewers || null,
-        min_score_threshold: values.min_score_threshold || null,
-        blind_review: values.blind_review,
-        requires_coi_confirmation: values.requires_coi_confirmation,
-        applicant_visible: values.applicant_visible,
-        checklist: values.checklist || null,
-        checklist_required: values.checklist_required,
-        responsible_role: values.responsible_role || null,
-        ...(criteria !== undefined ? { criteria } : {}),
-        ...(showAllocationExtras
-          ? {
-              include_award_response: !!values.include_award_response,
-              allocation_time: values.allocation_time,
-            }
-          : {}),
-        transition_mode: values.transition_mode || 'automatic_on_completion',
       };
-      // Switching the step off strands anything that depends on it, so ask
-      // first -- the same warning the row action shows.
-      const cascade =
-        !values.is_enabled && step.is_enabled && enabledDependents.length > 0;
-      if (cascade) {
-        const {
-          title,
-          body: message,
-          options,
-        } = disableCascadeConfirmation(step, enabledDependents);
-        try {
-          await confirm(title, message, options);
-        } catch {
-          // Cancelled: leave the form exactly as the user left it.
-          return;
-        }
-      }
-
       try {
-        await submitMutation.mutateAsync({ body, cascade });
-      } catch {
-        return { [FORM_ERROR]: translate('Unable to save changes.') };
+        await submitMutation.mutateAsync(body);
+      } catch (error) {
+        // Pull the table back in line with the backend whatever happened.
+        queryClient.invalidateQueries({
+          queryKey: callWorkflowStepsKey(call.uuid),
+        });
+        const errors = stepSubmissionErrors(error);
+        if (errors) return errors;
+        showErrorResponse(
+          error,
+          translate('Unable to update workflow step configuration.'),
+        );
       }
     },
-    [
-      showReviewExtras,
-      showAllocationExtras,
-      submitMutation,
-      step,
-      enabledDependents,
-      confirm,
-    ],
+    [kind, step, submitMutation, queryClient, call.uuid, showErrorResponse],
   );
 
   return (
-    <Form<FormValues>
+    <Form<StepFormValues>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={
-              showReviewExtras
-                ? translate('Configure criteria for {name}', {
-                    name: stepLabel(step.step),
-                  })
-                : translate('Configure step: {name}', {
-                    name: stepLabel(step.step),
-                  })
-            }
-            footer={
-              <>
-                <CloseDialogButton className="min-w-[125px]" />
-                <SubmitButton
-                  disabled={pristine}
-                  disabledReason={
-                    pristine
-                      ? translate('Change a value to enable saving.')
-                      : undefined
-                  }
-                  submitting={submitting}
-                  label={translate('Save')}
-                  className="min-w-[125px]"
-                />
-              </>
-            }
-          >
-            {definition && (
-              <p className="text-quaternary mb-3">{definition.description}</p>
-            )}
-
-            {showEnableSwitch && (
-              <BooleanGroup
-                name="is_enabled"
-                label={translate('Step enabled')}
-                disabled={enableBlocked}
-                description={enableHelpText}
-              />
-            )}
-
-            <NumberGroup
-              name="duration_in_days"
-              label={translate('Estimated duration (days)')}
-              description={translate(
-                'Days allowed for this step. Used to compute the deadline.',
-              )}
-              min={0}
-            />
-
-            <SelectGroup
-              name="responsible_role"
-              label={translate('Responsible role')}
-              required={true}
-              options={responsibleRoleOptions}
-              simpleValue={true}
-              placeholder={translate('Select...')}
-              validate={required}
-            />
-
-            <RadioGroup
-              name="transition_mode"
-              label={translate('Transition mode options')}
-              required={true}
-              choices={transitionModeChoices}
-              validate={required}
-            />
-
-            {showReviewExtras && (
-              <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
-                  <div>
-                    <NumberGroup
-                      name="min_reviewers"
-                      label={translate('Minimum reviewers')}
-                      description={translate(
-                        'Minimum reviews required before this step can complete.',
-                      )}
-                      min={1}
-                    />
-                  </div>
-                  <div>
-                    <NumberGroup
-                      name="min_score_threshold"
-                      label={translate('Minimum score threshold')}
-                      description={translate(
-                        'Minimum average score to pass this step.',
-                      )}
-                      min={0}
-                      step={0.1}
-                    />
-                  </div>
-                </div>
-
-                <FormGroup label={translate('Criteria')}>
-                  <CriteriaListField name="criteria" />
-                </FormGroup>
-
-                <BooleanGroup
-                  name="blind_review"
-                  spaceless={true}
-                  label={translate('Blind review')}
-                  description={translate(
-                    "Evaluators cannot see each other's assessments.",
-                  )}
-                />
-
-                <BooleanGroup
-                  name="requires_coi_confirmation"
-                  spaceless={true}
-                  label={translate('Conflict of interest confirmation')}
-                  description={translate(
-                    'Evaluator must confirm absence of conflict of interest.',
-                  )}
-                />
-              </>
-            )}
-
-            {showAllocationExtras && (
-              <>
-                <SelectGroup
-                  name="allocation_time"
-                  label={translate('Allocation timing')}
-                  description={translate(
-                    'When a granted proposal takes effect: immediately on the decision, or on the fixed allocation date set per round.',
-                  )}
-                  required={true}
-                  options={getAllocationTimeOptions()}
-                  simpleValue={true}
-                  isClearable={false}
-                  validate={required}
-                />
-
-                <BooleanGroup
-                  name="include_award_response"
-                  spaceless={true}
-                  label={translate('Include award response')}
-                  description={translate(
-                    'Require the applicant to explicitly accept or decline the award before provisioning.',
-                  )}
-                />
-              </>
-            )}
-
-            <SelectGroup
-              name="checklist"
-              label={translate('Checklist')}
-              description={translate(
-                'Attach a checklist (evaluation form) for this step.',
-              )}
-              options={checklistOptions}
-              simpleValue={true}
-              isClearable={true}
-              placeholder={translate('Select...')}
-            />
-
-            {values.checklist && (
-              <BooleanGroup
-                name="checklist_required"
-                label={translate('Checklist required')}
-                description={translate(
-                  'Block completing this step until the checklist’s required questions are answered.',
-                )}
-              />
-            )}
-
-            <BooleanGroup
-              name="applicant_visible"
-              spaceless={true}
-              label={translate('Applicant visible')}
-              // Says what *off* does, not just what on does. Off is the
-              // default and the flag is now honoured on the applicant's
-              // tracker, so a call manager who reads only the on-case will not
-              // realise the step is hidden from applicants until one asks.
-              description={translate(
-                'On, applicants see this step by name on their progress tracker. Off, they see only that their proposal is in review while it runs.',
-              )}
-            />
-          </ModalDialog>
-        </form>
+      mutators={FORM_MUTATORS}
+      render={(formProps) => (
+        <StepConfigForm
+          {...formProps}
+          kind={kind}
+          call={call}
+          step={step}
+          isLoading={isLoading}
+          showEnableSwitch={showEnableSwitch}
+          initialPage={initialPage}
+          initialField={initialField}
+        />
       )}
     />
   );

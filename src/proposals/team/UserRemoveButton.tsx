@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -22,6 +22,9 @@ interface UserRemoveButtonProps {
   canRemove?: boolean;
   /** Shown as the tooltip of a disabled Remove, e.g. the last manager. */
   disabledReason?: string;
+  /** Said in the confirmation below the question, e.g. that the change is
+   * made for the applicant. */
+  confirmationNote?: ReactNode;
 }
 
 /**
@@ -57,6 +60,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   refetch,
   canRemove: canRemoveOverride,
   disabledReason,
+  confirmationNote,
 }) => {
   const canRemoveByPermission = useCanRemoveTeamMember(
     scope,
@@ -74,9 +78,16 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
     refetch,
     confirmation: {
       title: translate('Confirmation'),
-      body: translate('Are you sure you want to remove {userName}?', {
-        userName: permission.user_full_name || permission.user_username,
-      }),
+      body: (
+        <>
+          {translate('Are you sure you want to remove {userName}?', {
+            userName: permission.user_full_name || permission.user_username,
+          })}
+          {confirmationNote ? (
+            <p className="mt-1.5 mb-0">{confirmationNote}</p>
+          ) : null}
+        </>
+      ),
     },
   });
   if (!canRemove) return null;

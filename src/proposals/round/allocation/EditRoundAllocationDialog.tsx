@@ -11,7 +11,8 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { AllocationTime, Call } from '@/proposals/types';
 import { WizardFormThirdPage } from '@/proposals/update/rounds/WizardFormThirdPage';
-import { getRoundInitialValues } from '@/proposals/utils';
+import { getRoundInitialValues, roundTimesInZone } from '@/proposals/utils';
+import { findAllocationDecision } from '@/proposals/workflow/constants';
 import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
@@ -39,9 +40,8 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
     queryKey: callWorkflowStepsKey(props.resolve.call.uuid),
     queryFn: () => fetchCallWorkflowSteps(props.resolve.call.uuid),
   });
-  const allocationMode = (workflowSteps?.find(
-    (s) => s.step === 'allocation_decision',
-  )?.allocation_time || 'on_decision') as AllocationTime;
+  const allocationMode = (findAllocationDecision(workflowSteps)
+    ?.allocation_time || 'on_decision') as AllocationTime;
 
   const wizardForms = useMemo(
     () => [
@@ -63,10 +63,10 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
           uuid: props.resolve.call.uuid,
           obj_uuid: props.resolve.round.uuid,
         },
-        body: {
+        body: roundTimesInZone({
           ...initialValues,
           ...formData,
-        },
+        }),
       }),
     successMessage: translate('Round has been updated.'),
     errorMessage: translate('Unable to update round.'),

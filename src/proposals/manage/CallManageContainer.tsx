@@ -17,12 +17,21 @@ import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { useValidationRedirect } from '@/proposals/validation/useValidationRedirect';
 import { useUser } from '@/workspace/hooks';
 
 import { CallTabs } from '../details/CallTabs';
+import { CallReportsTab } from '../reports/CallReportsTab';
+import { leaveReportParamsBehind, REPORTS_TAB } from '../reports/reportParams';
 import { CallUpdateHero } from '../update/CallUpdateHero';
+import { CallResourcePoolsSection } from '../update/resource-pools/CallResourcePoolsSection';
 import { ReviewerPoolContainer } from '../update/reviewer-pool/ReviewerPoolContainer';
-import { canAccessCallManagement, useCallBreadcrumbItems } from '../utils';
+import {
+  canAccessCallManagement,
+  canReadCallReports,
+  canUpdateCall,
+  useCallBreadcrumbItems,
+} from '../utils';
 
 import { CallDashboard } from './CallDashboard';
 import { CallEventsList } from './CallEventsList';
@@ -37,6 +46,7 @@ const PageHero = ({ call, refetch }) => (
 );
 
 const Body = ({ call, refetch, loading }) => {
+  const user = useUser();
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
@@ -61,27 +71,54 @@ const Body = ({ call, refetch, loading }) => {
           component: ReviewerPoolContainer,
         },
         {
+          // What the call awards, against what it has requested and
+          // awarded so far: watched and adjusted while the call runs.
+          key: 'resource-pools',
+          title: translate('Resource pools'),
+          component: CallResourcePoolsSection,
+        },
+        // Only for those the report endpoint answers: this page is also
+        // open to organization owners without CALL.UPDATE.
+        !isFeatureVisible(MarketplaceFeatures.call_only) &&
+          canReadCallReports(user, call) && {
+            key: REPORTS_TAB,
+            title: translate('Reports'),
+            component: CallReportsTab,
+          },
+        {
           key: 'events',
           title: translate('Events'),
           component: CallEventsList,
         },
       ].filter(Boolean) as PageBarTab[],
-    [call],
+    [call, user],
   );
+  // Leaving Reports leaves its report and filters behind.
+  const linkedTabs = useMemo(() => leaveReportParamsBehind(tabs), [tabs]);
 
   const breadcrumbItems = useCallBreadcrumbItems(call);
   useBreadcrumbs(breadcrumbItems);
 
   const {
     tabSpec: { component: Component },
-  } = usePageTabsTransmitter(tabs);
+  } = usePageTabsTransmitter(linkedTabs);
+  useValidationRedirect();
+
+  // The same gate as the Edit page: an archived call is frozen, and every
+  // write needs UPDATE_CALL.
+  const isReadOnly = call.state === 'archived' || !canUpdateCall(user, call);
 
   return (
     <>
       <LayoutSlot name="hero">
         <PageHero call={call} refetch={refetch} />
       </LayoutSlot>
-      <Component call={call} refetch={refetch} loading={loading} />
+      <Component
+        call={call}
+        refetch={refetch}
+        loading={loading}
+        isReadOnly={isReadOnly}
+      />
     </>
   );
 };

@@ -1,0 +1,18 @@
+// The step dialogs keep one height whichever page is open; a long page
+// scrolls inside it.
+.step-form-dialog-body {
+  height: min(560px, 60vh);
+  min-height: 280px;
+  overflow-y: auto;
+}
+
+// On a narrow screen the pages keep a readable width and the indicator
+// scrolls sideways instead of squeezing their names together.
+.step-form-page-indicator {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  .progress-steps-view {
+    min-width: 500px;
+  }
+}

@@ -6,6 +6,7 @@ import {
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { SubmissionDeadlineField } from '@/proposals/proposal/SubmissionDeadlineField';
 import {
   getNonCanceledProposalStates,
   getProposalStateOptions,
@@ -21,9 +22,9 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
+import { postAwardStatusLabel } from './postAward';
 import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalStateBadge } from './ProposalStateBadge';
 
@@ -39,7 +40,6 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
       {
         ...filterValues,
       };
-    result.o = ['-round__cutoff_time'];
     if (!result.state) {
       result.state = getNonCanceledProposalStates();
     }
@@ -57,6 +57,8 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
   return (
     <Table
       {...tableProps}
+      // Newest first: what just came in is on top.
+      initialSorting={{ field: 'created', mode: 'desc' }}
       formId={ProposalProposalsFilterFormId}
       columns={[
         {
@@ -72,23 +74,19 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
           id: 'name',
         },
         {
+          title: translate('State'),
+          render: ({ row }) => <ProposalStateBadge row={row} />,
+          filter: 'state',
+          inlineFilter: (row) =>
+            getProposalStateOptions().filter((s) => s.value === row.state),
+          keys: ['state', 'decision_held'],
+          id: 'state',
+        },
+        {
           title: translate('Applicant'),
           render: ({ row }) => <>{renderFieldOrDash(row.created_by_name)}</>,
           keys: ['created_by_name'],
           id: 'applicant',
-        },
-        {
-          title: translate('Organization'),
-          render: ({ row }) => (
-            <>{renderFieldOrDash((row as any).organization_name)}</>
-          ),
-          filter: 'organization_uuid',
-          inlineFilter: (row) => ({
-            name: (row as any).organization_name,
-            uuid: (row as any).organization_uuid,
-          }),
-          keys: ['organization_name'] as any,
-          id: 'organization',
         },
         {
           title: translate('Call'),
@@ -117,20 +115,25 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
           }),
         },
         {
-          title: translate('Ending'),
-          render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
+          title: translate('Submission deadline'),
+          render: SubmissionDeadlineField,
           className: 'whitespace-nowrap',
           keys: ['round'],
           id: 'ending',
         },
         {
-          title: translate('State'),
-          render: ({ row }) => <ProposalStateBadge row={row} />,
-          filter: 'state',
-          inlineFilter: (row) =>
-            getProposalStateOptions().filter((s) => s.value === row.state),
-          keys: ['state', 'decision_held'],
-          id: 'state',
+          title: translate('Extension or final report'),
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
+                row.post_award_status
+                  ? postAwardStatusLabel(row.post_award_status)
+                  : null,
+              )}
+            </>
+          ),
+          keys: ['post_award_status'],
+          id: 'post_award_status',
         },
       ]}
       title={translate('All proposals')}

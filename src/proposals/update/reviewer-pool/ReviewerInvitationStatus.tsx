@@ -6,6 +6,7 @@ import { Badge } from 'waldur-ui';
 
 import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { InvitationStatusOptions } from '@/table/generated/CallReviewerPoolsFilter';
 
 import { InvitationStatusBadge } from './InvitationStatusBadge';
 import { CallReviewerPoolExtended } from './types';
@@ -20,10 +21,12 @@ const isExpiringS = (expiresAt: string | null): boolean => {
   return daysUntilExpiry <= 7 && daysUntilExpiry > 0;
 };
 
-const isExpired = (expiresAt: string | null): boolean => {
-  if (!expiresAt) return false;
-  return new Date(expiresAt) < new Date();
-};
+// The badge reads the same as the status filter above the table, rather
+// than the backend's longer "Invitation pending" / "Invitation expired".
+const getPoolStatusLabel = (row: CallReviewerPoolExtended) =>
+  InvitationStatusOptions.find(
+    (option) => option.value === row.invitation_status,
+  )?.label ?? row.invitation_status_display;
 
 interface ReviewerInvitationStatusProps {
   row: CallReviewerPoolExtended;
@@ -36,10 +39,17 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
     <div className="flex items-center gap-1.5" style={{ minWidth: 220 }}>
       <InvitationStatusBadge
         status={row.invitation_status}
-        statusDisplay={row.invitation_status_display}
+        statusDisplay={getPoolStatusLabel(row)}
         pendingHint={translate(
           'This reviewer has not yet accepted the invitation or created a profile.',
         )}
+        declinedHint={
+          row.decline_reason
+            ? translate('Decline reason: {reason}', {
+                reason: row.decline_reason,
+              })
+            : undefined
+        }
       />
       {row.invitation_status === 'pending' &&
         isExpiringS(row.invitation_expires_at) && (
@@ -50,12 +60,6 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
           >
             <WarningIcon size={16} weight="bold" className="text-warning" />
           </Tooltip>
-        )}
-      {isExpired(row.invitation_expires_at) &&
-        row.invitation_status === 'pending' && (
-          <Badge variant="danger" tone="outline">
-            {translate('Expired')}
-          </Badge>
         )}
       {row.override_reason && (
         <Tooltip

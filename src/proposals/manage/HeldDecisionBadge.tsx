@@ -3,11 +3,8 @@ import { FC } from 'react';
 
 import { Badge } from 'waldur-ui';
 
-import {
-  HELD_DECISION_STEP,
-  heldDecisionLabel,
-  heldDecisionVariant,
-} from '../roundLifecycle';
+import { heldDecisionLabel, heldDecisionVariant } from '../roundLifecycle';
+import { isAllocationDecisionStep } from '../workflow/constants';
 import {
   fetchProposalWorkflowStates,
   proposalWorkflowStatesKey,
@@ -42,9 +39,7 @@ export const HeldDecisionBadge: FC<{ proposalUuid: string }> = ({
       />
     );
   }
-  const outcome = (data ?? []).find(
-    (s) => s.step === HELD_DECISION_STEP,
-  )?.outcome;
+  const outcome = (data ?? []).find(isAllocationDecisionStep)?.outcome;
   return (
     <Badge
       variant={heldDecisionVariant(outcome)}

@@ -59,6 +59,7 @@ interface TableConfig {
   enableExport: boolean;
   fullExport?: TableFullExport;
   showExportInDropdown: boolean;
+  dropdownActionsSize?: 'sm' | 'lg';
   showPageSizeSelector: boolean;
   hoverable: boolean;
   hoverShadow: { table?: boolean; grid?: boolean } | boolean;
@@ -113,6 +114,7 @@ interface TableDisplay {
   id?: string;
   rowClass?: (({ row }: { row: any }) => string) | string;
   rowValidate?: TableProps['rowValidate'];
+  rowGroupHeader?: TableProps['rowGroupHeader'];
   gridClassName?: string;
   gridFixedWidth?: boolean;
 }

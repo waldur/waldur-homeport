@@ -3,21 +3,12 @@ import React from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
+import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, SupportFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
-import {
-  canAccessReporting,
-  categoryPermissions,
-  reportPermissions,
-} from './access';
-
-const PROPOSALS_REPORTS = [
-  'call-performance',
-  'review-progress',
-  'resource-demand',
-];
+import { canAccessReporting, reportPermissions } from './access';
 
 export const states: StateDeclaration[] = [
   {
@@ -66,6 +57,56 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Dashboard'),
       priority: 10,
+    },
+  },
+
+  // Proposals category: the call reports across every organization, for
+  // staff and support. It holds one report, so its tab is the report.
+  {
+    name: 'reporting-proposals-list',
+    url: 'proposals/?report&organization&call&round&from&to',
+    parent: 'reporting-dashboard-layout',
+    // The report switcher and the filters rewrite these; without `dynamic`
+    // UI-Router would remount the page on every change.
+    params: {
+      report: { dynamic: true },
+      organization: { dynamic: true, array: true },
+      call: { dynamic: true, array: true },
+      round: { dynamic: true },
+      from: { dynamic: true },
+      to: { dynamic: true },
+    },
+    component: lazyComponent(() =>
+      import('@/proposals/reports/GlobalCallReportsPage').then((module) => ({
+        default: module.GlobalCallReportsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Proposals'),
+      priority: 200,
+      feature: MarketplaceFeatures.show_call_management_functionality,
+      permissions: [
+        ...reportPermissions('call-reports'),
+        // Calls run outside Waldur have no proposals to report on.
+        () => !isFeatureVisible(MarketplaceFeatures.call_only),
+      ],
+    },
+  },
+  // The reports the category held before -- call performance, review
+  // progress, resource demand and their analyses -- live on in the call
+  // reports: bookmarks to them, and the chaos route sweep, land there.
+  {
+    name: 'reporting-proposals-retired',
+    // `proposals` and anything under `proposals/`; `proposals/` itself is
+    // the page.
+    url: 'proposals{path:(?:/.+)?}',
+    parent: 'reporting',
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: 'reporting-proposals-list',
+    data: {
+      skipBreadcrumb: true,
     },
   },
 
@@ -308,135 +349,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Projects by affiliated organization'),
       permissions: reportPermissions('projects-by-affiliated-organization'),
-    },
-  },
-
-  // Proposals & Reviews category (feature-based visibility)
-  // Requires both call management AND experimental flags since all children use mock data
-  {
-    name: 'reporting-proposals',
-    url: 'proposals/',
-    parent: 'reporting',
-    component: UIView,
-    abstract: true,
-    redirectTo: 'reporting-call-performance-analytics',
-    data: {
-      permissions: categoryPermissions(PROPOSALS_REPORTS),
-      breadcrumb: () => translate('Proposals'),
-      priority: 200,
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-    },
-  },
-  {
-    name: 'reporting-proposals-list',
-    url: 'proposals/',
-    parent: 'reporting-dashboard-layout',
-    component: lazyComponent(() =>
-      import('./ReportingReportList').then((module) => ({
-        default: () =>
-          React.createElement(module.ReportingReportList, {
-            category: 'proposals',
-          }),
-      })),
-    ),
-    data: {
-      permissions: categoryPermissions(PROPOSALS_REPORTS),
-      breadcrumb: () => translate('Proposals'),
-      priority: 200,
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-    },
-  },
-  {
-    name: 'reporting-call-performance',
-    url: 'call-performance/',
-    parent: 'reporting-proposals',
-    component: lazyComponent(() =>
-      import('./proposals/CallPerformanceList').then((module) => ({
-        default: module.CallPerformanceList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Call performance'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      permissions: reportPermissions('call-performance'),
-    },
-  },
-  {
-    name: 'reporting-review-progress',
-    url: 'review-progress/',
-    parent: 'reporting-proposals',
-    component: lazyComponent(() =>
-      import('./proposals/ReviewProgressList').then((module) => ({
-        default: module.ReviewProgressList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Review progress'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      permissions: reportPermissions('review-progress'),
-    },
-  },
-  {
-    name: 'reporting-resource-demand',
-    url: 'resource-demand/',
-    parent: 'reporting-proposals',
-    component: lazyComponent(() =>
-      import('./proposals/ResourceDemandList').then((module) => ({
-        default: module.ResourceDemandList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Resource demand'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      permissions: reportPermissions('resource-demand'),
-    },
-  },
-  {
-    name: 'reporting-call-performance-analytics',
-    url: 'call-performance-analytics/?mode',
-    parent: 'reporting-proposals',
-    component: lazyComponent(() =>
-      import('./proposals/CallPerformanceAnalyticsPage').then((module) => ({
-        default: module.CallPerformanceAnalyticsPage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Call Performance Analysis'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      // Guarded like the report it analyses.
-      permissions: reportPermissions('call-performance'),
-    },
-  },
-  {
-    name: 'reporting-review-progress-analytics',
-    url: 'review-progress-analytics/?mode',
-    parent: 'reporting-proposals',
-    component: lazyComponent(() =>
-      import('./proposals/ReviewProgressAnalyticsPage').then((module) => ({
-        default: module.ReviewProgressAnalyticsPage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Review Progress Analysis'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      // Guarded like the report it analyses.
-      permissions: reportPermissions('review-progress'),
-    },
-  },
-  {
-    name: 'reporting-resource-demand-analytics',
-    url: 'resource-demand-analytics/?mode',
-    parent: 'reporting-proposals',
-    component: lazyComponent(() =>
-      import('./proposals/ResourceDemandAnalyticsPage').then((module) => ({
-        default: module.ResourceDemandAnalyticsPage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Resource Demand Analysis'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      // Guarded like the report it analyses.
-      permissions: reportPermissions('resource-demand'),
     },
   },
 

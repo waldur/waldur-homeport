@@ -1,3 +1,6 @@
+import { get } from 'es-toolkit/compat';
+
+import { isEmpty } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import {
@@ -7,12 +10,17 @@ import {
 } from '@/proposals/types';
 
 /**
- * Mirror the backend: DESCRIPTION_LENGTH (waldur_core.core.models) is the
- * description column's size, PROJECT_SUMMARY_LENGTH (proposal.models)
- * the summary's. The serializers refuse anything longer.
+ * Character limits of the Project details fields, mirroring the backend: name
+ * is the model's `max_length`, description DESCRIPTION_LENGTH
+ * (waldur_core.core.models), the description column's size, and summary
+ * PROJECT_SUMMARY_LENGTH (proposal.models). The serializers refuse anything
+ * longer.
  */
-export const PROPOSAL_DESCRIPTION_MAX_LENGTH = 4096;
-export const PROPOSAL_SUMMARY_MAX_LENGTH = 1000;
+export const PROPOSAL_FIELD_MAX_LENGTH = {
+  name: 150,
+  project_summary: 1000,
+  description: 4096,
+} as const;
 
 /** Fields the call can configure, in the order the form renders them. */
 const CONFIGURABLE_FIELDS: ProposalFieldName[] = [
@@ -69,23 +77,60 @@ export const isFieldRequired = (
  * it identifies the proposal and forms the last third of the awarded project's
  * name (see getProposalProjectName).
  *
- * The project duration is deliberately absent: it is no longer a question the
- * form asks. Allocation derives it from the subscriptions requested and the
- * call's fixed duration (see projectDuration.ts), so a field here would count
- * towards a total the applicant has no way to fill. */
+ * The project duration is asked only of a call that offers a list of lengths
+ * (`allowed_duration_months`), and is then required. Elsewhere allocation
+ * derives it from the subscriptions requested and the call's fixed duration
+ * (see projectDuration.ts), so a field there would count towards a total the
+ * applicant has no way to fill. */
 export const getTrackedFields = (
   states: Record<ProposalFieldName, ProposalFieldState>,
+  asksDuration = false,
 ): string[] => [
   'name',
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldVisible(states, field)),
+  ...(asksDuration ? [DURATION_FIELD] : []),
 ];
 
 export const getRequiredFields = (
   states: Record<ProposalFieldName, ProposalFieldState>,
+  asksDuration = false,
 ): string[] => [
   'name',
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldRequired(states, field)),
+  ...(asksDuration ? [DURATION_FIELD] : []),
 ];
+
+export const DURATION_FIELD = 'requested_duration_months';
+
+/**
+ * Whether a Project details field counts as filled, for the step's
+ * "{filled}/{total}" counter and for whether a required field still blocks
+ * submission, so the two cannot disagree.
+ *
+ * The form value of supporting_documentation holds only files not yet
+ * uploaded: Save as draft sends them and clears it, after which they live on
+ * the proposal. Counting the form alone leaves the step short of its total,
+ * and a call that requires documents never completes after a save.
+ */
+export const isProposalFieldFilled = (
+  field: string,
+  values: Record<string, any> | undefined,
+  proposal?: { supporting_documentation?: unknown[] | null } | null,
+): boolean => {
+  if (
+    field === 'supporting_documentation' &&
+    proposal?.supporting_documentation?.length
+  ) {
+    return true;
+  }
+  const value = get(values ?? {}, field);
+  return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
+};
+
+/** Whether the call lets the applicant choose the project's length. */
+export const asksForDuration = (call?: {
+  allowed_duration_months?: number[] | null;
+}): boolean => Boolean(call?.allowed_duration_months?.length);
 
 /**
  * Whether a read-only view should render a configurable field.

@@ -1,44 +1,41 @@
 import { useCallback, useMemo } from 'react';
-import { Project } from 'waldur-js-client';
+import { Project, User } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { isProjectMember } from '@/permissions/isProjectMember';
 import { useUser } from '@/workspace/hooks';
 
 import { ChangeEndDateRequestFlowDialog } from './ChangeEndDateRequestFlowDialog';
 
+/** Mirrors the backend: asking is a permission of its own, and whoever sets
+ * the date directly (and so approves requests) has nobody to ask. */
 export const canRequestProjectEndDateChange = (
-  user: Parameters<typeof isProjectMember>[0] | null | undefined,
+  user: User | null | undefined,
   project: Pick<Project, 'uuid' | 'customer_uuid'>,
 ): boolean => {
-  const canEdit =
-    hasPermission(user, {
-      permission: PermissionEnum.UPDATE_PROJECT,
-      projectId: project.uuid,
-    }) ||
-    hasPermission(user, {
-      permission: PermissionEnum.UPDATE_PROJECT,
-      customerId: project.customer_uuid,
-    });
-  if (canEdit) {
+  if (!user || user.is_staff) {
     return false;
   }
-  // A role on the project can request without PROJECT.LIST. Anyone else must
-  // see this project: PROJECT.LIST on it, on its organization, or site-wide.
-  if (isProjectMember(user, project.uuid)) {
-    return true;
-  }
-  return Boolean(
-    hasPermission(user, {
-      permission: PermissionEnum.LIST_PROJECTS,
-      projectId: project.uuid,
-      customerId: project.customer_uuid,
-    }),
+  const scopes = { projectId: project.uuid, customerId: project.customer_uuid };
+  return (
+    !hasPermission(user, {
+      permission: PermissionEnum.SET_PROJECT_END_DATE,
+      ...scopes,
+    }) &&
+    Boolean(
+      hasPermission(user, {
+        permission: PermissionEnum.REQUEST_PROJECT_END_DATE_CHANGE,
+        ...scopes,
+      }),
+    )
   );
 };
 
+/**
+ * Same visibility and dialog as {@link ChangeEndDateAction}: whoever may ask
+ * for an end date change, and cannot set the date themselves.
+ */
 export function useChangeEndDateRequest(project: Project, refetch: () => void) {
   const user = useUser();
   const { openDialog } = useModal();

@@ -16,9 +16,15 @@ const WaiveCOIDialog = lazyComponent(() =>
 interface COIWaiveActionProps {
   row: ConflictOfInterest;
   fetch: () => void;
+  /** Why it cannot be waived: its type requires recusal on this call. */
+  disabledReason?: string;
 }
 
-export const COIWaiveAction: FC<COIWaiveActionProps> = ({ row, fetch }) => {
+export const COIWaiveAction: FC<COIWaiveActionProps> = ({
+  row,
+  fetch,
+  disabledReason,
+}) => {
   const { openDialog } = useModal();
 
   const handleWaive = useCallback(() => {
@@ -32,6 +38,8 @@ export const COIWaiveAction: FC<COIWaiveActionProps> = ({ row, fetch }) => {
     <ActionItem
       title={translate('Waive')}
       action={handleWaive}
+      disabled={Boolean(disabledReason)}
+      tooltip={disabledReason}
       iconNode={<ShieldIcon weight="bold" />}
       iconColor="warning"
       className="text-warning"

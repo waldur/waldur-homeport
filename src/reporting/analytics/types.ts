@@ -78,7 +78,7 @@ export interface DrillDownDataItem {
 /**
  * Configuration for a drill-down path
  */
-export interface DrillDownPath {
+interface DrillDownPath {
   from: string;
   to: string;
   dimension: string;

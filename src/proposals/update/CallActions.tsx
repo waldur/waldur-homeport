@@ -3,7 +3,7 @@ import {
   CopyIcon,
   DownloadSimpleIcon,
 } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import {
   callProposalProjectRoleMappingsCount,
@@ -14,6 +14,7 @@ import {
 import { Menu } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -32,8 +33,18 @@ import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
 } from '../workflow/queries';
+import {
+  callWorkflowCheckKey,
+  useCallWorkflowCheck,
+} from '../workflow-description/queries';
 
 import { NoRoleMappingsWarning } from './role-mapping/NoRoleMappingsWarning';
+
+const WorkflowCheckRefusedDialog = lazyComponent(() =>
+  import('@/proposals/workflow-check/WorkflowCheckRefusedDialog').then((m) => ({
+    default: m.WorkflowCheckRefusedDialog,
+  })),
+);
 
 const DuplicateCallDialog = lazyComponent(() =>
   import('@/proposals/details/DuplicateCallDialog').then((m) => ({
@@ -102,13 +113,56 @@ export const CallActions: FC<CallActionsProps> = ({
     queryFn: () => fetchCallWorkflowSteps(call.uuid),
     enabled: canBeActivated,
   });
+  // The workflow check's errors, counted on the Activate item: the backend
+  // refuses activation while there are any, and says which.
+  const { data: workflowCheck } = useCallWorkflowCheck(
+    call.uuid,
+    canBeActivated && canUpdate,
+  );
+  const checkErrors = workflowCheck?.summary.error ?? 0;
+  const activateTitle = checkErrors
+    ? translate('Activate ({count} errors)', { count: checkErrors })
+    : translate('Activate');
+  const queryClient = useQueryClient();
   const hasEnabledStep =
     !canBeActivated || (workflowSteps?.some((s) => s.is_enabled) ?? false);
+  // Exactly one enabled allocation decision: the backend refuses to activate
+  // a call with none, or with two.
   const mandatoryStepsEnabled =
     !canBeActivated ||
-    (workflowSteps ?? [])
-      .filter((s) => s.is_mandatory)
-      .every((s) => s.is_enabled);
+    (workflowSteps ?? []).filter(
+      (s) => s.is_allocation_decision && s.is_enabled,
+    ).length === 1;
+
+  // The backend refuses to archive a call whose proposals are still being
+  // evaluated unless told to; it says how many, so the manager decides.
+  const archiveCall = useCallback(async () => {
+    try {
+      await proposalProtectedCallsArchive({ path: { uuid: call.uuid } });
+    } catch (er) {
+      const pending = getErrorBody(er)?.proposals_in_evaluation;
+      if (typeof pending !== 'number' || pending <= 0) {
+        throw er;
+      }
+      await confirm(
+        translate('Proposals are still in evaluation'),
+        translate(
+          '{count} proposals of this call are still in evaluation. Archiving the call stops their evaluation. Archive it anyway?',
+          { count: pending },
+        ),
+        {
+          positiveButton: translate('Archive anyway'),
+          negativeButton: translate('Cancel'),
+          positiveButtonVariant: 'danger',
+          type: 'danger',
+        },
+      );
+      await proposalProtectedCallsArchive({
+        path: { uuid: call.uuid },
+        body: { confirm: true },
+      });
+    }
+  }, [call, confirm]);
 
   const editCallState = useCallback(
     async (state, label: string) => {
@@ -151,16 +205,27 @@ export const CallActions: FC<CallActionsProps> = ({
               action: label.toLowerCase(),
             }),
           );
-          await proposalProtectedCallsArchive({ path: { uuid: call.uuid } });
+          await archiveCall();
         }
         showSuccess(translate('Call state updated.'));
         refetch();
       } catch (er) {
         if (!er) return;
+        const findings = getErrorBody(er)?.workflow_check;
+        if (Array.isArray(findings) && findings.length) {
+          queryClient.invalidateQueries({
+            queryKey: callWorkflowCheckKey(call.uuid),
+          });
+          openDialog(WorkflowCheckRefusedDialog, {
+            resolve: { findings },
+            size: 'xl',
+          });
+          return;
+        }
         showErrorResponse(er, translate('Unable to update call state.'));
       }
     },
-    [call, refetch],
+    [call, refetch, queryClient, openDialog, archiveCall],
   );
 
   const handleDuplicate = useCallback(() => {
@@ -196,7 +261,7 @@ export const CallActions: FC<CallActionsProps> = ({
           )
         : !mandatoryStepsEnabled
           ? translate(
-              'All mandatory workflow steps must be enabled to activate the call',
+              'The workflow must have exactly one enabled allocation decision to activate the call',
             )
           : !hasOffering
             ? translate(
@@ -213,7 +278,7 @@ export const CallActions: FC<CallActionsProps> = ({
         toggleClassName={className}
       >
         <ActionItem
-          title={translate('Activate')}
+          title={activateTitle}
           action={() => editCallState('activate', translate('Activate'))}
           disabled={Boolean(tooltipMessage)}
           tooltip={tooltipMessage}
@@ -248,7 +313,7 @@ export const CallActions: FC<CallActionsProps> = ({
         toggleClassName={className}
       >
         <ActionItem
-          title={translate('Activate')}
+          title={activateTitle}
           action={() => editCallState('activate', translate('Activate'))}
           disabled={Boolean(tooltipMessage)}
           tooltip={tooltipMessage}

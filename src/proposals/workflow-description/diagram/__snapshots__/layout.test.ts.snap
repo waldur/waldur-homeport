@@ -1,0 +1,265 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`layoutDiagram > draws the access_maximize template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "reviewer_assignment@call_manager:1:420,288",
+  "technical_assessment@offering_team:2:652,544",
+  "merit_review@call_manager:2:652,288",
+  "panel_meeting@panel_chair:3:884,416",
+  "allocation_decision@call_manager:4:1116,288",
+  "award_response@applicant:5:1348,50",
+  "extension_request@applicant:6:1580,50",
+  "extension_assessment@offering_team:7:1812,544",
+  "extension_decision@call_manager:8:2044,288",
+  "final_report@applicant:9:2276,50",
+  "final_report_approval@call_manager:10:2508,288",
+]
+`;
+
+exports[`layoutDiagram > draws the ai_factory_fast_lane template without overlaps 1`] = `
+[
+  "technical_assessment@offering_team:0:188,416",
+  "allocation_decision@system:1:420,544",
+  "final_report@applicant:2:652,50",
+  "final_report_approval@call_manager:3:884,288",
+]
+`;
+
+exports[`layoutDiagram > draws the ai_factory_large_scale template without overlaps 1`] = `
+[
+  "administrative_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,416",
+  "innovation_group_evaluation@offering_team:1:420,526",
+  "ranking_list_adoption@call_manager:2:652,288",
+  "allocation_decision@call_manager:3:884,288",
+  "award_response@applicant:4:1116,50",
+  "final_report@applicant:5:1348,50",
+  "final_report_approval@call_manager:6:1580,288",
+]
+`;
+
+exports[`layoutDiagram > draws the ai_factory_playground template without overlaps 1`] = `
+[
+  "technical_assessment@offering_team:0:188,416",
+  "allocation_decision@system:1:420,544",
+  "final_report@applicant:2:652,50",
+  "final_report_approval@call_manager:3:884,288",
+]
+`;
+
+exports[`layoutDiagram > draws the ai_for_science template without overlaps 1`] = `
+[
+  "administrative_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,416",
+  "expert_evaluation@call_manager:2:652,288",
+  "consensus_report@call_manager:3:884,288",
+  "allocation_decision@call_manager:4:1116,288",
+  "award_response@applicant:5:1348,50",
+  "extension_request@applicant:6:1580,50",
+  "extension_assessment@offering_team:7:1812,416",
+  "extension_decision@call_manager:8:2044,288",
+  "final_report@applicant:9:2276,50",
+  "final_report_approval@call_manager:10:2508,288",
+]
+`;
+
+exports[`layoutDiagram > draws the alcc template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "reviewer_assignment@call_manager:1:420,288",
+  "technical_assessment@offering_team:2:652,544",
+  "peer_review@call_manager:2:652,288",
+  "panel_meeting@panel_chair:3:884,416",
+  "allocation_decision@call_manager:4:1116,288",
+  "award_response@applicant:5:1348,50",
+  "final_report@applicant:6:1580,50",
+  "final_report_approval@call_manager:7:1812,288",
+]
+`;
+
+exports[`layoutDiagram > draws the beamtime_rapid template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,416",
+  "reviewer_assignment@call_manager:2:652,288",
+  "review@call_manager:3:884,288",
+  "allocation_decision@call_manager:4:1116,288",
+  "final_report@applicant:5:1348,50",
+  "final_report_approval@call_manager:6:1580,288",
+]
+`;
+
+exports[`layoutDiagram > draws the beamtime_standard template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,544",
+  "panel_chair_assignment@panel_chair:1:420,416",
+  "referee_assignment@proposal_role:review_panel_chair:2:652,672",
+  "referee_reports@proposal_role:panel_referee:3:884,800",
+  "review_panel_meeting@proposal_role:review_panel_chair:4:1116,672",
+  "allocation_decision@call_manager:5:1348,288",
+  "final_report@applicant:6:1580,50",
+  "final_report_approval@call_manager:7:1812,288",
+]
+`;
+
+exports[`layoutDiagram > draws the benchmark_access template without overlaps 1`] = `
+[
+  "technical_assessment@offering_team:0:188,416",
+  "allocation_decision@system:1:420,544",
+  "final_report@applicant:2:652,50",
+  "final_report_approval@call_manager:3:884,288",
+]
+`;
+
+exports[`layoutDiagram > draws the development_access template without overlaps 1`] = `
+[
+  "technical_assessment@offering_team:0:188,416",
+  "allocation_decision@system:1:420,544",
+  "final_report@applicant:2:652,50",
+  "final_report_approval@call_manager:3:884,288",
+]
+`;
+
+exports[`layoutDiagram > draws the domain_sub_panels template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,544",
+  "sub_panel_chair_assignment@panel_chair:1:420,416",
+  "assessor_assignment@proposal_role:sub_panel_chair:2:652,672",
+  "sub_panel_assessment@proposal_role:panel_assessor:3:884,800",
+  "sub_panel_meeting@proposal_role:sub_panel_chair:4:1116,672",
+  "panel_meeting@panel_chair:5:1348,416",
+  "allocation_decision@call_manager:6:1580,288",
+  "final_report@applicant:7:1812,50",
+  "final_report_approval@call_manager:8:2044,288",
+]
+`;
+
+exports[`layoutDiagram > draws the extreme_scale template without overlaps 1`] = `
+[
+  "administrative_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,544",
+  "rapporteur_assignment@panel_chair:1:420,416",
+  "rapporteur_questions@proposal_role:rapporteur:2:652,672",
+  "reviewer_assignment@call_manager:3:884,288",
+  "scientific_review@call_manager:4:1116,288",
+  "response_to_reviews@applicant:5:1348,50",
+  "individual_reports@proposal_role:rapporteur:6:1580,672",
+  "consolidated_report@proposal_role_lead:rapporteur:7:1812,800",
+  "committee_meeting@panel_chair:8:2044,416",
+  "final_feedback@proposal_role_lead:rapporteur:9:2276,800",
+  "allocation_decision@call_manager:10:2508,288",
+  "award_response@applicant:11:2740,50",
+  "extension_request@applicant:12:2972,50",
+  "extension_assessment@offering_team:13:3204,544",
+  "extension_decision@call_manager:14:3436,288",
+  "final_report@applicant:15:3668,50",
+  "final_report_approval@call_manager:16:3900,288",
+]
+`;
+
+exports[`layoutDiagram > draws the nairr_classroom template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "resource_fit@offering_team:1:420,416",
+  "allocation_decision@call_manager:2:652,288",
+  "final_report@applicant:3:884,50",
+  "final_report_approval@call_manager:4:1116,288",
+]
+`;
+
+exports[`layoutDiagram > draws the nairr_research template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "reviewer_assignment@call_manager:1:420,288",
+  "merit_review@call_manager:2:652,288",
+  "resource_matching@offering_team:3:884,416",
+  "allocation_decision@call_manager:4:1116,288",
+  "final_report@applicant:5:1348,50",
+  "final_report_approval@call_manager:6:1580,288",
+]
+`;
+
+exports[`layoutDiagram > draws the quantum_access template without overlaps 1`] = `
+[
+  "technical_assessment@offering_team:0:188,416",
+  "emulation_assessment@offering_team:1:420,416",
+  "allocation_decision@system:2:652,544",
+  "final_report@applicant:3:884,50",
+  "final_report_approval@call_manager:4:1116,288",
+]
+`;
+
+exports[`layoutDiagram > draws the rapid_access template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,416",
+  "allocation_decision@system:2:652,544",
+  "final_report@applicant:3:884,50",
+  "final_report_approval@call_manager:4:1116,288",
+]
+`;
+
+exports[`layoutDiagram > draws the regular_access template without overlaps 1`] = `
+[
+  "administrative_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,544",
+  "domain_panel_chair_assignment@panel_chair:1:420,416",
+  "rapporteur_assignment@proposal_role:domain_panel_chair:2:652,672",
+  "individual_reports@proposal_role:rapporteur:3:884,800",
+  "domain_panel_meeting@proposal_role:domain_panel_chair:4:1116,672",
+  "consolidated_report@proposal_role:domain_panel_chair:5:1348,672",
+  "super_panel_meeting@panel_chair:6:1580,416",
+  "final_feedback@proposal_role:domain_panel_chair:7:1812,672",
+  "allocation_decision@call_manager:8:2044,288",
+  "award_response@applicant:9:2276,50",
+  "extension_request@applicant:10:2508,50",
+  "extension_assessment@offering_team:11:2740,544",
+  "extension_decision@call_manager:12:2972,288",
+  "final_report@applicant:13:3204,50",
+  "final_report_approval@call_manager:14:3436,288",
+]
+`;
+
+exports[`layoutDiagram > draws the single_panel_review template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "reviewer_assignment@call_manager:1:420,288",
+  "scientific_review@call_manager:2:652,288",
+  "panel_meeting@panel_chair:3:884,416",
+  "allocation_decision@call_manager:4:1116,288",
+  "award_response@applicant:5:1348,50",
+  "final_report@applicant:6:1580,50",
+  "final_report_approval@call_manager:7:1812,288",
+]
+`;
+
+exports[`layoutDiagram > draws the staff_reviewed_allocation template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "technical_assessment@offering_team:1:420,416",
+  "allocation_decision@call_manager:2:652,288",
+  "final_report@applicant:3:884,50",
+  "final_report_approval@call_manager:4:1116,288",
+]
+`;
+
+exports[`layoutDiagram > draws the technical_and_scientific_review template without overlaps 1`] = `
+[
+  "eligibility_check@call_manager:0:188,288",
+  "reviewer_assignment@call_manager:1:420,288",
+  "technical_assessment@offering_team:2:652,544",
+  "scientific_review@call_manager:2:652,288",
+  "quality_threshold@call_manager:3:884,288",
+  "panel_meeting@panel_chair:4:1116,416",
+  "allocation_decision@call_manager:5:1348,288",
+  "award_response@applicant:6:1580,50",
+  "extension_request@applicant:7:1812,50",
+  "extension_assessment@offering_team:8:2044,544",
+  "extension_decision@call_manager:9:2276,288",
+  "final_report@applicant:10:2508,50",
+  "final_report_approval@call_manager:11:2740,288",
+]
+`;

@@ -9,7 +9,7 @@ import {
 
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
-import { useProject } from '@/workspace/hooks';
+import { useProject, useUser } from '@/workspace/hooks';
 
 import { EditUserDialog } from './EditUserDialog';
 
@@ -58,6 +58,8 @@ describe('EditUserDialog (Project)', () => {
       uuid: 'project-uuid',
       name: 'Test Project',
     } as any);
+    // The picker offers the roles the editing user may grant.
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
   });
 
   it('renders dialog with correct title and user information', () => {

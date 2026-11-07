@@ -59,7 +59,11 @@ export const ExpertiseSection = ({
   const columns: Column<ReviewerExpertise>[] = [
     {
       title: translate('Keyword'),
-      render: ({ row }) => row.expertise_keyword,
+      render: ({ row }) => (
+        <span className="font-medium text-primary">
+          {row.expertise_keyword}
+        </span>
+      ),
     },
     {
       title: translate('Category'),

@@ -76,6 +76,27 @@ function checkServiceProviderScope(
   );
 }
 
+/**
+ * Does the user hold `permission` through a role on any offering of the
+ * organization? An offering manager acts for the offerings they manage
+ * without any role on the provider organization itself. Without a
+ * permission, any role on one of its offerings counts: the provider resource
+ * list shows such a user the resources of those offerings.
+ */
+export const hasPermissionOnAnyOfferingOf = (
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  customerId: string,
+  permission?: string,
+): boolean =>
+  !!user?.is_staff ||
+  (!!customerId &&
+    !!user?.permissions?.some(
+      (grant) =>
+        grant.scope_type === 'offering' &&
+        grant.customer_uuid === customerId &&
+        (!permission || roleGrants(grant.role_name, permission)),
+    ));
+
 export const hasPermission = (
   user: Pick<User, 'is_staff' | 'permissions'>,
   request: PermissionRequest,

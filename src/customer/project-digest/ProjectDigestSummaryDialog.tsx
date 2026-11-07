@@ -25,7 +25,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
           <h4 className="mb-3">{translate('Overview')}</h4>
           <p className="text-quaternary mb-0">
             {translate(
-              'Project digest sends periodic email summaries to project members, giving them an overview of each project they belong to. Digests include information such as active resources, project timelines, and team composition.',
+              'Project digest sends periodic email summaries to project members, giving them an overview of each project they belong to. Digests include information such as active resources, project end dates, and recent team changes.',
             )}
           </p>
         </section>
@@ -35,7 +35,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
           <ol className="text-quaternary mb-0">
             <li className="mb-1.5">
               {translate(
-                'An organization owner enables digest emails and chooses the frequency (weekly, bi-weekly, or monthly) and the delivery day.',
+                'An organization owner enables digest emails and chooses the frequency (weekly, bi-weekly, or monthly) and the delivery day. Digests are sent only if project digest is also enabled for the whole site.',
               )}
             </li>
             <li className="mb-1.5">
@@ -45,17 +45,17 @@ export const ProjectDigestSummaryDialog: FC = () => {
             </li>
             <li className="mb-1.5">
               {translate(
-                'On the scheduled day, the system collects data for each project in the organization.',
+                'A daily check runs at 08:00 server time. On the scheduled day, the system collects data for each project in the organization. Archived and blocked organizations are skipped.',
               )}
             </li>
             <li className="mb-1.5">
               {translate(
-                'Each project member receives an email summarizing only the projects they belong to.',
+                'Each project member with an email address and email notifications turned on receives one email summarizing only the projects they belong to.',
               )}
             </li>
             <li>
               {translate(
-                'Emails are rendered in the preferred language of each recipient.',
+                'Emails are rendered in the preferred language of each recipient, or in the default site language if none is set.',
               )}
             </li>
           </ol>
@@ -82,7 +82,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    'Lists active resources in the project with their type and current state.',
+                    'Lists active resources in the project with their offering and current state.',
                   )}
                 </TableCell>
               </TableRow>
@@ -92,17 +92,17 @@ export const ProjectDigestSummaryDialog: FC = () => {
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    'Shows the project end date, days remaining, and grace period status.',
+                    'Shows the project end date and the days remaining, highlighted when 30 days or fewer remain. Shown only for projects with an end date.',
                   )}
                 </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium text-primary">
-                  {translate('Team')}
+                  {translate('Team changes')}
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    'Summarizes the number of project members grouped by role.',
+                    'Counts members who joined or left the project during the digest period (the last 7, 14, or 30 days, matching the frequency), grouped by role. Shown only when the team changed.',
                   )}
                 </TableCell>
               </TableRow>
@@ -136,7 +136,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
                 </TableCell>
                 <TableCell className="text-tertiary">
                   {translate(
-                    'Sent every two weeks on the selected day of the week.',
+                    'Sent on the selected day of the week, at most once every two weeks.',
                   )}
                 </TableCell>
               </TableRow>
@@ -163,12 +163,12 @@ export const ProjectDigestSummaryDialog: FC = () => {
               <ul className="mb-0 mt-1.5">
                 <li>
                   {translate(
-                    'Use the "Send test email" button to send a digest to yourself for review.',
+                    'Use the "Send test email" button to send a digest of all projects in the organization to yourself for review. It is available once digest emails are enabled.',
                   )}
                 </li>
                 <li>
                   {translate(
-                    'Use the "Preview" section below the form to see the rendered digest for a specific project.',
+                    'Use the "Preview" button to see the rendered digest for a specific project. The preview covers the last 30 days and uses the default site language.',
                   )}
                 </li>
                 <li>

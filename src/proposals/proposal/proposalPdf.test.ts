@@ -95,3 +95,23 @@ describe('buildProposalDocument', () => {
     expect(empty).toContain('No team members.');
   });
 });
+
+describe('buildProposalDocument for a provider', () => {
+  const NOTE = "Only your offerings' part is shown";
+
+  it("says that other providers' requests are left out", () => {
+    const document = buildProposalDocument(
+      { ...proposal, reads_own_offerings_only: true },
+      resources,
+      team,
+    );
+    expect(flatten(document.content)).toContain(NOTE);
+  });
+
+  it('says nothing of the kind to whoever reads every request', () => {
+    expect(text()).not.toContain(NOTE);
+  });
+
+  const text = () =>
+    flatten(buildProposalDocument(proposal, resources, team).content);
+});

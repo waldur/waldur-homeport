@@ -72,6 +72,7 @@ export const OrderActionsButton = ({
       hasPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         customerId: order.provider_uuid,
+        offeringId: order.offering_uuid,
       })
     );
   }, [order, user, hideProviderActions]);
@@ -86,6 +87,7 @@ export const OrderActionsButton = ({
       hasPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         customerId: order.provider_uuid,
+        offeringId: order.offering_uuid,
       })
     );
   }, [order, user, hideProviderActions]);
@@ -100,6 +102,7 @@ export const OrderActionsButton = ({
     return hasPermission(user, {
       permission: PermissionEnum.APPROVE_ORDER,
       customerId: order.provider_uuid,
+      offeringId: order.offering_uuid,
     });
   }, [order, user]);
 

@@ -27,6 +27,8 @@ export const FormSteps: FC<{
    *  where completion / error state isn't meaningful (e.g. viewing a
    *  submitted proposal). */
   hideStatusIcons?: boolean;
+  /** Called with the step's id when the reader picks it. */
+  onSelect?(id: string): void;
 }> = ({
   steps,
   completedSteps = [],
@@ -35,6 +37,7 @@ export const FormSteps: FC<{
   criticalErrors,
   showRequiredErrors,
   hideStatusIcons,
+  onSelect,
 }) => {
   const nonRequiredErrors = useMemo(() => {
     const errorsFlatten = flattenObject(errors);
@@ -146,5 +149,10 @@ export const FormSteps: FC<{
     };
   });
 
-  return <ScrollSpyNav items={tabs} />;
+  return (
+    <ScrollSpyNav
+      items={tabs}
+      onSelect={onSelect ? (key) => onSelect(key) : undefined}
+    />
+  );
 };

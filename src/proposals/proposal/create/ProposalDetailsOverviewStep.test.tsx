@@ -11,10 +11,10 @@ const baseProposal = {
   created_by_name: 'Jane Roe',
 } as any;
 
-const renderStep = (proposal: any) =>
+const renderStep = (proposal: any, params: Record<string, unknown> = {}) =>
   renderWithProviders(
     <ProposalDetailsOverviewStep
-      {...({ id: 'overview', params: { proposal } } as any)}
+      {...({ id: 'overview', params: { proposal, ...params } } as any)}
     />,
   );
 
@@ -59,6 +59,26 @@ describe('ProposalDetailsOverviewStep', () => {
     const columns = Array.from(container.querySelectorAll('.grid > div'));
     expect(columns.length).toBeGreaterThan(0);
     columns.forEach((column) => expect(column).not.toBeEmptyDOMElement());
+  });
+
+  it('offers the applicant the reviews shared with them', () => {
+    renderStep(
+      { ...baseProposal, round: null },
+      { applicantReadsReviews: true },
+    );
+
+    expect(screen.getByRole('button', { name: 'Reviews' })).toBeInTheDocument();
+  });
+
+  it('offers nobody else the reviews without a review step', () => {
+    renderStep(
+      { ...baseProposal, round: null },
+      { canViewReviews: true, workflowStates: [] },
+    );
+
+    expect(
+      screen.queryByRole('button', { name: 'Reviews' }),
+    ).not.toBeInTheDocument();
   });
 
   it('shows the creator to viewers who may see it', () => {

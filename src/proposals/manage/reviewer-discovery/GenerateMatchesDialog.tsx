@@ -7,6 +7,7 @@ import {
   Proposal,
   proposalProposalsList,
   proposalProtectedCallsGenerateSuggestions,
+  proposalProtectedCallsMatchingConfigurationRetrieve,
 } from 'waldur-js-client';
 
 import { RangeInput } from 'waldur-ui';
@@ -63,6 +64,9 @@ const sourceOptions: SourceOption[] = [
   },
 ];
 
+// The model's default, while a call has no matching configuration saved.
+const DEFAULT_MIN_AFFINITY = 0.1;
+
 const searchModeOptions = [
   {
     value: 'expertise_only',
@@ -89,9 +93,10 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
   const { closeDialog } = useModal();
 
-  // Fetch proposals for this call
+  // Fetch proposals for this call. A cancelled one will not be reviewed, and
+  // matching leaves it out, so it is neither counted nor offered here.
   const { data: proposals, isLoading: proposalsLoading } = useQuery({
-    queryKey: ['proposals', resolve.call.uuid],
+    queryKey: ['proposals', resolve.call.uuid, 'matchable'],
     queryFn: async () => {
       const response = await proposalProposalsList({
         query: {
@@ -99,9 +104,30 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
           page_size: 100,
         },
       });
-      return response.data;
+      return response.data.filter((proposal) => proposal.state !== 'canceled');
     },
   });
+
+  // The call's minimum affinity, which matching applies unless changed here.
+  const { data: matchingConfig } = useQuery({
+    queryKey: ['matching-config', resolve.call.uuid],
+    queryFn: () =>
+      proposalProtectedCallsMatchingConfigurationRetrieve({
+        path: { uuid: resolve.call.uuid },
+      }).then((response) => response.data),
+    retry: false,
+  });
+  const minThreshold = Math.round(
+    (matchingConfig?.min_affinity_threshold ?? DEFAULT_MIN_AFFINITY) * 100,
+  );
+  const initialValues = useMemo(
+    () => ({
+      source: sourceOptions.find((s) => s.value === 'all_proposals'),
+      keyword_search_mode: searchModeOptions[0],
+      min_threshold: minThreshold,
+    }),
+    [minThreshold],
+  );
 
   const proposalOptions = useMemo(
     () =>
@@ -134,8 +160,11 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
             'expertise_only' | 'full_text';
         }
 
-        if (values.min_threshold !== undefined && values.min_threshold > 0) {
-          body.min_affinity_threshold = values.min_threshold / 100;
+        // Sent as chosen, 0 included: a call's own minimum is what the
+        // slider starts at.
+        const threshold = Number(values.min_threshold);
+        if (Number.isFinite(threshold)) {
+          body.min_affinity_threshold = threshold / 100;
         }
 
         const response = await proposalProtectedCallsGenerateSuggestions({
@@ -193,11 +222,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
     <Form
       onSubmit={processRequest}
       validate={validate}
-      initialValues={{
-        source: sourceOptions.find((s) => s.value === 'all_proposals'),
-        keyword_search_mode: searchModeOptions[0],
-        min_threshold: 10,
-      }}
+      initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

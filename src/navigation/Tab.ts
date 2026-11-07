@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 
-export interface Tab {
+import type { TabCountProps } from 'waldur-ui';
+
+export interface Tab extends TabCountProps {
   title: ReactNode;
   to?: string;
   redirectTo?: { state; params? } | string;

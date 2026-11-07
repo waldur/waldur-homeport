@@ -4,14 +4,21 @@ import { FC, PropsWithChildren } from 'react';
 import { useBreakpointDown, Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { useFullPage } from '@/navigation/context';
-import { PAGE_CONTAINER_XXL_CLASSNAME } from '@/navigation/pageContainer';
+import {
+  PAGE_CONTAINER_CLASSNAME,
+  PAGE_CONTAINER_XXL_CLASSNAME,
+} from '@/navigation/pageContainer';
 
 import './SidebarLayout.scss';
 
-const Container: FC<PropsWithChildren> = (props) => (
+/** `fluid`: the full width of the page, as a list page has it, not capped. */
+const frame = (fluid?: boolean) =>
+  fluid ? PAGE_CONTAINER_CLASSNAME : PAGE_CONTAINER_XXL_CLASSNAME;
+
+const Container: FC<PropsWithChildren<{ fluid?: boolean }>> = (props) => (
   <div
     className={classNames(
-      PAGE_CONTAINER_XXL_CLASSNAME,
+      frame(props.fluid),
       'flex flex-col xl:flex-row gap-4 pb-8',
     )}
   >
@@ -100,10 +107,12 @@ const Sidebar: FC<
   );
 };
 
-const Header: FC<PropsWithChildren<{ className?: string }>> = (props) => (
+const Header: FC<PropsWithChildren<{ className?: string; fluid?: boolean }>> = (
+  props,
+) => (
   <div
     className={classNames(
-      PAGE_CONTAINER_XXL_CLASSNAME,
+      frame(props.fluid),
       'v-stepper-form-header',
       props.className,
     )}

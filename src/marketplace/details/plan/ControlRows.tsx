@@ -5,6 +5,7 @@ import { getDerivedComponents } from '@/marketplace/common/derivedLimits';
 
 import { ComponentEditRow2 } from './ComponentEditRow';
 import { FixedRows } from './FixedRows';
+import { useReadOnlyComponents } from './readOnlyComponents';
 import { Component, PlanPeriod } from './types';
 
 export const ControlRows = (props: {
@@ -23,9 +24,18 @@ export const ControlRows = (props: {
 }) => {
   // Quantities an order-form option calculates are shown, not typed: the
   // server would replace a typed value anyway.
-  const derived = useMemo(
+  const calculated = useMemo(
     () => getDerivedComponents(props.offering?.options?.options),
     [props.offering],
+  );
+  // Quantities decided outside the form are shown the same way.
+  const decidedElsewhere = useReadOnlyComponents();
+  const derived = useMemo(
+    () =>
+      decidedElsewhere.size
+        ? new Set([...calculated.keys(), ...decidedElsewhere])
+        : new Set(calculated.keys()),
+    [calculated, decidedElsewhere],
   );
   return props.viewMode || props.readOnlyLimits ? (
     <FixedRows

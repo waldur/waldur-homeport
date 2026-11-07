@@ -3,6 +3,7 @@ import { FC, ReactNode } from 'react';
 
 import { Card, CardContent, CardFooter } from 'waldur-ui';
 
+import { CLICKABLE_CARD_CLASSNAME } from './clickableCard';
 import { Image } from './Image';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { getAbbreviation } from './utils';
@@ -32,7 +33,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
     bordered
     className={classNames(
       'h-full overflow-hidden',
-      props.clickable && 'cursor-pointer hover:border-brand',
+      props.clickable && CLICKABLE_CARD_CLASSNAME,
     )}
     data-testid="model-card"
     onClick={props.onClick}

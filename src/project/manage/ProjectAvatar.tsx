@@ -18,7 +18,13 @@ interface FormData {
   image;
 }
 
-export const ProjectAvatar = ({ project }: { project: Project }) => {
+export const ProjectAvatar = ({
+  project,
+  canEdit = true,
+}: {
+  project: Project;
+  canEdit?: boolean;
+}) => {
   const abbreviation = useMemo(() => getItemAbbreviation(project), [project]);
   const setCurrentProject = useSetProject();
 
@@ -56,9 +62,11 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                     initialValue={project.image}
                     max={2 * 1024 * 1024} // 2MB
                     size={64}
-                    disabled={project.is_removed}
+                    disabled={project.is_removed || !canEdit}
                     extraActions={({ isChanged, isTooLarge }) =>
-                      (isChanged || submitting) && !project.is_removed ? (
+                      (isChanged || submitting) &&
+                      !project.is_removed &&
+                      canEdit ? (
                         <SubmitButton
                           size="sm"
                           submitting={submitting}

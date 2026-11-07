@@ -9,6 +9,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
+import { criterionLabel } from '@/proposals/review/criteriaScore';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 // Per-field review comments, in display order. Only non-empty ones are shown.
@@ -68,6 +69,9 @@ export const ReviewExpandableRow: FC<{
 // (e.g. as a "Review from X" tab in the proposal details overview dialog).
 export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
   const fieldComments = COMMENT_FIELDS.filter((field) => review[field.key]);
+  const criteria = [...(review.criteria ?? [])].sort(
+    (a, b) => a.order - b.order,
+  );
 
   const summaryItems = (
     <>
@@ -86,16 +90,37 @@ export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
           )
         }
       />
+      {criteria.map((criterion) => {
+        const score = review.criteria_scores?.[criterion.uuid];
+        return (
+          <PropertyItem
+            key={criterion.uuid}
+            label={criterionLabel(criterion, criteria)}
+            value={
+              score ? (
+                <div className="flex items-center gap-1.5">
+                  <RateStars value={score} size={16} />
+                  <span className="text-quaternary">({score}/5)</span>
+                </div>
+              ) : null
+            }
+            hideIfEmpty={false}
+          />
+        );
+      })}
       <PropertyItem
         label={translate('Public comment')}
         value={review.summary_public_comment}
         hideIfEmpty={false}
       />
-      <PropertyItem
-        label={translate('Private comment')}
-        value={review.summary_private_comment}
-        hideIfEmpty={false}
-      />
+      {/* Only for whom the API returns it: the applicant never gets it. */}
+      {'summary_private_comment' in review && (
+        <PropertyItem
+          label={translate('Private comment')}
+          value={review.summary_private_comment}
+          hideIfEmpty={false}
+        />
+      )}
       {review.created && (
         <PropertyItem
           label={translate('Created')}
@@ -113,22 +138,30 @@ export const ReviewDetails: FC<{ review: ProposalReview }> = ({ review }) => {
 
   if (fieldComments.length > 0) {
     return (
-      <PropertyList variant="summary" className="flex flex-col gap-6">
-        <PropertyList.Section title={translate('Summary')}>
-          {summaryItems}
-        </PropertyList.Section>
-        <PropertyList.Section title={translate('Field comments')}>
-          {fieldComments.map((field) => (
-            <PropertyItem
-              key={field.key}
-              label={field.label}
-              value={review[field.key]}
-            />
-          ))}
-        </PropertyList.Section>
+      <PropertyList as="div" variant="summary" className="flex flex-col gap-6">
+        <div>
+          <h6 className="mb-2.5">{translate('Summary')}</h6>
+          <PropertyList.Section>{summaryItems}</PropertyList.Section>
+        </div>
+        <div>
+          <h6 className="mb-2.5">{translate('Field comments')}</h6>
+          <PropertyList.Section>
+            {fieldComments.map((field) => (
+              <PropertyItem
+                key={field.key}
+                label={field.label}
+                value={review[field.key]}
+              />
+            ))}
+          </PropertyList.Section>
+        </div>
       </PropertyList>
     );
   }
 
-  return <PropertyList variant="summary">{summaryItems}</PropertyList>;
+  return (
+    <PropertyList as="div" variant="summary">
+      {summaryItems}
+    </PropertyList>
+  );
 };

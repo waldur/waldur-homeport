@@ -17,7 +17,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
-import { MatchingConfig, ALGORITHM_LABELS } from './types';
+import { MatchingConfig } from './types';
 
 interface Props {
   resolve: {
@@ -36,11 +36,11 @@ const generateAffinityFlowDiagram = (config: MatchingConfig): string => {
   return `
 flowchart TB
     subgraph trigger["Compute Affinities"]
-        A[Call Manager clicks 'Compute matrix'] --> B["API: POST /compute-affinities/"]
+        A[Call manager computes affinities] --> B["Create assignment →<br/>Compute affinities"]
     end
 
     subgraph inputs["Input Data"]
-        B --> C{For each<br/>Reviewer × Proposal}
+        B --> C{For each accepted pool reviewer<br/>× proposal in the call}
 
         C --> D[Reviewer Profile]
         C --> E[Proposal Content]
@@ -87,41 +87,34 @@ flowchart TB
 `;
 };
 
-const generateAssignmentDiagram = (config: MatchingConfig): string => {
-  const algorithm = config?.algorithm || 'minmax';
-
-  return `
+const generateAssignmentDiagram = (config: MatchingConfig): string => `
 flowchart LR
-    subgraph matrix["Affinity Matrix"]
-        A["Reviewer × Proposal<br/>scores computed"]
+    subgraph trigger["Generate Assignments"]
+        A["Create assignment →<br/>Generate assignments"] --> B["Submitted and in-review proposals"]
     end
 
-    subgraph constraints["Constraints Applied"]
-        A --> B{Assignment Algorithm}
-        B --> C["Min reviewers/proposal: ${config?.min_reviewers_per_proposal ?? 3}"]
-        B --> D["Max reviewers/proposal: ${config?.max_reviewers_per_proposal ?? 5}"]
-        B --> E["Max proposals/reviewer: ${config?.max_proposals_per_reviewer ?? 10}"]
+    subgraph selection["Reviewer Selection"]
+        B --> C["Reviewers needed: Min reviewers per proposal (${config?.min_reviewers_per_proposal ?? 3})<br/>minus those already reviewing or offered"]
+        C --> D["Skip reviewers with a Pending or Recused conflict,<br/>or already assigned to the proposal"]
+        D --> E["Highest affinity first,<br/>within each reviewer's Maximum assignments"]
+        E --> F["Fill any gap from the pool<br/>without a score"]
     end
 
-    subgraph algorithm["Algorithm: ${ALGORITHM_LABELS[algorithm] || algorithm}"]
-        C & D & E --> F["${algorithm === 'minmax' ? 'Balance load across reviewers' : algorithm === 'fairflow' ? 'Ensure quality threshold' : 'Optimize global assignment'}"]
+    subgraph output["Draft Batches"]
+        F --> G["One draft batch per reviewer"]
+        G --> H["Call manager sends drafts"]
     end
 
-    subgraph output["Proposed Assignments"]
-        F --> G["Reviewer ↔ Proposal<br/>assignments"]
-    end
-
-    style B fill:var(--status-warning-bg-strong),color:var(--text-primary)
-    style F fill:var(--status-success-bg-strong),color:var(--text-primary)
+    style C fill:var(--status-warning-bg-strong),color:var(--text-primary)
+    style E fill:var(--status-success-bg-strong),color:var(--text-primary)
 `;
-};
 
 const SCORING_METHODS = [
   {
     method: 'keyword',
     label: translate('Keyword Matching'),
     description: translate(
-      'Matches reviewer expertise keywords against proposal text. Keywords are weighted by proficiency level: Expert (100%), Familiar (70%).',
+      'Matches reviewer expertise keywords against proposal text. Keywords are weighted by proficiency level: Expert (100%), Familiar (70%). Basic keywords are not used.',
     ),
     formula: translate(
       'Score = matched keyword weights / total keyword weights',
@@ -154,7 +147,7 @@ const DATA_SOURCES = [
       {
         field: translate('Expertise keywords'),
         description: translate(
-          'Keywords with proficiency levels (Expert, Familiar, Learning). Expert keywords are weighted 3×, Familiar 2×.',
+          'Keywords with proficiency levels (Expert, Familiar, Basic). In text similarity, Expert keywords count 3×, Familiar 2× and Basic 1×.',
         ),
       },
       {
@@ -210,17 +203,17 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
               <ul className="mb-0 mt-1.5">
                 <li>
                   {translate(
-                    'Only reviewers who have ACCEPTED the pool invitation are included.',
+                    'Only reviewers who accepted the pool invitation, are in good standing and have an active account are included.',
                   )}
                 </li>
                 <li>
                   {translate(
-                    'All proposals from all rounds in this call are matched.',
+                    'Affinities cover all proposals from all rounds in this call. Generate assignments only assigns submitted and in-review proposals.',
                   )}
                 </li>
                 <li>
                   {translate(
-                    'Affinity scores are computed and cached for all reviewer-proposal pairs.',
+                    'Affinity scores are stored until they are computed again. Compute them again after reviewers or proposals change.',
                   )}
                 </li>
               </ul>
@@ -233,7 +226,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('Affinity computation flow')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'When you click "Compute matrix", the system calculates how well each reviewer matches each proposal based on their expertise and the proposal content.',
+              'When affinities are computed, the system calculates how well each reviewer matches each proposal based on their expertise and the proposal content. A call manager computes them with "Compute affinities" in the "Create assignment" menu of the Assignment batches tab, before using "Generate assignments"; both are offered only when automated matching is turned on for the platform.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -309,7 +302,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-3">{translate('Assignment algorithm')}</h4>
           <p className="text-quaternary mb-3">
             {translate(
-              'Once affinity scores are computed, an assignment algorithm can be used to optimally assign reviewers to proposals while respecting constraints.',
+              'Generate assignments picks reviewers for each proposal by stored affinity score and creates draft assignment batches for the call manager to review and send.',
             )}
           </p>
           <div className="border border-secondary rounded-lg p-3">
@@ -318,6 +311,11 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
               className="text-center"
             />
           </div>
+          <p className="text-quaternary mt-3 mb-0">
+            {translate(
+              "Generate assignments refuses more reviewers per proposal than Max reviewers per proposal, and a reviewer's load is the smaller of Maximum assignments in the reviewer pool and Max proposals per reviewer. The Assignment algorithm setting is not applied yet: reviewers are always picked by affinity, best first.",
+            )}
+          </p>
         </section>
 
         {/* Score Interpretation */}

@@ -107,6 +107,73 @@ describe('ExportDialog layout', () => {
   });
 });
 
+describe('ExportDialog with a full export of its own format', () => {
+  const download = vi.fn(() => Promise.resolve());
+  const report: TableFullExport = {
+    label: 'Validation report',
+    description: 'PDF of the whole validation.',
+    format: 'pdf',
+    download,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    (useModal as Mock).mockReturnValue({
+      openDialog: vi.fn(),
+      closeDialog: vi.fn(),
+    });
+    registerTable({
+      table: 'report-table',
+      fetchData: () => Promise.resolve({ rows: [], resultCount: 0 }),
+    } as any);
+  });
+
+  const renderDialog = (table?: string, ownFullExport = report) =>
+    render(
+      <Provider store={createStore(() => ({ tables: {} }))}>
+        <ExportDialog
+          resolve={{
+            table,
+            format: 'clipboard',
+            ownProps: { fullExport: ownFullExport } as any,
+          }}
+        />
+      </Provider>,
+    );
+
+  it('says what it holds in its own words and writes its own format', async () => {
+    renderDialog('report-table');
+    expect(screen.getByText('Visible columns')).toBeInTheDocument();
+    expect(
+      screen.getByText('PDF of the whole validation.'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/CSV, every page/)).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Validation report'));
+    expect(screen.getByText('PDF')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Export' }));
+    expect(download).toHaveBeenCalledTimes(1);
+  });
+
+  it('offers the full export alone without a table', async () => {
+    renderDialog(undefined);
+    expect(screen.queryByText('Visible columns')).not.toBeInTheDocument();
+    expect(screen.queryByText('All pages')).not.toBeInTheDocument();
+    expect(screen.getByText('PDF')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Export' }));
+    expect(download).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps a CSV full export as it was', () => {
+    renderDialog('report-table', { ...fullExport, format: undefined });
+    expect(
+      screen.getByText('Every field. CSV, every page.'),
+    ).toBeInTheDocument();
+  });
+});
+
 describe('ExportDialog PDF size warning', () => {
   beforeEach(() => {
     vi.clearAllMocks();

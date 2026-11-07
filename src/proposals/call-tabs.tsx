@@ -50,11 +50,14 @@ const fetchCallCount = async <Q extends CallCountQueryBase>(
 export const fetchAllCallCounts = async <Q extends CallCountQueryBase>(
   fetcher: CallListFetcher<Q>,
   baseQuery: Q,
+  { withDraft = true }: { withDraft?: boolean } = {},
 ): Promise<CallCounts> => {
   const [all, active, draft, archived] = await Promise.all([
     fetchCallCount(fetcher, baseQuery),
     fetchCallCount(fetcher, baseQuery, 'active'),
-    fetchCallCount(fetcher, baseQuery, 'draft'),
+    withDraft
+      ? fetchCallCount(fetcher, baseQuery, 'draft')
+      : Promise.resolve(undefined),
     fetchCallCount(fetcher, baseQuery, 'archived'),
   ]);
   return { all, active, draft, archived };
@@ -88,30 +91,38 @@ export const resolveCallStateFilter = (
   return values.length ? (values as CallStates[]) : undefined;
 };
 
-export const buildCallTabs = (counts?: CallCounts): TableTab[] => [
-  {
-    key: 'all',
-    title: translate('All'),
-    count: counts?.all,
-    params: { state: undefined },
-    default: true,
-  },
-  {
-    key: 'active',
-    title: translate('Active'),
-    count: counts?.active,
-    params: { state: 'active' },
-  },
-  {
-    key: 'draft',
-    title: translate('Draft'),
-    count: counts?.draft,
-    params: { state: 'draft' },
-  },
-  {
-    key: 'archived',
-    title: translate('Archived'),
-    count: counts?.archived,
-    params: { state: 'archived' },
-  },
-];
+/**
+ * The state tabs of a call list. A public list holds no draft -- a draft is
+ * its managers' to see, on their own list -- so it has no Draft tab.
+ */
+export const buildCallTabs = (
+  counts?: CallCounts,
+  { withDraft = true }: { withDraft?: boolean } = {},
+): TableTab[] =>
+  [
+    {
+      key: 'all',
+      title: translate('All'),
+      count: counts?.all,
+      params: { state: undefined },
+      default: true,
+    },
+    {
+      key: 'active',
+      title: translate('Active'),
+      count: counts?.active,
+      params: { state: 'active' },
+    },
+    {
+      key: 'draft',
+      title: translate('Draft'),
+      count: counts?.draft,
+      params: { state: 'draft' },
+    },
+    {
+      key: 'archived',
+      title: translate('Archived'),
+      count: counts?.archived,
+      params: { state: 'archived' },
+    },
+  ].filter((tab) => withDraft || tab.key !== 'draft');

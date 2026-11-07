@@ -185,7 +185,14 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           ) : undefined
         }
         trailing={trailing}
-        className={classNames(isHighlighted && 'active', props.className)}
+        className={classNames(
+          isHighlighted && 'active',
+          props.className,
+          // A destructive row keeps its colour on hover too; the row's own
+          // hover colour would turn it black.
+          props.iconColor === 'danger' &&
+            'action-row-active:text-danger menu-row-active:text-danger',
+        )}
         data-highlighted={isHighlighted ? '' : undefined}
         aria-describedby={description ? descriptionId : undefined}
         // onSelect, not onClick: it covers keyboard activation (Enter/Space)

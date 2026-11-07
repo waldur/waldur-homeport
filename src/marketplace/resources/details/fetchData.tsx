@@ -3,7 +3,6 @@ import {
   marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesDetailsRetrieve,
   marketplaceResourceMetricsList,
-  marketplaceResourcesOfferingRetrieve,
   Offering,
   Resource,
 } from 'waldur-js-client';
@@ -30,6 +29,7 @@ import {
 import { getHpcWorkspaceMode } from '@/marketplace/resources/details/hpc/queries';
 import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
 import { shouldShowLimitChangeRequestsTab } from '@/marketplace/resources/request-limits-change/utils';
+import { retrieveResourceOffering } from '@/marketplace/resources/usage/utils';
 import { PageBarTab } from '@/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
@@ -561,16 +561,25 @@ export const getResourceTabs = ({
 export const fetchData = async (resource: Resource) => {
   let scope;
   if (resource.scope) {
-    scope = (
-      await marketplaceResourcesDetailsRetrieve({
-        path: { uuid: resource.uuid },
-      })
-    ).data;
+    try {
+      scope = (
+        await marketplaceResourcesDetailsRetrieve({
+          path: { uuid: resource.uuid },
+        })
+      ).data;
+    } catch (error) {
+      // A call manager reading what their call allocated is refused the
+      // backend details; the page renders without them.
+      if (error?.response?.status !== 404) {
+        throw error;
+      }
+    }
   }
 
-  const offering = await marketplaceResourcesOfferingRetrieve({
-    path: { uuid: resource.uuid },
-  }).then((response) => response.data);
+  const offering = await retrieveResourceOffering(
+    resource.uuid,
+    resource.offering_uuid,
+  );
   // Billing fields are resolved for the resource's plan: under a usage plan
   // the builtin components read as usage-based.
   const components = resolvePlanComponents(

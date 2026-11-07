@@ -140,7 +140,8 @@ export const canViewConsumerResource = (
 /**
  * Should links to the order's resource open the provider's view of it? Only
  * when the user cannot read it through the consumer endpoints, which answer
- * them with 404, but can open the provider workspace.
+ * them with 404, but can open the provider workspace, or holds a role on the
+ * order's offering, whose resources the provider pages show them.
  */
 export const shouldLinkProviderResource = (
   user: User | undefined,
@@ -150,6 +151,7 @@ export const shouldLinkProviderResource = (
     | 'project_uuid'
     | 'marketplace_resource_uuid'
     | 'provider_uuid'
+    | 'offering_uuid'
   >,
 ): boolean =>
   !!user &&
@@ -159,4 +161,8 @@ export const shouldLinkProviderResource = (
     projectUuid: order.project_uuid,
     resourceUuid: order.marketplace_resource_uuid,
   }) &&
-  checkCanAccessServiceProvider({ uuid: order.provider_uuid }, user);
+  (checkCanAccessServiceProvider({ uuid: order.provider_uuid }, user) ||
+    (user.permissions ?? []).some(
+      ({ scope_type, scope_uuid }) =>
+        scope_type === 'offering' && scope_uuid === order.offering_uuid,
+    ));

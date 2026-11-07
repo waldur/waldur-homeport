@@ -25,6 +25,8 @@ const makeRound = (overrides: Record<string, unknown>) =>
     status: 'ended',
     lifecycle_state: 'evaluating',
     adopted_at: null,
+    // The call team's view: it sees the held decisions, so a count.
+    held_decisions_count: 0,
     ...overrides,
   }) as any;
 
@@ -219,7 +221,9 @@ describe('RoundLifecycleActions', () => {
 
   it('offers the lifecycle but not the round setting with CALL.CLOSE_ROUNDS alone', () => {
     renderActions(
-      makeRound({ lifecycle_state: 'deciding' }),
+      // Without CALL.UPDATE the held decisions, and with them the adoption
+      // record, are withheld: the count comes back null.
+      makeRound({ lifecycle_state: 'deciding', held_decisions_count: null }),
       vi.fn(),
       {},
       {
@@ -227,10 +231,60 @@ describe('RoundLifecycleActions', () => {
         canUpdate: false,
       },
     );
-    expect(titles()).toEqual(['Publish results', 'Record adoption']);
+    expect(titles()).toEqual(['Publish results']);
     expect(
       screen.queryByText('Undecided proposals rule'),
     ).not.toBeInTheDocument();
+  });
+
+  it('lets a round-closer record the adoption once the results are out', () => {
+    renderActions(
+      makeRound({
+        lifecycle_state: 'results_published',
+        held_decisions_count: null,
+      }),
+      vi.fn(),
+      {},
+      { canCloseRounds: true, canUpdate: false },
+    );
+    expect(titles()).toEqual(['Complete round', 'Record adoption']);
+  });
+
+  describe('on a call requiring adoption', () => {
+    const adoption = { adoption_required: true };
+
+    it('records the adoption only while deciding', () => {
+      renderActions(
+        makeRound({ lifecycle_state: 'evaluating' }),
+        vi.fn(),
+        adoption,
+      );
+      expect(titles()).toEqual(['Publish results', 'Start deciding']);
+    });
+
+    it('disables publishing until the adoption is recorded', () => {
+      renderActions(
+        makeRound({ lifecycle_state: 'deciding' }),
+        vi.fn(),
+        adoption,
+      );
+      expect(titles()).toEqual(['Publish results', 'Record adoption']);
+      expect(
+        screen.getByRole('menuitem', { name: 'Publish results' }),
+      ).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    it('publishes once adopted', () => {
+      renderActions(
+        makeRound({ lifecycle_state: 'deciding', adopted_at: '2026-09-15' }),
+        vi.fn(),
+        adoption,
+      );
+      expect(
+        screen.getByRole('menuitem', { name: 'Publish results' }),
+      ).not.toHaveAttribute('aria-disabled', 'true');
+      expect(screen.getByText('Edit adoption record')).toBeInTheDocument();
+    });
   });
 
   it('offers only the round setting with CALL.UPDATE alone', () => {

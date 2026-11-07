@@ -14,7 +14,7 @@ import exportAs from './exporters';
 import { ExportConfig } from './exporters/types';
 import { getTableOptions } from './registry';
 import { getTableState } from './selectors';
-import { TableRequest } from './types';
+import { TableFullExport, TableOptionsType, TableRequest } from './types';
 
 /** The table's columns as an automatic export writes them: in the user's
  * order, only the enabled ones, without those marked `export: false`. */
@@ -49,8 +49,13 @@ function getExportColumns(props) {
 
 /** How many columns an export of this table holds, known before any row is
  * fetched. Undefined for a table whose own exportRow sets them. */
-export function getExportColumnCount(table, props): number | undefined {
-  const { exportFields, exportRow } = getTableOptions(table);
+export function getExportColumnCount(
+  table: string | undefined,
+  props,
+): number | undefined {
+  const { exportFields, exportRow } = table
+    ? getTableOptions(table)
+    : ({} as TableOptionsType);
   if (exportFields) {
     const fields =
       typeof exportFields === 'function' ? exportFields(props) : exportFields;
@@ -63,8 +68,9 @@ export function getExportColumnCount(table, props): number | undefined {
 }
 
 /** Exports the table. The run stops when `abort` is called or the dialog
- * using the hook unmounts: no file, no toast, no `closeDialog`. */
-export function useTableExport(table, props?) {
+ * using the hook unmounts: no file, no toast, no `closeDialog`. `table` is
+ * left out when the dialog offers only `props.fullExport`. */
+export function useTableExport(table: string | undefined, props?) {
   const { closeDialog } = useModal();
   const controller = useRef<AbortController>(undefined);
   const [progress, setProgress] = useState<{
@@ -81,7 +87,7 @@ export function useTableExport(table, props?) {
     exportData,
     fetchData,
     ...options
-  } = getTableOptions(table);
+  } = table ? getTableOptions(table) : ({} as TableOptionsType);
 
   const tableState = useSelector(getTableState(table));
   // The rows on screen, from the table that opened the dialog; all-pages export
@@ -210,17 +216,32 @@ export function useTableExport(table, props?) {
     controller.current = new AbortController();
     const { signal } = controller.current;
     setProgress(undefined);
-    try {
-      // The server writes this one; nothing to assemble from the rows.
-      if (config.content === 'full' && props?.fullExport) {
-        await props.fullExport.download({ query: tableState.query, signal });
+    // The server writes this one; nothing to assemble from the rows.
+    const fullExport: TableFullExport = props?.fullExport;
+    if (config.content === 'full' && fullExport) {
+      try {
+        await fullExport.download({ query: tableState.query, signal });
         if (signal.aborted) return;
         showSuccess(
-          translate('Table has been exported to {format}.', { format: 'CSV' }),
+          fullExport.format
+            ? translate('{name} has been exported.', {
+                name: fullExport.label,
+              })
+            : translate('Table has been exported to {format}.', {
+                format: 'CSV',
+              }),
         );
         closeDialog();
-        return;
+      } catch (e) {
+        if (signal.aborted) return;
+        showErrorResponse(
+          e,
+          fullExport.errorMessage ?? translate('Unable to export table.'),
+        );
       }
+      return;
+    }
+    try {
       if (config.format === 'json') {
         const { default: saveAsJson } = await import('./exporters/json');
         const rows = await fetchApiRows(config, signal);

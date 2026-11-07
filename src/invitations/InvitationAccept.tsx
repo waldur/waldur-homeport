@@ -14,7 +14,7 @@ export const InvitationAccept: FunctionComponent = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
 
-  const { checkAndAccept } = useCheckAndAccept(uuid);
+  const { checkAndAccept, isAccepting } = useCheckAndAccept(uuid);
 
   useEffectOnce(() => {
     if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
@@ -27,9 +27,14 @@ export const InvitationAccept: FunctionComponent = () => {
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-col items-center justify-center flex-auto p-8">
-        <LoadingSpinner />
-        <p>{translate('Your invitation is being processed.')}</p>
-        <p>{translate('You will be redirected in a moment.')}</p>
+        {/* Until the user confirms, the confirmation dialog is the page. */}
+        {isAccepting ? (
+          <>
+            <LoadingSpinner />
+            <p>{translate('Your invitation is being processed.')}</p>
+            <p>{translate('You will be redirected in a moment.')}</p>
+          </>
+        ) : null}
       </div>
     </div>
   );

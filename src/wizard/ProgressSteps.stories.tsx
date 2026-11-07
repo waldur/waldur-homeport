@@ -1,6 +1,7 @@
 import { GearIcon, ShieldCheckIcon, UserIcon } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { ProgressStep, ProgressSteps } from './ProgressSteps';
 
@@ -140,7 +141,22 @@ export const CustomIcons: Story = {
   },
 };
 
+/**
+ * With `onClick`, each step is a real button: Tab reaches it, Enter or Space
+ * opens it, it is ringed when focused, and the current one carries
+ * `aria-current="step"`. Without `onClick` the steps stay plain.
+ */
 export const Interactive: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.tab();
+    await expect(
+      canvas.getByRole('button', { name: 'Plan Selection' }),
+    ).toHaveFocus();
+    await expect(
+      canvas.getByRole('button', { current: 'step' }),
+    ).toHaveAccessibleName('Resource Limits');
+  },
   render: function InteractiveStory() {
     const [currentIndex, setCurrentIndex] = useState(1);
     const labels = [

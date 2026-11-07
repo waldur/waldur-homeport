@@ -4,6 +4,7 @@ import { translate } from '@/i18n';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { getProposalRoles } from '@/permissions/utils';
+import { isPartEditable } from '@/proposals/proposal/changeRequests';
 import { Proposal } from '@/proposals/types';
 
 type TeamUser = Pick<User, 'uuid' | 'is_staff' | 'permissions'>;
@@ -15,7 +16,8 @@ type TeamProposal = Pick<
   | 'call_uuid'
   | 'call_managing_organisation_uuid'
   | 'created_by_uuid'
->;
+> &
+  Partial<Pick<Proposal, 'open_change_requests'>>;
 
 type TeamChange = 'grant' | 'revoke';
 
@@ -93,6 +95,14 @@ export const canSubmitProposal = (user: TeamUser, proposal: TeamProposal) =>
   canEditProposal(user, proposal) &&
   holdsOnProposal(user, proposal, PermissionEnum.MANAGE_PROPOSAL);
 
+/** Withdraw the proposal: its managers (PROPOSAL.MANAGE) and its creator,
+ * as the backend allows -- not only the creator. Staff withdraw it, if
+ * ever, from no page of theirs: they are not on the team. */
+export const canWithdrawProposal = (user: TeamUser, proposal: TeamProposal) =>
+  Boolean(user && proposal) &&
+  isOnProposalTeam(user, proposal) &&
+  holdsOnProposal(user, proposal, PermissionEnum.MANAGE_PROPOSAL);
+
 /** Manage the team at all (its invitations and change log included): its
  * managers (PROPOSAL.MANAGE), those overseeing the call, and staff. */
 export const canManageProposalTeam = (user: TeamUser, proposal: TeamProposal) =>
@@ -107,9 +117,23 @@ export const canManageProposalTeam = (user: TeamUser, proposal: TeamProposal) =>
 
 /** Whether the user is on the applicant side of the proposal: its creator
  * or the holder of any role on it. */
-export const isOnProposalTeam = (user: TeamUser, proposal: TeamProposal) =>
+export const isOnProposalTeam = (
+  user: TeamUser,
+  proposal: Pick<TeamProposal, 'uuid' | 'created_by_uuid'>,
+) =>
   Boolean(user && proposal) &&
   (user.uuid === proposal.created_by_uuid || holdsProposalRole(user, proposal));
+
+/** Act for the applicant -- answer the award, ask for an extension, submit
+ * the changes asked, call off the team's own run: any of the proposal's
+ * current managers, as the backend's acts_for_applicant. The other members
+ * of the team, and its creator once no longer a manager, only read. */
+export const actsForApplicant = (
+  user: TeamUser,
+  proposal: Pick<TeamProposal, 'uuid'>,
+): boolean =>
+  Boolean(user && proposal) &&
+  holdsProposalRole(user, proposal, RoleEnum.PROPOSAL_MANAGER);
 
 /**
  * Mirrors the backend's team rules for a proposal:
@@ -118,7 +142,10 @@ export const isOnProposalTeam = (user: TeamUser, proposal: TeamProposal) =>
  * - while it is a draft, its managers may change any role; the manager and
  *   administrator roles are reserved to them, while other roles also follow
  *   the team permission;
- * - once submitted, the team is fixed for the applicant.
+ * - once submitted, the team is fixed for the applicant, unless an open
+ *   request for changes unlocks it;
+ * - once the award is accepted, it is settled for everyone, staff and
+ *   overseers included: the people are managed on the awarded project.
  */
 export const canChangeProposalRole = (
   user: TeamUser,
@@ -126,14 +153,14 @@ export const canChangeProposalRole = (
   roleName: string,
   change: TeamChange,
 ): boolean => {
-  if (!user || !proposal) {
+  if (!user || !proposal || proposal.state === 'accepted') {
     return false;
   }
   // Staff pass as overseers: hasPermission lets them through.
   if (canOverseeProposal(user, proposal)) {
     return true;
   }
-  if (proposal.state !== 'draft') {
+  if (!isPartEditable(proposal, 'team')) {
     return false;
   }
   if (holdsProposalRole(user, proposal, RoleEnum.PROPOSAL_MANAGER)) {
@@ -184,13 +211,14 @@ export const canRevokeAnyProposalRole = (
     canChangeProposalRole(user, proposal, role.name, 'revoke'),
   );
 
-/** Invite someone by mail: staff and those overseeing the call at any
- * time, the team permission while the proposal is a draft. */
+/** Invite someone by mail: staff and those overseeing the call until the
+ * award is accepted, the team permission while the proposal is a draft. */
 export const canInviteToProposal = (
   user: TeamUser,
   proposal: TeamProposal,
 ): boolean =>
   Boolean(user && proposal) &&
+  proposal.state !== 'accepted' &&
   (canOverseeProposal(user, proposal) ||
     (proposal.state === 'draft' &&
       Boolean(

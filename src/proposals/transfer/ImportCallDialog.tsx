@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { FC, useCallback, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
   CallImportResponse,
@@ -11,15 +11,13 @@ import { AlertItem, BaseButton } from 'waldur-ui';
 import { format } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { BooleanGroup, StringGroup, SubmitButton } from '@/form';
-import { AttachmentItem } from '@/form/upload/AttachmentItem';
-import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { MAX_CALL_EXPORT_SIZE, parseCallExport } from './callExportYaml';
+import { CallFileUpload, ParsedCallFile } from './CallFileUpload';
 import {
   CallTransferSection,
   getPresentSections,
@@ -27,13 +25,6 @@ import {
   getSectionLabel,
   sectionFlags,
 } from './sections';
-
-const EXPORT_FILE_TYPES = {
-  'application/json': ['.json'],
-  'text/yaml': ['.yaml', '.yml'],
-  'application/yaml': ['.yaml', '.yml'],
-  'application/x-yaml': ['.yaml', '.yml'],
-};
 
 interface ImportCallDialogProps {
   resolve: {
@@ -46,13 +37,10 @@ type FormValues = { name: string } & Partial<
   Record<CallTransferSection, boolean>
 >;
 
-interface ParsedFile {
-  file: File;
-  data: Record<string, unknown>;
-  sections: CallTransferSection[];
-}
-
-const ImportResult: FC<{ result: CallImportResponse }> = ({ result }) => {
+/** The call an import created, with what it could not match on this portal. */
+export const ImportCallResult: FC<{ result: CallImportResponse }> = ({
+  result,
+}) => {
   const router = useRouter();
   const { closeDialog } = useModal();
   const openCall = () => {
@@ -93,8 +81,11 @@ const ImportResult: FC<{ result: CallImportResponse }> = ({ result }) => {
 export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
   const router = useRouter();
   const { closeDialog } = useModal();
-  const [parsed, setParsed] = useState<ParsedFile | null>(null);
-  const [fileError, setFileError] = useState<string | null>(null);
+  const [parsed, setParsed] = useState<ParsedCallFile | null>(null);
+  const sections = useMemo(
+    () => (parsed ? getPresentSections(parsed.data) : []),
+    [parsed],
+  );
   const [result, setResult] = useState<CallImportResponse | null>(null);
 
   const mutation = useManagedMutation({
@@ -125,30 +116,8 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
     successMessage: translate('Call imported as a draft.'),
   });
 
-  const onDrop = useCallback(async (files: File[]) => {
-    const file = files[0];
-    if (!file) return;
-    try {
-      const data = parseCallExport(await file.text());
-      setParsed({ file, data, sections: getPresentSections(data) });
-      setFileError(null);
-    } catch (error) {
-      setParsed(null);
-      setFileError(error.message);
-    }
-  }, []);
-
-  const onDropRejected = useCallback(() => {
-    setParsed(null);
-    setFileError(
-      translate(
-        'The file is larger than 10 MB, the most a portal accepts. Export the call again without documents and attach them after the import.',
-      ),
-    );
-  }, []);
-
   if (result) {
-    return <ImportResult result={result} />;
+    return <ImportCallResult result={result} />;
   }
 
   const exportedName = (parsed?.data.call as { name?: string } | undefined)
@@ -160,9 +129,7 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
       onSubmit={(values) => mutation.mutateAsync(values).catch(() => undefined)}
       initialValues={{
         name: exportedName ?? '',
-        ...Object.fromEntries(
-          (parsed?.sections ?? []).map((section) => [section, true]),
-        ),
+        ...Object.fromEntries(sections.map((section) => [section, true])),
       }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
@@ -190,37 +157,7 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
               </>
             }
           >
-            {parsed ? (
-              <AttachmentItem
-                attachment={{
-                  file: parsed.file,
-                  file_name: parsed.file.name,
-                  file_size: parsed.file.size,
-                  mime_type: parsed.file.type,
-                }}
-                onDelete={() => setParsed(null)}
-              />
-            ) : (
-              <UploadContainer
-                onDrop={onDrop}
-                message={translate(
-                  'Call export file (.yaml, .yml or .json, max. 10 MB)',
-                )}
-                onDropRejected={onDropRejected}
-                maxSize={MAX_CALL_EXPORT_SIZE}
-                accept={EXPORT_FILE_TYPES}
-                multiple={false}
-              />
-            )}
-
-            {fileError && (
-              <AlertItem
-                variant="error"
-                type="floating"
-                className="mt-3"
-                title={fileError}
-              />
-            )}
+            <CallFileUpload value={parsed} onChange={setParsed} />
 
             {mutation.error && (
               <AlertItem
@@ -240,10 +177,10 @@ export const ImportCallDialog: FC<ImportCallDialogProps> = ({ resolve }) => {
                   label={translate('Call name')}
                   required
                 />
-                {parsed.sections.length > 0 && (
+                {sections.length > 0 && (
                   <h5 className="mb-3">{translate('Import options')}</h5>
                 )}
-                {parsed.sections.map((section) => (
+                {sections.map((section) => (
                   <BooleanGroup
                     key={section}
                     name={section}

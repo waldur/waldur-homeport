@@ -20,7 +20,13 @@ import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
 import { CallOfferingStateField } from '../details/CallOfferingStateField';
+import {
+  CallNameLink,
+  CurrentRoundCell,
+  CutoffCell,
+} from '../provider-calls/ProviderCallsTable';
 
+import { getRequestPlanName } from './OfferingRequestCommitments';
 import { OfferingRequestItemActions } from './OfferingRequestItemActions';
 import { OfferingRequestsListExpandableRow } from './OfferingRequestsListExpandableRow';
 
@@ -56,7 +62,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
       columns={[
         {
           title: translate('Call'),
-          render: ({ row }) => <>{row.call_name}</>,
+          render: CallNameLink,
           filter: 'call',
           inlineFilter: (row) => ({ name: row.call_name, url: row.call }),
         },
@@ -77,15 +83,37 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         {
           title: translate('Plan'),
           render: ({ row }) => (
-            <>{row.plan ? row.plan_details.name : translate('Ordinary plan')}</>
+            <span className={row.plan ? undefined : 'text-quaternary'}>
+              {getRequestPlanName(row)}
+            </span>
           ),
         },
         {
           title: translate('State'),
-          render: CallOfferingStateField,
+          render: ({ row }) => (
+            <div className="flex flex-col items-start gap-1">
+              <CallOfferingStateField row={row} />
+              {row.state === 'canceled' && row.rejection_reason ? (
+                <span
+                  className="text-quaternary whitespace-normal"
+                  title={row.rejection_reason}
+                >
+                  {row.rejection_reason}
+                </span>
+              ) : null}
+            </div>
+          ),
           filter: 'state',
           inlineFilter: (row) =>
             RequestedOfferingStatesOptions.filter((s) => s.value === row.state),
+        },
+        {
+          title: translate('Current round'),
+          render: CurrentRoundCell,
+        },
+        {
+          title: translate('Cut-off'),
+          render: CutoffCell,
         },
         {
           title: translate('Created at'),

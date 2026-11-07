@@ -1,24 +1,40 @@
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, BaseButton } from 'waldur-ui';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
 import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { publicCallKey } from '@/proposals/callQueries';
+import { isOnProposalTeam } from '@/proposals/team/teamRules';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
+
+import { sectionOpenProps, useSectionOpenState } from '../sectionOpen';
 
 import { CommentSection } from './CommentSection';
 import { DocumentationFiles } from './DocumentationFiles';
 import { getFieldStates, shouldRenderField } from './proposalFields';
 
+const ChangePanelDialog = lazyComponent(() =>
+  import('./ChangePanelDialog').then((module) => ({
+    default: module.ChangePanelDialog,
+  })),
+);
+
 interface ProjectDetailsSummaryProps {
   proposal: Proposal;
   reviews?: ProposalReview[];
   onAddCommentClick?({ commentField, label }): void;
+  /** The viewer may move the proposal to another panel of its call. */
+  canChangePanel?: boolean;
+  refetch?(): void;
 }
 
 const FIELD_CONFIG_FIELDS = ['proposal_field_config'] as const;
@@ -27,7 +43,11 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   proposal,
   reviews,
   onAddCommentClick,
+  canChangePanel,
+  refetch,
 }) => {
+  const openState = useSectionOpenState();
+  const { openDialog } = useModal();
   // Which fields this call asked for. Same fetch as ProjectDetailsStep, so the
   // two share a React Query cache entry when both are on screen.
   const { data: call } = useQuery({
@@ -41,6 +61,7 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
     refetchOnWindowFocus: false,
   });
 
+  const user = useUser();
   const fieldStates = useMemo(
     () => getFieldStates(call?.proposal_field_config),
     [call],
@@ -50,8 +71,12 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
     <AccordionCard
       id="step-project"
       title={translate('Project details')}
-      subtitle={translate('Basic information about your research project.')}
-      defaultOpen={false}
+      subtitle={
+        isOnProposalTeam(user, proposal)
+          ? translate('Basic information about your research project.')
+          : translate('Basic information about the research project.')
+      }
+      {...sectionOpenProps(openState, 'step-project', false)}
     >
       <CommentSection
         label={translate('Name')}
@@ -94,7 +119,9 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
           proposal={proposal}
         >
           {(props) => (
-            <BaseTextField solid value={props.value} readOnly disabled />
+            // Read-only, not disabled: the disabled grey is for a control
+            // that cannot be used, and made the text hard to read.
+            <BaseTextField solid value={props.value} readOnly />
           )}
         </CommentSection>
       )}
@@ -118,6 +145,37 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
             <div style={{ width: 42.5 }}>
               {/* Dummy spacing to align with other fields. */}
             </div>
+          }
+        />
+      )}
+
+      {(proposal.panel_name || canChangePanel) && (
+        <ReadOnlyFormControl
+          label={translate('Panel')}
+          value={renderFieldOrDash(proposal.panel_name)}
+          tooltip={translate(
+            "The call's panel evaluating the proposal, by its research domain. Not shown to the applicant team.",
+          )}
+          actions={
+            canChangePanel ? (
+              // As the comment button beside the other fields.
+              <BaseButton
+                variant="text-primary"
+                size="lg"
+                className="mt-6"
+                iconNode={<PencilSimpleIcon weight="bold" />}
+                tooltip={translate('Change panel')}
+                onClick={() =>
+                  openDialog(ChangePanelDialog, {
+                    resolve: { proposal, refetch },
+                  })
+                }
+              />
+            ) : (
+              <div style={{ width: 42.5 }}>
+                {/* Dummy spacing to align with other fields. */}
+              </div>
+            )
           }
         />
       )}

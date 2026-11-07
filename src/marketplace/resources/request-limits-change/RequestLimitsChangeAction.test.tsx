@@ -11,8 +11,12 @@ import { useUser } from '@/workspace/hooks';
 
 import { RequestLimitsChangeAction } from './RequestLimitsChangeAction';
 
+// The user may ask (the request permission), but not change it directly.
+const granted = vi.hoisted(() => ({ permissions: new Set<string>() }));
+
 vi.mock('@/permissions/hasPermission', () => ({
-  hasPermission: () => false,
+  hasPermission: (_user, request) =>
+    granted.permissions.has(request.permission),
   hasAllPermissions: () => false,
 }));
 
@@ -58,6 +62,7 @@ const waitUntilLoaded = (queryClient: QueryClient, queryKey) =>
 
 describe('RequestLimitsChangeAction', () => {
   beforeEach(() => {
+    granted.permissions = new Set(['RESOURCE.REQUEST_LIMITS_CHANGE']);
     vi.clearAllMocks();
     // Regular project member: not staff/support and no UPDATE_RESOURCE_LIMITS.
     vi.mocked(useUser).mockReturnValue({ uuid: 'user-uuid' } as any);
@@ -72,6 +77,22 @@ describe('RequestLimitsChangeAction', () => {
     renderAction(baseResource);
 
     expect(await screen.findByText('Request limit change')).toBeInTheDocument();
+  });
+
+  it('hides the action from a role that may not ask', async () => {
+    // An awarded project's team: its limits are the call's to decide.
+    granted.permissions = new Set();
+    mockOffering({
+      plugin_options: optedIn,
+      components: [{ billing_type: 'limit' }],
+    });
+
+    renderAction(baseResource);
+
+    await waitFor(() =>
+      expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled(),
+    );
+    expect(screen.queryByText('Request limit change')).toBeNull();
   });
 
   it('shows the action when the offering has prepaid components', async () => {

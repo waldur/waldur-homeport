@@ -61,23 +61,29 @@ export const AdminReviewsList: FC = () => {
           id: 'proposal',
         },
         {
-          title: translate('Reviewer'),
-          render: ({ row }) => <>{renderFieldOrDash(row.reviewer_full_name)}</>,
-          keys: ['reviewer_full_name'],
-          id: 'reviewer',
+          title: translate('State'),
+          render: ReviewStateRenderer,
+          filter: 'state',
+          inlineFilter: (row) =>
+            ProposalReviewStateOptions.filter((s) => s.value === row.state),
+          keys: ['state'],
+          id: 'state',
         },
         {
-          title: translate('Organization'),
+          // The reviewer's own organisation, under their name.
+          title: translate('Reviewer'),
           render: ({ row }) => (
-            <>{renderFieldOrDash((row as any).organization_name)}</>
+            <div className="flex flex-col">
+              <span>{renderFieldOrDash(row.reviewer_full_name)}</span>
+              {row.reviewer_organization ? (
+                <span className="text-quaternary">
+                  {row.reviewer_organization}
+                </span>
+              ) : null}
+            </div>
           ),
-          filter: 'organization_uuid',
-          inlineFilter: (row) => ({
-            name: (row as any).organization_name,
-            uuid: (row as any).organization_uuid,
-          }),
-          keys: ['organization_name'] as any,
-          id: 'organization',
+          keys: ['reviewer_full_name', 'reviewer_organization'],
+          id: 'reviewer',
         },
         {
           title: translate('Call'),
@@ -109,15 +115,6 @@ export const AdminReviewsList: FC = () => {
           render: ({ row }) => <EndingField endDate={row.review_end_date} />,
           keys: ['review_end_date'],
           id: 'review_due',
-        },
-        {
-          title: translate('State'),
-          render: ReviewStateRenderer,
-          filter: 'state',
-          inlineFilter: (row) =>
-            ProposalReviewStateOptions.filter((s) => s.value === row.state),
-          keys: ['state'],
-          id: 'state',
         },
       ]}
       title={translate('All reviews')}

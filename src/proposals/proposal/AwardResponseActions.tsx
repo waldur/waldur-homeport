@@ -11,13 +11,15 @@ import { AwardComparisonRow, awardDiffers } from '@/proposals/awardedResources';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { useUser } from '@/workspace/hooks';
 
+import { actsForApplicant } from '../team/teamRules';
 import { Proposal } from '../types';
+import { isAwardResponseStep } from '../workflow/constants';
 import {
   fetchProposalWorkflowStates,
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
 
-import { isProposalApplicant } from './applicantTimeline';
+import { AllocationDecisionComment } from './AllocationDecisionComment';
 
 interface AwardResponseActionsProps {
   proposal: Proposal;
@@ -26,8 +28,8 @@ interface AwardResponseActionsProps {
   awardRows?: AwardComparisonRow[];
 }
 
-// Applicant-facing accept/decline control for the award_response step (WAL-9349).
-// When a call enables the award response, the applicant either accepts the award
+// Applicant-facing accept/decline control for the award response: an applicant
+// step whose outcomes are accepted / declined. The applicant either accepts the award
 // (→ resources are provisioned) or declines it with a reason (→ the proposal is
 // canceled). The backend authorises the proposal creator; this surfaces the
 // control only to them.
@@ -48,13 +50,17 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
     queryFn: () => fetchProposalWorkflowStates(proposal.uuid),
   });
 
+  // The award response runs alone, but name it rather than take whichever
+  // step happens to be active first.
   const activeStep = useMemo(
-    () => (data ?? []).find((s) => s.status === 'active'),
+    () =>
+      (data ?? []).find((s) => s.status === 'active' && isAwardResponseStep(s)),
     [data],
   );
 
-  const isApplicant = isProposalApplicant(user, proposal);
-  const isAwardStep = activeStep?.step === 'award_response';
+  // Any of its managers answers for the applicant, as the backend lets them.
+  const isApplicant = actsForApplicant(user, proposal);
+  const isAwardStep = isAwardResponseStep(activeStep);
 
   const acceptAward = useManagedMutation<any, any, void>({
     mutationFn: () =>
@@ -141,6 +147,10 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
 
   return (
     <>
+      <AllocationDecisionComment
+        proposalUuid={proposal.uuid}
+        className="mt-1.5"
+      />
       {differs && (
         <AlertItem
           variant="warning"

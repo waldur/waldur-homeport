@@ -8,9 +8,16 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
+import {
+  callsSection,
+  resourcesSection,
+} from '@/navigation/sidebar/sidebarSection';
 import { PermissionEnum } from '@/permissions/enums';
 import {
   canAccessProviderOffering,
+  canAccessOfferingRequests,
+  canAccessProviderOrders,
+  canAccessProviderResources,
   canAccessServiceProviderWorkspace,
   canViewServiceProviderTeam,
   hasServiceProviderPermission,
@@ -19,7 +26,10 @@ import {
   isStaff,
 } from '@/workspace/selectors';
 
-import { canAccessMarketplaceRouteGuard as canAccessMarketplace } from './canUseMarketplaceShopUi';
+import {
+  canAccessMarketplaceRouteGuard as canAccessMarketplace,
+  canAccessOfferingPageRouteGuard,
+} from './canUseMarketplaceShopUi';
 import { fetchProvider, fetchProviderCustomer } from './resolve';
 import { getMarketplaceTitle } from './title';
 
@@ -53,7 +63,9 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'public',
     data: {
-      permissions: [canAccessMarketplace],
+      // Private offerings deploy in calls-only mode too; the page checks the
+      // rest once the offering is loaded.
+      permissions: [canAccessOfferingPageRouteGuard],
       showGoBack: true,
     },
   },
@@ -160,7 +172,7 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
-      permissions: [canAccessMarketplace],
+      permissions: [canAccessOfferingPageRouteGuard],
     },
   },
   {
@@ -450,8 +462,10 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider',
     component: UIView,
     url: '',
-    redirectTo: 'marketplace-provider-offering-requests',
+    redirectTo: 'marketplace-provider-calls',
     data: {
+      // A provider's call pages belong to the Calls section's provider entry.
+      ...callsSection('provider-calls'),
       feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Calls for proposals'),
       priority: 140,
@@ -786,6 +800,9 @@ export const states: StateDeclaration[] = [
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Resources'),
+      // Replaces the inherited workspace guard: an offering manager lists
+      // the resources of the offerings they manage.
+      permissions: [canAccessProviderResources],
     },
   },
 
@@ -817,10 +834,32 @@ export const states: StateDeclaration[] = [
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Orders'),
+      // Replaces the inherited workspace guard: an offering manager lists
+      // the orders of the offerings they manage.
       permissions: [
-        canAccessServiceProviderWorkspace,
+        canAccessProviderOrders,
         () => !isFeatureVisible(MarketplaceFeatures.catalogue_only),
       ],
+    },
+  },
+
+  {
+    name: 'marketplace-provider-calls',
+    url: 'calls/',
+    component: lazyComponent(() =>
+      import('@/proposals/provider-calls/ProviderCallsPage').then((module) => ({
+        default: module.ProviderCallsPage,
+      })),
+    ),
+    parent: 'provider-calls',
+    data: {
+      feature: MarketplaceFeatures.show_call_management_functionality,
+      breadcrumb: () => translate('Calls'),
+      // Tabs in the order a provider works through them.
+      priority: 10,
+      // The provider's people who answer for its offerings in calls: owners,
+      // and offering managers without a role on the organisation.
+      permissions: [canAccessOfferingRequests],
     },
   },
 
@@ -836,6 +875,66 @@ export const states: StateDeclaration[] = [
     data: {
       feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Requests for offerings'),
+      priority: 20,
+      // Replaces the inherited workspace guard so an offering manager can
+      // answer the requests for the offerings they manage.
+      permissions: [canAccessOfferingRequests],
+    },
+  },
+
+  {
+    name: 'marketplace-provider-call-tasks',
+    // `tab` picks the user's own tasks or the team's open work.
+    url: 'call-tasks/?tab',
+    params: { tab: { dynamic: true, squash: true, value: null } },
+    component: lazyComponent(() =>
+      import('@/proposals/provider-calls/ProviderCallTasksPage').then(
+        (module) => ({ default: module.ProviderCallTasksPage }),
+      ),
+    ),
+    parent: 'provider-calls',
+    data: {
+      feature: MarketplaceFeatures.show_call_management_functionality,
+      breadcrumb: () => translate('My call tasks'),
+      priority: 30,
+      permissions: [canAccessOfferingRequests],
+    },
+  },
+
+  {
+    name: 'marketplace-provider-call-proposals',
+    url: 'call-proposals/',
+    component: lazyComponent(() =>
+      import('@/proposals/provider-calls/ProviderCallProposalsPage').then(
+        (module) => ({ default: module.ProviderCallProposalsPage }),
+      ),
+    ),
+    parent: 'provider-calls',
+    data: {
+      feature: MarketplaceFeatures.show_call_management_functionality,
+      breadcrumb: () => translate('Proposals'),
+      priority: 40,
+      permissions: [canAccessOfferingRequests],
+    },
+  },
+
+  {
+    name: 'marketplace-provider-call-demand',
+    // `call` is the Demand table's call filter, so a link can open the page
+    // filtered to one call.
+    url: 'call-demand/?call',
+    params: { call: { dynamic: true, squash: true, value: null } },
+    component: lazyComponent(() =>
+      import('@/proposals/provider-calls/ProviderCallDemandPage').then(
+        (module) => ({ default: module.ProviderCallDemandPage }),
+      ),
+    ),
+    parent: 'provider-calls',
+    data: {
+      feature: MarketplaceFeatures.show_call_management_functionality,
+      breadcrumb: () => translate('Demand'),
+      priority: 50,
+      permissions: [canAccessOfferingRequests],
     },
   },
 
@@ -927,6 +1026,7 @@ export const states: StateDeclaration[] = [
         default: module.ResourceDetailsContainer,
       })),
     ),
+    data: resourcesSection,
   },
   {
     name: 'marketplace-resource-details',
@@ -978,6 +1078,8 @@ export const states: StateDeclaration[] = [
       useExtraTabs: true,
       skipBreadcrumb: true,
       skipHero: true,
+      // An offering manager opens the resources of their offerings here.
+      permissions: [canAccessProviderResources],
     },
   },
   {

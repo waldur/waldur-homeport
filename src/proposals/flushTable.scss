@@ -49,12 +49,19 @@
     th:last-child {
       padding-right: 1.25rem;
     }
+
+    // An expanded row's cell is no first column: its details already sit
+    // under the first column's text, so they take no inset on top.
+    td:has(> .expandable-container) {
+      padding-left: 0;
+    }
   }
 }
 
 // Where a card body opens straight onto one of these tables, its top inset only
 // pushes the header band away from the card's own rule. Bodies that start with
-// fields keep theirs — they have no band to lean on.
-[data-slot='card-content']:has(> .proposal-flush-table:first-child) {
+// fields keep theirs — they have no band to lean on. Any body: a Bootstrap
+// card's or a section card's (AccordionCard), whose own class is a utility.
+*:has(> .proposal-flush-table:first-child) {
   padding-top: 0;
 }

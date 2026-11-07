@@ -10,6 +10,8 @@ export type {
 export { resolveTabValue } from './resolveTabValue';
 
 export { TabNav } from './TabNav';
+export { TabCount } from './TabCount';
+export type { TabCountProps, TabCountVariant } from './TabCount';
 export type { TabNavProps, TabNavItemDef } from './TabNav';
 
 export { tabListVariants, tabTriggerVariants } from './tabStyles';

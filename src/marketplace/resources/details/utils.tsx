@@ -244,6 +244,18 @@ export const getResourceSummaryFields = ({
           ),
         }
       : null,
+    resource.options && Object.keys(resource.options).length > 0
+      ? {
+          name: 'options',
+          label: translate('Resource options'),
+          value: (
+            <KeyValueButton
+              items={resource.options}
+              title={translate('Resource options')}
+            />
+          ),
+        }
+      : null,
     resource.backend_metadata
       ? {
           name: 'backend_metadata',

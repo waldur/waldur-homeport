@@ -1,23 +1,44 @@
-import { screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { screen, waitFor } from '@testing-library/react';
+import { FC, PropsWithChildren } from 'react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { proposalProtectedCallsWorkflowStepKindsList } from 'waldur-js-client';
 
+import { DrawerProvider } from '@/drawer/DrawerContext';
+import { STEP_KINDS } from '@/proposals/workflow/stepKinds.fixture';
 import { renderWithProviders } from '@/test/harness';
 
 import { WorkflowStepExpandableRow } from './WorkflowStepExpandableRow';
 
+// The shared table registers itself in the app's store.
+const StoreWrapper: FC<PropsWithChildren> = ({ children }) => (
+  <DrawerProvider>
+    <Provider store={configureStore()({ tables: {} })}>{children}</Provider>
+  </DrawerProvider>
+);
+
 const step = (overrides: Record<string, unknown>) =>
   ({
     uuid: 'step-1',
-    step: 'panel_review',
-    responsible_role: 'panel_member',
+    key: 'panel_review',
+    kind: 'decision',
+    outcome_set: 'approval',
+    completer: 'panel_member',
     transition_mode: 'automatic_on_completion',
     criteria: [],
     responsible_users: [],
     ...overrides,
   }) as any;
 
+beforeEach(() => {
+  vi.mocked(proposalProtectedCallsWorkflowStepKindsList).mockResolvedValue({
+    data: STEP_KINDS,
+  } as any);
+});
+
 describe('WorkflowStepExpandableRow evaluators', () => {
-  it('lists the people holding the responsible role and marks the chair', () => {
+  it('lists the people of the step in a table with their role', async () => {
     renderWithProviders(
       <WorkflowStepExpandableRow
         row={step({
@@ -28,38 +49,44 @@ describe('WorkflowStepExpandableRow evaluators', () => {
               full_name: 'Ada Lovelace',
               email: 'ada@example.org',
               is_panel_chair: true,
-            },
-            {
-              uuid: 'u2',
-              username: 'alan',
-              full_name: 'Alan Turing',
-              email: 'alan@example.org',
-              is_panel_chair: false,
+              is_panel_vice_chair: false,
+              offerings: [],
             },
           ],
         })}
       />,
+      { wrapper: StoreWrapper },
     );
-    expect(screen.getByText('Ada Lovelace')).toBeInTheDocument();
-    expect(screen.getByText('ada · ada@example.org')).toBeInTheDocument();
-    expect(screen.getByText('Alan Turing')).toBeInTheDocument();
-    expect(screen.getAllByText('Chair')).toHaveLength(1);
+    expect(screen.getByTestId('step-evaluators')).toBeInTheDocument();
+    // The rows load after the first render and settle once the step
+    // kinds have loaded too.
+    await waitFor(() => {
+      expect(screen.getByText('Ada Lovelace')).toBeInTheDocument();
+      expect(screen.getByText('ada@example.org')).toBeInTheDocument();
+      expect(screen.getByText('Chair')).toBeInTheDocument();
+    });
   });
+});
 
-  it('warns and links to the Team tab when nobody holds the role', () => {
-    renderWithProviders(<WorkflowStepExpandableRow row={step({})} />);
-    expect(screen.getByText('Nobody holds this role yet.')).toBeInTheDocument();
-    expect(screen.getByText('Assign in the Team tab')).toBeInTheDocument();
-  });
-
-  it('explains the applicant role instead of listing users', () => {
+describe('WorkflowStepExpandableRow allocation timing', () => {
+  it('shows allocation timing on the allocation decision', () => {
     renderWithProviders(
       <WorkflowStepExpandableRow
-        row={step({ step: 'award_response', responsible_role: 'applicant' })}
+        row={step({
+          is_allocation_decision: true,
+          allocation_time: 'fixed_date',
+        })}
       />,
+      { wrapper: StoreWrapper },
     );
-    expect(
-      screen.getByText('The applicant of each proposal'),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Allocation timing/)).toBeInTheDocument();
+    expect(screen.getByText('Fixed date')).toBeInTheDocument();
+  });
+
+  it('leaves it out on any other decision', () => {
+    renderWithProviders(<WorkflowStepExpandableRow row={step({})} />, {
+      wrapper: StoreWrapper,
+    });
+    expect(screen.queryByText(/Allocation timing/)).not.toBeInTheDocument();
   });
 });

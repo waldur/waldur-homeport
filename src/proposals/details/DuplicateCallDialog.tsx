@@ -26,6 +26,7 @@ interface FormValues {
   copy_rounds: boolean;
   copy_workflow_steps: boolean;
   copy_resource_templates: boolean;
+  copy_budgets: boolean;
   copy_role_mappings: boolean;
   copy_applicant_visibility_config: boolean;
   copy_coi_configuration: boolean;
@@ -39,6 +40,7 @@ const defaultSelections = {
   copy_rounds: true,
   copy_workflow_steps: true,
   copy_resource_templates: true,
+  copy_budgets: true,
   copy_role_mappings: true,
   copy_applicant_visibility_config: true,
   copy_coi_configuration: true,
@@ -146,6 +148,13 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                   label={translate('Resource templates')}
                   description={translate(
                     'Copy resource-request templates. Skipped automatically if "Offerings" is unchecked.',
+                  )}
+                />
+                <BooleanGroup
+                  name="copy_budgets"
+                  label={translate('Resource pools')}
+                  description={translate(
+                    'Copy the resource pools. Skipped if "Offerings" is unchecked, which copies the component rules; a round\'s pool is copied only with "Rounds".',
                   )}
                 />
               </div>

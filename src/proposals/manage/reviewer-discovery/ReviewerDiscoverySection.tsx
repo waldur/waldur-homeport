@@ -1,5 +1,4 @@
-import { InfoIcon, UserIcon } from '@phosphor-icons/react';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
 import {
   reviewerSuggestionsList,
@@ -9,12 +8,9 @@ import {
   reviewerSuggestionsDestroy,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton, Tooltip } from 'waldur-ui';
+import { Badge, BaseButton, HelpIcon } from 'waldur-ui';
 
-import { formatDate } from '@/core/dateUtils';
-import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { useBatchMutation } from '@/modal/useBatchMutation';
 import { Call } from '@/proposals/types';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
@@ -29,17 +25,12 @@ import {
 } from '@/table/generated/ReviewerSuggestionsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
 import { ReviewerDiscoveryActions } from './ReviewerDiscoveryActions';
 import { SuggestionExpandableRow } from './SuggestionExpandableRow';
-import { SuggestionRowActions } from './SuggestionRowActions';
-
-const ReviewerProfileDialog = lazyComponent(() =>
-  import('./ReviewerProfileDialog').then((m) => ({
-    default: m.ReviewerProfileDialog,
-  })),
-);
+import { isOpenSuggestion, SuggestionRowActions } from './SuggestionRowActions';
 
 interface ReviewerDiscoverySectionProps {
   call: Call;
@@ -59,9 +50,9 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
       case 'rejected':
         return 'danger';
       case 'invited':
-        return 'primary';
+        return 'info';
       default:
-        return 'secondary';
+        return 'neutral';
     }
   }, [status]);
 
@@ -98,13 +89,12 @@ const AffinityScoreWithTooltip: FC<{ row: ReviewerSuggestion }> = ({ row }) => {
     </div>
   );
 
+  // The score, with its breakdown behind the library's help icon.
   return (
-    <Tooltip label={tooltipContent} side="top" autoWidth>
-      <div className="font-medium text-success cursor-pointer">
-        {formatScore(row.affinity_score)}
-        <InfoIcon className="ms-1" size={14} weight="bold" />
-      </div>
-    </Tooltip>
+    <span className="inline-flex items-center gap-1">
+      {formatScore(row.affinity_score)}
+      <HelpIcon label={tooltipContent} size={14} />
+    </span>
   );
 };
 
@@ -115,7 +105,8 @@ interface BulkActionsProps {
 }
 
 const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
-  const pendingRows = rows.filter((r) => r.status === 'pending');
+  // Someone already in the pool has nothing to confirm or reject.
+  const pendingRows = rows.filter(isOpenSuggestion);
 
   const { mutate: handleBulkConfirm, isPending: isConfirming } =
     useBatchMutation<ReviewerSuggestion, void>({
@@ -222,7 +213,6 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
 const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
   call,
 }) => {
-  const { openDialog } = useModal();
   const { values } = useFormState();
   // Generating, confirming, rejecting and inviting all need
   // MANAGE_PROPOSAL_REVIEW; everyone else gets the suggestions read-only.
@@ -249,52 +239,15 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
     filter,
   });
 
-  const handleViewProfile = useCallback(
-    (row: ReviewerSuggestion) => {
-      openDialog(ReviewerProfileDialog, {
-        resolve: { suggestion: row },
-        size: 'lg',
-      });
-    },
-    [openDialog],
-  );
-
   const columns = useMemo(
     () => [
       {
         id: 'reviewer',
         title: translate('Reviewer'),
         render: ({ row }: { row: ReviewerSuggestion }) => (
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-medium">{row.reviewer_name}</span>
-              <BaseButton
-                variant="secondary"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleViewProfile(row);
-                }}
-                tooltip={translate('View profile')}
-                iconNode={<UserIcon size={14} weight="bold" />}
-              />
-            </div>
-            {row.reviewer_biography && (
-              <div
-                className="text-quaternary small mt-1"
-                style={{
-                  maxWidth: '300px',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {row.reviewer_biography}
-              </div>
-            )}
-          </div>
+          <span className="font-medium text-primary">{row.reviewer_name}</span>
         ),
-        keys: ['reviewer_name', 'reviewer_biography'],
+        keys: ['reviewer_name'],
       },
       {
         id: 'affinity',
@@ -337,10 +290,10 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
             <div className="flex flex-col gap-1">
               {matchedKeywords.length > 0 && (
                 <div>
-                  <small className="text-quaternary">
+                  <span className="text-quaternary">
                     {translate('Keywords')}:
-                  </small>{' '}
-                  <span className="small">
+                  </span>{' '}
+                  <span>
                     {matchedKeywords.slice(0, 3).join(', ')}
                     {matchedKeywords.length > 3 && '...'}
                   </span>
@@ -348,10 +301,10 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
               )}
               {topProposals.length > 0 && (
                 <div>
-                  <small className="text-quaternary">
+                  <span className="text-quaternary">
                     {translate('Best for')}:
-                  </small>{' '}
-                  <span className="small">
+                  </span>{' '}
+                  <span>
                     {topProposals
                       .slice(0, 2)
                       .map((p) => p.name)
@@ -383,28 +336,12 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
         id: 'reviewed_by',
         title: translate('Reviewed by'),
         render: ({ row }: { row: ReviewerSuggestion }) => (
-          <div>
-            {row.reviewed_by_name && (
-              <>
-                <div>{row.reviewed_by_name}</div>
-                {row.reviewed_at && (
-                  <small className="text-quaternary">
-                    {formatDate(row.reviewed_at)}
-                  </small>
-                )}
-              </>
-            )}
-            {row.rejection_reason && (
-              <div className="text-danger small mt-1">
-                {row.rejection_reason}
-              </div>
-            )}
-          </div>
+          <>{renderFieldOrDash(row.reviewed_by_name)}</>
         ),
-        keys: ['reviewed_by_name', 'reviewed_at', 'rejection_reason'],
+        keys: ['reviewed_by_name'],
       },
     ],
-    [handleViewProfile],
+    [],
   );
 
   const toolbarActions = (
@@ -427,9 +364,15 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
       showPageSizeSelector
       hasQuery
       filters={<ReviewerSuggestionsFilter />}
-      rowActions={canManage ? SuggestionRowActions : undefined}
+      rowActions={({ row, fetch }) => (
+        <SuggestionRowActions row={row} fetch={fetch} canManage={canManage} />
+      )}
       rowClass={({ row }) =>
-        row.status === 'rejected' ? 'bg-danger-subtle' : ''
+        // A rejected suggestion of someone in the pool all the same is no
+        // exclusion.
+        row.status === 'rejected' && !row.pool_invitation_status
+          ? 'bg-danger-subtle'
+          : ''
       }
       enableMultiSelect={canManage}
       multiSelectActions={canManage ? BulkActions : undefined}

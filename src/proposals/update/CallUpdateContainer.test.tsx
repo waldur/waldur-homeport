@@ -15,17 +15,22 @@ vi.mock('@/navigation/context', () => ({
   usePageHero: vi.fn(),
 }));
 vi.mock('@/navigation/title', () => ({ useTitle: vi.fn() }));
+const tabsSeen = vi.hoisted(() => ({ current: [] as any[] }));
+
 // Whichever tab is open gets the read-only flag the page computed.
 vi.mock('@/navigation/usePageTabsTransmitter', () => ({
-  usePageTabsTransmitter: () => ({
-    tabSpec: {
-      component: ({ isReadOnly }: { isReadOnly: boolean }) => (
-        <div data-testid="call-edit-tab">
-          {isReadOnly ? 'read-only' : 'editable'}
-        </div>
-      ),
-    },
-  }),
+  usePageTabsTransmitter: (tabs: any[]) => {
+    tabsSeen.current = tabs;
+    return {
+      tabSpec: {
+        component: ({ isReadOnly }: { isReadOnly: boolean }) => (
+          <div data-testid="call-edit-tab">
+            {isReadOnly ? 'read-only' : 'editable'}
+          </div>
+        ),
+      },
+    };
+  },
 }));
 vi.mock('@/error/AccessDeniedPage', () => ({
   AccessDeniedPage: () => <div>Access denied</div>,
@@ -95,5 +100,47 @@ describe('CallUpdateContainer access', () => {
     renderWithProviders(<CallUpdateContainer />);
     expect(await screen.findByText('Access denied')).toBeInTheDocument();
     expect(screen.queryByTestId('call-edit-tab')).not.toBeInTheDocument();
+  });
+
+  it('groups the tabs by what they configure', async () => {
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: true,
+      permissions: [],
+    } as any);
+    renderWithProviders(<CallUpdateContainer />);
+    await screen.findByTestId('call-edit-tab');
+    // A parent tab lists its sub-tabs; destructured, as the tab spec names
+    // them like a DOM node's.
+    const layout = tabsSeen.current.map(({ key, children: sub = [] }) => [
+      key,
+      sub.map((child) => child.key),
+    ]);
+    expect(layout).toEqual([
+      ['call', ['general', 'general-config', 'documents']],
+      ['rounds', []],
+      [
+        'application',
+        [
+          'proposal-fields',
+          'applicant-eligibility',
+          'applicant-visibility',
+          'resource-templates',
+        ],
+      ],
+      ['offerings', []],
+      [
+        'workflow',
+        [
+          'steps-settings',
+          'evaluator-roles',
+          'panels',
+          'coi-settings',
+          'reviewer-eligibility',
+          'matching',
+        ],
+      ],
+      ['allocation', ['allocation-settings', 'role_mapping']],
+      ['team', []],
+    ]);
   });
 });

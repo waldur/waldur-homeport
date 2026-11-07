@@ -47,7 +47,11 @@ export const CallRoleMappingsList = (props) => {
   const columns: Column<ProposalProjectRoleMapping>[] = [
     {
       title: translate('Proposal role'),
-      render: ({ row }) => formatRole(row.proposal_role, 'proposal'),
+      render: ({ row }) => (
+        <span className="font-medium text-primary">
+          {formatRole(row.proposal_role, 'proposal')}
+        </span>
+      ),
     },
     {
       title: translate('Project role'),

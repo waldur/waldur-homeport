@@ -75,7 +75,8 @@
     }
   }
 
-  tbody > tr > td {
+  tbody > tr > td,
+  tbody > tr > th.row-header {
     color: var(--text-quaternary);
   }
 
@@ -161,8 +162,10 @@
       }
     }
 
-    // Inline filter
-    > td.has-filter {
+    // Inline filter. A row header (`th.row-header`) is a body cell like any
+    // other, so the body cell rules below cover it too.
+    > td.has-filter,
+    > th.row-header.has-filter {
       position: relative;
 
       // The absolute hover-reveal positioning lives on `.inline-filter-anchor`,
@@ -200,7 +203,8 @@
       }
     }
 
-    > td.ellipsis {
+    > td.ellipsis,
+    > th.row-header.ellipsis {
       max-width: 300px;
 
       &,
@@ -214,7 +218,9 @@
     }
 
     > td > *,
-    > td .td-data > * {
+    > td .td-data > *,
+    > th.row-header > *,
+    > th.row-header .td-data > * {
       vertical-align: middle;
     }
 
@@ -222,7 +228,8 @@
     // 1em, so the negative side margins hand the extra width back. The height
     // stays inside the cell: ellipsis cells clip overflow, which would cut off
     // both the hit area and the focus ring.
-    > td .copy-to-clipboard-btn {
+    > td .copy-to-clipboard-btn,
+    > th.row-header .copy-to-clipboard-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -239,7 +246,9 @@
     // Keyboard focus reveals a cell's filter shortcut just as hovering the row
     // does, making room for it so it doesn't cover the text.
     &:hover > td.has-filter,
-    > td.has-filter:has(button.inline-filter:focus-visible) {
+    &:hover > th.row-header.has-filter,
+    > td.has-filter:has(button.inline-filter:focus-visible),
+    > th.row-header.has-filter:has(button.inline-filter:focus-visible) {
       div.td-data:not(.with-copy div.td-data) {
         width: calc(100% - 40px); /* 32px of filter button + 8px of gap */
         overflow-x: hidden;
@@ -272,14 +281,16 @@
   // `td.has-filter` sets position: relative with a higher-specificity
   // selector, which would turn the sticky insets into a literal offset from
   // the cell's normal position. Pinned always stays sticky.
-  tbody > tr > td.pinned {
+  tbody > tr > td.pinned,
+  tbody > tr > th.row-header.pinned {
     position: sticky;
   }
   th.pinned-end,
   td.pinned-end {
     right: 0;
   }
-  td.pinned {
+  td.pinned,
+  th.row-header.pinned {
     background-color: var(--bg-primary);
   }
   th.is-floating,
@@ -651,4 +662,31 @@ $mobile-spacing: 15px;
 // Standalone table header
 .table-standalone-header {
   margin-bottom: 24px;
+}
+
+// A cell rendered as the row's header (`Column.rowHeader`) looks like any
+// other cell; only its semantics change.
+.table tbody > tr > th.row-header {
+  font-weight: inherit;
+  text-align: start;
+  vertical-align: inherit;
+}
+
+// A full-width row that opens a group of the rows below it (rowGroupHeader).
+// It reads as a sub-header of the table, not as a row: no hover, no shadow.
+.table tbody > tr.table-group-header {
+  > th {
+    padding: 6.5px 9.75px;
+    text-align: start;
+    font-weight: var(--font-weight-normal);
+    white-space: normal;
+  }
+}
+
+.table-container.table-hover-shadow
+  > table
+  > tbody
+  > tr.table-group-header:hover {
+  border-color: var(--table-row-border);
+  box-shadow: none;
 }

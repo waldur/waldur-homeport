@@ -326,6 +326,8 @@ export const OrganizationsList: FunctionComponent = () => {
       filters={<CustomersFilter />}
       hasOptionalColumns
       expandableRowClassName="py-1.5 pe-1.5"
+      // As tall as its cards, not a 300px floor a few cards don't fill.
+      minHeight="auto"
       expandableRow={OrganizationExpandableRow}
     />
   );

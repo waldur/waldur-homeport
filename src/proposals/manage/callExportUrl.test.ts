@@ -29,6 +29,13 @@ describe('buildCallExportUrl', () => {
     expect(url).not.toMatch(/[?&]state=/);
   });
 
+  it('repeats the proposal filter for each selected proposal', () => {
+    const url = buildCallExportUrl(call, 'export-proposals', 'proposal_state', {
+      proposal_uuids: ['p1', 'p2'],
+    });
+    expect(url).toContain('proposal_uuid=p1&proposal_uuid=p2');
+  });
+
   it('leaves the query out when nothing is filtered', () => {
     expect(
       buildCallExportUrl(call, 'export-proposals', 'proposal_state', {}),

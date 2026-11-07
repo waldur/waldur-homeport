@@ -5,7 +5,7 @@ import { marketplaceResourcesOfferingForSubresourcesList } from 'waldur-js-clien
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n/translate';
-import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
+import { canOrderFromOffering } from '@/marketplace/canUseMarketplaceShopUi';
 import { OfferingLink } from '@/marketplace/links/OfferingLink';
 import { Resource } from '@/resource/types';
 import { useUser } from '@/workspace/hooks';
@@ -17,7 +17,8 @@ interface AddResourceButtonProps {
 
 export const AddResourceButton = (props: AddResourceButtonProps) => {
   const user = useUser();
-  const showShopUi = canUseMarketplaceShopUi(user);
+  // A tenant's sub-resource offerings are private to its project.
+  const showShopUi = canOrderFromOffering(user, { shared: false });
 
   const { data: value, isLoading: loading } = useQuery({
     queryKey: ['AddResourceButton', props.resource],

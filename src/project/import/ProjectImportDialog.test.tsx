@@ -75,10 +75,9 @@ const navigateToUploadStep = async (user, withResources = false) => {
 
     await user.click(screen.getByTestId('next-button-step-0'));
     await waitFor(() => {
-      const offeringStep = screen.getAllByRole('listitem', {
-        name: /Select offering/i,
-      })[0];
-      expect(offeringStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Select offering/i);
     });
 
     await openAndSelectOption(user, 'Select offering', 'Cloud / Test Offering');
@@ -93,19 +92,17 @@ const navigateToUploadStep = async (user, withResources = false) => {
   }
 
   await waitFor(() => {
-    const templateStep = screen.getAllByRole('listitem', {
-      name: /Download template/i,
-    })[0];
-    expect(templateStep).toHaveAttribute('aria-current', 'step');
+    expect(
+      screen.getByRole('button', { current: 'step' }),
+    ).toHaveAccessibleName(/Download template/i);
   });
 
   await user.click(screen.getByTestId('next-button-step-1'));
 
   await waitFor(() => {
-    const uploadStep = screen.getAllByRole('listitem', {
-      name: /Upload file/i,
-    })[0];
-    expect(uploadStep).toHaveAttribute('aria-current', 'step');
+    expect(
+      screen.getByRole('button', { current: 'step' }),
+    ).toHaveAccessibleName(/Upload file/i);
   });
 };
 
@@ -205,10 +202,9 @@ describe('ProjectImportDialog Component', () => {
     await user.click(screen.getByTestId('next-button-step-1'));
 
     await waitFor(() => {
-      const previewStep = screen.getByRole('listitem', {
-        name: /Preview & import/i,
-      });
-      expect(previewStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Preview & import/i);
     });
 
     expect(
@@ -287,10 +283,9 @@ describe('ProjectImportDialog Component', () => {
 
     await user.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
-      const previewStep = screen.getAllByRole('listitem', {
-        name: /Preview & import/i,
-      })[0];
-      expect(previewStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Preview & import/i);
     });
 
     await waitFor(() => {
@@ -403,10 +398,9 @@ describe('ProjectImportDialog Component', () => {
 
     await user.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
-      const previewStep = screen.getAllByRole('listitem', {
-        name: /Preview & import/i,
-      })[0];
-      expect(previewStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Preview & import/i);
     });
 
     await waitFor(() => {
@@ -447,26 +441,23 @@ describe('ProjectImportDialog Component', () => {
 
     await user.click(screen.getByRole('button', { name: /Back/i }));
     await waitFor(() => {
-      const templateStep = screen.getAllByRole('listitem', {
-        name: /Download template/i,
-      })[0];
-      expect(templateStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Download template/i);
     });
 
     await user.click(screen.getByRole('button', { name: /Back/i }));
     await waitFor(() => {
-      const offeringStep = screen.getAllByRole('listitem', {
-        name: /Select offering/i,
-      })[0];
-      expect(offeringStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Select offering/i);
     });
 
     await user.click(screen.getByRole('button', { name: /Back/i }));
     await waitFor(() => {
-      const importTypeStep = screen.getAllByRole('listitem', {
-        name: /Import type/i,
-      })[0];
-      expect(importTypeStep).toHaveAttribute('aria-current', 'step');
+      expect(
+        screen.getByRole('button', { current: 'step' }),
+      ).toHaveAccessibleName(/Import type/i);
     });
 
     const radioProjects = screen.getByRole('radio', { name: /Projects only/i });

@@ -8,6 +8,14 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { RequestedResourceCost } from './requestedResourceCost';
 
+/**
+ * Whether prices are concealed on this portal. A proposal has no customer or
+ * project to take a narrower setting from, so only the global feature counts.
+ * Where it is on, a cost column or line is left out rather than shown empty.
+ */
+export const pricesConcealed = () =>
+  isFeatureVisible(MarketplaceFeatures.conceal_prices);
+
 interface RequestedResourceCostLabelProps {
   cost: RequestedResourceCost;
   /** Renders the one-time part on its own line rather than inline. */
@@ -31,7 +39,7 @@ interface RequestedResourceCostLabelProps {
 export const RequestedResourceCostLabel: FC<
   RequestedResourceCostLabelProps
 > = ({ cost, stacked, part }) => {
-  if (isFeatureVisible(MarketplaceFeatures.conceal_prices)) {
+  if (pricesConcealed()) {
     return <>{DASH_ESCAPE_CODE}</>;
   }
   if (!cost.known) {

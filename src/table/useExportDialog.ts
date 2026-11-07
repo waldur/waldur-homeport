@@ -11,8 +11,9 @@ const ExportDialog = lazyComponent(() =>
 
 export const useExportDialog = () => {
   const { openDialog } = useModal();
+  // `table` is left out to offer only `ownProps.fullExport`.
   return (
-    table: string,
+    table: string | undefined,
     format: ExportFormat,
     ownProps?: Partial<TableProps>,
   ) => {

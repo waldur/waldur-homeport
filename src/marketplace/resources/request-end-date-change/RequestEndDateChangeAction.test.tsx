@@ -10,8 +10,12 @@ import { useUser } from '@/workspace/hooks';
 
 import { RequestEndDateChangeAction } from './RequestEndDateChangeAction';
 
+// The user may ask (the request permission), but not change it directly.
+const granted = vi.hoisted(() => ({ permissions: new Set<string>() }));
+
 vi.mock('@/permissions/hasPermission', () => ({
-  hasPermission: () => false,
+  hasPermission: (_user, request) =>
+    granted.permissions.has(request.permission),
 }));
 
 // What an OpenStack menu passes: the plugin resource, which carries no end
@@ -51,6 +55,7 @@ const waitUntilLoaded = (queryClient: QueryClient) =>
 
 describe('RequestEndDateChangeAction', () => {
   beforeEach(() => {
+    granted.permissions = new Set(['RESOURCE.REQUEST_END_DATE_CHANGE']);
     vi.clearAllMocks();
     // Project admin: not staff/support and no RESOURCE.SET_END_DATE.
     vi.mocked(useUser).mockReturnValue({ uuid: 'user-uuid' } as any);
@@ -68,6 +73,19 @@ describe('RequestEndDateChangeAction', () => {
       end_date: '2026-11-25',
       project_end_date: '2027-06-30',
     });
+  });
+
+  it('hides the action from a role that may not ask', async () => {
+    granted.permissions = new Set();
+    mockOffering({ plugin_options: optedIn, components: [] });
+
+    renderAction({ resource: pluginResource, marketplaceResource });
+
+    // Not even the offering is looked up for someone who may not ask.
+    await waitFor(() =>
+      expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled(),
+    );
+    expect(screen.queryByText('Request end date change')).toBeNull();
   });
 
   it('hides the action when the offering does not accept requests', async () => {

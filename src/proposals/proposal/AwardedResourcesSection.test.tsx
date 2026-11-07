@@ -1,14 +1,18 @@
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
+import { combineReducers, legacy_createStore as createStore } from 'redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   proposalProposalsAwardedResourcesList,
+  proposalProposalsOfferingAssessmentsList,
   proposalProposalsResourcesList,
 } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { tablesReducer } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 
 import { AwardedResourcesSection } from './AwardedResourcesSection';
@@ -16,7 +20,10 @@ import { AwardedResourcesSection } from './AwardedResourcesSection';
 const renderSection = (ui: ReactElement) =>
   renderWithProviders(
     <DrawerProvider>
-      <Provider store={configureStore()({ tables: {} })}>{ui}</Provider>
+      {/* A real tables reducer: a row's details open on its expander. */}
+      <Provider store={createStore(combineReducers({ tables: tablesReducer }))}>
+        {ui}
+      </Provider>
     </DrawerProvider>,
   );
 
@@ -95,6 +102,9 @@ describe('AwardedResourcesSection', () => {
   beforeEach(() => {
     vi.mocked(proposalProposalsResourcesList).mockImplementation(() =>
       page(requests),
+    );
+    vi.mocked(proposalProposalsOfferingAssessmentsList).mockImplementation(() =>
+      page([]),
     );
   });
 
@@ -260,12 +270,81 @@ describe('AwardedResourcesSection', () => {
       <AwardedResourcesSection proposal={proposal} editable={false} />,
     );
 
+    expect(await screen.findByText('Changed')).toBeInTheDocument();
+    // The amounts are in each row's details.
+    for (const expander of screen.getAllByTestId('row-expander')) {
+      await userEvent.click(expander);
+    }
     // The changed amount, with what was asked for beside it.
     expect(await screen.findByText('600 h')).toBeInTheDocument();
     expect(screen.getByText('requested 1000 h')).toBeInTheDocument();
-    expect(screen.getByText('Changed')).toBeInTheDocument();
     // A request the award dropped stays visible as not awarded.
     expect(screen.getByText('GPU Burst Capacity')).toBeInTheDocument();
+    expect(screen.getByText('Not awarded')).toBeInTheDocument();
+  });
+
+  it('shows what each offering assessment concluded beside it', async () => {
+    vi.mocked(proposalProposalsAwardedResourcesList).mockImplementation(() =>
+      page(awards),
+    );
+    vi.mocked(proposalProposalsOfferingAssessmentsList).mockImplementation(() =>
+      page([
+        {
+          contribution_uuid: 'contribution-hpc',
+          step_name: 'Technical assessment',
+          requested_offering_uuid: hpc.uuid,
+          offering_name: hpc.offering_name,
+          status: 'submitted',
+          outcome: 'conditionally_accepted',
+          conditions: 'Jobs of at most 512 nodes',
+        },
+        {
+          contribution_uuid: 'contribution-gpu',
+          step_name: 'Technical assessment',
+          requested_offering_uuid: gpu.uuid,
+          offering_name: gpu.offering_name,
+          status: 'submitted',
+          outcome: 'rejected',
+          conditions: '',
+        },
+      ]),
+    );
+
+    renderSection(
+      <AwardedResourcesSection proposal={proposal} editable={false} />,
+    );
+
+    await screen.findByText('HPC Standard Allocation');
+    // Each offering's assessment is in its row's details.
+    for (const expander of screen.getAllByTestId('row-expander')) {
+      await userEvent.click(expander);
+    }
+    expect(
+      await screen.findByText('Conditionally accepted'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Conditions: Jobs of at most 512 nodes'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Rejected')).toBeInTheDocument();
+    expect(screen.getAllByTestId('offering-assessment')).toHaveLength(2);
+  });
+
+  it('marks only the items whose award differs from the request', async () => {
+    vi.mocked(proposalProposalsAwardedResourcesList).mockImplementation(() =>
+      page([{ ...awards[0], plan_name: null, limits: { cpu_hours: 1000 } }]),
+    );
+
+    renderSection(
+      <AwardedResourcesSection proposal={proposal} editable={false} />,
+    );
+
+    // Awarded as requested: no badge on that row.
+    expect(
+      await screen.findByText('HPC Standard Allocation'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText('As requested')).not.toBeInTheDocument();
+    expect(screen.queryByText('Changed')).not.toBeInTheDocument();
+    // The dropped request is still called out.
     expect(screen.getByText('Not awarded')).toBeInTheDocument();
   });
 });

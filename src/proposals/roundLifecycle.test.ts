@@ -17,6 +17,7 @@ describe('getRoundLifecycleActions', () => {
       close: true,
       startDeciding: false,
       publishResults: false,
+      awaitingAdoption: false,
       complete: false,
       completionRule: true,
       recordAdoption: false,
@@ -31,6 +32,7 @@ describe('getRoundLifecycleActions', () => {
         close: false,
         startDeciding: false,
         publishResults: false,
+        awaitingAdoption: false,
         complete: false,
         completionRule: true,
         recordAdoption: false,
@@ -43,11 +45,14 @@ describe('getRoundLifecycleActions', () => {
       getRoundLifecycleActions({
         status: 'ended',
         lifecycle_state: 'evaluating',
+        // Read by the call team, who see the held decisions.
+        held_decisions_count: 0,
       }),
     ).toEqual({
       close: false,
       startDeciding: true,
       publishResults: true,
+      awaitingAdoption: false,
       complete: false,
       completionRule: true,
       recordAdoption: true,
@@ -65,11 +70,14 @@ describe('getRoundLifecycleActions', () => {
       getRoundLifecycleActions({
         status: 'ended',
         lifecycle_state: 'deciding',
+        // Read by the call team, who see the held decisions.
+        held_decisions_count: 0,
       }),
     ).toEqual({
       close: false,
       startDeciding: false,
       publishResults: true,
+      awaitingAdoption: false,
       complete: false,
       completionRule: true,
       recordAdoption: true,
@@ -96,6 +104,7 @@ describe('getRoundLifecycleActions', () => {
       close: false,
       startDeciding: false,
       publishResults: false,
+      awaitingAdoption: false,
       complete: true,
       completionRule: true,
       recordAdoption: true,
@@ -109,10 +118,115 @@ describe('getRoundLifecycleActions', () => {
       close: false,
       startDeciding: false,
       publishResults: false,
+      awaitingAdoption: false,
       complete: false,
       completionRule: false,
       recordAdoption: true,
     });
+  });
+});
+
+describe('getRoundLifecycleActions with adoption required', () => {
+  const call = {
+    adoption_required: true,
+    publish_results: 'with_round' as const,
+  };
+
+  it('takes the adoption only while the round is deciding', () => {
+    for (const lifecycle_state of [
+      'evaluating',
+      'results_published',
+      'closed',
+    ] as const) {
+      expect(
+        getRoundLifecycleActions(
+          { status: 'ended', lifecycle_state, held_decisions_count: 0 },
+          call,
+        ).recordAdoption,
+      ).toBe(false);
+    }
+    expect(
+      getRoundLifecycleActions(
+        {
+          status: 'ended',
+          lifecycle_state: 'deciding',
+          held_decisions_count: 0,
+        },
+        call,
+      ).recordAdoption,
+    ).toBe(true);
+  });
+
+  it('holds publication back until the adoption is recorded', () => {
+    const deciding = {
+      status: 'ended' as const,
+      lifecycle_state: 'deciding' as const,
+      held_decisions_count: 1,
+    };
+    expect(getRoundLifecycleActions(deciding, call)).toMatchObject({
+      publishResults: true,
+      awaitingAdoption: true,
+    });
+    expect(
+      getRoundLifecycleActions({ ...deciding, adopted_at: '2026-09-15' }, call),
+    ).toMatchObject({ publishResults: true, awaitingAdoption: false });
+  });
+
+  it('lets a failed release be published again', () => {
+    expect(
+      getRoundLifecycleActions(
+        {
+          status: 'ended',
+          lifecycle_state: 'results_published',
+          held_decisions_count: 1,
+          adopted_at: '2026-09-15',
+        },
+        call,
+      ),
+    ).toMatchObject({ publishResults: true, awaitingAdoption: false });
+  });
+});
+
+describe('getRoundLifecycleActions for those who may not read the record', () => {
+  it('does not offer to record an adoption they cannot see', () => {
+    // held_decisions_count comes back null to whoever may not see held
+    // decisions; the backend refuses them the record while it is withheld.
+    expect(
+      getRoundLifecycleActions(
+        {
+          status: 'ended',
+          lifecycle_state: 'deciding',
+          held_decisions_count: null,
+        },
+        { publish_results: 'with_round' },
+      ).recordAdoption,
+    ).toBe(false);
+  });
+
+  it('offers it once the results are out', () => {
+    expect(
+      getRoundLifecycleActions(
+        {
+          status: 'ended',
+          lifecycle_state: 'results_published',
+          held_decisions_count: null,
+        },
+        { publish_results: 'with_round' },
+      ).recordAdoption,
+    ).toBe(true);
+  });
+
+  it('offers it on a call announcing each decision at once', () => {
+    expect(
+      getRoundLifecycleActions(
+        {
+          status: 'ended',
+          lifecycle_state: 'evaluating',
+          held_decisions_count: null,
+        },
+        { publish_results: 'immediately' },
+      ).recordAdoption,
+    ).toBe(true);
   });
 });
 

@@ -15,7 +15,7 @@ import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { GenericPermission, Role } from '@/permissions/types';
 import { getHeldRole } from '@/permissions/utils';
-import { useProject } from '@/workspace/hooks';
+import { useProject, useUser } from '@/workspace/hooks';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
 import {
@@ -96,6 +96,7 @@ const EditUserDialogFormBody: FC<{
   permission,
   customerId,
 }) => {
+  const currentUser = useUser();
   const permissionRoleName = permission.role_name;
   const { data: hasActiveManager } = useProjectHasActiveManager(project?.uuid);
   const isProjectManagerBlocked = isProjectManagerSelectionBlocked(
@@ -132,7 +133,11 @@ const EditUserDialogFormBody: FC<{
         }
       >
         <UserGroup permission={permission} />
-        <RoleGroup types={['project']} scope={{ customerId }} />
+        <RoleGroup
+          types={['project']}
+          user={currentUser}
+          scope={{ customerId, projectId: project?.uuid }}
+        />
         <ExpirationTimeGroup disabled={submitting} />
       </ModalDialog>
     </form>

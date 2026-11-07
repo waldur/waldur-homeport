@@ -17,6 +17,7 @@ import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { RoleEnum } from '@/permissions/enums';
+import { useValidationRedirect } from '@/proposals/validation/useValidationRedirect';
 import { useUser } from '@/workspace/hooks';
 
 import { CallTabs } from '../details/CallTabs';
@@ -32,14 +33,18 @@ import { ApplicantVisibilitySection } from './applicant-visibility/ApplicantVisi
 import { CallActions } from './CallActions';
 import { CallUpdateHero } from './CallUpdateHero';
 import { COISettingsSection } from './coi-settings/COISettingsSection';
+import { AllocationSettingsSection } from './configuration/AllocationSettingsSection';
 import { CallResourceTemplates } from './configuration/CallResourceTemplates';
 import { GeneralConfigurationSection } from './configuration/GeneralConfigurationSection';
 import { ProposalFieldsSection } from './configuration/ProposalFieldsSection';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallEligibilitySection } from './eligibility/CallEligibilitySection';
+import { ReviewerEligibilitySection } from './eligibility/ReviewerEligibilitySection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { MatchingSection } from './matching/MatchingSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
+import { CallPanelsSection } from './panels/CallPanelsSection';
+import { CallProposalRolesSection } from './proposal-roles/CallProposalRolesSection';
 import { CallRoleMappingsList } from './role-mapping/CallRoleMappingsList';
 import { CallRoundsList } from './rounds/CallRoundsList';
 import { WorkflowStepsSection } from './workflow-steps/WorkflowStepsSection';
@@ -73,46 +78,29 @@ const Body = ({ call, refetch, loading }) => {
     () =>
       [
         {
-          key: 'general',
-          title: translate('General'),
-          component: CallGeneralSection,
-        },
-        {
-          // Parent has no `component`, so it renders as a dropdown whose
+          // A parent without a `component` renders as a dropdown whose
           // children each map to ?tab=<child key> (see usePageTabsTransmitter).
-          key: 'configuration',
-          title: translate('Configuration'),
-          defaultKey: 'general-config',
+          // The groups follow what is being configured: the call itself,
+          // the application form, the resources, the evaluation and the
+          // allocation.
+          key: 'call',
+          title: translate('Call'),
+          defaultKey: 'general',
           children: [
+            {
+              key: 'general',
+              title: translate('General'),
+              component: CallGeneralSection,
+            },
             {
               key: 'general-config',
               title: translate('General configuration'),
               component: GeneralConfigurationSection,
             },
             {
-              key: 'proposal-fields',
-              title: translate('Project details fields'),
-              component: ProposalFieldsSection,
-            },
-            {
-              key: 'applicant-visibility',
-              title: translate('Applicant data visibility'),
-              component: ApplicantVisibilitySection,
-            },
-            {
-              key: 'applicant-eligibility',
-              title: translate('Applicant eligibility'),
-              component: CallEligibilitySection,
-            },
-            {
-              key: 'resource-templates',
-              title: translate('Resource templates'),
-              component: CallResourceTemplates,
-            },
-            {
-              key: 'steps-settings',
-              title: translate('Steps & settings'),
-              component: WorkflowStepsSection,
+              key: 'documents',
+              title: translate('Documents'),
+              component: CallDocumentsSection,
             },
           ],
         },
@@ -127,29 +115,91 @@ const Body = ({ call, refetch, loading }) => {
           component: CallRoundsList,
         },
         {
-          key: 'documents',
-          title: translate('Documents'),
-          component: CallDocumentsSection,
+          key: 'application',
+          title: translate('Application form'),
+          defaultKey: 'proposal-fields',
+          children: [
+            {
+              key: 'proposal-fields',
+              title: translate('Project details fields'),
+              component: ProposalFieldsSection,
+            },
+            {
+              key: 'applicant-eligibility',
+              title: translate('Applicant eligibility'),
+              component: CallEligibilitySection,
+            },
+            {
+              key: 'applicant-visibility',
+              title: translate('Applicant data visibility'),
+              component: ApplicantVisibilitySection,
+            },
+            {
+              key: 'resource-templates',
+              title: translate('Resource templates'),
+              component: CallResourceTemplates,
+            },
+          ],
         },
         {
+          // The call's offerings and what a proposal may request of each.
           key: 'offerings',
-          title: translate('Offerings'),
+          title: translate('Resources'),
           component: CallOfferingsSection,
         },
         {
-          key: 'role_mapping',
-          title: translate('Role mapping'),
-          component: CallRoleMappingsList,
+          key: 'workflow',
+          title: translate('Evaluation workflow'),
+          defaultKey: 'steps-settings',
+          children: [
+            {
+              key: 'steps-settings',
+              title: translate('Steps & settings'),
+              component: WorkflowStepsSection,
+            },
+            {
+              key: 'evaluator-roles',
+              title: translate('Evaluator roles'),
+              component: CallProposalRolesSection,
+            },
+            {
+              key: 'panels',
+              title: translate('Panels'),
+              component: CallPanelsSection,
+            },
+            {
+              key: 'coi-settings',
+              title: translate('COI settings'),
+              component: COISettingsSection,
+            },
+            {
+              key: 'reviewer-eligibility',
+              title: translate('Reviewer eligibility'),
+              component: ReviewerEligibilitySection,
+            },
+            {
+              key: 'matching',
+              title: translate('Matching settings'),
+              component: MatchingSection,
+            },
+          ],
         },
         {
-          key: 'coi-settings',
-          title: translate('COI settings'),
-          component: COISettingsSection,
-        },
-        {
-          key: 'matching',
-          title: translate('Matching settings'),
-          component: MatchingSection,
+          key: 'allocation',
+          title: translate('Allocation'),
+          defaultKey: 'allocation-settings',
+          children: [
+            {
+              key: 'allocation-settings',
+              title: translate('Allocation settings'),
+              component: AllocationSettingsSection,
+            },
+            {
+              key: 'role_mapping',
+              title: translate('Role mapping'),
+              component: CallRoleMappingsList,
+            },
+          ],
         },
         {
           key: 'team',
@@ -160,7 +210,7 @@ const Body = ({ call, refetch, loading }) => {
           // (ProtectedCallViewSet exempts add_user/update_user/delete_user from
           // its blanket gate so organization owners keep team management), and
           // AddUserButton already checks that set itself. Only the panel-chair
-          // action PATCHes the call, so only it follows the call's edit lock --
+          // actions PATCH the call, so only it follows the call's edit lock --
           // hidden, like Remove for users who may not remove, rather than shown
           // disabled.
           component: ({ call, refetch, isReadOnly }) => (
@@ -194,6 +244,16 @@ const Body = ({ call, refetch, loading }) => {
                   >
                     {translate('Chair')}
                   </Badge>
+                ) : call.panel_vice_chair_uuid &&
+                  row.user_uuid === call.panel_vice_chair_uuid ? (
+                  <Badge
+                    variant="primary"
+                    size="sm"
+                    shape="pill"
+                    tone="outline"
+                  >
+                    {translate('Vice-chair')}
+                  </Badge>
                 ) : null
               }
             />
@@ -209,6 +269,7 @@ const Body = ({ call, refetch, loading }) => {
   const {
     tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
+  useValidationRedirect();
 
   const canUpdate = canUpdateCall(user, call);
 

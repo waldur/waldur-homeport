@@ -8,6 +8,8 @@ import {
   canCloseRounds,
   canManageCallReviews,
   canOpenCallEditPage,
+  canReadCallReports,
+  canReadRoundCommittee,
   canUpdateCall,
   getRoundMenuAccess,
   isOnCallTeam,
@@ -489,4 +491,109 @@ describe('canOpenCallEditPage', () => {
         ),
       ).toBe(false);
     }));
+});
+
+describe('canReadRoundCommittee', () => {
+  it.each(['CALL.MANAGER', 'CALL.PANEL_MEMBER'])(
+    'admits a %s of the call',
+    (role) => {
+      withRoles(() => {
+        expect(
+          canReadRoundCommittee({ permissions: [onCall(role)] } as any, call),
+        ).toBe(true);
+      });
+    },
+  );
+
+  it('admits staff', () => {
+    withRoles(() => {
+      expect(
+        canReadRoundCommittee({ is_staff: true, permissions: [] } as any, call),
+      ).toBe(true);
+    });
+  });
+
+  it('leaves out reviewers and applicants', () => {
+    withRoles(() => {
+      expect(
+        canReadRoundCommittee(
+          { permissions: [onCall('CALL.REVIEWER')] } as any,
+          call,
+        ),
+      ).toBe(false);
+      expect(canReadRoundCommittee({ permissions: [] } as any, call)).toBe(
+        false,
+      );
+    });
+  });
+});
+
+describe('canReadRoundCommittee for a round', () => {
+  const round = { proposals: [{ uuid: 'proposal-1' }, { uuid: 'proposal-2' }] };
+  const onProposal = (uuid: string) => ({
+    role_name: 'PROPOSAL.MEMBER',
+    scope_type: 'proposal',
+    scope_uuid: uuid,
+  });
+
+  it.each(['CALL.MANAGER', 'CALL.PANEL_MEMBER'])(
+    'leaves out a %s on the team of one of its proposals',
+    (role) => {
+      withRoles(() => {
+        const user = {
+          permissions: [onCall(role), onProposal('proposal-2')],
+        } as any;
+        expect(canReadRoundCommittee(user, call, round)).toBe(false);
+        expect(
+          canReadRoundCommittee(user, call, { proposals: [{ uuid: 'other' }] }),
+        ).toBe(true);
+      });
+    },
+  );
+
+  it('admits staff on the team of one of its proposals', () => {
+    withRoles(() => {
+      expect(
+        canReadRoundCommittee(
+          { is_staff: true, permissions: [onProposal('proposal-1')] } as any,
+          call,
+          round,
+        ),
+      ).toBe(true);
+    });
+  });
+});
+
+// The call's Reports tab: the report endpoint asks for CALL.UPDATE, and lets
+// support read as well. The Manage page is open to owners, who hold neither.
+describe('canReadCallReports', () => {
+  it.each([
+    ['a call manager', { permissions: [onCall('CALL.MANAGER')] }, true],
+    [
+      'a call organizer',
+      { permissions: [onManagingOrg('CUSTOMER.CALL_ORGANIZER')] },
+      true,
+    ],
+    ['staff', { is_staff: true, permissions: [] }, true],
+    ['support', { is_support: true, permissions: [] }, true],
+    [
+      'an organization owner',
+      {
+        permissions: [
+          {
+            role_name: 'CUSTOMER.OWNER',
+            scope_type: 'customer',
+            scope_uuid: 'customer-uuid',
+            customer_uuid: 'customer-uuid',
+          },
+        ],
+      },
+      false,
+    ],
+    ['a reviewer', { permissions: [onCall('CALL.REVIEWER')] }, false],
+  ])('%s: %s', (_label, user, expected) => {
+    withRoles(() =>
+      expect(canReadCallReports(user as any, call)).toBe(expected),
+    );
+  });
 });
