@@ -1167,21 +1167,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-feedback-surveys',
-    url: 'feedback-surveys/',
-    parent: 'admin-user-interface',
-    component: lazyComponent(() =>
-      import('@/feedback/FeedbackSurveysList').then((module) => ({
-        default: module.FeedbackSurveysList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Feedback surveys'),
-      permissions: [isStaffOrSupport],
-    },
-  },
-
-  {
     name: 'admin-support-feedback',
     url: 'support-feedback/',
     parent: 'admin-user-interface',
