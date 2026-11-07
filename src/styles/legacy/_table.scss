@@ -364,7 +364,9 @@
         .h3 {
           line-height: 28px;
         }
-        small {
+        // `.small` was added by Bootstrap's `.small { @extend small }`.
+        small,
+        .small {
           line-height: 20px;
         }
       }

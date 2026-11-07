@@ -66,7 +66,7 @@
      img, svg, video, canvas, audio, iframe, embed, object { display: block }
      img, video { max-width: 100%; height: auto }
 
-   Bootstrap's reboot only sets `vertical-align: middle` on img/svg, so
+   The reboot (styles/legacy/_reboot.scss) sets nothing on img/svg, so
    nothing in the `bootstrap` layer outranks the display change — every one
    of the app's ~61 <img> tags and every inline Phosphor <svg> silently went
    from inline to block the moment Tailwind shipped in the app bundle, which
@@ -93,10 +93,11 @@
    parent and never depended on preflight's rule to begin with. Verify that
    still holds before moving one of them into an inline-flow context. */
 /* The ring's corner for controls that bring no radius of their own. It sits in
-   `bootstrap`, not `base`, only because Bootstrap's reboot forces
-   `button { border-radius: 0 }` there -- from `base` every plain <button> (the
-   column pin, the favourite star) would keep square corners while the padded
-   buttons beside them are rounded. A component that sets its own radius still
+   `bootstrap`, not `base`, because Bootstrap's reboot forced
+   `button { border-radius: 0 }` there; only preflight's `base` copy of that
+   rule is left, which it outranks either way. Without it every plain <button>
+   (the column pin, the favourite star) would keep square corners while the
+   padded buttons beside them are rounded. A component that sets its own radius still
    wins: same specificity, and its stylesheet loads after this one. */
 @layer bootstrap {
   :focus-visible {
@@ -126,9 +127,9 @@
 
        ol, ul, menu { list-style: none; margin: 0; padding: 0 }
 
-     Reboot has its own `margin`/`padding-left` for lists, so those two win
-     on layer order and are already unaffected — `list-style` is the single
-     property with no Bootstrap counterpart, which is why only it is
+     The reboot (styles/legacy/_reboot.scss) has its own `margin-bottom`/
+     `padding-left` for lists, so those win on layer order — `list-style` is
+     the single property with no reboot counterpart, which is why only it is
      reverted here rather than the whole rule. Without this, every bare
      <ul>/<ol> loses its bullets: ~30 in .tsx directly, plus every list in
      Markdown the app renders as user content (SafeMarkdown /
@@ -147,10 +148,10 @@
 
 /* The page's base styles, from Metronic's core/layout/_base.scss and the
    body background in layout/_main.scss. They stay in the `bootstrap` layer,
-   where they always were, so they compete with Bootstrap's reboot exactly as
-   before. This file loads before the Metronic stylesheet, so the body rules
-   use `html body` to keep beating the reboot's `body` rules regardless of
-   order.
+   where they always were, so they compete with the reboot
+   (styles/legacy/_reboot.scss) exactly as before. This file loads before the
+   Metronic stylesheet, so the body rules use `html body` to keep beating the
+   reboot's `body` rules regardless of order.
 
    Root font size: 13px, 12px below md. Every rem in the app is relative to
    it. Body text is 1.077rem (14px at the 13px root). A deployment font's
@@ -218,8 +219,8 @@
    It sits below the utilities, so a caller's class on Code (text-xs,
    text-quaternary, mx-0) wins without tailwind-merge. A <code> in a <pre> is a
    code block and is left alone, as are highlighted fences (code.language-*).
-   Bootstrap's reboot still sets the font of every `code`, and colours none:
-   $code-color is `inherit`. */
+   The reboot (styles/legacy/_reboot.scss) still sets the font of every
+   `code`, and its colour to `inherit`. */
 @layer bootstrap {
   [data-slot='code'],
   .rich-text code:not(pre > code, [class*='language-']) {
@@ -240,8 +241,8 @@
      stands apart from the text around it. Only a bare <pre>: a block with its
      own class (the AI assistant's .aui-md-pre, a highlighted language-*
      fence) keeps its look, and so does CodePreview's $-prompt block, which
-     .code-block draws. Bootstrap's reboot sets its font, size and bottom
-     margin. */
+     .code-block draws. The reboot (styles/legacy/_reboot.scss) sets its font,
+     size and bottom margin. */
   .rich-text pre:not([class], .code-block pre) {
     overflow-x: auto;
     background-color: var(--bg-tertiary);
