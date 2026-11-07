@@ -304,6 +304,7 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
                 'font-normal text-quaternary line-clamp-2',
                 props.descriptionClass,
               )}
+              tooltip={props.descriptionTooltip}
             >
               {props.description}
             </ItemDescription>

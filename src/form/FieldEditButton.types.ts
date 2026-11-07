@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
-import { PropertyItemProps } from 'waldur-ui';
+import { ModalSize, PropertyItemProps } from 'waldur-ui';
 
 export interface FieldEditButtonProps extends Partial<
   Omit<PropertyItemProps, 'actions'>
@@ -22,4 +22,8 @@ export interface FieldEditButtonProps extends Partial<
   emptyValue?: any;
   tooltip?: string;
   iconNode?: React.ReactNode;
+  /** Shown above the control in the edit dialog. */
+  dialogDescription?: React.ReactNode;
+  /** The edit dialog's size; the modal's default when left out. */
+  dialogSize?: ModalSize;
 }

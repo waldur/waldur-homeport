@@ -3,7 +3,7 @@ import { FieldValidator } from 'final-form';
 import { ComponentType, FC, ReactNode } from 'react';
 import { FieldProps } from 'react-final-form';
 
-import { PropertyItem } from 'waldur-ui';
+import { ModalSize, PropertyItem } from 'waldur-ui';
 
 import { CheckOrX } from '@/core/CheckOrX';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
@@ -35,6 +35,14 @@ export type EditFieldProps<P = object> = Omit<
    * blocks (e.g. a placeholder reference table) that would bloat the row.
    */
   descriptionInEditOnly?: boolean;
+  /** `false` drops the row's tooltip repeating the description. */
+  descriptionTooltip?: boolean;
+  /** Help text on a question mark after the label. */
+  labelTooltip?: ReactNode;
+  /** Shown above the control in the edit dialog, in place of the subtitle. */
+  dialogDescription?: ReactNode;
+  /** The edit dialog's size; the modal's default when left out. */
+  dialogSize?: ModalSize;
   disabled?: boolean;
   warnTooltip?: string;
   isStaffOnly?: boolean;
@@ -97,6 +105,10 @@ export function withEditField<P extends object>(
       label,
       description,
       descriptionInEditOnly,
+      descriptionTooltip,
+      dialogDescription,
+      labelTooltip,
+      dialogSize,
       disabled,
       warnTooltip,
       isStaffOnly,
@@ -157,7 +169,7 @@ export function withEditField<P extends object>(
     const editButton = (
       <FieldEditButton
         title={label}
-        description={description as string}
+        description={(dialogDescription ? undefined : description) as string}
         scope={scope}
         name={name}
         callback={callback}
@@ -173,6 +185,8 @@ export function withEditField<P extends object>(
         tooltip={tooltip ?? (disabled ? ctx?.readOnlyReason : undefined)}
         iconNode={iconNode}
         disabled={disabled}
+        dialogDescription={dialogDescription}
+        dialogSize={dialogSize}
       />
     );
 
@@ -193,10 +207,12 @@ export function withEditField<P extends object>(
       <PropertyItem
         label={label}
         description={descriptionInEditOnly ? undefined : description}
+        descriptionTooltip={descriptionTooltip}
         value={displayValue}
         required={required}
         disabled={disabled}
         warnTooltip={warnTooltip}
+        tooltip={labelTooltip}
         actions={actions}
       />
     );

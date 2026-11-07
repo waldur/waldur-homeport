@@ -170,6 +170,11 @@ export interface BasePropertyItemProps {
   labelClass?: string;
   /** Classes for the description under the term (`divided` only). */
   descriptionClass?: string;
+  /**
+   * `false` drops the tooltip that repeats a clamped description, for a
+   * description that is not text (e.g. badges with tooltips of their own).
+   */
+  descriptionTooltip?: boolean;
   /** Classes for the value, after the list's `valueClass`. */
   valueClass?: string;
   /** Classes for the actions slot (`divided` only). */

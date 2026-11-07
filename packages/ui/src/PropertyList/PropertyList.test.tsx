@@ -375,6 +375,24 @@ describe('PropertyList', () => {
     );
   });
 
+  it('drops the description tooltip when descriptionTooltip is false', async () => {
+    render(
+      <PropertyList>
+        <PropertyList.Item
+          label="UID"
+          description="POSIX UID supplied by the identity provider."
+          descriptionTooltip={false}
+          value="100231"
+        />
+      </PropertyList>,
+    );
+
+    await userEvent.hover(
+      screen.getByText('POSIX UID supplied by the identity provider.'),
+    );
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  });
+
   it('names an inline control by its label in summary mode', () => {
     render(
       <PropertyList variant="summary">
