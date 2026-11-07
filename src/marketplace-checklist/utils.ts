@@ -21,6 +21,16 @@ export const checklistTypeOptions: Array<{ label; value: ChecklistTypeEnum }> =
     { label: translate('Feedback survey'), value: 'feedback' },
   ];
 
+// The types calls use as forms: only these may belong to an organization,
+// which limits them to that organization's own calls.
+const CALL_FORM_CHECKLIST_TYPES: ChecklistTypeEnum[] = [
+  'proposal_compliance',
+  'workflow_step',
+];
+
+export const isCallFormChecklistType = (type?: ChecklistTypeEnum | null) =>
+  !!type && CALL_FORM_CHECKLIST_TYPES.includes(type);
+
 export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
   { label: translate('Text input'), value: 'text_input' },
   { label: translate('Text area'), value: 'text_area' },

@@ -24,7 +24,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { checklistTypeOptions } from '../utils';
+import { checklistTypeOptions, isCallFormChecklistType } from '../utils';
 
 const loadOrganizations = organizationAutocomplete({
   field: ['name', 'uuid'],
@@ -53,8 +53,11 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
         name: formData.name,
         description: formData.description,
         checklist_type: formData.checklist_type,
-        // Empty: a checklist the whole portal shares.
-        customer: formData.customer?.uuid ?? null,
+        // Empty: a checklist the whole portal shares. Only call forms belong
+        // to an organization; nothing else reads it.
+        customer: isCallFormChecklistType(formData.checklist_type)
+          ? (formData.customer?.uuid ?? null)
+          : null,
       };
       if (isEdit) {
         return checklistsAdminPartialUpdate({
@@ -91,7 +94,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
     <Form
       onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, pristine, invalid }) => (
+      render={({ handleSubmit, submitting, pristine, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -133,22 +136,24 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               space={4}
             />
 
-            <AsyncSelectGroup
-              name="customer"
-              label={translate('Organization')}
-              description={translate(
-                'Only the calls of this organization use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.',
-              )}
-              placeholder={translate('Shared by the whole portal')}
-              loadOptions={loadOrganizations}
-              debounceTimeout={500}
-              defaultOptions
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => option.name}
-              noOptionsMessage={() => translate('No organizations found')}
-              isClearable={true}
-              space={4}
-            />
+            {isCallFormChecklistType(values.checklist_type) && (
+              <AsyncSelectGroup
+                name="customer"
+                label={translate('Organization')}
+                description={translate(
+                  'Only the calls of this organization use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.',
+                )}
+                placeholder={translate('Shared by the whole portal')}
+                loadOptions={loadOrganizations}
+                debounceTimeout={500}
+                defaultOptions
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.name}
+                noOptionsMessage={() => translate('No organizations found')}
+                isClearable={true}
+                space={4}
+              />
+            )}
 
             <TextGroup
               name="description"
