@@ -161,6 +161,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'support-feedback-surveys',
+    url: 'feedback-surveys/',
+    parent: 'support-communication',
+    component: lazyComponent(() =>
+      import('@/feedback/FeedbackSurveysList').then((module) => ({
+        default: module.FeedbackSurveysList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Feedback surveys'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
     name: 'support-audit-logs',
     url: 'audit-logs/',
     parent: 'support-logs',
