@@ -26,13 +26,13 @@ export const CallInProgressBanner: FC = () => {
   if (otherMembers.length === 0) return null;
 
   return (
-    <div className="call-in-progress-banner flex items-center">
+    <div className="flex items-center gap-4 py-2.5 px-[var(--card-padding-x,24px)] bg-warning-subtle border-b border-b-secondary">
       <FeaturedIcon
         icon={<WarningCircleIcon weight="bold" />}
         variant="warning"
         size="sm"
       />
-      <span className="call-in-progress-banner__label grow truncate">
+      <span className="text-sm font-semibold text-warning grow truncate">
         {translate('Call in progress')}
       </span>
       <BaseButton

@@ -417,7 +417,7 @@ const CallStage: FC<{
 };
 
 const ConnectingPlaceholder: FC = () => (
-  <div className="matrix-call-view__connecting">
+  <div className="absolute inset-0 z-2 flex flex-col items-center justify-center gap-3 bg-tertiary text-secondary">
     <LoadingSpinnerSimple />
     <span>{translate('Starting call…')}</span>
   </div>
@@ -428,7 +428,7 @@ const CallErrorPanel: FC<{
   onRetry: () => void;
   onClose: () => void;
 }> = ({ message, onRetry, onClose }) => (
-  <div className="matrix-call-view__error">
+  <div className="absolute inset-0 z-2 flex flex-col items-center justify-center gap-3 p-4 text-center bg-tertiary text-secondary">
     <LoadingErred
       loadData={onRetry}
       message={message || translate('Could not connect to the call.')}

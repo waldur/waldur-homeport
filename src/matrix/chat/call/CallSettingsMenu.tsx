@@ -76,8 +76,8 @@ const DeviceSelect: FC<DeviceSelectProps> = ({ kind, label }) => {
   const value = options.find((o) => o.value === activeDeviceId) ?? null;
 
   return (
-    <div className="call-device-settings__group">
-      <div className="call-device-settings__label">{label}</div>
+    <div>
+      <div className="mb-1 font-semibold text-secondary">{label}</div>
       <Select
         options={options}
         value={value}
@@ -124,9 +124,10 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
         // The docked call belongs to MatrixCallHost's React tree, not the
         // drawer's, so the drawer would read clicks here as a click away.
         data-dialog-inside=""
-        className="call-device-settings-popover p-3"
+        data-testid="call-device-settings-popover"
+        className="w-[280px] p-3"
       >
-        <div className="call-device-settings">
+        <div className="flex flex-col gap-3">
           {kinds.map(({ kind, label }) => (
             <DeviceSelect key={kind} kind={kind} label={label} />
           ))}
