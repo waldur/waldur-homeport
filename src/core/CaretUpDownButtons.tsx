@@ -38,7 +38,12 @@ interface CaretUpDownButtonsProps {
 
 export const CaretUpDownButtons = (props: CaretUpDownButtonsProps) => {
   return (
-    <span className={classNames('up-down-buttons', props.className)}>
+    <span
+      className={classNames(
+        'inline-flex flex-col align-middle *:flex',
+        props.className,
+      )}
+    >
       <button
         type="button"
         data-testid={props.upTestId}

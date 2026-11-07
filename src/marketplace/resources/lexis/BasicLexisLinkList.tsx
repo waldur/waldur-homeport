@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { lexisLinksList } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { CodeLine } from '@/core/CodeLine';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { LexisLinkDeleteAction } from '@/marketplace/resources/lexis/LexisLinkDeleteButton';
@@ -25,7 +25,9 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
       title: translate('Robot account'),
       render: ({ row }) =>
         row.robot_account_username ? (
-          <CopyToClipboardContainer value={row.robot_account_username} />
+          <CodeLine variant="inline" copyable>
+            {row.robot_account_username}
+          </CodeLine>
         ) : (
           'N/A'
         ),

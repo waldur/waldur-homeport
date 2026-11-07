@@ -1,7 +1,3 @@
-body {
-  overflow-x: hidden;
-}
-
 /* CARD */
 // The title's description and headings. waldur-ui's CardTitle sets none of
 // these, so a class the caller puts on them still wins.
@@ -150,11 +146,6 @@ body {
   display: inline;
   margin: 0;
   padding: 0;
-}
-
-hr {
-  background-color: var(--border-secondary);
-  opacity: 1;
 }
 
 .content-wrapper {

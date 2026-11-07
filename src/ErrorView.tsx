@@ -5,7 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { BaseButton, RadialBackground } from 'waldur-ui';
+import { BaseButton, IconSquare, RadialBackground } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import '@/navigation/header/search/NoResult.scss';
@@ -32,9 +32,9 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
     <div className="search-error">
       <RadialBackground className="background" />
       <div className="text-center flex flex-col items-center pb-8 relative z-1">
-        <div className="icon-square icon-lg error-icon">
+        <IconSquare size="lg" className="error-icon">
           <WarningCircleIcon weight="bold" size={24} />
-        </div>
+        </IconSquare>
 
         <div>
           <h4>{translate('Something went wrong')}</h4>

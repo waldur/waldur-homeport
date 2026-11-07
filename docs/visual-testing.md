@@ -73,7 +73,7 @@ node scripts/theme-snapshots.mjs capture storybook-static /tmp/vt/head
 node scripts/theme-snapshots.mjs compare /tmp/vt/base /tmp/vt/head /tmp/vt/report
 ```
 
-- `capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,…>] [--themes <light,dark>]`
+- `capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,…>] [--themes <light,dark>] [--styles]`
   writes `<story-id>.<theme>.png`, full page, at a 1280×900 viewport. `--filter` matches story ids
   (`--filter '^actions-'`). `--font` forces one font family everywhere, for comparing two builds
   that load different web fonts: the text then cannot differ, so colour changes stand out.
@@ -87,6 +87,14 @@ node scripts/theme-snapshots.mjs compare /tmp/vt/base /tmp/vt/head /tmp/vt/repor
   and, for each changed pair, a `base | head | changed pixels in red` PNG. It prints the changed
   pairs sorted by ratio and exits 1 when anything differs.
 - The per-pixel threshold is 0.05: antialiasing passes, a one-step colour ramp change does not.
+- `capture … --styles` also writes `<story-id>.<theme>.styles.json`: the computed style of every
+  element the story renders (portals included), keyed by its DOM path (tags and sibling
+  positions, no class names). When both captures have them, `compare` lists every property that
+  changed, as `div:4>div:0>…  padding-top  11px → 9px`, under `styles` in `report.json` and on the
+  console, and exits 1 for them too. Use it for a refactor that should change no style at all,
+  such as moving a stylesheet's rules into utilities: it names the element and the property, and
+  it catches a change too small for the pixel threshold. Check that the stories you filter on
+  actually render the changed markup (grep the head captures for the new value).
 - `capture … --root <px>` forces `html`'s font size (the rem root) before each story loads, and
   `root-invariance <storybook-static> <out-dir> [--roots 13,20]` captures at both roots into
   `<out-dir>/root-13` and `<out-dir>/root-20` and compares them into `<out-dir>/report`

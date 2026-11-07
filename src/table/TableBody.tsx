@@ -130,7 +130,7 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
           <BaseButton
             variant="text-secondary"
             size="sm"
-            className="inline-filter icon-align"
+            className="inline-filter [&_svg]:-mt-0.75"
             tooltip={translate('Add filter')}
             iconNode={<FunnelSimpleIcon weight="bold" size={20} />}
           />

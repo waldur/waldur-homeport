@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Invitation } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { CodeLine } from '@/core/CodeLine';
 import { translate } from '@/i18n';
 import { getInvitationLink } from '@/invitations/utils';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -16,7 +16,9 @@ export const InvitationLinkExpandableRow: FunctionComponent<{
   <ExpandableContainer>
     <div>
       <b>{translate('Invitation link')}: </b>
-      <CopyToClipboardContainer value={getInvitationLink(row)} />
+      <CodeLine variant="inline" copyable>
+        {getInvitationLink(row)}
+      </CodeLine>
     </div>
   </ExpandableContainer>
 );

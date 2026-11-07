@@ -24,9 +24,9 @@ describe('no-bootstrap-important-collision', () => {
       // A variant is a different class name, which Bootstrap does not define.
       { code: "const c = 'md:visually-hidden';" },
       // Names that only start with a colliding one.
-      { code: "const c = 'visually-hidden-focusable btn-no-focus-ring';" },
+      { code: "const c = 'visually-hidden-focusable';" },
       // Not a class list.
-      { code: 'const A = () => <BaseButton variant="btn-no-focus" />;' },
+      { code: 'const A = () => <BaseButton variant="visually-hidden" />;' },
       { code: "if (look === 'visually-hidden') {}" },
     ],
     invalid: [
@@ -40,11 +40,6 @@ describe('no-bootstrap-important-collision', () => {
         code: 'const c = `w-[250px] ${a} visually-hidden`;',
         errors: [{ messageId: 'collision' }],
         output: 'const c = `w-[250px] ${a} sr-only`;',
-      },
-      // No fix: the class has no Tailwind counterpart.
-      {
-        code: 'const A = () => <BaseButton className="btn-no-focus" />;',
-        errors: [{ messageId: 'collision' }],
       },
     ],
   });

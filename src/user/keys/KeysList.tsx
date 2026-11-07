@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { keysList, SshKey, User } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { CodeLine } from '@/core/CodeLine';
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -84,7 +84,9 @@ export const KeysList: FunctionComponent<{
     {
       title: translate('Fingerprint (SHA256)'),
       render: ({ row }) => (
-        <CopyToClipboardContainer value={row.fingerprint_sha256} />
+        <CodeLine variant="inline" copyable>
+          {row.fingerprint_sha256}
+        </CodeLine>
       ),
 
       export: 'fingerprint_sha256',

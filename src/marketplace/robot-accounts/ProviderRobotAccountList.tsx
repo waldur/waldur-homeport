@@ -4,7 +4,7 @@ import {
   RobotAccountDetails,
 } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { CodeLine } from '@/core/CodeLine';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -81,7 +81,9 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
       title: translate('Username'),
       render: ({ row }) =>
         row.username ? (
-          <CopyToClipboardContainer value={row.username} />
+          <CodeLine variant="inline" copyable>
+            {row.username}
+          </CodeLine>
         ) : (
           'N/A'
         ),

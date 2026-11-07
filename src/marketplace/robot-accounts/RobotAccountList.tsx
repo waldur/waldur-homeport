@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { marketplaceRobotAccountsList } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { CodeLine } from '@/core/CodeLine';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -32,7 +32,9 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
       title: translate('Username'),
       render: ({ row }) =>
         row.username ? (
-          <CopyToClipboardContainer value={row.username} />
+          <CodeLine variant="inline" copyable>
+            {row.username}
+          </CodeLine>
         ) : (
           'N/A'
         ),

@@ -22,6 +22,7 @@ export * from './EmptyState';
 export * from './FeaturedIcon';
 export * from './Form';
 export * from './HelpIcon';
+export * from './IconSquare';
 export * from './Input';
 export * from './LanguageMenu';
 export * from './LoadingSpinner';

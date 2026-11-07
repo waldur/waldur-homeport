@@ -59,7 +59,7 @@ const LiveResourceList: FC<UIBlockProps> = ({ block }) => {
   });
 
   return (
-    <div className="aui-resource-list-block">
+    <div className="w-full overflow-x-auto [&>[data-slot=card]]:mb-0 [&>[data-slot=card]]:[--card-min-width:30rem]">
       <Table
         {...tableProps}
         columns={columns}
@@ -95,7 +95,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
   }
 
   return (
-    <div className="aui-resource-list-block border border-secondary rounded-lg bg-tertiary dark:bg-quaternary p-2.5">
+    <div className="w-full overflow-x-auto border border-secondary rounded-lg bg-tertiary dark:bg-quaternary p-2.5">
       <div className="flex items-center justify-between mb-1.5 gap-1.5 flex-wrap">
         <div className="flex items-center gap-1.5">
           <TableIcon weight="bold" />

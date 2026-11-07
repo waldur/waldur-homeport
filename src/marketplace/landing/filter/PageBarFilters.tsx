@@ -69,7 +69,6 @@ const PageBarFilters = ({ withPicker = false }: { withPicker?: boolean }) => {
             ))}
             <BaseButton
               variant="text-secondary"
-              className="btn-no-focus"
               onClick={clearAllFilters}
               iconNode={<XIcon weight="bold" />}
               label={translate('Clear filters')}

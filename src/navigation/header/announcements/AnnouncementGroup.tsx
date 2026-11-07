@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { AdminAnnouncement } from 'waldur-js-client';
 
+import { IconSquare } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 
@@ -33,9 +35,9 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
             'flex items-center gap-2.5',
           )}
         >
-          <div className="icon-square">
+          <IconSquare>
             <InfoIcon weight="bold" />
-          </div>
+          </IconSquare>
           <div className="grow text-start">
             <strong className="font-medium block text-sm">
               {translate('{count} announcements', {

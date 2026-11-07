@@ -1,31 +1,19 @@
 import Markdown, { RuleType } from 'markdown-to-jsx';
-import { FunctionComponent, PropsWithChildren } from 'react';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { CodeBlock } from '@/core/CodeBlock';
 import { formatTemplate } from '@/i18n/translate';
 
 import './SafeMarkdown.scss';
 
-const CodeBlock: FunctionComponent<PropsWithChildren> = ({ children }) => (
-  <div className="code-block">
-    <pre>
-      <div className="me-1 code-block-pre">$</div>
-      <div className="code-block-content">{children}</div>
-      <div className="ms-1 code-block-post">
-        <CopyToClipboardButton value={children} />
-      </div>
-    </pre>
-  </div>
-);
-
 export const CodePreview = ({ template = '', context }) => {
   const formattedTemplate = formatTemplate(template, context);
 
+  // A one-line fence (```ssh user@host```) is a code block too: put its
+  // content on lines of its own, which the markdown parser needs. A one-line
+  // fence has no language tag, so its first word is part of the command.
   const normalizedTemplate = formattedTemplate.replace(
-    /```(\w+\s+)?([^`\n]+)```/g,
-    (_match, _lang, content) => {
-      return '\n```\n' + content.trim() + '\n```\n';
-    },
+    /```([^`\n]+)```/g,
+    (_match, content) => '\n```\n' + content.trim() + '\n```\n',
   );
 
   return (
@@ -41,7 +29,11 @@ export const CodePreview = ({ template = '', context }) => {
         renderRule(next, node, _, state) {
           if (node.type === RuleType.codeBlock) {
             return (
-              <CodeBlock key={state.key}>{String.raw`${node.text}`}</CodeBlock>
+              <CodeBlock key={state.key} prompt copyable>
+                {/* The parser keeps the fence's last line break; copied,
+                    it would run the pasted command at once. */}
+                {String.raw`${node.text}`.replace(/\n$/, '')}
+              </CodeBlock>
             );
           }
 

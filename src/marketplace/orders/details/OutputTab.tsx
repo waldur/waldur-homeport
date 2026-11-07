@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
 
-import { CodeBlockPreview } from '@/core/CodeBlockPreview';
+import { CodeLine } from '@/core/CodeLine';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -14,7 +14,11 @@ export const OutputTab = ({ order }) => {
       </CardHeader>
       {order.output ? (
         <CardContent>
-          <CodeBlockPreview code={order.output} />
+          {order.output.split('\n').map((line: string, index: number) => (
+            <CodeLine key={index} variant="dense" lineNumber={index + 1} prompt>
+              {line}
+            </CodeLine>
+          ))}
         </CardContent>
       ) : (
         <NoResult

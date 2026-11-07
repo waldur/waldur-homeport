@@ -4,7 +4,7 @@
 // change moves no pixel it shouldn't, in both themes, by capturing a build of
 // the base branch and a build of the change and diffing them.
 //
-//   node scripts/theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>]
+//   node scripts/theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>] [--styles]
 //   node scripts/theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>
 //   node scripts/theme-snapshots.mjs root-invariance <storybook-static> <out-dir> [--filter <regex>] [--widths …] [--themes …] [--roots <px,px>]
 //
@@ -20,8 +20,17 @@
 // --root <px> forces html's font size (the rem root) before the story loads,
 // overriding the 13px HomePort forces.
 //
+// --styles also writes <story-id>.<theme>.styles.json: the computed style of
+// every element the story renders (portals included), keyed by its DOM path.
+// A pixel diff shows that something moved; this names the element and the
+// property (`div>pre>div  margin-top  3px → 0px`), and catches a change too
+// small for the pixel threshold. Meant for refactors that should change no
+// style at all, such as moving a stylesheet's rules into utilities.
+//
 // compare writes report.json and, for every pair that differs, a
-// base | head | changed-pixels-in-red PNG. Exit code 1 when anything differs.
+// base | head | changed-pixels-in-red PNG. When both sides captured styles it
+// also lists every property that changed, in report.json (`styles`) and on
+// the console. Exit code 1 when anything differs.
 //
 // root-invariance captures the build twice, with html's font size forced to
 // 13px and to 20px (--roots), into <out-dir>/root-<px>, and compares the two
@@ -93,6 +102,7 @@ async function capture(
   widths,
   themes,
   rootPx,
+  styles = false,
 ) {
   const root = path.resolve(staticDir);
   const index = JSON.parse(readFileSync(path.join(root, 'index.json'), 'utf8'));
@@ -177,6 +187,12 @@ async function capture(
           path: path.join(outDir, name),
           fullPage: true,
         });
+        if (styles) {
+          writeFileSync(
+            path.join(outDir, name.replace(/\.png$/, '.styles.json')),
+            JSON.stringify(await page.evaluate(collectStyles, STYLE_PROPS)),
+          );
+        }
       } catch (error) {
         failed.push(`${name}: ${error.message.split('\n')[0]}`);
       }
@@ -193,6 +209,143 @@ async function capture(
       `Could not capture ${failed.length}:\n  ${failed.join('\n  ')}`,
     );
   }
+}
+
+// The properties --styles records: what a stylesheet-to-utilities move can
+// change. Longhands, since a shorthand's computed value is often empty.
+const STYLE_PROPS = [
+  'display',
+  'position',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'z-index',
+  'box-sizing',
+  'width',
+  'height',
+  'min-width',
+  'min-height',
+  'max-width',
+  'max-height',
+  'margin-top',
+  'margin-right',
+  'margin-bottom',
+  'margin-left',
+  'padding-top',
+  'padding-right',
+  'padding-bottom',
+  'padding-left',
+  'border-top-width',
+  'border-right-width',
+  'border-bottom-width',
+  'border-left-width',
+  'border-top-style',
+  'border-right-style',
+  'border-bottom-style',
+  'border-left-style',
+  'border-top-color',
+  'border-right-color',
+  'border-bottom-color',
+  'border-left-color',
+  'border-top-left-radius',
+  'border-top-right-radius',
+  'border-bottom-right-radius',
+  'border-bottom-left-radius',
+  'background-color',
+  'background-image',
+  'color',
+  'opacity',
+  'box-shadow',
+  'outline-style',
+  'outline-width',
+  'outline-color',
+  'font-family',
+  'font-size',
+  'font-weight',
+  'line-height',
+  'text-align',
+  'text-decoration-line',
+  'text-overflow',
+  'white-space',
+  'vertical-align',
+  'flex-direction',
+  'flex-wrap',
+  'flex-grow',
+  'flex-shrink',
+  'flex-basis',
+  'align-items',
+  'justify-content',
+  'row-gap',
+  'column-gap',
+  'grid-template-columns',
+  'overflow-x',
+  'overflow-y',
+  'transform',
+  'visibility',
+  'cursor',
+  'pointer-events',
+  'object-fit',
+];
+
+// Runs in the page: { "<path>": { prop: value } } for every element under
+// <body> except Storybook's own and non-rendering ones. The path is each
+// ancestor's tag and position among its siblings, so the same markup gets
+// the same keys in two builds, and the class names, which a refactor
+// changes, stay out of it.
+function collectStyles(props) {
+  const out = {};
+  const skip = new Set(['SCRIPT', 'STYLE', 'LINK', 'META', 'TEMPLATE']);
+  const walk = (el, prefix) => {
+    [...el.children].forEach((child, i) => {
+      if (skip.has(child.tagName) || child.id === 'storybook-docs') return;
+      const key = `${prefix}${prefix ? '>' : ''}${child.tagName.toLowerCase()}:${i}`;
+      const cs = getComputedStyle(child);
+      out[key] = Object.fromEntries(
+        props.map((p) => [p, cs.getPropertyValue(p)]),
+      );
+      walk(child, key);
+    });
+  };
+  walk(document.body, '');
+  return out;
+}
+
+// Every property that differs between two collectStyles() results, and the
+// elements only one of them has (the markup changed).
+function diffStyles(base, head) {
+  const changes = [];
+  for (const key of new Set([...Object.keys(base), ...Object.keys(head)])) {
+    if (!base[key] || !head[key]) {
+      changes.push({ element: key, change: base[key] ? 'removed' : 'added' });
+      continue;
+    }
+    for (const prop of Object.keys(base[key])) {
+      if (base[key][prop] !== head[key][prop]) {
+        changes.push({
+          element: key,
+          property: prop,
+          base: base[key][prop],
+          head: head[key][prop],
+        });
+      }
+    }
+  }
+  return changes;
+}
+
+function compareStyles(baseDir, headDir) {
+  const names = readdirSync(baseDir).filter(
+    (f) => f.endsWith('.styles.json') && existsSync(path.join(headDir, f)),
+  );
+  const results = [];
+  for (const name of names.sort()) {
+    const read = (dir) =>
+      JSON.parse(readFileSync(path.join(dir, name), 'utf8'));
+    const changes = diffStyles(read(baseDir), read(headDir));
+    if (changes.length) results.push({ name, changes });
+  }
+  return { compared: names.length, results };
 }
 
 function readPng(file) {
@@ -257,9 +410,16 @@ function compare(baseDir, headDir, reportDir) {
     }
   }
 
+  const styles = compareStyles(baseDir, headDir);
   writeFileSync(
     path.join(reportDir, 'report.json'),
-    JSON.stringify(results, null, 2),
+    JSON.stringify(
+      styles.compared
+        ? { screenshots: results, styles: styles.results }
+        : results,
+      null,
+      2,
+    ),
   );
   const changed = results.filter((r) => r.status !== 'same');
   for (const theme of THEMES) {
@@ -277,7 +437,25 @@ function compare(baseDir, headDir, reportDir) {
       `  ${r.name}  ${r.status}${r.ratio !== undefined ? ` ${(r.ratio * 100).toFixed(3)}%` : ''}${r.sizeChanged ? ' (size changed)' : ''}`,
     );
   }
-  return changed.length === 0;
+  if (styles.compared) {
+    console.log(
+      `styles: ${styles.compared - styles.results.length} same, ${styles.results.length} changed`,
+    );
+    for (const { name, changes } of styles.results) {
+      console.log(`  ${name}`);
+      for (const c of changes.slice(0, 20)) {
+        console.log(
+          c.property
+            ? `    ${c.element}  ${c.property}  ${c.base} → ${c.head}`
+            : `    ${c.element}  ${c.change}`,
+        );
+      }
+      if (changes.length > 20) {
+        console.log(`    … ${changes.length - 20} more in report.json`);
+      }
+    }
+  }
+  return changed.length === 0 && styles.results.length === 0;
 }
 
 const [command, ...args] = process.argv.slice(2);
@@ -294,10 +472,11 @@ const captureOptions = () => {
     font: option('--font'),
     widths: widths ? widths.split(',').map(Number) : null,
     themes: themes ? themes.split(',') : THEMES,
+    styles: args.includes('--styles'),
   };
 };
 if (command === 'capture' && args.length >= 2) {
-  const { filter, font, widths, themes } = captureOptions();
+  const { filter, font, widths, themes, styles } = captureOptions();
   const root = option('--root');
   await capture(
     args[0],
@@ -307,6 +486,7 @@ if (command === 'capture' && args.length >= 2) {
     widths,
     themes,
     root ? Number(root) : null,
+    styles,
   );
 } else if (command === 'root-invariance' && args.length >= 2) {
   const { filter, font, widths, themes } = captureOptions();
@@ -323,7 +503,7 @@ if (command === 'capture' && args.length >= 2) {
   process.exit(compare(args[0], args[1], args[2]) ? 0 : 1);
 } else {
   console.error(
-    'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>] [--root <px>]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>\n  theme-snapshots.mjs root-invariance <storybook-static> <out-dir> [--filter <regex>] [--widths <px,px,...>] [--themes <light,dark>] [--roots <px,px>]',
+    'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>] [--root <px>] [--styles]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>\n  theme-snapshots.mjs root-invariance <storybook-static> <out-dir> [--filter <regex>] [--widths <px,px,...>] [--themes <light,dark>] [--roots <px,px>]',
   );
   process.exit(2);
 }

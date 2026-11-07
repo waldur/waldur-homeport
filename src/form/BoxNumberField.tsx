@@ -45,7 +45,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           }
           disabled={props.disabled}
           variant="tertiary-ghost"
-          className="minus-btn btn-no-focus"
+          className="minus-btn"
           size="sm"
         />
         <Input
@@ -65,7 +65,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           }
           disabled={props.disabled}
           variant="tertiary-ghost"
-          className="plus-btn btn-no-focus"
+          className="plus-btn"
           size="sm"
         />
       </div>

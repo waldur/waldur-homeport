@@ -1,7 +1,7 @@
 import { LifebuoyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { BaseButton, Card, CardContent } from 'waldur-ui';
+import { BaseButton, Card, CardContent, IconSquare } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -41,9 +41,9 @@ export const HelpdeskSetupCard: FC = () => {
   return (
     <Card className="mb-5">
       <CardContent className="flex flex-wrap items-center gap-3">
-        <div className="icon-square icon-lg bg-brand-subtle text-brand">
+        <IconSquare size="lg" className="bg-brand-subtle text-brand">
           <LifebuoyIcon weight="bold" size={24} />
-        </div>
+        </IconSquare>
         <div className="grow min-w-[200px]">
           <h4 className="mb-1">{translate('Set up provider helpdesk')}</h4>
           <p className="text-quaternary text-sm mb-0">

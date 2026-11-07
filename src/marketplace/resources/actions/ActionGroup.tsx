@@ -32,8 +32,8 @@ export const ActionGroupTabsContext =
  * the dialog is narrowed to this group, since the selected tab already
  * names it.
  *
- * The `action-group` / `action-list` classes are hooks for the rule that
- * hides a group whose actions all filtered out (custom/action-group.scss).
+ * A group whose actions all filtered out renders an empty list, and the
+ * group hides itself: `has-[[data-slot=action-list]:empty]:hidden`.
  */
 export const ActionGroup = ({ title, children }) => {
   const { hideGroupName } = useActionListFilter();
@@ -72,7 +72,7 @@ export const ActionGroup = ({ title, children }) => {
 
   return (
     <Menu.Group
-      className="action-group"
+      className="has-[[data-slot=action-list]:empty]:hidden"
       aria-labelledby={showLabel ? labelId : undefined}
     >
       {showLabel ? (
@@ -83,7 +83,7 @@ export const ActionGroup = ({ title, children }) => {
           {title}
         </Menu.Label>
       ) : null}
-      <div className="action-list" data-testid="action-list" ref={listRef}>
+      <div data-slot="action-list" data-testid="action-list" ref={listRef}>
         {children}
       </div>
     </Menu.Group>

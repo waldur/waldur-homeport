@@ -23,6 +23,31 @@ describe('CodePreview', () => {
     expect(screen.getByText('ssh test_user@example.com')).toBeInTheDocument();
   });
 
+  it('keeps every word of a single-line code block', () => {
+    // A one-line fence has no language tag (CommonMark ends the info string
+    // at the line break), so `ssh` is the command, not a language.
+    const template = 'Connect with ```ssh ubuntu@{ip}``` and log in.';
+
+    render(<CodePreview template={template} context={{ ip: '192.0.2.10' }} />);
+
+    expect(screen.getByText('ssh ubuntu@192.0.2.10')).toBeInTheDocument();
+  });
+
+  it('renders a single-word single-line code block', () => {
+    render(<CodePreview template="Run ```htop```." context={{}} />);
+
+    expect(screen.getByText('htop')).toBeInTheDocument();
+  });
+
+  it("leaves out a fence's trailing newline, which a pasted command would run", () => {
+    render(<CodePreview template={'```\nls -la\n```'} context={{}} />);
+
+    // The default matcher trims whitespace; compare the raw text instead.
+    expect(
+      screen.getByText('ls -la', { normalizer: (text) => text }),
+    ).toBeInTheDocument();
+  });
+
   it('styles inline code through rich-text, leaving the $-prompt block alone', () => {
     render(
       <CodePreview
@@ -35,12 +60,10 @@ describe('CodePreview', () => {
     expect(
       screen.getByText('/store', { selector: '.rich-text code' }),
     ).toBeInTheDocument();
-    // ...and the prompt block keeps .code-block's own <pre>, which the
-    // rich-text panel rule skips by selector, not by a class on the <pre>.
+    // ...and the prompt block is CodeBlock's: its <pre> has a class, so the
+    // rich-text panel rule (`.rich-text pre:not([class])`) leaves it alone.
     expect(
-      screen.getByText('ls /store', {
-        selector: '.code-block pre:not([class]) > .code-block-content',
-      }),
+      screen.getByText('ls /store', { selector: '.rich-text pre[class] span' }),
     ).toBeInTheDocument();
   });
 
