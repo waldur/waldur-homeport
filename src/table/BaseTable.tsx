@@ -362,7 +362,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       >
         {/* Standalone header */}
         {props.standalone && (
-          <div className="table-standalone-header flex justify-between gap-3">
+          <div className="flex justify-between gap-3 mb-6 max-sm:mb-4">
             <div>
               <div className="flex items-center self-stretch gap-1.5">
                 <h1 className="mb-0 text-2xl">

@@ -17,7 +17,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
         style="min-height: auto;"
       >
         <div
-          class="table-container transition-opacity duration-150 aria-busy:pointer-events-none aria-busy:opacity-50 table-hover-shadow"
+          class="table-container transition-opacity duration-150 aria-busy:opacity-50 table-hover-shadow"
           data-testid="table-container"
         >
           <table

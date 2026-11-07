@@ -1,9 +1,12 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { describe, expect, it } from 'vitest';
 
 import {
   createMockTableContext,
   renderWithTableContext,
+  TableContext,
 } from '../../test-utils';
 
 import { TableContent } from './TableContent';
@@ -279,6 +282,52 @@ describe('TableContent', () => {
       expect(screen.getByTestId('table-container')).not.toHaveClass(
         'table-hover-shadow',
       );
+    });
+  });
+
+  describe('refetching', () => {
+    it('marks the rows busy and overlays a spinner while refetching', () => {
+      renderWithTableContext(<TableContent />, {
+        loading: true,
+        hasRows: true,
+        rows: [{ uuid: '1' }],
+        visibleColumns: [{ title: 'Col', render: () => 'x' }],
+      });
+
+      const container = screen.getByTestId('table-container');
+      expect(container).toHaveAttribute('aria-busy', 'true');
+      // Inert: the stale rows take neither clicks nor keyboard focus.
+      expect(container.inert).toBe(true);
+      expect(screen.getByRole('status')).toBeInTheDocument();
+    });
+
+    it('makes the same rows interactive again once loading ends', () => {
+      const store = createStore(() => ({}));
+      const tree = (loading: boolean) => (
+        <Provider store={store}>
+          <TableContext.Provider
+            value={createMockTableContext({
+              loading,
+              hasRows: true,
+              rows: [{ uuid: '1' }],
+              visibleColumns: [{ title: 'Col', render: () => 'x' }],
+            })}
+          >
+            <TableContent />
+          </TableContext.Provider>
+        </Provider>
+      );
+      const { rerender } = render(tree(true));
+      const container = screen.getByTestId('table-container');
+      expect(container.inert).toBe(true);
+
+      rerender(tree(false));
+
+      // Same element, so the flag has to be cleared, not just never set.
+      expect(screen.getByTestId('table-container')).toBe(container);
+      expect(container.inert).toBe(false);
+      expect(container).not.toHaveAttribute('aria-busy');
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
   });
 });
