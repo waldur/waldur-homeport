@@ -39,6 +39,9 @@ import { TEAM_EVENT_TYPES } from './teamRules';
 import { useProposalTeamRules } from './useProposalTeamRules';
 import { UsersList } from './UsersList';
 
+const isReviewerRow = (row: GenericPermission) =>
+  row.role_name === RoleEnum.CALL_REVIEWER;
+
 export const TeamSection: FC<
   GenericInvitationContext & {
     title: string;
@@ -220,6 +223,8 @@ export const TeamSection: FC<
                         ? ReviewerExpandableRow
                         : undefined
                     }
+                    // Only a reviewer has a reviewer profile to show.
+                    isRowExpandable={isReviewerRow}
                     readOnly={props.readOnlyMode || rules?.readOnly}
                     extraRowActions={props.extraRowActions}
                     hasExtraRowActions={props.hasExtraRowActions}

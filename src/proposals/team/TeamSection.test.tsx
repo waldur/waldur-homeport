@@ -9,9 +9,10 @@ import * as workspaceHooks from '@/workspace/hooks';
 
 import { TeamSection } from './TeamSection';
 
-const { fetchCount, dropdownProps } = vi.hoisted(() => ({
+const { fetchCount, dropdownProps, usersListProps } = vi.hoisted(() => ({
   fetchCount: { value: 0 },
   dropdownProps: { value: null as any },
+  usersListProps: { value: null as any },
 }));
 
 // Like useTableQuery, run onFetch from an effect keyed on the callback: an
@@ -26,7 +27,12 @@ vi.mock('@/table/useTable', () => ({
   },
 }));
 
-vi.mock('./UsersList', () => ({ UsersList: () => null }));
+vi.mock('./UsersList', () => ({
+  UsersList: (props) => {
+    usersListProps.value = props;
+    return null;
+  },
+}));
 vi.mock('./InvitationsList', () => ({ InvitationsList: () => null }));
 vi.mock('./TeamDropdownActions', () => ({
   TeamDropdownActions: (props) => {
@@ -144,5 +150,29 @@ describe('TeamSection', () => {
     ).toBeInTheDocument();
     expect(screen.queryByText('Invitations')).not.toBeInTheDocument();
     expect(screen.queryByText('Team changes')).not.toBeInTheDocument();
+  });
+
+  it("expands only a call reviewer's row, to show their reviewer profile", () => {
+    renderSection(holder(RoleEnum.PROPOSAL_MANAGER), {
+      scope: { uuid: 'call-1', url: '/api/proposal-protected-calls/call-1/' },
+      roleTypes: ['call', 'call_organizer'],
+      roles: [
+        RoleEnum.CALL_MANAGER,
+        RoleEnum.CALL_PANEL_MEMBER,
+        RoleEnum.CALL_REVIEWER,
+      ],
+    });
+    expect(usersListProps.value.expandableRow).toBeDefined();
+    const { isRowExpandable } = usersListProps.value;
+    expect(isRowExpandable({ role_name: RoleEnum.CALL_REVIEWER })).toBe(true);
+    expect(isRowExpandable({ role_name: RoleEnum.CALL_MANAGER })).toBe(false);
+    expect(isRowExpandable({ role_name: RoleEnum.CALL_PANEL_MEMBER })).toBe(
+      false,
+    );
+  });
+
+  it('gives a team without the reviewer role no expandable rows', () => {
+    renderSection(holder(RoleEnum.PROPOSAL_MANAGER));
+    expect(usersListProps.value.expandableRow).toBeUndefined();
   });
 });

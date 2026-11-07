@@ -19,6 +19,8 @@ interface UsersListProps {
   hasActionBar?: boolean;
   fullWidth?: boolean;
   expandableRow?: FC<{ row: GenericPermission }> | (({ row }) => ReactNode);
+  /** Which rows `expandableRow` applies to; the others get no caret. */
+  isRowExpandable?: (row: GenericPermission) => boolean;
   /** Extra items rendered in each row's actions dropdown before Remove. */
   extraRowActions?: FC<{ row: GenericPermission }>;
   /** Whether `extraRowActions` renders anything for this row. Without it a row
@@ -50,6 +52,7 @@ export const UsersList: FC<UsersListProps> = ({
   hasActionBar,
   fullWidth,
   expandableRow,
+  isRowExpandable,
   extraRowActions: ExtraRowActions,
   hasExtraRowActions,
   roleSuffix,
@@ -105,6 +108,7 @@ export const UsersList: FC<UsersListProps> = ({
       }
       footer={tableFooter}
       expandableRow={expandableRow}
+      isRowExpandable={isRowExpandable}
     />
   );
 };

@@ -216,7 +216,14 @@ const Body = ({ call, refetch, loading }) => {
           component: ({ call, refetch, isReadOnly }) => (
             <TeamSection
               scope={call}
-              roles={[RoleEnum.CALL_MANAGER, RoleEnum.CALL_PANEL_MEMBER]}
+              // The reviewer role puts its holder in the call's reviewer pool
+              // as accepted, and revoking it declines their entry there
+              // (reviewer_membership in mastermind).
+              roles={[
+                RoleEnum.CALL_MANAGER,
+                RoleEnum.CALL_PANEL_MEMBER,
+                RoleEnum.CALL_REVIEWER,
+              ]}
               roleTypes={['call', 'call_organizer']}
               title={translate('Call team')}
               extraRowActions={
