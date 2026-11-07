@@ -321,7 +321,8 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
                 value={phase}
                 onValueChange={(key) => choosePhase(key as WorkflowPhaseKey)}
               >
-                <TabsList>
+                {/* Spaced like the table's own tabs (TableNav). */}
+                <TabsList className="pt-3">
                   {phases.map((key) => (
                     <TabsTrigger key={key} value={key} hint={phaseHint(key)}>
                       {phaseTitle(key)}

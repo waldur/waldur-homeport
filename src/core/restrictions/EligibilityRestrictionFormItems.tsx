@@ -117,7 +117,7 @@ export const EligibilityRestrictionFormItems: FC<
           warnTooltip={rows.user_affiliations.warnTooltip}
           label={translate('User affiliations')}
           description={translate(
-            'Standard eduPerson values are suggested; scoped values can be typed in.',
+            'Standard eduPerson values are suggested; scoped values can be typed in. Values are matched exactly as the identity provider sends them, e.g. faculty@university.example.',
           )}
           options={affiliationOptions}
           disabled={disabled}

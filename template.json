@@ -7872,6 +7872,15 @@
       "feature_area": "questions"
     }
   },
+  "At least {amount}": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "At least {low}.": {
     "context": {
       "variables": {
@@ -11833,16 +11842,6 @@
   "Checked": {
     "context": {
       "primary_ui_type": "label"
-    }
-  },
-  "Checked when a proposal is created": {
-    "context": {
-      "feature_area": "eligibility"
-    }
-  },
-  "Checked when a reviewer joins the call": {
-    "context": {
-      "feature_area": "eligibility"
     }
   },
   "Checked {checked} reviewers, generated {created} suggestions.": {
@@ -20559,7 +20558,7 @@
       "feature_area": "create"
     }
   },
-  "Drafts started before a restriction was added are not re-checked, and eligibility does not limit who may join the project once the proposal is granted. Values are matched exactly against what the identity provider sends: a scoped affiliation arrives looking like faculty@university.example.": {
+  "Drafts started before a rule was added are not re-checked, and the rules do not limit who may join the project once the proposal is granted.": {
     "context": {
       "feature_area": "eligibility"
     }
@@ -39702,6 +39701,11 @@
       "feature_area": "common"
     }
   },
+  "No mail selected": {
+    "context": {
+      "feature_area": "mail"
+    }
+  },
   "No mail: {filter}": {
     "context": {
       "variables": {
@@ -43799,6 +43803,11 @@
       "feature_area": "workflow-check"
     }
   },
+  "Open notifications": {
+    "context": {
+      "feature_area": "mail"
+    }
+  },
   "Open now": {
     "context": {
       "feature_area": "provider-calls"
@@ -47503,6 +47512,11 @@
   "Pick a command to put it in the message box.": {
     "context": {
       "feature_area": "commands"
+    }
+  },
+  "Pick a mail on the call's Notifications tab.": {
+    "context": {
+      "feature_area": "mail"
     }
   },
   "Pick a new end date and time": {
@@ -56912,12 +56926,12 @@
       "feature_area": "service-providers"
     }
   },
-  "Restricts who may review for the call, separately from who may apply. Read like applicant eligibility: email patterns, affiliations and identity sources form one group, and each configured AAI field is required on top. Empty fields are not checked.": {
+  "Restricts who may review for the call, separately from who may apply. Read like applicant eligibility: email patterns, affiliations and identity sources form one group, and each configured AAI field is required on top. Empty fields are not checked. A reviewer is checked when invited to the pool, accepting an invitation, suggested, or given the call reviewer role.": {
     "context": {
       "feature_area": "eligibility"
     }
   },
-  "Restricts who may submit a proposal. Email patterns, user affiliations and identity sources form a single group: an applicant matching any one value in it passes. Nationalities and organization types are each checked on top of that, and every assurance level listed is required. A field left empty is not checked, and only attributes this deployment collects are listed.": {},
+  "Restricts who may submit a proposal. Email patterns, user affiliations and identity sources form a single group: an applicant matching any one value in it passes. Nationalities and organization types are each checked on top of that, and every assurance level listed is required. A field left empty is not checked, and only attributes this deployment collects are listed. An applicant is checked when a proposal is created.": {},
   "Result": {
     "context": {
       "primary_ui_type": "title",
@@ -57560,6 +57574,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "reports"
+    }
+  },
+  "Reviewers already in the pool are not removed when these rules change.": {
+    "context": {
+      "feature_area": "eligibility"
     }
   },
   "Reviewers are assigned at a review step.": {
@@ -64166,7 +64185,7 @@
       "feature_area": "proposals"
     }
   },
-  "Standard eduPerson values are suggested; scoped values can be typed in.": {
+  "Standard eduPerson values are suggested; scoped values can be typed in. Values are matched exactly as the identity provider sends them, e.g. faculty@university.example.": {
     "context": {
       "feature_area": "restrictions"
     }
@@ -79810,6 +79829,15 @@
       "feature_area": "policies"
     }
   },
+  "Up to {amount}": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "Up to {maximum}": {
     "context": {
       "variables": {
@@ -84195,11 +84223,6 @@
       "feature_area": "common"
     }
   },
-  "When a reviewer is invited to the pool, accepts an invitation, is suggested, or is given the call reviewer role. Reviewers already in the pool are not removed.": {
-    "context": {
-      "feature_area": "eligibility"
-    }
-  },
   "When a round closes, move unsubmitted drafts to the next round instead of canceling them. Applicants keep their content and are notified by email. Drafts are canceled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"
@@ -85009,11 +85032,6 @@
   "Workflow check": {
     "context": {
       "feature_area": "call-management"
-    }
-  },
-  "Workflow check: no errors or warnings.": {
-    "context": {
-      "feature_area": "workflow-check"
     }
   },
   "Workflow check: {summary}.": {

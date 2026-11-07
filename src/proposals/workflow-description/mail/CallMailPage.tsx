@@ -17,6 +17,7 @@ import { Panel } from '@/core/Panel';
 import { AccessDeniedPage } from '@/error/AccessDeniedPage';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { useTitle } from '@/navigation/title';
 import { Call } from '@/proposals/types';
 import { useCallBreadcrumbItems } from '@/proposals/utils';
@@ -116,6 +117,20 @@ const WordingTab: FC = () => {
         />
       ) : preview.isLoading ? (
         <LoadingSpinner />
+      ) : !target.step && !target.mailType ? (
+        // Opened with no mail named: point to where mails are picked.
+        <NoResult
+          title={translate('No mail selected')}
+          message={translate("Pick a mail on the call's Notifications tab.")}
+          actions={
+            <Link
+              state={CALL_VALIDATION_STATE}
+              params={{ call_uuid: call.uuid, tab: 'notifications' }}
+              buttonVariant="tertiary"
+              label={translate('Open notifications')}
+            />
+          }
+        />
       ) : (
         <AlertItem variant="warning" title={previewErrorText(preview.error)} />
       )}
@@ -177,20 +192,25 @@ const Body: FC<{ call: Call; target: MailTarget }> = ({ call, target }) => {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h1 className="mb-4 text-2xl">{title}</h1>
-        <TabNav
-          items={tabs.map((tab) => ({
-            key: tab.key,
-            title: tab.title,
-            link: (
-              <Link
-                state={CALL_MAIL_STATE}
-                params={{ ...params, tab: tab.key }}
-              />
-            ),
-            active: tab.key === active.key,
-          }))}
-        />
+        <h1 className={tabs.length > 1 ? 'mb-4 text-2xl' : 'mb-0 text-2xl'}>
+          {title}
+        </h1>
+        {/* One tab (a mail with no step has no rules) needs no strip. */}
+        {tabs.length > 1 && (
+          <TabNav
+            items={tabs.map((tab) => ({
+              key: tab.key,
+              title: tab.title,
+              link: (
+                <Link
+                  state={CALL_MAIL_STATE}
+                  params={{ ...params, tab: tab.key }}
+                />
+              ),
+              active: tab.key === active.key,
+            }))}
+          />
+        )}
       </div>
       <MailPageContext.Provider value={context}>
         <active.Component />
