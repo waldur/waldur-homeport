@@ -106,7 +106,7 @@
   height: 4px;
   border: none;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
   transition: all 0.3s ease;
 }

@@ -99,7 +99,7 @@
 
 .layout-seasonal-card {
   background: var(--bg-primary);
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   padding: 2.5rem;
   width: 100%;
   max-width: 420px;

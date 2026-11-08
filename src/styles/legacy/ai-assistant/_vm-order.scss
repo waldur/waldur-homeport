@@ -24,7 +24,7 @@
     gap: 0.6rem;
     padding: 1rem 1.3rem;
     background-color: var(--bg-tertiary);
-    border-radius: 0.9rem;
+    border-radius: var(--radius-xl);
     transition: background-color 0.2s ease;
     border: 1px solid var(--border-primary);
 
@@ -76,7 +76,7 @@
       @include mirrored-ramp-color(color, blue, 700);
       border: 1px solid;
       @include mirrored-ramp-color(border-color, blue, 200);
-      border-radius: 0.5rem;
+      border-radius: var(--radius-md);
       padding: 1rem 1.25rem;
       font-size: var(--text-sm);
       flex-shrink: 0;
@@ -121,7 +121,7 @@
     gap: 0.5rem;
     padding: 0.75rem 1rem;
     background-color: var(--bg-tertiary);
-    border-radius: 0.5rem;
+    border-radius: var(--radius-md);
     border: 1px solid var(--border-primary);
 
     .aui-vm-order-id-label {
@@ -162,7 +162,7 @@
   // Result card (error state only)
   .aui-vm-order-result {
     padding: 1.25rem;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-md);
     border: 1px solid var(--border-primary);
 
     // Error variant
@@ -207,7 +207,7 @@
       gap: 0.5rem;
       padding: 0.75rem;
       @include mirrored-ramp-color(background-color, error, 100);
-      border-radius: 0.375rem;
+      border-radius: var(--radius-sm);
       @include mirrored-ramp-color(color, error, 600);
       font-size: var(--text-xs);
 
@@ -233,7 +233,7 @@
     padding: 0.625rem 1.25rem;
     font-size: var(--text-sm);
     font-weight: var(--font-weight-medium);
-    border-radius: 0.615rem;
+    border-radius: var(--radius-lg);
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;

@@ -131,7 +131,7 @@
     color: var(--bg-secondary);
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-secondary);
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
   }
 
   .aui-ask-user-pill[data-picked='1'] .aui-ask-user-check {

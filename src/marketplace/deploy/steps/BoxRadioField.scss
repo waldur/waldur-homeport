@@ -10,7 +10,7 @@
       display: inline-block;
       position: relative;
       width: 145px;
-      border-radius: 0.5rem;
+      border-radius: var(--radius-md);
       border: 1px solid var(--border-secondary);
       margin: 1px;
       margin-bottom: 1.5rem;
@@ -117,7 +117,7 @@
       column-gap: 16px;
       height: 100%;
       position: relative;
-      border-radius: 8px;
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border-secondary);
       padding: 1.23rem;
       margin: 1px 1px 8px 1px;

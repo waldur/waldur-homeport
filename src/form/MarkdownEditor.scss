@@ -3,7 +3,7 @@
   // body ran straight into whatever field followed it. Same border and radius
   // as .form-control so it sits in a form as one of them.
   border: 1px solid var(--color-gray-300);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 
   // --color-gray-N is the same in both themes; dark reads the dark gray ramp.
@@ -24,7 +24,7 @@
 }
 
 .markdown-editor-wrapper {
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 
   // Only the preview draws its own box: the editor now carries one itself.
