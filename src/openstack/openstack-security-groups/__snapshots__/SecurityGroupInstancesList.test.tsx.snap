@@ -17,11 +17,11 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
         style="min-height: auto;"
       >
         <div
-          class="table-container transition-opacity duration-150 aria-busy:opacity-50 table-hover-shadow"
+          class="table-container w-full min-w-0 transition-opacity duration-150 aria-busy:opacity-50 table-hover-shadow"
           data-testid="table-container"
         >
           <table
-            class="table align-middle table-row-bordered text-sm table-list"
+            class="table align-middle table-row-bordered text-sm table-list mb-0"
           >
             <colgroup>
               <col

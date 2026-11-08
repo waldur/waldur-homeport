@@ -38,6 +38,7 @@ export const TablePlaceholder: FunctionComponent<TablePlaceholderProps> = ({
 
   return (
     <NoResult
+      className="mt-0"
       callback={!hasRetry ? null : query ? clearSearch : () => fetch(true)}
       title={title}
       message={

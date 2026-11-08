@@ -87,11 +87,27 @@ table .expandable-container {
     background-color: transparent;
     overflow: hidden;
 
-    [data-slot='card-content'] {
+    > [data-slot='card-header'] {
+      --card-header-mx: 0px;
+      --card-header-px: var(--card-padding-x);
+    }
+
+    > [data-slot='card-content'] {
+      --card-content-pt: 0px;
+      --card-content-px: 0px;
       padding-bottom: 0.5rem;
 
       .table {
         margin-bottom: 0;
+
+        td:first-child,
+        th:first-child {
+          padding-left: var(--card-padding-x);
+        }
+        td:last-child,
+        th:last-child {
+          padding-right: var(--card-padding-x);
+        }
 
         thead > tr {
           background-color: var(--bg-tertiary);
@@ -111,20 +127,10 @@ table .expandable-container {
         }
       }
     }
-  }
 
-  // The .table-toolbar-search class in _table.scss is scoped under
-  // the card header's toolbar so it doesn't apply inside the expanded-row
-  // toolbar. Duplicate the same rule here.
-  .table-toolbar-search {
-    flex: 0 0 320px;
-    max-width: 320px;
-    width: 320px;
-
-    @media (max-width: 767px) {
-      flex: 1 1 auto;
-      max-width: 100%;
-      width: 100%;
+    .table-pagination {
+      padding-left: var(--card-padding-x) !important;
+      padding-right: var(--card-padding-x) !important;
     }
   }
 }

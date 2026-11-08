@@ -37,7 +37,11 @@ export function TableView() {
   return (
     <table
       className={classNames(
-        'table align-middle table-row-bordered text-sm table-list',
+        'table align-middle table-row-bordered text-sm table-list mb-0',
+        config.fullWidth &&
+          '[&_td:first-child]:ps-[var(--card-padding-x)] [&_th:first-child]:ps-[var(--card-padding-x)] [&_td:last-child]:pe-[var(--card-padding-x)] [&_th:last-child]:pe-[var(--card-padding-x)] max-sm:[&_td:first-child]:!ps-[15px] max-sm:[&_th:first-child]:!ps-[15px] max-sm:[&_td:last-child]:!pe-[15px] max-sm:[&_th:last-child]:!pe-[15px]',
+        fieldName &&
+          'cursor-pointer [&_tr.checked]:!bg-secondary [&_tr.checked_>*]:!bg-secondary [&_tr.checked_>*]:border-0',
         {
           'table-expandable': Boolean(slots.expandableRow),
           'table-hover': config.hoverable,

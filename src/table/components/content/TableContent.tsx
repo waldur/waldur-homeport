@@ -113,7 +113,8 @@ export function TableContent() {
       )}
       <div
         className={classNames(
-          'table-container',
+          'table-container w-full min-w-0',
+          mode === 'grid' && 'overflow-x-hidden',
           REFETCH_CLASSES,
           isGrid
             ? gridHover && 'grid-hover-shadow'
