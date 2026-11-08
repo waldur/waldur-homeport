@@ -8,7 +8,7 @@
 // is scoped under the call view's root class, one class above LiveKit's own.
 
 // Keep this file to rules that override LiveKit; the rest of the call UI
-// lives in _call.scss, inside the layer like everything else.
+// is styled with Tailwind.
 
 .matrix-call-view {
   position: relative;

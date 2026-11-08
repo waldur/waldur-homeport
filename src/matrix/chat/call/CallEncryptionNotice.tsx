@@ -37,7 +37,10 @@ export const CallEncryptionNotice: FC<{
     (p) => identityMap.get(p.identity) || p.name || p.identity,
   );
   return (
-    <div className="matrix-call-view__notice" role="status">
+    <div
+      className="absolute top-2 left-1/2 -translate-x-1/2 z-1 flex items-center gap-1.5 max-w-[calc(100%-16px)] py-1 px-2.5 rounded-md bg-warning-subtle text-warning text-xs"
+      role="status"
+    >
       <WarningIcon size={16} weight="bold" />
       <span>
         {translate('Not shown, not end-to-end encrypted: {names}', {

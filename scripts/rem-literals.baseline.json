@@ -90,7 +90,6 @@
   "src/styles/legacy/ai-assistant/_thread.scss": 66,
   "src/styles/legacy/ai-assistant/_vm-order.scss": 40,
   "src/styles/legacy/matrix/_call-livekit.scss": 2,
-  "src/styles/legacy/matrix/_call.scss": 14,
   "src/styles/legacy/matrix/_team-chat.scss": 117,
   "src/styles/legacy/support/_helpdesk.scss": 7,
   "src/table/EmbeddedTabs.tsx": 3,

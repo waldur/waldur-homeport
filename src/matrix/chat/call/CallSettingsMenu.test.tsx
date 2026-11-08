@@ -100,7 +100,7 @@ describe('CallSettingsMenu', () => {
     expect(
       // eslint-disable-next-line testing-library/no-node-access
       (await screen.findByRole('listbox')).closest(
-        '.call-device-settings-popover',
+        '[data-testid="call-device-settings-popover"]',
       ),
     ).not.toBeNull();
     await user.click(await screen.findByRole('option', { name: 'Headset' }));
