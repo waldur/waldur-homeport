@@ -72,15 +72,24 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
   }
 
   return (
-    <div className="grid grid-cols-6 gap-x-5 mb-1">
-      {resolvePlanComponents(
-        offering.components,
-        findResourcePlan(offering.plans, resource.plan_uuid),
-      ).map((component) => (
-        <div key={component.type}>
-          <ResourceComponentItem resource={resource} component={component} />
-        </div>
-      ))}
+    // The summary sits in an expanded table row, so its width is the table's,
+    // not the viewport's: size the columns against the container. Six fixed
+    // columns leave ~55px each on a phone, which cuts every title and figure
+    // down to an ellipsis.
+    <div className="@container mb-1">
+      <div
+        data-slot="resource-components-grid"
+        className="grid grid-cols-1 gap-x-5 @sm:grid-cols-2 @xl:grid-cols-3 @3xl:grid-cols-4 @min-[1000px]:grid-cols-6"
+      >
+        {resolvePlanComponents(
+          offering.components,
+          findResourcePlan(offering.plans, resource.plan_uuid),
+        ).map((component) => (
+          <div key={component.type}>
+            <ResourceComponentItem resource={resource} component={component} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
