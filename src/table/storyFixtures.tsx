@@ -398,21 +398,19 @@ const noop = () => undefined;
 /**
  * Expanded-row detail content, built from `Field` the same way real
  * `expandableRow` renderers are (see `CreditExpandableRow.tsx`). `asTable`
- * switches `ExpandableContainer`'s CSS between its default flow layout and
- * the `.as-table` field-grid layout (`ExpandableContainer.scss`) — same
- * content, different container, so the two story variants share this one
- * renderer rather than duplicating the fields.
+ * switches `ExpandableContainer` between its default flow layout and one
+ * `PropertyList` with the labels in one column — same content, different
+ * container, so the two story variants share this one renderer rather than
+ * duplicating the fields.
  */
 export const TableStoryExpandableRow = ({
   row,
   asTable,
-  hasMultiSelect,
 }: {
   row: TableStoryRow;
   asTable?: boolean;
-  hasMultiSelect?: boolean;
 }) => (
-  <ExpandableContainer asTable={asTable} hasMultiSelect={hasMultiSelect}>
+  <ExpandableContainer asTable={asTable}>
     <PropertyItem label="Region" value={row.region} />
     <PropertyItem label="Plan" value={row.plan} />
     <PropertyItem label="Monthly cost" value={row.monthlyCost} />
@@ -421,9 +419,9 @@ export const TableStoryExpandableRow = ({
 );
 
 /**
- * A nested table inside the expanded row — the `.card-table` CSS branch in
- * `ExpandableContainer.scss` (distinct thead/tbody background tokens,
- * pinned-column background overrides). Mirrors `RoleUsersExpandableRow.tsx`
+ * A nested table inside the expanded row — the nested-table classes the
+ * expanded row's slot carries (`TableBody`: distinct thead/tbody background
+ * tokens, pinned-column background overrides). Mirrors `RoleUsersExpandableRow.tsx`
  * (CLAUDE.md's canonical nested-table reference): a real `<Table>`,
  * `hideTitle`/`hasActionBar={false}` to drop the chrome the parent already
  * provides, driven by plain props rather than `useTable()` for the same

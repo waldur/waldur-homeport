@@ -19,7 +19,7 @@ interface CallOfferingExpandableRowProps {
 export const CallOfferingExpandableRow: FunctionComponent<
   CallOfferingExpandableRowProps
 > = ({ row, call, refetch, readOnlyReason }) => (
-  <ExpandableContainer alignRows>
+  <ExpandableContainer>
     <PropertyList variant="summary">
       <PropertyItem
         label={translate('Plan')}

@@ -277,7 +277,7 @@ const WhySoDrillDownTable: FC<{
   };
 
   return (
-    <div className="expandable-container py-2.5">
+    <div className="py-2.5">
       <div>
         <Table
           density="compact"

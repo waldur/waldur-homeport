@@ -491,7 +491,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 at the left edge, in scroll reach. */}
             <div
               ref={tableResponsiveRef}
-              className="table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
+              className="@container/table table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
               style={{ minHeight: props.minHeight || 300 }}
               onScroll={debouncedScrollHandler}
             >

@@ -110,7 +110,7 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
     );
   }
   return (
-    <ExpandableContainer hasMultiSelect>
+    <ExpandableContainer>
       <Table<ResourceProjectGrant & { uuid: string; rp_uuid: string }>
         {...tableProps}
         columns={[

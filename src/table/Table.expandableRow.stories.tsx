@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 
 import { PropertyItem, PropertyList } from 'waldur-ui';
 
@@ -14,15 +15,9 @@ import { withTableProviders } from './storyProviders';
 import Table from './Table';
 
 /**
- * Every `ExpandableContainer` variant — the piece most at risk in the
- * Tailwind port, since its width math (`ExpandableContainer.scss`) computes
- * off a literal `100vw` minus fixed page offsets and the sidebar's width
- * (`--layout-sidebar-width`). Storybook has no sidebar, so the variable is
- * unset and counts as 0px, but the fixed offsets still assume the app's
- * page padding — that viewport arithmetic is the actual risk these stories
- * exist to make visible, not a bug in them. See
- * `ExpandableRowFluid` for the opt-out real narrow-context callers (a
- * modal, a side panel) already use to sidestep it.
+ * Every `ExpandableContainer` variant — verified across layout modes:
+ * default flow layout, `asTable` label-value columns, multi-select
+ * checkbox column offset, and nested tables.
  *
  * Sibling of `Table.stories.tsx` (base data states); see that file's own
  * comment for why this is a separate file/sidebar group, and for
@@ -47,10 +42,20 @@ export const ExpandableRow: Story = {
       expandableRow={({ row }) => <TableStoryExpandableRow row={row} />}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const slot = canvasElement.querySelector(
+      '[data-slot="expanded-row-content"]',
+    );
+    expect(slot).not.toBeNull();
+    const style = getComputedStyle(slot as Element);
+    await expect(style.position).toBe('sticky');
+    await expect(style.left).toBe('0px');
+    await expect(style.paddingLeft).toBe('52px');
+  },
 };
 
-/** The `.as-table` layout variant — `ExpandableContainer`'s field-grid CSS
- * branch, used where the expanded detail reads better as aligned
+/** The `asTable` layout variant — one `PropertyList` with the labels in
+ * one column, used where the expanded detail reads better as aligned
  * label/value columns than the default flow layout (see
  * `CreditExpandableRow.tsx`, the pattern this mirrors). */
 export const ExpandableRowAsTable: Story = {
@@ -61,28 +66,37 @@ export const ExpandableRowAsTable: Story = {
       expandableRow={({ row }) => <TableStoryExpandableRow row={row} asTable />}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const el = canvasElement.querySelector('.expandable-container');
+    await expect(el).not.toBeNull();
+    const label = el?.querySelector('[data-slot="property-term"]');
+    await expect(label).not.toBeNull();
+  },
 };
 
-/** Expandable rows combined with multi-select — `ExpandableContainer`'s
- * `.has-multiselect` CSS branch shifts the expanded panel's left margin to
- * clear the checkbox column, on top of the arrow column it always clears. */
+/** Expandable rows combined with multi-select — shifts the expanded panel's
+ * left margin to clear the checkbox column on top of the arrow column. */
 export const ExpandableRowWithMultiSelect: Story = {
   render: () => (
     <Table
       {...tableStoryBaseProps}
       toggled={{ [tableStoryRows[0].uuid]: true }}
       enableMultiSelect
-      expandableRow={({ row }) => (
-        <TableStoryExpandableRow row={row} hasMultiSelect />
-      )}
+      expandableRow={({ row }) => <TableStoryExpandableRow row={row} />}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const slot = canvasElement.querySelector(
+      '[data-slot="expanded-row-content"]',
+    );
+    expect(slot).not.toBeNull();
+    const style = getComputedStyle(slot as Element);
+    await expect(style.paddingLeft).toBe('84px');
+  },
 };
 
-/** A nested table inside the expanded row — `ExpandableContainer.scss`'s
- * `.card-table` branch (distinct thead/tbody background tokens, pinned-
- * column background overrides), the pattern `RoleUsersExpandableRow.tsx`
- * uses for e.g. a role's list of granted users. */
+/** A nested table inside the expanded row — nested table card has transparent
+ * background and card padding applied directly to edge cells. */
 export const ExpandableRowNestedTable: Story = {
   render: () => (
     <Table
@@ -91,6 +105,18 @@ export const ExpandableRowNestedTable: Story = {
       expandableRow={() => <TableStoryNestedExpandableRow />}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const slot = canvasElement.querySelector(
+      '[data-slot="expanded-row-content"]',
+    );
+    const nestedCard = slot?.querySelector('[data-slot="card"]');
+    expect(nestedCard).not.toBeNull();
+    if (nestedCard) {
+      await expect(getComputedStyle(nestedCard).backgroundColor).toBe(
+        'rgba(0, 0, 0, 0)',
+      );
+    }
+  },
 };
 
 /** Two rows expanded at once — `toggled` is a per-row map, not a single
@@ -110,14 +136,11 @@ export const ExpandableRowMultipleExpanded: Story = {
   ),
 };
 
-/** The `fluid` opt-out (`ExpandableContainer.scss`'s `table .expandable-
- * container.fluid` rule) — for a table that doesn't span the full content
- * area (a proposal panel beside a progress rail, a modal), where the
- * viewport-relative width math in the default `ExpandableRow` story would
- * push columns behind an unnecessary horizontal scroll. Wrapped in a
- * narrow container to make the point visible: compare against
- * `ExpandableRow` at the same viewport width. */
-export const ExpandableRowFluid: Story = {
+/** A table that doesn't span the full content area (a proposal panel
+ * beside a progress rail, a modal): the expanded row's slot takes the
+ * table's own width, so it needs no opt-out. Wrapped in a narrow container
+ * to make the point visible. */
+export const ExpandableRowNarrow: Story = {
   decorators: [
     (Story) => (
       <div style={{ maxWidth: 500 }}>
@@ -130,7 +153,7 @@ export const ExpandableRowFluid: Story = {
       {...tableStoryBaseProps}
       toggled={{ [tableStoryRows[0].uuid]: true }}
       expandableRow={({ row }) => (
-        <ExpandableContainer className="fluid">
+        <ExpandableContainer>
           <PropertyList variant="summary">
             <PropertyItem label="Region" value={row.region} />
             <PropertyItem label="Plan" value={row.plan} />
@@ -139,6 +162,14 @@ export const ExpandableRowFluid: Story = {
       )}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const slot = canvasElement.querySelector(
+      '[data-slot="expanded-row-content"]',
+    );
+    expect(slot).not.toBeNull();
+    const style = getComputedStyle(slot as Element);
+    await expect(style.position).toBe('sticky');
+  },
 };
 
 /** `isRowExpandable` hides the expand caret on rows that don't qualify —

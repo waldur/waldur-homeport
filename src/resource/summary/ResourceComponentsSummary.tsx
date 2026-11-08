@@ -72,7 +72,7 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
   }
 
   return (
-    <div className="field-row grid grid-cols-6 gap-x-5 mb-1">
+    <div className="grid grid-cols-6 gap-x-5 mb-1">
       {resolvePlanComponents(
         offering.components,
         findResourcePlan(offering.plans, resource.plan_uuid),

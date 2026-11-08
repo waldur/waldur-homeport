@@ -93,7 +93,6 @@
   "src/styles/legacy/matrix/_team-chat.scss": 117,
   "src/styles/legacy/support/_helpdesk.scss": 7,
   "src/table/EmbeddedTabs.tsx": 3,
-  "src/table/ExpandableContainer.scss": 3,
   "src/tailwind.css": 3,
   "src/user/dashboard/UserProfileHero.tsx": 1,
   "src/user/OfferingUsersWarningBar.scss": 2,

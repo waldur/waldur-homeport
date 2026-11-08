@@ -15,15 +15,7 @@ export const IssuesListExpandableRow: FunctionComponent<{
   row: Issue;
   supportOrStaff: boolean;
 }> = ({ row, supportOrStaff }) => (
-  <ExpandableContainer
-    style={{
-      width: 'auto',
-      maxWidth: '100%',
-      marginLeft: 48,
-      position: 'static',
-      left: 'auto',
-    }}
-  >
+  <ExpandableContainer>
     {/* Two columns of facts about the issue, each row keeping its place even
         when the issue has no value for it. */}
     <div className="flex flex-wrap gap-x-16 gap-y-3">

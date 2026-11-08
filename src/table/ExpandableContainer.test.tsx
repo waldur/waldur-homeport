@@ -5,17 +5,13 @@ import { PropertyItem, PropertyList } from 'waldur-ui';
 
 import { ExpandableContainer } from './ExpandableContainer';
 
-// The panel and its lists have no role to query by; the classes and
-// elements are what the .as-table styles key on.
-const panel = (container: HTMLElement) =>
-  // eslint-disable-next-line testing-library/no-node-access
-  container.querySelector('.expandable-container');
+// The lists have no role to query by.
 const lists = (container: HTMLElement) =>
   // eslint-disable-next-line testing-library/no-node-access
   container.querySelectorAll('dl');
 
 describe('ExpandableContainer', () => {
-  it('renders asTable rows in one list, lined up as a table', () => {
+  it('renders asTable rows in one list', () => {
     const { container } = render(
       <ExpandableContainer asTable>
         <PropertyItem label="Region" value="eu-north-1" />
@@ -23,14 +19,13 @@ describe('ExpandableContainer', () => {
       </ExpandableContainer>,
     );
 
-    expect(panel(container)).toHaveClass('as-table');
     expect(lists(container)).toHaveLength(1);
     expect(screen.getAllByRole('term')).toHaveLength(2);
   });
 
-  it('lines up rows held in their own lists without adding one', () => {
+  it('leaves children that hold their own lists unwrapped', () => {
     const { container } = render(
-      <ExpandableContainer alignRows>
+      <ExpandableContainer>
         <div>
           <PropertyList variant="summary">
             <PropertyItem label="Region" value="eu-north-1" />
@@ -39,7 +34,6 @@ describe('ExpandableContainer', () => {
       </ExpandableContainer>,
     );
 
-    expect(panel(container)).toHaveClass('as-table');
     // Only the column's own list: no second <dl> around the column.
     expect(lists(container)).toHaveLength(1);
   });

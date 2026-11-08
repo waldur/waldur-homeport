@@ -51,10 +51,33 @@ interface TableBodyProps extends Pick<
   | 'hasOptionalColumns'
   | 'isRowExpandable'
   | 'rowGroupHeader'
+  | 'fullWidth'
 > {
   pinnedColumns?: PinnedColumns;
   pinnedOffsets?: PinnedOffsets;
 }
+
+const NESTED_TABLE_CLASSES = [
+  '[&_[data-slot=card][data-variant=table]]:bg-transparent',
+  '[&_[data-slot=card][data-variant=table]]:overflow-hidden',
+  '[&_[data-slot=card][data-variant=table]>[data-slot=card-header]]:[--card-header-mx:0px]',
+  '[&_[data-slot=card][data-variant=table]>[data-slot=card-header]]:[--card-header-px:var(--card-padding-x)]',
+  '[&_[data-slot=card][data-variant=table]>[data-slot=card-content]]:[--card-content-pt:0px]',
+  '[&_[data-slot=card][data-variant=table]>[data-slot=card-content]]:[--card-content-px:0px]',
+  '[&_[data-slot=card][data-variant=table]>[data-slot=card-content]]:pb-2',
+  '[&_[data-slot=card][data-variant=table]_.table]:mb-0',
+  '[&_[data-slot=card][data-variant=table]_.table_td:first-child]:ps-[var(--card-padding-x)]',
+  '[&_[data-slot=card][data-variant=table]_.table_th:first-child]:ps-[var(--card-padding-x)]',
+  '[&_[data-slot=card][data-variant=table]_.table_td:last-child]:pe-[var(--card-padding-x)]',
+  '[&_[data-slot=card][data-variant=table]_.table_th:last-child]:pe-[var(--card-padding-x)]',
+  '[&_[data-slot=card][data-variant=table]_.table_thead>tr]:bg-tertiary',
+  '[&_[data-slot=card][data-variant=table]_.table_tbody>tr]:bg-secondary',
+  '[&_[data-slot=card][data-variant=table]_.table_thead_th.pinned]:bg-tertiary',
+  '[&_[data-slot=card][data-variant=table]_.table_thead_th.header-actions]:bg-tertiary',
+  '[&_[data-slot=card][data-variant=table]_.table_tbody_td.pinned]:bg-secondary',
+  '[&_[data-slot=card][data-variant=table]_.table_tbody_td.row-actions]:bg-secondary',
+  '[&_[data-slot=card][data-variant=table]_.table-pagination]:!px-[var(--card-padding-x)]',
+].join(' ');
 
 /**
  * Renders a table's `rowActions`. Callers usually pass an inline arrow,
@@ -725,6 +748,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     pinnedOffsets = {},
     isRowExpandable,
     rowGroupHeader,
+    fullWidth: isFullWidthCard = false,
   }) => {
     // Several tables can share a page, so each prefixes its details ids.
     const detailsIdPrefix = useId();
@@ -827,7 +851,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
       ],
     );
 
-    const fullWidth =
+    const colSpanCount =
       columns.length +
       (rowActions ? 1 : 0) +
       (enableMultiSelect || fieldType ? 1 : 0);
@@ -841,7 +865,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
             <React.Fragment key={getId(row, rowIndex, rowKey)}>
               {groupHeader ? (
                 <tr className="table-group-header">
-                  <th colSpan={fullWidth} data-testid="table-group-header">
+                  <th colSpan={colSpanCount} data-testid="table-group-header">
                     {groupHeader}
                   </th>
                 </tr>
@@ -863,22 +887,30 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                 renderRow(row, rowIndex)
               )}
               {canExpand && toggled[getId(row, rowIndex, rowKey)] && (
-                // With a checkbox column, the details start past it too,
-                // level with the row's first column (ExpandableContainer.scss).
-                <tr
-                  className={
-                    enableMultiSelect || fieldType
-                      ? 'has-multiselect'
-                      : undefined
-                  }
-                >
+                <tr className="bg-secondary">
                   <td
-                    colSpan={fullWidth}
+                    colSpan={colSpanCount}
                     id={`${detailsIdPrefix}-details-${rowIndex}`}
-                    className={expandableRowClassName}
+                    className={classNames('p-0', expandableRowClassName)}
                     data-testid="expanded-row-cell"
                   >
-                    {React.createElement(expandableRow, { row, fetch })}
+                    <div
+                      data-slot="expanded-row-content"
+                      className={classNames(
+                        'sticky left-0 w-[100cqw] max-w-[100cqw]',
+                        'py-4 pe-[var(--card-padding-x,24px)]',
+                        enableMultiSelect || fieldType
+                          ? isFullWidthCard
+                            ? 'ps-[60px]'
+                            : 'ps-[84px]'
+                          : isFullWidthCard
+                            ? 'ps-[28px]'
+                            : 'ps-[52px]',
+                        NESTED_TABLE_CLASSES,
+                      )}
+                    >
+                      {React.createElement(expandableRow, { row, fetch })}
+                    </div>
                   </td>
                 </tr>
               )}

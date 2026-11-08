@@ -84,7 +84,7 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
       <AddProjectUserButton customer={row} refetch={refetch} />
     </div>
   ) : (
-    <ExpandableContainer hasMultiSelect>
+    <ExpandableContainer>
       <Table<ProjectGrantRow>
         {...tableProps}
         rowKey="uuid"
