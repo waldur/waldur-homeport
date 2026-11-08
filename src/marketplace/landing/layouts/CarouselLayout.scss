@@ -35,7 +35,7 @@
     max-width: 120px;
     background: var(--bg-primary);
     border: 1px solid var(--border-secondary);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     text-decoration: none;
     color: var(--text-primary);
     transition: border-color 0.2s ease;

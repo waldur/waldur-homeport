@@ -46,7 +46,7 @@
 .layout-neumorphism-card input:not([type='checkbox']):not([type='radio']) {
   background: #e0e5ec;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   box-shadow:
     inset 5px 5px 10px #bec3c9,
     inset -5px -5px 10px #ffffff;

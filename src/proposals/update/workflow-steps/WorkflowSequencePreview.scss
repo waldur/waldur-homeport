@@ -55,7 +55,7 @@
     gap: 3.25px;
     height: 24px;
     padding: 0 8.12px;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     border: 1px solid var(--border-divider);
     background: var(--bg-primary);
     color: var(--text-quaternary);
@@ -80,7 +80,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      border-radius: 6.5px;
+      border-radius: var(--radius-md);
       background: var(--bg-secondary);
       z-index: -1;
     }

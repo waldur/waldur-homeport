@@ -25,7 +25,7 @@
   left: 0;
   padding: 20px;
   border: 2px solid var(--border-brand);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   text-align: center;
   z-index: 2;
 }
@@ -34,7 +34,7 @@
   display: none;
   padding: 20px 30px;
   border: 2px solid var(--border-brand);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   max-width: 250px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -47,7 +47,7 @@
   width: 100%;
   position: relative;
   border: 1px solid var(--border-secondary);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   padding: 15px;
 
   .attachment-item__thumb {
@@ -93,7 +93,7 @@
     padding: 20px;
     background: color-mix(in srgb, var(--bg-primary) 50%, transparent);
     border: 1px dashed var(--status-danger-border);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     text-align: center;
     z-index: 2;
   }

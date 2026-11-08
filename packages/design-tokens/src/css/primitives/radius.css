@@ -13,6 +13,17 @@
  *   --radius-2xl: 16px
  *   --radius-modal: 20px (the Sidebar mode-switcher card; the Modal itself is
  *                    --radius-xl, the app's former Bootstrap modal radius)
+ *   --radius-full: 9999px (pills, circular badges, status dots)
+ *
+ * --radius-full replaces Tailwind's own `rounded-full`, which is
+ * `calc(infinity * 1px)`, with the 9999px the radius table in
+ * docs/design-tokens.md and enforce-border-radius-tokens both already name.
+ * The two render identically -- a radius is clamped to half the shorter side
+ * of the box, so they differ only above ~19998px -- and defining it gives
+ * stylesheets a token to read, where the utility is out of reach: the pills
+ * in the chat, AI-assistant and auth layouts spelled it 99px, 100px and
+ * 9999px between them. It is the one step not needed to escape the 13px root
+ * (9999px never compressed); it is here so the scale is one list.
  */
 @theme static {
   --radius-xs: 2px;
@@ -22,4 +33,5 @@
   --radius-xl: 12px;
   --radius-2xl: 16px;
   --radius-modal: 20px;
+  --radius-full: 9999px;
 }

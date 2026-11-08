@@ -182,7 +182,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 1.23rem;
+    border-radius: var(--radius-2xl);
     background: var(--bg-brand-primary);
     border: 1px solid var(--border-brand);
     color: var(--text-brand-secondary);
@@ -211,7 +211,7 @@
     flex-shrink: 0;
     padding: 2px 0.462rem;
     border: 0;
-    border-radius: 99px;
+    border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-secondary);
     font-size: var(--text-sm);
@@ -681,7 +681,7 @@
   .tc-voice__bar {
     flex: 1;
     min-width: 2px;
-    border-radius: 99px;
+    border-radius: var(--radius-full);
     background: var(--border-primary);
     transition: background 0.1s ease;
 
@@ -743,7 +743,7 @@
     align-items: center;
     gap: 0.308rem;
     padding: 2px 0.615rem;
-    border-radius: 99px;
+    border-radius: var(--radius-full);
     background: var(--bg-primary);
     color: var(--text-primary);
     border: 1px solid var(--border-primary);
@@ -790,7 +790,7 @@
     padding: 0.308rem;
     background: var(--bg-primary);
     border: 1px solid var(--border-primary);
-    border-radius: 99px;
+    border-radius: var(--radius-full);
     box-shadow:
       0 4px 14px color-mix(in srgb, var(--shadow-color) 8%, transparent),
       0 1px 3px color-mix(in srgb, var(--shadow-color) 4%, transparent);
@@ -878,7 +878,7 @@
     background: transparent;
     color: var(--text-primary);
     cursor: pointer;
-    border-radius: 99px;
+    border-radius: var(--radius-full);
     font-size: var(--text-base);
     line-height: 1;
     transition:

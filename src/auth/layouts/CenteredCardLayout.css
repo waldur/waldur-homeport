@@ -28,7 +28,7 @@
 
 .layout-centered-card-box {
   background: var(--bg-primary);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   padding: 2rem;
   width: 100%;
   max-width: 420px;

@@ -76,7 +76,7 @@
 .layout-news-item {
   background: var(--bg-primary);
   padding: 1.5rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   border: 1px solid var(--border-secondary);
 }
 
@@ -95,7 +95,7 @@
 .layout-news-tag {
   font-size: var(--text-xs);
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background: var(--brand-color);
   color: white;
   font-weight: var(--font-weight-medium);

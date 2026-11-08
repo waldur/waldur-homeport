@@ -62,7 +62,7 @@
   width: 40px;
   height: 4px;
   background: var(--border-divider-strong);
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
   margin: 12px auto;
 }
 
