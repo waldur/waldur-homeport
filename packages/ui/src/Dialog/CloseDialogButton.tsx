@@ -2,6 +2,7 @@ import React from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { BaseButton, ButtonVariant } from '../Button';
+import { cn } from '../cn';
 
 import { useModalHide } from './Modal';
 import { useModal } from './modalContext';
@@ -11,7 +12,8 @@ interface CloseDialogButtonProps {
   label?: string;
   /** Button variant - defaults to 'tertiary' */
   variant?: ButtonVariant;
-  /** Additional CSS classes */
+  /** Additional CSS classes. A min-w class here replaces the default
+   * --dialog-action-min-w floor. */
   className?: string;
   /** Disabled state */
   disabled?: boolean;
@@ -60,7 +62,7 @@ export const CloseDialogButton: React.FC<CloseDialogButtonProps> = ({
 
   return (
     <BaseButton
-      className={className}
+      className={cn('min-w-[var(--dialog-action-min-w)]', className)}
       onClick={handleClick}
       variant={variant}
       size="lg"

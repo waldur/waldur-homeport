@@ -62,15 +62,12 @@ export const MailDialog: FC<Props> = ({ resolve }) => {
       )}
       footer={
         <>
-          <CloseDialogButton
-            className="min-w-[125px]"
-            label={translate('Close')}
-          />
+          <CloseDialogButton label={translate('Close')} />
           {canEdit && (
             <BaseButton
               variant="primary"
               size="lg"
-              className="min-w-[125px]"
+              className="min-w-[var(--dialog-action-min-w)]"
               label={translate('Edit')}
               onClick={() =>
                 router.stateService.go(CALL_MAIL_STATE, {

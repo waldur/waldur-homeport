@@ -46,7 +46,6 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
       submitting={props.submitting}
       label={props.submitLabel}
       invalid={props.submitDisabled || props.loading || props.invalid}
-      className="min-w-[125px]"
       data-testid="wizard-submit-btn"
       // As iconNode, not children: children replace the label in
       // SubmitButton, which left the Next button wordless.
@@ -77,7 +76,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
               {props.step > 0 && (
                 <BaseButton
                   variant="tertiary"
-                  className="min-w-[125px] me-auto"
+                  className="min-w-[var(--dialog-action-min-w)] me-auto"
                   onClick={() => props.onPrev(props.values)}
                   label={translate('Back')}
                   iconNode={<CaretLeftIcon weight="bold" />}
@@ -85,7 +84,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
                   size="lg"
                 />
               )}
-              <CloseDialogButton className="min-w-[125px]" />
+              <CloseDialogButton />
               {typeof props.actions === 'function'
                 ? props.actions({ values: props.values })
                 : props.actions}

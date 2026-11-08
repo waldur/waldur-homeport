@@ -105,12 +105,11 @@ export const RestoreProjectDialog: FunctionComponent<
               }
               footer={
                 <>
-                  <CloseDialogButton className="min-w-[125px]" />
+                  <CloseDialogButton />
                   <SubmitButton
                     submitting={submitting}
                     label={translate('Recover')}
                     variant="primary"
-                    className="min-w-[125px]"
                   />
                 </>
               }

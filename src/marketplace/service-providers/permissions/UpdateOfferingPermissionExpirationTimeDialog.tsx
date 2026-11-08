@@ -39,13 +39,12 @@ export const UpdateOfferingPermissionExpirationTimeDialog: FC<{
             })}
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   label={translate('Update')}
                   submitting={submitting}
                   disabled={invalid}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

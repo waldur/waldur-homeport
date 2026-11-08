@@ -92,7 +92,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
               }
               footer={
                 <>
-                  <CloseDialogButton className="min-w-[125px]" />
+                  <CloseDialogButton />
                   <SubmitButton
                     submitting={submitting}
                     label={translate('Save')}
@@ -109,7 +109,6 @@ export const EditResourceEndDateDialog: FunctionComponent<
                         : undefined
                     }
                     variant="primary"
-                    className="min-w-[125px]"
                   />
                 </>
               }

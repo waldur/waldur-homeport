@@ -36,13 +36,13 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         iconNode={<CaretLeftIcon weight="bold" />}
         disabled={submitting}
         disabledReason={translate('Submission in progress')}
-        className="min-w-[125px]"
+        className="min-w-[var(--dialog-action-min-w)]"
         variant="tertiary"
         size="lg"
       />
     )}
     <CloseDialogButton
-      className="ms-auto min-w-[125px]"
+      className="ms-auto"
       disabled={submitting}
       disabledReason={translate('Submission in progress')}
     />
@@ -52,7 +52,6 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         submitting={submitting}
         label={submitLabel || translate('Confirm')}
         variant="primary"
-        className="min-w-[125px]"
         data-testid="confirm-button"
       />
     ) : (
@@ -60,7 +59,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         label={translate('Next')}
         onClick={goNext}
         variant="primary"
-        className="min-w-[125px]"
+        className="min-w-[var(--dialog-action-min-w)]"
         disabled={invalid}
         tooltip={tooltip}
         data-testid={isFirstStep ? 'next-button-step-0' : 'next-button-step-1'}

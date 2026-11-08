@@ -104,19 +104,18 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
     <>
       <BaseButton
         variant="tertiary"
-        className="min-w-[125px] me-auto"
+        className="min-w-[var(--dialog-action-min-w)] me-auto"
         onClick={() => props.onPrev(values)}
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
         size="lg"
       />
-      <CloseDialogButton className="min-w-[125px]" />
+      <CloseDialogButton />
       <SubmitButton
         submitting={loading}
         disabled={loading}
         label={translate('Continue')}
         onClick={handleContinue}
-        className="min-w-[125px]"
         iconNode={<CaretRightIcon weight="bold" />}
       />
     </>

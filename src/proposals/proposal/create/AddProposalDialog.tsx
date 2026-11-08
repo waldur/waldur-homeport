@@ -187,10 +187,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
               iconColor="success"
               footer={
                 <>
-                  <CloseDialogButton
-                    variant="tertiary"
-                    className="min-w-[125px]"
-                  />
+                  <CloseDialogButton variant="tertiary" />
                   <SubmitButton
                     disabled={invalid}
                     submitting={submitting || isPending}
@@ -199,7 +196,6 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                     // dialog in the app uses.
                     label={translate('Create')}
                     variant="primary"
-                    className="min-w-[125px]"
                   />
                 </>
               }

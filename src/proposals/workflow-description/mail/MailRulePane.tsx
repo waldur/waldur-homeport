@@ -252,14 +252,14 @@ const RuleForm: FC<{
                 <BaseButton
                   variant="tertiary"
                   size="lg"
-                  className="min-w-[125px]"
+                  className="min-w-[var(--dialog-action-min-w)]"
                   label={translate('Cancel')}
                   onClick={() => onDone()}
                 />
                 <BaseButton
                   variant="primary"
                   size="lg"
-                  className="min-w-[125px]"
+                  className="min-w-[var(--dialog-action-min-w)]"
                   label={rule ? translate('Save rule') : translate('Add rule')}
                   pending={submitting}
                   disabled={submitting || (Boolean(rule) && pristine)}

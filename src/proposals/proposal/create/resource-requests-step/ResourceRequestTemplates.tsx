@@ -447,7 +447,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
               : translate('No changes to save')
           }
           pending={isPending}
-          className="min-w-[125px]"
+          className="min-w-[var(--dialog-action-min-w)]"
           variant="tertiary"
           size="lg"
         />

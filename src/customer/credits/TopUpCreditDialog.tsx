@@ -91,13 +91,12 @@ export const TopUpCreditDialog: FC<OwnProps> = ({
               }
               footer={
                 <>
-                  <CloseDialogButton className="min-w-[125px]" />
+                  <CloseDialogButton />
                   <SubmitButton
                     submitting={submitting}
                     disabled={invalid}
                     label={translate('Top up')}
                     variant="primary"
-                    className="min-w-[125px]"
                   />
                 </>
               }

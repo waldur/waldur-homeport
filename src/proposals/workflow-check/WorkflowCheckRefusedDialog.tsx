@@ -26,7 +26,7 @@ export const WorkflowCheckRefusedDialog: FC<{
       subtitle={summaryText({ error: findings.length, warning: 0 })}
       footer={
         <>
-          <CloseDialogButton className="min-w-[125px]" />
+          <CloseDialogButton />
           <BaseButton
             variant="primary"
             size="lg"

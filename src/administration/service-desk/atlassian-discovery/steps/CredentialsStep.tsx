@@ -87,7 +87,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
   // Custom footer for this step
   const renderFooter = () => (
     <>
-      <CloseDialogButton className="min-w-[125px]" />
+      <CloseDialogButton />
       <SubmitButton
         submitting={validating}
         disabled={!isFormValid()}
