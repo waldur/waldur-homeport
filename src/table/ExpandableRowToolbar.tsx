@@ -127,7 +127,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
   return (
     <div className="flex flex-wrap items-center gap-1.5 px-2.5 py-1.5">
       {activeTableKey && (
-        <div className="table-toolbar-search">
+        <div className="table-toolbar-search w-80 max-w-80 flex-none max-md:w-full max-md:max-w-full max-md:flex-auto">
           <TableQuery
             query={query}
             setQuery={handleSetQuery}

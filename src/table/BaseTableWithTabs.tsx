@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, Fragment, ReactNode, useState } from 'react';
 
 import {
@@ -56,14 +57,18 @@ export const BaseTableWithTabs: FC<BaseTableWithTabsProps> = ({
 
   return (
     <Card variant="table" bordered className={className}>
-      <CardHeader className={headerClassName}>
-        <CardToolbar className="flex flex-wrap gap-3 w-full">
+      <CardHeader className={classNames('min-h-[77px]', headerClassName)}>
+        <CardToolbar className="my-[var(--card-toolbar-my)] flex flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-0">
-            <CardTitle as="div" ref={setTitleNode} className="h5">
+            <CardTitle
+              as="div"
+              ref={setTitleNode}
+              className="my-0 mr-0 leading-snug"
+            >
               <div className="me-1.5">
                 <h3>{title}</h3>
                 {Boolean(subtitle) && (
-                  <small className="text-sm font-normal block mt-1.5">
+                  <small className="text-sm font-normal block mt-1.5 leading-5">
                     {subtitle}
                   </small>
                 )}

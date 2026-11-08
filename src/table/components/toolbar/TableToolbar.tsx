@@ -138,7 +138,7 @@ export function TableToolbarActions() {
           {config.hasQuery && (
             <div className="flex items-center gap-3">
               {slots.beforeSearch}
-              <div className="table-toolbar-search">
+              <div className="table-toolbar-search w-80 max-w-80 flex-none max-md:w-full max-md:max-w-full max-md:flex-auto">
                 <TableQuery
                   query={query}
                   setQuery={actions.setQuery}
@@ -222,16 +222,18 @@ export function TableToolbarTitle() {
 
   return (
     <div className="grow order-0" data-testid="table-toolbar-title-container">
-      <CardTitle as="div" className="h5">
+      <CardTitle as="div" className="my-0 mr-0 leading-snug">
         {!config.hideTitle && (
           <div className="me-1.5">
-            <span className={classNames('h3', display.titleClassName)}>
+            <span
+              className={classNames('h3 leading-7', display.titleClassName)}
+            >
               {display.title ||
                 display.alterTitle ||
                 (display.verboseName && titleCase(display.verboseName))}
             </span>
             {Boolean(display.subtitle) && (
-              <small className="text-sm font-normal block mt-1">
+              <small className="text-sm font-normal block mt-1 leading-5">
                 {display.subtitle}
               </small>
             )}
@@ -261,12 +263,12 @@ export function TableToolbar() {
   return (
     <CardHeader
       className={classNames(
-        'border-b border-b-secondary',
+        'border-b border-b-secondary min-h-[77px]',
         display.headerClassName,
       )}
       data-testid="table-toolbar"
     >
-      <CardToolbar className="flex flex-wrap items-center gap-3 w-full">
+      <CardToolbar className="my-[var(--card-toolbar-my)] flex flex-wrap items-center gap-3 w-full">
         <TableToolbarTitle />
         {!portal?.toolbar && <TableToolbarActions />}
       </CardToolbar>

@@ -347,6 +347,9 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
     return null;
   }
 
+  // A grid of cards keeps the card's own top padding and header inset.
+  const isGridTable = props.mode === 'grid' && Boolean(props.gridItem);
+
   return (
     <FilterContextProvider
       {...props}
@@ -397,12 +400,19 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           variant="table"
           bordered={props.cardBordered}
           className={classNames(
-            props.fullWidth && 'full-width',
-            props.fieldName ? 'field-table' : '',
-            props.mode === 'grid' && Boolean(props.gridItem) && 'grid-table',
+            // Every header of a full-width card spans the card's edges and
+            // insets its content instead: the toolbar, and the filter and
+            // selection bars above the table. The --card-header-* hooks
+            // don't inherit (card.css), so they are set on the headers.
+            props.fullWidth &&
+              'full-width overflow-hidden max-sm:-mx-[15px] max-sm:rounded-none',
+            props.fullWidth &&
+              !isGridTable &&
+              '[&>[data-slot=card-header]]:[--card-header-mx:0px] [&>[data-slot=card-header]]:[--card-header-px:var(--card-padding-x)] max-sm:[&>[data-slot=card-header]]:[--card-header-px:15px]',
             props.className,
           )}
           id={props.id}
+          data-table-mode={isGridTable ? 'grid' : undefined}
         >
           {/* Toolbar (card header with title and actions) */}
           <TableToolbar />
@@ -470,7 +480,12 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             )}
 
           {/* Main content */}
-          <CardContent className={props.bodyClassName}>
+          <CardContent
+            className={classNames(
+              props.fullWidth && !isGridTable && 'pt-0 px-0',
+              props.bodyClassName,
+            )}
+          >
             {/* items-center is the fallback for Safari before 17.6, which drops
                 items-center-safe; safe keeps a child wider than the screen
                 at the left edge, in scroll reach. */}
@@ -489,6 +504,11 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 showPageSizeSelector={props.showPageSizeSelector}
                 updatePageSize={props.updatePageSize}
                 gotoPage={props.gotoPage}
+                className={classNames(
+                  props.mode === 'grid' && '!px-0',
+                  props.fullWidth &&
+                    '!px-[var(--card-padding-x)] max-sm:!px-[15px]',
+                )}
               />
             )}
             {props.footer}

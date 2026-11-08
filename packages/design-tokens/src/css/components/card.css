@@ -180,4 +180,47 @@
     --card-content-pt: 1.23rem;
     --card-content-pb: 0.923rem;
   }
+
+  /* variant="table": HomePort's table card (@/table) */
+  [data-slot='card'][data-variant='table'] {
+    --card-border-width: 0px;
+  }
+
+  [data-slot='card'][data-variant='table'][data-bordered] {
+    --card-border-width: 1px;
+  }
+
+  [data-slot='card'][data-variant='table']
+    > [data-slot='card-header']:not(
+      [data-variant='solid'] [data-slot='card-header']
+    ) {
+    --card-header-min-h: 77px;
+  }
+
+  [data-slot='card'][data-variant='table']
+    > [data-slot='card-header']:not(
+      [data-variant='solid'] [data-slot='card-header']
+    )
+    [data-slot='card-toolbar'] {
+    --card-toolbar-my: 0.71rem;
+  }
+
+  [data-slot='card'][data-variant='table']
+    > [data-slot='card-header']:not(
+      [data-variant='solid'] [data-slot='card-header']
+    )
+    [data-slot='card-toolbar']
+    [data-slot='card-title'] {
+    --card-title-my: 0px;
+    --card-title-mr: 0px;
+  }
+
+  [data-slot='card'][data-variant='table']:not([data-table-mode='grid'])
+    > [data-slot='card-content']:not(
+      .tab-content [data-slot='card-content']
+    ):not([role='tabpanel'] [data-slot='card-content']):not(
+      [data-variant='solid'] [data-slot='card-content']
+    ) {
+    --card-content-pt: 0px;
+  }
 }

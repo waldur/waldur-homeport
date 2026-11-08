@@ -9,12 +9,12 @@ exports[`InternalIpsList > renders list 1`] = `
     data-variant="table"
   >
     <div
-      class="flex flex-wrap items-center justify-between min-h-[var(--card-header-min-h,var(--card-header-min-height,70px))] mx-[var(--card-header-mx,var(--card-padding-x))] px-[var(--card-header-px,0px)] py-[var(--card-header-padding-y,var(--card-header-py))] border-secondary bg-[var(--card-header-bg,transparent)] first:rounded-t-[7px] text-[length:var(--text-sm)] font-bold text-[color:var(--card-header-color,var(--text-secondary))] border-b border-b-secondary"
+      class="flex flex-wrap items-center justify-between mx-[var(--card-header-mx,var(--card-padding-x))] px-[var(--card-header-px,0px)] py-[var(--card-header-padding-y,var(--card-header-py))] border-secondary bg-[var(--card-header-bg,transparent)] first:rounded-t-[7px] text-[length:var(--text-sm)] font-bold text-[color:var(--card-header-color,var(--text-secondary))] border-b border-b-secondary min-h-[77px]"
       data-slot="card-header"
       data-testid="table-toolbar"
     >
       <div
-        class="my-[var(--card-toolbar-my,var(--card-header-py))] flex flex-wrap items-center gap-3 w-full"
+        class="my-[var(--card-toolbar-my)] flex flex-wrap items-center gap-3 w-full"
         data-slot="card-toolbar"
       >
         <div
@@ -22,14 +22,14 @@ exports[`InternalIpsList > renders list 1`] = `
           data-testid="table-toolbar-title-container"
         >
           <div
-            class="my-[var(--card-title-my,var(--card-header-py))] mr-[var(--card-title-mr,var(--card-header-py))] ml-0 flex items-center text-primary text-[1.275rem] font-medium h5"
+            class="ml-0 flex items-center text-primary text-[1.275rem] font-medium my-0 mr-0 leading-snug"
             data-slot="card-title"
           >
             <div
               class="me-1.5"
             >
               <span
-                class="h3"
+                class="h3 leading-7"
               >
                 Ports
               </span>
@@ -84,11 +84,11 @@ exports[`InternalIpsList > renders list 1`] = `
         style="min-height: 300px;"
       >
         <div
-          class="table-container transition-opacity duration-150 aria-busy:opacity-50 table-hover-shadow"
+          class="table-container w-full min-w-0 transition-opacity duration-150 aria-busy:opacity-50 table-hover-shadow"
           data-testid="table-container"
         >
           <table
-            class="table align-middle table-row-bordered text-sm table-list"
+            class="table align-middle table-row-bordered text-sm table-list mb-0"
           >
             <colgroup>
               <col
