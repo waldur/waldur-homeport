@@ -1023,7 +1023,7 @@ const MessagesTable: FC<{
       bodyClassName="p-0"
       placeholderHasRetry={false}
       expandableRow={({ row }) => (
-        <ExpandableContainer className="fluid">
+        <ExpandableContainer>
           {/* Wraps to the width the table shows; see FindingDetails. */}
           <div className="sticky left-0 w-[calc(100cqw-64px)]">
             {/* Read-only, as the mail dialog's preview: the email as its

@@ -172,7 +172,7 @@ export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
     // the drawer that is far wider than the panel, so the nested tables spill
     // past its edge. `fluid` makes it take the width it is actually given, and
     // the tables shrink with the panel instead.
-    <ExpandableContainer className="fluid">
+    <ExpandableContainer>
       <EmbeddedTabs
         defaultValue="metadata"
         listClassName="mb-3"

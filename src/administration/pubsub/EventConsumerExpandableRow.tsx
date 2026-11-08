@@ -82,7 +82,7 @@ export const EventConsumerExpandableRow: FC<{ row: EventConsumer }> = ({
   return (
     // fluid: this table sits inside an accordion card, narrower than the
     // content area the default panel width is computed from.
-    <ExpandableContainer asTable className="fluid">
+    <ExpandableContainer asTable>
       <PropertyItem label={translate('UUID')} value={row.uuid} hasCopy />
       <PropertyItem
         label={translate('Receives')}

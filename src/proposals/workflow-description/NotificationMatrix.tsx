@@ -249,7 +249,7 @@ const FlagsList: FC<{
         className="[&_.table-responsive]:[container-type:inline-size]"
         placeholderHasRetry={false}
         expandableRow={({ row }) => (
-          <ExpandableContainer className="fluid">
+          <ExpandableContainer>
             {/* Wraps to the width the table shows; see FindingDetails. */}
             <div className="sticky left-0 w-[calc(100cqw-64px)]">
               <PropertyList variant="summary" termWidth="120px">

@@ -42,7 +42,7 @@ export const ResourceRequestExpandableRow = ({
   const options = offering.options;
 
   return (
-    <ExpandableContainer alignRows className="fluid">
+    <ExpandableContainer>
       <PropertyList
         as="div"
         variant="summary"

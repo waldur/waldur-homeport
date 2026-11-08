@@ -40,7 +40,7 @@ export const OrdersListExpandableRow: FunctionComponent<{
     ? order.provider_uuid
     : undefined;
   return (
-    <ExpandableContainer asTable hasMultiSelect>
+    <ExpandableContainer asTable>
       <PropertyItem
         label={translate('Project description')}
         value={order.project_description}

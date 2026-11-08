@@ -82,7 +82,7 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
   const categories = row.categories as string[] | undefined;
 
   return (
-    <ExpandableContainer asTable style={{ marginLeft: 46 }}>
+    <ExpandableContainer asTable>
       {categories?.length > 0 && (
         <PropertyItem
           label={translate('Categories')}

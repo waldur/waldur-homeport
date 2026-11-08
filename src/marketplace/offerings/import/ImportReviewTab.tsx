@@ -58,7 +58,7 @@ export const ImportReviewTab = () => {
       </PropertyList>
 
       <div>
-        <label className="field-label text-secondary font-semibold mb-3">
+        <label className="text-secondary font-semibold mb-3">
           {translate('Selected mappings')}:
         </label>
         <Table density="compact" className="align-middle mb-2.5">

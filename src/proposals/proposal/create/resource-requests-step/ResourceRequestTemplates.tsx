@@ -71,7 +71,7 @@ interface ResourceRequestTemplatesProps {
 const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
   const keyValues = Object.entries(row.limits || {});
   return (
-    <ExpandableContainer hasMultiSelect className="fluid">
+    <ExpandableContainer>
       {/* Off the table: the plan is a property of the template rather than
           something to compare rows by, and the column it held was pushing the
           cost and the purchase order behind a sideways scroll. */}

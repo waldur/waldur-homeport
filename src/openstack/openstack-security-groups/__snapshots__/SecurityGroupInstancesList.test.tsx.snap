@@ -13,7 +13,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
       data-slot="card-content"
     >
       <div
-        class="table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
+        class="@container/table table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
         style="min-height: auto;"
       >
         <div

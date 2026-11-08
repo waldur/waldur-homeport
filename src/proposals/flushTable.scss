@@ -52,7 +52,7 @@
 
     // An expanded row's cell is no first column: its details already sit
     // under the first column's text, so they take no inset on top.
-    td:has(> .expandable-container) {
+    td:has(> [data-slot='expanded-row-content']) {
       padding-left: 0;
     }
   }

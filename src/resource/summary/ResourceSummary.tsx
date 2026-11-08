@@ -16,7 +16,6 @@ import { ResourceSummaryBase } from './ResourceSummaryBase';
 
 interface ResourceSummaryProps {
   resource: any;
-  hasMultiSelect?: boolean;
   extraTabs?: Array<{
     title: ReactNode;
     eventKey: string;
@@ -34,16 +33,13 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
 
   if (conf?.standalone) {
     return (
-      <ExpandableContainer hasMultiSelect={props.hasMultiSelect} asTable>
+      <ExpandableContainer asTable>
         <SummaryComponent resource={props.resource} />
       </ExpandableContainer>
     );
   } else {
     return (
-      <ExpandableContainer
-        hasMultiSelect={props.hasMultiSelect}
-        asTable={!hasExtraTabs}
-      >
+      <ExpandableContainer asTable={!hasExtraTabs}>
         {!hasExtraTabs ? (
           <>
             <ResourceSummaryBase resource={props.resource} />

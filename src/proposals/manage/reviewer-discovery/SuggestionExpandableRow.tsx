@@ -114,7 +114,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
 
   if (topProposals.length === 0 && matchedKeywords.length === 0) {
     return (
-      <ExpandableContainer alignRows>
+      <ExpandableContainer>
         {details}
         <p className="text-quaternary mb-0 mt-1.5">
           {translate('No detailed match information available.')}
@@ -124,7 +124,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
   }
 
   return (
-    <ExpandableContainer alignRows>
+    <ExpandableContainer>
       <div className="mb-3">{details}</div>
       {/* Matched Keywords Section */}
       {matchedKeywords.length > 0 && (

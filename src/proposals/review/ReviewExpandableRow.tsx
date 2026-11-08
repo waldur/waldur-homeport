@@ -50,7 +50,7 @@ export const ReviewExpandableRow: FC<{
   });
 
   return (
-    <ExpandableContainer alignRows>
+    <ExpandableContainer>
       {isLoading ? (
         <LoadingSpinner />
       ) : error || !data ? (

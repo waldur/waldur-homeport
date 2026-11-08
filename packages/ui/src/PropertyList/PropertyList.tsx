@@ -187,8 +187,8 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
           ctx.stacked
             ? // Term above value at every width: no term track to squeeze
               // the value in a narrow cell.
-              'field-row flex flex-col m-0'
-            : 'field-row flex flex-wrap m-0 sm:grid sm:grid-cols-[var(--dt-width)_minmax(0,1fr)] sm:gap-6 items-baseline',
+              'flex flex-col m-0'
+            : 'flex flex-wrap m-0 sm:grid sm:grid-cols-[var(--dt-width)_minmax(0,1fr)] sm:gap-6 items-baseline',
           space ? SPACE_CLASSES[space] : undefined,
           props.className,
         )}
@@ -197,7 +197,7 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
           <dt
             data-slot="property-term"
             className={cn(
-              'w-full text-secondary font-medium break-words field-label m-0',
+              'w-full text-secondary font-medium break-words m-0',
               !ctx.stacked && 'sm:w-auto',
               ctx.labelClass,
               props.labelClass,

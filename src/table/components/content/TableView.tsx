@@ -102,6 +102,7 @@ export function TableView() {
         hasOptionalColumns={config.hasOptionalColumns}
         pinnedColumns={pinnedColumns}
         pinnedOffsets={pinnedOffsets}
+        fullWidth={config.fullWidth}
       />
     </table>
   );

@@ -11,7 +11,7 @@ interface OwnProps {
 }
 
 export const OfferingQoSExpandableRow: FC<OwnProps> = ({ row }) => (
-  <ExpandableContainer alignRows>
+  <ExpandableContainer>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
       <div>
         <PropertyList variant="summary" space={1.5} hideIfEmpty={false}>

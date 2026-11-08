@@ -12,7 +12,7 @@ import { getInvitationLink } from './utils';
 export const InvitationExpandableRow: React.FC<{
   row: Invitation;
 }> = ({ row }) => (
-  <ExpandableContainer hasMultiSelect>
+  <ExpandableContainer>
     <p>
       <b>{translate('Invitation link')}: </b>
       <CodeLine variant="inline" copyable>

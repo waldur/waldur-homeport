@@ -32,7 +32,7 @@ const StaticResourceSummary: FunctionComponent<{ row: Resource }> = ({
     translate('Backend ID');
 
   return (
-    <ExpandableContainer hasMultiSelect asTable>
+    <ExpandableContainer asTable>
       {highlightedId &&
         row.offering_plugin_options?.highlight_backend_id_display && (
           <PropertyItem label={backendIdLabel} value={highlightedId} hasCopy />
@@ -101,7 +101,6 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
         parent_uuid: row.parent_uuid,
         parent_name: row.parent_name,
       }}
-      hasMultiSelect
     />
   );
 };
@@ -113,7 +112,7 @@ export const ExpandableResourceSummary: FunctionComponent<{
   <>
     {(row.is_limit_based || row.is_usage_based) &&
       !(row.resource_type || '').startsWith('OpenStack') && (
-        <ExpandableContainer hasMultiSelect>
+        <ExpandableContainer>
           <ResourceComponentsSummary resource={row} context={context} />
         </ExpandableContainer>
       )}

@@ -152,7 +152,7 @@ const FindingActions: FC<FindingActionsProps> = ({
 // Sized from the scroller (a size container, see the table's class), it also
 // leaves the columns' widths alone.
 const FindingDetails = ({ row }: { row: WorkflowCheckFinding }) => (
-  <ExpandableContainer className="fluid">
+  <ExpandableContainer>
     <div className="sticky left-0 w-[calc(100cqw-64px)]">
       <PropertyList variant="summary" termWidth="120px">
         {/* Where and Setting are columns of the row; the message alone here. */}
