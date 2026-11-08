@@ -18,13 +18,12 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
           <img
             src={item.thumbnail}
             alt="thumb"
-            className="max-w-full h-auto p-1 bg-primary border border-primary rounded-lg shadow-raised"
+            className="max-w-full h-auto p-1 bg-primary border border-primary rounded-lg shadow-raised cursor-pointer"
             onClick={() =>
               openDialog(ImageDetailsDialog, {
                 resolve: item,
               })
             }
-            style={{ cursor: 'pointer' }}
             aria-hidden="true"
           />
 

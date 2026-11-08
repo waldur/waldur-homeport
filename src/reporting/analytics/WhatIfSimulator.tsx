@@ -90,7 +90,7 @@ const ParamInput: FC<{
           onChange={(e) => handleChange(parseFloat(e.target.value))}
           className="flex-1"
         />
-        <span className="whitespace-nowrap" style={{ minWidth: '60px' }}>
+        <span className="whitespace-nowrap min-w-15">
           {numValue}
           {param.unit && (
             <span className="text-quaternary ms-1">{param.unit}</span>

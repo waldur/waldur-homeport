@@ -61,10 +61,7 @@ export const ReviewerProfileSummaryCard: FC<
       <Card bordered className="bg-warning-subtle">
         <CardContent>
           <div className="flex items-center gap-3">
-            <div
-              className="flex items-center justify-center rounded-full bg-warning text-white"
-              style={{ width: 56, height: 56, minWidth: 56 }}
-            >
+            <div className="flex items-center justify-center rounded-full bg-warning text-white w-14 h-14 min-w-14">
               <UserIcon size={28} weight="regular" />
             </div>
             <div className="grow">

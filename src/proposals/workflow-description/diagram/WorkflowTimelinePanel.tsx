@@ -53,7 +53,7 @@ export const WorkflowTimelinePanel: FC<{
     <div data-testid="workflow-timeline-panel">
       <PanelHeaderControls className="flex flex-wrap items-center gap-2.5 mb-2.5">
         {plans.length > 1 ? (
-          <div style={{ minWidth: 240 }}>
+          <div className="min-w-60">
             <Select
               aria-label={translate('Round')}
               options={options}

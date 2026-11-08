@@ -9,7 +9,7 @@ const meta: Meta<typeof NoResult> = {
   component: NoResult,
   decorators: [
     (Story) => (
-      <div className="p-5 bg-primary" style={{ minWidth: 600 }}>
+      <div className="p-5 bg-primary min-w-150">
         <Card bordered>
           <CardContent>
             <Story />

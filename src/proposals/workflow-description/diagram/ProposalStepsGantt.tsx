@@ -192,7 +192,8 @@ export const ProposalStepsChart: FC<{
       <svg
         viewBox={`0 0 ${width} ${height}`}
         width="100%"
-        style={{ maxWidth: width, display: 'block' }}
+        className="block"
+        style={{ maxWidth: width }}
         role="img"
         aria-label={translate('Steps planned against actual')}
         aria-describedby={listId}

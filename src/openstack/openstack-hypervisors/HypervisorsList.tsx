@@ -20,10 +20,7 @@ const UsageCell: FC<{ used: number; total: number; unit?: string }> = ({
   total,
   unit,
 }) => (
-  <div
-    className="flex flex-col flex-auto self-stretch"
-    style={{ minWidth: 120 }}
-  >
+  <div className="flex flex-col flex-auto self-stretch min-w-30">
     <Progress value={used} max={total} variant="indigo" />
     <span className="text-end text-xs text-secondary mt-1">
       {used}/{total}

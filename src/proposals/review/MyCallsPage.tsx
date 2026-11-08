@@ -157,7 +157,7 @@ export const MyCallsPage: FC = () => {
   );
 
   return (
-    <div className="flex flex-col" style={{ gap: 16 }}>
+    <div className="flex flex-col gap-4">
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard />
 

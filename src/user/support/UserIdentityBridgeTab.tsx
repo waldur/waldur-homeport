@@ -52,10 +52,7 @@ const FreshnessDot: FC<{ ageDays: number }> = ({ ageDays }) => {
   }
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span
-        className={`rounded-full ${color}`}
-        style={{ width: 8, height: 8, display: 'inline-block' }}
-      />
+      <span className={`inline-block size-2 rounded-full ${color}`} />
       {label}
     </span>
   );

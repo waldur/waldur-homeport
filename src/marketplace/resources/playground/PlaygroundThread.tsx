@@ -52,7 +52,7 @@ const PlaygroundText: TextMessagePartComponent = ({ text }) => {
           open={reasoningOpen}
         >
           <summary className="cursor-pointer">{translate('Reasoning')}</summary>
-          <div style={{ whiteSpace: 'pre-wrap' }}>{reasoning}</div>
+          <div className="whitespace-pre-wrap">{reasoning}</div>
         </details>
       ) : null}
       {answer ? (

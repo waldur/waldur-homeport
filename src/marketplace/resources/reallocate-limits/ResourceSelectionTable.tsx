@@ -121,7 +121,7 @@ const AllocationInputCell: FC<{
       <TableCell>{currentLimit}</TableCell>
       <TableCell>
         {isSelected ? (
-          <div style={{ maxWidth: '200px' }}>
+          <div className="max-w-50">
             {/* Always wrapped: swapping the wrapper in and out would remount
                 the input and drop focus mid-typing. */}
             <Tooltip

@@ -58,7 +58,7 @@ const RoleAndProjectSelectFieldHarness: React.FC<HarnessProps> = ({
     onSubmit={onSubmit}
     initialValues={{ assignment: initialValue }}
     render={() => (
-      <div style={{ maxWidth: 400, minHeight: 360 }}>
+      <div className="max-w-100 min-h-90">
         <RoleAndProjectSelectField
           name="assignment"
           roles={roles}

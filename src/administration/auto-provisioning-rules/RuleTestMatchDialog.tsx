@@ -146,7 +146,7 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
       <Table density="compact" className="align-middle">
         <TableHeader>
           <TableRow>
-            <TableHead style={{ width: 24 }} />
+            <TableHead className="w-6" />
             <TableHead>{translate('Filter')}</TableHead>
             <TableHead>{translate('Rule value')}</TableHead>
             <TableHead>{translate('User value')}</TableHead>

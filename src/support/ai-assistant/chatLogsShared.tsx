@@ -90,7 +90,7 @@ export const formatDetectionCategories = (
     );
   }
   if (parts.length === 0) return translate('Flagged');
-  return <span style={{ whiteSpace: 'pre-line' }}>{parts.join('\n')}</span>;
+  return <span className="whitespace-pre-line">{parts.join('\n')}</span>;
 };
 
 /**

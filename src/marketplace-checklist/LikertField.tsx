@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
 import { Radio } from 'waldur-ui';
@@ -71,8 +72,10 @@ export const LikertField: FC<LikertFieldProps> = ({
 
   return (
     <div
-      className={inline ? 'flex flex-wrap gap-3' : 'flex flex-col gap-1.5'}
-      style={disabled ? { pointerEvents: 'none' } : undefined}
+      className={classNames(
+        inline ? 'flex flex-wrap gap-3' : 'flex flex-col gap-1.5',
+        disabled && 'pointer-events-none',
+      )}
       aria-disabled={disabled || undefined}
     >
       {options.map((opt) => (

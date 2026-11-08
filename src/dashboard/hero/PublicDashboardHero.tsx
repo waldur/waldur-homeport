@@ -46,9 +46,8 @@ export const PublicDashboardHero: FC<
             {props.backgroundImage && (
               <img
                 alt=""
-                className="w-full rounded-t-[7px]"
+                className="w-full rounded-t-[7px] object-cover h-40"
                 src={props.backgroundImage}
-                style={{ height: 160, objectFit: 'cover' }}
               />
             )}
             <CardContent className="flex flex-col sm:flex-row items-stretch grow">

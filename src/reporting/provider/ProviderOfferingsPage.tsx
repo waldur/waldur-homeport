@@ -185,7 +185,7 @@ export const ProviderOfferingsPage: FC = () => {
                 <label className="text-quaternary text-xs whitespace-nowrap">
                   {translate('Provider')}:
                 </label>
-                <div style={{ minWidth: 200 }}>
+                <div className="min-w-[200px]">
                   <ProviderSelector />
                 </div>
               </div>

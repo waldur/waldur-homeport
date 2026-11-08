@@ -100,7 +100,7 @@ export const PaymentUpdateDialog: FunctionComponent<
               />
 
               {props.resolve.proof ? (
-                <span style={{ marginLeft: '145px' }}>
+                <span className="ms-[145px]">
                   <PaymentProofRenderer row={props.resolve} />
                 </span>
               ) : null}
@@ -108,7 +108,7 @@ export const PaymentUpdateDialog: FunctionComponent<
               {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
                 <FormField>
                   <FormLabel>{translate('Invoice')}</FormLabel>
-                  <div style={{ marginTop: '8px' }}>
+                  <div className="mt-2">
                     <Link
                       state="billingDetails"
                       params={{

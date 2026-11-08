@@ -53,9 +53,7 @@ const REVIEW_COMMENTS: Array<[keyof ProposalReview, () => string]> = [
 ];
 
 const Paragraph: FC<{ children: string }> = ({ children }) => (
-  <p className="mb-0" style={{ whiteSpace: 'pre-line' }}>
-    {children}
-  </p>
+  <p className="mb-0 whitespace-pre-line">{children}</p>
 );
 
 const ReviewOutput: FC<{ review: ProposalReview }> = ({ review }) => {
@@ -83,7 +81,7 @@ const ReviewOutput: FC<{ review: ProposalReview }> = ({ review }) => {
           {comments.map(([field, label]) => (
             <div key={field} className="mb-1.5">
               <dt className="font-semibold">{label()}</dt>
-              <dd className="mb-0" style={{ whiteSpace: 'pre-line' }}>
+              <dd className="mb-0 whitespace-pre-line">
                 {String(review[field])}
               </dd>
             </div>
@@ -130,7 +128,7 @@ export const ContributionOutput: FC<{
           {answers.map((answer) => (
             <div key={answer.question_uuid} className="mb-1.5">
               <dt className="font-semibold">{answer.question_description}</dt>
-              <dd className="mb-0" style={{ whiteSpace: 'pre-line' }}>
+              <dd className="mb-0 whitespace-pre-line">
                 {answer.answer_display}
               </dd>
             </div>

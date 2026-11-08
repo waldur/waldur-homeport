@@ -14,9 +14,7 @@ const Line: FC<{ label: string; value?: string | null }> = ({
 }) =>
   value ? (
     <div className="flex gap-1.5">
-      <span className="text-quaternary" style={{ minWidth: 160 }}>
-        {label}
-      </span>
+      <span className="text-quaternary min-w-40">{label}</span>
       <span>{value}</span>
     </div>
   ) : null;

@@ -55,7 +55,7 @@ export const AssigneeSelect: FC<AssigneeSelectProps> = ({
     (assigneeName ? { value: assignee ?? '', label: assigneeName } : null);
 
   return (
-    <div style={{ minWidth: 180 }}>
+    <div className="min-w-45">
       <Select
         value={current}
         options={options}

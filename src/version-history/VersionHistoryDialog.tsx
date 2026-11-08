@@ -109,7 +109,7 @@ export const VersionHistoryDialog: FunctionComponent<
       footer={<CloseDialogButton label={translate('Close')} />}
       bodyClassName="p-0"
     >
-      <div className="flex flex-col" style={{ height: '70vh' }}>
+      <div className="flex flex-col h-[70vh]">
         {/* Toolbar: wraps onto two rows on a phone. */}
         <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b border-b-secondary">
           <div className="flex items-center gap-1.5 whitespace-nowrap">

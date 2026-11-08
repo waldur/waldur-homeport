@@ -37,9 +37,7 @@ export const ResourceOrderErrorDialog = ({
             valueClass="whitespace-pre"
           >
             {error_traceback ? (
-              <div style={{ height: 300, overflow: 'scroll' }}>
-                {error_traceback}
-              </div>
+              <div className="overflow-scroll h-[300px]">{error_traceback}</div>
             ) : (
               translate('No traceback recorded for this order.')
             )}

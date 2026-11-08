@@ -230,7 +230,7 @@ export const OrganizationResourcesTable: FC<
               {renderFieldOrDash(row.project_name)}
             </Link>
             <div className="flex items-center text-quaternary text-xs mt-1">
-              <span className="truncate" style={{ maxWidth: '150px' }}>
+              <span className="truncate max-w-37.5">
                 {formatUuidNoDashes(row.project_uuid)}
               </span>
               {row.project_uuid && (
@@ -256,7 +256,7 @@ export const OrganizationResourcesTable: FC<
               {renderFieldOrDash(row.name || row.offering_name)}
             </Link>
             <div className="flex items-center text-quaternary text-xs mt-1">
-              <span className="truncate" style={{ maxWidth: '150px' }}>
+              <span className="truncate max-w-37.5">
                 {formatUuidNoDashes(row.uuid)}
               </span>
               {row.uuid && (

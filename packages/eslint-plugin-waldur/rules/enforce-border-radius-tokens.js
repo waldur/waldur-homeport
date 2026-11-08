@@ -26,6 +26,8 @@
  * - `inline`: inline `style={{ borderRadius: ... }}` in JSX elements.
  */
 
+import { inJsxStyle } from '../lib/jsx-style.js';
+
 import { notAClassList } from './class-name-tokens.js';
 
 export const RETIRED_BOOTSTRAP = {
@@ -60,22 +62,6 @@ const split = (token) => {
 };
 
 const escape = (s) => s.replace(/[[\]()|\\.*+?^$-]/g, '\\$&');
-
-const inJsxStyle = (property) => {
-  let node = property.parent;
-  while (
-    node &&
-    [
-      'ObjectExpression',
-      'ConditionalExpression',
-      'LogicalExpression',
-      'JSXExpressionContainer',
-    ].includes(node.type)
-  ) {
-    node = node.parent;
-  }
-  return node?.type === 'JSXAttribute' && node.name.name === 'style';
-};
 
 const isBorderRadiusProperty = (name) => {
   return [

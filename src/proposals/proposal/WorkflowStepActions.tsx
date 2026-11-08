@@ -335,9 +335,7 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
           title={translate("Waiting for the applicant's changes")}
           body={
             <>
-              <p className="mb-1" style={{ whiteSpace: 'pre-wrap' }}>
-                {openRequest.message}
-              </p>
+              <p className="mb-1 whitespace-pre-wrap">{openRequest.message}</p>
               <p className="mb-1">
                 {translate('Unlocked: {parts}.', {
                   parts: openRequest.unlocked_parts

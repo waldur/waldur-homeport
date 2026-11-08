@@ -102,7 +102,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
             name={input.name}
             accept=".png, .jpg, .jpeg"
             onChange={(event) => changeImage(event.target.files[0])}
-            style={{ display: 'none' }}
+            className="hidden"
             data-testid="image-input"
           />
         </div>

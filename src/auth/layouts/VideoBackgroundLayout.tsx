@@ -14,6 +14,7 @@ import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
 import DefaultVideoBackground from '../default-video-background.mp4';
 import { getHeroBackgroundImage } from '../heroImage';
+import { LoginLogo } from '../LoginLogo';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -23,7 +24,6 @@ import './VideoBackgroundLayout.css';
 
 export const VideoBackgroundLayout = () => {
   const features = useAuthFeatures();
-  const imageUrl = getIconUrl('login_logo');
   const videoUrl =
     ENV.plugins.WALDUR_CORE.LOGIN_PAGE_VIDEO_URL || DefaultVideoBackground;
   const [videoFailed, setVideoFailed] = useState(false);
@@ -67,13 +67,7 @@ export const VideoBackgroundLayout = () => {
         </div>
         <div className="layout-video-bg-content">
           <div className="layout-video-bg-card">
-            <div className="login-logo mb-2.5">
-              <img
-                alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-                src={imageUrl}
-                style={{ maxWidth: '100%', maxHeight: '80px' }}
-              />
-            </div>
+            <LoginLogo className="mb-2.5" />
             <AuthHeader />
             {isLoading ? (
               <LoadingSpinner />

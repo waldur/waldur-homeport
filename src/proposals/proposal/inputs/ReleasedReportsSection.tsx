@@ -114,11 +114,7 @@ const ReleasedReportBody: FC<{ report: ReleasedReport }> = ({ report }) => (
             })}
       </span>
     </div>
-    {report.text && (
-      <p className="mb-0" style={{ whiteSpace: 'pre-line' }}>
-        {report.text}
-      </p>
-    )}
+    {report.text && <p className="mb-0 whitespace-pre-line">{report.text}</p>}
     {report.contributions.map((contribution) => (
       <ContributionOutput key={contribution.uuid} contribution={contribution} />
     ))}

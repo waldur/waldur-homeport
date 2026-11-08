@@ -31,10 +31,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
   return (
     <>
       {selectedTable === 'versionAdoption' && (
-        <div
-          className="border border-secondary rounded-lg"
-          style={{ padding: '16px' }}
-        >
+        <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Version adoption')}</h6>
           <Table density="compact">
             <TableHeader>
@@ -69,10 +66,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       )}
 
       {selectedTable === 'consentStatus' && (
-        <div
-          className="border border-secondary rounded-lg"
-          style={{ padding: '16px' }}
-        >
+        <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Consent status breakdown')}</h6>
           <Table density="compact">
             <TableHeader>
@@ -108,10 +102,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       )}
 
       {selectedTable === 'acceptedTrend' && (
-        <div
-          className="border border-secondary rounded-lg"
-          style={{ padding: '16px' }}
-        >
+        <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Accepted consents trend')}</h6>
           <Table density="compact">
             <TableHeader>
@@ -161,10 +152,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       )}
 
       {selectedTable === 'revokedTrend' && (
-        <div
-          className="border border-secondary rounded-lg"
-          style={{ padding: '16px' }}
-        >
+        <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Revoked consents trend')}</h6>
           <Table density="compact">
             <TableHeader>

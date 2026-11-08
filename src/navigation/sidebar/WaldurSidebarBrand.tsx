@@ -140,8 +140,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
       />
       <Menu.Content
         look="actions"
-        style={{ minWidth: '400px' }}
-        className="p-0 overflow-hidden"
+        className="p-0 overflow-hidden min-w-[400px]"
       >
         {shortcuts.map((shortcut: any, index: number) => (
           <Menu.Item
@@ -152,10 +151,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
             <a href={shortcut.link} target="_blank" rel="noopener noreferrer">
               {/* Show separator line only if there are multiple items and not the last item */}
               {shortcuts.length > 1 && index < shortcuts.length - 1 && (
-                <div
-                  className="absolute bottom-0 start-1/2 -translate-x-1/2 border-b border-b-secondary"
-                  style={{ width: 'calc(100% - 24px)' }}
-                />
+                <div className="absolute bottom-0 start-1/2 -translate-x-1/2 border-b border-b-secondary w-[calc(100%-24px)]" />
               )}
               <div className="me-4">
                 <Avatar name={shortcut.name} src={shortcut.image} size={42} />

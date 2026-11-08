@@ -126,7 +126,7 @@ const PrepaidEndDateSelector = ({
       label={translate('Subscription period')}
       value={
         <div>
-          <div style={{ minWidth: 160 }}>
+          <div className="min-w-40">
             <SelectFieldInline
               input={{
                 value: selectedMonths,

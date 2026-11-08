@@ -16,10 +16,7 @@ export const TosRevokedTrendChart: FC<TosRevokedTrendChartProps> = ({
   const chartOptions = formatRevokedTrendChart(data.revoked_consents_over_time);
 
   return (
-    <div
-      className="border border-secondary rounded-lg"
-      style={{ padding: '16px' }}
-    >
+    <div className="border border-secondary rounded-lg p-4">
       <h6 className="mb-2.5">{translate('Revoked consents over time')}</h6>
       <EChart options={chartOptions} height="250px" />
     </div>

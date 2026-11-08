@@ -85,7 +85,7 @@ export const ComponentDiscountEditor: FunctionComponent<
         <BillingTypeBadge component={component} className="ms-1.5" />
       </div>
 
-      <div className="mb-3" style={{ maxWidth: 400 }}>
+      <div className="mb-3 max-w-100">
         <SelectGroup
           name={`${base}.discount_aggregation`}
           label={translate('Discount scope')}

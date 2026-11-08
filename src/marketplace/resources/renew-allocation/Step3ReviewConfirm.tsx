@@ -147,7 +147,7 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
 
       {showPurchaseOrder && (
         <>
-          <div style={{ maxWidth: 300 }}>
+          <div className="max-w-75">
             <StringGroup
               label={translate('Comment')}
               description={translate(

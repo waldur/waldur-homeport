@@ -166,7 +166,11 @@ The app's base styles (in `src/tailwind.css`, moved there from Metronic's `core/
 Tailwind's default rem-based scale assumes a `16px` root. In `src/tailwind.css`, `@theme` overrides standard tokens (`--spacing`, `--text-sm`, `--text-base`, `--radius-md`, `--radius-lg`) with explicit values to compensate.
 
 > [!WARNING]
-> **Inline Styles & Rem Trap**: While Tailwind utilities can be adjusted via `@theme`, **inline styles** like `style={{ width: '18rem' }}` bypass Tailwind entirely. In standard browsers `18rem = 288px`, but in Waldur `18rem = 18 × 13px = 234px` (and `216px` on mobile). **Always use explicit pixel values (`style={{ width: '250px' }}`) for inline sizing.**
+> **The Rem Trap**: a `rem` length follows the root, which Waldur forces to `13px` (`12px` below `md`). In a standard browser `18rem` is `288px`; here it is `18 × 13px = 234px`, and `216px` on a phone. So **never size anything in `rem`** — not in a stylesheet, not in an arbitrary utility (`w-[18rem]`), and not in an inline style.
+>
+> **Size with the spacing scale instead.** `--spacing` is pinned to `4px`, so `w-62.5` is `250px` at any root, and `max-w-130` is `520px`. What is _not_ root-independent is Tailwind's rem-based container scale: `max-w-xl` is `468px` here, not `576px`. Prefer `max-w-130` to `max-w-xl` whenever a specific width is meant.
+>
+> **This is not a reason to reach for an inline style.** An inline `style={{ width: '250px' }}` escapes the rem trap but outranks every stylesheet, so it also opts the element out of dark mode, responsive variants and the token scales — `waldur-custom/no-static-inline-style` reports a static declaration that has a utility. Where a width really is computed at render time, bridge it through a custom property (`style={{ '--w': px }}` with `w-[var(--w)]`), which is the pattern below. See [inline-style-retirement-plan.md](inline-style-retirement-plan.md).
 
 ---
 

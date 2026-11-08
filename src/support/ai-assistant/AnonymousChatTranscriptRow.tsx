@@ -190,7 +190,7 @@ const InteractionTurns: FunctionComponent<{
               'border-l-3 border-l-danger': interaction.is_flagged,
             })}
           >
-            <div style={{ whiteSpace: 'pre-wrap' }}>
+            <div className="whitespace-pre-wrap">
               {interaction.user_input || translate('(no input)')}
             </div>
           </div>

@@ -261,13 +261,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                 <div className="border border-secondary rounded-lg p-2.5 bg-tertiary dark:bg-quaternary mb-3">
                   <div className="font-medium mb-1.5">{resolve.call.name}</div>
                   {resolve.call.description ? (
-                    <div
-                      className="text-quaternary small"
-                      style={{
-                        maxHeight: '100px',
-                        overflow: 'auto',
-                      }}
-                    >
+                    <div className="text-quaternary small overflow-auto max-h-25">
                       {resolve.call.description}
                     </div>
                   ) : (

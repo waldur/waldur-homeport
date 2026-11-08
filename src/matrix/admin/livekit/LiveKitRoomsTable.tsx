@@ -57,7 +57,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
       <Table density="compact" className="align-middle mb-0">
         <TableHeader>
           <TableRow className="font-medium text-quaternary">
-            <TableHead style={{ width: 24 }} />
+            <TableHead className="w-6" />
             <TableHead>{translate('Room')}</TableHead>
             <TableHead>{translate('SID')}</TableHead>
             <TableHead>{translate('Participants')}</TableHead>
@@ -71,7 +71,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
             return (
               <Fragment key={room.sid}>
                 <TableRow
-                  style={{ cursor: 'pointer' }}
+                  className="cursor-pointer"
                   onClick={() => toggle(room.name)}
                 >
                   <TableCell>

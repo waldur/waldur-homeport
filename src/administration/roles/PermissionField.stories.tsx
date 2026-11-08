@@ -7,11 +7,8 @@ const PermissionFieldHarness = ({ initial = [] as string[] }) => {
   const [value, setValue] = useState<string[]>(initial);
   return (
     <div
-      style={{
-        maxWidth: '850px',
-        padding: '24px',
-        background: 'var(--bg-primary, #fff)',
-      }}
+      className="max-w-212.5 p-6"
+      style={{ background: 'var(--bg-primary, #fff)' }}
     >
       <PermissionField input={{ value, onChange: setValue }} />
     </div>

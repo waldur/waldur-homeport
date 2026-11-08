@@ -276,11 +276,8 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
           className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden"
         >
           <div
-            style={{
-              height: `${virtualizer.getTotalSize()}px`,
-              width: '100%',
-              position: 'relative',
-            }}
+            className="relative w-full"
+            style={{ height: `${virtualizer.getTotalSize()}px` }}
           >
             {virtualItems.map((virtualItem) => {
               const item = items[virtualItem.index];
@@ -289,13 +286,8 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
                   key={virtualItem.key}
                   data-index={virtualItem.index}
                   ref={virtualizer.measureElement}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    transform: `translateY(${virtualItem.start}px)`,
-                  }}
+                  className="absolute w-full top-0 start-0"
+                  style={{ transform: `translateY(${virtualItem.start}px)` }}
                 >
                   {item ? (
                     <OfferingListItem

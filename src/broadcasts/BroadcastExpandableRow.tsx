@@ -16,7 +16,7 @@ export const BroadcastExpandableRow: FunctionComponent<{
 }> = ({ row }) => (
   <ExpandableContainer>
     <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-5">
-      <div className="sm:col-span-8" style={{ whiteSpace: 'pre-line' }}>
+      <div className="sm:col-span-8 whitespace-pre-line">
         <p>{row.body}</p>
         <p>{ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT}</p>
       </div>

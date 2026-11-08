@@ -845,10 +845,11 @@ import { formatLongText } from '@/table/utils';
 // CSS truncation class
 <span className="ellipsis">{text}</span>
 
-// With custom width
-<span className="ellipsis d-inline-block" style={{ maxWidth: 200 }}>
-  {text}
-</span>
+// With custom width. The width is a utility, not an inline style: `max-w-50`
+// is 200px on the px-pinned spacing scale, and an inline max-width would
+// outrank every stylesheet and every responsive variant
+// (`waldur-custom/no-static-inline-style`).
+<span className="ellipsis inline-block max-w-50">{text}</span>
 ```
 
 ### 9.2 Internationalization

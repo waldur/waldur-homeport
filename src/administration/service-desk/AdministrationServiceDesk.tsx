@@ -132,12 +132,7 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
       <CardContent className="pe-4 flex">
         <div className="flex grow">
           <div className="flex flex-row justify-between grow">
-            <div
-              style={{
-                width: 50,
-                marginRight: 17,
-              }}
-            >
+            <div className="w-12.5 me-[17px]">
               <ServiceDeskProviderLogo name={serviceDeskProvider} />
             </div>
             <div className="grow flex flex-col">

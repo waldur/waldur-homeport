@@ -65,10 +65,12 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
               ProgressSteps: no button, no hover. */}
           <Step
             {...(isClickable && { type: 'button' as const })}
-            className="group flex w-full items-start gap-[1rem] border-0 bg-transparent px-0 py-[1rem] text-left transition-all duration-300 focus:outline-2 focus:outline-offset-2 focus:outline-brand focus:outline-solid disabled:cursor-not-allowed disabled:opacity-60"
+            className={classNames(
+              'group flex w-full items-start gap-[1rem] border-0 bg-transparent px-0 py-[1rem] text-left transition-all duration-300 focus:outline-2 focus:outline-offset-2 focus:outline-brand focus:outline-solid disabled:cursor-not-allowed disabled:opacity-60',
+              isClickable && 'cursor-pointer',
+            )}
             onClick={isClickable ? () => onClick(step, index) : undefined}
             aria-current={isCurrent ? 'step' : undefined}
-            style={isClickable ? { cursor: 'pointer' } : undefined}
           >
             <div
               data-testid="step-marker"

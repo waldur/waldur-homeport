@@ -38,6 +38,7 @@ import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noRemLength from './rules/no-rem-length.js';
 import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
+import noStaticInlineStyle from './rules/no-static-inline-style.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
@@ -59,6 +60,7 @@ export default {
     'enforce-badge-props-consistency': enforceBadgePropsConsistency,
     'no-literal-color': noLiteralColor,
     'no-rem-length': noRemLength,
+    'no-static-inline-style': noStaticInlineStyle,
     'no-lone-property-item-in-list': noLonePropertyItemInList,
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getIdentityProviders } from '@/administration/api';
-import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -14,6 +13,7 @@ import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
 import { HeroButton } from '../HeroButton';
 import { getHeroBackgroundImage } from '../heroImage';
+import { LoginLogo } from '../LoginLogo';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -23,7 +23,6 @@ import './DuotoneLayout.css';
 
 export const DuotoneLayout = () => {
   const features = useAuthFeatures();
-  const imageUrl = getIconUrl('login_logo');
   const brandColor = getBrandColor();
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -39,13 +38,7 @@ export const DuotoneLayout = () => {
           <AuthHeaderControls />
         </div>
         <div className="layout-duotone-form">
-          <div className="login-logo mb-2.5">
-            <img
-              alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-              src={imageUrl}
-              style={{ maxWidth: '100%', maxHeight: '80px' }}
-            />
-          </div>
+          <LoginLogo className="mb-2.5" />
           <AuthHeader />
           {isLoading ? (
             <LoadingSpinner />

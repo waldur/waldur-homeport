@@ -84,7 +84,7 @@ export const OfferingComponentUsageList = () => {
         const usage =
           row.usage_percent !== undefined ? Number(row.usage_percent) : 0;
         return (
-          <div className="flex flex-col gap-1" style={{ minWidth: 150 }}>
+          <div className="flex flex-col gap-1 min-w-37.5">
             <div className="flex justify-between text-xs text-quaternary">
               <span>
                 {formatUsageValue(row.total_consumed, true)} /{' '}

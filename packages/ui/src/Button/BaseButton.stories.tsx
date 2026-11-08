@@ -524,7 +524,7 @@ export const RealisticUsage: Story = {
     },
   },
   render: () => (
-    <div className="p-10" style={{ maxWidth: 640 }}>
+    <div className="p-10 max-w-160">
       <UsageSection>
         <SectionHeader
           title="Dialog footer"

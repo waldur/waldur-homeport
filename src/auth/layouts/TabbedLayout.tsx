@@ -2,8 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { getIdentityProviders } from '@/administration/api';
-import { getIconUrl } from '@/core/api';
-import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -13,6 +11,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
 import { IdentityProviderSelector } from '../IdentityProviderSelector';
+import { LoginLogo } from '../LoginLogo';
 import { PoweredBy } from '../PoweredBy';
 import { SigninForm } from '../SigninForm';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -24,7 +23,6 @@ type TabType = 'sso' | 'local';
 
 export const TabbedLayout = () => {
   const features = useAuthFeatures();
-  const imageUrl = getIconUrl('login_logo');
   const [activeTab, setActiveTab] = useState<TabType>('sso');
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -43,13 +41,7 @@ export const TabbedLayout = () => {
       </div>
       <div className="layout-tabbed-content">
         <div className="layout-tabbed-card">
-          <div className="login-logo mb-2.5">
-            <img
-              alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-              src={imageUrl}
-              style={{ maxWidth: '100%', maxHeight: '80px' }}
-            />
-          </div>
+          <LoginLogo className="mb-2.5" />
           <AuthHeader />
 
           {hasSso && hasLocal && (

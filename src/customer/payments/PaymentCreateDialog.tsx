@@ -60,7 +60,7 @@ export const PaymentCreateDialog: FunctionComponent<
               </>
             }
           >
-            <div style={{ paddingBottom: '50px' }}>
+            <div className="pb-12.5">
               <DateGroup
                 name="date_of_payment"
                 label={translate('Date')}

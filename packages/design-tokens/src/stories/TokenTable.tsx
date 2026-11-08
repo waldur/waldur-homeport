@@ -260,10 +260,7 @@ export function TokenTable({
       {tokens.map((token) => (
         <Fragment key={token.name}>
           {token.section && (
-            <div
-              className="pb-1 pt-3 text-xs font-semibold text-secondary"
-              style={{ gridColumn: '1 / -1' }}
-            >
+            <div className="pb-1 pt-3 text-xs font-semibold text-secondary col-span-full">
               {token.section}
             </div>
           )}

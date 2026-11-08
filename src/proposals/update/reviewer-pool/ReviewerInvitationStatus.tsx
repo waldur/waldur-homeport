@@ -36,7 +36,7 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
   row,
 }) => {
   return (
-    <div className="flex items-center gap-1.5" style={{ minWidth: 220 }}>
+    <div className="flex items-center gap-1.5 min-w-55">
       <InvitationStatusBadge
         status={row.invitation_status}
         statusDisplay={getPoolStatusLabel(row)}

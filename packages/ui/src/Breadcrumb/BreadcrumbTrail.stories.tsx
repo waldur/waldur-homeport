@@ -433,7 +433,7 @@ export const WithProvider: Story = {
     const [page, setPage] = useState('project');
     return (
       <BreadcrumbsProvider renderLink={routerLink}>
-        <div className="flex flex-col gap-2.5 p-3" style={{ width: 720 }}>
+        <div className="flex flex-col gap-2.5 p-3 w-180">
           <div className="flex">
             <BreadcrumbTrail />
           </div>

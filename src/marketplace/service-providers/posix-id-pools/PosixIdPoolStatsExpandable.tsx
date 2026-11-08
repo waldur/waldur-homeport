@@ -76,7 +76,7 @@ export const PosixIdPoolStatsExpandable: FunctionComponent<{
   }
 
   return (
-    <div className="px-3 py-1.5" style={{ maxWidth: 480 }}>
+    <div className="px-3 py-1.5 max-w-120">
       <NamespaceStats
         label={translate('UID')}
         stats={data.uid}

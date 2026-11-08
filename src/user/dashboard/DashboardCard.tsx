@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
 import { Card, CardContent } from 'waldur-ui';
@@ -26,14 +27,11 @@ export const DashboardCard: FC<DashboardCardProps> = ({
   return (
     <Card
       bordered
-      className={`${
-        isClickable ? 'hover:border-brand cursor-pointer' : 'opacity-50'
-      }`}
+      className={classNames('min-h-30', {
+        'hover:border-brand cursor-pointer': isClickable,
+        'opacity-50 cursor-default': !isClickable,
+      })}
       onClick={isClickable ? onClick : undefined}
-      style={{
-        cursor: isClickable ? 'pointer' : 'default',
-        minHeight: '120px',
-      }}
     >
       <CardContent className="flex items-center">
         <div

@@ -369,7 +369,7 @@ export const AutoOpen: Story = {
 /** The trigger's looks: default, `size="sm"` (with time) and `solid`. */
 export const Variants: Story = {
   render: () => (
-    <div className="flex flex-col gap-[12px]" style={{ width: 320 }}>
+    <div className="flex flex-col gap-[12px] w-80">
       <DatePicker value={june15} onChange={() => undefined} />
       <DatePicker
         value={june15at0830}

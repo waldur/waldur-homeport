@@ -16,15 +16,9 @@ export const ImageDetailsDialog: FunctionComponent<ImageDetailsDialogProps> = (
     title={translate('Viewing image')}
     footer={<CloseDialogButton label={translate('Close')} />}
   >
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
+    <div className="flex flex-col justify-center">
       <img src={props.resolve.image} alt={translate('Image here')} />
-      <span style={{ marginTop: '10px' }}>{props.resolve.description}</span>
+      <span className="mt-2.5">{props.resolve.description}</span>
     </div>
   </ModalDialog>
 );

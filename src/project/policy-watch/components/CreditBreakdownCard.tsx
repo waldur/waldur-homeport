@@ -90,10 +90,7 @@ export const CreditBreakdownCard: FC<Props> = ({
       {/* Three segments rather than one progress value: "Lost" is the only
           figure that tells a project it is forfeiting credit, and a single
           consumed bar hides it inside the same band as real usage. */}
-      <div
-        className="flex rounded-lg overflow-hidden mb-2.5"
-        style={{ height: 16 }}
-      >
+      <div className="flex rounded-lg overflow-hidden mb-2.5 h-4">
         {segments.map((s) =>
           s.value > 0 ? (
             <div

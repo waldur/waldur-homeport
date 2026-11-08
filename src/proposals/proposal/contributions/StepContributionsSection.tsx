@@ -252,7 +252,7 @@ const ContributionGuidance: FC<{
       data-testid="contribution-guidance"
     >
       <div className="font-semibold">{translate('What is asked of you')}</div>
-      <p className="mb-0 text-secondary" style={{ whiteSpace: 'pre-line' }}>
+      <p className="mb-0 text-secondary whitespace-pre-line">
         {step.step_description ||
           (contribution.is_per_offering && contribution.offering_name
             ? translate(
@@ -455,7 +455,7 @@ const ContributionCard: FC<ContributionCardProps> = ({
           variant="warning"
           title={translate('Reopened for changes')}
           body={
-            <span style={{ whiteSpace: 'pre-line' }}>{reopening.message}</span>
+            <span className="whitespace-pre-line">{reopening.message}</span>
           }
           data-testid="contribution-reopened"
         />
@@ -464,13 +464,11 @@ const ContributionCard: FC<ContributionCardProps> = ({
       {contribution.conditions && (
         <div>
           <div className="font-semibold">{translate('Conditions')}</div>
-          <p className="mb-0" style={{ whiteSpace: 'pre-line' }}>
-            {contribution.conditions}
-          </p>
+          <p className="mb-0 whitespace-pre-line">{contribution.conditions}</p>
         </div>
       )}
       {contribution.comment && (
-        <p className="mb-0 text-secondary" style={{ whiteSpace: 'pre-line' }}>
+        <p className="mb-0 text-secondary whitespace-pre-line">
           {contribution.comment}
         </p>
       )}
@@ -480,7 +478,7 @@ const ContributionCard: FC<ContributionCardProps> = ({
           {shownAnswers.map((answer) => (
             <div key={answer.question_uuid} className="mb-1.5">
               <dt className="font-semibold">{answer.question_description}</dt>
-              <dd className="mb-0" style={{ whiteSpace: 'pre-line' }}>
+              <dd className="mb-0 whitespace-pre-line">
                 {answer.answer_display}
               </dd>
             </div>
@@ -648,8 +646,7 @@ const StepContributions: FC<{
         {/* Whoever fills a card reads the step's description in it. */}
         {step.step_description && !anyFillable && (
           <p
-            className="mb-0 text-secondary"
-            style={{ whiteSpace: 'pre-line' }}
+            className="mb-0 text-secondary whitespace-pre-line"
             data-testid="step-description"
           >
             {step.step_description}

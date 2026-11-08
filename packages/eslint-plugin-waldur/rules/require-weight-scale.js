@@ -23,6 +23,8 @@
  * have a fontWeight key are not styles and are not reported.
  */
 
+import { inJsxStyle } from '../lib/jsx-style.js';
+
 import { notAClassList } from './class-name-tokens.js';
 
 /** Bootstrap's former weight classes, to the Tailwind class of the same weight. */
@@ -54,21 +56,6 @@ const split = (token) => {
 const escape = (s) => s.replace(/[[\]()|\\.*+?^$-]/g, '\\$&');
 
 /** Is this `fontWeight` property part of a JSX `style` value? */
-const inJsxStyle = (property) => {
-  let node = property.parent;
-  while (
-    node &&
-    [
-      'ObjectExpression',
-      'ConditionalExpression',
-      'LogicalExpression',
-      'JSXExpressionContainer',
-    ].includes(node.type)
-  ) {
-    node = node.parent;
-  }
-  return node?.type === 'JSXAttribute' && node.name.name === 'style';
-};
 
 export default {
   meta: {

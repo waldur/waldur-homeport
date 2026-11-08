@@ -20,10 +20,7 @@ export const CoiDeclaration: FC<CoiDeclarationProps> = ({ text, fallback }) =>
       <div className="text-quaternary text-xs mb-1">
         {translate('By confirming you declare:')}
       </div>
-      <blockquote
-        className="border-l border-l-secondary border-3 ps-2.5 mb-0"
-        style={{ whiteSpace: 'pre-wrap' }}
-      >
+      <blockquote className="border-l border-l-secondary border-3 ps-2.5 mb-0 whitespace-pre-wrap">
         {text}
       </blockquote>
     </div>

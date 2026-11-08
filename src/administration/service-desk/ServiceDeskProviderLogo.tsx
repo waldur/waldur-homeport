@@ -13,5 +13,5 @@ const LogoMap = {
 
 export const ServiceDeskProviderLogo = ({ name }) => {
   const Logo = LogoMap[name] || LogoMap.waldur;
-  return <Logo style={{ width: '100%' }} />;
+  return <Logo className="w-full" />;
 };

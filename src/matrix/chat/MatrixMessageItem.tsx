@@ -276,7 +276,7 @@ const MediaContent: FC<{
       return (
         <div>
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <audio controls style={{ maxWidth: '100%' }}>
+          <audio controls className="max-w-full">
             <source src={httpUrl} type={message.info?.mimetype} />
           </audio>
           <div className="text-quaternary text-xs">{message.body}</div>

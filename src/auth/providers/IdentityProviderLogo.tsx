@@ -46,5 +46,6 @@ const LogoMap = {
 
 export const IdentityProviderLogo = ({ name, maxHeight = undefined }) => {
   const Logo = LogoMap[name] || LogoMap.waldur;
-  return <Logo style={{ width: '100%', maxHeight }} />;
+  // maxHeight is the caller's, so it stays a style; the width is a class.
+  return <Logo className="w-full" style={{ maxHeight }} />;
 };

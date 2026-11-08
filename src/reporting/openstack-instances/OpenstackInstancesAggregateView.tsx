@@ -47,7 +47,7 @@ const OpenstackInstancesAggregateViewTable: FC<any> = () => {
 
   return (
     <div>
-      <FormField className="mb-5" style={{ maxWidth: 300 }}>
+      <FormField className="mb-5 max-w-75">
         <FormLabel>{translate('Group by')}</FormLabel>
         <Select
           value={selectedOption}

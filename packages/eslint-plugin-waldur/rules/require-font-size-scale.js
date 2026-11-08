@@ -27,6 +27,8 @@
  * every stylesheet and skips the scale.
  */
 
+import { inJsxStyle } from '../lib/jsx-style.js';
+
 import { notAClassList } from './class-name-tokens.js';
 
 const BP_MAP = {
@@ -90,23 +92,6 @@ const split = (token) => {
 };
 
 const escape = (s) => s.replace(/[[\]()|\\.*+?^$-]/g, '\\$&');
-
-/** Is this property part of a JSX `style` value? */
-const inJsxStyle = (property) => {
-  let node = property.parent;
-  while (
-    node &&
-    [
-      'ObjectExpression',
-      'ConditionalExpression',
-      'LogicalExpression',
-      'JSXExpressionContainer',
-    ].includes(node.type)
-  ) {
-    node = node.parent;
-  }
-  return node?.type === 'JSXAttribute' && node.name.name === 'style';
-};
 
 export const getFontSizeReplacement = (name) => {
   if (RETIRED_FONT_SIZES[name]) return RETIRED_FONT_SIZES[name];

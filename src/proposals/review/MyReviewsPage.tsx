@@ -67,7 +67,7 @@ export const MyReviewsPage: FC = () => {
   }
 
   return (
-    <div className="flex flex-col" style={{ gap: 16 }}>
+    <div className="flex flex-col gap-4">
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard onProfileStatus={handleProfileStatus} />
       {/* The table carries the tabs, so it renders without a profile too:

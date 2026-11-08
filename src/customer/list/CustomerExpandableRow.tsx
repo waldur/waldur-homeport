@@ -39,13 +39,7 @@ export const CustomerExpandableRow = memo((props: any) => {
   } else {
     return (
       <>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '5px',
-          }}
-        >
+        <div className="flex justify-center mt-[5px]">
           <AgreementInfo paymentProfiles={props.row.payment_profiles} />
         </div>
         {value ? (

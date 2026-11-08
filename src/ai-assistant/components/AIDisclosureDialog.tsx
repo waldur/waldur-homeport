@@ -85,10 +85,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
         </p>
       </div>
 
-      <div
-        className="flex flex-col gap-2.5 w-full mb-6"
-        style={{ maxWidth: 520 }}
-      >
+      <div className="flex flex-col gap-2.5 w-full mb-6 max-w-130">
         <AccordionSection
           icon={<ShieldWarningIcon size={18} weight="duotone" />}
           title={translate('Experimental AI & external processing')}
@@ -149,7 +146,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
         </AccordionSection>
       </div>
 
-      <div className="w-full" style={{ maxWidth: 520 }}>
+      <div className="w-full max-w-130">
         <BaseButton
           variant="primary"
           className="w-full py-2.5 font-medium text-sm"

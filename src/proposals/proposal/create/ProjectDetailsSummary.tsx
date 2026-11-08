@@ -142,7 +142,7 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
           )}
           tooltip={translate('Main research field of the project.')}
           actions={
-            <div style={{ width: 42.5 }}>
+            <div className="w-[42.5px]">
               {/* Dummy spacing to align with other fields. */}
             </div>
           }
@@ -172,7 +172,7 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
                 }
               />
             ) : (
-              <div style={{ width: 42.5 }}>
+              <div className="w-[42.5px]">
                 {/* Dummy spacing to align with other fields. */}
               </div>
             )

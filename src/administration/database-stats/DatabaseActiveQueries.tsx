@@ -80,7 +80,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
         render: ({ row }: { row: ActiveQuery }) => (
           <div className="flex items-center gap-1.5">
             <Tooltip label={row.query_preview}>
-              <Code style={{ maxWidth: '300px' }} className="text-xs truncate">
+              <Code className="text-xs truncate max-w-75">
                 {row.query_preview.length > 50
                   ? `${row.query_preview.substring(0, 50)}...`
                   : row.query_preview}

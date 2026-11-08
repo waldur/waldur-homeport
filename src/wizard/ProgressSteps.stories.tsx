@@ -18,7 +18,7 @@ const meta: Meta<typeof ProgressSteps> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-5 bg-primary" style={{ minWidth: 600 }}>
+      <div className="p-5 bg-primary min-w-150">
         <Story />
       </div>
     ),

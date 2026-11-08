@@ -247,10 +247,7 @@ const OpenFromOutside = () => {
   const ref = useRef<DateRangePickerHandle>(null);
   const [value, setValue] = useState<DateRangeValue | undefined>();
   return (
-    <div
-      className="flex flex-col items-start gap-[12px]"
-      style={{ width: 400 }}
-    >
+    <div className="flex flex-col items-start gap-[12px] w-[400px]">
       <DateRangePicker
         ref={ref}
         value={value}

@@ -56,7 +56,7 @@ const Panel = ({
     <Provider store={store}>
       <ModalProvider>
         <ModalRoot />
-        <div style={{ maxWidth: 560 }}>
+        <div className="max-w-140">
           <EditFieldProvider
             scope={scope}
             readOnlyReason={readOnlyReason}

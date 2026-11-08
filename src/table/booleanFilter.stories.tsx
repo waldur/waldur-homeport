@@ -52,7 +52,7 @@ const Harness = ({ children }: { children: React.ReactNode }) => {
         applyFiltersFn={noop}
         selectedSavedFilter={null}
       >
-        <div style={{ maxWidth: 320 }}>
+        <div className="max-w-80">
           <Accordion type="multiple" defaultValue={['active', 'conceal']}>
             {children}
           </Accordion>

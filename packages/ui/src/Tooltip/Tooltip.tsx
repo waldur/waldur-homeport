@@ -108,8 +108,7 @@ const bubbleArrow = (theme: 'light' | 'dark') => (
     preserveAspectRatio="none"
     width={10}
     height={5}
-    style={{ overflow: 'visible', display: 'block' }}
-    className={arrowClassName(theme)}
+    className={cn('block overflow-visible', arrowClassName(theme))}
   >
     <polygon points="0,-1 30,-1 15,10" />
   </svg>

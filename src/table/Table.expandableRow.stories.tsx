@@ -143,7 +143,7 @@ export const ExpandableRowMultipleExpanded: Story = {
 export const ExpandableRowNarrow: Story = {
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: 500 }}>
+      <div className="max-w-125">
         <Story />
       </div>
     ),

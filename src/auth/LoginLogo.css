@@ -1,0 +1,66 @@
+/* The deployment's logo on the login page, for every layout in ./layouts.
+ *
+ * These rules used to live in LoginColumn.scss, which only LoginColumn.tsx
+ * imports, while the twenty-one alternative layouts wrote
+ * `className="login-logo"` and borrowed them — so whether they applied
+ * depended on LoginColumn happening to be in the same chunk. LoginLogo.tsx
+ * imports this file, so every layout that renders the component gets them.
+ *
+ * Specificity is the whole trick here. Each size sets the image's max-height
+ * through `[data-size='…']` (0,2,0), so the short-viewport steps have to match
+ * that weight — hence `[data-size]` on them rather than a bare class — and
+ * then win on source order. Written the obvious way, a size would outrank the
+ * steps and `height <= 600px` would do nothing, which is exactly what the
+ * inline `max-height` these layouts used to carry did to it.
+ */
+
+/* The cap applies at every width, not only from 768px up. The twenty-one
+ * alternative layouts already capped the logo inline at all widths, so this
+ * matches them; LoginColumn alone was uncapped below 768px, where a tall
+ * deployment logo could run away. Scoping the base cap to the desktop query
+ * would drop the cap on a phone for the other twenty-one, which is the
+ * regression, not the fix. */
+.login-logo-image {
+  max-width: 100%;
+  max-height: 80px;
+}
+
+/* The caps the layouts set inline, kept per layout rather than flattened. */
+.login-logo-image[data-size='sm'] {
+  max-height: 70px;
+}
+
+.login-logo-image[data-size='lg'] {
+  max-height: 100px;
+}
+
+/* Desktop: comfortable logo space. */
+@media (width >= 768px) {
+  .login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+  }
+}
+
+/* Short viewport: compact, every size alike. */
+@media (height <= 600px) {
+  .login-logo {
+    min-height: 60px;
+  }
+
+  .login-logo-image[data-size] {
+    max-height: 50px;
+  }
+}
+
+@media (height <= 450px) {
+  .login-logo {
+    min-height: 40px;
+  }
+
+  .login-logo-image[data-size] {
+    max-height: 35px;
+  }
+}

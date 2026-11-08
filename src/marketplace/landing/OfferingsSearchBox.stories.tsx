@@ -80,7 +80,7 @@ const withHarness = (Story: () => React.ReactElement) => {
   return (
     <QueryClientProvider client={queryClient}>
       <StoryRouter>
-        <div className="p-10" style={{ minHeight: 520 }}>
+        <div className="p-10 min-h-130">
           <Story />
           <CurrentPage />
         </div>

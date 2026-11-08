@@ -45,10 +45,9 @@ export const ModelCard1: FC<ModelCard1Props> = ({
             alt="model-card"
             src={props.image}
             height={85}
-            style={
-              props.imageCover ? { objectFit: 'cover' } : { padding: '10px' }
+            className={
+              props.imageCover ? 'w-full h-full object-cover' : 'm-auto p-2.5'
             }
-            className={props.imageCover ? 'w-full h-full' : 'm-auto'}
           />
         ) : (
           props.placeholder

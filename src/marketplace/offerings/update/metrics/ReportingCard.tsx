@@ -57,11 +57,7 @@ const Item: FC<{ label: string; description: string; value: string }> = ({
   <PropertyItem
     label={label}
     description={description}
-    value={
-      <pre className="text-xs mb-0" style={{ whiteSpace: 'pre-wrap' }}>
-        {value}
-      </pre>
-    }
+    value={<pre className="text-xs mb-0 whitespace-pre-wrap">{value}</pre>}
     copyValue={value}
   />
 );

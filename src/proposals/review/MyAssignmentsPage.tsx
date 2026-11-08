@@ -189,7 +189,7 @@ export const MyAssignmentsPage: FC = () => {
   });
 
   return (
-    <div className="flex flex-col" style={{ gap: 16 }}>
+    <div className="flex flex-col gap-4">
       <ReviewerProfileSummaryCard />
       <ReviewStatsWidgets />
 

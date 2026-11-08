@@ -274,14 +274,13 @@ const Box: FC<{
     Record<string, string> | undefined;
   return (
     <g
-      className={onOpenStep ? 'wd-box-focus' : undefined}
+      className={onOpenStep ? 'wd-box-focus cursor-pointer' : undefined}
       data-testid={`diagram-box-${step.key}`}
       role={onOpenStep ? 'button' : undefined}
       tabIndex={onOpenStep ? 0 : undefined}
       aria-label={onOpenStep ? label : undefined}
       onClick={onOpenStep ? open('basics') : undefined}
       onKeyDown={onOpenStep ? keyOpen : undefined}
-      style={onOpenStep ? { cursor: 'pointer' } : undefined}
     >
       <title>
         {[

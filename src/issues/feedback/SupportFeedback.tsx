@@ -74,7 +74,7 @@ export const SupportFeedback = () => {
             />
 
             <FormField>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <div className="flex justify-end">
                 <SubmitButton
                   disabled={invalid}
                   submitting={isPending}

@@ -140,8 +140,7 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
                   key={claim}
                   variant={availableSet.has(claim) ? 'success' : 'neutral'}
                   tone="outline"
-                  className="ms-1"
-                  style={{ cursor: 'pointer' }}
+                  className="ms-1 cursor-pointer"
                   onClick={() =>
                     handleSelectChange(
                       availableSet.has(claim) ? claim : CUSTOM_CLAIM,

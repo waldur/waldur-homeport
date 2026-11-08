@@ -52,7 +52,7 @@ const Controls = ({ prefix }: { prefix: string }) => {
 };
 
 const Page = () => (
-  <div style={{ maxWidth: 360 }}>
+  <div className="max-w-90">
     <div className="disabled-view">
       <Controls prefix="Unavailable" />
     </div>

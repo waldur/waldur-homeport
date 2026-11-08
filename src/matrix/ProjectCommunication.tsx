@@ -33,10 +33,7 @@ export const ProjectCommunication: FC = () => {
 
   if (activeRoom && isMember) {
     return (
-      <Card
-        className="overflow-hidden mt-5"
-        style={{ height: 'calc(100vh - 320px)', minHeight: 480 }}
-      >
+      <Card className="overflow-hidden mt-5 h-[calc(100vh-320px)] min-h-120">
         <MatrixChatPanel
           forceDock
           hideRoomList

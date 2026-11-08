@@ -4,8 +4,6 @@ import { Tooltip } from 'waldur-ui';
 
 export const TitleColumn: FunctionComponent<{ row }> = ({ row }) => (
   <Tooltip label={row.summary}>
-    <span style={{ width: 150 }} className="ellipsis">
-      {row.summary}
-    </span>
+    <span className="ellipsis w-37.5">{row.summary}</span>
   </Tooltip>
 );

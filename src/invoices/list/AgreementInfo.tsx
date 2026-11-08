@@ -46,7 +46,7 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
   return (
     <>
       {activeFixedPricePaymentProfile ? (
-        <div style={{ marginBottom: '20px' }}>
+        <div className="mb-5">
           {activeFixedPricePaymentProfile.attributes.agreement_number ? (
             <>
               {translate('Organization has signed a fixed price agreement')}{' '}

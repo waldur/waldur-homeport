@@ -162,11 +162,10 @@ export const MailView: FC<{
             content: (
               <Card>
                 <pre
-                  className="mb-0 overflow-auto text-sm"
+                  className="mb-0 overflow-auto text-sm whitespace-pre-wrap"
                   // The HTML frame's size and inset, so switching between
                   // the two does not move or resize anything.
                   style={{
-                    whiteSpace: 'pre-wrap',
                     height: PREVIEW_HEIGHT,
                     padding: PREVIEW_PADDING,
                     // The HTML frame's type too (see useFramedHtml).

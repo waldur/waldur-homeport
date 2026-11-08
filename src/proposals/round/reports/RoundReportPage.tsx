@@ -131,9 +131,7 @@ export const RoundReportPage: FC = () => {
         }
       >
         {data.body ? (
-          <p className="mb-5 wrap-anywhere" style={{ whiteSpace: 'pre-wrap' }}>
-            {data.body}
-          </p>
+          <p className="mb-5 wrap-anywhere whitespace-pre-wrap">{data.body}</p>
         ) : null}
         <div className="font-medium text-quaternary mb-1.5">
           {translate('Proposals covered')}

@@ -169,12 +169,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
   }
   return (
     <div className="flex justify-end mt-3">
-      <div
-        className="border-t border-t-secondary pt-2.5"
-        style={{ minWidth: 320 }}
-      >
-        {body}
-      </div>
+      <div className="border-t border-t-secondary pt-2.5 min-w-80">{body}</div>
     </div>
   );
 };

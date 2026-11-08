@@ -104,8 +104,7 @@ export const QuestionGeneralForm = ({
             <div
               role="button"
               tabIndex={0}
-              className="flex justify-between items-center"
-              style={{ cursor: 'pointer' }}
+              className="flex justify-between items-center cursor-pointer"
               onClick={() => setPreviewOpen((v) => !v)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {

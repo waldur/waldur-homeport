@@ -322,31 +322,21 @@ export const FeaturesList = () => {
                 >
                   <div
                     ref={scrollRef}
-                    className="grow"
-                    style={{
-                      overflowX: 'auto',
-                      scrollbarWidth: 'none',
-                      minWidth: 0,
-                      paddingBottom: 2,
-                      marginBottom: -2,
-                    }}
+                    className="grow overflow-x-auto min-w-0 pb-0.5 -mb-0.5"
+                    style={{ scrollbarWidth: 'none' }}
                   >
-                    <TabsList
-                      bordered={false}
-                      style={{ minWidth: 'max-content' }}
-                    >
+                    <TabsList bordered={false} className="min-w-max">
                       {FEATURES_TABS.map((tab) => {
                         const filteredCount = getFilteredCount(tab.key);
                         const hasMatches = filteredCount > 0;
                         return (
                           <TabsTrigger
                             key={tab.key}
-                            style={{ whiteSpace: 'nowrap' }}
                             value={tab.key}
                             disabled={!hasMatches && !!query}
-                            className={
-                              !hasMatches && query ? 'text-quaternary' : ''
-                            }
+                            className={classNames('whitespace-nowrap', {
+                              'text-quaternary': !hasMatches && query,
+                            })}
                           >
                             {tab.title}
                             {query && (
@@ -371,8 +361,7 @@ export const FeaturesList = () => {
                         <BaseButton
                           variant="text-secondary"
                           size="md"
-                          className="shrink-0"
-                          style={{ marginBottom: 2 }}
+                          className="shrink-0 mb-0.5"
                           tooltip={translate('More tabs')}
                           iconNode={
                             <DotsThreeVerticalIcon size={22} weight="bold" />

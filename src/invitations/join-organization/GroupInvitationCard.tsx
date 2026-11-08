@@ -69,8 +69,7 @@ export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
                 <img
                   src={invitation.scope_image}
                   alt="invitation logo"
-                  className="rounded-lg"
-                  style={{ width: '24px', height: '24px' }}
+                  className="rounded-lg w-6 h-6"
                 />
               ) : undefined,
             },

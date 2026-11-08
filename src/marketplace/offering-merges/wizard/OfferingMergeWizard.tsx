@@ -467,7 +467,7 @@ export const OfferingMergeWizard: FC = () => {
       </CardHeader>
       <CardContent>
         <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-5.5">
-          <div className="shrink-0" style={{ width: '280px' }}>
+          <div className="shrink-0 w-70">
             <VerticalProgressSteps
               steps={steps}
               onClick={(_item, index) => goToStep(index)}

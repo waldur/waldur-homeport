@@ -36,7 +36,7 @@ const Harness = ({
 }) => {
   const [query, setQuery] = useState(initial);
   return (
-    <div style={{ width: '100%', maxWidth: 640 }}>
+    <div className="w-full max-w-160">
       <SearchInput
         query={query}
         setQuery={setQuery}

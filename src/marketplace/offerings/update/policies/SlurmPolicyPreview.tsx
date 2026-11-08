@@ -85,15 +85,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
               usage: currentUsage?.toLocaleString(),
             })}
           >
-            <div
-              className="absolute font-bold text-xs"
-              style={{
-                top: '-20px',
-                left: '-30px',
-                width: '60px',
-                textAlign: 'center',
-              }}
-            >
+            <div className="absolute font-bold text-xs text-center w-15 -top-5 -start-7.5">
               {translate('Current')}
             </div>
           </div>

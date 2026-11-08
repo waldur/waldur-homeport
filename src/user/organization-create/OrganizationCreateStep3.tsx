@@ -123,10 +123,7 @@ export const OrganizationCreateStep3: FunctionComponent<
                   </>
                 )}
                 {validationResult.error_traceback && (
-                  <pre
-                    className="mb-0"
-                    style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
-                  >
+                  <pre className="mb-0 whitespace-pre-wrap break-words">
                     {validationResult.error_traceback}
                   </pre>
                 )}
