@@ -228,10 +228,7 @@ const ProjectAutocompleteDialog: FC<{
           })}
         </span>
       </div>
-      <div
-        style={{ maxHeight: 320, overflowY: 'auto' }}
-        className="border border-secondary rounded-lg p-1.5"
-      >
+      <div className="border border-secondary rounded-lg p-1.5 overflow-y-auto max-h-80">
         {visible.length === 0 && (
           <p className="text-quaternary small mb-0 p-1.5">
             {translate('No projects match the filters.')}
@@ -245,7 +242,7 @@ const ProjectAutocompleteDialog: FC<{
               onChange={() => toggle(p.uuid)}
               className="mt-1"
               label={
-                <span className="grow" style={{ cursor: 'pointer' }}>
+                <span className="grow cursor-pointer">
                   <span>{p.name}</span>
                   {(p.start_date || p.end_date) && (
                     <span className="text-quaternary small ms-1.5">

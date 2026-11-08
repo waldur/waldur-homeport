@@ -90,10 +90,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
   const groups = useMemo(() => groupByHypervisor(instances), [instances]);
 
   return (
-    <div
-      className="flex flex-col gap-3"
-      style={{ overflow: 'auto', maxHeight: '70vh' }}
-    >
+    <div className="flex flex-col gap-3 overflow-auto max-h-[70vh]">
       {groups.map((group) => {
         const totalCores = group.instances.reduce(
           (sum, i) => sum + (i.cores || 0),

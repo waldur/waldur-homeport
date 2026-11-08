@@ -288,7 +288,7 @@ export const DateGroupWiresAria: Story = {
     <Form
       onSubmit={() => undefined}
       render={() => (
-        <div data-testid="field" style={{ width: 320 }}>
+        <div data-testid="field" className="w-80">
           <DateGroup
             name="end_date"
             label="End date"
@@ -327,7 +327,7 @@ export const DateTimeRangeGroupLabelled: Story = {
     <Form
       onSubmit={() => undefined}
       render={() => (
-        <div data-testid="field" style={{ width: 400 }}>
+        <div data-testid="field" className="w-[400px]">
           <DateTimeRangeGroup name="window" label="Maintenance window" />
         </div>
       )}

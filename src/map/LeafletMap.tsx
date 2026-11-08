@@ -14,11 +14,7 @@ import { GeolocationPoint } from './types';
 export const LeafletMap: React.FC<GeolocationPoint> = (props) => {
   const position: LatLngTuple = [props.latitude, props.longitude];
   return (
-    <MapContainer
-      center={position}
-      zoom={13}
-      style={{ width: '100%', height: 300 }}
-    >
+    <MapContainer center={position} zoom={13} className="w-full h-[300px]">
       <OpenStreetMapTileLayer />
       <Marker position={position} icon={CustomMarkerIcon()}>
         <Popup>{translate('Service provider')}</Popup>

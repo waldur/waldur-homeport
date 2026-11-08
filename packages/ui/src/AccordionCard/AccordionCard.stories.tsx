@@ -10,7 +10,7 @@ const meta: Meta<typeof AccordionCard> = {
   component: AccordionCard,
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: 640 }}>
+      <div className="max-w-160">
         <Story />
       </div>
     ),
@@ -111,8 +111,8 @@ export const WideContent: Story = {
     subtitle: 'Team members and their roles in the project.',
     defaultOpen: true,
     children: (
-      <div style={{ overflowX: 'auto' }} data-testid="wide-scroller">
-        <div style={{ width: 1200, padding: 8, border: '1px dashed #999' }}>
+      <div className="overflow-x-auto" data-testid="wide-scroller">
+        <div className="w-300 p-2 border border-dashed border-secondary">
           A table wider than the card
         </div>
       </div>

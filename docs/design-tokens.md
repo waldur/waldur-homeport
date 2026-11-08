@@ -376,6 +376,47 @@ Spacing uses standard Tailwind steps (`p-3`, `mb-1.5`, `gap-2`). The `waldur-cus
   px, or the Tailwind step that equals it (`p-3`, not `p-[0.923rem]`; `calc(var(--spacing) * 3)`
   in a stylesheet). See [Root font size](#root-font-size).
 
+## Inline styles
+
+An inline `style` outranks every stylesheet, every utility and every `!important` in a layer, so
+a declaration left there is outside all of the above: outside dark mode, outside the responsive
+variants, outside the scales the rules on this page guard. `style={{ maxWidth: '100%',
+maxHeight: '80px' }}` is three declarations that could be two classes, and
+`waldur-custom/no-static-inline-style` reports each one, naming the utility
+(`max-w-full max-h-20`).
+
+It reports a property of a JSX `style` object when every part of its value is a literal **and**
+the declaration has a utility. Sizes map through the px-pinned spacing scale, never Tailwind's
+rem container scale: `minWidth: 160` is `min-w-40`, and `max-w-xl` is 468px here (432px on a
+phone), not 576px. A px value off the whole-or-half step is named as an arbitrary utility
+(`margin: 17` is `m-[17px]`), so choosing 16 or 20 stays a decision someone makes.
+
+Two kinds of value skip the scale and take the arbitrary form. One is a px off the whole-or-half
+step, as above. The other is a step Bootstrap made ambiguous: `w`, `h`, `min-w`, `min-h`, `top`,
+`bottom`, `start` and `end` at 25, 50, 75 or 100 — so `minWidth: 200` is `min-w-[200px]`, not
+`min-w-50`, which `no-bootstrap-layout-utility` reports because Bootstrap used that name for 50%.
+`max-w-*` and `max-h-*` are unaffected; Bootstrap spelled those `mw-100` and `mh-100`.
+
+An inline style is still right where the value is not static:
+
+- **Measured or animated geometry** — ``width: `${percent}%` ``, a chart's height, a drag
+  handle's `transform`, a stagger's `animationDelay`.
+- **A custom property bridging a varying value into a literal utility** — `style={{ '--w': px }}`
+  with `w-[var(--w)]`. Tailwind generates only the class names it finds in source, so this is the
+  way to vary one; see
+  [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md).
+- **A forwarded `style` prop** — where a caller's object is spread in, merge order decides the
+  winner, so the rule leaves the whole object alone.
+- **A declaration with no utility** — a gradient, `maskType`, an `animation` shorthand.
+
+`fontSize`, `fontWeight` and `borderRadius` belong to `require-font-size-scale`,
+`require-weight-scale` and `enforce-border-radius-tokens`, which already report them inline.
+
+Declarations that predate the rule are counted per file and per property in
+`inline-style.baseline.json`, which only shrinks: run `yarn lint:styles:baseline` after moving
+some. A file holding fewer than listed is reported as stale. The staged plan for emptying it is
+[inline-style-retirement-plan.md](inline-style-retirement-plan.md).
+
 ## Root font size
 
 `src/tailwind.css` forces `html, body { font-size: 13px !important }` (12px below `md`). The
@@ -461,6 +502,7 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 | Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), `waldur/font-size-scale` |
 | Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint                   |
 | Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint                    |
+| Static inline declarations only go down                 | `waldur-custom/no-static-inline-style`, `inline-style.baseline.json`                 |
 | Legacy stylesheet emits no `fw-*`; Tailwind on scale    | `src/tailwindBootstrapColors.test.ts`                                                |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
 | No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                                     |

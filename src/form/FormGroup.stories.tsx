@@ -18,7 +18,7 @@ const meta: Meta<typeof FormGroup> = {
   parameters: { layout: 'padded' },
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: 420 }}>
+      <div className="max-w-105">
         <Story />
       </div>
     ),

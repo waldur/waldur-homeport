@@ -310,7 +310,7 @@ export const OrganizationCreatePage: FC = () => {
       <div className={PAGE_CONTAINER_XXL_CLASSNAME}>
         {submissionComplete ? (
           <div className="flex gap-5.5">
-            <div className="shrink-0" style={{ width: '300px' }}>
+            <div className="shrink-0 w-[300px]">
               <VerticalProgressSteps
                 steps={steps.map((s) => ({ ...s, completed: true }))}
               />
@@ -342,7 +342,7 @@ export const OrganizationCreatePage: FC = () => {
 
                 <div className="flex gap-5.5">
                   {/* Left Sidebar with Stepper */}
-                  <div className="shrink-0" style={{ width: '300px' }}>
+                  <div className="shrink-0 w-[300px]">
                     <VerticalProgressSteps
                       steps={stepsWithCompletion}
                       onClick={handleStepClick}

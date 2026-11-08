@@ -29,7 +29,7 @@ const NestedReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
       value={
         <>
           {props.children ? (
-            <span style={{ whiteSpace: 'pre-line' }}>{props.children}</span>
+            <span className="whitespace-pre-line">{props.children}</span>
           ) : (
             <span className="italic">{translate('No explanation')}</span>
           )}
@@ -71,10 +71,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
           )}
         </FormHeading>
         {props.children ? (
-          <p
-            className="text-quaternary mb-0"
-            style={{ whiteSpace: 'pre-line' }}
-          >
+          <p className="text-quaternary mb-0 whitespace-pre-line">
             {props.children}
           </p>
         ) : (

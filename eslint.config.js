@@ -221,6 +221,13 @@ export default tseslint
         // rem lengths beyond a file's count in
         // scripts/rem-literals.baseline.json (the `yarn rem:check` ratchet).
         'waldur-custom/no-rem-length': 'error',
+        // A style={{ … }} whose every value is a literal is a class in
+        // disguise, and outranks every stylesheet while it stays inline.
+        // Declarations that predate the rule are counted per file and per
+        // property in inline-style.baseline.json, which only shrinks:
+        // `yarn lint:styles:baseline` after moving some. The staged plan is
+        // docs/inline-style-retirement-plan.md.
+        'waldur-custom/no-static-inline-style': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
         'waldur-custom/icon-button-needs-accessible-name': 'error',
@@ -340,6 +347,17 @@ export default tseslint
       ignores: ['**/*.test.{ts,tsx}'],
       rules: {
         'react-hooks/rules-of-hooks': 'error',
+      },
+    },
+    {
+      // Off in tests. jsdom loads no stylesheet, so an inline style is the
+      // only declaration that reaches the element: a fixture that needs a
+      // real width, or a click to land, has to set one, and the lint rules'
+      // own fixtures exist to be reported. Converting them breaks the test
+      // rather than the styling, which no linter would catch.
+      files: ['**/*.test.{ts,tsx}'],
+      rules: {
+        'waldur-custom/no-static-inline-style': 'off',
       },
     },
     {

@@ -125,8 +125,7 @@ export const MatrixCallFloatingWidget = forwardRef<
       }}
     >
       <div
-        className="flex items-center gap-1.5 px-1.5 py-1 border-b border-b-secondary"
-        style={{ cursor: 'grab', userSelect: 'none', touchAction: 'none' }}
+        className="flex items-center gap-1.5 px-1.5 py-1 border-b border-b-secondary cursor-grab select-none touch-none"
         onPointerDown={onPointerDown}
       >
         <span className="grow truncate">{roomName}</span>

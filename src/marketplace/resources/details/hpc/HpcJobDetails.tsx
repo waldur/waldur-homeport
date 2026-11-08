@@ -54,7 +54,7 @@ const Ratio: FC<{ value?: number | null; detail?: ReactNode }> = ({
   detail,
 }) =>
   value === null || value === undefined ? null : (
-    <div className="flex items-center gap-3" style={{ maxWidth: 420 }}>
+    <div className="flex items-center gap-3 max-w-105">
       <Progress
         value={value * 100}
         variant={efficiencyVariant(value)}

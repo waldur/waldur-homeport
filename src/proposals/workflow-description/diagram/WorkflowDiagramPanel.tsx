@@ -153,7 +153,7 @@ export const WorkflowDiagramPanel: FC<{
           />
         ) : null}
         {showProgress && progress ? (
-          <div style={{ minWidth: 200 }}>
+          <div className="min-w-[200px]">
             <Select
               aria-label={translate('Round')}
               options={roundOptions}

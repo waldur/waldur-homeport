@@ -154,7 +154,6 @@ const TableTh = ({
   toggledAll,
   toggleAll,
   hasLeadingCheckbox,
-  style,
   pinKey,
   pinned,
   shadow,
@@ -173,10 +172,13 @@ const TableTh = ({
         pinned && shadow === 'start' && 'shadow-start',
       ) || undefined
     }
+    // The pin offsets are measured at runtime, so they stay a style. The
+    // zeroed padding that used to ride along with them is already set, with
+    // !important, by th.first-expandable-column in TableHeader.scss.
     style={
       pinned && pinOffset
-        ? { ...style, left: pinOffset.left, right: pinOffset.right }
-        : style
+        ? { left: pinOffset.left, right: pinOffset.right }
+        : undefined
     }
     data-pin-key={pinKey}
     aria-sort={
@@ -194,14 +196,10 @@ const TableTh = ({
             <span
               className={
                 isFirstDataColumn && expandableRow
-                  ? 'cell-with-expander-header'
-                  : undefined
-              }
-              style={
-                isFirstDataColumn && expandableRow
-                  ? {
-                      paddingLeft: hasLeadingCheckbox ? 12 : 16,
-                    }
+                  ? classNames(
+                      'cell-with-expander-header',
+                      hasLeadingCheckbox ? 'ps-3' : 'ps-4',
+                    )
                   : undefined
               }
             >
@@ -390,11 +388,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
       <thead>
         <tr className="text-start text-quaternary font-semibold text-xs align-middle">
           {fieldType ? (
-            <th
-              style={{ width: '10px', paddingLeft: '16px', paddingRight: 0 }}
-            />
+            <th className="w-2.5 ps-4 pe-0" />
           ) : enableMultiSelect ? (
-            <th style={{ width: '10px', paddingLeft: '16px', paddingRight: 0 }}>
+            <th className="w-2.5 ps-4 pe-0">
               <Checkbox
                 ref={refCheck}
                 data-testid="select-all"
@@ -431,11 +427,6 @@ export const TableHeader: FC<TableHeaderProps> = ({
                         shadow={pinnedColumns[id]}
                         pinOffset={pinnedOffsets[id]}
                         onTogglePin={toggleColumnPin}
-                        style={
-                          expandableRow && index === firstVisibleDataIndex
-                            ? { paddingLeft: 0, paddingRight: 0 }
-                            : undefined
-                        }
                       />
                     ),
                 )
@@ -466,11 +457,6 @@ export const TableHeader: FC<TableHeaderProps> = ({
                     shadow={pinnedColumns[pinKey]}
                     pinOffset={pinnedOffsets[pinKey]}
                     onTogglePin={toggleColumnPin}
-                    style={
-                      expandableRow && index === firstVisibleDataIndex
-                        ? { paddingLeft: 0, paddingRight: 0 }
-                        : undefined
-                    }
                   />
                 );
               })}

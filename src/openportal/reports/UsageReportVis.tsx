@@ -385,10 +385,7 @@ export const UsageReportVis: FC<Props> = ({
       {/* ── Chart ─────────────────────────────────────────}─ */}
       {/* Updating indicator */}
       {isUpdating && (
-        <div
-          className="text-quaternary small mb-1 flex items-center"
-          style={{ minHeight: '1.2em' }}
-        >
+        <div className="text-quaternary small mb-1 flex items-center min-h-[1.2em]">
           <LoadingSpinner
             size={12}
             className="me-1"

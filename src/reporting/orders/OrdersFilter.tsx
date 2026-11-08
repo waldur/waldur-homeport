@@ -88,7 +88,7 @@ export const OrdersFilter: FC<OrdersFilterProps> = ({
         >
           {translate('Time period')}:
         </label>
-        <div style={{ minWidth: 200 }}>
+        <div className="min-w-[200px]">
           <Select
             value={selectedDateRange}
             onChange={(option: PeriodOption | null) => {

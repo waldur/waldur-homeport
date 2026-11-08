@@ -147,8 +147,7 @@ export const SaveScenarioDialog: FC<SaveScenarioDialogProps> = ({
                 spaceless
               >
                 <pre
-                  className="p-2.5 bg-tertiary dark:bg-quaternary rounded-lg text-xs mb-0"
-                  style={{ maxHeight: 240, overflow: 'auto' }}
+                  className="p-2.5 bg-tertiary dark:bg-quaternary rounded-lg text-xs mb-0 overflow-auto max-h-60"
                   data-testid="scenario-json"
                 >
                   {json}

@@ -21,7 +21,7 @@ const meta: Meta<typeof AnnouncementBar> = {
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (
-      <div style={{ minHeight: 160 }}>
+      <div className="min-h-40">
         <Story />
       </div>
     ),
@@ -157,7 +157,7 @@ export const TruncatedWithShowMore: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: 520 }}>
+      <div className="max-w-130">
         <Story />
       </div>
     ),

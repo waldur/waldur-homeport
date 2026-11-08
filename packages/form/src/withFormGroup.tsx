@@ -11,6 +11,13 @@ type AutonomousFieldProps<P> = Omit<P, 'input' | 'meta' | 'id'> &
   FormGroupProps &
   UseFieldConfig<any> & {
     name: string;
+    /**
+     * Classes for the control itself. `className` dresses the FormGroup
+     * around it, so a size or a look meant for the input goes here — it is
+     * the element a `style` prop would reach, which is what makes an inline
+     * style avoidable (`no-static-inline-style`).
+     */
+    controlClassName?: string;
   };
 
 /**
@@ -41,6 +48,7 @@ export function withFormGroup<P extends object>(
       quickAction,
       className,
       containerClassName,
+      controlClassName,
       spaceless,
       space,
       id,
@@ -78,9 +86,12 @@ export function withFormGroup<P extends object>(
 
     // A control that owns its label (a switch, a radio group) also draws its
     // tooltip, description and required mark, beside or under that label.
-    const componentProps = options?.passLabelToControl
-      ? { ...rest, label, tooltip, description, required }
-      : rest;
+    const componentProps = {
+      ...(options?.passLabelToControl
+        ? { ...rest, label, tooltip, description, required }
+        : rest),
+      ...(controlClassName ? { className: controlClassName } : {}),
+    };
 
     // The rest of the props are intended for the WrappedComponent, including `input` bindings
     return (

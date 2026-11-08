@@ -52,7 +52,7 @@ type Story = StoryObj<typeof TableFilterContainer>;
 export const Sidebar: Story = {
   decorators: [withTableProviders],
   render: () => (
-    <div style={{ width: 500 }}>
+    <div className="w-125">
       <TableFilterContainer
         table={TABLE_ID}
         formId={FORM_ID}
@@ -72,7 +72,7 @@ export const SidebarExpanded: Story = {
     withSeededTableStore(TABLE_ID, { filtersStorage: tableStoryActiveFilters }),
   ],
   render: () => (
-    <div style={{ width: 500 }}>
+    <div className="w-125">
       <TableFilterContainer
         table={TABLE_ID}
         formId={FORM_ID}
@@ -97,7 +97,7 @@ export const SidebarWithSavedFilters: Story = {
     withSeededTableStore(TABLE_ID, { savedFilters: tableStorySavedFilters }),
   ],
   render: () => (
-    <div style={{ width: 500 }}>
+    <div className="w-125">
       <TableFilterContainer
         table={TABLE_ID}
         formId={FORM_ID}

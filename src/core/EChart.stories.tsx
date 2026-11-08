@@ -72,10 +72,7 @@ const meta: Meta<typeof EChart> = {
   },
   decorators: [
     (Story) => (
-      <div
-        className="p-5 border border-secondary rounded-lg bg-primary shadow-raised"
-        style={{ width: '100%', maxWidth: '750px', height: '420px' }}
-      >
+      <div className="p-5 border border-secondary rounded-lg bg-primary shadow-raised w-full max-w-187.5 h-105">
         <Story />
       </div>
     ),

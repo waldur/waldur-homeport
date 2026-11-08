@@ -283,18 +283,12 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               )}
               {showCallView && (
                 <div
-                  className="relative overflow-hidden"
-                  style={{
-                    display: 'flex',
-                    flex: showChat ? '0 0 60%' : '1 1 auto',
-                  }}
+                  className="relative overflow-hidden flex"
+                  style={{ flex: showChat ? '0 0 60%' : '1 1 auto' }}
                 >
                   <MatrixCallDockSlot roomId={activeRoomId} />
                   {callLive && (
-                    <div
-                      className="absolute"
-                      style={{ top: 8, right: 8, zIndex: 2 }}
-                    >
+                    <div className="absolute top-2 end-2" style={{ zIndex: 2 }}>
                       <Tooltip
                         label={
                           chatVisible

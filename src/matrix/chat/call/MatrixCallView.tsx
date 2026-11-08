@@ -303,17 +303,17 @@ const CallStage: FC<{
       <div className="relative grow overflow-hidden">
         {compact ? (
           compactTrack ? (
-            <FocusLayout trackRef={compactTrack} style={{ height: '100%' }} />
+            <FocusLayout trackRef={compactTrack} className="h-full" />
           ) : null
         ) : focusTrack ? (
-          <FocusLayoutContainer style={{ height: '100%' }}>
+          <FocusLayoutContainer className="h-full">
             <CarouselLayout tracks={carouselTracks}>
               <ParticipantTile />
             </CarouselLayout>
             <FocusLayout trackRef={focusTrack} />
           </FocusLayoutContainer>
         ) : (
-          <GridLayout tracks={tracks} style={{ height: '100%' }}>
+          <GridLayout tracks={tracks} className="h-full">
             <ParticipantTile />
           </GridLayout>
         )}
@@ -527,7 +527,7 @@ const MatrixCallView: FC<{
               : endCall(translate('Could not connect to the call.'))
           }
           onError={() => endCall(translate('Could not connect to the call.'))}
-          style={{ height: '100%' }}
+          className="h-full"
         >
           <LayoutContextProvider>
             <CallStage

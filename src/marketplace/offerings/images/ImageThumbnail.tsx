@@ -28,7 +28,7 @@ export const ImageThumbnail: FunctionComponent<ImageThumbnailProps> = (
           resolve: props.image,
         })
       }
-      style={{ cursor: 'pointer', maxWidth: 100 }}
+      className="cursor-pointer max-w-25"
       aria-hidden="true"
     />
   );

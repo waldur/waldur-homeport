@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { BaseButton } from 'waldur-ui';
 
 import { getIdentityProviders } from '@/administration/api';
-import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -16,6 +15,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
 import { IdentityProviderSelector } from '../IdentityProviderSelector';
+import { LoginLogo } from '../LoginLogo';
 import { PoweredBy } from '../PoweredBy';
 import { SigninForm } from '../SigninForm';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -27,7 +27,6 @@ type Step = 'welcome' | 'method' | 'login';
 
 export const WizardLayout = () => {
   const features = useAuthFeatures();
-  const imageUrl = getIconUrl('login_logo');
   const [step, setStep] = useState<Step>('welcome');
   const [useSSO, setUseSSO] = useState(true);
 
@@ -156,13 +155,7 @@ export const WizardLayout = () => {
       </div>
       <div className="layout-wizard-content">
         <div className="layout-wizard-card">
-          <div className="login-logo mb-2.5">
-            <img
-              alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-              src={imageUrl}
-              style={{ maxWidth: '100%', maxHeight: '70px' }}
-            />
-          </div>
+          <LoginLogo className="mb-2.5" size="sm" />
 
           <div className="layout-wizard-progress">
             <div

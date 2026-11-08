@@ -47,7 +47,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
               resource={props.resource}
             />
           ) : (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="flex justify-center">
               <ResourceUsageChart
                 resource={props.resource}
                 offeringComponent={component}

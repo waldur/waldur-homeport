@@ -89,7 +89,7 @@ const OptionRow: FC<{
         <OptionValue option={option} value={submittedValue} />
       </TableCell>
       <TableCell>
-        <div style={option?.type === 'integer' ? { width: 96 } : undefined}>
+        <div className={option?.type === 'integer' ? 'w-24' : undefined}>
           <Field
             name={`attributes.${optionKey}`}
             component={OptionField}
@@ -297,7 +297,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                           <TableHead>{translate('Submitted value')}</TableHead>
                           {/* Shrink to the field it holds instead of taking
                               the table's remaining width. */}
-                          <TableHead style={{ width: '1%' }}>
+                          <TableHead className="w-[1%]">
                             {translate('New value')}
                           </TableHead>
                         </TableRow>

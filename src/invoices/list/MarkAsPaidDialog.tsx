@@ -46,7 +46,7 @@ export const MarkAsPaidDialog: FunctionComponent<any> = (props) => {
             title={translate('Mark invoice as paid')}
             footer={<FormFooter />}
           >
-            <div style={{ paddingBottom: '95px' }}>
+            <div className="pb-[95px]">
               <div>
                 <DateGroup
                   name="date"

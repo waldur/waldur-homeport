@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
@@ -111,7 +112,7 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
 
   if (loading) {
     return (
-      <div className={className} style={{ minHeight: '200px' }}>
+      <div className={classNames('min-h-[200px]', className)}>
         <div className="flex justify-center items-center h-full">
           <LoadingSpinner
             size={32}

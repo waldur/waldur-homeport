@@ -416,7 +416,7 @@ export const ProposalReviewsDialog: FC<ProposalReviewsDialogProps> = ({
     <ModalDialog title={translate('Reviews')} subtitle={proposal.name}>
       {/* A floor, so the loading state is not a sliver the table then
           stretches. */}
-      <div style={{ minHeight: 240 }}>{content}</div>
+      <div className="min-h-60">{content}</div>
     </ModalDialog>
   );
 };

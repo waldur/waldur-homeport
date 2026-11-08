@@ -1,4 +1,5 @@
 import { StarIcon, StarHalfIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import {
   FC,
   KeyboardEvent,
@@ -144,8 +145,7 @@ export const RateStars: FC<RateStarsProps> = ({
 
   return (
     <span
-      className={className}
-      style={{ display: 'inline-flex', gap: 2 }}
+      className={classNames('inline-flex gap-0.5', className)}
       onMouseLeave={handleMouseLeave}
       role={edit ? 'radiogroup' : undefined}
       aria-label={edit ? label : undefined}

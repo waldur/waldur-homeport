@@ -97,10 +97,10 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
             <TablePrimitive density="compact" className="align-middle">
               <TableHeader>
                 <TableRow className="align-middle">
-                  <TableHead style={{ width: '50%' }}>
+                  <TableHead className="w-1/2">
                     {translate('Component')}
                   </TableHead>
-                  <TableHead style={{ width: '50%' }}>
+                  <TableHead className="w-1/2">
                     {translate('Requested amount')}
                   </TableHead>
                 </TableRow>

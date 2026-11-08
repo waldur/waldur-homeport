@@ -44,7 +44,7 @@ const Harness = ({
           onSubmit={() => undefined}
           initialValues={initialValues}
           render={() => (
-            <div style={{ maxWidth: 480 }}>
+            <div className="max-w-120">
               <OptionsForm options={options} customer={CUSTOMER} />
               <FormSpy subscription={{ values: true }}>
                 {({ values }) => (

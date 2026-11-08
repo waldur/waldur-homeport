@@ -92,26 +92,15 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
     <div>
       <div
         ref={contentRef}
-        style={{
-          maxHeight: isTruncated ? `${maxHeight}px` : 'none',
-          overflow: 'hidden',
-          position: 'relative',
-        }}
+        className="overflow-hidden relative"
+        style={{ maxHeight: isTruncated ? `${maxHeight}px` : 'none' }}
       >
         <SafeMarkdown text={text} smallTitles={smallTitles} />
         {isTruncated && (
           <div
+            className="absolute flex items-end justify-center h-10 bottom-0 start-0 end-0 pb-2"
             style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '40px',
               background: 'linear-gradient(transparent, var(--bg-primary))',
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              paddingBottom: '8px',
             }}
           />
         )}

@@ -128,7 +128,7 @@ const DrillDownRow: FC<{
         onClick={toggleExpand}
       >
         <TableCell className="flex items-center gap-1.5">
-          <div style={{ width: '20px' }} className="flex justify-center">
+          <div className="flex justify-center w-5">
             {item.canDrillDown && (
               <CaretDownIcon
                 weight="bold"
@@ -146,11 +146,11 @@ const DrillDownRow: FC<{
         <TableCell className="text-end">
           <span>{item.value.toLocaleString()}</span>
         </TableCell>
-        <TableCell className="text-end" style={{ width: '100px' }}>
+        <TableCell className="text-end w-[100px]">
           <span className="text-quaternary">{item.percentage.toFixed(1)}%</span>
         </TableCell>
         {showChange && (
-          <TableCell className="text-end" style={{ width: '100px' }}>
+          <TableCell className="text-end w-[100px]">
             <DrillDownChange change={item.change} />
           </TableCell>
         )}

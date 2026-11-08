@@ -32,7 +32,7 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
         `}
     </style>
 
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <div className="flex items-center gap-2.5">
       {props.data.image ? (
         <Image src={props.data.image} size={size} isContain circle />
       ) : (
@@ -41,7 +41,7 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
         </ImagePlaceholder>
       )}
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="flex-1 flex flex-col">
         <span>
           {props.data.full_name}{' '}
           <span className="text-quaternary">@{props.data.username}</span>
@@ -51,7 +51,7 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
         )}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+      <div className="flex items-center gap-[5px]">
         {props.data.is_active === false && (
           <Tooltip label={translate('Inactive')}>
             <ProhibitIcon weight="bold" />

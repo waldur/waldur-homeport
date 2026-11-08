@@ -42,7 +42,7 @@ const meta: Meta<typeof ActionsMenu> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-10" style={{ minHeight: 360 }}>
+      <div className="p-10 min-h-90">
         <Story />
       </div>
     ),

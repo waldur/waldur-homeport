@@ -114,7 +114,7 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
               <TextGroup
                 name="public_key"
                 validate={required}
-                style={{ height: 100 }}
+                controlClassName="h-[100px]"
                 placeholder={translate('Paste your SSH public key here...')}
                 label={translate('Public key')}
                 required

@@ -90,7 +90,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
           <Table density="compact" scrollable={false}>
             <TableHeader>
               <TableRow divided={false}>
-                <TableHead style={{ width: '40%' }}>
+                <TableHead className="w-[40%]">
                   {translate('Waldur Field')}
                 </TableHead>
                 <TableHead>{translate('OIDC Claim')}</TableHead>

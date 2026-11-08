@@ -123,7 +123,7 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
               return (
                 <div className="flex items-center justify-end">
                   <span className="text-quaternary me-1.5">{percentage}%</span>
-                  <div style={{ width: '50px' }}>
+                  <div className="w-12.5">
                     <Progress size="sm" value={Number(percentage)} />
                   </div>
                 </div>

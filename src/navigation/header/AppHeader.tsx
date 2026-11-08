@@ -116,10 +116,9 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           {Boolean(user) && showGoBack && (
             <BaseButton
               variant="text-primary"
-              className="me-[0.75rem] py-[0px] self-center text-base"
+              className="me-[0.75rem] py-[0px] self-center text-base w-27 h-9"
               onClick={onGoBack}
               tooltip={translate('Go back')}
-              style={{ width: '108px', height: '36px' }}
               iconNode={<CaretLeftIcon size={18} weight="bold" />}
               label={translate('Go back')}
             />

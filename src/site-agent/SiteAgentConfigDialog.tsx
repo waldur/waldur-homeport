@@ -200,10 +200,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
                 : translate('Select all')}
             </button>
           </div>
-          <div
-            className="border border-secondary rounded-lg p-2.5"
-            style={{ maxHeight: '200px', overflowY: 'auto' }}
-          >
+          <div className="border border-secondary rounded-lg p-2.5 overflow-y-auto max-h-50">
             {offerings.map((offering) => (
               <Checkbox
                 id={`offering-${offering.uuid}`}

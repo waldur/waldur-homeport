@@ -181,13 +181,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
                 />
               </div>
 
-              <div
-                className="min-h-[400px]"
-                style={{
-                  maxHeight: '400px',
-                  overflowY: 'auto',
-                }}
-              >
+              <div className="min-h-[400px] overflow-y-auto max-h-100">
                 <WizardTabs
                   steps={steps}
                   currentStep={step}

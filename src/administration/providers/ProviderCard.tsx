@@ -180,12 +180,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
       <CardContent className="pe-4">
         <div className="flex items-center h-full">
           <div className="flex flex-row justify-between h-full grow">
-            <div
-              style={{
-                width: 50,
-                marginRight: 17,
-              }}
-            >
+            <div className="w-12.5 me-[17px]">
               <IdentityProviderLogo name={type} maxHeight={40} />
             </div>
             <div className="grow">

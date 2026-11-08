@@ -355,10 +355,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
         />
       ))}
       <div className="flex items-center px-1.5 py-1 grow min-w-0">
-        <span
-          className="me-1 text-quaternary inline-flex"
-          style={{ width: 14 }}
-        >
+        <span className="me-1 text-quaternary inline-flex w-3.5">
           {row.hasChildren ? (
             row.isOpen ? (
               <CaretDownIcon weight="bold" size={12} />

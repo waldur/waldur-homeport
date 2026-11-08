@@ -56,7 +56,7 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => {
   );
   return (
     <SelectOption {...props}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div className="flex justify-between">
         <span>
           {label}
           {qualifier && (
@@ -64,12 +64,7 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => {
           )}
           <SramRoleBadge roleName={props.data.name} className="ms-1.5" />
         </span>
-        <span
-          style={{
-            alignSelf: 'center',
-            marginLeft: 'auto',
-          }}
-        >
+        <span className="self-center ms-auto">
           {renderRoleType(props.data.content_type)}
         </span>
       </div>

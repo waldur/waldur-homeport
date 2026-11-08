@@ -42,7 +42,7 @@ const Harness = ({
   <Form
     onSubmit={() => undefined}
     initialValues={initialValues}
-    render={() => <div style={{ maxWidth: 520 }}>{children}</div>}
+    render={() => <div className="max-w-130">{children}</div>}
   />
 );
 

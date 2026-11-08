@@ -65,9 +65,7 @@ const NoteCell: FC<{ row: RoundMeetingNote }> = ({ row }) => (
     <span className="font-semibold wrap-anywhere">{row.title}</span>
     {row.is_report ? <ReportStatus row={row} /> : null}
     {row.body ? (
-      <span className="wrap-anywhere" style={{ whiteSpace: 'pre-wrap' }}>
-        {row.body}
-      </span>
+      <span className="wrap-anywhere whitespace-pre-wrap">{row.body}</span>
     ) : null}
   </div>
 );

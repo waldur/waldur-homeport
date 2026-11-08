@@ -15,29 +15,30 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 
 ## UI patterns
 
-| Guide                                                                    | Covers                                                                                                                                       |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| [component-library.md](component-library.md)                             | Reusable UI components: buttons, modals, tables, filters — with prop references                                                              |
-| [tabs.md](tabs.md)                                                       | Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, tokens, gotchas                                                                          |
-| [breadcrumbs.md](breadcrumbs.md)                                         | Breadcrumbs: `BreadcrumbTrail`, `useBreadcrumbs`, `IBreadcrumbItem`, routing via `renderLink`, dropdowns, layout, keyboard, micro-apps       |
-| [a11y-decision-matrix.md](a11y-decision-matrix.md)                       | Accessibility decision matrix: SegmentedControl vs Tabs vs Action Buttons vs Nav                                                             |
-| [button-ui-guide.md](button-ui-guide.md)                                 | Comprehensive button UI guide: BaseButton, tokens, tooltips, toggles, segmented controls                                                     |
-| [ui-consistency-guidelines.md](ui-consistency-guidelines.md)             | Empty states, buttons, loading indicators, status indicators and colours, tooltips, null-value display                                       |
-| [tables.md](tables.md)                                                   | `useTable`, columns, filters, row actions, export                                                                                            |
-| [property-rendering-guide.md](property-rendering-guide.md)             | Property rendering guide: PropertyList, PropertyItem, PropertyCard, propVal.* formatters, and linting |
-| [property-fields.md](property-fields.md)                                 | Read-only rows: typed formatters (`propVal.date`, `propVal.currency`, …) and the `prefer-typed-property` lint |
-| [forms.md](forms.md)                                                     | React Final Form, `*Group` / `*EditField` / `*Filter` patterns, `TabbedSection`                                                              |
-| [filter-migration-guide.md](table/filter-migration-guide.md)             | Generated table filters from the OpenAPI schema                                                                                              |
-| [migration-guide.md](table/migration-guide.md)                           | Migrating hand-rolled tables: choosing `Table`, `SimpleTable`, a form grid or a label/value block                                            |
-| [theme.md](theme.md)                                                     | Dark mode and theming: semantic utilities, theme-aware tokens, third-party components                                                        |
-| [design-tokens.md](design-tokens.md)                                     | Colour ramps, semantic roles (text scale, surfaces, borders, status matrix, brand), the Tailwind bridge, guards                              |
-| [menu-navigation.md](menu-navigation.md)                                 | Sidebar menu structure and state-based routing                                                                                               |
-| [sidebar.md](sidebar.md)                                                 | Sidebar navigation architecture, design tokens, components, and recipes                                                                      |
-| [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Tailwind/shadcn UI architecture: cascade layers, token extraction, lint rules, visual-parity tests                                           |
-| [class-names-and-data-attributes.md](class-names-and-data-attributes.md) | Native state and ARIA first, then when to use a class, `data-slot`, a state attribute or `data-testid`; examples; removing a hook safely     |
-| [e2e-locators.md](e2e-locators.md)                                       | How waldur-integration-testing finds HomePort elements: every role, test id and slot it relies on                                            |
-| [menus.md](menus.md)                                                     | Menus, dropdowns and popovers: which component to use, recipes, rules, how the looks work, testing                                           |
-| [modals.md](modals.md)                                                   | Modals: `openDialog`, `ModalDialog`, `ModalShell`, the parts, sizes and options, `data-slot` styling hooks, testing                          |
+| Guide                                                                    | Covers                                                                                                                                   |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [component-library.md](component-library.md)                             | Reusable UI components: buttons, modals, tables, filters — with prop references                                                          |
+| [tabs.md](tabs.md)                                                       | Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, tokens, gotchas                                                                     |
+| [breadcrumbs.md](breadcrumbs.md)                                         | Breadcrumbs: `BreadcrumbTrail`, `useBreadcrumbs`, `IBreadcrumbItem`, routing via `renderLink`, dropdowns, layout, keyboard, micro-apps   |
+| [a11y-decision-matrix.md](a11y-decision-matrix.md)                       | Accessibility decision matrix: SegmentedControl vs Tabs vs Action Buttons vs Nav                                                         |
+| [button-ui-guide.md](button-ui-guide.md)                                 | Comprehensive button UI guide: BaseButton, tokens, tooltips, toggles, segmented controls                                                 |
+| [ui-consistency-guidelines.md](ui-consistency-guidelines.md)             | Empty states, buttons, loading indicators, status indicators and colours, tooltips, null-value display                                   |
+| [tables.md](tables.md)                                                   | `useTable`, columns, filters, row actions, export                                                                                        |
+| [property-rendering-guide.md](property-rendering-guide.md)               | Property rendering guide: PropertyList, PropertyItem, PropertyCard, propVal.* formatters, and linting                                    |
+| [property-fields.md](property-fields.md)                                 | Read-only rows: typed formatters (`propVal.date`, `propVal.currency`, …) and the `prefer-typed-property` lint                            |
+| [forms.md](forms.md)                                                     | React Final Form, `*Group` / `*EditField` / `*Filter` patterns, `TabbedSection`                                                          |
+| [filter-migration-guide.md](table/filter-migration-guide.md)             | Generated table filters from the OpenAPI schema                                                                                          |
+| [migration-guide.md](table/migration-guide.md)                           | Migrating hand-rolled tables: choosing `Table`, `SimpleTable`, a form grid or a label/value block                                        |
+| [theme.md](theme.md)                                                     | Dark mode and theming: semantic utilities, theme-aware tokens, third-party components                                                    |
+| [design-tokens.md](design-tokens.md)                                     | Colour ramps, semantic roles (text scale, surfaces, borders, status matrix, brand), the Tailwind bridge, guards                          |
+| [menu-navigation.md](menu-navigation.md)                                 | Sidebar menu structure and state-based routing                                                                                           |
+| [sidebar.md](sidebar.md)                                                 | Sidebar navigation architecture, design tokens, components, and recipes                                                                  |
+| [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Tailwind/shadcn UI architecture: cascade layers, token extraction, lint rules, visual-parity tests                                       |
+| [inline-style-retirement-plan.md](inline-style-retirement-plan.md)       | Audit of static `style={{ … }}` and how it was moved onto Tailwind utilities: mapping table, lint guard, codemod slices                  |
+| [class-names-and-data-attributes.md](class-names-and-data-attributes.md) | Native state and ARIA first, then when to use a class, `data-slot`, a state attribute or `data-testid`; examples; removing a hook safely |
+| [e2e-locators.md](e2e-locators.md)                                       | How waldur-integration-testing finds HomePort elements: every role, test id and slot it relies on                                        |
+| [menus.md](menus.md)                                                     | Menus, dropdowns and popovers: which component to use, recipes, rules, how the looks work, testing                                       |
+| [modals.md](modals.md)                                                   | Modals: `openDialog`, `ModalDialog`, `ModalShell`, the parts, sizes and options, `data-slot` styling hooks, testing                      |
 
 ## API and data
 

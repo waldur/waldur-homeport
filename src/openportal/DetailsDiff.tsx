@@ -35,7 +35,7 @@ const renderValue = (value: unknown): ReactNode => {
     return String(value);
   }
   return (
-    <pre className="mb-0 text-xs" style={{ whiteSpace: 'pre-wrap' }}>
+    <pre className="mb-0 text-xs whitespace-pre-wrap">
       {JSON.stringify(value, null, 2)}
     </pre>
   );
@@ -76,11 +76,11 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
     >
       <TableHeader>
         <TableRow>
-          <TableHead style={{ width: '20%' }}>{translate('Field')}</TableHead>
-          <TableHead style={{ width: '40%' }}>
+          <TableHead className="w-[20%]">{translate('Field')}</TableHead>
+          <TableHead className="w-[40%]">
             {beforeLabel ?? translate('Before')}
           </TableHead>
-          <TableHead style={{ width: '40%' }}>
+          <TableHead className="w-[40%]">
             {afterLabel ?? translate('After')}
             {afterNote && <span className="ms-1">{afterNote}</span>}
           </TableHead>

@@ -39,10 +39,7 @@ const replaceUnserialisable = (_key: string, value: unknown) =>
 export const ErrorTraceDialog: FallbackRender = (props) => {
   return (
     <ModalDialog title={translate('Error trace')}>
-      <div
-        className="text-quaternary relative max-h-[300px] overflow-y-auto"
-        style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
-      >
+      <div className="text-quaternary relative max-h-[300px] overflow-y-auto whitespace-pre-wrap break-words">
         {props.componentStack || describeError(props.error as Error)}
       </div>
     </ModalDialog>

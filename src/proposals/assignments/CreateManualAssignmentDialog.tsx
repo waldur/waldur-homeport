@@ -43,10 +43,7 @@ const TruncatedMultiValue = (props: any) => (
     onClear={props.removeProps.onClick}
     clearLabel={getRemoveLabel(props.selectProps.getOptionLabel(props.data))}
   >
-    <span
-      className="truncate inline-block align-bottom"
-      style={{ maxWidth: 260 }}
-    >
+    <span className="truncate inline-block align-bottom max-w-65">
       {props.children}
     </span>
   </Tag>

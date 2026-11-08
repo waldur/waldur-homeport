@@ -239,7 +239,7 @@ const FormModalComponent: FC<
                   "You've changed the project end date. Some resources now conflict with this date. Review the list below to align or confirm resource termination dates.",
                 )}
               </p>
-              <div className="grow overflow-auto" style={{ minHeight: 0 }}>
+              <div className="grow overflow-auto min-h-0">
                 <ResourcesTable
                   {...tableProps}
                   rows={resources || []}
@@ -263,13 +263,13 @@ const FormModalComponent: FC<
         </div>
 
         {step === 2 && (
-          <div className="flex flex-col grow" style={{ minHeight: 0 }}>
+          <div className="flex flex-col grow min-h-0">
             <p className="text-secondary mb-3">
               {translate(
                 'The following resources were not selected and will be forcibly terminated on the project end date:',
               )}
             </p>
-            <div className="grow overflow-auto" style={{ minHeight: 0 }}>
+            <div className="grow overflow-auto min-h-0">
               <ResourcesTable
                 {...tablePropsUnselected}
                 rows={ignoredResources}

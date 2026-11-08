@@ -46,10 +46,7 @@ export const SupportSystemLogsExpandableRow: FC<
       />
       {traceback && (
         <PropertyItem label={translate('Traceback')}>
-          <pre
-            className="text-quaternary text-xs mb-0"
-            style={{ whiteSpace: 'pre-wrap' }}
-          >
+          <pre className="text-quaternary text-xs mb-0 whitespace-pre-wrap">
             {traceback}
           </pre>
         </PropertyItem>

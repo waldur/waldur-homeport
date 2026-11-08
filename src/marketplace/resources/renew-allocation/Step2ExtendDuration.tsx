@@ -98,7 +98,7 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
               : null
         }
       >
-        <div style={{ maxWidth: 300 }}>
+        <div className="max-w-75">
           <SelectFieldInline
             input={{
               value: extensionMonths,

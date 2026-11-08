@@ -53,7 +53,7 @@ export const VersionStateAtTimestamp: FunctionComponent<
         clearable={false}
         size="sm"
         placeholder={translate('Select date and time')}
-        style={{ width: '180px' }}
+        className="w-45"
       />
       <BaseButton
         variant="secondary"

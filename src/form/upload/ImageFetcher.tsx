@@ -56,11 +56,7 @@ export const ImageFetcher = ({ url, name, thumb = false, iconSize = 20 }) => {
         thumb ? (
           <Image size={iconSize} src={imageUrl} />
         ) : (
-          <img
-            src={imageUrl}
-            alt={name}
-            style={{ maxWidth: '100%', height: 'auto' }}
-          />
+          <img src={imageUrl} alt={name} className="max-w-full h-auto" />
         )
       ) : (
         translate('Failed to load image')

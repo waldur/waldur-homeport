@@ -325,13 +325,8 @@ const TableCell = memo(
           style={{ paddingLeft: 0, paddingRight: 0, ...pinStyle }}
         >
           <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingLeft: hasLeadingCheckbox ? 12 : 16,
-              paddingRight: 16,
-              columnGap: 12,
-            }}
+            className="flex items-center pe-4 gap-x-3"
+            style={{ paddingLeft: hasLeadingCheckbox ? 12 : 16 }}
           >
             {expander.canExpand && (
               // A real button, so the row opens from the keyboard too. A
@@ -367,7 +362,7 @@ const TableCell = memo(
             )}
             <div
               id={hasExpander && !dataId ? labelId : undefined}
-              style={{ minWidth: 0, flex: '1 1 auto' }}
+              className="flex-auto min-w-0"
             >
               {content}
             </div>
@@ -590,10 +585,7 @@ const TableRow = memo<TableRowProps>(
         onClick={handleRowClick}
       >
         {(enableMultiSelect || fieldType) && (
-          <td
-            className="row-control"
-            style={{ paddingLeft: '16px', paddingRight: 0 }}
-          >
+          <td className="row-control ps-4 pe-0">
             <div>
               {fieldType && fieldProps ? (
                 <>

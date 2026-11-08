@@ -25,7 +25,7 @@ export const ProvisioningFilter: FC<ProvisioningFilterProps> = ({
       <label className="text-quaternary text-xs">
         {translate('Time period')}:
       </label>
-      <div style={{ minWidth: 200 }}>
+      <div className="min-w-[200px]">
         <Select
           value={OPTIONS.find((o) => o.value === days)}
           onChange={(option) => option && onDaysChange(option.value)}

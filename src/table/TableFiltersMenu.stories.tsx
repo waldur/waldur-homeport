@@ -69,7 +69,7 @@ const FiltersMenuHarness = ({
     applyFiltersFn={noop}
     selectedSavedFilter={null}
   >
-    <div style={{ minHeight: 360 }}>
+    <div className="min-h-90">
       <TableFiltersMenu
         table={TABLE_ID}
         filters={filters}

@@ -253,8 +253,7 @@ export const InteractiveScrolling: Story = {
         {/* Scrollable content panels */}
         <div
           ref={setContainer}
-          className="flex-1 overflow-y-auto space-y-6 pr-2 rounded-lg"
-          style={{ scrollBehavior: 'smooth' }}
+          className="flex-1 overflow-y-auto space-y-6 pr-2 rounded-lg scroll-smooth"
         >
           {sections.map((sec) => (
             <div

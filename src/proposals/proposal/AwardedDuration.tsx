@@ -76,7 +76,7 @@ export const AwardedDuration: FC<{
       label={translate('Awarded duration')}
       value={
         editable && allowed.length ? (
-          <div style={{ maxWidth: 240 }}>
+          <div className="max-w-60">
             <Select
               inputId="awarded_duration_months"
               aria-label={translate('Awarded duration')}

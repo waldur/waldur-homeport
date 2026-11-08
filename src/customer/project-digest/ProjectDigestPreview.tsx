@@ -76,11 +76,10 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
 
       {isPending && <LoadingSpinner />}
 
+      {/* The digest is an email body, which renders on white in a mail
+          client, so the preview stays light in both themes. */}
       {preview && !isPending && (
-        <div
-          className="rounded-lg shadow-raised p-5"
-          style={{ backgroundColor: '#fff', color: '#333' }}
-        >
+        <div className="rounded-lg shadow-raised p-5 bg-white dark:bg-white text-gray-700 dark:text-gray-700">
           <FormattedHtml html={preview.html_body} />
         </div>
       )}

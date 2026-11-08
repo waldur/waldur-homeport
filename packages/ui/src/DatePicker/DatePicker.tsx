@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { ComponentProps, CSSProperties, FC, useId } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
+import { cn } from '../cn';
 import { useControlId, useDescribedBy } from '../Form/controlId';
 
 import { Calendar } from './Calendar';
@@ -71,6 +72,11 @@ export interface DatePickerProps {
   /** More descriptions (the form's description and error) for the input. */
   'aria-describedby'?: string;
   style?: CSSProperties;
+  /**
+   * Classes for the field box. It is the element `style` lands on too, so a
+   * size belongs here rather than in `style` (`no-static-inline-style`).
+   */
+  className?: string;
 }
 
 /**
@@ -109,6 +115,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   'aria-describedby': ariaDescribedBy,
   onEntryErrorChange,
   style,
+  className,
 }) => {
   const id = useControlId(idProp);
   // The field's help and error text, besides any given by hand.
@@ -219,7 +226,10 @@ export const DatePicker: FC<DatePickerProps> = ({
     return (
       <div
         id={id}
-        className="inline-block rounded-lg border border-solid border-secondary"
+        className={cn(
+          'inline-block rounded-lg border border-solid border-secondary',
+          className,
+        )}
         style={style}
       >
         {body}
@@ -276,6 +286,7 @@ export const DatePicker: FC<DatePickerProps> = ({
       }
       onBlur={onClose}
       style={style}
+      className={className}
     >
       {body}
     </DatePickerPopover>

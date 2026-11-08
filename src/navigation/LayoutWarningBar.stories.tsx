@@ -17,7 +17,7 @@ const meta: Meta<typeof LayoutWarningBar> = {
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (
-      <div className="bg-primary" style={{ minHeight: 160 }}>
+      <div className="bg-primary min-h-40">
         <Story />
       </div>
     ),

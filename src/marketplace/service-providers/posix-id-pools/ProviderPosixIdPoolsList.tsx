@@ -128,7 +128,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
       {
         title: translate('UID utilization'),
         render: ({ row }: { row: PosixIdPool }) => (
-          <div style={{ minWidth: 90 }}>
+          <div className="min-w-22.5">
             <PercentProgress
               value={roundUtilization(row.uid_utilization)}
               compact
@@ -140,7 +140,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
       {
         title: translate('GID utilization'),
         render: ({ row }: { row: PosixIdPool }) => (
-          <div style={{ minWidth: 90 }}>
+          <div className="min-w-22.5">
             <PercentProgress
               value={roundUtilization(row.gid_utilization)}
               compact
@@ -155,7 +155,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
           row.group_gid_utilization == null ? (
             <>{renderFieldOrDash(null)}</>
           ) : (
-            <div style={{ minWidth: 90 }}>
+            <div className="min-w-22.5">
               <PercentProgress
                 value={roundUtilization(row.group_gid_utilization)}
                 compact

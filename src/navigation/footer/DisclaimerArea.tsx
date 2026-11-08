@@ -32,7 +32,7 @@ export const DisclaimerArea: FunctionComponent = () => {
           <img
             src={getIconUrl('disclaimer_area_logo')}
             alt="Disclaimer"
-            style={{ maxHeight: 40, objectFit: 'contain' }}
+            className="object-contain max-h-10"
           />
         )}
       </div>

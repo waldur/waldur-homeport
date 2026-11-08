@@ -197,7 +197,7 @@ const NewsItemsEditor: FC<{
             </div>
           </FormField>
           <div className="flex gap-1.5 mb-1.5">
-            <FormField style={{ width: '120px' }}>
+            <FormField className="w-30">
               <FormLabel className="text-xs text-quaternary mb-1">
                 {translate('Date')}
               </FormLabel>
@@ -209,7 +209,7 @@ const NewsItemsEditor: FC<{
                 placeholder={translate('e.g., Jan 2025')}
               />
             </FormField>
-            <FormField style={{ width: '140px' }}>
+            <FormField className="w-35">
               <FormLabel className="text-xs text-quaternary mb-1">
                 {translate('Tag')}
               </FormLabel>

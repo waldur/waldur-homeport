@@ -23,18 +23,14 @@ const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
     return <FileUploadField {...props} />;
   }
   return (
-    <div style={{ maxHeight: 200, maxWidth: 200 }}>
+    <div className="max-h-50 max-w-50">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5">
         <div className="md:col-span-5">
           <div>
             <img
               src={getImageUrl(props.input.value)}
               alt={translate('Image here')}
-              style={{
-                maxHeight: '100%',
-                maxWidth: '100%',
-                objectFit: 'contain',
-              }}
+              className="object-contain max-h-full max-w-full"
             />
           </div>
         </div>

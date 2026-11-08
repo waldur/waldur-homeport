@@ -41,7 +41,7 @@ export const InvitationExpandableRow: React.FC<{
       </p>
     )}
     {row.extra_invitation_text && (
-      <p style={{ whiteSpace: 'pre-line' }}>
+      <p className="whitespace-pre-line">
         <b>{translate('Message')}: </b>
         {row.extra_invitation_text}
         {'\n\n'}

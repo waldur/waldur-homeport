@@ -57,10 +57,7 @@ export const MatrixDiagnosticsDialog: FC = () => {
           <TableBody>
             {data.checks.map((check) => (
               <TableRow key={check.name} divided={false}>
-                <TableCell
-                  className="whitespace-nowrap pe-2.5"
-                  style={{ width: 24 }}
-                >
+                <TableCell className="whitespace-nowrap pe-2.5 w-6">
                   {check.ok ? (
                     <CheckCircleIcon
                       size={20}

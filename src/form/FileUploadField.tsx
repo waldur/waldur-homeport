@@ -75,7 +75,7 @@ export const FileUploadField = ({
       />
       <input
         type="file"
-        style={{ display: 'none' }}
+        className="hidden"
         ref={fileInputRef}
         accept={accept}
         onChange={handleFile}

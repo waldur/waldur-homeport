@@ -234,7 +234,6 @@ const PresetSelector: FC = () => {
                   : 'border-secondary'
               }`}
               onClick={() => applyPreset(preset)}
-              style={{ cursor: 'pointer' }}
             >
               <CardContent className="p-2.5">
                 <div className="text-xs font-medium mb-1.5">{preset.label}</div>

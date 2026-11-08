@@ -312,6 +312,8 @@ export interface DatePickerPopoverProps {
   /** Names the box as a group, for the range picker's two inputs. */
   group?: { 'aria-label'?: string; 'aria-labelledby'?: string };
   style?: CSSProperties;
+  /** Classes for the field box, which is also what `style` lands on. */
+  className?: string;
   /** The popup body: a Calendar, optionally with time inputs. */
   children: ReactNode;
 }
@@ -346,6 +348,7 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
   onBlur,
   group,
   style,
+  className,
   children,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -397,7 +400,7 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
     <Popover open={open} onOpenChange={handleOpenChange}>
       <div
         data-slot="date-picker"
-        className="w-full"
+        className={cn('w-full', className)}
         style={style}
         onFocus={handleFocus}
         onBlur={handleBlur}

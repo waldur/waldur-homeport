@@ -109,9 +109,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
         <div className="flex flex-col gap-1 small">
           {filterRows.map((f) => (
             <div key={f.key} className="flex gap-1.5">
-              <span className="text-quaternary" style={{ minWidth: 90 }}>
-                {f.key}
-              </span>
+              <span className="text-quaternary min-w-22.5">{f.key}</span>
               <span className="wrap-anywhere">{f.value}</span>
             </div>
           ))}

@@ -193,6 +193,7 @@ export const ModalShell: FC<ModalShellProps> = ({
             // click in the rest of the outer box (the full height, when
             // centred) reaches the overlay and closes the dialog. Radix sets
             // pointer-events inline, so a class could not override it.
+            // eslint-disable-next-line waldur-custom/no-static-inline-style -- a class cannot outrank Radix's own inline pointer-events
             style={{ pointerEvents: 'none' }}
             onPointerDownOutside={(event) => {
               if (backdrop === 'static' || isInsidePointerDown(event)) {
@@ -221,6 +222,7 @@ export const ModalShell: FC<ModalShellProps> = ({
               // Inline, as the box's pointer-events: none above is: the pair
               // is behaviour, not styling, and must hold without the
               // stylesheet (tests run without one).
+              // eslint-disable-next-line waldur-custom/no-static-inline-style -- the other half of the pair above, which must hold without a stylesheet
               style={{ pointerEvents: 'auto' }}
               className={cn(
                 'relative flex w-full flex-col rounded-xl bg-primary bg-clip-padding shadow-[var(--modal-shadow-xs)] outline-none sm:shadow-[var(--modal-shadow)]',

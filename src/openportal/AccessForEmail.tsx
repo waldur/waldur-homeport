@@ -235,7 +235,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
               onChange={(e) => setSearchValue(e.target.value)}
               // Prevent form submission on Enter (query will trigger automatically via debounce)
               onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
-              style={{ flex: 1 }}
+              inputClassName="flex-1"
             />
             {searchValue && (
               <BaseButton

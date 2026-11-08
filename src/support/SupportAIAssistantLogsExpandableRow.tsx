@@ -222,7 +222,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
             })
           ) : (
             // User messages are plain input
-            <div style={{ whiteSpace: 'pre-wrap' }}>{copyText}</div>
+            <div className="whitespace-pre-wrap">{copyText}</div>
           )}
           {isAssistant && <MessageDataInspector blocks={blocks} />}
         </div>

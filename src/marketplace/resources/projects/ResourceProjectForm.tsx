@@ -244,7 +244,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                       <TableHeader>
                         <TableRow>
                           <TableHead>{translate('Component')}</TableHead>
-                          <TableHead style={{ width: 180 }}>
+                          <TableHead className="w-45">
                             {translate('Limit')}
                           </TableHead>
                           <TableHead>

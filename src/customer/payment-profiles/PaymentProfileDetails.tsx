@@ -11,7 +11,7 @@ export const PaymentProfileDetails: FunctionComponent = () => {
 
   const profile = customer.payment_profiles?.find((p) => p.is_active);
   return profile ? (
-    <div style={{ marginBottom: '20px' }}>
+    <div className="mb-5">
       <p>
         <b>{translate('Name')}: </b>
         {profile.name}

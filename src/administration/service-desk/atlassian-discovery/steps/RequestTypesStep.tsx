@@ -158,7 +158,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
       <Table className="mb-5">
         <TableHeader>
           <TableRow>
-            <TableHead style={{ width: 40 }}>
+            <TableHead className="w-10">
               <Checkbox
                 aria-label={translate('Select all')}
                 checked={selectedCount === values.requestTypes.length}

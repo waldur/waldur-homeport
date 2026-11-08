@@ -32,9 +32,9 @@ const HeaderRow = (props: {
   concealBillingInfo?: boolean;
 }) => (
   <TableRow>
-    <TableHead style={{ width: '5%' }}>{translate('Component name')}</TableHead>
-    <TableHead style={{ width: '5%' }}>{translate('Quantity')}</TableHead>
-    <TableHead style={{ width: '5%' }}>{translate('Unit')}</TableHead>
+    <TableHead className="w-[5%]">{translate('Component name')}</TableHead>
+    <TableHead className="w-[5%]">{translate('Quantity')}</TableHead>
+    <TableHead className="w-[5%]">{translate('Unit')}</TableHead>
     {!props.concealBillingInfo &&
       props.periods.map((period, index) => (
         <TableHead className="sm:w-1/12" key={index}>

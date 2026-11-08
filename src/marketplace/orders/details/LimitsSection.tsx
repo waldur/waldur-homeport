@@ -163,13 +163,7 @@ export const LimitsSection = ({
           <TableHeader>
             <TableRow>
               {editable && (
-                <TableHead
-                  style={{
-                    width: '10px',
-                    paddingLeft: '16px',
-                    paddingRight: 0,
-                  }}
-                >
+                <TableHead className="w-2.5 ps-4 pe-0">
                   <Checkbox
                     ref={headerCheckRef}
                     data-testid="select-all"
@@ -194,7 +188,7 @@ export const LimitsSection = ({
             {components.map((component, id) => (
               <TableRow key={id}>
                 {editable && (
-                  <TableCell style={{ paddingLeft: '16px', paddingRight: 0 }}>
+                  <TableCell className="ps-4 pe-0">
                     <Checkbox
                       aria-label={component.name}
                       checked={selected.includes(component.type)}

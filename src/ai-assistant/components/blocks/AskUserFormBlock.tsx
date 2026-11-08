@@ -265,7 +265,7 @@ const SearchableListQuestion: FC<{
         options={selectOptions}
         placeholder={translate('Search…')}
         formatOptionLabel={(opt: SelectOption) => (
-          <div className="flex flex-col" style={{ minWidth: 0 }}>
+          <div className="flex flex-col min-w-0">
             <span>{opt.label}</span>
             {opt.description && (
               <small className="text-quaternary">{opt.description}</small>

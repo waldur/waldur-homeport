@@ -16,9 +16,7 @@ const earliestDue = (requests: ProposalChangeRequest[]) =>
 
 const RequestBody: FC<{ request: ProposalChangeRequest }> = ({ request }) => (
   <>
-    <p className="mb-1.5" style={{ whiteSpace: 'pre-wrap' }}>
-      {request.message}
-    </p>
+    <p className="mb-1.5 whitespace-pre-wrap">{request.message}</p>
     <p className="mb-1">
       {translate('You may edit: {parts}.', {
         parts: request.unlocked_parts.map(changeRequestPartLabel).join(', '),

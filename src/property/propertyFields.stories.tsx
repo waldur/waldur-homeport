@@ -76,7 +76,7 @@ const Rows = () => (
 
 export const Divided: Story = {
   render: () => (
-    <div style={{ maxWidth: 560 }}>
+    <div className="max-w-140">
       <PropertyList detailsMode>
         <Rows />
       </PropertyList>
@@ -97,7 +97,7 @@ export const Divided: Story = {
 
 export const Summary: Story = {
   render: () => (
-    <div style={{ maxWidth: 560 }}>
+    <div className="max-w-140">
       <PropertyList variant="summary" termWidth="md">
         <Rows />
       </PropertyList>
@@ -120,7 +120,7 @@ export const AllTypes: Story = {
       WALDUR_CORE: { ...ENV.plugins?.WALDUR_CORE, CURRENCY_NAME: 'EUR' },
     } as typeof ENV.plugins;
     return (
-      <div style={{ maxWidth: 560 }}>
+      <div className="max-w-140">
         <PropertyList detailsMode>
           <PropertyItem
             label="Name"

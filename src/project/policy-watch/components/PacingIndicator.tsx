@@ -232,25 +232,22 @@ export const PacingIndicator: FC<Props> = ({
           positional — the floor and where a linear ramp says today should be —
           so they stay on the bar; their values are stated as badges below,
           which is what removed the label collision at the right edge. */}
-      <div style={{ paddingTop: 20 }}>
+      <div className="pt-5">
         <div
-          className="rounded-lg relative"
-          style={{ height: 16, backgroundColor: c.track }}
+          className="rounded-lg relative h-4"
+          style={{ backgroundColor: c.track }}
         >
           <div
-            className="rounded-lg"
+            className="rounded-lg h-full"
             style={{
-              height: '100%',
               width: clampPct(usageFraction),
               backgroundColor: c.brand300,
             }}
           />
           {minimalFraction !== null && (
             <div
+              className="absolute top-[-3px] bottom-[-3px]"
               style={{
-                position: 'absolute',
-                top: -3,
-                bottom: -3,
                 left: clampPct(minimalFraction),
                 borderLeft: `2px dashed ${c.warning}`,
               }}
@@ -258,10 +255,8 @@ export const PacingIndicator: FC<Props> = ({
             />
           )}
           <div
+            className="absolute top-[-3px] bottom-[-3px]"
             style={{
-              position: 'absolute',
-              top: -3,
-              bottom: -3,
               left: clampPct(periodFraction),
               borderLeft: `2px solid ${c.muted}`,
             }}
@@ -276,15 +271,8 @@ export const PacingIndicator: FC<Props> = ({
           </div>
           {isOver && (
             <div
-              style={{
-                position: 'absolute',
-                top: -3,
-                bottom: -3,
-                right: -3,
-                display: 'flex',
-                alignItems: 'center',
-                color: c.danger,
-              }}
+              className="absolute flex items-center top-[-3px] bottom-[-3px] end-[-3px]"
+              style={{ color: c.danger }}
               title={translate('Over expected consumption')}
             >
               <CaretDoubleRightIcon weight="bold" />

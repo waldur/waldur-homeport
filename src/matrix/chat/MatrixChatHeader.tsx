@@ -235,7 +235,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         fallbackClassName={getChatAvatarClass(roomUuid)}
       />
 
-      <div className="flex items-baseline gap-1 grow" style={{ minWidth: 0 }}>
+      <div className="flex items-baseline gap-1 grow min-w-0">
         {projectUuid ? (
           <Link
             state="project.dashboard"

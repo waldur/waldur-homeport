@@ -47,7 +47,7 @@ const DonutChart: FC<{ data: PieSeriesOption['data'] }> = ({ data }) => {
     [data],
   );
   return (
-    <div className="shrink-0" style={{ width: 80, height: 80 }}>
+    <div className="shrink-0 w-20 h-20">
       <EChart options={options} height="80px" width="80px" />
     </div>
   );
@@ -109,32 +109,32 @@ const ChartItem: FC<ChartItemProps> = ({
       <div className="flex flex-col gap-1">
         <span className="flex items-center gap-1.5 text-xs">
           <span
-            className="rounded-full inline-block"
-            style={{ width: 8, height: 8, backgroundColor: usedColor }}
+            className="rounded-full inline-block w-2 h-2"
+            style={{ backgroundColor: usedColor }}
           />
           {usedLabel}
         </span>
         {isOvercommitted && overcommittedLabel ? (
           <span className="flex items-center gap-1.5 text-xs text-warning">
             <span
-              className="rounded-full inline-block"
-              style={{ width: 8, height: 8, backgroundColor: warningColor }}
+              className="rounded-full inline-block w-2 h-2"
+              style={{ backgroundColor: warningColor }}
             />
             {overcommittedLabel}
           </span>
         ) : (
           <span className="flex items-center gap-1.5 text-xs">
             <span
-              className="rounded-full inline-block"
-              style={{ width: 8, height: 8, backgroundColor: availableColor }}
+              className="rounded-full inline-block w-2 h-2"
+              style={{ backgroundColor: availableColor }}
             />
             {availableLabel}
           </span>
         )}
         <span className="flex items-center gap-1.5 text-xs">
           <span
-            className="rounded-full inline-block"
-            style={{ width: 8, height: 8, backgroundColor: totalColor }}
+            className="rounded-full inline-block w-2 h-2"
+            style={{ backgroundColor: totalColor }}
           />
           {totalLabel}
         </span>

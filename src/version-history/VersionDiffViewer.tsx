@@ -98,10 +98,8 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
         </div>
         {isMonacoReady ? (
           <div
-            style={{
-              display: viewMode === 'json' ? undefined : 'none',
-              height: '100%',
-            }}
+            className="h-full"
+            style={{ display: viewMode === 'json' ? undefined : 'none' }}
           >
             <JsonDiffView
               currentVersion={currentVersion}

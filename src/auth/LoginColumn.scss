@@ -56,34 +56,15 @@
   background-color: transparent;
 }
 
-/* Desktop: wider container and comfortable logo space */
+/* Desktop: wider container. The logo's own rules are in LoginLogo.css. */
 @media (width >= 768px) {
   .login-grid-item-container {
     width: 50%;
-  }
-
-  .login-logo {
-    min-height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .login-logo img {
-    max-height: 80px;
   }
 }
 
 /* Small height: compact everything */
 @media (height <= 600px) {
-  .login-logo {
-    min-height: 60px;
-  }
-
-  .login-logo img {
-    max-height: 50px;
-  }
-
   .login-footer {
     padding: 8px 16px;
     font-size: var(--text-xs);
@@ -100,14 +81,6 @@
 
 /* Very small height: hide non-essential elements */
 @media (height <= 450px) {
-  .login-logo {
-    min-height: 40px;
-  }
-
-  .login-logo img {
-    max-height: 35px;
-  }
-
   .login-header {
     padding: 2px 5px;
   }

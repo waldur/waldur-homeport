@@ -283,7 +283,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
           <small className="text-secondary">
             {translate('Offering · component')}:
           </small>
-          <div style={{ minWidth: 320 }}>
+          <div className="min-w-80">
             <Select
               size="sm"
               isClearable={false}
@@ -322,7 +322,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
           <>
             <div className="flex items-center gap-1.5">
               <small className="text-secondary">{translate('Period A')}:</small>
-              <div style={{ minWidth: 160 }}>
+              <div className="min-w-40">
                 <Select
                   size="sm"
                   isClearable={false}
@@ -343,7 +343,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
             </div>
             <div className="flex items-center gap-1.5">
               <small className="text-secondary">{translate('Period B')}:</small>
-              <div style={{ minWidth: 160 }}>
+              <div className="min-w-40">
                 <Select
                   size="sm"
                   isClearable={false}

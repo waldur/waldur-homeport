@@ -53,10 +53,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
           {translate('Component usage chart')}
         </CardTitle>
       </CardHeader>
-      <CardContent
-        className="mt-2.5"
-        style={{ maxWidth: '500px', minWidth: '100%' }}
-      >
+      <CardContent className="mt-2.5 max-w-125 min-w-full">
         {loading ? (
           <LoadingSpinner />
         ) : error ? (

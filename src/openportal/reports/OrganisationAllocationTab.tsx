@@ -572,10 +572,7 @@ const ProjectAutocompleteDialog: FC<{
         </span>
       </div>
 
-      <div
-        style={{ maxHeight: 320, overflowY: 'auto' }}
-        className="border border-secondary rounded-lg p-1.5"
-      >
+      <div className="border border-secondary rounded-lg p-1.5 overflow-y-auto max-h-80">
         {visible.length === 0 && (
           <p className="text-quaternary small mb-0 p-1.5">
             {translate('No projects match the filters.')}
@@ -1500,9 +1497,7 @@ export const OrganisationAllocationTab: FC = () => {
               <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded-lg small">
                 <div className="grid grid-cols-1 gap-1.5">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span style={{ minWidth: 120 }}>
-                      {translate('Slow start')}:
-                    </span>
+                    <span className="min-w-30">{translate('Slow start')}:</span>
                     {translate(
                       'started ≥ {input1} months ago with < {input2} % of allocation spent',
                       {
@@ -1533,9 +1528,7 @@ export const OrganisationAllocationTab: FC = () => {
                     )}
                   </div>
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span style={{ minWidth: 120 }}>
-                      {translate('Inactive')}:
-                    </span>
+                    <span className="min-w-30">{translate('Inactive')}:</span>
                     {translate(
                       'started ≥ {input1} months ago, after the {input2} th of the month, no spend this month, > {input3} % remaining',
                       {
@@ -1580,7 +1573,7 @@ export const OrganisationAllocationTab: FC = () => {
                     )}
                   </div>
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span style={{ minWidth: 120 }}>
+                    <span className="min-w-30">
                       {translate('Nearly depleted')}:
                     </span>
                     {translate(
@@ -1619,9 +1612,7 @@ export const OrganisationAllocationTab: FC = () => {
                     )}
                   </div>
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span style={{ minWidth: 120 }}>
-                      {translate('Off track')}:
-                    </span>
+                    <span className="min-w-30">{translate('Off track')}:</span>
                     {translate(
                       'after the {input1} th of the month, actual daily avg differs from predicted by > {input2} %',
                       {
