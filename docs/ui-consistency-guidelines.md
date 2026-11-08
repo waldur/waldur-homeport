@@ -956,6 +956,7 @@ const filterPosition =
 **Buttons:**
 
 - Three standard sizes: 44px (large), 36px (default), 28px (small)
+- In code these are `--control-height-lg` / `-md` / `-sm` (`primitives/controls.css`), read as `min-h-[var(--control-height-md)]`. Do not restate the number.
 - All sizes are acceptable for desktop interfaces
 - Use size appropriate to context and hierarchy
 

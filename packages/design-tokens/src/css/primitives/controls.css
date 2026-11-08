@@ -1,0 +1,47 @@
+/**
+ * Interactive control heights.
+ *
+ * The three sizes an interactive control comes in, already named as a design
+ * decision in docs/ui-consistency-guidelines.md ("Three standard sizes: 44px
+ * (large), 36px (default), 28px (small)") but, until now, with no token: every
+ * component wrote the number itself, so the scale existed only as a sentence
+ * in a guide and three literals per component.
+ *
+ *   --control-height-sm: 28px
+ *   --control-height-md: 36px
+ *   --control-height-lg: 44px
+ *
+ * A control is a thing the user operates: a button, a select, a date field, a
+ * pagination button. It is NOT a row (SimpleTable's 44px cell), a layout band
+ * (the 44px filter bar in navigation/Layout) or a card header (card.css's
+ * --card-header-min-h, 36/42/48/70/77px). Those land on the same numbers by
+ * coincidence, and reading this token would claim a relationship that is not
+ * there -- change a control size and the table rows must not follow.
+ *
+ * On a square icon-only control, width is the height, so `size-[var(--control-
+ * height-sm)]` is the honest spelling rather than a second token.
+ *
+ * Two sizes in the library deliberately sit off the scale, and say so where
+ * they are rather than silently rounding:
+ *
+ *   - Select's `isTableCell` is 35px, the measured height of the control it
+ *     replaced (see Select/tailwindStyles.ts), 1px under --control-height-md.
+ *   - DatePicker's default trigger is 40px, which is the *other* number the
+ *     same guide gives: "Form controls (inputs, selects, textareas):
+ *     Minimum height: 40px". Select, also a form control, is 44px. So the
+ *     guide carries two heights for a field and the library implements both;
+ *     until that is settled there is no fourth token here, because naming
+ *     40px would bake the contradiction into the scale. Left as it was:
+ *     moving it either way is a visible 4px change, and a design call.
+ *
+ * `static`, for the reason zIndex.css gives for --z-index-toast: no utility
+ * references these by name -- they are read as `h-[var(--control-height-md)]`
+ * from a TSX string, which Tailwind does not count as a usage -- so without
+ * `static` the variables would be missing from the build and every control
+ * would collapse to its padding.
+ */
+@theme static {
+  --control-height-sm: 28px;
+  --control-height-md: 36px;
+  --control-height-lg: 44px;
+}

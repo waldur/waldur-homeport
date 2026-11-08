@@ -11,7 +11,7 @@ import { PaginationState } from './types';
 
 const NAV_BUTTON_CLASSNAME = cn(
   PAGINATION_ITEM_CLASSNAME,
-  'size-[28px] p-0 text-[var(--pagination-icon)]',
+  'size-[var(--control-height-sm)] p-0 text-[var(--pagination-icon)]',
   'hover:bg-[var(--pagination-hover-bg)] hover:text-[var(--pagination-icon-hover)]',
   'focus-visible:bg-[var(--pagination-hover-bg)]',
   'disabled:pointer-events-none disabled:text-[var(--pagination-text-disabled)]',

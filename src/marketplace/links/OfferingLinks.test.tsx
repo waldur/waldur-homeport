@@ -53,7 +53,9 @@ describe.each([
       </Component>,
     );
 
-    expect(screen.getByText('+')).toHaveClass('h-[28px]', 'w-[28px]');
+    expect(screen.getByText('+')).toHaveClass(
+      'size-[var(--control-height-sm)]',
+    );
   });
 });
 

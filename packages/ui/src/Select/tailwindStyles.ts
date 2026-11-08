@@ -75,8 +75,8 @@ export const getSelectTailwindClassNames = <
         isTableCell
           ? 'min-h-[35px]! m-[1px] px-[11px] py-[6px] text-sm'
           : isSm
-            ? 'min-h-[28px]! px-[8px] py-[4.5px] text-sm'
-            : 'min-h-[44px]! px-[11px] py-[6px] text-sm',
+            ? 'min-h-[var(--control-height-sm)]! px-[8px] py-[4.5px] text-sm'
+            : 'min-h-[var(--control-height-lg)]! px-[11px] py-[6px] text-sm',
         hasError
           ? 'border-danger-subtle ring-1 ring-[var(--status-danger-border)]'
           : isFocused
