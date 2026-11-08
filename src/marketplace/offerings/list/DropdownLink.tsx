@@ -1,6 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
 
+import { MenuItemIconSlot, MenuItemLabelSlot } from 'waldur-ui';
+
 /**
  * forwardRef because this is rendered under `Menu.Item asChild`:
  * Radix's Slot clones this component and attaches the ref its menu
@@ -18,19 +20,12 @@ export const DropdownLink = forwardRef<
 >(({ state, params, icon, children, ...rest }, ref) => {
   // This component ensures that dropdown is hidden when state transition is triggered
   const router = useRouter();
-  // Menu.Item renders no icon/label slots under asChild, so they are written
-  // out here, marked as MenuItem marks its own.
+  // Menu.Item renders no icon/label slots under asChild, so this row uses
+  // MenuItem's own slot components.
   const content = icon ? (
     <>
-      <span
-        data-slot="menu-item-icon"
-        className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
-      >
-        {icon}
-      </span>
-      <span data-slot="menu-item-label" className="flex-1 min-w-0">
-        {children}
-      </span>
+      <MenuItemIconSlot>{icon}</MenuItemIconSlot>
+      <MenuItemLabelSlot>{children}</MenuItemLabelSlot>
     </>
   ) : (
     children

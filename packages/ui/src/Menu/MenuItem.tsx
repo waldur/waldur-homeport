@@ -92,6 +92,37 @@ export const useMenuItemClassName = (lookOverride?: MenuLook) => {
   return menuItem({ look: lookOverride ?? panelLook });
 };
 
+/**
+ * A row's leading icon: a 20x20 box with the row's 12px gap, sizing whatever
+ * icon node it is given.
+ *
+ * MenuItem renders this itself. Export it for the one case that cannot use
+ * that: a row built with `asChild`, where MenuItem hands its className to the
+ * composed element and renders no slots of its own, so the link spells out
+ * its own icon and label (see InvoicePayButton, DropdownLink).
+ */
+export const MenuItemIconSlot = ({ children }: { children: ReactNode }) => (
+  <span
+    data-slot="menu-item-icon"
+    className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
+  >
+    {children}
+  </span>
+);
+
+/** A row's label, taking the width left beside the icon. */
+export const MenuItemLabelSlot = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => (
+  <span data-slot="menu-item-label" className={cn('flex-1 min-w-0', className)}>
+    {children}
+  </span>
+);
+
 export type MenuItemProps = ComponentPropsWithoutRef<
   typeof DropdownMenuPrimitive.Item
 > & {
@@ -163,20 +194,10 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
     const content =
       hasSlots && !props.asChild ? (
         <>
-          {icon && (
-            <span
-              data-slot="menu-item-icon"
-              className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
-            >
-              {icon}
-            </span>
-          )}
-          <span
-            data-slot="menu-item-label"
-            className={cn('flex-1 min-w-0', props.disabled && 'opacity-50')}
-          >
+          {icon && <MenuItemIconSlot>{icon}</MenuItemIconSlot>}
+          <MenuItemLabelSlot className={cn(props.disabled && 'opacity-50')}>
             {children}
-          </span>
+          </MenuItemLabelSlot>
           {effectiveTrailing && (
             <span
               data-slot="menu-item-trailing"

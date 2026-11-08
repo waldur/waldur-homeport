@@ -24,11 +24,7 @@ const BaseYearField: FC<BaseYearFieldProps> = ({
 }) => (
   <BaseInputField
     type="number"
-    start={
-      <span className="[&>svg]:size-[20px]">
-        <CalendarIcon weight="bold" />
-      </span>
-    }
+    start={<CalendarIcon size={20} weight="bold" />}
     min={minYear}
     max={maxYear}
     step={1}

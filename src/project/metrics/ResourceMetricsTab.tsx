@@ -3,7 +3,13 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { marketplaceResourceMetricsList, Resource } from 'waldur-js-client';
 
-import { HelpIcon, Menu, SegmentedControl } from 'waldur-ui';
+import {
+  HelpIcon,
+  Menu,
+  MenuItemIconSlot,
+  MenuItemLabelSlot,
+  SegmentedControl,
+} from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -229,15 +235,13 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
                 state="project.metrics"
                 params={{ uuid: resource.project_uuid }}
               >
-                <span
-                  data-slot="menu-item-icon"
-                  className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
-                >
+                {/* asChild: MenuItem renders no slots, so use its own. */}
+                <MenuItemIconSlot>
                   <FlagIcon weight="bold" />
-                </span>
-                <span data-slot="menu-item-label" className="flex-1 min-w-0">
+                </MenuItemIconSlot>
+                <MenuItemLabelSlot>
                   {translate('Project goals')}
-                </span>
+                </MenuItemLabelSlot>
               </Link>
             </Menu.Item>
           </ActionsMenu>

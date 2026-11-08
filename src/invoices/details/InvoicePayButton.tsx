@@ -1,7 +1,12 @@
 import { MoneyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { buttonVariants, Menu } from 'waldur-ui';
+import {
+  buttonVariants,
+  Menu,
+  MenuItemIconSlot,
+  MenuItemLabelSlot,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useCustomer } from '@/workspace/hooks';
@@ -41,17 +46,12 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
     // OpenPublicOffering.tsx / MatrixChatHeader.tsx).
     <Menu.Item asChild>
       <a href={row.payment_url} target="_self" rel="noopener noreferrer">
-        {/* Menu.Item renders no icon/label slots under asChild, so they
-            are written out here, marked as MenuItem marks its own. */}
-        <span
-          data-slot="menu-item-icon"
-          className="inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none"
-        >
+        {/* Menu.Item renders no icon/label slots under asChild, so this
+            row uses MenuItem's own slot components. */}
+        <MenuItemIconSlot>
           <MoneyIcon weight="bold" />
-        </span>
-        <span data-slot="menu-item-label" className="flex-1 min-w-0">
-          {translate('Pay')}
-        </span>
+        </MenuItemIconSlot>
+        <MenuItemLabelSlot>{translate('Pay')}</MenuItemLabelSlot>
       </a>
     </Menu.Item>
   );

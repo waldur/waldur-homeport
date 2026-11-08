@@ -13,11 +13,7 @@ type BasePhoneNumberFieldProps = Omit<BaseInputFieldProps, 'type' | 'start'>;
 const BasePhoneNumberField: FC<BasePhoneNumberFieldProps> = (props) => (
   <BaseInputField
     type="tel"
-    start={
-      <span className="[&>svg]:size-[20px]">
-        <PhoneIcon weight="bold" />
-      </span>
-    }
+    start={<PhoneIcon size={20} weight="bold" />}
     {...props}
   />
 );
