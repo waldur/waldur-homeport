@@ -158,9 +158,9 @@ export const buttonVariants = cva(
       { size: 'sm', iconOnly: false, class: 'px-[8px] py-[4px]' },
       { size: 'md', iconOnly: false, class: 'px-[12px] py-[8px]' },
       { size: 'lg', iconOnly: false, class: 'px-[16px] py-[10px]' },
-      { size: 'sm', iconOnly: true, class: 'h-[28px] w-[28px]' },
-      { size: 'md', iconOnly: true, class: 'h-[36px] w-[36px]' },
-      { size: 'lg', iconOnly: true, class: 'h-[44px] w-[44px]' },
+      { size: 'sm', iconOnly: true, class: 'size-[var(--control-height-sm)]' },
+      { size: 'md', iconOnly: true, class: 'size-[var(--control-height-md)]' },
+      { size: 'lg', iconOnly: true, class: 'size-[var(--control-height-lg)]' },
     ],
     defaultVariants: {
       variant: 'primary',

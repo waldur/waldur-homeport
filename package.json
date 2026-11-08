@@ -324,6 +324,7 @@
           "packages/design-tokens/src/css/primitives/colors.css",
           "packages/design-tokens/src/css/primitives/colorRamps.css",
           "packages/design-tokens/src/css/primitives/radius.css",
+          "packages/design-tokens/src/css/primitives/controls.css",
           "packages/design-tokens/src/css/primitives/containers.css",
           "packages/design-tokens/src/css/primitives/spacing.css",
           "packages/design-tokens/src/css/primitives/typography.css",

@@ -484,6 +484,35 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 - **No inline `borderRadius`** in JSX elements. Use standard utility classes (`rounded-sm`, `rounded-md`,
   `rounded-lg`, etc.).
 
+## Control height
+
+The three sizes an interactive control comes in, pinned in px in
+`primitives/controls.css` (`@theme static`):
+
+| Token                  | Size | Read as                            | Use                                     |
+| ---------------------- | ---- | ---------------------------------- | --------------------------------------- |
+| `--control-height-sm`  | 28px | `h-[var(--control-height-sm)]`     | compact buttons, pagination, table rows |
+| `--control-height-md`  | 36px | `min-h-[var(--control-height-md)]` | the default button and control          |
+| `--control-height-lg`  | 44px | `min-h-[var(--control-height-lg)]` | large buttons, form fields              |
+
+These are the sizes [ui-consistency-guidelines.md](ui-consistency-guidelines.md) already named
+("Three standard sizes: 44px (large), 36px (default), 28px (small)"); the token gives them a name
+in code, so a component no longer restates the number and two components cannot drift apart
+unnoticed.
+
+- **A control is a thing the user operates** — a button, a select, a date field, a pagination
+  button. A table row (`SimpleTable`'s 44px cell), a layout band (the 44px filter bar) and a card
+  header (`--card-header-min-h`) land on the same numbers by coincidence and must not read this
+  token: a control resize must not drag the table rows with it.
+- **On a square icon-only control** width is the height, so `size-[var(--control-height-sm)]` is
+  the spelling, not a second token.
+- **Two library sizes sit off the scale on purpose** and say so where they are: `Select`'s
+  `isTableCell` is 35px (the measured height of the control it replaced) and `DatePicker`'s
+  default trigger is 40px (the *form-control* minimum the same guide gives, while `Select`, also a
+  field, is 44px — the guide carries both numbers, and that is unresolved).
+- **No `--control-height` for 40px yet**, deliberately: naming it would bake that contradiction
+  into the scale.
+
 ## Guards
 
 | What                                                    | Enforced by                                                                          |

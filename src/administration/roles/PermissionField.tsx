@@ -56,7 +56,7 @@ const getCoverage = (
       : { label: translate('Partial'), variant: 'warning' };
 
 const TAB_TRIGGER_BASE =
-  'flex items-center justify-between w-full min-h-[36px] py-[7px] px-2.5 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand disabled:opacity-40 disabled:cursor-not-allowed';
+  'flex items-center justify-between w-full min-h-[var(--control-height-md)] py-[7px] px-2.5 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand disabled:opacity-40 disabled:cursor-not-allowed';
 
 /**
  * Custom hook managing search filtering across permission groups,
