@@ -95,11 +95,7 @@ export const FilterBox = forwardRef<HTMLInputElement, FilterBoxProps>(
       <BaseInputField
         type="text"
         containerClassName={classNames('filter-box', className)}
-        start={
-          <span className="[&>svg]:size-[20px]">
-            <MagnifyingGlassIcon weight="bold" />
-          </span>
-        }
+        start={<MagnifyingGlassIcon size={20} weight="bold" />}
         end={
           (rightAction || showClear) && (
             <span className="pointer-events-auto flex items-center gap-1.5">

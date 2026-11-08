@@ -4,7 +4,12 @@
 export { Menu, MenuDisclosure, MenuPopover } from './Menu';
 export { MenuLookProvider } from './menuContext';
 export type { MenuLook, MenuRowOptions } from './menuContext';
-export { menuItem, useMenuItemClassName } from './MenuItem';
+export {
+  menuItem,
+  MenuItemIconSlot,
+  MenuItemLabelSlot,
+  useMenuItemClassName,
+} from './MenuItem';
 export type { MenuItemProps } from './MenuItem';
 export { MenuTriggerButton } from './MenuTriggerButton';
 export type { MenuTriggerButtonProps } from './MenuTriggerButton';
