@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { translate } from 'waldur-i18n-runtime';
-import { BaseButton, ButtonVariant } from 'waldur-ui';
+import { BaseButton, ButtonVariant, cn } from 'waldur-ui';
 
 interface SubmitButtonProps {
   /** Loading/submitting state - shows spinner and disables button */
@@ -19,7 +19,8 @@ interface SubmitButtonProps {
   variant?: ButtonVariant;
   /** Button size - defaults to 'lg' */
   size?: 'sm' | 'lg';
-  /** Additional CSS classes */
+  /** Additional CSS classes. On a large button, a min-w class here
+   * replaces the default --dialog-action-min-w floor. */
   className?: string;
   /** Button type - defaults to 'submit' */
   type?: 'submit' | 'button';
@@ -66,7 +67,13 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
     onClick={onClick}
     iconNode={iconNode}
     iconRight={!iconOnLeft}
-    className={className}
+    className={cn(
+      // A large SubmitButton is a dialog/form footer action: it carries the
+      // same width floor as the CloseDialogButton beside it. A small one is
+      // for a popover or an inline form, where the floor would be wrong.
+      size === 'lg' && 'min-w-[var(--dialog-action-min-w)]',
+      className,
+    )}
     disabled={disabled || invalid}
     disabledReason={disabledReason}
     variant={variant}

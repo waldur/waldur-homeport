@@ -129,7 +129,7 @@ const AddStepForm: FC<FormRenderProps<StepFormValues> & AddStepFormProps> = ({
         footer={
           <>
             <StepFormBackButton isFirst={isFirst} goBack={goBack} />
-            <CloseDialogButton className="min-w-[125px]" />
+            <CloseDialogButton />
             <StepFormNextButton
               isLast={isLast && Boolean(kind)}
               goNext={goNext}
@@ -144,7 +144,6 @@ const AddStepForm: FC<FormRenderProps<StepFormValues> & AddStepFormProps> = ({
               <SubmitButton
                 submitting={submitting}
                 label={translate('Create')}
-                className="min-w-[125px]"
               />
             )}
           </>

@@ -46,10 +46,7 @@ export const PendingMembershipReviewDialog: FunctionComponent<
       title={title}
       footer={
         <>
-          <CloseDialogButton
-            className="min-w-[125px]"
-            label={translate('Remind me later')}
-          />
+          <CloseDialogButton label={translate('Remind me later')} />
           <BaseButton
             pending={closeReviewMutation.isPending}
             onClick={() => closeReviewMutation.mutate()}

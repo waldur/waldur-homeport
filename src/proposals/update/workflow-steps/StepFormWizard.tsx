@@ -197,7 +197,7 @@ export const StepFormBackButton: FC<{ isFirst: boolean; goBack(): void }> = ({
     <BaseButton
       variant="tertiary"
       size="lg"
-      className="min-w-[125px] me-auto"
+      className="min-w-[var(--dialog-action-min-w)] me-auto"
       label={translate('Back')}
       iconNode={<CaretLeftIcon weight="bold" />}
       onClick={goBack}
@@ -215,7 +215,7 @@ export const StepFormNextButton: FC<{
     <BaseButton
       variant={variant}
       size="lg"
-      className="min-w-[125px]"
+      className="min-w-[var(--dialog-action-min-w)]"
       label={translate('Next')}
       iconNode={<CaretRightIcon weight="bold" />}
       iconRight={true}

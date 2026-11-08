@@ -151,10 +151,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton
-                  variant="tertiary"
-                  className="min-w-[125px]"
-                />
+                <CloseDialogButton variant="tertiary" />
                 {/* Only rendered fields register with the form, so `invalid`
                     reflects exactly the branch on screen. */}
                 <SubmitButton
@@ -162,7 +159,6 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                   disabled={invalid}
                   label={translate('Continue')}
                   variant="primary"
-                  className="min-w-[125px]"
                   onClick={handleSubmit}
                 />
               </>

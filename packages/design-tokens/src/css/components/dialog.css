@@ -32,6 +32,20 @@
   --modal-shadow:
     0 20px 24px -4px rgba(16, 24, 40, 0.1),
     0 8px 8px -4px rgba(16, 24, 40, 0.04);
+
+  /* The minimum width of a footer action button (CloseDialogButton and a
+     large SubmitButton, which apply it themselves; a BaseButton used as a
+     footer action reads it through min-w-[var(--dialog-action-min-w)]).
+
+     An lg button is only as wide as its label plus 2x16px of padding, so
+     "OK" next to "Create resource" produced footers of wildly uneven
+     buttons. 125px is the floor ~20% of the app's dialogs had already
+     pasted in as `min-w-[125px]`; it is now the default for all of them.
+     Off the 4px spacing scale, as that literal was.
+
+     A caller that needs a narrower button passes its own min-w class,
+     which tailwind-merge takes in place of this one. */
+  --dialog-action-min-w: 125px;
 }
 
 :root[data-theme='dark'] {

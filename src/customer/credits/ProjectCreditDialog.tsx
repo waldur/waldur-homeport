@@ -110,13 +110,12 @@ export const ProjectCreditDialog: FC<ProjectCreditDialogProps> = ({
             )}
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid || !dirty || !organizationCredit}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Confirm')}
                   variant="primary"
-                  className="min-w-[125px]"
                   data-testid="submit-button"
                 />
               </>

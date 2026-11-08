@@ -56,13 +56,12 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
             title={translate('Grant permission')}
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   label={translate('Submit')}
                   submitting={submitting}
                   disabled={invalid}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

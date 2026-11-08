@@ -81,12 +81,11 @@ export const SetProviderInfoDialog: FC<SetProviderInfoDialogProps> = ({
             iconColor="info"
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={providerMutation.isPending}
                   label={translate('Send')}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

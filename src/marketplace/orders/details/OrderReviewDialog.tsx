@@ -66,7 +66,7 @@ export const OrderReviewDialog = ({ order, loadData }) => {
       )}
       footer={
         <>
-          <CloseDialogButton className="min-w-[125px]" />
+          <CloseDialogButton />
           <BaseButton
             size="sm"
             variant="danger"

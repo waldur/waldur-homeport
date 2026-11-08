@@ -72,7 +72,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
 
   const renderFooter = () => (
     <>
-      <CloseDialogButton className="min-w-[125px]" />
+      <CloseDialogButton />
       <SubmitButton
         submitting={loading}
         disabled={!values.search?.trim()}

@@ -104,7 +104,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
@@ -112,7 +112,6 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
                     isEdit ? translate('Save changes') : translate('Confirm')
                   }
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

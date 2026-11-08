@@ -65,13 +65,12 @@ export const AdjustWithdrawableDialog: FC<OwnProps> = ({
               title={translate('Adjust withdrawable balance')}
               footer={
                 <>
-                  <CloseDialogButton className="min-w-[125px]" />
+                  <CloseDialogButton />
                   <SubmitButton
                     submitting={submitting}
                     disabled={invalid}
                     label={translate('Save')}
                     variant="primary"
-                    className="min-w-[125px]"
                   />
                 </>
               }

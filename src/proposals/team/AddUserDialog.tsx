@@ -70,13 +70,12 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   label={translate('Add role')}
                   submitting={submitting}
                   disabled={invalid}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

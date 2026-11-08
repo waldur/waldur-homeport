@@ -164,12 +164,12 @@ const StepConfigForm: FC<
         footer={
           <>
             <StepFormBackButton isFirst={isFirst} goBack={goBack} />
-            <CloseDialogButton className="min-w-[125px]" />
+            <CloseDialogButton />
             {returnToCheck && page !== 'check' ? (
               <BaseButton
                 variant="secondary"
                 size="lg"
-                className="min-w-[125px]"
+                className="min-w-[var(--dialog-action-min-w)]"
                 label={translate('Back to check')}
                 onClick={() => selectPage('check')}
               />
@@ -185,7 +185,6 @@ const StepConfigForm: FC<
               }
               submitting={submitting}
               label={translate('Save')}
-              className="min-w-[125px]"
             />
           </>
         }

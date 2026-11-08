@@ -450,7 +450,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
                     id="check-another"
                   />
                 )}
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
@@ -458,7 +458,6 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
                     isEdit ? translate('Save changes') : translate('Confirm')
                   }
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

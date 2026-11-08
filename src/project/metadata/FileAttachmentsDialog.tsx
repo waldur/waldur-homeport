@@ -31,7 +31,7 @@ export const FileAttachmentsDialog: FC<FileAttachmentsDialogProps> = ({
 }) => (
   <ModalDialog
     title={translate('File attachments')}
-    footer={<CloseDialogButton className="min-w-[125px]" />}
+    footer={<CloseDialogButton />}
   >
     <div className="flex flex-col gap-2.5">
       {resolve.files.map((file) => (

@@ -66,12 +66,11 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
             iconColor="info"
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={setConsumerMutation.isPending}
                   label={translate('Send')}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

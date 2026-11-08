@@ -104,13 +104,12 @@ export const PolicyCreateDialog: FC<PolicyCreateDialogProps> = ({
             }
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Create')}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

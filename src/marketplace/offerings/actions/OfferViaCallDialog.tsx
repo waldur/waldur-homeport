@@ -62,20 +62,19 @@ const renderFooter = ({
       {step > 0 && (
         <BaseButton
           variant="tertiary"
-          className="min-w-[125px] me-auto"
+          className="min-w-[var(--dialog-action-min-w)] me-auto"
           onClick={() => onPrev()}
           label={translate('Back')}
           iconNode={<CaretLeftIcon weight="bold" />}
           size="lg"
         />
       )}
-      <CloseDialogButton variant="tertiary" className="min-w-[125px]" />
+      <CloseDialogButton variant="tertiary" />
       <SubmitButton
         submitting={submitting}
         invalid={invalid}
         label={isLast ? translate('Create') : translate('Next')}
         iconNode={isLast ? undefined : <CaretRightIcon weight="bold" />}
-        className="min-w-[125px]"
       />
     </>
   );
@@ -92,7 +91,7 @@ const dialogShell = (children) => (
   <ModalDialog
     title={translate('Offer via call')}
     iconNode={<MegaphoneIcon weight="bold" />}
-    footer={<CloseDialogButton className="min-w-[125px]" />}
+    footer={<CloseDialogButton />}
   >
     {children}
   </ModalDialog>

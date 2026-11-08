@@ -227,13 +227,12 @@ export const AssignEvaluatorDialog = ({
               iconColor="success"
               footer={
                 <>
-                  <CloseDialogButton className="min-w-[125px]" />
+                  <CloseDialogButton />
                   <SubmitButton
                     submitting={submitting}
                     disabled={invalid}
                     label={translate('Assign')}
                     variant="primary"
-                    className="min-w-[125px]"
                   />
                 </>
               }

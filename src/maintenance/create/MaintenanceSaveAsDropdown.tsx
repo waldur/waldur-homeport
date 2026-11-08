@@ -42,7 +42,7 @@ export const MaintenanceSaveAsDropdown: FC<OwnProps> = ({
           {translate('Save as')}
         </>
       }
-      toggleClassName="min-w-[125px]"
+      toggleClassName="min-w-[var(--dialog-action-min-w)]"
       className="min-w-[150px]"
       side="bottom"
     >

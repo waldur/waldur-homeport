@@ -270,7 +270,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                   label={translate('Back')}
                   iconNode={<ArrowLeftIcon weight="bold" />}
                   variant="tertiary"
-                  className="min-w-[125px]"
+                  className="min-w-[var(--dialog-action-min-w)]"
                   size="lg"
                 />
                 <SubmitButton
@@ -280,7 +280,6 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                   }
                   label={translate('Save')}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

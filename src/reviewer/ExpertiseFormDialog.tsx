@@ -61,13 +61,12 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting}
                   disabled={invalid}
                   label={translate('Add')}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }

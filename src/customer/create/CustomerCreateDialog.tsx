@@ -77,13 +77,12 @@ export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
             iconColor="success"
             footer={
               <>
-                <CloseDialogButton className="min-w-[125px]" />
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting}
                   disabled={invalid}
                   label={translate('Create')}
                   variant="primary"
-                  className="min-w-[125px]"
                 />
               </>
             }
