@@ -8,6 +8,7 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
+import { resourceFacets } from './facets';
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { buildResourcesAllFilter, resourcesListRequiredFields } from './utils';
 
@@ -30,6 +31,7 @@ export const OrganizationResourcesAllList: FC<Partial<TableProps>> = ({
     table: `OrganizationResourcesAllList`,
     syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
+    facets: resourceFacets,
     queryField: 'query',
     filter,
     mandatoryFields: resourcesListRequiredFields(),

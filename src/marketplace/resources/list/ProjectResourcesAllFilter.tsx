@@ -6,6 +6,7 @@ import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { BooleanFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 import { TableFilterContext } from '@/table/FilterContextProvider';
 import { useFilterValues } from '@/table/useFilterValues';
 import { Customer } from '@/workspace/types';
@@ -14,6 +15,9 @@ import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
+
+const byName = facetOption('uuid', 'name');
+const byTitle = facetOption('uuid', 'title');
 
 interface ProjectResourcesAllFilterProps {
   hasProjectFilter?: boolean;
@@ -45,26 +49,35 @@ export const ProjectResourcesAllFilter: FunctionComponent<
       <OfferingFilter
         providerOfferings={false}
         offeringFilter={offeringFilter}
+        facet="offering"
       />
       <OfferingFilter
         title={translate('Parent offering')}
         name="parent_offering"
         offeringFilter={parentOfferingFilter}
+        facet="parent_offering"
       />
       <CategoryFilter
         project={formValues?.project || props.project}
         customer={formValues?.organization || props.customer}
+        facet="category"
+        facetOption={byTitle}
       />
-      {props.hasCustomerFilter ? <OrganizationFilter /> : null}
-      {props.hasProjectFilter ? <ProjectFilter /> : null}
+      {props.hasCustomerFilter ? (
+        <OrganizationFilter facet="customer" facetOption={byName} />
+      ) : null}
+      {props.hasProjectFilter ? (
+        <ProjectFilter facet="project" facetOption={byName} />
+      ) : null}
       {props.context ? (
         <RuntimeStateFilter
           customerUuid={
             props.context === 'organization' ? props.customer?.uuid : undefined
           }
+          facet="runtime_state"
         />
       ) : null}
-      <ResourceStateFilter instantApply={false} />
+      <ResourceStateFilter instantApply={false} facet="state" />
       <BooleanFilter
         title={translate('Include terminated')}
         name="include_terminated"

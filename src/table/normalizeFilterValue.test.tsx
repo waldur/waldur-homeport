@@ -18,12 +18,15 @@ interface ProbeProps {
   name: string;
   isMulti: boolean;
   options?: any;
+  scalarToOption?: (raw: string | number) => any;
 }
 
-const Probe: FC<ProbeProps> = ({ name, isMulti, options }) => {
-  useNormalizeSelectFilterValue(name, isMulti, options);
+const Probe: FC<ProbeProps> = ({ name, isMulti, options, scalarToOption }) => {
+  useNormalizeSelectFilterValue(name, isMulti, options, scalarToOption);
   return null;
 };
+
+const asOption = (raw) => ({ value: raw, label: String(raw) });
 
 const renderWithRedux = (
   initialValue: any,
@@ -210,6 +213,33 @@ describe('useNormalizeSelectFilterValue', () => {
       await waitFor(() => {
         expect(getValues().state).toEqual(correct);
       });
+    });
+  });
+
+  describe('options that come from a facet', () => {
+    it('keeps a raw single value as an option', async () => {
+      const getValues = renderWithRedux('Pending vendor', {
+        name: 'status',
+        isMulti: false,
+        scalarToOption: asOption,
+      });
+      await waitFor(() =>
+        expect(getValues().status).toEqual({
+          value: 'Pending vendor',
+          label: 'Pending vendor',
+        }),
+      );
+    });
+
+    it('keeps a raw multi value as an option', async () => {
+      const getValues = renderWithRedux('bio', {
+        name: 'category',
+        isMulti: true,
+        scalarToOption: asOption,
+      });
+      await waitFor(() =>
+        expect(getValues().category).toEqual([{ value: 'bio', label: 'bio' }]),
+      );
     });
   });
 });

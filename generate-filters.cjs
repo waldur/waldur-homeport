@@ -586,6 +586,19 @@ class Generator {
     if (['SelectFilter', 'AsyncSelectFilter'].includes(tagName)) {
       props.push(`isClearable={${!f.required}}`);
       if (f.isMulti) props.push(`isMulti={true}`);
+      // `facet: <name>` limits the options to the values the list's facets
+      // action still counts, when the table passes `facets` to useTable.
+      if (f.facet) {
+        props.push(`facet="${f.facet}"`);
+        if (tagName === 'AsyncSelectFilter') {
+          // A user option is labelled by its full name (see getOptionLabel).
+          const labelKey =
+            f.itemType === 'User' ? 'full_name' : f.labelField || 'name';
+          props.push(
+            `facetOption={facetOption('${f.valueField || 'url'}', '${labelKey}')}`,
+          );
+        }
+      }
     }
 
     if (f.placeholder || (f.label && tagName !== 'BooleanFilter')) {
@@ -628,7 +641,10 @@ ${jsx}    )}\n`
     if (f.mapTo === false) {
       return '';
     }
-    if (f.component === 'RangeNumberField' || f.component === 'RangeDateField') {
+    if (
+      f.component === 'RangeNumberField' ||
+      f.component === 'RangeDateField'
+    ) {
       return (
         `      if (values.${f.name}?.min != null) {\n` +
         `        filter.${f.rangeMinParam} = values.${f.name}.min;\n` +
@@ -861,6 +877,7 @@ ${filters.map(Generator.selector).join('')}  }
           }
         }
         if (f.feature) comps.add('feature');
+        if (f.facet && f.component === 'Autocomplete') comps.add('facetOption');
         const tagName = MAPPING[f.component] || 'TableFilterItem';
         tableComps.add(tagName);
       });
@@ -883,6 +900,10 @@ ${filters.map(Generator.selector).join('')}  }
     if (comps.has('feature')) {
       lines.push(`import { isFeatureVisible } from '@/features/connect';`);
       lines.push(`import { MarketplaceFeatures } from '@/FeaturesEnums';`);
+    }
+
+    if (comps.has('facetOption')) {
+      lines.push(`import { facetOption } from '@/table/facets';`);
     }
 
     if (tableComps.has('AsyncSelectFilter')) {

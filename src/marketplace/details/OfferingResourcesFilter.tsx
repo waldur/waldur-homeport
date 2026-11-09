@@ -23,8 +23,12 @@ export const OfferingResourcesFilter: FunctionComponent<
         offeringUuid={offeringUuid}
         organizationUuid={values?.organization?.uuid}
       />
-      <RuntimeStateFilter offeringUuid={offeringUuid} />
-      <ResourceStateFilter ellipsis={false} instantApply={false} />
+      <RuntimeStateFilter offeringUuid={offeringUuid} facet="runtime_state" />
+      <ResourceStateFilter
+        ellipsis={false}
+        instantApply={false}
+        facet="state"
+      />
       <BooleanFilter
         title={translate('Include terminated')}
         name="include_terminated"

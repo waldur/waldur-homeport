@@ -5,6 +5,7 @@ import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { BooleanFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import {
   checkIsOwnerOrStaff,
@@ -13,6 +14,9 @@ import {
 
 import { CategoryFilter } from './CategoryFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
+
+const byName = facetOption('uuid', 'name');
+const byTitle = facetOption('uuid', 'title');
 
 export const ProviderResourcesFilter: FunctionComponent = () => {
   const customer = useCustomer();
@@ -30,15 +34,20 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
 
   return (
     <>
-      <OfferingFilter offeringFilter={offeringFilter} />
+      <OfferingFilter offeringFilter={offeringFilter} facet="offering" />
       <OfferingFilter
         title={translate('Parent offering')}
         name="parent_offering"
         offeringFilter={parentOfferingFilter}
+        facet="parent_offering"
       />
-      <OrganizationFilter title={translate('Client organization')} />
-      <CategoryFilter />
-      <ResourceStateFilter instantApply={false} />
+      <OrganizationFilter
+        title={translate('Client organization')}
+        facet="customer"
+        facetOption={byName}
+      />
+      <CategoryFilter facet="category" facetOption={byTitle} />
+      <ResourceStateFilter instantApply={false} facet="state" />
       <BooleanFilter
         title={translate('Include terminated')}
         name="include_terminated"

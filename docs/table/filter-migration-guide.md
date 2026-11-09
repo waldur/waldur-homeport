@@ -135,16 +135,17 @@ You can customize almost every aspect of the generated filters.
 
 ### Key Configuration Options
 
-| Option | Description | Example |
-| :--- | :--- | :--- |
-| `label` | Custom label for the filter. | `label: "Organization"` |
-| `component` | React component to use. | `component: "Autocomplete"` |
-| `loadOptions` | API method for async loading. | `loadOptions: "customersList"` |
-| `valueField` | Field to use as value. | `valueField: "uuid"` |
-| `labelField` | Field to show in UI. | `labelField: "name"` |
-| `mapTo` | Map a renamed filter back to a specific API param. | `mapTo: "organization_group_uuid"` |
-| `options` | Hardcoded options for Select. | `options: [{ label: "Yes", value: true }]` |
-| `keepOrder` | Emit enum options in the order listed (`enumOverrides`/`options`) instead of sorted by value, for scales such as time periods. | `keepOrder: true` |
+| Option        | Description                                                                                                                                                                       | Example                                    |
+| :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
+| `label`       | Custom label for the filter.                                                                                                                                                      | `label: "Organization"`                    |
+| `component`   | React component to use.                                                                                                                                                           | `component: "Autocomplete"`                |
+| `loadOptions` | API method for async loading.                                                                                                                                                     | `loadOptions: "customersList"`             |
+| `valueField`  | Field to use as value.                                                                                                                                                            | `valueField: "uuid"`                       |
+| `labelField`  | Field to show in UI.                                                                                                                                                              | `labelField: "name"`                       |
+| `mapTo`       | Map a renamed filter back to a specific API param.                                                                                                                                | `mapTo: "organization_group_uuid"`         |
+| `options`     | Hardcoded options for Select.                                                                                                                                                     | `options: [{ label: "Yes", value: true }]` |
+| `keepOrder`   | Emit enum options in the order listed (`enumOverrides`/`options`) instead of sorted by value, for scales such as time periods.                                                    | `keepOrder: true`                          |
+| `facet`       | Name of the list's facet whose values limit this filter's options (see "Filter facets" in [filters.md](filters.md)). Has no effect until the table passes `facets` to `useTable`. | `facet: customer`                          |
 
 ### Example Configuration
 
@@ -157,13 +158,13 @@ overrides:
   # Override specific parameters across ALL operations
   parameters:
     organization_group:
-      label: "Organization group"
-      component: "Autocomplete"
-      loadOptions: "organizationGroupsList"
-      valueField: "uuid"
-      labelField: "name"
+      label: 'Organization group'
+      component: 'Autocomplete'
+      loadOptions: 'organizationGroupsList'
+      valueField: 'uuid'
+      labelField: 'name'
       # The API expects 'organization_group_uuid', but we call the filter 'organization_group'
-      mapTo: "organization_group_uuid"
+      mapTo: 'organization_group_uuid'
 ```
 
 ---
@@ -197,7 +198,7 @@ If a filter's options come from parent props (not an API call), use the `props.`
 ```yaml
 parameters:
   project_role:
-    options: "props.projectRoles" # Will generate props.projectRoles in component
+    options: 'props.projectRoles' # Will generate props.projectRoles in component
 ```
 
 The generator will:

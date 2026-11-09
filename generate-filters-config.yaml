@@ -775,13 +775,16 @@ overrides:
     customer_uuid:
       label: Client organization
       name: organization
+      facet: customer
     project_uuid:
       name: project
+      facet: project
       extraQuery:
         customer: 'props.organizationUuid'
     plan_uuid:
       label: Plan
       name: plan
+      facet: plan
       searchParam: false
       extraQuery:
         offering_uuid: 'props.offeringUuid'
@@ -860,6 +863,7 @@ overrides:
     final_report_overdue:
       label: Final report overdue
     state:
+      facet: state
       isMulti: true
       enumOverrides:
         draft: Draft
@@ -871,10 +875,15 @@ overrides:
     call_uuid:
       label: Call
       name: call
+      facet: call
+      # A call's own tabs fix the call: offering the others there would
+      # switch the page to another call's proposals.
+      isHidden: props.hideCall
       operationId: proposal_public_calls_list
     round_uuid:
       label: Round
       name: round
+      facet: round
       operationId: proposal_protected_calls_rounds_list
       extraPath:
         uuid: props.callUuid
@@ -882,14 +891,17 @@ overrides:
     organization_uuid:
       label: Organization running the call
       name: organization_uuid
+      facet: organization
       operationId: customers_list
     created_by_uuid:
       label: Applicant
       name: applicant
+      facet: applicant
       operationId: users_list
     panel_uuid:
       label: Panel
       name: panel
+      facet: panel
       operationId: proposal_protected_calls_panels_list
       extraPath:
         uuid: props.callUuid
@@ -958,15 +970,20 @@ overrides:
   support_issues:
     filters:
       - status
+      - type
       - is_open
       - is_routed
+    # Status and type are free text synced from the service desk, so no list
+    # here could name their values: the options are the values the facets
+    # count. A caller may still pass fixed ones as statusOptions/typeOptions.
     status:
-      enumOverrides:
-        Canceled: Canceled
-        Closed: Closed
-        Open: Open
-        Resolved: Resolved
-        'Waiting for support': Waiting for support
+      component: Select
+      options: props.statusOptions
+      facet: status
+    type:
+      component: Select
+      options: props.typeOptions
+      facet: type
     is_open:
       # A Select rather than a boolean checkbox: the dashboard's "Closed issues"
       # card links to is_open=false, and the generated boolean filter drops a
@@ -984,15 +1001,19 @@ overrides:
   provider_tickets:
     filters:
       - status
+      - priority
       - is_escalated
       - sla_breached
+    # Free text synced from the service desk: the options are the values the
+    # facets count, unless a caller passes fixed ones.
     status:
-      enumOverrides:
-        Canceled: Canceled
-        Closed: Closed
-        Open: Open
-        Resolved: Resolved
-        'Waiting for support': Waiting for support
+      component: Select
+      options: props.statusOptions
+      facet: status
+    priority:
+      component: Select
+      options: props.priorityOptions
+      facet: priority
     is_escalated:
       label: Escalated
     sla_breached:
@@ -1029,30 +1050,55 @@ overrides:
 
   marketplace_software_packages:
     filters:
-      - catalog_name
-      - catalog_version
+      - catalog_name_exact
+      - catalog_version_exact
       - catalog_type
       - category
       - license
       - toolchain_name
       - has_gpu
       - gpu_arch
-    catalog_name:
+    # The catalogue's own values: the options are those the facets count,
+    # sent as exact matches ("2023" must not also select "2023.06").
+    catalog_name_exact:
       label: Catalog
-    catalog_version:
+      name: catalog_name
+      component: Select
+      options: props.catalogNameOptions
+      facet: catalog_name
+    catalog_version_exact:
       label: Version
+      name: catalog_version
+      component: Select
+      options: props.catalogVersionOptions
+      facet: catalog_version
     catalog_type:
       label: Type
+      facet: catalog_type
+    # Free text on the server; the options are the values the facets count,
+    # unless a caller passes fixed ones.
     category:
       label: Category
+      component: Select
+      options: props.categoryOptions
+      facet: category
     license:
       label: License
+      component: Select
+      options: props.licenseOptions
+      facet: license
     toolchain_name:
       label: Toolchain
+      component: Select
+      options: props.toolchainOptions
+      facet: toolchain
     has_gpu:
       label: Has GPU
     gpu_arch:
       label: GPU architecture
+      component: Select
+      options: props.gpuArchOptions
+      facet: gpu_arch
 
   user_data_access_history:
     operationId: users_data_access_history_list
@@ -1136,6 +1182,7 @@ overrides:
       - reviewer_uuid
       - proposal_uuid
     state:
+      facet: state
       isMulti: true
       enumOverrides:
         in_review: In review
@@ -1144,10 +1191,15 @@ overrides:
     call_uuid:
       label: Call
       name: call
+      facet: call
+      # A call's own tabs fix the call: offering the others there would
+      # switch the page to another call's proposals.
+      isHidden: props.hideCall
       operationId: proposal_public_calls_list
     round_uuid:
       label: Round
       name: round
+      facet: round
       operationId: proposal_protected_calls_rounds_list
       extraPath:
         uuid: props.callUuid
@@ -1155,16 +1207,23 @@ overrides:
     organization_uuid:
       label: Organization running the call
       name: organization_uuid
+      facet: organization
+      # An organization's reviews page fixes it, as "My reviews" fixes the
+      # reviewer: the filter there would offer others and change nothing.
+      isHidden: props.hideOrganization
       operationId: customers_list
     reviewer_uuid:
       label: Reviewer
       name: reviewer
+      facet: reviewer
+      isHidden: props.hideReviewer
       operationId: users_list
       valueField: uuid
       labelField: full_name
     proposal_uuid:
       label: Proposal
       name: proposal
+      facet: proposal
       operationId: proposal_proposals_list
       extraQuery:
         call_uuid: props.callUuid
@@ -1175,6 +1234,7 @@ overrides:
       - state
       - call_uuid
     state:
+      facet: state
       isMulti: true
       enumOverrides:
         draft: Draft
@@ -1186,6 +1246,7 @@ overrides:
     call_uuid:
       label: Call
       name: call
+      facet: call
       operationId: proposal_public_calls_list
       # The applicant list drops this where the deployment hides calls; the
       # call-manager list keeps it in every mode, so it is a prop rather than
@@ -1195,30 +1256,34 @@ overrides:
   proposal_requested_offerings:
     filters:
       - organization_uuid
-      - call
+      - call_uuid
       - state
-      - offering
+      - offering_uuid
     organization_uuid:
       label: Organization
       name: organization_uuid
+      facet: organization
       operationId: customers_list
-    call:
+    # By UUID, as the facets key them: the inline column filters set
+    # {uuid, name}; values saved as {url} earlier are mapped by the pages.
+    call_uuid:
       label: Call
       name: call
+      facet: call
       operationId: proposal_public_calls_list
-      valueField: url
     state:
       label: Status
+      facet: state
       isMulti: true
       enumOverrides:
         requested: Requested
         accepted: Accepted
         canceled: Canceled
-    offering:
+    offering_uuid:
       label: Offering
       name: offering
+      facet: offering
       operationId: marketplace_public_offerings_list
-      valueField: url
       extraQuery:
         shared: true
 

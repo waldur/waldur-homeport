@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { marketplaceSoftwarePackagesList, Offering } from 'waldur-js-client';
+import {
+  marketplaceSoftwarePackagesList,
+  Offering,
+  marketplaceSoftwarePackagesFacetsList,
+} from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
@@ -22,6 +26,9 @@ import {
 } from '../softwareCatalogCpu';
 
 import { SoftwarePackageExpandableRow } from './SoftwarePackageExpandableRow';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const softwareFacets = { fetch: marketplaceSoftwarePackagesFacetsList };
 
 interface PublicOfferingSoftwareCatalogTableProps {
   offering: Offering;
@@ -95,6 +102,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
     table: 'OfferingSoftwarePackages-' + offering.uuid,
     syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceSoftwarePackagesList),
+    facets: softwareFacets,
     queryField: 'query',
     filter,
   });

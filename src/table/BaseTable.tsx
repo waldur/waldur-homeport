@@ -23,6 +23,7 @@ import { TableContent } from './components/content';
 import { TableToolbar, TableToolbarActions } from './components/toolbar';
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProvider } from './context';
+import { TableFacetsProvider } from './facets';
 import { FilterContextProvider } from './FilterContextProvider';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
 import { getTableState } from './selectors';
@@ -673,6 +674,8 @@ export default function BaseTable<RowType = any>({
     [columns],
   );
   return (
-    <Table {...(props as TableProps<RowType>)} columns={filteredColumns} />
+    <TableFacetsProvider value={props.facets}>
+      <Table {...(props as TableProps<RowType>)} columns={filteredColumns} />
+    </TableFacetsProvider>
   );
 }

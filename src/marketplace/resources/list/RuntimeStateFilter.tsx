@@ -5,6 +5,7 @@ import { marketplaceRuntimeStatesList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { SelectFilter } from '@/table';
+import { useHasTableFacets } from '@/table/facets';
 import { useProject } from '@/workspace/hooks';
 
 interface RuntimeStateFilterProps {
@@ -12,14 +13,19 @@ interface RuntimeStateFilterProps {
   offeringUuid?: string;
   /** Limits the offered states to the resources of a single organization. */
   customerUuid?: string;
+  /** The table's runtime-state facet; when the table counts facets, its
+   * values replace the runtime-states request and no scope is needed. */
+  facet?: string;
   [key: string]: any;
 }
 
 export const RuntimeStateFilter: React.FC<RuntimeStateFilterProps> = ({
   offeringUuid,
   customerUuid,
+  facet,
   ...props
 }) => {
+  const faceted = useHasTableFacets() && !!facet;
   const { params } = useCurrentStateAndParams();
   const project = useProject();
   const categoryUuid = params.category_uuid;
@@ -45,8 +51,22 @@ export const RuntimeStateFilter: React.FC<RuntimeStateFilterProps> = ({
           customer_uuid: customerUuid,
         },
       }).then((r) => r.data),
-    enabled: hasScope,
+    enabled: hasScope && !faceted,
   });
+
+  if (faceted) {
+    return (
+      <SelectFilter
+        title={translate('Runtime state')}
+        name="runtime_state"
+        badgeValue={(value) => value?.label}
+        placeholder={translate('Select state...')}
+        facet={facet}
+        isClearable={true}
+        {...props}
+      />
+    );
+  }
 
   if (!hasScope) {
     return null;

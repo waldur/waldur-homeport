@@ -50,8 +50,29 @@ describe('URL filters without a router', () => {
         customer: {
           uuid: '0123456789abcdef0123456789abcdef',
           name: 'Acme Lab',
+          title: 'Acme Lab',
+          full_name: 'Acme Lab',
         },
       },
     );
+  });
+
+  it('keeps the label of a titled or user value through the query', () => {
+    syncFiltersToURL({
+      category: { uuid: '0123456789abcdef0123456789abcdef', title: 'HPC' },
+      applicant: {
+        uuid: 'fedcba9876543210fedcba9876543210',
+        full_name: 'Niels Bohr',
+      },
+    });
+    const url = replaceState.mock.calls.at(-1)[2];
+    window.location.search = url.slice(url.indexOf('?'), url.indexOf('#'));
+
+    const values = getInitialValues(
+      undefined,
+      new Set(['category', 'applicant']),
+    );
+    expect(values.category.title).toBe('HPC');
+    expect(values.applicant.full_name).toBe('Niels Bohr');
   });
 });

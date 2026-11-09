@@ -8,6 +8,7 @@ import { ProviderFilter } from '@/marketplace/orders/ProviderFilter';
 import { CategoryFilter } from '@/marketplace/resources/list/CategoryFilter';
 import { TagFilter } from '@/marketplace/tags/TagFilter';
 import { SelectFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 
 interface OfferingsListFilterOwnProps {
   showCategory?;
@@ -39,29 +40,40 @@ const sharedOptions = [
   },
 ];
 
+const organizationOption = facetOption('uuid', 'name');
+const categoryOption = facetOption('uuid', 'title');
+const tagOption = facetOption('uuid', 'name');
+
+// The facet props limit each filter to values that still have offerings when
+// the table passes `facets` to useTable; otherwise they change nothing.
 export const OfferingsListFilter: FunctionComponent<
   OfferingsListFilterOwnProps
 > = ({ showCategory, showOrganization = true }) => {
   return (
     <>
-      <OfferingStateFilter instantApply={false} />
+      <OfferingStateFilter instantApply={false} facet="state" />
       {showOrganization ? (
         <ProviderFilter
           name="organization"
           loadOptions={loadOrganizationOptions}
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => option.name}
+          facet="customer"
+          facetOption={organizationOption}
         />
       ) : null}
-      <OfferingTypeFilter />
-      {showCategory ? <CategoryFilter /> : null}
-      <TagFilter />
+      <OfferingTypeFilter facet="type" />
+      {showCategory ? (
+        <CategoryFilter facet="category" facetOption={categoryOption} />
+      ) : null}
+      <TagFilter facet="tag" facetOption={tagOption} />
       <SelectFilter
         name="shared"
         title={translate('Shared')}
         badgeValue={(value) => value?.label}
         placeholder={translate('Select status')}
         options={sharedOptions}
+        facet="shared"
       />
     </>
   );

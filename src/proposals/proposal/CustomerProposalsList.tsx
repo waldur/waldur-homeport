@@ -1,5 +1,8 @@
 import { FC, useMemo } from 'react';
-import { proposalProposalsList } from 'waldur-js-client';
+import {
+  proposalProposalsList,
+  proposalProposalsFacetsList,
+} from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -23,6 +26,9 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalStateBadge } from './ProposalStateBadge';
 
+// Counts what each filter can still take; see '@/table/facets'.
+const proposalFacets = { fetch: proposalProposalsFacetsList };
+
 export const CustomerProposalsList: FC = () => {
   const customer = useCustomer();
   const values = useFilterValues('ProposalsList');
@@ -41,6 +47,7 @@ export const CustomerProposalsList: FC = () => {
     table: 'ProposalsList',
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalProposalsList),
+    facets: proposalFacets,
     queryField: 'name',
     filter,
   });

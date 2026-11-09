@@ -19,6 +19,7 @@ import {
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { AsyncSelectFilter, SelectFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 
 export const ProposalReviewStateOptions: ProposalReviewStateOption[] = [
   {
@@ -54,19 +55,24 @@ export const ProposalReviewsFilter: FunctionComponent<
       getOptionLabel={(option: ProposalReviewStateOption) => option.label}
       isClearable={true}
       isMulti={true}
+      facet="state"
       placeholder={translate('State')}
     />
-    <AsyncSelectFilter
-      title={translate('Call')}
-      name="call"
-      getValueLabel={(value: PublicCall) => value?.name}
-      loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
-      defaultOptions
-      getOptionValue={(option: PublicCall) => String(option.uuid || '')}
-      getOptionLabel={(option: PublicCall) => String(option.name || '')}
-      isClearable={true}
-      placeholder={translate('Call')}
-    />
+    {!props.hideCall && (
+      <AsyncSelectFilter
+        title={translate('Call')}
+        name="call"
+        getValueLabel={(value: PublicCall) => value?.name}
+        loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
+        defaultOptions
+        getOptionValue={(option: PublicCall) => String(option.uuid || '')}
+        getOptionLabel={(option: PublicCall) => String(option.name || '')}
+        isClearable={true}
+        facet="call"
+        facetOption={facetOption('uuid', 'name')}
+        placeholder={translate('Call')}
+      />
+    )}
     <AsyncSelectFilter
       title={translate('Round')}
       name="round"
@@ -81,34 +87,44 @@ export const ProposalReviewsFilter: FunctionComponent<
       getOptionValue={(option: ProtectedRound) => String(option.uuid || '')}
       getOptionLabel={(option: ProtectedRound) => String(option.name || '')}
       isClearable={true}
+      facet="round"
+      facetOption={facetOption('uuid', 'name')}
       placeholder={translate('Round')}
     />
-    <AsyncSelectFilter
-      title={translate('Organization running the call')}
-      name="organization_uuid"
-      getValueLabel={(value: Customer) => value?.name}
-      loadOptions={createLoadOptions(customersList, 'query')}
-      defaultOptions
-      getOptionValue={(option: Customer) => String(option.uuid || '')}
-      getOptionLabel={(option: Customer) => String(option.name || '')}
-      isClearable={true}
-      placeholder={translate('Organization running the call')}
-    />
-    <AsyncSelectFilter
-      title={translate('Reviewer')}
-      name="reviewer"
-      getValueLabel={(value: User) =>
-        value?.full_name || value?.username || value?.email
-      }
-      loadOptions={createLoadOptions(usersList, 'query')}
-      defaultOptions
-      getOptionValue={(option: User) => String(option.uuid || '')}
-      getOptionLabel={(option: User) =>
-        String(option.full_name || option.username || option.email || '')
-      }
-      isClearable={true}
-      placeholder={translate('Reviewer')}
-    />
+    {!props.hideOrganization && (
+      <AsyncSelectFilter
+        title={translate('Organization running the call')}
+        name="organization_uuid"
+        getValueLabel={(value: Customer) => value?.name}
+        loadOptions={createLoadOptions(customersList, 'query')}
+        defaultOptions
+        getOptionValue={(option: Customer) => String(option.uuid || '')}
+        getOptionLabel={(option: Customer) => String(option.name || '')}
+        isClearable={true}
+        facet="organization"
+        facetOption={facetOption('uuid', 'name')}
+        placeholder={translate('Organization running the call')}
+      />
+    )}
+    {!props.hideReviewer && (
+      <AsyncSelectFilter
+        title={translate('Reviewer')}
+        name="reviewer"
+        getValueLabel={(value: User) =>
+          value?.full_name || value?.username || value?.email
+        }
+        loadOptions={createLoadOptions(usersList, 'query')}
+        defaultOptions
+        getOptionValue={(option: User) => String(option.uuid || '')}
+        getOptionLabel={(option: User) =>
+          String(option.full_name || option.username || option.email || '')
+        }
+        isClearable={true}
+        facet="reviewer"
+        facetOption={facetOption('uuid', 'full_name')}
+        placeholder={translate('Reviewer')}
+      />
+    )}
     <AsyncSelectFilter
       title={translate('Proposal')}
       name="proposal"
@@ -120,6 +136,8 @@ export const ProposalReviewsFilter: FunctionComponent<
       getOptionValue={(option: Proposal) => String(option.uuid || '')}
       getOptionLabel={(option: Proposal) => String(option.name || '')}
       isClearable={true}
+      facet="proposal"
+      facetOption={facetOption('uuid', 'name')}
       placeholder={translate('Proposal')}
     />
   </>
@@ -129,6 +147,9 @@ export const ProposalReviewsFilterFormId = 'ProposalReviewsFilter';
 
 interface ProposalReviewsFilterProps {
   callUuid?: any;
+  hideCall?: boolean;
+  hideOrganization?: boolean;
+  hideReviewer?: boolean;
 }
 
 export interface ProposalReviewsFilterFormData {

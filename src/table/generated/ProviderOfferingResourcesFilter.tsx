@@ -14,6 +14,7 @@ import {
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { AsyncSelectFilter, BooleanFilter, DateFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 
 export const ProviderOfferingResourcesFilter: FunctionComponent<
   ProviderOfferingResourcesFilterProps
@@ -28,6 +29,8 @@ export const ProviderOfferingResourcesFilter: FunctionComponent<
       getOptionValue={(option: Customer) => String(option.uuid || '')}
       getOptionLabel={(option: Customer) => String(option.name || '')}
       isClearable={true}
+      facet="customer"
+      facetOption={facetOption('uuid', 'name')}
       placeholder={translate('Client organization')}
     />
     <AsyncSelectFilter
@@ -41,6 +44,8 @@ export const ProviderOfferingResourcesFilter: FunctionComponent<
       getOptionValue={(option: Project) => String(option.uuid || '')}
       getOptionLabel={(option: Project) => String(option.name || '')}
       isClearable={true}
+      facet="project"
+      facetOption={facetOption('uuid', 'name')}
       placeholder={translate('Project')}
     />
     <AsyncSelectFilter
@@ -58,6 +63,8 @@ export const ProviderOfferingResourcesFilter: FunctionComponent<
         String(option.name || '')
       }
       isClearable={true}
+      facet="plan"
+      facetOption={facetOption('uuid', 'name')}
       placeholder={translate('Plan')}
     />
     <BooleanFilter

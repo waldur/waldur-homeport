@@ -39,6 +39,7 @@ import {
   TABLE_PUBLIC_RESOURCE,
 } from './constants';
 import { EndDateTooltip } from './EndDateTooltip';
+import { providerResourceFacets } from './facets';
 import { ProviderResourceActions } from './ProviderResourceActions';
 import { ProviderResourcesFilter } from './ProviderResourcesFilter';
 import { PublicResourcesLimits } from './PublicResourcesLimits';
@@ -286,6 +287,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 const TableOptions = {
   table: TABLE_PUBLIC_RESOURCE,
   fetchData: createFetcher(marketplaceProviderResourcesList),
+  facets: providerResourceFacets,
   queryField: 'query',
   initialFilters: {
     state: getStates().filter((state) => state.value !== 'Terminated'),

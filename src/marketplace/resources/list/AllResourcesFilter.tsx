@@ -7,10 +7,13 @@ import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { StringFilter, BooleanFilter, AsyncSelectFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 
 import { ProjectFilter } from './ProjectFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
+
+const byName = facetOption('uuid', 'name');
 
 export const AllResourcesFilter: FunctionComponent<{
   category_uuid?: string;
@@ -22,8 +25,8 @@ export const AllResourcesFilter: FunctionComponent<{
   );
   return (
     <>
-      <OrganizationFilter />
-      <ProjectFilter />
+      <OrganizationFilter facet="customer" facetOption={byName} />
+      <ProjectFilter facet="project" facetOption={byName} />
       <AsyncSelectFilter
         title={translate('Offering')}
         name="offering"
@@ -33,14 +36,17 @@ export const AllResourcesFilter: FunctionComponent<{
         getOptionLabel={(value) => value?.name}
         getOptionValue={(value) => value?.uuid}
         required={true}
+        facet="offering"
+        facetOption={byName}
       />
       <OfferingFilter
         title={translate('Parent offering')}
         name="parent_offering"
         badgeValue={(value) => value?.name}
         offeringFilter={parentOfferingFilter}
+        facet="parent_offering"
       />
-      <RuntimeStateFilter />
+      <RuntimeStateFilter facet="runtime_state" />
       {columns?.some((column) => column.attribute === 'flavor_name') && (
         <StringFilter
           title={translate('Flavor name')}
@@ -55,7 +61,7 @@ export const AllResourcesFilter: FunctionComponent<{
           placeholder={translate('Image name...')}
         />
       )}
-      <ResourceStateFilter instantApply={false} />
+      <ResourceStateFilter instantApply={false} facet="state" />
       <BooleanFilter
         title={translate('Include terminated')}
         name="include_terminated"

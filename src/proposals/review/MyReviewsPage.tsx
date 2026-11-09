@@ -1,5 +1,9 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
+import {
+  proposalReviewsList,
+  ProposalReviewsListData,
+  proposalReviewsFacetsList,
+} from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -26,6 +30,9 @@ import { ReviewsExpandableRow } from './ReviewsExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const reviewFacets = { fetch: proposalReviewsFacetsList };
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
@@ -57,6 +64,7 @@ export const MyReviewsPage: FC = () => {
     table: 'MyReviewsList',
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalReviewsList),
+    facets: reviewFacets,
     queryField: 'proposal_name',
     filter,
     mandatoryFields,
@@ -160,7 +168,7 @@ export const MyReviewsPage: FC = () => {
             verboseName={translate('reviews')}
             hasQuery={true}
             rowActions={ReviewsRowActions}
-            filters={<ProposalReviewsFilter />}
+            filters={<ProposalReviewsFilter hideReviewer />}
             showPageSizeSelector={true}
             expandableRow={ReviewsExpandableRow}
             hasOptionalColumns

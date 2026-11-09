@@ -19,6 +19,7 @@ vi.mock('./useTableQuery', () => ({
     isFetching: false,
     error: null,
     refetch: vi.fn(),
+    requestParams: {},
   })),
 }));
 
@@ -50,6 +51,7 @@ describe('useTable', () => {
       isFetching: false,
       error: null,
       refetch: vi.fn(),
+      requestParams: {},
     });
   });
 
@@ -67,6 +69,7 @@ describe('useTable', () => {
         isFetching: false,
         error: null,
         refetch: vi.fn(),
+        requestParams: {},
       });
 
       const { result } = renderHookWithProviders(
@@ -569,6 +572,7 @@ describe('useTable', () => {
         isFetching: false,
         error: null,
         refetch: vi.fn(),
+        requestParams: {},
       });
 
       const { result, rerender } = renderHookWithProviders(
@@ -597,6 +601,7 @@ describe('useTable', () => {
         isFetching: false,
         error: null,
         refetch: vi.fn(),
+        requestParams: {},
       });
 
       // Rerender to trigger the data handling effect
@@ -617,6 +622,7 @@ describe('useTable', () => {
         isFetching: false,
         error: null,
         refetch: vi.fn(),
+        requestParams: {},
       });
 
       const { result, rerender } = renderHookWithProviders(
@@ -644,6 +650,7 @@ describe('useTable', () => {
         isFetching: false,
         error: null,
         refetch: vi.fn(),
+        requestParams: {},
       });
 
       // Rerender to trigger the data handling effect

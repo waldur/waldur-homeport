@@ -21,44 +21,27 @@ export interface IsOpenOption {
   value: boolean;
 }
 
-export const StatusOptions: StatusOption[] = [
-  {
-    label: translate('Canceled'),
-    value: 'Canceled',
-  },
-  {
-    label: translate('Closed'),
-    value: 'Closed',
-  },
-  {
-    label: translate('Open'),
-    value: 'Open',
-  },
-  {
-    label: translate('Resolved'),
-    value: 'Resolved',
-  },
-  {
-    label: translate('Waiting for support'),
-    value: 'Waiting for support',
-  },
-];
-export interface StatusOption {
-  label: string;
-  value: string;
-}
-
-export const SupportIssuesFilter: FunctionComponent<{}> = () => (
+export const SupportIssuesFilter: FunctionComponent<
+  SupportIssuesFilterProps
+> = (props) => (
   <>
     <SelectFilter
       title={translate('Status')}
       name="status"
-      getValueLabel={(value: StatusOption) => value?.label}
-      options={StatusOptions}
-      getOptionValue={(option: StatusOption) => String(option.value)}
-      getOptionLabel={(option: StatusOption) => option.label}
+      getValueLabel={(value: any) => value?.label}
+      options={props.statusOptions}
       isClearable={true}
+      facet="status"
       placeholder={translate('Status')}
+    />
+    <SelectFilter
+      title={translate('Type')}
+      name="type"
+      getValueLabel={(value: any) => value?.label}
+      options={props.typeOptions}
+      isClearable={true}
+      facet="type"
+      placeholder={translate('Type')}
     />
     <SelectFilter
       title={translate('Open or closed')}
@@ -84,8 +67,14 @@ export const SupportIssuesFilter: FunctionComponent<{}> = () => (
 
 export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
 
+interface SupportIssuesFilterProps {
+  statusOptions?: any[];
+  typeOptions?: any[];
+}
+
 export interface SupportIssuesFilterFormData {
-  status: StatusOption;
+  status: any;
+  type: any;
   is_open: IsOpenOption;
   is_routed: boolean;
 }
@@ -99,6 +88,9 @@ export const selectSupportIssuesFilter = (
   if (values) {
     if (values.status) {
       filter.status = values.status.value;
+    }
+    if (values.type) {
+      filter.type = values.type.value;
     }
     if (values.is_open) {
       filter.is_open = values.is_open.value;

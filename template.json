@@ -83567,11 +83567,6 @@
       "feature_area": "cost-policies"
     }
   },
-  "Waiting for support": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
   "Waiting for the applicant's changes": {
     "context": {
       "feature_area": "proposal"

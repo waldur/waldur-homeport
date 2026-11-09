@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import {
   proposalRequestedOfferingsList,
   ProviderRequestedOffering,
+  proposalRequestedOfferingsFacetsList,
 } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
@@ -11,6 +12,7 @@ import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { CALL_STATE_VARIANT } from '@/proposals/call-tabs';
 import { CallOfferingStateField } from '@/proposals/details/CallOfferingStateField';
+import { withRequestedOfferingUuids } from '@/proposals/offering-requests/requestedOfferingFilterValues';
 import {
   formatCallOfferingState,
   formatCallState,
@@ -30,6 +32,9 @@ import { renderFieldOrDash } from '@/table/utils';
 import { OfferingTeamStepsRow } from './OfferingTeamStepsRow';
 import { makeProviderCallRowActions } from './ProviderCallRowActions';
 import { needsOfferingManagers } from './providerCalls';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const requestedOfferingFacets = { fetch: proposalRequestedOfferingsFacetsList };
 
 /**
  * The call's name, linked to its public page. A draft call has none yet:
@@ -125,7 +130,12 @@ export const ProviderCallsTable: FC<ProviderCallsTableProps> = ({
     : 'ProviderCalls';
   const values = useFilterValues(table);
   const formFilters = useMemo(
-    () => (offeringUuid ? {} : selectProposalRequestedOfferingsFilter(values)),
+    () =>
+      offeringUuid
+        ? {}
+        : selectProposalRequestedOfferingsFilter(
+            withRequestedOfferingUuids(values),
+          ),
     [offeringUuid, values],
   );
   const filter = useMemo(
@@ -146,6 +156,7 @@ export const ProviderCallsTable: FC<ProviderCallsTableProps> = ({
     table,
     syncFiltersToURL: !offeringUuid,
     fetchData: createFetcher(proposalRequestedOfferingsList),
+    facets: requestedOfferingFacets,
     queryField: 'call_name',
     filter,
     exportFields: [

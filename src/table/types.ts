@@ -5,6 +5,7 @@ import { Fetcher, FetcherOptions, TableRequest } from 'waldur-api-client';
 import type { TabCountProps } from 'waldur-ui';
 
 import type { ExportFormat } from './exporters/types';
+import type { TableFacetsOptions, TableFacetsSource } from './facets';
 import { TableFiltersGroup } from './TableFilterService';
 
 export type { Fetcher, FetcherOptions, TableRequest };
@@ -43,6 +44,11 @@ export interface TableOptionsType<RowType = any> {
   mandatoryFields?: string[];
   initialFilters?: Record<string, any>;
   syncFiltersToURL?: boolean;
+  /**
+   * The list endpoint's `facets` action. Filters with a `facet` prop then
+   * offer only the values that still have rows. Memoize it, like `filter`.
+   */
+  facets?: TableFacetsOptions;
 }
 
 export interface Column<RowType = any> {
@@ -204,6 +210,7 @@ export interface TableFullExport {
 
 export interface TableProps<RowType = any> extends TableState {
   table?: string;
+  facets?: TableFacetsSource;
   rows: any[];
   rowKey?: string;
   fetch: (force?: boolean) => void;

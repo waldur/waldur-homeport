@@ -92,20 +92,15 @@ export const SelectOfferingTab = () => {
         onChange={updateCategoriesMapping}
         components={{
           Option: (props) => (
-            <MultiSelectOption
-              {...props}
-              label={
-                <>
-                  {props.data.name}
-                  {props.data.category_title ? (
-                    <span className="text-quaternary">
-                      {' / '}
-                      {props.data.category_title}
-                    </span>
-                  ) : null}
-                </>
-              }
-            />
+            <MultiSelectOption {...props}>
+              {props.data.name}
+              {props.data.category_title ? (
+                <span className="text-quaternary">
+                  {' / '}
+                  {props.data.category_title}
+                </span>
+              ) : null}
+            </MultiSelectOption>
           ),
         }}
         disabled={false}
