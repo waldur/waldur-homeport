@@ -255,7 +255,7 @@ export const MyTasksPage: FC = () => {
           ? translate('No task waiting for you matches this deadline.')
           : translate('Nothing waiting for you.')
       }
-      rowClass={({ row }) => (row.is_overdue ? 'table-danger' : '')}
+      rowVariant={({ row }) => (row.is_overdue ? 'danger' : undefined)}
       hasQuery={false}
       // Only a delegated task has actions; with none on the page there is
       // no Actions column, rather than an empty one.

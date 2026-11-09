@@ -33,7 +33,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { propVal } from '@/property/propertyFields';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { DASH_ESCAPE_CODE, ROW_VARIANT_CLASSES } from '@/table/constants';
 
 import { formatIsdName, IsdBadges } from './IsdBadges';
 
@@ -297,7 +297,9 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
                 return (
                   <TableRow
                     key={attr}
-                    className={isStale ? 'table-warning' : undefined}
+                    className={
+                      isStale ? ROW_VARIANT_CLASSES.warning : undefined
+                    }
                   >
                     <TableCell>{attr}</TableCell>
                     <TableCell>

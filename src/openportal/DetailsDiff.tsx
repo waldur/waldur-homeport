@@ -10,6 +10,7 @@ import {
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { ROW_VARIANT_CLASSES } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 
 const sortedStringify = (value: unknown): string => {
@@ -95,7 +96,7 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
           return (
             <TableRow
               key={key}
-              className={differs ? 'table-warning' : undefined}
+              className={differs ? ROW_VARIANT_CLASSES.warning : undefined}
             >
               <TableCell className="align-top">{key}</TableCell>
               <TableCell className="align-top">

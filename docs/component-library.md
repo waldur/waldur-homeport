@@ -781,7 +781,8 @@ Key configuration props. Full interface is large — these are the most commonly
 | `enableExport`         | `boolean`                                | no       | `false`  | Enable export functionality                          |
 | `enableMultiSelect`    | `boolean`                                | no       | `false`  | Enable row multi-select                              |
 | `hoverable`            | `boolean`                                | no       | `false`  | Enable row hover highlight                           |
-| `rowClass`             | `(({ row }) => string) \| string`        | no       | —        | CSS class for individual rows                        |
+| `rowClass`             | `(({ row }) => string) \| string`        | no       | —        | Project class for individual rows                    |
+| `rowVariant`           | `(({ row }) => Variant) \| Variant`      | no       | —        | Status tint of a row: danger/warning/success/neutral |
 | `rowActions`           | `React.ComponentType<{ row; fetch }>`    | no       | —        | Per-row actions component                            |
 | `expandableRow`        | `React.ComponentType<{ row; fetch }>`    | no       | —        | Expandable row detail component                      |
 | `isRowExpandable`      | `(row: RowType) => boolean`              | no       | —        | Controls which rows can be expanded                  |

@@ -158,8 +158,8 @@ export const TableGrowthTable: FC<TableGrowthTableProps> = ({
       verboseName={translate('tables')}
       hasQuery
       initialSorting={{ field: 'weekly_growth_percent', mode: 'desc' }}
-      rowClass={({ row }) =>
-        alertedTables.has(row.table_name) ? 'table-warning' : ''
+      rowVariant={({ row }) =>
+        alertedTables.has(row.table_name) ? 'warning' : undefined
       }
       hasActionBar={false}
       hoverShadow={false}

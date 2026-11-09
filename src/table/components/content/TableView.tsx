@@ -81,6 +81,7 @@ export function TableView() {
         rows={rows}
         columns={visibleColumns}
         rowClass={display.rowClass}
+        rowVariant={display.rowVariant}
         rowValidate={display.rowValidate}
         rowGroupHeader={display.rowGroupHeader}
         rowKey={config.rowKey}
