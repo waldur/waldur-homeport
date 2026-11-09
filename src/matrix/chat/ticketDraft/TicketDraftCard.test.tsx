@@ -567,4 +567,47 @@ describe('TicketDraftCard', () => {
       );
     },
   );
+
+  describe('visual styling & classes', () => {
+    it('applies expected Tailwind classes to card layout, typography, and actions', async () => {
+      renderCard(makeDraft(), true);
+
+      const title = await screen.findByText('VM does not boot');
+      expect(title).toHaveClass('font-semibold');
+
+      const card = screen.getByTestId('ticket-draft-card');
+      expect(card).toHaveClass('flex', 'flex-col', 'gap-3', 'min-w-[240px]');
+
+      const header = screen.getByTestId('ticket-draft-header');
+      expect(header).toHaveClass(
+        'flex',
+        'items-center',
+        'gap-1.5',
+        'text-xs',
+        'text-secondary',
+        'font-semibold',
+        'uppercase',
+        'tracking-[0.04em]',
+      );
+
+      const description = screen.getByText(
+        'See [this](https://evil.example.com) <b>now</b>',
+      );
+      expect(description).toHaveClass(
+        'whitespace-pre-wrap',
+        '[overflow-wrap:anywhere]',
+        'max-h-52',
+        'overflow-y-auto',
+      );
+
+      const actions = screen.getByTestId('ticket-draft-actions');
+      expect(actions).toHaveClass('flex', 'gap-1.5');
+    });
+
+    it('applies text-xs text-quaternary to closed draft outcomes', async () => {
+      renderCard(makeDraft(), true, { state: 'cancelled' });
+      const cancelledNote = await screen.findByText('This draft was canceled.');
+      expect(cancelledNote).toHaveClass('text-xs', 'text-quaternary');
+    });
+  });
 });
