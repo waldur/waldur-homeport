@@ -152,6 +152,10 @@ export const InvoicesEnum = {
   update_of_project_credit_by_staff: 'update_of_project_credit_by_staff',
 };
 
+export const McpEnum = {
+  mcp_tool_called: 'mcp_tool_called',
+};
+
 export const Offering_accountingEnum = {
   marketplace_offering_component_created: 'marketplace_offering_component_created',
   marketplace_offering_component_deleted: 'marketplace_offering_component_deleted',
