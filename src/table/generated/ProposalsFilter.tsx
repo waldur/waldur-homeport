@@ -11,6 +11,7 @@ import {
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { AsyncSelectFilter, SelectFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 
 export const ProposalStatesOptions: ProposalStatesOption[] = [
   {
@@ -56,6 +57,7 @@ export const ProposalsFilter: FunctionComponent<ProposalsFilterProps> = (
       getOptionLabel={(option: ProposalStatesOption) => option.label}
       isClearable={true}
       isMulti={true}
+      facet="state"
       placeholder={translate('State')}
     />
     {!props.hideCall && (
@@ -68,6 +70,8 @@ export const ProposalsFilter: FunctionComponent<ProposalsFilterProps> = (
         getOptionValue={(option: PublicCall) => String(option.uuid || '')}
         getOptionLabel={(option: PublicCall) => String(option.name || '')}
         isClearable={true}
+        facet="call"
+        facetOption={facetOption('uuid', 'name')}
         placeholder={translate('Call')}
       />
     )}

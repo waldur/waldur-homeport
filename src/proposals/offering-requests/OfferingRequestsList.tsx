@@ -3,6 +3,7 @@ import {
   proposalRequestedOfferingsList,
   ProtectedRound,
   ProviderRequestedOffering,
+  proposalRequestedOfferingsFacetsList,
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -29,6 +30,10 @@ import {
 import { getRequestPlanName } from './OfferingRequestCommitments';
 import { OfferingRequestItemActions } from './OfferingRequestItemActions';
 import { OfferingRequestsListExpandableRow } from './OfferingRequestsListExpandableRow';
+import { withRequestedOfferingUuids } from './requestedOfferingFilterValues';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const requestedOfferingFacets = { fetch: proposalRequestedOfferingsFacetsList };
 
 interface OfferingRequestsListProps {
   round: ProtectedRound;
@@ -39,7 +44,10 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
   const values = useFilterValues('ProposalRequestedOfferingsList');
 
   const formFilters = useMemo(
-    () => selectProposalRequestedOfferingsFilter(values),
+    () =>
+      selectProposalRequestedOfferingsFilter(
+        withRequestedOfferingUuids(values),
+      ),
     [values],
   );
 
@@ -52,6 +60,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
     table: 'ProposalRequestedOfferingsList',
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalRequestedOfferingsList),
+    facets: requestedOfferingFacets,
     queryField: 'call_name',
     filter,
   });
@@ -64,7 +73,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
           title: translate('Call'),
           render: CallNameLink,
           filter: 'call',
-          inlineFilter: (row) => ({ name: row.call_name, url: row.call }),
+          inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
         },
         {
           title: translate('Call manager'),
@@ -77,7 +86,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
           filter: 'offering',
           inlineFilter: (row) => ({
             name: row.offering_name,
-            url: row.offering,
+            uuid: row.offering_uuid,
           }),
         },
         {

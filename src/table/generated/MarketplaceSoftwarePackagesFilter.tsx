@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { SelectFilter, BooleanFilter, StringFilter } from '@/table';
+import { BooleanFilter, SelectFilter } from '@/table';
 
 export const CatalogTypeOptions: CatalogTypeOption[] = [
   {
@@ -28,41 +28,64 @@ export interface CatalogTypeOption {
   value: CatalogTypeEnum;
 }
 
-export const MarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
+export const MarketplaceSoftwarePackagesFilter: FunctionComponent<
+  MarketplaceSoftwarePackagesFilterProps
+> = (props) => (
   <>
-    <StringFilter
+    <SelectFilter
       title={translate('Catalog')}
       name="catalog_name"
+      getValueLabel={(value: any) => value?.label}
+      options={props.catalogNameOptions}
+      isClearable={true}
+      facet="catalog_name"
       placeholder={translate('Catalog')}
     />
-    <StringFilter
+    <SelectFilter
       title={translate('Version')}
       name="catalog_version"
+      getValueLabel={(value: any) => value?.label}
+      options={props.catalogVersionOptions}
+      isClearable={true}
+      facet="catalog_version"
       placeholder={translate('Version')}
     />
     <SelectFilter
       title={translate('Type')}
       name="catalog_type"
       getValueLabel={(value: CatalogTypeOption) => value?.label}
-      placeholder={translate('Type')}
       options={CatalogTypeOptions}
       getOptionValue={(option: CatalogTypeOption) => String(option.value)}
       getOptionLabel={(option: CatalogTypeOption) => option.label}
       isClearable={true}
+      facet="catalog_type"
+      placeholder={translate('Type')}
     />
-    <StringFilter
+    <SelectFilter
       title={translate('Category')}
       name="category"
+      getValueLabel={(value: any) => value?.label}
+      options={props.categoryOptions}
+      isClearable={true}
+      facet="category"
       placeholder={translate('Category')}
     />
-    <StringFilter
+    <SelectFilter
       title={translate('License')}
       name="license"
+      getValueLabel={(value: any) => value?.label}
+      options={props.licenseOptions}
+      isClearable={true}
+      facet="license"
       placeholder={translate('License')}
     />
-    <StringFilter
+    <SelectFilter
       title={translate('Toolchain')}
       name="toolchain_name"
+      getValueLabel={(value: any) => value?.label}
+      options={props.toolchainOptions}
+      isClearable={true}
+      facet="toolchain"
       placeholder={translate('Toolchain')}
     />
     <BooleanFilter
@@ -72,9 +95,13 @@ export const MarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
       ellipsis={false}
       parse={(v) => v || undefined}
     />
-    <StringFilter
+    <SelectFilter
       title={translate('GPU architecture')}
       name="gpu_arch"
+      getValueLabel={(value: any) => value?.label}
+      options={props.gpuArchOptions}
+      isClearable={true}
+      facet="gpu_arch"
       placeholder={translate('GPU architecture')}
     />
   </>
@@ -83,15 +110,24 @@ export const MarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
 export const MarketplaceSoftwarePackagesFilterFormId =
   'MarketplaceSoftwarePackagesFilter';
 
+interface MarketplaceSoftwarePackagesFilterProps {
+  catalogNameOptions?: any[];
+  catalogVersionOptions?: any[];
+  categoryOptions?: any[];
+  gpuArchOptions?: any[];
+  licenseOptions?: any[];
+  toolchainOptions?: any[];
+}
+
 export interface MarketplaceSoftwarePackagesFilterFormData {
-  catalog_name: string;
-  catalog_version: string;
+  catalog_name: any;
+  catalog_version: any;
   catalog_type: CatalogTypeOption;
-  category: string;
-  license: string;
-  toolchain_name: string;
+  category: any;
+  license: any;
+  toolchain_name: any;
   has_gpu: boolean;
-  gpu_arch: string;
+  gpu_arch: any;
 }
 
 type MarketplaceSoftwarePackagesFilterQuery =
@@ -103,28 +139,28 @@ export const selectMarketplaceSoftwarePackagesFilter = (
   const filter: MarketplaceSoftwarePackagesFilterQuery = {} as any;
   if (values) {
     if (values.catalog_name) {
-      filter.catalog_name = values.catalog_name;
+      filter.catalog_name_exact = values.catalog_name.value;
     }
     if (values.catalog_version) {
-      filter.catalog_version = values.catalog_version;
+      filter.catalog_version_exact = values.catalog_version.value;
     }
     if (values.catalog_type) {
       filter.catalog_type = values.catalog_type.value;
     }
     if (values.category) {
-      filter.category = values.category;
+      filter.category = values.category.value;
     }
     if (values.license) {
-      filter.license = values.license;
+      filter.license = values.license.value;
     }
     if (values.toolchain_name) {
-      filter.toolchain_name = values.toolchain_name;
+      filter.toolchain_name = values.toolchain_name.value;
     }
     if (values.has_gpu) {
       filter.has_gpu = values.has_gpu;
     }
     if (values.gpu_arch) {
-      filter.gpu_arch = values.gpu_arch;
+      filter.gpu_arch = values.gpu_arch.value;
     }
   }
   return filter;

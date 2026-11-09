@@ -21,6 +21,7 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { NON_TERMINATED_STATES } from '../resources/list/constants';
+import { providerResourceFacets } from '../resources/list/facets';
 import { ProviderResourceActions } from '../resources/list/ProviderResourceActions';
 import {
   getResourceAllListColumns,
@@ -75,6 +76,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
     table: TABLE_OFFERING_RESOURCE,
     syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceProviderResourcesList),
+    facets: providerResourceFacets,
     filter,
     queryField: 'query',
     mandatoryFields: resourcesListRequiredFields(false),

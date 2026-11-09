@@ -3,6 +3,7 @@ import { FC, useMemo } from 'react';
 import {
   proposalProposalsList,
   proposalProtectedCallsPanelsList,
+  proposalProposalsFacetsList,
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -38,6 +39,9 @@ import { buildCallExportUrl } from './callExportUrl';
 import { makeProposalsBulkActions } from './ProposalsBulkActions';
 import { ProposalStepCell } from './ProposalStepCell';
 
+// Counts what each filter can still take; see '@/table/facets'.
+const proposalFacets = { fetch: proposalProposalsFacetsList };
+
 interface CallProposalsListProps {
   call: Call;
 }
@@ -63,6 +67,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
     syncFiltersToURL: true,
     filter,
     fetchData: createFetcher(proposalProposalsList),
+    facets: proposalFacets,
     queryField: 'name',
   });
 
@@ -232,7 +237,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
           refetch={tableProps.fetch}
         />
       )}
-      filters={<ProposalProposalsFilter callUuid={call.uuid} />}
+      filters={<ProposalProposalsFilter callUuid={call.uuid} hideCall />}
       formId={ProposalProposalsFilterFormId}
       enableExport
       fullExport={canExport ? fullExport : undefined}

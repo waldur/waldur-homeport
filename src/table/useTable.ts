@@ -145,7 +145,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   onApplyFilterRef.current = options.onApplyFilter;
 
   // Use React Query for fetching
-  const { data, isLoading, isFetching, error, refetch } =
+  const { data, isLoading, isFetching, error, refetch, requestParams } =
     useTableQuery<RowType>({
       table,
       fetchData: options.fetchData,
@@ -312,6 +312,15 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [pagination, resultCount],
   );
 
+  const facetsOptions = options.facets;
+  const facets = useMemo(
+    () =>
+      facetsOptions
+        ? { ...facetsOptions, table, params: requestParams }
+        : undefined,
+    [facetsOptions, table, requestParams],
+  );
+
   return {
     fetch,
     gotoPage,
@@ -344,5 +353,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     alterTitle,
     // Pass current filter for export functionality
     filter,
+    facets,
   };
 };

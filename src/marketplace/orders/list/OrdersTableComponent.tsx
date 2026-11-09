@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import {
+  marketplaceOrdersFacetsList,
   marketplaceOrdersList,
   MarketplaceOrdersListData,
   OrderDetails,
@@ -78,6 +79,9 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'customer_name',
 ];
 
+// What each order filter can still take; see OrdersListFilter.
+const orderFacets = { fetch: marketplaceOrdersFacetsList };
+
 const formatName = (row: OrderDetails) => {
   if (typeof row.attributes['name'] === 'string' && row.attributes['name']) {
     return row.attributes['name'];
@@ -95,6 +99,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
   const props = useTable({
     table,
     fetchData: createFetcher(marketplaceOrdersList),
+    facets: orderFacets,
     filter,
     queryField: 'query',
     mandatoryFields,

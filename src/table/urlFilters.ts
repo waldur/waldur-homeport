@@ -18,8 +18,8 @@ const compactFilterValue = (value: any): any => {
     return value.map(compactFilterValue);
   }
   if (typeof value === 'object' && value.uuid) {
-    // Store as "uuid::name" or "uuid::title" for compact representation
-    const label = value.name || value.title || '';
+    // Store as "uuid::<label>": a name, a title or a user's full name.
+    const label = value.name || value.title || value.full_name || '';
     return `${value.uuid}${COMPACT_SEPARATOR}${label}`;
   }
   return value;
@@ -50,7 +50,13 @@ const expandFilterValue = (value: any): any => {
     const match = value.match(COMPACT_UUID_PATTERN);
     if (match) {
       const obj: any = { uuid: match[1] };
-      if (match[2]) obj.name = match[2];
+      // The label went into the URL from whichever of these the filter
+      // reads; restore it under each, so the chip shows it again.
+      if (match[2]) {
+        obj.name = match[2];
+        obj.title = match[2];
+        obj.full_name = match[2];
+      }
       return obj;
     }
     // Also handle plain UUIDs (without name) - will show UUID in badge

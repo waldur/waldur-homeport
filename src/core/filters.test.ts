@@ -120,9 +120,12 @@ describe('filters', () => {
 
       const params = getQueryParams();
 
+      // The label is restored under each field a filter may read it from.
       expect(params.organization).toEqual({
         uuid: '550e8400-e29b-41d4-a716-446655440000',
         name: 'My Org',
+        title: 'My Org',
+        full_name: 'My Org',
       });
     });
 
@@ -179,8 +182,18 @@ describe('filters', () => {
       const params = getQueryParams();
 
       expect(params.items).toEqual([
-        { uuid: '550e8400-e29b-41d4-a716-446655440001', name: 'Name One' },
-        { uuid: '550e8400-e29b-41d4-a716-446655440002', name: 'Name Two' },
+        {
+          uuid: '550e8400-e29b-41d4-a716-446655440001',
+          name: 'Name One',
+          title: 'Name One',
+          full_name: 'Name One',
+        },
+        {
+          uuid: '550e8400-e29b-41d4-a716-446655440002',
+          name: 'Name Two',
+          title: 'Name Two',
+          full_name: 'Name Two',
+        },
       ]);
     });
 
@@ -214,6 +227,8 @@ describe('filters', () => {
       expect(params.organization).toEqual({
         uuid: '550e8400-e29b-41d4-a716-446655440000',
         name: 'My Organization',
+        title: 'My Organization',
+        full_name: 'My Organization',
       });
     });
   });

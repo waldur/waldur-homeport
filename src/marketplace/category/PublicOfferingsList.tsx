@@ -1,6 +1,7 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import {
+  marketplacePublicOfferingsFacetsList,
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
   NestedTag,
@@ -80,6 +81,9 @@ const RowActions = ({ row }) => {
   );
 };
 
+// Counts what each filter can still take; see OfferingsListFilter.
+const offeringFacets = { fetch: marketplacePublicOfferingsFacetsList };
+
 const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   // OfferingCard
   'uuid',
@@ -142,6 +146,7 @@ export const PublicOfferingsList: FunctionComponent<{
     fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'keyword',
     mandatoryFields,
+    facets: offeringFacets,
   });
 
   const columns: Column<PublicOfferingDetails>[] = [

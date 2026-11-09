@@ -1,5 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
-import { marketplaceOfferingUsersList } from 'waldur-js-client';
+import {
+  marketplaceOfferingUsersFacetsList,
+  marketplaceOfferingUsersList,
+} from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
@@ -33,6 +36,9 @@ import {
   ProviderOfferingUsersFilter,
   PROVIDER_OFFERING_USERS_FORM_ID,
 } from './ProviderOfferingUsersFilter';
+
+// What each filter can still take; see ProviderOfferingUsersFilter.
+const offeringUserFacets = { fetch: marketplaceOfferingUsersFacetsList };
 
 const mandatoryFields = [
   'uuid',
@@ -91,6 +97,7 @@ export const ProviderOfferingUsersList: FunctionComponent<
     table: 'marketplace-offering-users',
     syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceOfferingUsersList),
+    facets: offeringUserFacets,
     filter,
     queryField: 'query',
     mandatoryFields,

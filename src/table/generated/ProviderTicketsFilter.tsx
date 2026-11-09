@@ -6,44 +6,27 @@ import { ProviderTicketsListData } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { BooleanFilter, SelectFilter } from '@/table';
 
-export const StatusOptions: StatusOption[] = [
-  {
-    label: translate('Canceled'),
-    value: 'Canceled',
-  },
-  {
-    label: translate('Closed'),
-    value: 'Closed',
-  },
-  {
-    label: translate('Open'),
-    value: 'Open',
-  },
-  {
-    label: translate('Resolved'),
-    value: 'Resolved',
-  },
-  {
-    label: translate('Waiting for support'),
-    value: 'Waiting for support',
-  },
-];
-export interface StatusOption {
-  label: string;
-  value: string;
-}
-
-export const ProviderTicketsFilter: FunctionComponent<{}> = () => (
+export const ProviderTicketsFilter: FunctionComponent<
+  ProviderTicketsFilterProps
+> = (props) => (
   <>
     <SelectFilter
       title={translate('Status')}
       name="status"
-      getValueLabel={(value: StatusOption) => value?.label}
-      options={StatusOptions}
-      getOptionValue={(option: StatusOption) => String(option.value)}
-      getOptionLabel={(option: StatusOption) => option.label}
+      getValueLabel={(value: any) => value?.label}
+      options={props.statusOptions}
       isClearable={true}
+      facet="status"
       placeholder={translate('Status')}
+    />
+    <SelectFilter
+      title={translate('Priority')}
+      name="priority"
+      getValueLabel={(value: any) => value?.label}
+      options={props.priorityOptions}
+      isClearable={true}
+      facet="priority"
+      placeholder={translate('Priority')}
     />
     <BooleanFilter
       title={translate('Escalated')}
@@ -68,8 +51,14 @@ export const ProviderTicketsFilter: FunctionComponent<{}> = () => (
 
 export const ProviderTicketsFilterFormId = 'ProviderTicketsFilter';
 
+interface ProviderTicketsFilterProps {
+  priorityOptions?: any[];
+  statusOptions?: any[];
+}
+
 export interface ProviderTicketsFilterFormData {
-  status: StatusOption;
+  status: any;
+  priority: any;
   is_escalated: boolean;
   sla_breached: boolean;
 }
@@ -83,6 +72,9 @@ export const selectProviderTicketsFilter = (
   if (values) {
     if (values.status) {
       filter.status = values.status.value;
+    }
+    if (values.priority) {
+      filter.priority = values.priority.value;
     }
     if (values.is_escalated) {
       filter.is_escalated = values.is_escalated;

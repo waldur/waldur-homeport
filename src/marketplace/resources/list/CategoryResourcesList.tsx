@@ -28,6 +28,7 @@ import {
 } from './constants';
 import { CreateResourceButton } from './CreateResourceButton';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
+import { resourceFacets } from './facets';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -112,6 +113,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = ({
     table: `${CATEGORY_RESOURCES_TABLE_ID}-${ownProps.category_uuid}`,
     syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
+    facets: resourceFacets,
     filter,
     queryField: 'query',
     onApplyFilter: (filters, firstFetch) => {

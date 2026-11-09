@@ -63,11 +63,11 @@ export const FilteredUsersList = () => {
 
 The `filterPosition` prop controls where the filter fields are displayed:
 
-| Position | Behavior |
-|----------|----------|
-| `header` | Filters are always visible inside the Card Header area. |
-| `menu` | Filters are housed in a dropdown menu, toggled via a filter button. |
-| `sidebar` | Filters open inside a sliding side drawer/panel. |
+| Position  | Behavior                                                            |
+| --------- | ------------------------------------------------------------------- |
+| `header`  | Filters are always visible inside the Card Header area.             |
+| `menu`    | Filters are housed in a dropdown menu, toggled via a filter button. |
+| `sidebar` | Filters open inside a sliding side drawer/panel.                    |
 
 ---
 
@@ -94,12 +94,12 @@ When enabled:
 
 Filters are stored in URL query parameters with compact encoding:
 
-| Value Type | URL Format | Example |
-|------------|------------|---------|
-| String | Direct value | `?name=test` |
-| Object with UUID | `uuid::name` | `?org=abc123::My+Org` |
+| Value Type       | URL Format                     | Example                     |
+| ---------------- | ------------------------------ | --------------------------- |
+| String           | Direct value                   | `?name=test`                |
+| Object with UUID | `uuid::name`                   | `?org=abc123::My+Org`       |
 | Array of objects | `[uuid1::name1, uuid2::name2]` | `?tags=["a1::T1","a2::T2"]` |
-| Boolean | `true`/`false` | `?active=true` |
+| Boolean          | `true`/`false`                 | `?active=true`              |
 
 The compact `uuid::name` format keeps URLs shorter while preserving display names for filter badges without needing additional API lookup calls.
 
@@ -140,3 +140,56 @@ Users can quickly filter table data by clicking values directly in the table cel
   })
 }
 ```
+
+## Filter facets
+
+A filter can offer only the values that still have rows under the table's
+other filters and search, each with its count. The list endpoint has to
+serve a `facets` action (mastermind's `FacetsMixin`, see
+`waldur_core/core/facets.py`), which counts every facet under all filters
+except its own, so a selection can always be changed.
+
+Opt the table in by passing the SDK's `…FacetsList` function, and each
+filter by naming its facet:
+
+```tsx
+// Module level, or memoized: it is part of the facet query key.
+const offeringFacets = { fetch: marketplacePublicOfferingsFacetsList };
+
+const props = useTable({
+  table: 'PublicOfferingsList',
+  fetchData: createFetcher(marketplacePublicOfferingsList),
+  queryField: 'keyword',
+  filter,
+  facets: offeringFacets,
+});
+
+<SelectFilter name="state" facet="state" options={states} isMulti />
+<AsyncSelectFilter
+  name="category"
+  facet="category"
+  facetOption={facetOption('uuid', 'title')}
+  getOptionValue={(option) => option.uuid}
+  getOptionLabel={(option) => option.title}
+  loadOptions={categoryAutocomplete()}
+/>
+```
+
+- A filter asks for its own facet when it mounts, which is when it is
+  opened, with exactly the params the table fetches its rows with (`filter`
+  plus the search term). Fixed params that `createFetcher` adds itself go in
+  `facets.query`, path params of a nested list in `facets.path`.
+- `SelectFilter` keeps the options the facet has, plus the current selection.
+  `AsyncSelectFilter` lists the facet's values instead of calling
+  `loadOptions`: `facetOption(valueKey, labelKey)` builds its option shape
+  from a facet value. A truncated facet is searched on the server.
+- Counts show in the menu only, not in the chip, through
+  `formatOptionLabel`; a filter that passes its own still draws the label,
+  and the count follows it.
+- A `SelectFilter` without `options` lists the facet's values themselves,
+  built with `facetOption` (default `{ value, label }`): for values only the
+  server knows, such as a status synced from a service desk.
+- Without `facets` on the table, or without `facet` on the filter, the filter
+  behaves as before, so a filter component shared by several tables can name
+  its facet once.
+- Generated filters take `facet: <name>` in `generate-filters-config.yaml`.

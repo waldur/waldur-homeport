@@ -1,5 +1,9 @@
 import { FC, useMemo } from 'react';
-import { ProviderTicket, providerTicketsList } from 'waldur-js-client';
+import {
+  ProviderTicket,
+  providerTicketsList,
+  providerTicketsFacetsList,
+} from 'waldur-js-client';
 
 import { formatRelative } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -28,6 +32,9 @@ import { AssigneeCell } from './AssigneeCell';
 import { ProviderTicketsRowActions } from './ProviderTicketsRowActions';
 import { TicketStatsWidgets } from './TicketStatsWidgets';
 
+// Counts what each filter can still take; see '@/table/facets'.
+const ticketFacets = { fetch: providerTicketsFacetsList };
+
 const TicketsTable: FC<{ helpdeskUuid?: string }> = ({ helpdeskUuid }) => {
   const values = useFilterValues('provider-tickets');
   // Staff and support see every routed ticket, so the page must ask for its
@@ -45,6 +52,8 @@ const TicketsTable: FC<{ helpdeskUuid?: string }> = ({ helpdeskUuid }) => {
     fetchData: helpdeskUuid
       ? createFetcher(providerTicketsList)
       : emptyTableFetcher,
+    // Without a helpdesk the table shows nothing, so nothing is counted.
+    facets: helpdeskUuid ? ticketFacets : undefined,
     queryField: 'summary',
     filter,
   });

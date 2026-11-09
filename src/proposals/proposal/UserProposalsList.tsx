@@ -1,7 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Proposal, proposalProposalsList } from 'waldur-js-client';
+import {
+  Proposal,
+  proposalProposalsList,
+  proposalProposalsFacetsList,
+} from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
 
@@ -35,6 +39,9 @@ import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { ProposalStateBadge } from './ProposalStateBadge';
 import { UserProposalExpandableRow } from './UserProposalExpandableRow';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const proposalFacets = { fetch: proposalProposalsFacetsList };
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
@@ -94,6 +101,7 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
     initialFilters,
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalProposalsList),
+    facets: proposalFacets,
     queryField: 'name',
     filter,
     mandatoryFields,

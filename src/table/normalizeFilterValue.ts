@@ -39,6 +39,9 @@ export const useNormalizeSelectFilterValue = (
   name: string,
   isMulti: boolean,
   options?: OptionsArg,
+  /** Builds the option of a raw value no fixed option names: a filter whose
+   * options come from a facet cannot list them up front. */
+  scalarToOption?: (raw: string | number) => OptionLike,
 ): void => {
   const { table } = useContext(TableFilterContext);
   const dispatch = useDispatch();
@@ -53,7 +56,8 @@ export const useNormalizeSelectFilterValue = (
       if (typeof raw === 'object') {
         normalized = [raw];
       } else if (typeof raw === 'string' || typeof raw === 'number') {
-        const resolved = resolveScalar(raw, resolveOptions(options));
+        const resolved =
+          resolveScalar(raw, resolveOptions(options)) ?? scalarToOption?.(raw);
         normalized = resolved ? [resolved] : null;
       } else {
         return;
@@ -62,7 +66,10 @@ export const useNormalizeSelectFilterValue = (
       if (Array.isArray(raw)) {
         normalized = raw.length ? raw[0] : null;
       } else if (typeof raw === 'string' || typeof raw === 'number') {
-        normalized = resolveScalar(raw, resolveOptions(options));
+        normalized =
+          resolveScalar(raw, resolveOptions(options)) ??
+          scalarToOption?.(raw) ??
+          null;
       } else {
         return;
       }
@@ -76,5 +83,5 @@ export const useNormalizeSelectFilterValue = (
         component: null,
       }),
     );
-  }, [raw, isMulti, name, dispatch, table, options]);
+  }, [raw, isMulti, name, dispatch, table, options, scalarToOption]);
 };

@@ -13,6 +13,7 @@ import { TableProps } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
+import { resourceFacets } from './facets';
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { buildResourcesAllFilter, resourcesListRequiredFields } from './utils';
 
@@ -37,6 +38,7 @@ export const AllResourcesList: FC<AllResourcesListProps> = ({ ...props }) => {
     table: ALL_RESOURCES_TABLE_ID,
     syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
+    facets: resourceFacets,
     queryField: 'query',
     filter,
     onApplyFilter: (filters) => {

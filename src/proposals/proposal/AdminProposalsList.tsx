@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import {
   proposalProposalsList,
   ProposalProposalsListData,
+  proposalProposalsFacetsList,
 } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -28,6 +29,9 @@ import { postAwardStatusLabel } from './postAward';
 import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalStateBadge } from './ProposalStateBadge';
 
+// Counts what each filter can still take; see '@/table/facets'.
+const proposalFacets = { fetch: proposalProposalsFacetsList };
+
 export const AdminProposalsList: FC<any> = ({ ...props }) => {
   const values = useFilterValues('AdminProposalsList');
   const filterValues = useMemo(
@@ -50,6 +54,7 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
     table: 'AdminProposalsList',
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalProposalsList),
+    facets: proposalFacets,
     queryField: 'name',
     filter,
   });

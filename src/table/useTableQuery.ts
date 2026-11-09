@@ -36,6 +36,9 @@ interface UseTableQueryResult<RowType = any> {
   isFetching: boolean;
   error: Error | null;
   refetch: () => void;
+  /** The filter the rows are fetched with, search included, without the
+   * paging, ordering and field-selection params. */
+  requestParams: Record<string, any>;
 }
 
 export function useTableQuery<RowType = any>(
@@ -80,6 +83,14 @@ export function useTableQuery<RowType = any>(
     }
     return result;
   }, [filter?.field, activeColumns, mandatoryFields]);
+
+  const requestParams = useMemo(() => {
+    const { field: _field, ...params } = filter ?? {};
+    if (queryField && debouncedQuery !== '') {
+      params[queryField] = debouncedQuery;
+    }
+    return params;
+  }, [filter, queryField, debouncedQuery]);
 
   // Build request
   const buildRequest = useCallback(
@@ -207,5 +218,6 @@ export function useTableQuery<RowType = any>(
     isFetching,
     error: error as Error | null,
     refetch,
+    requestParams,
   };
 }

@@ -1,5 +1,9 @@
 import { FC, useMemo } from 'react';
-import { Issue, supportIssuesList } from 'waldur-js-client';
+import {
+  Issue,
+  supportIssuesList,
+  supportIssuesFacetsList,
+} from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
 
@@ -16,7 +20,6 @@ import { createFetcher } from '@/table/api';
 import {
   SupportIssuesFilter as IssuesFilter,
   selectSupportIssuesFilter as selectIssuesFilter,
-  StatusOptions,
   SupportIssuesFilterFormId,
 } from '@/table/generated/SupportIssuesFilter';
 import Table from '@/table/Table';
@@ -27,6 +30,9 @@ import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
 import { IssueCreateButton } from './IssueCreateButton';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const issueFacets = { fetch: supportIssuesFacetsList };
 
 interface OwnProps {
   hiddenColumns?: (
@@ -62,6 +68,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
     table: `issuesList-${props.scope?.uuid}`,
     syncFiltersToURL: true,
     fetchData: createFetcher(supportIssuesList),
+    facets: issueFacets,
     queryField: 'query',
     filter: props.filter || filterValues,
   });
@@ -88,8 +95,9 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
         render: StatusColumn,
         orderField: 'status',
         filter: 'status',
-        inlineFilter: (row) =>
-          StatusOptions.filter((op) => op.value === row.status),
+        // Any status the service desk uses, as the status filter's facet
+        // offers it.
+        inlineFilter: (row) => ({ value: row.status, label: row.status }),
         export: (row) => renderFieldOrDash(row.status),
         exportKeys: ['status'],
       },

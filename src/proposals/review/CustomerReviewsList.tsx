@@ -1,5 +1,9 @@
 import { FC, useMemo } from 'react';
-import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
+import {
+  proposalReviewsList,
+  ProposalReviewsListData,
+  proposalReviewsFacetsList,
+} from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -19,6 +23,9 @@ import { useCustomer } from '@/workspace/hooks';
 
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const reviewFacets = { fetch: proposalReviewsFacetsList };
 
 export const CustomerReviewsList: FC = () => {
   const customer = useCustomer();
@@ -40,6 +47,7 @@ export const CustomerReviewsList: FC = () => {
     table: 'ReviewsList',
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalReviewsList),
+    facets: reviewFacets,
     queryField: 'proposal_name',
     filter,
   });
@@ -114,7 +122,7 @@ export const CustomerReviewsList: FC = () => {
       title={translate('Reviews')}
       verboseName={translate('Reviews')}
       hasQuery={true}
-      filters={<ProposalReviewsFilter />}
+      filters={<ProposalReviewsFilter hideOrganization />}
       rowActions={ReviewsRowActions}
       hasOptionalColumns
     />

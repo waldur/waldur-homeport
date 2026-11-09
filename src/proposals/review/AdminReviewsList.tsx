@@ -1,5 +1,8 @@
 import { FC, useMemo } from 'react';
-import { proposalReviewsList } from 'waldur-js-client';
+import {
+  proposalReviewsList,
+  proposalReviewsFacetsList,
+} from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -21,6 +24,9 @@ import { ReviewExpandableRow } from './ReviewExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
 
+// Counts what each filter can still take; see '@/table/facets'.
+const reviewFacets = { fetch: proposalReviewsFacetsList };
+
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
 export const AdminReviewsList: FC = () => {
@@ -32,6 +38,7 @@ export const AdminReviewsList: FC = () => {
     table: 'AdminReviewsList',
     syncFiltersToURL: true,
     fetchData: createFetcher(proposalReviewsList),
+    facets: reviewFacets,
     queryField: 'proposal_name',
     filter,
     mandatoryFields,

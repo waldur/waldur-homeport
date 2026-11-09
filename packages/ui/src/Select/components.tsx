@@ -120,7 +120,9 @@ export const MultiSelectOption = (props) => {
         tabIndex={-1}
         aria-hidden="true"
       />
-      <label className="cursor-pointer">{props.label}</label>
+      {/* children, not label: react-select passes formatOptionLabel's
+          rendering of the option here, as for a single-select row. */}
+      <label className="cursor-pointer">{props.children}</label>
     </components.Option>
   );
 };

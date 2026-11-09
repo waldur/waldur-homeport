@@ -6,6 +6,7 @@ import { translate } from '@/i18n';
 import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { ProviderFilter } from '@/marketplace/orders/ProviderFilter';
 import { SelectFilter } from '@/table';
+import { facetOption } from '@/table/facets';
 import { useCustomer } from '@/workspace/hooks';
 
 export const PROVIDER_OFFERING_USERS_FORM_ID = 'ProviderOfferingUsersFilter';
@@ -41,6 +42,8 @@ const profileCompletenessOptions = [
   { value: false, label: translate('Incomplete') },
 ];
 
+const byProvider = facetOption('customer_uuid', 'customer_name');
+
 export const ProviderOfferingUsersFilter: FunctionComponent<
   ProviderOfferingUsersFilterProps
 > = ({ hasOrganizationColumn }) => {
@@ -60,6 +63,7 @@ export const ProviderOfferingUsersFilter: FunctionComponent<
       <OfferingFilter
         badgeValue={(value) => value?.name}
         offeringFilter={offeringFilter}
+        facet="offering"
       />
       <SelectFilter
         title={translate('State')}
@@ -69,9 +73,14 @@ export const ProviderOfferingUsersFilter: FunctionComponent<
         options={getOfferingUserStateFilterOptions()}
         isClearable={true}
         isMulti
+        facet="state"
       />
       {hasOrganizationColumn && (
-        <ProviderFilter getValueLabel={(option) => option.customer_name} />
+        <ProviderFilter
+          getValueLabel={(option) => option.customer_name}
+          facet="provider"
+          facetOption={byProvider}
+        />
       )}
       {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
         <SelectFilter

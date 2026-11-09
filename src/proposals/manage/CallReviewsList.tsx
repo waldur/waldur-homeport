@@ -1,5 +1,8 @@
 import { FC, useMemo } from 'react';
-import { proposalReviewsList } from 'waldur-js-client';
+import {
+  proposalReviewsList,
+  proposalReviewsFacetsList,
+} from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { downloadFile } from '@/form/upload/FileDownloader';
@@ -26,6 +29,9 @@ import { Call } from '../types';
 import { canExportCall } from '../utils';
 
 import { buildCallExportUrl } from './callExportUrl';
+
+// Counts what each filter can still take; see '@/table/facets'.
+const reviewFacets = { fetch: proposalReviewsFacetsList };
 
 interface CallReviewsListProps {
   call: Call;
@@ -78,6 +84,7 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
     syncFiltersToURL: true,
     filter,
     fetchData: createFetcher(proposalReviewsList),
+    facets: reviewFacets,
     queryField: 'proposal_name',
     mandatoryFields,
   });
@@ -151,7 +158,7 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
       hasQuery
       verboseName={translate('Reviews')}
       rowActions={ReviewsRowActions}
-      filters={<ProposalReviewsFilter callUuid={call.uuid} />}
+      filters={<ProposalReviewsFilter callUuid={call.uuid} hideCall />}
       expandableRow={ReviewExpandableRow}
       formId={ProposalReviewsFilterFormId}
       enableExport
