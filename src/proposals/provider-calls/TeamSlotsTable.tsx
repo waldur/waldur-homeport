@@ -201,7 +201,7 @@ export const TeamSlotsTable: FC<TeamSlotsTableProps> = ({
       emptyMessage={emptyMessage ?? translate('Nothing open on this step.')}
       enableMultiSelect={Boolean(HandOnAction) && slots.length > 0}
       multiSelectActions={HandOnAction}
-      rowClass={({ row }) => (row.overdue ? 'table-danger' : '')}
+      rowVariant={({ row }) => (row.overdue ? 'danger' : undefined)}
       hideTitle
       // The bar carries only the selection's action: shown once there is one.
       hasActionBar={Boolean(HandOnAction) && selectedCount > 0}

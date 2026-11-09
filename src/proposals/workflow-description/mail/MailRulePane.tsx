@@ -470,7 +470,7 @@ export const MailRulePane: FC<{
         bodyClassName="p-0"
         hasPagination={false}
         placeholderHasRetry={false}
-        rowClass={({ row }) => (row.uuid === saved ? 'table-success' : '')}
+        rowVariant={({ row }) => (row.uuid === saved ? 'success' : undefined)}
         rowActions={({ row }) => (
           <ActionsDropdown row={row} refetch={refetch}>
             <ActionItem

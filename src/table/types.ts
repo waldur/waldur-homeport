@@ -84,6 +84,13 @@ export interface Column<RowType = any> {
 
 export type DisplayMode = 'table' | 'grid';
 
+/**
+ * The status a row carries, painted as a tint from the status matrix:
+ * `danger` for an overdue or failed row, `warning` for one that needs
+ * attention, `success` for one just saved, `neutral` for one out of play.
+ */
+export type RowVariant = 'danger' | 'warning' | 'success' | 'neutral';
+
 export type FilterPosition = 'menu' | 'sidebar' | 'header';
 
 /** Key present = column is pinned. For the actions column the value is the
@@ -242,6 +249,16 @@ export interface TableProps<RowType = any> extends TableState {
   bodyClassName?: string;
   id?: string;
   rowClass?: (({ row }: { row: RowType }) => string) | string;
+  /**
+   * The status tint of a row. Prefer it to `rowClass` for "this row is
+   * overdue / just saved / needs attention": a variant is checked by the
+   * compiler and painted from the status matrix, where a class string is
+   * neither — the Bootstrap `table-danger` and `table-success` it replaces
+   * were defined in no stylesheet and so painted nothing at all. Return
+   * `undefined` for an ordinary row.
+   */
+  rowVariant?:
+    (({ row }: { row: RowType }) => RowVariant | undefined) | RowVariant;
   /**
    * A full-width header row rendered above `row`, which opens a group of
    * the rows that follow it (a stage, a phase). Return null for a row that

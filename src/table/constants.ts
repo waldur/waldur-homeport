@@ -1,12 +1,24 @@
 import { PAGE_SIZE_FULL } from 'waldur-api-client';
 import { PAGE_SIZE_COMPACT } from 'waldur-ui';
 
-import { type TableState } from './types';
+import { type RowVariant, type TableState } from './types';
 
 export { PAGE_SIZE_FULL, PAGE_SIZE_COMPACT };
 export const DASH_ESCAPE_CODE = '\u2014';
 export const COLUMN_ACTIONS_KEY = '__actions__';
 export const COLUMN_FILTER_TOGGLE_CLASS = 'column-filter-toggle';
+
+/**
+ * The tint of a row carrying a status, from the status matrix, so both themes
+ * are covered and the colour linters have a token to check. Used by `Table`'s
+ * `rowVariant` prop, and directly by a row of waldur-ui's `Table` primitives.
+ */
+export const ROW_VARIANT_CLASSES = {
+  danger: 'bg-danger-subtle',
+  warning: 'bg-warning-subtle',
+  success: 'bg-success-subtle',
+  neutral: 'bg-neutral-subtle',
+} as const satisfies Record<RowVariant, string>;
 
 export const INITIAL_STATE: TableState = {
   loading: false,

@@ -22,7 +22,7 @@ import { BaseButton, Checkbox, MenuPopover, Radio, Tooltip } from 'waldur-ui';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { FieldErrorMessage } from '@/form/FieldError';
 
-import { COLUMN_ACTIONS_KEY } from './constants';
+import { COLUMN_ACTIONS_KEY, ROW_VARIANT_CLASSES } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
 import { Column, PinnedColumns, PinnedOffsets, TableProps } from './types';
 import { getColumnPinKey, getId } from './utils';
@@ -32,6 +32,7 @@ interface TableBodyProps extends Pick<
   | 'rows'
   | 'columns'
   | 'rowClass'
+  | 'rowVariant'
   | 'rowKey'
   | 'expandableRow'
   | 'expandableRowClassName'
@@ -453,6 +454,7 @@ interface TableRowProps {
   rowIndex: number;
   rowKey: string;
   rowClass: TableProps['rowClass'];
+  rowVariant: TableProps['rowVariant'];
   expandableRow: TableProps['expandableRow'];
   toggled: TableProps['toggled'];
   fieldType: TableProps['fieldType'];
@@ -482,6 +484,7 @@ const TableRow = memo<TableRowProps>(
     rowIndex,
     rowKey,
     rowClass,
+    rowVariant,
     expandableRow,
     toggled,
     fieldType,
@@ -576,6 +579,11 @@ const TableRow = memo<TableRowProps>(
         className={
           classNames(
             typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
+            ROW_VARIANT_CLASSES[
+              typeof rowVariant === 'function'
+                ? rowVariant({ row })
+                : rowVariant
+            ],
             {
               expanded: canExpand && toggled[getId(row, rowIndex, rowKey)],
               checked: fieldType && isChecked,
@@ -719,6 +727,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     rows,
     columns,
     rowClass,
+    rowVariant,
     rowKey = 'uuid',
     expandableRow,
     expandableRowClassName,
@@ -796,6 +805,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           rowIndex={rowIndex}
           rowKey={rowKey}
           rowClass={rowClass}
+          rowVariant={rowVariant}
           expandableRow={expandableRow}
           toggled={toggled}
           fieldType={fieldType}
@@ -824,6 +834,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
       [
         rowKey,
         rowClass,
+        rowVariant,
         expandableRow,
         toggled,
         fieldType,

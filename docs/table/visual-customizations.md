@@ -114,11 +114,32 @@ For list actions that affect the table globally, instead of using `tableActions`
 
 - **`staleTime`**: Pass inside `useTable` (in milliseconds) to configure the underlying React Query cache, preventing the table from executing API queries on remount if data has been fetched within the stale time window.
 - **`initialPageSize`**: Pass directly to `<Table>` to override the default pagination page size (which defaults to 10). Use the `PAGE_SIZE_COMPACT` (5) constant from `@/table/constants` for embedded/drawer tables, or `PAGE_SIZE_FULL` (10) for primary list views.
-- **`rowClass`**: Pass a callback to apply custom styling to `<tr>` elements based on row data:
+- **`rowVariant`**: The status tint of a row — `'danger'`, `'warning'`,
+  `'success'` or `'neutral'`, as a value or a callback, `undefined` for an
+  ordinary row. Painted from the status matrix, so both themes are covered:
 
   ```ts
-  rowClass={({ row }) => row.status === 'erred' ? 'table-danger' : ''}
+  rowVariant={({ row }) => (row.is_overdue ? 'danger' : undefined)}
   ```
+
+  Prefer it to `rowClass` for a row that is overdue, failed, just saved or out
+  of play. The Bootstrap `table-danger` / `table-success` / `table-warning`
+  classes it replaces are gone: the first two were defined in no stylesheet and
+  painted nothing at all. For a row of waldur-ui's `Table` primitives, where
+  there is no `rowVariant` prop, read the same class off
+  `ROW_VARIANT_CLASSES` (`@/table/constants`).
+
+- **`rowClass`**: Pass a callback to put a project class on `<tr>` elements
+  based on row data. Only for styling a row owns itself (a selected row, a
+  disabled step); a status goes through `rowVariant`:
+
+  ```ts
+  rowClass={({ row }) => (row.enabled ? '' : DISABLED_STEP_ROW_CLASS)}
+  ```
+
+  Note that `rowClass` is outside the `*ClassName` naming the `no-unknown-class`
+  linter checks, so a class that paints nothing is not reported here. Keep the
+  class defined in a stylesheet next to the component that owns it.
 
 - **`rowGroupHeader`**: Pass a callback `({ row, rowIndex, rows }) => ReactNode` to render a full-width header row (`tr.table-group-header > th[colspan]`) above a row that opens a group — a stage, a phase. Return `null` for every other row. The rows stay one list, so expansion and row actions are unchanged; pair it with `rowClass` to mark the group's rows. Don't hide a cell's content to make room for a group: use the header. Reference: `src/proposals/update/workflow-steps/WorkflowStepsSection.tsx`.
 

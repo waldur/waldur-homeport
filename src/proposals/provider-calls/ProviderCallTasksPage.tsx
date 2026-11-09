@@ -109,7 +109,7 @@ const ProviderCallTasksTable: FC<{ providerUuid: string }> = ({
       subtitle={translate('Your work in calls on your offerings.')}
       verboseName={translate('tasks')}
       emptyMessage={translate('Nothing waiting for you on these offerings.')}
-      rowClass={({ row }) => (row.is_overdue ? 'table-danger' : '')}
+      rowVariant={({ row }) => (row.is_overdue ? 'danger' : undefined)}
       hasQuery={false}
       enableExport
     />
@@ -174,7 +174,7 @@ const TeamOpenWorkTable: FC<{ providerUuid: string }> = ({ providerUuid }) => {
       subtitle={translate('Open steps on your offerings, whoever holds them.')}
       verboseName={translate('slots')}
       emptyMessage={translate('Nothing open for your offerings’ teams.')}
-      rowClass={({ row }) => (row.overdue ? 'table-danger' : '')}
+      rowVariant={({ row }) => (row.overdue ? 'danger' : undefined)}
       hasQuery={false}
       enableExport
     />

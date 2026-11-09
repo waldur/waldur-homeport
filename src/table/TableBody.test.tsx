@@ -7,7 +7,7 @@ import { describe, it, expect } from 'vitest';
 
 import { ModalProvider } from '@/modal/ModalContext';
 
-import { DASH_ESCAPE_CODE } from './constants';
+import { DASH_ESCAPE_CODE, ROW_VARIANT_CLASSES } from './constants';
 import { FilterContextProvider } from './FilterContextProvider';
 import { StringFilter } from './filters';
 import { tablesReducer } from './store';
@@ -49,6 +49,25 @@ describe('TableBody', () => {
   it('should render a cell for each column', () => {
     renderWrapper();
     expect(screen.getAllByRole('cell')).toHaveLength(COLUMNS.length);
+  });
+
+  it('paints a row carrying a status variant, and leaves the others alone', () => {
+    const rows = [
+      { uuid: 1, type: 'A', name: 'late' },
+      { uuid: 2, type: 'B', name: 'on time' },
+    ];
+    renderWrapper({
+      rows,
+      rowVariant: ({ row }) => (row.name === 'late' ? 'danger' : undefined),
+    });
+    const [late, onTime] = screen.getAllByRole('row');
+    expect(late).toHaveClass(ROW_VARIANT_CLASSES.danger);
+    expect(onTime.className).toBe('');
+  });
+
+  it('takes a status variant as a plain value for every row', () => {
+    renderWrapper({ rowVariant: 'warning' });
+    expect(screen.getByRole('row')).toHaveClass(ROW_VARIANT_CLASSES.warning);
   });
 
   it('renders a row-header column as th scope=row', () => {

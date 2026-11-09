@@ -113,6 +113,7 @@ interface TableDisplay {
   expandableRowClassName?: string;
   id?: string;
   rowClass?: (({ row }: { row: any }) => string) | string;
+  rowVariant?: TableProps['rowVariant'];
   rowValidate?: TableProps['rowValidate'];
   rowGroupHeader?: TableProps['rowGroupHeader'];
   gridClassName?: string;

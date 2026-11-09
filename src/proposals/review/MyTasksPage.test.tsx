@@ -87,7 +87,7 @@ vi.mock('@/table/Table', () => ({
           <div
             key={row.key}
             data-testid={`row-${row.key}`}
-            className={props.rowClass({ row })}
+            data-variant={props.rowVariant({ row }) ?? ''}
           >
             {props.columns.map((column, index) => (
               <span key={index}>{column.render({ row })}</span>
@@ -168,11 +168,13 @@ describe('MyTasksPage', () => {
   it('highlights an overdue task', () => {
     renderPage();
     expect(screen.getByText('Overdue')).toBeInTheDocument();
-    expect(screen.getByTestId('row-contribution:1')).toHaveClass(
-      'table-danger',
+    expect(screen.getByTestId('row-contribution:1')).toHaveAttribute(
+      'data-variant',
+      'danger',
     );
-    expect(screen.getByTestId('row-invitation:2')).not.toHaveClass(
-      'table-danger',
+    expect(screen.getByTestId('row-invitation:2')).toHaveAttribute(
+      'data-variant',
+      '',
     );
   });
 
