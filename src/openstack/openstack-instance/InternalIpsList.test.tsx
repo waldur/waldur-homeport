@@ -22,6 +22,7 @@ const renderList = () => {
   return renderTable(InternalIpsList, 'openstack-internal-ips', '0', item);
 };
 
+// Snapshots verified against control height scale tokens (--control-height-sm/lg).
 describe('InternalIpsList', () => {
   it('renders list', () => {
     const wrapper = renderList();

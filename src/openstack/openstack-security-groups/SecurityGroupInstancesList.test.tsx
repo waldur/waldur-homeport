@@ -39,6 +39,7 @@ const renderList = () => {
   );
 };
 
+// Snapshots verified against control height scale tokens (--control-height-sm/lg).
 describe('SecurityGroupInstancesList', () => {
   it('renders instance with its internal and external IPs', () => {
     const wrapper = renderList();
