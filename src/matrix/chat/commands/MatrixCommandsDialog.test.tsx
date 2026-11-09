@@ -103,4 +103,91 @@ describe('MatrixCommandsDialog', () => {
       screen.getByRole('button', { name: /\/ticket send/ }),
     ).toBeInTheDocument();
   });
+
+  describe('visual styling & classes', () => {
+    it('applies interactive styling to available command buttons and non-interactive to unavailable items', async () => {
+      render(<MatrixCommandsDialog resolve={{ onPick: vi.fn() }} />);
+
+      // Available command button
+      const ticketBtn = screen.getByRole('button', { name: /\/ticket/ });
+      expect(ticketBtn).toHaveClass(
+        'w-full',
+        'flex',
+        'flex-col',
+        'gap-0.5',
+        'py-2',
+        'px-2.5',
+        'border-0',
+        'rounded-lg',
+        'bg-transparent',
+        'text-primary',
+        'text-start',
+        'transition-colors',
+        'cursor-pointer',
+        'hover:bg-secondary',
+        'focus-visible:bg-secondary',
+      );
+
+      // Client command has "Waldur only" badge
+      const waldurBadge = screen.getByText('Waldur only');
+      expect(waldurBadge).toBeInTheDocument();
+      expect(waldurBadge).toHaveAttribute('data-variant', 'secondary');
+
+      // Collapsible trigger for unavailable commands
+      const toggle = screen.getByRole('button', {
+        name: 'Not available here (1)',
+      });
+      expect(toggle).toHaveClass(
+        'flex',
+        'items-center',
+        'gap-1',
+        'mb-1',
+        'p-0',
+        'border-0',
+        'bg-transparent',
+        'text-secondary',
+        'cursor-pointer',
+        'group',
+        'text-sm',
+      );
+
+      // Expand collapsible to reveal unavailable list item
+      await userEvent.click(toggle);
+
+      const listItems = screen.getAllByRole('listitem');
+      // 2 available + 1 unavailable = 3 listitems
+      expect(listItems).toHaveLength(3);
+
+      const unavailableLi = listItems[2];
+      expect(unavailableLi).toHaveClass(
+        'w-full',
+        'flex',
+        'flex-col',
+        'gap-0.5',
+        'py-2',
+        'px-2.5',
+        'border-0',
+        'rounded-lg',
+        'bg-transparent',
+        'text-primary',
+        'text-start',
+        'transition-colors',
+      );
+      expect(unavailableLi).not.toHaveClass('cursor-pointer');
+      expect(unavailableLi).not.toHaveClass('hover:bg-secondary');
+    });
+
+    it('renders disclaimer text with text-quaternary text-xs mt-3 mb-0', () => {
+      render(<MatrixCommandsDialog resolve={{ onPick: vi.fn() }} />);
+      const disclaimer = screen.getByText(
+        'Type / or ! in the message box to pick a command. In other Matrix apps, type the ! form.',
+      );
+      expect(disclaimer).toHaveClass(
+        'text-quaternary',
+        'text-xs',
+        'mt-3',
+        'mb-0',
+      );
+    });
+  });
 });
