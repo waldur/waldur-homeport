@@ -36,7 +36,7 @@ const DraftState: FC<{ state: TicketDraftState }> = ({ state }) => {
         ? translate('Ticket {key} created.', { key: state.issueKey })
         : translate('Ticket created.');
       return (
-        <div className="tc-ticket-draft__outcome" role="status">
+        <div className="text-xs" role="status">
           {state.issueUuid ? (
             <Link
               state="support.detail"
@@ -51,13 +51,13 @@ const DraftState: FC<{ state: TicketDraftState }> = ({ state }) => {
     }
     case 'cancelled':
       return (
-        <div className="tc-ticket-draft__outcome text-quaternary" role="status">
+        <div className="text-xs text-quaternary" role="status">
           {translate('This draft was canceled.')}
         </div>
       );
     case 'expired':
       return (
-        <div className="tc-ticket-draft__outcome text-quaternary" role="status">
+        <div className="text-xs text-quaternary" role="status">
           {translate('This draft has expired.')}
         </div>
       );
@@ -79,14 +79,20 @@ export const TicketDraftCard: FC<TicketDraftCardProps> = ({
   const server = useServerTicketDraft(eventDraft, isRequester, outcome);
   if (server.loading) {
     return (
-      <div className="tc-ticket-draft" data-testid="ticket-draft-card">
+      <div
+        className="flex flex-col gap-3 min-w-[240px]"
+        data-testid="ticket-draft-card"
+      >
         <LoadingSpinner />
       </div>
     );
   }
   if (server.failed) {
     return (
-      <div className="tc-ticket-draft" data-testid="ticket-draft-card">
+      <div
+        className="flex flex-col gap-3 min-w-[240px]"
+        data-testid="ticket-draft-card"
+      >
         <LoadingErred
           message={translate("Couldn't load this draft.")}
           loadData={() => server.retry()}
@@ -136,26 +142,33 @@ const TicketDraftView: FC<{
 
   return (
     <div
-      className="tc-ticket-draft"
+      className="flex flex-col gap-3 min-w-[240px]"
       data-testid="ticket-draft-card"
       role="group"
       aria-labelledby={titleId}
     >
-      <div className="tc-ticket-draft__heading">
-        <div className="tc-ticket-draft__header">
-          <TicketIcon weight="bold" />
+      <div className="flex flex-col gap-1">
+        <div
+          className="flex items-center gap-1.5 text-xs text-secondary font-semibold uppercase tracking-[0.04em]"
+          data-testid="ticket-draft-header"
+        >
+          <TicketIcon weight="bold" className="size-4 shrink-0" />
           <span>{translate('Support ticket draft')}</span>
         </div>
-        <div className="tc-ticket-draft__title" id={titleId}>
+        <div className="font-semibold" id={titleId}>
           {draft.title}
         </div>
       </div>
       {/* Focusable, so a keyboard can scroll a long description too. */}
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-      <div className="tc-ticket-draft__description" tabIndex={0}>
+      {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
+      <div
+        className="whitespace-pre-wrap [overflow-wrap:anywhere] max-h-52 overflow-y-auto"
+        tabIndex={0}
+      >
         {draft.description}
       </div>
-      <dl className="tc-ticket-draft__facts">
+      {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
+      <dl className="grid grid-cols-[max-content_1fr] gap-y-1 gap-x-2.5 m-0 text-xs [&>dt]:font-medium [&>dt]:text-secondary [&>dd]:m-0 [&>dd]:min-w-0 [&>dd]:[overflow-wrap:anywhere]">
         {draft.requestType && (
           <>
             <dt>{translate('Request type')}</dt>
@@ -205,8 +218,8 @@ const TicketDraftView: FC<{
         }
       />
       {pending && draft.expiresAt && (
-        <div className="tc-ticket-draft__expiry">
-          <ClockIcon weight="bold" />
+        <div className="flex items-center gap-1.5 text-xs text-secondary">
+          <ClockIcon weight="bold" className="size-4 shrink-0" />
           <span>
             {translate('Expires at {time}', {
               time: formatDateTime(draft.expiresAt),
@@ -216,7 +229,7 @@ const TicketDraftView: FC<{
       )}
       <DraftState state={state} />
       {pending && actionable && (
-        <div className="tc-ticket-draft__actions">
+        <div className="flex gap-1.5" data-testid="ticket-draft-actions">
           <BaseButton
             label={translate('Create ticket')}
             iconNode={<TicketIcon weight="bold" />}
@@ -248,9 +261,7 @@ const TicketDraftView: FC<{
           />
         </div>
       )}
-      {pending && note && (
-        <div className="tc-ticket-draft__readonly text-quaternary">{note}</div>
-      )}
+      {pending && note && <div className="text-xs text-quaternary">{note}</div>}
     </div>
   );
 };
