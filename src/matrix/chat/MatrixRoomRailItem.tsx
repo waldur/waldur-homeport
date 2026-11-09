@@ -1,8 +1,7 @@
 import { PhoneIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC } from 'react';
 
-import { Avatar, Tooltip } from 'waldur-ui';
+import { Avatar, Badge, cn, Tooltip } from 'waldur-ui';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
 import { getChatAvatarClass } from './chatColors';
@@ -38,7 +37,11 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
         type="button"
         aria-label={name}
         onClick={onClick}
-        className={classNames('tc-rail-item', { active })}
+        className={cn(
+          'relative flex p-1 border-0 rounded-lg bg-transparent cursor-pointer transition-colors hover:bg-secondary',
+          active &&
+            'bg-[var(--bg-brand-secondary)] hover:bg-[var(--bg-brand-secondary)]',
+        )}
       >
         <Avatar
           name={name}
@@ -47,18 +50,22 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
           fallbackClassName={getChatAvatarClass(uuid)}
         />
         {activeCall && (
-          <span className="tc-rail-call text-success" aria-hidden>
+          <span
+            data-testid="rail-call-indicator"
+            className="absolute bottom-0 right-0 inline-flex items-center justify-center size-3.5 rounded-full bg-primary text-success"
+            aria-hidden
+          >
             <PhoneIcon size={10} weight="fill" />
           </span>
         )}
         {isUnread && (
-          <span
-            className={classNames('tc-badge tc-rail-badge', {
-              mention: mentionCount > 0,
-            })}
+          <Badge
+            variant={mentionCount > 0 ? 'danger' : 'primary'}
+            size="sm"
+            className="absolute top-0 right-0 min-w-6 tabular-nums"
           >
             {unreadCount > 99 ? '99+' : unreadCount}
-          </span>
+          </Badge>
         )}
       </button>
     </Tooltip>
