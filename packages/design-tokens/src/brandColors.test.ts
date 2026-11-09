@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { generateBrandColors } from './brandColors';
+import { hslLightness } from './colorMath';
 import { contrastRatio } from './contrast';
 
 describe('generateBrandColors', () => {
@@ -54,4 +55,18 @@ describe('generateBrandColors', () => {
     const ramp = generateBrandColors(brand);
     expect(contrastRatio('#fafafa', ramp['900'])).toBeGreaterThanOrEqual(4.5);
   });
+
+  // Primary button: default (600), hover (700), pressed (800) must darken.
+  it.each([...BRANDS, '#ff69b4', '#880e4f', '#4a0026'])(
+    'runs light to dark from 500 to 800 for %s',
+    (brand) => {
+      const ramp = generateBrandColors(brand);
+      const [l500, l600, l700, l800] = ['500', '600', '700', '800'].map((key) =>
+        hslLightness(ramp[key]),
+      );
+      expect(l500).toBeGreaterThan(l600);
+      expect(l600).toBeGreaterThan(l700);
+      expect(l700).toBeGreaterThan(l800);
+    },
+  );
 });
