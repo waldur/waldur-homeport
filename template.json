@@ -11395,7 +11395,7 @@
   "Chair": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "update"
+      "feature_area": "team"
     }
   },
   "Challenge code": {
@@ -21956,7 +21956,7 @@
     }
   },
   "Email address and API token of an Atlassian account.": {},
-  "Email address for CrossRef API polite pool. Provides higher rate limits.": {},
+  "Email address for Crossref API polite pool. Provides higher rate limits.": {},
   "Email address of the user": {
     "context": {
       "feature_area": "actions"
@@ -77898,7 +77898,6 @@
   },
   "Unable to send the message.": {
     "context": {
-      "primary_ui_type": "error_message",
       "feature_area": "manage"
     }
   },
@@ -82088,7 +82087,7 @@
       }
     }
   },
-  "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}.": {
+  "User {user_link} has revoked {role_name} role in {scope_link} from {affected_user_link}.": {
     "context": {
       "variables": {
         "user_link": {
@@ -82097,10 +82096,10 @@
         "role_name": {
           "type": "string"
         },
-        "affected_user_link": {
+        "scope_link": {
           "type": "url"
         },
-        "scope_link": {
+        "affected_user_link": {
           "type": "url"
         }
       }
@@ -82987,7 +82986,7 @@
   },
   "Vice-chair": {
     "context": {
-      "feature_area": "update"
+      "feature_area": "team"
     }
   },
   "Video": {

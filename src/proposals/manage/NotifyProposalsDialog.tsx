@@ -6,6 +6,7 @@ import {
   proposalProtectedCallsNotifyProposals,
 } from 'waldur-js-client';
 
+import { formatErrorObject, getErrorBody } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { RadioGroup, StringGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -45,7 +46,12 @@ export const NotifyProposalsDialog: FC<NotifyProposalsDialogProps> = ({
   resolve: { callUuid, proposalUuids, proposalName, refetch },
 }) => {
   const count = proposalUuids.length;
-  const { showSuccess, showRedirectMessage: showWarning } = useNotify();
+  const {
+    showSuccess,
+    showError,
+    showErrorResponse,
+    showRedirectMessage: showWarning,
+  } = useNotify();
   const send = useManagedMutation<
     { data: NotifyProposalsResponse },
     any,
@@ -88,7 +94,20 @@ export const NotifyProposalsDialog: FC<NotifyProposalsDialogProps> = ({
         );
       }
     },
-    errorMessage: translate('Unable to send the message.'),
+    // A refusal says why in words of its own -- mail switched off on the
+    // site, a subject that is not one line -- so it is shown as said, not
+    // behind the status line the shared formatter puts first.
+    onError: (error) => {
+      const title = translate('Unable to send the message.');
+      const status = error?.status ?? error?.response?.status;
+      const body = status === 400 ? getErrorBody(error) : undefined;
+      const reason = body ? formatErrorObject(body) : '';
+      if (reason) {
+        showError(`${title} ${reason}`);
+      } else {
+        showErrorResponse(error, title);
+      }
+    },
     refetch,
   });
 

@@ -86,7 +86,7 @@ const formatRoleRevokedEvent = (event: RoleEvent) => {
   const context = getEventContext(event);
   if (event.user_uuid) {
     return translate(
-      'User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}.',
+      'User {user_link} has revoked {role_name} role in {scope_link} from {affected_user_link}.',
       context,
       formatJsxTemplate,
     );

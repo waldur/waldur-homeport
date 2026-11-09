@@ -58,6 +58,24 @@ describe('ActionsMenu', () => {
     );
   });
 
+  it('says why a disabled "Add" is disabled and stays closed', async () => {
+    const user = userEvent.setup();
+    render(
+      <ActionsMenu toggle="add" disabled tooltip="Only managers may add.">
+        <Menu.Item>Invite</Menu.Item>
+      </ActionsMenu>,
+    );
+    const toggle = screen.getByRole('button', { name: 'Add' });
+    expect(toggle).toBeDisabled();
+
+    await user.tab();
+    expect(
+      await screen.findAllByText('Only managers may add.'),
+    ).not.toHaveLength(0);
+    await user.click(toggle);
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
   it('takes a toggle element of its own', async () => {
     const user = userEvent.setup();
     render(

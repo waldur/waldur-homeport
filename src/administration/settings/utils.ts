@@ -22,8 +22,13 @@ export const formatListFieldValue = (value: unknown[]): string => {
   return value.join(', ');
 };
 
+// Keys whose words title-casing gets wrong: a product's own name.
+const KEY_TITLES: Record<string, string> = {
+  SEMANTIC_SCHOLAR_API_KEY: 'Semantic Scholar API key',
+};
+
 export const getKeyTitle = (key) =>
-  titleCase(key.toLowerCase().replaceAll('_', ' '));
+  KEY_TITLES[key] ?? titleCase(key.toLowerCase().replaceAll('_', ' '));
 
 export const SIDEBAR_STYLE_PRIMARY = 'primary';
 

@@ -2,6 +2,8 @@ import { CrownIcon, CrownSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RoleEnum } from '@/permissions/enums';
@@ -87,4 +89,29 @@ export const SetPanelChairButton: FC<SetPanelChairButtonProps> = ({
       />
     </>
   );
+};
+
+/**
+ * The Chair or Vice-chair badge of a call team row. The seats are the
+ * panel's, so only the panel-member row carries it, not the person's other
+ * roles in the call (a reviewer is often on the panel too).
+ */
+export const PanelChairBadge: FC<{
+  row: Pick<GenericPermission, 'role_name' | 'user_uuid'>;
+  call: Pick<Call, 'panel_chair_uuid' | 'panel_vice_chair_uuid'>;
+}> = ({ row, call }) => {
+  if (row.role_name !== RoleEnum.CALL_PANEL_MEMBER || !row.user_uuid) {
+    return null;
+  }
+  const label =
+    row.user_uuid === call.panel_chair_uuid
+      ? translate('Chair')
+      : row.user_uuid === call.panel_vice_chair_uuid
+        ? translate('Vice-chair')
+        : null;
+  return label ? (
+    <Badge variant="primary" size="sm" shape="pill" tone="outline">
+      {label}
+    </Badge>
+  ) : null;
 };

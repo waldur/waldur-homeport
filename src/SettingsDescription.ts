@@ -1161,7 +1161,7 @@ export const SettingsDescription = [
       },
       {
         key: 'CROSSREF_MAILTO',
-        description: translate('Email address for CrossRef API polite pool. Provides higher rate limits.'),
+        description: translate('Email address for Crossref API polite pool. Provides higher rate limits.'),
         default: '',
         type: 'email_field',
       },
