@@ -224,3 +224,35 @@
     --card-content-pt: 0px;
   }
 }
+
+/* A clickable card: a Card drawn on a link (`asChild`), or a link around a
+   Card. Every one looks like the marketplace offering card: a brand border
+   on hover, a 2px brand outline inside the edge while pressed, and the focus
+   ring, following the card's corners, only on keyboard focus. The border
+   and shadow are !important to beat the card's own border-secondary and
+   shadow utilities, which a base-layer rule otherwise loses to. */
+@layer base {
+  a[data-slot='card']:hover,
+  a:hover > [data-slot='card'] {
+    border-color: var(--brand-color) !important;
+    box-shadow: none !important;
+  }
+
+  a[data-slot='card']:active,
+  a:active > [data-slot='card'] {
+    outline: 2px solid var(--brand-color);
+    outline-offset: -2px;
+    border-color: transparent !important;
+  }
+
+  /* The ring goes on the card, not on the link around it, whose box is
+     square (or broken into lines when the link is inline). */
+  a:has(> [data-slot='card']):focus-visible {
+    outline: none;
+  }
+
+  a:focus-visible > [data-slot='card'] {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
