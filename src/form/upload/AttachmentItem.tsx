@@ -1,5 +1,4 @@
 import { FileIcon, TrashIcon, WarningIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC } from 'react';
 
 import { BaseButton } from 'waldur-ui';
@@ -11,6 +10,7 @@ import { decodeFileName, formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
+import { AttachmentCard } from './AttachmentCard';
 import { FileDownloader } from './FileDownloader';
 import { ImageFetcher } from './ImageFetcher';
 import { Attachment } from './types';
@@ -44,85 +44,49 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
 
   const fileName = decodeFileName(attachment.file_name);
 
+  const thumb = !attachment.file ? (
+    <WarningIcon size={iconSize} className="text-quinary" weight="bold" />
+  ) : attachment.file instanceof File ? (
+    <FileIcon size={iconSize} weight="bold" />
+  ) : attachment.mime_type?.startsWith('image') ? (
+    <button className="text-btn hover:text-brand" onClick={openModal}>
+      <ImageFetcher
+        url={attachment.file}
+        name={fileName}
+        thumb
+        iconSize={iconSize}
+      />
+    </button>
+  ) : (
+    <FileDownloader url={attachment.file} name={fileName} size={iconSize} />
+  );
+
+  const meta = [
+    attachment.file_size ? formatFilesize(attachment.file_size, 'B') : '',
+    attachment.created ? formatDateTime(attachment.created) : '',
+  ]
+    .filter(Boolean)
+    .join(' - ');
+
   return (
-    <div className={classNames('attachment-item', error && 'attachment-error')}>
-      {isDeleting && (
-        <div className="attachment-item__overlay">
-          <LoadingSpinner />
-        </div>
-      )}
-      {attachment.file ? (
-        <>
-          {attachment.file instanceof File ? (
-            <div className="attachment-item__thumb">
-              <FileIcon size={iconSize} weight="bold" />
-            </div>
-          ) : (
-            <div className="attachment-item__thumb">
-              {attachment.mime_type &&
-              attachment.mime_type.startsWith('image') ? (
-                <button
-                  className="text-btn hover:text-brand"
-                  onClick={openModal}
-                >
-                  <ImageFetcher
-                    url={attachment.file}
-                    name={fileName}
-                    thumb
-                    iconSize={iconSize}
-                  />
-                </button>
-              ) : (
-                <FileDownloader
-                  url={attachment.file}
-                  name={fileName}
-                  size={iconSize}
-                />
-              )}
-            </div>
-          )}
-          <div className="attachment-item__body">
-            <h6 className="font-medium text-secondary">{fileName}</h6>
-            <p className="text-sm text-quaternary">
-              {[
-                attachment.file_size
-                  ? formatFilesize(attachment.file_size, 'B')
-                  : '',
-                attachment.created ? formatDateTime(attachment.created) : '',
-              ]
-                .filter(Boolean)
-                .join(' - ')}
-            </p>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="attachment-item__thumb">
-            <WarningIcon
-              size={iconSize}
-              className="text-quinary"
-              weight="bold"
-            />
-          </div>
-          <div className="attachment-item__body self-center">
-            <h6 className="font-medium text-secondary">
-              {translate('Attachment is broken.')}
-            </h6>
-          </div>
-        </>
-      )}
-      {onDelete ? (
-        <div>
+    <AttachmentCard
+      error={Boolean(error)}
+      overlay={isDeleting ? <LoadingSpinner /> : null}
+      thumb={thumb}
+      title={attachment.file ? fileName : translate('Attachment is broken.')}
+      subtitle={attachment.file ? meta : undefined}
+      bodyClassName={attachment.file ? undefined : 'self-center'}
+      actions={
+        onDelete ? (
           <BaseButton
             iconNode={<TrashIcon weight="bold" />}
             tooltip={translate('Delete attachment')}
             onClick={() => onDelete(attachment)}
             variant="text-danger"
-            className="attachment-item__delete"
             size="sm"
           />
-        </div>
-      ) : null}
-    </div>
+        ) : null
+      }
+    />
   );
 };

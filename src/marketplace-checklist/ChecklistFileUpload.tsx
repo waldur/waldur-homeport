@@ -6,9 +6,12 @@ import { FieldInputProps } from 'react-final-form';
 import { BaseButton } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import {
+  AttachmentCard,
+  AttachmentCardList,
+} from '@/form/upload/AttachmentCard';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import '@/form/upload/AttachmentsList.scss';
 
 // Format for new file uploads (before backend processing)
 interface FileUploadData {
@@ -317,35 +320,30 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
       )}
 
       {currentFiles.length > 0 && (
-        <ul className="attachment-list">
+        <AttachmentCardList>
           {currentFiles.map((file, index) => (
             <li key={`${file.name}-${index}`}>
-              <div className="attachment-item">
-                <div className="attachment-item__thumb">
-                  <FileIcon size={22} weight="bold" />
-                </div>
-                <div className="attachment-item__body">
-                  <h6 className="font-medium text-secondary">{file.name}</h6>
-                  <p className="text-sm text-quaternary">
-                    {'stored_file_id' in file
-                      ? translate('Uploaded')
-                      : translate('Pending upload')}
-                  </p>
-                </div>
-                <div>
+              <AttachmentCard
+                thumb={<FileIcon size={22} weight="bold" />}
+                title={file.name}
+                subtitle={
+                  'stored_file_id' in file
+                    ? translate('Uploaded')
+                    : translate('Pending upload')
+                }
+                actions={
                   <BaseButton
                     tooltip={translate('Remove')}
                     onClick={() => handleRemove(file.name)}
                     iconNode={<TrashIcon weight="bold" />}
                     variant="tertiary-ghost"
-                    className="attachment-item__delete"
                     size="sm"
                   />
-                </div>
-              </div>
+                }
+              />
             </li>
           ))}
-        </ul>
+        </AttachmentCardList>
       )}
     </>
   );

@@ -1,10 +1,9 @@
 import { ComponentType, FC } from 'react';
 
+import { AttachmentCardList } from './AttachmentCard';
 import { AttachmentItem } from './AttachmentItem';
 import { AttachmentItemPending } from './AttachmentItemPending';
 import { Attachment, AttachmentUploading } from './types';
-
-import './AttachmentsList.scss';
 
 interface AttachmentsListProps {
   attachments?: Attachment[];
@@ -22,7 +21,7 @@ export const AttachmentsList: FC<AttachmentsListProps> = ({
   className,
 }) => {
   return attachments?.length > 0 || uploading?.length > 0 ? (
-    <ul className={'attachment-list' + (className ? ' ' + className : '')}>
+    <AttachmentCardList className={className}>
       {uploading &&
         uploading.map((item) => (
           <li key={item.key}>
@@ -40,6 +39,6 @@ export const AttachmentsList: FC<AttachmentsListProps> = ({
             <ItemComponent attachment={attachment} />
           </li>
         ))}
-    </ul>
+    </AttachmentCardList>
   ) : null;
 };

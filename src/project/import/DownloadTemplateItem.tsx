@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
+import { AttachmentCard } from '@/form/upload/AttachmentCard';
 import { translate } from '@/i18n';
 
 interface DownloadTemplateItemProps {
@@ -13,21 +14,22 @@ interface DownloadTemplateItemProps {
 
 export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
   return (
-    <div className="attachment-item mb-5">
-      <div className="attachment-item__thumb">
+    <AttachmentCard
+      className="mb-5"
+      thumb={
         <FileCsvIcon size={20} weight="bold" className="text-quaternary" />
-      </div>
-      <div className="attachment-item__body text-sm">
+      }
+      title={
         <button
           type="button"
-          className="font-medium text-secondary leading-none text-anchor"
+          className="font-medium text-secondary text-anchor"
           onClick={props.onClick}
         >
           {props.name}.csv
         </button>
-        <p className="text-sm text-quaternary mb-0">{props.size}</p>
-      </div>
-      <div>
+      }
+      subtitle={props.size}
+      actions={
         <BaseButton
           tooltip={translate('Download')}
           onClick={props.onClick}
@@ -36,7 +38,7 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
           variant="text-primary"
           size="sm"
         />
-      </div>
-    </div>
+      }
+    />
   );
 };
