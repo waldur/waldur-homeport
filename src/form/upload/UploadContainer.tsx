@@ -7,8 +7,6 @@ import { IconSquare } from 'waldur-ui';
 
 import { formatJsx, translate } from '@/i18n';
 
-import './UploadContainer.scss';
-
 interface UploadContainerProps extends DropzoneOptions {
   message?: string;
   /** Accessible name of the file input; defaults to "Upload files". */
@@ -16,10 +14,6 @@ interface UploadContainerProps extends DropzoneOptions {
   className?: string;
   disabled?: boolean;
 }
-
-const rejectStyle = {
-  borderColor: 'var(--status-danger-border)',
-};
 
 export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
   const { message, className, inputLabel, ...rest } = props;
@@ -36,17 +30,30 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
       {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
         <div
           {...getRootProps({
-            className: classNames('dropzone metronic-upload', className),
+            className: classNames(
+              'relative rounded-xl border border-secondary px-6 py-4',
+              className,
+            ),
           })}
         >
           {isDragActive && (
             <div
-              className="dropzone__overlay"
-              style={isDragReject ? rejectStyle : undefined}
+              className={classNames(
+                'absolute inset-0 z-2 flex items-center justify-center rounded-xl border-2 p-5 text-center',
+                isDragReject
+                  ? 'border-danger-subtle'
+                  : 'border-[var(--border-brand)]',
+              )}
             >
+              {/* Hidden since the overlay border alone signals the drop
+                  target; the text stays for assistive technology. */}
               <div
-                className="dropzone__overlay-message"
-                style={isDragReject ? rejectStyle : undefined}
+                className={classNames(
+                  'hidden max-w-[250px] rounded-lg border-2 bg-primary px-7.5 py-5 text-primary',
+                  isDragReject
+                    ? 'border-danger-subtle'
+                    : 'border-[var(--border-brand)]',
+                )}
               >
                 {isDragReject
                   ? translate('Invalid files')
@@ -54,7 +61,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
               </div>
             </div>
           )}
-          <div className="dropzone-message text-quaternary">
+          <div className="flex flex-col items-center gap-3 text-center text-sm text-quaternary">
             {/* Hidden by react-dropzone but still reachable by assistive
                 technology and by tests that set files on it, so it is
                 named. */}
