@@ -1,11 +1,12 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC } from 'react';
 
 import { BaseButton, Progress } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
+
+import { AttachmentCard } from './AttachmentCard';
 
 interface AttachmentItemPendingProps {
   file: File;
@@ -25,48 +26,38 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
   onCancel,
 }) => {
   return (
-    <div
-      className={classNames('attachment-item', error && 'attachment-error')}
+    <AttachmentCard
+      error={Boolean(error)}
       data-testid="pending-attachment-item"
-    >
-      <div className="attachment-item__thumb">
-        <FileIcon size={iconSize} weight="bold" />
-      </div>
-
-      <div className="attachment-item__body">
-        <h6 className="font-medium text-secondary">
-          {error ? translate('Upload failed, please try again') : file.name}
-        </h6>
-        <p className="text-sm text-quaternary">
-          {error ? file.name : formatFilesize(file.size, 'B')}
-        </p>
-        {error ? (
-          <button
-            type="button"
-            className="text-anchor text-anchor-danger mt-1"
-            onClick={() => onRetry(file)}
-          >
-            {translate('Try again')}
-          </button>
-        ) : progress || progress === 0 ? (
-          progress ? (
-            <Progress className="mt-1.5" value={progress} />
-          ) : (
-            <Progress className="mt-1.5" indeterminate />
-          )
-        ) : null}
-      </div>
-      <div>
+      thumb={<FileIcon size={iconSize} weight="bold" />}
+      title={error ? translate('Upload failed, please try again') : file.name}
+      subtitle={error ? file.name : formatFilesize(file.size, 'B')}
+      actions={
         <BaseButton
           iconNode={<TrashIcon weight="bold" />}
           tooltip={translate('Cancel upload')}
           onClick={() => onCancel(file)}
           variant="text-danger"
-          className="attachment-item__delete"
           disabled={!error && progress && progress !== 0}
           size="sm"
         />
-      </div>
-    </div>
+      }
+    >
+      {error ? (
+        <button
+          type="button"
+          className="text-anchor text-anchor-danger mt-1"
+          onClick={() => onRetry(file)}
+        >
+          {translate('Try again')}
+        </button>
+      ) : progress || progress === 0 ? (
+        progress ? (
+          <Progress className="mt-1.5" value={progress} />
+        ) : (
+          <Progress className="mt-1.5" indeterminate />
+        )
+      ) : null}
+    </AttachmentCard>
   );
 };
