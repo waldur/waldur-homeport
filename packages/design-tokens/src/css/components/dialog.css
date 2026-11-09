@@ -48,6 +48,16 @@
   --dialog-action-min-w: 125px;
 }
 
+/* A footer action is as wide as its label, never narrower than the floor
+   above (whatever the button is) and never stretched across the dialog by
+   a caller's flex-1 or w-full. */
+@layer base {
+  [data-slot='modal-footer'] button {
+    min-width: var(--dialog-action-min-w);
+    max-width: max-content;
+  }
+}
+
 :root[data-theme='dark'] {
   /* The app's dark veil: the darkest dark surface, gray-dark-900
      (#161b26), at half strength. Its Bootstrap modal replaced Bootstrap's
