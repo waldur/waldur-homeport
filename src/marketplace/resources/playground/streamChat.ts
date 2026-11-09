@@ -62,8 +62,44 @@ export const splitReasoning = (
 const authHeaders = (apiKey?: string | null): Record<string, string> =>
   apiKey ? { Authorization: `Bearer ${apiKey}` } : {};
 
+// What each model is for, by id, as a LiteLLM gateway reports it in
+// `/model/info` (`model_info.mode`: chat, embedding, rerank, ...). Empty when
+// the endpoint has no such listing -- not every OpenAI-compatible gateway does
+// -- so that nothing is hidden there. A cancelled request still cancels.
+const fetchModelModes = async (
+  baseUrl: string,
+  apiKey?: string | null,
+  signal?: AbortSignal,
+): Promise<Record<string, string>> => {
+  try {
+    const response = await fetch(`${baseUrl}/model/info`, {
+      signal,
+      headers: authHeaders(apiKey),
+    });
+    if (!response?.ok) {
+      return {};
+    }
+    const data = await response.json();
+    const modes: Record<string, string> = {};
+    for (const entry of data?.data ?? []) {
+      const mode = entry?.model_info?.mode;
+      if (typeof entry?.model_name === 'string' && typeof mode === 'string') {
+        modes[entry.model_name] = mode;
+      }
+    }
+    return modes;
+  } catch (e) {
+    if ((e as Error)?.name === 'AbortError') {
+      throw e;
+    }
+    return {};
+  }
+};
+
 // List the model ids the endpoint exposes (OpenAI `/v1/models`) for the model
-// picker. Sends the api key so gateways that gate `/models` don't 401.
+// picker. Sends the api key so gateways that gate `/models` don't 401. The
+// playground only chats, so a model the gateway marks as for something else
+// (an embedding or rerank model, say) is left out; one with no mode is kept.
 export const listInferenceModels = async (
   baseUrl: string,
   apiKey?: string | null,
@@ -88,7 +124,12 @@ export const listInferenceModels = async (
   if (ids.length === 0) {
     throw new Error(translate('The endpoint does not expose any model.'));
   }
-  return ids;
+  const modes = await fetchModelModes(baseUrl, apiKey, signal);
+  const chatIds = ids.filter((id) => !modes[id] || modes[id] === 'chat');
+  if (chatIds.length === 0) {
+    throw new Error(translate('The endpoint does not expose any chat model.'));
+  }
+  return chatIds;
 };
 
 export async function* streamInferenceReply(
