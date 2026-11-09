@@ -31,6 +31,12 @@ const hslToHex = (h: number, s: number, l: number): string => {
   return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1)}`;
 };
 
+/** HSL lightness of a hex color, from 0 (dark) to 1 (light). */
+export const hslLightness = (hex: string): number => {
+  const channels = [1, 3, 5].map((i) => parseInt(hex.substring(i, i + 2), 16));
+  return (Math.max(...channels) + Math.min(...channels)) / 2 / 255;
+};
+
 /**
  * @param hex Color hex
  * @param lightness Form 0 (dark) to 1 (light)
