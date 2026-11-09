@@ -235,3 +235,25 @@ describe('Role definition details gating', () => {
     ).not.toBeNull();
   });
 });
+
+describe('Role assignment events', () => {
+  const grant = {
+    ...staff,
+    affected_user_uuid: 'ddd',
+    affected_user_full_name: 'Bob Member',
+    affected_user_username: 'bob',
+    scope_type: 'call',
+    scope_uuid: 'eee',
+    scope_name: 'Regular Access',
+    role_name: 'CALL.PANEL_MEMBER',
+  };
+
+  it('says what was revoked from whom, as the grant says what was given', () => {
+    expect(format('role_granted', grant)).toBe(
+      'User Alice Staff has granted CALL.PANEL_MEMBER role in Regular Access to Bob Member.',
+    );
+    expect(format('role_revoked', grant)).toBe(
+      'User Alice Staff has revoked CALL.PANEL_MEMBER role in Regular Access from Bob Member.',
+    );
+  });
+});

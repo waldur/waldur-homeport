@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   formatDefaultValue,
   formatListFieldValue,
+  getKeyTitle,
   isSettingModified,
   parseListFieldValue,
 } from './utils';
@@ -167,5 +168,18 @@ describe('formatDefaultValue', () => {
         options: [{ value: 'classic', label: 'Classic' }],
       }),
     ).toBe('Classic');
+  });
+});
+
+describe('getKeyTitle', () => {
+  it('titles a key from its words', () => {
+    expect(getKeyTitle('CROSSREF_MAILTO')).toBe('Crossref mailto');
+    expect(getKeyTitle('ORCID_SANDBOX_MODE')).toBe('ORCID sandbox mode');
+  });
+
+  it('keeps a product name as its vendor writes it', () => {
+    expect(getKeyTitle('SEMANTIC_SCHOLAR_API_KEY')).toBe(
+      'Semantic Scholar API key',
+    );
   });
 });

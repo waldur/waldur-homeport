@@ -6,7 +6,7 @@ import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 import { RoleEnum } from '@/permissions/enums';
 import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
-import { SetPanelChairButton } from './SetPanelChairButton';
+import { PanelChairBadge, SetPanelChairButton } from './SetPanelChairButton';
 
 const { captured, mutate } = vi.hoisted(() => ({
   captured: { value: null as any },
@@ -113,5 +113,42 @@ describe('SetPanelChairButton', () => {
       path: { uuid: 'call-1' },
       body: { panel_vice_chair: null },
     });
+  });
+});
+
+describe('PanelChairBadge', () => {
+  const call = { panel_chair_uuid: 'chair', panel_vice_chair_uuid: 'vice' };
+
+  it.each([
+    ['chair', 'Chair'],
+    ['vice', 'Vice-chair'],
+  ])('marks the panel-member row of %s', (user, label) => {
+    renderWithProviders(
+      <PanelChairBadge
+        row={{ user_uuid: user, role_name: RoleEnum.CALL_PANEL_MEMBER }}
+        call={call}
+      />,
+    );
+    expect(screen.getByText(label)).toBeInTheDocument();
+  });
+
+  it("leaves the same person's reviewer row unmarked", () => {
+    renderWithProviders(
+      <PanelChairBadge
+        row={{ user_uuid: 'chair', role_name: RoleEnum.CALL_REVIEWER }}
+        call={call}
+      />,
+    );
+    expect(screen.queryByText('Chair')).not.toBeInTheDocument();
+  });
+
+  it('marks nobody else', () => {
+    renderWithProviders(
+      <PanelChairBadge
+        row={{ user_uuid: 'other', role_name: RoleEnum.CALL_PANEL_MEMBER }}
+        call={call}
+      />,
+    );
+    expect(screen.queryByText(/chair/i)).not.toBeInTheDocument();
   });
 });

@@ -58,10 +58,13 @@ export const RolePopover = ({ roleName }) => {
   }
   return (
     <>
-      {role.description || role.name}{' '}
+      {role.description || role.name}
+      {/* Spaced by a margin, not a text space: the sentences this sits in
+          put their own space after it. */}
       <QuestionIcon
         size={12}
         weight="bold"
+        className="ms-1"
         onClick={() => openDialog(RoleDetailsDialog, { role })}
       />
     </>

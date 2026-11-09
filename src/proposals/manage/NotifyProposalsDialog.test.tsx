@@ -76,4 +76,28 @@ describe('NotifyProposalsDialog', () => {
       'The message is being sent to the applicants of 1 proposals.',
     );
   });
+
+  it('says why a refused message was not sent, without the status line', async () => {
+    // The shape the API client's interceptor gives a DRF refusal: the body's
+    // items spread onto the error, beside the response envelope.
+    vi.mocked(proposalProtectedCallsNotifyProposals).mockRejectedValue({
+      0: 'Mail to applicants is switched off on this site.',
+      status: 400,
+      statusText: 'Bad Request',
+      response: { status: 400 },
+    });
+    render();
+    const user = userEvent.setup();
+
+    await user.type(screen.getByLabelText(/Subject/), 'Annex');
+    await user.type(screen.getByLabelText(/Message/), 'Upload it.');
+    await user.click(screen.getByRole('button', { name: 'Send' }));
+
+    await waitFor(() =>
+      expect(useNotify().showError).toHaveBeenCalledWith(
+        'Unable to send the message. Mail to applicants is switched off on this site.',
+      ),
+    );
+    expect(useNotify().showErrorResponse).not.toHaveBeenCalled();
+  });
 });

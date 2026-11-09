@@ -5,7 +5,7 @@ import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
 import { GenericInvitationContext } from '@/invitations/types';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 
-import { AddUserButton } from './AddUserButton';
+import { AddUserButton, useCanAddTeamMember } from './AddUserButton';
 
 interface TeamDropdownActionsProps extends GenericInvitationContext {
   refetchUsers?(): void;
@@ -37,8 +37,24 @@ export const TeamDropdownActions = ({
     ...rest,
   });
   const mayInvite = canInvite ?? invitation.canInvite;
+  const { canAddUser: mayAdd, reason } = useCanAddTeamMember(
+    rest.scope,
+    canAddUser,
+    rest.roleTypes,
+  );
+  // Nothing in the menu is open to the user: Add itself is disabled and says
+  // who may, as on the organisation's call management team, rather than
+  // opening on items that are all disabled.
+  const nothingToAdd = !mayAdd && !mayInvite;
   return (
-    <ActionsMenu side="bottom" toggle="add" variant={variant} align="start">
+    <ActionsMenu
+      side="bottom"
+      toggle="add"
+      variant={variant}
+      align="start"
+      disabled={nothingToAdd}
+      tooltip={nothingToAdd ? reason : undefined}
+    >
       {canInvite === false ? null : (
         <InvitationCreateButton
           refetch={refetchInvitations}

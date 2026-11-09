@@ -10,6 +10,11 @@ import {
   resolvePrepaidMonthsCap,
 } from './projectDuration';
 
+// Text, not a margin: the length and what it means for prepaid
+// subscriptions read as two statements wherever the line wraps, is copied or
+// is read aloud.
+const SEPARATOR = ' · ';
+
 /**
  * What a call's duration setting means for an applicant, stated once so the
  * call page, the offering rows and the request form agree: a fixed duration
@@ -33,7 +38,8 @@ export const CallDurationPolicy: FC<{
         <span className="font-semibold">
           {allowed.map(formatPrepaidMonths).join(', ')}
         </span>
-        <span className="text-quaternary ms-1.5">
+        {SEPARATOR}
+        <span className="text-quaternary">
           {translate(
             'The applicant chooses one; no prepaid subscription may run longer.',
           )}
@@ -58,7 +64,8 @@ export const CallDurationPolicy: FC<{
   return (
     <>
       <span>{formatProjectDuration({ days })}</span>
-      <span className="text-quaternary ms-1.5">
+      {SEPARATOR}
+      <span className="text-quaternary">
         {cap
           ? translate('Prepaid subscriptions {cap}.', {
               cap: formatPrepaidMonthsCap(cap),

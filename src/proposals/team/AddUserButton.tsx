@@ -23,6 +23,47 @@ const ADD_USER_PERMISSIONS = [
   PermissionEnum.MANAGE_PROPOSAL,
 ];
 
+/**
+ * Whether the user may add a member to the team of ``scope``, and if not,
+ * who may. Mirrors UserRoleCreateSerializer: the scope type's create
+ * permission -- CALL.CREATE_PERMISSION for a call, PROPOSAL.MANAGE for a
+ * proposal -- held on the scope's organization or on the scope itself. The
+ * team panel renders for both, and checkScope inside hasPermission tells them
+ * apart by scope_type. Organization owners hold the call one on the
+ * organization. ``override`` decides instead where the scope has rules of
+ * its own.
+ */
+export const useCanAddTeamMember = (
+  scope: AddUserDialogProps['scope'] | undefined,
+  override?: boolean,
+  /** The team's role types; the tooltip names only the roles of these. */
+  roleTypes?: AddUserDialogProps['roleTypes'],
+) => {
+  const user = useUser();
+  const scopeUuid = scope?.uuid;
+  const canAddUser =
+    override ??
+    (!!scopeUuid &&
+      ADD_USER_PERMISSIONS.some((permission) =>
+        hasPermission(user, {
+          permission,
+          scopeId: scopeUuid,
+          customerId: scope?.customer_uuid,
+        }),
+      ));
+  return {
+    canAddUser,
+    reason: canAddUser
+      ? undefined
+      : getPermissionDisabledTooltip(
+          ADD_USER_PERMISSIONS,
+          roleTypes?.length
+            ? ['customer', ...roleTypes]
+            : ['customer', 'call', 'proposal'],
+        ),
+  };
+};
+
 export const AddUserButton: React.FC<
   AddUserDialogProps & {
     /** Decided by the caller when the scope has rules of its own, e.g. a
@@ -34,24 +75,11 @@ export const AddUserButton: React.FC<
   }
 > = ({ canAddUser: canAddUserOverride, beforeOpen, ...props }) => {
   const { openDialog } = useModal();
-  const user = useUser();
-
-  // Mirrors UserRoleCreateSerializer: the scope type's create permission --
-  // CALL.CREATE_PERMISSION for a call, PROPOSAL.MANAGE for a proposal -- held
-  // on the scope's organization or on the scope itself. The team panel renders
-  // for both, and checkScope inside hasPermission tells them apart by
-  // scope_type. Organization owners hold the call one on the organization.
-  const scopeUuid = props.scope?.uuid;
-  const canAddUser =
-    canAddUserOverride ??
-    (!!scopeUuid &&
-      ADD_USER_PERMISSIONS.some((permission) =>
-        hasPermission(user, {
-          permission,
-          scopeId: scopeUuid,
-          customerId: props.scope?.customer_uuid,
-        }),
-      ));
+  const { canAddUser, reason } = useCanAddTeamMember(
+    props.scope,
+    canAddUserOverride,
+    props.roleTypes,
+  );
 
   return (
     <ActionItem
@@ -62,15 +90,7 @@ export const AddUserButton: React.FC<
       }}
       iconNode={<UserPlusIcon weight="bold" />}
       disabled={!canAddUser}
-      tooltip={
-        !canAddUser
-          ? getPermissionDisabledTooltip(ADD_USER_PERMISSIONS, [
-              'customer',
-              'call',
-              'proposal',
-            ])
-          : null
-      }
+      tooltip={reason ?? null}
     />
   );
 };

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
-import { AlertItem, Badge, useBreadcrumbs } from 'waldur-ui';
+import { AlertItem, useBreadcrumbs } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { AccessDeniedPage } from '@/error/AccessDeniedPage';
@@ -21,7 +21,10 @@ import { useValidationRedirect } from '@/proposals/validation/useValidationRedir
 import { useUser } from '@/workspace/hooks';
 
 import { CallTabs } from '../details/CallTabs';
-import { SetPanelChairButton } from '../team/SetPanelChairButton';
+import {
+  PanelChairBadge,
+  SetPanelChairButton,
+} from '../team/SetPanelChairButton';
 import { TeamSection } from '../team/TeamSection';
 import {
   canOpenCallEditPage,
@@ -240,29 +243,7 @@ const Body = ({ call, refetch, loading }) => {
               hasExtraRowActions={(row) =>
                 row.role_name === RoleEnum.CALL_PANEL_MEMBER
               }
-              roleSuffix={(row) =>
-                call.panel_chair_uuid &&
-                row.user_uuid === call.panel_chair_uuid ? (
-                  <Badge
-                    variant="primary"
-                    size="sm"
-                    shape="pill"
-                    tone="outline"
-                  >
-                    {translate('Chair')}
-                  </Badge>
-                ) : call.panel_vice_chair_uuid &&
-                  row.user_uuid === call.panel_vice_chair_uuid ? (
-                  <Badge
-                    variant="primary"
-                    size="sm"
-                    shape="pill"
-                    tone="outline"
-                  >
-                    {translate('Vice-chair')}
-                  </Badge>
-                ) : null
-              }
+              roleSuffix={(row) => <PanelChairBadge row={row} call={call} />}
             />
           ),
         },

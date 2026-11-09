@@ -291,13 +291,13 @@ export const ActionsMenu: FunctionComponent<
   PropsWithChildren<ActionsMenuProps>
 > = (props) => {
   const {
-    toggle: _toggle,
+    toggle,
     label: _label,
     variant: _variant,
     size: _size,
     toggleClassName: _toggleClassName,
     disabled,
-    tooltip: _tooltip,
+    tooltip,
     onOpenChange,
     defaultOpen,
     children,
@@ -305,12 +305,18 @@ export const ActionsMenu: FunctionComponent<
     align = 'start',
     ...contentProps
   } = props;
-  const unavailableReason = useContext(ActionsUnavailableContext);
+  // A disabled Add button explains itself the same way: its own tooltip,
+  // on a wrapper the pointer can still reach.
+  const unavailableReason =
+    useContext(ActionsUnavailableContext) ??
+    (toggle === 'add' && disabled && typeof tooltip === 'string'
+      ? tooltip
+      : undefined);
   if (unavailableReason) {
     // The toggle disabled, its reason in a tooltip. The tooltip sits on a
     // wrapper: a disabled button gets no pointer events (and .disabled-view
     // turns them off for every button), so it couldn't open on the button.
-    const toggle = renderToggle({
+    const disabledToggle = renderToggle({
       ...props,
       disabled: true,
       tooltip: undefined,
@@ -320,9 +326,9 @@ export const ActionsMenu: FunctionComponent<
         {/* Focusable, so the reason is reachable from the keyboard too. */}
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <span className="inline-flex" tabIndex={0}>
-          {isValidElement<{ disabled?: boolean }>(toggle)
-            ? cloneElement(toggle, { disabled: true })
-            : toggle}
+          {isValidElement<{ disabled?: boolean }>(disabledToggle)
+            ? cloneElement(disabledToggle, { disabled: true })
+            : disabledToggle}
         </span>
       </Tooltip>
     );
