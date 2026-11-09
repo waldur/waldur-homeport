@@ -85,32 +85,35 @@ export const TabNav = forwardRef<HTMLElement, TabNavProps>(
       ...props
     },
     ref,
-  ) => (
-    <nav
-      ref={ref}
-      aria-label={ariaLabel ?? translate('Tabs')}
-      className={cn('w-full', className)}
-      {...props}
-    >
-      <TabNavList
-        className={listClassName}
-        bordered={bordered}
-        scrollable={scrollable}
-        scrollClassName={scrollClassName}
+  ) =>
+    // A lone tab chooses nothing: leave the strip out.
+    items.length <= 1 ? null : (
+      <nav
+        ref={ref}
+        aria-label={ariaLabel ?? translate('Tabs')}
+        className={cn('w-full', className)}
+        {...props}
       >
-        {items.map((item) => (
-          <TabNavItem
-            key={item.key}
-            item={item}
-            current={
-              item.active ?? (activeKey !== undefined && item.key === activeKey)
-            }
-            onSelect={onSelect}
-          />
-        ))}
-      </TabNavList>
-    </nav>
-  ),
+        <TabNavList
+          className={listClassName}
+          bordered={bordered}
+          scrollable={scrollable}
+          scrollClassName={scrollClassName}
+        >
+          {items.map((item) => (
+            <TabNavItem
+              key={item.key}
+              item={item}
+              current={
+                item.active ??
+                (activeKey !== undefined && item.key === activeKey)
+              }
+              onSelect={onSelect}
+            />
+          ))}
+        </TabNavList>
+      </nav>
+    ),
 );
 TabNav.displayName = 'TabNav';
 

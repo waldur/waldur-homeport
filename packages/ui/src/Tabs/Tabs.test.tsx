@@ -261,6 +261,7 @@ describe('scrollable lists', () => {
       <Tabs defaultValue="a">
         <TabsList scrollable scrollClassName="flex-grow-1" data-testid="list">
           <TabsTrigger value="a">A</TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
         <TabsContent value="a">Panel</TabsContent>
       </Tabs>,
@@ -281,6 +282,7 @@ describe('scrollable lists', () => {
       <Tabs defaultValue="a">
         <TabsList data-testid="list">
           <TabsTrigger value="a">A</TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
@@ -295,9 +297,11 @@ describe('scrollable lists', () => {
       <Tabs defaultValue="a">
         <TabsList data-testid="wrapping">
           <TabsTrigger value="a">A</TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
         <TabsList scrollable data-testid="scrolling">
           <TabsTrigger value="b">B</TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
@@ -309,7 +313,10 @@ describe('scrollable lists', () => {
   it('frames a scrollable TabNav list', () => {
     render(
       <TabNav
-        items={[{ key: 'b', title: 'B' }]}
+        items={[
+          { key: 'b', title: 'B' },
+          { key: 'z', title: 'Z' },
+        ]}
         scrollable
         scrollClassName="flex-grow-1"
       />,
@@ -481,7 +488,14 @@ describe('TabNav', () => {
   });
 
   it('gives the nav a default accessible name', () => {
-    render(<TabNav items={[{ key: 'a', title: 'A' }]} />);
+    render(
+      <TabNav
+        items={[
+          { key: 'a', title: 'A' },
+          { key: 'z', title: 'Z' },
+        ]}
+      />,
+    );
 
     expect(screen.getByRole('navigation')).toHaveAccessibleName('Tabs');
   });
@@ -641,6 +655,7 @@ describe('tab counts', () => {
           >
             Check
           </TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
@@ -661,11 +676,14 @@ describe('tab counts', () => {
     render(
       <Tabs
         defaultValue="a"
-        items={[{ value: 'a', title: 'All', count: 4, content: 'panel' }]}
+        items={[
+          { value: 'a', title: 'All', count: 4, content: 'panel' },
+          { value: 'z', title: 'Z', content: 'z' },
+        ]}
       />,
     );
 
-    const number = within(screen.getByRole('tab')).getByText('4');
+    const number = within(screen.getAllByRole('tab')[0]).getByText('4');
     expect(number).not.toHaveAttribute('aria-hidden');
     expect(number).toHaveAttribute('data-count-variant', 'neutral');
   });
@@ -683,6 +701,7 @@ describe('tab counts', () => {
             countLabel: '3 warnings',
             content: 'panel',
           },
+          { value: 'z', title: 'Z', content: 'z' },
         ]}
       />,
     );
@@ -778,11 +797,12 @@ describe('TabsTrigger extras', () => {
           <TabsTrigger value="a" count={0}>
             A
           </TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
 
-    expect(screen.getByRole('tab')).toHaveTextContent('A0');
+    expect(screen.getAllByRole('tab')[0]).toHaveTextContent('A0');
   });
 
   it('shows a hint as the tooltip, with no nested control', async () => {
@@ -793,6 +813,7 @@ describe('TabsTrigger extras', () => {
           <TabsTrigger value="a" hint="What A means">
             A
           </TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
@@ -816,6 +837,7 @@ describe('active style under a tooltip', () => {
           <TabsTrigger value="a" hint="Help">
             A
           </TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
@@ -831,7 +853,10 @@ describe('active style under a tooltip', () => {
     render(
       <TabNav
         activeKey="a"
-        items={[{ key: 'a', title: 'A', tooltip: 'Help' }]}
+        items={[
+          { key: 'a', title: 'A', tooltip: 'Help' },
+          { key: 'z', title: 'Z' },
+        ]}
       />,
     );
 
@@ -868,6 +893,7 @@ describe('TabsList variants', () => {
       <Tabs defaultValue="a">
         <TabsList bordered={false}>
           <TabsTrigger value="a">A</TabsTrigger>
+          <TabsTrigger value="z">Z</TabsTrigger>
         </TabsList>
       </Tabs>,
     );
