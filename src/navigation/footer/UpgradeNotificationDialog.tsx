@@ -17,14 +17,7 @@ export const UpgradeNotificationDialog: FunctionComponent<
   <ModalDialog
     title={translate('Upgrade available')}
     iconNode={<InfoIcon size={28} className="text-success" weight="bold" />}
-    footerClassName="block px-3 pb-3"
-    footer={
-      <CloseDialogButton
-        label={translate('Close')}
-        variant="success"
-        className="w-full text-center"
-      />
-    }
+    footer={<CloseDialogButton label={translate('Close')} variant="success" />}
   >
     <p>
       {translate('Waldur {version} is now available.', {
