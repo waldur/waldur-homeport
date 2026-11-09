@@ -86,6 +86,144 @@ describe('listInferenceModels', () => {
   });
 });
 
+// A LiteLLM gateway says what each model is for in /model/info
+// (model_info.mode). The playground only chats, so models marked for
+// something else are left out of its picker.
+describe('listInferenceModels on a gateway that reports model modes', () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  const ok = (body: unknown) => ({
+    ok: true,
+    json: () => Promise.resolve(body),
+  });
+
+  // Answers /models with the given ids and /model/info with the given modes.
+  const gateway = (ids: string[], modeInfo: unknown) =>
+    vi.fn((url: string) =>
+      Promise.resolve(
+        url.endsWith('/model/info')
+          ? modeInfo
+          : ok({ data: ids.map((id) => ({ id })) }),
+      ),
+    );
+
+  const modes = (entries: Record<string, string | null>) =>
+    ok({
+      data: Object.entries(entries).map(([model_name, mode]) => ({
+        model_name,
+        model_info: { mode },
+      })),
+    });
+
+  it('leaves out models the gateway marks as not for chat', async () => {
+    // Assign: a gateway with one chat model and three others
+    vi.stubGlobal(
+      'fetch',
+      gateway(
+        [
+          'Qwen3.8-27B',
+          'qwen3-embedding-4b',
+          'qwen3-reranker-4b',
+          'clef-flash',
+        ],
+        modes({
+          'Qwen3.8-27B': 'chat',
+          'qwen3-embedding-4b': 'embedding',
+          'qwen3-reranker-4b': 'rerank',
+          'clef-flash': 'evaluation',
+        }),
+      ),
+    );
+
+    // Act: list the models
+    const models = await listInferenceModels('https://gw.test/v1');
+
+    // Assert: only the chat model is offered
+    expect(models).toEqual(['Qwen3.8-27B']);
+  });
+
+  it('keeps a model whose mode is not set', async () => {
+    // Assign: one chat model and one without a mode
+    vi.stubGlobal(
+      'fetch',
+      gateway(['chatty', 'unknown'], modes({ chatty: 'chat', unknown: null })),
+    );
+
+    // Act: list the models
+    const models = await listInferenceModels('https://gw.test/v1');
+
+    // Assert: both are offered
+    expect(models).toEqual(['chatty', 'unknown']);
+  });
+
+  it('keeps every model when the gateway has no /model/info', async () => {
+    // Assign: a gateway without /model/info
+    vi.stubGlobal(
+      'fetch',
+      gateway(['qwen', 'gemma'], { ok: false, status: 404 }),
+    );
+
+    // Act: list the models
+    const models = await listInferenceModels('https://plain.test/v1');
+
+    // Assert: every model is offered
+    expect(models).toEqual(['qwen', 'gemma']);
+  });
+
+  it('asks /model/info with the same api key', async () => {
+    // Assign: a gateway that reports modes
+    const fetchMock = gateway(['qwen'], modes({ qwen: 'chat' }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    // Act: list the models with a key
+    await listInferenceModels('https://gw.test/v1', 'sk-xyz');
+
+    // Assert: /model/info got the same Bearer key
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://gw.test/v1/model/info',
+      expect.objectContaining({ headers: { Authorization: 'Bearer sk-xyz' } }),
+    );
+  });
+
+  it('says so when no chat model is left', async () => {
+    // Assign: a gateway with only an embedding model
+    vi.stubGlobal(
+      'fetch',
+      gateway(
+        ['qwen3-embedding-4b'],
+        modes({ 'qwen3-embedding-4b': 'embedding' }),
+      ),
+    );
+
+    // Act: list the models
+    const listing = listInferenceModels('https://gw.test/v1');
+
+    // Assert: it says there is no chat model
+    await expect(listing).rejects.toThrow(
+      /The endpoint does not expose any chat model/,
+    );
+  });
+
+  it('preserves an AbortError from /model/info', async () => {
+    // Assign: /model/info is cancelled
+    const abort = Object.assign(new Error('aborted'), { name: 'AbortError' });
+    vi.stubGlobal(
+      'fetch',
+      vi.fn((url: string) =>
+        url.endsWith('/model/info')
+          ? Promise.reject(abort)
+          : Promise.resolve(ok({ data: [{ id: 'qwen' }] })),
+      ),
+    );
+
+    // Act: list the models
+    const listing = listInferenceModels('https://gw.test/v1');
+
+    // Assert: the AbortError comes through
+    await expect(listing).rejects.toMatchObject({ name: 'AbortError' });
+  });
+});
+
 describe('streamInferenceReply', () => {
   afterEach(() => vi.restoreAllMocks());
 
