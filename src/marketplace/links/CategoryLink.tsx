@@ -7,14 +7,20 @@ interface OwnProps {
   className?: string;
 }
 
-export const CategoryLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
+export const CategoryLink: React.FC<PropsWithChildren<OwnProps>> = ({
+  item,
+  className,
+  children,
+  ...rest
+}) => {
   return (
     <Link
       state="public.marketplace-category"
-      params={{ category_uuid: props.item.uuid }}
-      className={props.className}
+      params={{ category_uuid: item.uuid }}
+      className={className}
+      {...rest}
     >
-      {props.children}
+      {children}
     </Link>
   );
 };

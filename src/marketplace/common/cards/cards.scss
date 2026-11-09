@@ -5,19 +5,6 @@
 .offering-card-detailed,
 .offering-card-list,
 .offering-card-image {
-  // No hover shadow on cards — only 1px brand border
-  [data-slot='card']:hover {
-    box-shadow: none;
-  }
-
-  // Pressed/select state — 2px green border (outline to avoid layout shift)
-  [data-slot='card']:active {
-    outline: 2px solid var(--brand-color);
-    outline-offset: -2px;
-    border-color: transparent !important;
-    box-shadow: none;
-  }
-
   // Common disabled state
   &.disabled {
     cursor: not-allowed;
