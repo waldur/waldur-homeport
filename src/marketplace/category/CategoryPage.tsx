@@ -20,7 +20,6 @@ import { getMarketplaceTitle } from '../title';
 import { useMarketplacePublicTabs } from '../utils';
 
 import { CategoryOfferingsList } from './CategoryOfferingsList';
-import { HeroSection } from './HeroSection';
 
 export const CategoryPage: FunctionComponent = () => {
   const {
@@ -83,7 +82,6 @@ export const CategoryPage: FunctionComponent = () => {
   return (
     <CardStyleProvider cardStyle={cardStyle}>
       <MarketplaceScopeBar />
-      <HeroSection item={category.data} />
       <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-5')}>
         <CategoryOfferingsList category={category.data} />
       </div>

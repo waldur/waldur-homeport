@@ -111,6 +111,7 @@ export const PublicOfferingsList: FunctionComponent<{
   showOrganization?;
   initialMode?;
   variant?: CardStyleType;
+  title?: string;
   onTagClick?(tag: NestedTag): void;
 }> = ({
   filter,
@@ -118,6 +119,7 @@ export const PublicOfferingsList: FunctionComponent<{
   showOrganization = true,
   initialMode,
   variant,
+  title,
   onTagClick,
 }) => {
   const contextCardStyle = useCardStyle();
@@ -251,7 +253,7 @@ export const PublicOfferingsList: FunctionComponent<{
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
       showPageSizeSelector={true}
-      title={translate('Offerings')}
+      title={title || translate('Offerings')}
       rowActions={RowActions}
       hasOptionalColumns
     />
