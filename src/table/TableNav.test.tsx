@@ -47,6 +47,7 @@ describe('TableNav', () => {
       <TableNav
         tabs={[
           { key: 'a', title: 'Plain title', params: { state: undefined } },
+          { key: 'b', title: 'Other', params: { state: 'other' } },
         ]}
       />,
     );

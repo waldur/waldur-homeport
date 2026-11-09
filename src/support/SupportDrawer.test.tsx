@@ -61,7 +61,8 @@ describe('SupportDrawer', () => {
     render(<SupportDrawer />);
 
     expect(screen.queryByText('Team chat')).not.toBeInTheDocument();
-    expect(screen.getByText('Helpdesk')).toBeInTheDocument();
+    // Helpdesk is then the only tab, so the strip is left out.
+    expect(screen.queryByRole('tab')).not.toBeInTheDocument();
   });
 
   it('shows the unread count on the Team chat tab', () => {

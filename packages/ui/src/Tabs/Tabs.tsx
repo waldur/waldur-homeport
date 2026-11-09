@@ -1,6 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import {
+  Children,
   ComponentPropsWithoutRef,
   createContext,
   ElementRef,
@@ -256,6 +257,10 @@ export const TabsList = forwardRef<
       () => ({ variant, fullWidth }),
       [variant, fullWidth],
     );
+    // A lone tab chooses nothing: leave the strip out, its panel still shows.
+    if (Children.toArray(props.children).length <= 1) {
+      return null;
+    }
     const list = (
       <TabsListContext.Provider value={contextValue}>
         <TabsPrimitive.List

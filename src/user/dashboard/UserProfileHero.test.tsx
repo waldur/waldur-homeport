@@ -68,14 +68,13 @@ describe('UserProfileHero', () => {
     );
   });
 
-  it('marks Edit as active on the manage route', () => {
+  it('shows no tab bar on the manage route, where Edit is the only tab', () => {
     setCurrentState('profile-manage');
     render(<UserProfileHero user={staffUser} />);
 
-    expect(screen.getByRole('link', { name: 'Edit' })).toHaveAttribute(
-      'aria-current',
-      'page',
-    );
+    expect(
+      screen.queryByRole('link', { name: 'Edit' }),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByRole('link', { name: 'View' }),
     ).not.toBeInTheDocument();

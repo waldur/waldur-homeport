@@ -163,7 +163,11 @@ describe('TabsList', () => {
   });
 
   it('skips a hidden tab, which is never rendered', () => {
-    tabs.current = [{ ...pageTabs[0], visible: false }, pageTabs[1]];
+    tabs.current = [
+      { ...pageTabs[0], visible: false },
+      pageTabs[1],
+      { title: 'Elsewhere', to: 'profile-freeipa' },
+    ];
     mockRouterOn('profile-manage');
 
     render(<TabsList />);
@@ -172,7 +176,7 @@ describe('TabsList', () => {
   });
 
   it('leaves tabs pointing at another state alone', () => {
-    tabs.current = [{ title: 'Elsewhere', to: 'profile-freeipa' }];
+    tabs.current = [pageTabs[0], { title: 'Elsewhere', to: 'profile-freeipa' }];
     mockRouterOn('profile-manage');
 
     render(<TabsList />);
@@ -237,15 +241,24 @@ describe('TabsList', () => {
   });
 
   it('renders a disabled tab without a link, marked disabled', () => {
-    tabs.current = [{ ...pageTabs[1], disabled: true }];
+    tabs.current = [pageTabs[0], { ...pageTabs[1], disabled: true }];
     mockRouterOn('profile-freeipa');
 
     render(<TabsList />);
 
-    expect(screen.queryByRole('link')).not.toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access
     const tab = screen.getByText('Reviewer profile').closest('a');
+    expect(tab).not.toHaveAttribute('href');
     expect(tab).toHaveAttribute('data-disabled');
+  });
+
+  it('hides a lone tab, which chooses nothing', () => {
+    tabs.current = [pageTabs[0]];
+    mockRouterOn('profile-manage');
+
+    render(<TabsList />);
+
+    expect(screen.queryByText('User profile')).not.toBeInTheDocument();
   });
 
   it('still prefers the tab the URL names', () => {

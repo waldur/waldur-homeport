@@ -22,7 +22,6 @@ describe('AdvancedIntegrationSection', () => {
         refetch={vi.fn()}
       />,
     );
-    expect(screen.getByText('HPC workspace')).toBeInTheDocument();
     expect(screen.getByText('FirecREST API URL')).toBeInTheDocument();
     expect(
       screen.getByText('https://firecrest.example.org'),

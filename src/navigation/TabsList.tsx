@@ -230,6 +230,11 @@ export const TabsList: FC = () => {
     );
   }, [tabs]);
 
+  // A lone tab chooses nothing; one with sub-tabs still opens their menu.
+  if (visibleTabs.length === 1 && !visibleTabs[0].children?.length) {
+    return null;
+  }
+
   return (
     <>
       {visibleTabs.map((parentTab, parentIndex) =>
