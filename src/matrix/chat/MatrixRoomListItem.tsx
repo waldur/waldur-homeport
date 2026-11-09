@@ -7,10 +7,9 @@ import {
   SpeakerHighIcon,
   VideoCameraIcon,
 } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
-import { Avatar } from 'waldur-ui';
+import { Avatar, Badge, cn } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -62,9 +61,9 @@ const PreviewLine: FC<{
 }> = ({ kind, preview, fileName, fileSize, sender }) => {
   if (kind === 'voice') {
     return (
-      <span className="tc-row-preview-media">
-        <MicrophoneIcon size={16} weight="regular" />
-        <span className="tc-row-preview-name">
+      <span className="flex items-center gap-1.5 min-w-0">
+        <MicrophoneIcon size={16} weight="regular" className="shrink-0" />
+        <span className="truncate">
           {sender && <b>{sender}: </b>}
           {translate('Voice message')}
         </span>
@@ -75,15 +74,17 @@ const PreviewLine: FC<{
   const fileIcon = FILE_ICONS[kind];
   if (fileIcon) {
     return (
-      <span className="tc-row-file">
-        <span className="tc-row-file-icon">{fileIcon}</span>
-        <span className="tc-row-file-meta">
-          <span className="tc-row-file-name">
+      <span className="flex items-center gap-3 min-w-0">
+        <span className="shrink-0 flex items-center justify-center size-8 border border-secondary rounded-lg text-tertiary">
+          {fileIcon}
+        </span>
+        <span className="min-w-0 flex flex-col">
+          <span className="truncate font-medium text-secondary">
             {sender && <b>{sender}: </b>}
             {fileName || preview}
           </span>
           {fileSize != null && (
-            <span className="tc-row-file-size">
+            <span className="text-quaternary">
               {formatFilesize(fileSize, 'B')}
             </span>
           )}
@@ -144,27 +145,44 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
   return (
     <button
       type="button"
-      className={classNames('tc-row', { active, unread: isUnread })}
+      className={cn(
+        'grid grid-cols-[48px_1fr] gap-3 w-full items-center py-3 px-[var(--card-padding-x,24px)] border-0 bg-transparent text-start transition-colors cursor-pointer hover:bg-secondary',
+        active && 'bg-secondary',
+      )}
       onClick={onClick}
     >
-      <div className="tc-row-avatar">
+      <div className="place-self-center size-12">
         <Avatar
           name={name}
           size={48}
           fallbackClassName={getChatAvatarClass(uuid)}
         />
       </div>
-      <div className="tc-row-meta">
-        <div className="tc-row-top">
-          <span className="tc-row-title">{name}</span>
+      <div className="min-w-0 flex flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <span
+            className={cn(
+              'grow min-w-0 truncate text-sm leading-[1.4]',
+              isUnread
+                ? 'text-primary font-semibold'
+                : 'text-secondary font-medium',
+            )}
+          >
+            {name}
+          </span>
           {lastActivity > 0 && (
-            <span className="tc-row-time">
+            <span className="shrink-0 text-xs text-quaternary tabular-nums">
               {formatRelativeTime(lastActivity)}
             </span>
           )}
         </div>
-        <div className="tc-row-bottom">
-          <div className="tc-row-preview">
+        <div className="flex items-center gap-2">
+          <div
+            className={cn(
+              'grow min-w-0 truncate text-sm leading-[1.4]',
+              isUnread ? 'text-primary' : 'text-quaternary',
+            )}
+          >
             {activeCall ? (
               <span className="text-success inline-flex items-center gap-1">
                 <PhoneIcon size={14} weight="fill" />
@@ -187,13 +205,19 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
             )}
           </div>
           {isMuted ? (
-            <BellSlashIcon size={14} weight="bold" className="tc-row-muted" />
+            <BellSlashIcon
+              size={14}
+              weight="bold"
+              className="shrink-0 text-quinary"
+            />
           ) : isUnread ? (
-            <span
-              className={classNames('tc-badge', { mention: mentionCount > 0 })}
+            <Badge
+              variant={mentionCount > 0 ? 'danger' : 'primary'}
+              size="sm"
+              className="min-w-6 shrink-0 tabular-nums"
             >
               {unreadCount > 99 ? '99+' : unreadCount}
-            </span>
+            </Badge>
           ) : null}
         </div>
       </div>
