@@ -76636,6 +76636,11 @@
       "feature_area": "inputs"
     }
   },
+  "Unable to load who was given access to the project.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Unable to load your recovery key.": {
     "context": {
       "primary_ui_type": "error_message",

@@ -163,6 +163,37 @@ describe('AllocationOutcomeSection', () => {
       screen.queryByText('No roles were granted on the project.'),
     ).not.toBeInTheDocument();
   });
+  // Anything but a 403 is a fault, not "not yours to see": the section says
+  // it could not load instead of disappearing as if nobody had been granted.
+  it('reports a failure to load the project roles', async () => {
+    vi.mocked(projectsRetrieve).mockImplementation(
+      () =>
+        Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+    );
+    vi.mocked(projectsListUsersList).mockImplementation(
+      () =>
+        Promise.reject({
+          detail: 'Not found.',
+          response: { status: 404 },
+        }) as any,
+    );
+    vi.mocked(proposalProposalsResourcesList).mockImplementation(() =>
+      page([]),
+    );
+
+    renderSection(<AllocationOutcomeSection proposal={proposal} />);
+
+    expect(
+      await screen.findByText(
+        'Unable to load who was given access to the project.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Project access:')).toBeInTheDocument();
+    expect(
+      screen.queryByText('No roles were granted on the project.'),
+    ).not.toBeInTheDocument();
+  });
+
   // A reviewer may receive the granted members without their name or username
   // when the call conceals them: the member cell shows a dash, not a blank.
   it('shows a dash for a member whose identity is concealed', async () => {
