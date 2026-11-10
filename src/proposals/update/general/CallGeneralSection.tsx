@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { PropertyCard, PropertyList } from 'waldur-ui';
+import { Code, FormText, PropertyCard, PropertyList } from 'waldur-ui';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { isFeatureVisible } from '@/features/connect';
@@ -11,7 +11,8 @@ import {
   StringEditField,
 } from '@/form/editFields';
 import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
-import { translate } from '@/i18n';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { DEFAULT_PROJECT_NAME_TEMPLATE } from '@/proposals/proposalProjectName';
 import { Call } from '@/proposals/types';
 import { useUpdateCall } from '@/proposals/update/useUpdateCall';
 import { getCallReadOnlyReason } from '@/proposals/utils';
@@ -45,6 +46,51 @@ const PROPOSAL_SLUG_PLACEHOLDERS = [
     name: 'counter_padded',
     description: 'Zero-padded 3-digit counter',
     example: '003',
+  },
+];
+
+// Mirrors PROJECT_NAME_PLACEHOLDERS in proposal/enums.py.
+const getProjectNamePlaceholders = () => [
+  {
+    name: 'proposal_name',
+    description: translate('Proposal name'),
+    example: 'Clinical school',
+  },
+  {
+    name: 'proposal_slug',
+    description: translate('Proposal slug'),
+    example: 'STORE-001',
+  },
+  {
+    name: 'call_prefix',
+    description: translate('Reference code, else call slug'),
+    example: 'STORE',
+  },
+  { name: 'call_slug', description: translate('Call slug'), example: 'store' },
+  {
+    name: 'call_name',
+    description: translate('Call name'),
+    example: 'Research storage',
+  },
+  {
+    name: 'round_start',
+    description: translate('Round start date'),
+    example: '2026-10-02',
+  },
+  {
+    name: 'round_slug',
+    description: translate('Round slug'),
+    example: 'ORG-STORE-202610',
+  },
+  {
+    name: 'org_slug',
+    description: translate('Organization slug'),
+    example: 'acme',
+  },
+  {
+    name: 'year',
+    description: translate('Year of allocation'),
+    example: '2026',
   },
 ];
 
@@ -111,6 +157,31 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                     )
                   : undefined
               }
+              renderValue={(value) => renderFieldOrDash(value)}
+            />
+            <StringEditField
+              name="project_name_template"
+              label={translate('Project name template')}
+              description={
+                <>
+                  <FormText
+                    as="div"
+                    variant="muted"
+                    className="mt-1.5 leading-7"
+                  >
+                    {translate(
+                      'Name of the project an accepted proposal creates. Leave empty for {default}. Applies to proposals allocated after the change.',
+                      { default: <Code>{DEFAULT_PROJECT_NAME_TEMPLATE}</Code> },
+                      formatJsxTemplate,
+                    )}
+                  </FormText>
+                  <SlugTemplateHelpText
+                    placeholders={getProjectNamePlaceholders()}
+                  />
+                </>
+              }
+              descriptionInEditOnly
+              disabled={props.isReadOnly}
               renderValue={(value) => renderFieldOrDash(value)}
             />
             {isFeatureVisible(MarketplaceFeatures.call_only) && (

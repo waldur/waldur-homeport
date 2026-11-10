@@ -10789,6 +10789,7 @@
   "Call setting: panel chair and vice-chair.": {},
   "Call setting: reviews are visible to applicants.": {},
   "Call settings": {},
+  "Call slug": {},
   "Call state": {
     "context": {
       "feature_area": "provider-calls"
@@ -38052,6 +38053,15 @@
     }
   },
   "Name of the organization role whose permissions SRAM placeholder roles copy. Empty gives placeholders no permissions. Placeholders are refreshed on the next push or by 'waldur sram_resync'.": {},
+  "Name of the project an accepted proposal creates. Leave empty for {default}. Applies to proposals allocated after the change.": {
+    "context": {
+      "variables": {
+        "default": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Name of the remote offering, e.g. \"isambard-ai\"": {
     "context": {
       "feature_area": "project-templates"
@@ -45331,6 +45341,7 @@
       "feature_area": "generated"
     }
   },
+  "Organization slug": {},
   "Organization summary": {
     "context": {
       "primary_ui_type": "title",
@@ -53438,6 +53449,7 @@
       "feature_area": "details"
     }
   },
+  "Reference code, else call slug": {},
   "Referral count": {
     "context": {
       "feature_area": "details"
@@ -58665,6 +58677,8 @@
     }
   },
   "Round schedule and settings; no proposals.": {},
+  "Round slug": {},
+  "Round start date": {},
   "Round started": {
     "context": {
       "feature_area": "workflow-description"
@@ -85461,6 +85475,7 @@
       "feature_area": "credits"
     }
   },
+  "Year of allocation": {},
   "Year-over-year": {
     "context": {
       "primary_ui_type": "label",

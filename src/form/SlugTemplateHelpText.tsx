@@ -32,7 +32,7 @@ export const SlugTemplateHelpText = ({
               <Code>{`{${p.name}}`}</Code>
             </TableCell>
             <TableCell>{p.description}</TableCell>
-            <TableCell className="text-quaternary">
+            <TableCell className="text-quaternary whitespace-nowrap">
               {translate('e.g.')} <Code>{p.example}</Code>
             </TableCell>
           </TableRow>
