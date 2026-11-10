@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import {
   ProposalBudget,
   ProposalBudgetEntry,
@@ -10,6 +10,7 @@ import { Badge } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { formatBudgetAmount, proposalBudgetKey } from '@/proposals/budgets';
+import { useCallResourcePoolUsage } from '@/proposals/update/resource-pools/queries';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -33,14 +34,37 @@ export const useProposalBudget = (proposalUuid: string, enabled: boolean) =>
     meta: { skipGlobalErrorRedirect: true },
   });
 
-const columns: Column<ProposalBudgetEntry>[] = [
+/**
+ * The component names of the call's pools by pool, from what the call's
+ * pools matrix reads: the budget itself carries only the component's key.
+ */
+const getPoolComponentNames = (
+  usage: {
+    component_name: string;
+    cells: { pool_uuid: string | null }[];
+  }[] = [],
+): Record<string, string> => {
+  const names: Record<string, string> = {};
+  for (const row of usage) {
+    for (const cell of row.cells) {
+      if (cell.pool_uuid && row.component_name) {
+        names[cell.pool_uuid] = row.component_name;
+      }
+    }
+  }
+  return names;
+};
+
+const getColumns = (
+  componentNames: Record<string, string>,
+): Column<ProposalBudgetEntry>[] => [
   {
     title: translate('Pool'),
     render: ({ row }) => (
       <span className="font-medium text-primary">
-        {`${row.offering_name} / ${row.component_type} (${
-          row.round_name || translate('whole call')
-        })`}
+        {`${row.offering_name} / ${
+          componentNames[row.pool_uuid] || row.component_type
+        } (${row.round_name || translate('whole call')})`}
       </span>
     ),
   },
@@ -50,7 +74,7 @@ const columns: Column<ProposalBudgetEntry>[] = [
   },
   {
     title: translate('Awarded to others'),
-    render: ({ row }) => row.awarded_so_far.toLocaleString(),
+    render: ({ row }) => formatBudgetAmount(row.awarded_so_far),
   },
   {
     title: translate('Remaining'),
@@ -58,7 +82,12 @@ const columns: Column<ProposalBudgetEntry>[] = [
   },
   {
     title: translate('This award'),
-    render: ({ row }) => renderFieldOrDash(row.award),
+    render: ({ row }) =>
+      renderFieldOrDash(
+        row.award === null || row.award === undefined
+          ? null
+          : formatBudgetAmount(row.award),
+      ),
   },
   {
     title: translate('Fits'),
@@ -77,8 +106,15 @@ const columns: Column<ProposalBudgetEntry>[] = [
 
 export const ProposalBudgetTable: FC<{
   proposalUuid: string;
+  /** Names the pools' components; without it they keep their keys. */
+  callUuid?: string;
   budget: ProposalBudget;
-}> = ({ proposalUuid, budget }) => {
+}> = ({ proposalUuid, callUuid, budget }) => {
+  const { data: usage } = useCallResourcePoolUsage(callUuid);
+  const columns = useMemo(
+    () => getColumns(getPoolComponentNames(usage)),
+    [usage],
+  );
   const fetchData = useCallback(
     () =>
       Promise.resolve({
