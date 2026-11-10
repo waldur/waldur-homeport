@@ -39,6 +39,7 @@ import {
   stepInputsKey,
   useStepInputs,
 } from './queries';
+import { StepAnswerValue } from './StepAnswerValue';
 
 const REVIEW_COMMENTS: Array<[keyof ProposalReview, () => string]> = [
   ['comment_project_title', () => translate('Project title')],
@@ -129,7 +130,7 @@ export const ContributionOutput: FC<{
             <div key={answer.question_uuid} className="mb-1.5">
               <dt className="font-semibold">{answer.question_description}</dt>
               <dd className="mb-0 whitespace-pre-line">
-                {answer.answer_display}
+                <StepAnswerValue answer={answer} />
               </dd>
             </div>
           ))}

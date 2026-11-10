@@ -20503,6 +20503,16 @@
       "feature_area": "transfer"
     }
   },
+  "Download {file}": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metadata"
+    }
+  },
   "Downloading page {page} of {totalPages}": {
     "context": {
       "variables": {

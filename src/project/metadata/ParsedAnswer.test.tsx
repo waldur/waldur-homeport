@@ -6,6 +6,28 @@ import { ParsedAnswer } from './ParsedAnswer';
 
 describe('ParsedAnswer', () => {
   describe('file upload answers', () => {
+    it.each([null, ''])(
+      'renders the name of a file stored without an id (%j) as text',
+      (storedFileId) => {
+        const question = {
+          uuid: 'q1',
+          question_type: 'file',
+          description: 'Upload document',
+          question_options: [],
+        };
+        const answer = {
+          answer_data: { name: 'draft.pdf', stored_file_id: storedFileId },
+        };
+
+        render(
+          <ParsedAnswer question={question as any} answer={answer as any} />,
+        );
+
+        expect(screen.getByText('draft.pdf')).toBeInTheDocument();
+        expect(screen.queryByRole('button')).not.toBeInTheDocument();
+      },
+    );
+
     it('renders file name for file upload answer', () => {
       const question = {
         uuid: 'q1',
@@ -16,7 +38,7 @@ describe('ParsedAnswer', () => {
       const answer = {
         answer_data: {
           name: 'document.pdf',
-          stored_file_id: 'file-123',
+          stored_file_id: '1f1e5c1a-0b7d-4c3e-9a51-6d2f8e4b7c01',
         },
       };
 
@@ -37,7 +59,7 @@ describe('ParsedAnswer', () => {
       const answer = {
         answer_data: {
           name: 'document.pdf',
-          stored_file_id: 'file-123',
+          stored_file_id: '1f1e5c1a-0b7d-4c3e-9a51-6d2f8e4b7c01',
           size: 1024 * 1024, // 1 MB
           mime_type: 'application/pdf',
         },
@@ -60,8 +82,14 @@ describe('ParsedAnswer', () => {
       };
       const answer = {
         answer_data: [
-          { name: 'first.pdf', stored_file_id: 'file-1' },
-          { name: 'second.png', stored_file_id: 'file-2' },
+          {
+            name: 'first.pdf',
+            stored_file_id: '1f1e5c1a-0b7d-4c3e-9a51-6d2f8e4b7c01',
+          },
+          {
+            name: 'second.png',
+            stored_file_id: '2a2b6d3c-1e8f-4d4a-8b62-7e3a9f5c8d02',
+          },
         ],
       };
 
@@ -80,7 +108,12 @@ describe('ParsedAnswer', () => {
         question_options: [],
       };
       const answer = {
-        answer_data: [{ name: 'only.pdf', stored_file_id: 'file-1' }],
+        answer_data: [
+          {
+            name: 'only.pdf',
+            stored_file_id: '1f1e5c1a-0b7d-4c3e-9a51-6d2f8e4b7c01',
+          },
+        ],
       };
 
       render(

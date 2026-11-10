@@ -53,7 +53,11 @@ describe('ProviderProjectMetadataPanel', () => {
         question_uuid: 'q4',
         question: 'Charter',
         question_type: 'file',
-        answer: { name: 'charter.pdf', stored_file_id: 'f1', size: 2048 },
+        answer: {
+          name: 'charter.pdf',
+          stored_file_id: '1f1e5c1a-0b7d-4c3e-9a51-6d2f8e4b7c01',
+          size: 2048,
+        },
       },
     ] as unknown as ProjectMetadataAnswer[];
     const { container } = render(
@@ -70,8 +74,14 @@ describe('ProviderProjectMetadataPanel', () => {
         question: 'Documents',
         question_type: 'multiple_files',
         answer: [
-          { name: 'a.pdf', stored_file_id: 'f1' },
-          { name: 'b.png', stored_file_id: 'f2' },
+          {
+            name: 'a.pdf',
+            stored_file_id: '1f1e5c1a-0b7d-4c3e-9a51-6d2f8e4b7c01',
+          },
+          {
+            name: 'b.png',
+            stored_file_id: '2a2b6d3c-1e8f-4d4a-8b62-7e3a9f5c8d02',
+          },
         ],
       },
     ] as unknown as ProjectMetadataAnswer[];
