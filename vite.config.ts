@@ -7,6 +7,7 @@ import svgr from 'vite-plugin-svgr';
 
 import { waldurBootSplash } from 'waldur-boot-splash/vite';
 
+import { collectMicroApps } from './scripts/micro-apps-registry.mjs';
 import reactDisplayNamePlugin from './vite-plugin-react-displayname.js';
 
 // Tailwind ships in the real app bundle now (src/index.tsx imports
@@ -15,7 +16,26 @@ import reactDisplayNamePlugin from './vite-plugin-react-displayname.js';
 // main.ts still registers its own, separate instance of this plugin; the
 // two are independent and both are needed. See
 // docs/tailwind-shadcn-migration-notes.md.
+// The micro-apps registry the quick shortcuts menu reads. The image writes
+// it at build time from the apps it holds (Dockerfile); the dev server lists
+// every apps/* member, read again on each request so a package.json edit
+// shows without a restart. See docs/micro-apps.md.
+const microAppsRegistry = (): PluginOption => ({
+  name: 'waldur-micro-apps-registry',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      if (req.url?.split('?')[0] !== '/micro-apps.json') {
+        next();
+        return;
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(collectMicroApps()));
+    });
+  },
+});
+
 const plugins: PluginOption[] = [
+  microAppsRegistry(),
   react(),
   tailwindcss(),
   svgr({

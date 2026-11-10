@@ -115,6 +115,7 @@ export enum UserFeatures {
   preferred_language = 'user.preferred_language',
   show_data_access = 'user.show_data_access',
   show_identity_bridge = 'user.show_identity_bridge',
+  show_micro_apps = 'user.show_micro_apps',
   show_slug = 'user.show_slug',
   show_username = 'user.show_username',
   ssh_keys = 'user.ssh_keys',

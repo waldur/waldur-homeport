@@ -1,25 +1,16 @@
-import { ArrowSquareOutIcon, SquaresFourIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
-import { externalLinksList } from 'waldur-js-client';
-
 import {
   ConfiguredSidebarStyle,
   isSidebarBackgroundDark,
   resolveSidebarStyle,
 } from 'waldur-design-tokens';
-import {
-  Avatar,
-  IconButton,
-  SIDEBAR_ICON_BUTTON_CLASSNAME,
-  SidebarBrand,
-  Menu,
-} from 'waldur-ui';
+import { QuickShortcutsMenu } from 'waldur-shell';
+import { SidebarBrand } from 'waldur-ui';
 
-import { SHORTCUTS_QUERY_KEY } from '@/administration/quick-shortcuts/utils';
 import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { useQuickShortcuts } from '@/navigation/useQuickShortcuts';
 import { useTheme } from '@/theme/useTheme';
 
 interface WaldurSidebarBrandProps {
@@ -32,15 +23,11 @@ interface WaldurSidebarBrandProps {
  * which owns the actual row layout (shortcuts slot, centered logo,
  * collapse toggle) and the collapsed-icon-rail/hover-expand behavior.
  *
- * The shortcuts button is passed via `shortcutsButton`, not
- * `onShortcutsClick`: it needs to be a RadixDropdownMenu.Trigger so the
- * menu anchors to just that button, not the whole brand row — a plain
- * onClick handed to SidebarBrand's own default button couldn't do that
- * (asChild would have to wrap the logo and collapse-toggle too, since
- * they're siblings inside the same row SidebarBrand renders).
- *
- * The dropdown *panel* is a Menu.Content in the actions look, like
- * the app's other action menus.
+ * The quick shortcuts menu is waldur-shell's QuickShortcutsMenu, which the
+ * micro-apps' AppShell uses too, listing useQuickShortcuts(). It renders its
+ * trigger into SidebarBrand's `shortcutsButton` slot, so the menu anchors to
+ * just that button. On mobile this row is not shown; AppHeader carries the
+ * menu there.
  */
 export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
   const { theme } = useTheme();
@@ -48,15 +35,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
     'dark') as ConfiguredSidebarStyle;
   const sidebarTheme = resolveSidebarStyle(configuredStyle, theme);
 
-  const { data: shortcutsResponse } = useQuery({
-    queryKey: SHORTCUTS_QUERY_KEY,
-    queryFn: () =>
-      externalLinksList({ query: { page_size: 50 } }).then(
-        (response) => response.data,
-      ),
-    refetchOnWindowFocus: false,
-  });
-  const shortcuts = shortcutsResponse || [];
+  const { apps, links } = useQuickShortcuts();
 
   const sidebarLogoUrl = getIconUrl('sidebar_logo');
   const sidebarLogoMobileUrl = getIconUrl('sidebar_logo_mobile');
@@ -120,61 +99,19 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
   );
 
   return (
-    <Menu>
-      <SidebarBrand
-        logo={logo}
-        onToggle={onToggle}
-        shortcutsLabel={translate('Quick shortcuts')}
-        shortcutsButton={
-          shortcuts.length > 0 ? (
-            <Menu.Trigger asChild>
-              <IconButton
-                icon={<SquaresFourIcon size={24} weight="bold" />}
-                label={translate('Quick shortcuts')}
-                variant="base"
-                className={`${SIDEBAR_ICON_BUTTON_CLASSNAME} group-data-[collapsible=icon]/panel:hidden`}
-              />
-            </Menu.Trigger>
-          ) : null
-        }
-      />
-      <Menu.Content
-        look="actions"
-        className="p-0 overflow-hidden min-w-[400px]"
-      >
-        {shortcuts.map((shortcut: any, index: number) => (
-          <Menu.Item
-            key={shortcut.uuid}
-            asChild
-            className="flex items-center py-4 ps-5 pe-1.5 relative"
-          >
-            <a href={shortcut.link} target="_blank" rel="noopener noreferrer">
-              {/* Show separator line only if there are multiple items and not the last item */}
-              {shortcuts.length > 1 && index < shortcuts.length - 1 && (
-                <div className="absolute bottom-0 start-1/2 -translate-x-1/2 border-b border-b-secondary w-[calc(100%-24px)]" />
-              )}
-              <div className="me-4">
-                <Avatar name={shortcut.name} src={shortcut.image} size={42} />
-              </div>
-              <div className="grow text-base">
-                <div className="font-semibold">{shortcut.name}</div>
-                {shortcut.description && (
-                  <div className="font-normal text-quaternary mt-2.5">
-                    {shortcut.description}
-                  </div>
-                )}
-              </div>
-              <div className="ms-1.5">
-                <ArrowSquareOutIcon
-                  size={24}
-                  weight="bold"
-                  className="text-brand"
-                />
-              </div>
-            </a>
-          </Menu.Item>
-        ))}
-      </Menu.Content>
-    </Menu>
+    <QuickShortcutsMenu
+      apps={apps}
+      links={links}
+      triggerClassName="group-data-[collapsible=icon]/panel:hidden"
+    >
+      {(trigger) => (
+        <SidebarBrand
+          logo={logo}
+          onToggle={onToggle}
+          shortcutsLabel={translate('Quick shortcuts')}
+          shortcutsButton={trigger}
+        />
+      )}
+    </QuickShortcutsMenu>
   );
 };

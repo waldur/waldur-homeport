@@ -1,12 +1,14 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { externalLinksList } from 'waldur-js-client';
 
+import { resetMicroAppsRegistry } from 'waldur-shell';
 import { SidebarProvider } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import { WaldurSidebarBrand } from './WaldurSidebarBrand';
 
@@ -111,5 +113,89 @@ describe('WaldurSidebarBrand', () => {
     const logo = screen.getByAltText('Waldur logo');
     expect(logo).toBeInTheDocument();
     expect(logo).toHaveClass('group-data-[collapsible=icon]/panel:sr-only');
+  });
+
+  describe('quick shortcuts', () => {
+    const registry = {
+      apps: [
+        {
+          name: 'provider-calls',
+          title: 'Calls for providers',
+          description: 'Requests and assessments in calls',
+          visibleTo: {
+            features: [],
+            roles: ['OFFERING.MANAGER'],
+            staffOnly: false,
+          },
+        },
+      ],
+    };
+
+    beforeEach(() => {
+      resetMicroAppsRegistry();
+      vi.stubGlobal(
+        'fetch',
+        vi.fn().mockResolvedValue(
+          new Response(JSON.stringify(registry), {
+            headers: { 'content-type': 'application/json' },
+          }),
+        ),
+      );
+      vi.mocked(externalLinksList).mockResolvedValue({
+        data: [
+          {
+            uuid: 'l1',
+            name: 'Status page',
+            link: 'https://status.example.org/',
+          },
+        ],
+      } as any);
+    });
+
+    afterEach(() => {
+      ENV.FEATURES = undefined;
+      vi.mocked(useUser).mockReturnValue({} as any);
+    });
+
+    it('lists the micro-apps a user may see above the staff-managed links', async () => {
+      ENV.FEATURES = { user: { show_micro_apps: true } } as any;
+      vi.mocked(useUser).mockReturnValue({
+        is_staff: false,
+        permissions: [{ role_name: 'OFFERING.MANAGER', is_active: true }],
+      } as any);
+      const user = userEvent.setup();
+      renderBrand();
+
+      await user.click(
+        await screen.findByRole('button', { name: 'Quick shortcuts' }),
+      );
+      expect(
+        await screen.findByRole('menuitem', { name: /Calls for providers/ }),
+      ).toHaveAttribute('href', '/provider-calls/');
+      expect(
+        screen.getByRole('menuitem', { name: /Status page/ }),
+      ).toHaveAttribute('target', '_blank');
+    });
+
+    it('keeps the menu as it was while the micro-apps feature is off', async () => {
+      ENV.FEATURES = { user: { show_micro_apps: false } } as any;
+      vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+      const user = userEvent.setup();
+      renderBrand();
+      // The registry has arrived, so its app would be listed by now.
+      await vi.waitFor(() => expect(fetch).toHaveBeenCalled());
+      await Promise.resolve();
+
+      await user.click(
+        await screen.findByRole('button', { name: 'Quick shortcuts' }),
+      );
+      expect(
+        await screen.findByRole('menuitem', { name: /Status page/ }),
+      ).toBeVisible();
+      expect(
+        screen.queryByRole('menuitem', { name: /Calls for providers/ }),
+      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Apps')).not.toBeInTheDocument();
+    });
   });
 });

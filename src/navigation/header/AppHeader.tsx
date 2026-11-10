@@ -25,6 +25,7 @@ import { useUser } from '@/workspace/hooks';
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { LLMChatDrawerToggle } from './LLMChatDrawerToggle';
+import { MobileQuickShortcuts } from './MobileQuickShortcuts';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
 import { ThemeToggle } from './ThemeToggle';
@@ -91,6 +92,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
       left={
         <div className="flex items-center lg:hidden -ms-[0.5rem] me-[0.5rem]">
           {Boolean(user) && <AsideMobileToggle />}
+          {Boolean(user) && <MobileQuickShortcuts />}
 
           {!errorImg && (
             <div className="flex items-center grow lg:grow-0">

@@ -76,6 +76,11 @@ RUN for app_dir in apps/*/; do \
       fi; \
     done
 
+# The registry the quick shortcuts menu lists micro-apps from: the apps this
+# image holds (just built into dist/<name>/ above), with what their
+# package.json says about them. See docs/micro-apps.md.
+RUN node scripts/micro-apps-registry.mjs dist > dist/micro-apps.json
+
 # Precompress once here; nginx serves the .gz siblings through gzip_static
 # (docker/nginx-tpl.conf) instead of running gzip -9 on every response.
 # Source maps are skipped: rarely fetched, and they would double the image.

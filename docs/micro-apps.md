@@ -210,6 +210,63 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
   `INCLUDE_DEPLOY_FALSE_APPS=true`) and deploys the preview one to a live,
   browsable k8s environment at `https://helm-testing.waldur.com/<mr-id>/`.
 
+## Listing an app in the quick shortcuts
+
+The quick shortcuts menu left of the sidebar logo lists the deployment's
+micro-apps (**Apps**) above the staff-managed external links (**Links**,
+Administration → Quick shortcuts). Both open in a new tab, with the same
+external-link icon. The portal and every
+micro-app show the same menu: it is `waldur-shell`'s `QuickShortcutsMenu`,
+which `AppShell` renders and the portal's `WaldurSidebarBrand` uses. In a
+micro-app the portal comes first, to get back, and the app itself is left
+out (pass `appName` to `AppShell`). An app that does not pass it looks for
+the registry under its own path, finds none, and lists neither the apps
+nor the way back to the portal.
+
+Nothing is listed until staff turn on the **`user.show_micro_apps`** feature
+(Administration → Features). Then each app is shown to the users its
+`package.json` names:
+
+```json
+{
+  "waldur": {
+    "deploy": false,
+    "title": "Calls for providers",
+    "description": "Requests, assessments and awards in calls",
+    "visibleTo": {
+      "features": ["marketplace.show_call_management_functionality"],
+      "roles": ["OFFERING.MANAGER", "OFFERING.EVALUATOR"],
+      "staffOnly": false
+    }
+  }
+}
+```
+
+- **`title`** opts the app in: an app without one is never listed.
+- **`features`**: feature flags (`section.key`) that must all be on.
+- **`roles`**: the user must hold one of these roles (any scope); empty
+  means every signed-in user. Staff and support always pass.
+- **`staffOnly`**: staff and support only, whatever `roles` says.
+
+The registry is `micro-apps.json` next to the portal's `index.html`,
+written by `scripts/micro-apps-registry.mjs`:
+
+- **In the image**, the Dockerfile runs it after the `apps/*` loop over
+  `dist/`, so it lists exactly the apps that image holds: an app left out
+  by `waldur.deploy: false` is left out of the menu too. nginx serves it
+  uncached (`docker/nginx-tpl.conf`).
+- **On the dev server**, the root `vite.config.ts` serves it for every
+  `apps/*` member, read again on each request.
+- **On a micro-app's standalone dev server** there is none, and the menu
+  lists only the links.
+
+The visibility rules are evaluated in the browser from `users/me` (the
+user's active roles) and the runtime feature flags; they decide what the
+menu offers, not who may use an app. An app still has to handle a user it
+has nothing for, and the backend still decides what the user may do. The
+registry itself is public, like the apps: anyone, signed in or not, can
+read every app's name, description and rules, `staffOnly` ones included.
+
 ## Adding a new micro-app
 
 1. Create `apps/<name>/` — `package.json` (with `dev`/`build`/`typecheck`
@@ -234,9 +291,13 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
 3. Decide whether it ships: omit `"waldur": { "deploy": false }` to ship by
    default, or add it if it's a demo/POC that should stay CI/preview-only
    (see above).
-4. That's it for Dockerfile/nginx/`entrypoint.sh`/CI — all four scan for
+4. To list it in the quick shortcuts, give its `waldur` block a `title`
+   (and `description`, `visibleTo`), and pass its directory name as
+   `appName` to `AppShell` — see
+   [Listing an app in the quick shortcuts](#listing-an-app-in-the-quick-shortcuts).
+5. That's it for Dockerfile/nginx/`entrypoint.sh`/CI — all four scan for
    `apps/*` content, none hand-list app names.
-5. Optional, for local dev convenience: add an entry to `.claude/launch.json`
+6. Optional, for local dev convenience: add an entry to `.claude/launch.json`
    (both the repo-root one and, if working from the `waldur-claude-workspace`
    hub, its own hub-level copy — these can drift out of sync since nothing
    keeps them in sync automatically) so `preview_start` can launch it by

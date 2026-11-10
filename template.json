@@ -9023,6 +9023,11 @@
       "feature_area": "mail"
     }
   },
+  "Back to the full portal.": {
+    "context": {
+      "feature_area": "shell"
+    }
+  },
   "Back to the usual updates.": {
     "context": {
       "primary_ui_type": "success_message",

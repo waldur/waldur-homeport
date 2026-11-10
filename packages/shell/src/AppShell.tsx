@@ -4,10 +4,11 @@ import {
   QuestionIcon,
   SquaresFourIcon,
 } from '@phosphor-icons/react';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useBootSplashDismiss } from 'waldur-boot-splash/react';
 import { translate } from 'waldur-i18n-runtime';
 import { NotificationProvider } from 'waldur-notifications';
+import type { RuntimeConfigData } from 'waldur-runtime-config';
 import {
   ConfirmModalRoot,
   IconButton,
@@ -25,8 +26,10 @@ import {
 } from 'waldur-ui';
 
 import { whenMicroAppBootstrapped } from './bootstrap';
+import { useExternalLinks } from './microApps';
+import { QuickShortcutsMenu, useAppShortcuts } from './QuickShortcutsMenu';
 import { ShellErrorBoundary } from './ShellErrorBoundary';
-import { CurrentUserProvider } from './useCurrentUser';
+import { CurrentUserProvider, useCurrentUser } from './useCurrentUser';
 import { UserMenu } from './UserMenu';
 import { ShellLanguageProvider } from './useShellLanguage';
 import { ShellThemeProvider } from './useShellTheme';
@@ -37,6 +40,12 @@ export interface AppShellProps {
    * rather than a hardcoded Waldur mark. The row itself, and with it the
    * sidebar's collapse toggle, renders either way. */
   logo?: ReactNode;
+  /** The app's directory under apps/ (e.g. "provider-calls"). The quick
+   * shortcuts menu leaves it out of its Apps group and offers the portal
+   * instead, to get back. */
+  appName?: string;
+  /** Replaces the quick shortcuts menu (micro-apps, then the staff-managed
+   * links) with a plain button calling this. */
   onShortcutsClick?: () => void;
   /** SidebarHeader content — e.g. a SidebarModeCard. App-specific: each
    * micro-app names and describes its own "current mode". */
@@ -110,11 +119,14 @@ export function AppShell(props: AppShellProps) {
   // the default look to the tenant's brand, font and language happens behind
   // it; pages then show their own loading states.
   const [bootstrapped, setBootstrapped] = useState(false);
+  const [runtimeConfig, setRuntimeConfig] = useState<RuntimeConfigData>();
   useEffect(() => {
     let mounted = true;
-    void whenMicroAppBootstrapped().then(
-      () => mounted && setBootstrapped(true),
-    );
+    void whenMicroAppBootstrapped().then((config) => {
+      if (!mounted) return;
+      setBootstrapped(true);
+      setRuntimeConfig(config as RuntimeConfigData | undefined);
+    });
     return () => {
       mounted = false;
     };
@@ -124,7 +136,7 @@ export function AppShell(props: AppShellProps) {
     <CurrentUserProvider>
       <ShellThemeProvider>
         <ShellLanguageProvider>
-          <AppShellContent {...props} />
+          <AppShellContent {...props} runtimeConfig={runtimeConfig} />
         </ShellLanguageProvider>
       </ShellThemeProvider>
     </CurrentUserProvider>
@@ -153,9 +165,16 @@ function MobileSidebarToggle() {
   );
 }
 
+/** Where the app is served (Vite's BASE_URL), read without assuming the
+ * app's tsconfig has Vite's client types. */
+const appBaseUrl = () =>
+  (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+
 function AppShellContent({
   logo,
+  appName,
   onShortcutsClick,
+  runtimeConfig,
   sidebarHeader,
   sidebarContent,
   orgSwitcher,
@@ -166,7 +185,27 @@ function AppShellContent({
   hasNotifications,
   footer,
   children,
-}: AppShellProps) {
+}: AppShellProps & { runtimeConfig?: RuntimeConfigData }) {
+  const currentUser = useCurrentUser();
+  const viewer = useMemo(
+    () =>
+      currentUser
+        ? {
+            isStaff: currentUser.isStaff,
+            isSupport: currentUser.isSupport,
+            roleNames: currentUser.roleNames,
+          }
+        : null,
+    [currentUser],
+  );
+  const appShortcuts = useAppShortcuts({
+    baseUrl: appBaseUrl(),
+    currentApp: appName,
+    viewer,
+    features: runtimeConfig?.FEATURES,
+    portalTitle: runtimeConfig?.plugins?.WALDUR_CORE?.SHORT_PAGE_TITLE,
+  });
+  const links = useExternalLinks(!onShortcutsClick && Boolean(currentUser));
   return (
     // The app's dialog host: page content opens dialogs with useModal() /
     // ModalService and confirm(), as in waldur-homeport, and the two roots
@@ -184,11 +223,27 @@ function AppShellContent({
       >
         <Sidebar>
           <SidebarHeader className="gap-4">
-            <SidebarBrand
-              logo={logo}
-              onShortcutsClick={onShortcutsClick}
-              shortcutsLabel={translate('Quick shortcuts')}
-            />
+            {onShortcutsClick ? (
+              <SidebarBrand
+                logo={logo}
+                onShortcutsClick={onShortcutsClick}
+                shortcutsLabel={translate('Quick shortcuts')}
+              />
+            ) : (
+              <QuickShortcutsMenu
+                apps={appShortcuts}
+                links={links}
+                triggerClassName="group-data-[collapsible=icon]/panel:hidden"
+              >
+                {(trigger) => (
+                  <SidebarBrand
+                    logo={logo}
+                    shortcutsButton={trigger}
+                    shortcutsLabel={translate('Quick shortcuts')}
+                  />
+                )}
+              </QuickShortcutsMenu>
+            )}
             {sidebarHeader}
           </SidebarHeader>
           <SidebarContent>{sidebarContent}</SidebarContent>
