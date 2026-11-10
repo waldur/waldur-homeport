@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 
 import { ENV } from '@/core/config';
 
+import { setDocumentTitle } from './documentTitle';
+
 type TitleAs = 'both' | 'page' | 'browser';
 
 let currentTitle = '';
@@ -29,7 +31,9 @@ export const useTitle = (
 
     // Side effect: update browser tab title
     if (as !== 'page') {
-      document.title = title + ' | ' + ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
+      setDocumentTitle(
+        title + ' | ' + ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
+      );
     }
 
     return () => {
@@ -38,7 +42,7 @@ export const useTitle = (
         currentSubtitle = '';
       }
       if (as !== 'page') {
-        document.title = ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
+        setDocumentTitle(ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE);
       }
     };
   }, [title, subtitle, as]);

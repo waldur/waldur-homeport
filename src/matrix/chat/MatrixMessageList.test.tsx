@@ -1,10 +1,11 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FC, useState } from 'react';
 import {
   afterAll,
   afterEach,
   beforeAll,
+  beforeEach,
   describe,
   expect,
   it,
@@ -51,6 +52,32 @@ const message = (eventId: string, timestamp: number): MatrixChatMessage => ({
   type: 'm.text',
 });
 
+const setVisibility = (state: DocumentVisibilityState) =>
+  Object.defineProperty(document, 'visibilityState', {
+    configurable: true,
+    get: () => state,
+  });
+
+// The stub shadows jsdom's prototype getter; deleting it restores the default.
+afterEach(() => {
+  Reflect.deleteProperty(document, 'visibilityState');
+});
+
+// test/setupTests.js mocks IntersectionObserver. Unlike a real one it never
+// reports the initial state after observe(), so tests deliver it themselves.
+const io = globalThis as unknown as {
+  __ioInstances: {
+    trigger: (entries: Partial<IntersectionObserverEntry>[]) => void;
+  }[];
+};
+
+const setOnScreen = (isIntersecting: boolean) =>
+  act(() => {
+    io.__ioInstances.forEach((observer) =>
+      observer.trigger([{ isIntersecting }]),
+    );
+  });
+
 const renderList = (props: Record<string, unknown> = {}) =>
   renderWithProviders(
     <MatrixMessageList
@@ -67,22 +94,152 @@ const renderList = (props: Record<string, unknown> = {}) =>
   );
 
 describe('MatrixMessageList read receipts', () => {
+  beforeEach(() => {
+    io.__ioInstances = [];
+  });
+
   it('reports the latest message as read once messages are loaded', () => {
     const onReadLatest = vi.fn();
     renderList({ onReadLatest });
+    setOnScreen(true);
     expect(onReadLatest).toHaveBeenCalledWith('evt-2');
   });
 
   it('does not report a read while still loading', () => {
     const onReadLatest = vi.fn();
     renderList({ onReadLatest, loading: true });
+    setOnScreen(true);
     expect(onReadLatest).not.toHaveBeenCalled();
   });
 
   it('does not report a read when there are no messages', () => {
     const onReadLatest = vi.fn();
     renderList({ onReadLatest, messages: [] });
+    setOnScreen(true);
     expect(onReadLatest).not.toHaveBeenCalled();
+  });
+
+  it('does not report read while the document is hidden', () => {
+    setVisibility('hidden');
+    const onReadLatest = vi.fn();
+    renderList({ onReadLatest });
+    setOnScreen(true);
+    expect(onReadLatest).not.toHaveBeenCalled();
+  });
+
+  it('reports the latest event once the document becomes visible', () => {
+    setVisibility('hidden');
+    const onReadLatest = vi.fn();
+    renderList({ onReadLatest });
+    setOnScreen(true);
+    setVisibility('visible');
+    act(() => {
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    expect(onReadLatest).toHaveBeenCalledTimes(1);
+    expect(onReadLatest).toHaveBeenCalledWith('evt-2');
+  });
+
+  // SupportDrawer keeps the Team chat tab mounted under Helpdesk
+  // (mount="all"); a display:none panel never intersects.
+  it('does not report read while the list is in a hidden tab panel', () => {
+    const onReadLatest = vi.fn();
+    renderList({ onReadLatest });
+    setOnScreen(false);
+    expect(onReadLatest).not.toHaveBeenCalled();
+  });
+
+  it('reports the latest event when the list comes back on screen', () => {
+    const onReadLatest = vi.fn();
+    renderList({ onReadLatest });
+    setOnScreen(false);
+    expect(onReadLatest).not.toHaveBeenCalled();
+    setOnScreen(true);
+    expect(onReadLatest).toHaveBeenCalledTimes(1);
+    expect(onReadLatest).toHaveBeenCalledWith('evt-2');
+  });
+
+  // A display:none list can't auto-scroll, so messages that arrived while it
+  // was hidden sit below the viewport when it comes back — and stay unread
+  // until the user scrolls, even across a later browser tab switch.
+  it('does not report on return while newer messages sit below the viewport', () => {
+    const onReadLatest = vi.fn();
+    const { container } = renderList({ onReadLatest });
+    setOnScreen(false);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const stream = container.querySelector('.tc-stream') as HTMLDivElement;
+    Object.defineProperty(stream, 'scrollHeight', {
+      value: 1000,
+      configurable: true,
+    });
+    Object.defineProperty(stream, 'clientHeight', {
+      value: 500,
+      configurable: true,
+    });
+    Object.defineProperty(stream, 'scrollTop', {
+      value: 200,
+      configurable: true,
+    });
+    setOnScreen(true);
+    expect(onReadLatest).not.toHaveBeenCalled();
+    act(() => {
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    expect(onReadLatest).not.toHaveBeenCalled();
+  });
+
+  it('stops reporting when the list leaves the screen', () => {
+    const onReadLatest = vi.fn();
+    const { rerender } = renderList({ onReadLatest });
+    setOnScreen(true);
+    onReadLatest.mockClear();
+    setOnScreen(false);
+    rerender(
+      <MatrixMessageList
+        messages={[
+          message('evt-1', 1000),
+          message('evt-2', 2000),
+          message('evt-3', 3000),
+        ]}
+        userId="@me:server"
+        memberNames={new Map()}
+        loading={false}
+        loadingOlder={false}
+        hasOlderMessages={false}
+        onLoadOlder={vi.fn()}
+        onReadLatest={onReadLatest}
+      />,
+    );
+    expect(onReadLatest).not.toHaveBeenCalled();
+  });
+
+  it('goes by the latest of several queued visibility changes', () => {
+    const onReadLatest = vi.fn();
+    const { rerender } = renderList({ onReadLatest });
+    setOnScreen(true);
+    onReadLatest.mockClear();
+    act(() => {
+      io.__ioInstances.forEach((observer) =>
+        observer.trigger([{ isIntersecting: false }, { isIntersecting: true }]),
+      );
+    });
+    rerender(
+      <MatrixMessageList
+        messages={[
+          message('evt-1', 1000),
+          message('evt-2', 2000),
+          message('evt-3', 3000),
+        ]}
+        userId="@me:server"
+        memberNames={new Map()}
+        loading={false}
+        loadingOlder={false}
+        hasOlderMessages={false}
+        onLoadOlder={vi.fn()}
+        onReadLatest={onReadLatest}
+      />,
+    );
+    expect(onReadLatest).toHaveBeenCalledWith('evt-3');
   });
 });
 

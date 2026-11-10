@@ -36,10 +36,19 @@ import { MatrixCommandsDialog } from './commands/MatrixCommandsDialog';
 import { useComposerCommands } from './commands/useComposerCommands';
 import { MatrixMembersList } from './MatrixMembersList';
 import { useMatrixMessageActions } from './MatrixMessageActionsContext';
-import { isRoomMuted, setRoomMuted } from './mute';
+import {
+  getRoomNotificationLevel,
+  RoomNotificationLevel,
+  setRoomNotificationLevel,
+} from './notificationLevel';
 import { useMatrixClient } from './useMatrixClient';
 import { useMatrixTotalUnread } from './useMatrixTotalUnread';
 import { useRoomMembers } from './useRoomMembers';
+
+// The actions look has no checked style of its own: highlight the current
+// level as the nav look does.
+const CHECKED_LEVEL_CLASSNAME =
+  'data-[state=checked]:bg-[var(--menu-item-hover-bg)]';
 
 interface MatrixChatHeaderProps {
   roomUuid: string;
@@ -85,30 +94,35 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   const roomOpen = activeRoomUuid === roomUuid;
 
   const isThisRoomsCall = call.inThisRoomsCall;
-  // Mute reads push rules, which only exist once the initial sync completes;
-  // gate on 'connected' so a pre-sync client (e.g. mid-impersonation reconnect)
-  // can't trigger the SDK's "SyncApi.sync() must be done" throw. The
-  // activeRoomUuid match guards the room-switch lag where it trails the props.
-  const muteReady = Boolean(
+  // The level reads push rules, which only exist once the initial sync
+  // completes; gate on 'connected' so a pre-sync client (e.g.
+  // mid-impersonation reconnect) can't trigger the SDK's "SyncApi.sync() must
+  // be done" throw. The activeRoomUuid match guards the room-switch lag where
+  // it trails the props.
+  const levelReady = Boolean(
     client &&
     connectionState === 'connected' &&
     activeRoomId &&
     activeRoomUuid === roomUuid,
   );
 
-  const [muted, setMuted] = useState(false);
+  const [level, setLevel] = useState<RoomNotificationLevel>('mentions');
   useEffect(() => {
-    if (!muteReady || !client || !activeRoomId) {
-      setMuted(false);
+    if (!levelReady || !client || !activeRoomId) {
+      setLevel('mentions');
       return;
     }
-    const sync = () => setMuted(isRoomMuted(client, activeRoomId));
+    const sync = () => setLevel(getRoomNotificationLevel(client, activeRoomId));
     sync();
+    // Push rules arrive as global account data, the stored level as the
+    // room's.
     client.on('accountData' as any, sync);
+    client.on('Room.accountData' as any, sync);
     return () => {
       client.removeListener('accountData' as any, sync);
+      client.removeListener('Room.accountData' as any, sync);
     };
-  }, [muteReady, client, activeRoomId]);
+  }, [levelReady, client, activeRoomId]);
 
   const handleCall = () => {
     if (call.busy) return;
@@ -130,28 +144,65 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
       size: 'lg',
     });
 
-  const handleMute = async () => {
-    if (!muteReady || !client || !activeRoomId) return;
-    const next = !muted;
+  const handleLevel = async (value: string) => {
+    const next = value as RoomNotificationLevel;
+    if (!levelReady || !client || !activeRoomId || next === level) return;
     try {
-      await setRoomMuted(client, activeRoomId, next);
-      setMuted(next);
-      showSuccess(next ? translate('Muted.') : translate('Unmuted.'));
+      await setRoomNotificationLevel(client, activeRoomId, next);
+      setLevel(next);
+      showSuccess(translate('Notification level updated.'));
     } catch {
-      showError(translate('Could not update mute setting.'));
+      showError(translate('Could not update notification level.'));
     }
   };
 
   const kebab = (
     <ActionsMenu size="sm">
-      <Menu.Item
-        icon={
-          muted ? <BellIcon weight="bold" /> : <BellSlashIcon weight="bold" />
-        }
-        onSelect={handleMute}
-      >
-        {muted ? translate('Unmute') : translate('Mute')}
-      </Menu.Item>
+      <Menu.Sub>
+        {levelReady ? (
+          <Menu.SubTrigger>
+            {level === 'mute' ? (
+              <BellSlashIcon weight="bold" />
+            ) : (
+              <BellIcon weight="bold" />
+            )}
+            {translate('Notifications')}
+          </Menu.SubTrigger>
+        ) : (
+          // Until then the level can't be read, and a pick can't be written.
+          <Tooltip
+            label={
+              roomOpen && connectionState !== 'connected'
+                ? translate('Not connected')
+                : translate('The conversation is not open yet.')
+            }
+            side="left"
+          >
+            <span>
+              <Menu.SubTrigger disabled>
+                <BellIcon weight="bold" />
+                {translate('Notifications')}
+              </Menu.SubTrigger>
+            </span>
+          </Tooltip>
+        )}
+        <Menu.SubContent>
+          <Menu.RadioGroup value={level} onValueChange={handleLevel}>
+            <Menu.RadioItem value="all" className={CHECKED_LEVEL_CLASSNAME}>
+              {translate('All messages')}
+            </Menu.RadioItem>
+            <Menu.RadioItem
+              value="mentions"
+              className={CHECKED_LEVEL_CLASSNAME}
+            >
+              {translate('Mentions only')}
+            </Menu.RadioItem>
+            <Menu.RadioItem value="mute" className={CHECKED_LEVEL_CLASSNAME}>
+              {translate('Mute')}
+            </Menu.RadioItem>
+          </Menu.RadioGroup>
+        </Menu.SubContent>
+      </Menu.Sub>
       {commands.length > 0 &&
         (hasAvailableCommand && roomOpen ? (
           <Menu.Item

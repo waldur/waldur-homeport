@@ -6,6 +6,8 @@ import { OWN_ERROR_STATE } from '@/core/queryRetry';
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
+export const MEMBER_MATRIX_ROOMS_QUERY_KEY = ['matrixRoomsAll'] as const;
+
 /**
  * The Waldur rooms the current user belongs to: one shared fetch for the room
  * list, the background auto-connect and the unread badges.
@@ -13,7 +15,7 @@ import { useUser } from '@/workspace/hooks';
 export function useMemberMatrixRooms() {
   const user = useUser();
   return useQuery({
-    queryKey: ['matrixRoomsAll'],
+    queryKey: MEMBER_MATRIX_ROOMS_QUERY_KEY,
     // Restrict to rooms the current user belongs to. Unlike the admin rooms
     // view, the chat list is personal — staff/support must not see rooms they
     // are not a member of.

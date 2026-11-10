@@ -23,6 +23,7 @@ import { isFeatureVisible } from './features/connect';
 import { MarketplaceFeatures } from './FeaturesEnums';
 import { translate } from './i18n';
 import { ModalService } from './modal/actions';
+import { getDocumentTitleBase } from './navigation/documentTitle';
 import { isDescendantOf } from './navigation/useTabs';
 import { router } from './router';
 import { NotifyService } from './store/notify';
@@ -364,7 +365,8 @@ export function attachTransitions() {
 
   router.transitionService.onSuccess({}, () => {
     if (MatomoInstance) {
-      MatomoInstance.trackPageView();
+      // Matomo defaults to document.title, which carries the unread prefix.
+      MatomoInstance.trackPageView({ documentTitle: getDocumentTitleBase() });
     }
   });
 

@@ -39,6 +39,10 @@ interface MatrixChatPanelProps {
    * Used by project-scoped views where cross-room navigation isn't wanted.
    */
   hideRoomList?: boolean;
+  /** A new value shows the room list, also over a room already open. */
+  roomListRequest?: number;
+  /** A new value opens defaultRoomUuid again, also after the user moved on. */
+  roomRequest?: number;
 }
 
 export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
@@ -47,6 +51,8 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   onTotalUnreadChange,
   forceDock,
   hideRoomList,
+  roomListRequest,
+  roomRequest,
 }) => {
   const { connect, connectionState, deniedRoomUuids } = useMatrixClient();
   const { rooms, totalUnread, isLoading, error } = useAllMatrixRooms({
@@ -82,7 +88,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
       prev === defaultRoomUuid ? prev : defaultRoomUuid,
     );
     setCompactView('detail');
-  }, [defaultRoomUuid]);
+  }, [defaultRoomUuid, roomRequest]);
 
   const activeRooms = useMemo(
     () => rooms.filter((r) => r.state === 'active'),
@@ -95,11 +101,14 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   // the user back to the deep-linked room — e.g. catapulting them into an
   // active call's room the moment they picked another conversation.
   const appliedDefaultRoomRef = useRef<string | null>(null);
+  const deepLinkKey = defaultRoomUuid
+    ? `${defaultRoomUuid}#${roomRequest ?? ''}`
+    : null;
   useEffect(() => {
     if (connectionState === 'idle') {
       const roomUuid = defaultRoomUuid || activeRooms[0]?.uuid;
       if (roomUuid) {
-        if (defaultRoomUuid) appliedDefaultRoomRef.current = defaultRoomUuid;
+        if (defaultRoomUuid) appliedDefaultRoomRef.current = deepLinkKey;
         connect(roomUuid);
       }
       return;
@@ -111,12 +120,12 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     if (
       connectionState === 'connected' &&
       defaultRoomUuid &&
-      defaultRoomUuid !== appliedDefaultRoomRef.current
+      deepLinkKey !== appliedDefaultRoomRef.current
     ) {
-      appliedDefaultRoomRef.current = defaultRoomUuid;
+      appliedDefaultRoomRef.current = deepLinkKey;
       connect(defaultRoomUuid);
     }
-  }, [connectionState, defaultRoomUuid, activeRooms, connect]);
+  }, [connectionState, defaultRoomUuid, deepLinkKey, activeRooms, connect]);
 
   // Propagate total unread to parent
   useEffect(() => {
@@ -141,16 +150,20 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     setChatDrawerPreference('matrixCompactView', view);
   }, []);
 
+  useEffect(() => {
+    if (roomListRequest) changeCompactView('list');
+  }, [roomListRequest, changeCompactView]);
+
   const handleRoomSelect = useCallback(
     (uuid: string) => {
       // Picking a room settles the deep link, even one not yet opened.
-      appliedDefaultRoomRef.current = defaultRoomUuid ?? null;
+      appliedDefaultRoomRef.current = deepLinkKey;
       setSelectedRoomUuid(uuid);
       setChatDrawerPreference('lastRoomUuid', uuid);
       changeCompactView('detail');
       connect(uuid);
     },
-    [connect, changeCompactView, defaultRoomUuid],
+    [connect, changeCompactView, deepLinkKey],
   );
 
   // Floating widget / cross-room banner ask the panel to switch back to the

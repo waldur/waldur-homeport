@@ -4,6 +4,7 @@ import {
   PaperPlaneRightIcon,
   PaperclipIcon,
   TrashIcon,
+  UsersThreeIcon,
 } from '@phosphor-icons/react';
 import {
   ClipboardEvent,
@@ -21,6 +22,7 @@ import { BaseButton, Tag } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 
 import {
   CommandPopup,
@@ -45,9 +47,13 @@ import {
   buildReplyContent,
   buildReplyFields,
   buildTextContent,
+  MENTION_PREFIX,
   MentionCandidate,
+  ROOM_MENTION,
+  ROOM_MENTION_CONFIRM_MIN_MEMBERS,
 } from './messageContent';
 import { isRoomOpenElsewhere } from './roomViews';
+import { useCanMentionRoom } from './useCanMentionRoom';
 import { useMatrixClient } from './useMatrixClient';
 import { useMentionCandidates } from './useMentionCandidates';
 import { useRoomMemberNames } from './useRoomMemberNames';
@@ -101,16 +107,24 @@ function formatClock(ms: number): string {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
+// Listed with the members, so picking it inserts `@room ` as it would a name.
+const ROOM_ENTRY: MentionCandidate = {
+  userId: ROOM_MENTION,
+  displayName: ROOM_MENTION.slice(1),
+};
+
+const MENTION_QUERY_PATTERN = new RegExp(
+  String.raw`${MENTION_PREFIX}@([^\s@]*)$`,
+);
+
 /** Extract the @-mention query from the text at the cursor position. */
 function getMentionQuery(
   text: string,
   cursorPos: number,
 ): { query: string; start: number } | null {
-  // Walk backwards from cursor to find the @ trigger. The prefix class
-  // accepts whitespace + opening parens/brackets so users can mention
-  // mid-sentence (e.g. "(@alice)" / "[@bob]") — common in markdown.
+  // Walk backwards from cursor to find the @ trigger.
   const before = text.slice(0, cursorPos);
-  const match = before.match(/(^|[\s([])@([^\s@]*)$/);
+  const match = before.match(MENTION_QUERY_PATTERN);
   if (!match) return null;
   const prefix = match[1]; // space or start-of-string before @
   const query = match[2];
@@ -234,6 +248,8 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
 
   // Get room members for mention autocomplete
   const members = useMentionCandidates();
+  const canMentionRoom = useCanMentionRoom();
+  const { confirm } = useModal();
   const {
     replyTo,
     cancelReply,
@@ -250,14 +266,20 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   const filteredMentions = useMemo(() => {
     if (!mentionQuery) return [];
     const q = mentionQuery.query.toLowerCase();
-    return members
-      .filter(
+    // Not on a bare `@`: that is mostly for a person, and picks the first entry.
+    const offerRoom =
+      canMentionRoom &&
+      !!q &&
+      ['room', 'everyone'].some((word) => word.startsWith(q));
+    return [
+      ...(offerRoom ? [ROOM_ENTRY] : []),
+      ...members.filter(
         (m) =>
           m.displayName.toLowerCase().includes(q) ||
           m.userId.toLowerCase().includes(q),
-      )
-      .slice(0, 6);
-  }, [members, mentionQuery]);
+      ),
+    ].slice(0, 6);
+  }, [members, mentionQuery, canMentionRoom]);
 
   const {
     commands: composerCommands,
@@ -305,11 +327,14 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     };
   }, [activeRoomId]);
 
-  // The menu's state and a hint are about the text in the room left behind.
+  // The menus' state and a hint are about the text in the room left behind.
+  // A mention popup left open would list the new room's members and write the
+  // pick into the new room's draft.
   useEffect(() => {
     setCommandIndex(0);
     setCommandsDismissed(false);
     setCommandHint(null);
+    setMentionQuery(null);
   }, [activeRoomId]);
 
   const updateMentionState = useCallback((value: string, cursorPos: number) => {
@@ -469,6 +494,28 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       )
         return;
 
+      // Mention pills for the Matrix spec (org.matrix.msc3952).
+      const content = buildTextContent(text, members, 'm.text', canMentionRoom);
+      // Asked before anything is uploaded, so a cancel sends nothing. The
+      // mention candidates are who it notifies: everyone joined but the
+      // sender and the bot.
+      if (
+        content['m.mentions']?.room &&
+        members.length + 1 >= ROOM_MENTION_CONFIRM_MIN_MEMBERS
+      ) {
+        try {
+          await confirm(
+            translate('Notify everyone?'),
+            translate('This notifies all {count} members of this room.', {
+              count: members.length,
+            }),
+            { positiveButton: translate('Notify everyone') },
+          );
+        } catch {
+          return;
+        }
+      }
+
       setSending(true);
       isTypingRef.current = false;
       sendTypingIndicator(false);
@@ -502,8 +549,6 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
         }
         if (!text) return;
 
-        // Mention pills for the Matrix spec (org.matrix.msc3952).
-        const content = buildTextContent(text, members);
         if (replyTo) {
           await client.sendMessage(
             activeRoomId,
@@ -542,6 +587,8 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       uploading,
       sendTypingIndicator,
       members,
+      canMentionRoom,
+      confirm,
       uploadFile,
       setPending,
       clearPending,
@@ -704,31 +751,49 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
         </div>
       )}
       {/* Mention autocomplete popup */}
-      {mentionQuery && filteredMentions.length > 0 && (
+      {roomOpen && mentionQuery && filteredMentions.length > 0 && (
         <div ref={mentionList.listRef} className="tc-mention-popup">
-          {filteredMentions.map((m, i) => (
-            <button
-              key={m.userId}
-              type="button"
-              className={`tc-mention-item ${
-                i === mentionIndex ? 'is-active' : ''
-              }`}
-              // The Matrix user ID disambiguates members who share a display
-              // name; surfaced as a hover tooltip rather than a permanent second
-              // line to keep the list compact.
-              title={m.userId}
-              onMouseDown={(e) => {
-                e.preventDefault(); // prevent textarea blur
-                acceptMention(m);
-              }}
-              onMouseMove={mentionList.pointAt(i)}
-            >
-              <div className="tc-mention-item__avatar">
-                {m.displayName.charAt(0).toUpperCase()}
-              </div>
-              <span className="tc-mention-item__name">{m.displayName}</span>
-            </button>
-          ))}
+          {filteredMentions.map((m, i) => {
+            const isRoom = m === ROOM_ENTRY;
+            return (
+              <button
+                key={m.userId}
+                type="button"
+                className={`tc-mention-item ${isRoom ? 'tc-command-item' : ''} ${
+                  i === mentionIndex ? 'is-active' : ''
+                }`}
+                // The Matrix user ID disambiguates members who share a display
+                // name; surfaced as a hover tooltip rather than a permanent second
+                // line to keep the list compact.
+                title={isRoom ? undefined : m.userId}
+                onMouseDown={(e) => {
+                  e.preventDefault(); // prevent textarea blur
+                  acceptMention(m);
+                }}
+                onMouseMove={mentionList.pointAt(i)}
+              >
+                <div className="tc-mention-item__avatar">
+                  {isRoom ? (
+                    <UsersThreeIcon weight="bold" />
+                  ) : (
+                    m.displayName.charAt(0).toUpperCase()
+                  )}
+                </div>
+                {isRoom ? (
+                  <span className="flex flex-col">
+                    <span className="tc-mention-item__name">
+                      {ROOM_MENTION}
+                    </span>
+                    <span className="tc-command-item__description">
+                      {translate('Notify everyone in this room')}
+                    </span>
+                  </span>
+                ) : (
+                  <span className="tc-mention-item__name">{m.displayName}</span>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 

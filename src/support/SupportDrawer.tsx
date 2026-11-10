@@ -21,11 +21,16 @@ import {
 interface SupportDrawerProps {
   defaultRoomUuid?: string;
   matrixRoomAlias?: string;
+  roomListRequest?: number;
+  /** A new value opens the room again, also after the user moved on. */
+  roomRequest?: number;
 }
 
 export const SupportDrawer: FC<SupportDrawerProps> = ({
   defaultRoomUuid,
   matrixRoomAlias,
+  roomListRequest,
+  roomRequest,
 }) => {
   const showChat = isMatrixChatEnabled();
   const showHelpdesk = hasSupport();
@@ -38,7 +43,10 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
   // render. Forcing it every render pins the drawer to chat for its whole
   // lifetime, so clicking Helpdesk snaps straight back to Team chat. Track which
   // deep-link value has already been honoured so the user can switch afterward.
-  const deepLinkKey = defaultRoomUuid || matrixRoomAlias || null;
+  const deepLinkRoom = defaultRoomUuid || matrixRoomAlias;
+  const deepLinkKey = deepLinkRoom
+    ? `${deepLinkRoom}#${roomRequest ?? ''}`
+    : null;
   const consumedDeepLinkRef = useRef<string | null>(null);
   const isFreshDeepLink =
     Boolean(deepLinkKey) && deepLinkKey !== consumedDeepLinkRef.current;
@@ -105,6 +113,8 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
                 <MatrixChatPanel
                   defaultRoomUuid={defaultRoomUuid}
                   defaultRoomAlias={matrixRoomAlias}
+                  roomListRequest={roomListRequest}
+                  roomRequest={roomRequest}
                 />
               </div>
             </TabsContent>

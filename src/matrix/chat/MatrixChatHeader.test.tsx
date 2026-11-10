@@ -1,4 +1,6 @@
-import { render, screen, within } from '@testing-library/react';
+import { EventEmitter } from 'events';
+
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   pushStateLocationPlugin,
@@ -19,8 +21,8 @@ const h = vi.hoisted(() => ({
   members: [] as any[],
   call: {} as any,
   matrixClient: {} as any,
-  isRoomMuted: vi.fn(),
-  setRoomMuted: vi.fn(),
+  getRoomNotificationLevel: vi.fn(),
+  setRoomNotificationLevel: vi.fn(),
   commands: [] as any[],
   pickCommand: vi.fn(),
 }));
@@ -54,9 +56,9 @@ vi.mock('./useMemberMatrixRooms', () => ({
   useMemberMatrixRooms: () => ({ data: [] }),
 }));
 
-vi.mock('./mute', () => ({
-  isRoomMuted: (...a: any[]) => h.isRoomMuted(...a),
-  setRoomMuted: (...a: any[]) => h.setRoomMuted(...a),
+vi.mock('./notificationLevel', () => ({
+  getRoomNotificationLevel: (...a: any[]) => h.getRoomNotificationLevel(...a),
+  setRoomNotificationLevel: (...a: any[]) => h.setRoomNotificationLevel(...a),
 }));
 
 const MEMBERS = [
@@ -105,8 +107,8 @@ beforeEach(() => {
     activeRoomId: null,
     activeRoomUuid: 'room-1',
   };
-  h.isRoomMuted = vi.fn().mockReturnValue(false);
-  h.setRoomMuted = vi.fn().mockResolvedValue(undefined);
+  h.getRoomNotificationLevel = vi.fn().mockReturnValue('mentions');
+  h.setRoomNotificationLevel = vi.fn().mockResolvedValue(undefined);
 });
 
 describe('MatrixChatHeader', () => {
@@ -235,7 +237,7 @@ describe('MatrixChatHeader', () => {
     const user = userEvent.setup();
     const { container } = renderHeader();
     await user.click(actionsToggle(container));
-    expect(await screen.findByText('Mute')).toBeTruthy();
+    expect(await screen.findByText('Notifications')).toBeTruthy();
     expect(screen.queryByText('Chat commands')).toBeNull();
   });
 
@@ -337,21 +339,19 @@ describe('MatrixChatHeader', () => {
     expect(screen.getByText('LLM Training Pipeline')).toBeTruthy();
   });
 
-  it('renders the mute item in the kebab and not mark-as-read', async () => {
+  it('renders the notifications item in the kebab and not mark-as-read', async () => {
     const user = userEvent.setup();
     const { container } = renderHeader();
     await user.click(actionsToggle(container));
-    expect(await screen.findByText('Mute')).toBeTruthy();
+    expect(await screen.findByText('Notifications')).toBeTruthy();
     expect(screen.queryByText('Mark as read')).toBeNull();
   });
 
-  const mutedClient = () => {
-    const client = {
+  const syncedClient = () => {
+    const client = Object.assign(new EventEmitter(), {
       id: 'c',
-      on: vi.fn(),
-      removeListener: vi.fn(),
       getRooms: () => [],
-    };
+    });
     h.matrixClient = {
       client,
       activeRoomId: '!room:server',
@@ -361,41 +361,133 @@ describe('MatrixChatHeader', () => {
     return client;
   };
 
-  it('mutes the active room and shows a success toast', async () => {
+  // By keyboard, as the Menu stories do: jsdom has no layout, so a pointer
+  // leaving the trigger closes the submenu before it reaches a level.
+  const openNotifications = async (
+    user: ReturnType<typeof userEvent.setup>,
+    container: HTMLElement,
+  ) => {
+    await user.click(actionsToggle(container));
+    act(() => screen.getByRole('menuitem', { name: 'Notifications' }).focus());
+    await user.keyboard('{ArrowRight}');
+  };
+
+  const pickLevel = async (
+    user: ReturnType<typeof userEvent.setup>,
+    name: string,
+  ) => {
+    const item = await screen.findByRole('menuitemradio', { name });
+    act(() => item.focus());
+    await user.keyboard('{Enter}');
+  };
+
+  // The level is read from the active room, so another view can't show it.
+  it('disables Notifications in the view without the active room', async () => {
     const user = userEvent.setup();
-    const client = mutedClient();
-    h.isRoomMuted.mockReturnValue(false);
+    syncedClient();
+    h.matrixClient.activeRoomUuid = 'other-room';
+    h.getRoomNotificationLevel.mockReturnValue('mute');
     const { container } = renderHeader();
     await user.click(actionsToggle(container));
-    await user.click(await screen.findByText('Mute'));
-    expect(h.setRoomMuted).toHaveBeenCalledWith(client, '!room:server', true);
-    await vi.waitFor(() =>
-      expect(useNotify().showSuccess).toHaveBeenCalledWith('Muted.'),
+    const trigger = await screen.findByRole('menuitem', {
+      name: 'Notifications',
+    });
+    expect(trigger).toHaveAttribute('aria-disabled', 'true');
+    await user.hover(trigger);
+    expect(
+      await screen.findByRole('tooltip', {
+        name: 'The conversation is not open yet.',
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it('disables Notifications while not connected', async () => {
+    const user = userEvent.setup();
+    syncedClient();
+    h.matrixClient.connectionState = 'error';
+    const { container } = renderHeader();
+    await user.click(actionsToggle(container));
+    const trigger = await screen.findByRole('menuitem', {
+      name: 'Notifications',
+    });
+    expect(trigger).toHaveAttribute('aria-disabled', 'true');
+    await user.hover(trigger);
+    expect(
+      await screen.findByRole('tooltip', { name: 'Not connected' }),
+    ).toBeInTheDocument();
+  });
+
+  it('shows the three levels with the current one checked', async () => {
+    const user = userEvent.setup();
+    syncedClient();
+    h.getRoomNotificationLevel.mockReturnValue('mute');
+    const { container } = renderHeader();
+    await openNotifications(user, container);
+    expect(
+      await screen.findByRole('menuitemradio', { name: 'Mute' }),
+    ).toHaveAttribute('aria-checked', 'true');
+    expect(
+      screen.getByRole('menuitemradio', { name: 'All messages' }),
+    ).toHaveAttribute('aria-checked', 'false');
+    expect(
+      screen.getByRole('menuitemradio', { name: 'Mentions only' }),
+    ).toHaveAttribute('aria-checked', 'false');
+  });
+
+  it('sets the picked level and shows a success toast', async () => {
+    const user = userEvent.setup();
+    const client = syncedClient();
+    const { container } = renderHeader();
+    await openNotifications(user, container);
+    await pickLevel(user, 'Mute');
+    expect(h.setRoomNotificationLevel).toHaveBeenCalledWith(
+      client,
+      '!room:server',
+      'mute',
     );
-  });
-
-  it('shows "Unmute" with a bell icon when the room is already muted', async () => {
-    const user = userEvent.setup();
-    mutedClient();
-    h.isRoomMuted.mockReturnValue(true);
-    const { container } = renderHeader();
-    await user.click(actionsToggle(container));
-    expect(await screen.findByText('Unmute')).toBeTruthy();
-    expect(screen.queryByText('Mute')).toBeNull();
-  });
-
-  it('shows an error toast when muting fails', async () => {
-    const user = userEvent.setup();
-    mutedClient();
-    h.isRoomMuted.mockReturnValue(false);
-    h.setRoomMuted = vi.fn().mockRejectedValue(new Error('forbidden'));
-    const { container } = renderHeader();
-    await user.click(actionsToggle(container));
-    await user.click(await screen.findByText('Mute'));
     await vi.waitFor(() =>
-      expect(useNotify().showError).toHaveBeenCalledWith(
-        'Could not update mute setting.',
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
+        'Notification level updated.',
       ),
     );
+  });
+
+  // The level syncs from other tabs and clients: push rules (Mute) arrive as
+  // global account data, the stored level (All, Mentions only) as the room's.
+  it.each([
+    ['accountData', 'mute', 'Mute'],
+    ['Room.accountData', 'all', 'All messages'],
+  ])(
+    'follows a level changed elsewhere, from %s',
+    async (eventName, level, label) => {
+      const user = userEvent.setup();
+      const client = syncedClient();
+      const { container } = renderHeader();
+      h.getRoomNotificationLevel.mockReturnValue(level);
+      act(() => {
+        client.emit(eventName);
+      });
+      await openNotifications(user, container);
+      expect(
+        await screen.findByRole('menuitemradio', { name: label }),
+      ).toHaveAttribute('aria-checked', 'true');
+    },
+  );
+
+  it('shows an error toast when setting the level fails', async () => {
+    const user = userEvent.setup();
+    syncedClient();
+    h.setRoomNotificationLevel = vi
+      .fn()
+      .mockRejectedValue(new Error('forbidden'));
+    const { container } = renderHeader();
+    await openNotifications(user, container);
+    await pickLevel(user, 'All messages');
+    await vi.waitFor(() =>
+      expect(useNotify().showError).toHaveBeenCalledWith(
+        'Could not update notification level.',
+      ),
+    );
+    expect(useNotify().showSuccess).not.toHaveBeenCalled();
   });
 });

@@ -11,6 +11,7 @@ import {
   initLanguageUtils,
   LanguageUtilsService,
 } from './i18n/LanguageUtilsService';
+import { setDocumentTitle } from './navigation/documentTitle';
 import { attachTransitions } from './transitions';
 
 function initCssVariables() {
@@ -20,7 +21,7 @@ function initCssVariables() {
 }
 
 function initPageTitle() {
-  document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
+  setDocumentTitle(ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE);
 }
 
 function initI18n() {

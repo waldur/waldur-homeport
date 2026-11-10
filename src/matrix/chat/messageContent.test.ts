@@ -26,6 +26,30 @@ describe('buildTextContent', () => {
       'hi <a href="https://matrix.to/#/%40alice%3As">Alice Smith</a> &lt;b&gt;',
     );
   });
+
+  it('adds m.mentions.room for @room when allowed', () => {
+    expect(buildTextContent('@room standup in 5', [], 'm.text', true)).toEqual({
+      msgtype: 'm.text',
+      body: '@room standup in 5',
+      'm.mentions': { room: true },
+    });
+  });
+
+  it('ignores @room when not allowed', () => {
+    expect(buildTextContent('@room standup', [])['m.mentions']).toBeUndefined();
+  });
+
+  it('does not treat @roommate as a room mention', () => {
+    expect(
+      buildTextContent('hi @roommate', [], 'm.text', true)['m.mentions'],
+    ).toBeUndefined();
+  });
+
+  it('keeps user mentions alongside @room', () => {
+    expect(
+      buildTextContent('@room and @Bob', members, 'm.text', true)['m.mentions'],
+    ).toEqual({ user_ids: ['@bob:s'], room: true });
+  });
 });
 
 describe('buildReplyContent', () => {
@@ -52,6 +76,19 @@ describe('buildReplyContent', () => {
       '@me:s',
     );
     expect(content['m.mentions']).toEqual({ user_ids: [] });
+  });
+
+  it('keeps a room mention in the reply', () => {
+    const content = buildReplyContent(
+      buildTextContent('@room see this', members, 'm.text', true),
+      '$parent',
+      '@bob:s',
+      '@me:s',
+    );
+    expect(content['m.mentions']).toEqual({
+      user_ids: ['@bob:s'],
+      room: true,
+    });
   });
 });
 
