@@ -19,6 +19,7 @@ import {
   loadSharedLocale,
   translate,
 } from 'waldur-i18n-runtime';
+import { setErrorResponseFormatter } from 'waldur-notifications';
 import {
   fetchRuntimeConfig,
   getApiUrlFromMeta,
@@ -26,6 +27,7 @@ import {
 } from 'waldur-runtime-config';
 import { initSentry, SentryInitOptions } from 'waldur-telemetry';
 
+import { formatApiError } from './formatApiError';
 import { createSharedStorage } from './sharedStorage';
 import {
   isConfiguredSidebarStyle,
@@ -96,6 +98,10 @@ export function bootstrapMicroApp(
   config: MicroAppBootstrapConfig = {},
 ): Promise<RuntimeConfigData | undefined> {
   const languageStorage = createSharedStorage('i18n/lang');
+
+  // Readable API errors in toasts (showErrorResponse, useManagedMutation),
+  // as the portal's own formatter gives it; an app may register its own.
+  setErrorResponseFormatter(formatApiError);
 
   configureAuthCore({
     storage: {

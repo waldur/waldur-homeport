@@ -168,7 +168,7 @@ export const max = (length) => (value) =>
  * The length the backend sees: Python's len() counts code points, while
  * String.length counts UTF-16 units and charges two for an emoji.
  */
-export const countCharacters = (value: string | undefined) =>
+const countCharacters = (value: string | undefined) =>
   value ? Array.from(value).length : 0;
 
 /**
