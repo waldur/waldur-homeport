@@ -1066,6 +1066,11 @@
     }
   },
   "A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.": {},
+  "A resource": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "A reversal cannot exceed the paid credit of {balance}.": {
     "context": {
       "variables": {
@@ -41282,6 +41287,11 @@
       "feature_area": "offering-users"
     }
   },
+  "Not all of it was carried out": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Not allowed": {},
   "Not applicable": {
     "context": {
@@ -41361,6 +41371,11 @@
   "Not awarded (tentative)": {
     "context": {
       "feature_area": "proposals"
+    }
+  },
+  "Not carried out": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Not carried over": {},
@@ -50127,6 +50142,17 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "Project end date moved {change}": {
+    "context": {
+      "variables": {
+        "change": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal",
+      "action_type": "update"
     }
   },
   "Project end date supersedes resource termination date if resource termination date is after the project end date.": {
@@ -84240,6 +84266,11 @@
       "feature_area": "proposal"
     }
   },
+  "What the approval changed": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "What the call allows": {
     "context": {
       "feature_area": "resource-requests-step"
@@ -84331,6 +84362,11 @@
   "What type of issue was this? (optional)": {
     "context": {
       "feature_area": "shared"
+    }
+  },
+  "What was granted for these resources is not ordered later by itself.": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "What was helpful about this response?": {
@@ -87846,6 +87882,18 @@
       "feature_area": "diagram"
     }
   },
+  "from {previous} to {end_date}": {
+    "context": {
+      "variables": {
+        "previous": {
+          "type": "unknown"
+        },
+        "end_date": {
+          "type": "date"
+        }
+      }
+    }
+  },
   "from {start} to {end}, {days} days": {
     "context": {
       "variables": {
@@ -89487,6 +89535,15 @@
   "till": {
     "context": {
       "feature_area": "booking"
+    }
+  },
+  "to {end_date}": {
+    "context": {
+      "variables": {
+        "end_date": {
+          "type": "date"
+        }
+      }
     }
   },
   "today": {
@@ -94948,6 +95005,30 @@
           "type": "string"
         }
       }
+    }
+  },
+  "{resource}: end date moved {change}": {
+    "context": {
+      "variables": {
+        "resource": {
+          "type": "unknown"
+        },
+        "change": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal",
+      "action_type": "update"
+    }
+  },
+  "{resource}: more limits ordered, for its provider to approve": {
+    "context": {
+      "variables": {
+        "resource": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal"
     }
   },
   "{role} ({name})": {

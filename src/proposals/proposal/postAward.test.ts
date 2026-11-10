@@ -5,6 +5,7 @@ import {
   canRequestExtension,
   canWithdrawRun,
   cleanRunLimits,
+  getRunAppliedChanges,
   runEditMode,
   runGrantDiffers,
   runPartUnlocked,
@@ -185,5 +186,38 @@ describe('runGrantDiffers', () => {
         }),
       ),
     ).toBe(true);
+  });
+});
+
+describe('getRunAppliedChanges', () => {
+  it('reads what an approval changed and what it skipped', () => {
+    const changes = getRunAppliedChanges({
+      applied_changes: {
+        project_end_date: { previous: '2028-03-08', end_date: '2028-06-30' },
+        resource_end_dates: [],
+        orders: [],
+        skipped: [
+          { resource_uuid: 'r1', reason: 'The resource is not in OK state.' },
+        ],
+      },
+    });
+    expect(changes?.projectEndDate?.end_date).toBe('2028-06-30');
+    expect(changes?.skipped).toEqual([
+      { resource_uuid: 'r1', reason: 'The resource is not in OK state.' },
+    ]);
+  });
+
+  it('is null when the run recorded nothing', () => {
+    expect(getRunAppliedChanges({ applied_changes: {} })).toBeNull();
+    expect(
+      getRunAppliedChanges({
+        applied_changes: {
+          project_end_date: null,
+          resource_end_dates: [],
+          orders: [],
+          skipped: [],
+        },
+      }),
+    ).toBeNull();
   });
 });

@@ -191,3 +191,43 @@ export const runPartUnlocked = (
       request.unlocked_parts?.includes(part),
     ),
   );
+
+interface AppliedEndDate {
+  previous?: string | null;
+  end_date: string;
+}
+
+/** What an approved extension carried out, as the backend recorded it. */
+export interface RunAppliedChanges {
+  projectEndDate: AppliedEndDate | null;
+  resourceEndDates: (AppliedEndDate & { resource_uuid: string })[];
+  orders: { resource_uuid: string; order_uuid: string }[];
+  skipped: { resource_uuid: string; reason: string }[];
+}
+
+const asList = <T>(value: unknown): T[] =>
+  Array.isArray(value) ? (value as T[]) : [];
+
+/**
+ * The run's recorded changes: the project end date it moved, the resource
+ * end dates it moved, the orders for more limits it created, and the
+ * resources it left alone with why. Null when it recorded none -- an open,
+ * rejected or withdrawn run, or a final report.
+ */
+export const getRunAppliedChanges = (
+  run: Pick<ProposalRun, 'applied_changes'>,
+): RunAppliedChanges | null => {
+  const applied = (run.applied_changes ?? {}) as Record<string, unknown>;
+  const changes: RunAppliedChanges = {
+    projectEndDate: (applied.project_end_date as AppliedEndDate) || null,
+    resourceEndDates: asList(applied.resource_end_dates),
+    orders: asList(applied.orders),
+    skipped: asList(applied.skipped),
+  };
+  return changes.projectEndDate ||
+    changes.resourceEndDates.length ||
+    changes.orders.length ||
+    changes.skipped.length
+    ? changes
+    : null;
+};
