@@ -1,5 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 
+import { ButtonVariant } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FieldError, FormFooter } from '@/form';
 
@@ -9,6 +11,7 @@ interface ActionDialogProps {
   title?: string;
   subtitle?: React.ReactNode;
   submitLabel?: string;
+  submitVariant?: ButtonVariant;
   submitting?: boolean;
   loading?: boolean;
   invalid?: boolean;
@@ -29,6 +32,7 @@ export const ActionDialogFinal: React.FC<
       footer={
         <FormFooter
           submitLabel={props.submitLabel}
+          submitVariant={props.submitVariant}
           fullWidth={props.fullButtons}
           submitDisabled={props.submitDisabled}
           submitDisabledReason={props.submitDisabledReason}

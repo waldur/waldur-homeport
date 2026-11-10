@@ -58891,6 +58891,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Running instances will be stopped. Existing backups and volume snapshots of the instances will be deleted.": {
+    "context": {
+      "feature_area": "mass-actions"
+    }
+  },
   "Running the scenarios. The results below refresh when they are done.": {
     "context": {
       "feature_area": "scenarios"
@@ -69118,6 +69123,16 @@
   "The option must be an earlier boolean or select option.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "The options below apply only to OpenStack instances ({count} of the selected resources).": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "mass-actions"
     }
   },
   "The organization UUID is not specified in one or more records.": {

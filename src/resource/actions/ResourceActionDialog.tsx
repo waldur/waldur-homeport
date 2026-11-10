@@ -2,7 +2,7 @@ import arrayMutators from 'final-form-arrays';
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { Form, useForm, useFormState } from 'react-final-form';
 
-import { Tooltip } from 'waldur-ui';
+import { ButtonVariant, Tooltip } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { composeValidators } from '@/core/validators';
@@ -28,6 +28,7 @@ interface ResourceActionDialogProps {
   dialogSubtitle?: ReactNode;
   dialogFullButtons?: boolean;
   dialogSubmitLabel?: string;
+  dialogSubmitVariant?: ButtonVariant;
   /** Keep Save disabled until the user changes something. */
   disableSubmitWhenPristine?: boolean;
   formFields?: any[] | ((values: any) => any[]);
@@ -57,6 +58,7 @@ const ResourceActionDialogInner: FC<any> = ({
   dialogSubtitle,
   dialogFullButtons,
   dialogSubmitLabel = translate('Submit'),
+  dialogSubmitVariant,
   loading,
   error,
   refetch,
@@ -180,6 +182,7 @@ const ResourceActionDialogInner: FC<any> = ({
       title={dialogTitle}
       subtitle={dialogSubtitle}
       submitLabel={dialogSubmitLabel}
+      submitVariant={dialogSubmitVariant}
       onSubmit={handleSubmit}
       submitting={submitting}
       invalid={invalid}
