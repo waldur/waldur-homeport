@@ -5,6 +5,7 @@ import { RadioGroupField } from './RadioGroupField';
 import { SelectField } from './select/SelectField';
 import { StringField } from './StringField';
 import { SwitchField } from './SwitchField';
+import { TextField } from './TextField';
 import { withFormGroup } from './withFormGroup';
 
 export * from './FormGroup';
@@ -13,6 +14,8 @@ export * from './FieldError';
 export * from './FieldWarning';
 export * from './InputField';
 export * from './StringField';
+export * from './TextField';
+export * from './CharacterCount';
 export * from './NumberField';
 export * from './SwitchField';
 export * from './DateField';
@@ -31,6 +34,7 @@ export * from './select';
 // Group components combining field adapter with FormGroup and Field
 export const StringGroup = withFormGroup(StringField);
 export const SelectGroup = withFormGroup(SelectField);
+export const TextGroup = withFormGroup(TextField);
 export const NumberGroup = withFormGroup(NumberField);
 export const BooleanGroup = withFormGroup(SwitchField, {
   passLabelToControl: true,

@@ -10119,7 +10119,7 @@
   },
   "By confirming you declare:": {
     "context": {
-      "feature_area": "coi-declaration"
+      "feature_area": "proposals"
     }
   },
   "By country": {
@@ -13763,7 +13763,7 @@
   "Conditional acceptance": {},
   "Conditionally accepted": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Conditions": {
@@ -15401,6 +15401,7 @@
     }
   },
   "Could not reach the inference endpoint. It may be offline or not publicly reachable — contact the provider if this persists.": {},
+  "Could not reach the server. Check your connection and try again.": {},
   "Could not remove reaction ({detail}).": {
     "context": {
       "primary_ui_type": "error_message",
@@ -21952,7 +21953,7 @@
   "Eligibility and completeness validation before evaluation.": {},
   "Eligible": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Eligible offerings": {
@@ -25563,7 +25564,7 @@
   },
   "Feasible": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Feature": {
@@ -25974,6 +25975,11 @@
   "Fill in the details to create a new user account.": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Fill in the form": {
+    "context": {
+      "feature_area": "contributions"
     }
   },
   "Fill in the form, then submit one of:": {
@@ -30511,12 +30517,12 @@
   },
   "Ineligible": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Infeasible": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Inference": {
@@ -40506,7 +40512,7 @@
   },
   "No response": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "No restrictions configured": {
@@ -46602,7 +46608,7 @@
   },
   "Paused: the contributor no longer holds the role or has a conflict of interest.": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Pausing": {
@@ -60680,7 +60686,7 @@
   },
   "Select an outcome...": {
     "context": {
-      "feature_area": "contributions"
+      "feature_area": "workflow"
     }
   },
   "Select at least one mapping to delete": {
@@ -69794,6 +69800,11 @@
     }
   },
   "The report month has ended, so the billing is treated as validated (checked every 12 hours). Later syncs leave it unchanged.": {},
+  "The request failed.": {
+    "context": {
+      "feature_area": "shell"
+    }
+  },
   "The request failed. Please try again.": {},
   "The request for changes has been canceled.": {
     "context": {
@@ -70236,7 +70247,7 @@
   },
   "The step ended before this contribution was submitted.": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "The step ended without a response.": {
@@ -85131,7 +85142,7 @@
   },
   "Withdrawn by a call manager, or closed when the step was decided or the contributor joined the applicant team.": {
     "context": {
-      "feature_area": "workflow"
+      "feature_area": "proposals"
     }
   },
   "Withdrawn or canceled": {
@@ -91812,6 +91823,16 @@
         }
       },
       "feature_area": "steps"
+    }
+  },
+  "{count} required questions of the form are unanswered": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "contributions"
     }
   },
   "{count} resource": {

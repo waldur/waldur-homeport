@@ -101,6 +101,12 @@ export default defineConfig({
         changeOrigin: true,
         ws: true,
       },
+      // apps/provider-calls, same arrangement (its dev:subpath script).
+      '/provider-calls': {
+        target: 'http://localhost:5181',
+        changeOrigin: true,
+        ws: true,
+      },
     },
   },
   plugins,

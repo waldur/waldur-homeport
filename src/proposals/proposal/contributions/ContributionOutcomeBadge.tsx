@@ -1,26 +1,5 @@
-import { FC } from 'react';
-
-import { Badge } from 'waldur-ui';
-
-import {
-  contributionOutcomeLabel,
-  contributionOutcomeVariant,
-} from '@/proposals/workflow/constants';
-
 /**
- * What a contribution concluded, coloured by how it went. Without an outcome
- * yet, `fallback` (its status, say) is shown in the neutral colour.
+ * Moved to waldur-proposals, which the micro-apps share. Kept as a module of
+ * its own so the imports from here don't change.
  */
-export const ContributionOutcomeBadge: FC<{
-  outcome?: string | null;
-  fallback?: string;
-}> = ({ outcome, fallback }) => (
-  <Badge
-    variant={contributionOutcomeVariant(outcome)}
-    size="sm"
-    shape="pill"
-    tone="outline"
-  >
-    {outcome ? contributionOutcomeLabel(outcome) : fallback}
-  </Badge>
-);
+export { ContributionOutcomeBadge } from 'waldur-proposals';

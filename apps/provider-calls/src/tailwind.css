@@ -1,0 +1,25 @@
+/**
+ * Shared Tailwind entry point for micro-apps.
+ *
+ * Inherits all core Waldur design tokens (typography, spacing, radius, breakpoints,
+ * surfaces, and color palettes) via waldur-design-tokens/index.css.
+ */
+@import 'tailwindcss';
+@import 'waldur-design-tokens/index.css';
+
+/* Tailwind v4's automatic content detection scans outward from this file
+   toward the nearest .git/package.json root, but stops at this app's own
+   package.json (apps/provider-calls/package.json) rather than walking
+   further up to sibling workspace packages — waldur-ui resolves only
+   through node_modules symlinking, which auto-detection skips by
+   convention. Without this, BaseButton's classes never make it into the
+   generated CSS: the component renders with the right className string
+   (cva/cn both work fine standalone) but with no matching rules at all.
+   Explicit @source is the correct fix for a genuinely standalone
+   consumer anyway, not a workaround — relying on git-root
+   auto-detection only worked for waldur-homeport's own Storybook config
+   because it happens to share this same repository. */
+@source '../../../packages/ui/src';
+@source '../../../packages/shell/src';
+@source '../../../packages/form/src';
+@source '../../../packages/proposals/src';

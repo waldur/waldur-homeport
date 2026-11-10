@@ -1,0 +1,29 @@
+{
+  "name": "waldur-proposals",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proposal workflow components (contributions, outcomes) shared by Waldur HomePort and its micro-apps",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.7"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.80.6",
+    "final-form": "^4.20.10",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-final-form": "^6.5.9",
+    "waldur-form": "workspace:*",
+    "waldur-i18n-runtime": "workspace:*",
+    "waldur-notifications": "workspace:*",
+    "waldur-shell": "workspace:*",
+    "waldur-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "license": "MIT"
+}
