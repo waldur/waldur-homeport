@@ -151,14 +151,15 @@ export const RevenueGrowthChart: FC = () => {
   }, [growthData]);
 
   const actions = (
-    <Select
-      placeholder={translate('Accounting status')}
-      value={accountingFilter}
-      onChange={(value: AccountingOption) => setAccountingFilter(value)}
-      options={accountingOptions}
-      isClearable={false}
-      className="grow-0 max-w-[200px]"
-    />
+    <div className="w-[200px]">
+      <Select
+        placeholder={translate('Accounting status')}
+        value={accountingFilter}
+        onChange={(value: AccountingOption) => setAccountingFilter(value)}
+        options={accountingOptions}
+        isClearable={false}
+      />
+    </div>
   );
 
   return (
