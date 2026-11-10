@@ -2,18 +2,18 @@ import { ReactNode, useId } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { AppLink } from '../AppLink';
-import { buttonVariants } from '../Button';
 import { Card, CardContent } from '../Card';
 import { cn } from '../cn';
+import { Tooltip } from '../Tooltip';
 
 export type StatCardTone = 'success' | 'warning' | 'danger';
 
-/** Where the figure's list lives, for the tile's "View all" link. */
+/** Where the figure's list lives: the whole tile links to it. */
 export interface StatCardLink {
   /** What the app's router navigates by: a UI-Router state, a path. */
   to: string;
   params?: object;
-  /** The link's text; "View all" by default. */
+  /** What the tile opens, in its tooltip; "View all" by default. */
   label?: string;
 }
 
@@ -31,8 +31,8 @@ const TONE_CLASSES: Record<StatCardTone, string> = {
  * The tile fills its grid cell (`h-full`) and the value grows, so footers
  * line up along the bottom of a row whose tiles have different content.
  *
- * A tile with `link` leads to the list behind the figure; the rest of the
- * tile stays plain, so a `HelpIcon` or a footer tooltip keeps working.
+ * A tile with `link` opens the list behind the figure wherever it is
+ * clicked; give a `HelpIcon` in it `relative` so it stays above the link.
  *
  * The figure carries `data-testid="stat-card-value"`, so a test can read a
  * row of figures in order.
@@ -51,9 +51,10 @@ export interface StatCardProps {
    */
   footer?: ReactNode;
   /**
-   * The list behind the figure. Drawn as "View all" at the end of the footer
-   * row, through the app's `LinkProvider` (a plain href without one), and
-   * named after the tile: "View all Organizations".
+   * The list behind the figure. The whole tile links to it, through the
+   * app's `LinkProvider` (a plain href without one), with `label` in a hover
+   * tooltip and named after the tile for screen readers: "View all
+   * Organizations".
    */
   link?: StatCardLink;
   /**
@@ -85,7 +86,40 @@ export const StatCard = ({
   const labelId = `${id}-label`;
   const linkId = `${id}-link`;
   return (
-    <Card bordered className={cn('h-full', className)}>
+    <Card
+      bordered
+      className={cn(
+        'relative h-full',
+        // The clickable card's hover, pressed and keyboard-focus states,
+        // driven by the overlay link.
+        link &&
+          'has-[>span>a:hover]:!border-brand has-[>span>a:hover]:!shadow-none has-[>span>a:active]:!border-transparent has-[>span>a:active]:outline-2 has-[>span>a:active]:outline-solid has-[>span>a:active]:outline-brand has-[>span>a:active]:-outline-offset-2 has-[>span>a:focus-visible]:outline-(length:--focus-ring-width) has-[>span>a:focus-visible]:outline-solid has-[>span>a:focus-visible]:outline-(color:--focus-ring-color) has-[>span>a:focus-visible]:outline-offset-(--focus-ring-offset)',
+        className,
+      )}
+    >
+      {link && (
+        // Laid over the whole tile, so the card opens the list wherever it
+        // is clicked, with what it opens named on hover; a HelpIcon in the
+        // label sits above it (`relative`).
+        <Tooltip
+          label={link.label ?? translate('View all')}
+          className="absolute inset-0"
+        >
+          <span>
+            <AppLink
+              to={link.to}
+              params={link.params}
+              id={linkId}
+              aria-labelledby={`${linkId} ${labelId}`}
+              className="absolute inset-0 rounded-[inherit] outline-none"
+            >
+              <span className="sr-only">
+                {link.label ?? translate('View all')}
+              </span>
+            </AppLink>
+          </span>
+        </Tooltip>
+      )}
       <CardContent
         className={cn(
           'flex flex-col',
@@ -118,7 +152,7 @@ export const StatCard = ({
         >
           {value}
         </div>
-        {(footer || link) && (
+        {footer && (
           <div
             className={cn(
               'flex flex-wrap items-center gap-1.5 text-tertiary',
@@ -126,22 +160,6 @@ export const StatCard = ({
             )}
           >
             {footer}
-            {link && (
-              <AppLink
-                to={link.to}
-                params={link.params}
-                id={linkId}
-                aria-labelledby={`${linkId} ${labelId}`}
-                className={cn(
-                  buttonVariants({ variant: 'text-primary', size: 'sm' }),
-                  'ms-auto px-0',
-                )}
-              >
-                {/* In a span: the app's Link styles a bare string as an
-                    inline anchor. */}
-                <span>{link.label ?? translate('View all')}</span>
-              </AppLink>
-            )}
           </div>
         )}
       </CardContent>

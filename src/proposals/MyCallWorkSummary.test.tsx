@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -120,12 +121,14 @@ describe('MyCallWorkSummary', () => {
     } as any);
     renderSummary(<MyCallWorkSummary />);
 
-    // The card says which draft, in which call, and on which date: above a
-    // list of calls it otherwise read as their next cut-off.
-    expect(await screen.findByText('Lattice QCD')).toBeInTheDocument();
-    expect(screen.getByText(/^in .* · Extreme Scale$/)).toBeInTheDocument();
-    expect(screen.getByText(formatDate(later))).toBeInTheDocument();
+    // The card shows the date; which draft and call is in the label's help.
+    expect(await screen.findByText(formatDate(later))).toBeInTheDocument();
     expect(screen.queryByText('Closed already')).not.toBeInTheDocument();
+    await userEvent.hover(screen.getByRole('button', { name: 'Help' }));
+    expect(
+      (await screen.findAllByText(/^Lattice QCD in Extreme Scale closes/))
+        .length,
+    ).toBeGreaterThan(0);
 
     const link = screen.getByRole('link', { name: /Next draft deadline/ });
     expect(link).toHaveAttribute('data-to', 'proposals.manage-proposal');
