@@ -30,6 +30,14 @@ export const EVENT_GROUP_LABELS: Record<EventGroupsEnum, EventGroupLabel> = {
         'Sign-ins, sign-outs, failed sign-in attempts, passkeys and personal access tokens.',
       ),
   },
+  mcp: {
+    section: 'access',
+    title: () => translate('MCP tool calls'),
+    description: () =>
+      translate(
+        "AI agents and other MCP clients calling Waldur tools with a user's access tokens.",
+      ),
+  },
   users: {
     section: 'access',
     title: () => translate('User accounts'),

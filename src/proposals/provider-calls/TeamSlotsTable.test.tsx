@@ -17,6 +17,7 @@ const slot = (values: Partial<OfferingTeamSlot>): OfferingTeamSlot => ({
   requested_offering_uuid: 'ro1',
   step_name: 'Technical assessment',
   step_key: 'technical_assessment',
+  phase: 'evaluation',
   status: 'pending',
   delegate_uuid: null,
   delegate_name: null,
