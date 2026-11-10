@@ -253,9 +253,9 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                   spaceless
                   disabled={submitting || isPending}
                 />
-                {/* The applicant's name is only the last third of what the
-                    project ends up called, so show the whole thing rather than
-                    describing the rule in prose. */}
+                {/* The call decides how the applicant's name becomes the
+                    project's (its project name template), so show the result
+                    rather than describing the rule in prose. */}
                 {projectName ? (
                   <div className="text-quaternary text-xs mt-1.5">
                     {translate(

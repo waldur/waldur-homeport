@@ -74,8 +74,8 @@ export const isFieldRequired = (
 /** Fields the Project details step tracks for its filled/total counter — the
  * ones actually rendered, so the count can reach its own total. */
 /* `name` brackets every list below: it is always asked and always required —
- * it identifies the proposal and forms the last third of the awarded project's
- * name (see getProposalProjectName).
+ * it identifies the proposal and goes into the awarded project's name (see
+ * getProposalProjectName).
  *
  * The project duration is asked only of a call that offers a list of lengths
  * (`allowed_duration_months`), and is then required. Elsewhere allocation
