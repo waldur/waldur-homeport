@@ -148,6 +148,29 @@ export const Floating: Story = {
   ),
 };
 
+export const Centered: Story = {
+  render: () => (
+    <div className="flex flex-col gap-2.5 max-w-[320px]">
+      <AlertItem
+        variant="error"
+        type="floating"
+        iconSize="sm"
+        iconClassName="mt-0"
+        centered
+        className="p-2.5 items-center"
+        title="Invalid username/password."
+      />
+      <AlertItem
+        variant="warning"
+        type="floating"
+        centered
+        title="Your session is about to expire."
+        body="Save your work and sign in again to keep editing."
+      />
+    </div>
+  ),
+};
+
 export const LongContent: Story = {
   render: () => (
     <div className="max-w-[320px]">

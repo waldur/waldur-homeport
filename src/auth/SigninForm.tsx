@@ -274,7 +274,10 @@ export const SigninForm = () => {
                 variant="error"
                 title={formError}
                 role="alert"
-                className="mt-2.5 line-clamp-1 max-w-[100vh]"
+                iconSize="sm"
+                iconClassName="mt-0"
+                centered
+                className="mt-2.5 max-w-[100vh] p-2.5 items-center"
               />
             )}
           </form>

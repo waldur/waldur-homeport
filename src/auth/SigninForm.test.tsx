@@ -112,6 +112,28 @@ describe('SigninForm', () => {
     });
   });
 
+  // A line-clamp utility on the alert root made tailwind-merge drop its
+  // `flex`, stacking the icon above a clipped message.
+  it('keeps the login error alert a flex row', async () => {
+    const user = userEvent.setup();
+    vi.mocked(AuthService.signin).mockRejectedValue({
+      response: { data: { detail: 'Invalid username/password.' } },
+    });
+
+    render(<SigninForm />);
+
+    await user.type(
+      screen.getByPlaceholderText('Enter your username'),
+      'alice',
+    );
+    await user.type(screen.getByPlaceholderText('Enter your password'), 'bad');
+    await user.click(screen.getByRole('button', { name: 'Login' }));
+
+    const alert = await screen.findByRole('alert');
+    expect(alert).toHaveTextContent('Invalid username/password.');
+    expect(alert).toHaveClass('flex');
+  });
+
   it('submits token in token mode', async () => {
     const user = userEvent.setup();
     vi.mocked(AuthService.signinByToken).mockResolvedValue(undefined as any);
