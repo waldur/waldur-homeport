@@ -50,6 +50,7 @@ import { stageStillOpen } from '@/proposals/workflow/stages';
 import { useUser } from '@/workspace/hooks';
 
 import { isResponseStep } from '../inputs/queries';
+import { StepAnswerValue } from '../inputs/StepAnswerValue';
 import { sectionOpenProps, useSectionOpenState } from '../sectionOpen';
 import { StepChecklistSection } from '../StepChecklistSection';
 
@@ -479,7 +480,7 @@ const ContributionCard: FC<ContributionCardProps> = ({
             <div key={answer.question_uuid} className="mb-1.5">
               <dt className="font-semibold">{answer.question_description}</dt>
               <dd className="mb-0 whitespace-pre-line">
-                {answer.answer_display}
+                <StepAnswerValue answer={answer} />
               </dd>
             </div>
           ))}

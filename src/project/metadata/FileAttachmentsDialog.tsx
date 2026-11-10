@@ -2,29 +2,17 @@ import { FC } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
-import { ENV } from '@/core/config';
-import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
-interface FileAttachment {
-  name: string;
-  size?: number;
-  mime_type?: string;
-  stored_file_id: string;
-}
+import { downloadMediaFile, FileAttachment } from './ParsedAnswer';
 
 interface FileAttachmentsDialogProps {
   resolve: {
     files: FileAttachment[];
   };
 }
-
-const downloadMediaFile = (storedFileId: string, fileName: string) => {
-  const url = `${ENV.apiEndpoint}api/media/${storedFileId}/`;
-  downloadFile(url, fileName);
-};
 
 export const FileAttachmentsDialog: FC<FileAttachmentsDialogProps> = ({
   resolve,

@@ -1,5 +1,5 @@
 import { PaperclipIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Answer, QuestionAdmin } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -10,6 +10,7 @@ import { formatFilesize } from '@/core/utils';
 import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { BooleanField } from '@/table/BooleanField';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -18,48 +19,72 @@ interface ParsedAnswerProps {
   answer: Answer;
 }
 
-interface FileAttachment {
+export interface FileAttachment {
   name: string;
   size?: number;
   mime_type?: string;
   stored_file_id: string;
 }
 
-// Check if the answer is a processed file upload object (has stored_file_id)
-const isFileUpload = (value: unknown): value is FileAttachment => {
+// The backend names a stored file by its UUID. An answer is written by its
+// author, who can put any text in the id, and the id becomes part of a
+// download URL fetched with the reader's credentials: only an id shaped like
+// a UUID is taken as a stored file. Anything else is shown as text.
+const STORED_FILE_ID =
+  /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
+
+// A file that was stored, with an id the media endpoint serves it by. An
+// answer missing either cannot be downloaded and is shown as text instead.
+export const isFileUpload = (value: unknown): value is FileAttachment => {
+  if (typeof value !== 'object' || value === null) {
+    return false;
+  }
+  const file = value as Record<string, unknown>;
   return (
-    typeof value === 'object' &&
-    value !== null &&
-    'stored_file_id' in value &&
-    'name' in value
+    typeof file.name === 'string' &&
+    typeof file.stored_file_id === 'string' &&
+    STORED_FILE_ID.test(file.stored_file_id)
   );
 };
 
-// Check if the answer is a raw (unprocessed) file upload object (has content)
-const isRawFileUpload = (
-  value: unknown,
-): value is { name: string; content: string } => {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    'content' in value &&
-    'name' in value &&
-    !('stored_file_id' in value)
+// A named file that cannot be downloaded: not yet processed (it still
+// carries its content) or stored without an id. Only its name is shown.
+const isRawFileUpload = (value: unknown): value is { name: string } =>
+  typeof value === 'object' &&
+  value !== null &&
+  !Array.isArray(value) &&
+  typeof (value as Record<string, unknown>).name === 'string' &&
+  !isFileUpload(value);
+
+export const downloadMediaFile = (storedFileId: string, fileName: string) =>
+  downloadFile(
+    `${ENV.apiEndpoint}api/media/${encodeURIComponent(storedFileId)}/`,
+    fileName,
   );
-};
 
-const downloadMediaFile = (storedFileId: string, fileName: string) => {
-  const url = `${ENV.apiEndpoint}api/media/${storedFileId}/`;
-  downloadFile(url, fileName);
-};
-
-const FileLink: FC<{ file: FileAttachment }> = ({ file }) => {
+export const FileLink: FC<{ file: FileAttachment }> = ({ file }) => {
+  const { showErrorResponse } = useNotify();
+  const [loading, setLoading] = useState(false);
   const sizeText = file.size ? ` (${formatFilesize(file.size, 'B')})` : '';
+  const download = async () => {
+    setLoading(true);
+    try {
+      await downloadMediaFile(file.stored_file_id, file.name);
+    } catch (error) {
+      showErrorResponse(error, translate('File download failed'));
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <BaseButton
       variant="text-primary"
-      onClick={() => downloadMediaFile(file.stored_file_id, file.name)}
+      onClick={download}
+      pending={loading}
       label={`${file.name}${sizeText}`}
+      aria-label={translate('Download {file}', {
+        file: `${file.name}${sizeText}`,
+      })}
     />
   );
 };
