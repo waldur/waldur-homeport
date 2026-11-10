@@ -230,6 +230,7 @@ export const CompleteWorkflowStepDialog: FC<
                 <p className="font-medium mb-1.5">{translate('Call budget')}</p>
                 <ProposalBudgetTable
                   proposalUuid={proposal.uuid}
+                  callUuid={proposal.call_uuid}
                   budget={budget.data}
                 />
               </div>

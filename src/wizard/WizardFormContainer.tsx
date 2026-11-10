@@ -1,6 +1,6 @@
 import { FormApi } from 'final-form';
-import { ComponentType, useState } from 'react';
-import { Form, FormSpy } from 'react-final-form';
+import { ComponentType, useEffect, useRef, useState } from 'react';
+import { Form, useFormState } from 'react-final-form';
 
 import type { ProgressStep } from './ProgressSteps';
 
@@ -29,6 +29,28 @@ interface WizardFormContainerProps<FormValues = any> {
    * runtime, which type-checking does not catch. */
   mutators?: Record<string, any>;
 }
+
+/**
+ * Reports the form's values after each render that changed them. Not
+ * FormSpy's `onChange`: react-final-form calls that synchronously while
+ * FormSpy first renders, so a caller keeping the values in its own state
+ * updated a component while rendering another one.
+ */
+const ValuesChangeReporter = <FormValues,>({
+  onChange,
+}: {
+  onChange(values: FormValues): void;
+}) => {
+  const { values } = useFormState<FormValues>({
+    subscription: { values: true },
+  });
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+  useEffect(() => {
+    onChangeRef.current(values);
+  }, [values]);
+  return null;
+};
 
 export const WizardFormContainer = <
   FormValues extends Record<string, any> = any,
@@ -97,12 +119,7 @@ export const WizardFormContainer = <
       mutators={mutators}
       render={({ handleSubmit, submitting, invalid, values, form }) => (
         <form onSubmit={handleSubmit} noValidate>
-          {onChange && (
-            <FormSpy<FormValues>
-              subscription={{ values: true }}
-              onChange={(formState) => onChange(formState.values as FormValues)}
-            />
-          )}
+          {onChange && <ValuesChangeReporter<FormValues> onChange={onChange} />}
           <CurrentStep
             title={title}
             subtitle={subtitle}

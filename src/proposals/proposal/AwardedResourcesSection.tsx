@@ -307,7 +307,7 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
         editable || differs ? (
           <div className="flex items-center gap-2.5">
             {differs && (
-              <span className="text-warning font-semibold text-xs">
+              <span className="text-warning font-semibold text-xs whitespace-nowrap">
                 {translate('Differs from the request')}
               </span>
             )}

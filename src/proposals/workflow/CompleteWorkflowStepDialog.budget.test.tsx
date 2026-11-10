@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   proposalProposalsBudgetRetrieve,
   proposalProposalsCompleteWorkflowStep,
+  proposalProtectedCallsResourcePoolUsageList,
 } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
@@ -43,13 +44,11 @@ const budget = (fits: boolean, enforcement = 'soft') => ({
   },
 });
 
-const renderDialog = () =>
+const renderDialog = (proposal: any = { uuid: 'proposal-1' }) =>
   renderWithProviders(
     <DrawerProvider>
       <Provider store={configureStore()({ tables: {} })}>
-        <CompleteWorkflowStepDialog
-          resolve={{ proposal: { uuid: 'proposal-1' } as any, step }}
-        />
+        <CompleteWorkflowStepDialog resolve={{ proposal, step }} />
       </Provider>
     </DrawerProvider>,
   );
@@ -78,6 +77,45 @@ describe('CompleteWorkflowStepDialog budget', () => {
       await screen.findByText('HPC / cpu (whole call)'),
     ).toBeInTheDocument();
     expect(screen.queryByText('Override the budget')).not.toBeInTheDocument();
+  });
+
+  it('names the components and formats every amount', async () => {
+    vi.mocked(proposalProposalsBudgetRetrieve).mockResolvedValue({
+      data: {
+        budget_enforcement: 'soft',
+        entries: [
+          {
+            ...budget(true).data.entries[0],
+            component_type: 'cpu_hours',
+            offered_total: 1000000,
+            awarded_so_far: 20000,
+            remaining: 980000,
+            award: 50000,
+          },
+        ],
+      },
+    } as any);
+    vi.mocked(proposalProtectedCallsResourcePoolUsageList).mockResolvedValue({
+      data: [
+        {
+          offering_name: 'HPC',
+          component_type: 'cpu_hours',
+          component_name: 'CPU hours',
+          cells: [{ pool_uuid: 'b1' }],
+        },
+      ],
+    } as any);
+    renderDialog({ uuid: 'proposal-1', call_uuid: 'call-1' });
+
+    expect(
+      await screen.findByText('HPC / CPU hours (whole call)'),
+    ).toBeInTheDocument();
+    expect(proposalProtectedCallsResourcePoolUsageList).toHaveBeenCalledWith({
+      path: { uuid: 'call-1' },
+    });
+    for (const amount of ['1,000,000', '20,000', '980,000', '50,000']) {
+      expect(screen.getByText(amount)).toBeInTheDocument();
+    }
   });
 
   it('sends the override with its reason when the award does not fit', async () => {
