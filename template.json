@@ -38700,12 +38700,7 @@
       "feature_area": "proposals"
     }
   },
-  "Next draft deadline": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "proposals"
-    }
-  },
+  "Next draft deadline": {},
   "Next hop (IP)": {
     "context": {
       "feature_area": "openstack-tenant"

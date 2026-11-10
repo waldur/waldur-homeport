@@ -28,7 +28,7 @@ Slots:
 - **label** — what the figure is. Keep it short; the unit goes here or in the value, not both.
 - **value** — the figure, already formatted (\`formatCurrency\`, \`toLocaleString\`, …). A unit in a smaller \`<span>\` is fine.
 - **footer** — one row under the value: a caption, a delta \`Badge\`, or a badge and a caption together. Plain text in it is muted; a Badge keeps its own colours.
-- **link** — the list behind the figure, as data (\`{ to, params?, label? }\`). The tile draws "View all" at the end of the footer row, through the app's \`LinkProvider\` (HomePort's turns \`to\` into a UI-Router state link; without a provider it is a plain href), and names it after the tile: "View all Organizations".
+- **link** — the list behind the figure, as data (\`{ to, params?, label? }\`). The whole tile links to it, through the app's \`LinkProvider\` (HomePort's turns \`to\` into a UI-Router state link; without a provider it is a plain href), named after the tile for screen readers: "View all Organizations".
 - **icon** — top-right corner, naming what the figure measures or explaining how it is worked out (\`HelpIcon\`).
 
 Pick the size by the grid:
@@ -173,7 +173,7 @@ export const Footers: Story = {
 
 export const Link: Story = {
   parameters: story(
-    '`link` leads to the list behind the figure. "View all" sits at the end of the footer row, beside a caption if there is one, and its accessible name adds the tile\'s label, so a row of them reads as distinct links. `label` changes the text. Without a `LinkProvider`, as here, `to` is a plain href.',
+    "`link` makes the whole tile open the list behind the figure. Its accessible name adds the tile's label, so a row of them reads as distinct links; `label` changes the first part. Without a `LinkProvider`, as here, `to` is a plain href.",
   ),
   render: () => (
     <div className="grid grid-cols-3 gap-3">

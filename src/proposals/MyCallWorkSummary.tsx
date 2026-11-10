@@ -6,10 +6,10 @@ import {
   proposalProposalsList,
 } from 'waldur-js-client';
 
-import { StatCardGrid } from 'waldur-ui';
+import { HelpIcon, StatCardGrid } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
-import { formatDate, formatDateTime, formatRelative } from '@/core/dateUtils';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { isOpenEnded } from '@/proposals/roundCutoff';
 import { ProposalStatesOptions } from '@/table/generated/ProposalsFilter';
@@ -82,25 +82,21 @@ interface CountItem {
 }
 
 /**
- * What the next-deadline card says beside its date: which draft, in which
- * call, and how long is left. It sits above a list of calls, so without the
- * draft and the call it read as the next cut-off among those calls.
+ * The next-deadline card's label, with which draft, in which call and when
+ * it closes in a help tooltip: the card itself shows only the date.
  */
-const NextDraftFooter: FC<{ draft: Proposal }> = ({ draft }) => (
-  <div
-    className="min-w-0 w-full text-sm"
-    title={translate('{proposal} in {call} closes {date}.', {
-      proposal: draft.name,
-      call: draft.call_name,
-      date: formatDateTime(draft.round.cutoff_time),
-    })}
-  >
-    <div className="truncate font-medium text-secondary">{draft.name}</div>
-    {/* The time left first: a long call name is what gets cut. */}
-    <div className="truncate text-quaternary">
-      {formatRelative(draft.round.cutoff_time)} · {draft.call_name}
-    </div>
-  </div>
+const NextDraftLabel: FC<{ draft: Proposal }> = ({ draft }) => (
+  <span className="inline-flex items-center gap-1.5">
+    {translate('Next draft deadline')}
+    <HelpIcon
+      className="relative"
+      label={translate('{proposal} in {call} closes {date}.', {
+        proposal: draft.name,
+        call: draft.call_name,
+        date: formatDateTime(draft.round.cutoff_time),
+      })}
+    />
+  </span>
 );
 
 /**
@@ -155,9 +151,8 @@ export const MyCallWorkSummary: FC<{ fallback?: ReactNode }> = ({
           ...(data?.next
             ? [
                 {
-                  label: translate('Next draft deadline'),
+                  label: <NextDraftLabel draft={data.next} />,
                   value: formatDate(data.next.round.cutoff_time),
-                  footer: <NextDraftFooter draft={data.next} />,
                   link: {
                     to: 'proposals.manage-proposal',
                     params: { proposal_uuid: data.next.uuid },
