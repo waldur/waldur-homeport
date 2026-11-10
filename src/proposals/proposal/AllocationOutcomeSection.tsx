@@ -28,7 +28,7 @@ import { translate } from '@/i18n';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { formatRole } from '@/permissions/utils';
 import { ProjectLink } from '@/project/ProjectLink';
-import { AwardComparisonRow } from '@/proposals/awardedResources';
+import { AwardComparisonRow, isForbidden } from '@/proposals/awardedResources';
 import {
   awardedAsRequestedLabel,
   blankAwardRowsNote,
@@ -394,13 +394,17 @@ const AllocationOutcome: FC<{
   // missing or empty — in which case that person got no access at all. This is
   // the only place that says who actually got in.
   //
-  // list_users raises PermissionDenied for a caller holding no role on the
-  // project's scope tree — which is every reviewer and panel member looking at
-  // an accepted proposal. useTable sets no `skipGlobalErrorRedirect`, so an
-  // uncaught 403 here would send the whole page to errorPage.noPermission.
-  // Resolved to null instead, and the section is dropped: "we cannot show you
-  // this" is not the same claim as "nobody was granted a role".
-  const { data: roles, isLoading: rolesLoading } = useQuery({
+  // list_users raises PermissionDenied for a caller who may read the project
+  // but not its team (an organisation role without the team permission, say).
+  // That 403 resolves to null and the section is dropped: "we cannot show you
+  // this" is not the same claim as "nobody was granted a role". Any other
+  // failure is a fault, and the section says so instead of disappearing; it
+  // stays on this page rather than sending it to the global error screen.
+  const {
+    data: roles,
+    isLoading: rolesLoading,
+    isError: rolesFailed,
+  } = useQuery({
     queryKey: ['proposal-allocated-roles', projectUuid],
     queryFn: () =>
       getAllPages<UserRoleDetails>((page) =>
@@ -408,10 +412,17 @@ const AllocationOutcome: FC<{
           path: { uuid: projectUuid },
           query: { page, page_size: MAX_PAGE_SIZE },
         }),
-      ).catch(() => null),
+      ).catch((error) => {
+        if (isForbidden(error)) {
+          return null;
+        }
+        throw error;
+      }),
     enabled: projectReadable,
     staleTime: STALE_TIME,
     refetchOnWindowFocus: false,
+    retry: false,
+    meta: { skipGlobalErrorRedirect: true },
   });
 
   // The award is shown only where it differs from the request. Matching line
@@ -537,12 +548,18 @@ const AllocationOutcome: FC<{
         </p>
       )}
 
-      {!rolesLoading && roles && (
+      {!rolesLoading && (roles || rolesFailed) && (
         <>
           <h6 className="text-secondary font-medium mt-5 mb-2.5">
             {translate('Project access:')}
           </h6>
-          <AllocatedTeamTable proposalUuid={proposal.uuid} roles={roles} />
+          {roles ? (
+            <AllocatedTeamTable proposalUuid={proposal.uuid} roles={roles} />
+          ) : (
+            <p className="text-danger mb-0">
+              {translate('Unable to load who was given access to the project.')}
+            </p>
+          )}
         </>
       )}
     </AccordionCard>

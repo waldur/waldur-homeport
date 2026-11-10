@@ -24,7 +24,7 @@ import {
 export const awardedResourcesKey = (proposalUuid: string) =>
   ['proposal-awarded-resources', proposalUuid] as const;
 
-const isForbidden = (error: any) =>
+export const isForbidden = (error: any) =>
   error?.response?.status === 403 || error?.status === 403;
 
 /**
