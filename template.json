@@ -232,6 +232,16 @@
       "feature_area": "details"
     }
   },
+  "(awarded: {amount})": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "contributions"
+    }
+  },
   "(deleted)": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -7584,6 +7594,16 @@
       "feature_area": "reports"
     }
   },
+  "Asked of {offering} by the extension": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "contributions"
+    }
+  },
   "Aspect": {
     "context": {
       "feature_area": "policies"
@@ -8905,6 +8925,16 @@
   "Awarded duration": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Awarded from {offering}": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "contributions"
     }
   },
   "Awarded in total": {
@@ -39922,6 +39952,11 @@
   "No models": {
     "context": {
       "feature_area": "api-keys"
+    }
+  },
+  "No more resources are asked of this offering.": {
+    "context": {
+      "feature_area": "contributions"
     }
   },
   "No more subnets available": {

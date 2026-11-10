@@ -9,7 +9,9 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useMemo, useState } from 'react';
 import {
+  AwardedResource,
   ProposalChangeRequest,
+  ProposalRun,
   proposalProposalsAcceptContribution,
   proposalProposalsDeclineContribution,
   proposalProposalsDelegateContribution,
@@ -36,6 +38,7 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { useAwardedResources } from '@/proposals/awardedResources';
 import { CoiDeclaration } from '@/proposals/coi-declaration/CoiDeclaration';
 import { getRequestedLines } from '@/proposals/provider-calls/requestedLines';
 import { isOnProposalTeam } from '@/proposals/team/teamRules';
@@ -51,6 +54,7 @@ import { useUser } from '@/workspace/hooks';
 
 import { isResponseStep } from '../inputs/queries';
 import { StepAnswerValue } from '../inputs/StepAnswerValue';
+import { useProposalRuns } from '../postAwardQueries';
 import { sectionOpenProps, useSectionOpenState } from '../sectionOpen';
 import { StepChecklistSection } from '../StepChecklistSection';
 
@@ -62,6 +66,7 @@ import {
   useProposalContributions,
   useStepContributionAnswers,
 } from './queries';
+import { RunAskedOfOffering } from './RunAskedOfOffering';
 
 const SubmitContributionDialog = lazyComponent(() =>
   import('./SubmitContributionDialog').then((module) => ({
@@ -200,6 +205,10 @@ interface ContributionCardProps {
   /** What the proposal asks of the contribution's offering, when it is one
    *  offering's to make. */
   requested?: RequestedResource[];
+  /** The extension or final report the step belongs to, with what the
+   *  offering was awarded: what the run asks replaces the request. */
+  run?: ProposalRun;
+  awarded?: AwardedResource[];
   refetch?(): void;
 }
 
@@ -320,6 +329,8 @@ const ContributionCard: FC<ContributionCardProps> = ({
   reopening,
   workflowStates,
   requested,
+  run,
+  awarded,
   refetch,
 }) => {
   const { openDialog } = useModal();
@@ -436,7 +447,13 @@ const ContributionCard: FC<ContributionCardProps> = ({
         </div>
       </div>
 
-      {requested?.length ? (
+      {run && awarded ? (
+        <RunAskedOfOffering
+          offeringName={contribution.offering_name || title}
+          run={run}
+          awarded={awarded}
+        />
+      ) : requested?.length ? (
         <RequestedFromOffering
           offeringName={contribution.offering_name || title}
           requested={requested}
@@ -604,10 +621,18 @@ const StepContributions: FC<{
     hasForm,
   );
   const { data: reopenings } = useContributionReopenings(proposal.uuid);
-  // A per-offering step shows each card what its offering was asked for.
+  // A per-offering step shows each card what its offering was asked for:
+  // in the evaluation, the proposal's request; in an extension or final
+  // report, what the run asks set against what was awarded.
+  const runStep = Boolean(step.per_requested_offering && step.run_uuid);
   const { data: resourceRows } = useProposalResourceRows(
-    step.per_requested_offering ? proposal.uuid : '',
+    step.per_requested_offering && !runStep ? proposal.uuid : '',
   );
+  const { data: runs } = useProposalRuns(proposal.uuid, runStep);
+  const { data: awards } = useAwardedResources(proposal.uuid, runStep);
+  const run = runStep
+    ? runs?.find((candidate) => candidate.uuid === step.run_uuid)
+    : undefined;
   const anyFillable = contributions.some(
     (contribution) =>
       contribution.can_fill &&
@@ -624,6 +649,16 @@ const StepContributions: FC<{
     }
     return byOffering;
   }, [resourceRows]);
+  const awardedByOffering = useMemo(() => {
+    const byOffering = new Map<string, AwardedResource[]>();
+    for (const item of awards ?? []) {
+      const key = item.requested_offering?.uuid;
+      if (key) {
+        byOffering.set(key, [...(byOffering.get(key) ?? []), item]);
+      }
+    }
+    return byOffering;
+  }, [awards]);
   return (
     <AccordionCard
       id={`step-contributions-${step.call_step_uuid}`}
@@ -665,6 +700,14 @@ const StepContributions: FC<{
             requested={
               contribution.requested_offering_uuid
                 ? requestedByOffering.get(contribution.requested_offering_uuid)
+                : undefined
+            }
+            run={run}
+            awarded={
+              run && awards && contribution.requested_offering_uuid
+                ? (awardedByOffering.get(
+                    contribution.requested_offering_uuid,
+                  ) ?? [])
                 : undefined
             }
             refetch={refetch}

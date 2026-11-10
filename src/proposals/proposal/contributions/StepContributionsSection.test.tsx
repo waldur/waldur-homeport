@@ -1,8 +1,10 @@
 import { screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  proposalProposalsAwardedResourcesList,
   proposalProposalsContributionsList,
   proposalProposalsResourcesList,
+  proposalProposalsRunsList,
   proposalProposalsStepChecklistResponsesList,
 } from 'waldur-js-client';
 
@@ -126,6 +128,124 @@ describe('StepContributionsSection', () => {
     );
     expect(guidance).toHaveTextContent('Fill in the form, then submit one of:');
     expect(within(guidance).getByText('Conditionally accepted')).toBeVisible();
+  });
+
+  describe('on a step of an extension', () => {
+    const storage = {
+      uuid: 'ro-storage',
+      components: [{ type: 'storage', name: 'Storage', measured_unit: 'TB' }],
+    };
+    const extensionStep = {
+      ...step,
+      step_name: 'Extension request assessment',
+      phase: 'extension',
+      run_uuid: 'run-1',
+    };
+    const storageSlot = slot({
+      uuid: 'c-storage',
+      offering_name: 'Research Data Storage',
+      requested_offering_uuid: 'ro-storage',
+    });
+
+    beforeEach(() => {
+      vi.mocked(proposalProposalsResourcesList).mockImplementation(() =>
+        page([{ requested_offering: storage, limits: { storage: 10 } }]),
+      );
+      vi.mocked(proposalProposalsAwardedResourcesList).mockImplementation(() =>
+        page([
+          {
+            requested_offering: storage,
+            limits: { storage: 20 },
+            resource: 'res-storage',
+            resource_name: 'Storage allocation',
+          },
+        ]),
+      );
+      vi.mocked(proposalProposalsContributionsList).mockImplementation(() =>
+        page([storageSlot]),
+      );
+    });
+
+    it('shows what the extension asks of the offering, not the original request', async () => {
+      vi.mocked(proposalProposalsRunsList).mockImplementation(() =>
+        page([
+          {
+            uuid: 'run-1',
+            phase: 'extension',
+            state: 'open',
+            requested_end_date: '2028-06-30',
+            requested_limits: { 'res-storage': { storage: 30 } },
+          },
+        ]),
+      );
+
+      renderWithProviders(
+        <StepContributionsSection
+          proposal={{ ...proposal, state: 'accepted' }}
+          workflowStates={[extensionStep]}
+        />,
+      );
+
+      const requested = await screen.findByTestId('contribution-requested');
+      expect(requested).toHaveTextContent(
+        'Asked of Research Data Storage by the extension',
+      );
+      expect(requested).toHaveTextContent('New end date');
+      expect(requested).toHaveTextContent('Storage: 30 TB (awarded: 20 TB)');
+      expect(requested).not.toHaveTextContent('10 TB');
+    });
+
+    it('says when the extension asks no more of the offering', async () => {
+      vi.mocked(proposalProposalsRunsList).mockImplementation(() =>
+        page([
+          {
+            uuid: 'run-1',
+            phase: 'extension',
+            state: 'open',
+            requested_end_date: '2028-06-30',
+            requested_limits: {},
+          },
+        ]),
+      );
+
+      renderWithProviders(
+        <StepContributionsSection
+          proposal={{ ...proposal, state: 'accepted' }}
+          workflowStates={[extensionStep]}
+        />,
+      );
+
+      const requested = await screen.findByTestId('contribution-requested');
+      expect(requested).toHaveTextContent(
+        'No more resources are asked of this offering.',
+      );
+      expect(requested).not.toHaveTextContent('10 TB');
+    });
+
+    it('shows what was awarded on a final report step', async () => {
+      vi.mocked(proposalProposalsRunsList).mockImplementation(() =>
+        page([
+          {
+            uuid: 'run-1',
+            phase: 'closing',
+            state: 'open',
+            requested_end_date: null,
+            requested_limits: {},
+          },
+        ]),
+      );
+
+      renderWithProviders(
+        <StepContributionsSection
+          proposal={{ ...proposal, state: 'accepted' }}
+          workflowStates={[{ ...extensionStep, phase: 'closing' }]}
+        />,
+      );
+
+      const requested = await screen.findByTestId('contribution-requested');
+      expect(requested).toHaveTextContent('Awarded from Research Data Storage');
+      expect(requested).toHaveTextContent('Storage: 20 TB');
+    });
   });
 
   it('keeps a paused slot on a running step, and drops a lapsed one once it ended', async () => {
