@@ -261,7 +261,14 @@ describe('useSelect — portaling defaults', () => {
       // filter's always-open menu would otherwise run on mount.
       useSelect({ options, variant: 'tableFilter', value: null }),
     );
-    expect(result.current.styles.menuList({})).toEqual({ height: '175px' });
+    const menuList = (count: number) =>
+      result.current.styles.menuList(
+        {},
+        { selectProps: { options: Array(count).fill({}) } },
+      );
+    expect(menuList(5)).toEqual({ height: '175px' });
+    // A short list fits its rows instead of leaving empty space below.
+    expect(menuList(1)).toEqual({ height: undefined });
     expect(result.current.styles.menuPortal({})).toEqual({
       zIndex: 9999,
       pointerEvents: 'auto',

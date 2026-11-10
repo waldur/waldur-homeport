@@ -45,9 +45,11 @@ export const defaultPortalingProps = {
 // `menuPortalTarget` — so it needs no portal styles. They are merged with it
 // rather than replaced, like any other caller's `styles`.
 const tableFilterStyles = {
-  menuList: (baseStyles) => ({
+  // A long list keeps a fixed height so the menu does not jump while the
+  // search narrows it; a short one (up to four 40px rows) fits its rows.
+  menuList: (baseStyles, { selectProps }) => ({
     ...baseStyles,
-    height: '175px',
+    height: selectProps.options?.length > 4 ? '175px' : undefined,
   }),
 };
 
