@@ -2,22 +2,33 @@ import { XIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { marketplaceResourcesTerminate, Resource } from 'waldur-js-client';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { useModal } from '@/modal/actions';
 import { useBatchMutation } from '@/modal/useBatchMutation';
+import { INSTANCE_TYPE } from '@/openstack/constants';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
+const MultiTerminateDialog = lazyComponent(() =>
+  import('./MultiTerminateDialog').then((module) => ({
+    default: module.MultiTerminateDialog,
+  })),
+);
+
 export const MultiTerminateAction = ({ rows, refetch }) => {
   const user = useUser();
+  const { openDialog } = useModal();
 
   const permittedResources = useMemo(
     () =>
       rows.filter(
         (resource) =>
-          ['OK', 'ERRED'].includes(resource.state) &&
+          // Marketplace resource states, not the scope's (which spells it ERRED).
+          ['OK', 'Erred'].includes(resource.state) &&
           !resource.offering_plugin_options?.disabled_resource_actions?.includes(
             ResourceAction.TERMINATE,
           ) &&
@@ -50,6 +61,17 @@ export const MultiTerminateAction = ({ rows, refetch }) => {
     },
   });
 
+  // Instances need the volume and floating IP options, which the plain
+  // confirmation cannot ask for.
+  const hasInstances = permittedResources.some(
+    (resource) => resource.resource_type === INSTANCE_TYPE,
+  );
+
+  const openTerminateDialog = () =>
+    openDialog(MultiTerminateDialog, {
+      resolve: { rows: permittedResources, refetch },
+    });
+
   if (permittedResources.length === 0) {
     return null;
   }
@@ -57,7 +79,7 @@ export const MultiTerminateAction = ({ rows, refetch }) => {
   return (
     <ActionItem
       title={translate('Terminate')}
-      action={mutate}
+      action={hasInstances ? openTerminateDialog : mutate}
       disabled={permittedResources.length !== rows.length || isPending}
       iconNode={<XIcon weight="bold" />}
       iconColor="danger"
