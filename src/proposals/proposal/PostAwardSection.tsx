@@ -28,6 +28,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { propVal } from '@/property/propertyFields';
+import { useAwardedResources } from '@/proposals/awardedResources';
 import { Proposal } from '@/proposals/types';
 import { proposalWorkflowStatesKey } from '@/proposals/workflow/queries';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -45,6 +46,7 @@ import {
   canOpenFinalReport,
   canRequestExtension,
   canWithdrawRun,
+  getRunAppliedChanges,
   isRunGranted,
   POST_AWARD_SECTION_ID,
   postAwardStatusLabel,
@@ -52,9 +54,9 @@ import {
   runGrantDiffers,
   runPartUnlocked,
   runPhaseLabel,
-  runStateLabel,
 } from './postAward';
 import { proposalRunsKey, useProposalRuns } from './postAwardQueries';
+import { RunAppliedChanges, RunStateCell } from './RunAppliedChanges';
 import { sectionOpenProps, useSectionOpenState } from './sectionOpen';
 
 const ProposalRunDialog = lazyComponent(() =>
@@ -96,7 +98,7 @@ const columns: Column<ProposalRun>[] = [
       </span>
     ),
   },
-  { title: translate('State'), render: ({ row }) => runStateLabel(row.state) },
+  { title: translate('State'), render: RunStateCell, ellipsis: false },
   {
     title: translate('Opened'),
     render: ({ row }) => formatDate(row.opened_at),
@@ -273,6 +275,24 @@ const RunsTable: FC<{
     fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
     filter,
   });
+  // Resources are named as the award names them, where the viewer reads it.
+  const { data: awards } = useAwardedResources(
+    proposal.uuid,
+    rows.some((row) => getRunAppliedChanges(row)),
+  );
+  const expandableRow = useMemo(() => {
+    const names: Record<string, string> = {};
+    for (const item of awards ?? []) {
+      if (item.resource) {
+        names[item.resource] =
+          item.resource_name || item.requested_offering?.offering_name || '';
+      }
+    }
+    const ExpandedRun: FC<{ row: ProposalRun }> = ({ row }) => (
+      <RunAppliedChanges run={row} resourceNames={names} />
+    );
+    return ExpandedRun;
+  }, [awards]);
   const rowActions = useMemo(
     () =>
       ({ row }: { row: ProposalRun }) => (
@@ -292,6 +312,8 @@ const RunsTable: FC<{
       hasPagination={false}
       columns={columns}
       rowActions={rowActions}
+      expandableRow={expandableRow}
+      isRowExpandable={(row) => Boolean(getRunAppliedChanges(row))}
       verboseName={translate('runs')}
       hideTitle
       hasActionBar={false}
