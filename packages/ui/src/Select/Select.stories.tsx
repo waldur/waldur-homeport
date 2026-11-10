@@ -52,7 +52,7 @@ type Story = StoryObj<typeof Select>;
 export const Playground: Story = {};
 
 /**
- * `size="sm"` (28px) next to the default control height (44px, the
+ * `size="sm"` (28px) next to the default control height (36px, the
  * design system's input height).
  */
 export const Sizes: Story = {
@@ -223,7 +223,7 @@ export const TableFilterVariant: Story = {
 };
 
 /**
- * `variant="tableCell"` — a shorter control (35px vs. the default 44px) for
+ * `variant="tableCell"` — a shorter control (35px vs. the default 36px) for
  * selects embedded directly in a table row, where the default height would
  * blow out the row (see K8sSecurityRulesField.tsx's protocol/direction
  * columns).

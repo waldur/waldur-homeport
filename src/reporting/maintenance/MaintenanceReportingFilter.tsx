@@ -168,7 +168,7 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('State')} spaceless className="w-[250px]">
+      <FormGroup label={translate('State')} spaceless className="w-[230px]">
         <Select
           value={selectedStates}
           onChange={(options: StateOption[] | null) =>
@@ -187,7 +187,7 @@ export const MaintenanceReportingFilter: FC<
       <FormGroup
         label={translate('Maintenance type')}
         spaceless
-        className="w-[200px]"
+        className="w-[230px]"
       >
         <Select
           value={selectedMaintenanceType}

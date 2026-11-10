@@ -951,7 +951,7 @@ const filterPosition =
 
 **Form controls (inputs, selects, textareas):**
 
-- Minimum height: 40px for adequate touch/click area
+- Same three heights as buttons (below), so a field and a button of one size line up; textareas grow with their rows
 
 **Buttons:**
 
