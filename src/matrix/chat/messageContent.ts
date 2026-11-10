@@ -8,8 +8,28 @@ export interface TextContent {
   body: string;
   format?: string;
   formatted_body?: string;
-  'm.mentions'?: { user_ids?: string[] };
+  'm.mentions'?: { user_ids?: string[]; room?: true };
 }
+
+/**
+ * What may come before a mention's `@`, as a regex group: the start, a space,
+ * or an opening paren or bracket, so "(@alice)" and "[@bob]" are mentions and
+ * an email address isn't. Shared by the composer's autocomplete and the
+ * `@room` check, so an `@room` the composer completes is one the message
+ * carries.
+ */
+export const MENTION_PREFIX = String.raw`(^|[\s([])`;
+
+export const ROOM_MENTION = '@room';
+/**
+ * From this many people in the room, the sender included and the bot not,
+ * `@room` asks before it notifies them.
+ */
+export const ROOM_MENTION_CONFIRM_MIN_MEMBERS = 6;
+// Ends at the word, so `@roommate` isn't one.
+const ROOM_MENTION_PATTERN = new RegExp(
+  String.raw`${MENTION_PREFIX}${ROOM_MENTION}(?!\w)`,
+);
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -18,13 +38,16 @@ const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /**
  * Content of a text message, with mention pills (org.matrix.msc3952) for the
- * `@Display Name` mentions of `members` it contains.
+ * `@Display Name` mentions of `members` it contains, and a room mention for
+ * `@room` when the sender may notify the whole room.
  */
 export function buildTextContent(
   text: string,
   members: MentionCandidate[],
   msgtype = 'm.text',
+  canMentionRoom = false,
 ): TextContent {
+  const mentionsRoom = canMentionRoom && ROOM_MENTION_PATTERN.test(text);
   // Escape first so message text can't inject HTML, then sort members
   // longest-name-first so "@Alice Smith" is matched before "@Alice" and
   // isn't corrupted by the shorter prefix.
@@ -53,13 +76,18 @@ export function buildTextContent(
     }
   }
 
-  if (mentionedUserIds.length === 0) return { msgtype, body: text };
+  const roomMention = mentionsRoom ? { room: true as const } : {};
+  if (mentionedUserIds.length === 0) {
+    return mentionsRoom
+      ? { msgtype, body: text, 'm.mentions': roomMention }
+      : { msgtype, body: text };
+  }
   return {
     msgtype,
     body: text,
     format: 'org.matrix.custom.html',
     formatted_body: htmlBody,
-    'm.mentions': { user_ids: mentionedUserIds },
+    'm.mentions': { user_ids: mentionedUserIds, ...roomMention },
   };
 }
 
@@ -89,14 +117,17 @@ export function buildReplyContent(
   parentSender: string,
   myUserId: string | null,
 ) {
+  const fields = buildReplyFields(
+    parentEventId,
+    parentSender,
+    myUserId,
+    content['m.mentions']?.user_ids,
+  );
   return {
     ...content,
-    ...buildReplyFields(
-      parentEventId,
-      parentSender,
-      myUserId,
-      content['m.mentions']?.user_ids,
-    ),
+    ...fields,
+    // The reply's user_ids include the message's; its @room stays too.
+    'm.mentions': { ...content['m.mentions'], ...fields['m.mentions'] },
   };
 }
 

@@ -12,6 +12,7 @@ const mockGo = vi.fn();
 const mockGetState = vi.fn();
 const mockGetCustomer = vi.fn();
 const mockGetAsync = vi.fn();
+const mockTrackPageView = vi.fn();
 
 const onBeforeHandlers: Array<{ criteria: any; callback: any }> = [];
 const onStartHandlers: Array<{ criteria: any; callback: any }> = [];
@@ -27,7 +28,7 @@ vi.mock('./customer/utils', () => ({
 }));
 
 vi.mock('./core/matomo', () => ({
-  MatomoInstance: null,
+  MatomoInstance: { trackPageView: (...args) => mockTrackPageView(...args) },
 }));
 
 vi.mock('./auth/AuthService', () => ({
@@ -103,6 +104,10 @@ vi.mock('./user/passkeys/enforcement', () => ({
   needsPasskeyEnrollment: (...args) => mockNeedsPasskeyEnrollment(...args),
 }));
 
+import {
+  setDocumentTitle,
+  setDocumentTitleUnread,
+} from './navigation/documentTitle';
 import { attachTransitions } from './transitions';
 
 function createMockTransition(
@@ -388,6 +393,31 @@ describe('Redirect persistence on success', () => {
       expect(mockRedirectStorageSet).not.toHaveBeenCalled();
     },
   );
+});
+
+describe('Matomo page views', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+    attachTransitions();
+  });
+
+  it('tracks the page title without the unread chat count', () => {
+    setDocumentTitle('Waldur | Projects');
+    setDocumentTitleUnread(3);
+    const hook = onSuccessHandlers.find((h) => {
+      mockTrackPageView.mockClear();
+      h.callback(createMockTransition('project.details'));
+      return mockTrackPageView.mock.calls.length > 0;
+    });
+    expect(hook).toBeTruthy();
+    expect(mockTrackPageView).toHaveBeenCalledWith({
+      documentTitle: 'Waldur | Projects',
+    });
+  });
 });
 
 describe('Transition error fallback', () => {

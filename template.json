@@ -4093,6 +4093,11 @@
       "feature_area": "update"
     }
   },
+  "All messages": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "All models": {
     "context": {
       "feature_area": "common"
@@ -15439,7 +15444,7 @@
     }
   },
   "Could not unlock chat encryption. Please try again.": {},
-  "Could not update mute setting.": {
+  "Could not update notification level.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "chat"
@@ -36455,6 +36460,11 @@
       "feature_area": "chat"
     }
   },
+  "Mentions only": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Mentor/mentee relationship": {
     "context": {
       "primary_ui_type": "label"
@@ -37822,12 +37832,6 @@
       "feature_area": "chat"
     }
   },
-  "Muted.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "chat"
-    }
-  },
   "My Proposals": {
     "context": {
       "feature_area": "proposals"
@@ -38461,6 +38465,15 @@
   "New merge": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "New message from {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   },
   "New monthly plan fee": {
@@ -42003,6 +42016,12 @@
       "feature_area": "notifications"
     }
   },
+  "Notification level updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "chat"
+    }
+  },
   "Notification method": {
     "context": {
       "feature_area": "hooks"
@@ -42053,6 +42072,21 @@
   "Notify addresses about new orders": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Notify everyone": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Notify everyone in this room": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Notify everyone?": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Notify external user": {
@@ -43769,6 +43803,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "proposals"
+    }
+  },
+  "Open chat": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "chat"
     }
   },
   "Open console": {
@@ -71584,6 +71624,16 @@
       }
     }
   },
+  "This notifies all {count} members of this room.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
   "This offering": {
     "context": {
       "feature_area": "roles"
@@ -79771,13 +79821,7 @@
   },
   "Unmute": {
     "context": {
-      "feature_area": "chat"
-    }
-  },
-  "Unmuted.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "chat"
+      "feature_area": "UserPendingActionsList"
     }
   },
   "Unnamed Project": {
@@ -86188,6 +86232,16 @@
       "feature_area": "contributions"
     }
   },
+  "You were added to a team chat": {},
+  "You were added to {count} team chats": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "You will be added as a reviewer on this call (if you are not already) and taken to your review of this proposal. Other reviewers’ reviews are not affected. Continue?": {
     "context": {
       "feature_area": "proposal"
@@ -90734,6 +90788,15 @@
       "feature_area": "dashboard"
     }
   },
+  "{count} mentions": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "{count} messages": {
     "context": {
       "variables": {
@@ -90809,6 +90872,15 @@
         }
       },
       "feature_area": "database-stats"
+    }
+  },
+  "{count} new messages": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{count} news items configured": {
@@ -93161,6 +93233,24 @@
   "{name} left the team": {
     "context": {
       "primary_ui_type": "text_content",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "{name} mentioned you": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "{name} notified everyone": {
+    "context": {
       "variables": {
         "name": {
           "type": "string"

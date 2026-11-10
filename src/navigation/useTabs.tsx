@@ -12,6 +12,7 @@ import { router } from '@/router';
 import store from '@/store/store';
 
 import { LayoutContext } from './context';
+import { setDocumentTitle } from './documentTitle';
 import { Tab } from './Tab';
 import { getTitle } from './title';
 
@@ -88,10 +89,11 @@ export const useTabs = (): Tab[] => {
     if (Array.isArray(breadcrumb)) {
       breadcrumb = breadcrumb.join(' > ');
     }
-    document.title =
+    setDocumentTitle(
       ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE +
-      ' | ' +
-      (breadcrumb || pageTitle);
+        ' | ' +
+        (breadcrumb || pageTitle),
+    );
   };
   const { extraTabs } = useContext(LayoutContext);
   useEffect(syncTabs, [pageTitle]);

@@ -9,7 +9,7 @@ import {
   useAllRoomCallStates,
 } from './call/useAllRoomCallStates';
 import { getDisplayedContent, getReplacedEventId } from './messageRelations';
-import { isRoomMuted } from './mute';
+import { isRoomMuted } from './notificationLevel';
 import {
   classifyPreviewEvent,
   PreviewKind,

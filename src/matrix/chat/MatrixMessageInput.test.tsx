@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { ComponentProps, FC, PropsWithChildren, createElement } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { useModal } from '@/modal/actions';
+
 const h = vi.hoisted(() => ({
   client: {
     sendTextMessage: vi.fn(),
@@ -14,12 +16,13 @@ const h = vi.hoisted(() => ({
   activeRoomUuid: 'uuid-1',
   requestedRoomUuid: 'uuid-1' as string | null,
   showRoomHere: vi.fn(),
+  activeRoomId: '!room:s',
 }));
 
 vi.mock('./useMatrixClient', () => ({
   useMatrixClient: () => ({
     client: h.client,
-    activeRoomId: '!room:s',
+    activeRoomId: h.activeRoomId,
     activeRoomUuid: h.activeRoomUuid,
     requestedRoomUuid: h.requestedRoomUuid,
     connectionState: h.connectionState,
@@ -53,6 +56,7 @@ beforeEach(() => {
   h.activeRoomUuid = 'uuid-1';
   h.requestedRoomUuid = 'uuid-1';
   h.showRoomHere.mockReset();
+  h.activeRoomId = '!room:s';
 });
 
 const composer = (
@@ -571,6 +575,7 @@ describe('MatrixMessageInput mention list', () => {
           userId: `@${name}:s`,
           name,
         })),
+      currentState: { mayTriggerNotifOfType: () => false },
     });
     const user = userEvent.setup();
     render(
@@ -590,5 +595,179 @@ describe('MatrixMessageInput mention list', () => {
     await user.keyboard('{ArrowDown}{ArrowDown}');
     expect(scrollIntoView).toHaveBeenLastCalledWith({ block: 'nearest' });
     expect(scrollIntoView.mock.contexts.at(-1)).toHaveTextContent('carol');
+  });
+});
+
+describe('MatrixMessageInput @room', () => {
+  // Mocked globally (test/mocks/modal.js).
+  const confirm = vi.mocked(useModal().confirm);
+
+  // `people` is everyone joined but the bot, the sender (@me:s) included.
+  const renderInRoom = ({ mayNotify = true, people = 6 } = {}) => {
+    const others = ['Robert', 'Ann', 'Ben', 'Cat', 'Dan', 'Eve'].slice(
+      0,
+      people - 1,
+    );
+    const joined = [
+      { userId: '@me:s', name: 'Me' },
+      { userId: '@waldur-bot:s', name: 'Waldur' },
+      ...others.map((name) => ({
+        userId: `@${name.toLowerCase()}:s`,
+        name,
+      })),
+    ];
+    h.client.getRoom.mockReturnValue({
+      getJoinedMembers: () => joined,
+      currentState: {
+        mayTriggerNotifOfType: (key: string, userId: string) =>
+          mayNotify && key === 'room' && userId === '@me:s',
+      },
+    });
+    render(
+      <MatrixMessageInput
+        roomUuid="uuid-1"
+        uploadFile={vi.fn()}
+        uploading={false}
+        pendingFiles={[]}
+        addFiles={vi.fn()}
+        removePending={vi.fn()}
+        setPending={vi.fn()}
+        clearPending={vi.fn()}
+      />,
+      { wrapper },
+    );
+    return screen.getByRole('textbox', {
+      name: 'Message',
+    }) as HTMLTextAreaElement;
+  };
+
+  beforeEach(() => {
+    confirm.mockReset().mockResolvedValue(undefined);
+  });
+
+  it('offers @room to members who may notify the room', async () => {
+    const user = userEvent.setup();
+    const textarea = renderInRoom();
+    await user.type(textarea, '@ro');
+
+    // The popup comes before the composer's own buttons.
+    const [first, second] = screen.getAllByRole('button');
+    expect(first).toHaveTextContent('@room');
+    expect(first).toHaveTextContent('Notify everyone in this room');
+    expect(second).toHaveTextContent('Robert');
+
+    await user.keyboard('{Enter}');
+    expect(textarea.value).toBe('@room ');
+  });
+
+  it('offers @room when typing @every', async () => {
+    const user = userEvent.setup();
+    await user.type(renderInRoom(), '@every');
+    expect(screen.getByRole('button', { name: /@room/ })).toBeInTheDocument();
+  });
+
+  it('does not offer @room for a bare @', async () => {
+    const user = userEvent.setup();
+    await user.type(renderInRoom(), '@');
+    expect(screen.getByRole('button', { name: /Robert/ })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /@room/ })).toBeNull();
+  });
+
+  it('does not offer @room to members who may not', async () => {
+    const user = userEvent.setup();
+    await user.type(renderInRoom({ mayNotify: false }), '@ro');
+    expect(screen.getByRole('button', { name: /Robert/ })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /@room/ })).toBeNull();
+  });
+
+  it('asks before notifying a room of six or more people', async () => {
+    const user = userEvent.setup();
+    await user.type(renderInRoom({ people: 6 }), '@room standup{Enter}');
+
+    await waitFor(() =>
+      expect(h.client.sendMessage).toHaveBeenCalledWith('!room:s', {
+        msgtype: 'm.text',
+        body: '@room standup',
+        'm.mentions': { room: true },
+      }),
+    );
+    expect(confirm).toHaveBeenCalledWith(
+      'Notify everyone?',
+      // The other five people; neither the sender nor the bot.
+      'This notifies all 5 members of this room.',
+      { positiveButton: 'Notify everyone' },
+    );
+  });
+
+  it('keeps the text and sends nothing when the confirmation is cancelled', async () => {
+    confirm.mockRejectedValue(undefined);
+    const user = userEvent.setup();
+    const textarea = renderInRoom({ people: 6 });
+    await user.type(textarea, '@room standup{Enter}');
+
+    await waitFor(() => expect(confirm).toHaveBeenCalled());
+    // Let a send that ignored the cancel happen before checking.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(h.client.sendMessage).not.toHaveBeenCalled();
+    expect(h.client.sendTextMessage).not.toHaveBeenCalled();
+    expect(textarea.value).toBe('@room standup');
+  });
+
+  it('sends without asking in a room of fewer than six people', async () => {
+    const user = userEvent.setup();
+    // Six joined, but one of them is the bot.
+    await user.type(renderInRoom({ people: 5 }), '@room standup{Enter}');
+
+    await waitFor(() =>
+      expect(h.client.sendMessage).toHaveBeenCalledWith('!room:s', {
+        msgtype: 'm.text',
+        body: '@room standup',
+        'm.mentions': { room: true },
+      }),
+    );
+    expect(confirm).not.toHaveBeenCalled();
+  });
+});
+
+// #603: the drawer and the page each have a composer; one room is active.
+describe('MatrixMessageInput mention popup across a room takeover', () => {
+  it('closes when another view takes the room', async () => {
+    const user = userEvent.setup();
+    h.client.getRoom.mockReturnValue({
+      getJoinedMembers: () => [
+        { userId: '@me:s', name: 'Me' },
+        { userId: '@robert:s', name: 'Robert' },
+      ],
+      currentState: { mayTriggerNotifOfType: () => true },
+    });
+    const both = () => (
+      <>
+        <div data-testid="page">{composer('uuid-a')}</div>
+        <div data-testid="drawer">{composer('uuid-b')}</div>
+      </>
+    );
+    h.activeRoomId = '!a:s';
+    h.activeRoomUuid = 'uuid-a';
+    h.requestedRoomUuid = 'uuid-a';
+    const { rerender } = render(both(), { wrapper });
+    const [pageBox, drawerBox] = screen.getAllByRole('textbox', {
+      name: 'Message',
+    }) as HTMLTextAreaElement[];
+    await user.type(pageBox, 'A draft');
+    h.activeRoomId = '!b:s';
+    h.activeRoomUuid = 'uuid-b';
+    h.requestedRoomUuid = 'uuid-b';
+    rerender(both());
+    await user.type(drawerBox, '@ro');
+    expect(screen.getByRole('button', { name: /@room/ })).toBeInTheDocument();
+
+    // A late page load takes room A back while the popup is open.
+    h.activeRoomId = '!a:s';
+    h.activeRoomUuid = 'uuid-a';
+    h.requestedRoomUuid = 'uuid-a';
+    rerender(both());
+
+    expect(screen.queryByRole('button', { name: /@room/ })).toBeNull();
+    expect(pageBox.value).toBe('A draft');
   });
 });

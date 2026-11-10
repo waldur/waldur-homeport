@@ -22,7 +22,12 @@ vi.mock('@/matrix/chat/useMatrixTotalUnread', () => ({
 }));
 
 vi.mock('@/matrix/chat/MatrixChatPanel', () => ({
-  MatrixChatPanel: () => <div data-testid="matrix-chat-panel" />,
+  MatrixChatPanel: ({ roomListRequest }: { roomListRequest?: number }) => (
+    <div
+      data-testid="matrix-chat-panel"
+      data-room-list-request={roomListRequest}
+    />
+  ),
 }));
 
 vi.mock('@/navigation/header/quick-issue-drawer/QuickIssueContainer', () => ({
@@ -74,6 +79,15 @@ describe('SupportDrawer', () => {
     expect(tab).toHaveTextContent('2');
   });
 
+  it('passes a request for the room list on to the chat panel', () => {
+    render(<SupportDrawer roomListRequest={3} />);
+
+    expect(screen.getByTestId('matrix-chat-panel')).toHaveAttribute(
+      'data-room-list-request',
+      '3',
+    );
+  });
+
   it('forces the Team chat tab on a room deep-link, overriding the stored tab', () => {
     h.matrixChatEnabled = true;
     h.hasSupport = true;
@@ -115,6 +129,23 @@ describe('SupportDrawer', () => {
     expect(screen.getByRole('tab', { name: /Team chat/ })).toHaveAttribute(
       'aria-selected',
       'false',
+    );
+  });
+
+  it('returns to Team chat for a later request for the same room', async () => {
+    h.drawerExpanded = false;
+    h.matrixChatEnabled = true;
+    h.hasSupport = true;
+    const { rerender } = render(
+      <SupportDrawer defaultRoomUuid="room-1" roomRequest={1} />,
+    );
+    await userEvent.click(screen.getByRole('tab', { name: 'Helpdesk' }));
+
+    rerender(<SupportDrawer defaultRoomUuid="room-1" roomRequest={2} />);
+
+    expect(screen.getByRole('tab', { name: /Team chat/ })).toHaveAttribute(
+      'aria-selected',
+      'true',
     );
   });
 

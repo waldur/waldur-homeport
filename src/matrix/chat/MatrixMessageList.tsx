@@ -48,6 +48,10 @@ function shouldShowDateSeparator(
 
 const CONTINUATION_WINDOW_MS = 5 * 60 * 1000;
 
+function isScrolledToBottom(el: HTMLElement): boolean {
+  return el.scrollHeight - el.scrollTop - el.clientHeight < 50;
+}
+
 // Stable empty fallback so the optional image map doesn't churn the memo.
 const EMPTY_MEMBER_IMAGES: Map<string, string> = new Map();
 
@@ -122,8 +126,7 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
   const checkIfAtBottom = useCallback(() => {
     const el = containerRef.current;
     if (!el) return;
-    wasAtBottomRef.current =
-      el.scrollHeight - el.scrollTop - el.clientHeight < 50;
+    wasAtBottomRef.current = isScrolledToBottom(el);
   }, []);
 
   // Record the topmost visible message and its offset from the viewport top, so
@@ -163,13 +166,64 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
     if (Math.abs(delta) >= 1) el.scrollTop += delta;
   }, []);
 
+  // Off screen until the observer says otherwise: SupportDrawer keeps the Team
+  // chat tab mounted under Helpdesk, so the list can load while hidden.
+  const onScreenRef = useRef(typeof IntersectionObserver === 'undefined');
+
   // Report the newest message as read whenever it sits at the bottom of the
   // viewport — on open, after auto-scrolling to a new message, or once the
   // user scrolls back down. This is what clears the room's unread badge.
+  // Only while the chat is actually on screen: a hidden browser tab, or the
+  // chat tab hidden under another drawer tab, would otherwise mark messages
+  // read that nobody has seen.
   const reportLatestRead = useCallback(() => {
     if (loading || messages.length === 0) return;
+    if (document.visibilityState !== 'visible' || !onScreenRef.current) return;
     onReadLatest?.(messages[messages.length - 1].eventId);
   }, [loading, messages, onReadLatest]);
+  const reportLatestReadRef = useRef(reportLatestRead);
+  reportLatestReadRef.current = reportLatestRead;
+
+  // Catch up once the list is back on screen (a display:none ancestor, like
+  // the inactive Team chat tab, never intersects). Measure rather than trust
+  // wasAtBottomRef: a display:none list can't auto-scroll, so messages that
+  // arrived meanwhile sit below the viewport while the ref still says bottom,
+  // and it stays stale until the user scrolls. Keyed on `loading`: the stream
+  // container only mounts once it flips false.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver((entries) => {
+      // Queued entries are in time order: a hide and a show can arrive together.
+      const entry = entries[entries.length - 1];
+      const cameOnScreen = entry.isIntersecting && !onScreenRef.current;
+      onScreenRef.current = entry.isIntersecting;
+      if (cameOnScreen && isScrolledToBottom(el)) reportLatestReadRef.current();
+    });
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      onScreenRef.current = false;
+    };
+  }, [loading]);
+
+  // Catch up on what arrived while the browser tab was hidden, once the user
+  // can see it. Measured for the same reason as above: wasAtBottomRef can
+  // still be stale from an earlier stint in a hidden drawer tab.
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      const el = containerRef.current;
+      if (
+        document.visibilityState === 'visible' &&
+        el &&
+        isScrolledToBottom(el)
+      )
+        reportLatestRead();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+  }, [reportLatestRead]);
 
   // Keep the viewport pinned to the bottom for: initial load, tail updates
   // while the user is parked at the bottom, and the rapid fill-too-short

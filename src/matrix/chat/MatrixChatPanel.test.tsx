@@ -280,3 +280,75 @@ describe('MatrixChatPanel — responsive dock layout', () => {
     );
   });
 });
+
+// "You were added to N team chats" asks for the list, maybe over an open room.
+describe('MatrixChatPanel — room list request', () => {
+  it('shows the room list when asked while a room is open', () => {
+    const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-1" />);
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
+
+    rerender(<MatrixChatPanel roomListRequest={1} />);
+    expect(screen.queryByTestId('chat-drawer')).not.toBeInTheDocument();
+    expect(screen.getByTestId('room-list')).toBeInTheDocument();
+  });
+
+  it('shows the room list again for a later request', async () => {
+    h.rooms = {
+      rooms: [
+        ...ROOMS,
+        { uuid: 'room-B', state: 'active', room_name: 'B', room_alias: '#b:s' },
+      ],
+      totalUnread: 0,
+      isLoading: false,
+    };
+    const { rerender } = render(<MatrixChatPanel roomListRequest={1} />);
+    await userEvent.click(screen.getByText('Pick room-B'));
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
+
+    rerender(<MatrixChatPanel roomListRequest={1} />);
+    expect(screen.getByTestId('chat-drawer')).toBeInTheDocument();
+    rerender(<MatrixChatPanel roomListRequest={2} />);
+    expect(screen.queryByTestId('chat-drawer')).not.toBeInTheDocument();
+  });
+});
+
+// A second "Open chat" for the room the drawer opened before, after the user
+// moved on to another room in the same drawer.
+describe('MatrixChatPanel — room request', () => {
+  beforeEach(() => {
+    h.rooms = {
+      rooms: [
+        ...ROOMS,
+        { uuid: 'room-B', state: 'active', room_name: 'B', room_alias: '#b:s' },
+      ],
+      totalUnread: 0,
+      isLoading: false,
+    };
+  });
+
+  it('opens the room again for a later request', async () => {
+    const { rerender } = render(
+      <MatrixChatPanel defaultRoomUuid="room-1" roomRequest={1} />,
+    );
+    await userEvent.click(screen.getByText('Pick room-B'));
+    h.matrixClient.activeRoomUuid = 'room-B';
+    h.matrixClient.connect.mockClear();
+
+    rerender(<MatrixChatPanel defaultRoomUuid="room-1" roomRequest={2} />);
+
+    expect(h.matrixClient.connect).toHaveBeenCalledWith('room-1');
+  });
+
+  it('stays on the room the user picked while the request is unchanged', async () => {
+    const { rerender } = render(
+      <MatrixChatPanel defaultRoomUuid="room-1" roomRequest={1} />,
+    );
+    await userEvent.click(screen.getByText('Pick room-B'));
+    h.matrixClient.activeRoomUuid = 'room-B';
+    h.matrixClient.connect.mockClear();
+
+    rerender(<MatrixChatPanel defaultRoomUuid="room-1" roomRequest={1} />);
+
+    expect(h.matrixClient.connect).not.toHaveBeenCalled();
+  });
+});
