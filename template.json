@@ -1148,6 +1148,7 @@
       "feature_area": "administration"
     }
   },
+  "AI agents and other MCP clients calling Waldur tools with a user's access tokens.": {},
   "AI assistant": {
     "context": {
       "primary_ui_type": "title",
@@ -34515,6 +34516,11 @@
   "MCP server": {
     "context": {
       "feature_area": "personal-access-tokens"
+    }
+  },
+  "MCP tool calls": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "MTU": {

@@ -29,4 +29,21 @@ describe('event group labels', () => {
     expect(JSON.stringify(options)).not.toContain('auth_logged_out');
     expect(options[2].section).toBeUndefined();
   });
+
+  it('lists MCP tool calls under account and access', async () => {
+    vi.mocked(eventsEventGroupsRetrieve).mockResolvedValue({
+      data: {
+        support: ['issue_creation_succeeded'],
+        mcp: ['mcp_tool_called'],
+      },
+    } as any);
+    const [mcp] = await loadEventGroupsOptions();
+    expect(mcp).toEqual({
+      key: 'mcp',
+      title: 'MCP tool calls',
+      description:
+        "AI agents and other MCP clients calling Waldur tools with a user's access tokens.",
+      section: 'access',
+    });
+  });
 });
