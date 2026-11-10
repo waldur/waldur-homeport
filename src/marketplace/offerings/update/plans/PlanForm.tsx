@@ -64,7 +64,10 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
     return units.size === 1 ? [...units][0] : undefined;
   }, [offering?.plans]);
 
-  const pinned = !periodApplies && Boolean(siblingUnit);
+  // A plan resources use keeps its period: the backend refuses a new one, so
+  // the form must not move it to the siblings' period either, or every save of
+  // such a plan would fail on a change nobody made.
+  const pinned = !inUse && !periodApplies && Boolean(siblingUnit);
   useEffect(() => {
     if (pinned && unit !== siblingUnit) {
       // Put back an option, not a bare value: the select reads both halves.
@@ -78,21 +81,23 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
   const mismatchesSiblings =
     Boolean(siblingUnit) && Boolean(unit) && unit !== siblingUnit;
 
-  const periodDescription = pinned
-    ? translate(
-        'Nothing on this plan is billed per period — usage is charged per reported quantity — so it follows the other plans of this offering, which lets customers switch between them.',
-      )
-    : !periodApplies
+  const periodDescription = inUse
+    ? translate('Cannot be changed while resources use this plan.')
+    : pinned
       ? translate(
-          'Nothing on this plan is billed per period, so this does not change what is invoiced. Customers can only move between plans that share a period, so match the other plans of this offering.',
+          'Nothing on this plan is billed per period — usage is charged per reported quantity — so it follows the other plans of this offering, which lets customers switch between them.',
         )
-      : mismatchesSiblings
+      : !periodApplies
         ? translate(
-            'Fixed and limit-based charges are billed for this period. The plan can be created, but the other plans of this offering use a different period, and customers can only move between plans that share one.',
+            'Nothing on this plan is billed per period, so this does not change what is invoiced. Customers can only move between plans that share a period, so match the other plans of this offering.',
           )
-        : translate(
-            'Fixed and limit-based charges are billed for this period. Usage is charged per reported quantity and is unaffected.',
-          );
+        : mismatchesSiblings
+          ? translate(
+              'Fixed and limit-based charges are billed for this period. The plan can be created, but the other plans of this offering use a different period, and customers can only move between plans that share one.',
+            )
+          : translate(
+              'Fixed and limit-based charges are billed for this period. Usage is charged per reported quantity and is unaffected.',
+            );
 
   return (
     <>
@@ -128,7 +133,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
         options={getBillingPeriods()}
         isClearable={false}
         required={true}
-        isDisabled={pinned}
+        isDisabled={inUse || pinned}
         description={periodDescription}
       />
       <MarkdownGroup
