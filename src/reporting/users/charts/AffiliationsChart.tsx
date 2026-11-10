@@ -260,7 +260,7 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
   return (
     <>
       {/* Filters */}
-      <Card className="mb-5">
+      <Card bordered className="mb-5">
         <CardHeader>
           <CardTitle as="div">{translate('Filters')}</CardTitle>
         </CardHeader>
