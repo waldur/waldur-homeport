@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { createRef } from 'react';
 import { describe, expect, it } from 'vitest';
 
@@ -60,6 +60,49 @@ describe('AlertItem', () => {
     );
     const icon = screen.getByTestId('alert-featured-icon');
     expect(icon).toHaveAttribute('data-variant', 'danger');
+  });
+
+  describe('centered', () => {
+    it('mirrors the icon with a hidden spacer so the text centres on the box', () => {
+      render(
+        <AlertItem
+          title="Centred alert"
+          variant="error"
+          iconSize="sm"
+          centered
+          data-testid="alert-item"
+        />,
+      );
+      const el = screen.getByTestId('alert-item');
+      expect(el).toHaveClass('text-center');
+
+      const spacer = screen.getByTestId('alert-icon-spacer');
+      expect(spacer).toHaveAttribute('aria-hidden', 'true');
+      expect(spacer).toHaveClass('invisible');
+      // The test id stays unique to the visible icon.
+      const icons = screen.getAllByTestId('alert-featured-icon');
+      expect(icons).toHaveLength(1);
+      const mirror = within(spacer).getByTestId('alert-icon-mirror');
+      expect(mirror.style.width).not.toBe('');
+      expect(mirror.style.width).toBe(icons[0].style.width);
+    });
+
+    it('skips the spacer when actions take the right side', () => {
+      render(
+        <AlertItem
+          title="Centred alert"
+          centered
+          actions={<button>Go</button>}
+        />,
+      );
+      expect(screen.queryByTestId('alert-icon-spacer')).not.toBeInTheDocument();
+    });
+
+    it('renders no spacer by default', () => {
+      render(<AlertItem title="Plain alert" data-testid="alert-item" />);
+      expect(screen.queryByTestId('alert-icon-spacer')).not.toBeInTheDocument();
+      expect(screen.getByTestId('alert-item')).not.toHaveClass('text-center');
+    });
   });
 
   it('renders type="floating" with full border and rounded styling', () => {

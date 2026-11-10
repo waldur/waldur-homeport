@@ -31,6 +31,12 @@ export interface AlertItemProps extends Omit<
   iconSize?: FeaturedIconSize;
   /** Extra classes for the icon, e.g. to override its default vertical offset. */
   iconClassName?: string;
+  /**
+   * Centre the title and body on the whole box, for alerts in a centred
+   * context. An invisible copy of the icon balances the real one, so this
+   * holds for any icon size. Not for alerts with `actions`.
+   */
+  centered?: boolean;
 }
 
 const ALERT_ICON: Record<
@@ -72,11 +78,18 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
       className,
       iconSize = 'lg',
       iconClassName,
+      centered = false,
       ...props
     },
     ref,
   ) => {
     const isFloating = type === 'floating';
+    const iconProps = {
+      icon: ALERT_ICON[variant].icon,
+      size: iconSize,
+      variant: ALERT_ICON[variant].variant,
+      className: cn('-mt-[0.77rem]', iconClassName),
+    };
 
     return (
       <div
@@ -86,19 +99,19 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
           isFloating
             ? 'p-[1.23rem] rounded-[0.475rem] border border-secondary'
             : 'py-[1.23rem] px-0 border-b border-secondary',
+          centered && 'text-center',
           className,
         )}
         {...props}
       >
-        <FeaturedIcon
-          icon={ALERT_ICON[variant].icon}
-          size={iconSize}
-          variant={ALERT_ICON[variant].variant}
-          data-testid="alert-featured-icon"
-          className={cn('-mt-[0.77rem]', iconClassName)}
-        />
+        <FeaturedIcon {...iconProps} data-testid="alert-featured-icon" />
         <div className="grow">
-          <div className="flex items-center flex-wrap gap-[0.616rem] mb-[0.308rem]">
+          <div
+            className={cn(
+              'flex items-center flex-wrap gap-[0.616rem] mb-[0.308rem]',
+              centered && 'justify-center',
+            )}
+          >
             <h6 className="m-0 text-sm font-medium leading-5 text-primary">
               {title}
             </h6>
@@ -114,6 +127,17 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
           <div className="flex items-start pr-[2px] gap-[0.924rem]">
             {actions}
           </div>
+        )}
+        {centered && !actions && (
+          // `invisible` keeps the space but hides it from screen readers too;
+          // opacity-0 would still be announced.
+          <span
+            aria-hidden
+            className="invisible flex shrink-0"
+            data-testid="alert-icon-spacer"
+          >
+            <FeaturedIcon {...iconProps} data-testid="alert-icon-mirror" />
+          </span>
         )}
       </div>
     );
