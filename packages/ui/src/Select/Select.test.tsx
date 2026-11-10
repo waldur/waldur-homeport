@@ -270,3 +270,16 @@ describe('useSelect — portaling defaults', () => {
     expect(result.current.menuPortalTarget).toBeUndefined();
   });
 });
+
+describe('useSelect — components', () => {
+  it('keeps the default parts when a caller overrides one of them', () => {
+    const ValueContainer = () => null;
+    const { result } = renderHook(() =>
+      useSelect({ options, isMulti: true, components: { ValueContainer } }),
+    );
+    expect(result.current.components.ValueContainer).toBe(ValueContainer);
+    expect(result.current.components.Option).toBeDefined();
+    expect(result.current.components.MultiValue).toBeDefined();
+    expect(result.current.components.DropdownIndicator).toBeDefined();
+  });
+});

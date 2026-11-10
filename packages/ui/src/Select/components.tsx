@@ -143,15 +143,19 @@ export const MultiSelectValue = (props: MultiValueProps) => (
   <Tag
     onClear={props.removeProps.onClick}
     clearLabel={getRemoveLabel(props.selectProps.getOptionLabel(props.data))}
-    className="max-w-full"
+    // `min-w-0` lets the tag shrink below its text width, so the `+N` tag
+    // after it stays inside the control instead of being clipped.
+    className="max-w-full min-w-0"
   >
     <span className="truncate">{props.children}</span>
   </Tag>
 );
 
-export const MultiSelectLimitedValueContainer = (props) => {
+export const MultiSelectLimitedValueContainer = ({
+  valuesLimit = 2,
+  ...props
+}: any) => {
   const tooltipId = useId();
-  const valuesLimit = 2;
   // react-select passes [placeholder or values, input]. Render that same
   // shape whether or not anything is selected: if the input moves to another
   // child slot, React remounts it, and the focused <input> is removed without
@@ -163,7 +167,9 @@ export const MultiSelectLimitedValueContainer = (props) => {
     : values;
 
   return (
-    <components.ValueContainer {...props}>
+    // `!`: react-select's own unlayered `flex-wrap: wrap` beats the plain
+    // utility, and a wrapped row makes the control grow as values are picked.
+    <components.ValueContainer {...props} className="flex-nowrap!">
       {displayValues}
 
       {hiddenValues.length > 0 && (
@@ -171,7 +177,7 @@ export const MultiSelectLimitedValueContainer = (props) => {
           id={tooltipId}
           label={hiddenValues.map((child) => child.props?.children).join(', ')}
         >
-          <div className="inline-block">
+          <div className="inline-block shrink-0">
             <Tag>+{hiddenValues.length}</Tag>
           </div>
         </Tooltip>
