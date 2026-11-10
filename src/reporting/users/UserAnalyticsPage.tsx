@@ -1,11 +1,9 @@
-import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { ExportData } from '@/table/exporters/types';
 import { formatOrganizationType } from '@/user/support/aai-constants';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
@@ -80,91 +78,81 @@ export const UserAnalyticsPage: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="user-analytics" />
-      <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'pb-5')}>
-        {(showNationality || showCountry) && (
-          <div
-            className={
-              showNationality && showCountry
-                ? 'grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'
-                : 'grid grid-cols-1 gap-4 mb-4'
-            }
-          >
-            {showNationality && (
-              <div>
-                <ChartCard
-                  title={translate('Users by nationality')}
-                  getExportData={() =>
-                    getExportData(
-                      translate('Nationality'),
-                      nationalityChartData,
-                    )
-                  }
-                  isEmpty={nationalityChartData.length === 0}
-                >
-                  {(ref) => <BarChart ref={ref} data={nationalityChartData} />}
-                </ChartCard>
-              </div>
-            )}
-            {showCountry && (
-              <div>
-                <ChartCard
-                  title={translate('Users by country')}
-                  getExportData={() =>
-                    getExportData(translate('Country'), countryChartData)
-                  }
-                  isEmpty={countryChartData.length === 0}
-                >
-                  {(ref) => <BarChart ref={ref} data={countryChartData} />}
-                </ChartCard>
-              </div>
-            )}
-          </div>
-        )}
-        {(showOrgType || showJobTitle) && (
-          <div
-            className={
-              showOrgType && showJobTitle
-                ? 'grid grid-cols-1 md:grid-cols-2 gap-4'
-                : 'grid grid-cols-1 gap-4'
-            }
-          >
-            {showOrgType && (
-              <div>
-                <ChartCard
-                  title={translate('Users by organization type')}
-                  getExportData={() =>
-                    getExportData(
-                      translate('Organization type'),
-                      orgTypeChartData,
-                    )
-                  }
-                  isEmpty={orgTypeChartData.length === 0}
-                >
-                  {(ref) => <DonutChart ref={ref} data={orgTypeChartData} />}
-                </ChartCard>
-              </div>
-            )}
-            {showJobTitle && (
-              <div>
-                <ChartCard
-                  title={translate('Users by job position')}
-                  getExportData={() =>
-                    getExportData(
-                      translate('Job position'),
-                      jobPositionChartData,
-                    )
-                  }
-                  isEmpty={jobPositionChartData.length === 0}
-                >
-                  {(ref) => (
-                    <DonutChart ref={ref} data={jobPositionChartData} />
-                  )}
-                </ChartCard>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      {(showNationality || showCountry) && (
+        <div
+          className={
+            showNationality && showCountry
+              ? 'grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'
+              : 'grid grid-cols-1 gap-4 mb-4'
+          }
+        >
+          {showNationality && (
+            <div>
+              <ChartCard
+                title={translate('Users by nationality')}
+                getExportData={() =>
+                  getExportData(translate('Nationality'), nationalityChartData)
+                }
+                isEmpty={nationalityChartData.length === 0}
+              >
+                {(ref) => <BarChart ref={ref} data={nationalityChartData} />}
+              </ChartCard>
+            </div>
+          )}
+          {showCountry && (
+            <div>
+              <ChartCard
+                title={translate('Users by country')}
+                getExportData={() =>
+                  getExportData(translate('Country'), countryChartData)
+                }
+                isEmpty={countryChartData.length === 0}
+              >
+                {(ref) => <BarChart ref={ref} data={countryChartData} />}
+              </ChartCard>
+            </div>
+          )}
+        </div>
+      )}
+      {(showOrgType || showJobTitle) && (
+        <div
+          className={
+            showOrgType && showJobTitle
+              ? 'grid grid-cols-1 md:grid-cols-2 gap-4'
+              : 'grid grid-cols-1 gap-4'
+          }
+        >
+          {showOrgType && (
+            <div>
+              <ChartCard
+                title={translate('Users by organization type')}
+                getExportData={() =>
+                  getExportData(
+                    translate('Organization type'),
+                    orgTypeChartData,
+                  )
+                }
+                isEmpty={orgTypeChartData.length === 0}
+              >
+                {(ref) => <DonutChart ref={ref} data={orgTypeChartData} />}
+              </ChartCard>
+            </div>
+          )}
+          {showJobTitle && (
+            <div>
+              <ChartCard
+                title={translate('Users by job position')}
+                getExportData={() =>
+                  getExportData(translate('Job position'), jobPositionChartData)
+                }
+                isEmpty={jobPositionChartData.length === 0}
+              >
+                {(ref) => <DonutChart ref={ref} data={jobPositionChartData} />}
+              </ChartCard>
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 };
