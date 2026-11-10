@@ -11,14 +11,60 @@ import {
 import { usersMeRetrieve } from 'waldur-js-client';
 
 export interface CurrentUser {
+  uuid: string;
   fullName: string;
   firstName: string;
   email: string;
   isStaff: boolean;
+  isSupport: boolean;
   imageSrc?: string;
   token?: string;
   ipAddress: string;
+  /** The names of the user's active roles, for the quick shortcuts menu's
+   * visibility rules (see microApps.ts). */
+  roleNames: string[];
 }
+
+/** The names of the roles a user holds now: active, not expired. */
+export const activeRoleNames = (
+  permissions?: Array<{
+    role_name: string;
+    is_active?: boolean | null;
+    expiration_time?: string | null;
+  }>,
+): string[] => {
+  const now = Date.now();
+  return [
+    ...new Set(
+      (permissions ?? [])
+        .filter(
+          (permission) =>
+            permission.is_active !== false &&
+            (!permission.expiration_time ||
+              new Date(permission.expiration_time).getTime() > now),
+        )
+        .map((permission) => permission.role_name),
+    ),
+  ];
+};
+
+type UsersMeData = NonNullable<
+  Awaited<ReturnType<typeof usersMeRetrieve>>['data']
+>;
+
+/** The /users/me/ answer as the shell uses it. */
+export const toCurrentUser = (data: UsersMeData): CurrentUser => ({
+  uuid: data.uuid,
+  fullName: data.full_name,
+  firstName: data.first_name,
+  email: data.email,
+  isStaff: Boolean(data.is_staff),
+  isSupport: Boolean(data.is_support),
+  imageSrc: data.image ?? undefined,
+  token: data.token ?? undefined,
+  ipAddress: data.ip_address,
+  roleNames: activeRoleNames(data.permissions),
+});
 
 const CurrentUserContext = createContext<CurrentUser | null | undefined>(
   undefined,
@@ -43,15 +89,7 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
     usersMeRetrieve()
       .then((result) => {
         if (cancelled || !result.data) return;
-        setUser({
-          fullName: result.data.full_name,
-          firstName: result.data.first_name,
-          email: result.data.email,
-          isStaff: Boolean(result.data.is_staff),
-          imageSrc: result.data.image ?? undefined,
-          token: result.data.token ?? undefined,
-          ipAddress: result.data.ip_address,
-        });
+        setUser(toCurrentUser(result.data));
       })
       .catch(() => {});
     return () => {

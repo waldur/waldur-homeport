@@ -5,7 +5,12 @@
   "description": "Standalone proof-of-concept consumer of packages/* — proves each extracted package is genuinely portable outside waldur-homeport's own src/, not just importable via workspace hoisting.",
   "type": "module",
   "waldur": {
-    "deploy": false
+    "deploy": false,
+    "title": "Workspace modes preview",
+    "description": "A preview of role-based workspaces built on the shared app shell.",
+    "visibleTo": {
+      "staffOnly": true
+    }
   },
   "scripts": {
     "dev": "vite",

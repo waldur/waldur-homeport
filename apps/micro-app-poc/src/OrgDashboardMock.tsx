@@ -120,6 +120,7 @@ export const OrgDashboardMock = () => {
 
   return (
     <AppShell
+      appName="micro-app-poc"
       logo={<WaldurLogo />}
       sidebarHeader={
         <SidebarModeCard
