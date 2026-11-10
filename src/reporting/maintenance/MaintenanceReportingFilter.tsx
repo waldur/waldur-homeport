@@ -4,7 +4,7 @@ import { FC, useMemo } from 'react';
 import { DatePicker } from 'waldur-ui';
 
 import { FormGroup } from '@/form';
-import { Select } from '@/form/select';
+import { MultiSelectLimitedValueContainer, Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 import { MaintenanceFilterState } from './types';
@@ -85,6 +85,11 @@ const maintenanceTypeOptions: MaintenanceTypeOption[] = Object.entries(
   MAINTENANCE_TYPE_LABELS,
 ).map(([value, label]) => ({ value: Number(value), label }));
 
+// Two state tags don't fit the 250px control without truncating both.
+const OneValueContainer = (props) => (
+  <MultiSelectLimitedValueContainer {...props} valuesLimit={1} />
+);
+
 interface MaintenanceReportingFilterProps {
   filter: MaintenanceFilterState;
   onFilterChange: (filter: Partial<MaintenanceFilterState>) => void;
@@ -114,8 +119,8 @@ export const MaintenanceReportingFilter: FC<
   );
 
   return (
-    <div className="flex flex-wrap gap-5 mb-5">
-      <FormGroup label={translate('Preset')} className="grow max-w-[150px]">
+    <div className="flex flex-wrap gap-5">
+      <FormGroup label={translate('Preset')} spaceless className="w-[150px]">
         <Select
           value={selectedPreset}
           onChange={(option: PresetOption | null) => {
@@ -129,7 +134,11 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('Start date')} className="grow max-w-[150px]">
+      <FormGroup
+        label={translate('Start date')}
+        spaceless
+        className="w-[150px]"
+      >
         <DatePicker
           value={isoDateToDate(filter.startDate)}
           onChange={(date) =>
@@ -144,7 +153,7 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('End date')} className="grow max-w-[150px]">
+      <FormGroup label={translate('End date')} spaceless className="w-[150px]">
         <DatePicker
           value={isoDateToDate(filter.endDate)}
           onChange={(date) =>
@@ -159,7 +168,7 @@ export const MaintenanceReportingFilter: FC<
         />
       </FormGroup>
 
-      <FormGroup label={translate('State')} className="grow max-w-[250px]">
+      <FormGroup label={translate('State')} spaceless className="w-[250px]">
         <Select
           value={selectedStates}
           onChange={(options: StateOption[] | null) =>
@@ -171,12 +180,14 @@ export const MaintenanceReportingFilter: FC<
           isMulti
           isClearable
           placeholder={translate('All states')}
+          components={{ ValueContainer: OneValueContainer }}
         />
       </FormGroup>
 
       <FormGroup
         label={translate('Maintenance type')}
-        className="grow max-w-[200px]"
+        spaceless
+        className="w-[200px]"
       >
         <Select
           value={selectedMaintenanceType}

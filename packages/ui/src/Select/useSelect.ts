@@ -145,8 +145,11 @@ export const useSelect = <
     ...defaultPortalingProps,
     ...multiProps,
     ...tableFilterProps,
-    components: composedComponents,
     ...props,
+    // After `props`: `composedComponents` already folds in the caller's own
+    // `components`, so spreading the raw prop last would drop every default
+    // (checkbox options, tags, indicators) as soon as one part is overridden.
+    components: composedComponents,
     // Merged, not replaced: a caller passing its own `styles` would otherwise
     // drop the portal z-index and the `pointer-events: auto` above, and the
     // symptom — an unclickable menu inside the modal drawer — surfaces far
@@ -273,8 +276,9 @@ export const useAsyncSelect = <
     ...defaultPortalingProps,
     ...multiProps,
     ...tableFilterProps,
-    components: composedComponents,
     ...props,
+    // After `props` — see the same line in `useSelect` above.
+    components: composedComponents,
     // Merged, not replaced — see the same block in `useSelect` above.
     styles: {
       ...defaultPortalingProps.styles,

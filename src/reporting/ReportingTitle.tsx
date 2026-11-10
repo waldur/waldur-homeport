@@ -53,7 +53,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
   return (
     <div
       className={classNames(
-        'flex justify-between items-center gap-3 mb-4',
+        'flex justify-between items-end gap-3 mb-4',
         showControlsOnMobile && 'flex-wrap',
       )}
     >
