@@ -395,6 +395,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Show identity bridge information in user profiles and admin views.'),
       },
       {
+        key: 'show_micro_apps',
+        description: translate('List the deployment\'s micro-apps in the quick shortcuts menu, to the users each app is meant for.'),
+      },
+      {
         key: 'show_slug',
         description: translate('Enable display of slug field in user summary.'),
       },
