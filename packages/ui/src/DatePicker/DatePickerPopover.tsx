@@ -416,11 +416,7 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
               'rounded-lg border border-solid',
               size === 'sm'
                 ? 'min-h-[var(--control-height-sm)] ps-[8px] pe-[2px]'
-                : // 40px is the form-control minimum in
-                  // docs/ui-consistency-guidelines.md, not a --control-height
-                  // step; Select, also a field, uses --control-height-lg (44px).
-                  // See primitives/controls.css.
-                  'min-h-[40px] ps-[11px] pe-[4px]',
+                : 'min-h-[var(--control-height-md)] ps-[11px] pe-[4px]',
               solid
                 ? 'border-transparent bg-tertiary'
                 : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum

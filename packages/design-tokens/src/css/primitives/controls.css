@@ -21,18 +21,11 @@
  * On a square icon-only control, width is the height, so `size-[var(--control-
  * height-sm)]` is the honest spelling rather than a second token.
  *
- * Two sizes in the library deliberately sit off the scale, and say so where
- * they are rather than silently rounding:
+ * One size in the library deliberately sits off the scale, and says so where
+ * it is rather than silently rounding:
  *
  *   - Select's `isTableCell` is 35px, the measured height of the control it
  *     replaced (see Select/tailwindStyles.ts), 1px under --control-height-md.
- *   - DatePicker's default trigger is 40px, which is the *other* number the
- *     same guide gives: "Form controls (inputs, selects, textareas):
- *     Minimum height: 40px". Select, also a form control, is 44px. So the
- *     guide carries two heights for a field and the library implements both;
- *     until that is settled there is no fourth token here, because naming
- *     40px would bake the contradiction into the scale. Left as it was:
- *     moving it either way is a visible 4px change, and a design call.
  *
  * `static`, for the reason zIndex.css gives for --z-index-toast: no utility
  * references these by name -- they are read as `h-[var(--control-height-md)]`

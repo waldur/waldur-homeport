@@ -73,6 +73,18 @@ const Cases = () => (
       </Card>
     </div>
 
+    <Card>
+      <CardContent>
+        <div role="tabpanel">
+          <Card variant="table">
+            <CardContent data-testid="card-tabpanel-table-body">
+              <Body />
+            </CardContent>
+          </Card>
+        </div>
+      </CardContent>
+    </Card>
+
     <Card variant="table">
       <CardHeader className="min-h-auto" data-testid="override-header">
         Tabs
@@ -99,7 +111,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          'Card in the contexts HomePort restyles it in: a table card, a solid card in its expanded row, a table card in a tab panel, a caller override, and the sm and widget variants. The play function checks the computed styles.',
+          'Card in the contexts HomePort restyles it in: a table card, a solid card in its expanded row, a table card in a tab panel (on a page and inside a card), a caller override, and the sm and widget variants. The play function checks the computed styles.',
       },
     },
   },
@@ -138,8 +150,11 @@ export const Default: Story = {
       plainBody.paddingTop,
     );
 
-    // In a tab panel the table body keeps its top padding.
-    await expect(style('tabpanel-table-body').paddingTop).toBe(
+    // A table that is a page's tab content starts under its header like any
+    // table; one in a tab panel inside a card (BaseTableWithTabs) keeps its
+    // top padding below the tabs.
+    await expect(style('tabpanel-table-body').paddingTop).toBe('0px');
+    await expect(style('card-tabpanel-table-body').paddingTop).toBe(
       plainBody.paddingTop,
     );
 

@@ -43,34 +43,54 @@ const HOVER_EDITABLE =
 const HOVER_SELECT =
   ' [&:hover:not(:disabled,:focus,[aria-invalid=true])]:border-[var(--input-border-hover)]';
 
-const variants = {
-  size: {
-    sm: 'rounded-md py-[5px] pl-[calc(10px+var(--input-start,0px))] pr-[calc(10px+var(--input-end,0px))] text-xs leading-[17px]',
-    md: 'rounded-lg py-[9px] pl-[calc(12px+var(--input-start,0px))] pr-[calc(12px+var(--input-end,0px))] text-sm leading-[20px]',
-    lg: 'rounded-lg py-[9px] pl-[calc(19.5px+var(--input-start,0px))] pr-[calc(19.5px+var(--input-end,0px))] text-base leading-[23px]',
-  },
-  solid: {
-    // A filled, borderless-looking field; it keeps its fill when disabled.
-    true:
-      'bg-[var(--input-solid-bg)] text-[var(--input-solid-text)] ' +
-      'focus:bg-[var(--input-solid-bg-focus)] focus:border-[var(--input-solid-border-focus)] ' +
-      'disabled:bg-[var(--input-solid-bg)]',
-    false: '[&[readonly]]:bg-[var(--input-readonly-bg)]',
-  },
+// Shape, horizontal padding and type per size, shared by every field.
+const size = {
+  sm: 'rounded-md pl-[calc(10px+var(--input-start,0px))] pr-[calc(10px+var(--input-end,0px))] text-xs leading-[17px]',
+  md: 'rounded-lg pl-[calc(12px+var(--input-start,0px))] pr-[calc(12px+var(--input-end,0px))] text-sm leading-[20px]',
+  lg: 'rounded-lg pl-[calc(19.5px+var(--input-start,0px))] pr-[calc(19.5px+var(--input-end,0px))] text-base leading-[23px]',
 } as const;
 
+const solid = {
+  // A filled, borderless-looking field; it keeps its fill when disabled.
+  true:
+    'bg-[var(--input-solid-bg)] text-[var(--input-solid-text)] ' +
+    'focus:bg-[var(--input-solid-bg-focus)] focus:border-[var(--input-solid-border-focus)] ' +
+    'disabled:bg-[var(--input-solid-bg)]',
+  false: '[&[readonly]]:bg-[var(--input-readonly-bg)]',
+} as const;
+
+// A single-line field takes the --control-height step of its size, like a
+// Button; a Textarea pads its rows instead, since it grows with them.
+const controlVariants = {
+  size: {
+    sm: `h-[var(--control-height-sm)] ${size.sm}`,
+    md: `h-[var(--control-height-md)] ${size.md}`,
+    lg: `h-[var(--control-height-lg)] ${size.lg}`,
+  },
+  solid,
+};
+
+const textareaSizeVariants = {
+  size: {
+    sm: `py-[5px] ${size.sm}`,
+    md: `py-[9px] ${size.md}`,
+    lg: `py-[9px] ${size.lg}`,
+  },
+  solid,
+};
+
 export const inputVariants = cva(COMMON + HOVER_EDITABLE, {
-  variants,
+  variants: controlVariants,
   defaultVariants: { size: 'md', solid: false },
 });
 
 export const textareaVariants = cva(COMMON + HOVER_EDITABLE + ' resize-y', {
-  variants,
+  variants: textareaSizeVariants,
   defaultVariants: { size: 'md', solid: false },
 });
 
 /** A native <select>: the input look, with the pointer a select has. */
 export const selectVariants = cva(COMMON + HOVER_SELECT + ' cursor-default', {
-  variants,
+  variants: controlVariants,
   defaultVariants: { size: 'md', solid: false },
 });

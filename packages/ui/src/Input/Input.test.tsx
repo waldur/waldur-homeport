@@ -46,14 +46,14 @@ describe('Input', () => {
   it('pins its size in px so it does not follow the root font-size', () => {
     const { rerender } = render(<Input aria-label="Name" />);
     expect(screen.getByRole('textbox')).toHaveClass(
-      'py-[9px]',
+      'h-[var(--control-height-md)]',
       'pl-[calc(12px+var(--input-start,0px))]',
       'text-sm',
       'rounded-lg',
     );
     rerender(<Input aria-label="Name" size="sm" />);
     expect(screen.getByRole('textbox')).toHaveClass(
-      'py-[5px]',
+      'h-[var(--control-height-sm)]',
       'text-xs',
       'rounded-md',
     );

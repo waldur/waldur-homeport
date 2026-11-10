@@ -68,15 +68,15 @@ export const getSelectTailwindClassNames = <
         // `rounded-md` step is 6px).
         'rounded-lg border border-solid bg-primary',
         // Gotcha #1: `min-h-*!` overrides react-select's forced 38px.
-        // Heights below match the old control's measured height per
-        // variant; `px-[11px]` doubles as the search-icon-to-border gap
-        // for `isTableFilter` (FilterSelectControl's icon only supplies
-        // the icon-to-text gap, not icon-to-border — see components.tsx).
+        // Heights are the --control-height steps, like Input and Button
+        // (bar the table-cell variant); `px-[11px]` doubles as the
+        // search-icon-to-border gap for `isTableFilter` (FilterSelectControl's
+        // icon only supplies the icon-to-text gap — see components.tsx).
         isTableCell
           ? 'min-h-[35px]! m-[1px] px-[11px] py-[6px] text-sm'
           : isSm
-            ? 'min-h-[var(--control-height-sm)]! px-[8px] py-[4.5px] text-sm'
-            : 'min-h-[var(--control-height-lg)]! px-[11px] py-[6px] text-sm',
+            ? 'min-h-[var(--control-height-sm)]! px-[8px] py-[1px] text-sm'
+            : 'min-h-[var(--control-height-md)]! px-[11px] py-[5px] text-sm',
         hasError
           ? 'border-danger-subtle ring-1 ring-[var(--status-danger-border)]'
           : isFocused
@@ -105,7 +105,7 @@ export const getSelectTailwindClassNames = <
       ),
 
     multiValue: () =>
-      'bg-quaternary rounded-md px-[4px] py-[2px] flex items-center gap-[4px] m-[2px]',
+      'bg-quaternary rounded-md px-[4px] py-[2px] flex items-center gap-[4px]',
 
     multiValueLabel: () => 'text-[11px] text-primary',
 
