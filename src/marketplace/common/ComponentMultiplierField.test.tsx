@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { Field, Form } from 'react-final-form';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { FormFieldError } from '@/form/FormFieldError';
 
 import * as selectors from '../deploy/selectors';
 
@@ -12,6 +15,10 @@ vi.mock('../deploy/selectors', () => ({
 
 describe('ComponentMultiplierField', () => {
   const mockOnChange = vi.fn();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   const getFieldConfig = (configOverrides = {}) => ({
     type: 'component_multiplier',
@@ -116,23 +123,76 @@ describe('ComponentMultiplierField', () => {
     expect(mockOnChange).toHaveBeenCalledWith('20');
   });
 
-  it('enforces min and max limits', async () => {
+  it('lets a value be typed digit by digit, even below min_limit at first', async () => {
     vi.mocked(selectors.useOrderFormData).mockReturnValue({});
+    renderComponent('', { min_limit: 10, max_limit: 50 });
 
+    const input = screen.getByRole('spinbutton');
+    // "2" alone is below min_limit; it must not be dropped, or "25" could
+    // never be typed.
+    await userEvent.type(input, '25');
+
+    expect(input).toHaveValue(25);
+    expect(mockOnChange).toHaveBeenLastCalledWith('25');
+    expect(input).not.toHaveAttribute('aria-invalid');
+  });
+
+  it('shows an out-of-range value as invalid and clamps it on blur', async () => {
+    vi.mocked(selectors.useOrderFormData).mockReturnValue({});
     renderComponent('', { min_limit: 5, max_limit: 50 });
 
     const input = screen.getByRole('spinbutton');
-
-    // Try to enter below min
-    await userEvent.clear(input);
     await userEvent.type(input, '2');
-    // The onChange might be called for each digit, but the final shouldn't pass if it blocks entirely.
-    // Wait, the component implementation says: `if (config.min_limit !== undefined && numValue < config.min_limit) return;`
-    // This means it completely blocks the state update if it violates the bounds.
-    // However, typing '2' is < 5, so it shouldn't update.
-    expect(input).toHaveValue(null); // Because we cleared it first
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+
+    await userEvent.tab();
+    expect(mockOnChange).toHaveBeenLastCalledWith('5');
+    expect(input).toHaveValue(5);
+
+    await userEvent.clear(input);
+    await userEvent.type(input, '90');
+    await userEvent.tab();
+    expect(mockOnChange).toHaveBeenLastCalledWith('50');
 
     // Help text should reflect ranges
     expect(screen.getByText(/Override range: 5 - 50/)).toBeInTheDocument();
+  });
+  it('marks a value the form rejects, and lets its error show once left', async () => {
+    vi.mocked(selectors.useOrderFormData).mockReturnValue({});
+    // In range but not whole, so blur has nothing to clamp: only the form's
+    // validator can reject it, and that is only shown on a touched field.
+    const validate = (value) =>
+      value && !Number.isInteger(Number(value))
+        ? 'Enter a whole number.'
+        : undefined;
+    render(
+      <Form
+        onSubmit={vi.fn()}
+        render={() => (
+          <>
+            <Field name="multiplier" validate={validate}>
+              {({ input, meta }) => (
+                <ComponentMultiplierField
+                  field={
+                    getFieldConfig({ min_limit: 10, max_limit: 50 }) as any
+                  }
+                  input={input}
+                  meta={meta}
+                />
+              )}
+            </Field>
+            <FormFieldError name="multiplier" />
+          </>
+        )}
+      />,
+    );
+
+    const input = screen.getByRole('spinbutton');
+    await userEvent.type(input, '25.5');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+
+    await userEvent.tab();
+    expect(input).toHaveValue(25.5);
+    expect(screen.getByText('Enter a whole number.')).toBeInTheDocument();
   });
 });

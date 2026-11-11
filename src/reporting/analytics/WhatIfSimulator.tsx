@@ -1,24 +1,21 @@
 import {
   ArrowCounterClockwiseIcon,
-  CaretDownIcon,
-  CaretUpIcon,
   TrendDownIcon,
   TrendUpIcon,
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import {
-  BaseButton,
   FormField,
   FormLabel,
   HelpIcon,
   NativeSelect,
+  NumberInput,
   RangeInput,
   Tooltip,
 } from 'waldur-ui';
 
-import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -100,48 +97,60 @@ const ParamInput: FC<{
     );
   }
 
-  // Default: number input with increment/decrement
-  const isAtMin = param.min !== undefined && numValue <= param.min;
-  const isAtMax = param.max !== undefined && numValue >= param.max;
+  return <NumberParamInput param={param} value={value} onChange={onChange} />;
+};
+
+/**
+ * A number parameter. The text being typed stays here: only a number in the
+ * parameter's range reaches the simulation, so typing 75 into a field with
+ * min 50 never runs it on 7 (nor snaps the 7 up to 50, which made the value
+ * impossible to type). An out-of-range entry shows invalid and is clamped
+ * when the field is left; an emptied one goes back to the current value.
+ */
+const NumberParamInput: FC<{
+  param: SimulationParam;
+  value: number | string;
+  onChange: (value: number | string) => void;
+}> = ({ param, value, onChange }) => {
+  const [text, setText] = useState<number | string>(value);
+
+  // Follow a value set from outside (Reset), but not the echo of what was
+  // just typed, or "0." would turn into "0" mid-entry.
+  useEffect(() => {
+    if (parseFloat(String(text)) !== Number(value)) {
+      setText(value);
+    }
+  }, [value]);
+
+  const handleValueChange = (next: number | string) => {
+    setText(next);
+    const num = typeof next === 'number' ? next : parseFloat(next);
+    const inRange =
+      !isNaN(num) &&
+      num >= (param.min ?? -Infinity) &&
+      num <= (param.max ?? Infinity);
+    if (inRange) {
+      onChange(num);
+    }
+  };
 
   return (
-    <div className="flex items-center gap-1">
-      <BaseButton
+    <div className="w-40">
+      <NumberInput
         size="sm"
-        variant="tertiary"
-        onClick={() => handleChange(numValue - step)}
-        disabled={isAtMin}
-        tooltip={
-          isAtMin
-            ? translate('Minimum value reached')
-            : translate('Decrease value')
-        }
-        iconNode={<CaretDownIcon weight="bold" />}
-      />
-      <BaseInputField
-        type="number"
-        size="sm"
-        value={numValue}
+        aria-label={param.label}
+        value={text}
+        onValueChange={handleValueChange}
+        onBlur={() => {
+          if (String(text).trim() === '') {
+            setText(value);
+          }
+        }}
         min={param.min}
         max={param.max}
-        step={step}
-        onChange={(e) => handleChange(parseFloat(e.target.value) || 0)}
-        className="text-center"
-        containerClassName="max-w-[100px]"
+        step={param.step ?? 1}
+        unit={param.unit}
       />
-      <BaseButton
-        size="sm"
-        variant="tertiary"
-        onClick={() => handleChange(numValue + step)}
-        disabled={isAtMax}
-        tooltip={
-          isAtMax
-            ? translate('Maximum value reached')
-            : translate('Increase value')
-        }
-        iconNode={<CaretUpIcon weight="bold" />}
-      />
-      {param.unit && <span className="text-quaternary">{param.unit}</span>}
     </div>
   );
 };

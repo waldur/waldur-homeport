@@ -603,6 +603,59 @@ describe('OptionsForm Integration', () => {
       });
     });
 
+    describe('component multiplier', () => {
+      // The field keeps every keystroke and corrects an out-of-range value
+      // when it is left, so the range is only held against a submission here.
+      // The field stores its value as text, hence the strings.
+      const multiplierValidator = (config?: Record<string, unknown>) =>
+        getComponentAndParams(
+          {
+            type: 'component_multiplier',
+            label: 'Nodes',
+            component_multiplier_config: config && {
+              component_type: 'cores',
+              factor: 2,
+              ...config,
+            },
+          },
+          'nodes',
+          undefined,
+        ).params.validate;
+
+      it('accepts a value inside the override range', () => {
+        const validate = multiplierValidator({ min_limit: 10, max_limit: 50 });
+        expect(validate('25')).toBeUndefined();
+        expect(validate('10')).toBeUndefined();
+        expect(validate('50')).toBeUndefined();
+      });
+
+      it('leaves an empty value to Required', () => {
+        const validate = multiplierValidator({ min_limit: 10 });
+        expect(validate('')).toBeUndefined();
+        expect(validate(undefined)).toBeUndefined();
+      });
+
+      it('rejects a value outside the override range', () => {
+        const validate = multiplierValidator({ min_limit: 10, max_limit: 50 });
+        expect(validate('9')).toBe(
+          'Ensure this value is greater than or equal to 10.',
+        );
+        expect(validate('51')).toBe(
+          'Ensure this value is less than or equal to 50.',
+        );
+      });
+
+      it('rejects a decimal, which the server would truncate', () => {
+        const validate = multiplierValidator({ max_limit: 50 });
+        expect(validate('2.5')).toBe('Enter a whole number.');
+      });
+
+      it('checks nothing without an override range', () => {
+        expect(multiplierValidator({})('1000')).toBeUndefined();
+        expect(multiplierValidator()('1000')).toBeUndefined();
+      });
+    });
+
     it('applies required validation and shows error message on blur', async () => {
       renderForm({
         order: ['mandatory'],

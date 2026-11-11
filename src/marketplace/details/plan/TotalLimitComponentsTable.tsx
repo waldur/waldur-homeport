@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
 import {
@@ -15,7 +15,7 @@ import { formatCurrency } from '@/core/formatCurrency';
 import { composeValidators } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { InputField } from '@/form/InputField';
+import { NumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
 import {
   formatIntField,
@@ -67,11 +67,12 @@ export const TotalLimitComponentsTable: FunctionComponent<
         </TableHeader>
         <TableBody>
           {props.components.map((component, index) => {
-            const validate = useMemo(
-              () => getOfferingComponentValidator(component),
-              [component.min_value, component.max_value],
+            // Not useMemo: one hook per row makes the hook count follow the
+            // list, and React throws as soon as it grows or shrinks (a plan
+            // with a different number of total-limited components).
+            const validateValue = composeValidators(
+              ...getOfferingComponentValidator(component),
             );
-            const validateValue = composeValidators(...validate);
 
             return (
               <TableRow key={index}>
@@ -92,12 +93,15 @@ export const TotalLimitComponentsTable: FunctionComponent<
                       validate={validateValue}
                     >
                       {({ input, meta }) => (
-                        <InputField
+                        // min: the validator checks min_value only when it is
+                        // set, so without it a negative limit went through.
+                        <NumberField
                           input={input}
                           meta={meta}
-                          type="number"
                           step={getLimitStep(component)}
-                          className="px-1.5"
+                          min={component.min_value || 0}
+                          max={component.max_value}
+                          showSteppers={false}
                         />
                       )}
                     </Field>

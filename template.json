@@ -18365,7 +18365,7 @@
   },
   "Decrease value": {
     "context": {
-      "feature_area": "analytics"
+      "feature_area": "Input"
     }
   },
   "Default": {
@@ -30567,7 +30567,7 @@
   },
   "Increase value": {
     "context": {
-      "feature_area": "analytics"
+      "feature_area": "Input"
     }
   },
   "Increases the total allocation at the start of a period by adding unused capacity from the previous period (capped at {pct}% of the base). This gives users a larger budget to work with.": {
@@ -36386,11 +36386,6 @@
       "feature_area": "vmware"
     }
   },
-  "Maximum value reached": {
-    "context": {
-      "feature_area": "analytics"
-    }
-  },
   "Maximum wall time in minutes": {
     "context": {
       "feature_area": "qos"
@@ -37284,11 +37279,6 @@
   },
   "Minimum table size in bytes (default 1MB) to monitor. Smaller tables are ignored.": {},
   "Minimum username length is 3 characters.": {},
-  "Minimum value reached": {
-    "context": {
-      "feature_area": "analytics"
-    }
-  },
   "Minute": {
     "context": {
       "feature_area": "DatePicker"

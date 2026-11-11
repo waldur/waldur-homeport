@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { NumberInput } from './NumberInput';
@@ -125,4 +126,68 @@ describe('NumberInput', () => {
       expect(screen.getByRole('spinbutton')).toBeDisabled();
     },
   );
+  describe('a number typed through an incomplete state', () => {
+    // While the text is "2." or "-", a browser reports the field as empty and
+    // sets validity.badInput; jsdom does neither, so both are set by hand.
+    // The wrapper parses like the limit fields: an empty value becomes 0.
+    const Parsed = ({ onValueChange }) => {
+      const [value, setValue] = useState<number | string>(2);
+      return (
+        <NumberInput
+          value={value}
+          onValueChange={(v) => {
+            onValueChange(v);
+            setValue(v === '' ? 0 : v);
+          }}
+          min={-100}
+          max={100}
+          step={0.01}
+        />
+      );
+    };
+
+    const change = (input: HTMLElement, value: string, badInput: boolean) => {
+      Object.defineProperty(input, 'validity', {
+        configurable: true,
+        get: () => ({ badInput }),
+      });
+      // eslint-disable-next-line testing-library/prefer-user-event -- user-event cannot set validity.badInput
+      fireEvent.change(input, { target: { value } });
+    };
+
+    const renderParsed = () => {
+      const onValueChange = vi.fn();
+      render(<Parsed onValueChange={onValueChange} />);
+      return { input: screen.getByRole('spinbutton'), onValueChange };
+    };
+
+    it('keeps "2." on screen instead of writing 0 over it', () => {
+      const { input, onValueChange } = renderParsed();
+      change(input, '', true);
+      expect(onValueChange).not.toHaveBeenCalled();
+      expect(input).toHaveValue(null);
+    });
+
+    it('passes the number on once it is complete', () => {
+      const { input, onValueChange } = renderParsed();
+      change(input, '', true);
+      change(input, '2.7', false);
+      expect(onValueChange).toHaveBeenLastCalledWith('2.7');
+      expect(input).toHaveValue(2.7);
+    });
+
+    it('shows the last number again when left unfinished', () => {
+      const { input, onValueChange } = renderParsed();
+      change(input, '', true);
+      fireEvent.blur(input);
+      expect(onValueChange).not.toHaveBeenCalled();
+      expect(input).toHaveValue(2);
+    });
+
+    it('still passes on a field that was really emptied', () => {
+      const { input, onValueChange } = renderParsed();
+      change(input, '', false);
+      expect(onValueChange).toHaveBeenLastCalledWith('');
+    });
+  });
 });
