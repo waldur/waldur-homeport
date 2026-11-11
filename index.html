@@ -5,7 +5,9 @@
 <html lang="en" translate="no">
   <head>
     <meta charset="UTF-8" />
-    <base href="%BASE_URL%" />
+    <!-- No <base> element: the image's Content-Security-Policy sends
+         base-uri 'none', which refuses one. Vite writes asset URLs absolute,
+         and the router takes the app's base from the build (src/router.ts). -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="opennodecloud.com" />
