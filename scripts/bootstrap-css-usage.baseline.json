@@ -1,7 +1,7 @@
 {
-  "compiledByteSize": 81044,
-  "totalClasses": 298,
-  "totalUsed": 298,
+  "compiledByteSize": 80950,
+  "totalClasses": 297,
+  "totalUsed": 297,
   "totalUnused": 0,
   "unused": {},
   "selectors": [
@@ -139,7 +139,6 @@
     "@layer bootstrap :: .text-anchor.text-anchor-danger",
     "@layer bootstrap :: .text-anchor.text-anchor-danger:hover",
     "@layer bootstrap :: .text-btn",
-    "@layer bootstrap :: .content-wrapper",
     "@layer bootstrap :: .disabled-view",
     "@layer bootstrap :: .disabled-view a",
     "@layer bootstrap :: .disabled-view button",

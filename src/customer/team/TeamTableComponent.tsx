@@ -83,7 +83,7 @@ export const TeamTableComponent = <
       {
         title: translate('Member'),
         render: ({ row }) => (
-          <div className="content-wrapper gap-1.5">
+          <div className="flex items-center gap-1.5">
             <Avatar
               name={getField(row, 'full_name')}
               src={getField(row, 'image')}
