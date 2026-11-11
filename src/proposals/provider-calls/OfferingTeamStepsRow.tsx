@@ -8,12 +8,14 @@ import {
   ProviderRequestedOffering,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { ROW_SECTIONS_CLASS, RowSection } from '@/proposals/ExpandableRowParts';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { useUser } from '@/workspace/hooks';
 
@@ -34,8 +36,7 @@ import { TeamSlotsTable } from './TeamSlotsTable';
 const OfferingManagersNeeded: FC<{
   row: ProviderRequestedOffering;
   providerUuid: string;
-  className?: string;
-}> = ({ row, providerUuid, className }) => {
+}> = ({ row, providerUuid }) => {
   const user = useUser();
   if (!needsOfferingManagers(row)) {
     return null;
@@ -50,7 +51,6 @@ const OfferingManagersNeeded: FC<{
     <AlertItem
       type="floating"
       variant="error"
-      className={className}
       title={translate('Nobody can do {offering}’s part in this call', {
         offering: row.offering_name,
       })}
@@ -72,34 +72,34 @@ const OfferingManagersNeeded: FC<{
   );
 };
 
-/** One line per step the call gives the offering's team: what it is, when
+/** One row per step the call gives the offering's team: what it is, when
  * it runs, how long it takes and who does it. */
 const TeamStepsSummary: FC<{
   steps: OfferingTeamStep[];
   offeringName: string;
 }> = ({ steps, offeringName }) => (
-  <div className="mb-3" data-testid="offering-team-steps">
-    <p className="font-medium mb-1">{translate('Your team’s steps')}</p>
+  <RowSection
+    title={translate('Your team’s steps')}
+    data-testid="offering-team-steps"
+  >
     {steps.length ? (
-      <ul className="mb-0 ps-4">
+      <PropertyList variant="summary" space={1.5}>
         {steps.map((step) => (
-          <li key={step.uuid}>
-            <span className="font-medium">{step.name}</span>
-            <span className="text-tertiary">
-              {' · '}
-              {[
-                phaseLabel(step.phase),
-                step.duration_in_days
-                  ? translate('{days} days', { days: step.duration_in_days })
-                  : null,
-                stepDoerText(step, offeringName),
-              ]
-                .filter(Boolean)
-                .join(' · ')}
-            </span>
-          </li>
+          <PropertyItem
+            key={step.uuid}
+            label={step.name}
+            value={[
+              phaseLabel(step.phase),
+              step.duration_in_days
+                ? translate('{days} days', { days: step.duration_in_days })
+                : null,
+              stepDoerText(step, offeringName),
+            ]
+              .filter(Boolean)
+              .join(' · ')}
+          />
         ))}
-      </ul>
+      </PropertyList>
     ) : (
       <p className="text-tertiary mb-0">
         {translate(
@@ -107,7 +107,7 @@ const TeamStepsSummary: FC<{
         )}
       </p>
     )}
-  </div>
+  </RowSection>
 );
 
 /**
@@ -178,51 +178,54 @@ export const OfferingTeamStepsRow: FC<{
   );
   return (
     <ExpandableContainer>
-      <OfferingManagersNeeded
-        row={row}
-        providerUuid={providerUuid}
-        className="mb-3"
-      />
-      <TeamStepsSummary steps={steps} offeringName={row.offering_name} />
-      <p className="font-medium mb-1">{translate('Open now')}</p>
-      {accepted && handOn ? (
-        <p className="text-tertiary mb-1.5" data-testid="default-hand-on">
-          {row.default_delegate_name
-            ? translate('New slots go to {name}.', {
-                name: row.default_delegate_name,
-              })
-            : translate('New slots stay with the offering’s managers.')}
-        </p>
-      ) : null}
-      {accepted ? (
-        <TeamSlotsTable
-          tableId={`offering-team-slots-${row.uuid}`}
-          slots={slots}
-          version={slotsQuery.dataUpdatedAt}
-          providerUuid={providerUuid}
-          showStep={steps.length > 1}
-          handOn={handOn}
-          refetch={refetchAll}
-          emptyMessage={translate(
-            'Nothing is waiting on your team in this call.',
+      <div className={ROW_SECTIONS_CLASS}>
+        <OfferingManagersNeeded row={row} providerUuid={providerUuid} />
+        <TeamStepsSummary steps={steps} offeringName={row.offering_name} />
+        <RowSection title={translate('Open now')}>
+          {accepted && handOn ? (
+            <p className="text-tertiary mb-1.5" data-testid="default-hand-on">
+              {row.default_delegate_name
+                ? translate('New slots go to {name}.', {
+                    name: row.default_delegate_name,
+                  })
+                : translate('New slots stay with the offering’s managers.')}
+            </p>
+          ) : null}
+          {!accepted ? (
+            <p className="text-tertiary mb-0">
+              {translate(
+                'Accept the request to receive work on the call’s proposals.',
+              )}
+            </p>
+          ) : slotsQuery.isLoading ? (
+            <LoadingSpinner />
+          ) : slots.length ? (
+            <TeamSlotsTable
+              tableId={`offering-team-slots-${row.uuid}`}
+              slots={slots}
+              version={slotsQuery.dataUpdatedAt}
+              providerUuid={providerUuid}
+              showStep={steps.length > 1}
+              handOn={handOn}
+              refetch={refetchAll}
+            />
+          ) : (
+            <p className="text-tertiary mb-0">
+              {translate('Nothing is waiting on your team in this call.')}
+            </p>
           )}
-        />
-      ) : (
-        <p className="text-tertiary mb-0">
-          {translate(
-            'Accept the request to receive work on the call’s proposals.',
-          )}
-        </p>
-      )}
-      <div className="mt-3">
-        <Link
-          state="marketplace-provider-call-demand"
-          params={{
-            uuid: providerUuid,
-            call: callFilterParam(row.call_uuid, row.call_name),
-          }}
-          label={translate('Demand for this call')}
-        />
+        </RowSection>
+        <div>
+          <Link
+            state="marketplace-provider-call-demand"
+            params={{
+              uuid: providerUuid,
+              call: callFilterParam(row.call_uuid, row.call_name),
+            }}
+            label={translate('Demand for this call')}
+            buttonVariant="tertiary"
+          />
+        </div>
       </div>
     </ExpandableContainer>
   );
