@@ -3,10 +3,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
 import { invoicesRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 import { useTitle } from '@/navigation/title';
 import { useNotify } from '@/store/notify';
 
@@ -17,9 +17,7 @@ import './BillingDetails.scss';
 
 export const BillingDetails: FunctionComponent = () => {
   useTitle(
-    ENV.accountingMode === 'accounting'
-      ? translate('Accounting record')
-      : translate('Invoice'),
+    isAccountingMode() ? translate('Accounting record') : translate('Invoice'),
   );
 
   const {
@@ -67,7 +65,7 @@ export const BillingDetails: FunctionComponent = () => {
     <LoadingSpinner />
   ) : error ? (
     <>{translate('Unable to load data.')}</>
-  ) : !invoice ? null : ENV.accountingMode === 'accounting' ? (
+  ) : !invoice ? null : isAccountingMode() ? (
     <BillingRecordDetails invoice={invoice} refreshInvoiceItems={callback} />
   ) : (
     <InvoiceDetails invoice={invoice} refreshInvoiceItems={callback} />

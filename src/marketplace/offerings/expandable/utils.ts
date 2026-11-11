@@ -5,6 +5,7 @@ import { ProviderOfferingCosts } from 'waldur-js-client';
 import { ENV } from '@/core/config';
 import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 
 export const formatOfferingCostsChart = (
   offeringCostsChartData: ProviderOfferingCosts[],
@@ -60,7 +61,7 @@ export const formatOfferingCostsChart = (
         name,
         type: 'line',
         data: offeringCostsChartData.map((row) =>
-          ENV.accountingMode === 'accounting' ? row.price : row.total,
+          isAccountingMode() ? row.price : row.total,
         ),
       },
     ],

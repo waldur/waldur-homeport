@@ -5,7 +5,6 @@ const { mockConfig } = vi.hoisted(() => {
     apiEndpoint: 'http://localhost:8080/',
     pageSize: 10,
     buildId: 'develop',
-    accountingMode: 'accounting',
     roles: [
       {
         name: 'owner',

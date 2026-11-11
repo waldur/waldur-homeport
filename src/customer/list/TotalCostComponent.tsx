@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { billingTotalCostRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 import { FinancialReportsFilterFormData } from '@/table/generated/FinancialReportsFilter';
 import { useFilterValues } from '@/table/useFilterValues';
 
@@ -26,7 +26,7 @@ const loadData = async (filter: FinancialReportsFilterFormData) => {
     },
   });
   // VAT is not included only when accounting mode is activated
-  if (ENV.accountingMode === 'accounting') {
+  if (isAccountingMode()) {
     return { total: response.data.price };
   } else {
     return { total: response.data.total };

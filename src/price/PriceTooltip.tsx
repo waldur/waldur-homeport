@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import { WarningTip } from 'waldur-ui';
 
-import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 
 interface PriceTooltipProps {
   estimated?: boolean;
@@ -16,7 +16,7 @@ export const PriceTooltip: FC<PriceTooltipProps> = ({
 }) => {
   // VAT is not included only when accounting mode is activated
   const parts = [];
-  if (ENV.accountingMode === 'accounting') {
+  if (isAccountingMode()) {
     parts.push(translate('VAT is not included.'));
   }
 

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
+import { isAccountingMode } from '@/invoices/accountingMode';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { Customer } from '@/workspace/types';
@@ -17,7 +17,7 @@ export const EstimatedCostField: FunctionComponent<{ row: Customer }> = ({
     return defaultCurrency(0);
   }
   // VAT is not included only when accounting mode is activated
-  if (ENV.accountingMode === 'accounting') {
+  if (isAccountingMode()) {
     return defaultCurrency(estimate.total);
   } else {
     return defaultCurrency(
@@ -39,7 +39,7 @@ export const ExportEstimatedCostField = ({
     return 0;
   }
   // VAT is not included only when accounting mode is activated
-  if (ENV.accountingMode === 'accounting') {
+  if (isAccountingMode()) {
     return parseFloat(estimate.total);
   } else {
     return parseFloat(estimate.total) + parseFloat(estimate.tax);

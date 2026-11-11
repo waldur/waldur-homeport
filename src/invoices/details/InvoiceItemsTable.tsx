@@ -30,7 +30,7 @@ import { groupInvoiceItems } from './utils';
 interface InvoiceItemsTableProps {
   invoice: Invoice;
   /**
-   * `invoiceView` is for the user invoice view, when `ENV.accountingMode !== 'accounting'`
+   * `invoiceView` is for the user invoice view, when `!isAccountingMode()` (`@/invoices/accountingMode`)
    * @see `src/invoices/details/BillingDetails.tsx`
    * */
   invoiceView?: boolean;

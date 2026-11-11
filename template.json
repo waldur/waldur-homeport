@@ -63300,6 +63300,11 @@
       "feature_area": "actions"
     }
   },
+  "Show costs and prices with VAT included and present monthly invoices instead of accounting records. When off, costs are shown without VAT.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show course accounts of the scopes.": {
     "context": {
       "feature_area": "features"

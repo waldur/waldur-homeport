@@ -1,10 +1,10 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { financialReportsList } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { formatDate } from '@/core/dateUtils';
 import { FinancialReportSendButton } from '@/customer/list/FinancialReportSendButton';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 import { PriceTooltip } from '@/price/PriceTooltip';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -61,10 +61,9 @@ export const CustomerList: FunctionComponent<{
 }> = ({ accountingPeriods, initialFilters }) => {
   const values = useFilterValues('customerList');
   const accountingPeriodIsCurrent = values?.accounting_period?.value?.current;
-  const vatMessage =
-    ENV.accountingMode === 'accounting'
-      ? translate('VAT is not included')
-      : translate('VAT is included');
+  const vatMessage = isAccountingMode()
+    ? translate('VAT is not included')
+    : translate('VAT is included');
 
   const columns: Column<Customer>[] = [
     {

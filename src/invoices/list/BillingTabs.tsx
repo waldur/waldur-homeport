@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@/core/config';
+import { isAccountingMode } from '@/invoices/accountingMode';
 
 import { AgreementInfo } from './AgreementInfo';
 import { BillingRecordsList } from './BillingRecordsList';
@@ -8,7 +8,7 @@ import { InvoicesList } from './InvoicesList';
 import { OverviewLastMonths } from './OverviewLastMonths';
 
 export const BillingTabs: FunctionComponent = () => {
-  return ENV.accountingMode === 'accounting' ? (
+  return isAccountingMode() ? (
     <div>
       <OverviewLastMonths />
       <AgreementInfo />
