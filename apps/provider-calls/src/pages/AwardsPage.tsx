@@ -21,12 +21,16 @@ import {
 } from '../components';
 import { DASH, formatAmount, formatDate } from '../format';
 import { providerOrderUrl } from '../links';
+import { APPROVE_ORDER, can, REJECT_ORDER, useGrants } from '../permissions';
 import { Provider } from '../providers';
 import { PROVIDER_CALLS_QUERY_KEY, useAwardOrders } from '../queries';
 import { navigate, pageHref, proposalHref, useRoute } from '../router';
 
 const FILTERS: Record<string, OrderState[]> = {
   waiting: ['pending-provider'],
+  // The applicant's organisation owes a purchase order before the order
+  // reaches the provider: nothing to do yet, but it is coming.
+  'purchase-order': ['pending-consumer'],
   provisioning: ['executing', 'pending-project', 'pending-start-date'],
   done: ['done'],
   refused: ['rejected', 'canceled', 'erred'],
@@ -109,6 +113,16 @@ const invalidateQueries = [{ queryKey: [PROVIDER_CALLS_QUERY_KEY] }];
  * extensions or final report.
  */
 const AwardOrderActions = ({ order }: { order: OrderDetails }) => {
+  const grants = useGrants();
+  // ORDER_PROVIDER_SOURCES: the offering, its organisation, and that
+  // organisation's service provider.
+  const scopes = {
+    offeringUuid: order.offering_uuid,
+    customerUuid: order.provider_uuid,
+    serviceProvider: true,
+  };
+  const mayApprove = can(grants.data, APPROVE_ORDER, scopes);
+  const mayReject = can(grants.data, REJECT_ORDER, scopes);
   const approve = useManagedMutation({
     mutationFn: () =>
       marketplaceOrdersApproveByProvider({ path: { uuid: order.uuid } }),
@@ -164,28 +178,34 @@ const AwardOrderActions = ({ order }: { order: OrderDetails }) => {
   });
 
   // Hidden, not disabled, while the answer is sent: the row then leaves
-  // the "waiting" list.
+  // the "waiting" list. Each is also hidden from a member whose role does
+  // not carry it.
   if (
     order.state !== 'pending-provider' ||
     approve.isPending ||
-    refuse.isPending
+    refuse.isPending ||
+    !(mayApprove || mayReject)
   ) {
     return null;
   }
   return (
     <div className="flex justify-end gap-2">
-      <BaseButton
-        size="sm"
-        variant="tertiary"
-        label={translate('Refuse')}
-        onClick={() => refuse.mutate()}
-      />
-      <BaseButton
-        size="sm"
-        variant="primary"
-        label={translate('Approve')}
-        onClick={() => approve.mutate()}
-      />
+      {mayReject ? (
+        <BaseButton
+          size="sm"
+          variant="tertiary"
+          label={translate('Refuse')}
+          onClick={() => refuse.mutate()}
+        />
+      ) : null}
+      {mayApprove ? (
+        <BaseButton
+          size="sm"
+          variant="primary"
+          label={translate('Approve')}
+          onClick={() => approve.mutate()}
+        />
+      ) : null}
     </div>
   );
 };
@@ -290,6 +310,10 @@ export const AwardsPage = ({ provider }: { provider?: Provider }) => {
         }
         options={[
           { value: 'waiting', label: translate('Waiting for you') },
+          {
+            value: 'purchase-order',
+            label: translate('Purchase order owed'),
+          },
           { value: 'provisioning', label: translate('Provisioning') },
           { value: 'done', label: translate('Provisioned') },
           { value: 'refused', label: translate('Refused or failed') },

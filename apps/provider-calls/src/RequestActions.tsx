@@ -8,7 +8,9 @@ import { useManagedMutation } from 'waldur-shell';
 import { BaseButton } from 'waldur-ui';
 
 import { formatAmount } from './format';
+import { ACCEPT_CALL_REQUEST, can, useGrants } from './permissions';
 import { PROVIDER_CALLS_QUERY_KEY } from './queries';
+import { useRoute } from './router';
 
 const invalidateQueries = [{ queryKey: [PROVIDER_CALLS_QUERY_KEY] }];
 
@@ -45,9 +47,15 @@ const describeCommitments = (row: ProviderRequestedOffering) => {
 
 /**
  * Accept or decline a call's request for one of the provider's offerings.
- * Only a request still waiting has these; the backend refuses any other.
+ * Only a request still waiting has these; the backend refuses any other,
+ * and anyone without OFFERING.ACCEPT_CALL_REQUEST on the offering or its
+ * organisation (an evaluator, say), so they are not offered to them.
  */
 export const RequestActions = ({ row }: { row: ProviderRequestedOffering }) => {
+  const grants = useGrants();
+  // The listed requests are the selected provider's, so its organisation is
+  // the offering's.
+  const providerUuid = useRoute().params.get('provider') ?? undefined;
   const accept = useManagedMutation({
     mutationFn: () =>
       proposalRequestedOfferingsAccept({ path: { uuid: row.uuid } }),
@@ -101,7 +109,15 @@ export const RequestActions = ({ row }: { row: ProviderRequestedOffering }) => {
 
   // Hidden, not disabled, while the request is answered: the row leaves the
   // "waiting" list as soon as the answer is in.
-  if (row.state !== 'requested' || accept.isPending || decline.isPending) {
+  if (
+    row.state !== 'requested' ||
+    accept.isPending ||
+    decline.isPending ||
+    !can(grants.data, ACCEPT_CALL_REQUEST, {
+      offeringUuid: row.offering_uuid,
+      customerUuid: providerUuid,
+    })
+  ) {
     return null;
   }
   return (
