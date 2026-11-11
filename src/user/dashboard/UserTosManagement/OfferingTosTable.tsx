@@ -10,6 +10,7 @@ import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { RevokeTosAction } from './RevokeTosAction';
 import { ViewTosAction } from './ViewTosAction';
@@ -52,21 +53,20 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
     const columns = useMemo(
       () => [
         {
-          title: translate('Terms of Service'),
+          title: translate('Version'),
           render: ({ row }) => (
-            <div>
-              <button
-                type="button"
-                className="text-anchor block text-start"
-                onClick={() => openViewDialog(row)}
-              >
-                {row.version || 'v1.0'}
-                <span className="text-anchor small block mt-1.5">
-                  {formatDate(row.created)}
-                </span>
-              </button>
-            </div>
+            <button
+              type="button"
+              className="text-anchor text-start"
+              onClick={() => openViewDialog(row)}
+            >
+              {renderFieldOrDash(row.version)}
+            </button>
           ),
+        },
+        {
+          title: translate('Created'),
+          render: ({ row }) => <>{formatDate(row.created)}</>,
         },
         {
           title: translate('Status'),
@@ -85,28 +85,8 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
             />
           ),
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <ActionsDropdown side="right">
-              <ViewTosAction
-                tos={row}
-                offering={offering}
-                refetch={handleRefetch}
-              />
-              {row.has_user_consent && (
-                <RevokeTosAction
-                  tos={row}
-                  offering={offering}
-                  refetch={handleRefetch}
-                  offeringUuid={offering.uuid}
-                />
-              )}
-            </ActionsDropdown>
-          ),
-        },
       ],
-      [offering, handleRefetch, openViewDialog],
+      [openViewDialog],
     );
 
     return (
@@ -114,8 +94,27 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
         {...tableProps}
         columns={columns}
         verboseName={translate('Terms of Service')}
+        rowActions={({ row }) => (
+          <ActionsDropdown row={row} refetch={handleRefetch}>
+            <ViewTosAction
+              tos={row}
+              offering={offering}
+              refetch={handleRefetch}
+            />
+            {row.has_user_consent && (
+              <RevokeTosAction
+                tos={row}
+                offering={offering}
+                refetch={handleRefetch}
+                offeringUuid={offering.uuid}
+              />
+            )}
+          </ActionsDropdown>
+        )}
+        hideTitle
         hasActionBar={false}
         hoverShadow={false}
+        placeholderHasRetry={false}
         minHeight="auto"
         initialPageSize={5}
       />
