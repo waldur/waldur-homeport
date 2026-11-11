@@ -9,7 +9,7 @@ export const isOnlyOneProjectManagerEnabled = (): boolean =>
   Boolean(ENV.plugins.WALDUR_CORE?.ONLY_ONE_PROJECT_MANAGER);
 
 /** The system project-manager role, or an organization's copy of it. */
-const isProjectManagerName = (roleName?: string | null): boolean =>
+export const isProjectManagerName = (roleName?: string | null): boolean =>
   Boolean(
     roleName &&
     (roleName === RoleEnum.PROJECT_MANAGER ||

@@ -15,6 +15,7 @@ import { Role } from '@/permissions/types';
 import { filterGrantableRoles } from '@/permissions/utils';
 import {
   getOnlyOneProjectManagerTooltip,
+  isOnlyOneProjectManagerEnabled,
   isProjectManagerRole,
 } from '@/project/team/onlyOneProjectManager';
 import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
@@ -55,14 +56,20 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   // Only when the invite is pinned to a project can the PM option be greyed
   // out up front; at organization scope the project is chosen after the role,
   // so the footer gate handles it there.
-  const { data: projectHasManager } = useProjectHasActiveManager(
-    context.project?.uuid,
-  );
+  const { data: projectHasManager, isPending: isCheckingManager } =
+    useProjectHasActiveManager(context.project?.uuid);
+  // No cached answer on open (gcTime: 0), so hold the role until the check
+  // returns. A pending invitation does not count as a manager.
+  const managerRoleTaken =
+    Boolean(projectHasManager) ||
+    (isOnlyOneProjectManagerEnabled() &&
+      Boolean(context.project?.uuid) &&
+      isCheckingManager);
 
   // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
   const roles = useMemo(() => {
     const disableTakenProjectManager = (_roles: Role[]) =>
-      projectHasManager
+      managerRoleTaken
         ? _roles.map((role) =>
             isProjectManagerRole(role)
               ? {
@@ -109,7 +116,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       is_active: !role.name.startsWith('PROJECT'),
       tooltip: translate('There are no projects.'),
     }));
-  }, [context, defaultProject, customerUuid, scopedRoles, projectHasManager]);
+  }, [context, defaultProject, customerUuid, scopedRoles, managerRoleTaken]);
 
   const defaultRole = useMemo(
     () => (roles.length > 0 ? roles[0] : null),

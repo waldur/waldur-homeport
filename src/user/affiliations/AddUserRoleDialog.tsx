@@ -18,14 +18,9 @@ import { getExistingRoleFeedback } from '@/permissions/existingRoles';
 import { Role, RoleType } from '@/permissions/types';
 import { useExistingRoles } from '@/permissions/useExistingRoles';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
-import {
-  getOnlyOneProjectManagerTooltip,
-  isOnlyOneProjectManagerEnabled,
-  isProjectManagerRole,
-  isProjectManagerSelectionBlocked,
-} from '@/project/team/onlyOneProjectManager';
+import { getOnlyOneProjectManagerTooltip } from '@/project/team/onlyOneProjectManager';
 import { RoleGroup } from '@/project/team/RoleGroup';
-import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
+import { useProjectManagerBlock } from '@/project/team/useProjectHasActiveManager';
 import { getCurrentUser } from '@/user/UsersService';
 import { useSetUser, useUser } from '@/workspace/hooks';
 
@@ -190,17 +185,12 @@ const AddUserRoleForm: FC<AddUserRoleFormProps> = ({
     !values.scope?.customer_uuid &&
     isProposalCustomerPending;
 
-  const { data: projectHasManager, isPending: isCheckingManager } =
-    useProjectHasActiveManager(projectUuid);
   // The setting is not a staff override. The API rejects a second manager
   // for every caller, so the form blocks the same selection.
-  const needsManagerCheck =
-    isOnlyOneProjectManagerEnabled() &&
-    isProjectManagerRole(values.role) &&
-    Boolean(projectUuid);
-  const isProjectManagerBlocked =
-    isProjectManagerSelectionBlocked(projectHasManager, values.role) ||
-    (needsManagerCheck && isCheckingManager);
+  const isProjectManagerBlocked = useProjectManagerBlock(
+    projectUuid,
+    values.role,
+  );
 
   const { hits: existingRoles, isChecking: isCheckingExistingRoles } =
     useExistingRoles({

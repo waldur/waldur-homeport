@@ -14,12 +14,9 @@ import { getExistingRoleFeedback } from '@/permissions/existingRoles';
 import { Role } from '@/permissions/types';
 import { useExistingRoles } from '@/permissions/useExistingRoles';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
-import {
-  getOnlyOneProjectManagerTooltip,
-  isProjectManagerSelectionBlocked,
-} from '@/project/team/onlyOneProjectManager';
+import { getOnlyOneProjectManagerTooltip } from '@/project/team/onlyOneProjectManager';
 import { RoleGroup } from '@/project/team/RoleGroup';
-import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
+import { useProjectManagerBlock } from '@/project/team/useProjectHasActiveManager';
 import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { OrganizationProjectSelectField } from './OrganizationProjectSelectField';
@@ -73,11 +70,8 @@ const AddProjectUserDialogFormBody: FC<{
 }> = ({ handleSubmit, invalid, values, resolve, updateMutation }) => {
   const currentUser = useUser() as User;
   const customer = useCustomer();
-  const { data: hasActiveManager } = useProjectHasActiveManager(
+  const isProjectManagerBlocked = useProjectManagerBlock(
     values.project?.uuid,
-  );
-  const isProjectManagerBlocked = isProjectManagerSelectionBlocked(
-    hasActiveManager,
     values.role,
   );
 
