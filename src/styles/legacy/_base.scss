@@ -25,24 +25,6 @@
   }
 }
 
-/* LIST-GROUP & ITEMS */
-.list-group-item {
-  background-color: var(--bg-primary);
-
-  @include dark-theme {
-    background-color: var(--bg-tertiary);
-  }
-
-  &:hover {
-    background-color: var(--bg-quaternary);
-  }
-  &.active {
-    color: var(--text-primary);
-    background-color: var(--bg-quaternary);
-    border-color: var(--border-divider);
-  }
-}
-
 // Named `rotate-toggle-180`, not the more obvious `rotate-180`: Tailwind
 // (enabled app-wide since it's now part of the same bundle) content-scans
 // every source file for class-name-shaped strings and generates a

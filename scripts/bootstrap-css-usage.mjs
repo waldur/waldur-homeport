@@ -219,12 +219,6 @@ export function isClassAllowed(cls, corpusTokens) {
     return true;
   }
   if (
-    corpusTokens.has('ListGroup') &&
-    /^list-group(?:-(?:flush|item(?:-action)?))?$/.test(cls)
-  ) {
-    return true;
-  }
-  if (
     corpusTokens.has('Spinner') &&
     /^spinner-(?:border|grow)(?:-sm)?$/.test(cls)
   ) {

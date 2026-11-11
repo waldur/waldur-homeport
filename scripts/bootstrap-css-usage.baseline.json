@@ -1,7 +1,7 @@
 {
-  "compiledByteSize": 81774,
-  "totalClasses": 305,
-  "totalUsed": 305,
+  "compiledByteSize": 81364,
+  "totalClasses": 304,
+  "totalUsed": 304,
   "totalUnused": 0,
   "unused": {},
   "selectors": [
@@ -129,10 +129,6 @@
     "@layer bootstrap :: [data-slot=card] [data-slot=card-header] [data-slot=card-title] .h5",
     "@layer bootstrap :: [data-slot=card] [data-slot=card-header] [data-slot=card-title] h6",
     "@layer bootstrap :: [data-slot=card] [data-slot=card-header] [data-slot=card-title] .h6",
-    "@layer bootstrap :: .list-group-item",
-    "@layer bootstrap :: :where([data-theme=dark]) .list-group-item",
-    "@layer bootstrap :: .list-group-item:hover",
-    "@layer bootstrap :: .list-group-item.active",
     "@layer bootstrap :: .rotate-toggle-180",
     "@layer bootstrap :: .collapsible:not(.collapsed) > .rotate-toggle-180",
     "@layer bootstrap :: .show > .rotate-toggle-180",

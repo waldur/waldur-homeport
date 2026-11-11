@@ -156,15 +156,12 @@ describe('bootstrapCssUsage', () => {
         expect(isClassAllowed('table-responsive', new Set())).toBe(false);
       });
 
-      it('allows ListGroup classes only when ListGroup is present in corpus', () => {
+      it('no longer allows list-group classes for a ListGroup token', () => {
         const lgTokens = new Set(['ListGroup']);
-        expect(isClassAllowed('list-group', lgTokens)).toBe(true);
-        expect(isClassAllowed('list-group-flush', lgTokens)).toBe(true);
-        expect(isClassAllowed('list-group-item', lgTokens)).toBe(true);
-        expect(isClassAllowed('list-group-item-action', lgTokens)).toBe(true);
-
-        expect(isClassAllowed('list-group', new Set())).toBe(false);
-        expect(isClassAllowed('list-group-numbered', lgTokens)).toBe(false);
+        expect(isClassAllowed('list-group', lgTokens)).toBe(false);
+        expect(isClassAllowed('list-group-flush', lgTokens)).toBe(false);
+        expect(isClassAllowed('list-group-item', lgTokens)).toBe(false);
+        expect(isClassAllowed('list-group-item-action', lgTokens)).toBe(false);
       });
 
       it('allows Spinner classes only when Spinner is present in corpus', () => {
