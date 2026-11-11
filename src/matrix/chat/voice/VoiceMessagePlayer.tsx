@@ -1,4 +1,5 @@
 import { PauseIcon, PlayIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, useEffect, useRef, useState } from 'react';
 
 import { translate } from '@/i18n';
@@ -160,7 +161,10 @@ export const VoiceMessagePlayer: FC<VoiceMessagePlayerProps> = ({
     : formatClock(effectiveDuration);
 
   return (
-    <div className="tc-voice">
+    <div
+      className="flex items-center gap-2.5 min-w-[180px]"
+      data-testid="voice-message-player"
+    >
       {/* Lifecycle is driven by the play/pause button; no visible controls. */}
       {/* preload="auto" decodes the (already in-memory) blob ahead of the
           click. With "metadata", the first play() of a finite-duration note
@@ -171,26 +175,43 @@ export const VoiceMessagePlayer: FC<VoiceMessagePlayerProps> = ({
       <audio ref={audioRef} src={src} preload="auto" />
       <button
         type="button"
-        className="tc-voice__play"
+        className="shrink-0 size-8 grid place-items-center p-0 border-0 rounded-full bg-[var(--bg-brand-solid)] text-white cursor-pointer hover:bg-[var(--btn-primary-bg-hover)]"
         onClick={toggle}
         aria-label={playing ? translate('Pause') : translate('Play')}
       >
-        {playing ? <PauseIcon weight="fill" /> : <PlayIcon weight="fill" />}
+        {playing ? (
+          <PauseIcon size={15} weight="fill" />
+        ) : (
+          <PlayIcon size={15} weight="fill" />
+        )}
       </button>
-      <div className="tc-voice__bars" aria-hidden="true">
+      {/* Let the waveform shrink below its 40-bar intrinsic width and clip the
+          overflowing bars, so the fixed-width duration label is never pushed past
+          the bubble edge in a narrow drawer. */}
+      <div
+        className="flex-1 min-w-0 overflow-hidden flex items-center gap-0.5 h-7"
+        aria-hidden="true"
+        data-testid="voice-player-bars"
+      >
         {bars.map((value, i) => (
           <span
             key={i}
-            className={
-              i < playedBars ? 'tc-voice__bar is-played' : 'tc-voice__bar'
-            }
+            data-testid="voice-bar"
+            className={classNames(
+              'flex-1 min-w-[2px] rounded-full transition-colors duration-100',
+              i < playedBars
+                ? 'bg-[var(--bg-brand-solid)]'
+                : 'bg-[var(--border-primary)]',
+            )}
             style={{
               height: `${Math.max(10, (value / MAX_WAVEFORM_VALUE) * 100)}%`,
             }}
           />
         ))}
       </div>
-      <span className="tc-voice__time">{label}</span>
+      <span className="shrink-0 text-xs text-secondary tabular-nums">
+        {label}
+      </span>
     </div>
   );
 };
