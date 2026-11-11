@@ -6,7 +6,9 @@ import {
   getAuthHeader,
   handleDemoResetResponse,
   handleUnauthorizedResponse,
+  refuseUnfilledPathParams,
   resetAuthSessionTracking,
+  UnfilledPathParamError,
 } from './client';
 import { configureAuthCore } from './config';
 
@@ -289,5 +291,55 @@ describe('handleDemoResetResponse', () => {
     await handleDemoResetResponse(response);
     expect(onDemoReset).not.toHaveBeenCalled();
     expect(response.bodyUsed).toBe(false);
+  });
+});
+
+describe('refuseUnfilledPathParams', () => {
+  const request = new Request('http://localhost:8080/api/calls/x/');
+
+  it('passes a request whose path parameters all have values', () => {
+    expect(
+      refuseUnfilledPathParams(request, {
+        url: '/api/calls/{uuid}/offerings/{obj_uuid}/',
+        path: { uuid: 'abc', obj_uuid: 'def' },
+      }),
+    ).toBe(request);
+  });
+
+  it('passes a request without path parameters', () => {
+    expect(refuseUnfilledPathParams(request, { url: '/api/calls/' })).toBe(
+      request,
+    );
+    expect(refuseUnfilledPathParams(request)).toBe(request);
+  });
+
+  it.each([
+    ['undefined', { uuid: undefined }],
+    ['null', { uuid: null }],
+    ['absent', {}],
+  ])('refuses a request whose path parameter is %s', (_, path) => {
+    expect(() =>
+      refuseUnfilledPathParams(request, {
+        url: '/api/proposal-protected-calls/{uuid}/',
+        path,
+      }),
+    ).toThrow(UnfilledPathParamError);
+  });
+
+  it('refuses a request sent without any path values', () => {
+    expect(() =>
+      refuseUnfilledPathParams(request, {
+        url: '/api/proposal-protected-calls/{uuid}/',
+      }),
+    ).toThrow(UnfilledPathParamError);
+  });
+
+  it('reads the name behind a serialization style marker', () => {
+    expect(
+      refuseUnfilledPathParams(request, {
+        url: '/api/items/{.uuid}/{name*}/',
+        path: { uuid: 'a', name: 'b' },
+      }),
+    ).toBe(request);
   });
 });
