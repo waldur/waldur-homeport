@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { DemoPresetUser, demoPresetStatusRetrieve } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, cn } from 'waldur-ui';
 
 import { isDemoPresetsEnabled } from '@/administration/demo-presets/gate';
 import { format } from '@/core/ErrorMessageFormatter';
@@ -19,11 +19,23 @@ const DEMO_USERS_QUERY_KEY = ['demo-preset-users'];
 const canQuickLogin = (user: DemoPresetUser) =>
   !user.is_staff && !user.is_support && Boolean(user.password);
 
+interface DemoUserQuickLoginProps {
+  /**
+   * `inline`: a section under the sign-in methods. `card`: a card of its own,
+   * for the hero column beside the sign-in column.
+   */
+  variant?: 'inline' | 'card';
+  className?: string;
+}
+
 /**
- * One-click sign-in as the demo users of the preset loaded last, under the
- * sign-in form. Only on a deployment that enables demo presets.
+ * One-click sign-in as the demo users of the preset loaded last. Only on a
+ * deployment that enables demo presets.
  */
-export const DemoUserQuickLogin: FC = () => {
+export const DemoUserQuickLogin: FC<DemoUserQuickLoginProps> = ({
+  variant = 'inline',
+  className,
+}) => {
   const enabled = isDemoPresetsEnabled();
   const { data } = useQuery({
     queryKey: DEMO_USERS_QUERY_KEY,
@@ -68,7 +80,12 @@ export const DemoUserQuickLogin: FC = () => {
 
   return (
     <section
-      className="mt-6 border-t border-t-secondary pt-4"
+      className={cn(
+        variant === 'card'
+          ? 'w-full max-w-90 rounded-xl border border-secondary bg-primary p-5 text-left shadow-lg'
+          : 'mt-6 border-t border-t-secondary pt-4',
+        className,
+      )}
       aria-labelledby="demo-quick-login-title"
       data-testid="demo-quick-login"
     >
