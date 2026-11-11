@@ -34,4 +34,17 @@ describe('UserDetailsButton', () => {
     const options = mockOpenDialog.mock.calls[0][1];
     expect(options.resolve).toEqual({ user_uuid: 'user-42', user: row });
   });
+
+  // The Roles and permissions tab holds a six-column table; in the large
+  // size its Role column ended up under the pinned actions.
+  it('opens the dialog wide enough for the roles table', async () => {
+    const user = userEvent.setup();
+
+    renderWithProviders(
+      inActionsMenu(<UserDetailsButton row={{ uuid: 'user-42' } as any} />),
+    );
+    await user.click(screen.getByText('Details'));
+
+    expect(mockOpenDialog.mock.calls[0][1].size).toBe('xl');
+  });
 });

@@ -24,7 +24,7 @@ export const UserDetailsButton: React.FC<UserDetailsButtonProps> = ({
   const callback = () =>
     openDialog(UserPopover, {
       resolve: { user_uuid: userId },
-      size: 'lg',
+      size: 'xl',
     });
   return (
     <ActionItem
