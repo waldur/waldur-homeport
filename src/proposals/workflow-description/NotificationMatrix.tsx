@@ -246,7 +246,7 @@ const FlagsList: FC<{
         hasActionBar={false}
         cardBordered={false}
         bodyClassName="p-0"
-        className="[&_.table-responsive]:[container-type:inline-size]"
+        className="[&_[data-slot=table-responsive]]:[container-type:inline-size]"
         placeholderHasRetry={false}
         expandableRow={({ row }) => (
           <ExpandableContainer>

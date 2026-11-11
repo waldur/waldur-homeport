@@ -239,7 +239,7 @@ Layouts are Tailwind grid or flex; `no-bootstrap-grid` reports legacy grid class
 
 Prefer standard CSS grid (`grid grid-cols-1 sm:grid-cols-2`, `sm:grid-cols-3`) for fixed column layouts so they stack cleanly on mobile. For dynamic or auto-sizing row items, use flexbox with standard utilities (`flex-1`, `flex-none`, `shrink-0`).
 
-A grid's `gap` replaces gutter padding, so a column's content lines up with the parent's padding. `TableView` keeps its cell padding in `src/styles/legacy/_table.scss` in the `bootstrap` cascade layer, so the first/last-cell rules still win.
+A grid's `gap` replaces gutter padding, so a column's content lines up with the parent's padding. `TableView`'s cells carry their own padding as utilities, and the first and last cell read `--table-edge-px` (see [table/styling-architecture.md](table/styling-architecture.md)).
 
 ---
 

@@ -29,6 +29,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { propVal } from '@/property/propertyFields';
 import { useAwardedResources } from '@/proposals/awardedResources';
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import { Proposal } from '@/proposals/types';
 import { proposalWorkflowStatesKey } from '@/proposals/workflow/queries';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -38,8 +39,6 @@ import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
-
-import '@/proposals/flushTable.scss';
 
 import { actsForApplicant, isOnProposalTeam } from '../team/teamRules';
 
@@ -313,7 +312,7 @@ export const RunsTable: FC<{
       // A short list, shown whole, flush with the section card it sits in:
       // no second border, and no empty floor under its few rows.
       hasPagination={false}
-      className="proposal-flush-table"
+      className={PROPOSAL_FLUSH_TABLE_CLASS}
       cardBordered={false}
       minHeight="auto"
       columns={columns}

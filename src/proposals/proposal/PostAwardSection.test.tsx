@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { describe, expect, it } from 'vitest';
 
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import { tablesReducer } from '@/table/store';
 import { renderWithProviders } from '@/test/harness';
 
@@ -42,9 +43,12 @@ describe('RunsTable', () => {
     expect(await screen.findByText('Approved')).toBeInTheDocument();
     const table = screen.getByRole('table');
     // eslint-disable-next-line testing-library/no-node-access
-    expect(table.closest('.proposal-flush-table')).not.toBeNull();
+    const card = table.closest('[data-slot="card"][data-variant="table"]');
+    expect(card).toHaveClass(...PROPOSAL_FLUSH_TABLE_CLASS.split(' '));
     // eslint-disable-next-line testing-library/no-node-access
-    const scroller = table.closest<HTMLElement>('.table-responsive');
+    const scroller = table.closest<HTMLElement>(
+      '[data-slot="table-responsive"]',
+    );
     expect(scroller?.style.minHeight).toBe('auto');
   });
 });

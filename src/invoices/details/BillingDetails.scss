@@ -26,7 +26,7 @@
   // drop the columns' minimum widths and the horizontal scroll, and wrap
   // the cells the screen truncates.
   [data-variant='table']:where([data-slot='card']) {
-    .table-responsive {
+    [data-slot='table-responsive'] {
       overflow: visible !important;
     }
 
@@ -39,18 +39,11 @@
       min-width: 0 !important;
     }
 
-    td.ellipsis,
-    td.ellipsis > * {
-      white-space: normal;
-      overflow: visible;
-      text-overflow: clip;
-    }
-
-    // The row selection checkboxes.
-    table:has(td.row-control) col:first-child,
-    table:has(td.row-control) thead th:first-child,
-    td.row-control {
-      display: none;
+    td,
+    td > * {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
     }
   }
 

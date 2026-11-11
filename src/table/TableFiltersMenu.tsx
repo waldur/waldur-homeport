@@ -24,7 +24,6 @@ import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
-import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
 import { closeFlyoutOnTabOut, focusFirstIn } from './filterMenuFocus';
 import { SavedFilterSelect } from './SavedFilterSelect';
@@ -33,6 +32,7 @@ import {
   selectSelectedSavedFilter,
   selectTableSavedFilters,
 } from './selectors';
+import { HEADER_CONTROL_BTN_CLASS } from './styles';
 import { TableFilterService } from './TableFilterService';
 import { TableProps, TablesRootState } from './types';
 import { getSavedFiltersKey } from './utils';
@@ -426,8 +426,12 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               <button
                 ref={triggerRef}
                 type="button"
+                data-testid="column-filter-toggle"
                 aria-label={translate('Filter by column')}
-                className={classNames(COLUMN_FILTER_TOGGLE_CLASS, 'text-btn')}
+                className={classNames(
+                  HEADER_CONTROL_BTN_CLASS,
+                  'inline-flex items-center aria-expanded:[&_svg]:text-[var(--fg-brand-primary)]',
+                )}
               >
                 <FunnelSimpleIcon size={16} weight="bold" />
               </button>

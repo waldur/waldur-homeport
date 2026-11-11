@@ -4,6 +4,10 @@ import { createStore } from 'redux';
 import { describe, expect, it } from 'vitest';
 
 import {
+  GRID_HOVER_SHADOW_CLASS,
+  TABLE_HOVER_SHADOW_CLASS,
+} from '../../styles';
+import {
   createMockTableContext,
   renderWithTableContext,
   TableContext,
@@ -172,7 +176,7 @@ describe('TableContent', () => {
       });
 
       expect(screen.getByTestId('table-container')).toHaveClass(
-        'table-hover-shadow',
+        TABLE_HOVER_SHADOW_CLASS,
       );
     });
 
@@ -186,7 +190,7 @@ describe('TableContent', () => {
       });
 
       expect(screen.getByTestId('table-container')).not.toHaveClass(
-        'table-hover-shadow',
+        TABLE_HOVER_SHADOW_CLASS,
       );
     });
   });
@@ -223,7 +227,7 @@ describe('TableContent', () => {
       });
 
       expect(screen.getByTestId('table-container')).toHaveClass(
-        'grid-hover-shadow',
+        GRID_HOVER_SHADOW_CLASS,
       );
     });
 
@@ -263,7 +267,7 @@ describe('TableContent', () => {
       });
 
       expect(screen.getByTestId('table-container')).toHaveClass(
-        'table-hover-shadow',
+        TABLE_HOVER_SHADOW_CLASS,
       );
     });
 
@@ -280,7 +284,7 @@ describe('TableContent', () => {
       });
 
       expect(screen.getByTestId('table-container')).not.toHaveClass(
-        'table-hover-shadow',
+        TABLE_HOVER_SHADOW_CLASS,
       );
     });
   });

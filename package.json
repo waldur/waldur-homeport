@@ -300,7 +300,7 @@
         ]
       },
       "property-disallowed-list": [
-        "/^--(?!card-(border-width|radius|box-shadow|min-width|header-(min-h|mx|px|padding-y|bg|color)|title-(my|mr)|toolbar-my|content-(pt|pb|px|flex))$)/",
+        "/^--(?!card-(surface-bg|border-width|radius|box-shadow|min-width|header-(min-h|mx|px|padding-y|bg|color)|title-(my|mr)|toolbar-my|content-(pt|pb|px|flex))$)/",
         {
           "message": "Custom properties (--*) must not be defined outside packages/design-tokens/. Define tokens in packages/design-tokens/src/css/. (The --card-* hooks registered in design-tokens card.css are set by context rules.)"
         }

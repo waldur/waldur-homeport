@@ -26,12 +26,12 @@ describe('TableView', () => {
       });
 
       const table = screen.getByRole('table');
-      expect(table).toHaveClass('table');
+      expect(table).toHaveClass('w-full');
+      expect(table).toHaveClass('border-collapse');
       expect(table).toHaveClass('align-middle');
-      expect(table).toHaveClass('table-row-bordered');
     });
 
-    it('adds table-expandable class when expandableRow is provided', () => {
+    it('renders row expander when expandableRow is provided', () => {
       const ExpandableRow = ({ row }) => <div>Expanded: {row.name}</div>;
 
       renderWithTableContext(<TableView />, {
@@ -40,11 +40,10 @@ describe('TableView', () => {
         slots: { expandableRow: ExpandableRow },
       });
 
-      const table = screen.getByRole('table');
-      expect(table).toHaveClass('table-expandable');
+      expect(screen.getByTestId('row-expander')).toBeInTheDocument();
     });
 
-    it('adds table-hover class when hoverable is true', () => {
+    it('adds hover row background variable when hoverable is true', () => {
       renderWithTableContext(<TableView />, {
         rows: [{ uuid: '1' }],
         visibleColumns: [{ title: 'Col', render: () => 'x' }],
@@ -52,10 +51,12 @@ describe('TableView', () => {
       });
 
       const table = screen.getByRole('table');
-      expect(table).toHaveClass('table-hover');
+      expect(table).toHaveClass(
+        '[&_tbody>tr[data-slot=table-row]:not([data-state]):hover]:[--table-row-bg:var(--bg-tertiary)]',
+      );
     });
 
-    it('does not add table-hover class when hoverable is false', () => {
+    it('does not add hover row background variable when hoverable is false', () => {
       renderWithTableContext(<TableView />, {
         rows: [{ uuid: '1' }],
         visibleColumns: [{ title: 'Col', render: () => 'x' }],
@@ -63,7 +64,9 @@ describe('TableView', () => {
       });
 
       const table = screen.getByRole('table');
-      expect(table).not.toHaveClass('table-hover');
+      expect(table).not.toHaveClass(
+        '[&_tbody>tr[data-slot=table-row]:not([data-state]):hover]:[--table-row-bg:var(--bg-tertiary)]',
+      );
     });
   });
 

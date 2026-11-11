@@ -20,6 +20,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown, ActionsMenu } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
@@ -27,8 +28,6 @@ import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
-
-import '@/proposals/flushTable.scss';
 
 import {
   moveLeadRefusal,
@@ -424,7 +423,7 @@ const RoleHoldersTable: FC<RoleHoldersTableProps> = ({
       {...tableProps}
       // Framed, but without the card's inner inset: the rows run to the
       // frame, as the other tables on the proposal page do.
-      className="proposal-flush-table"
+      className={PROPOSAL_FLUSH_TABLE_CLASS}
       // As tall as its few holders, not the 300px floor of a page's table.
       minHeight="auto"
       columns={columns}

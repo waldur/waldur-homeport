@@ -37,15 +37,12 @@ export function TableView() {
   return (
     <table
       className={classNames(
-        'table align-middle table-row-bordered text-sm table-list mb-0',
+        'w-full border-collapse align-middle text-sm text-primary border-secondary mb-0',
         config.fullWidth &&
-          '[&_td:first-child]:ps-[var(--card-padding-x)] [&_th:first-child]:ps-[var(--card-padding-x)] [&_td:last-child]:pe-[var(--card-padding-x)] [&_th:last-child]:pe-[var(--card-padding-x)] max-sm:[&_td:first-child]:!ps-[15px] max-sm:[&_th:first-child]:!ps-[15px] max-sm:[&_td:last-child]:!pe-[15px] max-sm:[&_th:last-child]:!pe-[15px]',
-        fieldName &&
-          'cursor-pointer [&_tr.checked]:!bg-secondary [&_tr.checked_>*]:!bg-secondary [&_tr.checked_>*]:border-0',
-        {
-          'table-expandable': Boolean(slots.expandableRow),
-          'table-hover': config.hoverable,
-        },
+          '[--table-edge-px:var(--card-padding-x)] max-sm:[--table-edge-px:15px]',
+        fieldName && 'cursor-pointer',
+        config.hoverable &&
+          '[&_tbody>tr[data-slot=table-row]:not([data-state]):hover]:[--table-row-bg:var(--bg-tertiary)]',
       )}
     >
       {config.hasHeaders && (

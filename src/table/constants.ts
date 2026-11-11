@@ -6,7 +6,6 @@ import { type RowVariant, type TableState } from './types';
 export { PAGE_SIZE_FULL, PAGE_SIZE_COMPACT };
 export const DASH_ESCAPE_CODE = '\u2014';
 export const COLUMN_ACTIONS_KEY = '__actions__';
-export const COLUMN_FILTER_TOGGLE_CLASS = 'column-filter-toggle';
 
 /**
  * The tint of a row carrying a status, from the status matrix, so both themes
@@ -18,6 +17,13 @@ export const ROW_VARIANT_CLASSES = {
   warning: 'bg-warning-subtle',
   success: 'bg-success-subtle',
   neutral: 'bg-neutral-subtle',
+} as const satisfies Record<RowVariant, string>;
+
+export const ROW_VARIANT_BG_VARS = {
+  danger: '[--table-row-bg:var(--status-danger-bg)]',
+  warning: '[--table-row-bg:var(--status-warning-bg)]',
+  success: '[--table-row-bg:var(--status-success-bg)]',
+  neutral: '[--table-row-bg:var(--status-neutral-bg)]',
 } as const satisfies Record<RowVariant, string>;
 
 export const INITIAL_STATE: TableState = {

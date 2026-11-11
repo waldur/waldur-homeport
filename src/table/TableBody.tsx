@@ -1,9 +1,3 @@
-import {
-  CaretDownIcon,
-  FunnelSimpleIcon,
-  SquareLogoIcon,
-  WarningCircleIcon,
-} from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, {
   Fragment,
@@ -12,18 +6,14 @@ import React, {
   useCallback,
   useId,
   useMemo,
-  useState,
 } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
-import { translate } from 'waldur-i18n-runtime';
-import { BaseButton, Checkbox, MenuPopover, Radio, Tooltip } from 'waldur-ui';
-
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { FieldErrorMessage } from '@/form/FieldError';
-
-import { COLUMN_ACTIONS_KEY, ROW_VARIANT_CLASSES } from './constants';
-import { TableFilterContext } from './FilterContextProvider';
+import { ROW_VARIANT_BG_VARS } from './constants';
+import { TableActionsCell } from './TableActionsColumn';
+import { TableControlCell } from './TableControlColumn';
+import { TableDataCell } from './TableDataCell';
+import { RowExpander, TableExpandedRow } from './TableExpandable';
 import { Column, PinnedColumns, PinnedOffsets, TableProps } from './types';
 import { getColumnPinKey, getId } from './utils';
 
@@ -46,79 +36,20 @@ interface TableBodyProps extends Pick<
   | 'fetch'
   | 'fieldType'
   | 'fieldName'
+  | 'fullWidth'
   | 'validate'
   | 'rowValidate'
   | 'columnPositions'
   | 'hasOptionalColumns'
   | 'isRowExpandable'
   | 'rowGroupHeader'
-  | 'fullWidth'
 > {
   pinnedColumns?: PinnedColumns;
   pinnedOffsets?: PinnedOffsets;
 }
 
-const NESTED_TABLE_CLASSES = [
-  '[&_[data-slot=card][data-variant=table]]:bg-transparent',
-  '[&_[data-slot=card][data-variant=table]]:overflow-hidden',
-  '[&_[data-slot=card][data-variant=table]>[data-slot=card-header]]:[--card-header-mx:0px]',
-  '[&_[data-slot=card][data-variant=table]>[data-slot=card-header]]:[--card-header-px:var(--card-padding-x)]',
-  '[&_[data-slot=card][data-variant=table]>[data-slot=card-content]]:[--card-content-pt:0px]',
-  '[&_[data-slot=card][data-variant=table]>[data-slot=card-content]]:[--card-content-px:0px]',
-  '[&_[data-slot=card][data-variant=table]>[data-slot=card-content]]:pb-2',
-  '[&_[data-slot=card][data-variant=table]_.table]:mb-0',
-  '[&_[data-slot=card][data-variant=table]_.table_td:first-child]:ps-[var(--card-padding-x)]',
-  '[&_[data-slot=card][data-variant=table]_.table_th:first-child]:ps-[var(--card-padding-x)]',
-  '[&_[data-slot=card][data-variant=table]_.table_td:last-child]:pe-[var(--card-padding-x)]',
-  '[&_[data-slot=card][data-variant=table]_.table_th:last-child]:pe-[var(--card-padding-x)]',
-  '[&_[data-slot=card][data-variant=table]_.table_thead>tr]:bg-tertiary',
-  // In dark, bg-tertiary is the --border-secondary step: the divider under
-  // the header row vanished into it.
-  '[&_[data-slot=card][data-variant=table]_.table_thead>tr]:border-b-[color:var(--border-divider)]',
-  '[&_[data-slot=card][data-variant=table]_.table_tbody>tr]:bg-secondary',
-  '[&_[data-slot=card][data-variant=table]_.table_thead_th.pinned]:bg-tertiary',
-  '[&_[data-slot=card][data-variant=table]_.table_thead_th.header-actions]:bg-tertiary',
-  '[&_[data-slot=card][data-variant=table]_.table_tbody_td.pinned]:bg-secondary',
-  '[&_[data-slot=card][data-variant=table]_.table_tbody_td.row-actions]:bg-secondary',
-  '[&_[data-slot=card][data-variant=table]_.table-pagination]:!px-[var(--card-padding-x)]',
-].join(' ');
-
-/**
- * Renders a table's `rowActions`. Callers usually pass an inline arrow,
- * which is a new function on every parent render. Used as a component type
- * (`createElement`), that remounted the cell whenever its row re-rendered,
- * which happens after every refetch (window focus, a completed action,
- * polling), and closed any row-action menu the user had open. Calling it as
- * a render function inside this stable component keeps the cell mounted.
- * Hooks it calls belong to RowActionsCell, which is safe because a table
- * always passes the same code. Class, `memo` and `forwardRef` components
- * cannot be called and are module-level constants anyway, so they keep
- * `createElement`.
- */
-const RowActionsCell = ({
-  rowActions,
-  row,
-  fetch,
-}: {
-  rowActions: TableProps['rowActions'];
-  row;
-  fetch;
-}) =>
-  typeof rowActions === 'function' && !rowActions.prototype?.isReactComponent
-    ? (rowActions as (props: { row; fetch }) => React.ReactNode)({ row, fetch })
-    : React.createElement(rowActions, { row, fetch });
-
-interface RowExpander {
-  canExpand: boolean;
-  isExpanded: boolean;
-  /** Toggles the row; the expander button calls it. */
-  onToggle: () => void;
-  /** Id of the details cell, which the button controls while it is shown. */
-  detailsId: string;
-}
-
 interface TableCellsProps {
-  row;
+  row: any;
   columns: TableProps['columns'];
   columnsMap: Record<string, Column>;
   columnPositions: TableProps['columnPositions'];
@@ -128,268 +59,6 @@ interface TableCellsProps {
   expander?: RowExpander;
   hasLeadingCheckbox?: boolean;
 }
-
-const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
-  const { filterComponents, apply, changeFilterValue } =
-    React.useContext(TableFilterContext);
-  const [open, setOpen] = useState(false);
-
-  const callback = useCallback(() => {
-    const filterConfig = filterComponents.find(
-      (comp) => comp.name === column.filter,
-    );
-    const value = column.inlineFilter(row);
-    filterConfig.setFilter(value);
-    changeFilterValue(column.filter, value);
-    apply();
-    // Close the popover explicitly on selection, as context apply does
-    // not handle popover state.
-    setOpen(false);
-  }, [filterComponents, column, row, changeFilterValue, apply]);
-
-  return (
-    // `.inline-filter-anchor` carries the absolute hover-reveal positioning;
-    // the actual `.inline-filter` trigger button stays a normal in-flow element
-    // inside it so BaseButton's tooltip wrapper span sizes correctly around it.
-    <span className="inline-filter-anchor">
-      <MenuPopover open={open} onOpenChange={setOpen} modal={false}>
-        <MenuPopover.Trigger asChild>
-          <BaseButton
-            variant="text-secondary"
-            size="sm"
-            className="inline-filter [&_svg]:-mt-0.75"
-            tooltip={translate('Add filter')}
-            iconNode={<FunnelSimpleIcon weight="bold" size={20} />}
-          />
-        </MenuPopover.Trigger>
-        <MenuPopover.Content
-          align="start"
-          className="w-auto min-w-[150px] py-1 font-medium"
-        >
-          <MenuPopover.Item
-            className="px-[16.25px] py-[9.75px]"
-            onClick={callback}
-          >
-            <span className="me-[13px] flex shrink-0 items-center">
-              <SquareLogoIcon weight="bold" size={20} />
-            </span>
-            {translate('Filter by')}
-          </MenuPopover.Item>
-        </MenuPopover.Content>
-      </MenuPopover>
-    </span>
-  );
-});
-
-InlineFilterButton.displayName = 'InlineFilterButton';
-
-const hasFilterMenu = (key: string) => {
-  const item = document.querySelector(
-    '#kt_content_container [data-slot="table-filters-menu"] #filter-item-' +
-      key,
-  );
-  return Boolean(item);
-};
-
-// When a cell's content is wider than its visible width (i.e. the
-// `ellipsis` CSS class has truncated it), expose the full value as a
-// native browser tooltip on hover. The check runs lazily — only when
-// the user actually hovers a cell — so there's no cost on initial
-// render. `innerText` is used in preference to `textContent` so
-// CSS-hidden affordances (e.g. inline filter buttons) don't leak
-// into the tooltip.
-const showTruncationTooltip = (e: React.MouseEvent<HTMLTableCellElement>) => {
-  const td = e.currentTarget;
-  // Prefer the inner `.td-data` element when present: in the first column of an
-  // expandable table the ellipsis truncation lives on `.td-data` while the `td`
-  // itself does not overflow, so checking only the `td` would miss it.
-  const inner = td.querySelector('.td-data') as HTMLElement | null;
-  const source = inner ?? td;
-  // +1 px tolerance avoids sub-pixel false positives reported by some
-  // browsers/zoom levels.
-  if (source.scrollWidth > source.clientWidth + 1) {
-    const text = (source.innerText || '').trim();
-    if (text && td.getAttribute('title') !== text) {
-      td.setAttribute('title', text);
-    }
-  } else if (td.hasAttribute('title')) {
-    td.removeAttribute('title');
-  }
-};
-
-const TableCell = memo(
-  ({
-    column,
-    row,
-    isFirstColumn,
-    expander,
-    hasLeadingCheckbox,
-    pinned,
-    shadow,
-    pinOffset,
-  }: {
-    column: Column;
-    row;
-    isFirstColumn?: boolean;
-    expander?: RowExpander;
-    hasLeadingCheckbox?: boolean;
-    pinned?: boolean;
-    shadow?: boolean | 'start' | 'end';
-    pinOffset?: { left: number; right: number };
-  }) => {
-    // Derived from the row's details id rather than useId: only the first
-    // cell of an expandable row uses them, and a hook per cell is wasted on
-    // every other cell of every table.
-    const labelId = expander ? `${expander.detailsId}-label` : undefined;
-    const toggleTextId = expander ? `${expander.detailsId}-toggle` : undefined;
-
-    // Skip rendering if column is not visible
-    if (column.visible === false) {
-      return null;
-    }
-
-    if (!column.render || typeof column.render !== 'function') {
-      return null;
-    }
-
-    const renderedContent = React.createElement(column.render, {
-      row,
-    });
-
-    if (renderedContent === undefined || renderedContent === null) {
-      return null;
-    }
-    const valueToCopy = column.copyField ? column.copyField(row) : '';
-    const hasFilter = column.inlineFilter && hasFilterMenu(column.filter);
-
-    const ellipsisEnabled = column.ellipsis ?? true;
-    const cellClassName = classNames(
-      column.className,
-      column.rowHeader && 'row-header',
-      column.inlineFilter && 'has-filter',
-      ellipsisEnabled && 'ellipsis',
-      pinned && 'pinned',
-      pinned && shadow === 'end' && 'shadow-end',
-      pinned && shadow === 'start' && 'shadow-start',
-    );
-    const pinStyle =
-      pinned && pinOffset
-        ? { left: pinOffset.left, right: pinOffset.right }
-        : undefined;
-    const onCellMouseEnter = ellipsisEnabled
-      ? showTruncationTooltip
-      : undefined;
-
-    // Nothing to copy (a dash, "not assigned"): no copy button either.
-    const hasCopy =
-      Boolean(column.copyField) && valueToCopy !== '' && valueToCopy != null;
-    // The expander is named after this cell's own text ("Expand Web
-    // server"). The id goes on `.td-data` when the cell has one, so the copy
-    // and filter buttons beside the text stay out of the name.
-    const hasExpander = isFirstColumn && expander?.canExpand;
-    const dataId = hasExpander && (hasCopy || hasFilter) ? labelId : undefined;
-    const content = hasCopy ? (
-      <>
-        <div className="with-copy flex items-center gap-1">
-          <div className="td-data" id={dataId}>
-            {renderedContent}
-          </div>
-          <CopyToClipboardButton value={valueToCopy} />
-        </div>
-        {hasFilter && <InlineFilterButton column={column} row={row} />}
-      </>
-    ) : (
-      <>
-        {hasFilter ? (
-          <div className="td-data" id={dataId}>
-            {renderedContent}
-          </div>
-        ) : (
-          renderedContent
-        )}
-        {hasFilter && <InlineFilterButton column={column} row={row} />}
-      </>
-    );
-
-    const handleClick = column.disabledClick
-      ? (e: React.MouseEvent) => e.stopPropagation()
-      : undefined;
-
-    const Cell = column.rowHeader ? 'th' : 'td';
-    const scope = column.rowHeader ? 'row' : undefined;
-
-    // First data column: render expander icon and text in the same cell.
-    if (isFirstColumn && expander) {
-      return (
-        <Cell
-          scope={scope}
-          className={cellClassName}
-          onClick={handleClick}
-          onMouseEnter={onCellMouseEnter}
-          style={{ paddingLeft: 0, paddingRight: 0, ...pinStyle }}
-        >
-          <div
-            className="flex items-center pe-4 gap-x-3"
-            style={{ paddingLeft: hasLeadingCheckbox ? 12 : 16 }}
-          >
-            {expander.canExpand && (
-              // A real button, so the row opens from the keyboard too. A
-              // click on it is ignored by the row's own handler (which skips
-              // buttons) and toggles here instead; a click anywhere else on
-              // the row still toggles it as before.
-              <button
-                type="button"
-                data-testid="row-expander"
-                className={classNames(
-                  'inline-flex size-[24px] shrink-0 items-center justify-center rounded-lg border-0 bg-transparent p-0 text-inherit',
-                  { active: expander.isExpanded },
-                )}
-                aria-expanded={expander.isExpanded}
-                aria-controls={
-                  expander.isExpanded ? expander.detailsId : undefined
-                }
-                aria-labelledby={`${toggleTextId} ${labelId}`}
-                onClick={expander.onToggle}
-              >
-                <span id={toggleTextId} className="sr-only">
-                  {expander.isExpanded
-                    ? translate('Collapse')
-                    : translate('Expand')}
-                </span>
-                <CaretDownIcon
-                  size={20}
-                  weight="bold"
-                  className="rotate-toggle-180"
-                  aria-hidden="true"
-                />
-              </button>
-            )}
-            <div
-              id={hasExpander && !dataId ? labelId : undefined}
-              className="flex-auto min-w-0"
-            >
-              {content}
-            </div>
-          </div>
-        </Cell>
-      );
-    }
-
-    return (
-      <Cell
-        scope={scope}
-        className={cellClassName}
-        onClick={handleClick}
-        onMouseEnter={onCellMouseEnter}
-        style={pinStyle}
-      >
-        {content}
-      </Cell>
-    );
-  },
-);
-
-TableCell.displayName = 'TableCell';
 
 const TableCells = memo(
   ({
@@ -416,7 +85,7 @@ const TableCells = memo(
               .filter((id) => columnsMap[id])
               .map((id, index) => (
                 <Fragment key={id}>
-                  <TableCell
+                  <TableDataCell
                     column={columnsMap[id]}
                     row={row}
                     isFirstColumn={index === firstVisibleIndex}
@@ -432,7 +101,7 @@ const TableCells = memo(
               const pinKey = getColumnPinKey(column, colIndex);
               return (
                 <Fragment key={colIndex}>
-                  <TableCell
+                  <TableDataCell
                     column={column}
                     row={row}
                     isFirstColumn={colIndex === firstVisibleIndex}
@@ -453,7 +122,7 @@ const TableCells = memo(
 TableCells.displayName = 'TableCells';
 
 interface TableRowProps {
-  row;
+  row: any;
   rowIndex: number;
   rowKey: string;
   rowClass: TableProps['rowClass'];
@@ -472,12 +141,11 @@ interface TableRowProps {
   hasOptionalColumns: TableProps['hasOptionalColumns'];
   pinnedColumns: PinnedColumns;
   pinnedOffsets: PinnedOffsets;
-  onRowClick: (row, index: number) => void;
-  onChangeField: (row, input) => void;
-  fieldProps?: { input; meta };
+  onRowClick: (row: any, index: number) => void;
+  onChangeField: (row: any, input: any) => void;
+  fieldProps?: { input: any; meta: any };
   rowError?: string | string[];
   isRowExpandable?: (row: any) => boolean;
-  /** Id of this row's details cell, for the expander's aria-controls. */
   detailsId?: string;
 }
 
@@ -529,7 +197,6 @@ const TableRow = memo<TableRowProps>(
 
     const handleRowClick = useCallback(
       (event: React.MouseEvent) => {
-        // prevent checkbox and expandable row to toggle when clicking on inner clickable elements
         const el = event.target as HTMLElement;
         if (
           el.onclick ||
@@ -571,83 +238,47 @@ const TableRow = memo<TableRowProps>(
               canExpand: Boolean(canExpand),
               isExpanded,
               onToggle: toggleExpanded,
-              detailsId,
+              detailsId: detailsId!,
             }
           : undefined,
       [expandableRow, canExpand, isExpanded, toggleExpanded, detailsId],
     );
 
+    const variant =
+      typeof rowVariant === 'function' ? rowVariant({ row }) : rowVariant;
+    const isRowChecked = Boolean(fieldType && isChecked);
+
     return (
       <tr
-        className={
-          classNames(
-            typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
-            ROW_VARIANT_CLASSES[
-              typeof rowVariant === 'function'
-                ? rowVariant({ row })
-                : rowVariant
-            ],
-            {
-              expanded: canExpand && toggled[getId(row, rowIndex, rowKey)],
-              checked: fieldType && isChecked,
-            },
-          ) || undefined
+        data-slot="table-row"
+        // The expander button carries aria-expanded; the row only needs a
+        // styling hook, and aria-expanded is not allowed on a plain table row.
+        data-state={
+          isExpanded ? 'expanded' : isRowChecked ? 'selected' : undefined
         }
+        className={classNames(
+          'group/row relative border-b last:border-b-0 border-solid border-secondary bg-[var(--table-row-bg)]',
+          typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
+          // Exactly one --table-row-bg class: two of them have the same
+          // specificity, so the stylesheet's order would pick the winner.
+          isExpanded || isRowChecked
+            ? '[--table-row-bg:var(--bg-secondary)]'
+            : variant
+              ? ROW_VARIANT_BG_VARS[variant]
+              : '[--table-row-bg:var(--table-body-bg,var(--bg-primary))]',
+          isRowChecked && '[&>*]:border-0',
+        )}
         onClick={handleRowClick}
       >
         {(enableMultiSelect || fieldType) && (
-          <td className="row-control ps-4 pe-0">
-            <div>
-              {fieldType && fieldProps ? (
-                <>
-                  {rowError ? (
-                    <Tooltip label={<FieldErrorMessage error={rowError} />}>
-                      <WarningCircleIcon
-                        weight="bold"
-                        size={16}
-                        className="error-mark"
-                      />
-                    </Tooltip>
-                  ) : (
-                    isChecked &&
-                    fieldProps.meta.touched &&
-                    fieldProps.meta.error && (
-                      <Tooltip label={fieldProps.meta.error}>
-                        <WarningCircleIcon
-                          weight="bold"
-                          size={16}
-                          className="error-mark"
-                        />
-                      </Tooltip>
-                    )
-                  )}
-                  {fieldType === 'radio' ? (
-                    <Radio
-                      name={fieldProps.input.name}
-                      aria-label={translate('Select row')}
-                      checked={isChecked}
-                      onChange={handleFieldChange}
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  ) : (
-                    <Checkbox
-                      name={fieldProps.input.name}
-                      aria-label={translate('Select row')}
-                      checked={isChecked}
-                      onChange={handleFieldChange}
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  )}
-                </>
-              ) : (
-                <Checkbox
-                  aria-label={translate('Select row')}
-                  checked={isChecked}
-                  onChange={handleSelectRow}
-                />
-              )}
-            </div>
-          </td>
+          <TableControlCell
+            fieldType={fieldType}
+            fieldProps={fieldProps}
+            rowError={rowError}
+            isChecked={isChecked}
+            onFieldChange={handleFieldChange}
+            onSelectRow={handleSelectRow}
+          />
         )}
         <TableCells
           row={row}
@@ -660,33 +291,20 @@ const TableRow = memo<TableRowProps>(
           expander={expander}
           hasLeadingCheckbox={Boolean(enableMultiSelect || fieldType)}
         />
-
         {rowActions && (
-          <td
-            className={classNames(
-              'row-actions',
-              COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned pinned-end',
-              pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
-            )}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div>
-              <RowActionsCell rowActions={rowActions} row={row} fetch={fetch} />
-            </div>
-          </td>
+          <TableActionsCell
+            rowActions={rowActions}
+            row={row}
+            fetch={fetch}
+            pinnedColumns={pinnedColumns}
+          />
         )}
       </tr>
     );
   },
-  // Custom comparison to prevent re-renders when only rowActions changes
-  // rowActions is a function that's often recreated on parent renders
-  // but doesn't affect the row's visual rendering
   (prevProps, nextProps) => {
-    // Compare all props except rowActions
     const { rowActions: _prevRowActions, ...prevRest } = prevProps;
     const { rowActions: _nextRowActions, ...nextRest } = nextProps;
-
-    // Shallow compare remaining props
     const keys = Object.keys(prevRest) as (keyof typeof prevRest)[];
     return keys.every((key) => prevRest[key] === nextRest[key]);
   },
@@ -694,9 +312,6 @@ const TableRow = memo<TableRowProps>(
 
 TableRow.displayName = 'TableRow';
 
-// Renders a single TableRow inside a react-final-form Field's render prop.
-// useFormState is only legal here because this component is mounted inside
-// <Field>, which itself lives inside <Form>.
 interface FieldRowBodyProps {
   row: any;
   rowIndex: number;
@@ -706,10 +321,11 @@ interface FieldRowBodyProps {
   renderRow: (
     row: any,
     rowIndex: number,
-    fieldProps?: { input; meta } | null,
+    fieldProps?: { input: any; meta: any } | null,
     rowError?: string | string[],
   ) => JSX.Element;
 }
+
 const FieldRowBody: FunctionComponent<FieldRowBodyProps> = ({
   row,
   rowIndex,
@@ -744,6 +360,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     fetch,
     fieldType,
     fieldName,
+    fullWidth: isFullWidthCard = false,
     validate,
     rowValidate,
     columnPositions,
@@ -752,9 +369,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     pinnedOffsets = {},
     isRowExpandable,
     rowGroupHeader,
-    fullWidth: isFullWidthCard = false,
   }) => {
-    // Several tables can share a page, so each prefixes its details ids.
     const detailsIdPrefix = useId();
     const columnsMap = useMemo(
       () =>
@@ -767,8 +382,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
 
     const onRowClick = useCallback(
       (row, index: number) => {
-        // Opt-in row-click handler (e.g. master/detail selection) fires first;
-        // the inline expand toggle only runs when an expandable row is set.
         onRowClickProp?.(row);
         if (!expandableRow) return;
         toggleRow(getId(row, index, rowKey));
@@ -781,7 +394,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         if (fieldType === 'checkbox') {
           const newValues: any[] = input.value || [];
           const index = newValues.findIndex((v) => v[rowKey] === row[rowKey]);
-          // Is field checked
           if (index > -1) {
             newValues.splice(index, 1);
           } else {
@@ -831,9 +443,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           detailsId={`${detailsIdPrefix}-details-${rowIndex}`}
         />
       ),
-      // Note: rowActions is intentionally excluded from dependencies
-      // TableRow has a custom comparison function that ignores rowActions changes
-      // to prevent unnecessary re-renders when parent creates new rowActions functions
       [
         rowKey,
         rowClass,
@@ -854,6 +463,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         onRowClick,
         onChangeField,
         detailsIdPrefix,
+        isRowExpandable,
       ],
     );
 
@@ -870,8 +480,15 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           return (
             <React.Fragment key={getId(row, rowIndex, rowKey)}>
               {groupHeader ? (
-                <tr className="table-group-header">
-                  <th colSpan={colSpanCount} data-testid="table-group-header">
+                <tr
+                  data-slot="table-group-header"
+                  className="border-b last:border-b-0 border-solid border-secondary [--table-row-bg:var(--table-body-bg,var(--bg-primary))] bg-[var(--table-row-bg)]"
+                >
+                  <th
+                    colSpan={colSpanCount}
+                    data-testid="table-group-header"
+                    className="h-[44px] py-[6.5px] px-[9.75px] first:ps-[var(--table-edge-px,9.75px)] last:pe-[var(--table-edge-px,9.75px)] text-start font-normal whitespace-normal text-primary"
+                  >
                     {groupHeader}
                   </th>
                 </tr>
@@ -893,32 +510,15 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                 renderRow(row, rowIndex)
               )}
               {canExpand && toggled[getId(row, rowIndex, rowKey)] && (
-                <tr className="bg-secondary">
-                  <td
-                    colSpan={colSpanCount}
-                    id={`${detailsIdPrefix}-details-${rowIndex}`}
-                    className={classNames('p-0', expandableRowClassName)}
-                    data-testid="expanded-row-cell"
-                  >
-                    <div
-                      data-slot="expanded-row-content"
-                      className={classNames(
-                        'sticky left-0 w-[100cqw] max-w-[100cqw]',
-                        'py-4 pe-[var(--card-padding-x,24px)]',
-                        enableMultiSelect || fieldType
-                          ? isFullWidthCard
-                            ? 'ps-[60px]'
-                            : 'ps-[84px]'
-                          : isFullWidthCard
-                            ? 'ps-[28px]'
-                            : 'ps-[52px]',
-                        NESTED_TABLE_CLASSES,
-                      )}
-                    >
-                      {React.createElement(expandableRow, { row, fetch })}
-                    </div>
-                  </td>
-                </tr>
+                <TableExpandedRow
+                  colSpanCount={colSpanCount}
+                  detailsId={`${detailsIdPrefix}-details-${rowIndex}`}
+                  expandableRowClassName={expandableRowClassName}
+                  hasLeadingCheckbox={Boolean(enableMultiSelect || fieldType)}
+                  fullWidth={isFullWidthCard}
+                >
+                  {React.createElement(expandableRow, { row, fetch })}
+                </TableExpandedRow>
               )}
             </React.Fragment>
           );

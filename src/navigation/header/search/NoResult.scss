@@ -42,3 +42,10 @@
 .search-no-result .actions {
   margin-top: 24px;
 }
+
+[data-slot='expanded-row-content'] {
+  .search-no-result,
+  .search-error {
+    margin-top: -13px;
+  }
+}

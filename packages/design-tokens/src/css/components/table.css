@@ -11,11 +11,7 @@
   --table-row-border: var(--border-tertiary);
   --table-row-hover-bg: var(--bg-secondary);
 
-  /* Table pagination (waldur-ui TablePagination). Unlike most surface
-     tokens, these have a real Metronic source: the `.card.card-table
-     .table-pagination` rules in src/styles/legacy/_table.scss,
-     read from the compiled light/dark stylesheets and checked against
-     the running pager with getComputedStyle. Page numbers and the
+  /* Table pagination (waldur-ui TablePagination). Page numbers and the
      range/label text use --pagination-text; the current page and hover
      use --pagination-text-current on --pagination-hover-bg. The
      prev/next carets sat one step lighter than the text

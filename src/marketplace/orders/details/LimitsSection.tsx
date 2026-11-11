@@ -177,7 +177,7 @@ export const LimitsSection = ({
               <TableHead>{translate('Measured unit')}</TableHead>
               <TableHead>{translate('Limit')}</TableHead>
               {editable && (
-                <TableHead className="header-actions">
+                <TableHead className="w-[50px] text-left">
                   {translate('Actions')}
                 </TableHead>
               )}

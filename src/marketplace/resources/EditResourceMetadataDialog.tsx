@@ -117,7 +117,7 @@ const FieldRows: FC<{
                       </Field>
                     </TableCell>
                   ))}
-                  <TableCell className="row-actions">
+                  <TableCell>
                     <BaseButton
                       label={translate('Remove')}
                       onClick={() => fields.remove(index)}
