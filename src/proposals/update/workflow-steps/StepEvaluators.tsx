@@ -19,7 +19,11 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useCallProposalRoles } from '@/proposals/proposal-roles/queries';
 import { AddUserButton } from '@/proposals/team/AddUserButton';
 import { Call } from '@/proposals/types';
-import { canManageCallReviews, getCallReadOnlyReason } from '@/proposals/utils';
+import {
+  canManageCallReviews,
+  canReadCallReviewers,
+  getCallReadOnlyReason,
+} from '@/proposals/utils';
 import { stepName } from '@/proposals/workflow/constants';
 import {
   callWorkflowCheckKey,
@@ -198,13 +202,17 @@ const TeamTabLink: FC = () => (
   />
 );
 
-const ReviewerPoolLink: FC = () => (
-  <Link
-    state="protected-call.manage"
-    params={{ tab: 'reviewer-pool' }}
-    label={translate('Open the reviewer pool')}
-  />
-);
+// The pool's tab is only there for those who may read the pool.
+const ReviewerPoolLink: FC<{ call?: Call }> = ({ call }) => {
+  const user = useUser();
+  return canReadCallReviewers(user, call) ? (
+    <Link
+      state="protected-call.manage"
+      params={{ tab: 'reviewer-pool' }}
+      label={translate('Open the reviewer pool')}
+    />
+  ) : null;
+};
 
 const roleName = (
   roleUuid: string | null | undefined,
@@ -227,7 +235,8 @@ const GroupNote: FC<{
   step: CallWorkflowStep;
   steps: CallWorkflowStep[];
   roles?: { uuid: string; name: string }[];
-}> = ({ group, step, steps, roles }) => {
+  call?: Call;
+}> = ({ group, step, steps, roles, call }) => {
   switch (group.source) {
     case 'call_manager':
       return (
@@ -264,7 +273,7 @@ const GroupNote: FC<{
             : translate(
                 "The reviewers who accepted to join the call's pool.",
               )}{' '}
-          <ReviewerPoolLink />
+          <ReviewerPoolLink call={call} />
         </>
       );
     case 'offering_team':
@@ -589,7 +598,13 @@ export const StepEvaluators: FC<
               {partLabel(group.part)}:{' '}
             </span>
           )}
-          <GroupNote group={group} step={step} steps={steps} roles={roles} />
+          <GroupNote
+            group={group}
+            step={step}
+            steps={steps}
+            roles={roles}
+            call={call}
+          />
           {HAS_PEOPLE.includes(group.source) && !group.users.length && (
             <EmptyState
               size="sm"
@@ -624,6 +639,7 @@ export const StepEvaluators: FC<
                   step={step}
                   steps={steps}
                   roles={roles}
+                  call={call}
                 />
               )
             }

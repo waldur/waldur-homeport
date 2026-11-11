@@ -152,15 +152,20 @@ describe('TeamSection', () => {
     expect(screen.queryByText('Team changes')).not.toBeInTheDocument();
   });
 
+  const callTeam = {
+    scope: { uuid: 'call-1', url: '/api/proposal-protected-calls/call-1/' },
+    roleTypes: ['call', 'call_organizer'],
+    roles: [
+      RoleEnum.CALL_MANAGER,
+      RoleEnum.CALL_PANEL_MEMBER,
+      RoleEnum.CALL_REVIEWER,
+    ],
+  };
+
   it("expands only a call reviewer's row, to show their reviewer profile", () => {
     renderSection(holder(RoleEnum.PROPOSAL_MANAGER), {
-      scope: { uuid: 'call-1', url: '/api/proposal-protected-calls/call-1/' },
-      roleTypes: ['call', 'call_organizer'],
-      roles: [
-        RoleEnum.CALL_MANAGER,
-        RoleEnum.CALL_PANEL_MEMBER,
-        RoleEnum.CALL_REVIEWER,
-      ],
+      ...callTeam,
+      showReviewerProfiles: true,
     });
     expect(usersListProps.value.expandableRow).toBeDefined();
     const { isRowExpandable } = usersListProps.value;
@@ -169,6 +174,11 @@ describe('TeamSection', () => {
     expect(isRowExpandable({ role_name: RoleEnum.CALL_PANEL_MEMBER })).toBe(
       false,
     );
+  });
+
+  it('expands no row for a viewer not shown the reviewer profiles', () => {
+    renderSection(holder(RoleEnum.PROPOSAL_MANAGER), callTeam);
+    expect(usersListProps.value.expandableRow).toBeUndefined();
   });
 
   it('gives a team without the reviewer role no expandable rows', () => {
