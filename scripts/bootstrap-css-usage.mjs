@@ -54,10 +54,6 @@ export const PARTIALS = [
     scss: "@import 'legacy/mixins'; @import 'legacy/content';",
   },
   {
-    name: 'legacy/landing',
-    scss: "@import 'legacy/mixins'; @import 'legacy/landing';",
-  },
-  {
     name: 'legacy/ai-assistant/index',
     scss: "@import 'legacy/mixins'; @import 'legacy/ai-assistant/index';",
   },
