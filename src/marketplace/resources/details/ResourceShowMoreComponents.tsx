@@ -15,6 +15,9 @@ const ResourceComponentsDialog = lazyComponent(() =>
 export const ResourceShowMoreComponents = ({
   resource,
   components,
+  orderTypes,
+  orderPeriod,
+  orderPeriodHint,
 }: {
   resource: Pick<
     Resource,
@@ -23,6 +26,10 @@ export const ResourceShowMoreComponents = ({
     Partial<Pick<Resource, 'spending_limit_status'>> &
     ResourceDisplayLimits;
   components: OfferingComponent[];
+  // The whole-order view, when the grid shows it: the dialog shows the same.
+  orderTypes?: string[];
+  orderPeriod?: string;
+  orderPeriodHint?: string;
 }) => {
   const { openDialog } = useModal();
 
@@ -32,7 +39,13 @@ export const ResourceShowMoreComponents = ({
       className="text-anchor font-medium"
       onClick={() =>
         openDialog(ResourceComponentsDialog, {
-          resolve: { resource, components },
+          resolve: {
+            resource,
+            components,
+            orderTypes,
+            orderPeriod,
+            orderPeriodHint,
+          },
           size: 'lg',
         })
       }

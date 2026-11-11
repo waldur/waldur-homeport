@@ -9,6 +9,10 @@ import {
   StringEditField,
 } from '@/form/editFields';
 import { translate } from '@/i18n';
+import {
+  getOrderPeriodComponentTypes,
+  supportsOrderPeriodTotals,
+} from '@/marketplace/common/orderPeriodTotals';
 import { getResourceActionOptions } from '@/marketplace/resources/actions/utils';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { isSiteAgentOfferingType } from '@/site-agent/constants';
@@ -131,6 +135,20 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
               )}
             />
           )}
+          {/* Only limit-based components that are not prepaid get the
+              whole-order view; prepaid ones have their own total view.
+              OpenStack tenants show live quota usage, so they have none. */}
+          {supportsOrderPeriodTotals(props.offering.type) &&
+            getOrderPeriodComponentTypes(props.offering.components).length >
+              0 && (
+              <BooleanEditField
+                name="plugin_options.show_order_period_totals"
+                label={translate('Show order-period totals')}
+                description={translate(
+                  "Add a switch to the resource's usage section that shows each limit-based component for the whole order: the usage since the order started against the monthly limit times the months until the end date. Use it for components measured over time, such as hours; for counts, such as GPUs, the months would add up. Ordering, billing and the limits on the backend do not change.",
+                )}
+              />
+            )}
           {props.offering.type === TENANT_TYPE && (
             <BooleanEditField
               name="plugin_options.show_ssh_key_loss_warning"

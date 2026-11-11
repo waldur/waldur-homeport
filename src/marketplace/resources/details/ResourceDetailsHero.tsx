@@ -161,7 +161,11 @@ export const ResourceDetailsHero = ({
             ) : resource.offering_type === VOLUME_TYPE ? (
               scope && <VolumeComponents resource={scope} />
             ) : (
-              <ResourceComponents resource={resource} components={components} />
+              <ResourceComponents
+                resource={resource}
+                components={components}
+                providerView={providerView}
+              />
             )
           }
         >

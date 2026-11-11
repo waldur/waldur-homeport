@@ -21,12 +21,23 @@ interface ResourceComponentsDialogProps {
       Partial<Pick<Resource, 'spending_limit_status'>> &
       ResourceDisplayLimits;
     components: OfferingComponent[];
+    // Components shown for the whole order, as on the grid it opens from.
+    orderTypes?: string[];
+    orderPeriod?: string;
+    orderPeriodHint?: string;
   };
 }
 
 export const ResourceComponentsDialog: React.FC<
   ResourceComponentsDialogProps
 > = ({ resolve }) => {
+  const periodProps = (type: string) =>
+    resolve.orderTypes?.includes(type)
+      ? {
+          orderPeriod: resolve.orderPeriod,
+          orderPeriodHint: resolve.orderPeriodHint,
+        }
+      : {};
   return (
     <ModalDialog
       title={translate('Components')}
@@ -38,6 +49,15 @@ export const ResourceComponentsDialog: React.FC<
       }
       footer={<CloseDialogButton label={translate('Done')} />}
     >
+      {resolve.orderTypes?.length > 0 && resolve.orderPeriod && (
+        // The cells carry the period only in their tooltip.
+        <p className="text-secondary text-sm mb-3">
+          {translate('Whole order')}:{' '}
+          {[resolve.orderPeriod, resolve.orderPeriodHint]
+            .filter(Boolean)
+            .join(' · ')}
+        </p>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5">
         {getResourceComponentEntries(resolve.resource, resolve.components).map(
           (entry) => (
@@ -48,6 +68,7 @@ export const ResourceComponentsDialog: React.FC<
                 spendingLimit={entry.spendingLimit}
                 thisMonth={entry.thisMonth}
                 noUsageThisMonth={entry.noUsageThisMonth}
+                {...periodProps(entry.component.type)}
               />
             </div>
           ),

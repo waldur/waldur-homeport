@@ -35,6 +35,10 @@ interface ResourceComponentItemProps {
   thisMonth?: boolean;
   // Nothing is reported for this month yet, so this month's usage is 0.
   noUsageThisMonth?: boolean;
+  // The usage and limit cover the whole order, e.g. "Jul 2026 – Jun 2027".
+  orderPeriod?: string;
+  // How the whole-order limit was calculated.
+  orderPeriodHint?: string;
   expanded?: boolean;
   stacked?: boolean;
 }
@@ -340,6 +344,8 @@ export const ResourceComponentItem = ({
   spendingLimit,
   thisMonth = false,
   noUsageThisMonth = false,
+  orderPeriod,
+  orderPeriodHint,
   expanded = false,
   stacked = false,
 }: ResourceComponentItemProps) => {
@@ -375,9 +381,11 @@ export const ResourceComponentItem = ({
   const billingType = getBillingTypeLabelOrDash(component.billing_type);
   const limitPeriod = component.limit_period;
 
-  const description = props.displayUnit
-    ? `${billingType} · ${translate('Measured in')}: ${props.displayUnit}`
-    : billingType;
+  const description = orderPeriod
+    ? [orderPeriod, orderPeriodHint].filter(Boolean).join(' · ')
+    : props.displayUnit
+      ? `${billingType} · ${translate('Measured in')}: ${props.displayUnit}`
+      : billingType;
 
   if (expanded) {
     return (
@@ -389,10 +397,14 @@ export const ResourceComponentItem = ({
         displayUnit={props.displayUnit}
         stacked={stacked}
         limitFrequency={
-          isTotal
-            ? translate('Total')
-            : component.billing_type === 'limit' &&
-              (limitPeriodMap[limitPeriod as string] || translate('Monthly'))
+          orderPeriod
+            ? orderPeriodHint
+              ? `${orderPeriod} (${orderPeriodHint})`
+              : orderPeriod
+            : isTotal
+              ? translate('Total')
+              : component.billing_type === 'limit' &&
+                (limitPeriodMap[limitPeriod as string] || translate('Monthly'))
         }
       />
     );

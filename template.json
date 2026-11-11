@@ -2505,6 +2505,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Add a switch to the resource's usage section that shows each limit-based component for the whole order: the usage since the order started against the monthly limit times the months until the end date. Use it for components measured over time, such as hours; for counts, such as GPUs, the months would add up. Ordering, billing and the limits on the backend do not change.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Add access subnet": {
     "context": {
       "feature_area": "details"
@@ -17005,6 +17010,12 @@
   "Current paid credit": {
     "context": {
       "feature_area": "credits"
+    }
+  },
+  "Current period": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "details"
     }
   },
   "Current period overlaid against previous, per (offering, component).": {},
@@ -63437,6 +63448,11 @@
       "feature_area": "options"
     }
   },
+  "Show order-period totals": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Show password": {
     "context": {
       "feature_area": "resource"
@@ -77020,6 +77036,11 @@
       "feature_area": "access"
     }
   },
+  "Unable to load usage for the whole order.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Unable to load user actions configuration.": {
     "context": {
       "feature_area": "user-actions"
@@ -81388,6 +81409,11 @@
       "feature_area": "policies"
     }
   },
+  "Usage period": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Usage policies": {
     "context": {
       "feature_area": "policies"
@@ -85288,6 +85314,12 @@
       "feature_area": "offering-requests"
     }
   },
+  "Whole order": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "details"
+    }
+  },
   "Whom the evaluators suggested, and why. The same person may be listed once by account and once by an address typed for them. The applicant does not see them.": {
     "context": {
       "feature_area": "reviewer-suggestions"
@@ -88707,6 +88739,15 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "common"
+    }
+  },
+  "monthly limit × {months}": {
+    "context": {
+      "variables": {
+        "months": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "months": {
