@@ -22,6 +22,8 @@ import {
 import { translate } from '@/i18n';
 import { getAllocationTimeOptions } from '@/proposals/utils';
 import {
+  AUTOMATIC_DECISION_GUARD_OPTIONS,
+  automaticDecisionGuardLabel,
   CONTRIBUTOR_SOURCE_OPTIONS,
   contributorSourceLabel,
   kindHasField,
@@ -361,6 +363,15 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
     return options;
   }, [values.contributor_source]);
 
+  const automaticDecisionGuardChoices = useMemo(
+    () =>
+      AUTOMATIC_DECISION_GUARD_OPTIONS.map((value) => ({
+        value,
+        label: automaticDecisionGuardLabel(value),
+      })),
+    [],
+  );
+
   const onNegativeChoices = useMemo(
     () =>
       ON_NEGATIVE_OPTIONS.map((value) => ({
@@ -498,8 +509,19 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
             name="decides_automatically"
             label={translate('Decide automatically')}
             description={translate(
-              'Award the proposal as requested as soon as it reaches this step, without waiting for the call managers. They decide only when the award cannot be made automatically, such as when a score threshold or the award amounts stop it. An enabled step before it must be able to reject a proposal.',
+              'Award the proposal as requested as soon as it reaches this step, without waiting for the call managers. They decide only when the award cannot be made automatically, such as when a score threshold or the award amounts stop it.',
             )}
+          />
+        )}
+
+        {show('automatic_decision_guard') && (
+          <RadioGroup
+            name="automatic_decision_guard"
+            label={translate('What stops an unsuitable proposal')}
+            description={translate(
+              'An earlier step: an enabled step before this one must be able to reject the proposal. The provider: every offering of the call must have its orders reviewed by the provider or fulfilled through a helpdesk ticket, so someone at the provider still acts on each award.',
+            )}
+            choices={automaticDecisionGuardChoices}
           />
         )}
       </>

@@ -1,5 +1,6 @@
 import { FORM_ERROR } from 'final-form';
 import {
+  AutomaticDecisionGuardEnum,
   CallStepKindEnum,
   CallWorkflowStep,
   OnNegativeEnum,
@@ -42,6 +43,7 @@ export interface StepFormValues {
   transition_mode: TransitionModeEnum | null;
   is_allocation_decision: boolean;
   decides_automatically: boolean;
+  automatic_decision_guard: AutomaticDecisionGuardEnum;
   allocation_time: AllocationTime;
   min_reviewers: number | null;
   min_contributions: number | null;
@@ -107,6 +109,7 @@ export const EMPTY_STEP_VALUES: StepFormValues = {
   transition_mode: 'automatic_on_completion',
   is_allocation_decision: false,
   decides_automatically: false,
+  automatic_decision_guard: 'earlier_step',
   allocation_time: 'on_decision',
   min_reviewers: null,
   min_contributions: null,
@@ -194,6 +197,7 @@ export const stepFormValues = (step: CallWorkflowStep): StepFormValues => ({
     'automatic_on_completion') as TransitionModeEnum,
   is_allocation_decision: step.is_allocation_decision ?? false,
   decides_automatically: step.decides_automatically ?? false,
+  automatic_decision_guard: step.automatic_decision_guard ?? 'earlier_step',
   allocation_time: (step.allocation_time || 'on_decision') as AllocationTime,
   min_reviewers: step.min_reviewers ?? null,
   min_contributions: step.min_contributions ?? null,
@@ -319,6 +323,13 @@ export const buildStepBody = (
   if (has('decides_automatically')) {
     body.decides_automatically = decidesAutomatically;
   }
+  // What stands in for a rejecting step means something only to an
+  // automatic decision; the backend refuses it on any other step.
+  if (has('automatic_decision_guard')) {
+    body.automatic_decision_guard = decidesAutomatically
+      ? values.automatic_decision_guard || 'earlier_step'
+      : 'earlier_step';
+  }
   // Allocation timing belongs to the allocation decision alone; the backend
   // refuses a fixed date anywhere else.
   if (has('allocation_time') && values.is_allocation_decision) {
@@ -408,6 +419,9 @@ export const buildStepBody = (
     // A post-award step settles no award and runs on every run.
     if (has('is_allocation_decision')) body.is_allocation_decision = false;
     if (has('decides_automatically')) body.decides_automatically = false;
+    if (has('automatic_decision_guard')) {
+      body.automatic_decision_guard = 'earlier_step';
+    }
     if (has('run_condition')) body.run_condition = null;
   }
   if (has('round_scoped')) {
@@ -556,6 +570,7 @@ const FIELD_PAGES: Record<keyof StepFormValues, StepFormPage> = {
   is_enabled: 'basics',
   is_allocation_decision: 'basics',
   decides_automatically: 'basics',
+  automatic_decision_guard: 'basics',
   completer: 'participants',
   completer_proposal_role: 'participants',
   assigns_roles: 'participants',
@@ -681,6 +696,12 @@ export const stepFieldShown = (
     case 'decides_automatically':
       return (
         Boolean(values.is_allocation_decision) && !isPostAward(values.phase)
+      );
+    case 'automatic_decision_guard':
+      return (
+        Boolean(values.is_allocation_decision) &&
+        Boolean(values.decides_automatically) &&
+        !isPostAward(values.phase)
       );
     case 'transition_mode':
       return !(values.is_allocation_decision && values.decides_automatically);

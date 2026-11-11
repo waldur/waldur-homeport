@@ -55,6 +55,7 @@ const STEP_FIELD_LABELS = (): Record<string, string> => ({
   blind_review: translate('Blind review'),
   is_allocation_decision: translate('Allocation decision'),
   decides_automatically: translate('Decides automatically'),
+  automatic_decision_guard: translate('What stops an unsuitable proposal'),
   duration_in_days: translate('Duration'),
   recipient: translate('Notification rule'),
   proposal_role: translate('Notification rule'),

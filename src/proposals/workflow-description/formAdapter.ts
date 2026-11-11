@@ -109,6 +109,10 @@ export const fromStepForm = (
     isAllocationDecision,
     decidesAutomatically:
       isAllocationDecision && !!values.decides_automatically,
+    reliesOnProviderFulfilment:
+      isAllocationDecision &&
+      !!values.decides_automatically &&
+      values.automatic_decision_guard === 'provider_fulfilment',
     assignsRoleNames: (values.assigns_roles ?? []).map(
       (ref) => findRole(roles, roleRef(ref))?.name ?? ref,
     ),
