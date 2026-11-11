@@ -124,7 +124,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
                   {
                     title: translate('Member'),
                     render: ({ row }) => (
-                      <div className="content-wrapper gap-1.5">
+                      <div className="flex items-center gap-1.5">
                         <Avatar
                           src={row.user_image}
                           name={row.user_full_name}

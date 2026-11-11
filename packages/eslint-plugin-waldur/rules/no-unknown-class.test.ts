@@ -31,7 +31,7 @@ describe('no-unknown-class', () => {
       },
       // Classes from the compiled SCSS (the legacy partials).
       {
-        code: 'const A = () => <div className="ellipsis text-btn content-wrapper" />;',
+        code: 'const A = () => <div className="ellipsis text-btn text-link" />;',
       },
       // group / peer markers emit no CSS of their own.
       {
