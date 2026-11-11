@@ -352,68 +352,6 @@
     }
   }
 
-  .tc-voice {
-    display: flex;
-    align-items: center;
-    gap: 0.769rem;
-    min-width: 180px;
-  }
-
-  .tc-voice__play {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    display: grid;
-    place-items: center;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: var(--bg-brand-solid);
-    color: var(--fg-white);
-    cursor: pointer;
-
-    &:hover {
-      background: var(--btn-primary-bg-hover);
-    }
-
-    svg {
-      width: 15px;
-      height: 15px;
-    }
-  }
-
-  .tc-voice__bars {
-    flex: 1;
-    // Let the waveform shrink below its 40-bar intrinsic width and clip the
-    // overflowing bars, so the fixed-width duration label is never pushed past
-    // the bubble edge in a narrow drawer.
-    min-width: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    height: 28px;
-  }
-
-  .tc-voice__bar {
-    flex: 1;
-    min-width: 2px;
-    border-radius: var(--radius-full);
-    background: var(--border-primary);
-    transition: background 0.1s ease;
-
-    &.is-played {
-      background: var(--bg-brand-solid);
-    }
-  }
-
-  .tc-voice__time {
-    flex-shrink: 0;
-    font-size: var(--text-xs);
-    color: var(--text-secondary);
-    font-variant-numeric: tabular-nums;
-  }
-
   // Recording happens inside the composer's text block: the indicator fills the
   // textarea slot (Cancel/Send stay in the footer), so the card keeps its size.
   .tc-voice-recording {
