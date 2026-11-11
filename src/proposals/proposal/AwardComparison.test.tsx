@@ -157,3 +157,15 @@ describe('AwardDetails options', () => {
     expect(screen.getByText('parallel')).toBeInTheDocument();
   });
 });
+
+describe('AwardOfferingCell', () => {
+  // The cell clips what does not fit: the name gives way, never the badge.
+  it('truncates the name and keeps the change badge whole', () => {
+    renderWithProviders(<AwardOfferingCell row={rowWith('balanced')} />);
+    const name = screen.getByTitle(optionsOffering.offering_name);
+    expect(name).toHaveClass('min-w-0', 'truncate');
+    const badge = screen.getByTestId('award-change-badge');
+    expect(badge).toHaveClass('shrink-0');
+    expect(badge).toHaveTextContent('Changed');
+  });
+});
