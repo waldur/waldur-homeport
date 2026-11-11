@@ -112,6 +112,48 @@ export const attachAuthHeader = (request: Request) => {
   return request;
 };
 
+const PATH_PARAM_RE = /\{([^{}]+)\}/g;
+
+/**
+ * Raised instead of sending a request whose url template still has a path
+ * parameter without a value.
+ */
+export class UnfilledPathParamError extends Error {
+  constructor(readonly url: string) {
+    super(`Path parameter missing in ${url}`);
+    this.name = 'UnfilledPathParamError';
+  }
+}
+
+// The generated client skips a path parameter whose value is undefined or
+// null and leaves its `{name}` placeholder in the url, so the call still goes
+// out as e.g. GET /api/proposal-protected-calls/%7Buuid%7D/. That happens
+// whenever a page fetches with an id read from the router while the router is
+// already leaving it: a 404 sends the app to the error page, the still-mounted
+// page sees that state's params (none), and its query refetches with an
+// undefined id. Such a request can only ever 404, so it is refused here,
+// before the network, for every endpoint at once.
+export const refuseUnfilledPathParams = (
+  request: Request,
+  options?: { url?: string; path?: Record<string, unknown> },
+) => {
+  const template = options?.url;
+  if (typeof template !== 'string') {
+    return request;
+  }
+  for (const [, raw] of template.matchAll(PATH_PARAM_RE)) {
+    // Strip the serialization style markers the generator may add
+    // ({.name}, {;name}, {name*}).
+    const name = raw.replace(/^[.;]/, '').replace(/\*$/, '');
+    const value = options.path?.[name];
+    if (value === undefined || value === null) {
+      throw new UnfilledPathParamError(template);
+    }
+  }
+  return request;
+};
+
+client.interceptors.request.use(refuseUnfilledPathParams);
 client.interceptors.request.use(attachAuthHeader);
 
 // The generated client throws the *raw response body* on a non-2xx --
