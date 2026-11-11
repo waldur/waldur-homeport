@@ -47,7 +47,8 @@ export const RabbitMQDeleteAllButton: FC<RabbitMQDeleteAllButtonProps> = ({
 
   const handleDeleteAll = useCallback(async () => {
     try {
-      const typedValue = await confirm(
+      // With `showInput`, confirm resolves with `{ input }`.
+      const result = await confirm(
         translate('WARNING: Mass queue deletion'),
         <>
           <p className="text-danger font-medium">
@@ -84,7 +85,8 @@ export const RabbitMQDeleteAllButton: FC<RabbitMQDeleteAllButtonProps> = ({
         },
       );
 
-      if (typedValue !== CONFIRMATION_TEXT) {
+      const typedValue = (result as { input?: string } | undefined)?.input;
+      if (typedValue?.trim() !== CONFIRMATION_TEXT) {
         showError(
           translate('Confirmation text does not match. Expected "{text}"', {
             text: CONFIRMATION_TEXT,
