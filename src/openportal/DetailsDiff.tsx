@@ -71,7 +71,6 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
 
   return (
     <Table
-      density="compact"
       className="mb-0 text-xs align-middle"
       data-testid="details-diff-table"
     >

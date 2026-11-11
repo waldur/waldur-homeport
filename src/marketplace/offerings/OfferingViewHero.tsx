@@ -257,11 +257,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 className="mb-0 px-0 h-auto text-xs w-auto mt-1"
               >
                 <TableBody>
-                  <TableRow divided={false}>
-                    <TableHead className="font-medium w-[150px] p-0 pe-2.5">
+                  <TableRow divided={false} hoverable={false}>
+                    <TableHead className="text-[length:inherit] text-inherit font-medium w-[150px] p-0 pe-2.5">
                       {translate('Shared/Billing enabled')}:
                     </TableHead>
-                    <TableCell className="text-quaternary p-0">
+                    <TableCell className="text-[length:inherit] text-quaternary p-0">
                       {(offering.shared ? translate('Yes') : translate('No')) +
                         '/' +
                         (offering.billable
@@ -269,11 +269,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                           : translate('No'))}
                     </TableCell>
                   </TableRow>
-                  <TableRow divided={false}>
-                    <TableHead className="font-medium w-[100px] p-0 pe-2.5">
+                  <TableRow divided={false} hoverable={false}>
+                    <TableHead className="text-[length:inherit] text-inherit font-medium w-[100px] p-0 pe-2.5">
                       {translate('Type')}:
                     </TableHead>
-                    <TableCell className="text-quaternary p-0">
+                    <TableCell className="text-[length:inherit] text-quaternary p-0">
                       {getLabel(offering.type)}
                     </TableCell>
                   </TableRow>

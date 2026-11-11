@@ -240,7 +240,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                 </FormText>
                 <Card variant="table" bordered className="full-width">
                   <CardContent className="p-0">
-                    <Table density="compact" className="align-middle mb-0">
+                    <Table className="align-middle mb-0">
                       <TableHeader>
                         <TableRow>
                           <TableHead>{translate('Component')}</TableHead>

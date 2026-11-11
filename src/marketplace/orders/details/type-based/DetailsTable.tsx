@@ -69,7 +69,7 @@ export const DetailsTable = <RowType,>({
   return (
     <Card variant="table" bordered>
       <CardContent className="p-0">
-        <Table density="compact" className="align-middle">
+        <Table className="align-middle">
           <TableHeader>
             <TableRow className="align-middle">
               {columns.map((col, i) => (

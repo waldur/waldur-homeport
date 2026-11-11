@@ -457,7 +457,7 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
           >
             <Card variant="table" bordered className="full-width">
               <CardContent className="p-0">
-                <Table density="compact" className="align-middle">
+                <Table className="align-middle">
                   <TableHeader>
                     <TableRow className="align-middle">
                       <TableHead>{translate('Component')}</TableHead>

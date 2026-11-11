@@ -61,7 +61,7 @@ export const ImportReviewTab = () => {
         <label className="text-secondary font-semibold mb-3">
           {translate('Selected mappings')}:
         </label>
-        <Table density="compact" className="align-middle mb-2.5">
+        <Table className="align-middle mb-2.5">
           <TableHeader>
             <TableRow>
               <TableHead>{translate('Remote category')}</TableHead>

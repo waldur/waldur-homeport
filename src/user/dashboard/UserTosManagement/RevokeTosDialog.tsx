@@ -101,7 +101,7 @@ export const RevokeTosDialog = ({
             </h6>
             <Card variant="table" bordered>
               <CardContent className="p-0">
-                <Table density="compact" className="align-middle mb-0">
+                <Table className="align-middle mb-0">
                   <TableHeader>
                     <TableRow className="align-middle">
                       <TableHead>{translate('Name')}</TableHead>

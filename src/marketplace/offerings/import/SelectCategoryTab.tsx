@@ -39,10 +39,7 @@ const FieldsListMapping = ({
 }) => {
   return (
     <FormField>
-      <Table
-        density="compact"
-        className="align-middle border-b border-b-secondary mb-2.5"
-      >
+      <Table className="align-middle border-b border-b-secondary mb-2.5">
         <TableHeader>
           <TableRow>
             <TableHead className="w-1/2">

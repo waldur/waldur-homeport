@@ -32,7 +32,7 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
   ...props
 }) => (
   <div className="max-h-[300px]! overflow-y-scroll!">
-    <Table density="compact">
+    <Table>
       <TableHeader>
         <TableRow>
           {enableSelect && <TableHead />}

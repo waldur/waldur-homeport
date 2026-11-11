@@ -32,7 +32,7 @@ export const OpenStackSecurityGroupsTable: FunctionComponent<{
   >[];
 }> = ({ securityGroups }) => {
   return (
-    <Table density="compact">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead />

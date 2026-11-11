@@ -46,7 +46,7 @@ export const AdministrativeAccessSection: FC<
     )}
 
     {isViewerStaffOrSupport && data.users && data.users.length > 0 && (
-      <Table density="compact" className="mb-0">
+      <Table className="mb-0">
         <TableHeader>
           <TableRow>
             <TableHead>{translate('User')}</TableHead>

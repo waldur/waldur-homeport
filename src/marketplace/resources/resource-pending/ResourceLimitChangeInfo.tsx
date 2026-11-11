@@ -133,7 +133,7 @@ export const ResourceLimitChangeInfo = ({
 
       <Card variant="table" bordered className="mt-5 mb-5">
         <CardContent className="p-0">
-          <Table density="compact" className="align-middle">
+          <Table className="align-middle">
             <TableHeader>
               <TableRow className="align-middle">
                 <TableHead>{translate('Resource type')}</TableHead>

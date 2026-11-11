@@ -348,7 +348,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                 )}
 
                 <h6 className="mt-5 mb-2.5">{translate('Preview')}</h6>
-                <Table density="compact" className="align-middle">
+                <Table className="align-middle">
                   <TableHeader>
                     <TableRow>
                       <TableHead>{translate('Resource')}</TableHead>

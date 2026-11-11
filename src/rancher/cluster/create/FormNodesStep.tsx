@@ -89,7 +89,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
       {fields.length > 0 && (
         <FormField id="nodes-list-group">
           <div>
-            <Table density="compact" className="align-middle">
+            <Table className="align-middle">
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[200px]">

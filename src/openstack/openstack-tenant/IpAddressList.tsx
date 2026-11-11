@@ -61,7 +61,7 @@ export const IpAddressList: React.FC<any> = ({
   <>
     {fields.length > 0 ? (
       <>
-        <Table density="compact" striped className="mt-2.5">
+        <Table striped className="mt-2.5">
           <TableHeader>
             <TableRow>
               <TableHead>{translate('IP address')}</TableHead>

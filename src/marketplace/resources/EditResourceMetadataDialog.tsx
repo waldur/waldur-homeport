@@ -86,7 +86,7 @@ const FieldRows: FC<{
           />
         </div>
         {fields.length ? (
-          <Table density="compact" className="mb-0">
+          <Table className="mb-0">
             <TableHeader>
               <TableRow>
                 {columns.map((column) => (

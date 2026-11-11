@@ -45,9 +45,11 @@ interface MonthOverviewProps {
 
 const OverviewItemTr = ({ title, value }) => {
   return (
-    <TableRow divided={false}>
-      <TableCell className="underline w-full py-2.5">{title}</TableCell>
-      <TableCell className="text-quaternary whitespace-nowrap">
+    <TableRow divided={false} hoverable={false}>
+      <TableCell className="text-[length:inherit] text-inherit underline w-full px-0 py-2.5">
+        {title}
+      </TableCell>
+      <TableCell className="text-[length:inherit] text-quaternary whitespace-nowrap p-0">
         {value}
       </TableCell>
     </TableRow>

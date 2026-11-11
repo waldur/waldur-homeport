@@ -60,7 +60,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
             className="-mt-4"
           />
         ) : (
-          <Table density="compact">
+          <Table>
             <TableBody>
               {props.offering.endpoints.map((endpoint) => (
                 <TableRow key={endpoint.uuid}>

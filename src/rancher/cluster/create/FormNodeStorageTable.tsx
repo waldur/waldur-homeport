@@ -45,7 +45,7 @@ export const FormNodeStorageTable: FC<
   return (
     <FormField>
       <div>
-        <Table density="compact" className="align-middle">
+        <Table className="align-middle">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[200px]">{props.title}</TableHead>

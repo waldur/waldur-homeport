@@ -60,7 +60,7 @@ export const ColumnsList: FC<ColumnsListProps> = ({
   category,
 }) => (
   <>
-    <Table density="compact">
+    <Table>
       {fields.length === 0 && CategoryColumns.length === 0 ? (
         <TableBody>
           <CategoryColumnsPlaceholder category={category} />
