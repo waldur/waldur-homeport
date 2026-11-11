@@ -82,8 +82,10 @@ export const OfferingResourcesTable: FC<OfferingResourcesTableProps> = memo(
         columns={columns}
         verboseName={translate('Resources')}
         initialSorting={{ field: 'created', mode: 'desc' }}
+        hideTitle
         hasActionBar={false}
         hoverShadow={false}
+        placeholderHasRetry={false}
         initialPageSize={5}
         minHeight="auto"
       />

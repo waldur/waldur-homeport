@@ -1,4 +1,4 @@
-import { FC, ReactNode, useId, useMemo, useRef, useState } from 'react';
+import { FC, ReactNode, useId, useMemo, useState } from 'react';
 
 import {
   cn,
@@ -31,9 +31,10 @@ interface EmbeddedTabsProps {
   listClassName?: string;
   panelsClassName?: string;
   /**
-   * Keep every opened panel laid out, the closed ones invisible, so the block
-   * is as tall as the tallest tab opened so far and does not jump back as tabs
-   * change. A panel mounts (and its table fetches) when first opened.
+   * Lay out every panel, the closed ones invisible, so the block is as tall as
+   * its tallest tab and never jumps as tabs change. On by default; every
+   * panel mounts (and its table fetches) up front. `false` mounts only the
+   * open panel.
    */
   keepTallest?: boolean;
 }
@@ -41,9 +42,9 @@ interface EmbeddedTabsProps {
 /**
  * Tabs whose panels are tables (or details), in an expandable row or a card
  * section: waldur-ui's data-driven `Tabs` with the strip and table-card
- * styling those places share. Only the open panel is mounted, so only its
- * table fetches (`keepTallest` keeps the ones already opened); a missing or
- * hidden choice falls back to the first tab.
+ * styling those places share. Every panel is laid out so the block keeps the
+ * tallest tab's height (`keepTallest={false}` mounts only the open one); a
+ * missing or hidden choice falls back to the first tab.
  */
 export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
   tabs,
@@ -55,7 +56,7 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
   className,
   listClassName,
   panelsClassName,
-  keepTallest,
+  keepTallest = true,
 }) => {
   // Re-key only when `tabs` changes. Callers that build `tabs` inline get a
   // new array each render anyway; a stable (memoised) `tabs` skips the work.
@@ -74,10 +75,6 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
     visibleTabs.filter((tab) => !tab.disabled).map((tab) => tab.key),
     value ?? internalValue,
   );
-  const visited = useRef(new Set<string>());
-  if (activeValue) {
-    visited.current.add(activeValue);
-  }
 
   const panelsFrame = cn(
     framed &&
@@ -99,6 +96,9 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
         !header &&
         // Arbitrary values on purpose: Bootstrap's `.border` is !important and would win.
         'rounded-t-[0.475rem] border border-secondary pl-[12px]',
+      // The strip's bottom line meets a table header painted in the
+      // --border-secondary step in dark; the divider step keeps it visible.
+      framed && !header && 'border-b-[color:var(--border-divider)]',
       listClassName,
     ),
   };
@@ -148,14 +148,11 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
           </TabsTrigger>
         ))}
       </TabsList>
-      {/* Every opened panel in one grid cell: a closed one keeps its height but
-          is invisible (out of reach and of the Tab order), so the block is as
-          tall as the tallest tab opened so far. */}
+      {/* Every panel in one grid cell: a closed one keeps its height but is
+          invisible (out of reach and of the Tab order), so the block is as
+          tall as the tallest tab. */}
       <div className={cn('grid', panelsFrame)}>
         {visibleTabs.map((tab) => {
-          if (!visited.current.has(tab.key)) {
-            return null;
-          }
           const open = tab.key === activeValue;
           return (
             <div

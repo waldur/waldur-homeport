@@ -334,21 +334,12 @@ export const FeaturesList = () => {
                             key={tab.key}
                             value={tab.key}
                             disabled={!hasMatches && !!query}
+                            count={query ? filteredCount : undefined}
                             className={classNames('whitespace-nowrap', {
                               'text-quaternary': !hasMatches && query,
                             })}
                           >
                             {tab.title}
-                            {query && (
-                              <Badge
-                                variant="secondary"
-                                size="sm"
-                                tone="outline"
-                                className="ms-1.5"
-                              >
-                                {filteredCount}
-                              </Badge>
-                            )}
                           </TabsTrigger>
                         );
                       })}

@@ -151,7 +151,7 @@ export const ReviewerProfilePanel = ({
   return (
     <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
       <Card bordered>
-        <CardHeader className="border-b-0 pt-3">
+        <CardHeader className="pt-3">
           <div className="flex flex-col lg:flex-row w-full gap-3">
             {/* Left side: Title, refresh, and status badges */}
             <div className="flex flex-col">

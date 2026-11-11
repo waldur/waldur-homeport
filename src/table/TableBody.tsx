@@ -72,6 +72,9 @@ const NESTED_TABLE_CLASSES = [
   '[&_[data-slot=card][data-variant=table]_.table_td:last-child]:pe-[var(--card-padding-x)]',
   '[&_[data-slot=card][data-variant=table]_.table_th:last-child]:pe-[var(--card-padding-x)]',
   '[&_[data-slot=card][data-variant=table]_.table_thead>tr]:bg-tertiary',
+  // In dark, bg-tertiary is the --border-secondary step: the divider under
+  // the header row vanished into it.
+  '[&_[data-slot=card][data-variant=table]_.table_thead>tr]:border-b-[color:var(--border-divider)]',
   '[&_[data-slot=card][data-variant=table]_.table_tbody>tr]:bg-secondary',
   '[&_[data-slot=card][data-variant=table]_.table_thead_th.pinned]:bg-tertiary',
   '[&_[data-slot=card][data-variant=table]_.table_thead_th.header-actions]:bg-tertiary',

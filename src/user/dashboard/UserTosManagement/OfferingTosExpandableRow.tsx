@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
-
 import { fetchResultCount } from '@/core/api';
-import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { TableWithTabs } from '@/table/TableWithTabs';
-import { TableTab } from '@/table/types';
 
 import { OfferingResourcesTable } from './OfferingResourcesTable';
 import { OfferingTosTable } from './OfferingTosTable';
@@ -35,44 +31,28 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
     refetchOnWindowFocus: false,
   });
 
-  const tabs = useMemo<TableTab[]>(
-    () => [
-      {
-        key: 'tos',
-        title: translate('Terms of Service'),
-        component: OfferingTosTable,
-      },
-      {
-        key: 'resources',
-        title: (
-          <>
-            {translate('Resources')}
-            <Badge
-              variant="neutral"
-              shape="pill"
-              tone="outline"
-              className="ms-1.5"
-            >
-              {resourcesCountQuery.isLoading ? (
-                <LoadingSpinnerSimple />
-              ) : (
-                resourcesCountQuery.data || 0
-              )}
-            </Badge>
-          </>
-        ),
-        component: OfferingResourcesTable,
-      },
-    ],
-    [resourcesCountQuery.data, resourcesCountQuery.isLoading],
-  );
-
   return (
     <ExpandableContainer>
-      <TableWithTabs
-        title={offering.name}
-        tabs={tabs}
-        data={{ offering, onTosAction }}
+      <EmbeddedTabs
+        framed
+        defaultValue="tos"
+        keepTallest
+        tabs={[
+          {
+            key: 'tos',
+            title: translate('Terms of Service'),
+            content: (
+              <OfferingTosTable offering={offering} onTosAction={onTosAction} />
+            ),
+          },
+          {
+            key: 'resources',
+            title: translate('Resources'),
+            count: resourcesCountQuery.data ?? 0,
+            countLoading: resourcesCountQuery.isLoading,
+            content: <OfferingResourcesTable offering={offering} />,
+          },
+        ]}
       />
     </ExpandableContainer>
   );

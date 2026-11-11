@@ -56,7 +56,7 @@ export const Default: Story = {
     await expect(canvas.getByText('Projects table')).toBeVisible();
     await userEvent.click(canvas.getByRole('tab', { name: /Resources/ }));
     await expect(canvas.getByText('Resources table')).toBeVisible();
-    await expect(canvas.queryByText('Projects table')).not.toBeInTheDocument();
+    await expect(canvas.getByText('Projects table')).not.toBeVisible();
   },
 };
 
