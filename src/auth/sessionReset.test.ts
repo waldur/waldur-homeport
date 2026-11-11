@@ -17,6 +17,8 @@ import { ENV } from '@/core/config';
 import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
 import { RESET_SESSION } from '@/store/reducers';
 
+import { ReauthenticationCancelled } from './reauthentication/api';
+import { requestReauthentication } from './reauthentication/prompt';
 import { resetSessionState } from './sessionReset';
 
 describe('resetSessionState', () => {
@@ -36,6 +38,21 @@ describe('resetSessionState', () => {
     expect(ENV.roles).toEqual([]);
     expect(resetUserCacheMock).toHaveBeenCalledTimes(1);
     expect(dispatchMock).toHaveBeenCalledWith({ type: RESET_SESSION });
+  });
+
+  it('fails a change still waiting for the user to confirm it is them', async () => {
+    const waiting = requestReauthentication({
+      action: 'change_email',
+      methods: ['password'],
+    }).catch((reason) => reason);
+
+    resetSessionState({ queries: false });
+
+    const reason = await waiting;
+    expect(reason).toBeInstanceOf(ReauthenticationCancelled);
+    expect(reason.message).toBe(
+      'Nothing was changed, because the session ended.',
+    );
   });
 
   it('can leave the query cache alone', () => {

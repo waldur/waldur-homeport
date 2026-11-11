@@ -1,5 +1,8 @@
+import { ReauthenticationCancelled } from '@/auth/reauthentication/api';
+import { cancelPendingReauthentication } from '@/auth/reauthentication/prompt';
 import { ENV } from '@/core/config';
 import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
+import { translate } from '@/i18n';
 import { resetSession } from '@/store/reducers';
 import store from '@/store/store';
 import { resetUserCache } from '@/user/UsersService';
@@ -28,4 +31,11 @@ export function resetSessionState({ queries = true } = {}) {
   ENV.roles = [];
   resetUserCache();
   store.dispatch(resetSession());
+  // A "Confirm it's you" still open belongs to the session that is ending
+  // (signed out, expired, or another account signing in): fail its change.
+  cancelPendingReauthentication(
+    new ReauthenticationCancelled(
+      translate('Nothing was changed, because the session ended.'),
+    ),
+  );
 }

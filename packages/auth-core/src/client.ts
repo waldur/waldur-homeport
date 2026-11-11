@@ -6,34 +6,17 @@ import { addApiErrorBreadcrumb } from 'waldur-telemetry';
 // see the comment on the same import in
 // packages/api-client/src/requestHelpers.ts.
 
+import { getAuthHeader } from './authHeader';
 import { getAuthCoreConfig } from './config';
+import {
+  handleReauthenticationChallenge,
+  readReauthenticationChallenge,
+} from './reauthentication';
+
+export { getAuthHeader } from './authHeader';
 
 const querySerializer = (params) =>
   Qs.stringify(params, { arrayFormat: 'repeat' });
-
-// Methods whose token is a DRF Token issued by Waldur itself, rather than an
-// OIDC access token. A passkey login yields exactly the same DRF token as a
-// password login, so it belongs here — without it, a passkey session on an
-// OIDC-enabled deployment would send `Bearer <drf-token>` and 401 on every
-// request after login.
-const DRF_TOKEN_METHODS = ['local', 'passkey'];
-
-const getAuthPrefix = (): 'Token' | 'Bearer' => {
-  const config = getAuthCoreConfig();
-  if (DRF_TOKEN_METHODS.includes(config.storage.method.get())) {
-    return 'Token';
-  }
-  return config.isOidcAccessTokenEnabled() ? 'Bearer' : 'Token';
-};
-
-export const getAuthHeader = () => {
-  const config = getAuthCoreConfig();
-  const token = config.storage.token.get();
-  const prefix = getAuthPrefix();
-  if (token) {
-    return [prefix, token].join(' ');
-  }
-};
 
 /**
  * Generates default HTTP headers for API requests.
@@ -182,8 +165,13 @@ client.interceptors.request.use(attachAuthHeader);
 //     status code, and the toast lost the message. The body is therefore also
 //     kept whole under `data`, which `getErrorBody` and the error formatter read
 //     before the spread keys.
+//   * An Error is passed through untouched as well, response or not. It is
+//     not the API's answer but something that failed around it: an
+//     interceptor that gave up (the user did not confirm a step-up challenge)
+//     or a retry whose fetch rejected. Stamping the first response's status on
+//     it would pass a network or CORS failure off as that 401.
 export const attachResponseDetails = (error: unknown, response?: Response) => {
-  if (!response) {
+  if (!response || error instanceof Error) {
     return error;
   }
   const details = {
@@ -212,6 +200,11 @@ const LOGIN_ENDPOINT_PATHS = [
   'api/passkeys/mfa/finish/',
 ];
 
+// A step-up challenge: the user is asked to confirm it is them and the
+// request is sent again (./reauthentication). Registered before the sign-out
+// below, which then sees the retry's response instead of the challenge.
+client.interceptors.response.use(handleReauthenticationChallenge);
+
 // A 401 means an authenticated session expired — hand off to the host's
 // onSessionExpired (remember where to return, then log out). Guarded on this
 // tab having had a session: an anonymous visitor (e.g. browsing the public
@@ -220,14 +213,18 @@ const LOGIN_ENDPOINT_PATHS = [
 // `hadAuthenticatedSession` covers the case where the token was cleared
 // out-of-band (logout in another tab) but this tab is still showing the
 // authenticated UI.
-export const handleUnauthorizedResponse = (response: Response) => {
+//
+// A step-up challenge is a 401 as well, but its session is fine: only the
+// one change it refused fails, when the user does not confirm it is them.
+export const handleUnauthorizedResponse = async (response: Response) => {
   const config = getAuthCoreConfig();
   if (
     response?.status === 401 &&
     (config.storage.token.get() || hadAuthenticatedSession) &&
     !LOGIN_ENDPOINT_PATHS.some(
       (path) => response.url === config.getApiEndpoint() + path,
-    )
+    ) &&
+    !(await readReauthenticationChallenge(response))
   ) {
     config.onSessionExpired();
   }

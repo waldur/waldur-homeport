@@ -10,6 +10,7 @@ import { DemoResetOverlay } from '@/administration/demo-presets/DemoResetOverlay
 import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
+import { ReauthenticationRoot } from '@/auth/reauthentication/ReauthenticationRoot';
 import { BootSplashGate } from '@/BootSplashGate';
 import { AppCopyFeedback } from '@/core/CopyFeedback';
 import { renderStateLink } from '@/core/Link';
@@ -63,6 +64,7 @@ const ApplicationInner: FunctionComponent = () => {
                             <NotificationContainer />
                             <ModalRoot />
                             <ConfirmModalRoot />
+                            <ReauthenticationRoot />
                             <DrawerRoot />
                             <UIView />
                             <BootSplashGate />
