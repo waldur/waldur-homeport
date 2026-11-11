@@ -1,4 +1,5 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
+import { FC } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { demoPresetStatusRetrieve } from 'waldur-js-client';
 
@@ -7,8 +8,8 @@ import { setViewport } from 'waldur-ui';
 import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
 
-import { HeroColumn } from './HeroColumn';
-import { LoginColumn } from './LoginColumn';
+import { RightSplitLayout } from './layouts/RightSplitLayout';
+import { SplitScreenLayout } from './layouts/SplitScreenLayout';
 
 vi.mock('@/administration/api', () => ({
   getIdentityProviders: vi.fn().mockResolvedValue([]),
@@ -26,14 +27,26 @@ vi.mock('@/i18n/LanguageSelectorBox', () => ({
 }));
 vi.mock('@/navigation/footer/FooterLinks', () => ({ FooterLinks: () => null }));
 
-// The split-screen layouts put the demo users in the hero column beside the
-// sign-in column, and under the sign-in methods only where the hero column
-// stacks below the fold.
-describe('demo users placement', () => {
+// Which column holds the list, counted once it is shown: a layout that listed
+// it in both columns, or in neither, fails.
+const columnHoldingDemoUsers = async () => {
+  await screen.findByTestId('demo-quick-login-alice');
+  const count = (column: string) =>
+    within(screen.getByTestId(column)).queryAllByTestId('demo-quick-login')
+      .length;
+  const inHero = count('hero-column');
+  const inSignIn = count('login-column');
+  expect(inHero + inSignIn).toBe(1);
+  return inHero ? 'hero' : 'sign-in';
+};
+
+describe.each<[string, FC]>([
+  ['split-screen', SplitScreenLayout],
+  ['right-split', RightSplitLayout],
+])('demo users in the %s layout', (_, Layout) => {
   let methods: string[];
 
   beforeEach(() => {
-    vi.clearAllMocks();
     methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS;
     ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS = ['LOCAL_SIGNIN'];
     ENV.plugins.WALDUR_CORE.DEMO_PRESETS_ENABLED = true;
@@ -51,31 +64,14 @@ describe('demo users placement', () => {
     delete ENV.plugins.WALDUR_CORE.DEMO_PRESETS_ENABLED;
   });
 
-  it('shows them in the hero column on a wide screen', async () => {
-    renderWithProviders(<HeroColumn />);
-    expect(await screen.findByTestId('demo-quick-login-alice')).toBeVisible();
+  it('shows them in the hero column beside the sign-in column', async () => {
+    renderWithProviders(<Layout />);
+    expect(await columnHoldingDemoUsers()).toBe('hero');
   });
 
-  it('keeps them out of the sign-in column on a wide screen', async () => {
-    renderWithProviders(<LoginColumn />);
-    await screen.findByText('Sign in with local account', { exact: false });
-    // Mounted, the list would have asked for the preset's users by now.
-    expect(demoPresetStatusRetrieve).not.toHaveBeenCalled();
-    expect(screen.queryByTestId('demo-quick-login')).toBeNull();
-  });
-
-  it('lists them under the sign-in methods on a narrow screen', async () => {
+  it('keeps them with the sign-in methods when the columns stack', async () => {
     setViewport('mobile');
-    renderWithProviders(<LoginColumn />);
-    expect(await screen.findByTestId('demo-quick-login-alice')).toBeVisible();
-  });
-
-  it('leaves the hero column without them on a narrow screen', async () => {
-    setViewport('mobile');
-    renderWithProviders(<HeroColumn />);
-    await waitFor(() =>
-      expect(demoPresetStatusRetrieve).not.toHaveBeenCalled(),
-    );
-    expect(screen.queryByTestId('demo-quick-login')).toBeNull();
+    renderWithProviders(<Layout />);
+    expect(await columnHoldingDemoUsers()).toBe('sign-in');
   });
 });

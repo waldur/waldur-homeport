@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { DemoPresetUser, demoPresetStatusRetrieve } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, cn } from 'waldur-ui';
+import { AlertItem, BaseButton, Card, cn } from 'waldur-ui';
 
 import { isDemoPresetsEnabled } from '@/administration/demo-presets/gate';
 import { format } from '@/core/ErrorMessageFormatter';
@@ -78,14 +78,13 @@ export const DemoUserQuickLogin: FC<DemoUserQuickLoginProps> = ({
     }
   };
 
-  return (
+  const section = (
     <section
-      className={cn(
+      className={
         variant === 'card'
-          ? 'w-full max-w-90 rounded-xl border border-secondary bg-primary p-5 text-left shadow-lg'
-          : 'mt-6 border-t border-t-secondary pt-4',
-        className,
-      )}
+          ? undefined
+          : cn('mt-6 border-t border-t-secondary pt-4', className)
+      }
       aria-labelledby="demo-quick-login-title"
       data-testid="demo-quick-login"
     >
@@ -107,7 +106,15 @@ export const DemoUserQuickLogin: FC<DemoUserQuickLoginProps> = ({
           title={error}
         />
       )}
-      <ul className="m-0 flex list-none flex-col gap-2 p-0">
+      {/* In the card the list scrolls, so a preset with many users does not
+          grow the card past the hero column; the padding keeps the buttons'
+          focus rings inside the scroll box. */}
+      <ul
+        className={cn(
+          'm-0 flex list-none flex-col gap-2 p-0',
+          variant === 'card' && 'min-h-0 overflow-y-auto p-0.5',
+        )}
+      >
         {users.map((user) => (
           <li key={user.username}>
             <BaseButton
@@ -133,5 +140,18 @@ export const DemoUserQuickLogin: FC<DemoUserQuickLoginProps> = ({
         ))}
       </ul>
     </section>
+  );
+
+  // The card is waldur-ui's, drawn on the section itself. It may shrink to
+  // min-h-40 in the hero column, below which the column scrolls instead.
+  return variant === 'card' ? (
+    <Card
+      asChild
+      className={cn('w-full max-w-90 min-h-40 p-5 text-left', className)}
+    >
+      {section}
+    </Card>
+  ) : (
+    section
   );
 };
