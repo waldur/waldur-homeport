@@ -1,6 +1,7 @@
 import { UIRouterReact } from '@uirouter/react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import { ENV } from '@/core/config';
 import { getTabs } from '@/navigation/useTabs';
 
 import { states } from './routes';
@@ -29,6 +30,30 @@ describe('administration routes', () => {
       route.data.permissions.every((permission) =>
         permission({ workspace: { user } } as any),
       );
+    expect(allows({ is_staff: true })).toBe(true);
+    expect(allows({ is_staff: false, is_support: true })).toBe(false);
+  });
+});
+
+describe('demo presets route', () => {
+  const route = states.find((s) => s.name === 'admin-demo-presets');
+  const allows = (user) =>
+    route.data.permissions.every((permission) =>
+      permission({ workspace: { user } } as any),
+    );
+
+  afterEach(() => {
+    delete ENV.plugins.WALDUR_CORE.DEMO_PRESETS_ENABLED;
+  });
+
+  // The deployment gate comes from the environment only; without it the page
+  // is neither listed nor reachable, staff or not.
+  it('is closed unless the deployment enables demo presets', () => {
+    expect(allows({ is_staff: true })).toBe(false);
+  });
+
+  it('is open to staff only when enabled', () => {
+    ENV.plugins.WALDUR_CORE.DEMO_PRESETS_ENABLED = true;
     expect(allows({ is_staff: true })).toBe(true);
     expect(allows({ is_staff: false, is_support: true })).toBe(false);
   });

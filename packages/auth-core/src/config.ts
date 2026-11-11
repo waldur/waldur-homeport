@@ -43,6 +43,13 @@ export interface AuthCoreConfig {
    * store — but see the caller for whether it's actually load-bearing.
    */
   onLogin?: () => unknown;
+
+  /**
+   * Called when the API answers 503 because a demo preset is loading
+   * (`demo_reset` in the body), with the preset's name. Optional: a host
+   * that never runs on a demo deployment leaves it out.
+   */
+  onDemoReset?: (preset: string) => void;
 }
 
 let config: AuthCoreConfig | undefined;

@@ -902,6 +902,11 @@
       "feature_area": "api-keys"
     }
   },
+  "A demo preset is loading. Everyone is signed out; the sign-in page opens when it is ready.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "A deprecated definition can no longer be adopted.": {
     "context": {
       "feature_area": "metrics"
@@ -937,6 +942,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "languages"
+    }
+  },
+  "A load returns every feature and every setting the deployment does not own to its default, then applies the preset’s values and the overlay’s. Settings the deployment owns keep their value.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "A message cannot be empty. Delete it instead.": {
@@ -3790,6 +3800,11 @@
   "After the award: runs on an accepted proposal, each time it opens": {
     "context": {
       "feature_area": "diagram"
+    }
+  },
+  "After the load": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "After the pool is built, create assignment batches for accepted pool members and send them to the reviewers. In the \"Create assignment\" menu, use \"Manual assignment\", or \"Compute affinities\" and then \"Generate assignments\".": {},
@@ -9073,6 +9088,11 @@
       "feature_area": "shell"
     }
   },
+  "Back to the portal": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Back to the usual updates.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -14148,7 +14168,7 @@
           "type": "string"
         }
       },
-      "feature_area": "rabbitmq"
+      "feature_area": "demo-presets"
     }
   },
   "Confirmed": {
@@ -19338,6 +19358,16 @@
       "feature_area": "provider-calls"
     }
   },
+  "Demo presets": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
+  "Demo users": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
   "Demographics": {
     "context": {
       "primary_ui_type": "title",
@@ -19394,6 +19424,7 @@
       "feature_area": "create"
     }
   },
+  "Deployment": {},
   "Deployment ID": {
     "context": {
       "feature_area": "administration"
@@ -23984,6 +24015,11 @@
       "feature_area": "configuration"
     }
   },
+  "Every organization, project, offering, user and API token is deleted and replaced with the preset’s, and everyone is signed out. Settings the deployment owns are kept.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Every person has the same username on all offerings of this service provider.": {
     "context": {
       "feature_area": "accounts"
@@ -24056,6 +24092,11 @@
     }
   },
   "Everyone evaluating on the call reads the proposal's step list.": {},
+  "Everyone is signed out, you included. While the preset loads, the portal is unavailable; then it opens the sign-in page.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Everyone on the proposal team now.": {
     "context": {
       "feature_area": "manage"
@@ -25610,7 +25651,7 @@
   },
   "Feature": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "title"
     }
   },
   "Feature is disabled.": {},
@@ -27113,6 +27154,15 @@
   "From the cluster monitor": {
     "context": {
       "feature_area": "hpc"
+    }
+  },
+  "From the deployment’s overlay {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   },
   "From the provider account": {
@@ -32250,6 +32300,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Kept": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Kept until": {
     "context": {
       "primary_ui_type": "label",
@@ -34077,6 +34132,16 @@
       "feature_area": "science-domains"
     }
   },
+  "Load the demo preset {title}?": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "demo-presets"
+    }
+  },
   "Load the plan first.": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -34103,6 +34168,16 @@
   "Loading Arrow customers...": {
     "context": {
       "feature_area": "mappings"
+    }
+  },
+  "Loading a preset deletes every organization, project, offering, user and API token in this portal, and replaces them with the preset’s.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
+  "Loading a preset resets the whole portal": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "Loading actions": {
@@ -34233,6 +34308,16 @@
   "Loading the allocations funded by this credit…": {
     "context": {
       "feature_area": "credits"
+    }
+  },
+  "Loading the demo preset {name} failed": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "demo-presets"
     }
   },
   "Loading the proposals of the round…": {
@@ -39514,6 +39599,11 @@
       "feature_area": "diagram"
     }
   },
+  "No demo presets": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "No description": {
     "context": {
       "feature_area": "hygiene"
@@ -39658,6 +39748,11 @@
   "No external networks found.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "No feature changes.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "No fields to display": {
@@ -40061,6 +40156,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "No offerings.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "No open round": {
     "context": {
       "feature_area": "call-management"
@@ -40134,6 +40234,11 @@
   "No organizations found": {
     "context": {
       "feature_area": "broadcasts"
+    }
+  },
+  "No organizations.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "No other offering of this service provider yet": {
@@ -40363,6 +40468,11 @@
   "No projects with future end dates — nothing to plot.": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "No projects.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "No proposal has been made to these calls yet.": {},
@@ -40800,6 +40910,11 @@
       "feature_area": "site-agents"
     }
   },
+  "No setting changes.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "No single date is valid for all selected resources, for example because a project has ended or a resource starts after another project ends. Select fewer resources or clear the termination date.": {
     "context": {
       "feature_area": "mass-actions"
@@ -41002,6 +41117,11 @@
   "No users found. You can only see users from projects you belong to. Use \"Invite by mail\" to add new users.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "No users.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "No valid course account to create.": {
@@ -41225,7 +41345,7 @@
   "None": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "steps"
+      "feature_area": "demo-presets"
     }
   },
   "None completed yet": {
@@ -41777,6 +41897,11 @@
       "feature_area": "integration"
     }
   },
+  "Not shown": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Not shown as a limit": {
     "context": {
       "feature_area": "options"
@@ -42243,6 +42368,11 @@
       "feature_area": "issues"
     }
   },
+  "Now": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Now {value}.": {
     "context": {
       "variables": {
@@ -42519,6 +42649,7 @@
       "feature_area": "reports"
     }
   },
+  "Off": {},
   "Off track": {
     "context": {
       "feature_area": "reports"
@@ -43193,6 +43324,7 @@
       "feature_area": "database-stats"
     }
   },
+  "On": {},
   "On Synapse, add the YAML file to app_service_config_files and restart the homeserver": {
     "context": {
       "feature_area": "matrix"
@@ -45863,6 +45995,11 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "Overlay": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Overridden": {
     "context": {
       "primary_ui_type": "label",
@@ -45940,7 +46077,7 @@
   "Overview": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "project-digest"
+      "feature_area": "demo-presets"
     }
   },
   "Overwrite existing": {
@@ -46443,7 +46580,7 @@
   "Password": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "steps"
+      "feature_area": "demo-presets"
     }
   },
   "Password for Estonian Äriregister API authentication.": {},
@@ -46477,6 +46614,11 @@
   "Passwords and credentials": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Passwords of staff and support users are never shown. Staff sign in with the password the deployment sets, when it sets one.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "Past its deadline": {
@@ -55968,6 +56110,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Resetting the demo": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Resolution SLA field name": {},
   "Resolution {score}/5": {
     "context": {
@@ -58446,7 +58593,7 @@
   "Roles": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "roles"
+      "feature_area": "demo-presets"
     }
   },
   "Roles & Status": {
@@ -60192,6 +60339,11 @@
     }
   },
   "Seconds to cache successful token introspection results. Reduces load on the introspection endpoint. Set to 0 to disable caching. Default: 300 (5 minutes).": {},
+  "Secret": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Secret options": {
     "context": {
       "primary_ui_type": "label",
@@ -62791,7 +62943,7 @@
   "Settings": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "administration"
+      "feature_area": "demo-presets"
     }
   },
   "Settings UUID is required": {
@@ -63533,6 +63685,11 @@
       "feature_area": "hpc"
     }
   },
+  "Sign in as one of the demo’s users with one click.": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
   "Sign in method": {
     "context": {
       "feature_area": "auth"
@@ -63584,6 +63741,11 @@
         }
       },
       "feature_area": "passkeys"
+    }
+  },
+  "Signing in": {
+    "context": {
+      "feature_area": "auth"
     }
   },
   "Silenced": {
@@ -65093,6 +65255,11 @@
     }
   },
   "Structural attachment (interface, port, instance NIC).": {},
+  "Structure": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Student": {
     "context": {
       "primary_ui_type": "label"
@@ -68322,6 +68489,16 @@
       }
     }
   },
+  "The demo preset {name} is loading. Everyone is signed out; the sign-in page opens when it is ready.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "demo-presets"
+    }
+  },
   "The deployment writes these settings on every deploy, so they are locked on this page: {settings}.": {
     "context": {
       "variables": {
@@ -68330,6 +68507,11 @@
         }
       },
       "feature_area": "matrix"
+    }
+  },
+  "The deployment’s own preset, imported after this one on every load.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "The digest can include the following sections, depending on which plugins are installed:": {
@@ -68809,6 +68991,16 @@
   "The list is published for an external firewall to enforce. This portal does not block traffic on it.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "The load is starting": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
+  "The load stopped without an error message.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "The logo image rendered in the disclaimer area below the footer.": {},
@@ -71444,6 +71636,11 @@
       "feature_area": "restrictions"
     }
   },
+  "This deployment offers no demo presets to load.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.": {
     "context": {
       "feature_area": "passkeys"
@@ -73822,7 +74019,7 @@
           "type": "string"
         }
       },
-      "feature_area": "rabbitmq"
+      "feature_area": "demo-presets"
     }
   },
   "Type / or ! in the message box to pick a command. In other Matrix apps, type the ! form.": {
@@ -76332,6 +76529,11 @@
       "feature_area": "core"
     }
   },
+  "Unable to load demo presets.": {
+    "context": {
+      "feature_area": "demo-presets"
+    }
+  },
   "Unable to load detail.": {
     "context": {
       "feature_area": "list"
@@ -76642,6 +76844,17 @@
       "feature_area": "metrics"
     }
   },
+  "Unable to load the demo preset {name}.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "demo-presets"
+    }
+  },
   "Unable to load the details.": {
     "context": {
       "feature_area": "proposal"
@@ -76650,6 +76863,11 @@
   "Unable to load the email configuration": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "Unable to load the preview.": {
+    "context": {
+      "feature_area": "demo-presets"
     }
   },
   "Unable to load the proposals of the round.": {
@@ -78171,6 +78389,12 @@
       "feature_area": "auth"
     }
   },
+  "Unable to sign in.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "auth"
+    }
+  },
   "Unable to silence action.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -79564,7 +79788,7 @@
   },
   "Unchanged": {
     "context": {
-      "feature_area": "roles"
+      "feature_area": "demo-presets"
     }
   },
   "Unchanged: it stays on the archived source.": {
@@ -96118,6 +96342,17 @@
           "type": "string"
         }
       }
+    }
+  },
+  "{username} must confirm with a passkey to sign in.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "feature_area": "auth"
     }
   },
   "{user} has approved it on {date} at {time}.": {

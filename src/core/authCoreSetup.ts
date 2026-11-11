@@ -1,5 +1,7 @@
 import { configureAuthCore, isAuthenticated } from 'waldur-auth-core';
 
+import { isDemoPresetsEnabled } from '@/administration/demo-presets/gate';
+import { startDemoReset } from '@/administration/demo-presets/resetState';
 import { localLogout } from '@/auth/authNavigation';
 import { resetSessionState } from '@/auth/sessionReset';
 import { router } from '@/router';
@@ -68,6 +70,11 @@ export function setupAuthCore() {
     onLogin: async () => {
       resetSessionState();
       await UsersService.refreshCurrentUser();
+    },
+    onDemoReset: (preset) => {
+      if (isDemoPresetsEnabled()) {
+        startDemoReset(preset);
+      }
     },
   });
 }

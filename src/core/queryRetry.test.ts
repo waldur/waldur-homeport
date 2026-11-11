@@ -14,4 +14,16 @@ describe('retryServerErrors', () => {
     expect(retryServerErrors()(0, { status: 404 })).toBe(false);
     expect(retryServerErrors()(0, { response: { status: 403 } })).toBe(false);
   });
+
+  // While a demo preset loads the API answers 503; the reset overlay polls
+  // the load's status instead.
+  it('never retries the 503 of a demo reset', () => {
+    expect(
+      retryServerErrors()(0, { status: 503, demo_reset: true, preset: 'x' }),
+    ).toBe(false);
+    expect(
+      retryServerErrors()(0, { status: 503, data: { demo_reset: true } }),
+    ).toBe(false);
+    expect(retryServerErrors()(0, { status: 503 })).toBe(true);
+  });
 });

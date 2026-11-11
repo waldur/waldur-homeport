@@ -193,6 +193,32 @@ export const handleUnauthorizedResponse = (response: Response) => {
 };
 
 client.interceptors.response.use(handleUnauthorizedResponse);
+
+// While a demo preset loads, the backend pauses its API: every request but
+// the status, configuration and login endpoints answers 503 with
+// `demo_reset: true`. Other 503s (a proxy, a worker restart) carry no such
+// body and are left alone. The body is read from a clone, so the caller still
+// gets it whole.
+export const handleDemoResetResponse = async (response: Response) => {
+  if (response?.status !== 503) {
+    return response;
+  }
+  const { onDemoReset } = getAuthCoreConfig();
+  if (!onDemoReset) {
+    return response;
+  }
+  try {
+    const body = await response.clone().json();
+    if (body?.demo_reset === true) {
+      onDemoReset(typeof body.preset === 'string' ? body.preset : '');
+    }
+  } catch {
+    // Not JSON: not the demo reset.
+  }
+  return response;
+};
+
+client.interceptors.response.use(handleDemoResetResponse);
 client.interceptors.response.use(addApiErrorBreadcrumb);
 
 /**

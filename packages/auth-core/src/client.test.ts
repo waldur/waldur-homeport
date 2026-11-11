@@ -4,6 +4,7 @@ import {
   attachAuthHeader,
   attachResponseDetails,
   getAuthHeader,
+  handleDemoResetResponse,
   handleUnauthorizedResponse,
   resetAuthSessionTracking,
 } from './client';
@@ -231,5 +232,62 @@ describe('attachResponseDetails — error normalisation', () => {
 
     expect(result.url).toBe('http://localhost:8080/api/configuration/');
     expect(result.data).toEqual({ url: ['Enter a valid URL.'] });
+  });
+});
+
+describe('handleDemoResetResponse', () => {
+  const onDemoReset = vi.fn();
+  const jsonResponse = (status: number, body: unknown) =>
+    new Response(JSON.stringify(body), {
+      status,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+  beforeEach(() => {
+    onDemoReset.mockClear();
+    configureAuthCore({
+      storage: {
+        token: makeStorage(),
+        method: makeStorage(),
+        impersonation: makeStorage(),
+        language: makeStorage(),
+      },
+      getApiEndpoint: () => 'http://localhost:8080/',
+      isConfigLoaded: () => true,
+      isOidcAccessTokenEnabled: () => false,
+      onSessionExpired,
+      onDemoReset,
+    });
+  });
+
+  it('reports a 503 the API answers with while a demo preset loads', async () => {
+    const response = jsonResponse(503, {
+      demo_reset: true,
+      preset: 'hpc_ai_platform',
+    });
+
+    const result = await handleDemoResetResponse(response);
+
+    expect(onDemoReset).toHaveBeenCalledWith('hpc_ai_platform');
+    // The caller still reads the body.
+    expect(await result.json()).toEqual({
+      demo_reset: true,
+      preset: 'hpc_ai_platform',
+    });
+  });
+
+  it('leaves other 503s alone', async () => {
+    await handleDemoResetResponse(jsonResponse(503, { detail: 'Down' }));
+    await handleDemoResetResponse(
+      new Response('<html>Bad gateway</html>', { status: 503 }),
+    );
+    expect(onDemoReset).not.toHaveBeenCalled();
+  });
+
+  it('does not read the body of other responses', async () => {
+    const response = jsonResponse(200, { demo_reset: true });
+    await handleDemoResetResponse(response);
+    expect(onDemoReset).not.toHaveBeenCalled();
+    expect(response.bodyUsed).toBe(false);
   });
 });
