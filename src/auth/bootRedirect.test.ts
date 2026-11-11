@@ -17,7 +17,11 @@ const OK: ProbeResult = { type: 'basic', status: 204 };
 interface Scenario {
   pathname?: string;
   search?: string;
+  // The path the app is served under: the script's own URL is
+  // <base>boot-redirect.js, as Vite writes it into index.html.
   base?: string;
+  // Browsers leave document.currentScript null outside a classic script.
+  currentScript?: 'absent';
   apiUrl?: string;
   local?: Record<string, string>;
   session?: Record<string, string>;
@@ -46,6 +50,7 @@ function run({
   session = {},
   probe = OK,
   storage,
+  currentScript,
 }: Scenario = {}) {
   const replace = vi.fn();
   const fetch = vi.fn(() =>
@@ -63,10 +68,13 @@ function run({
       replace,
     },
     document: {
+      // index.html has no <base> element: the Content-Security-Policy's
+      // base-uri 'none' refuses one.
+      currentScript:
+        currentScript === 'absent'
+          ? null
+          : { src: `${ORIGIN}${base}boot-redirect.js` },
       querySelector: (selector: string) => {
-        if (selector === 'base') {
-          return { getAttribute: () => base };
-        }
         if (selector === 'meta[name="api-url"]') {
           return { getAttribute: () => apiUrl };
         }
@@ -143,9 +151,16 @@ describe('boot-redirect.js', () => {
   it('respects a non-root base path', async () => {
     const inside = run({ base: '/portal/', pathname: '/portal/login/' });
     await vi.waitFor(() => expect(inside.replace).toHaveBeenCalled());
+    const root = run({ base: '/portal/', pathname: '/portal/' });
+    await vi.waitFor(() => expect(root.replace).toHaveBeenCalled());
     const outside = run({ base: '/portal/', pathname: '/' });
     await flush();
     expect(outside.fetch).not.toHaveBeenCalled();
+  });
+
+  it('takes the root as the base without document.currentScript', async () => {
+    const { replace } = run({ currentScript: 'absent' });
+    await vi.waitFor(() => expect(replace).toHaveBeenCalledWith(expectedUrl()));
   });
 
   it.each([

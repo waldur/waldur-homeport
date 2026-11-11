@@ -100,12 +100,15 @@ RUN mkdir -p /tmp/nginx && \
     chgrp -R 0 /tmp/nginx && \
     chmod -R g=u /tmp/nginx
 
-# Placeholder for entrypoint.sh to (re)generate at container start: one
-# location block per subpath micro-app actually present under
-# /usr/share/nginx/html, included from nginx-tpl.conf. Created here (rather
-# than left for entrypoint.sh to mkdir) so `nginx -t`/`include` never faces
-# a missing file, and so it's covered by the chgrp/chmod below.
-RUN mkdir -p /etc/nginx/conf.d && touch /etc/nginx/conf.d/micro-apps.conf
+# Placeholders for entrypoint.sh to (re)generate at container start, both
+# included from nginx-tpl.conf: one location block per subpath micro-app
+# actually present under /usr/share/nginx/html, and the security headers
+# (Content-Security-Policy and the rest) rendered from the CSP_* environment
+# variables. Created here (rather than left for entrypoint.sh to mkdir) so
+# `nginx -t`/`include` never faces a missing file, and so they're covered by
+# the chgrp/chmod below.
+RUN mkdir -p /etc/nginx/conf.d && \
+    touch /etc/nginx/conf.d/micro-apps.conf /etc/nginx/conf.d/security-headers.conf
 
 # replace default configuration
 RUN chgrp -R 0 /etc/nginx && \

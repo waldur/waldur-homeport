@@ -1,10 +1,10 @@
 // Pre-bundle sign-in redirect.
 //
 // Served from public/ as a plain classic script and referenced first in
-// index.html. Production ingresses send `script-src 'self'` with no nonce,
-// which is why this is an external file and not an inline block. It is
-// deferred like the application module but listed before it, so it runs as
-// soon as the document is parsed and ahead of any application code.
+// index.html. The image's Content-Security-Policy sends `script-src 'self'`
+// with no nonce, which is why this is an external file and not an inline
+// block. It is deferred like the application module but listed before it, so
+// it runs as soon as the document is parsed and ahead of any application code.
 //
 // An anonymous visitor landing on the root or the login page is sent to
 // /api-auth/default/init/, where the backend resolves DEFAULT_IDP and starts
@@ -73,8 +73,15 @@
     return element ? element.getAttribute(name) || '' : '';
   }
 
+  // The app's base path is the directory this script is served from: Vite
+  // writes its URL under the build's base (/boot-redirect.js, or
+  // /portal/boot-redirect.js for a sub-path build). index.html has no <base>
+  // element to read it from, because the Content-Security-Policy's
+  // base-uri 'none' refuses one.
   var location = win.location;
-  var base = new URL(attribute('base', 'href') || '/', location.href).pathname;
+  var script = win.document.currentScript;
+  var base = new URL('.', (script && script.src) || location.origin + '/')
+    .pathname;
   if (location.pathname.indexOf(base) !== 0) {
     return;
   }
