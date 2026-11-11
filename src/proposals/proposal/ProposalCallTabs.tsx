@@ -129,7 +129,7 @@ export const OfferingsTab: FC<{
   return (
     // No frame of its own, nor the dialog's around its rows: the tab is
     // the frame.
-    <div className="[&_.table-responsive]:border-0">
+    <div className="[&_[data-slot=table-responsive]]:border-0">
       <Table<OfferingRow>
         {...tableProps}
         cardBordered={false}
@@ -178,7 +178,7 @@ export const OfferingsTab: FC<{
 /** The call's documents, for download. */
 export const DocumentsTab: FC<{ call: PublicCall }> = ({ call }) => (
   // The dialog frames every table; the tab already names and frames this one.
-  <div className="[&_.table-responsive]:border-0">
+  <div className="[&_[data-slot=table-responsive]]:border-0">
     <CallDocumentsCard
       call={call}
       rowActions={undefined}

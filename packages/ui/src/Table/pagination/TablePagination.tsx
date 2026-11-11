@@ -38,8 +38,9 @@ export interface TablePaginationProps extends PaginationState {
  * "‹ Page 2 of 5 ›". Renders nothing when every result fits on one compact
  * page.
  *
- * The root keeps the `table-pagination` class as a hook for page layouts
- * that adjust its padding (homeport's full-width and nested tables). The
+ * The root sets `data-slot="table-pagination"` and reads `--pagination-px` /
+ * `--pagination-pt` hooks for page layouts that adjust its padding
+ * (homeport's full-width and nested tables). The
  * two layouts carry `data-pagination-layout="desktop|mobile"` so a layout
  * can switch between them on its own width, as the helpdesk list does with
  * a container query.
@@ -70,10 +71,11 @@ export const TablePagination = ({
 
   return (
     <div
+      data-slot="table-pagination"
       className={cn(
-        'table-pagination md:px-[16.25px]',
+        'px-[var(--pagination-px,0px)] md:px-[var(--pagination-px,16.25px)]',
         bordered &&
-          'border-t border-solid border-[var(--pagination-border)] pt-[12px]',
+          'border-t border-solid border-[var(--pagination-border)] pt-[var(--pagination-pt,12px)]',
         className,
       )}
     >

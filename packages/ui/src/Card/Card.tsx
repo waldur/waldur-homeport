@@ -45,9 +45,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
    * - `solid`: the header is a full-width `--bg-secondary` strip, 48px high.
    * - `widget`: a dashboard widget; its bodies have 20px padding.
    * - `table`: HomePort's table card (`@/table`): a 77px header, no top
-   *   padding in the body, and no border unless `bordered`. HomePort's
-   *   stylesheet draws it (src/styles/legacy/_table.scss); elsewhere it is
-   *   a plain card.
+   *   padding in the body, and no border unless `bordered`.
    */
   variant?: 'solid' | 'table' | 'widget';
   /**
@@ -75,7 +73,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       data-size={size}
       data-bordered={bordered ? '' : undefined}
       className={cn(
-        'relative flex min-w-[var(--card-min-width,0px)] flex-col break-words bg-primary bg-clip-border',
+        'relative flex min-w-[var(--card-min-width,0px)] flex-col break-words bg-[var(--card-surface-bg,var(--bg-primary))] bg-clip-border',
         'rounded-[var(--card-radius,var(--radius-lg))] border-solid border-secondary',
         bordered
           ? 'border-[length:var(--card-border-width,1px)] shadow-[var(--card-box-shadow,none)]'

@@ -228,7 +228,7 @@ export const FindingsTable: FC<
       hasActionBar={false}
       cardBordered={false}
       bodyClassName="p-0"
-      className="[&_.table-responsive]:[container-type:inline-size]"
+      className="[&_[data-slot=table-responsive]]:[container-type:inline-size]"
       minHeight="auto"
       placeholderHasRetry={false}
       expandableRow={FindingDetails}

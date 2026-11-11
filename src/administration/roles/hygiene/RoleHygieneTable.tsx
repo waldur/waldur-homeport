@@ -17,8 +17,6 @@ import { renderFieldOrDash } from '@/table/utils';
 import { RoleHygieneFindingDetails } from './RoleHygieneFindingDetails';
 import { filterFindings, getCheckLabel } from './utils';
 
-import './RoleHygienePage.scss';
-
 const SEVERITY_VARIANTS: Record<RoleHygieneFindingSeverityEnum, BadgeVariant> =
   {
     error: 'danger',
@@ -149,7 +147,7 @@ export const RoleHygieneTable = ({
       expandableRow={RoleHygieneFindingDetails}
       title={translate('Findings')}
       verboseName={translate('findings')}
-      className={portal ? 'role-hygiene-findings' : undefined}
+      className={portal ? '[&>[data-table-tabs]]:px-0' : undefined}
       // Inside the roles page's tabs the card and the toolbar are the page's.
       portal={portal}
       hasActionBar={!portal}

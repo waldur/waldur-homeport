@@ -29,6 +29,7 @@ import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateFi
 import { formatRole } from '@/permissions/utils';
 import { ProjectLink } from '@/project/ProjectLink';
 import { AwardComparisonRow, isForbidden } from '@/proposals/awardedResources';
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import {
   awardedAsRequestedLabel,
   blankAwardRowsNote,
@@ -39,8 +40,6 @@ import { ResourceLink } from '@/resource/ResourceLink';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-
-import '@/proposals/flushTable.scss';
 
 import { AllocationDecisionComment } from './AllocationDecisionComment';
 import {
@@ -199,7 +198,7 @@ const tableChrome = {
   hideRefresh: true,
   placeholderHasRetry: false,
   minHeight: 'auto' as const,
-  className: 'proposal-flush-table',
+  className: PROPOSAL_FLUSH_TABLE_CLASS,
 };
 
 /**

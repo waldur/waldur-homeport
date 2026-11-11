@@ -123,9 +123,7 @@ For list actions that affect the table globally, instead of using `tableActions`
   ```
 
   Prefer it to `rowClass` for a row that is overdue, failed, just saved or out
-  of play. The Bootstrap `table-danger` / `table-success` / `table-warning`
-  classes it replaces are gone: the first two were defined in no stylesheet and
-  painted nothing at all. For a row of waldur-ui's `Table` primitives, where
+  of play. For a row of waldur-ui's `Table` primitives, where
   there is no `rowVariant` prop, read the same class off
   `ROW_VARIANT_CLASSES` (`@/table/constants`).
 
@@ -141,12 +139,12 @@ For list actions that affect the table globally, instead of using `tableActions`
   linter checks, so a class that paints nothing is not reported here. Keep the
   class defined in a stylesheet next to the component that owns it.
 
-- **`rowGroupHeader`**: Pass a callback `({ row, rowIndex, rows }) => ReactNode` to render a full-width header row (`tr.table-group-header > th[colspan]`) above a row that opens a group — a stage, a phase. Return `null` for every other row. The rows stay one list, so expansion and row actions are unchanged; pair it with `rowClass` to mark the group's rows. Don't hide a cell's content to make room for a group: use the header. Reference: `src/proposals/update/workflow-steps/WorkflowStepsSection.tsx`.
+- **`rowGroupHeader`**: Pass a callback `({ row, rowIndex, rows }) => ReactNode` to render a full-width header row (`tr[data-slot="table-group-header"] > th[colspan]`) above a row that opens a group — a stage, a phase. Return `null` for every other row. The rows stay one list, so expansion and row actions are unchanged; pair it with `rowClass` to mark the group's rows. Don't hide a cell's content to make room for a group: use the header. Reference: `src/proposals/update/workflow-steps/WorkflowStepsSection.tsx`.
 
 - **`equalColWidth`**: Set to `true` to give all columns without an explicit width set the exact same width. By default, the first data column is allocated double the width of the remaining columns.
 - **Row & Card Hover Shadows (`hoverShadow`, `hoverable`)**:
   - `hoverShadow`: Defaults to `true`, displaying shadow elevation on cell/card hover. Can be customized with a boolean or a mode config object: `hoverShadow={{ table: true, grid: false }}`.
-  - `hoverable`: Set to `true` to enable row hover background coloring (`.table-hover`). Defaults to `false`.
+  - `hoverable`: Set to `true` to enable row hover background coloring. Defaults to `false`. Expanded and selected rows keep their own background (see [styling-architecture.md](styling-architecture.md), decision 3).
 
 ---
 

@@ -54,7 +54,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
       className={classNames(
         buttonVariant
           ? buttonVariants({ variant: buttonVariant, iconOnly: true })
-          : 'text-btn copy-to-clipboard-btn',
+          : 'text-btn in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2',
         buttonClassName,
       )}
       type="button"

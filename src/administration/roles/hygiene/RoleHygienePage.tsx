@@ -13,8 +13,6 @@ import { getRoleHygieneReport } from '../../api';
 import { RoleHygieneSummary } from './RoleHygieneSummary';
 import { RoleHygieneTable } from './RoleHygieneTable';
 
-import './RoleHygienePage.scss';
-
 export const RoleHygienePage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const [severity, setSeverity] = useState<
     RoleHygieneFindingSeverityEnum | undefined

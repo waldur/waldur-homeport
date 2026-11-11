@@ -2,7 +2,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
-import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -278,30 +277,6 @@ describe('bootstrapCssUsage', () => {
       expect(findNewUnusedClasses(baseline, current)).toEqual({
         'custom/new-partial': ['unreferenced-class'],
       });
-    });
-  });
-
-  describe('table cell gutters', () => {
-    const css = compilePartial(
-      "@import 'legacy/mixins'; @import 'legacy/table';",
-    );
-    const declarations = (selector: string) => {
-      const found: Record<string, string> = {};
-      postcss.parse(css).walkRules((rule) => {
-        if (rule.selectors.includes(selector)) {
-          rule.walkDecls((decl) => {
-            found[decl.prop] = decl.value;
-          });
-        }
-      });
-      return found;
-    };
-
-    it.each([
-      ['.table.table-list td', { padding: '0 8px' }],
-      ['.table.table-list th', { padding: '0 8px' }],
-    ])('pads %s', (selector, expected) => {
-      expect(declarations(selector)).toMatchObject(expected);
     });
   });
 

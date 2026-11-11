@@ -67,7 +67,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
                   <TableCell className="md:w-3/12">{endpoint.name}</TableCell>
                   <TableCell className="md:w-9/12">{endpoint.url}</TableCell>
                   {(canUpdate || canDelete) && (
-                    <TableCell className="row-actions">
+                    <TableCell>
                       <div className="flex gap-1.5">
                         {canUpdate && (
                           <EditEndpointButton

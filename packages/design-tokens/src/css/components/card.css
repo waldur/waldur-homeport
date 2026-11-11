@@ -59,6 +59,10 @@
    a solid header, a card in an expanded table row. Each part reads its hook
    with its own value as the fallback (Card.tsx). They don't inherit, so a
    hook set on one part never reaches a nested card's part. */
+@property --card-surface-bg {
+  syntax: '*';
+  inherits: false;
+}
 @property --card-border-width {
   syntax: '*';
   inherits: false;
@@ -222,6 +226,27 @@
       [data-variant='solid'] [data-slot='card-content']
     ) {
     --card-content-pt: 0px;
+  }
+
+  /* Table cards inside expanded table rows — recessed secondary surface, borderless */
+  [data-slot='expanded-row-content'] [data-slot='card'][data-variant='table'] {
+    --card-surface-bg: transparent;
+    overflow: hidden;
+  }
+
+  [data-slot='expanded-row-content']
+    [data-slot='card'][data-variant='table']
+    > [data-slot='card-header'] {
+    --card-header-mx: 0px;
+    --card-header-px: var(--card-padding-x);
+  }
+
+  [data-slot='expanded-row-content']
+    [data-slot='card'][data-variant='table']
+    > [data-slot='card-content'] {
+    --card-content-pt: 0px;
+    --card-content-px: 0px;
+    --card-content-pb: calc(var(--spacing) * 2);
   }
 }
 

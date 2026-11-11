@@ -30,7 +30,7 @@
 
 /* Space between a table's columns, in place of Metronic's .table.gx-*:
    `table-col-gap-4` pads each cell's inner sides only, so the first and last
-   cells keep the edge padding custom/_table.scss gives them. */
+   cells keep the edge padding (--table-edge-px) TableView gives them. */
 @utility table-col-gap-* {
   :is(th, td):not(:first-child) {
     padding-inline-start: --spacing(--value(number));

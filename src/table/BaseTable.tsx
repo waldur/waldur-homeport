@@ -172,7 +172,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
     // Right-stuck pinned columns stack just before the right-pinned actions
     // column, so its width is the base of every `right` inset.
     const actionsTh = tableEl?.querySelector<HTMLElement>(
-      ':scope > thead > tr > th.header-actions',
+      ':scope > thead > tr > th[data-slot="header-actions"]',
     );
     const offsets = computePinnedOffsets(
       cells,
@@ -406,7 +406,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             // selection bars above the table. The --card-header-* hooks
             // don't inherit (card.css), so they are set on the headers.
             props.fullWidth &&
-              'full-width overflow-hidden max-sm:-mx-[15px] max-sm:rounded-none',
+              'overflow-hidden max-sm:-mx-[15px] max-sm:rounded-none',
             props.fullWidth &&
               !isGridTable &&
               '[&>[data-slot=card-header]]:[--card-header-mx:0px] [&>[data-slot=card-header]]:[--card-header-px:var(--card-padding-x)] max-sm:[&>[data-slot=card-header]]:[--card-header-px:15px]',
@@ -432,7 +432,10 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Tabs */}
           {props.nav ? (
-            <CardHeader className="table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto">
+            <CardHeader
+              data-table-tabs
+              className="border-b border-b-secondary items-stretch py-0 min-h-auto"
+            >
               {props.nav}
             </CardHeader>
           ) : null}
@@ -492,7 +495,8 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 at the left edge, in scroll reach. */}
             <div
               ref={tableResponsiveRef}
-              className="@container/table table-responsive relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe"
+              data-slot="table-responsive"
+              className="@container/table overflow-x-auto relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe in-[[data-slot=modal-content]]:border in-[[data-slot=modal-content]]:border-solid in-[[data-slot=modal-content]]:border-secondary in-[[data-slot=modal-content]]:rounded-lg"
               style={{ minHeight: props.minHeight || 300 }}
               onScroll={debouncedScrollHandler}
             >
@@ -506,9 +510,9 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 updatePageSize={props.updatePageSize}
                 gotoPage={props.gotoPage}
                 className={classNames(
-                  props.mode === 'grid' && '!px-0',
+                  props.mode === 'grid' && '[--pagination-px:0px]',
                   props.fullWidth &&
-                    '!px-[var(--card-padding-x)] max-sm:!px-[15px]',
+                    '[--pagination-px:var(--card-padding-x)] max-sm:[--pagination-px:15px]',
                 )}
               />
             )}

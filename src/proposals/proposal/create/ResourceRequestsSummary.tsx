@@ -5,14 +5,13 @@ import { AccordionCard } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { AwardComparisonRow } from '@/proposals/awardedResources';
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
-
-import '@/proposals/flushTable.scss';
 
 import { AwardChangeBadge } from '../AwardComparison';
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
@@ -148,7 +147,7 @@ export const ResourceRequestsSummary = ({
       <OwnOfferingsNote proposal={proposal} />
       <Table<ProposalResource>
         {...tableProps}
-        className="proposal-flush-table"
+        className={PROPOSAL_FLUSH_TABLE_CLASS}
         // A frame only to set it apart from the comments below it.
         cardBordered={Boolean(
           reviews?.some((review) => review?.comment_resource_requests),

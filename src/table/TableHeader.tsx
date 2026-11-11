@@ -1,17 +1,8 @@
-import { CaretDownIcon, PushPinIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
-import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
-import { translate } from 'waldur-i18n-runtime';
-import { Checkbox, Tooltip } from 'waldur-ui';
-
-import {
-  CaretDownSmallIcon,
-  CaretUpSmallIcon,
-} from '@/core/CaretUpDownButtons';
-
-import { COLUMN_ACTIONS_KEY } from './constants';
-import { TableFiltersMenu } from './TableFiltersMenu';
+import { TableActionsHead } from './TableActionsColumn';
+import { TableControlHead } from './TableControlColumn';
+import { TableHeaderCell } from './TableHeaderCell';
 import {
   TableProps,
   Column,
@@ -19,9 +10,7 @@ import {
   PinnedColumns,
   PinnedOffsets,
 } from './types';
-import { getColumnPinKey, getId } from './utils';
-
-import './TableHeader.scss';
+import { getColumnPinKey, getId, resolveVisibleColumns } from './utils';
 
 interface TableHeaderProps {
   columns: Column[];
@@ -52,224 +41,6 @@ interface TableHeaderProps {
   toggleColumnPin?(id: string): void;
 }
 
-const getSortMode = (column: Column, sorting: Sorting) =>
-  column.orderField && sorting && column.orderField === sorting.field
-    ? sorting.mode
-    : undefined;
-
-const SortToggle: FC<{
-  column: Column;
-  sorting: Sorting;
-  sort: TableHeaderProps['onSortClick'];
-}> = ({ column, sorting, sort }) => {
-  const mode = getSortMode(column, sorting);
-  const previousMode = useRef(mode);
-  const wasSorted = previousMode.current !== undefined;
-  useEffect(() => {
-    previousMode.current = mode;
-  }, [mode]);
-
-  // One control per column (rather than separate up/down buttons) so it can
-  // meet the 24×24 px target size: none → ascending → descending → none.
-  const onClick = () =>
-    mode === 'asc'
-      ? sort({ field: column.orderField, mode: 'desc' })
-      : mode === 'desc'
-        ? sort({ field: null, mode: undefined })
-        : sort({ field: column.orderField, mode: 'asc' });
-
-  const name =
-    typeof column.title === 'string' ? column.title : column.orderField;
-  const label =
-    mode === 'asc'
-      ? translate('{name}: sorted ascending. Sort descending', { name })
-      : mode === 'desc'
-        ? translate('{name}: sorted descending. Clear sorting', { name })
-        : translate('{name}: not sorted. Sort ascending', { name });
-  // Screen readers don't reliably re-read a focused button whose label
-  // changed, so the new order is also announced through a live region.
-  const announcement =
-    mode === 'asc'
-      ? translate('Sorted by {name}, ascending', { name })
-      : mode === 'desc'
-        ? translate('Sorted by {name}, descending', { name })
-        : wasSorted
-          ? translate('Sorting by {name} cleared', { name })
-          : '';
-
-  return (
-    <>
-      <button
-        type="button"
-        className="text-btn sort-toggle"
-        data-testid="sort-toggle"
-        aria-label={label}
-        onClick={onClick}
-      >
-        <CaretUpSmallIcon className={mode === 'asc' ? 'active' : undefined} />
-        <CaretDownSmallIcon
-          className={mode === 'desc' ? 'active' : undefined}
-        />
-      </button>
-      <span className="sr-only" aria-live="polite">
-        {announcement}
-      </span>
-    </>
-  );
-};
-
-function renderSortingIcon(
-  column: Column,
-  sorting: Sorting,
-  sort: TableHeaderProps['onSortClick'],
-) {
-  if (!column.orderField || !sorting) {
-    return null;
-  }
-  return <SortToggle column={column} sorting={sorting} sort={sort} />;
-}
-
-const WithThMeta = (children, meta) =>
-  meta ? (
-    <div className="th-wrapper">
-      {children}
-      {meta}
-    </div>
-  ) : (
-    children
-  );
-
-const TableTh = ({
-  column,
-  onSortClick,
-  currentSorting,
-  filters,
-  filtersStorage,
-  setFilter,
-  applyFiltersFn,
-  toggleFilterMenu,
-  isFirstDataColumn,
-  expandableRow,
-  hideExpandToggle,
-  toggledAll,
-  toggleAll,
-  hasLeadingCheckbox,
-  pinKey,
-  pinned,
-  shadow,
-  pinOffset,
-  onTogglePin,
-}) => (
-  <th
-    scope="col"
-    className={
-      classNames(
-        column.orderField && 'sorting-column',
-        column.filter && filters && 'filter-column',
-        isFirstDataColumn && expandableRow && 'first-expandable-column',
-        pinned && 'pinned',
-        pinned && shadow === 'end' && 'shadow-end',
-        pinned && shadow === 'start' && 'shadow-start',
-      ) || undefined
-    }
-    // The pin offsets are measured at runtime, so they stay a style. The
-    // zeroed padding that used to ride along with them is already set, with
-    // !important, by th.first-expandable-column in TableHeader.scss.
-    style={
-      pinned && pinOffset
-        ? { left: pinOffset.left, right: pinOffset.right }
-        : undefined
-    }
-    data-pin-key={pinKey}
-    aria-sort={
-      getSortMode(column, currentSorting) === 'asc'
-        ? 'ascending'
-        : getSortMode(column, currentSorting) === 'desc'
-          ? 'descending'
-          : undefined
-    }
-  >
-    <div className="th-content">
-      <div className="th-main">
-        {WithThMeta(
-          <>
-            <span
-              className={
-                isFirstDataColumn && expandableRow
-                  ? classNames(
-                      'cell-with-expander-header',
-                      hasLeadingCheckbox ? 'ps-3' : 'ps-4',
-                    )
-                  : undefined
-              }
-            >
-              {isFirstDataColumn && expandableRow && !hideExpandToggle && (
-                <span
-                  className={classNames(
-                    'all-rows-expander',
-                    toggledAll ? 'active' : '',
-                  )}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={
-                    toggledAll
-                      ? translate('Collapse all rows')
-                      : translate('Expand all rows')
-                  }
-                  onClick={toggleAll}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      toggleAll();
-                    }
-                  }}
-                >
-                  <CaretDownIcon
-                    size={20}
-                    weight="bold"
-                    className="rotate-toggle-180"
-                  />
-                </span>
-              )}
-              {column.title}
-              {renderSortingIcon(column, currentSorting, onSortClick)}
-            </span>
-            {column.filter && filters && (
-              <TableFiltersMenu
-                filters={filters}
-                filterPosition="menu"
-                filtersStorage={filtersStorage}
-                setFilter={setFilter}
-                applyFiltersFn={applyFiltersFn}
-                openName={column.filter}
-                toggleFilterMenu={toggleFilterMenu}
-              />
-            )}
-          </>,
-          column.meta,
-        )}
-      </div>
-      {onTogglePin && (
-        <button
-          type="button"
-          className={classNames('text-btn pin-toggle', pinned && 'active')}
-          data-testid={`pin-toggle-${pinKey}`}
-          aria-label={
-            pinned ? translate('Unpin column') : translate('Pin column')
-          }
-          onClick={() => onTogglePin(pinKey)}
-        >
-          <Tooltip
-            label={pinned ? translate('Unpin column') : translate('Pin column')}
-          >
-            <PushPinIcon size={16} weight={pinned ? 'fill' : 'bold'} />
-          </Tooltip>
-        </button>
-      )}
-    </div>
-  </th>
-);
-
 export const TableHeader: FC<TableHeaderProps> = ({
   columns,
   columnPositions,
@@ -297,24 +68,14 @@ export const TableHeader: FC<TableHeaderProps> = ({
   pinnedOffsets = {},
   toggleColumnPin,
 }) => {
-  const isAllSelected = selectedRows?.length >= rows?.length;
-
   const columnMap = useMemo(
     () =>
-      columns.reduce(
+      columns.reduce<Record<string, Column>>(
         (result, column) => ({ ...result, [column.id]: column }),
         {},
       ),
     [columns],
   );
-
-  const refCheck = useRef<HTMLInputElement>();
-  useEffect(() => {
-    if (refCheck?.current) {
-      refCheck.current.indeterminate =
-        !isAllSelected && selectedRows?.length > 0;
-    }
-  }, [refCheck?.current, isAllSelected, selectedRows]);
 
   const toggledAll = useMemo(() => {
     if (!expandableRow || rows.length === 0) return false;
@@ -334,13 +95,10 @@ export const TableHeader: FC<TableHeaderProps> = ({
     }
   }, [rows, rowKey, toggledAll, toggled, toggleRow]);
 
-  const visibleCols = useMemo<Column[]>(() => {
-    return hasOptionalColumns
-      ? columnPositions
-          .filter((id) => columnMap[id] && (columnMap[id].visible ?? true))
-          .map((id) => columnMap[id])
-      : columns.filter((column) => column.visible ?? true);
-  }, [hasOptionalColumns, columnPositions, columnMap, columns]);
+  const visibleCols = useMemo<Column[]>(
+    () => resolveVisibleColumns(columns, columnPositions, hasOptionalColumns),
+    [hasOptionalColumns, columnPositions, columns],
+  );
 
   const colWidths = useMemo(() => {
     if (visibleCols.length <= 1) return { first: 100, other: 0 };
@@ -352,7 +110,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
     const remainingWidth = 100 - first;
     const other = remainingWidth / (colsWithoutCustomWidth - 1);
     return { first, other };
-  }, [visibleCols]);
+  }, [visibleCols, equalColWidth]);
 
   // The first column which has no custom width. Find it to make it wider.
   const firstColIndex = visibleCols.findIndex((col) => !col.width);
@@ -367,7 +125,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
   return (
     <>
       <colgroup>
-        {fieldType || enableMultiSelect ? <col width="10px" /> : null}
+        {fieldType || enableMultiSelect ? (
+          <col width="10px" className="print:hidden" />
+        ) : null}
         {visibleCols.map((col, i) => (
           <col
             key={i}
@@ -386,27 +146,21 @@ export const TableHeader: FC<TableHeaderProps> = ({
         ))}
       </colgroup>
       <thead>
-        <tr className="text-start text-quaternary font-semibold text-xs align-middle">
-          {fieldType ? (
-            <th className="w-2.5 ps-4 pe-0" />
-          ) : enableMultiSelect ? (
-            <th className="w-2.5 ps-4 pe-0">
-              <Checkbox
-                ref={refCheck}
-                data-testid="select-all"
-                aria-label={translate('Select all rows')}
-                checked={isAllSelected}
-                onChange={() => onSelectAllRows(rows)}
-              />
-            </th>
-          ) : null}
+        <tr className="border-b border-solid border-secondary border-b-[color:var(--table-head-border,var(--border-secondary))] [--table-row-bg:var(--table-head-bg,var(--bg-secondary))] bg-[var(--table-row-bg)] text-start text-quaternary font-semibold text-xs align-middle">
+          <TableControlHead
+            fieldType={fieldType}
+            enableMultiSelect={enableMultiSelect}
+            rows={rows}
+            selectedRows={selectedRows}
+            onSelectAllRows={onSelectAllRows}
+          />
           {hasOptionalColumns
             ? columnPositions
                 .filter((id) => columnMap[id])
                 .map(
                   (id, index) =>
                     (columnMap[id].visible ?? true) && (
-                      <TableTh
+                      <TableHeaderCell
                         key={id}
                         column={columnMap[id]}
                         onSortClick={onSortClick}
@@ -436,7 +190,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                 }
                 const pinKey = getColumnPinKey(column, index);
                 return (
-                  <TableTh
+                  <TableHeaderCell
                     key={index}
                     column={column}
                     onSortClick={onSortClick}
@@ -461,15 +215,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                 );
               })}
           {showActions ? (
-            <th
-              className={classNames(
-                'header-actions',
-                COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned pinned-end',
-                pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
-              )}
-            >
-              {translate('Actions')}
-            </th>
+            <TableActionsHead pinnedColumns={pinnedColumns} />
           ) : null}
         </tr>
       </thead>

@@ -348,10 +348,6 @@ function compareStyles(baseDir, headDir) {
   return { compared: names.length, results };
 }
 
-function readPng(file) {
-  return PNG.sync.read(readFileSync(file));
-}
-
 function pad(png, width, height) {
   const out = new PNG({ width, height });
   out.data.fill(255);
@@ -359,7 +355,7 @@ function pad(png, width, height) {
   return out;
 }
 
-function compare(baseDir, headDir, reportDir) {
+async function compare(baseDir, headDir, reportDir) {
   mkdirSync(reportDir, { recursive: true });
   const names = new Set([
     ...readdirSync(baseDir).filter((f) => f.endsWith('.png')),
@@ -377,14 +373,32 @@ function compare(baseDir, headDir, reportDir) {
       });
       continue;
     }
-    let base = readPng(a);
-    let head = readPng(b);
+    // Most pairs are the same file byte for byte: skip decoding them. Each
+    // decode allocates several full-size bitmaps outside the JS heap, which
+    // the collector frees too late in this synchronous loop to keep a full
+    // run within memory.
+    const aBytes = readFileSync(a);
+    const bBytes = readFileSync(b);
+    if (aBytes.equals(bBytes)) {
+      results.push({
+        name,
+        status: 'same',
+        changedPixels: 0,
+        ratio: 0,
+        sizeChanged: false,
+      });
+      continue;
+    }
+    let base = PNG.sync.read(aBytes);
+    let head = PNG.sync.read(bBytes);
     const width = Math.max(base.width, head.width);
     const height = Math.max(base.height, head.height);
     const sizeChanged =
       base.width !== head.width || base.height !== head.height;
-    base = pad(base, width, height);
-    head = pad(head, width, height);
+    if (sizeChanged) {
+      base = pad(base, width, height);
+      head = pad(head, width, height);
+    }
     const diff = new PNG({ width, height });
     // threshold 0.05: antialiasing noise passes, a one-step ramp change does not.
     const changed = pixelmatch(base.data, head.data, diff.data, width, height, {
@@ -408,6 +422,8 @@ function compare(baseDir, headDir, reportDir) {
       PNG.bitblt(diff, sheet, 0, 0, width, height, width * 2, 0);
       writeFileSync(path.join(reportDir, name), PNG.sync.write(sheet));
     }
+    // Let the freed bitmaps go before decoding the next pair.
+    await new Promise((resolve) => setImmediate(resolve));
   }
 
   const styles = compareStyles(baseDir, headDir);
@@ -497,10 +513,10 @@ if (command === 'capture' && args.length >= 2) {
   }
   console.log(`\nStories that differ between a ${low}px and a ${high}px root:`);
   process.exit(
-    compare(dir(low), dir(high), path.join(args[1], 'report')) ? 0 : 1,
+    (await compare(dir(low), dir(high), path.join(args[1], 'report'))) ? 0 : 1,
   );
 } else if (command === 'compare' && args.length === 3) {
-  process.exit(compare(args[0], args[1], args[2]) ? 0 : 1);
+  process.exit((await compare(args[0], args[1], args[2])) ? 0 : 1);
 } else {
   console.error(
     'Usage:\n  theme-snapshots.mjs capture <storybook-static> <out-dir> [--filter <regex>] [--font <family>] [--widths <px,px,...>] [--themes <light,dark>] [--root <px>] [--styles]\n  theme-snapshots.mjs compare <base-dir> <head-dir> <report-dir>\n  theme-snapshots.mjs root-invariance <storybook-static> <out-dir> [--filter <regex>] [--widths <px,px,...>] [--themes <light,dark>] [--roots <px,px>]',

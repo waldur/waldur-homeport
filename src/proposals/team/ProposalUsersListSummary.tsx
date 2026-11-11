@@ -5,6 +5,7 @@ import { AccordionCard } from 'waldur-ui';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { PROPOSAL_ACTIVITY_SECTION_ID } from '@/proposals/activity/ProposalActivitySection';
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import { Proposal } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
@@ -21,8 +22,6 @@ import { isAccessDenied } from './teamApi';
 import { TeamDropdownActions } from './TeamDropdownActions';
 import { useProposalTeamRules } from './useProposalTeamRules';
 import { UsersList } from './UsersList';
-
-import '@/proposals/flushTable.scss';
 
 /**
  * The collapsible card the proposal page lists the team in. Given, the list
@@ -143,7 +142,7 @@ export const ProposalUsersListSummary: FC<{
   }
 
   const body = (
-    <div className="proposal-flush-table">
+    <div className={PROPOSAL_FLUSH_TABLE_CLASS}>
       {usersList}
       {openState ? (
         <p className="text-quaternary pt-2.5 mb-0">

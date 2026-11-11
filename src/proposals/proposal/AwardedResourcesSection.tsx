@@ -25,6 +25,7 @@ import {
   isAwardSectionShown,
   useAwardedResources,
 } from '@/proposals/awardedResources';
+import { PROPOSAL_FLUSH_TABLE_CLASS } from '@/proposals/flushTable';
 import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
 import {
   pricesConcealed,
@@ -41,8 +42,6 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-
-import '@/proposals/flushTable.scss';
 
 import { useConfirmApplicantChange } from './actingForApplicant';
 import { AwardDetails, AwardOfferingCell } from './AwardComparison';
@@ -359,7 +358,7 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
           {...tableProps}
           // A short list, shown whole.
           hasPagination={false}
-          className="proposal-flush-table"
+          className={PROPOSAL_FLUSH_TABLE_CLASS}
           cardBordered={false}
           title={null}
           hasActionBar={false}

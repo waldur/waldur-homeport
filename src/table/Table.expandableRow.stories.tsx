@@ -116,6 +116,20 @@ export const ExpandableRowNestedTable: Story = {
         'rgba(0, 0, 0, 0)',
       );
     }
+    // The nested header row's rule is the divider colour: in dark its
+    // --bg-tertiary background is the --border-secondary step.
+    const nestedHeaderRow = slot?.querySelector('thead > tr');
+    expect(nestedHeaderRow).not.toBeNull();
+    if (nestedHeaderRow) {
+      const probe = document.createElement('span');
+      probe.style.color = 'var(--border-divider)';
+      canvasElement.appendChild(probe);
+      const divider = getComputedStyle(probe).color;
+      probe.remove();
+      await expect(getComputedStyle(nestedHeaderRow).borderBottomColor).toBe(
+        divider,
+      );
+    }
   },
 };
 

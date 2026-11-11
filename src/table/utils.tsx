@@ -12,6 +12,24 @@ import { Column } from '@/table/types';
 export const getColumnPinKey = (column: Column, index: number): string =>
   column.id ?? 'column-' + index;
 
+/** Resolves the ordered list of visible columns for TableHeader and TableBody. */
+export const resolveVisibleColumns = (
+  columns: Column[],
+  columnPositions: string[],
+  hasOptionalColumns?: boolean,
+): Column[] => {
+  if (!hasOptionalColumns) {
+    return columns.filter((column) => column.visible ?? true);
+  }
+  const columnMap = columns.reduce<Record<string, Column>>(
+    (result, column) => ({ ...result, [column.id]: column }),
+    {},
+  );
+  return columnPositions
+    .filter((id) => columnMap[id] && (columnMap[id].visible ?? true))
+    .map((id) => columnMap[id]);
+};
+
 /** Walks header cells in DOM order and derives the sticky insets of each
  * pinned column. Each pinned cell gets BOTH a `left` (sum of the widths of
  * pinned cells before it) and a `right` (sum of the widths of pinned cells

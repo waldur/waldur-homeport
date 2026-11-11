@@ -20,8 +20,6 @@ import {
 } from '@/form/types';
 import { translate } from '@/i18n';
 
-import './ChoicesTable.scss';
-
 interface ChoicesTableProps {
   enableSelect?: boolean;
   columns: SelectDialogFieldColumn[];
@@ -33,7 +31,7 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
   enableSelect = true,
   ...props
 }) => (
-  <div className="choices-table">
+  <div className="max-h-[300px]! overflow-y-scroll!">
     <Table density="compact">
       <TableHeader>
         <TableRow>
@@ -59,7 +57,7 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
                 return props.input.onChange(choice);
               }
             }}
-            className={classNames({ 'selectable-row': enableSelect })}
+            className={classNames({ 'cursor-pointer': enableSelect })}
           >
             {enableSelect && (
               <TableCell>

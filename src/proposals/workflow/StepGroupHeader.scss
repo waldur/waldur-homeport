@@ -23,16 +23,22 @@
   }
 }
 
-.table tbody > tr.table-group-header:has(.step-group-header--phase) > th {
+table
+  tbody
+  > tr[data-slot='table-group-header']:has(.step-group-header--phase)
+  > th {
   background-color: var(--bg-secondary);
 }
 
 // The rail: the header of a parallel stage and each of its rows carry it on
 // their first cell, so it runs unbroken down the edge of the table. An inset
 // shadow takes no room, so the expander and the text stay where they are.
-.table tbody > tr.table-group-header:has(.step-group-header--stage) > th,
-.table tbody > tr.step-row--parallel > :is(td, th):first-child,
-.table tbody > tr.step-row--parallel.expanded + tr > td {
+table
+  tbody
+  > tr[data-slot='table-group-header']:has(.step-group-header--stage)
+  > th,
+table tbody > tr.step-row--parallel > :is(td, th):first-child,
+table tbody > tr.step-row--parallel[data-state='expanded'] + tr > td {
   box-shadow: inset 2px 0 0 var(--brand-color);
 }
 
@@ -41,7 +47,7 @@
 // its content keeps a readable width (a table cell ignores min-width, its
 // content does not), its badges wrap, and only the summary is clamped, to
 // two lines.
-.table tbody > tr > :is(td, th).step-name-cell {
+table tbody > tr > :is(td, th).step-name-cell {
   white-space: normal;
 
   .badge {

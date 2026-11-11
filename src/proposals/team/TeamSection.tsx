@@ -174,7 +174,7 @@ export const TeamSection: FC<
       </CardHeader>
       {props.hasTeamTabs &&
         !isFeatureVisible(MarketplaceFeatures.call_only) && (
-          <CardHeader className="table-tabs border-b border-b-secondary items-stretch py-0 min-h-auto">
+          <CardHeader className="border-b border-b-secondary items-stretch py-0 min-h-auto">
             <TableNav
               tabs={[
                 {

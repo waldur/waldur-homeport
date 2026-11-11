@@ -29,9 +29,9 @@ describe('no-unknown-class', () => {
       {
         code: 'const A = () => <div className="flex gap-4 md:hidden hover:bg-primary mt-[3px] !p-2 p-2! text-primary/50 grid-cols-[1fr_auto] text-tertiary" />;',
       },
-      // Classes from the compiled SCSS (the table and legacy partials).
+      // Classes from the compiled SCSS (the legacy partials).
       {
-        code: 'const A = () => <div className="table table-row-bordered full-width" />;',
+        code: 'const A = () => <div className="ellipsis text-btn content-wrapper" />;',
       },
       // group / peer markers emit no CSS of their own.
       {

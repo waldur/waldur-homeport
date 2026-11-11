@@ -46,6 +46,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `breadcrumbs.md` - Breadcrumbs: `useBreadcrumbs`, `IBreadcrumbItem`, `BreadcrumbTrail`, `renderLink`, dropdown crumbs
 - `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
 - `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
+- `table/styling-architecture.md` - How the table is drawn: `--table-*` custom properties, one row background class, `data-state`/`data-slot` hooks, and the checks to run before changing them
 - `development-setup.md` - Build, environment, tooling
 - `design-tokens.md` - Colour ramps generated from `tokens/colors.json` (never edit `colorRamps.css`)
 - `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips

@@ -8,6 +8,10 @@ import { ErrorView } from '@/ErrorView';
 
 import { useTableContext } from '../../context';
 import { GridBody } from '../../GridBody';
+import {
+  GRID_HOVER_SHADOW_CLASS,
+  TABLE_HOVER_SHADOW_CLASS,
+} from '../../styles';
 import { TableLoadingSpinnerContainer } from '../../TableLoadingSpinnerContainer';
 import { TablePlaceholder } from '../../TablePlaceholder';
 
@@ -113,12 +117,12 @@ export function TableContent() {
       )}
       <div
         className={classNames(
-          'table-container w-full min-w-0',
+          'w-full min-w-0',
           mode === 'grid' && 'overflow-x-hidden',
           REFETCH_CLASSES,
           isGrid
-            ? gridHover && 'grid-hover-shadow'
-            : tableHover && 'table-hover-shadow',
+            ? gridHover && GRID_HOVER_SHADOW_CLASS
+            : tableHover && TABLE_HOVER_SHADOW_CLASS,
         )}
         ref={setInert}
         aria-busy={isRefetching || undefined}

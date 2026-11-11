@@ -1015,7 +1015,7 @@ const MessagesTable: FC<{
       className={classNames(
         // The expanded email keeps to the width the table shows, as the
         // Notifications tab's expanded rows do (container query width).
-        '[&_.table-responsive]:[container-type:inline-size]',
+        '[&_[data-slot=table-responsive]]:[container-type:inline-size]',
         compact && '[&_table]:table-fixed',
       )}
       // All on one page: no pager unless they run past it.

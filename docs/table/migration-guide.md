@@ -1,12 +1,6 @@
 # Migrating Hand-Rolled Tables
 
-How to move a raw `<table>` off legacy table classes, and how to pick what it
-becomes. Tracked in #563 (part of epic #442); the end goal was #502: deleting the
-legacy `.table-*` rules in `src/styles/legacy/_table-base.scss` (completed).
-
-All hand-rolled tables have been migrated to semantic `waldur-ui` Table primitives
-or `PropertyList`, and `src/styles/legacy/_table-base.scss` has been retired.
-`waldur-custom/no-hand-rolled-table` enforces this going forward.
+How to replace a raw `<table>`, and how to pick what it becomes.
 
 `waldur-custom/no-hand-rolled-table` is an error with a shrinking baseline:
 the raw `<table>`s that predate it are counted per file in
@@ -14,9 +8,9 @@ the raw `<table>`s that predate it are counted per file in
 lint, and one fewer reports the count as stale. After migrating some, run
 `yarn lint:tables:baseline`; never run it to let a new table in.
 
-Not every table should become `@/table/Table`. That goal only needs "no
-legacy table classes", and a short read-only list gains nothing from a fetch
-cycle, a Redux table store and five props to switch its chrome off. Pick the
+Not every table should become `@/table/Table`: a short read-only list gains
+nothing from a fetch cycle, a Redux table store and five props to switch its
+chrome off. Pick the
 target by what the table **is**, not by the fact that it is a `<table>`.
 
 ---
@@ -227,7 +221,7 @@ Key props on the primitives:
 - `<Table density="compact" | "normal" | "spacious">`: Controls cell padding and typography.
 - `<Table scrollable={false}>`: Drops the outer overflow wrapper when the parent container (e.g. modal body) already handles scrolling.
 - `<TableRow hoverable={false}>`: Disables row hover highlight for static read-only tables.
-- `<TableRow divided={false}>`: Drops the bottom border (replaces `.table-borderless`).
+- `<TableRow divided={false}>`: Drops the bottom border.
 - `<TableFooter>`: Semantic `<tfoot>` with token borders and background for summary/totals rows.
 
 ## 3. `@/table/Table`

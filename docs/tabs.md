@@ -244,7 +244,7 @@ Use this instead of `SegmentedControl` whenever each option owns a distinct, lar
 
 - **Border widths are Tailwind's.** `border`, `border-x-0`, `border-b-2` … are Tailwind's pixel widths; write them as steps, not arbitrary values (`no-arbitrary-border-width`), and name the colour next to a bare `border` (`require-border-color`).
 - **Anchor tabs and colour.** Give a `TabNav` item a `link`; don't style a bare `<a>` as a tab.
-- **Card bodies in a tab panel keep their top padding.** `_table.scss` drops the top padding of a table card's body, except inside a tab panel. It keys off `[role="tabpanel"]`, which every `TabsContent` has, so no wrapper class is needed; the older `.tab-content` hook still works where it is set by hand. Use `[role="tabpanel"]` in new CSS.
+- **Card bodies in a tab panel keep their top padding.** `card.css` (waldur-design-tokens) drops the top padding of a table card's body, except inside a tab panel. It keys off `[role="tabpanel"]`, which every `TabsContent` has, so no wrapper class is needed; the older `.tab-content` hook still works where it is set by hand. Use `[role="tabpanel"]` in new CSS.
 - **Tab and search params must be `dynamic` in the route.** A tab bar that keeps its state in the URL (`?tab=…`, `useUrlTab`, `TableWithTabs syncWithUrlKey`) writes it with `router.stateService.go(...)`. If the route does not declare the param `dynamic`, UI-Router exits and re-enters the state on every change, so the whole page remounts on each tab switch (and a `?q=` search box loses focus on every keystroke). Declare it once on the route:
 
   ```ts

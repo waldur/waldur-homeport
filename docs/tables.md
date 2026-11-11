@@ -15,13 +15,18 @@ To make table integration rules, properties, and layouts easier to navigate, the
 | **[Pillar 3: Column Setup & Configuration](./table/column-setup.md)**   | Column parameters (width, alignment, copying, ellipsis, click blocking), sorting, optional columns, and key fetching.                                                           |
 | **[Pillar 4: Row Actions & Selection](./table/row-actions.md)**         | 3-dots action menus (`ActionsDropdown` + `ActionItem`), row expansion (`isRowExpandable`), multi-select, and bulk toolbars.                                                     |
 | **[Pillar 5: Filters & URL Sync](./table/filters.md)**                  | OpenAPI generated filters, Redux caching, syncing to URL query formatting (`uuid::name`), and cell inline filtering.                                                            |
-| **[Pillar 6: Visual Customizations](./table/visual-customizations.md)** | Grid layouts (`gridItem` + `gridClassName`), custom empty placeholders, header titles, styling class triggers, and standalone mode.                                    |
+| **[Pillar 6: Visual Customizations](./table/visual-customizations.md)** | Grid layouts (`gridItem` + `gridClassName`), custom empty placeholders, header titles, styling class triggers, and standalone mode.                                             |
 | **[Pillar 7: Layout Wrappers & Portals](./table/layout-wrappers.md)**   | Rendering multiple tables within tabs (`TableWithTabs`) and forwarding rendering portals (`portal`).                                                                            |
 | **[Pillar 8: Form Integration](./table/form-integration.md)**           | Embedding tables as input fields in `react-final-form` (`fieldType`, `fieldName`, `rowValidate`).                                                                               |
 
 Replacing a raw `<table>`? Start with the
 **[Migration guide](./table/migration-guide.md)**: it decides whether the list
 becomes `Table`, `SimpleTable`, a form grid or a label/value block.
+
+Changing how the table itself is drawn (cell padding, row backgrounds, pinned
+columns, a table nested in something else)? Read
+**[Table styling architecture](./table/styling-architecture.md)**: the design
+decisions behind the table's markup and custom properties, and what checks them.
 
 ---
 

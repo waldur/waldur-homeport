@@ -216,8 +216,9 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
   const tableRef = useRef<HTMLDivElement>(null);
   const [rowsFloor, setRowsFloor] = useState(0);
   const choosePhase = (key: WorkflowPhaseKey) => {
-    const rows =
-      tableRef.current?.querySelector<HTMLElement>('.table-responsive');
+    const rows = tableRef.current?.querySelector<HTMLElement>(
+      '[data-slot="table-responsive"]',
+    );
     setRowsFloor((floor) => Math.max(floor, rows?.offsetHeight ?? 0));
     setPhase(key);
   };

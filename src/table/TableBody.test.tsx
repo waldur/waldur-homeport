@@ -7,7 +7,7 @@ import { describe, it, expect } from 'vitest';
 
 import { ModalProvider } from '@/modal/ModalContext';
 
-import { DASH_ESCAPE_CODE, ROW_VARIANT_CLASSES } from './constants';
+import { DASH_ESCAPE_CODE, ROW_VARIANT_BG_VARS } from './constants';
 import { FilterContextProvider } from './FilterContextProvider';
 import { StringFilter } from './filters';
 import { tablesReducer } from './store';
@@ -61,13 +61,13 @@ describe('TableBody', () => {
       rowVariant: ({ row }) => (row.name === 'late' ? 'danger' : undefined),
     });
     const [late, onTime] = screen.getAllByRole('row');
-    expect(late).toHaveClass(ROW_VARIANT_CLASSES.danger);
-    expect(onTime.className).toBe('');
+    expect(late).toHaveClass(ROW_VARIANT_BG_VARS.danger);
+    expect(onTime).not.toHaveClass(ROW_VARIANT_BG_VARS.danger);
   });
 
   it('takes a status variant as a plain value for every row', () => {
     renderWrapper({ rowVariant: 'warning' });
-    expect(screen.getByRole('row')).toHaveClass(ROW_VARIANT_CLASSES.warning);
+    expect(screen.getByRole('row')).toHaveClass(ROW_VARIANT_BG_VARS.warning);
   });
 
   it('renders a row-header column as th scope=row', () => {
@@ -388,7 +388,7 @@ describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
     renderWithFilters();
     await waitFor(() =>
       expect(
-        document.querySelector('.inline-filter'), // eslint-disable-line testing-library/no-node-access, no-restricted-syntax
+        document.querySelector('[data-testid="inline-filter"]'), // eslint-disable-line testing-library/no-node-access, no-restricted-syntax
       ).toBeInTheDocument(),
     );
   });
@@ -398,11 +398,9 @@ describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
     renderWithFilters();
 
     await waitFor(() =>
-      expect(
-        document.querySelector('.inline-filter'), // eslint-disable-line testing-library/no-node-access, no-restricted-syntax
-      ).toBeInTheDocument(),
+      expect(screen.getByTestId('inline-filter')).toBeInTheDocument(),
     );
-    const inlineTrigger = document.querySelector('.inline-filter'); // eslint-disable-line testing-library/no-node-access, no-restricted-syntax
+    const inlineTrigger = screen.getByTestId('inline-filter');
     expect(inlineTrigger).toHaveAttribute('data-state', 'closed');
 
     await user.click(inlineTrigger as HTMLElement);

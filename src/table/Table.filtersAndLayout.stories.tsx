@@ -159,7 +159,7 @@ export const InlineCellFilter: Story = {
       const maxAttempts = 40;
       const tick = () => {
         if (cancelled) return;
-        if (document.querySelector('.inline-filter')) return;
+        if (document.querySelector('[data-testid="inline-filter"]')) return;
         if (attempts >= maxAttempts) return;
         attempts += 1;
         setRows(tableStoryRows.map((row) => ({ ...row })));
@@ -196,7 +196,9 @@ export const InlineCellFilter: Story = {
     // visibility, which getByRole/querySelector don't need to see it.
     await waitFor(
       () =>
-        expect(canvasElement.querySelector('.inline-filter')).not.toBeNull(),
+        expect(
+          canvasElement.querySelector('[data-testid="inline-filter"]'),
+        ).not.toBeNull(),
       { timeout: 5000 },
     );
     await userEvent.hover(canvas.getByText('production-cluster'));

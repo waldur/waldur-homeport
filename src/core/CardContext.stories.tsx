@@ -22,13 +22,13 @@ const Body = () => <p className="m-0">Body</p>;
 
 const ExpandedRow = ({ children }: { children: ReactNode }) => (
   // eslint-disable-next-line waldur-custom/no-hand-rolled-table -- the expanded-row markup the context rules key on, not a data table
-  <table className="table table-expandable">
+  <table className="mb-4 w-full border-collapse text-sm">
     <tbody>
-      <tr className="expanded">
-        <td>Row</td>
+      <tr data-state="expanded" className="bg-secondary">
+        <td className="h-[44px] px-2 text-quaternary">Row</td>
       </tr>
-      <tr>
-        <td>{children}</td>
+      <tr className="bg-secondary">
+        <td className="px-2 py-4 text-quaternary">{children}</td>
       </tr>
     </tbody>
   </table>
