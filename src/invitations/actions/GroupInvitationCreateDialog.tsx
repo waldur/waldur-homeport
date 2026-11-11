@@ -10,11 +10,8 @@ import { translate } from '@/i18n';
 import { invitationTypeOptions } from '@/invitations/actions/constants';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
-import {
-  getOnlyOneProjectManagerTooltip,
-  isProjectManagerSelectionBlocked,
-} from '@/project/team/onlyOneProjectManager';
-import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
+import { getOnlyOneProjectManagerTooltip } from '@/project/team/onlyOneProjectManager';
+import { useProjectManagerBlock } from '@/project/team/useProjectHasActiveManager';
 import { useNotify } from '@/store/notify';
 import { useCustomer, useUser } from '@/workspace/hooks';
 
@@ -123,12 +120,10 @@ export const GroupInvitationCreateDialog = ({
           [values?.type, roles],
         );
 
-        const { data: projectHasManager } = useProjectHasActiveManager(
-          !values?.auto_create_project ? values?.project?.uuid : undefined,
+        const isProjectManagerBlocked = useProjectManagerBlock(
+          values?.auto_create_project ? undefined : values?.project?.uuid,
+          values?.role,
         );
-        const isProjectManagerBlocked =
-          !values?.auto_create_project &&
-          isProjectManagerSelectionBlocked(projectHasManager, values?.role);
 
         useEffect(() => {
           if (values.type === 'public') {

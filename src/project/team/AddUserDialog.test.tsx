@@ -13,12 +13,14 @@ import {
 } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { RoleEnum } from '@/permissions/enums';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
 import { mockListResponse } from '@/test/utils';
 import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { AddUserDialog } from './AddUserDialog';
+import { getOnlyOneProjectManagerTooltip } from './onlyOneProjectManager';
 
 const mockProps = {
   refetch: vi.fn(),
@@ -212,6 +214,88 @@ describe('AddUserDialog', () => {
     renderComponent({ ...mockProps, title: undefined });
 
     expect(screen.getByText('Add user')).toBeInTheDocument();
+  });
+
+  describe('only one project manager', () => {
+    beforeEach(() => {
+      ENV.plugins.WALDUR_CORE.ONLY_ONE_PROJECT_MANAGER = true;
+      vi.mocked(rolesList).mockResolvedValue(
+        mockListResponse([
+          {
+            uuid: 'pm-uuid',
+            name: RoleEnum.PROJECT_MANAGER,
+            description: 'Project manager',
+            content_type: 'project',
+            is_active: true,
+          },
+          {
+            uuid: 'project-role-uuid',
+            name: 'project_role',
+            description: 'project role',
+            content_type: 'project',
+            is_active: true,
+          },
+        ]),
+      );
+    });
+
+    it('holds submit while the manager check runs', async () => {
+      let resolveManagerCheck: (value: unknown) => void;
+      const pendingCheck = new Promise((resolve) => {
+        resolveManagerCheck = resolve;
+      });
+      vi.mocked(projectsListUsersList).mockImplementation((request) => {
+        if (request?.query?.field) {
+          return pendingCheck as any;
+        }
+        return Promise.resolve(mockListResponse([])) as any;
+      });
+
+      const user = userEvent.setup();
+      renderComponent({ ...mockProps, level: 'project' });
+
+      await typeAndSelectOption(user, 'User', 'John', /John Doe/);
+      await openAndSelectOption(user, 'Role', 'Project manager');
+
+      const submitButton = screen.getByRole('button', { name: 'Add role' });
+      const reason = getOnlyOneProjectManagerTooltip();
+      await waitFor(() => expect(submitButton).toBeDisabled());
+      expect(submitButton).toHaveAccessibleDescription(reason);
+
+      resolveManagerCheck!(mockListResponse([]));
+    });
+
+    it('allows a project manager grant when the check reports none', async () => {
+      vi.mocked(projectsListUsersList).mockResolvedValue(
+        mockListResponse([]) as any,
+      );
+
+      const user = userEvent.setup();
+      renderComponent({ ...mockProps, level: 'project' });
+
+      await typeAndSelectOption(user, 'User', 'John', /John Doe/);
+      await openAndSelectOption(user, 'Role', 'Project manager');
+
+      const submitButton = screen.getByRole('button', { name: 'Add role' });
+      await waitFor(() => expect(submitButton).not.toBeDisabled());
+    });
+
+    it('keeps submit blocked after the check reports an active manager', async () => {
+      vi.mocked(projectsListUsersList).mockResolvedValue(
+        mockListResponse([{ role_name: RoleEnum.PROJECT_MANAGER }]),
+      );
+
+      const user = userEvent.setup();
+      renderComponent({ ...mockProps, level: 'project' });
+
+      await typeAndSelectOption(user, 'User', 'John', /John Doe/);
+      await openAndSelectOption(user, 'Role', 'Project manager');
+
+      const submitButton = screen.getByRole('button', { name: 'Add role' });
+      const reason = getOnlyOneProjectManagerTooltip();
+      await waitFor(() => expect(submitButton).toBeDisabled());
+      expect(submitButton).toHaveAccessibleDescription(reason);
+    });
   });
 
   describe('existing role feedback', () => {

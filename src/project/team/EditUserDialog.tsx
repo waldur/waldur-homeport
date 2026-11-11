@@ -18,12 +18,9 @@ import { getHeldRole } from '@/permissions/utils';
 import { useProject, useUser } from '@/workspace/hooks';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
-import {
-  getOnlyOneProjectManagerTooltip,
-  isProjectManagerSelectionBlocked,
-} from './onlyOneProjectManager';
+import { getOnlyOneProjectManagerTooltip } from './onlyOneProjectManager';
 import { RoleGroup } from './RoleGroup';
-import { useProjectHasActiveManager } from './useProjectHasActiveManager';
+import { useProjectManagerBlock } from './useProjectHasActiveManager';
 import { UserGroup } from './UserGroup';
 
 interface EditUserDialogFormData {
@@ -97,12 +94,10 @@ const EditUserDialogFormBody: FC<{
   customerId,
 }) => {
   const currentUser = useUser();
-  const permissionRoleName = permission.role_name;
-  const { data: hasActiveManager } = useProjectHasActiveManager(project?.uuid);
-  const isProjectManagerBlocked = isProjectManagerSelectionBlocked(
-    hasActiveManager,
+  const isProjectManagerBlocked = useProjectManagerBlock(
+    project?.uuid,
     values.role,
-    permissionRoleName,
+    permission.role_name,
   );
 
   return (

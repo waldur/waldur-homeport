@@ -17,12 +17,9 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { type Role } from '@/permissions/types';
 import { getHeldRole } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
-import {
-  getOnlyOneProjectManagerTooltip,
-  isProjectManagerSelectionBlocked,
-} from '@/project/team/onlyOneProjectManager';
+import { getOnlyOneProjectManagerTooltip } from '@/project/team/onlyOneProjectManager';
 import { RoleGroup } from '@/project/team/RoleGroup';
-import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
+import { useProjectManagerBlock } from '@/project/team/useProjectHasActiveManager';
 import { useCustomer } from '@/workspace/hooks';
 
 import { ProjectGroup } from './ProjectGroup';
@@ -87,11 +84,8 @@ const EditProjectUserDialogFormBody: FC<{
   >;
 }> = ({ handleSubmit, invalid, submitting, values, resolve, saveMutation }) => {
   const customer = useCustomer();
-  const { data: hasActiveManager } = useProjectHasActiveManager(
+  const isProjectManagerBlocked = useProjectManagerBlock(
     resolve.project['project_uuid'],
-  );
-  const isProjectManagerBlocked = isProjectManagerSelectionBlocked(
-    hasActiveManager,
     values.role,
     resolve.project.role_name,
   );

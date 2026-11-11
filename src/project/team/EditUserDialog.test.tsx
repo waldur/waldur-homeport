@@ -4,14 +4,18 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 import {
   projectsAddUser,
   projectsDeleteUser,
+  projectsListUsersList,
   projectsUpdateUser,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
+import { RoleEnum } from '@/permissions/enums';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
 import { useProject, useUser } from '@/workspace/hooks';
 
 import { EditUserDialog } from './EditUserDialog';
+import { getOnlyOneProjectManagerTooltip } from './onlyOneProjectManager';
 
 // Mock table constants
 vi.mock('@/table/constants', async (importOriginal) => ({
@@ -54,12 +58,36 @@ const renderDialog = (resolve = mockResolve) => {
 describe('EditUserDialog (Project)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    ENV.plugins.WALDUR_CORE.ONLY_ONE_PROJECT_MANAGER = false;
     vi.mocked(useProject).mockReturnValue({
       uuid: 'project-uuid',
       name: 'Test Project',
     } as any);
     // The picker offers the roles the editing user may grant.
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+  });
+
+  it('does not hold Save for the current project manager while the check is in flight', async () => {
+    ENV.plugins.WALDUR_CORE.ONLY_ONE_PROJECT_MANAGER = true;
+    vi.mocked(projectsListUsersList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
+
+    renderDialog({
+      ...mockResolve,
+      permission: {
+        ...mockPermission,
+        role_name: RoleEnum.PROJECT_MANAGER,
+        role_description: 'Project manager',
+      } as any,
+    });
+
+    const save = screen.getByRole('button', { name: 'Save' });
+    await waitFor(() => expect(save).not.toBeDisabled());
+    expect(save).not.toHaveAccessibleDescription(
+      getOnlyOneProjectManagerTooltip(),
+    );
+    expect(projectsListUsersList).not.toHaveBeenCalled();
   });
 
   it('renders dialog with correct title and user information', () => {

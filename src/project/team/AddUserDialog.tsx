@@ -38,14 +38,9 @@ import {
 import { Project, User } from '@/workspace/types';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
-import {
-  getOnlyOneProjectManagerTooltip,
-  isOnlyOneProjectManagerEnabled,
-  isProjectManagerRole,
-  isProjectManagerSelectionBlocked,
-} from './onlyOneProjectManager';
+import { getOnlyOneProjectManagerTooltip } from './onlyOneProjectManager';
 import { RoleGroup } from './RoleGroup';
-import { useProjectHasActiveManager } from './useProjectHasActiveManager';
+import { useProjectManagerBlock } from './useProjectHasActiveManager';
 import { UserListOptionInline } from './UserListOptionInline';
 import { hasCurrentCustomerPermission } from './utils';
 
@@ -295,17 +290,10 @@ const AddUserDialogForm: FC<AddUserDialogFormProps> = ({
   getOptionLabel,
 }) => {
   const targetProjectUuid = values.project?.uuid || resolvedProject?.uuid;
-  const { data: targetProjectHasManager, isPending: isCheckingManager } =
-    useProjectHasActiveManager(targetProjectUuid);
-
-  const needsManagerCheck =
-    isOnlyOneProjectManagerEnabled() &&
-    isProjectManagerRole(values.role) &&
-    Boolean(targetProjectUuid);
-
-  const isProjectManagerBlocked =
-    isProjectManagerSelectionBlocked(targetProjectHasManager, values.role) ||
-    (needsManagerCheck && isCheckingManager);
+  const isProjectManagerBlocked = useProjectManagerBlock(
+    targetProjectUuid,
+    values.role,
+  );
 
   // The scope the role would be granted in, resolved the same way saveUser does.
   const scopeUuidByContentType = {
