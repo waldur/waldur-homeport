@@ -39,6 +39,8 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
+import '@/proposals/flushTable.scss';
+
 import { actsForApplicant, isOnProposalTeam } from '../team/teamRules';
 
 import { changeRequestPartLabel } from './changeRequests';
@@ -262,7 +264,7 @@ const RunActions: FC<{
   );
 };
 
-const RunsTable: FC<{
+export const RunsTable: FC<{
   proposal: Proposal;
   rows: ProposalRun[];
   version: number;
@@ -308,8 +310,12 @@ const RunsTable: FC<{
   return (
     <Table
       {...tableProps}
-      // A short list, shown whole.
+      // A short list, shown whole, flush with the section card it sits in:
+      // no second border, and no empty floor under its few rows.
       hasPagination={false}
+      className="proposal-flush-table"
+      cardBordered={false}
+      minHeight="auto"
       columns={columns}
       rowActions={rowActions}
       expandableRow={expandableRow}
