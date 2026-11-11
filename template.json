@@ -585,6 +585,11 @@
       "feature_area": "workflow-description"
     }
   },
+  "1 open task across calls": {
+    "context": {
+      "feature_area": "review"
+    }
+  },
   "1 organization": {
     "context": {
       "feature_area": "roles"
@@ -2152,6 +2157,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "vendorOfferings"
+    }
+  },
+  "Activate (1 error)": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Activate ({count} errors)": {
@@ -34732,6 +34742,17 @@
       "action_type": "filter"
     }
   },
+  "Mail: {filter} (1 mail)": {
+    "context": {
+      "variables": {
+        "filter": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "scenarios",
+      "action_type": "filter"
+    }
+  },
   "Mail: {filter} ({count} mails)": {
     "context": {
       "variables": {
@@ -36743,6 +36764,11 @@
     }
   },
   "Message the applicants": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Message the applicants of 1 proposal": {
     "context": {
       "feature_area": "manage"
     }
@@ -40716,6 +40742,11 @@
       "feature_area": "proposal"
     }
   },
+  "No reviewer added to 1 proposal": {
+    "context": {
+      "feature_area": "assignments"
+    }
+  },
   "No reviewer added to {count} proposals": {
     "context": {
       "variables": {
@@ -41850,6 +41881,11 @@
   "Not running accounting": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Not sent for 1 proposal": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Not sent for {count} proposals": {

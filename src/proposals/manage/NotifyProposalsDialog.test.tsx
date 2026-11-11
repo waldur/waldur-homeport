@@ -68,7 +68,7 @@ describe('NotifyProposalsDialog', () => {
 
     await waitFor(() =>
       expect(useNotify().showRedirectMessage).toHaveBeenCalledWith(
-        'Not sent for 1 proposals',
+        'Not sent for 1 proposal',
         'Lattice QCD: Nobody it is addressed to receives mail.',
       ),
     );

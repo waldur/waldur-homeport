@@ -120,9 +120,11 @@ export const CallActions: FC<CallActionsProps> = ({
     canBeActivated && canUpdate,
   );
   const checkErrors = workflowCheck?.summary.error ?? 0;
-  const activateTitle = checkErrors
-    ? translate('Activate ({count} errors)', { count: checkErrors })
-    : translate('Activate');
+  const activateTitle = !checkErrors
+    ? translate('Activate')
+    : checkErrors === 1
+      ? translate('Activate (1 error)')
+      : translate('Activate ({count} errors)', { count: checkErrors });
   const queryClient = useQueryClient();
   const hasEnabledStep =
     !canBeActivated || (workflowSteps?.some((s) => s.is_enabled) ?? false);

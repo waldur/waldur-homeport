@@ -81,10 +81,12 @@ const describeAssertion = (
   if ('notified' in entry) {
     const filter = mailFilter(entry.notified, name);
     return entry.notified.count != null
-      ? translate('Mail: {filter} ({count} mails)', {
-          filter,
-          count: entry.notified.count,
-        })
+      ? entry.notified.count === 1
+        ? translate('Mail: {filter} (1 mail)', { filter })
+        : translate('Mail: {filter} ({count} mails)', {
+            filter,
+            count: entry.notified.count,
+          })
       : translate('Mail: {filter}', { filter });
   }
   if ('not_notified' in entry) {

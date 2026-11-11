@@ -43,9 +43,12 @@ export const MyWorkCards: FC = () => {
       key: 'total',
       count: summary.total,
       title: translate('Tasks waiting for you'),
-      message: translate('{count} open tasks across calls', {
-        count: summary.total,
-      }),
+      message:
+        summary.total === 1
+          ? translate('1 open task across calls')
+          : translate('{count} open tasks across calls', {
+              count: summary.total,
+            }),
       icon: (
         <ListChecksIcon
           size={32}
