@@ -8,6 +8,8 @@ const filter = {
 export const PendingProjectUpdates = () => (
   <BaseProjectUpdateRequestsList
     filter={filter}
-    title={translate('Project updates')}
+    title={translate('Pending project updates')}
+    initialPageSize={5}
+    minHeight="auto"
   />
 );

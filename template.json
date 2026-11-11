@@ -47194,6 +47194,11 @@
       "feature_area": "resource-pending"
     }
   },
+  "Pending project updates": {
+    "context": {
+      "feature_area": "confirmation-drawer"
+    }
+  },
   "Pending proposals": {
     "context": {
       "primary_ui_type": "label",
@@ -50916,11 +50921,6 @@
   "Project type": {
     "context": {
       "feature_area": "create"
-    }
-  },
-  "Project update requests": {
-    "context": {
-      "feature_area": "confirmation-drawer"
     }
   },
   "Project updates": {

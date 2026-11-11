@@ -43,13 +43,12 @@ export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
         </div>
       )}
       {showProviderOrders && props.pendingProvidersCount > 0 && (
-        <div className="border-b border-b-secondary pb-4 mb-4">
+        <div className="mb-4">
           <PendingProviderOrders />
         </div>
       )}
       {props.pendingProjectUpdatesCount > 0 && (
         <div className="mb-4">
-          <h4 className="mb-2.5">{translate('Project update requests')}</h4>
           <PendingProjectUpdates />
         </div>
       )}
