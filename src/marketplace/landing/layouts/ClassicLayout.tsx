@@ -31,9 +31,7 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
         context="marketplace"
         backgroundImage={`url(${backendImage}), url(${defaultImage})`}
       >
-        <div className="landing-hero__search">
-          <OfferingsSearchBox />
-        </div>
+        <OfferingsSearchBox />
       </LandingHeroSection>
       <div className={PAGE_CONTAINER_CLASSNAME}>
         <CategoriesList />

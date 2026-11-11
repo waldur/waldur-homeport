@@ -165,7 +165,7 @@ export const OfferingsSearchBox = () => {
       emptyMessage={translate(
         'No offerings match your search. To find organizations, projects or resources, use the search in the top bar.',
       )}
-      wrapperClassName="landing-hero__search-box w-full max-w-[432px] px-3"
+      wrapperClassName="w-full max-w-[432px] px-3"
     />
   );
 };
