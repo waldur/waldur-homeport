@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { useBreakpointUp } from 'waldur-ui';
+
 import { getIdentityProviders } from '@/administration/api';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -31,6 +33,9 @@ export const LoginColumn = () => {
     queryFn: () => getIdentityProviders(),
   });
   const [view, setView] = useState<LoginView>('providers');
+  // On a wide screen HeroColumn, always beside this column, shows the demo
+  // users; listing them here too pushed the sign-in methods off the column.
+  const isWide = useBreakpointUp('md');
 
   const hasOtherProviders = data && data.length > 0;
 
@@ -71,7 +76,7 @@ export const LoginColumn = () => {
             />
           )}
           {/* In both views: on a demo it is the quickest way in. */}
-          {features.SigninForm && <DemoUserQuickLogin />}
+          {features.SigninForm && !isWide && <DemoUserQuickLogin />}
           <UserAuthWarning />
           <PoweredBy />
         </div>

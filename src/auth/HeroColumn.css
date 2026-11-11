@@ -11,8 +11,11 @@
   height: 100%;
   background: #000000ba;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* Keeps the demo users card off the column's edges on a narrow screen. */
+  padding: 0 24px;
 }
 
 .hero-text {
