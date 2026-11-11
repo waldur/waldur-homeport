@@ -23573,6 +23573,11 @@
       "feature_area": "resource-pending"
     }
   },
+  "Estimated cost this month": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Estimated duration (days)": {
     "context": {
       "feature_area": "workflow-steps"
@@ -30453,6 +30458,11 @@
       "feature_area": "single-import"
     }
   },
+  "Includes the usage of keys deleted this month, which the list leaves out.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Incomplete": {
     "context": {
       "primary_ui_type": "label",
@@ -32329,11 +32339,26 @@
   "Keys": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "user"
+      "feature_area": "api-keys"
     }
   },
   "Keys can be requested once the resource has been created.": {
     "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Keys of one resource.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Keys of {resource}.": {
+    "context": {
+      "variables": {
+        "resource": {
+          "type": "unknown"
+        }
+      },
       "feature_area": "api-keys"
     }
   },
@@ -41612,6 +41637,11 @@
       "feature_area": "manage"
     }
   },
+  "Not paused by a limit": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Not provided": {
     "context": {
       "feature_area": "team"
@@ -46622,6 +46652,18 @@
     }
   },
   "Paused at limit": {},
+  "Paused by a limit": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "api-keys"
+    }
+  },
+  "Paused by limit": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
   "Paused due to project grace period": {
     "context": {
       "feature_area": "details"
@@ -63306,6 +63348,11 @@
   "Show the check details": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Show the keys of all resources": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Show the project's errored resources, orders pending approval and operations in progress": {},
@@ -81113,6 +81160,12 @@
       "feature_area": "hpc"
     }
   },
+  "Usage this month": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
   "Usage tracking": {
     "context": {
       "feature_area": "policies"
@@ -90726,6 +90779,16 @@
       "action_type": "read"
     }
   },
+  "{count} erred": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "list"
+    }
+  },
   "{count} errors": {
     "context": {
       "variables": {
@@ -91426,6 +91489,16 @@
           "type": "number"
         }
       }
+    }
+  },
+  "{count} paused": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "list"
     }
   },
   "{count} pending": {

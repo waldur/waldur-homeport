@@ -800,8 +800,31 @@ export const states: StateDeclaration[] = [
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Resources'),
+      // Between Orders (10) and API keys (30) in the Resources menu.
+      priority: 20,
       // Replaces the inherited workspace guard: an offering manager lists
       // the resources of the offerings they manage.
+      permissions: [canAccessProviderResources],
+    },
+  },
+
+  {
+    name: 'marketplace-provider-api-keys',
+    url: 'api-keys/?resource_uuid',
+    component: lazyComponent(() =>
+      import('./service-providers/api-keys/ProviderApiKeysList').then(
+        (module) => ({ default: module.ProviderApiKeysList }),
+      ),
+    ),
+    parent: 'provider-resources',
+    params: {
+      resource_uuid: { dynamic: true, value: null, squash: true },
+    },
+    data: {
+      breadcrumb: () => translate('API keys'),
+      // After Orders and Resources in the Resources menu.
+      priority: 30,
+      // The keys of the resources the provider resource list shows.
       permissions: [canAccessProviderResources],
     },
   },
@@ -834,6 +857,8 @@ export const states: StateDeclaration[] = [
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Orders'),
+      // First in the Resources menu, where provider-resources redirects.
+      priority: 10,
       // Replaces the inherited workspace guard: an offering manager lists
       // the orders of the offerings they manage.
       permissions: [

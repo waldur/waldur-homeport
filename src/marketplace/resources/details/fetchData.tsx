@@ -226,23 +226,9 @@ export const getResourceTabs = ({
     });
   }
 
-  // Any backend that reports API keys gets the tab, unless the offering hides it.
-  // Under key management a resource starts with no keys, and the tab is where
-  // the first one is requested.
-  if (
-    (resource.has_api_keys ||
-      offering.plugin_options?.enable_api_key_provisioning) &&
-    !offering.plugin_options?.hide_api_keys_tab
-  ) {
-    tabs.push({
-      key: 'api-keys',
-      title: translate('API keys'),
-      component: lazyComponent(() =>
-        import('./api-keys/ResourceApiKeysTab').then((module) => ({
-          default: module.ResourceApiKeysTab,
-        })),
-      ),
-    });
+  const apiKeysTab = getApiKeysTab(resource, offering);
+  if (apiKeysTab) {
+    tabs.push(apiKeysTab);
   }
 
   if (scope) {
@@ -637,6 +623,35 @@ export const fetchData = async (resource: Resource) => {
 };
 
 /**
+ * The API keys tab. Any backend that reports API keys gets it, unless the
+ * offering hides it. Under key management a resource starts with no keys, and
+ * the tab is where the first one is requested.
+ */
+const getApiKeysTab = (
+  resource: Resource,
+  offering?: Pick<Offering, 'plugin_options'>,
+): PageBarTab | undefined => {
+  if (
+    !(
+      resource.has_api_keys ||
+      offering?.plugin_options?.enable_api_key_provisioning
+    ) ||
+    offering?.plugin_options?.hide_api_keys_tab
+  ) {
+    return undefined;
+  }
+  return {
+    key: 'api-keys',
+    title: translate('API keys'),
+    component: lazyComponent(() =>
+      import('./api-keys/ResourceApiKeysTab').then((module) => ({
+        default: module.ResourceApiKeysTab,
+      })),
+    ),
+  };
+};
+
+/**
  * Tabs of the resource page opened from the provider workspace. Most consumer
  * tabs read the resource through the consumer endpoints, which answer a
  * provider-side user with 404, so only the tabs that need nothing beyond the
@@ -644,8 +659,10 @@ export const fetchData = async (resource: Resource) => {
  */
 export const getProviderResourceTabs = ({
   resource,
+  offering,
 }: {
   resource: Resource;
+  offering?: Pick<Offering, 'plugin_options'>;
 }) => {
   const tabs: PageBarTab[] = [
     {
@@ -677,6 +694,13 @@ export const getProviderResourceTabs = ({
         })),
       ),
     });
+  }
+  // The keys list reads through endpoints that admit the provider side. Reveal
+  // and the commands stay with the consumer: the card offers them only to
+  // members of the resource's project or organization.
+  const apiKeysTab = getApiKeysTab(resource, offering);
+  if (apiKeysTab) {
+    tabs.push(apiKeysTab);
   }
   return tabs;
 };

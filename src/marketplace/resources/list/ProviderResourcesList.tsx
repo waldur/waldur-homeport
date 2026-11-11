@@ -33,6 +33,7 @@ import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
+import { ApiKeyCountsField } from './ApiKeyCountsField';
 import {
   NON_TERMINATED_STATES,
   PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
@@ -228,6 +229,21 @@ const TableComponent: FunctionComponent<any> = (props) => {
       id: 'paused',
     },
     {
+      title: translate('API keys'),
+      render: ({ row }) => (
+        <ApiKeyCountsField
+          counts={row.api_key_counts}
+          providerUuid={props.providerUuid}
+          resourceUuid={row.uuid}
+        />
+      ),
+      export: (row) => JSON.stringify(row.api_key_counts ?? {}),
+      exportKeys: ['api_key_counts'],
+      keys: ['api_key_counts'],
+      optional: true,
+      id: 'api_key_counts',
+    },
+    {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
@@ -385,6 +401,7 @@ export const ProviderResourcesList: FunctionComponent = () => {
       {...tableProps}
       formId={PROVIDER_RESOURCES_LIST_FILTER_FORM_ID}
       filters={<ProviderResourcesFilter />}
+      providerUuid={customer?.uuid}
     />
   );
 };

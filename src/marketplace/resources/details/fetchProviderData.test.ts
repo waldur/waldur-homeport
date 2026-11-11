@@ -58,6 +58,21 @@ describe('getProviderResourceTabs', () => {
     ]);
   });
 
+  it('adds the API keys tab for a resource with keys', () => {
+    expect(keys({ uuid: 'resource-uuid', has_api_keys: true })).toContain(
+      'api-keys',
+    );
+  });
+
+  it('leaves the API keys tab out where the offering hides it', () => {
+    expect(
+      getProviderResourceTabs({
+        resource: { uuid: 'resource-uuid', has_api_keys: true } as any,
+        offering: { plugin_options: { hide_api_keys_tab: true } } as any,
+      }).map((tab) => tab.key),
+    ).not.toContain('api-keys');
+  });
+
   it('adds the report when the resource has one', () => {
     expect(
       keys({ uuid: 'resource-uuid', report: [{ header: 'h', body: 'b' }] }),
