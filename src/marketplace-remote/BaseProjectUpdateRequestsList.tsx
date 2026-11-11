@@ -19,7 +19,9 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
   filter;
   title?;
   filters?;
-}> = ({ filter, title, filters }) => {
+  initialPageSize?: number;
+  minHeight?: number | 'auto';
+}> = ({ filter, title, filters, initialPageSize, minHeight }) => {
   const props = useTable({
     table: 'marketplace-project-update-requests',
     fetchData: createFetcher(marketplaceProjectUpdateRequestsList),
@@ -70,6 +72,8 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}
       filters={filters}
+      initialPageSize={initialPageSize}
+      minHeight={minHeight}
     />
   );
 };

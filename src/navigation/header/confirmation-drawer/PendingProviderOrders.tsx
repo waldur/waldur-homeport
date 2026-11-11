@@ -59,6 +59,7 @@ export const PendingProviderOrders: React.FC<{}> = () => {
       verboseName={translate('Orders')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
+      minHeight="auto"
       expandableRow={PendingOrderExpandableRow}
       rowActions={({ row }) => (
         <OrderProviderActions
