@@ -1,4 +1,4 @@
-import { useBreakpointUp } from 'waldur-ui';
+import { CSSProperties, FC } from 'react';
 
 import { ENV } from '@/core/config';
 
@@ -9,26 +9,30 @@ import { useAuthFeatures } from './useAuthFeatures';
 
 import './HeroColumn.css';
 
-export const HeroColumn = () => {
+interface HeroColumnProps {
+  /**
+   * Show the demo users as a card under the text. The layout decides, and
+   * passes it only where this column sits beside the sign-in column.
+   */
+  showDemoUsers?: boolean;
+}
+
+export const HeroColumn: FC<HeroColumnProps> = ({ showDemoUsers = false }) => {
   const features = useAuthFeatures();
-  // Beside the sign-in column the demo users get a card of their own here;
-  // on a narrow screen the column stacks below the fold, and LoginColumn
-  // lists them under the sign-in methods instead.
-  const isWide = useBreakpointUp('md');
 
   return (
     <div
       className="hero-column"
-      style={{
-        backgroundImage: getHeroBackgroundImage(),
-      }}
+      data-testid="hero-column"
+      // HeroColumn.css layers the overlay over it.
+      style={{ '--hero-image': getHeroBackgroundImage() } as CSSProperties}
     >
       <div className="hero-background">
         <div className="hero-text">
           <h1>{ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}</h1>
           <HeroButton />
         </div>
-        {features.SigninForm && isWide && (
+        {features.SigninForm && showDemoUsers && (
           <DemoUserQuickLogin variant="card" className="mt-8" />
         )}
       </div>

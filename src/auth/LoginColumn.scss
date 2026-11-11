@@ -15,10 +15,14 @@
   padding: 4px 10px 0;
 }
 
+/* Centred by the container's auto margins, not align-items: content taller
+   than the column then starts at the top and scrolls, where align-items:
+   center pushed its top above the scroll area, out of reach (the logo, on a
+   phone with a few demo users). */
 .login-body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
   flex: 1 1 auto;
   min-height: 0;
@@ -54,6 +58,10 @@
   font-weight: var(--font-weight-semibold);
   border: none;
   background-color: transparent;
+}
+
+.login-grid-item-container {
+  margin-block: auto;
 }
 
 /* Desktop: wider container. The logo's own rules are in LoginLogo.css. */

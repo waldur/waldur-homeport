@@ -1,4 +1,8 @@
 .hero-column {
+  /* The overlay is the column's own top background layer, over the image
+     HeroColumn.tsx passes in, so it covers the column however its content
+     scrolls. */
+  background-image: linear-gradient(#000000ba 0 0), var(--hero-image);
   min-height: 100vh;
   height: 100%;
   background-size: cover;
@@ -9,16 +13,14 @@
 .hero-background {
   width: 100%;
   height: 100%;
-  background: #000000ba;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* Keeps the demo users card off the column's edges on a narrow screen. */
-  padding: 0 24px;
 }
 
 .hero-text {
+  flex-shrink: 0;
   text-align: center;
 }
 
@@ -29,6 +31,33 @@
 }
 
 @media (width >= 768px) {
+  /* Beside the sign-in column, which is one screen tall, this column is too:
+     the demo users card fits the space under the text and scrolls its list
+     (DemoUserQuickLogin), so neither the column nor the page grows with the
+     number of users. Only if the text alone leaves no room for the card does
+     the column scroll. */
+  .hero-column {
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  /* The children are centred by auto margins, not justify-content, so content
+     taller than the column starts at the top instead of above the scroll
+     area. The padding keeps the card off the column's edges. */
+  .hero-background {
+    justify-content: flex-start;
+    padding: 24px;
+  }
+
+  .hero-background > :first-child {
+    margin-top: auto;
+  }
+
+  .hero-background > :last-child {
+    margin-bottom: auto;
+  }
+
   .hero-text {
     max-width: 57%;
   }

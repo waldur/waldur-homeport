@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-
-import { useBreakpointUp } from 'waldur-ui';
+import { FC, useState } from 'react';
 
 import { getIdentityProviders } from '@/administration/api';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -25,7 +23,15 @@ import './LoginColumn.scss';
 
 type LoginView = 'providers' | 'local-login';
 
-export const LoginColumn = () => {
+interface LoginColumnProps {
+  /**
+   * List the demo users under the sign-in methods. The layout decides: one
+   * that shows them in its hero column beside this one passes false.
+   */
+  showDemoUsers?: boolean;
+}
+
+export const LoginColumn: FC<LoginColumnProps> = ({ showDemoUsers = true }) => {
   const features = useAuthFeatures();
   const currentLanguage = LanguageUtilsService.getCurrentLanguage();
   const { data, isLoading, error, refetch } = useQuery({
@@ -33,14 +39,11 @@ export const LoginColumn = () => {
     queryFn: () => getIdentityProviders(),
   });
   const [view, setView] = useState<LoginView>('providers');
-  // On a wide screen HeroColumn, always beside this column, shows the demo
-  // users; listing them here too pushed the sign-in methods off the column.
-  const isWide = useBreakpointUp('md');
 
   const hasOtherProviders = data && data.length > 0;
 
   return (
-    <div className="login-column">
+    <div className="login-column" data-testid="login-column">
       <div className="login-header">
         <LanguageSelectorBox />
         <AuthHeaderControls />
@@ -76,7 +79,7 @@ export const LoginColumn = () => {
             />
           )}
           {/* In both views: on a demo it is the quickest way in. */}
-          {features.SigninForm && !isWide && <DemoUserQuickLogin />}
+          {features.SigninForm && showDemoUsers && <DemoUserQuickLogin />}
           <UserAuthWarning />
           <PoweredBy />
         </div>
