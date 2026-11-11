@@ -1237,7 +1237,7 @@ export const SettingsDescription = [
       },
       {
         key: 'OIDC_MATCHMAKING_BY_EMAIL',
-        description: translate('If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user\'s primary lookup field is updated to the OIDC claim value.'),
+        description: translate('If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user\'s primary lookup field is updated to the OIDC claim value. An email the user set themselves (a self-service email change) is not matched; a login that finds only such an account is refused, and staff setting the email makes it matchable.'),
         default: false,
         type: 'boolean',
       },
@@ -1257,6 +1257,12 @@ export const SettingsDescription = [
         key: 'API_TOKEN_MAX_LIFETIME_MINUTES',
         description: translate('Maximum API token lifetime, in minutes, that a non-staff user can choose. 0 means no limit, which also allows tokens that never expire. Staff can choose any lifetime. A lifetime chosen before the limit was set is kept until the user changes it.'),
         default: 0,
+        type: 'integer',
+      },
+      {
+        key: 'REAUTHENTICATION_GRANT_LIFETIME_SECONDS',
+        description: translate('How long, in seconds, a re-authentication grant stays usable. Users confirm their identity again, with their password or a passkey, before changing their email, their API token lifetime, their passkeys or their personal access tokens; the grant this returns is good for one such change within this time.'),
+        default: 300,
         type: 'integer',
       },
     ],
@@ -1588,6 +1594,12 @@ export const SettingsDescription = [
         description: translate('Number of hours after which onboarding verifications expire.'),
         default: 48,
         type: 'integer',
+      },
+      {
+        key: 'ONBOARDING_NOTIFICATION_EMAILS',
+        description: translate('Comma-separated list of email addresses that are told when a user submits an onboarding justification for manual review, and when an organization is created after passing automatic validation without review. The emails link to the relevant page and carry no details of the applicant or the organization. Leave empty to send none. The onboarding.justification_submitted and onboarding.customer_created_automatically notifications must also be enabled, as new notifications are disabled by default.'),
+        default: '',
+        type: 'string',
       },
       {
         key: 'ONBOARDING_ARIREGISTER_BASE_URL',
