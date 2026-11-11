@@ -13,7 +13,7 @@ import { Checkbox } from 'waldur-ui';
 
 import { FormGroup } from '@/form';
 import { FieldWarning } from '@/form/FieldWarning';
-import { createLoadOptions } from '@/form/select';
+import { AsyncSelectLoader, createLoadOptions } from '@/form/select';
 import { SelectMultiBooleanGroup } from '@/form/SelectMultiBooleanGroup';
 import { translate } from '@/i18n';
 import { ALL_MODELS } from '@/marketplace/common/modelSelection';
@@ -90,27 +90,75 @@ const KeyLimitsField: FC<{
 export type AssigneeOption = Pick<User, 'uuid' | 'full_name'> &
   Partial<Pick<User, 'email'>>;
 
+// A key requested with no assignee is shared by the project. The picker
+// offers that as a choice of its own -- selected to start with and first in
+// the list -- because an empty field whose meaning was only in its help text
+// went unread: people picked a member who already held a key, and a person
+// holds at most one key per resource.
+export const PROJECT_KEY_OPTION: AssigneeOption = { uuid: '', full_name: '' };
+
+const PROJECT_KEY_LABEL = () =>
+  translate('Project key (shared by the project)');
+
+/** The ``user`` a key is requested for: a member's uuid, or null for a project key. */
+export const assigneeUuid = (option?: AssigneeOption | null): string | null =>
+  option && option.uuid !== PROJECT_KEY_OPTION.uuid ? option.uuid : null;
+
+// Not every account has an email.
+export const getAssigneeLabel = (option: AssigneeOption): string =>
+  option.uuid === PROJECT_KEY_OPTION.uuid
+    ? PROJECT_KEY_LABEL()
+    : option.email
+      ? `${option.full_name} (${option.email})`
+      : option.full_name;
+
+/**
+ * Puts the project key at the top of the members' first page. Not on later
+ * pages, where it would repeat, nor in search results, which are for finding
+ * a member. The member loader sees only the members loaded so far: it counts
+ * them to tell whether another page is left, and the project key is not one.
+ */
+export const withProjectKeyOption =
+  (
+    loadMembers: AsyncSelectLoader<AssigneeOption>,
+  ): AsyncSelectLoader<AssigneeOption> =>
+  async (query, prevOptions, additional) => {
+    const page = await loadMembers(
+      query,
+      prevOptions?.filter(
+        (option: AssigneeOption) => option.uuid !== PROJECT_KEY_OPTION.uuid,
+      ),
+      additional,
+    );
+    return query || prevOptions?.length
+      ? page
+      : { ...page, options: [PROJECT_KEY_OPTION, ...page.options] };
+  };
+
 // The request dialog's assignee picker: a key's assignee is chosen only when
 // it is requested. It lists the resource's project members, the only users
-// the backend accepts.
+// the backend accepts, below the project key.
 export const useAssigneeField = (resource: Resource) =>
   useMemo(
     () => ({
       name: 'user',
       label: translate('Assignee'),
       type: 'async_select',
-      loadOptions: createLoadOptions(usersList, 'full_name', {
-        project_uuid: resource.project_uuid,
-        field: ['full_name', 'email', 'uuid'],
-        o: ['full_name'],
-      }),
-      // Not every account has an email.
-      getOptionLabel: ({ full_name, email }: AssigneeOption) =>
-        email ? `${full_name} (${email})` : full_name,
+      loadOptions: withProjectKeyOption(
+        createLoadOptions(usersList, 'full_name', {
+          project_uuid: resource.project_uuid,
+          field: ['full_name', 'email', 'uuid'],
+          o: ['full_name'],
+        }),
+      ),
+      getOptionLabel: getAssigneeLabel,
       getOptionValue: ({ uuid }: AssigneeOption) => uuid,
       isClearable: true,
+      // Clearing the field asks for a project key too, so the empty field
+      // says so rather than "Select...".
+      extraProps: { placeholder: PROJECT_KEY_LABEL() },
       help_text: translate(
-        'Only the assignee can reveal the key. Leave empty for a key shared by the project.',
+        'Any member of the project can reveal a project key. Pick a person for a personal key that only they can reveal; a person can hold one key per resource.',
       ),
       space: 4,
     }),
