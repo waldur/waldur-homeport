@@ -68,6 +68,7 @@ const OFFERING_PAGE_GUARD = {
   'marketplace-provider-call-demand': canAccessOfferingRequests,
   'marketplace-provider-orders': canAccessProviderOrders,
   'marketplace-public-resources': canAccessProviderResources,
+  'marketplace-provider-api-keys': canAccessProviderResources,
   'marketplace-provider-resource-details': canAccessProviderResources,
 };
 describe('provider workspace states', () => {

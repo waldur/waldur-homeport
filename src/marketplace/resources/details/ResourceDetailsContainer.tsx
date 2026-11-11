@@ -285,7 +285,7 @@ export const ResourceDetailsContainer: FunctionComponent<
       !data || !resource
         ? []
         : providerView
-          ? getProviderResourceTabs({ resource })
+          ? getProviderResourceTabs({ resource, offering: data.offering })
           : getResourceTabs({
               ...(data as Awaited<ReturnType<typeof fetchData>>),
               resource,
