@@ -1,5 +1,5 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { BaseButton } from '../Button';
@@ -91,6 +91,17 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     },
     ref,
   ) => {
+    // While the text is "2." or "-" -- a number typed through a state that
+    // is not one yet -- the browser reports the field as empty and sets
+    // validity.badInput. Passed on, that empty value comes back from the form
+    // as 0 (or the last number), and React writes it over what is on screen,
+    // so a decimal point or a minus sign could never be typed. Until the text
+    // is a number again, nothing is passed on and the field is given the same
+    // empty value the browser reports, which React leaves alone.
+    const [midEntry, setMidEntry] = useState(false);
+    // A value set from outside (Reset, a synced field) wins over the draft.
+    useEffect(() => setMidEntry(false), [value]);
+
     const minNum = Number(min ?? -Infinity);
     const maxNum = Number(max ?? Infinity);
 
@@ -176,14 +187,23 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         <Input
           ref={ref}
           type="number"
-          value={value ?? ''}
+          value={midEntry ? '' : (value ?? '')}
           min={min}
           max={max}
           step={step}
           invalid={isInvalid}
           disabled={disabled}
-          onChange={(e) => onValueChange?.(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value === '' && e.target.validity?.badInput) {
+              setMidEntry(true);
+              return;
+            }
+            setMidEntry(false);
+            onValueChange?.(e.target.value);
+          }}
           onBlur={(e) => {
+            // Left unfinished ("-"): show the last number again.
+            setMidEntry(false);
             const v = outOfRange(value);
             if (v !== false) onValueChange?.(v);
             onBlur?.(e);

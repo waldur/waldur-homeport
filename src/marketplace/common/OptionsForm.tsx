@@ -95,6 +95,32 @@ const getFormulaValidator = (option, name) => (value, allValues?) => {
   );
 };
 
+// The multiplier field keeps every keystroke and only pulls an out-of-range
+// value back when the field is left, so the bounds are checked here as well:
+// the form, not a blur handler, is what holds a submission back. Wording and
+// shape follow getFormulaValidator, the other numeric option field.
+const getMultiplierValidator = (option) => (value) => {
+  const config = option.component_multiplier_config;
+  if (!config || value === undefined || value === null || value === '') {
+    return undefined;
+  }
+  const amount = Number(value);
+  if (!Number.isFinite(amount) || !Number.isInteger(amount)) {
+    return translate('Enter a whole number.');
+  }
+  if (config.min_limit != null && amount < config.min_limit) {
+    return translate('Ensure this value is greater than or equal to {min}.', {
+      min: config.min_limit,
+    });
+  }
+  if (config.max_limit != null && amount > config.max_limit) {
+    return translate('Ensure this value is less than or equal to {max}.', {
+      max: config.max_limit,
+    });
+  }
+  return undefined;
+};
+
 // Validator for K8s configuration fields - returns array for proper tooltip formatting
 const validateK8sConfig = (value) => {
   if (!value) return undefined;
@@ -319,6 +345,7 @@ export const getComponentAndParams = (
       OptionField = ComponentMultiplierField;
       params = {
         field: option,
+        validate: getMultiplierValidator(option),
       };
       break;
     case 'component_formula':
@@ -465,9 +492,13 @@ export const OptionsForm = ({
             >
               {(() => {
                 const { key: remountKey, ...fieldParams } = params;
-                // The formula check is part of validateFn, with Required and
-                // the cross-field rules; passed on its own it would replace them.
-                if (option.type === 'component_formula') {
+                // The range and formula checks are part of validateFn, with
+                // Required and the cross-field rules; passed on their own they
+                // would replace them.
+                if (
+                  option.type === 'component_formula' ||
+                  option.type === 'component_multiplier'
+                ) {
                   delete fieldParams.validate;
                 }
                 return (

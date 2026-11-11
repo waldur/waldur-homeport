@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OptionField } from 'waldur-js-client';
 
-import { FormText } from 'waldur-ui';
+import { FormText, NumberInput } from 'waldur-ui';
 
-import { BaseInputField } from '@/form/InputField';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
+import { getLimitFieldError } from '@/marketplace/details/plan/MeasuredUnitInput';
 
 import { useOrderFormData } from '../deploy/selectors';
 
@@ -16,6 +16,7 @@ interface ComponentMultiplierFieldProps extends FormField {
 export const ComponentMultiplierField = ({
   field,
   input,
+  meta,
   tooltip,
 }: ComponentMultiplierFieldProps) => {
   const fieldValue = input?.value || '';
@@ -57,36 +58,29 @@ export const ComponentMultiplierField = ({
     prevLimitRef.current = currentLimit;
   }, [currentLimit, config, isUserEditing]);
 
-  // Handle user input with validation (but don't auto-update limits)
-  const handleChange = useCallback(
-    (newValue: string) => {
-      setIsUserEditing(true);
-      const numValue = parseInt(newValue, 10);
+  // Every keystroke is kept: a value is typed a digit at a time, so its
+  // first digits are often below min_limit. NumberInput shows an
+  // out-of-range value as invalid and clamps it when the field is left
+  // (which comes back through here as a number).
+  const handleChange = useCallback((newValue: number | string) => {
+    setIsUserEditing(true);
+    const text = String(newValue);
+    setLocalValue(text);
+    if (inputRef.current?.onChange) {
+      inputRef.current.onChange(text);
+    }
+  }, []);
 
-      // Validate against min/max limits if configured
-      if (config && !isNaN(numValue)) {
-        if (config.min_limit !== undefined && numValue < config.min_limit) {
-          return;
-        }
-        if (config.max_limit !== undefined && numValue > config.max_limit) {
-          return;
-        }
-      }
-
-      setLocalValue(newValue);
-      if (inputRef.current?.onChange) {
-        inputRef.current.onChange(newValue);
-      }
-    },
-    [config],
-  );
-
+  // Focus and blur reach the form too: a value it rejects that blur cannot
+  // clamp (25.5 in 10..50) is only shown once the field is touched.
   const handleBlur = useCallback(() => {
     setIsUserEditing(false);
+    inputRef.current?.onBlur?.();
   }, []);
 
   const handleFocus = useCallback(() => {
     setIsUserEditing(true);
+    inputRef.current?.onFocus?.();
   }, []);
 
   const getHelpText = () => {
@@ -128,15 +122,17 @@ export const ComponentMultiplierField = ({
         </FormText>
       )}
       <div>
-        <BaseInputField
-          type="number"
+        <NumberInput
           value={localValue}
-          onChange={(e) => handleChange(e.target.value)}
+          onValueChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={translate('Enter value')}
           min={config?.min_limit}
           max={config?.max_limit}
+          step={1}
+          showSteppers={false}
+          invalid={Boolean(getLimitFieldError(meta))}
         />
         {config && (
           <FormText as="div" variant="muted" className="mt-1">

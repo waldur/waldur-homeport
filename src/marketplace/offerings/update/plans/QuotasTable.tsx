@@ -14,7 +14,8 @@ import {
   TableRow,
 } from 'waldur-ui';
 
-import { BaseInputField } from '@/form/InputField';
+import { FieldError } from '@/form';
+import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
 import {
   BillingTypeBadge,
@@ -58,14 +59,29 @@ const QuotaRow: FC<{ component: OfferingComponent; plan: Plan }> = ({
       <TableCell>
         <Field
           name={`quotas.${component.type}`}
-          type="number"
           validate={validateNonNegative}
           parse={parseIntField}
           format={formatIntField}
         >
-          {({ input }) => (
-            <BaseInputField {...input} min={0} inputMode="numeric" />
-          )}
+          {({ input, meta }) => {
+            // Shown on first change, not only on blur, as the plan limit rows
+            // do: a negative amount is pulled back to 0 when the field is
+            // left, so an error that waited for blur would never be read.
+            const error =
+              meta.modified || meta.touched ? meta.error : undefined;
+            return (
+              <>
+                <BaseNumberField
+                  {...input}
+                  min={0}
+                  step={1}
+                  showSteppers={false}
+                  isInvalid={Boolean(error)}
+                />
+                <FieldError error={error} />
+              </>
+            );
+          }}
         </Field>
       </TableCell>
       <TableCell>{price === null ? DASH_ESCAPE_CODE : price}</TableCell>

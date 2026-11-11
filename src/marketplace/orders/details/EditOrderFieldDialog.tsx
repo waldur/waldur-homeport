@@ -9,11 +9,17 @@ import {
 import { BaseButton, FormField, FormLabel, Switch } from 'waldur-ui';
 
 import { composeValidators } from '@/core/validators';
+import { FieldError } from '@/form';
 import { DateField } from '@/form/DateField';
-import { BaseInputField } from '@/form/InputField';
+import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
-import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import {
+  formatIntField,
+  getLimitParser,
+  getLimitStep,
+} from '@/marketplace/common/utils';
 import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/useOrderStartDateBounds';
+import { getLimitFieldError } from '@/marketplace/details/plan/MeasuredUnitInput';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -31,21 +37,34 @@ interface EditOrderFieldDialogProps {
   initialValues?: any;
 }
 
-const LimitInput = (
-  props: { input: any; meta: any } & {
-    min?: number;
-    max?: number;
-    unit?: string;
-  },
-) => (
-  <BaseInputField
-    type="number"
-    min={props.min}
-    max={props.max}
-    end={props.unit}
-    {...props.input}
-  />
-);
+// A component limit, as the plan's limit rows edit it (ComponentEditRow):
+// the component's precision sets the step and the parser, so a fractional
+// limit keeps its decimals, and the field's error shows once it is touched.
+const LimitInput = ({
+  input,
+  meta,
+  component,
+}: {
+  input: any;
+  meta: any;
+  component: PublicOfferingDetails['components'][number];
+}) => {
+  const error = getLimitFieldError(meta);
+  return (
+    <>
+      <BaseNumberField
+        {...input}
+        step={getLimitStep(component)}
+        min={component.min_value || 0}
+        max={component.max_value}
+        unit={component.measured_unit}
+        isInvalid={Boolean(error)}
+        showSteppers={false}
+      />
+      <FieldError error={error} />
+    </>
+  );
+};
 
 export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
   const { resolve } = props;
@@ -112,18 +131,12 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
         </FormLabel>
         <Field
           name={`limits.${c.type}`}
-          parse={parseIntField}
+          parse={getLimitParser(c)}
           format={formatIntField}
           validate={composeValidators(...getOfferingComponentValidator(c))}
         >
           {({ input, meta }) => (
-            <LimitInput
-              input={input}
-              meta={meta}
-              min={c.min_value || 0}
-              max={c.max_value}
-              unit={c.measured_unit}
-            />
+            <LimitInput input={input} meta={meta} component={c} />
           )}
         </Field>
       </FormField>
