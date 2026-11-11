@@ -5,6 +5,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
 import {
   InvitationsFeatures,
+  MarketplaceFeatures,
   ResellerFeatures,
   SupportFeatures,
 } from '@/FeaturesEnums';
@@ -412,6 +413,24 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Notifications'),
       permissions: [isStaff],
+    },
+  },
+
+  {
+    name: 'support-reviewer-registry',
+    url: 'reviewer-registry/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@/administration/reviewer-registry/ReviewerRegistryList').then(
+        (module) => ({
+          default: module.ReviewerRegistryList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Reviewer registry'),
+      permissions: [isStaff],
+      feature: MarketplaceFeatures.show_call_management_functionality,
     },
   },
 

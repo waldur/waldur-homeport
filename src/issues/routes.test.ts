@@ -40,14 +40,16 @@ describe('issues/routes', () => {
   const support = asUser({ is_staff: false, is_support: true });
   const staff = asUser({ is_staff: true, is_support: false });
 
-  // auth-tokens and notification-messages answer 403 to support users.
-  it.each(['support-active-sessions', 'support-notification-messages'])(
-    'shows %s to staff only',
-    (name) => {
-      expect(allows(name, staff)).toBe(true);
-      expect(allows(name, support)).toBe(false);
-    },
-  );
+  // auth-tokens, notification-messages and reviewer-registry answer 403 to
+  // support users.
+  it.each([
+    'support-active-sessions',
+    'support-notification-messages',
+    'support-reviewer-registry',
+  ])('shows %s to staff only', (name) => {
+    expect(allows(name, staff)).toBe(true);
+    expect(allows(name, support)).toBe(false);
+  });
 
   it('redirects support-user-management to a page support users can open', () => {
     const parent = states.find((s) => s.name === 'support-user-management');
