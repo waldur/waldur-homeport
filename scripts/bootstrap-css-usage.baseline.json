@@ -1,7 +1,7 @@
 {
-  "compiledByteSize": 81148,
-  "totalClasses": 299,
-  "totalUsed": 299,
+  "compiledByteSize": 81044,
+  "totalClasses": 298,
+  "totalUsed": 298,
   "totalUnused": 0,
   "unused": {},
   "selectors": [
@@ -129,7 +129,6 @@
     "@layer bootstrap :: [data-slot=card] [data-slot=card-header] [data-slot=card-title] .h5",
     "@layer bootstrap :: [data-slot=card] [data-slot=card-header] [data-slot=card-title] h6",
     "@layer bootstrap :: [data-slot=card] [data-slot=card-header] [data-slot=card-title] .h6",
-    "@layer bootstrap :: .image-placeholder",
     "@layer bootstrap :: .ellipsis",
     "@layer bootstrap :: .btn-text-align",
     "@layer bootstrap :: .text-link",
