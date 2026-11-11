@@ -1,4 +1,5 @@
 import { CaretUpIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import React from 'react';
 
 import { MenuDisclosure } from 'waldur-ui';
@@ -28,12 +29,15 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
         <MenuDisclosure.Trigger asChild>
           {/* A <button>, not a <span>: the trigger has to be reachable by
               keyboard (WCAG 2.1.1). */}
-          <button type="button" className={FOOTER_LINK_CLASSNAME}>
+          <button
+            type="button"
+            className={classNames(FOOTER_LINK_CLASSNAME, 'group/toggle')}
+          >
             {title}
             <CaretUpIcon
               size={16.9}
               weight="bold"
-              className="ms-[8px] shrink-0"
+              className="ms-[8px] shrink-0 transition-[rotate] duration-300 ease-[ease] group-data-[state=open]/toggle:rotate-180"
             />
           </button>
         </MenuDisclosure.Trigger>

@@ -223,7 +223,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                       "box-radio-info" <button> without breaking HTML
                       validity. */}
                   <Menu.Trigger asChild>
-                    <div className="version-selector">
+                    <div className="version-selector group/toggle">
                       <div />
                       <div>
                         <div className="box-radio-label">{choice.label}</div>
@@ -232,7 +232,10 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                         </div>
                       </div>
                       <span className="text-2xl font-light">
-                        <CaretDownIcon weight="bold" />
+                        <CaretDownIcon
+                          weight="bold"
+                          className="transition-[rotate] duration-300 ease-[ease] group-data-[state=open]/toggle:rotate-180"
+                        />
                       </span>
                     </div>
                   </Menu.Trigger>

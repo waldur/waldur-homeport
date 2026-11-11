@@ -1,10 +1,10 @@
 import {
   CaretDownIcon,
-  CaretUpIcon,
   LockIcon,
   ShieldWarningIcon,
   SparkleIcon,
 } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, ReactNode, useState } from 'react';
 
 import { BaseButton } from 'waldur-ui';
@@ -51,11 +51,14 @@ const AccordionSection: FC<AccordionSectionProps> = ({
           <span className="text-brand">{icon}</span>
           <span className="font-medium text-sm">{title}</span>
         </div>
-        {open ? (
-          <CaretUpIcon size={16} weight="bold" className="text-quaternary" />
-        ) : (
-          <CaretDownIcon size={16} weight="bold" className="text-quaternary" />
-        )}
+        <CaretDownIcon
+          size={16}
+          weight="bold"
+          className={classNames(
+            'text-quaternary transition-[rotate] duration-300 ease-[ease]',
+            open && 'rotate-180',
+          )}
+        />
       </div>
       {open && (
         <div className="px-4 pb-4 pt-0">

@@ -1,4 +1,4 @@
-import { CaretDownIcon, CaretUpIcon, InfoIcon } from '@phosphor-icons/react';
+import { CaretDownIcon, InfoIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { AdminAnnouncement } from 'waldur-js-client';
@@ -48,15 +48,14 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
               {translate('Planned maintenance windows and service updates')}
             </span>
           </div>
-          {expanded ? (
-            <CaretUpIcon weight="bold" size={20} className="text-quaternary" />
-          ) : (
-            <CaretDownIcon
-              weight="bold"
-              size={20}
-              className="text-quaternary"
-            />
-          )}
+          <CaretDownIcon
+            weight="bold"
+            size={20}
+            className={classNames(
+              'text-quaternary transition-[rotate] duration-300 ease-[ease]',
+              expanded && 'rotate-180',
+            )}
+          />
         </div>
       </button>
 

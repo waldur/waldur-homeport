@@ -444,7 +444,7 @@ Three primitives in `waldur-ui` (`packages/ui/src`) and `Link` in `@/core/Link` 
 - **Integer Heights & Inset Borders**: Decoupled from physical CSS `border-box` calculations via `shadow-[inset_0_0_0_1px_var(...)]`, guaranteeing exact heights: 28px (`sm`), 36px (`md`, default), and 44px (`lg`).
 - **Direct Tooltip Integration**: `buttonVariants` does not declare `disabled:pointer-events-none`; instead, it pairs `disabled:cursor-not-allowed` with matching `data-disabled:*` styles. `<BaseButton>` passes `data-disabled` and wraps `<button>` inside `<Tooltip>` with **zero wrapper `<span>` elements**, eliminating flexbox alignment bugs (`self-center`, `w-100`).
 - **Outline Focus Rings**: Focus indicators use native CSS `outline` (`focus-visible:[outline:2px_solid_var(...)]`) for forced-colors compatibility and resistance to container resets.
-- **Toggles in `ActionsDropdown`**: Dropdown toggles render a direct `<button>` with `buttonVariants()` (rather than `BaseButton`) so the rotating caret (`rotate-toggle-180`) remains an immediate child for CSS animation.
+- **Toggles in `ActionsDropdown`**: Dropdown toggles render a direct `<button>` with `buttonVariants()` (rather than `BaseButton`) and mark themselves `group/toggle`, which `ButtonCaret` flips on while Radix sets `data-state="open"`.
 - **SegmentedControl**: Built on Radix RadioGroup (<kbd>←</kbd>/<kbd>→</kbd> select, single <kbd>Tab</kbd> stop) with `inline-flex self-center` preventing layout stretching.
 
 > [!TIP]
