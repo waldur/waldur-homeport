@@ -295,14 +295,13 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
 }) => {
   // Fetch reviewer profile if available
   const { data: profile, isLoading: profileLoading } = useQuery({
-    queryKey: ['reviewerPoolProfile', row.reviewer_uuid],
+    // reviewer_uuid is the profile's own uuid; the list filters by its user.
+    queryKey: ['reviewerPoolProfile', row.reviewer_user_uuid],
     queryFn: () =>
-      row.reviewer_uuid
-        ? reviewerProfilesList({
-            query: { user_uuid: row.reviewer_uuid },
-          }).then((response) => response.data?.[0])
-        : Promise.resolve(null),
-    enabled: !!row.reviewer_uuid,
+      reviewerProfilesList({
+        query: { user_uuid: row.reviewer_user_uuid },
+      }).then((response) => response.data?.[0] ?? null),
+    enabled: !!row.reviewer_uuid && !!row.reviewer_user_uuid,
     staleTime: SHORT_STALE_TIME,
   });
 

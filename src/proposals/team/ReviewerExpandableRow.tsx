@@ -168,7 +168,8 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
     queryKey: ['reviewerProfile', row.user_uuid],
     queryFn: () =>
       reviewerProfilesList({ query: { user_uuid: row.user_uuid } }).then(
-        (response) => response.data?.[0],
+        // React Query rejects undefined; null renders the empty state.
+        (response) => response.data?.[0] ?? null,
       ),
     staleTime: SHORT_STALE_TIME,
   });
