@@ -99,7 +99,7 @@ export const OfferingProfileDetail: FC = () => {
               {translate('No roles in this catalog yet.')}
             </p>
           ) : (
-            <Table density="compact" className="align-middle mb-0">
+            <Table className="align-middle mb-0">
               <TableHeader>
                 <TableRow>
                   <TableHead>{translate('Role')}</TableHead>

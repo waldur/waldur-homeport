@@ -71,7 +71,7 @@ export const SubnetsTable: FC<{ fields; sourceSubnets }> = ({
     <>
       {fields.length > 0 ? (
         <>
-          <Table density="compact" className="mt-2.5">
+          <Table className="mt-2.5">
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Source')}</TableHead>

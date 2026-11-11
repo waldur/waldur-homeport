@@ -54,7 +54,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
           { label: translate('Publishers'), value: totals.publisher_count },
         ]}
       />
-      <Table density="compact" className="align-middle mb-0">
+      <Table className="align-middle mb-0">
         <TableHeader>
           <TableRow className="font-medium text-quaternary">
             <TableHead className="w-6" />

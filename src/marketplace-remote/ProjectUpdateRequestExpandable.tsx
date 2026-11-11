@@ -11,7 +11,7 @@ import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
 export const ProjectUpdateRequestExpandable = ({ row }) => (
-  <Table density="compact">
+  <Table>
     <TableHeader>
       <TableRow>
         <TableHead>{translate('Field')}</TableHead>

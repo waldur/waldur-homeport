@@ -33,7 +33,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       {selectedTable === 'versionAdoption' && (
         <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Version adoption')}</h6>
-          <Table density="compact">
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Version')}</TableHead>
@@ -68,7 +68,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       {selectedTable === 'consentStatus' && (
         <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Consent status breakdown')}</h6>
-          <Table density="compact">
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Status')}</TableHead>
@@ -104,7 +104,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       {selectedTable === 'acceptedTrend' && (
         <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Accepted consents trend')}</h6>
-          <Table density="compact">
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Month')}</TableHead>
@@ -154,7 +154,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
       {selectedTable === 'revokedTrend' && (
         <div className="border border-secondary rounded-lg p-4">
           <h6 className="mb-2.5">{translate('Revoked consents trend')}</h6>
-          <Table density="compact">
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Month')}</TableHead>

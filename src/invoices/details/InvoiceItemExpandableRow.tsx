@@ -276,7 +276,7 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
     <ExpandableContainer>
       <Card variant="table" bordered>
         <CardContent>
-          <Table density="compact" className="align-middle">
+          <Table className="align-middle">
             <TableHeader>
               <TableRow className="align-middle">
                 <TableHead>{translate('Name')}</TableHead>

@@ -281,7 +281,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
       {attributeEntries.length > 0 && (
         <div>
           <h5 className="mb-3">{translate('Attribute provenance')}</h5>
-          <Table density="compact" className="align-middle">
+          <Table className="align-middle">
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Attribute')}</TableHead>

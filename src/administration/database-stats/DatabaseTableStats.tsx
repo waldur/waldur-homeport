@@ -29,7 +29,7 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
       defaultOpen
       className="mb-5"
     >
-      <Table density="compact" className="align-middle mb-0">
+      <Table className="align-middle mb-0">
         <TableHeader>
           <TableRow>
             <TableHead>{translate('Table')}</TableHead>

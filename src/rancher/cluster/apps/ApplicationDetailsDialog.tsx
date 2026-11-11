@@ -19,7 +19,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 const ApplicationDetailsTable = ({ application }) => (
-  <Table density="compact">
+  <Table>
     <TableHeader>
       <TableRow>
         <TableHead>{translate('Key')}</TableHead>
@@ -53,7 +53,7 @@ const ApplicationDetailsTable = ({ application }) => (
 );
 
 const ApplicationAnswersTable = ({ application }) => (
-  <Table density="compact">
+  <Table>
     <TableHeader>
       <TableRow>
         <TableHead>{translate('Question')}</TableHead>

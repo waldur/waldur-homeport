@@ -246,7 +246,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         simpleValue
       />
       {costsData && costsData.length !== 0 && (
-        <Table density="compact" className="my-3">
+        <Table className="my-3">
           <TableHeader>
             <TableRow>
               <TableHead>

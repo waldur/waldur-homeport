@@ -137,7 +137,7 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
           size="lg"
         />
       </div>
-      <Table density="compact" className="mb-0">
+      <Table className="mb-0">
         <TableHeader>
           <TableRow>
             <TableHead>{translate('Email')}</TableHead>

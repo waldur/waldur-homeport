@@ -213,7 +213,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
         )}
       </div>
 
-      <Table density="compact" className="align-middle">
+      <Table className="align-middle">
         <TableHeader>
           <TableRow>
             <TableHead>{translate('Resource name')}</TableHead>

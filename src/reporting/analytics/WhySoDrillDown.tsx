@@ -280,7 +280,6 @@ const WhySoDrillDownTable: FC<{
     <div className="py-2.5">
       <div>
         <Table
-          density="compact"
           scrollable={Boolean(isRoot)}
           className={classNames(
             'border border-secondary mb-0',

@@ -60,27 +60,27 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
       {nextRound.status?.value === 'open' && (
         <Table scrollable={false} className="mb-0 px-0 h-auto w-auto">
           <TableBody>
-            <TableRow divided={false}>
-              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-[length:inherit] text-inherit font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
                 {translate('Open round started')}:
               </TableHead>
-              <TableCell className="text-quaternary p-0 pb-1">
+              <TableCell className="text-[length:inherit] text-quaternary p-0 pb-1">
                 {formatDateTime(nextRound.start_time)}
               </TableCell>
             </TableRow>
-            <TableRow divided={false}>
-              <TableHead className="font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-[length:inherit] text-inherit font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
                 {translate('Open round ends')}:
               </TableHead>
-              <TableCell className="text-quaternary p-0">
+              <TableCell className="text-[length:inherit] text-quaternary p-0">
                 {formatRoundCutoff(nextRound)}
               </TableCell>
             </TableRow>
-            <TableRow divided={false}>
-              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-[length:inherit] text-inherit font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
                 {translate('Project duration')}:
               </TableHead>
-              <TableCell className="text-quaternary p-0 pt-1">
+              <TableCell className="text-[length:inherit] text-quaternary p-0 pt-1">
                 <CallDurationPolicy call={props.call} />
               </TableCell>
             </TableRow>
@@ -101,27 +101,27 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
       {nextRound.status?.value === 'scheduled' && (
         <Table scrollable={false} className="mb-0 px-0 h-auto w-auto">
           <TableBody>
-            <TableRow divided={false}>
-              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-[length:inherit] text-inherit font-medium w-[125px] p-0 pe-2.5 pb-1 whitespace-nowrap">
                 {translate('Next round starts')}:
               </TableHead>
-              <TableCell className="text-quaternary p-0 pb-1">
+              <TableCell className="text-[length:inherit] text-quaternary p-0 pb-1">
                 {formatDateTime(nextRound.start_time)}
               </TableCell>
             </TableRow>
-            <TableRow divided={false}>
-              <TableHead className="font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-[length:inherit] text-inherit font-medium w-[125px] p-0 pe-2.5 whitespace-nowrap">
                 {translate('Next round ends')}:
               </TableHead>
-              <TableCell className="text-quaternary p-0">
+              <TableCell className="text-[length:inherit] text-quaternary p-0">
                 {formatRoundCutoff(nextRound)}
               </TableCell>
             </TableRow>
-            <TableRow divided={false}>
-              <TableHead className="font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
+            <TableRow divided={false} hoverable={false}>
+              <TableHead className="text-[length:inherit] text-inherit font-medium w-[125px] p-0 pe-2.5 pt-1 whitespace-nowrap">
                 {translate('Project duration')}:
               </TableHead>
-              <TableCell className="text-quaternary p-0 pt-1">
+              <TableCell className="text-[length:inherit] text-quaternary p-0 pt-1">
                 <CallDurationPolicy call={props.call} />
               </TableCell>
             </TableRow>

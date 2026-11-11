@@ -103,7 +103,7 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
         )}
       </div>
 
-      <Table density="compact">
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead>{translate('Resource name')}</TableHead>

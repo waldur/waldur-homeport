@@ -94,7 +94,7 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
       ) : (
         <Card variant="table" bordered>
           <CardContent>
-            <TablePrimitive density="compact" className="align-middle">
+            <TablePrimitive className="align-middle">
               <TableHeader>
                 <TableRow className="align-middle">
                   <TableHead className="w-1/2">

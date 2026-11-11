@@ -42,7 +42,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
       {loading ? (
         <LoadingSpinner />
       ) : value ? (
-        <Table density="compact" className="mb-0">
+        <Table className="mb-0">
           <TableHeader>
             <TableRow>
               <TableHead>{translate('Check name')}</TableHead>

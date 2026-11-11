@@ -42,7 +42,7 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
   return (
     <ModalDialog title={translate('Processing log')} bodyClassName="p-0">
       {processingLog && processingLog.length > 0 ? (
-        <Table density="compact" striped className="mb-0">
+        <Table striped className="mb-0">
           <TableHeader>
             <TableRow>
               <TableHead>{translate('Timestamp')}</TableHead>

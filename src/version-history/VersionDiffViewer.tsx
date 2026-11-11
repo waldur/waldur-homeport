@@ -132,7 +132,7 @@ const TableDiffView: FunctionComponent<{
   return (
     // The column minimums apply from md up: on a phone the three columns
     // share the width, and long values (emails, UUIDs) break instead.
-    <Table density="compact" className="align-middle mb-0">
+    <Table className="align-middle mb-0">
       <TableHeader>
         <TableRow className="font-medium text-xs uppercase text-quaternary">
           <TableHead className="ps-4 md:min-w-[150px]">

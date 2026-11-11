@@ -75,7 +75,7 @@ export const IdentityBridgeTab: FC = () => {
       {stats.users_per_isd?.length > 0 && (
         <div>
           <h5 className="mb-3">{translate('ISD health')}</h5>
-          <Table density="compact" className="align-middle">
+          <Table className="align-middle">
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('ISD')}</TableHead>
@@ -123,7 +123,7 @@ export const IdentityBridgeTab: FC = () => {
       {stats.identity_managers?.length > 0 && (
         <div>
           <h5 className="mb-3">{translate('Identity managers')}</h5>
-          <Table density="compact" className="align-middle">
+          <Table className="align-middle">
             <TableHeader>
               <TableRow>
                 <TableHead>{translate('Name')}</TableHead>

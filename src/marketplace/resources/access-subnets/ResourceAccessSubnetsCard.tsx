@@ -68,7 +68,7 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <TablePrimitive density="compact">
+            <TablePrimitive>
               <TableHeader>
                 <TableRow>
                   <TableHead>{translate('CIDR')}</TableHead>

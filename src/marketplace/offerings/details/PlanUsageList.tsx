@@ -28,23 +28,27 @@ const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
     <h4 className="font-medium mb-3">{plan.plan_name}:</h4>
     <Table scrollable={false} className="text-tertiary mb-8">
       <TableBody>
-        <TableRow divided={false}>
-          <TableHead className="text-secondary font-medium pe-5">
+        <TableRow divided={false} hoverable={false}>
+          <TableHead className="text-[length:inherit] text-secondary font-medium p-0 pe-5">
             {translate('Active count')}:
           </TableHead>
-          <TableCell>{plan.usage}</TableCell>
+          <TableCell className="text-[length:inherit] text-inherit p-0">
+            {plan.usage}
+          </TableCell>
         </TableRow>
-        <TableRow divided={false}>
-          <TableHead className="text-secondary font-medium pe-5">
+        <TableRow divided={false} hoverable={false}>
+          <TableHead className="text-[length:inherit] text-secondary font-medium p-0 pe-5">
             {translate('Limit')}:
           </TableHead>
-          <TableCell>{renderFieldOrDash(plan.limit)}</TableCell>
+          <TableCell className="text-[length:inherit] text-inherit p-0">
+            {renderFieldOrDash(plan.limit)}
+          </TableCell>
         </TableRow>
-        <TableRow divided={false}>
-          <TableHead className="text-secondary font-medium pe-5">
+        <TableRow divided={false} hoverable={false}>
+          <TableHead className="text-[length:inherit] text-secondary font-medium p-0 pe-5">
             {translate('Remaining')}:
           </TableHead>
-          <TableCell>
+          <TableCell className="text-[length:inherit] text-inherit p-0">
             {plan.remaining === null ? DASH_ESCAPE_CODE : plan.remaining}
           </TableCell>
         </TableRow>

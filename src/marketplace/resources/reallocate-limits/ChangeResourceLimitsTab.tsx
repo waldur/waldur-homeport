@@ -105,7 +105,7 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
         <strong>{translate('Total freed')}</strong>{' '}
         {freedCapacitySummary && ` - ${freedCapacitySummary}`}
       </p>
-      <Table density="compact" className="align-middle">
+      <Table className="align-middle">
         <TableHeader>
           <TableRow>
             <TableHead>{translate('Component')}</TableHead>
