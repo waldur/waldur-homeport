@@ -26,6 +26,35 @@ const described = (key: string) =>
     DESCRIPTION,
   );
 
+describe('automatic decision summary', () => {
+  const decision = {
+    ...DESCRIPTION.steps[0],
+    is_allocation_decision: true,
+    decides_automatically: true,
+  };
+
+  it('says when the decision relies on the provider fulfilling each order', () => {
+    const sentence = formatStepSummary(
+      fromDescription(
+        { ...decision, automatic_decision_guard: 'provider_fulfilment' },
+        DESCRIPTION,
+      ),
+    );
+    expect(sentence).toContain('decided automatically by the system');
+    expect(sentence).toContain('relying on the provider fulfilling each order');
+  });
+
+  it('says nothing more for a decision guarded by an earlier step', () => {
+    const sentence = formatStepSummary(
+      fromDescription(
+        { ...decision, automatic_decision_guard: 'earlier_step' },
+        DESCRIPTION,
+      ),
+    );
+    expect(sentence).not.toContain('provider fulfilling');
+  });
+});
+
 describe('applicant labels', () => {
   // The backend's description derives the same labels from the same cases
   // (waldur-mastermind proposal/tests/applicant_labels.json).

@@ -4911,6 +4911,16 @@
       "feature_area": "proposal-roles"
     }
   },
+  "An earlier step that can reject the proposal": {
+    "context": {
+      "feature_area": "workflow"
+    }
+  },
+  "An earlier step: an enabled step before this one must be able to reject the proposal. The provider: every offering of the call must have its orders reviewed by the provider or fulfilled through a helpdesk ticket, so someone at the provider still acts on each award.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "An earlier submission could be overtaken. To allocate the others now, give a reason; it is recorded.": {
     "context": {
       "feature_area": "lifecycle"
@@ -8882,7 +8892,7 @@
       "feature_area": "workflow-steps"
     }
   },
-  "Award the proposal as requested as soon as it reaches this step, without waiting for the call managers. They decide only when the award cannot be made automatically, such as when a score threshold or the award amounts stop it. An enabled step before it must be able to reject a proposal.": {
+  "Award the proposal as requested as soon as it reaches this step, without waiting for the call managers. They decide only when the award cannot be made automatically, such as when a score threshold or the award amounts stop it.": {
     "context": {
       "feature_area": "workflow-steps"
     }
@@ -33824,6 +33834,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "List the deployment's micro-apps in the quick shortcuts menu, to the users each app is meant for.": {
+    "context": {
+      "feature_area": "features"
     }
   },
   "List the room's joined members, marking moderators as admin": {},
@@ -69773,6 +69788,11 @@
       "feature_area": "rounds"
     }
   },
+  "The provider fulfilling each order": {
+    "context": {
+      "feature_area": "workflow"
+    }
+  },
   "The provider reports this resource as {state}.": {
     "context": {
       "variables": {
@@ -84321,6 +84341,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "What stops an unsuitable proposal": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "What the allocation decision granted, beside the request.": {
     "context": {
       "feature_area": "proposal"
@@ -88951,6 +88976,11 @@
   "referrals": {
     "context": {
       "feature_area": "referral"
+    }
+  },
+  "relying on the provider fulfilling each order": {
+    "context": {
+      "feature_area": "workflow-description"
     }
   },
   "remote accounts": {

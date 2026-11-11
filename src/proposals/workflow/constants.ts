@@ -234,6 +234,25 @@ export const transitionModeLabel = (
 ): string =>
   getTransitionModeLabels()[mode as TransitionModeEnum] ?? DASH_ESCAPE_CODE;
 
+export const AUTOMATIC_DECISION_GUARD_OPTIONS = [
+  'earlier_step',
+  'provider_fulfilment',
+] as const;
+
+// Mirrors AutomaticDecisionGuards.CHOICES in waldur-mastermind.
+export const automaticDecisionGuardLabel = (
+  guard: string | null | undefined,
+): string => {
+  switch (guard) {
+    case 'earlier_step':
+      return translate('An earlier step that can reject the proposal');
+    case 'provider_fulfilment':
+      return translate('The provider fulfilling each order');
+    default:
+      return DASH_ESCAPE_CODE;
+  }
+};
+
 // Per-mode help text shown via the "?" icon next to each transition-mode
 // radio. Mirrors the wording of TransitionModes.CHOICES in waldur-mastermind.
 export const transitionModeDescription = (

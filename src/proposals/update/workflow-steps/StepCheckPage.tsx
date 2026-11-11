@@ -12,6 +12,7 @@ import {
 } from '@/proposals/proposal-roles/queries';
 import { criterionLabel } from '@/proposals/review/criteriaScore';
 import {
+  automaticDecisionGuardLabel,
   contributorSourceLabel,
   onNegativeLabel,
   outcomeLabel,
@@ -39,6 +40,7 @@ const FIELD_LABELS = (): Partial<Record<keyof StepFormValues, string>> => ({
   is_enabled: translate('Enabled'),
   is_allocation_decision: translate('Allocation decision'),
   decides_automatically: translate('Decides automatically'),
+  automatic_decision_guard: translate('What stops an unsuitable proposal'),
   completer: translate('Completed by'),
   completer_proposal_role: translate('Completing evaluator role'),
   assigns_roles: translate('Assigns'),
@@ -177,6 +179,8 @@ export const StepCheckPage: FC<CheckPageProps> = ({
         return onNegativeLabel(values.on_negative);
       case 'transition_mode':
         return transitionModeLabel(values.transition_mode);
+      case 'automatic_decision_guard':
+        return automaticDecisionGuardLabel(values.automatic_decision_guard);
       case 'outcome_set':
         return (
           kind?.outcome_sets.find((set) => set.id === values.outcome_set)

@@ -30,6 +30,9 @@ export interface SummaryStep {
   minContributions: number | null;
   isAllocationDecision: boolean;
   decidesAutomatically: boolean;
+  /** The automatic decision needs no rejecting step before it: someone at
+   * the provider acts on every order the award places. */
+  reliesOnProviderFulfilment?: boolean;
   assignsRoleNames: string[];
   inputStepNames: string[];
   runCondition?: {
@@ -219,6 +222,9 @@ const stepSummaryParts = (step: SummaryStep): string[] => {
           )
         : translate('decided automatically by the system'),
     );
+    if (step.reliesOnProviderFulfilment) {
+      parts.push(translate('relying on the provider fulfilling each order'));
+    }
   } else if (completer && contributors) {
     parts.push(
       step.perRequestedOffering
@@ -388,6 +394,9 @@ export const fromDescription = (
     minContributions: step.contributors.min,
     isAllocationDecision: step.is_allocation_decision,
     decidesAutomatically: step.decides_automatically,
+    reliesOnProviderFulfilment:
+      step.decides_automatically &&
+      step.automatic_decision_guard === 'provider_fulfilment',
     assignsRoleNames: step.assigns_roles.map(
       (key) => roleName(description, key) ?? key,
     ),

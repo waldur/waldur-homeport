@@ -42,6 +42,7 @@ const step = (overrides: Record<string, any>, roles: any[]) => ({
   input_steps: [],
   is_allocation_decision: false,
   decides_automatically: false,
+  automatic_decision_guard: null,
   allocation_time: null,
   include_award_response: false,
   allows_change_requests: false,
