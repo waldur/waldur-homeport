@@ -110,10 +110,13 @@ const getDescriptionColumn = (): Column<ApiKeyRow> => ({
     ),
 });
 
+// A key with no assignee is the project's, named as the request dialog names it.
 const getAssigneeColumn = (): Column<ApiKeyRow> => ({
   title: translate('Assignee'),
   render: ({ row }) =>
-    row.user_full_name ? (
+    !row.user_uuid ? (
+      translate('Project key')
+    ) : row.user_full_name ? (
       <span className="flex items-center gap-x-2">
         <Avatar name={row.user_full_name} size={32} />
         {row.user_full_name}

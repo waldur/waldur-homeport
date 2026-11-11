@@ -5283,6 +5283,11 @@
       "feature_area": "coi-review"
     }
   },
+  "Any member of the project can reveal a project key. Pick a person for a personal key that only they can reveal; a person can hold one key per resource.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Any principal": {
     "context": {
       "feature_area": "generated"
@@ -43957,11 +43962,6 @@
     }
   },
   "Only staff users are allowed to perform this action.": {},
-  "Only the assignee can reveal the key. Leave empty for a key shared by the project.": {
-    "context": {
-      "feature_area": "api-keys"
-    }
-  },
   "Only the assignee can reveal this key.": {},
   "Only the call manager takes a role away from someone else.": {},
   "Only the calls of this organization use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.": {
@@ -50687,6 +50687,12 @@
       "feature_area": "details"
     }
   },
+  "Project key": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Project key (shared by the project)": {},
   "Project kind": {
     "context": {
       "feature_area": "create"

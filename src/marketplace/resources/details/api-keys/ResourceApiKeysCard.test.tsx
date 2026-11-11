@@ -400,6 +400,28 @@ describe('ResourceApiKeysCard', () => {
       }
     });
 
+    it('names a key with no assignee as the project key', async () => {
+      renderCard(
+        [
+          { uuid: 'k1', client_id: 'KEY1', state: 'OK', user_uuid: null },
+          {
+            uuid: 'k2',
+            client_id: 'KEY2',
+            state: 'OK',
+            user_uuid: 'someone-else',
+            user_full_name: 'Alice',
+          },
+        ],
+        { offering: MANAGED_OFFERING },
+      );
+      const [shared, personal] = (await screen.findAllByRole('row')).slice(1);
+      expect(within(shared).getByText('Project key')).toBeInTheDocument();
+      expect(within(personal).getByText('Alice')).toBeInTheDocument();
+      expect(
+        within(personal).queryByText('Project key'),
+      ).not.toBeInTheDocument();
+    });
+
     it('drops models the offering no longer lists from the key', async () => {
       renderManaged({ state: 'OK', allowed_models: ['gpt-4o', 'retired'] });
       await screen.findByText('KEY1');

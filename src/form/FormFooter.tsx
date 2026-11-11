@@ -76,9 +76,24 @@ export const FormFooter: FC<FormFooterProps> = ({
   extraButtonsPosition = 'start',
   submitChildren,
 }) => {
-  const { submitting, invalid } = useFormState({
-    subscription: { submitting: true, invalid: true },
+  // A refusal from the server holds the button only until the form is
+  // edited. final-form's own `invalid` keeps it until the next submit, which
+  // the refusal itself would then block.
+  const {
+    submitting,
+    hasValidationErrors,
+    hasSubmitErrors,
+    dirtySinceLastSubmit,
+  } = useFormState({
+    subscription: {
+      submitting: true,
+      hasValidationErrors: true,
+      hasSubmitErrors: true,
+      dirtySinceLastSubmit: true,
+    },
   });
+  const invalid =
+    hasValidationErrors || (hasSubmitErrors && !dirtySinceLastSubmit);
   const buttonClassName = fullWidth ? 'flex-1' : undefined;
 
   return (

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   getComponentReadings,
@@ -9,8 +9,12 @@ import {
   getReadingLabel,
 } from './keyLimits';
 import {
+  assigneeUuid,
+  getAssigneeLabel,
   getKeySettingsFields,
+  PROJECT_KEY_OPTION,
   serializeKeySettings,
+  withProjectKeyOption,
 } from './keySettingsFields';
 import {
   getKeyLimitComponents,
@@ -620,5 +624,136 @@ describe('getResourceKeyComponents', () => {
         components.find((c) => c.type === 'tokens')!.spending_limit_periods,
       ).toEqual({ month: {} });
     });
+  });
+});
+
+// A key with no assignee is shared by the project. The picker offers that as
+// a choice of its own, because an empty field with the meaning only in its
+// help text went unread: people picked a member who already held a key and
+// were refused ("A person holds at most one key per resource").
+describe('the project key in the assignee picker', () => {
+  const ADA = {
+    uuid: 'u-ada',
+    full_name: 'Ada Lovelace',
+    email: 'ada@example.com',
+  };
+
+  it('requests an unassigned key for the project key choice', () => {
+    // Assign
+    const choice = PROJECT_KEY_OPTION;
+
+    // Act
+    const user = assigneeUuid(choice);
+
+    // Assert
+    expect(user).toBeNull();
+  });
+
+  it('requests an unassigned key when the field is left empty or cleared', () => {
+    // Assign
+    const empty = [null, undefined];
+
+    // Act
+    const users = empty.map(assigneeUuid);
+
+    // Assert
+    expect(users).toEqual([null, null]);
+  });
+
+  it('requests a personal key for a picked member', () => {
+    // Assign
+    const choice = ADA;
+
+    // Act
+    const user = assigneeUuid(choice);
+
+    // Assert
+    expect(user).toBe('u-ada');
+  });
+
+  it('names the project key in words, and a member by name and email', () => {
+    // Assign
+    const choices = [
+      PROJECT_KEY_OPTION,
+      ADA,
+      { uuid: 'u-bob', full_name: 'Bob' },
+    ];
+
+    // Act
+    const labels = choices.map(getAssigneeLabel);
+
+    // Assert
+    expect(labels).toEqual([
+      'Project key (shared by the project)',
+      'Ada Lovelace (ada@example.com)',
+      'Bob',
+    ]);
+  });
+
+  it('lists the project key first, above the members, on the first page', async () => {
+    // Assign
+    const loadMembers = vi.fn().mockResolvedValue({
+      options: [ADA],
+      hasMore: true,
+      additional: { page: 2 },
+    });
+
+    // Act
+    const page = await withProjectKeyOption(loadMembers)('', [], { page: 1 });
+
+    // Assert
+    expect(page).toEqual({
+      options: [PROJECT_KEY_OPTION, ADA],
+      hasMore: true,
+      additional: { page: 2 },
+    });
+    expect(loadMembers).toHaveBeenCalledWith('', [], { page: 1 });
+  });
+
+  it('does not repeat the project key on later pages', async () => {
+    // Assign
+    const loadMembers = vi
+      .fn()
+      .mockResolvedValue({ options: [ADA], hasMore: false });
+
+    // Act
+    const page = await withProjectKeyOption(loadMembers)(
+      '',
+      [PROJECT_KEY_OPTION],
+      { page: 2 },
+    );
+
+    // Assert
+    expect(page.options).toEqual([ADA]);
+  });
+
+  it('counts only the members loaded so far when asking for the next page', async () => {
+    // Assign
+    const loadMembers = vi
+      .fn()
+      .mockResolvedValue({ options: [ADA], hasMore: false });
+
+    // Act
+    await withProjectKeyOption(loadMembers)('', [PROJECT_KEY_OPTION, ADA], {
+      page: 2,
+    });
+
+    // Assert
+    expect(loadMembers).toHaveBeenCalledWith('', [ADA], { page: 2 });
+  });
+
+  it('leaves search results to the members searched for', async () => {
+    // Assign
+    const loadMembers = vi
+      .fn()
+      .mockResolvedValue({ options: [ADA], hasMore: false });
+
+    // Act
+    const page = await withProjectKeyOption(loadMembers)('ada', [], {
+      page: 1,
+    });
+
+    // Assert
+    expect(page.options).toEqual([ADA]);
   });
 });

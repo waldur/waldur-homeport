@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourceApiKeysCreate } from 'waldur-js-client';
 
+import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 
 import { RequestApiKeyDialog } from './RequestApiKeyDialog';
@@ -14,6 +15,17 @@ import { RequestApiKeyDialog } from './RequestApiKeyDialog';
 vi.mock('@/modal/useManagedMutation', () => ({
   useManagedMutation: ({ mutationFn }: any) => ({ mutateAsync: mutationFn }),
 }));
+
+// useNotify is mocked globally; its actions are one shared object.
+const { showErrorResponse } = useNotify();
+
+// A refusal as the SDK's error interceptor (attachResponseDetails in
+// waldur-auth-core) throws it: the body spread and kept whole under `data`,
+// beside the fetch Response and its status. No axios-style `response.data`.
+const refusal = (status: number, body: object) => {
+  const response = new Response(JSON.stringify(body), { status });
+  return { ...body, data: body, response, status, url: response.url };
+};
 
 const WARNING = 'The key will not be able to call any model.';
 
@@ -48,6 +60,83 @@ describe('RequestApiKeyDialog', () => {
     expect(screen.getByLabelText('gpt-4o')).toBeDisabled();
     expect(screen.getByLabelText('llama-3')).toBeDisabled();
     expect(screen.queryByText(WARNING)).not.toBeInTheDocument();
+  });
+
+  it('opens on a project key and requests it unassigned', async () => {
+    // Assign
+    const user = userEvent.setup();
+    renderDialog();
+
+    // Act
+    const shown = await screen.findByText(
+      'Project key (shared by the project)',
+    );
+    const body = await submit(user);
+
+    // Assert
+    expect(shown).toBeInTheDocument();
+    expect(body.user).toBeNull();
+  });
+
+  it('shows a refused assignee under the field, not as a toast', async () => {
+    // Assign
+    const user = userEvent.setup();
+    const HELD =
+      'Ada already holds an API key on this resource (KEY1). A person holds at most one key per resource: delete that key first.';
+    vi.mocked(marketplaceResourceApiKeysCreate).mockRejectedValueOnce(
+      refusal(400, { user: [HELD] }),
+    );
+    renderDialog();
+    await screen.findByText('Project key (shared by the project)');
+
+    // Act
+    await submit(user);
+
+    // Assert
+    expect(await screen.findByRole('alert')).toHaveTextContent(HELD);
+    expect(showErrorResponse).not.toHaveBeenCalled();
+  });
+
+  it('lets a refused request be sent again once the form is changed', async () => {
+    // Assign
+    const user = userEvent.setup();
+    vi.mocked(marketplaceResourceApiKeysCreate).mockRejectedValueOnce(
+      refusal(400, { user: ['Ada already holds an API key.'] }),
+    );
+    renderDialog();
+    await screen.findByText('Project key (shared by the project)');
+    await submit(user);
+    await screen.findByRole('alert');
+    const button = screen.getByRole('button', { name: 'Submit' });
+    const heldBack = button.hasAttribute('disabled');
+
+    // Act
+    await user.type(screen.getByLabelText('Description'), 'CI');
+
+    // Assert
+    expect(heldBack).toBe(true);
+    expect(button).toBeEnabled();
+  });
+
+  it('shows any other refusal as a toast', async () => {
+    // Assign
+    const user = userEvent.setup();
+    const error = refusal(400, { resource: ['Resource is not live.'] });
+    vi.mocked(marketplaceResourceApiKeysCreate).mockRejectedValueOnce(error);
+    renderDialog();
+    await screen.findByText('Project key (shared by the project)');
+
+    // Act
+    await submit(user);
+
+    // Assert
+    await waitFor(() =>
+      expect(showErrorResponse).toHaveBeenCalledWith(
+        error,
+        'Unable to request the API key.',
+      ),
+    );
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
   it('requests every model when left alone', async () => {
