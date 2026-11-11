@@ -31,7 +31,7 @@ import {
 import { DASH, formatAmount, formatDate, proposalStateBadge } from '../format';
 import { offeringTeamProposalUrl } from '../links';
 import { Provider } from '../providers';
-import { navigate, pageHref } from '../router';
+import { navigate, pageHref, useScrollToHash } from '../router';
 
 const STEP_STATUS_BADGES: Record<
   string,
@@ -133,6 +133,7 @@ export const ProposalPage = ({
   });
   const contributions = useProposalContributions(proposalUuid);
   const requests = useOwnRequests(proposalUuid, provider?.uuid);
+  useScrollToHash();
 
   const steps = useMemo(
     () => latestInstanceOfEachStep(states.data ?? []),

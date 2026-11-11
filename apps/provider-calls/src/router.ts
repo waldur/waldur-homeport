@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 
 /**
  * A History API router just big enough for this app's five flat pages: the
@@ -142,3 +142,34 @@ interface MouseEventLike {
   shiftKey: boolean;
   button: number;
 }
+
+/** The id a hash names; null for none, or for a malformed escape (`#%E0`). */
+export const sectionFromHash = (hash: string): string | null => {
+  try {
+    return decodeURIComponent(hash.slice(1)) || null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Scrolls to the element the URL's hash names once it is on the page. The
+ * browser only tries on a full load, before the page's data has arrived, and
+ * never on a client-side navigation, so a link to a section (an Inbox task's
+ * step, say) would otherwise open at the top. Checked after every render
+ * until the element appears; each hash is scrolled to once.
+ */
+export const useScrollToHash = () => {
+  const done = useRef<string | null>(null);
+  useEffect(() => {
+    const id = sectionFromHash(window.location.hash);
+    if (!id || done.current === id) {
+      return;
+    }
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ block: 'start' });
+      done.current = id;
+    }
+  });
+};
