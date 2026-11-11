@@ -25,7 +25,7 @@ export const UserDetailsButton: FunctionComponent<{ row }> = ({ row }) => {
         // row as well seeds the dialog immediately while the full object loads.
         openDialog(UserPopover, {
           resolve: { user_uuid: row.uuid, user: row },
-          size: 'lg',
+          size: 'xl',
         })
       }
     >

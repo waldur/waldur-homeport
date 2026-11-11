@@ -78,7 +78,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
   const openUserDialog = () => {
     openDialog(UserPopover, {
       resolve: { user_uuid: comment.author_uuid },
-      size: 'lg',
+      size: 'xl',
     });
   };
 

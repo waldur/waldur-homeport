@@ -111,11 +111,15 @@ export const UserAffiliationsList: FunctionComponent<
   const hasSearchOrFilters =
     Boolean(props.query) || props.filtersStorage?.length > 0;
 
+  // Scope type, Active and Valid till hold a word, a check mark and a date:
+  // sized to that, so the table fits the user details dialog instead of
+  // pushing the role out of view behind the pinned actions.
   const columns = [
     {
       title: translate('Scope type'),
       render: ({ row }) => <>{formatRoleType(row.scope_type)}</>,
       filter: 'scope_type',
+      width: '150px',
     },
     {
       title: translate('Scope name'),
@@ -163,6 +167,7 @@ export const UserAffiliationsList: FunctionComponent<
             title: translate('Active'),
             render: ({ row }) => <BooleanField value={row.is_active} />,
             filter: 'show_inactive',
+            width: '80px',
           },
         ]
       : []),
@@ -175,6 +180,7 @@ export const UserAffiliationsList: FunctionComponent<
             : DASH_ESCAPE_CODE}
         </>
       ),
+      width: '110px',
     },
   ];
 
