@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, Fragment, ReactNode } from 'react';
 
 import { Badge, BadgeVariant, PropertyItem } from 'waldur-ui';
@@ -61,21 +62,28 @@ const getAwardAuthorLine = (row: AwardComparisonRow): string | null => {
 };
 
 /** The offering an item is awarded on, with the change badge where the
- * award differs from the request: one line for the table row. */
+ * award differs from the request: one line for the table row. The cell
+ * clips what does not fit, so the name gives way and the badge stays whole. */
 export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
   const offering = (row.awarded ?? row.requested).requested_offering;
   return (
-    <span className="flex items-center gap-1.5">
+    <span className="flex min-w-0 items-center gap-1.5">
       <span
-        className={
+        className={classNames(
+          'min-w-0 truncate',
           row.change === 'removed'
             ? 'text-quaternary line-through'
-            : 'font-medium text-primary'
-        }
+            : 'font-medium text-primary',
+        )}
+        title={offering.offering_name}
       >
         {offering.offering_name}
       </span>
-      <AwardChangeBadge change={row.change} />
+      {row.change !== 'unchanged' && (
+        <span className="shrink-0" data-testid="award-change-badge">
+          <AwardChangeBadge change={row.change} />
+        </span>
+      )}
     </span>
   );
 };
