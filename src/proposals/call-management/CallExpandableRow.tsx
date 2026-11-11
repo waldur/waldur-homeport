@@ -97,24 +97,26 @@ const DraftCallDetails: FC<{ call: Call }> = ({ call }) => {
                 sections'. */}
             {/* eslint-disable-next-line waldur-custom/no-lone-property-item-in-list */}
             <PropertyItem label={translate('Workflow check')}>
-              <Badge
-                variant={check.can_activate ? 'success' : 'danger'}
-                shape="pill"
-                tone="outline"
-                data-testid="workflow-check-verdict"
-              >
-                {check.can_activate
-                  ? findings
-                    ? translate('Can be activated · {findings}', { findings })
-                    : translate('Can be activated')
-                  : findings}
-              </Badge>
-              <Link
-                state={CALL_VALIDATION_STATE}
-                params={{ call_uuid: call.uuid }}
-                label={translate('Open validation')}
-                className="ms-2.5 whitespace-nowrap"
-              />
+              <span className="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                <Badge
+                  variant={check.can_activate ? 'success' : 'danger'}
+                  shape="pill"
+                  tone="outline"
+                  data-testid="workflow-check-verdict"
+                >
+                  {check.can_activate
+                    ? findings
+                      ? translate('Can be activated · {findings}', { findings })
+                      : translate('Can be activated')
+                    : findings}
+                </Badge>
+                <Link
+                  state={CALL_VALIDATION_STATE}
+                  params={{ call_uuid: call.uuid }}
+                  label={translate('Open validation')}
+                  className="whitespace-nowrap"
+                />
+              </span>
             </PropertyItem>
           </PropertyList>
         ) : null}
