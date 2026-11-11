@@ -4,6 +4,19 @@ export interface StorageAdapter {
   remove(): void;
 }
 
+/**
+ * What the API asks for before a change that needs the user to confirm it is
+ * them: a 401 whose body has `code: "reauthentication_required"`.
+ */
+export interface ReauthenticationChallenge {
+  /** The change a grant is needed for, such as `token_lifetime`. */
+  action: string;
+  /** How this user can confirm it is them; empty when they cannot. */
+  methods: string[];
+  /** The API's explanation, in the user's language. */
+  detail?: string;
+}
+
 export interface AuthCoreConfig {
   storage: {
     token: StorageAdapter;
@@ -50,6 +63,18 @@ export interface AuthCoreConfig {
    * that never runs on a demo deployment leaves it out.
    */
   onDemoReset?: (preset: string) => void;
+
+  /**
+   * Called when the API refuses a change until the user confirms it is them
+   * (the step-up challenge above). Resolve with a re-authentication grant for
+   * `challenge.action`, and the request is sent once more carrying it; reject,
+   * and the request fails with the rejection as its error. Optional: without
+   * it the challenge reaches the caller as the 401 it is. Either way it does
+   * not sign the user out.
+   */
+  onReauthenticationRequired?: (
+    challenge: ReauthenticationChallenge,
+  ) => Promise<string>;
 }
 
 let config: AuthCoreConfig | undefined;

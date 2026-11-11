@@ -1,5 +1,9 @@
 export { configureAuthCore } from './config';
-export type { AuthCoreConfig, StorageAdapter } from './config';
+export type {
+  AuthCoreConfig,
+  ReauthenticationChallenge,
+  StorageAdapter,
+} from './config';
 
 export {
   getAuthHeader,

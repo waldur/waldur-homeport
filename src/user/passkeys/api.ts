@@ -10,6 +10,7 @@ import {
   passkeysSigninBegin,
   passkeysSigninFinish,
 } from 'waldur-js-client';
+import { client } from 'waldur-js-client/client.gen';
 
 /**
  * Ceremony helpers.
@@ -89,6 +90,49 @@ export const completeMfa = async (prepared: PreparedCeremony) => {
     body: { ceremony: prepared.ceremony, credential } as any,
   });
   return response.data.token;
+};
+
+// The re-authentication endpoints are not yet in the published
+// waldur-js-client exports, so they are called through the client by URL.
+const postJson = (url: string, body: object) =>
+  client.post({
+    url,
+    body,
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+/**
+ * POST /api/reauthentication/passkey/begin/: a challenge for one of the
+ * user's own passkeys, for a grant for `action`.
+ */
+export const prepareReauthentication = async (
+  action: string,
+): Promise<PreparedCeremony> => {
+  const begin = await postJson('/api/reauthentication/passkey/begin/', {
+    action,
+  });
+  const data = begin.data as PreparedCeremony;
+  return { ceremony: data.ceremony, options: data.options };
+};
+
+/**
+ * POST /api/reauthentication/passkey/finish/, after the assertion. Resolves
+ * with the grant. Must be called directly from a click handler, with no
+ * await before it.
+ */
+export const completeReauthentication = async (
+  action: string,
+  prepared: PreparedCeremony,
+): Promise<string> => {
+  const credential = await startAuthentication({
+    optionsJSON: prepared.options,
+  });
+  const response = await postJson('/api/reauthentication/passkey/finish/', {
+    action,
+    ceremony: prepared.ceremony,
+    credential,
+  });
+  return (response.data as { grant: string }).grant;
 };
 
 /** Whether this browser can do WebAuthn at all. */

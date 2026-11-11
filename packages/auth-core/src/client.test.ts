@@ -133,18 +133,18 @@ describe('handleUnauthorizedResponse — 401 logout guard', () => {
       url: 'http://localhost:8080/api/matrix/rooms/?member=true',
     }) as unknown as Response;
 
-  it('does not log out an anonymous visitor (no token) on a 401', () => {
-    handleUnauthorizedResponse(resp401());
+  it('does not log out an anonymous visitor (no token) on a 401', async () => {
+    await handleUnauthorizedResponse(resp401());
     expect(onSessionExpired).not.toHaveBeenCalled();
   });
 
-  it('logs out an authenticated user (token present) on a 401', () => {
+  it('logs out an authenticated user (token present) on a 401', async () => {
     tokenStorage.set('local-key');
-    handleUnauthorizedResponse(resp401());
+    await handleUnauthorizedResponse(resp401());
     expect(onSessionExpired).toHaveBeenCalledTimes(1);
   });
 
-  it('logs out a stale authenticated tab whose token was cleared out-of-band', () => {
+  it('logs out a stale authenticated tab whose token was cleared out-of-band', async () => {
     // This tab made an authenticated request (sets the in-memory flag)...
     configLoaded = true;
     oidcEnabled = true;
@@ -154,13 +154,13 @@ describe('handleUnauthorizedResponse — 401 logout guard', () => {
     // ...then a logout in another tab cleared the shared token.
     tokenStorage.remove();
 
-    handleUnauthorizedResponse(resp401());
+    await handleUnauthorizedResponse(resp401());
     expect(onSessionExpired).toHaveBeenCalledTimes(1);
   });
 
-  it('does not log out on a 401 from the login endpoint itself', () => {
+  it('does not log out on a 401 from the login endpoint itself', async () => {
     tokenStorage.set('local-key');
-    handleUnauthorizedResponse({
+    await handleUnauthorizedResponse({
       status: 401,
       url: 'http://localhost:8080/api-auth/password/',
     } as unknown as Response);
@@ -209,6 +209,18 @@ describe('attachResponseDetails — error normalisation', () => {
 
   // An ingress controller's HTML error page is thrown as a bare string;
   // spreading it indexed it by character into {0: '<', 1: 'h', ...}.
+  it('passes an Error through untouched even with a response', () => {
+    // A retry whose fetch rejected, or an interceptor that gave up: not the
+    // API's answer, so it must not take on that response's status.
+    const failure = new TypeError('Failed to fetch');
+    const result = attachResponseDetails(
+      failure,
+      makeResponse(401, 'Unauthorized'),
+    );
+    expect(result).toBe(failure);
+    expect((result as any).status).toBeUndefined();
+  });
+
   it('parks a non-object body under `body` instead of spreading it', () => {
     const html = '<html><body>404 page not found</body></html>';
 

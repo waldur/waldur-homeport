@@ -3,6 +3,7 @@ import { configureAuthCore, isAuthenticated } from 'waldur-auth-core';
 import { isDemoPresetsEnabled } from '@/administration/demo-presets/gate';
 import { startDemoReset } from '@/administration/demo-presets/resetState';
 import { localLogout } from '@/auth/authNavigation';
+import { requestReauthentication } from '@/auth/reauthentication/prompt';
 import { resetSessionState } from '@/auth/sessionReset';
 import { router } from '@/router';
 import { UsersService } from '@/user/UsersService';
@@ -76,5 +77,8 @@ export function setupAuthCore() {
         startDemoReset(preset);
       }
     },
+    // A change the API refuses until the user confirms it is them: ask, in
+    // "Confirm it's you" (ReauthenticationRoot), and hand back the grant.
+    onReauthenticationRequired: requestReauthentication,
   });
 }

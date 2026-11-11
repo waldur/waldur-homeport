@@ -1,8 +1,9 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Form } from 'react-final-form';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { StringGroup } from '@/form';
@@ -35,6 +36,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [prepared, setPrepared] = useState<PreparedCeremony | null>(null);
+  const [preparing, setPreparing] = useState(true);
   const [hasPlatform, setHasPlatform] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -65,11 +67,29 @@ export const PasskeyRegisterDialog: FunctionComponent<
           );
           closeDialog();
         }
+      })
+      .finally(() => {
+        if (!cancelled) setPreparing(false);
       });
     return () => {
       cancelled = true;
     };
   }, []);
+
+  // Starting a registration is a change that asks the user to confirm it is
+  // them, so a fresh challenge is fetched only when they ask for one: doing it
+  // by itself after a dismissed prompt would open "Confirm it's you" unasked.
+  const prepareAgain = async () => {
+    setPreparing(true);
+    setError(null);
+    try {
+      setPrepared(await prepareRegistration());
+    } catch (e) {
+      setError(format(e));
+    } finally {
+      setPreparing(false);
+    }
+  };
 
   const submit = async (values: { name: string }) => {
     if (!prepared) return;
@@ -87,15 +107,12 @@ export const PasskeyRegisterDialog: FunctionComponent<
         return;
       }
       // A refused ceremony burns its challenge, so the user needs a fresh one
-      // rather than a second try at the same prompt.
+      // rather than a second try at the same prompt: "Try again" gets it.
       setError(described ?? null);
       if (!described) {
         showErrorResponse(e, translate('Unable to register passkey.'));
       }
       setPrepared(null);
-      prepareRegistration()
-        .then(setPrepared)
-        .catch(() => undefined);
     } finally {
       setBusy(false);
     }
@@ -121,17 +138,29 @@ export const PasskeyRegisterDialog: FunctionComponent<
           <ModalDialog
             title={translate('Add passkey')}
             footer={
-              <SubmitButton
-                submitting={busy}
-                invalid={invalid || !prepared}
-                disabledReason={
-                  !prepared
-                    ? translate('Preparing the passkey challenge.')
-                    : undefined
-                }
-                label={translate('Continue')}
-                data-testid="passkey-register-submit"
-              />
+              prepared || preparing ? (
+                <SubmitButton
+                  submitting={busy}
+                  invalid={invalid || !prepared}
+                  disabledReason={
+                    !prepared
+                      ? translate('Preparing the passkey challenge.')
+                      : undefined
+                  }
+                  label={translate('Continue')}
+                  data-testid="passkey-register-submit"
+                />
+              ) : (
+                <BaseButton
+                  label={translate('Try again')}
+                  onClick={prepareAgain}
+                  variant="primary"
+                  size="lg"
+                  type="button"
+                  className="min-w-[var(--dialog-action-min-w)]"
+                  data-testid="passkey-register-retry"
+                />
+              )
             }
           >
             <p className="text-quaternary">
@@ -157,7 +186,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
                 className="mt-2.5"
               />
             )}
-            {!prepared && !error && <LoadingSpinner />}
+            {preparing && <LoadingSpinner />}
             {error && (
               <AlertItem
                 variant="error"

@@ -14153,6 +14153,11 @@
       "feature_area": "mappings"
     }
   },
+  "Confirm it's you": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
   "Confirm no conflict of interest": {
     "context": {
       "primary_ui_type": "title",
@@ -23348,6 +23353,13 @@
   "Enter your password": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Enter your password.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "reauthentication",
+      "action_type": "create"
     }
   },
   "Enter your recovery key first.": {
@@ -42250,6 +42262,17 @@
   "Nothing was assigned": {
     "context": {
       "feature_area": "assignments"
+    }
+  },
+  "Nothing was changed, because the session ended.": {},
+  "Nothing was changed, because your identity was not confirmed.": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
+  "Nothing was changed: your account cannot confirm your identity. Please contact support.": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "Nothing was imported.": {
@@ -71518,7 +71541,7 @@
   },
   "This browser does not support passkeys. Try a recent version of Chrome, Safari, Edge or Firefox.": {
     "context": {
-      "feature_area": "passkeys"
+      "feature_area": "reauthentication"
     }
   },
   "This call allocates on decision — no allocation date is needed. Change the allocation timing on the Configuration tab to set a fixed date.": {
@@ -71636,6 +71659,11 @@
   "This change is refused": {
     "context": {
       "feature_area": "dependents"
+    }
+  },
+  "This change needs you to confirm your identity, and your account has no way to do that here. Please contact support.": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "This chart will populate once data is available.": {
@@ -73044,6 +73072,26 @@
       "feature_area": "details"
     }
   },
+  "To add a passkey, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
+  "To change the API token lifetime, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
+  "To change the email address, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
+  "To change the password, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
   "To change them or rotate the appservice tokens, change them where the deployment keeps them and redeploy: for Helm, in the values and Secrets; for Docker Compose, in .env, with the appservice tokens in secrets.env on the secrets volume (see Token rotation in the Matrix chat add-on docs). A change made here some other way is reverted at the next deploy. Clear \"Matrix tokens managed by\" only if the deployment no longer sets up Matrix.": {
     "context": {
       "feature_area": "matrix"
@@ -73057,6 +73105,11 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "To create or rotate a personal access token, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "To do": {
@@ -73073,6 +73126,11 @@
   "To make this Kubernetes option fully functional, you need to configure:": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "To make this change, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "To manually link a resource, find the resource in Waldur and set its backend_id to the Arrow License Reference (e.g., XSP12345).": {
@@ -73113,6 +73171,11 @@
         }
       },
       "feature_area": "support"
+    }
+  },
+  "To revoke a passkey, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "To speed things up: select a specific year and month filter before loading. System-wide data across all projects and users can be very large.": {
@@ -73342,6 +73405,29 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "create"
+    }
+  },
+  "Too many attempts. Try again in {count} minutes.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "Too many attempts. Try again in {count} seconds.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "Too many attempts. Try again later.": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "Too many chat requests. Please try again in {wait}.": {
@@ -74072,6 +74158,11 @@
   "Try the model": {
     "context": {
       "feature_area": "playground"
+    }
+  },
+  "Try the passkey again": {
+    "context": {
+      "feature_area": "reauthentication"
     }
   },
   "Tuesday": {
@@ -81643,6 +81734,11 @@
     }
   },
   "Use lowercase dotted names, for example education.course.completions.": {},
+  "Use passkey": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
   "Use per-resource robot accounts as identity model": {
     "context": {
       "feature_area": "integration"
@@ -86836,6 +86932,11 @@
   "Your OpenStack project — the scope that owns all the networks, routers, and instances below.": {},
   "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {},
   "Your access lasts as long as the longest subscription requested.": {},
+  "Your account cannot confirm it is you": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
   "Your account does not satisfy the applicant eligibility requirements of this call.": {
     "context": {
       "feature_area": "details"
@@ -88983,7 +89084,7 @@
   },
   "or": {
     "context": {
-      "feature_area": "form"
+      "feature_area": "reauthentication"
     }
   },
   "order queues": {
