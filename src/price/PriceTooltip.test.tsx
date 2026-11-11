@@ -7,27 +7,31 @@ import { ENV } from '@/core/config';
 import { PriceTooltip } from './PriceTooltip';
 
 describe('PriceTooltip', () => {
-  const originalAccountingMode = ENV.accountingMode;
+  const originalFeatures = ENV.FEATURES;
+
+  const setBillingMode = (enabled: boolean) => {
+    ENV.FEATURES = { customer: { billing_mode: enabled } };
+  };
 
   beforeEach(() => {
-    ENV.accountingMode = originalAccountingMode;
+    ENV.FEATURES = originalFeatures;
   });
 
   it('does not render anything if billing mode is activated and not estimated', () => {
-    ENV.accountingMode = 'billing';
+    setBillingMode(true);
     const { container } = render(<PriceTooltip />);
     expect(container).toBeEmptyDOMElement();
   });
 
   it('renders icon if accounting mode is activated', () => {
-    ENV.accountingMode = 'accounting';
+    setBillingMode(false);
     render(<PriceTooltip />);
     expect(screen.getByTestId('WarningCircleIcon')).toBeInTheDocument();
   });
 
   it('renders tooltip with correct label if accounting mode is activated', async () => {
     const user = userEvent.setup();
-    ENV.accountingMode = 'accounting';
+    setBillingMode(false);
     render(<PriceTooltip />);
 
     const icon = screen.getByTestId('WarningCircleIcon');
@@ -40,7 +44,7 @@ describe('PriceTooltip', () => {
 
   it('indicates that price is estimated', async () => {
     const user = userEvent.setup();
-    ENV.accountingMode = 'accounting';
+    setBillingMode(false);
     render(<PriceTooltip estimated={true} />);
 
     const icon = screen.getByTestId('WarningCircleIcon');
@@ -55,7 +59,7 @@ describe('PriceTooltip', () => {
 
   it('renders only estimated message if billing mode is activated but price is estimated', async () => {
     const user = userEvent.setup();
-    ENV.accountingMode = 'billing';
+    setBillingMode(true);
     render(<PriceTooltip estimated={true} />);
 
     const icon = screen.getByTestId('WarningCircleIcon');

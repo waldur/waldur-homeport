@@ -13,6 +13,7 @@ import { getChartThemeColors } from '@/dashboard/chartColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { getAccountingMode } from '@/invoices/accountingMode';
 import { ExportData } from '@/table/exporters/types';
 
 interface AccountingOption {
@@ -120,7 +121,7 @@ export const RevenueGrowthChart: FC = () => {
       const response = await invoicesGrowthRetrieve({
         query: {
           accounting_is_running: accountingFilter?.value,
-          accounting_mode: ENV.accountingMode,
+          accounting_mode: getAccountingMode(),
         },
         signal,
       });

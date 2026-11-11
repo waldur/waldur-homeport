@@ -12,11 +12,11 @@ import {
   TableRow,
 } from 'waldur-ui';
 
-import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 import { propVal } from '@/property/propertyFields';
 import { Customer } from '@/workspace/types';
 
@@ -60,8 +60,8 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   costTrend,
 }) => {
   const isCurrentMonth = isOpenInvoice(invoice) && !invoice.invoice_date;
-  const isAccountingMode = ENV.accountingMode === 'accounting';
-  const maxProjectsShowCount = isCurrentMonth && !isAccountingMode ? 4 : 5;
+  const accountingMode = isAccountingMode();
+  const maxProjectsShowCount = isCurrentMonth && !accountingMode ? 4 : 5;
 
   const projects = useMemo(() => {
     if (invoice) {
@@ -93,7 +93,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
       <CardContent>
         <div className="grid grid-cols-2 gap-x-5 h-full">
           <div>
-            {isCurrentMonth && !isAccountingMode ? (
+            {isCurrentMonth && !accountingMode ? (
               <div className="flex items-center">
                 <div className="text-start">
                   <EstimatedCost />
@@ -134,7 +134,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                     labelClass="underline"
                     valueClass="text-quaternary"
                   >
-                    {!isAccountingMode && (
+                    {!accountingMode && (
                       <PropertyItem
                         label={translate('VAT')}
                         value={propVal.currency(invoice.tax)}

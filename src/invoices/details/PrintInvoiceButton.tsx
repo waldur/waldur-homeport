@@ -3,15 +3,15 @@ import { FunctionComponent } from 'react';
 
 import { BaseButton } from 'waldur-ui';
 
-import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 
 export const PrintInvoiceButton: FunctionComponent = () => (
   <BaseButton
     variant="secondary"
     onClick={() => window.print()}
     label={
-      ENV.accountingMode === 'accounting'
+      isAccountingMode()
         ? translate('Print record')
         : translate('Print invoice')
     }

@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { invoicesStatsList } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
+import { isAccountingMode } from '@/invoices/accountingMode';
 import { INVOICES_STATS_TABLE } from '@/invoices/constants';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { createFetcher } from '@/table/api';
@@ -14,7 +14,7 @@ import { useTable } from '@/table/useTable';
 const CostField = ({ invoiceStats, organization }) =>
   getActiveFixedPricePaymentProfile(organization.payment_profiles)
     ? DASH_ESCAPE_CODE
-    : ENV.accountingMode === 'accounting'
+    : isAccountingMode()
       ? defaultCurrency(invoiceStats.aggregated_price)
       : defaultCurrency(invoiceStats.aggregated_total);
 

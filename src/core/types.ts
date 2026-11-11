@@ -60,7 +60,6 @@ export interface ApplicationConfigurationOptions {
   FEATURES?: Record<string, Record<string, boolean>>;
   pageSize: number;
   buildId: string;
-  accountingMode: 'billing' | 'accounting';
   roles: RoleDetails[];
   /**
     Provide exclude file types for issue attachments uploading
