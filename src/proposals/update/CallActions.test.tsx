@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   callProposalProjectRoleMappingsCount,
   proposalProtectedCallsActivate,
+  proposalProtectedCallsWorkflowCheckRetrieve,
 } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
@@ -100,5 +101,24 @@ describe('CallActions activation', () => {
     await waitFor(() => expect(useModal().openDialog).toHaveBeenCalled());
     const [, options] = vi.mocked(useModal().openDialog).mock.calls[0];
     expect((options as any).resolve.findings).toHaveLength(1);
+  });
+});
+
+describe('CallActions activate label', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+  });
+
+  it.each([
+    [1, 'Activate (1 error)'],
+    [3, 'Activate (3 errors)'],
+  ])('counts %i workflow check error(s)', async (error, label) => {
+    vi.mocked(proposalProtectedCallsWorkflowCheckRetrieve).mockResolvedValue({
+      data: { summary: { error, warning: 0, info: 0 }, findings: [] },
+    } as any);
+    renderWithProviders(<CallActions call={call} refetch={vi.fn()} />);
+    await userEvent.click(screen.getByRole('button'));
+    expect(await screen.findByRole('menuitem', { name: label })).toBeTruthy();
   });
 });

@@ -80,9 +80,11 @@ export const CreateAssignmentDropdown: FC<CreateAssignmentDropdownProps> = ({
           byReason.set(row.reason, names);
         });
         showWarning(
-          translate('No reviewer added to {count} proposals', {
-            count: skipped.length,
-          }),
+          skipped.length === 1
+            ? translate('No reviewer added to 1 proposal')
+            : translate('No reviewer added to {count} proposals', {
+                count: skipped.length,
+              }),
           [...byReason]
             .map(([reason, names]) =>
               names.length ? `${reason}: ${names.join(', ')}.` : `${reason}.`,

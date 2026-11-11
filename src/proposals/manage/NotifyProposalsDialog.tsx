@@ -82,9 +82,11 @@ export const NotifyProposalsDialog: FC<NotifyProposalsDialogProps> = ({
       }
       if (skipped.length) {
         showWarning(
-          translate('Not sent for {count} proposals', {
-            count: skipped.length,
-          }),
+          skipped.length === 1
+            ? translate('Not sent for 1 proposal')
+            : translate('Not sent for {count} proposals', {
+                count: skipped.length,
+              }),
           skipped
             .map(
               (row) =>
@@ -124,9 +126,11 @@ export const NotifyProposalsDialog: FC<NotifyProposalsDialogProps> = ({
                 ? translate('Message the applicants of {name}', {
                     name: proposalName,
                   })
-                : translate('Message the applicants of {count} proposals', {
-                    count,
-                  })
+                : count === 1
+                  ? translate('Message the applicants of 1 proposal')
+                  : translate('Message the applicants of {count} proposals', {
+                      count,
+                    })
             }
             footer={
               <>
