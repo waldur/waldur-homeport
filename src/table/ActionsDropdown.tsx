@@ -81,8 +81,7 @@ export interface ActionsDropdownProps
  * nothing to position against.
  *
  * Renders a raw `<button>` with `buttonVariants({ variant, size })` rather
- * than `BaseButton` so the rotating caret (`.rotate-toggle-180`) stays a
- * direct child of the toggle for its open-state rotation.
+ * than `BaseButton`; it is the `group/toggle` its `ButtonCaret` flips on.
  */
 export const TableDropdownToggle = forwardRef<
   HTMLButtonElement,

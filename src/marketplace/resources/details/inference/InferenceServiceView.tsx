@@ -1,9 +1,9 @@
-import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useState } from 'react';
 import { Offering, Resource, ResourceApiKeyStatus } from 'waldur-js-client';
 
 import {
   BaseButton,
+  ButtonCaret,
   Collapsible,
   CollapsibleContent,
   Card,
@@ -103,13 +103,7 @@ const PlaygroundCard: FC<{
                 : translate('Open playground')
             }
             onClick={toggle}
-            iconNode={
-              open ? (
-                <CaretUpIcon weight="bold" size={16} />
-              ) : (
-                <CaretDownIcon weight="bold" size={16} />
-              )
-            }
+            iconNode={<ButtonCaret size="sm" isOpen={open} />}
           />
         </div>
       </CardHeader>

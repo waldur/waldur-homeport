@@ -138,7 +138,10 @@ export const MarketplaceLandingFilter = ({
                   {translate('Organization')} & {translate('Project')}
                   <CaretDownIcon
                     size={size === 'sm' ? 16 : 18}
-                    className="rotate-toggle-180"
+                    className={classNames(
+                      'transition-[rotate] duration-300 ease-[ease]',
+                      show && 'rotate-180',
+                    )}
                     weight="bold"
                   />
                 </>

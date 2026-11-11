@@ -1,11 +1,7 @@
-import {
-  ArrowSquareOutIcon,
-  CaretDownIcon,
-  CopyIcon,
-} from '@phosphor-icons/react';
+import { ArrowSquareOutIcon, CopyIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 
-import { BaseButton, Menu, Tooltip } from 'waldur-ui';
+import { BaseButton, ButtonCaret, Menu, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -65,8 +61,9 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
         <BaseButton
           variant="primary"
           size="sm"
+          className="group/toggle"
           label={translate('Access resource')}
-          iconNode={<CaretDownIcon weight="bold" />}
+          iconNode={<ButtonCaret size="sm" />}
           iconRight
         />
       }

@@ -1,6 +1,7 @@
-import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { Checklist } from 'waldur-js-client';
+
+import { ButtonCaret } from 'waldur-ui';
 
 import { AtLeast } from '@/core/types';
 import { greaterThan, required } from '@/core/validators';
@@ -117,11 +118,7 @@ export const QuestionGeneralForm = ({
               <span className="text-sm text-secondary font-semibold">
                 {translate('Preview')}
               </span>
-              {previewOpen ? (
-                <CaretUpIcon weight="bold" size={20} />
-              ) : (
-                <CaretDownIcon weight="bold" size={20} />
-              )}
+              <ButtonCaret isOpen={previewOpen} />
             </div>
             {previewOpen && (
               <>

@@ -280,7 +280,10 @@ const MenuCrumb = ({ item }: { item: IBreadcrumbItem }) => {
     <CaretDownIcon
       weight="bold"
       size={16}
-      className="shrink-0 ms-1.5 text-secondary"
+      className={cn(
+        'shrink-0 ms-1.5 text-secondary transition-[rotate] duration-300 ease-[ease]',
+        show && 'rotate-180',
+      )}
       aria-hidden="true"
     />
   );

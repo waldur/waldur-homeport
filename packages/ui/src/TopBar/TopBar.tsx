@@ -94,7 +94,7 @@ export const OrgSwitcher = ({
           // a flex parent (e.g. TopBar's left slot on a narrow viewport) —
           // flex items default to min-width:auto, which ignores flex-shrink
           // and any child's own truncate class otherwise.
-          'flex min-w-0 items-center gap-1.5 rounded-lg px-1.5 py-1.5 text-sm font-medium',
+          'group/toggle flex min-w-0 items-center gap-1.5 rounded-lg px-1.5 py-1.5 text-sm font-medium',
           // --bg-primary-hover, not --nav-item-hover-bg: OrgSwitcher sits in
           // the TopBar, not the sidebar, so it shouldn't inherit the
           // sidebar's own SIDEBAR_STYLE-driven hover color.
@@ -110,7 +110,7 @@ export const OrgSwitcher = ({
         <span className="truncate">{name}</span>
         <CaretDownIcon
           size={14}
-          className="shrink-0 text-quinary"
+          className="shrink-0 text-quinary transition-[rotate] duration-300 ease-[ease] group-data-[state=open]/toggle:rotate-180"
           weight="bold"
         />
       </button>

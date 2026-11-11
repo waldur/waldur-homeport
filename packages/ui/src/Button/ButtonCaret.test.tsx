@@ -19,7 +19,11 @@ describe('ButtonCaret and buttonIconSizes', () => {
     expect(icon).toBeInTheDocument();
     expect(icon).toHaveAttribute('size', '16');
     expect(icon).toHaveAttribute('weight', 'bold');
-    expect(icon).toHaveClass('shrink-0', 'rotate-toggle-180');
+    expect(icon).toHaveClass(
+      'shrink-0',
+      'group-data-[state=open]/toggle:rotate-180',
+    );
+    expect(icon).not.toHaveClass('rotate-180');
   });
 
   it('renders CaretDownIcon with default/lg dimensions', () => {
@@ -33,7 +37,6 @@ describe('ButtonCaret and buttonIconSizes', () => {
   it('applies custom className and isOpen state', () => {
     render(<ButtonCaret isOpen className="ms-1.5" />);
     const icon = screen.getByTestId('CaretDownIcon');
-    expect(icon).toHaveClass('ms-1.5', 'rotate-toggle-180');
-    expect(icon).toHaveStyle({ transform: 'rotateZ(180deg)' });
+    expect(icon).toHaveClass('ms-1.5', 'rotate-180');
   });
 });

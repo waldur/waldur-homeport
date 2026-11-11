@@ -132,10 +132,10 @@ const DrillDownRow: FC<{
             {item.canDrillDown && (
               <CaretDownIcon
                 weight="bold"
-                style={{
-                  transform: isExpanded ? 'none' : 'rotate(-90deg)',
-                  transition: 'transform 0.2s',
-                }}
+                className={classNames(
+                  'transition-[rotate] duration-200 ease-[ease]',
+                  !isExpanded && '-rotate-90',
+                )}
               />
             )}
           </div>
