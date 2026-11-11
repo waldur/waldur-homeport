@@ -160,6 +160,20 @@ describe('StepEvaluators: reviewer pool', () => {
       screen.queryByRole('button', { name: 'Invite reviewer' }),
     ).not.toBeInTheDocument();
   });
+
+  it('links the pool only for those who may read it', () => {
+    renderEvaluators(reviewerStep);
+    expect(
+      screen.getAllByText('Open the reviewer pool').length,
+    ).toBeGreaterThan(0);
+  });
+
+  it('leaves the pool link out for anyone else', () => {
+    renderEvaluators(reviewerStep, {}, nobody);
+    expect(
+      screen.queryByText('Open the reviewer pool'),
+    ).not.toBeInTheDocument();
+  });
 });
 
 describe('StepEvaluators: offering team', () => {

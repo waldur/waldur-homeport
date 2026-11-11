@@ -411,6 +411,21 @@ export const canManageCallReviews = (user: User, call: Call): boolean =>
     }),
   );
 
+/**
+ * Whether the user reads who reviews the call: its reviewer pool and the
+ * reviewers' profiles, conflicts of interest, disclosures, bids and
+ * suggestions. The backend shows these to whoever manages the call's review
+ * (`canManageCallReviews`), to staff and support, and to holders of a
+ * site-wide CALL.LIST grant; everyone else gets them empty. Narrower than
+ * `canAccessCallManagement`: an organization owner opens the Manage page
+ * without reading any of this.
+ */
+export const canReadCallReviewers = (user: User, call: Call): boolean =>
+  canManageCallReviews(user, call) ||
+  Boolean(checkIsStaffOrSupport(user)) ||
+  // No scope given: only a site-wide grant answers.
+  Boolean(hasPermission(user, { permission: PermissionEnum.LIST_CALLS }));
+
 export const checkIsCallManager = (call: Call, user: User): boolean =>
   !!user?.permissions?.find(
     (permission) =>

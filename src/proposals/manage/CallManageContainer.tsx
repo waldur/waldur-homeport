@@ -29,6 +29,7 @@ import { ReviewerPoolContainer } from '../update/reviewer-pool/ReviewerPoolConta
 import {
   canAccessCallManagement,
   canReadCallReports,
+  canReadCallReviewers,
   canUpdateCall,
   useCallBreadcrumbItems,
 } from '../utils';
@@ -65,11 +66,14 @@ const Body = ({ call, refetch, loading }) => {
           title: translate('Reviews'),
           component: CallReviewsList,
         },
-        !isFeatureVisible(MarketplaceFeatures.call_only) && {
-          key: 'reviewer-pool',
-          title: translate('Reviewer pool'),
-          component: ReviewerPoolContainer,
-        },
+        // Who reviews is for those the backend shows it to: the tab would
+        // only ever be empty for anyone else, an organization owner say.
+        !isFeatureVisible(MarketplaceFeatures.call_only) &&
+          canReadCallReviewers(user, call) && {
+            key: 'reviewer-pool',
+            title: translate('Reviewer pool'),
+            component: ReviewerPoolContainer,
+          },
         {
           // What the call awards, against what it has requested and
           // awarded so far: watched and adjusted while the call runs.

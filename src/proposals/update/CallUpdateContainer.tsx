@@ -28,6 +28,7 @@ import {
 import { TeamSection } from '../team/TeamSection';
 import {
   canOpenCallEditPage,
+  canReadCallReviewers,
   canUpdateCall,
   useCallBreadcrumbItems,
 } from '../utils';
@@ -229,6 +230,7 @@ const Body = ({ call, refetch, loading }) => {
               ]}
               roleTypes={['call', 'call_organizer']}
               title={translate('Call team')}
+              showReviewerProfiles={canReadCallReviewers(user, call)}
               extraRowActions={
                 isReadOnly
                   ? undefined
@@ -248,7 +250,7 @@ const Body = ({ call, refetch, loading }) => {
           ),
         },
       ].filter(Boolean) as PageBarTab[],
-    [call],
+    [call, user],
   );
 
   const breadcrumbItems = useCallBreadcrumbItems(call);

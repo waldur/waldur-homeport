@@ -9,6 +9,7 @@ import {
   canManageCallReviews,
   canOpenCallEditPage,
   canReadCallReports,
+  canReadCallReviewers,
   canReadRoundCommittee,
   canUpdateCall,
   getRoundMenuAccess,
@@ -275,6 +276,79 @@ describe('canManageCallReviews', () => {
       expect(
         canManageCallReviews(
           { permissions: [ownerOf('customer-uuid')] } as any,
+          call,
+        ),
+      ).toBe(false);
+    });
+  });
+});
+
+describe('canReadCallReviewers', () => {
+  const withReviewRoles = (fn: () => void) => {
+    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
+      {
+        name: 'CALL.MANAGER',
+        permissions: [PermissionEnum.MANAGE_PROPOSAL_REVIEW],
+      },
+      {
+        name: 'CUSTOMER.CALL_ORGANIZER',
+        permissions: [PermissionEnum.MANAGE_PROPOSAL_REVIEW],
+      },
+      { name: 'CALL.PANEL_MEMBER', permissions: [] },
+      {
+        name: 'CUSTOMER.OWNER',
+        permissions: [PermissionEnum.UPDATE_CALL_PERMISSION],
+      },
+      { name: 'CALL.OBSERVER', permissions: [PermissionEnum.LIST_CALLS] },
+    ] as any);
+    try {
+      fn();
+    } finally {
+      vi.restoreAllMocks();
+    }
+  };
+
+  it('allows whoever manages the review, staff and support', () => {
+    withReviewRoles(() => {
+      for (const user of [
+        { permissions: [onCall('CALL.MANAGER')] },
+        { permissions: [onManagingOrg('CUSTOMER.CALL_ORGANIZER')] },
+        { is_staff: true, permissions: [] },
+        { is_support: true, permissions: [] },
+      ]) {
+        expect(canReadCallReviewers(user as any, call)).toBe(true);
+      }
+    });
+  });
+
+  it('allows a site-wide CALL.LIST grant, not one on another scope', () => {
+    withReviewRoles(() => {
+      expect(
+        canReadCallReviewers(
+          {
+            permissions: [{ role_name: 'CALL.OBSERVER', scope_type: 'global' }],
+          } as any,
+          call,
+        ),
+      ).toBe(true);
+      expect(
+        canReadCallReviewers(
+          { permissions: [onCall('CALL.OBSERVER')] } as any,
+          call,
+        ),
+      ).toBe(false);
+    });
+  });
+
+  it('denies an owner of the organization and a panel member', () => {
+    withReviewRoles(() => {
+      const owner = { permissions: [ownerOf('customer-uuid')] } as any;
+      // The owner still opens the Manage page, without reading the pool.
+      expect(canAccessCallManagement(owner, call)).toBe(true);
+      expect(canReadCallReviewers(owner, call)).toBe(false);
+      expect(
+        canReadCallReviewers(
+          { permissions: [onCall('CALL.PANEL_MEMBER')] } as any,
           call,
         ),
       ).toBe(false);

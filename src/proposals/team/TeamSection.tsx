@@ -54,6 +54,10 @@ export const TeamSection: FC<
     extraRowActions?: FC<{ row: GenericPermission }>;
     hasExtraRowActions?: (row: GenericPermission) => boolean;
     roleSuffix?: (row: GenericPermission) => ReactNode;
+    /** Whether a reviewer's row opens onto their reviewer profile: only
+     * for those the backend shows the call's reviewers to, as for anyone
+     * else it would always be empty. */
+    showReviewerProfiles?: boolean;
   }
 > = (props) => {
   const queryClient = useQueryClient();
@@ -219,6 +223,7 @@ export const TeamSection: FC<
                     hasActionBar={false}
                     fullWidth
                     expandableRow={
+                      props.showReviewerProfiles &&
                       props.roles?.includes(RoleEnum.CALL_REVIEWER)
                         ? ReviewerExpandableRow
                         : undefined

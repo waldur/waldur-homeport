@@ -11,15 +11,21 @@ import { StatCardGrid } from 'waldur-ui';
 import { fetchResultCount } from '@/core/api';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
 import { WorkflowStepsSection } from '../update/workflow-steps/WorkflowStepsSection';
+import { canReadCallReviewers } from '../utils';
 
 interface CallDashboardProps {
   call: Call;
 }
 
 export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
+  const user = useUser();
+  // Only those the backend shows the pool to get its size: for anyone else
+  // it would always read 0.
+  const showReviewerPool = canReadCallReviewers(user, call);
   // Fetch reviewer pool count (accepted reviewers only)
   const { data: reviewerPoolData } = useQuery({
     queryKey: ['CallDashboard', 'reviewerPool', call.uuid],
@@ -32,6 +38,7 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
         },
       }),
     staleTime: FAST_STALE_TIME,
+    enabled: showReviewerPool,
   });
 
   // Fetch proposals count
@@ -74,7 +81,9 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
         stats={[
           { label: translate('Rounds'), value: call.rounds?.length || 0 },
           { label: translate('Offerings'), value: call.offerings?.length || 0 },
-          { label: translate('Reviewer pool'), value: reviewerPoolCount },
+          ...(showReviewerPool
+            ? [{ label: translate('Reviewer pool'), value: reviewerPoolCount }]
+            : []),
           { label: translate('Proposals'), value: proposalsCount },
           { label: translate('Reviews'), value: reviewsCount },
         ]}
