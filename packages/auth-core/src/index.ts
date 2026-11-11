@@ -8,6 +8,7 @@ export {
   attachAuthHeader,
   resetAuthSessionTracking,
   handleUnauthorizedResponse,
+  handleDemoResetResponse,
   get,
   post,
 } from './client';

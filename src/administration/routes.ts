@@ -18,6 +18,8 @@ import { getMarketplaceTitle } from '@/marketplace/title';
 import { isSramUiEnabled } from '@/sram/utils';
 import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
+import { canManageDemoPresets } from './demo-presets/gate';
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -380,6 +382,22 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Site agents'),
       permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
+    name: 'admin-demo-presets',
+    url: 'demo-presets/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./demo-presets/DemoPresetsList').then((module) => ({
+        default: module.DemoPresetsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Demo presets'),
+      // Only on a deployment that enables demo presets; see gate.ts.
+      permissions: [canManageDemoPresets],
     },
   },
 

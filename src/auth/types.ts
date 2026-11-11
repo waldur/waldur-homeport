@@ -115,6 +115,8 @@ interface CoreConfiguration {
   DISABLE_DARK_THEME: boolean;
   /** True only when the backend runs with DEBUG and the web shell switched on. */
   WEB_SHELL_ENABLED?: boolean;
+  /** True when the deployment lets staff load demo presets from the portal. */
+  DEMO_PRESETS_ENABLED?: boolean;
   USER_TABLE_COLUMNS: string;
   FREEIPA_USERNAME_PREFIX?: string;
   FREEIPA_ENABLED?: boolean;

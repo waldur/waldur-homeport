@@ -11,6 +11,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 
 import { AuthHeader } from './AuthHeader';
 import { AuthHeaderControls } from './AuthHeaderControls';
+import { DemoUserQuickLogin } from './DemoUserQuickLogin';
 import { IdentityProviderSelector } from './IdentityProviderSelector';
 import { LocalLoginButton, LocalLoginForm } from './LocalLogin';
 import { LoginLogo } from './LoginLogo';
@@ -69,6 +70,8 @@ export const LoginColumn = () => {
               }
             />
           )}
+          {/* In both views: on a demo it is the quickest way in. */}
+          {features.SigninForm && <DemoUserQuickLogin />}
           <UserAuthWarning />
           <PoweredBy />
         </div>

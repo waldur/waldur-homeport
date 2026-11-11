@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 
 import { LinkProvider } from 'waldur-ui';
 
+import { DemoResetOverlay } from '@/administration/demo-presets/DemoResetOverlay';
 import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
@@ -65,6 +66,7 @@ const ApplicationInner: FunctionComponent = () => {
                             <DrawerRoot />
                             <UIView />
                             <BootSplashGate />
+                            <DemoResetOverlay />
                           </AnonymousThreadProvider>
                         </ThreadRuntimeProvider>
                       </ThreadProvider>

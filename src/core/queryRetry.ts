@@ -1,3 +1,5 @@
+import { isDemoResetError } from '@/administration/demo-presets/resetState';
+
 /**
  * The app's retry rule for queries, with a configurable limit: a 4xx
  * (403/404/400/...) is deterministic, so retrying it only repeats the failure
@@ -7,6 +9,11 @@
 export const retryServerErrors =
   (limit = 3) =>
   (failureCount: number, error: any) => {
+    // The API is paused while a demo preset loads; the reset overlay polls
+    // the load's status instead.
+    if (isDemoResetError(error)) {
+      return false;
+    }
     const status = error?.response?.status ?? error?.status;
     if (typeof status === 'number' && status >= 400 && status < 500) {
       return false;
