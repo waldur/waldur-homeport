@@ -15,7 +15,7 @@ The theme is one attribute: `data-theme="light|dark"` on `<html>`. Everything fo
   specificity as the rule it overrides:
 
 ```scss
-.list-group-item {
+.my-component {
   background-color: var(--bg-primary);
 
   @include dark-theme {

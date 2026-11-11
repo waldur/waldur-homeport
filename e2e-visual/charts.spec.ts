@@ -134,7 +134,9 @@ test.describe('EChart Visual Regression Tests', () => {
 
         // Select first organization if available
         const orgOption = page
-          .locator('[data-slot="modal-content"] .list-group-item')
+          .locator(
+            '[data-slot="modal-content"] button, [data-slot="modal-content"] [role="button"]',
+          )
           .first();
         if ((await orgOption.count()) > 0) {
           await orgOption.click();
@@ -176,7 +178,9 @@ test.describe('EChart Visual Regression Tests', () => {
         await page.waitForTimeout(500);
 
         const orgOption = page
-          .locator('[data-slot="modal-content"] .list-group-item')
+          .locator(
+            '[data-slot="modal-content"] button, [data-slot="modal-content"] [role="button"]',
+          )
           .first();
         if ((await orgOption.count()) > 0) {
           await orgOption.click();
@@ -217,7 +221,9 @@ test.describe('EChart Visual Regression Tests', () => {
           await page.waitForTimeout(500);
 
           const projectOption = page
-            .locator('[data-slot="modal-content"] .list-group-item')
+            .locator(
+              '[data-slot="modal-content"] button, [data-slot="modal-content"] [role="button"]',
+            )
             .first();
           if ((await projectOption.count()) > 0) {
             await projectOption.click();

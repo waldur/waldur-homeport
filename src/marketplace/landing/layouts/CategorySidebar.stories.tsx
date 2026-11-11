@@ -109,7 +109,7 @@ const meta: Meta<typeof CategorySidebar> = {
     docs: {
       description: {
         component:
-          'Marketplace category sidebar navigation. Migrated from react-bootstrap ListGroup to semantic navigation with category-nav-item buttons, badge counts, and group nesting.',
+          'Marketplace category sidebar navigation. Migrated to Tailwind with semantic navigation buttons, badge counts, and group nesting.',
       },
     },
   },
