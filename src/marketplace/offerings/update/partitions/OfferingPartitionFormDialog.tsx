@@ -84,7 +84,7 @@ export const OfferingPartitionFormDialog: FC<
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
-                  label={isEdit ? translate('Edit') : translate('Add')}
+                  label={isEdit ? translate('Save') : translate('Add')}
                   variant="primary"
                   className="w-[125px]"
                 />
