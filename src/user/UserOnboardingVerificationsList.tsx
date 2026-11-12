@@ -5,7 +5,10 @@ import {
   onboardingVerificationsList,
 } from 'waldur-js-client';
 
-import { OnboardingVerificationExpandableRow } from '@/administration/organizations/OnboardingVerificationExpandableRow';
+import {
+  hasVerificationError,
+  OnboardingVerificationExpandableRow,
+} from '@/administration/organizations/OnboardingVerificationExpandableRow';
 import { getOnboardingVerificationColumns } from '@/administration/organizations/OrganizationOnboardingVerificationsList';
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -66,6 +69,7 @@ export const UserOnboardingVerificationsList: FC = () => {
       hasQuery
       rowActions={UserOnboardingVerificationActions}
       expandableRow={OnboardingVerificationExpandableRow}
+      isRowExpandable={hasVerificationError}
       hasOptionalColumns
     />
   );

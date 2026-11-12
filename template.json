@@ -82631,11 +82631,6 @@
   "User's gender (male, female, or unknown)": {},
   "User's job title": {},
   "User's organization": {},
-  "User's organization details": {
-    "context": {
-      "feature_area": "organizations"
-    }
-  },
   "User's phone number": {},
   "User's place of birth": {},
   "User's postal address": {},

@@ -18,7 +18,10 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { OnboardingVerificationActions } from './OnboardingVerificationActions';
-import { OnboardingVerificationExpandableRow } from './OnboardingVerificationExpandableRow';
+import {
+  hasVerificationError,
+  OnboardingVerificationExpandableRow,
+} from './OnboardingVerificationExpandableRow';
 
 const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
   status,
@@ -150,6 +153,7 @@ export const OrganizationOnboardingVerificationsList: FC = () => {
       hasQuery
       rowActions={OnboardingVerificationActions}
       expandableRow={OnboardingVerificationExpandableRow}
+      isRowExpandable={hasVerificationError}
       hasOptionalColumns
     />
   );
