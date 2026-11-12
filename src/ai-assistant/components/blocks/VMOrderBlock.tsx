@@ -1,10 +1,10 @@
-import { ThreadPrimitive } from '@assistant-ui/react';
 import {
   CheckCircleIcon,
   PencilSimpleIcon,
   WarningCircleIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import {
   createContext,
   FC,
@@ -16,8 +16,12 @@ import {
 
 import { AlertItem, Code } from 'waldur-ui';
 
+import {
+  BlockActionButton,
+  BlockActions,
+} from '@/ai-assistant/components/blocks/BlockActions';
 import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
-import { UIBlockProps } from '@/ai-assistant/lib/types';
+import { UIBlock, UIBlockProps } from '@/ai-assistant/lib/types';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Link } from '@/core/Link';
 import { Select } from '@/form/select';
@@ -33,141 +37,145 @@ const getInitials = (name: string): string => {
   return name.substring(0, 2).toUpperCase();
 };
 
-// Reusable VM preview card (avatar + name + project/org + optional flavor badge)
-const VMPreviewCard: FC<{
-  name?: string;
-  project?: string;
-  organization?: string;
+interface VMPreviewCardProps {
+  block: Partial<UIBlock>;
   flavor?: string;
   orderId?: string;
   success?: boolean;
   className?: string;
-  image?: string;
-  network?: string;
-  ssh_key_name?: string;
-  system_volume_size?: number | string;
-}> = ({
-  name,
-  project,
-  organization,
-  flavor,
+}
+
+// Reusable VM preview card (avatar + name + project/org + specs details panel)
+const VMPreviewCard: FC<VMPreviewCardProps> = ({
+  block,
+  flavor = block.flavor,
   orderId,
   success,
   className,
-  image,
-  network,
-  ssh_key_name,
-  system_volume_size,
-}) => (
-  <div
-    className={[
-      'aui-vm-order-preview',
-      success ? 'aui-vm-order-preview--success' : '',
-      className ?? '',
-    ]
-      .filter(Boolean)
-      .join(' ')}
-  >
-    <div className="aui-vm-order-preview-avatar">
-      {name ? getInitials(name) : 'VM'}
-    </div>
-    <div className="aui-vm-order-preview-content">
-      <div className="aui-vm-order-preview-name">
-        {orderId ? (
-          <Link
-            state="marketplace-orders.details"
-            params={{ order_uuid: orderId }}
-          >
-            {name || translate('VM')}
-          </Link>
-        ) : (
-          name || translate('VM')
-        )}
+}) => {
+  const {
+    name,
+    project,
+    organization,
+    image,
+    network,
+    ssh_key_name,
+    system_volume_size,
+  } = block;
+
+  const detailItems = [
+    { label: translate('Size'), value: flavor },
+    { label: translate('OS'), value: image },
+    { label: translate('Network'), value: network },
+    { label: translate('SSH Key'), value: ssh_key_name },
+    {
+      label: translate('Volume'),
+      value: system_volume_size ? `${system_volume_size} GB` : undefined,
+    },
+  ].filter((item) => Boolean(item.value));
+
+  return (
+    <div
+      className={classNames(
+        'rounded-xl border p-4 transition-colors duration-200',
+        success
+          ? 'bg-success-subtle border-success-subtle'
+          : 'bg-tertiary border-primary hover:bg-quaternary',
+        className,
+      )}
+    >
+      <div className="flex items-center gap-3">
+        <div
+          className={classNames(
+            'size-10 flex items-center justify-center rounded-full font-semibold text-xs shrink-0',
+            success
+              ? 'bg-[var(--status-success-bg-strong)] text-success'
+              : 'bg-quaternary text-secondary',
+          )}
+        >
+          {name ? getInitials(name) : 'VM'}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-base font-semibold text-primary break-words">
+            {orderId ? (
+              <Link
+                state="marketplace-orders.details"
+                params={{ order_uuid: orderId }}
+              >
+                {name || translate('VM')}
+              </Link>
+            ) : (
+              name || translate('VM')
+            )}
+          </div>
+          {project && (
+            <div className="text-xs text-tertiary break-words mt-0.5">
+              {translate('Project')}: {project}
+            </div>
+          )}
+          {organization && (
+            <div className="text-xs text-tertiary break-words">
+              {translate('Organization')}: {organization}
+            </div>
+          )}
+        </div>
       </div>
-      {project && (
-        <div className="aui-vm-order-preview-project">
-          {translate('Project')}: {project}
-        </div>
-      )}
-      {organization && (
-        <div className="aui-vm-order-preview-project">
-          {translate('Organization')}: {organization}
-        </div>
-      )}
-    </div>
-    <div className="aui-vm-order-preview-details">
-      {flavor && (
-        <div className="aui-vm-order-preview-detail-row">
-          <span className="aui-vm-order-preview-detail-label">
-            {translate('Size')}
-          </span>
-          <span className="aui-vm-order-preview-detail-value">{flavor}</span>
-        </div>
-      )}
-      {image && (
-        <div className="aui-vm-order-preview-detail-row">
-          <span className="aui-vm-order-preview-detail-label">
-            {translate('OS')}
-          </span>
-          <span className="aui-vm-order-preview-detail-value">{image}</span>
-        </div>
-      )}
-      {network && (
-        <div className="aui-vm-order-preview-detail-row">
-          <span className="aui-vm-order-preview-detail-label">
-            {translate('Network')}
-          </span>
-          <span className="aui-vm-order-preview-detail-value">{network}</span>
-        </div>
-      )}
-      {ssh_key_name && (
-        <div className="aui-vm-order-preview-detail-row">
-          <span className="aui-vm-order-preview-detail-label">
-            {translate('SSH Key')}
-          </span>
-          <span className="aui-vm-order-preview-detail-value">
-            {ssh_key_name}
-          </span>
-        </div>
-      )}
-      {system_volume_size && (
-        <div className="aui-vm-order-preview-detail-row">
-          <span className="aui-vm-order-preview-detail-label">
-            {translate('Volume')}
-          </span>
-          <span className="aui-vm-order-preview-detail-value">
-            {system_volume_size} GB
-          </span>
+      {detailItems.length > 0 && (
+        <div className="mt-3.5 bg-blue-50 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800 rounded-lg p-3 text-xs sm:text-sm divide-y divide-blue-200/60 dark:divide-blue-800/60">
+          {detailItems.map(({ label, value }) => (
+            <div
+              key={label}
+              className="flex items-center justify-between py-1.5 first:pt-0 last:pb-0 gap-4"
+            >
+              <span className="font-medium opacity-75 shrink-0">{label}</span>
+              <span className="font-semibold text-right truncate">{value}</span>
+            </div>
+          ))}
         </div>
       )}
     </div>
+  );
+};
+
+interface SelectFormFieldProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+  placeholder: string;
+}
+
+const SelectFormField: FC<SelectFormFieldProps> = ({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+}) => (
+  <div>
+    <label className="block text-sm font-semibold text-primary mb-2">
+      {label} <span className="text-danger">*</span>
+    </label>
+    <Select
+      value={value ? options.find((opt) => opt.value === value) : null}
+      onChange={(option: any) => onChange(option?.value || '')}
+      options={options}
+      placeholder={placeholder}
+      isClearable
+    />
   </div>
 );
 
 // Single-field select form (used for project_form and offering_form steps)
-const SelectFormStep: FC<{
-  intro: string;
-  label: string;
-  options: { value: string; label: string }[];
-  value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
-}> = ({ intro, label, options, value, onChange, placeholder }) => (
-  <div className="aui-vm-order-block" data-has-actions="true">
-    <div className="aui-vm-order-intro mb-2.5">{intro}</div>
-    <div className="aui-vm-order-form">
-      <div className="aui-vm-order-form-field">
-        <label className="aui-vm-order-form-label">
-          {label} <span className="text-danger">*</span>
-        </label>
-        <Select
-          value={value ? options.find((opt) => opt.value === value) : null}
-          onChange={(option: any) => onChange(option?.value || '')}
-          options={options}
-          placeholder={placeholder}
-          isClearable
-        />
-      </div>
+const SelectFormStep: FC<
+  SelectFormFieldProps & {
+    intro: string;
+  }
+> = ({ intro, ...fieldProps }) => (
+  <div className="mb-4" data-has-actions="true">
+    <div className="text-sm leading-[1.75] mb-2.5">{intro}</div>
+    <div className="mt-5">
+      <SelectFormField {...fieldProps} />
     </div>
   </div>
 );
@@ -260,7 +268,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   const isLoading = block.status === 'loading';
   if (isLoading) {
     return (
-      <div className="aui-vm-order-block">
+      <div className="mb-4">
         <SkeletonLoader />
       </div>
     );
@@ -326,28 +334,19 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
     }));
 
     return (
-      <div className="aui-vm-order-block" data-has-actions="true">
+      <div className="mb-4" data-has-actions="true">
         {/* Intro text */}
-        <div className="aui-vm-order-intro mb-2.5">
+        <div className="text-sm leading-[1.75] mb-2.5">
           {translate('Please select a flavor and image for your VM.')}
         </div>
 
         {/* Section heading */}
-        <h4 className="aui-vm-order-heading mb-2.5">
+        <h4 className="text-sm font-semibold text-primary mb-2.5">
           {translate('Configure your VM:')}
         </h4>
 
         {/* Preview-style card with avatar */}
-        <VMPreviewCard
-          name={block.name}
-          project={block.project}
-          organization={block.organization}
-          image={block.image}
-          network={block.network}
-          ssh_key_name={block.ssh_key_name}
-          system_volume_size={block.system_volume_size}
-          className="mb-3"
-        />
+        <VMPreviewCard block={block} flavor={undefined} className="mb-3" />
 
         {/* No options available message */}
         {(!hasFlavors || !hasImages) && (
@@ -365,47 +364,21 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
 
         {/* Form fields */}
         {hasFlavors && hasImages && (
-          <div className="aui-vm-order-form">
-            {/* Flavor selector */}
-            <div className="aui-vm-order-form-field">
-              <label className="aui-vm-order-form-label">
-                {translate('VM Size')} <span className="text-danger">*</span>
-              </label>
-              <Select
-                value={
-                  selectedFlavor
-                    ? flavorOptions.find((opt) => opt.value === selectedFlavor)
-                    : null
-                }
-                onChange={(option: any) =>
-                  setSelectedFlavor(option?.value || '')
-                }
-                options={flavorOptions}
-                placeholder={translate('Select a flavor...')}
-                isClearable
-              />
-            </div>
-
-            {/* Image selector */}
-            <div className="aui-vm-order-form-field">
-              <label className="aui-vm-order-form-label">
-                {translate('Operating System')}{' '}
-                <span className="text-danger">*</span>
-              </label>
-              <Select
-                value={
-                  selectedImage
-                    ? imageOptions.find((opt) => opt.value === selectedImage)
-                    : null
-                }
-                onChange={(option: any) =>
-                  setSelectedImage(option?.value || '')
-                }
-                options={imageOptions}
-                placeholder={translate('Select an image...')}
-                isClearable
-              />
-            </div>
+          <div className="mt-5 space-y-5">
+            <SelectFormField
+              label={translate('VM Size')}
+              value={selectedFlavor}
+              onChange={setSelectedFlavor}
+              options={flavorOptions}
+              placeholder={translate('Select a flavor...')}
+            />
+            <SelectFormField
+              label={translate('Operating System')}
+              value={selectedImage}
+              onChange={setSelectedImage}
+              options={imageOptions}
+              placeholder={translate('Select an image...')}
+            />
           </div>
         )}
       </div>
@@ -415,22 +388,26 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   // Result/Success state
   if (isResult) {
     return (
-      <div className="aui-vm-order-block">
+      <div className="mb-4">
         {/* Error state */}
         {hasError ? (
-          <div className="aui-vm-order-result aui-vm-order-result--error">
-            <div className="aui-vm-order-result-header">
-              <div className="aui-vm-order-result-icon">
+          <div className="p-5 rounded-md border border-danger-subtle bg-danger-subtle">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="size-8 flex items-center justify-center rounded-full shrink-0 bg-[var(--status-danger-bg-strong)] text-danger">
                 <XCircleIcon size={24} weight="bold" />
               </div>
-              <div className="aui-vm-order-result-message">
+              <div className="text-sm font-semibold text-primary">
                 {translate('VM Creation Failed')}
               </div>
             </div>
 
             {block.error && (
-              <div className="aui-vm-order-result-error">
-                <WarningCircleIcon size={20} weight="bold" />
+              <div className="flex items-start gap-2 p-3 bg-[var(--status-danger-bg-strong)] rounded-sm text-danger text-xs">
+                <WarningCircleIcon
+                  size={20}
+                  weight="bold"
+                  className="shrink-0 mt-0.5"
+                />
                 <span>{block.error}</span>
               </div>
             )}
@@ -439,28 +416,19 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
           // Success state - use preview-style card
           <>
             {block.message && (
-              <div className="aui-vm-order-intro mb-2.5">{block.message}</div>
+              <div className="text-sm leading-[1.75] mb-2.5">
+                {block.message}
+              </div>
             )}
-            <h4 className="aui-vm-order-heading mb-2.5">
+            <h4 className="text-sm font-semibold text-primary mb-2.5">
               {translate('VM order created successfully!')}
             </h4>
             {/* Preview-style card with avatar and badge */}
-            <VMPreviewCard
-              name={block.name}
-              project={block.project}
-              organization={block.organization}
-              flavor={block.flavor}
-              image={block.image}
-              network={block.network}
-              ssh_key_name={block.ssh_key_name}
-              system_volume_size={block.system_volume_size}
-              orderId={block.order_id}
-              success
-            />
+            <VMPreviewCard block={block} orderId={block.order_id} success />
             {/* Order ID with copy button */}
             {block.order_id && (
-              <div className="aui-vm-order-id mt-2.5">
-                <span className="aui-vm-order-id-label">
+              <div className="flex items-center gap-2 py-3 px-4 bg-tertiary rounded-md border border-primary mt-2.5">
+                <span className="text-xs font-semibold text-secondary">
                   {translate('Order ID')}:
                 </span>
                 <Link
@@ -485,26 +453,17 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
 
   // Preview/Confirmation state
   return (
-    <div className="aui-vm-order-block" data-has-actions="true">
+    <div className="mb-4" data-has-actions="true">
       {/* Section heading */}
-      <h4 className="aui-vm-order-heading mb-2.5">
+      <h4 className="text-sm font-semibold text-primary mb-2.5">
         {translate('Here is the preview of changes:')}
       </h4>
 
       {/* Preview card */}
-      <VMPreviewCard
-        name={block.name}
-        project={block.project}
-        organization={block.organization}
-        flavor={block.flavor}
-        image={block.image}
-        network={block.network}
-        ssh_key_name={block.ssh_key_name}
-        system_volume_size={block.system_volume_size}
-      />
+      <VMPreviewCard block={block} />
 
       {/* Confirmation question */}
-      <div className="aui-vm-order-confirm mt-3">
+      <div className="text-sm leading-[1.75] font-semibold mt-3">
         {translate('Do you confirm these changes?')}
       </div>
     </div>
@@ -512,42 +471,22 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
 };
 
 // Continue button — active when a prompt is provided, disabled otherwise
-const ContinueButton: FC<{ prompt?: string }> = ({ prompt }) =>
-  prompt ? (
-    <ThreadPrimitive.Suggestion
-      prompt={prompt}
-      send
-      clearComposer={false}
-      asChild
-    >
-      <button className="aui-vm-order-action-btn aui-vm-order-action-btn--primary">
-        <CheckCircleIcon size={16} weight="bold" />
-        {translate('Continue')}
-      </button>
-    </ThreadPrimitive.Suggestion>
-  ) : (
-    <button
-      className="aui-vm-order-action-btn aui-vm-order-action-btn--primary"
-      disabled
-    >
-      <CheckCircleIcon size={16} weight="bold" />
-      {translate('Continue')}
-    </button>
-  );
+const ContinueButton: FC<{ prompt?: string }> = ({ prompt }) => (
+  <BlockActionButton prompt={prompt} disabled={!prompt} variant="primary">
+    <CheckCircleIcon size={16} weight="bold" />
+    {translate('Continue')}
+  </BlockActionButton>
+);
 
 // Reusable Modify button for both form and preview modes
 const ModifyButton: FC = () => (
-  <ThreadPrimitive.Suggestion
+  <BlockActionButton
     prompt={translate('I want to modify VM configuration. What can i change?')}
-    send
-    clearComposer={false}
-    asChild
+    variant="secondary"
   >
-    <button className="aui-vm-order-action-btn aui-vm-order-action-btn--secondary">
-      <PencilSimpleIcon size={16} weight="bold" />
-      {translate('Modify')}
-    </button>
-  </ThreadPrimitive.Suggestion>
+    <PencilSimpleIcon size={16} weight="bold" />
+    {translate('Modify')}
+  </BlockActionButton>
 );
 
 /**
@@ -570,32 +509,28 @@ export const VMOrderActions: FC<UIBlockProps> = ({ block }) => {
     return null;
   }
 
-  if (block.order_status === 'offering_form') {
-    return (
-      <div className="aui-vm-order-actions">
-        <ContinueButton
-          prompt={
-            selectedOffering ? `offering_uuid: ${selectedOffering}` : undefined
-          }
-        />
-      </div>
-    );
-  }
+  if (
+    block.order_status === 'offering_form' ||
+    block.order_status === 'project_form'
+  ) {
+    const prompt =
+      block.order_status === 'offering_form'
+        ? selectedOffering
+          ? `offering_uuid: ${selectedOffering}`
+          : undefined
+        : selectedProject
+          ? `project_uuid: ${selectedProject}`
+          : undefined;
 
-  if (block.order_status === 'project_form') {
     return (
-      <div className="aui-vm-order-actions">
-        <ContinueButton
-          prompt={
-            selectedProject ? `project_uuid: ${selectedProject}` : undefined
-          }
-        />
-      </div>
+      <BlockActions>
+        <ContinueButton prompt={prompt} />
+      </BlockActions>
     );
   }
 
   return (
-    <div className="aui-vm-order-actions">
+    <BlockActions>
       <ModifyButton />
       {block.order_status === 'form' ? (
         <ContinueButton
@@ -607,18 +542,14 @@ export const VMOrderActions: FC<UIBlockProps> = ({ block }) => {
         />
       ) : (
         // Preview mode - Create button
-        <ThreadPrimitive.Suggestion
+        <BlockActionButton
           prompt={translate('proceed with creating the VM')}
-          send
-          clearComposer={false}
-          asChild
+          variant="primary"
         >
-          <button className="aui-vm-order-action-btn aui-vm-order-action-btn--primary">
-            <CheckCircleIcon size={16} weight="bold" />
-            {translate('Create')}
-          </button>
-        </ThreadPrimitive.Suggestion>
+          <CheckCircleIcon size={16} weight="bold" />
+          {translate('Create')}
+        </BlockActionButton>
       )}
-    </div>
+    </BlockActions>
   );
 };

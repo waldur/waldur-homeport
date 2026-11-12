@@ -1,4 +1,3 @@
-import { ThreadPrimitive } from '@assistant-ui/react';
 import {
   ArrowSquareOutIcon,
   CheckCircleIcon,
@@ -10,6 +9,10 @@ import { FC, useEffect, useId, useState } from 'react';
 
 import { AlertItem, BaseButton, Code } from 'waldur-ui';
 
+import {
+  BlockActionButton,
+  BlockActions,
+} from '@/ai-assistant/components/blocks/BlockActions';
 import { useScriptPanel } from '@/ai-assistant/components/ScriptPanel';
 import { CodeHeader } from '@/ai-assistant/components/shared/CodeHeader';
 import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
@@ -148,7 +151,7 @@ export const HpcJobBlock: FC<UIBlockProps> = ({ block }) => {
 
   if (block.status === 'loading') {
     return (
-      <div className="aui-vm-order-block">
+      <div className="mb-4">
         <SkeletonLoader />
       </div>
     );
@@ -167,11 +170,11 @@ export const HpcJobBlock: FC<UIBlockProps> = ({ block }) => {
 
   return (
     <div
-      className="aui-vm-order-block"
+      className="mb-4"
       data-has-actions={isHpcJobAwaitingConfirmation(block) || undefined}
     >
       {block.content && (
-        <div className="aui-vm-order-intro mb-3">{block.content}</div>
+        <div className="text-sm leading-[1.75] mb-3">{block.content}</div>
       )}
 
       <div className="rounded-md border border-secondary p-4 mb-3">
@@ -247,7 +250,7 @@ export const HpcJobBlock: FC<UIBlockProps> = ({ block }) => {
       )}
 
       {isHpcJobAwaitingConfirmation(block) && (
-        <div className="aui-vm-order-confirm mt-4">
+        <div className="text-sm leading-[1.75] font-semibold mt-4">
           {translate('Submit this job to the cluster?')}
         </div>
       )}
@@ -264,29 +267,18 @@ export const HpcJobActions: FC<UIBlockProps> = ({ block }) => {
     return null;
   }
   return (
-    <div className="aui-vm-order-actions">
-      <ThreadPrimitive.Suggestion
+    <BlockActions>
+      <BlockActionButton
         prompt={translate('I want to modify the job. What can I change?')}
-        send
-        clearComposer={false}
-        asChild
+        variant="secondary"
       >
-        <button className="aui-vm-order-action-btn aui-vm-order-action-btn--secondary">
-          <PencilSimpleIcon size={16} weight="bold" />
-          {translate('Modify')}
-        </button>
-      </ThreadPrimitive.Suggestion>
-      <ThreadPrimitive.Suggestion
-        prompt={translate('Submit the job')}
-        send
-        clearComposer={false}
-        asChild
-      >
-        <button className="aui-vm-order-action-btn aui-vm-order-action-btn--primary">
-          <PaperPlaneTiltIcon size={16} weight="bold" />
-          {translate('Submit')}
-        </button>
-      </ThreadPrimitive.Suggestion>
-    </div>
+        <PencilSimpleIcon size={16} weight="bold" />
+        {translate('Modify')}
+      </BlockActionButton>
+      <BlockActionButton prompt={translate('Submit the job')} variant="primary">
+        <PaperPlaneTiltIcon size={16} weight="bold" />
+        {translate('Submit')}
+      </BlockActionButton>
+    </BlockActions>
   );
 };

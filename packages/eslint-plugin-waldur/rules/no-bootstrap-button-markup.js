@@ -57,7 +57,7 @@ export default {
           return;
         }
         // Exact token, not a substring: `btn-close`, `text-btn` and
-        // `aui-vm-order-action-btn` are not Bootstrap buttons, and matching
+        // `action-btn` are not Bootstrap buttons, and matching
         // them would drown the rule in false positives.
         if (!getClassNameTokens(node).has('btn')) {
           return;

@@ -22,7 +22,7 @@ describe('no-bootstrap-button-markup', () => {
       { code: 'const A = () => <button className="text-btn" />;' },
       { code: 'const A = () => <button className="btn-close" />;' },
       {
-        code: 'const A = () => <button className="aui-vm-order-action-btn" />;',
+        code: 'const A = () => <button className="action-btn" />;',
       },
       // Components are the recommended path, not a violation.
       { code: 'const A = () => <BaseButton className="btn" />;' },
