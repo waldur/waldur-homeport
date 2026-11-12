@@ -19395,11 +19395,6 @@
       "feature_area": "administration"
     }
   },
-  "Demo users": {
-    "context": {
-      "feature_area": "auth"
-    }
-  },
   "Demographics": {
     "context": {
       "primary_ui_type": "title",
@@ -63810,11 +63805,6 @@
       "feature_area": "hpc"
     }
   },
-  "Sign in as one of the demo’s users with one click.": {
-    "context": {
-      "feature_area": "auth"
-    }
-  },
   "Sign in method": {
     "context": {
       "feature_area": "auth"
@@ -63866,11 +63856,6 @@
         }
       },
       "feature_area": "passkeys"
-    }
-  },
-  "Signing in": {
-    "context": {
-      "feature_area": "auth"
     }
   },
   "Silenced": {
@@ -78582,12 +78567,6 @@
     }
   },
   "Unable to sign in with a passkey.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "auth"
-    }
-  },
-  "Unable to sign in.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "auth"
@@ -96596,17 +96575,6 @@
           "type": "string"
         }
       }
-    }
-  },
-  "{username} must confirm with a passkey to sign in.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      },
-      "feature_area": "auth"
     }
   },
   "{user} has approved it on {date} at {time}.": {

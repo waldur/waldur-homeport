@@ -18,7 +18,7 @@
 /* Centred by the container's auto margins, not align-items: content taller
    than the column then starts at the top and scrolls, where align-items:
    center pushed its top above the scroll area, out of reach (the logo, on a
-   phone with a few demo users). */
+   short screen or with a long list of sign-in methods). */
 .login-body {
   display: flex;
   justify-content: center;
