@@ -1,11 +1,16 @@
+import { useMemo } from 'react';
+import { createFetcher } from 'waldur-api-client';
 import { translate } from 'waldur-i18n-runtime';
-import { RequestedOfferingStates } from 'waldur-js-client';
+import {
+  proposalRequestedOfferingsList,
+  RequestedOfferingStates,
+} from 'waldur-js-client';
+import { Table, useTable } from 'waldur-table';
 import { SegmentedControl } from 'waldur-ui';
 
 import { getRequestColumns } from '../columns';
-import { PageHeader, QueryTableCard } from '../components';
+import { PageHeader, useStableColumns } from '../components';
 import { Provider } from '../providers';
-import { useRequestedOfferings } from '../queries';
 import { navigate, pageHref, useRoute } from '../router';
 
 const FILTERS: Record<string, RequestedOfferingStates[] | undefined> = {
@@ -15,11 +20,29 @@ const FILTERS: Record<string, RequestedOfferingStates[] | undefined> = {
   all: undefined,
 };
 
+const fetchRequests = createFetcher(proposalRequestedOfferingsList);
+
 /** Every call that asked for one of the provider's offerings. */
 export const RequestsPage = ({ provider }: { provider?: Provider }) => {
   const { params } = useRoute();
   const filter = params.get('state') ?? 'waiting';
-  const query = useRequestedOfferings(provider?.uuid, FILTERS[filter]);
+  const providerUuid = provider?.uuid;
+  const tableFilter = useMemo(
+    () => ({
+      ...(providerUuid ? { provider_uuid: providerUuid } : {}),
+      ...(FILTERS[filter] ? { state: FILTERS[filter] } : {}),
+      // Newest first, until a column header is clicked.
+      o: '-created',
+    }),
+    [providerUuid, filter],
+  );
+  const tableProps = useTable({
+    // One table per state, so each keeps its own page.
+    table: `provider-calls-requests-${filter}`,
+    fetchData: fetchRequests,
+    filter: tableFilter,
+  });
+  const columns = useStableColumns(getRequestColumns());
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-6">
@@ -42,10 +65,11 @@ export const RequestsPage = ({ provider }: { provider?: Provider }) => {
           { value: 'all', label: translate('All') },
         ]}
       />
-      <QueryTableCard
-        query={query}
-        columns={getRequestColumns()}
-        rowKey={(row) => row.uuid}
+      <Table
+        {...tableProps}
+        columns={columns}
+        // The page header names the list.
+        hasActionBar={false}
         emptyMessage={
           filter === 'waiting'
             ? translate('No call is waiting for an answer.')

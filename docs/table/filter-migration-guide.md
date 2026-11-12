@@ -33,7 +33,7 @@ The generation process is driven by:
 
 ### Generated Output
 
-The script produces `src/table/generated/{OperationId}Filter.tsx` files. Each file exports:
+The script produces `packages/table/src/generated/{OperationId}Filter.tsx` files. Each file exports:
 
 - `{Name}Filter`: The filter component containing autonomous filter components (StringFilter, SelectFilter, etc.) that connect directly to Redux.
 - `{Name}FilterFormData`: TypeScript interface for filter values.
@@ -76,7 +76,7 @@ Execute the generation script:
 node generate-filters.cjs
 ```
 
-This will create/update `src/table/generated/CustomersFilter.tsx`.
+This will create/update `packages/table/src/generated/CustomersFilter.tsx`.
 
 ### 4. Replace the Manual Component
 

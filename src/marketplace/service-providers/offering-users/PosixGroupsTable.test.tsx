@@ -5,7 +5,7 @@ import { useTable } from '@/table/useTable';
 
 import { PosixGroupsTable } from './OfferingUsersExpandableRow';
 
-vi.mock('@/table/useTable', () => ({ useTable: vi.fn() }));
+vi.mock('waldur-table/src/useTable', () => ({ useTable: vi.fn() }));
 
 let tableProps: any;
 vi.mock('@/table/Table', () => ({

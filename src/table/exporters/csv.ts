@@ -1,9 +1,4 @@
-import Papa from 'papaparse';
-
-import { saveFile } from './saveFile';
-
-export default function saveAsCsv(table, data) {
-  const csv = Papa.unparse(data);
-  const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
-  saveFile(blob, `${table}.csv`);
-}
+// Lives in waldur-table (packages/table); kept here so the app's imports
+// don't change.
+export * from 'waldur-table/src/exporters/csv';
+export { default } from 'waldur-table/src/exporters/csv';

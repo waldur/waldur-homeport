@@ -167,3 +167,51 @@ export const ReviewerPoolSection = ({ call }) => {
   );
 };
 ```
+
+## Where the table lives
+
+The table is the `waldur-table` package (`packages/table`), so micro-apps
+([micro-apps.md](micro-apps.md)) use the same one. Inside homeport,
+`src/table/<module>.ts` re-exports the package module of the same name, so
+`@/table/useTable`, `@/table/api` and the rest import as before. What stays
+in `src/table` is homeport's own layer: `Table.tsx` with `TableNav.tsx`
+(UI-Router tabs), `TableWithTabs.tsx`, `useFilteredNavigation.ts` and the
+generated filters.
+
+A micro-app imports from the package entry point (`import { Table, useTable,
+createFetcher } from 'waldur-table'`), puts `tables: tablesReducer` in its
+Redux store or wraps itself in a `Provider` with `createTablesStore()`, and
+adds `packages/table/src` to its Tailwind `@source` list.
+
+What the package may import:
+
+- Shared code comes from the other packages (`waldur-ui`, `waldur-form`,
+  `waldur-api-client`, `waldur-i18n-runtime`, `waldur-notifications`), never
+  from `@/…`.
+- The table's visible states are waldur-ui components, the same ones the
+  portal uses, so a table looks the same in every app: `NoResult` (no rows),
+  `ErrorView` (the fetch failed), `CopyToClipboardButton` (a cell's copy
+  button) and `MenuActionItem` (the export row; the portal's `ActionItem` is
+  built on it).
+- What only an app has goes through `TableHost`
+  (`packages/table/src/host.tsx`), and that is environment, not UI: the URL,
+  the default title, how a dialog's chunk loads, and the message a crashed
+  table shows (the portal's has an illustration no package carries; without
+  one the table catches nothing and the app's own error boundary does). The
+  portal sets these in `src/core/tableHost.ts` (router) and
+  `src/core/tableHostComponents.ts` (the other two, which Storybook uses too).
+- Tests, stories and their support files sit beside the code in the package
+  but run inside homeport, and may use its test harness (`@/test/harness`)
+  and a few of its components.
+
+ESLint enforces this (`no-restricted-imports` for `packages/table/src/**` in
+`eslint.config.js`). When the table needs something new from an app, add a
+member to `TableHost` if it is environment, and move it to a package if it
+is a component: a host component would give micro-apps a second, different
+version of it.
+
+A test that replaces a table module mocks the package's file, which the
+`@/table/…` re-export then passes on:
+`vi.mock('waldur-table/src/useTableQuery', () => import('@/table/mockTableQuery'))`.
+Mocking `@/table/useTableQuery` would replace only the re-export, and the
+table itself would still run the real one.

@@ -5,7 +5,7 @@ import { getRequestColumns, getSlotColumns, getTaskColumns } from '../columns';
 import {
   InternalLink,
   PageHeader,
-  QueryTableCard,
+  QueryTable,
   TableQuery,
   withRows,
 } from '../components';
@@ -110,11 +110,13 @@ export const InboxPage = ({ provider }: { provider?: Provider }) => {
       />
 
       {isTeam ? (
-        <QueryTableCard
+        <QueryTable
+          table="provider-calls-inbox-tasks"
+          hasPagination={false}
           title={translate('My tasks')}
           query={top(tasks)}
           columns={getTaskColumns()}
-          rowKey={(task) => task.key}
+          rowKey="key"
           emptyMessage={translate('Nothing is waiting for you.')}
           footer={
             <More
@@ -125,33 +127,36 @@ export const InboxPage = ({ provider }: { provider?: Provider }) => {
         />
       ) : null}
 
-      <QueryTableCard
+      <QueryTable
+        table="provider-calls-inbox-requests"
+        hasPagination={false}
         title={translate('Calls waiting for your answer')}
         query={top(waiting)}
         columns={getRequestColumns()}
-        rowKey={(row) => row.uuid}
         emptyMessage={translate('No call is waiting for an answer.')}
         footer={
           <More total={waiting.data?.length ?? 0} href={pageHref('requests')} />
         }
       />
 
-      <QueryTableCard
+      <QueryTable
+        table="provider-calls-inbox-awards"
+        hasPagination={false}
         title={translate('Awards waiting for your approval')}
         query={top(awards)}
         columns={getAwardColumns(providerUuid)}
-        rowKey={(order) => order.uuid}
         emptyMessage={translate('No award is waiting for your approval.')}
         footer={
           <More total={awards.data?.length ?? 0} href={pageHref('awards')} />
         }
       />
 
-      <QueryTableCard
+      <QueryTable
+        table="provider-calls-inbox-slots"
+        hasPagination={false}
         title={translate('Team slots due soonest')}
         query={top(slots)}
         columns={getSlotColumns()}
-        rowKey={(slot) => slot.uuid}
         emptyMessage={translate('Your team has no open assessments.')}
         footer={
           <More total={slots.data?.length ?? 0} href={pageHref('team')} />

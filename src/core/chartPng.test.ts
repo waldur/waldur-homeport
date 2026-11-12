@@ -4,7 +4,7 @@ import { saveFile } from '@/table/exporters/saveFile';
 
 import { saveChartPng } from './chartPng';
 
-vi.mock('@/table/exporters/saveFile', () => ({ saveFile: vi.fn() }));
+vi.mock('waldur-table/src/exporters/saveFile', () => ({ saveFile: vi.fn() }));
 
 // The 8-byte PNG signature, base64.
 const PNG_SIGNATURE = 'iVBORw0KGgo=';

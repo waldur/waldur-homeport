@@ -23,7 +23,7 @@ export interface EmptyStateProps extends Omit<
 }
 
 /**
- * "Nothing here" for an inline or in-dialog spot: lighter than the app's
+ * "Nothing here" for an inline or in-dialog spot: lighter than
  * `NoResult`, which is for a whole table or page and carries an illustration.
  */
 export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(

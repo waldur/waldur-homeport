@@ -25,7 +25,10 @@ import { EventConsumersCard } from './EventConsumersCard';
 import { EventConsumerWebhookDialog } from './EventConsumerWebhookDialog';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 vi.mock('@/modal/useManagedMutation', () => ({
   useManagedMutation: vi.fn(),
 }));

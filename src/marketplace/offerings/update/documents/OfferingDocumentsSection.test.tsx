@@ -8,7 +8,7 @@ import { OfferingDocumentsSection } from './OfferingDocumentsSection';
 // Capture the useTable config and stub the heavy Table so we can exercise the
 // section's column renderers and table actions in isolation.
 const useTableSpy = vi.fn();
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (config: any) => {
     useTableSpy(config);
     return { fetch: vi.fn(), rows: [], filter: config.filter };

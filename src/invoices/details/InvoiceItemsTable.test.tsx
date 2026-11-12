@@ -12,7 +12,7 @@ import { InvoiceItemsTable } from './InvoiceItemsTable';
 const fetchSpy = vi.fn();
 
 // Control the table's own refetch and bypass real React Query / SDK calls.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: fetchSpy, rows: [], pagination: {} }),
 }));
 

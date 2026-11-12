@@ -11,9 +11,6 @@ export {
 } from './Table';
 export type { TableDensity, TableProps, TableRowProps } from './Table';
 
-export { DataTable } from './DataTable';
-export type { DataTableColumn, DataTableProps } from './DataTable';
-
 export { TablePagination } from './pagination/TablePagination';
 export type { TablePaginationProps } from './pagination/TablePagination';
 export { Pagination } from './pagination/Pagination';

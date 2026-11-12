@@ -15,7 +15,10 @@ import { renderWithProviders } from '@/test/harness';
 import { PendingConsumerOrders } from './PendingConsumerOrders';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const order = {
   uuid: 'order-1',

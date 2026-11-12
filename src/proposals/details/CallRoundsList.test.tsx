@@ -14,7 +14,7 @@ const tableProps = vi.hoisted(() => ({ current: null as any }));
 
 // Capture what the list hands the table, and leave the table itself out: the
 // question is which rounds reach it, not how it draws them.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (options: any) => {
     tableOptions.current = options;
     return { rows: [], fetch: vi.fn(), pagination: {} };

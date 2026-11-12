@@ -18,7 +18,7 @@ const { fetchCount, dropdownProps, usersListProps } = vi.hoisted(() => ({
 // Like useTableQuery, run onFetch from an effect keyed on the callback: an
 // unstable callback then fires on every render. The first call is the first
 // fetch, later ones are refetches.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (options) => {
     useEffect(() => {
       options.onFetch?.([], 0, fetchCount.value++ === 0);

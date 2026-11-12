@@ -44,14 +44,13 @@ const baselineFile = () =>
   process.env.WALDUR_HAND_ROLLED_TABLE_BASELINE_FILE ??
   path.join(REPO_ROOT, 'hand-rolled-table.baseline.json');
 
-// The shared table implementation, markup that is not a data table, and
-// packages/ui/src/Table/Table.tsx — the shadcn-recipe table primitive
-// (DataTable.tsx builds on it) for standalone micro-apps (apps/*), which
-// deliberately can't depend on @/table/Table (Redux table-store +
-// Bootstrap coupled to homeport's own src/). See docs/micro-apps.md and
-// Table.tsx's own header comment.
+// The shared table implementation (waldur-table in packages/table, and
+// homeport's layer over it in src/table), markup that is not a data table,
+// and packages/ui/src/Table/Table.tsx — the table primitive that
+// waldur-table builds on.
 const ALLOWED_FILES = [
   'src/table/',
+  'packages/table/',
   'src/core/RichTextEditor',
   'packages/ui/src/Table/Table.tsx',
   // Storybook demo of the tableCell select variant embedded in a row -- a

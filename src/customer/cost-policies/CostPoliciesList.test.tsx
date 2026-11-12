@@ -7,7 +7,7 @@ import { useCustomer } from '@/workspace/hooks';
 
 import { CostPoliciesList, CostPoliciesListTable } from './CostPoliciesList';
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [] }),
 }));
 

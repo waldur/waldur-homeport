@@ -1,0 +1,74 @@
+import { useCallback } from 'react';
+import { Form } from 'react-final-form';
+import { required, StringGroup, SubmitButton } from 'waldur-form';
+import { translate } from 'waldur-i18n-runtime';
+import { useNotify } from 'waldur-notifications';
+import { CloseDialogButton, ModalDialog, useModal } from 'waldur-ui';
+
+interface SaveFilterDialogProps {
+  resolve: {
+    saveFilter(name: string, update: boolean): void;
+  };
+  initialValues?: { name: string };
+}
+
+export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
+  const { showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
+  const isEdit = Boolean(props.initialValues);
+
+  const callback = useCallback(
+    (formData: { name: string }) => {
+      props.resolve.saveFilter(formData.name, isEdit);
+      if (!isEdit) {
+        showSuccess(translate('Filter saved'));
+      } else {
+        showSuccess(translate('Filter updated successfully'));
+      }
+      closeDialog();
+    },
+    [props.resolve, showSuccess, closeDialog, isEdit],
+  );
+
+  return (
+    <Form
+      onSubmit={callback}
+      initialValues={props.initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              isEdit ? translate('Update filter') : translate('Save filter')
+            }
+            subtitle={translate('Filters can be saved and reused on any pages')}
+            footer={
+              <>
+                <CloseDialogButton className="flex-1" />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={isEdit ? translate('Update') : translate('Save')}
+                  variant="primary"
+                  className="flex-1"
+                />
+              </>
+            }
+          >
+            <div>
+              <StringGroup
+                name="name"
+                label={translate('Filter name')}
+                placeholder={translate('e.g. New filter')}
+                required={true}
+                validate={required}
+                spaceless
+                disabled={submitting}
+              />
+            </div>
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

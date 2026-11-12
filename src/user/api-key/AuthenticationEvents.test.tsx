@@ -5,7 +5,7 @@ import { useUser } from '@/workspace/hooks';
 
 import { AuthenticationEvents } from './AuthenticationEvents';
 
-vi.mock('@/table/useTable', () => ({ useTable: () => ({}) }));
+vi.mock('waldur-table/src/useTable', () => ({ useTable: () => ({}) }));
 vi.mock('@/table/Table', () => ({
   default: ({ columns }) => (
     <ul>

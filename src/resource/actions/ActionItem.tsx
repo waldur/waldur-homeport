@@ -1,8 +1,12 @@
-import { QuestionIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC, ReactNode, useEffect, useId, useRef } from 'react';
 
-import { ButtonVariant, Tooltip, BaseButton, Menu } from 'waldur-ui';
+import {
+  BaseButton,
+  ButtonVariant,
+  Menu,
+  MenuActionIconColor,
+  MenuActionItem,
+} from 'waldur-ui';
 
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { translate } from '@/i18n';
@@ -14,20 +18,7 @@ import {
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 
 /** The colours an action's icon can take (default gray). */
-export type ActionIconColor =
-  'gray-400' | 'danger' | 'success' | 'warning' | 'info';
-
-// What Metronic's legacy svg-icon-<colour> classes drew, in both themes (measured
-// in the app): the icon's paths take the element's colour (fill=currentColor).
-// The semantic roles switch with the theme; purple is a categorical hue with
-// no role, so it keeps its own dark step.
-const ICON_COLOR_CLASSNAMES: Record<ActionIconColor, string> = {
-  'gray-400': 'text-quinary',
-  danger: 'text-danger',
-  success: 'text-success',
-  warning: 'text-warning',
-  info: 'text-info',
-};
+export type ActionIconColor = MenuActionIconColor;
 
 // Bootstrap's text-dark, in both themes.
 const STAFF_ICON_CLASSNAME = 'ms-1 me-2.5 text-primary';
@@ -53,7 +44,6 @@ export interface ActionItemProps {
 export const ActionItem: FC<ActionItemProps> = (props) => {
   const filter = useActionListFilter();
   const combobox = useActionCombobox();
-  const descriptionId = useId();
   const itemId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const label = props.label ?? props.title ?? '';
@@ -114,14 +104,6 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     );
   }
 
-  // The reason an action is disabled and the staff-only marker are shown
-  // beside the row, as icons with tooltips (a disabled row takes no pointer
-  // events, so a tooltip on it would never open). A screen reader gets the
-  // same through aria-describedby.
-  const description = [props.tooltip, props.staff && translate('Staff action')]
-    .filter(Boolean)
-    .join('. ');
-
   const comboboxItemProps =
     combobox && itemIndex >= 0
       ? combobox.getItemProps({
@@ -131,88 +113,32 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         })
       : undefined;
 
-  const trailing =
-    props.tooltip || props.staff ? (
-      <span className="inline-flex items-center shrink-0 pointer-events-auto">
-        {props.tooltip && (
-          <Tooltip label={props.tooltip}>
-            <QuestionIcon
-              size={20}
-              weight="bold"
-              aria-hidden="true"
-              className={classNames(
-                'ms-1 me-2.5 text-[var(--menu-item-muted-text)]',
-                props.disabled && 'opacity-50',
-              )}
-            />
-          </Tooltip>
-        )}
-        {props.staff && <StaffOnlyIndicator className={STAFF_ICON_CLASSNAME} />}
-      </span>
-    ) : undefined;
-
   return (
-    <>
-      <Menu.Item
-        {...comboboxItemProps}
-        ref={(node: any) => {
-          buttonRef.current = node;
-          if (typeof comboboxItemProps?.ref === 'function') {
-            comboboxItemProps.ref(node);
-          } else if (
-            comboboxItemProps?.ref &&
-            'current' in comboboxItemProps.ref
-          ) {
-            (comboboxItemProps.ref as any).current = node;
-          }
-        }}
-        icon={
-          props.iconNode ? (
-            <span
-              className={classNames(
-                'leading-none [&>svg]:size-[20px]',
-                // Disabled, every icon takes the same gray, a danger one too.
-                ICON_COLOR_CLASSNAMES[
-                  props.disabled ? 'gray-400' : (props.iconColor ?? 'gray-400')
-                ],
-                // This span sets its own colour, so the row's disabled
-                // colour never reaches the icon. Fade it like the label.
-                props.disabled && 'opacity-50',
-              )}
-            >
-              {props.iconNode}
-            </span>
-          ) : undefined
+    <MenuActionItem
+      itemProps={comboboxItemProps}
+      ref={(node: any) => {
+        buttonRef.current = node;
+        if (typeof comboboxItemProps?.ref === 'function') {
+          comboboxItemProps.ref(node);
+        } else if (
+          comboboxItemProps?.ref &&
+          'current' in comboboxItemProps.ref
+        ) {
+          (comboboxItemProps.ref as any).current = node;
         }
-        trailing={trailing}
-        className={classNames(
-          isHighlighted && 'active',
-          props.className,
-          // A destructive row keeps its colour on hover too; the row's own
-          // hover colour would turn it black.
-          props.iconColor === 'danger' &&
-            'action-row-active:text-danger menu-row-active:text-danger',
-        )}
-        data-highlighted={isHighlighted ? '' : undefined}
-        aria-describedby={description ? descriptionId : undefined}
-        // onSelect, not onClick: it covers keyboard activation (Enter/Space)
-        // as well as pointer, and closes the menu afterwards. `disabled`
-        // blocks selection.
-        onSelect={() => props.action()}
-        disabled={props.disabled}
-      >
-        <span
-          className={props.disabled ? 'opacity-50' : undefined}
-          data-testid="action-item-content"
-        >
-          {label}
-        </span>
-      </Menu.Item>
-      {description && (
-        <span id={descriptionId} className="sr-only">
-          {description}
-        </span>
-      )}
-    </>
+      }}
+      label={label}
+      action={props.action}
+      iconNode={props.iconNode}
+      iconColor={props.iconColor}
+      disabled={props.disabled}
+      tooltip={props.tooltip}
+      marker={
+        props.staff && <StaffOnlyIndicator className={STAFF_ICON_CLASSNAME} />
+      }
+      markerDescription={props.staff ? translate('Staff action') : undefined}
+      className={props.className}
+      highlighted={isHighlighted}
+    />
   );
 };

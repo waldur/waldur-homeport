@@ -21,3 +21,5 @@
    because it happens to share this same repository. */
 @source '../../../packages/ui/src';
 @source '../../../packages/shell/src';
+@source '../../../packages/table/src';
+@source '../../../packages/form/src';

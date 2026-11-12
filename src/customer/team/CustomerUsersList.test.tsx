@@ -11,7 +11,10 @@ import * as workspaceHooks from '@/workspace/hooks';
 import { CustomerUsersList } from './CustomerUsersList';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const mockStore = configureStore();
 const rowId = 'user-uuid-1';

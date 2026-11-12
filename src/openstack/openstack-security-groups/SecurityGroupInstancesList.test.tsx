@@ -6,7 +6,10 @@ import { renderTable } from '@/table/testUtils';
 import { SecurityGroupInstancesList } from './SecurityGroupInstancesList';
 
 // Serves the row renderTable sets; no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const securityGroup = {
   uuid: 'ff0e04e40b8d4ba09d0a9d5c14b78e59',

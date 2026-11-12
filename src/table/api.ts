@@ -1,7 +1,3 @@
-export {
-  processApiResponse,
-  createFetcher,
-  fetchAll,
-  createClientPaginatedFetcher,
-} from 'waldur-api-client';
-export type { DataPage, SdkFunction } from 'waldur-api-client';
+// Lives in waldur-table (packages/table); kept here so the app's imports
+// don't change.
+export * from 'waldur-table/src/api';

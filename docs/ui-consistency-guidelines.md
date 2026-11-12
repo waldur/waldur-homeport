@@ -76,7 +76,7 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 
 **Message hierarchy**: Title → Explanation → CTA (call-to-action)
 
-**Utility functions** (from `src/table/utils.tsx`):
+**Utility functions** (from `packages/table/src/utils.tsx`):
 
 ```tsx
 import { getNoResultTitle, getNoResultMessage } from '@/table/utils';
@@ -1249,7 +1249,7 @@ if (hasPermission(user, { permission: 'staff.action', ... })) { ... }
 
 ### 3. Sidebar Filters Hidden on Empty Tables
 
-**Files affected**: `src/table/Table.tsx:301-323`
+**Files affected**: `packages/table/src/Table.tsx:301-323`
 
 **Problem**: Sidebar filters only show when `filtersStorage.length > 0`, preventing filter discovery
 

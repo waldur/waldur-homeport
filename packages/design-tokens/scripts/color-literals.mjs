@@ -51,7 +51,6 @@ const ALLOWED = {
   'src/auth/storyFixtures.tsx': 'story fixture: the default brand colour',
   // Colours that are not painted as such.
   'packages/ui/src/Dialog/RadialBackground.tsx': 'SVG mask stops (alpha)',
-  'src/navigation/header/search/NoResult.scss': 'gradient mask (alpha)',
   // Rendered outside the app's stylesheet, where no token resolves.
   'src/core/SVGImagePlaceholder.tsx': 'SVG data-URI image',
   'src/customer/project-digest/ProjectDigestPreview.tsx': 'email preview',

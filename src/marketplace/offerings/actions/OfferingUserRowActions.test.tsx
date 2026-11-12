@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { OfferingUserRowActions } from './OfferingUserRowActions';
 
 // Render the menu's actions inline, each update button by its scope.
-vi.mock('@/table/ActionsDropdown', () => ({
+vi.mock('waldur-table/src/ActionsDropdown', () => ({
   ActionsDropdown: ({ actions, row, refetch }) => (
     <div>
       {actions.map((Action, index) => (

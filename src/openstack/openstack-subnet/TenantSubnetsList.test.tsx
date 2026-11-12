@@ -8,7 +8,10 @@ import { renderTable } from '@/table/testUtils';
 import { TenantSubnetsList } from './TenantSubnetsList';
 
 // Serves the row renderTable sets; no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const subnet = (overrides: Partial<OpenStackSubNet>) =>
   ({

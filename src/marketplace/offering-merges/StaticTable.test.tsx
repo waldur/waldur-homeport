@@ -7,7 +7,7 @@ import { StaticTable } from './StaticTable';
 
 const tableSpy = vi.fn();
 
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useState } = await import('react');
   return {
     useTable: (config: any) => {

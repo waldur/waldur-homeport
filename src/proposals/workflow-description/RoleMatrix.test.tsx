@@ -10,10 +10,10 @@ import { RoleMatrix } from './RoleMatrix';
 
 // The shared table needs the app's store; a plain grid of the same rows and
 // columns is enough to read the cells.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [], pagination: {} }),
 }));
-vi.mock('@/table/useRowsTable', () => ({
+vi.mock('waldur-table/src/useRowsTable', () => ({
   useRowsTable: (_name: string, rows: unknown[]) => ({
     fetch: vi.fn(),
     rows,

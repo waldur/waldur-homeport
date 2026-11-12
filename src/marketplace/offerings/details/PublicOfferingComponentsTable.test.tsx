@@ -22,7 +22,7 @@ const components = [
 
 // The table machinery needs a store; the column renderers are what is under
 // test, so render each of them for every row directly.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [] }),
 }));
 

@@ -418,7 +418,7 @@ whether each class exists, so every one of the 330 generated classes is known
 to paint something. `tsgo --noEmit`, `colors:check` (6/6), `rem:check`
 (705/705), `style:check` and prettier are all clean, and 2,751 tests pass
 (628 lint-plugin, 404 beside the changed files, 1,719 across `packages/ui`,
-`src/table` and `src/auth`).
+`packages/table` and `src/auth`).
 
 Two checks beyond the linters, for the things a linter cannot see:
 

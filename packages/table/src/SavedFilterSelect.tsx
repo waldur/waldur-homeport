@@ -1,0 +1,173 @@
+import { FunnelIcon, TrashIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
+import { FC, useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { components, OptionProps } from 'react-select';
+import { translate } from 'waldur-i18n-runtime';
+import { useNotify } from 'waldur-notifications';
+import { BaseButton, SelectOption, useModal, WindowedSelect } from 'waldur-ui';
+
+import {
+  clearAllFilters,
+  selectSavedFilter,
+  setFilter,
+  setSavedFilters,
+} from './actions';
+import {
+  selectSelectedSavedFilter,
+  selectTableSavedFilters,
+} from './selectors';
+import { TableFilterService, TableFiltersGroup } from './TableFilterService';
+import { TableProps, TablesRootState } from './types';
+import { getSavedFiltersKey } from './utils';
+
+const Control = (props) => (
+  <div className="flex items-center gap-1.5">
+    <components.Control
+      {...props}
+      className={classNames('grow', props.className)}
+    >
+      <FunnelIcon
+        size={20}
+        weight="bold"
+        className="ms-2.5 me-1.5 text-secondary shrink-0"
+      />
+      {props.children}
+    </components.Control>
+    {Boolean(props.getValue()[0]) && (
+      <BaseButton
+        iconNode={<TrashIcon weight="bold" />}
+        tooltip={translate('Delete filter')}
+        onClick={(e) => props.remove(e, props.getValue()[0])}
+        variant="text-danger"
+        className="me-2.5"
+        size="sm"
+      />
+    )}
+  </div>
+);
+
+const ListOption: FC<OptionProps & { remove }> = (props) => (
+  <SelectOption {...props}>
+    <div className="flex justify-between items-center">
+      {props.children}
+      <BaseButton
+        iconNode={<TrashIcon weight="bold" />}
+        tooltip={translate('Delete filter')}
+        onClick={(e) => props.remove(e, props.getValue()[0])}
+        variant="text-danger"
+        // Shown while the option is hovered. (Formerly SavedFilterSelect.scss.)
+        className="opacity-0 transition-opacity duration-200 ease-[ease] in-[.metronic-select\_\_option:hover]:opacity-100"
+        size="sm"
+      />
+    </div>
+  </SelectOption>
+);
+
+interface SavedFilterSelectProps {
+  table: string;
+  formId: string;
+  filterPosition?: TableProps['filterPosition'];
+  onSelect?(): void;
+}
+
+export const SavedFilterSelect = ({
+  table,
+  formId,
+  filterPosition,
+  onSelect,
+}: SavedFilterSelectProps) => {
+  const { confirm } = useModal();
+  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
+
+  const key = useMemo(() => getSavedFiltersKey(table, formId), [table, formId]);
+
+  useEffect(() => {
+    dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
+  }, [table, key, dispatch]);
+
+  const list = useSelector((state: TablesRootState) =>
+    selectTableSavedFilters(state, table),
+  );
+  const selected = useSelector((state: TablesRootState) =>
+    selectSelectedSavedFilter(state, table),
+  );
+
+  const setSelected = useCallback(
+    (value: TableFiltersGroup) => {
+      const deselect = selected && value?.id === selected.id;
+      dispatch(clearAllFilters(table));
+      if (value && !deselect) {
+        Object.entries(value.values).forEach(([name, val]) => {
+          dispatch(
+            setFilter(table, {
+              name,
+              value: val,
+              label: null,
+              component: null,
+            }),
+          );
+        });
+      }
+      dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
+      if (!deselect && value) {
+        dispatch(selectSavedFilter(table, value));
+        if (onSelect) onSelect();
+      } else {
+        dispatch(selectSavedFilter(table, null));
+      }
+    },
+    [table, key, onSelect, selected, dispatch],
+  );
+
+  const remove = useCallback(
+    async (e, item) => {
+      e.stopPropagation();
+      try {
+        await confirm(
+          translate('Delete filter'),
+          translate(
+            'Are you sure you want to delete this filter? This action cannot be undone.',
+          ),
+          { forDeletion: true },
+        );
+      } catch {
+        return;
+      }
+      try {
+        TableFilterService.remove(key, item);
+        setSelected(null);
+        if (onSelect) onSelect();
+      } catch (error) {
+        showErrorResponse(error, translate('Unable to remove the filter.'));
+      }
+    },
+    [setSelected, key, onSelect, confirm, showErrorResponse],
+  );
+
+  return (
+    <div className={filterPosition === 'menu' ? undefined : 'mb-5.5'}>
+      <WindowedSelect
+        value={selected}
+        onChange={setSelected}
+        placeholder={translate('Select saved filter')}
+        getOptionLabel={(option) => option.title}
+        getOptionValue={(option) => option.id}
+        options={list || []}
+        isClearable={true}
+        noOptionsMessage={() => translate('No saved filter')}
+        {...(filterPosition === 'menu' ? { variant: 'tableFilter' } : {})}
+        components={
+          filterPosition === 'menu'
+            ? {
+                Option: (props) => <ListOption {...props} remove={remove} />,
+              }
+            : {
+                Control: (props) => <Control {...props} remove={remove} />,
+              }
+        }
+      />
+    </div>
+  );
+};

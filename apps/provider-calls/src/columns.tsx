@@ -4,7 +4,8 @@ import {
   OfferingTeamSlot,
   ProviderRequestedOffering,
 } from 'waldur-js-client';
-import { Badge, DataTableColumn } from 'waldur-ui';
+import { Column } from 'waldur-table';
+import { Badge } from 'waldur-ui';
 
 import { InternalLink, PortalLink } from './components';
 import {
@@ -79,20 +80,20 @@ const Stacked = ({ main, sub }: { main: string; sub?: string | null }) => (
   </div>
 );
 
-export const getTaskColumns = (): DataTableColumn<MyTask>[] => [
+export const getTaskColumns = (): Column<MyTask>[] => [
   {
-    key: 'needed',
-    header: translate('What is needed'),
-    render: (task) => (
+    id: 'needed',
+    title: translate('What is needed'),
+    render: ({ row: task }) => (
       <PortalLink href={taskUrl(task)}>
         <Stacked main={task.needed_label} sub={task.detail} />
       </PortalLink>
     ),
   },
   {
-    key: 'proposal',
-    header: translate('Proposal'),
-    render: (task) =>
+    id: 'proposal',
+    title: translate('Proposal'),
+    render: ({ row: task }) =>
       task.proposal_name ? (
         <Stacked main={task.proposal_name} sub={task.proposal_slug} />
       ) : (
@@ -100,9 +101,9 @@ export const getTaskColumns = (): DataTableColumn<MyTask>[] => [
       ),
   },
   {
-    key: 'call',
-    header: translate('Step'),
-    render: (task) =>
+    id: 'call',
+    title: translate('Step'),
+    render: ({ row: task }) =>
       task.step_name ? (
         <StepCell
           step={task.step_name}
@@ -114,26 +115,30 @@ export const getTaskColumns = (): DataTableColumn<MyTask>[] => [
       ),
   },
   {
-    key: 'due',
-    header: translate('Due'),
-    render: (task) => <Due at={task.due_at} overdue={task.is_overdue} />,
+    id: 'due',
+    title: translate('Due'),
+    render: ({ row: task }) => (
+      <Due at={task.due_at} overdue={task.is_overdue} />
+    ),
   },
 ];
 
 export const getRequestColumns = (
   withActions = true,
-): DataTableColumn<ProviderRequestedOffering>[] => [
+): Column<ProviderRequestedOffering>[] => [
   {
-    key: 'offering',
-    header: translate('Offering'),
-    render: (row) => (
+    id: 'offering',
+    orderField: 'offering__name',
+    title: translate('Offering'),
+    render: ({ row }) => (
       <Stacked main={row.offering_name} sub={row.plan_details?.name} />
     ),
   },
   {
-    key: 'call',
-    header: translate('Call'),
-    render: (row) => (
+    id: 'call',
+    orderField: 'call__name',
+    title: translate('Call'),
+    render: ({ row }) => (
       <div className="flex flex-col">
         <PortalLink href={publicCallUrl(row.call_uuid)}>
           {row.call_name}
@@ -145,9 +150,9 @@ export const getRequestColumns = (
     ),
   },
   {
-    key: 'round',
-    header: translate('Current round'),
-    render: (row) =>
+    id: 'round',
+    title: translate('Current round'),
+    render: ({ row }) =>
       row.current_round ? (
         <Stacked
           main={row.current_round.name ?? DASH}
@@ -164,9 +169,10 @@ export const getRequestColumns = (
       ),
   },
   {
-    key: 'requested',
-    header: translate('Requested'),
-    render: (row) => (
+    id: 'requested',
+    orderField: 'created',
+    title: translate('Requested'),
+    render: ({ row }) => (
       <Stacked
         main={formatDate(row.created)}
         sub={row.created_by_name || null}
@@ -174,9 +180,10 @@ export const getRequestColumns = (
     ),
   },
   {
-    key: 'state',
-    header: translate('State'),
-    render: (row) => {
+    id: 'state',
+    orderField: 'state',
+    title: translate('State'),
+    render: ({ row }) => {
       const badge = requestStateBadge(row.state);
       return (
         <div className="flex flex-col items-start gap-1">
@@ -193,28 +200,26 @@ export const getRequestColumns = (
     },
   },
   {
-    key: 'proposals',
-    header: translate('Proposals'),
-    render: (row) => row.proposals_count,
+    id: 'proposals',
+    title: translate('Proposals'),
+    render: ({ row }) => row.proposals_count,
   },
   ...(withActions
     ? [
         {
-          key: 'actions',
-          header: '',
-          render: (row: ProviderRequestedOffering) => (
-            <RequestActions row={row} />
-          ),
+          id: 'actions',
+          title: '',
+          render: ({ row }) => <RequestActions row={row} />,
         },
       ]
     : []),
 ];
 
-export const getSlotColumns = (): DataTableColumn<OfferingTeamSlot>[] => [
+export const getSlotColumns = (): Column<OfferingTeamSlot>[] => [
   {
-    key: 'proposal',
-    header: translate('Proposal'),
-    render: (slot) => {
+    id: 'proposal',
+    title: translate('Proposal'),
+    render: ({ row: slot }) => {
       return (
         <InternalLink href={proposalHref(slot.proposal_uuid)}>
           <Stacked main={slot.proposal_name} sub={slot.proposal_slug} />
@@ -223,21 +228,21 @@ export const getSlotColumns = (): DataTableColumn<OfferingTeamSlot>[] => [
     },
   },
   {
-    key: 'step',
-    header: translate('Step'),
-    render: (slot) => (
+    id: 'step',
+    title: translate('Step'),
+    render: ({ row: slot }) => (
       <StepCell step={slot.step_name} phase={slot.phase} sub={slot.call_name} />
     ),
   },
   {
-    key: 'offering',
-    header: translate('Offering'),
-    render: (slot) => slot.offering_name,
+    id: 'offering',
+    title: translate('Offering'),
+    render: ({ row: slot }) => slot.offering_name,
   },
   {
-    key: 'holder',
-    header: translate('Held by'),
-    render: (slot) => {
+    id: 'holder',
+    title: translate('Held by'),
+    render: ({ row: slot }) => {
       const badge = slotStatusBadge(slot.status);
       return (
         <div className="flex flex-col items-start gap-1">
@@ -255,8 +260,8 @@ export const getSlotColumns = (): DataTableColumn<OfferingTeamSlot>[] => [
     },
   },
   {
-    key: 'due',
-    header: translate('Due'),
-    render: (slot) => <Due at={slot.due_at} overdue={slot.overdue} />,
+    id: 'due',
+    title: translate('Due'),
+    render: ({ row: slot }) => <Due at={slot.due_at} overdue={slot.overdue} />,
   },
 ];

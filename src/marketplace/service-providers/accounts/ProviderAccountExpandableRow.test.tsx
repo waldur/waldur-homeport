@@ -20,7 +20,7 @@ vi.mock('@/table/Table', () => ({
   ),
 }));
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({
     rows: [
       {

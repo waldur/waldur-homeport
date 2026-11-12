@@ -16,7 +16,7 @@ import { MergeEntriesView } from './MergeEntriesView';
 
 // The table machinery lives in the Redux store; resolve the in-memory rows and
 // render the cells directly, which is what the grouping is about.
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useState } = await import('react');
   return {
     useTable: (config: any) => {

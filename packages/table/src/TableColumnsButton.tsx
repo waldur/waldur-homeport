@@ -1,0 +1,349 @@
+import {
+  Announcements,
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import {
+  ArrowCounterClockwiseIcon,
+  DotsSixVerticalIcon,
+  GearIcon,
+} from '@phosphor-icons/react';
+import { FC, ReactNode, useId, useMemo, useState } from 'react';
+import { FilterBox } from 'waldur-form';
+import { translate } from 'waldur-i18n-runtime';
+import {
+  BaseButton,
+  Checkbox,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  cn,
+  menuItem,
+} from 'waldur-ui';
+
+import { COLUMN_ACTIONS_KEY } from './constants';
+import { TableProps } from './types';
+
+interface SortableItemProps {
+  id: string;
+  title: ReactNode;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+const SortableItem: FC<SortableItemProps> = ({
+  id,
+  title,
+  isActive,
+  onClick,
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  const checkboxId = useId();
+  const labelText = typeof title === 'string' ? title : id;
+
+  return (
+    <li
+      className={cn(menuItem({ look: 'actions' }), isDragging && 'opacity-50')}
+      data-testid="column-row"
+      ref={setNodeRef}
+      style={style}
+    >
+      <button
+        type="button"
+        ref={setActivatorNodeRef}
+        {...attributes}
+        {...listeners}
+        className="inline-flex items-center justify-center size-[20px] shrink-0 p-0 me-[12px] cursor-grab active:cursor-grabbing border-0 bg-transparent text-quaternary hover:text-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand rounded-lg"
+        aria-label={translate('Reorder column {title}', { title: labelText })}
+      >
+        <DotsSixVerticalIcon weight="bold" size={16} />
+      </button>
+      <label
+        htmlFor={checkboxId}
+        className="flex items-center grow cursor-pointer m-0"
+      >
+        <Checkbox
+          id={checkboxId}
+          size="sm"
+          className="me-[12px]"
+          checked={Boolean(isActive)}
+          onChange={onClick}
+          aria-label={typeof title === 'string' ? title : undefined}
+        />
+        <span>{title}</span>
+      </label>
+    </li>
+  );
+};
+
+const ColumnsPopover = ({
+  columns,
+  toggleColumn,
+  activeColumns,
+  swapColumns,
+  columnPositions,
+  hasActions,
+  resetColumns,
+}) => {
+  const [query, setQuery] = useState('');
+  const actionsCheckboxId = useId();
+
+  const columnMap = useMemo(
+    () =>
+      columns.reduce(
+        (result, column) => ({ ...result, [column.id]: column }),
+        {},
+      ),
+    [columns],
+  );
+
+  const matches = useMemo(
+    () =>
+      columnPositions.filter(
+        (id) =>
+          // A column kept for the export alone has nothing here to show or hide.
+          (columnMap[id].visible ?? true) &&
+          ((columnMap[id].keys && !query) ||
+            typeof columnMap[id].title !== 'string' ||
+            columnMap[id].title.toLowerCase().includes(query.toLowerCase())),
+      ),
+    [columnMap, query],
+  );
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      swapColumns(active.id, over.id);
+    }
+  }
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const announcements: Announcements = useMemo(
+    () => ({
+      onDragStart({ active }) {
+        const title = columnMap[active.id]?.title ?? active.id;
+        return translate(
+          'Picked up column {title}. Use arrow keys to reorder, space to drop.',
+          { title },
+        );
+      },
+      onDragOver({ active, over }) {
+        if (over) {
+          const title = columnMap[active.id]?.title ?? active.id;
+          const overIndex = matches.indexOf(String(over.id)) + 1;
+          return translate(
+            'Column {title} was moved over position {position} of {total}.',
+            { title, position: overIndex, total: matches.length },
+          );
+        }
+      },
+      onDragEnd({ active, over }) {
+        const title = columnMap[active.id]?.title ?? active.id;
+        if (over) {
+          const overIndex = matches.indexOf(String(over.id)) + 1;
+          return translate(
+            'Column {title} was dropped at position {position} of {total}.',
+            { title, position: overIndex, total: matches.length },
+          );
+        }
+        return translate('Column {title} was dropped.', { title });
+      },
+      onDragCancel({ active }) {
+        const title = columnMap[active.id]?.title ?? active.id;
+        return translate(
+          'Reordering was canceled. Column {title} returned to its original position.',
+          { title },
+        );
+      },
+    }),
+    [columnMap, matches],
+  );
+
+  return (
+    <div className="max-w-[400px]">
+      <div className="p-4">
+        <FilterBox
+          type="search"
+          placeholder={translate('Search...')}
+          aria-label={translate('Search columns')}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          rightAction={
+            <BaseButton
+              iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+              tooltip={translate('Reset settings to default')}
+              aria-label={translate('Reset settings to default')}
+              onClick={resetColumns}
+              variant="text-secondary"
+              size="sm"
+            />
+          }
+        />
+      </div>
+      <div role="status" className="sr-only">
+        {query
+          ? translate('Columns found: {count}', { count: matches.length })
+          : ''}
+      </div>
+      <div className="max-h-[300px] overflow-auto pb-1.5">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+          accessibility={{
+            announcements,
+          }}
+        >
+          <SortableContext
+            items={matches}
+            strategy={verticalListSortingStrategy}
+          >
+            <ul
+              className="list-unstyled p-0 m-0"
+              aria-label={translate('Columns')}
+            >
+              {matches.map((id) => (
+                <SortableItem
+                  key={id}
+                  id={id}
+                  title={columnMap[id].title}
+                  onClick={() => toggleColumn(id, columnMap[id])}
+                  isActive={Boolean(activeColumns[id])}
+                />
+              ))}
+              {hasActions && (
+                <li
+                  data-testid="column-row"
+                  className={menuItem({ look: 'actions' })}
+                >
+                  <span
+                    className="inline-block size-[20px] shrink-0 me-[12px] opacity-0"
+                    aria-hidden="true"
+                  />
+                  <label
+                    htmlFor={actionsCheckboxId}
+                    className="flex items-center grow cursor-pointer m-0"
+                  >
+                    <Checkbox
+                      id={actionsCheckboxId}
+                      key={activeColumns[COLUMN_ACTIONS_KEY]}
+                      size="sm"
+                      className="me-[12px]"
+                      checked={Boolean(activeColumns[COLUMN_ACTIONS_KEY])}
+                      onChange={() =>
+                        toggleColumn(COLUMN_ACTIONS_KEY, {
+                          keys: [COLUMN_ACTIONS_KEY],
+                        })
+                      }
+                      aria-label={translate('Actions')}
+                    />
+                    <span>{translate('Actions')}</span>
+                  </label>
+                </li>
+              )}
+            </ul>
+          </SortableContext>
+        </DndContext>
+
+        {matches.length === 0 && (
+          <div className="text-quaternary text-center py-3 text-xs">
+            {translate('No columns found')}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export const TableColumnButton: FC<TableProps> = ({
+  columns,
+  activeColumns,
+  toggleColumn,
+  swapColumns,
+  columnPositions,
+  initColumnPositions,
+  resetColumns,
+  rowActions,
+  mode,
+}) => {
+  const handleReset = () => {
+    resetColumns();
+    initColumnPositions(columns.map((column) => column.id));
+    // Re-run the same initialization Table.tsx uses on mount:
+    // column.optional === true → hidden by default; otherwise → visible.
+    columns.forEach((column) => {
+      toggleColumn(column.id, column, column.optional ? false : true);
+    });
+    if (rowActions) {
+      toggleColumn(COLUMN_ACTIONS_KEY, { keys: [] }, true);
+    }
+  };
+  return (
+    <Popover>
+      {/* BaseButton's own `tooltip` prop wraps the button in its own
+          Tooltip internally — Radix's nested asChild composition delivers
+          Popover's props down to the underlying <button>. */}
+      <PopoverTrigger asChild disabled={mode !== 'table'}>
+        <BaseButton
+          disabled={mode !== 'table'}
+          variant="tertiary"
+          size="lg"
+          tooltip={translate('Toggle visible columns')}
+          iconNode={<GearIcon weight="bold" />}
+        />
+      </PopoverTrigger>
+      <PopoverContent
+        side="bottom"
+        align="end"
+        sideOffset={2}
+        aria-label={translate('Visible columns')}
+      >
+        <ColumnsPopover
+          columns={columns}
+          activeColumns={activeColumns}
+          toggleColumn={toggleColumn}
+          swapColumns={swapColumns}
+          columnPositions={columnPositions}
+          hasActions={Boolean(rowActions)}
+          resetColumns={handleReset}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+};

@@ -6,7 +6,7 @@ When rendering multiple tables within tabs, use the `TableWithTabs` wrapper comp
 
 ## Table with Tabs Wrapper Component (`TableWithTabs`)
 
-`TableWithTabs` (`src/table/TableWithTabs.tsx`) is a layout wrapper that renders waldur-ui `Tabs` (see [tabs.md](../tabs.md)). Each tab maps to a lazy-loaded child component.
+`TableWithTabs` (`packages/table/src/TableWithTabs.tsx`) is a layout wrapper that renders waldur-ui `Tabs` (see [tabs.md](../tabs.md)). Each tab maps to a lazy-loaded child component.
 
 It is homeport's wrapper over the router-free `BaseTableWithTabs`, adding `syncWithUrlKey` (through `useUrlTab` and UI-Router). `BaseTableWithTabs` keeps the open tab itself, or takes it as `activeKey`/`onSelect` from a caller that keeps it elsewhere; use it outside homeport.
 

@@ -9,7 +9,10 @@ import { renderWithProviders } from '@/test/harness';
 import { EventSubscriptionsList } from './EventSubscriptionsList';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const store = configureStore()({
   tables: {

@@ -11,7 +11,10 @@ import { renderWithProviders } from '@/test/harness';
 import { AgentIdentityExpandableRow } from './AgentIdentityExpandableRow';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const AGENT_UUID = 'agent-1';
 const CONSUMER_QUEUE = 'consumer_0dc92ac0518e4604a2e27ff11120df6c';

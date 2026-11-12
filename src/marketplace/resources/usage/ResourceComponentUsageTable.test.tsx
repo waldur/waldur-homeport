@@ -7,7 +7,7 @@ const useTableSpy = vi.fn();
 
 // Capture the config `useTable` receives so we can assert on the built filter,
 // and bypass the real React Query / SDK fetch.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (config: any) => {
     useTableSpy(config);
     return { rows: [], pagination: {} };

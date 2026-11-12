@@ -9,7 +9,7 @@ import {
   useUsageExport,
 } from './UsageExportDropdown';
 
-vi.mock('@/table/exporters');
+vi.mock('waldur-table/src/exporters');
 
 describe('useUsageExport', () => {
   beforeEach(() => {

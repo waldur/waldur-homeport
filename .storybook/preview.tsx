@@ -5,12 +5,18 @@ import { sb } from 'storybook/test';
 import { initBrandTokens } from 'waldur-design-tokens';
 
 import { ENV } from '@/core/config';
+import { homeportTableComponents } from '@/core/tableHostComponents';
 import { getBrandColor } from '@/core/utils';
+import { configureTableHost } from '@/table/host';
 import { applyTheme } from '@/theme/utils';
 
 // Same order as src/index.tsx: tailwind.css declares the layer order first.
 import '../src/tailwind.css';
 import '../src/styles/index.scss';
+
+// Tables show homeport's crash message, as afterBootstrap.tsx sets up; the
+// URL stays the browser's, as Storybook has no router.
+configureTableHost(homeportTableComponents);
 
 // Redirects @/core/api to src/core/__mocks__/api.ts: same API, fixture icons.
 sb.mock(import('../src/core/api.ts'));
@@ -119,7 +125,6 @@ const preview: Preview = {
             'Card',
             'StatCard',
             'Table',
-            'DataTable',
             'MermaidChart',
           ],
           'Overlays',

@@ -13,7 +13,10 @@ import type { RmqQueueStats, RmqVhostStats } from './api';
 import { RabbitMQVhostExpandableRow } from './RabbitMQVhostExpandableRow';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const mockStore = configureStore();
 const makeStore = (vhostName: string, queues: RmqQueueStats[]) => {

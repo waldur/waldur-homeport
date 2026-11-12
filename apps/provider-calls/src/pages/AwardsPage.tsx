@@ -1,29 +1,28 @@
+import { useMemo } from 'react';
+import { createFetcher } from 'waldur-api-client';
 import { translate } from 'waldur-i18n-runtime';
 import {
   marketplaceOrdersApproveByProvider,
+  marketplaceOrdersList,
   marketplaceOrdersRejectByProvider,
   OrderDetails,
   OrderState,
 } from 'waldur-js-client';
 import { useManagedMutation } from 'waldur-shell';
-import {
-  Badge,
-  BaseButton,
-  DataTableColumn,
-  SegmentedControl,
-} from 'waldur-ui';
+import { Column, Table, useTable } from 'waldur-table';
+import { Badge, BaseButton, SegmentedControl } from 'waldur-ui';
 
 import {
   InternalLink,
   PageHeader,
   PortalLink,
-  QueryTableCard,
+  useStableColumns,
 } from '../components';
 import { DASH, formatAmount, formatDate } from '../format';
 import { providerOrderUrl } from '../links';
 import { APPROVE_ORDER, can, REJECT_ORDER, useGrants } from '../permissions';
 import { Provider } from '../providers';
-import { PROVIDER_CALLS_QUERY_KEY, useAwardOrders } from '../queries';
+import { PROVIDER_CALLS_QUERY_KEY } from '../queries';
 import { navigate, pageHref, proposalHref, useRoute } from '../router';
 
 const FILTERS: Record<string, OrderState[]> = {
@@ -212,11 +211,11 @@ const AwardOrderActions = ({ order }: { order: OrderDetails }) => {
 
 export const getAwardColumns = (
   providerUuid: string | undefined,
-): DataTableColumn<OrderDetails>[] => [
+): Column<OrderDetails>[] => [
   {
-    key: 'proposal',
-    header: translate('Awarded proposal'),
-    render: (order) => (
+    id: 'proposal',
+    title: translate('Awarded proposal'),
+    render: ({ row: order }) => (
       <div className="flex flex-col">
         {order.award?.can_read ? (
           <InternalLink href={proposalHref(order.award.proposal_uuid)}>
@@ -232,9 +231,9 @@ export const getAwardColumns = (
     ),
   },
   {
-    key: 'offering',
-    header: translate('Offering'),
-    render: (order) => (
+    id: 'offering',
+    title: translate('Offering'),
+    render: ({ row: order }) => (
       <div className="flex flex-col">
         <span>{order.offering_name}</span>
         <span className="text-xs text-quaternary">{order.project_name}</span>
@@ -242,31 +241,33 @@ export const getAwardColumns = (
     ),
   },
   {
-    key: 'limits',
-    header: translate('Awarded'),
-    render: (order) => <AwardedLimits order={order} />,
+    id: 'limits',
+    title: translate('Awarded'),
+    render: ({ row: order }) => <AwardedLimits order={order} />,
   },
   {
-    key: 'po',
-    header: translate('Purchase order'),
-    render: (order) =>
+    id: 'po',
+    title: translate('Purchase order'),
+    render: ({ row: order }) =>
       order.attachment || order.request_comment
         ? order.request_comment || translate('Document attached')
         : DASH,
   },
   {
-    key: 'created',
-    header: translate('Placed'),
-    render: (order) => (
+    id: 'created',
+    orderField: 'created',
+    title: translate('Placed'),
+    render: ({ row: order }) => (
       <PortalLink href={providerUuid ? providerOrderUrl(order.uuid) : null}>
         {formatDate(order.created)}
       </PortalLink>
     ),
   },
   {
-    key: 'state',
-    header: translate('State'),
-    render: (order) => {
+    id: 'state',
+    orderField: 'state',
+    title: translate('State'),
+    render: ({ row: order }) => {
       const badge = getStateBadge(order.state);
       return (
         <Badge variant={badge.variant} shape="pill" hasBullet>
@@ -276,11 +277,55 @@ export const getAwardColumns = (
     },
   },
   {
-    key: 'actions',
-    header: '',
-    render: (order) => <AwardOrderActions order={order} />,
+    id: 'actions',
+    title: '',
+    render: ({ row: order }) => <AwardOrderActions order={order} />,
   },
 ];
+
+const fetchOrders = createFetcher(marketplaceOrdersList);
+
+/** The award orders in one of the page's states, a page at a time. */
+const AwardsTable = ({
+  providerUuid,
+  filter,
+}: {
+  providerUuid: string;
+  filter: string;
+}) => {
+  const tableFilter = useMemo(
+    () => ({
+      provider_uuid: providerUuid,
+      from_award: true,
+      state: FILTERS[filter],
+      type: ['Create'],
+      // Newest first, until a column header is clicked.
+      o: '-created',
+    }),
+    [providerUuid, filter],
+  );
+  const tableProps = useTable({
+    // One table per state, so each keeps its own page and search.
+    table: `provider-calls-awards-${filter}`,
+    fetchData: fetchOrders,
+    filter: tableFilter,
+    queryField: 'query',
+  });
+  return (
+    <Table
+      {...tableProps}
+      columns={useStableColumns(getAwardColumns(providerUuid))}
+      // The page header names the list; the bar holds the search.
+      hideTitle
+      hasQuery
+      emptyMessage={
+        filter === 'waiting'
+          ? translate('No award is waiting for your approval.')
+          : translate('No awards here.')
+      }
+    />
+  );
+};
 
 /**
  * After the award: the orders that provision it on the provider's
@@ -292,7 +337,6 @@ export const AwardsPage = ({ provider }: { provider?: Provider }) => {
   const { params } = useRoute();
   const requested = params.get('state');
   const filter = requested && requested in FILTERS ? requested : 'waiting';
-  const query = useAwardOrders(provider?.uuid, FILTERS[filter]);
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-6">
@@ -319,16 +363,11 @@ export const AwardsPage = ({ provider }: { provider?: Provider }) => {
           { value: 'refused', label: translate('Refused or failed') },
         ]}
       />
-      <QueryTableCard
-        query={query}
-        columns={getAwardColumns(provider?.uuid)}
-        rowKey={(order) => order.uuid}
-        emptyMessage={
-          filter === 'waiting'
-            ? translate('No award is waiting for your approval.')
-            : translate('No awards here.')
-        }
-      />
+      {/* Without a provider the endpoint would list every order the user
+          can see; one is selected as soon as the providers have loaded. */}
+      {provider ? (
+        <AwardsTable providerUuid={provider.uuid} filter={filter} />
+      ) : null}
     </div>
   );
 };

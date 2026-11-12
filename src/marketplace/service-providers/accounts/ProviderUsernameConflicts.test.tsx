@@ -16,7 +16,7 @@ const useTableFetch = vi.fn();
 
 // The table itself is covered elsewhere: here it shows its actions, and the
 // test drives the fetchData it was given.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (options) => {
     tableOptions = options;
     return { rows: [], fetch: useTableFetch };

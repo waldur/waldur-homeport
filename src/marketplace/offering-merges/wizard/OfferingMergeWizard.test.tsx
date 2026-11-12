@@ -17,7 +17,7 @@ import { OfferingMergeWizard } from './OfferingMergeWizard';
 
 // The preview's grouped tables read their state from the Redux store, which
 // this suite has none of: it is about the wizard's flow, not its tables.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ rows: [], fetch: vi.fn() }),
 }));
 vi.mock('@/table/Table', () => ({ default: () => null }));

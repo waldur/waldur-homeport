@@ -4,11 +4,11 @@ import { renderWithProviders } from '@/test/harness';
 
 import { AccessSubnetMatrix } from './AccessSubnetMatrix';
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [] }),
 }));
 
-vi.mock('@/table/useFilterValues', () => ({
+vi.mock('waldur-table/src/useFilterValues', () => ({
   useFilterValues: () => ({}),
 }));
 

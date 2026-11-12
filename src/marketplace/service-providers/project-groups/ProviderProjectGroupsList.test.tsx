@@ -9,8 +9,8 @@ import {
   ProviderProjectGroupsList,
 } from './ProviderProjectGroupsList';
 
-vi.mock('@/table/useTable', () => ({ useTable: vi.fn() }));
-vi.mock('@/table/useFilterValues', () => ({
+vi.mock('waldur-table/src/useTable', () => ({ useTable: vi.fn() }));
+vi.mock('waldur-table/src/useFilterValues', () => ({
   useFilterValues: vi.fn(() => ({})),
 }));
 vi.mock('@/core/Link', () => ({

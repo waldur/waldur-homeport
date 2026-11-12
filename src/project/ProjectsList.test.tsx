@@ -13,8 +13,10 @@ vi.mock('@/table/Table', () => ({
     return null;
   },
 }));
-vi.mock('@/table/useTable', () => ({ useTable: () => ({}) }));
-vi.mock('@/table/useFilterValues', () => ({ useFilterValues: () => ({}) }));
+vi.mock('waldur-table/src/useTable', () => ({ useTable: () => ({}) }));
+vi.mock('waldur-table/src/useFilterValues', () => ({
+  useFilterValues: () => ({}),
+}));
 vi.mock('./ProjectsTableActions', () => ({ ProjectsTableActions: () => null }));
 
 const renderedColumn = (id: string): Column =>

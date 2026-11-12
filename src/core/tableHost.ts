@@ -1,6 +1,6 @@
 import { getTitle } from '@/navigation/title';
 import { router } from '@/router';
-import { configureTableHost } from '@/table/host';
+import { configureTableHost, TableHost } from '@/table/host';
 
 // The page's last breadcrumb, else its title.
 const getDefaultTitle = () => {
@@ -20,8 +20,11 @@ const getDefaultTitle = () => {
 
 /** Tables read their default title and filter URL params through UI-Router,
  * so a filter change is a router URL change (sidebar highlighting follows). */
-export const configureHomeportTableHost = () =>
+export const configureHomeportTableHost = (
+  components: Partial<TableHost> = {},
+) =>
   configureTableHost({
+    ...components,
     getDefaultTitle,
     readQuery: () => router.urlService.search(),
     writeQuery: (query) =>

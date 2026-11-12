@@ -32,7 +32,7 @@ vi.mock('@/table/Table', () => ({
 }));
 // Rows loaded once per filter; a fetcher rebuilt on every render (as the
 // documents card's is) must not reload them.
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useRef, useState } = await import('react');
   return {
     useTable: ({ fetchData, filter }) => {

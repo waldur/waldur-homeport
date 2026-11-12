@@ -24,6 +24,10 @@ export interface ProjectRow {
   monthlySpend: string;
 }
 
+// One array for "no rows", so a table over them does not start over every
+// render.
+const NO_ROWS: ProjectRow[] = [];
+
 interface DashboardData {
   orgName: string;
   projectsCount: number;
@@ -207,15 +211,14 @@ export function useDashboardData() {
         orgName: selectedCustomer.name,
         projectsCount: selectedCustomer.projects_count,
         usersCount: selectedCustomer.users_count,
-        // renderFieldOrDash() lives in @/table/utils — this app is
-        // deliberately decoupled from src/table/* (see DataTable.tsx's
-        // header comment), so that convention doesn't apply here.
+        // A stat value, not a table cell, so the table's
+        // renderFieldOrDash() does not apply here.
         // eslint-disable-next-line waldur-custom/enforce-render-field-or-dash
         invoiceTotal: projectData?.invoiceTotal ?? '—',
         invoiceHint:
           projectData?.invoiceHint ??
           (loading ? translate('loading…') : translate('no invoices')),
-        rows: projectData?.rows ?? [],
+        rows: projectData?.rows ?? NO_ROWS,
       }
     : null;
 

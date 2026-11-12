@@ -1,13 +1,4 @@
-import { ExportData } from './types';
-
-const exporters = {
-  csv: () => import('./csv'),
-  clipboard: () => import('./clipboard'),
-  pdf: () => import('./pdf'),
-  excel: () => import('./excel'),
-};
-
-export default async function exportAs(format, table, data: ExportData) {
-  const exporter = await exporters[format]();
-  await exporter.default(table, data);
-}
+// Lives in waldur-table (packages/table); kept here so the app's imports
+// don't change.
+export * from 'waldur-table/src/exporters';
+export { default } from 'waldur-table/src/exporters';
