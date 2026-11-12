@@ -245,6 +245,25 @@ describe('ReauthenticationDialog', () => {
     );
   });
 
+  it('says why it asks before widening a personal access token’s networks', () => {
+    renderWithProviders(
+      <ReauthenticationDialog
+        challenge={{
+          action: 'widen_personal_access_token_networks',
+          methods: ['password'],
+          detail: 'Confirm your identity to make this change.',
+        }}
+        onConfirm={vi.fn()}
+      />,
+    );
+
+    expect(
+      screen.getByText(
+        "To let a personal access token work from more networks, confirm it's you.",
+      ),
+    ).toBeVisible();
+  });
+
   it('points to support when the API offers only methods the portal lacks', () => {
     renderDialog(['oidc']);
 

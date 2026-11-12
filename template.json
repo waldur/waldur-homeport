@@ -73115,6 +73115,11 @@
       "primary_ui_type": "label"
     }
   },
+  "To let a personal access token work from more networks, confirm it's you.": {
+    "context": {
+      "feature_area": "reauthentication"
+    }
+  },
   "To look at": {
     "context": {
       "primary_ui_type": "title",
