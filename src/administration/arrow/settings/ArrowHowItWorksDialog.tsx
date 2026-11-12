@@ -611,7 +611,7 @@ const FieldMappingTable: FC<FieldMappingTableProps> = ({
       },
     ]}
     rows={fields}
-    rowKey="arrowField"
+    rowKey="waldurField"
   />
 );
 

@@ -86,7 +86,11 @@ export default mergeConfig(
             browser: {
               enabled: true,
               headless: true,
-              provider: playwright({}),
+              provider: playwright({
+                // Docker gives Chromium a 64MB /dev/shm; once the run fills it,
+                // the page crashes mid-run ("Browser connection was closed").
+                launchOptions: { args: ['--disable-dev-shm-usage'] },
+              }),
               instances: [
                 {
                   browser: 'chromium',
