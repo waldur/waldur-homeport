@@ -19,7 +19,11 @@ import { BaseTextField } from '@/form/TextField';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { translate } from '@/i18n';
+import { ROW_SECTIONS_CLASS, RowSection } from '@/proposals/ExpandableRowParts';
 import { renderFieldOrDash } from '@/table/utils';
+
+const hasEntries = (data?: object | null) =>
+  Boolean(data && Object.keys(data).length > 0);
 
 interface OnboardingJustificationDetailsProps {
   justification: OnboardingJustification | null;
@@ -105,90 +109,63 @@ export const OnboardingJustificationDetails: FC<
           </div>
 
           <Card className="mb-3">
-            <CardContent>
-              {((verification?.user_submitted_customer_data &&
-                Object.keys(verification.user_submitted_customer_data).length >
-                  0) ||
-                (verification?.onboarding_metadata &&
-                  Object.keys(verification.onboarding_metadata).length >
-                    0)) && (
-                <>
-                  <h3 className="mb-3">
-                    {translate("User's organization details")}
-                  </h3>
-                  <hr className="my-3" />
-
-                  <PropertyList
-                    variant="summary"
-                    className="flex flex-col gap-6 mb-3"
-                  >
-                    {verification?.user_submitted_customer_data &&
-                      Object.keys(verification.user_submitted_customer_data)
-                        .length > 0 && (
-                        <PropertyList.Section
-                          title={translate('Organization info')}
-                        >
-                          {Object.entries(
-                            verification.user_submitted_customer_data,
-                          ).map(([key, value]) => (
-                            <PropertyItem
-                              key={key}
-                              label={key}
-                              value={String(renderFieldOrDash(value))}
-                            />
-                          ))}
-                        </PropertyList.Section>
-                      )}
-
-                    {verification?.onboarding_metadata &&
-                      Object.keys(verification.onboarding_metadata).length >
-                        0 && (
-                        <PropertyList.Section title={translate('User answers')}>
-                          {Object.entries(verification.onboarding_metadata).map(
-                            ([key, value]) => (
-                              <PropertyItem
-                                key={key}
-                                label={key}
-                                value={String(renderFieldOrDash(value))}
-                              />
-                            ),
-                          )}
-                        </PropertyList.Section>
-                      )}
+            <CardContent className={ROW_SECTIONS_CLASS}>
+              {hasEntries(verification?.user_submitted_customer_data) && (
+                <RowSection title={translate('Organization info')}>
+                  <PropertyList variant="summary" space={1.5}>
+                    {Object.entries(
+                      verification.user_submitted_customer_data,
+                    ).map(([key, value]) => (
+                      <PropertyItem
+                        key={key}
+                        label={key}
+                        value={String(renderFieldOrDash(value))}
+                      />
+                    ))}
                   </PropertyList>
-                </>
+                </RowSection>
               )}
 
-              {justification?.supporting_documentation &&
-                justification.supporting_documentation.length > 0 && (
-                  <>
-                    <h4 className="font-medium mb-2.5">
-                      {translate('Attached documents')}
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mb-2.5">
-                      {justification.supporting_documentation.map(
-                        (doc, index) => (
-                          <div key={index}>
-                            <AttachmentsList
-                              attachments={[doc]}
-                              ItemComponent={({ attachment }) => (
-                                <AttachmentItem attachment={attachment} />
-                              )}
-                            />
-                          </div>
-                        ),
-                      )}
-                    </div>
-                  </>
-                )}
+              {hasEntries(verification?.onboarding_metadata) && (
+                <RowSection title={translate('User answers')}>
+                  <PropertyList variant="summary" space={1.5}>
+                    {Object.entries(verification.onboarding_metadata).map(
+                      ([key, value]) => (
+                        <PropertyItem
+                          key={key}
+                          label={key}
+                          value={String(renderFieldOrDash(value))}
+                        />
+                      ),
+                    )}
+                  </PropertyList>
+                </RowSection>
+              )}
+
+              {justification?.supporting_documentation?.length > 0 && (
+                <RowSection title={translate('Attached documents')}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+                    {justification.supporting_documentation.map(
+                      (doc, index) => (
+                        <div key={index}>
+                          <AttachmentsList
+                            attachments={[doc]}
+                            ItemComponent={({ attachment }) => (
+                              <AttachmentItem attachment={attachment} />
+                            )}
+                          />
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </RowSection>
+              )}
 
               {justification &&
                 (justification.error_message ||
                   justification.error_traceback) && (
-                  <PropertyList variant="summary" className="mb-3">
-                    <PropertyList.Section
-                      title={translate('Automatic validation logs')}
-                    >
+                  <RowSection title={translate('Automatic validation logs')}>
+                    <PropertyList variant="summary" space={1.5}>
                       <PropertyItem
                         label={translate('Error code')}
                         value={justification.error_message}
@@ -197,16 +174,13 @@ export const OnboardingJustificationDetails: FC<
                         label={translate('Traceback')}
                         value={justification.error_traceback}
                       />
-                    </PropertyList.Section>
-                  </PropertyList>
+                    </PropertyList>
+                  </RowSection>
                 )}
 
               {justification && (
-                <>
-                  <hr className="my-3" />
-
-                  <h4 className="font-medium mb-2.5">{translate('Notes')}</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 mb-2.5">
+                <RowSection title={translate('Notes')}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5">
                     <div>
                       <FormField name="staff_notes">
                         {({ input }) => (
@@ -222,7 +196,7 @@ export const OnboardingJustificationDetails: FC<
                       </FormField>
                     </div>
                   </div>
-                </>
+                </RowSection>
               )}
             </CardContent>
           </Card>
