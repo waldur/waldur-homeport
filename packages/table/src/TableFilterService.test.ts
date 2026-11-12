@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { TableFilterService } from './TableFilterService';
+import { getSavedFiltersKey } from './utils';
 
 const KEY = 'test/saved-filters';
 const group = (title: string, id?: string) => ({
@@ -34,5 +35,36 @@ describe('TableFilterService', () => {
     TableFilterService.addOrReplace(KEY, group('Renamed', 'g1'));
 
     expect(TableFilterService.list(KEY)).toEqual([group('Renamed', 'g1')]);
+  });
+
+  // The key and the stored shape are a contract between homeport and the
+  // micro-apps, which share one origin's localStorage: a filter saved in one
+  // app shows up in the others. Changing either loses every user's saved
+  // filters unless each app ships a migration.
+  it('stores groups under the shared key, in the shared shape', () => {
+    const key = getSavedFiltersKey('projects', 'ProjectsFilter');
+    expect(key).toBe('waldur/table/filters/projects/ProjectsFilter');
+
+    TableFilterService.addOrReplace(key, {
+      title: 'Mine',
+      date: '2026-01-01',
+      values: { query: 'abc' },
+    });
+
+    const stored = JSON.parse(localStorage.getItem(key));
+    expect(stored).toEqual([
+      {
+        id: expect.any(String),
+        title: 'Mine',
+        date: '2026-01-01',
+        values: { query: 'abc' },
+      },
+    ]);
+    expect(Object.keys(stored[0]).sort()).toEqual([
+      'date',
+      'id',
+      'title',
+      'values',
+    ]);
   });
 });
