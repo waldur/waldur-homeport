@@ -1,10 +1,11 @@
 import { MarketplaceResourcesListData, Resource } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { BooleanField } from '@/table/BooleanField';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { SLUG_COLUMN } from '@/table/slug';
 import { Column } from '@/table/types';
 import { renderFieldOrDash } from '@/table/utils';
@@ -254,7 +255,9 @@ export const getResourceAllListColumns = (
         title: translate('Project end date'),
         render: ({ row }) => (
           <>
-            {renderFieldOrDash(row.project_end_date)}
+            {row.project_end_date
+              ? formatDate(row.project_end_date)
+              : DASH_ESCAPE_CODE}
             {row.project_effective_end_date &&
               row.project_end_date &&
               row.project_effective_end_date !== row.project_end_date && (

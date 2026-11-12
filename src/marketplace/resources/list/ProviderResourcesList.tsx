@@ -254,7 +254,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Termination date'),
-      render: ({ row }) => <ResourceTerminationDateField row={row} format />,
+      render: ({ row }) => <ResourceTerminationDateField row={row} />,
       orderField: 'end_date',
       id: 'end_date',
       keys: ['end_date', 'resource_effective_end_date'],

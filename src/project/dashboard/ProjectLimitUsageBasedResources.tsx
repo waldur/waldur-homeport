@@ -156,7 +156,7 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
       },
       isFeatureVisible(MarketplaceFeatures.show_resource_end_date) && {
         title: translate('Expiration'),
-        render: ({ row }) => <ResourceTerminationDateField row={row} format />,
+        render: ({ row }) => <ResourceTerminationDateField row={row} />,
       },
       {
         title: translate('Usage'),
