@@ -18,10 +18,10 @@ import { menuRowDataAttributes } from './MenuItem';
 export const MENU_PANEL_SCROLL_CLASSNAME =
   'max-h-(--radix-dropdown-menu-content-available-height) overflow-x-hidden overflow-y-auto';
 
-// Metronic's dropdown entrance (fade in while sliding 0.75rem toward the
+// Dropdown entrance animation (fade in while sliding 0.75rem toward the
 // trigger, 0.3s ease), as keyframes in waldur-design-tokens/animations.css.
 // Only a panel that opens upwards (data-side="top") slides down; every
-// other side, including a sideways submenu, slides up, as Metronic's did.
+// other side, including a sideways submenu, slides up.
 // Keyframes rather than a transition because Radix holds animations back
 // until the panel is positioned; see the comment on those keyframes.
 const MENU_PANEL_MOTION_CLASSNAME =
@@ -36,7 +36,7 @@ export type SurfaceContainer = 'menu' | 'popover' | 'disclosure';
 
 // No border (a 1px ring in dark), the page body's background, an 8px
 // radius and z-index 105.
-// Like Metronic, it sets no text colour; only rows are gray-600.
+// Sets no text colour; only rows are gray-600.
 const navSurface = cva(
   `z-nav-menu m-[0px] flex list-none flex-col p-[0px] rounded-lg shadow-[var(--menu-shadow)] bg-[var(--menu-bg)] ${MENU_PANEL_MOTION_CLASSNAME}`,
   {
@@ -63,7 +63,7 @@ const navSurface = cva(
 );
 
 // 6.5px vertical padding, 13px text, a 130px minimum width and z-index
-// 1100, and no entrance motion, as Bootstrap's. Scrolling is left to the
+// 1100, and no entrance motion. Scrolling is left to the
 // panel (Menu.Content adds it; ActionsMenu's popover adds its own).
 const ACTIONS_SURFACE_CLASSNAME =
   'z-dropdown-menu m-[0px] block min-w-[130px] list-none rounded-lg bg-[var(--menu-bg)] py-[6.5px] text-start text-sm shadow-[var(--menu-shadow)]';

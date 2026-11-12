@@ -1,7 +1,7 @@
 import { SVGProps } from 'react';
 
 /**
- * The check: the path the legacy Bootstrap checkbox drew, as an element in
+ * The check mark, as an element in
  * `currentColor`. Checkbox draws it inside its box; a single-select draws
  * it at the end of the selected option.
  */

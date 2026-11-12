@@ -10,7 +10,7 @@
 //
 // capture serves the static Storybook itself, opens each story's iframe with
 // the `theme` global (the same switch as the toolbar, which sets data-theme
-// for the Bootstrap stylesheet and Tailwind alike), waits for it and the fonts,
+// for the legacy stylesheet and Tailwind alike), waits for it and the fonts,
 // freezes animations, and writes <story-id>.<theme>.png. --font forces one
 // font family everywhere, for comparing two builds that load different web
 // fonts: the text then can't differ, so colour changes stand out. --widths

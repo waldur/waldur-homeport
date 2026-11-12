@@ -20,7 +20,7 @@ import { ResourceAction } from '@/marketplace/resources/actions/constants';
 /** The colours an action's icon can take (default gray). */
 export type ActionIconColor = MenuActionIconColor;
 
-// Bootstrap's text-dark, in both themes.
+// Primary text color, in both themes.
 const STAFF_ICON_CLASSNAME = 'ms-1 me-2.5 text-primary';
 
 export interface ActionItemProps {

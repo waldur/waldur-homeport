@@ -151,7 +151,7 @@ export const MarketplaceLandingFilter = ({
           <PopoverContent
             align={align}
             sideOffset={2}
-            // react-bootstrap's Dropdown.Menu auto-generated this pointing
+            // Legacy dropdown auto-generated this pointing
             // at the Toggle's id; Radix has no equivalent auto-wiring, so
             // it has to be set explicitly here — both for a11y and because
             // the E2E suite's MarketplaceFilter.open() page object asserts
@@ -159,13 +159,13 @@ export const MarketplaceLandingFilter = ({
             aria-labelledby="marketplace-landing-filter-toggle"
             // A form, not a menu, so a plain Popover. The Card draws the
             // panel's border; the content keeps the menus' layer, so it
-            // stacks like the other dropdowns, and Metronic's dropdown
-            // entrance (on Content so that Radix holds it back until the
+            // stacks like the other dropdowns, with the dropdown
+            // entrance animation (on Content so that Radix holds it back until the
             // panel is positioned, see waldur-design-tokens/animations.css).
             className="z-dropdown-menu w-[min(400px,calc(100vw-30px))] border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
           >
             <Card className="text-base shadow-[var(--menu-shadow)] m-0">
-              {/* Bootstrap's bare .card-body: flex 1 1 auto, 1rem padding. */}
+              {/* Card body: flex 1 1 auto, 1rem padding. */}
               <form
                 onSubmit={handleSubmit}
                 className="flex flex-auto flex-col gap-6 p-[var(--card-spacer)]"

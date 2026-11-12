@@ -34,7 +34,7 @@ const meta: Meta<typeof Card> = {
     a11y: { test: 'error' },
     docs: {
       description: {
-        component: `A surface that groups one subject: a header with its title and actions, a body, and an optional footer. It draws what HomePort's Metronic \`.card\` drew, so a page can mix the two without a seam.
+        component: `A surface that groups one subject: a header with its title and actions, a body, and an optional footer.
 
 **Anatomy.** \`Card\` > \`CardHeader\` (> \`CardTitle\`, \`CardToolbar\`) > \`CardContent\` > \`CardFooter\`. Every part is a plain element you can pass a \`className\` to; a utility you pass wins over the part's own styles. Each part sets \`data-slot\` (\`card\`, \`card-header\`, \`card-title\`, \`card-toolbar\`, \`card-content\`, \`card-footer\`), so a parent or a test can find it.
 
@@ -48,7 +48,7 @@ const meta: Meta<typeof Card> = {
 
 **Variants.** \`variant="solid"\` gives the header a full-width \`--bg-secondary\` strip (expanded-row details); \`size="sm"\` is the compact card; \`variant="widget"\` pads its body 20px (dashboard widgets). \`variant="table"\` is the card \`@/table\` draws around a table — use \`Table\`, not this prop. \`asChild\` draws the card on its only child, such as a link.
 
-**Pick something else when** the card is label/value pairs about one object (\`PropertyCard\`), one figure (\`StatCard\`), a collapsible section (\`AccordionCard\`) or a list of records (\`@/table\`'s \`Table\`). Never write Bootstrap's \`card\`, \`card-header\`, \`card-body\` classes: they no longer style anything.
+**Pick something else when** the card is label/value pairs about one object (\`PropertyCard\`), one figure (\`StatCard\`), a collapsible section (\`AccordionCard\`) or a list of records (\`@/table\`'s \`Table\`). Never write legacy \`card\`, \`card-header\`, \`card-body\` classes: they no longer style anything.
 
 **Context.** A card in a table or an expanded table row is restyled by HomePort's stylesheet through \`--card-*\` hooks the parts read. *Data Display/Card/Context* shows those cases and checks them.`,
       },

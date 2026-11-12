@@ -28,9 +28,7 @@ export interface CheckLabelProps {
  * The shared label row: control first, then the label (and tooltip) over the
  * description, 8px apart. The label is a `<label htmlFor>` naming the
  * control; the description is linked with `aria-describedby`, so it is read
- * as help text rather than as part of the control's name. Replaces
- * Bootstrap's `.form-check` + `.form-check-label` and Metronic's
- * `.form-check-custom`.
+ * as help text rather than as part of the control's name.
  *
  * Internal to Checkbox, Radio and Switch; callers pass `label` to those.
  */

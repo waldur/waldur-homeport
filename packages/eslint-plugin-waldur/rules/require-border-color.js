@@ -1,12 +1,9 @@
 /**
  * ESLint rule: a bare `border` names its colour.
  *
- * Bootstrap's `.border` was `border: 1px solid var(--border-secondary)
- * !important`, so `border` alone drew the secondary line. Bootstrap no longer
- * generates it (#478): `border` is Tailwind's, which sets only the width, and
- * without a colour class the line falls back to `currentColor`, the text
- * colour. The rule reports a bare `border` with no border colour beside it and
- * autofixes it to `border border-secondary`, the line it drew before.
+ * Tailwind's `border` sets only the width, and without a colour class the line
+ * falls back to `currentColor` (the text colour). The rule reports a bare `border`
+ * with no border colour beside it and autofixes it to `border border-secondary`.
  *
  * In a JSX `className` or a class helper call (`cn()`, `classNames()`, …),
  * every string counts (both arms of a conditional, template expressions,

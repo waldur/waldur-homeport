@@ -93,7 +93,7 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
       'pt-[0.93rem]',
       framed &&
         !header &&
-        // Arbitrary values on purpose: Bootstrap's `.border` is !important and would win.
+        // Rounded top and border for the framed tab bar.
         'rounded-t-[0.475rem] border border-secondary pl-[12px]',
       // The strip's bottom line meets a table header painted in the
       // --border-secondary step in dark; the divider step keeps it visible.

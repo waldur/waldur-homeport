@@ -5,8 +5,5 @@
   "description": "Waldur HomePort's custom Stylelint rules",
   "type": "module",
   "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "postcss-selector-parser": "^7.1.6"
-  }
+  "license": "MIT"
 }

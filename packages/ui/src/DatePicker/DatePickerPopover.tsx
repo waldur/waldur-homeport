@@ -297,7 +297,7 @@ export interface DatePickerPopoverProps {
   /** Paints the field as invalid (a refused entry, or the form's error). */
   invalid?: boolean;
   disabled?: boolean;
-  /** Borderless grey fill, like Metronic's `.form-control-solid`. */
+  /** Borderless grey fill. */
   solid?: boolean;
   size?: 'sm';
   /** Shows a remove button while `showClear`. */
@@ -325,7 +325,7 @@ export interface DatePickerPopoverProps {
  * message for a refused entry below. The expected format is the empty
  * input's placeholder, and is read out with the input from a hidden hint.
  *
- * The box looks like Metronic's `.form-control`, with the values
+ * The box has standard input styling, with the values
  * select/tailwindStyles.ts pins for the select control (height, radius,
  * focus ring, disabled fill), so a date field sits flush next to selects
  * and text inputs. The popup anchors to the whole box, not the button.

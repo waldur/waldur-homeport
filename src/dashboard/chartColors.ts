@@ -12,7 +12,7 @@ import { useTheme } from '@/theme/useTheme';
  * (src/dashboard/utils.ts, src/marketplace/aggregate-limits/utils.ts): the
  * primary/consumed series is the brand green ramp, the secondary / remaining
  * series is neutral gray-300, and status hues use the theme's semantic ramp
- * values (packages/design-tokens/src/css/primitives/colorRamps.css) instead of ad-hoc Tailwind/Bootstrap
+ * values (packages/design-tokens/src/css/primitives/colorRamps.css) instead of ad-hoc
  * hex. Keeping one source here means the experimental widgets track the brand
  * color and never drift back to off-theme palettes.
  */
@@ -26,9 +26,7 @@ import { useTheme } from '@/theme/useTheme';
  * The colour ramps (`--color-<ramp>-<step>`) are always there (`@theme static`)
  * and physical, so `ramp()` is the same value in either theme. The track and
  * muted colours use it directly, so they are the same light-theme grays in dark
- * mode: they used to read `--bs-secondary-bg` and `--bs-secondary-color`,
- * which the Bootstrap we ship (5.1.3) never defined, so the ramp was always
- * the value that rendered. The text, surface and border colours read the
+ * mode. The text, surface and border colours read the
  * design tokens and follow the theme.
  */
 const ramp = (name: string, step: number) =>

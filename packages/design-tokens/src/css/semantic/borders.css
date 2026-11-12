@@ -12,8 +12,7 @@
  *
  * The dividers are lines drawn as a fill or a border rather than the edge of
  * a surface, so a connector or a rule never borrows a background or text
- * role. They are what Bootstrap's --bs-gray-200 and --bs-gray-400 resolved
- * to (see docs/design-tokens.md, "Retiring --bs-*").
+ * role.
  *
  * The names match the Tailwind utilities (border-primary, border-secondary,
  * border-tertiary, border-divider; tailwind/theme.css), so a class and a

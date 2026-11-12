@@ -131,8 +131,8 @@ export const createTestWrapper = ({
  * already-open Radix menu.
  *
  * Radix's menu item reads its context on render and throws "`MenuItem` must
- * be used within `Menu`" outside one, so a menu row cannot be rendered bare
- * the way a react-bootstrap `Dropdown.Item` could. Rendering it in an open
+ * be used within `Menu`" outside one, so a menu row cannot be rendered bare.
+ * Rendering it in an open
  * menu is also closer to how it really runs: the row gets its
  * role="menuitem", its keyboard handling and its onSelect wiring.
  *

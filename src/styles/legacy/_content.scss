@@ -7,10 +7,9 @@
     opacity: 1 !important;
     pointer-events: none !important;
 
-    &:not(.nav-link) {
-      color: var(--text-quinary) !important;
-    }
-    &:not(.btn-icon):not(.nav-link) {
+    color: var(--text-quinary) !important;
+
+    &:not(.btn-icon) {
       background-color: var(--btn-disabled-bg) !important;
       border-color: var(--btn-disabled-bg) !important;
     }

@@ -1,6 +1,6 @@
 # Modals
 
-Every dialog is waldur-ui's Modal (`packages/ui/src/Dialog/Modal.tsx`), a Radix Dialog drawn in the app's modal geometry. Legacy modal classes (`.modal*`, `.btn-close`) are retired, and `no-unknown-class` reports them in markup — including in `dialogClassName`, `bodyClassName` and other class-bearing props.
+Every dialog is waldur-ui's Modal (`packages/ui/src/Dialog/Modal.tsx`), a Radix Dialog drawn in the app's modal geometry. Classes like `.modal*` and `.btn-close` are retired, and `no-unknown-class` reports them in markup — including in `dialogClassName`, `bodyClassName` and other class-bearing props.
 
 The same component serves micro-apps: it has no app dependencies, and every length is in px, so it is the same size under the app's 13px root and a micro-app's 16px one.
 
@@ -97,7 +97,7 @@ Each part carries a `data-slot`: `modal-backdrop`, `modal` (the scrolling overla
 }
 ```
 
-Component stylesheets imported from TSX are unlayered, so they beat Tailwind utilities; legacy SCSS is in the `bootstrap` cascade layer and does not.
+Component stylesheets imported from TSX are unlayered, so they beat Tailwind utilities; layered SCSS is in the `bootstrap` cascade layer and does not.
 
 Prefer props first: `bodyClassName="p-0"`, `headerClassName`, `footerClassName`. They go through `cn()`, so a padding class replaces the part's own instead of fighting it.
 

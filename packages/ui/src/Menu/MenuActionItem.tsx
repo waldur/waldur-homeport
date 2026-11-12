@@ -10,7 +10,7 @@ import { MenuItem } from './MenuItem';
 export type MenuActionIconColor =
   'gray-400' | 'danger' | 'success' | 'warning' | 'info';
 
-// What Metronic's legacy svg-icon-<colour> classes drew, in both themes (measured
+// What legacy svg-icon-<colour> classes drew, in both themes (measured
 // in the app): the icon's paths take the element's colour (fill=currentColor).
 // The semantic roles switch with the theme; purple is a categorical hue with
 // no role, so it keeps its own dark step.

@@ -143,7 +143,7 @@ export const SwitchSizes: Story = {
     const canvas = within(canvasElement);
     const md = trackOf(canvas.getByRole('checkbox', { name: 'Medium' }));
     const sm = trackOf(canvas.getByRole('checkbox', { name: 'Small' }));
-    // The legacy .form-switch (44×24) and .form-switch-sm (36×20).
+    // Switch dimensions: md (44×24) and sm (36×20).
     await expect(md.getBoundingClientRect()).toMatchObject({
       width: 44,
       height: 24,

@@ -1,12 +1,7 @@
-// Waldur's own global styles, from the Metronic theme and later features.
-// None of them reads a Bootstrap Sass variable, mixin or function, only
-// _mixins.scss: scripts/bootstrap-css-usage.mjs compiles this file from it
-// alone, and fails if a file in this directory is not imported from here (or
-// from matrix/_call-livekit.scss, imported unlayered by index.scss). It is
-// imported from styles/index.scss, inside the `bootstrap` cascade layer (the
-// layer keeps its name; Bootstrap itself is gone, #481). The element defaults
-// (_reboot.scss, once Bootstrap's reboot and type) come first, so every
-// partial after them builds on them as it did on reboot.
+// Waldur's global styles.
+// All partials compile from _mixins.scss.
+// Imported from styles/index.scss inside the `bootstrap` cascade layer.
+// Element defaults (_reboot.scss) come first, so subsequent partials build on them.
 @import 'reboot';
 @import 'base';
 @import 'content';

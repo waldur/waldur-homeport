@@ -90,9 +90,8 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
         ? translate('Initial')
         : `v${totalVersions - versionIndex}`;
 
-  // Bootstrap's .text-muted is the same secondary tone, but !important, so
-  // the selected row could not lift it: on the dark selected fill it reads
-  // 4:1, so it steps up to the subdued tone there.
+  // On the dark selected fill, quaternary text steps up to the subdued tone
+  // so it remains readable.
   const mutedText = isSelected
     ? 'text-quaternary dark:text-tertiary'
     : 'text-quaternary';

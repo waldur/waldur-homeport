@@ -41,7 +41,7 @@ export const Warning: Story = {
     ).toBeVisible();
 
     // Status tint is applied (guards against the arbitrary-value classes
-    // not being generated or being overridden by Bootstrap).
+    // not being generated).
     const bar = getBar(canvasElement);
     await expect(bar).toHaveAttribute('data-variant', 'warning');
     await expect(getComputedStyle(bar!).backgroundColor).not.toBe(TRANSPARENT);

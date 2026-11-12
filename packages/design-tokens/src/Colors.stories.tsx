@@ -42,7 +42,7 @@ const CSS_RAMPS = Object.keys(RAMPS).filter(
 );
 
 const NEUTRAL = ['gray', 'gray-dark'];
-// info is a contextual state colour (Bootstrap's `info`), not a decorative hue.
+// info is a contextual state colour, not a decorative hue.
 const STATUS = ['success', 'warning', 'error', 'info'];
 const ACCENT_ORDER = [
   'purple',
@@ -232,14 +232,14 @@ export const Status: Story = {
 
 /**
  * Decorative hues for badges, tags and charts. Sparser than the status ramps:
- * steps Metronic never defined are left out rather than invented. From
+ * unused steps are left out rather than invented. From
  * `colorRamps.css`.
  */
 export const Accent: Story = {
   render: () => (
     <RampPage
       title="Accent hues"
-      blurb={`Badges, tags and charts. Steps Metronic never defined (25, 100, 800 and most 400s) are left out rather than invented. ${PHYSICAL}`}
+      blurb={`Badges, tags and charts. Unused steps (25, 100, 800 and most 400s) are left out rather than invented. ${PHYSICAL}`}
       ramps={ACCENT.map(tokenRamp)}
     />
   ),

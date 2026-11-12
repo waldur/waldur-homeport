@@ -65,8 +65,8 @@ export const KNOWN_RUNTIME_PREFIXES = [
   '--brand-', // Runtime-injected brand ramp (initBrandTokens)
   '--font-', // Runtime-injected typography (initFontFamily)
   '--radix-', // Radix UI dynamic animation/presence properties
-  '--bs-', // Bootstrap legacy variables (guarded by ESLint no-bootstrap-css-vars)
-  '--kt-', // Metronic layout dimensions
+  '--bs-', // Legacy variables
+  '--kt-', // Legacy layout dimensions
   '--test-', // Mock variables in unit tests
   '--boot-', // Boot splash text and logo, set at runtime by waldur-boot-splash's boot-splash.js
 ];

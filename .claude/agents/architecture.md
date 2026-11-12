@@ -68,7 +68,7 @@ Feature-based structure under `src/`:
 - **React 18.3.0** with TypeScript 5.7.3
 - **Redux 4.2.1** for legacy state management
 - **UI Router React 1.0.7** for navigation
-- **React Bootstrap 2.10.9** for UI components
+- **Tailwind CSS** and **waldur-ui** for UI components
 - **TanStack React Query 5.80.6** for server state
 - **Vite 7.0** for build tooling
 

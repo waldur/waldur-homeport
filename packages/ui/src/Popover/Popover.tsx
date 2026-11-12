@@ -19,26 +19,24 @@ import { cn } from '../cn';
  * containing a form control — typing into a text input inside one either
  * moves the selection or never reaches the input at all.
  *
- * A large share of waldur-homeport's Metronic `menu-sub-dropdown` popups
+ * A large share of waldur-homeport's popup panels
  * are not menus in that sense. They render filter fields, selects, date
  * pickers, search boxes and Cancel/Apply footers (TableFiltersMenu /
  * TableFilterItem, AsyncSearchBox, MarketplaceLandingFilter, BoxRadioField),
- * and TableColumnsButton is already a
- * react-bootstrap Popover rather than a Dropdown. Those all belong here.
+ * and TableColumnsButton is a Popover rather than a Dropdown. Those all belong here.
  * The rule of thumb when migrating one: if it contains anything the user
  * types into or drags, it is a Popover; if every child is a command row,
  * it is a DropdownMenu.
  *
- * ## Parity with the Bootstrap popover it replaces
+ * ## Surface parity
  *
- * Metronic sets `$popover-box-shadow: $dropdown-box-shadow` and
- * `$popover-border-radius: $border-radius` — a popover and a dropdown are
- * deliberately the same floating surface in this design system, so the
+ * A popover and a dropdown are
+ * the same floating surface in this design system, so the
  * panel below reuses the same --dropdown-shadow token and rounded-lg
- * radius (8px, the custom $border-radius) DropdownMenu.tsx's own panel uses, rather than introducing a
+ * radius (8px) DropdownMenu.tsx's own panel uses, rather than introducing a
  * second surface treatment. It is intentionally not shared as one exported
  * constant: the menu panel also carries menu-only concerns (p-1 item
- * gutter, min-w-40, the Metronic menu entrance) that a popover holding
+ * gutter, min-w-40, menu entrance motion) that a popover holding
  * arbitrary content must not inherit.
  *
  * It has no motion of its own: a panel that wants the menus' entrance
@@ -58,7 +56,7 @@ export const PopoverClose = PopoverPrimitive.Close;
 
 /**
  * A floating card: the card surface (border, background, the dropdown
- * shadow, an 8px radius) on Bootstrap's popover layer, and nothing else —
+ * shadow, an 8px radius) on the popover z-index layer, and nothing else —
  * no width, padding or height cap, since every panel lays out its own
  * content. A panel that may outgrow the screen caps itself, e.g. with
  * `max-h-(--radix-popover-content-available-height) overflow-y-auto`.

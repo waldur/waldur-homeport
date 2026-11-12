@@ -13,7 +13,7 @@ import { ActionItem } from './ActionItem';
  * preventing crashes outside a Menu Root/Content.
  * ModalActionsDialog's "show all actions" search results
  * (marketplace/resources/actions/ActionDialogBody.tsx) render actions
- * inside a plain react-bootstrap Modal, not a Radix panel — caught live
+ * outside a Menu panel — caught live
  * in production via ForceDestroyAction, an ordinary ActionItemType action
  * that also happens to be listed there. Menu.Item renders a
  * plain button when no menu panel is around it: the dialog is no menu.

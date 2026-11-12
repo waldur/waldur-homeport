@@ -6,8 +6,7 @@ import { cn } from '../cn';
 
 import { MenuLook, useMenuLook } from './menuContext';
 
-/** A divider: Metronic's `.separator.my-2` (nav) or Bootstrap's
- * `.dropdown-divider` with zero margin (actions). */
+/** A divider: nav divider with vertical margin or actions divider with zero margin. */
 export const menuSeparator = cva('', {
   variants: {
     look: {

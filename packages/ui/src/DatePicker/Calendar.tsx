@@ -26,14 +26,12 @@ import { useKeepInputFocus } from './keepInputFocus';
 
 /**
  * shadcn's Calendar recipe (https://ui.shadcn.com/docs/components/calendar)
- * over react-day-picker, styled to match the Metronic theme: a 328px panel
- * of 40px cells (px rather than rem: Metronic's root font is 13px), round 39px days, a filled grey "today", brand-600 selected
+ * over react-day-picker: a 328px panel
+ * of 40px cells (px rather than rem), round 39px days, a filled grey "today", brand-600 selected
  * days and a brand-50 band behind ranges, six rows per month.
  *
- * The colours are that stylesheet's semantic tokens resolved to runtime
- * variables — the Bootstrap gray ramp (swapped per theme stylesheet) and
- * the brand ramp — with the dark-mode picks it made via `isDarkMode()`
- * expressed as `dark:` variants.
+ * The colours use semantic tokens resolved to runtime variables with dark
+ * mode expressed as `dark:` variants.
  *
  * Behaviour the form fields rely on:
  * - The root carries `data-slot="calendar"`, and every day cell keeps

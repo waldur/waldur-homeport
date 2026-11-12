@@ -765,7 +765,7 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     ).toBeInTheDocument();
   });
 
-  it('closes on a click in the empty part of the dialog box, as Bootstrap', async () => {
+  it('closes on a click in the empty part of the dialog box', async () => {
     const user = userEvent.setup();
 
     render(

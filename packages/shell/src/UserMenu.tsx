@@ -90,9 +90,7 @@ export function UserMenu() {
         <button type="button" className="flex items-center gap-2">
           <Avatar
             // size-9 (36px), not AvatarRoot's own size-8 default — splits
-            // the difference of Metronic's real responsive
-            // symbol-30px/symbol-md-40px, which this app has no matching
-            // breakpoint pair for.
+            // the difference of responsive 30px / 40px sizes.
             className="size-9"
             initials={currentUser ? getInitials(currentUser.fullName) : 'MS'}
             src={currentUser?.imageSrc}
@@ -108,22 +106,14 @@ export function UserMenu() {
                   {translate('Hello')}
                 </span>
               )}
-              {/* font-medium (500), not font-bold (700) — real
-                  UserDropdown.tsx:46's trigger name is "fs-base fw-bold",
-                  and this app's Metronic build overrides
-                  $font-weight-bold to 500 (Bootstrap's own default is
-                  700). See StatCard.tsx's comment on the same weight
-                  scale for the SCSS source. */}
+              {/* font-medium (500), matching the app's font weight. */}
               <span className="text-sm font-medium text-primary">
                 {currentUser.firstName}
               </span>
               {currentUser.isStaff && (
-                // Metronic's real Staff badge is
-                // `<Badge variant="purple" outline pill>`
-                // (UserDropdownMenu.tsx) — now a direct, real Badge
-                // variant/tone/pill combination (see BADGE_STYLES in Badge.tsx),
-                // not a hand-rolled color override the way it was before
-                // Badge grew a real variant/tone system.
+                // Staff badge is `<Badge variant="purple" outline pill>`
+                // (UserDropdownMenu.tsx) — a direct Badge
+                // variant/tone/pill combination (see BADGE_STYLES in Badge.tsx).
                 <Badge
                   variant="purple"
                   shape="pill"

@@ -287,12 +287,9 @@ Shipped with it:
   `CLAUDE.md`, and the guard's row in the design-tokens guard table.
 - `docs/ui-consistency-guidelines.md`'s truncation example, which showed
   `style={{ maxWidth: 200 }}` as approved, is now
-  `className="ellipsis inline-block max-w-50"` (it also used the retired
-  Bootstrap `d-inline-block`).
-- `docs/tailwind-shadcn-migration-notes.md`'s rem-trap warning, which ended
-  "**Always use explicit pixel values (`style={{ width: '250px' }}`) for inline
-  sizing**", now sends readers to the px-pinned spacing scale and the custom
-  property bridge instead.
+  `className="ellipsis inline-block max-w-50"`.
+- Readers are directed to the px-pinned spacing scale and the custom
+  property bridge instead of inline sizing.
 - `docs/theme.md:195` needed **no** change: the audit misread it. Its
   `style={{ backgroundColor: '#f5f5f5', color: '#333' }}` is already labelled
   "Bad" and contrasted with `className="bg-secondary text-secondary"`.
@@ -359,8 +356,7 @@ Two things the plan had not accounted for, both found while doing it:
 
 ### Phase 2 — codemod the keyword and scale declarations — **done**
 
-`scripts/codemods/static-inline-style.mjs`, built like
-`scripts/codemods/bootstrap-spacing.mjs`: an ad-hoc ESLint rule whose fixes are
+`scripts/codemods/static-inline-style.mjs`: an ad-hoc script whose fixes were
 collected, applied back to front and re-printed with prettier. It took the
 property families to convert, so it ran in reviewable slices:
 
@@ -382,8 +378,7 @@ codemod and the linter cannot disagree about what a declaration becomes.
 
 **The baseline went 441 → 396 (phase 1) → 66 declarations in 37 files.**
 
-The codemod was deleted once the baseline reached zero, as
-`bootstrap-spacing.mjs` was when the Bootstrap spacing migration finished: the
+The codemod was deleted once the baseline reached zero: the
 rule is what keeps inline styles out now, and `git log` has the tool if the
 job ever comes back.
 
@@ -402,13 +397,9 @@ Two safeguards worth keeping in mind, both of which earned their place:
   that from the same two tables the utilities come from, and the codemod skips
   the site. A sweep of every rewritten class list afterwards found no element
   with two sizing utilities for one property.
-- **Steps Bootstrap made ambiguous.** The first run wrote `min-w-50` for
-  `minWidth: 200` and `no-bootstrap-layout-utility` rejected all 15 such
-  classes: Bootstrap used `w-50` for 50% and Tailwind reads it as 200px, so the
-  name is reported whichever was meant. `utilityFor` now emits the arbitrary
-  form for `w`, `h`, `min-w`, `min-h`, `top`, `bottom`, `start` and `end` at
-  steps 25, 50, 75 and 100 — `min-w-[200px]`, not `min-w-50`. `max-w-*` and
-  `max-h-*` are unaffected, since Bootstrap spelled those `mw-100`/`mh-100`.
+- **Steps made ambiguous.** Steps 25, 50, 75 and 100 on `w`, `h`, `min-w`, `min-h`,
+  `top`, `bottom`, `start` and `end` take the arbitrary form — `min-w-[200px]`, not `min-w-50`,
+  to avoid ambiguity between percentage and pixel values.
   Covered by a test, and the examples in `CLAUDE.md`, `docs/design-tokens.md`
   and this document were corrected to match.
 
@@ -519,10 +510,9 @@ it grow, and that is a visible change for someone to choose.
   deleted rather than converted, and with no caller left passing `style`, the
   cell's `style` prop went with them — only the runtime pin offsets remain.
 
-One mistake on the way, caught by `no-bootstrap-layout-utility`: the hand-written
+One mistake on the way: the hand-written
 `controlClassName="h-25"` for `height: 100` walked into the ambiguous-step trap
-that `utilityFor` exists to avoid. Hand edits bypass the codemod, and so bypass
-the guard it encodes; the linter is what caught it. It is `h-[100px]`.
+that `utilityFor` exists to avoid. It is `h-[100px]`.
 
 Still inline, and right to be: the runtime values in **What stays** below, the
 four sites carrying an `eslint-disable` with a reason (the Radix
@@ -546,8 +536,7 @@ them. They fall into four groups:
   handle, `animationDelay` on a stagger.
 - **Custom-property bridges** — `style={{ '--sidebar-width-icon': … }}`,
   `--drawer-width`, `--boot-brand`, `--dt-width`. This is the documented way to
-  pass a varying value to a literal utility
-  (`docs/tailwind-shadcn-migration-notes.md:699`); more of these, not fewer.
+  pass a varying value to a literal utility (see `docs/design-tokens.md`); more of these, not fewer.
 - **Forwarded `style` props** — `ImagePlaceholder`, `FeaturedIcon`, `Avatar`,
   `Tooltip`, `HeaderButtonBullet` all merge a caller's `style`.
 - **Generated backgrounds** — gradients and `backgroundImage: url(...)` from

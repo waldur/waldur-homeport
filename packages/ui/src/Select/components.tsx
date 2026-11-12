@@ -77,9 +77,9 @@ export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
         // always render — see the condition above and that comment), so
         // a left margin here would double it up again the same way
         // `control`'s own left padding once did. `me-2.5` still supplies the
-        // icon-to-text gap — the old SCSS structure got that for free from
-        // `.metronic-select__value-container`'s own left padding
-        // (`calc($input-padding-x - 2px)` ≈ 10px), but this migration's
+        // icon-to-text gap — the legacy structure got that from
+        // the value container's own left padding
+        // (~10px), but this migration's
         // `valueContainer` classNames carry no padding of their own.
         // Confirmed live: the old deployment's icon-to-text gap measures
         // ~10px, matching `me-2.5`.

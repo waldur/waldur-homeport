@@ -30,8 +30,7 @@ export interface TopBarProps extends ComponentProps<'header'> {
 }
 
 /**
- * The app header's bar, ported from Metronic's `.header` and the
- * `.container-fluid` inside it (layout/_header.scss, layout/_main.scss):
+ * The app header's bar:
  * 55px tall with 15px side padding, 65px and 32px from `lg` (992px), a
  * 1px `border-secondary` rule at the bottom (inside the height) and the
  * `bg-primary` surface. Measured identical to it in the signed-in app.
@@ -173,22 +172,13 @@ export interface IconButtonProps extends ComponentProps<'button'> {
 }
 
 /**
- * The header look is Metronic's legacy `.btn-nav-item` (with `.svg-icon-2`
- * icon sizing), which it replaced after a pixel comparison of the two;
- * the AppHeaderLayout stories' play function (TopBar.stories.tsx) keeps its
- * measured size and spacing:
+ * Header icon button styles.
  *
- * - 40px square, 6px radius, the header's own surface (`bg-primary`).
- * - Icon in rem, not px: 1.54rem (`md`, legacy `svg-icon-2`) and 1.85rem (`lg`, legacy `svg-icon-1x`),
- *   so it shrinks with the 12px mobile root (20px → 18.5px) as it did.
- * - Hover, keyboard focus and `aria-expanded` (the drawer the button opens is
- *   showing) fill with `--btn-secondary-bg` and turn the icon brand.
- * - The ring is the old 0.155rem box-shadow, but on `:focus-visible` only.
- *   The old one also showed on `:focus`/`:active`, so a clicked button kept
- *   its ring and fill until focus moved elsewhere; `aria-expanded` now says
- *   whether its drawer is open, which is what that lingering state stood in
- *   for. The one deliberate difference from the original.
- * - Timing as before: the fill 0.2s, the icon colour 0.3s.
+ * - 40px square, 6px radius, surface (`bg-primary`).
+ * - Icon in rem: 1.54rem (`md`) and 1.85rem (`lg`), shrinking proportionally with mobile root font size.
+ * - Hover, keyboard focus and `aria-expanded` fill with `--btn-secondary-bg` and turn the icon brand.
+ * - Focus ring on `:focus-visible`.
+ * - Transitions: fill 0.2s, icon color 0.3s.
  */
 const iconButton = cva('relative', {
   variants: {
@@ -217,17 +207,12 @@ const iconButton = cva('relative', {
 });
 
 /**
- * Extends ComponentProps<'button'> (not just onClick/className, the
- * original scope) and forwards its ref, so a Menu.Trigger asChild
+ * Extends ComponentProps<'button'> and forwards its ref, so a Menu.Trigger asChild
  * can compose this directly — Radix's Slot clones its child, attaches its
  * own ref (Popper needs it to position the menu against this element),
  * and merges in aria-haspopup/aria-expanded/data-state and its own
- * open-on-click handling. Without forwardRef, React silently drops the
- * ref ("Function components cannot be given refs"), Popper never gets a
- * real anchor element, and every consumer downstream of that — not just
- * this button — breaks (observed as the whole dashboard crashing the
- * instant a Menu.Trigger wrapped a pre-forwardRef IconButton, not
- * merely the menu failing to open). The forwarded ref lands on the same
+ * open-on-click handling. Without forwardRef, Popper never gets a
+ * real anchor element. The forwarded ref lands on the same
  * <button> Tooltip's own Trigger asChild already puts a ref on; Radix's
  * Slot composes multiple refs on one element rather than clobbering, so
  * both work together.

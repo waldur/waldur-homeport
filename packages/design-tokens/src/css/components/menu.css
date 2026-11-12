@@ -7,13 +7,10 @@
  * switches with the theme.
  */
 :root {
-  /* The menus' nav look (waldur-ui's Menu, see docs/menus.md), ported from
-     Metronic's .menu-sub-dropdown with the menu-gray-600/menu-state-bg-gray
-     theme: the panel is $body-bg, rows are $gray-600 ($gray-700 for the
-     strong tone), a hovered/highlighted/active row is $gray-700 on $gray-50,
-     a disabled row is $gray-400, and the light background (the language
-     pill, the shell's token field) is $light ($gray-100). Each role below
-     has the same light and dark values those mirrored SCSS grays had. */
+  /* The menus' nav look (waldur-ui's Menu, see docs/menus.md):
+     the panel is --bg-primary, rows are --text-tertiary (--text-secondary
+     for strong tone), hovered/active row is --text-secondary on --bg-secondary,
+     and disabled row is --text-quinary. */
   --menu-bg: var(--bg-primary);
   --menu-item-text: var(--text-tertiary);
   --menu-item-strong-text: var(--text-secondary);
@@ -21,7 +18,7 @@
   --menu-item-light-bg: var(--bg-tertiary);
   --menu-item-hover-bg: var(--bg-secondary);
   --menu-item-disabled-text: var(--text-quinary);
-  /* Action menus' disabled row: Bootstrap's $dropdown-link-disabled-color. */
+  /* Action menus' disabled row text. */
   --menu-item-muted-text: var(--text-quaternary);
   /* The shadow doesn't show on the dark page, so --dropdown-outline adds a
      1px ring there that outlines the panel instead; in light it draws

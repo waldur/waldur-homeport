@@ -28,10 +28,10 @@
   --text-quaternary: var(--color-gray-500);
   --text-quinary: var(--color-gray-400);
   --text-senary: var(--color-gray-300);
-  /* The date pickers' and inputs' disabled text: $gray-300 in light, $gray-400
+  /* The date pickers' and inputs' disabled text: gray-300 in light, gray-400
      in dark, one step brighter than --text-senary there. */
   --text-disabled: var(--color-gray-300);
-  /* Metronic's inline-code pink, rose in dark. */
+  /* Inline-code pink, rose in dark. */
   --text-code: var(--color-pink-700);
   --fg-white: #ffffff;
 }

@@ -1,11 +1,8 @@
 /**
  * ESLint rule: a whole-pixel border width is written as Tailwind's step.
  *
- * `border-[1px]`, `border-t-[1px]`, … were how the app spelled a 1px border
- * while Bootstrap owned the name `border` (its `!important` colour beat any
- * Tailwind colour beside it). Bootstrap generates no utility any more (#478),
- * and Tailwind's border widths are pixels (`border` is 1px, `border-2` is
- * 2px), so the plain step renders the same:
+ * Tailwind's border widths are standard steps (`border` is 1px, `border-2` is
+ * 2px), so arbitrary pixel wrappers should be simplified:
  *
  *   border-[1px]     → border
  *   border-t-[1px]   → border-t

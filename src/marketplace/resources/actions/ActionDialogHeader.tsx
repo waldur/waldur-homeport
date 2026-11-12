@@ -13,7 +13,7 @@ export const ActionDialogHeader = ({
   name: string;
 }) => (
   <ModalHeader closeButton className="pb-0">
-    {/* A heading, at the 16.25px of Bootstrap's h4 look it used to borrow. */}
+    {/* Heading at 16.25px (1.25rem at 13px base). */}
     <ModalTitle as="h2" className="text-[16.25px]">
       {marketplaceResource ? (
         <div className="flex flex-none items-stretch gap-2.5 grow">

@@ -6,10 +6,7 @@ import { cn } from '../cn';
 /**
  * shadcn's Card recipe (Card/CardHeader/CardTitle/CardToolbar/CardContent/
  * CardFooter as composable div wrappers — see
- * https://ui.shadcn.com/docs/components/card) drawn exactly as HomePort's
- * Metronic `.card` was: Bootstrap's `card` partial, Metronic's
- * `components/_card.scss` and the `.card .card-header` rule of
- * `legacy/_base.scss`, merged.
+ * https://ui.shadcn.com/docs/components/card).
  *
  * - Card: a flex column, `--bg-primary`, 8px radius. Light: no border, the
  *   `--card-shadow`; dark: a 1px `--border-secondary` border, no shadow.
@@ -32,12 +29,12 @@ import { cn } from '../cn';
  * card.css; HomePort's stylesheets (src/styles/legacy) add the table card
  * and cards in an expanded table row or a tab panel.
  *
- * Sizes stay in rem, as Metronic's were, so they follow the 13px root.
+ * Sizes stay in rem so they follow the 13px root.
  */
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Outline the card with a `--border-secondary` border instead of the
-   * theme-dependent shadow, in both themes (Metronic `.card-bordered`).
+   * theme-dependent shadow, in both themes.
    */
   bordered?: boolean;
   /**
@@ -112,8 +109,7 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
   /**
    * - `md` (default): `.card-title` set directly on the heading
    *   (1.275rem, medium).
-   * - `lg`: 1.385rem semibold, Bootstrap's `$h3-font-size` at 1200px and
-   *   up. Not the same as an `<h3>` inside a title (`<CardTitle as="div">
+   * - `lg`: 1.385rem semibold at 1200px and up. Not the same as an `<h3>` inside a title (`<CardTitle as="div">
    *   <h3>…`), which takes the reboot's responsive h3 size,
    *   `calc(1.2635rem + 0.162vw)` below 1200px.
    */
@@ -139,7 +135,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
           'my-[var(--card-title-my,var(--card-header-py))] mr-[var(--card-title-mr,var(--card-header-py))] ml-0 flex items-center text-primary',
           Element === 'h3' && 'leading-[1.2]',
           size === 'lg'
-            ? // eslint-disable-next-line waldur-custom/require-font-size-scale -- matches Metronic's rem .card-title until the card step moves both to the scale
+            ? // eslint-disable-next-line waldur-custom/require-font-size-scale -- matches rem .card-title until the card step moves both to the scale
               'text-[1.385rem] font-semibold'
             : // eslint-disable-next-line waldur-custom/require-font-size-scale -- as above
               'text-[1.275rem] font-medium',
@@ -153,7 +149,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
   },
 );
 
-/** The header's actions: a wrapping flex row (Metronic `.card-toolbar`). */
+/** The header's actions: a wrapping flex row. */
 export const CardToolbar = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement>

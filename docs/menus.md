@@ -32,7 +32,7 @@ How to build any menu or menu-like popover in HomePort: row actions, "Add" menus
 ## Rules
 
 - **ALWAYS** build menus from `Menu` / `MenuPopover` (`waldur-ui`) or the app components on top of them (`ActionsMenu`, `ActionsDropdown`, `ActionItem`, `NavMenuLink`). **NEVER** import `@radix-ui/react-dropdown-menu` or `@radix-ui/react-popover` outside `packages/ui` (ESLint rejects it).
-- **NEVER** hand-roll a menu with legacy dropdown classes (`dropdown-menu`, `dropdown-item`, `menu-sub-dropdown`, `menu-link`, …). That CSS has been deleted.
+- **NEVER** hand-roll a menu with obsolete dropdown classes (`dropdown-menu`, `dropdown-item`, `menu-sub-dropdown`, `menu-link`, …). That CSS has been deleted.
 - **Row actions** use the 3-dots pattern: `ActionsDropdown` with `ActionItem` children (see CLAUDE.md). No standalone buttons in `rowActions`.
 - **Rows** are `Menu.Item` (or `ActionItem` in action menus). React to them with `onSelect`, not `onClick`: it fires for pointer and keyboard, and the panel closes afterwards unless the handler calls `event.preventDefault()`.
 - **A custom trigger** must `forwardRef` to a real `<button>` and spread `...props` onto it, or the menu won't open or position.
@@ -309,7 +309,7 @@ import { MenuPopover } from 'waldur-ui';
 </MenuPopover>;
 ```
 
-- `MenuPopover.Content` defaults to the nav look with the filter rows' options (Metronic's base padding, gray-700). Nav-look popovers are not height-capped, so a select inside has room for its option list.
+- `MenuPopover.Content` defaults to the nav look with the filter rows' options (base padding, gray-700). Nav-look popovers are not height-capped, so a select inside has room for its option list.
 - `MenuPopover.Item` is a button row that does **not** close the panel, so it can be a nested popover's trigger. A `Menu.Item` inside a popover is a button that **does** close it.
 - `forceMount` keeps a closed panel in the DOM, hidden (the table filter panels need it; `TableBody.tsx` looks for their closed markup). `container` picks where the panel is portaled.
 - `MenuPopover.Anchor` (or `PopoverAnchor`) positions a panel against an element that isn't the trigger (`AsyncSearchBox.tsx`).
@@ -373,7 +373,7 @@ import { ActionList } from '@/marketplace/resources/actions/ActionList';
 - `modal={false}`: a click on another trigger opens that menu directly, and the page keeps scrolling.
 - A Portal to `document.body` (or `container`), with the look's z-index layer (`z-nav-menu`, `z-dropdown-menu`).
 - Scrolling inside the space Radix measures between the trigger and the viewport edge, instead of running off-screen.
-- `sideOffset={2}`, and Metronic's entrance (fade and slide, 0.3s) on nav panels, off under `prefers-reduced-motion`.
+- `sideOffset={2}`, and standard entrance animation (fade and slide, 0.3s) on nav panels, off under `prefers-reduced-motion`.
 
 ### Looks
 

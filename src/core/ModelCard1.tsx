@@ -77,7 +77,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
             className={classNames(
               'text-base font-medium',
               LINE_CLAMP[ellipsisLines],
-              // Bootstrap's .card-title margin.
+              // Card title margin.
               props.subtitle ? 'mb-[var(--card-title-spacer-y)]' : 'mb-0',
             )}
           >

@@ -26,10 +26,9 @@ export const ToastViewport = forwardRef<
     ref={ref}
     className={cn(
       // list-none: this is a real <ol> (Viewport) of <li>s (each Root), not
-      // a styling choice — Bootstrap's own list reset in the consuming
-      // app's tailwind.css restores bullets/numbers on bare ol/ul deliberately
-      // (see that file's own comment), which reaches this one too since it
-      // isn't marked up as a menu/nav.
+      // a styling choice — bare ol/ul elements in the consuming app
+      // may have default list styling restored, which reaches this one too
+      // since it isn't marked up as a menu/nav.
       'fixed top-6 right-6 z-50 flex w-[400px] max-w-[calc(100vw-3rem)] list-none flex-col gap-2.5 outline-none',
       className,
     )}

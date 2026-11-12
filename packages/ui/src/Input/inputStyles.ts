@@ -3,9 +3,7 @@ import { cva } from 'class-variance-authority';
 export type InputSize = 'sm' | 'md' | 'lg';
 
 /**
- * Input and Textarea share one look: the legacy Bootstrap/Metronic
- * `.form-control`, rebuilt from waldur-design-tokens/input.css so it renders
- * the same with or without Metronic loaded.
+ * Input and Textarea share one look: built from waldur-design-tokens/input.css.
  *
  * Sizes are px, not rem: waldur-homeport forces a 13px root (12px on mobile)
  * while the micro-apps keep the browser's 16px, so a rem input would be a

@@ -100,7 +100,7 @@ function RadiusTile({
       }
     };
     measure();
-    // Metronic's stylesheet sets the 13px root the rem steps scale with. The
+    // The legacy stylesheet sets the 13px root the rem steps scale with. The
     // theme decorator adds it after this first render, so re-measure when a
     // stylesheet is added to <head> and again when it has loaded.
     const onAdded = new MutationObserver((records) => {
@@ -150,7 +150,7 @@ function RadiusTile({
 
 /**
  * The corner radii this package pins (`radius.css`). All scale steps are pinned
- * in physical pixels to prevent fractional rem compression under Metronic's forced
+ * in physical pixels to prevent fractional rem compression under a forced
  * 13px root font size.
  */
 export const Radius: Story = {
@@ -188,8 +188,7 @@ function useViewportWidth() {
 }
 
 /**
- * The responsive breakpoints, aligned with Bootstrap's so a Tailwind `lg:`
- * and Bootstrap's `col-lg-*` switch at the same width.
+ * The responsive breakpoints (`breakpoints.css`).
  */
 export const Breakpoints: Story = {
   render: () => <BreakpointsPage />,

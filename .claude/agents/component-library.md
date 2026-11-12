@@ -116,7 +116,7 @@ const FieldRow = ({ field, ...rest }) =>
 ## Design Principles
 
 - **TypeScript Interfaces**: Comprehensive type safety
-- **Consistent Styling**: React Bootstrap and custom classes
+- **Consistent Styling**: Tailwind CSS and waldur-ui components
 - **Accessibility**: Proper ARIA attributes and keyboard navigation
 - **Responsive Design**: Mobile-first approach
 - **Theme Support**: Light/dark mode compatibility

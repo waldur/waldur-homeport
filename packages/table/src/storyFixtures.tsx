@@ -32,11 +32,8 @@ export interface TableStoryRow {
 
 /**
  * Fixed ids/dates/owners — no relative time (`3 days ago`), no random
- * values. Every story built from this must render byte-identical output on
- * every run, since these fixtures are the deterministic baseline the
- * upcoming Playwright `toHaveScreenshot()` golden-master captures depend on
- * (see docs/tailwind-shadcn-migration-notes.md and the Table.stories.tsx
- * file comment).
+ * values. Every story built from this renders deterministic output on
+ * every run for visual snapshots.
  */
 export const tableStoryRows: TableStoryRow[] = [
   {

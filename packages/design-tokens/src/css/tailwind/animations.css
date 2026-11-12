@@ -1,14 +1,12 @@
 /**
- * waldur-ui Modal's enter/exit keyframes, matching what waldur-homeport's
- * Bootstrap modal did — the exact source values, not an approximation. As
- * in Bootstrap's markup, the dialog box sits inside a scrolling overlay:
+ * waldur-ui Modal's enter/exit keyframes:
+ * dialog box sits inside a scrolling overlay:
  *
  * - dialog box: `transform: translate(0, -50px)` → `none` over
- *               `.3s ease-out` ($modal-fade-transform/$modal-show-transform/
- *               $modal-transition); exit is the app's own `.15s ease-in`,
+ *               `.3s ease-out`; exit is the app's own `.15s ease-in`,
  *               so the box is gone by the time its fading overlay is.
- * - overlay and backdrop: opacity 0 → 1 over `.15s linear`, Bootstrap's
- *               `.fade`/`.show` pair. The box doesn't fade as well, which
+ * - overlay and backdrop: opacity 0 → 1 over `.15s linear`.
+ *               The box doesn't fade as well, which
  *               would double the fade. The backdrop's alpha stays in
  *               --modal-backdrop-bg rather than in this animation's end
  *               state — see dialog.css's comment on why that separation
@@ -21,10 +19,8 @@
  * sets data-state="open" before first paint, so there's no closed state
  * for a transition to start from either).
  *
- * The reduced-motion block is Bootstrap's own behavior too — its
- * transition() mixin emits `transition: none` under
- * prefers-reduced-motion. animation-duration is collapsed rather than set
- * to `none` so animationend still fires and Radix still unmounts.
+ * Under prefers-reduced-motion, animation-duration is collapsed rather
+ * than set to `none` so animationend still fires and Radix still unmounts.
  */
 @keyframes waldur-modal-slide-in {
   from {
@@ -64,9 +60,7 @@
 
 /**
  * Toast enter/exit — a plain slide-in-from-the-right + fade, and its
- * reverse. There's no legacy Bootstrap toast to match parity against here
- * (unlike the modal keyframes above), so these are a from-scratch pick
- * rather than a measured value: right, since that's also the Toast
+ * reverse: right, since that's also the Toast
  * Provider's swipeDirection, so an entering and a dismissed-by-swipe toast
  * travel the same axis. Also plays for a completed swipe dismissal, not
  * just the timer/close-button case — see Toast.tsx's own comment on why a
@@ -101,8 +95,7 @@
 }
 
 /**
- * Sidebar accordion slide, matching Metronic's
- * kt-menu-accordion-down/-up at the same 250ms ease-out.
+ * Sidebar accordion slide, at 250ms ease-out.
  * Animates a `height` custom property rather than
  * `height` itself directly against Radix's own
  * --radix-collapsible-content-height: that var is written into a plain ref
@@ -143,7 +136,7 @@
  * layout effect before the opening frame is painted.
  *
  * `overflow: hidden` lives in the keyframes, not on the element: it must
- * clip only while the height animates (as Bootstrap's `.collapsing` did).
+ * clip only while the height animates.
  * Left on an open panel it clips anything that pops out of it — a
  * react-select menu — and react-select's scroll-menu-into-view then scrolls
  * the clipped panel itself, hiding the top of the field.
@@ -172,7 +165,7 @@
 
 /**
  * Dropdown/menu panel entrance (waldur-ui's DropdownMenu, NavMenu and
- * popover panels), ported from Metronic's menu-sub-dropdown-animation-*:
+ * popover panels):
  * fade in while sliding 0.75rem toward the trigger, 0.3s ease. `-up` is the
  * default (the panel starts below its resting place); `-down` is for a
  * panel that opens upwards (data-side="top").
@@ -230,7 +223,7 @@
 }
 
 /**
- * Generic utility animations ported from Metronic:
+ * Generic utility animations:
  * - .animation-blink: Blinking cursor / bullet indicator
  * - .animation-spin: Continuous rotation for loading spinners
  */
@@ -258,10 +251,9 @@
 }
 
 /**
- * The app drawer's slide in from (and out to) the right edge, Metronic's
- * `.drawer-end` / `.drawer-on` transform at its 0.3s ease-in-out.
- * Keyframes for the same Presence reason as the modal's above. The
- * slide-in holds no end frame: a held
+ * The app drawer's slide in from (and out to) the right edge, at
+ * 0.3s ease-in-out. Keyframes for the same Presence reason as the modal's above.
+ * The slide-in holds no end frame: a held
  * `matrix(1, 0, 0, 1, 0, 0)` would still make the drawer the containing
  * block for `position: fixed` menus portalled into it.
  */

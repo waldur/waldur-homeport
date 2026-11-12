@@ -26,9 +26,9 @@ const StoryRouter = ({ children }: { children: ReactNode }) => {
 };
 
 /**
- * Visual verification story for retired text-anchor, text-btn, and text-link patterns.
- * This mounts all migrated component patterns side-by-side to visually inspect
- * colors, alignments, hover states, font inheritance, and focus rings.
+ * Visual verification story for LinkButton, TruncatedDescription, and unstyled action buttons.
+ * Mounts component patterns side-by-side to visually inspect colors, alignments,
+ * hover states, font inheritance, and focus rings.
  */
 const meta: Meta = {
   title: 'Audit/TextComponentsAudit',
@@ -47,7 +47,7 @@ export default meta;
 
 type Story = StoryObj;
 
-export const AllMigratedCases: Story = {
+export const AllCases: Story = {
   render: function VisualAudit() {
     const [secretVisible, setSecretVisible] = useState(false);
 
@@ -56,7 +56,7 @@ export const AllMigratedCases: Story = {
         {/* Section 1: LinkButton Variants & Prose */}
         <section className="space-y-3">
           <h3 className="font-semibold text-primary border-b border-secondary pb-2">
-            1. LinkButton (replaces .text-anchor & .text-link on buttons)
+            1. LinkButton
           </h3>
           <div className="flex flex-wrap gap-4 items-center">
             <LinkButton variant="brand">Brand action</LinkButton>
@@ -96,10 +96,10 @@ export const AllMigratedCases: Story = {
           </div>
         </section>
 
-        {/* Section 3: Text Buttons (formerly .text-btn) */}
+        {/* Section 3: Text Buttons */}
         <section className="space-y-3">
           <h3 className="font-semibold text-primary border-b border-secondary pb-2">
-            3. Unstyled Action Buttons (replaces legacy .text-btn)
+            3. Unstyled Action Buttons
           </h3>
 
           <div className="grid grid-cols-2 gap-4">

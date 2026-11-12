@@ -17,16 +17,11 @@
  * (semantic/text.css), `bg-secondary` is var(--bg-secondary)
  * (background.css), `border-primary` is var(--border-primary) (borders.css).
  *
- * In waldur-homeport, Bootstrap no longer emits .text-/.bg-/.border- primary
- * or -secondary — it is gone entirely (#481) — so these are the only
- * definitions there.
- *
- * State colours read the status matrix (semantic/status.css), named like
- * Bootstrap 5.3's: `text-danger` is the -fg slot, `bg-danger` and
- * `border-danger` the -solid fill, `bg-danger-subtle` and
- * `border-danger-subtle` the tinted -bg and -border. Same for success and
- * warning; info and neutral have `text-*` and `bg-*-subtle` only. Bootstrap no
- * longer emits its own classes of these names.
+ * State colours read the status matrix (semantic/status.css): `text-danger`
+ * is the -fg slot, `bg-danger` and `border-danger` the -solid fill,
+ * `bg-danger-subtle` and `border-danger-subtle` the tinted -bg and -border.
+ * Same for success and warning; info and neutral have `text-*` and
+ * `bg-*-subtle` only.
  *
  * Brand: `text-brand`, `border-brand` and `outline-brand` are var(--text-brand)
  * (semantic/brand.css: the tenant colour in light, a lighter step in dark).

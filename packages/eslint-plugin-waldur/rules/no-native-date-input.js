@@ -1,8 +1,7 @@
 /**
  * ESLint rule forbidding native date/time inputs:
  * `<input type="date">` and its siblings (`datetime-local`, `time`, `month`,
- * `week`), whether on a raw <input>, a react-bootstrap <Form.Control> or any
- * other component that forwards `type`.
+ * `week`), whether on a raw <input> or any other component that forwards `type`.
  *
  * Native pickers can't be styled with the design tokens (the popup is
  * browser chrome, with its own colours and no dark theme), render in a

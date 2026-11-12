@@ -34,8 +34,7 @@ export interface AccordionCardProps extends PropsWithChildren {
  * Collapsible. `keepMounted`: several cards wrap react-final-form fields,
  * which must keep their values and validation while folded.
  *
- * Tailwind port of the Metronic `.card.card-bordered` it used to render.
- * Spacing is in rem, as Metronic's was (`$card-px` 1.85rem, `$card-py`
+ * Spacing is in rem (`$card-px` 1.85rem, `$card-py`
  * 1.23rem), so it keeps scaling with the app's responsive root font size;
  * colours come from the `--card-bg` / `--border-secondary` tokens in
  * waldur-design-tokens and card.css.
@@ -57,7 +56,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
       <div
         id={props.id}
         className={cn(
-          // min-w-0: as Bootstrap's .card, so a card in a flex/grid row can
+          // min-w-0: so a card in a flex/grid row can
           // shrink and let wide content scroll instead of widening it.
           'flex min-w-0 flex-col rounded-lg border border-solid border-secondary bg-primary',
           props.solid && 'overflow-hidden',
