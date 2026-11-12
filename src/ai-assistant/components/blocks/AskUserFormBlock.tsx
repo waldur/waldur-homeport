@@ -6,6 +6,7 @@ import {
   InfoIcon,
   PlusIcon,
 } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { BaseButton } from 'waldur-ui';
@@ -96,16 +97,20 @@ const OtherAnswerInput: FC<{
   useEffect(() => {
     if (!disabled) ref.current?.focus();
   }, [disabled]);
+  const hasValue = Boolean(value.trim());
   return (
     <div
-      className="aui-ask-user-input-row"
-      data-has-value={value.trim() ? '1' : '0'}
+      className="border-t border-primary pt-2.5 mt-1"
+      data-has-value={hasValue ? '1' : '0'}
     >
       <BaseInputField
         ref={ref}
         type="text"
         size="sm"
-        className="aui-ask-user-text"
+        className={classNames(
+          'h-[34px]',
+          hasValue && 'border-[var(--border-brand-solid)] text-primary',
+        )}
         placeholder={translate('Type your own answer…')}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -160,14 +165,29 @@ const ButtonGroupQuestion: FC<{
               role={isMulti ? 'checkbox' : 'radio'}
               aria-checked={picked}
               onClick={() => togglePick(opt)}
-              className="aui-ask-user-pill"
+              className={classNames(
+                'inline-flex items-center gap-1.5 h-[34px] px-3.5 text-sm font-medium leading-none rounded-md border whitespace-nowrap cursor-pointer transition-colors duration-150',
+                picked
+                  ? 'text-[var(--text-brand-secondary)] bg-brand-subtle border-[var(--border-brand-solid)]'
+                  : 'text-primary bg-secondary border-secondary enabled:hover:bg-tertiary enabled:hover:border-primary',
+                dimmed && 'opacity-35',
+                disabled && 'cursor-default opacity-70',
+              )}
               data-picked={picked ? '1' : '0'}
               data-dimmed={dimmed ? '1' : '0'}
               title={opt.description || undefined}
               disabled={disabled}
             >
               {isMulti && (
-                <span className="aui-ask-user-check" aria-hidden="true">
+                <span
+                  className={classNames(
+                    'inline-flex items-center justify-center shrink-0 size-3.5 rounded-sm border',
+                    picked
+                      ? 'text-[var(--text-primary-on-brand)] bg-[var(--bg-brand-solid)] border-[var(--border-brand-solid)]'
+                      : 'text-secondary bg-secondary border-secondary',
+                  )}
+                  aria-hidden="true"
+                >
                   {picked && <CheckIcon size={11} weight="bold" />}
                 </span>
               )}
@@ -185,7 +205,7 @@ const ButtonGroupQuestion: FC<{
               picks: !answer.otherOpen ? [] : answer.picks,
             })
           }
-          className="aui-ask-user-other-toggle"
+          className="inline-flex items-center gap-1.5 h-[34px] px-3 text-sm font-medium text-secondary bg-transparent border border-dashed border-primary rounded-md cursor-pointer transition-colors duration-150 hover:text-primary hover:bg-tertiary hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
           aria-expanded={answer.otherOpen}
           disabled={disabled}
         >
@@ -284,7 +304,7 @@ const SearchableListQuestion: FC<{
               picks: !answer.otherOpen ? [] : answer.picks,
             })
           }
-          className="aui-ask-user-other-toggle aui-ask-user-other-toggle--compact"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-secondary bg-transparent border-0 cursor-pointer transition-colors duration-150 hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
           aria-expanded={answer.otherOpen}
           disabled={disabled}
         >
@@ -311,22 +331,28 @@ const FreeformQuestion: FC<{
   answer: FreeformAnswer;
   onChange: (a: FreeformAnswer) => void;
   disabled: boolean;
-}> = ({ answer, onChange, disabled }) => (
-  <div
-    className="aui-ask-user-input-row"
-    data-has-value={answer.text.trim() ? '1' : '0'}
-  >
-    <BaseInputField
-      type="text"
-      size="sm"
-      className="aui-ask-user-text"
-      placeholder={translate('Type your answer…')}
-      value={answer.text}
-      onChange={(e) => onChange({ text: e.target.value })}
-      disabled={disabled}
-    />
-  </div>
-);
+}> = ({ answer, onChange, disabled }) => {
+  const hasValue = Boolean(answer.text.trim());
+  return (
+    <div
+      className="border-t border-primary pt-2.5 mt-1"
+      data-has-value={hasValue ? '1' : '0'}
+    >
+      <BaseInputField
+        type="text"
+        size="sm"
+        className={classNames(
+          'h-[34px]',
+          hasValue && 'border-[var(--border-brand-solid)] text-primary',
+        )}
+        placeholder={translate('Type your answer…')}
+        value={answer.text}
+        onChange={(e) => onChange({ text: e.target.value })}
+        disabled={disabled}
+      />
+    </div>
+  );
+};
 
 export const AskUserFormBlock: FC<UIBlockProps> = ({ block }) => {
   const readOnly = useContext(OfflineBlockContext);
@@ -344,10 +370,14 @@ export const AskUserFormBlock: FC<UIBlockProps> = ({ block }) => {
 // submission would be misleading.
 const AskUserFormBlockLive: FC<UIBlockProps> = ({ block }) => {
   const stale = useAuiState((state) => {
-    const messageId = state.message?.id;
-    const messages = state.thread.messages;
-    if (!messageId || !messages || messages.length === 0) return false;
-    return messages[messages.length - 1].id !== messageId;
+    try {
+      const messageId = state.message?.id;
+      const messages = state.thread?.messages;
+      if (!messageId || !messages || messages.length === 0) return false;
+      return messages[messages.length - 1]?.id !== messageId;
+    } catch {
+      return false;
+    }
   });
   return <AskUserFormBody block={block} readOnly={false} stale={stale} />;
 };
@@ -398,27 +428,38 @@ export const AskUserFormBody: FC<
 
   return (
     <div
-      className="aui-ask-user-block"
+      className={classNames(
+        'w-full max-w-[680px] mb-4 p-4 rounded-lg border border-primary text-sm leading-[1.75] text-primary transition-colors',
+        showSubmitted ? 'bg-secondary' : 'bg-tertiary',
+      )}
       data-submitted={showSubmitted ? '1' : '0'}
     >
       {block.context && (
-        <div className="aui-ask-user-context">
-          <InfoIcon size={13} weight="regular" />
+        <div className="flex items-start gap-1.5 mb-3.5 text-sm leading-normal text-secondary">
+          <InfoIcon
+            size={13}
+            weight="regular"
+            className="shrink-0 mt-0.5 text-tertiary"
+          />
           <span>{block.context}</span>
         </div>
       )}
 
-      <div className="aui-ask-user-questions">
+      <div className="flex flex-col gap-4.5">
         {questions.map((q, i) => {
           const a = answers[i];
           const mode = modeFor(q);
           return (
-            <div key={q.id} className="aui-ask-user-question">
-              <div className="aui-ask-user-q-header">
+            <div key={q.id} className="flex flex-col gap-2">
+              <div className="flex flex-col items-start gap-1">
                 {q.header && (
-                  <span className="aui-ask-user-chip">{q.header}</span>
+                  <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium leading-[1.6] tracking-wider uppercase text-secondary bg-quaternary rounded-sm">
+                    {q.header}
+                  </span>
                 )}
-                <label className="aui-ask-user-q-text">{q.question}</label>
+                <label className="m-0 text-sm font-semibold leading-tight text-primary">
+                  {q.question}
+                </label>
               </div>
               <div>
                 {mode === 'freeform' ? (
@@ -450,16 +491,23 @@ export const AskUserFormBody: FC<
 
       {showSubmitted ? (
         <div
-          className="aui-ask-user-footer aui-ask-user-footer--submitted"
+          className="flex items-center justify-start gap-1.5 mt-4 pt-3.5 border-t border-primary text-sm text-secondary"
           data-testid="ask-user-footer"
         >
-          <CheckCircleIcon size={14} weight="fill" />
+          <CheckCircleIcon
+            size={14}
+            weight="fill"
+            className="text-brand shrink-0"
+          />
           <span>{translate('Sent to assistant')}</span>
         </div>
       ) : (
-        <div className="aui-ask-user-footer" data-testid="ask-user-footer">
+        <div
+          className="flex items-center justify-end gap-3 mt-4 pt-3.5 border-t border-primary"
+          data-testid="ask-user-footer"
+        >
           {!readOnly && (
-            <span className="aui-ask-user-progress">
+            <span className="me-auto text-xs text-tertiary tabular-nums">
               {translate('{answered} of {total} answered', {
                 answered: answeredCount,
                 total: questions.length,
@@ -470,7 +518,7 @@ export const AskUserFormBody: FC<
             <BaseButton
               variant="primary"
               size="sm"
-              className="aui-ask-user-submit"
+              className="inline-flex items-center gap-1.5 disabled:cursor-not-allowed"
               label={translate('Send answers')}
               iconNode={<ArrowRightIcon size={13} weight="bold" />}
               iconRight
@@ -487,7 +535,7 @@ export const AskUserFormBody: FC<
               <BaseButton
                 variant="primary"
                 size="sm"
-                className="aui-ask-user-submit"
+                className="inline-flex items-center gap-1.5"
                 onClick={() => setSubmitted(true)}
                 label={translate('Send answers')}
                 iconNode={<ArrowRightIcon size={13} weight="bold" />}
