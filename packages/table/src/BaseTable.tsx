@@ -3,6 +3,7 @@ import { isEqual } from 'es-toolkit';
 import React, {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -89,6 +90,24 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
   // Refs
   const tableResponsiveRef = useRef<HTMLDivElement>(null);
+
+  // Across a table's pages the body keeps the height of its tallest page, so
+  // the pagination stays where it is instead of jumping up on a short last
+  // page. A single page, or a new page size, starts over.
+  const pageSize = props.pagination?.pageSize;
+  const multiPage =
+    props.hasPagination &&
+    props.pagination?.resultCount > props.pagination?.pageSize;
+  const [tallestPage, setTallestPage] = useState(0);
+  useEffect(() => setTallestPage(0), [pageSize]);
+  useLayoutEffect(() => {
+    if (!multiPage) {
+      if (tallestPage) setTallestPage(0);
+      return;
+    }
+    const height = tableResponsiveRef.current?.offsetHeight ?? 0;
+    if (height > tallestPage) setTallestPage(height);
+  });
   const prevPaginationRef = useRef(props.pagination);
   const prevQueryRef = useRef(props.query);
   const prevFiltersStorageRef = useRef(props.filtersStorage);
@@ -496,7 +515,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               ref={tableResponsiveRef}
               data-slot="table-responsive"
               className="@container/table overflow-x-auto relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe in-[[data-slot=modal-content]]:border in-[[data-slot=modal-content]]:border-solid in-[[data-slot=modal-content]]:border-secondary in-[[data-slot=modal-content]]:rounded-lg"
-              style={{ minHeight: props.minHeight || 300 }}
+              style={{ minHeight: tallestPage || props.minHeight || 300 }}
               onScroll={debouncedScrollHandler}
             >
               <TableContent />
