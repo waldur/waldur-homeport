@@ -66,8 +66,3 @@ A formatter is a function in `src/property/formats/` and exported on `propVal` i
 ## Lint: `waldur-custom/prefer-typed-property`
 
 The rule reports a `PropertyItem` whose `value` is formatted by hand where a typed formatter fits: `formatDate`/`formatDateTime`/`formatMonth`/`formatRelative`, `defaultCurrency`, `formatCount`/`formatUsageValue`, `formatFilesize`, `formatPercent`, a Yes/No · Enabled/Disabled · Active/Inactive ternary, `CheckOrX`, `BooleanField`, `FormattedHtml`, `SafeMarkdown`, `x.join(', ')`, the same behind `x ? f(x) : empty` or `x && f(x)` — and `renderFieldOrDash(x)`, since the row draws the dash itself.
-
-Rows that predate the rule are counted per file and kind in `typed-property.baseline.json`. A file may hold as many of a kind as listed; one more and every row of that kind is reported. A file holding fewer than listed is reported as stale, so the counts only shrink:
-
-- after moving rows onto typed properties, rewrite the counts: `yarn lint:properties:baseline`;
-- never raise a count for new code; use the typed property.

@@ -15,7 +15,6 @@ const ruleTester = new RuleTester({
   },
 });
 
-// A file outside the repository, so the baseline never lists it.
 const filename = '/tmp/prefer-typed-property/Example.tsx';
 
 const prefer = (replacement: string) => ({

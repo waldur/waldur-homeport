@@ -130,7 +130,6 @@ Scan JS dependencies:
         - typings.d.ts
         - vite.config.ts
         - eslint.config.js
-        - unknown-classes.baseline.json
         - packages/**/*
         - .eslintrc.cjs
         - .eslintignore

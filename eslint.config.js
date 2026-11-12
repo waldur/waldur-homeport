@@ -121,9 +121,7 @@ export default tseslint
         'waldur-custom/no-bootstrap-button-markup': 'error',
         // Raw <table> markup becomes Table, SimpleTable, PropertyList or, for
         // a form grid, allow-listed waldur-ui Table primitives (decision tree:
-        // docs/table/migration-guide.md). Tables that predate the rule are
-        // counted per file in hand-rolled-table.baseline.json, which only
-        // shrinks: `yarn lint:tables:baseline` after migrating some.
+        // docs/table/migration-guide.md).
         'waldur-custom/no-hand-rolled-table': 'error',
         'waldur-custom/no-hand-rolled-modal-footer': 'error',
         // Zero instances remain: every native date/time input was replaced by
@@ -204,8 +202,7 @@ export default tseslint
         // share compile to nothing.
         'waldur-custom/no-retired-bootstrap-utility': 'error',
         // A class that neither Tailwind nor any stylesheet defines styles
-        // nothing — a typo or a leftover. Existing ones are listed per file
-        // in unknown-classes.baseline.json; any other one fails.
+        // nothing — a typo or a leftover.
         'waldur-custom/no-unknown-class': [
           'error',
           { allow: UNKNOWN_CLASS_HOOKS },
@@ -223,9 +220,7 @@ export default tseslint
         'waldur-custom/no-rem-length': 'error',
         // A style={{ … }} whose every value is a literal is a class in
         // disguise, and outranks every stylesheet while it stays inline.
-        // Declarations that predate the rule are counted per file and per
-        // property in inline-style.baseline.json, which only shrinks:
-        // `yarn lint:styles:baseline` after moving some. The staged plan is
+        // How the existing ones were retired:
         // docs/inline-style-retirement-plan.md.
         'waldur-custom/no-static-inline-style': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
@@ -238,9 +233,7 @@ export default tseslint
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
         // A PropertyItem formatting its value by hand should be the typed
-        // property for it (src/property/propertyFields.tsx). Rows that predate
-        // the rule are counted in typed-property.baseline.json, which only
-        // shrinks: `yarn lint:properties:baseline` after moving some.
+        // property for it (src/property/propertyFields.tsx).
         'waldur-custom/prefer-typed-property': 'error',
         'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
         'waldur-custom/no-direct-field-adapter': 'error',

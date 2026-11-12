@@ -253,9 +253,10 @@ alone rather than reporting its literals.
 `enforce-border-radius-tokens`, which already report them inline, so nothing is
 reported twice.
 
-The baseline is `inline-style.baseline.json`, written by
+The baseline was `inline-style.baseline.json`, written by
 `scripts/static-inline-style-baseline.mjs` through `writeRuleBaseline`
-(`yarn lint:styles:baseline`), counted per file and per property:
+(`yarn lint:styles:baseline`), counted per file and per property (all three
+were deleted in phase 4):
 
 ```json
 { "src/auth/layouts/NewsLayout.tsx": { "maxHeight": 1, "maxWidth": 1 } }
@@ -528,11 +529,12 @@ four sites carrying an `eslint-disable` with a reason (the Radix
 `pointer-events` pair in `Modal.tsx`, and two tests asserting on a forwarded
 `style`), and the pin offsets in `TableHeader`.
 
-### Phase 4 — close out
+### Phase 4 — close out — **done**
 
-With the baseline at zero for app code, flip the rule from baselined to plain
-`error` and delete `inline-style.baseline.json` and its script, as the Bootstrap
-guards will be deleted when their baselines empty.
+With the baseline at zero, the rule is a plain `error`:
+`inline-style.baseline.json`, its script and `yarn lint:styles:baseline` are
+deleted, along with the other emptied rule baselines (unknown classes, typed
+properties, hand-rolled tables).
 
 ## What stays
 

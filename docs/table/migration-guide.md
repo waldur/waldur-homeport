@@ -2,11 +2,8 @@
 
 How to replace a raw `<table>`, and how to pick what it becomes.
 
-`waldur-custom/no-hand-rolled-table` is an error with a shrinking baseline:
-the raw `<table>`s that predate it are counted per file in
-`hand-rolled-table.baseline.json`. A file may keep that many; one more fails
-lint, and one fewer reports the count as stale. After migrating some, run
-`yarn lint:tables:baseline`; never run it to let a new table in.
+`waldur-custom/no-hand-rolled-table` is an error: every raw `<table>` that
+predates it has been migrated, so a new one fails lint.
 
 Not every table should become `@/table/Table`: a short read-only list gains
 nothing from a fetch cycle, a Redux table store and five props to switch its

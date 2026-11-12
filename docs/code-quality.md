@@ -128,11 +128,11 @@ Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed
 
 ## Typed property guard
 
-`waldur-custom/prefer-typed-property` reports a `PropertyItem` that formats its value by hand where a typed formatter fits (`propVal.date`, `propVal.currency`, `propVal.boolean`, …), and `renderFieldOrDash` inside one. Existing rows are counted per file and kind in `typed-property.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:properties:baseline` after moving rows, never to let new ones in. See [property-fields.md](property-fields.md).
+`waldur-custom/prefer-typed-property` reports a `PropertyItem` that formats its value by hand where a typed formatter fits (`propVal.date`, `propVal.currency`, `propVal.boolean`, …), and `renderFieldOrDash` inside one. See [property-fields.md](property-fields.md).
 
 ## Hand-rolled table guard
 
-`waldur-custom/no-hand-rolled-table` reports raw `<table>` markup, which should be `@/table/Table` or `SimpleTable` (see [table/migration-guide.md](table/migration-guide.md)). Existing tables are counted per file in `hand-rolled-table.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:tables:baseline` after migrating some, never to let new ones in. A table that is deliberately not a data table (a `<td>` under test, a story's layout grid) takes `// eslint-disable-next-line waldur-custom/no-hand-rolled-table -- <reason>` and is not counted.
+`waldur-custom/no-hand-rolled-table` reports raw `<table>` markup, which should be `@/table/Table` or `SimpleTable` (see [table/migration-guide.md](table/migration-guide.md)). A table that is deliberately not a data table (a `<td>` under test, a story's layout grid) takes `// eslint-disable-next-line waldur-custom/no-hand-rolled-table -- <reason>`.
 
 ## rem length guard
 
@@ -140,7 +140,7 @@ Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed
 
 ## Static inline style guard
 
-`waldur-custom/no-static-inline-style` reports a property of a JSX `style` object whose value is entirely literal and that has a Tailwind utility, naming the utility: `style={{ maxWidth: '100%', maxHeight: '80px' }}` is `max-w-full max-h-20`. An inline style outranks every stylesheet, so one left there also opts the element out of dark mode, responsive variants and the token scales — the auth logo's inline `max-height` kept `.login-logo img`'s own 600px and 450px media queries from ever applying. The rule stays silent on a value computed at runtime, a CSS custom property, an object with a spread in it (merge order decides the winner there) and any declaration with no utility; `fontSize`, `fontWeight` and `borderRadius` belong to `require-font-size-scale`, `require-weight-scale` and `enforce-border-radius-tokens`. Existing declarations are counted per file and property in `inline-style.baseline.json`; the counts only shrink, so rewrite them with `yarn lint:styles:baseline` after moving some, never to let new ones in. A file holding fewer than listed is reported as stale. See "Inline styles" in [design-tokens.md](design-tokens.md) and the staged plan in [inline-style-retirement-plan.md](inline-style-retirement-plan.md).
+`waldur-custom/no-static-inline-style` reports a property of a JSX `style` object whose value is entirely literal and that has a Tailwind utility, naming the utility: `style={{ maxWidth: '100%', maxHeight: '80px' }}` is `max-w-full max-h-20`. An inline style outranks every stylesheet, so one left there also opts the element out of dark mode, responsive variants and the token scales — the auth logo's inline `max-height` kept `.login-logo img`'s own 600px and 450px media queries from ever applying. The rule stays silent on a value computed at runtime, a CSS custom property, an object with a spread in it (merge order decides the winner there) and any declaration with no utility; `fontSize`, `fontWeight` and `borderRadius` belong to `require-font-size-scale`, `require-weight-scale` and `enforce-border-radius-tokens`. See "Inline styles" in [design-tokens.md](design-tokens.md) and how the existing ones were retired in [inline-style-retirement-plan.md](inline-style-retirement-plan.md).
 
 ## Unknown class guard
 
@@ -162,13 +162,6 @@ The rule reads class positions only:
 A `const` used in one of those positions is followed to its value in the same file: `className={BASE}` checks `BASE`, `cn(SIZES[size])` checks every value of `SIZES`, `TONE.danger` checks that entry. Imports, parameters and `let` are not followed. A token glued to a `${…}` in a template literal is a fragment and is skipped. The message names the nearest real class when there is one (`Did you mean "flex"?`).
 
 Implementation: `packages/eslint-plugin-waldur/lib/class-oracle.js`, reached from the synchronous rule through a `synckit` worker. The rule finds the repository root from its own location, so ESLint can run from any directory. Compiled stylesheet classes are cached in `node_modules/.cache/eslint-plugin-waldur/`, keyed by every stylesheet's path, size and mtime and by `yarn.lock`; a long-lived ESLint server (the editor's) picks up stylesheet changes within a few seconds.
-
-### Existing violations
-
-Existing violations are listed per file in `unknown-classes.baseline.json`. A listed class is not reported in its file; any other unknown class is, whatever else the change does. A listed class the file no longer has (fixed, removed, or now defined by a stylesheet) is reported as stale, so the list only shrinks.
-
-- After fixing listed classes, rewrite the list: `yarn lint:classes:baseline`.
-- Never add entries for new code. Fix the class instead.
 
 ### Classes that deliberately style nothing
 
