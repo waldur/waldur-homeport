@@ -43889,12 +43889,12 @@
   },
   "Only lowercase letters, numbers, and @/./+/-/_ characters are allowed.": {},
   "Only members of the resource's project or organization can reveal its keys.": {},
-  "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating its assignee.": {
+  "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating a member who may.": {
     "context": {
       "feature_area": "api-keys"
     }
   },
-  "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating one of them.": {
+  "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating its assignee.": {
     "context": {
       "feature_area": "api-keys"
     }
@@ -43978,7 +43978,11 @@
     }
   },
   "Only staff users are allowed to perform this action.": {},
-  "Only the assignee can reveal this key.": {},
+  "Only the assignee can reveal this key.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Only the call manager takes a role away from someone else.": {},
   "Only the calls of this organization use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.": {
     "context": {
@@ -57583,6 +57587,12 @@
   "Reuse value": {},
   "Reveal": {
     "context": {
+      "feature_area": "roles"
+    }
+  },
+  "Reveal the shared API keys of resources used by the project or organization": {
+    "context": {
+      "primary_ui_type": "label",
       "feature_area": "roles"
     }
   },
@@ -87221,6 +87231,7 @@
       "feature_area": "review"
     }
   },
+  "Your role in this project or organization does not allow revealing its shared keys.": {},
   "Your search \"{query}\" did not match any {verboseName}.": {
     "context": {
       "variables": {

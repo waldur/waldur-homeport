@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
@@ -80,6 +81,10 @@ const MEMBER = {
 
 describe('InferenceServiceView', () => {
   beforeEach(() => {
+    // As permissions.yaml grants it: a member reveals the project's shared keys.
+    (ENV as any).roles = [
+      { name: 'PROJECT.MEMBER', permissions: ['RESOURCE.REVEAL_API_KEY'] },
+    ];
     vi.clearAllMocks();
     vi.mocked(useUser).mockReturnValue(MEMBER as any);
   });

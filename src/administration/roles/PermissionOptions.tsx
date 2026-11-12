@@ -145,6 +145,10 @@ export const PermissionOptions = [
         value: 'RESOURCE.REQUEST_LIMITS_CHANGE',
       },
       {
+        label: translate('Reveal the shared API keys of resources used by the project or organization'),
+        value: 'RESOURCE.REVEAL_API_KEY',
+      },
+      {
         label: translate('Set limits for resource'),
         value: 'RESOURCE.SET_LIMITS',
       },
