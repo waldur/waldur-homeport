@@ -165,7 +165,12 @@ export function getNoResultTitle({ verboseName, hasFilter = false }) {
  * saved filter gets when the user gives none. */
 export const formatNow = () => DateTime.now().toFormat('d LLL yyyy, t');
 
-export const getSavedFiltersKey = (table, formId) =>
+/** Where a table's saved filters are stored. Homeport and every micro-app
+ * share one origin and this key, so a filter saved in one shows up in the
+ * others on the same table id. Changing the format loses everyone's saved
+ * filters unless each app ships a migration. Pinned by
+ * TableFilterService.test.ts. */
+export const getSavedFiltersKey = (table: string, formId: string) =>
   `waldur/table/filters/${table}/${formId}`;
 
 export const getSimpleExportData = <T = any,>(
