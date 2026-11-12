@@ -12,27 +12,7 @@
  * Only `value` is read, and only a call, a Yes/No-style ternary or one of the
  * retired display components at its root, or behind `x ? f(x) : empty` /
  * `x && f(x)`. A value that composes more than that is left alone.
- *
- * Rows that predate the rule are counted per file and kind in
- * typed-property.baseline.json at the repository root. A file may hold as
- * many of a kind as listed; one more and every one of that kind is reported.
- * A file holding fewer than listed is reported as stale, so the counts only
- * shrink. `yarn lint:properties:baseline` rewrites the file.
  */
-
-import path from 'node:path';
-import process from 'node:process';
-
-import {
-  REPO_ROOT,
-  createBaselineReader,
-  repoRelative,
-} from '../lib/baseline.js';
-
-const BASELINE_FILE = 'typed-property.baseline.json';
-
-// Set by scripts/typed-property-baseline.mjs to see every case.
-const IGNORE_BASELINE = process.env.WALDUR_TYPED_PROPERTY_BASELINE === 'ignore';
 
 const ROWS = new Set(['PropertyItem', 'PropertyList.Item']);
 
@@ -127,8 +107,6 @@ const replacementFor = (node) => {
   return null;
 };
 
-const readBaseline = createBaselineReader();
-
 export default {
   meta: {
     type: 'suggestion',
@@ -143,17 +121,10 @@ export default {
       prefer:
         'This PropertyItem formats its value by hand; use {{ replacement }} with PropertyItem from @/property/propertyFields, which also decides when the value is missing and what it copies.',
       dash: 'A PropertyItem draws a missing value itself: a dash in a divided list, no row in a summary list (hideIfEmpty={false} keeps the row and its dash). Pass value={x} instead of renderFieldOrDash(x).',
-      stale:
-        'typed-property.baseline.json lists {{ listed }} "{{ kind }}" row(s) for this file, but it has {{ found }}. Run `yarn lint:properties:baseline` to update the list.',
     },
   },
 
   create(context) {
-    const relativeFile = repoRelative(context.filename);
-
-    /** kind → nodes */
-    const found = new Map();
-
     return {
       JSXOpeningElement(node) {
         if (!ROWS.has(jsxName(node.name))) return;
@@ -165,37 +136,11 @@ export default {
         );
         const replacement = replacementFor(value?.value.expression);
         if (!replacement) return;
-        if (!found.has(replacement)) found.set(replacement, []);
-        found.get(replacement).push(value);
-      },
-
-      'Program:exit'(program) {
-        const listed = IGNORE_BASELINE
-          ? {}
-          : (readBaseline(path.join(REPO_ROOT, BASELINE_FILE))[relativeFile] ??
-            {});
-
-        for (const [kind, nodes] of found) {
-          if (nodes.length <= (listed[kind] ?? 0)) continue;
-          for (const node of nodes) {
-            context.report(
-              kind === 'value={x}'
-                ? { node, messageId: 'dash' }
-                : { node, messageId: 'prefer', data: { replacement: kind } },
-            );
-          }
-        }
-        for (const [kind, count] of Object.entries(listed)) {
-          const have = found.get(kind)?.length ?? 0;
-          if (have < count) {
-            context.report({
-              node: program,
-              loc: { line: 1, column: 0 },
-              messageId: 'stale',
-              data: { kind, listed: String(count), found: String(have) },
-            });
-          }
-        }
+        context.report(
+          replacement === 'value={x}'
+            ? { node: value, messageId: 'dash' }
+            : { node: value, messageId: 'prefer', data: { replacement } },
+        );
       },
     };
   },

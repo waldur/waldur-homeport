@@ -412,9 +412,7 @@ An inline style is still right where the value is not static:
 `fontSize`, `fontWeight` and `borderRadius` belong to `require-font-size-scale`,
 `require-weight-scale` and `enforce-border-radius-tokens`, which already report them inline.
 
-Declarations that predate the rule are counted per file and per property in
-`inline-style.baseline.json`, which only shrinks: run `yarn lint:styles:baseline` after moving
-some. A file holding fewer than listed is reported as stale. The staged plan for emptying it is
+How the declarations that predate the rule were retired is in
 [inline-style-retirement-plan.md](inline-style-retirement-plan.md).
 
 ## Root font size
@@ -531,7 +529,7 @@ unnoticed.
 | Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), `waldur/font-size-scale` |
 | Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint                   |
 | Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint                    |
-| Static inline declarations only go down                 | `waldur-custom/no-static-inline-style`, `inline-style.baseline.json`                 |
+| No static inline declarations                           | `waldur-custom/no-static-inline-style`                                               |
 | Legacy stylesheet emits no `fw-*`; Tailwind on scale    | `src/tailwindBootstrapColors.test.ts`                                                |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
 | No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                                     |
