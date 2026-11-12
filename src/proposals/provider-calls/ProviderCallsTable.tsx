@@ -55,18 +55,21 @@ export const CallNameLink: FC<{ row: ProviderRequestedOffering }> = ({
   );
 
 const CallCell: FC<{ row: ProviderRequestedOffering }> = ({ row }) => (
-  <div className="flex flex-col items-start gap-1">
+  <div className="flex flex-col items-start">
     <CallNameLink row={row} />
     <span className="text-quaternary">{row.call_managing_organisation}</span>
-    <Badge
-      variant={CALL_STATE_VARIANT[row.call_state] || 'secondary'}
-      size="sm"
-      shape="pill"
-      tone="outline"
-    >
-      {formatCallState(row.call_state)}
-    </Badge>
   </div>
+);
+
+const CallStateCell: FC<{ row: ProviderRequestedOffering }> = ({ row }) => (
+  <Badge
+    variant={CALL_STATE_VARIANT[row.call_state] || 'secondary'}
+    size="sm"
+    shape="pill"
+    tone="outline"
+  >
+    {formatCallState(row.call_state)}
+  </Badge>
 );
 
 export const CurrentRoundCell: FC<{ row: ProviderRequestedOffering }> = ({
@@ -77,7 +80,7 @@ export const CurrentRoundCell: FC<{ row: ProviderRequestedOffering }> = ({
     return <>{renderFieldOrDash(null)}</>;
   }
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-wrap items-center gap-1.5">
       <span>{row.current_round.name}</span>
       <Badge variant={status.color} size="sm" shape="pill" tone="outline">
         {status.label}
@@ -227,6 +230,7 @@ export const ProviderCallsTable: FC<ProviderCallsTableProps> = ({
       render: CallOfferingStateField,
       orderField: 'state',
     },
+    { title: translate('Call state'), render: CallStateCell },
     { title: translate('Current round'), render: CurrentRoundCell },
     { title: translate('Cut-off'), render: CutoffCell },
     {

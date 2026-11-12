@@ -10846,6 +10846,7 @@
   "Call slug": {},
   "Call state": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "provider-calls"
     }
   },
@@ -87236,7 +87237,11 @@
       "feature_area": "auth"
     }
   },
-  "Your team’s steps": {},
+  "Your team’s steps": {
+    "context": {
+      "feature_area": "provider-calls"
+    }
+  },
   "Your token": {
     "context": {
       "feature_area": "personal-access-tokens"

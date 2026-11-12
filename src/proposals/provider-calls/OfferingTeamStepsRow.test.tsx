@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -86,16 +86,17 @@ describe('OfferingTeamStepsRow', () => {
     } as any);
     render(<OfferingTeamStepsRow row={row} providerUuid="prov" />);
 
-    await screen.findByText('Extension request assessment', {
-      selector: 'span',
-    });
-    const steps = screen.getByTestId('offering-team-steps');
-    expect(steps).toHaveTextContent(
-      'Technical assessment · Evaluation · 21 days',
+    const steps = await screen.findByTestId('offering-team-steps');
+    await waitFor(() =>
+      expect(within(steps).getByText(/^Technical assessment/)).toBeVisible(),
     );
-    expect(steps).toHaveTextContent(
-      'Extension request assessment · Extension request · 14 days',
-    );
+    expect(within(steps).getByText(/Evaluation · 21 days/)).toBeVisible();
+    expect(
+      within(steps).getByText(/^Extension request assessment/),
+    ).toBeVisible();
+    expect(
+      within(steps).getByText(/Extension request · 14 days/),
+    ).toBeVisible();
     expect(await screen.findByText('Proposal p1')).toBeInTheDocument();
     expect(screen.getByText('Proposal p2')).toBeInTheDocument();
     // Slots of two steps in one table: each names its step.
