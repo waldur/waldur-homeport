@@ -37,7 +37,7 @@ const { rows, tableProps } = vi.hoisted(() => ({
   tableProps: { value: null as any },
 }));
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (options) => {
     tableProps.value = options;
     return { fetch: vi.fn() };

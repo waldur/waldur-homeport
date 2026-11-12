@@ -12,7 +12,7 @@ import { SupportAIAssistantLogsList } from './SupportAIAssistantLogsList';
 // Only the stat row above the table is under test, so the table machinery and
 // its redux-backed filter values are stubbed out. Both stubs are spies so a
 // test can vary the active scope and assert what reaches the stats endpoint.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: vi.fn(() => ({
     rows: [],
     fetch: vi.fn(),
@@ -30,7 +30,7 @@ vi.mock('@/table/Table', () => ({
     return null;
   },
 }));
-vi.mock('@/table/useFilterValues', () => ({
+vi.mock('waldur-table/src/useFilterValues', () => ({
   useFilterValues: vi.fn(() => ({})),
 }));
 

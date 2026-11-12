@@ -1,6 +1,9 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { bootstrapMicroApp } from 'waldur-shell';
+import { createTablesStore } from 'waldur-table';
 
 import { OrgDashboardMock } from './OrgDashboardMock';
 import './tailwind.css';
@@ -17,8 +20,17 @@ import 'waldur-design-tokens/fonts.css';
 // (no router of its own, no Sentry DSN yet, no brand color override).
 bootstrapMicroApp();
 
+// What waldur-table's Table needs around it: a query client for its
+// fetching, and a Redux store for its page, sorting and filters.
+const queryClient = new QueryClient();
+const tablesStore = createTablesStore();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <OrgDashboardMock />
+    <QueryClientProvider client={queryClient}>
+      <Provider store={tablesStore}>
+        <OrgDashboardMock />
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );

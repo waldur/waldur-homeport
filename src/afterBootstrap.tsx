@@ -5,6 +5,7 @@ import { ENV } from './core/config';
 import { initMatomoTracker } from './core/matomo';
 import { initSentry } from './core/sentry';
 import { configureHomeportTableHost } from './core/tableHost';
+import { homeportTableComponents } from './core/tableHostComponents';
 import { getBrandColor } from './core/utils';
 import { translate } from './i18n';
 import {
@@ -42,7 +43,7 @@ export function afterBootstrap() {
   initSentry();
   initI18n();
   attachTransitions();
-  configureHomeportTableHost();
+  configureHomeportTableHost(homeportTableComponents);
   initCssVariables();
   // Fire and forget: only the next visit's splash depends on it. Once the
   // user's language has loaded, so the splash text is cached in it.

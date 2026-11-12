@@ -48,5 +48,5 @@ Still in `src/` and next in line:
 - `StepChecklistSection.tsx`, the step's form: needs file upload in
   `waldur-form` (homeport #482).
 - The workflow timeline: needs `FormSteps`/`ProgressSteps` in `waldur-ui`.
-- Resource requests and activity: need the portal's tables in a package
-  (homeport #454).
+- Resource requests and activity: need tables. The portal's is now the
+  `waldur-table` package, so these can move (homeport #454).

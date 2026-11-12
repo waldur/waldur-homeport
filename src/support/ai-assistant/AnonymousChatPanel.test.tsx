@@ -16,7 +16,7 @@ import { AnonymousChatPanel } from './AnonymousChatPanel';
 // control (mounted via tableActions) can be triggered.
 let tableOptions: any;
 const tableFetch = vi.fn();
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (options: any) => {
     tableOptions = options;
     return { rows: [], fetch: tableFetch };
@@ -32,7 +32,9 @@ vi.mock('@/table/Table', () => ({
 }));
 
 // Filter values come from the redux table slice; the panel only forwards them.
-vi.mock('@/table/useFilterValues', () => ({ useFilterValues: () => ({}) }));
+vi.mock('waldur-table/src/useFilterValues', () => ({
+  useFilterValues: () => ({}),
+}));
 
 // Kept accessible so a test can inspect cache state the panel is expected to
 // invalidate on refresh.

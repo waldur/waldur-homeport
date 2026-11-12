@@ -16,7 +16,7 @@ import {
 
 // Render each table's rows, read through its fetchData as useTable would;
 // the table chrome is not under test here.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (options) => ({
     fetch: vi.fn(),
     fetchData: options.fetchData,

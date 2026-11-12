@@ -44,8 +44,8 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
  * plus Header/Body/Row/Head/Cell sub-components — see
  * https://ui.shadcn.com/docs/components/table) — border/hover colors point
  * at waldur-design-tokens/table.css's table tokens and the shared surface tokens
- * instead of shadcn's own default palette. DataTable.tsx's column-def API
- * builds on these rather than rendering a bare <table> itself.
+ * instead of shadcn's own default palette. The waldur-table package's
+ * tables build on these rather than rendering a bare <table> themselves.
  */
 export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
   {

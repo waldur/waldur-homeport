@@ -10,7 +10,7 @@ const rows = [
   { uuid: 'm2', proposal_role: 'PROPOSAL.OTHER', project_role: null },
 ];
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn() }),
 }));
 

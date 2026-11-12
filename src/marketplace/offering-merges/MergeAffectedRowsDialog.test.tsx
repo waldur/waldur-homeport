@@ -15,7 +15,7 @@ const useTableSpy = vi.fn();
 
 // Capture what the dialog asks the table to fetch, and render the page the SDK
 // answered with through the real columns.
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useState } = await import('react');
   return {
     useTable: (config: any) => {

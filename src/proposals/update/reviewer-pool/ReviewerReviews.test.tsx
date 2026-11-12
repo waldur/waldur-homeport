@@ -27,7 +27,7 @@ vi.mock('@/table/Table', () => ({
   ),
 }));
 // Fetches the first page through the real fetcher, as the table would.
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useState } = await import('react');
   return {
     useTable: ({ table, fetchData, filter }) => {

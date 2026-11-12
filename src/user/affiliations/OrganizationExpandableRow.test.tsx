@@ -11,7 +11,7 @@ import { OrganizationExpandableRow } from './OrganizationExpandableRow';
 
 // Expose the toolbar's `onRefetch` via a button so the test can fire the
 // post-bulk-action refresh without driving the full move/delete UI.
-vi.mock('@/table/ExpandableRowToolbar', () => ({
+vi.mock('waldur-table/src/ExpandableRowToolbar', () => ({
   ExpandableRowToolbar: ({ onRefetch }: any) => (
     <button onClick={() => onRefetch?.()}>fire-refetch</button>
   ),

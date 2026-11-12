@@ -10,9 +10,9 @@ The application features a comprehensive set of reusable UI components organized
 
 | Component               | Location                            | Description                | Key Features                                                |
 | ----------------------- | ----------------------------------- | -------------------------- | ----------------------------------------------------------- |
-| **Table**               | `src/table/Table.tsx`               | Main table component       | Filtering, sorting, pagination, column visibility, export   |
-| **ActionsDropdown**     | `src/table/ActionsDropdown.tsx`     | Dropdown for table actions | Row actions with `ActionItem`; a wrapper over `ActionsMenu` |
-| **ExpandableContainer** | `src/table/ExpandableContainer.tsx` | Collapsible row details    | Table row expansion, detail views                           |
+| **Table**               | `packages/table/src/Table.tsx`               | Main table component       | Filtering, sorting, pagination, column visibility, export   |
+| **ActionsDropdown**     | `packages/table/src/ActionsDropdown.tsx`     | Dropdown for table actions | Row actions with `ActionItem`; a wrapper over `ActionsMenu` |
+| **ExpandableContainer** | `packages/table/src/ExpandableContainer.tsx` | Collapsible row details    | Table row expansion, detail views                           |
 | **TablePagination**     | `waldur-ui`                         | Pagination controls        | Page navigation, size selection                             |
 
 ### Menus and Popovers
@@ -21,7 +21,7 @@ The application features a comprehensive set of reusable UI components organized
 | --------------- | ------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | **Menu**        | `packages/ui/src/Menu/` (`waldur-ui`) | Every dropdown menu                  | `nav` and `actions` looks, `density` / `tone` on the panel, submenus, radio rows, `openOnHover` |
 | **MenuPopover** | `packages/ui/src/Menu/` (`waldur-ui`) | Menu surface for panels with inputs  | Filter and picker popovers with menu rows, `forceMount`; panels with no rows use `Popover`      |
-| **ActionsMenu** | `src/table/ActionsDropdown.tsx`       | Action menu with its trigger         | Kebab, labeled, "Add" or custom toggle; `actions-menu` / `action-item` test ids                 |
+| **ActionsMenu** | `packages/table/src/ActionsDropdown.tsx`       | Action menu with its trigger         | Kebab, labeled, "Add" or custom toggle; `actions-menu` / `action-item` test ids                 |
 | **ActionItem**  | `src/resource/actions/ActionItem.tsx` | An action row                        | Icon, tooltip, staff indicator; filtered by `ActionList`                                        |
 | **NavMenuLink** | `src/navigation/NavMenu.tsx`          | A nav menu row that is a router link | ui-router `state`/`params`                                                                      |
 

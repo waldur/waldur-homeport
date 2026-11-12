@@ -1,18 +1,8 @@
 import { UseQueryResult } from '@tanstack/react-query';
-import { ReactNode } from 'react';
+import { FC, ReactNode, useRef } from 'react';
 import { translate } from 'waldur-i18n-runtime';
-import {
-  AppLink,
-  BaseButton,
-  BreadcrumbTrail,
-  Card,
-  CardContent,
-  CardHeader,
-  DataTable,
-  DataTableColumn,
-  EmptyState,
-  LoadingSpinner,
-} from 'waldur-ui';
+import { Column, Table, TableProps, useRowsTable } from 'waldur-table';
+import { AppLink, BreadcrumbTrail } from 'waldur-ui';
 
 import { navigate, pageHref } from './router';
 
@@ -79,30 +69,17 @@ export const PortalLink = ({
     <>{children}</>
   );
 
-const describeError = (error: unknown) => {
-  const response = (error as { response?: Response })?.response;
-  if (response?.status === 401) {
-    return translate('You are not logged in. Log in to the portal first.');
-  }
-  if (response) {
-    return translate('The server answered {status}.', {
-      status: response.status,
-    });
-  }
-  return translate('The server could not be reached.');
-};
-
-/** The parts of a react-query result a table card reads. */
+/** The parts of a react-query result a table reads. */
 export type TableQuery<T> = Pick<
   UseQueryResult<unknown>,
-  'isLoading' | 'isError' | 'error' | 'refetch'
+  'isLoading' | 'isError' | 'error' | 'refetch' | 'dataUpdatedAt'
 > & { data?: T[] };
 
 /** The same query showing `data` instead: a slice, or a reshaping of it. */
 export const withRows = <T,>(
   query: Pick<
     UseQueryResult<unknown>,
-    'isLoading' | 'isError' | 'error' | 'refetch'
+    'isLoading' | 'isError' | 'error' | 'refetch' | 'dataUpdatedAt'
   >,
   data: T[] | undefined,
 ): TableQuery<T> => ({
@@ -110,59 +87,84 @@ export const withRows = <T,>(
   isError: query.isError,
   error: query.error,
   refetch: query.refetch,
+  dataUpdatedAt: query.dataUpdatedAt,
   data,
 });
 
 /**
- * A card holding a table fed by one query: spinner while loading, the
- * error with a retry, an empty state, or the rows.
+ * The pages build their columns on every render, so that the titles follow
+ * the language once its dictionary loads. The table mounts a column's
+ * `render` as a component, and a new function each render would remount
+ * every cell, dropping a row action's pending state. So each column keeps
+ * one component, which draws with the latest `render`.
  */
-export function QueryTableCard<T>({
-  title,
+export const useStableColumns = <T,>(columns: Column<T>[]): Column<T>[] => {
+  const latest = useRef(columns);
+  latest.current = columns;
+  const renderers = useRef<FC<{ row: T }>[]>([]);
+  return columns.map((column, index) => {
+    renderers.current[index] ??= (props) =>
+      (latest.current[index].render as FC<{ row: T }>)(props);
+    return { ...column, render: renderers.current[index] };
+  });
+};
+
+// Sorting is the server's: a column's `orderField` names an endpoint
+// ordering, which rows held in memory cannot follow.
+const withoutSorting = <T,>(column: Column<T>): Column<T> => ({
+  ...column,
+  orderField: undefined,
+});
+
+// One array for "no rows yet", so the table does not start over every render.
+const NO_ROWS = [];
+
+/**
+ * For the lists whose endpoint is not paginated, or whose rows are reshaped
+ * here, and for the inbox's previews; a paginated list fetches its own pages
+ * (`useTable` with `createFetcher`, see RequestsPage).
+ *
+ * The shared table over a list one query fetched whole: the table pages the
+ * rows in the browser and draws every state itself (its spinner while the
+ * query loads, its error view, its empty state with `emptyMessage`).
+ * Refresh, in the title bar and in the empty state, runs the query again.
+ * Takes the table's own props: `title`, `footer`, `rowKey`, `hasPagination`
+ * (false for a preview of a few rows), …
+ */
+export function QueryTable<T>({
+  table,
   query,
   columns,
-  rowKey,
-  emptyMessage,
-  footer,
+  title,
+  ...rest
 }: {
-  title?: ReactNode;
+  /** The table's name in the tables store: one per list on screen. */
+  table: string;
   query: TableQuery<T>;
-  columns: DataTableColumn<T>[];
-  rowKey: (row: T) => string;
-  emptyMessage: string;
-  footer?: ReactNode;
-}) {
+  columns: Column<T>[];
+} & Pick<
+  TableProps<T>,
+  'title' | 'footer' | 'rowKey' | 'hasPagination' | 'emptyMessage'
+>) {
+  const tableProps = useRowsTable<T>(
+    table,
+    query.data ?? NO_ROWS,
+    query.dataUpdatedAt,
+  );
   return (
-    <Card>
-      {title ? (
-        <CardHeader className="p-4 pb-0 text-sm font-semibold text-primary">
-          {title}
-        </CardHeader>
-      ) : null}
-      <CardContent className="overflow-x-auto p-0">
-        {query.isLoading ? (
-          <div className="flex justify-center p-8">
-            <LoadingSpinner />
-          </div>
-        ) : query.isError ? (
-          <EmptyState
-            title={translate('Could not load this list')}
-            message={describeError(query.error)}
-            action={
-              <BaseButton
-                variant="tertiary"
-                label={translate('Try again')}
-                onClick={() => query.refetch()}
-              />
-            }
-          />
-        ) : (query.data ?? []).length === 0 ? (
-          <EmptyState message={emptyMessage} />
-        ) : (
-          <DataTable columns={columns} rows={query.data} rowKey={rowKey} />
-        )}
-        {footer}
-      </CardContent>
-    </Card>
+    <Table
+      {...tableProps}
+      columns={useStableColumns(columns).map(withoutSorting)}
+      loading={query.isLoading || tableProps.loading}
+      error={query.isError ? query.error : tableProps.error}
+      fetch={() => {
+        query.refetch();
+      }}
+      title={title}
+      // The bar holds the title and Refresh; a list under a page header
+      // that already names it has neither.
+      hasActionBar={Boolean(title)}
+      {...rest}
+    />
   );
 }

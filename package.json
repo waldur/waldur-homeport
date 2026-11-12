@@ -140,6 +140,7 @@
     "waldur-proposals": "workspace:*",
     "waldur-runtime-config": "workspace:*",
     "waldur-shell": "workspace:*",
+    "waldur-table": "workspace:*",
     "waldur-telemetry": "workspace:*",
     "waldur-ui": "workspace:*",
     "yjs": "^13.5.22"

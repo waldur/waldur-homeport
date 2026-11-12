@@ -13,7 +13,10 @@ import { renderWithProviders } from '@/test/harness';
 import { InvitationList } from './InvitationList';
 
 // Serves the rows given to setTableQueryRows (none by default); no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const invitation = {
   uuid: '5b9a1d3e6c7f4a8e9b2d1c0f3e4a5b6c',

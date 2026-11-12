@@ -506,7 +506,7 @@ import { ProjectLink } from '@/project/ProjectLink';
 
 ## 6. Dropdown & Menu Toggles
 
-Action dropdown toggles—such as [`TableDropdownToggle`](../src/table/ActionsDropdown.tsx) and `AddDropdownToggle`—render dropdown triggers inside tables and toolbars. For standalone dropdown buttons, use `Menu.TriggerButton` (which wraps `BaseButton` with `ButtonCaret`).
+Action dropdown toggles—such as [`TableDropdownToggle`](../packages/table/src/ActionsDropdown.tsx) and `AddDropdownToggle`—render dropdown triggers inside tables and toolbars. For standalone dropdown buttons, use `Menu.TriggerButton` (which wraps `BaseButton` with `ButtonCaret`).
 
 ### Why Action Toggles Use `buttonVariants()` Instead of `BaseButton`
 
@@ -536,7 +536,7 @@ When a Radix menu opens, it sets `data-state="open"` on its trigger. A toggle ma
 
 ### Unavailable Actions
 
-On an unavailable offering, the page wraps itself in `<ActionsUnavailable reason={…}>` (`src/table/ActionsDropdown.tsx`). Every action menu inside renders its toggle disabled, with the reason in a tooltip, and doesn't open, as the [UI guidelines](ui-consistency-guidelines.md) ask of a control that is temporarily unavailable. The tooltip sits on a focusable wrapper, because a disabled button gets no pointer events.
+On an unavailable offering, the page wraps itself in `<ActionsUnavailable reason={…}>` (`packages/table/src/ActionsDropdown.tsx`). Every action menu inside renders its toggle disabled, with the reason in a tooltip, and doesn't open, as the [UI guidelines](ui-consistency-guidelines.md) ask of a control that is temporarily unavailable. The tooltip sits on a focusable wrapper, because a disabled button gets no pointer events.
 
 Tests find a toggle by `data-testid="actions-toggle"`, or the icon-only kebab by its accessible name, "Actions".
 

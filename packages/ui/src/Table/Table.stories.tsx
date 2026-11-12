@@ -18,7 +18,7 @@ const meta: Meta<typeof Table> = {
     docs: {
       description: {
         component:
-          'Low-level Table primitive (Table, TableHeader, TableBody, TableRow, TableHead, TableCell) with horizontal overflow scrolling, surface border tokens, and hover row effects. Serves as the foundation for DataTable.',
+          'Low-level Table primitive (Table, TableHeader, TableBody, TableRow, TableHead, TableCell) with horizontal overflow scrolling, surface border tokens, and hover row effects. Serves as the foundation for the tables of the waldur-table package.',
       },
     },
   },

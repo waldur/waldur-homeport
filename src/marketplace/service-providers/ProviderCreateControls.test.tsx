@@ -16,7 +16,7 @@ import { ProviderOfferingGroupsList } from './offering-groups/ProviderOfferingGr
 import { CreateProviderOfferingUserButton } from './offering-users/CreateProviderOfferingUserButton';
 
 // Only the table's own actions matter here, not its rows or data fetching.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [] }),
 }));
 

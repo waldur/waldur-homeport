@@ -7,7 +7,7 @@ const useTableSpy = vi.fn();
 
 // Capture the config `useTable` receives so we can assert on the built filter,
 // and bypass the real React Query / SDK fetch.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: (config: any) => {
     useTableSpy(config);
     return { rows: [], pagination: {} };
@@ -25,7 +25,9 @@ vi.mock('@/table/Table', () => ({
 }));
 
 // No active filter form values in these tests.
-vi.mock('@/table/useFilterValues', () => ({ useFilterValues: () => ({}) }));
+vi.mock('waldur-table/src/useFilterValues', () => ({
+  useFilterValues: () => ({}),
+}));
 
 // Keep the filter panel out of the render tree (and its top-level date setup).
 vi.mock('./ResourceUsageFilter', () => ({

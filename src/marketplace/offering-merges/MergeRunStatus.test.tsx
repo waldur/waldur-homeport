@@ -11,7 +11,7 @@ import { MergeVerification } from './MergeRunStatus';
 
 // The checks table keeps its state in the Redux store; resolve its in-memory
 // rows and render the cells, which is where the summary and the dialog live.
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useState } = await import('react');
   return {
     useTable: (config: any) => {

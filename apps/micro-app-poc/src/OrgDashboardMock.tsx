@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 import { AppShell } from 'waldur-shell';
+import { Column, Table, useRowsTable } from 'waldur-table';
 import {
   Badge,
   BaseButton,
@@ -8,8 +9,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  DataTable,
-  DataTableColumn,
   ModalService,
   ModePickerDialog,
   OrgSwitcher,
@@ -49,30 +48,33 @@ import { getModeSubtitle, getWorkspaceModes } from './workspaceModes';
  *
  */
 
+// One array for "no rows", so the table does not start over every render.
+const NO_ROWS: ProjectRow[] = [];
+
 export const OrgDashboardMock = () => {
   // Rebuilt every render (not a module-level constant) so its translate()
   // calls re-resolve once the dictionary loads — see the file header
   // comment on why nothing forces an extra render for that on its own.
-  const columns: DataTableColumn<ProjectRow>[] = [
-    { key: 'name', header: translate('Project'), render: (row) => row.name },
+  const columns: Column<ProjectRow>[] = [
+    { id: 'name', title: translate('Project'), render: ({ row }) => row.name },
     {
-      key: 'status',
-      header: translate('Status'),
-      render: (row) => (
+      id: 'status',
+      title: translate('Status'),
+      render: ({ row }) => (
         <Badge variant={row.statusTone} shape="pill" tone="outline" hasBullet>
           {row.status}
         </Badge>
       ),
     },
     {
-      key: 'members',
-      header: translate('Members'),
-      render: (row) => row.members,
+      id: 'members',
+      title: translate('Members'),
+      render: ({ row }) => row.members,
     },
     {
-      key: 'monthlySpend',
-      header: translate('Monthly spend'),
-      render: (row) => row.monthlySpend,
+      id: 'monthlySpend',
+      title: translate('Monthly spend'),
+      render: ({ row }) => row.monthlySpend,
     },
   ];
 
@@ -104,9 +106,8 @@ export const OrgDashboardMock = () => {
     });
 
   // Dashes, not mock-number fallbacks, when there's no backend/no
-  // customers — see the file header comment. renderFieldOrDash() lives in
-  // @/table/utils — this app is deliberately decoupled from src/table/*
-  // (see DataTable.tsx's header comment), so that convention doesn't
+  // customers — see the file header comment. These are stat values and a
+  // heading, not table cells, so the table's renderFieldOrDash() does not
   // apply here.
   /* eslint-disable waldur-custom/enforce-render-field-or-dash */
   const orgName = data?.orgName ?? translate('No organisation');
@@ -116,7 +117,8 @@ export const OrgDashboardMock = () => {
   const invoiceHint = data?.invoiceHint ?? '—';
   const workspaceTitle = currentMode?.title ?? '—';
   /* eslint-enable waldur-custom/enforce-render-field-or-dash */
-  const rows = data?.rows ?? [];
+  const rows = data?.rows ?? NO_ROWS;
+  const tableProps = useRowsTable<ProjectRow>('poc-projects', rows, rows);
 
   return (
     <AppShell
@@ -207,10 +209,15 @@ export const OrgDashboardMock = () => {
             {translate('Projects')}
           </CardHeader>
           <CardContent className="overflow-x-auto p-0">
-            <DataTable
+            {/* The card around it has the title. */}
+            <Table
+              {...tableProps}
               columns={columns}
-              rows={rows}
-              rowKey={(row) => row.uuid}
+              verboseName={translate('projects')}
+              hideTitle
+              hasActionBar={false}
+              cardBordered={false}
+              placeholderHasRetry={false}
             />
           </CardContent>
         </Card>

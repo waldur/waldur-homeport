@@ -486,7 +486,7 @@ Every menu and menu-like popover is built from one set of parts in `waldur-ui` (
 
 1. **`Menu`** (`packages/ui/src/Menu/`): Radix DropdownMenu with the defaults built in: `modal={false}`, a Portal (with an optional `container`), the look's z-index layer, scrolling inside the space Radix measures, `sideOffset={2}` and the keyframe entrance. Parts: `Menu.Trigger`, `Menu.Content`, `Menu.Item`, `Menu.Group`, `Menu.RadioGroup`/`Menu.RadioItem`, `Menu.Sub`/`Menu.SubTrigger`/`Menu.SubContent`, `Menu.Label`, `Menu.Separator`, `Menu.CheckboxItem` (a setting, shown as a switch) and `Menu.CopyItem` (copies a value).
 2. **`MenuPopover`**: the same surfaces on a Radix Popover, for panels holding inputs. Parts: `Trigger`, `Anchor`, `Close`, `Content` (with `forceMount` and `container` for the table filter panels) and `Item` (a button row that does _not_ close the panel, since the filter menus use it as a nested popover's trigger).
-3. **App components** in `src/table/ActionsDropdown.tsx`: `ActionsMenu` and its rows (below), and `NavMenuLink` in `src/navigation/NavMenu.tsx`, a nav row that is a ui-router link.
+3. **App components** in `packages/table/src/ActionsDropdown.tsx`: `ActionsMenu` and its rows (below), and `NavMenuLink` in `src/navigation/NavMenu.tsx`, a nav row that is a ui-router link.
 
 - **Looks**: `Menu.Content look="nav"` (the default; header, page tabs, footer, filter popovers) or `look="actions"` (row actions, "Add" menus). Popovers with a layout of their own (the column picker, search, breadcrumb, call settings) are plain `Popover`s, whose `PopoverContent` is a bordered card on `z-popover`. The looks are cva recipes collocated with each component in `packages/ui/src/Menu/` (`menuSurface` in `MenuContent.tsx`, `menuItem` in `MenuItem.tsx`, `menuText` in `MenuStatic.tsx`, `menuLabel` in `MenuLabel.tsx`, `menuSeparator` in `MenuSeparator.tsx`) and pinned by `menuLooks.test.ts`.
 - **Look and kind in context**: a panel provides its look and its kind (`menu`, `popover` or, with no panel, `plain`) through React context (`packages/ui/src/Menu/menuContext.tsx`), so rows in a portaled submenu still inherit them. `Menu.Item` renders for its kind: a Radix item in a menu, a button that closes the panel in a popover, a plain `<button role="menuitem">` anywhere else. `onSelect` works the same in all three; calling `event.preventDefault()` keeps the panel open.
@@ -506,7 +506,7 @@ The surfaces reset their own margin and padding (`m-[0px] p-[0px]`); a caller's 
 
 ### `ActionsMenu` & `ActionItem`
 
-`src/table/ActionsDropdown.tsx` / `src/resource/actions/ActionItem.tsx`.
+`packages/table/src/ActionsDropdown.tsx` / `src/resource/actions/ActionItem.tsx`.
 
 - **`ActionsMenu`**: a trigger plus an actions-look panel. `toggle` is `"kebab"` (the default), `"labeled"` (with `label`), `"add"` or an element of your own (which must forward its ref). The panel opens to the left of the toggle, aligned to its start, as row actions always have; "Add" and toolbar menus pass `side="bottom"`. For panels with search inputs, use `MenuPopover` with `TableDropdownToggle` directly. `ActionsDropdown` is a wrapper over it. For standalone dropdown buttons, use `Menu.TriggerButton`.
 - **`Menu.Content look="actions"`**: the panel on its own, for menus whose trigger sits elsewhere in the markup (`WaldurSidebarBrand`, `ResourceUsageForm`).
@@ -636,7 +636,7 @@ The former `enforce-button-variants` rule was deleted: the variant list lives in
   CHOKIDAR_USEPOLLING=1 yarn vitest run --project=storybook
   ```
 
-- **Stories to look at**: `Actions/BaseButton` (`packages/ui/src/Button/BaseButton.stories.tsx`: playground, every state, sizes, icon-only, realistic usage), `Actions/SegmentedControl` (variants, sizes, `BesideTallerSibling`, `AsTabsWithPanels`), and `src/table/ActionsMenu.stories.tsx`.
+- **Stories to look at**: `Actions/BaseButton` (`packages/ui/src/Button/BaseButton.stories.tsx`: playground, every state, sizes, icon-only, realistic usage), `Actions/SegmentedControl` (variants, sizes, `BesideTallerSibling`, `AsTabsWithPanels`), and `packages/table/src/ActionsMenu.stories.tsx`.
 - **Storybook is not the app**: it applies the theme through `storybook-addon-pseudo-states`, which rewrites `:focus-visible` / `:hover` selectors. See the pitfall below before trusting a `:not(:focus-visible)` result there.
 
 ---

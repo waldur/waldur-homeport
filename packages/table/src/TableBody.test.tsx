@@ -1,0 +1,437 @@
+import { ModalProvider } from '@/modal/ModalContext';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { memo, useEffect, useState } from 'react';
+import { Provider } from 'react-redux';
+import { combineReducers, legacy_createStore as createStore } from 'redux';
+import { describe, it, expect } from 'vitest';
+
+import { DASH_ESCAPE_CODE, ROW_VARIANT_BG_VARS } from './constants';
+import { FilterContextProvider } from './FilterContextProvider';
+import { StringFilter } from './filters';
+import { tablesReducer } from './store';
+import { TableBody } from './TableBody';
+import { TableFilters } from './TableFilters';
+import { renderFieldOrDash } from './utils';
+
+export const ROW_UUID = 1;
+
+export const COLUMNS = [
+  {
+    title: 'Resource type',
+    render: ({ row }) => row.type,
+  },
+  {
+    title: 'Resource name',
+    render: ({ row }) => row.name,
+  },
+];
+
+const ROWS = [
+  {
+    type: 'OpenStack Instance',
+    name: 'Web server',
+    uuid: ROW_UUID,
+  },
+];
+
+export const renderWrapper = (props?) =>
+  render(
+    <table>
+      <TableBody columns={COLUMNS} rows={ROWS} {...props} />
+    </table>,
+  );
+
+const expandableRow = () => <h3>Detailed info</h3>;
+
+describe('TableBody', () => {
+  it('should render a cell for each column', () => {
+    renderWrapper();
+    expect(screen.getAllByRole('cell')).toHaveLength(COLUMNS.length);
+  });
+
+  it('paints a row carrying a status variant, and leaves the others alone', () => {
+    const rows = [
+      { uuid: 1, type: 'A', name: 'late' },
+      { uuid: 2, type: 'B', name: 'on time' },
+    ];
+    renderWrapper({
+      rows,
+      rowVariant: ({ row }) => (row.name === 'late' ? 'danger' : undefined),
+    });
+    const [late, onTime] = screen.getAllByRole('row');
+    expect(late).toHaveClass(ROW_VARIANT_BG_VARS.danger);
+    expect(onTime).not.toHaveClass(ROW_VARIANT_BG_VARS.danger);
+  });
+
+  it('takes a status variant as a plain value for every row', () => {
+    renderWrapper({ rowVariant: 'warning' });
+    expect(screen.getByRole('row')).toHaveClass(ROW_VARIANT_BG_VARS.warning);
+  });
+
+  it('renders a row-header column as th scope=row', () => {
+    renderWrapper({
+      columns: [{ ...COLUMNS[0], rowHeader: true }, COLUMNS[1]],
+    });
+    const header = screen.getByRole('rowheader', {
+      name: 'OpenStack Instance',
+    });
+    expect(header.tagName).toBe('TH');
+    expect(header).toHaveAttribute('scope', 'row');
+    expect(screen.getAllByRole('cell')).toHaveLength(1);
+  });
+
+  it('renders a full-width group header above a row that opens a group', () => {
+    const rows = [
+      { uuid: 1, type: 'A', name: 'one', group: 'x' },
+      { uuid: 2, type: 'B', name: 'two', group: 'x' },
+      { uuid: 3, type: 'C', name: 'three', group: 'y' },
+    ];
+    renderWrapper({
+      rows,
+      rowActions: () => null,
+      rowGroupHeader: ({ row, rowIndex, rows: all }) =>
+        rowIndex === 0 || all[rowIndex - 1].group !== row.group
+          ? `Group ${row.group}`
+          : null,
+    });
+    const headers = screen.getAllByTestId('table-group-header');
+    expect(headers.map((header) => header.textContent)).toEqual([
+      'Group x',
+      'Group y',
+    ]);
+    // Spans the data columns and the actions column.
+    expect(headers[0]).toHaveAttribute('colspan', String(COLUMNS.length + 1));
+    expect(screen.getAllByRole('cell')).toHaveLength(
+      rows.length * (COLUMNS.length + 1),
+    );
+  });
+
+  it('should not render expandable indicator if expandable component is not provided', () => {
+    renderWrapper();
+    expect(screen.queryByTestId('row-expander')).not.toBeInTheDocument();
+  });
+
+  it('should render untoggled expandable indicator if expandable component is provided', () => {
+    renderWrapper({ expandableRow, toggled: {} });
+    expect(screen.getByTestId('row-expander')).toBeInTheDocument();
+    expect(screen.getAllByRole('cell')).toHaveLength(COLUMNS.length);
+  });
+
+  it('should render toggled expandable indicator according to props', () => {
+    renderWrapper({
+      expandableRow,
+      toggled: { [ROW_UUID]: true },
+    });
+    expect(screen.getByTestId('row-expander')).toBeInTheDocument();
+  });
+
+  it('should render extra row if it is expanded', () => {
+    renderWrapper({
+      expandableRow,
+      toggled: { [ROW_UUID]: true },
+    });
+    expect(screen.getByText('Detailed info')).toBeInTheDocument();
+  });
+
+  it('expanded row colSpan should equal columns.length when no rowActions or multiSelect', () => {
+    renderWrapper({
+      expandableRow,
+      toggled: { [ROW_UUID]: true },
+    });
+    const expandedCell = screen.getByTestId('expanded-row-cell');
+    expect(expandedCell).toHaveAttribute('colspan', String(COLUMNS.length));
+  });
+
+  describe('expander', () => {
+    const StatefulTable = (props) => {
+      const [toggled, setToggled] = useState({});
+      return (
+        <table>
+          <TableBody
+            columns={COLUMNS}
+            rows={ROWS}
+            expandableRow={expandableRow}
+            toggled={toggled}
+            toggleRow={(id) =>
+              setToggled((prev) => ({ ...prev, [id]: !prev[id] }))
+            }
+            {...props}
+          />
+        </table>
+      );
+    };
+
+    it('is a button named after the row that reports its state', () => {
+      renderWrapper({ expandableRow, toggled: {} });
+      const button = screen.getByRole('button', {
+        name: 'Expand OpenStack Instance',
+      });
+      expect(button).toBe(screen.getByTestId('row-expander'));
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      expect(button).not.toHaveAttribute('aria-controls');
+    });
+
+    it('opens and closes the row from the keyboard', async () => {
+      const user = userEvent.setup();
+      render(<StatefulTable />);
+
+      await user.tab();
+      const button = screen.getByRole('button', {
+        name: 'Expand OpenStack Instance',
+      });
+      expect(button).toHaveFocus();
+
+      await user.keyboard('{Enter}');
+      expect(screen.getByText('Detailed info')).toBeInTheDocument();
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      expect(button).toHaveAccessibleName('Collapse OpenStack Instance');
+      expect(button).toHaveAttribute(
+        'aria-controls',
+        screen.getByTestId('expanded-row-cell').id,
+      );
+
+      await user.keyboard(' ');
+      expect(screen.queryByText('Detailed info')).not.toBeInTheDocument();
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('still toggles when the row itself is clicked', async () => {
+      const user = userEvent.setup();
+      render(<StatefulTable />);
+
+      await user.click(screen.getByText('Web server'));
+      expect(screen.getByText('Detailed info')).toBeInTheDocument();
+
+      // A click on the button toggles once, not twice (row + button).
+      await user.click(
+        screen.getByRole('button', { name: 'Collapse OpenStack Instance' }),
+      );
+      expect(screen.queryByText('Detailed info')).not.toBeInTheDocument();
+    });
+  });
+
+  it('should show expander when first column is hidden', () => {
+    const columnsWithHiddenFirst = [
+      {
+        title: 'Hidden column',
+        render: ({ row }) => row.type,
+        visible: false,
+      },
+      {
+        title: 'Visible column',
+        render: ({ row }) => row.name,
+      },
+    ];
+    renderWrapper({
+      columns: columnsWithHiddenFirst,
+      expandableRow,
+      toggled: {},
+    });
+    expect(screen.getByTestId('row-expander')).toBeInTheDocument();
+  });
+});
+
+/**
+ * Regression coverage for a live bug: TableBody.tsx's InlineFilterButton
+ * only renders for a cell when hasFilterMenu() finds
+ * `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` in the
+ * DOM — a selector written for Metronic's own markup, never portaled.
+ * TableFiltersMenu.tsx's Radix Popover.Portal defaulted to document.body,
+ * which moves that whole subtree (and every `#filter-item-*` row in it)
+ * outside `#kt_content_container`, so the selector silently stopped
+ * matching and the inline "filter by this value" shortcut stopped
+ * appearing at all — reported live as "inline & column table filters
+ * does not work anymore". Fixed by anchoring the Portal's `container`
+ * back inside `#kt_content_container`.
+ */
+describe('TableBody row actions', () => {
+  // Holds state, like an open row-action menu does.
+  const Counter = () => {
+    const [count, setCount] = useState(0);
+    return (
+      <button type="button" onClick={() => setCount((c) => c + 1)}>
+        Clicked {count}
+      </button>
+    );
+  };
+
+  // What a refetch produces: new row objects, and a new inline rowActions
+  // arrow from the re-rendering parent. Untyped like renderWrapper's props.
+  const freshProps = (): any => ({
+    columns: COLUMNS,
+    rows: ROWS.map((row) => ({ ...row })),
+    rowActions: () => <Counter />,
+  });
+
+  // A refetch hands TableBody new row objects, and the parent hands it a new
+  // inline rowActions arrow on the same render. The cell must stay mounted,
+  // or an open menu closes under the user.
+  it('keeps the row-actions cell mounted when rows and rowActions are recreated', async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(
+      <table>
+        <TableBody {...freshProps()} />
+      </table>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Clicked 0' }));
+
+    rerender(
+      <table>
+        <TableBody {...freshProps()} />
+      </table>,
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Clicked 1' }),
+    ).toBeInTheDocument();
+  });
+
+  it('still renders a memo component passed as rowActions', () => {
+    const Memoized = memo(() => <span>Memo actions</span>);
+    renderWrapper({ rowActions: Memoized });
+    expect(screen.getByText('Memo actions')).toBeInTheDocument();
+  });
+});
+
+describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
+  const FILTER_COLUMNS = [
+    {
+      title: 'Resource type',
+      render: ({ row }) => row.type,
+      filter: 'resource_type',
+      inlineFilter: (row) => row.type,
+    },
+    {
+      title: 'Resource name',
+      render: ({ row }) => row.name,
+    },
+  ];
+
+  // Mirrors Table.tsx's real composition: the filters bar (holding
+  // TableFiltersMenu's force-mounted content) and TableBody share one
+  // FilterContextProvider. Rows are populated one tick after mount — like
+  // a real async fetch — so this exercises the same render-ordering the
+  // live bug depended on: the filters bar's DOM must exist before
+  // hasFilterMenu() is asked about a row.
+  //
+  // #kt_content_container itself is created and attached to the document
+  // *before* render(), and the tree is rendered directly into it via
+  // RTL's `container` option — not as a React-rendered child inside the
+  // tree under test. In the real app this id belongs to a page-shell
+  // element (the page content container in src/navigation/Layout.tsx) that's already
+  // mounted, from an earlier commit, by the time any table underneath it
+  // renders for the first time. Nesting it as a plain JSX ancestor in the
+  // SAME initial render — as an earlier version of this test did — commits
+  // it in the very same pass as TableFiltersMenu, so the Portal's
+  // container lookup (which runs during render, before anything commits)
+  // always sees it as absent and silently falls back to document.body,
+  // masking exactly the bug this test exists to catch.
+  const renderWithFilters = () => {
+    const table = 'TableBodyRegressionTable';
+    const store = createStore(combineReducers({ tables: tablesReducer }));
+
+    const ktContentContainer = document.createElement('div');
+    ktContentContainer.id = 'kt_content_container';
+    document.body.appendChild(ktContentContainer);
+
+    const Wrapper = () => {
+      const [rows, setRows] = useState<typeof ROWS>([]);
+      useEffect(() => {
+        setRows(ROWS);
+      }, []);
+      return (
+        <Provider store={store}>
+          <ModalProvider>
+            <FilterContextProvider
+              table={table}
+              formId="RegressionForm"
+              filterPosition="menu"
+              setFilter={() => undefined}
+              applyFiltersFn={() => undefined}
+              toggleFilterMenu={() => undefined}
+            >
+              <TableFilters
+                table={table}
+                filtersStorage={[]}
+                formId="RegressionForm"
+                filterPosition="menu"
+                setFilter={() => undefined}
+                applyFiltersFn={() => undefined}
+                filters={
+                  <StringFilter
+                    title="Resource type"
+                    name="resource_type"
+                    placeholder="Resource type"
+                  />
+                }
+              />
+              <table>
+                <TableBody
+                  columns={FILTER_COLUMNS}
+                  rows={rows}
+                  fetch={() => undefined}
+                  columnPositions={FILTER_COLUMNS.map((c) => c.title)}
+                />
+              </table>
+            </FilterContextProvider>
+          </ModalProvider>
+        </Provider>
+      );
+    };
+
+    return render(<Wrapper />, { container: ktContentContainer });
+  };
+
+  it('shows the inline filter shortcut once the filters bar and row have both mounted', async () => {
+    renderWithFilters();
+    await waitFor(() =>
+      expect(
+        document.querySelector('[data-testid="inline-filter"]'), // eslint-disable-line testing-library/no-node-access, no-restricted-syntax
+      ).toBeInTheDocument(),
+    );
+  });
+
+  it('the inline filter shortcut opens on click', async () => {
+    const user = userEvent.setup();
+    renderWithFilters();
+
+    await waitFor(() =>
+      expect(screen.getByTestId('inline-filter')).toBeInTheDocument(),
+    );
+    const inlineTrigger = screen.getByTestId('inline-filter');
+    expect(inlineTrigger).toHaveAttribute('data-state', 'closed');
+
+    await user.click(inlineTrigger as HTMLElement);
+    expect(inlineTrigger).toHaveAttribute('data-state', 'open');
+    expect(await screen.findByText('Filter by')).toBeInTheDocument();
+  });
+});
+
+describe('TableBody copy button', () => {
+  const copyColumns = [
+    {
+      title: 'Member',
+      render: ({ row }) => renderFieldOrDash(row.name),
+      copyField: (row) => row.name,
+    },
+  ];
+
+  it('offers copying a cell that has a value', () => {
+    renderWrapper({
+      columns: copyColumns,
+      rows: [{ uuid: 1, name: 'Jane Roe' }],
+    });
+    expect(
+      screen.getByRole('button', { name: 'Copy to clipboard' }),
+    ).toBeInTheDocument();
+  });
+
+  it('offers nothing to copy when the value is missing', () => {
+    renderWrapper({ columns: copyColumns, rows: [{ uuid: 1, name: null }] });
+    expect(screen.getByText(DASH_ESCAPE_CODE)).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Copy to clipboard' }),
+    ).not.toBeInTheDocument();
+  });
+});

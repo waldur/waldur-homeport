@@ -86,8 +86,8 @@ The app's only page — `OrgDashboardMock.tsx` composes `waldur-shell`'s
 — shortcuts button, logo slot, collapse toggle — plus the TopBar's
 Apps/Help/Notifications/`UserMenu` cluster, and an error boundary around
 page content — see `ShellErrorBoundary.tsx`) with `packages/ui`
-primitives (`StatCard`, `Badge`, `DataTable`) for its own page
-content, wired to real Waldur data via `waldur-js-client`
+primitives (`StatCard`, `Badge`) and `waldur-table`'s `Table` for its own
+page content, wired to real Waldur data via `waldur-js-client`
 (`customersList`/`projectsList`/`invoicesList`/`projectsListUsersCount`).
 Nav items, the org switcher's data, and all page content stay this app's
 own responsibility — current user, theme, language, and the error

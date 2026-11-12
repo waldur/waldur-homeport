@@ -5,7 +5,9 @@ import {
 } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { bootstrapMicroApp } from 'waldur-shell';
+import { createTablesStore } from 'waldur-table';
 
 import { App } from './App';
 import { ROOT_APP_URL } from './links';
@@ -24,20 +26,30 @@ bootstrapMicroApp({
 const queryClient: QueryClient = new QueryClient({
   // Any answer given here (a request, an award, an assessment from the
   // shared proposal package, which knows nothing of this app's queries)
-  // changes the inbox counts and task lists, so they are fetched again.
+  // changes the inbox counts and task lists, so they are fetched again:
+  // this app's own queries, and the pages the tables fetch for themselves
+  // (waldur-table keeps those under 'table').
   mutationCache: new MutationCache({
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [PROVIDER_CALLS_QUERY_KEY] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [PROVIDER_CALLS_QUERY_KEY] });
+      queryClient.invalidateQueries({ queryKey: ['table'] });
+    },
   }),
   defaultOptions: {
     queries: { refetchOnWindowFocus: false, retry: 1, staleTime: 30_000 },
   },
 });
 
+// The tables keep their page, sorting and filters in a Redux store; this app
+// has no other use for one.
+const tablesStore = createTablesStore();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <Provider store={tablesStore}>
+        <App />
+      </Provider>
     </QueryClientProvider>
   </React.StrictMode>,
 );

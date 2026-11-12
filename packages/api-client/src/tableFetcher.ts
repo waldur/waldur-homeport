@@ -210,3 +210,10 @@ export const createClientPaginatedFetcher =
       nextPage: endIndex < data.length ? page + 1 : null,
     });
   };
+
+/** A table's sorting as the list endpoints' `o` param: the field, with a
+ * leading `-` when descending. */
+export const orderByFilter = (sorting: {
+  mode: 'asc' | 'desc';
+  field: string;
+}): string => `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`;

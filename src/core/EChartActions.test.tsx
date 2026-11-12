@@ -15,7 +15,7 @@ vi.mock('./ChartExportDropdown', () => ({
   ),
 }));
 
-vi.mock('@/table/exporters/saveFile', () => ({ saveFile: vi.fn() }));
+vi.mock('waldur-table/src/exporters/saveFile', () => ({ saveFile: vi.fn() }));
 
 describe('EChartActions PDF export', () => {
   const pdf = new Blob(['%PDF-'], { type: 'application/pdf' });

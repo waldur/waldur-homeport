@@ -8,13 +8,11 @@ import {
   OrderState,
   OfferingTeamSlot,
   ProviderRequestedOffering,
-  ProviderRequestedResource,
   proposalMyTasksList,
   proposalMyTasksSummaryRetrieve,
   proposalOfferingDemandList,
   proposalRequestedOfferingsList,
   proposalRequestedOfferingsTeamSlotsList,
-  proposalRequestedResourcesList,
   RequestedOfferingStates,
 } from 'waldur-js-client';
 
@@ -23,9 +21,11 @@ import {
  * provider the user works for: the endpoints scope to the user's roles
  * themselves, so no filter is the same as "all mine".
  *
- * Lists are fetched whole (every page) and shown without a pager: a
- * provider's calls, requests and open slots are tens of rows, not thousands.
- * Proposals are the one list that can grow; it is capped, see below.
+ * These lists are fetched whole (every page): the inbox and the sidebar
+ * count them and preview their first rows, and the team slots and demand
+ * endpoints are not paginated. The full lists on the Requests, Awards,
+ * Proposals and Team work pages fetch their own pages instead (`useTable`
+ * with `createFetcher`).
  */
 const KEY = 'provider-calls';
 
@@ -88,27 +88,6 @@ export const useTeamSlots = (providerUuid?: string) =>
           query: withProvider(providerUuid),
         })
       ).data ?? [],
-  });
-
-export const PROPOSALS_SHOWN = 200;
-
-export const useRequestedResources = (providerUuid?: string) =>
-  useQuery({
-    queryKey: [KEY, 'requested-resources', providerUuid],
-    queryFn: async () => {
-      const result = await proposalRequestedResourcesList({
-        query: {
-          ...withProvider(providerUuid),
-          o: ['-created'],
-          page_size: PROPOSALS_SHOWN,
-        },
-      });
-      const total = Number(result.response.headers.get('x-result-count'));
-      return {
-        rows: (result.data ?? []) as ProviderRequestedResource[],
-        total: Number.isFinite(total) ? total : (result.data ?? []).length,
-      };
-    },
   });
 
 /** Not paginated: one row per offering × call × round × state group. */

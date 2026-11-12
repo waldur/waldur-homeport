@@ -32,7 +32,7 @@ vi.mock('./TeamDropdownActions', () => ({
   },
 }));
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: [], error: tableError.value }),
 }));
 

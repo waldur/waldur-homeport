@@ -18,7 +18,7 @@ import { EditUserDialog } from './EditUserDialog';
 import { getOnlyOneProjectManagerTooltip } from './onlyOneProjectManager';
 
 // Mock table constants
-vi.mock('@/table/constants', async (importOriginal) => ({
+vi.mock('waldur-table/src/constants', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@/table/constants')>()),
   DASH_ESCAPE_CODE: '—',
 }));

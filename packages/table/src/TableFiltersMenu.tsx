@@ -1,0 +1,513 @@
+import {
+  ArrowsClockwiseIcon,
+  CaretRightIcon,
+  FunnelSimpleIcon,
+  PlusIcon,
+  StarIcon,
+} from '@phosphor-icons/react';
+import classNames from 'classnames';
+import React, {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { translate } from 'waldur-i18n-runtime';
+import { BaseButton, MenuPopover, useModal } from 'waldur-ui';
+
+import { selectSavedFilter, setSavedFilters } from './actions';
+import { TableFilterContext } from './FilterContextProvider';
+import { closeFlyoutOnTabOut, focusFirstIn } from './filterMenuFocus';
+import { lazyTableDialog } from './host';
+import { SavedFilterSelect } from './SavedFilterSelect';
+import {
+  selectFilterValues,
+  selectSelectedSavedFilter,
+  selectTableSavedFilters,
+} from './selectors';
+import { HEADER_CONTROL_BTN_CLASS } from './styles';
+import { TableFilterService } from './TableFilterService';
+import { TableProps, TablesRootState } from './types';
+import { formatNow, getSavedFiltersKey } from './utils';
+
+const SaveFilterDialog = lazyTableDialog(() =>
+  import('./SaveFilterDialog').then((module) => ({
+    default: module.SaveFilterDialog,
+  })),
+);
+
+// TableBody.tsx's hasFilterMenu() decides whether to show a cell's inline
+// "filter by this value" shortcut by querying the DOM for
+// `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` — a
+// selector that assumes this Content lives *inside* the page's content
+// wrapper, matching Metronic's own pre-Radix markup (never portaled).
+// Radix Popover.Portal defaults to document.body, which moves this
+// Content — and every `#filter-item-*` row inside it — clean outside
+// `#kt_content_container`, so that selector silently stopped matching
+// and the inline shortcut stopped appearing at all (reported live:
+// "inline & column table filters does not work anymore"). Anchoring the
+// portal back inside the content wrapper restores the assumption without
+// touching hasFilterMenu() itself. Falls back to Radix's own default
+// (document.body) wherever the wrapper isn't present — Storybook/tests
+// that don't render the real layout shell.
+const getFilterMenuPortalContainer = () =>
+  document.getElementById('kt_content_container') ?? undefined;
+
+/**
+ * A row that flies out a sub-panel to the right on click — the same shape
+ * as core's own `.menu-sub` flyout, but on a Radix Popover (its own
+ * independent open state) rather than DropdownMenu.Sub: the flyouts here
+ * hold real form controls (SavedFilterSelect's WindowedSelect below, and
+ * every individual filter's own input in TableFilterItem.tsx), and a
+ * DropdownMenu's roving-tabindex/typeahead collection steals keystrokes
+ * from a focused text input the moment one matches a sibling item's label
+ * (confirmed empirically for ScriptEditorHeader.tsx's search box earlier
+ * in this migration). Popover has no such collection, so nesting one
+ * inside another's Content is safe.
+ */
+const FlyoutRow: FC<
+  React.PropsWithChildren<{
+    label: string;
+    icon: React.ReactNode;
+    content: React.ReactNode;
+    open?: boolean;
+    onOpenChange?(open: boolean): void;
+  }>
+> = ({ label, icon, content, onOpenChange, open }) => {
+  const { activeItemName, menuIsOpen, closeMenu } =
+    useContext(TableFilterContext);
+  return (
+    <MenuPopover open={open} modal={false} onOpenChange={onOpenChange}>
+      <MenuPopover.Trigger asChild>
+        {/* A real <button> so Tab reaches the row and Enter/Space open it. */}
+        <MenuPopover.Item>
+          {label}
+          {icon}
+        </MenuPopover.Item>
+      </MenuPopover.Trigger>
+      <MenuPopover.Content
+        side="right"
+        align="start"
+        className="w-[250px] py-2.5"
+        // Same close-focus rule as the filter rows — see
+        // TableMenuFilterItem's onCloseAutoFocus in TableFilterItem.tsx.
+        onCloseAutoFocus={(e) =>
+          (activeItemName || !menuIsOpen) && e.preventDefault()
+        }
+        onEscapeKeyDown={() => closeMenu?.()}
+        onKeyDown={(e) => closeFlyoutOnTabOut(e, () => onOpenChange?.(false))}
+      >
+        {content}
+      </MenuPopover.Content>
+    </MenuPopover>
+  );
+};
+
+// Synthetic `activeItemName` values for SaveFilterItems' two rows, which
+// aren't real filters (no `name` of their own) but are still siblings in
+// the same list and must participate in the same only-one-open
+// coordination.
+const CURRENT_FILTERS_ITEM_NAME = '__current_filters__';
+const SAVED_FILTERS_ITEM_NAME = '__saved_filters__';
+
+const SaveFilterItems = ({ table, formId, apply }) => {
+  const dispatch = useDispatch();
+  const { openDialog } = useModal();
+  const { activeItemName, setActiveItemName } = useContext(TableFilterContext);
+  const formValues = useSelector(selectFilterValues(table)) || {};
+
+  const selectedSavedFilter = useSelector((state: TablesRootState) =>
+    selectSelectedSavedFilter(state, table),
+  );
+  const key = useMemo(() => getSavedFiltersKey(table, formId), [table, formId]);
+
+  const list = useSelector((state: TablesRootState) =>
+    selectTableSavedFilters(state, table),
+  );
+
+  const saveFilter = useCallback(
+    (name, update: boolean) => {
+      let newItem;
+      const valuesCopy = { ...formValues };
+      Object.entries(valuesCopy).forEach(([key, value]) => {
+        if (Array.isArray(value) && value.length === 0) {
+          delete valuesCopy[key];
+        }
+      });
+      if (update && selectedSavedFilter) {
+        // Update
+        newItem = {
+          ...selectedSavedFilter,
+          title: name,
+          date: new Date().toISOString(),
+          values: valuesCopy,
+        };
+      } else {
+        // New
+        const isoDate = new Date().toISOString();
+        newItem = {
+          id: `${table}-${formId}-${isoDate}`,
+          title: name || formatNow(),
+          date: isoDate,
+          values: valuesCopy,
+        };
+      }
+
+      TableFilterService.addOrReplace(key, newItem);
+      dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
+      dispatch(selectSavedFilter(table, newItem));
+    },
+    [key, formValues, selectedSavedFilter, table, formId, dispatch],
+  );
+
+  const onSaveFilter = (e, update = false) => {
+    openDialog(SaveFilterDialog, {
+      resolve: {
+        saveFilter,
+      },
+      size: 'sm',
+      initialValues:
+        update && selectedSavedFilter
+          ? { name: selectedSavedFilter.title }
+          : undefined,
+    });
+    e.stopPropagation();
+  };
+
+  const hasFiltersApplied = Object.values(formValues || {}).filter(
+    (f) => Boolean(f) || f === false,
+  ).length;
+
+  return (
+    <>
+      {(hasFiltersApplied || selectedSavedFilter) && (
+        <FlyoutRow
+          open={activeItemName === CURRENT_FILTERS_ITEM_NAME}
+          onOpenChange={(next) =>
+            // See TableFilterItem.tsx's own onOpenChange for why the
+            // `false` branch is guarded rather than an unconditional
+            // `undefined` — a dismiss-outside callback here can race
+            // with (and land after) a sibling row's own open call.
+            setActiveItemName?.((prev) =>
+              next
+                ? CURRENT_FILTERS_ITEM_NAME
+                : prev === CURRENT_FILTERS_ITEM_NAME
+                  ? undefined
+                  : prev,
+            )
+          }
+          label={translate('Current filters')}
+          icon={<CaretRightIcon size={20} className="ms-auto" weight="bold" />}
+          content={
+            <>
+              {/* Real buttons, so they are reachable by Tab and
+                    announced by screen readers. */}
+              <MenuPopover.Item onClick={onSaveFilter}>
+                {translate('Save as')}
+                <StarIcon size={20} className="ms-auto" weight="bold" />
+              </MenuPopover.Item>
+              {selectedSavedFilter ? (
+                <MenuPopover.Item onClick={(e) => onSaveFilter(e, true)}>
+                  {translate('Update')}
+                  <ArrowsClockwiseIcon
+                    size={20}
+                    className="ms-auto"
+                    weight="bold"
+                  />
+                </MenuPopover.Item>
+              ) : null}
+            </>
+          }
+        />
+      )}
+      <FlyoutRow
+        open={activeItemName === SAVED_FILTERS_ITEM_NAME}
+        onOpenChange={(next) =>
+          setActiveItemName?.((prev) =>
+            next
+              ? SAVED_FILTERS_ITEM_NAME
+              : prev === SAVED_FILTERS_ITEM_NAME
+                ? undefined
+                : prev,
+          )
+        }
+        label={translate('Saved filters ({count})', { count: list.length })}
+        icon={<CaretRightIcon size={20} className="ms-auto" weight="bold" />}
+        content={
+          // `role="presentation"`, not `aria-hidden`: aria-hidden would
+          // hide the select inside from screen readers too.
+          <div
+            data-slot="filter-field"
+            className="px-[12px] py-[8px]"
+            onClick={(e) => e.stopPropagation()}
+            role="presentation"
+          >
+            <SavedFilterSelect
+              table={table}
+              formId={formId}
+              filterPosition="menu"
+              onSelect={apply}
+            />
+          </div>
+        }
+      />
+    </>
+  );
+};
+
+interface TableFiltersMenuProps extends Pick<
+  TableProps,
+  | 'filters'
+  | 'formId'
+  | 'filterPosition'
+  | 'filtersStorage'
+  | 'setFilter'
+  | 'applyFiltersFn'
+> {
+  table?: TableProps['table'];
+  selectedSavedFilter?: TableProps['selectedSavedFilter'];
+  openName?: string;
+  toggleFilterMenu?(show?): void;
+}
+
+export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
+  const context = useContext(TableFilterContext);
+  const [open, setOpen] = useState(false);
+  // Which row (an individual filter's own name, or one of
+  // SaveFilterItems' synthetic row names) is currently expanded inside
+  // the "Add filter" list — shared across every row so opening one
+  // collapses any previously open sibling. See FilterContextProvider.tsx's
+  // own comment on `activeItemName` for why this exists at all (Radix's
+  // own default outside-click dismissal alone needs a second click to
+  // actually open the new row, not just close the old one).
+  const [activeItemName, setActiveItemNameRaw] = useState<string | undefined>(
+    undefined,
+  );
+  // Plain passthrough, not staged through an intermediate `undefined`
+  // frame: each row skips Radix's close-focus return while a sibling has
+  // taken over (TableFilterItem.tsx, FlyoutRow above), so switching
+  // directly between two rows can just flip this value.
+  const setActiveItemName = setActiveItemNameRaw;
+
+  const apply = useCallback(
+    (hideMenu = true) => {
+      props.applyFiltersFn(true);
+      if (hideMenu) {
+        setOpen(false);
+        setActiveItemName(undefined);
+      }
+      if (props.toggleFilterMenu) props.toggleFilterMenu(true);
+    },
+    [props.applyFiltersFn, props.toggleFilterMenu, setActiveItemName],
+  );
+
+  // The column-filter toggle only makes sense if a filter with this exact
+  // name is actually among `props.filters` — otherwise it opened an empty
+  // menu for a column whose filter was removed/renamed. This can't be
+  // checked against the *static* `props.filters` element tree
+  // (React.Children.toArray(props.filters).some(child => child.props.name
+  // === ...) was tried and reverted): every real caller passes a single
+  // wrapper component (`filters={<SomeGeneratedFilter />}`, confirmed by
+  // grepping every `filters={` call site in the app — never a bare field
+  // or raw Fragment), so the *actual* named filter is nested inside that
+  // wrapper's own render output, never a direct child of what's passed
+  // here — the static check always saw one childless wrapper element and
+  // always evaluated false, silently hiding the column-filter toggle for
+  // every column, on every page, ever since it was introduced. Checking
+  // the real rendered DOM instead — the same thing the pre-Radix Metronic
+  // version did — works at any nesting depth.
+  //
+  // A callback ref, not `useRef` + `useEffect`: Radix's `Presence` (what
+  // `forceMount` relies on) defers actually mounting Content's real DOM
+  // node by one render pass — a plain ref is still null the first time a
+  // parent-level effect runs, so the check would silently never fire.
+  // The callback ref instead runs exactly when the node itself attaches,
+  // whenever that ends up being.
+  const [existed, setExisted] = useState(true);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const checkExisted = useCallback(
+    (node: HTMLDivElement | null) => {
+      contentRef.current = node;
+      if (node && props.openName) {
+        const item = node.querySelector('#filter-item-' + props.openName);
+        setExisted(Boolean(item));
+      }
+    },
+    [props.openName],
+  );
+
+  // Radix moves focus into a Popover's content on mount and back to the
+  // trigger on unmount, but `forceMount` below keeps this content mounted
+  // for good, so neither fires — and the list is portaled away from its
+  // trigger, so Tab has no way in either. Both moves happen here instead,
+  // in an effect rather than on a later frame: by then a row may have
+  // opened its own flyout, and pulling focus back into the list would
+  // dismiss it as an outside interaction.
+  const wasOpen = useRef(false);
+  // Set by closeMenu() below: focus is then in a portaled flyout, outside
+  // `contentRef`, so the effect can't tell on its own that it belongs to
+  // this menu.
+  const reclaimFocus = useRef(false);
+  useEffect(() => {
+    const content = contentRef.current;
+    if (open) {
+      focusFirstIn(content);
+    } else if (wasOpen.current) {
+      // Only reclaim focus the closing menu would otherwise strand; a
+      // close because the user moved onto something else leaves it be.
+      const active = document.activeElement;
+      if (
+        reclaimFocus.current ||
+        !active ||
+        active === document.body ||
+        content?.contains(active)
+      ) {
+        triggerRef.current?.focus();
+      }
+      reclaimFocus.current = false;
+    }
+    wasOpen.current = open;
+  }, [open]);
+
+  // Escape closes the whole filter window in one press from anywhere
+  // inside it — a row, a flyout, a field. Radix alone dismisses only the
+  // innermost layer.
+  const closeMenu = useCallback(() => {
+    reclaimFocus.current = true;
+    setOpen(false);
+    setActiveItemName(undefined);
+  }, [setActiveItemName]);
+
+  if (props.openName && !existed) return null;
+
+  return (
+    <TableFilterContext.Provider
+      value={{
+        ...context,
+        // Always 'menu', whatever the table's own position: on a narrow
+        // viewport that is 'sidebar', yet TableHeader still renders one of
+        // these per filtered column. Inheriting it sent the rows down
+        // TableFilterItem's sidebar branch — an AccordionItem, which throws
+        // outside TableFilterContainer's Accordion.
+        filterPosition: 'menu',
+        apply,
+        openMenuName: props.openName,
+        menuIsOpen: open,
+        closeMenu,
+        activeItemName,
+        setActiveItemName,
+      }}
+    >
+      <MenuPopover
+        open={open}
+        onOpenChange={(next) => {
+          setOpen(next);
+          if (next) {
+            props.applyFiltersFn(false);
+          } else {
+            // Reset so the list starts fully collapsed next time it's
+            // reopened, rather than reshowing whatever was last expanded.
+            setActiveItemName(undefined);
+          }
+        }}
+        modal={false}
+      >
+        {props.openName ? (
+          <>
+            <MenuPopover.Trigger asChild>
+              <button
+                ref={triggerRef}
+                type="button"
+                data-testid="column-filter-toggle"
+                aria-label={translate('Filter by column')}
+                className={classNames(
+                  HEADER_CONTROL_BTN_CLASS,
+                  'inline-flex items-center aria-expanded:[&_svg]:text-[var(--fg-brand-primary)]',
+                )}
+              >
+                <FunnelSimpleIcon size={16} weight="bold" />
+              </button>
+            </MenuPopover.Trigger>
+            {/* forceMount, rather than letting Radix unmount this while
+                closed (its default): TableBody.tsx's hasFilterMenu()
+                decides whether to show a cell's inline-filter shortcut by
+                querying the DOM for `#filter-item-{name}` inside
+                `[data-slot="table-filters-menu"]`, and would wrongly find nothing
+                whenever this menu happens to be closed, which is most of
+                the time. The panel hides itself while closed. */}
+            <MenuPopover.Content
+              ref={checkExisted}
+              forceMount
+              container={getFilterMenuPortalContainer()}
+              aria-label={translate('Filter by column')}
+              // Portaled like a row's flyout, so Tab off either edge
+              // closes it and focus returns to the funnel icon.
+              onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
+              align="start"
+              // w-[375px]: matches TableFilterItem.tsx's own single-filter
+              // flyout (same kind of content — one filter's field), wide
+              // enough for an AsyncSelect's search box and option list.
+              data-slot="table-filters-menu"
+              className="font-medium text-sm w-[375px]"
+            >
+              {props.filters}
+            </MenuPopover.Content>
+          </>
+        ) : (
+          <>
+            {/* BaseButton is forwardRef, so — unlike the old raw <Button>
+                wrapped in a plain, non-forwardRef tooltip component (which
+                broke when nested *inside* `Trigger asChild`: Slot had
+                nothing but the wrapper to attach its ref/merged props to,
+                and the wrapper didn't forward either) — it can sit directly
+                inside `Trigger asChild` with its own `tooltip` prop. The ref Slot
+                clones onto BaseButton threads straight to its inner
+                <button> via BaseButton's own forwardRef, regardless of
+                the Tooltip/span wrapping BaseButton renders internally.
+                `data-add-filter` must stay: TableButtons.tsx/TableToolbar.tsx
+                locate and .click() this exact button via
+                querySelector('[data-add-filter]'). */}
+            <MenuPopover.Trigger asChild>
+              <BaseButton
+                ref={triggerRef}
+                variant="secondary"
+                size="sm"
+                data-add-filter
+                tooltip={translate('Add filter')}
+                iconNode={<PlusIcon weight="bold" />}
+              />
+            </MenuPopover.Trigger>
+            {/* forceMount — same reasoning as the column-filter panel
+                above. */}
+            <MenuPopover.Content
+              ref={contentRef}
+              forceMount
+              container={getFilterMenuPortalContainer()}
+              aria-label={translate('Add filter')}
+              // Tab off either edge closes the list; the close effect
+              // above then returns focus to the "+" trigger.
+              onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
+              align="start"
+              data-slot="table-filters-menu"
+              className="font-medium py-1 text-sm w-[250px]"
+            >
+              <SaveFilterItems
+                table={props.table}
+                formId={context.form}
+                apply={() => props.applyFiltersFn(true)}
+              />
+
+              <div className="border-b border-b-secondary" />
+              {props.filters}
+            </MenuPopover.Content>
+          </>
+        )}
+      </MenuPopover>
+    </TableFilterContext.Provider>
+  );
+};

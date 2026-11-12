@@ -11,5 +11,10 @@ export {
   useMenuItemClassName,
 } from './MenuItem';
 export type { MenuItemProps } from './MenuItem';
+export { MenuActionItem } from './MenuActionItem';
+export type {
+  MenuActionIconColor,
+  MenuActionItemProps,
+} from './MenuActionItem';
 export { MenuTriggerButton } from './MenuTriggerButton';
 export type { MenuTriggerButtonProps } from './MenuTriggerButton';

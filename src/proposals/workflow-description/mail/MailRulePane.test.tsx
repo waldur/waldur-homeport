@@ -14,7 +14,7 @@ import { MailRulePane } from './MailRulePane';
 
 // The SDK is mocked for every test (test/setupTests.js).
 
-vi.mock('@/table/ActionsDropdown', () => ({
+vi.mock('waldur-table/src/ActionsDropdown', () => ({
   ActionsDropdown: ({ children }) => <div>{children}</div>,
 }));
 vi.mock('@/resource/actions/ActionItem', () => ({

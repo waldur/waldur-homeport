@@ -18,7 +18,7 @@ vi.mock('./queries', async (importOriginal) => ({
 }));
 
 // The rows are those the section holds, each cell rendered.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({
     fetch: vi.fn(),
     resetSelection: vi.fn(),

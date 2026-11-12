@@ -10,7 +10,7 @@ import { ProjectPosixGroups } from './ProjectPosixGroups';
 
 vi.mock('@/features/connect', () => ({ isFeatureVisible: vi.fn(() => true) }));
 
-vi.mock('@/table/useTable', () => ({ useTable: vi.fn() }));
+vi.mock('waldur-table/src/useTable', () => ({ useTable: vi.fn() }));
 
 const tables: Record<string, any> = {};
 vi.mock('@/table/Table', () => ({

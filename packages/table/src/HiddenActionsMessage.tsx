@@ -1,0 +1,49 @@
+import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
+import { FunctionComponent } from 'react';
+import { translate } from 'waldur-i18n-runtime';
+import { BaseButton, FeaturedIcon } from 'waldur-ui';
+
+import { COLUMN_ACTIONS_KEY } from './constants';
+import { TableProps } from './types';
+
+interface HiddenActionsMessageProps {
+  toggleColumn: TableProps['toggleColumn'];
+  close(): void;
+}
+
+export const HiddenActionsMessage: FunctionComponent<
+  HiddenActionsMessageProps
+> = ({ toggleColumn, close }) => {
+  return (
+    <div className="flex gap-4 my-4 w-full">
+      <FeaturedIcon
+        icon={<WarningCircleIcon weight="bold" />}
+        variant="warning"
+        className="me-1.5"
+      />
+
+      <div className="font-medium">
+        <p className="mb-1">{translate('Action column is hidden.')}</p>
+        <p className="text-quaternary mb-1">
+          {translate('Some functionality may not be accessible.')}
+        </p>
+        <button
+          type="button"
+          className="text-anchor font-medium"
+          onClick={() => toggleColumn(COLUMN_ACTIONS_KEY, { keys: [] }, true)}
+        >
+          {translate('Restore column')}
+        </button>
+      </div>
+      <div className="ms-auto">
+        <BaseButton
+          tooltip={translate('Dismiss')}
+          variant="text-secondary"
+          size="sm"
+          onClick={close}
+          iconNode={<XIcon size={18} weight="bold" />}
+        />
+      </div>
+    </div>
+  );
+};

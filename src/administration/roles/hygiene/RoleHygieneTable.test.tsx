@@ -8,7 +8,7 @@ import { RoleHygieneTable } from './RoleHygieneTable';
 
 const resetPagination = vi.fn();
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ resetPagination }),
 }));
 

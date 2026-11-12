@@ -1,6 +1,7 @@
 {
   "packages/design-tokens/src/stories/TokenTable.tsx": 6,
   "packages/shell/src/AppShell.tsx": 1,
+  "packages/table/src/EmbeddedTabs.tsx": 3,
   "packages/ui/src/AccordionCard/AccordionCard.tsx": 17,
   "packages/ui/src/AlertItem/AlertItem.tsx": 8,
   "packages/ui/src/Card/Card.tsx": 2,
@@ -90,7 +91,6 @@
   "src/styles/legacy/matrix/_call-livekit.scss": 2,
   "src/styles/legacy/matrix/_team-chat.scss": 88,
   "src/styles/legacy/support/_helpdesk.scss": 7,
-  "src/table/EmbeddedTabs.tsx": 3,
   "src/tailwind.css": 3,
   "src/user/dashboard/UserProfileHero.tsx": 1,
   "src/user/OfferingUsersWarningBar.scss": 2,

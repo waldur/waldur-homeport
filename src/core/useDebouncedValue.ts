@@ -1,12 +1,2 @@
-import { useEffect, useState } from 'react';
-
-export function useDebouncedValue<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debouncedValue;
-}
+// Lives in waldur-ui; kept here so the app's imports don't change.
+export { useDebouncedValue } from 'waldur-ui';

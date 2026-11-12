@@ -6,7 +6,7 @@ import { renderWithProviders } from '@/test/harness';
 import { AccountOptionsPreviewResult } from './AccountOptionsPreviewResult';
 
 // The renames list is a standard table; its rendering is covered elsewhere.
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ rows: [], fetch: vi.fn() }),
 }));
 vi.mock('@/table/Table', () => ({

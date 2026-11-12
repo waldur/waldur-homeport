@@ -52,7 +52,7 @@ How to build any menu or menu-like popover in HomePort: row actions, "Add" menus
 | `MenuDisclosure`             | same                                   | The nav surface as a disclosure: a button that shows a list of links, Tabbed through                           |
 | `menuSurface`, `menuItem`, … | `packages/ui/src/Menu/` (collocated)   | The looks, as cva recipes collocated with each component (`MenuContent.tsx`, `MenuItem.tsx`, …)                |
 | `MenuLookProvider`, hooks    | `packages/ui/src/Menu/menuContext.tsx` | The look and container kind a panel hands to its rows; `useMenuItemClassName()` for an element styled as a row |
-| `ActionsMenu`                | `src/table/ActionsDropdown.tsx`        | An action menu with its trigger (kebab, labeled, "Add" or custom)                                              |
+| `ActionsMenu`                | `packages/table/src/ActionsDropdown.tsx`        | An action menu with its trigger (kebab, labeled, "Add" or custom)                                              |
 | `ActionsDropdown`            | same                                   | Row-actions facade over `ActionsMenu`                                                                          |
 | `ActionItem`                 | `src/resource/actions/ActionItem.tsx`  | An action row with icon, tooltip and staff indicator, hidden when `ActionList`'s filter rejects it             |
 | `ActionList`, `ActionGroup`  | `src/marketplace/resources/actions/`   | A filter for the `ActionItem`s inside it; a captioned group of actions                                         |

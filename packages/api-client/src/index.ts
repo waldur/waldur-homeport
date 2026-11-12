@@ -22,6 +22,7 @@ export {
   createFetcher,
   fetchAll,
   createClientPaginatedFetcher,
+  orderByFilter,
 } from './tableFetcher';
 export type { DataPage, SdkFunction } from './tableFetcher';
 

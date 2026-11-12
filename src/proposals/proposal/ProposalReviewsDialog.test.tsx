@@ -27,7 +27,7 @@ vi.mock('@/table/Table', () => ({
     </div>
   ),
 }));
-vi.mock('@/table/useTable', async () => {
+vi.mock('waldur-table/src/useTable', async () => {
   const { useEffect, useState } = await import('react');
   return {
     useTable: ({ fetchData, filter }) => {

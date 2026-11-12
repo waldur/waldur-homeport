@@ -9,7 +9,7 @@ import { renderWithProviders } from '@/test/harness';
 
 import { ExportCallDialog } from './ExportCallDialog';
 
-vi.mock('@/table/exporters/saveFile');
+vi.mock('waldur-table/src/exporters/saveFile');
 const exportResponse = (overrides = {}) => ({
   data: {
     call_uuid: 'call',

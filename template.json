@@ -4998,7 +4998,11 @@
       "feature_area": "documents"
     }
   },
-  "An error occurred.": {},
+  "An error occurred.": {
+    "context": {
+      "feature_area": "NoResult"
+    }
+  },
   "An extra requirement on top of the email, affiliation and identity group.": {
     "context": {
       "feature_area": "restrictions"
@@ -48689,7 +48693,7 @@
   "Please stop the instance before changing its flavor.": {},
   "Please try again": {
     "context": {
-      "feature_area": "search"
+      "feature_area": "NoResult"
     }
   },
   "Please try again with different keywords or check your filters": {
@@ -63395,7 +63399,11 @@
       "feature_area": "resource-pending"
     }
   },
-  "Show error trace": {},
+  "Show error trace": {
+    "context": {
+      "feature_area": "NoResult"
+    }
+  },
   "Show example": {
     "context": {
       "feature_area": "administration"
@@ -74154,7 +74162,11 @@
       "feature_area": "reports"
     }
   },
-  "Try reloading or go back to the previous page": {},
+  "Try reloading or go back to the previous page": {
+    "context": {
+      "feature_area": "NoResult"
+    }
+  },
   "Try the model": {
     "context": {
       "feature_area": "playground"
@@ -84464,7 +84476,7 @@
   },
   "We didn't get any results.": {
     "context": {
-      "feature_area": "search"
+      "feature_area": "NoResult"
     }
   },
   "We'll email them instructions and a link to accept the invitation.": {

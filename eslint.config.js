@@ -361,6 +361,43 @@ export default tseslint
       },
     },
     {
+      // The table is a package (waldur-table) that micro-apps use too
+      // (docs/micro-apps.md), so it reads nothing of the portal's: shared code
+      // comes from the other packages, and what only an app has (its router,
+      // its crash message) through `TableHost` (packages/table/src/host.tsx).
+      // Left out: tests, stories and their support, which run inside homeport
+      // and use its test harness and a few of its components.
+      files: ['packages/table/src/**/*.{ts,tsx}'],
+      ignores: [
+        '**/*.test.{ts,tsx}',
+        '**/*.stories.tsx',
+        'packages/table/src/storyFixtures.tsx',
+        'packages/table/src/storyProviders.tsx',
+        'packages/table/src/testUtils.tsx',
+        'packages/table/src/test-utils.tsx',
+      ],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [...RESTRICTED_IMPORTS, ...RADIX_MENU_IMPORTS],
+            patterns: [
+              {
+                regex: '^@/',
+                message:
+                  'waldur-table imports nothing from the portal: take it from a package, or add it to TableHost (packages/table/src/host.tsx).',
+              },
+              {
+                regex: '^@uirouter/',
+                message:
+                  'The table knows no router: go through TableHost (packages/table/src/host.tsx).',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
       // waldur-ui is where Menu and MenuPopover wrap Radix.
       files: ['packages/ui/**/*.{ts,tsx}'],
       rules: {

@@ -14,7 +14,7 @@ vi.mock('@/table/TableWithTabs', () => ({
   },
 }));
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn() }),
 }));
 

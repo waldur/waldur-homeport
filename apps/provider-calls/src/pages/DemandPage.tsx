@@ -1,8 +1,8 @@
 import { translate } from 'waldur-i18n-runtime';
 import { OfferingDemand } from 'waldur-js-client';
-import { DataTableColumn } from 'waldur-ui';
+import { Column } from 'waldur-table';
 
-import { PageHeader, QueryTableCard, withRows } from '../components';
+import { PageHeader, QueryTable, withRows } from '../components';
 import { DASH, formatAmount, formatDate } from '../format';
 import { Provider } from '../providers';
 import { useOfferingDemand } from '../queries';
@@ -66,16 +66,16 @@ export const DemandPage = ({ provider }: { provider?: Provider }) => {
   const query = useOfferingDemand(provider?.uuid);
   const folded = withRows(query, query.data ? fold(query.data) : undefined);
 
-  const columns: DataTableColumn<DemandRow>[] = [
+  const columns: Column<DemandRow>[] = [
     {
-      key: 'offering',
-      header: translate('Offering'),
-      render: (row) => row.offering,
+      id: 'offering',
+      title: translate('Offering'),
+      render: ({ row }) => row.offering,
     },
     {
-      key: 'call',
-      header: translate('Call and round'),
-      render: (row) => (
+      id: 'call',
+      title: translate('Call and round'),
+      render: ({ row }) => (
         <div className="flex flex-col">
           <span>{row.call}</span>
           <span className="text-xs text-quaternary">
@@ -88,9 +88,9 @@ export const DemandPage = ({ provider }: { provider?: Provider }) => {
       ),
     },
     {
-      key: 'proposals',
-      header: translate('Proposals'),
-      render: (row) =>
+      id: 'proposals',
+      title: translate('Proposals'),
+      render: ({ row }) =>
         translate('{pending} pending · {accepted} accepted · {closed} closed', {
           pending: row.pending,
           accepted: row.accepted,
@@ -98,9 +98,9 @@ export const DemandPage = ({ provider }: { provider?: Provider }) => {
         }),
     },
     {
-      key: 'components',
-      header: translate('Requested / awarded'),
-      render: (row) =>
+      id: 'components',
+      title: translate('Requested / awarded'),
+      render: ({ row }) =>
         row.components.size === 0 ? (
           DASH
         ) : (
@@ -125,10 +125,11 @@ export const DemandPage = ({ provider }: { provider?: Provider }) => {
           'How much the calls ask of your offerings, and how much they award.',
         )}
       />
-      <QueryTableCard
+      <QueryTable
+        table="provider-calls-demand"
         query={folded}
         columns={columns}
-        rowKey={(row) => row.key}
+        rowKey="key"
         emptyMessage={translate(
           'No call has proposals for your offerings yet.',
         )}

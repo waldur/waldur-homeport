@@ -52,6 +52,9 @@ export const CopyFeedbackProvider: FC<
   </CopyFeedbackContext.Provider>
 );
 
+/** What reports a copy to the app, when a `CopyFeedbackProvider` is above. */
+export const useCopyFeedback = () => useContext(CopyFeedbackContext);
+
 /**
  * The button swaps its label (label → copiedLabel, then back) after a copy,
  * and reports the copy to an enclosing `CopyFeedbackProvider`, which the app

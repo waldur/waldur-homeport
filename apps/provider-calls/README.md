@@ -80,10 +80,17 @@ A provider has two checkpoints after a proposal is awarded:
 - **No router dependency.** `src/router.ts` is a small History API router
   for five flat pages. Swap it for react-router once pages nest or load data
   per route.
-- **Tables are `waldur-ui` `DataTable` without sorting, filtering or a
-  pager.** The portal's `@/table` (fetchers, facets, row-action menus) is not
-  in `packages/*` yet. Lists are fetched whole, except Proposals, which shows
-  the newest 200.
+- **Two lists and the inbox are still fetched whole.** Requests, Awards,
+  Proposals and My tasks are `waldur-table`'s `Table` fetching its own pages
+  (`useTable` with `createFetcher`), with sorting where the endpoint orders
+  and search on Awards and Proposals. Team slots and Demand come from
+  endpoints that are not paginated, so `QueryTable` (`src/components.tsx`)
+  pages them in the browser. The inbox's previews and the sidebar's counts
+  still fetch the whole Requests, Awards and My tasks lists; they need a
+  count of their own first.
+- **A list without a title bar has no Refresh.** Requests, My tasks and the
+  in-memory lists show the table's error view if they fail to load, and are
+  retried by reloading the page.
 - **A step's form is filled in the portal.** The card links there while
   required answers are missing; the form moves to `waldur-proposals` once
   `waldur-form` has file upload (see that package's README).

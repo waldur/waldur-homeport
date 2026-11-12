@@ -34,7 +34,7 @@ const { rows, dropdowns } = vi.hoisted(() => ({
   dropdowns: { value: [] as any[] },
 }));
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn() }),
 }));
 
@@ -54,7 +54,7 @@ vi.mock('@/table/Table', () => ({
   ),
 }));
 
-vi.mock('@/table/ActionsDropdown', () => ({
+vi.mock('waldur-table/src/ActionsDropdown', () => ({
   ActionsDropdown: (props) => {
     dropdowns.value.push(props);
     return null;

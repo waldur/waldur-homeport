@@ -7,7 +7,7 @@ import { KeysList } from './KeysList';
 
 const table = vi.hoisted(() => ({ rows: [] as any[] }));
 
-vi.mock('@/table/useTable', () => ({
+vi.mock('waldur-table/src/useTable', () => ({
   useTable: () => ({ fetch: vi.fn(), rows: table.rows }),
 }));
 
@@ -25,7 +25,7 @@ vi.mock('@/table/Table', () => ({
     ) : null,
 }));
 
-vi.mock('@/table/ActionsDropdown', () => ({
+vi.mock('waldur-table/src/ActionsDropdown', () => ({
   ActionsDropdown: ({ actions, row, refetch }) => (
     <div data-testid="actions-menu">
       {actions.map((Action, index) => (

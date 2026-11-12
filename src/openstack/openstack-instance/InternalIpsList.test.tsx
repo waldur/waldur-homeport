@@ -6,7 +6,10 @@ import { renderTable } from '@/table/testUtils';
 import { InternalIpsList } from './InternalIpsList';
 
 // Serves the row renderTable sets; no request fires.
-vi.mock('@/table/useTableQuery', () => import('@/table/mockTableQuery'));
+vi.mock(
+  'waldur-table/src/useTableQuery',
+  () => import('@/table/mockTableQuery'),
+);
 
 const renderList = () => {
   const item: Partial<OpenStackNestedPort> = {
