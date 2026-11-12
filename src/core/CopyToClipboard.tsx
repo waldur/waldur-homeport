@@ -32,7 +32,10 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
 
   return textButton ? (
     <button
-      className={classNames('text-btn', className)}
+      className={classNames(
+        'bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary',
+        className,
+      )}
       type="button"
       onClick={onClick}
     >

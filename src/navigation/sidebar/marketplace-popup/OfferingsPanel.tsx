@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { LinkButton, Tooltip } from 'waldur-ui';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
@@ -256,14 +256,13 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
       data-testid="offering-listing"
       className="w-full lg:w-1/2 lg:basis-1/2 flex flex-col h-full"
     >
-      <button
-        type="button"
-        className="flex lg:hidden items-center gap-2 text-anchor font-medium p-1.5 ms-4 my-1.5 shrink-0"
+      <LinkButton
+        className="flex lg:hidden items-center gap-2 font-medium p-1.5 ms-4 my-1.5 shrink-0"
         onClick={goBack}
       >
         <CaretLeftIcon size={14} weight="bold" />
         {translate('Go back to categories')}
-      </button>
+      </LinkButton>
       <div className="block lg:hidden border-b border-secondary mx-6 shrink-0" />
       <h6 className="text-secondary font-medium mt-3 mb-1.5 ms-6 shrink-0">
         {translate('Offerings')}

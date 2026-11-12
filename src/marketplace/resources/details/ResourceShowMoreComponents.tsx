@@ -1,5 +1,7 @@
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
+import { LinkButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -34,9 +36,8 @@ export const ResourceShowMoreComponents = ({
   const { openDialog } = useModal();
 
   return (
-    <button
-      type="button"
-      className="text-anchor font-medium"
+    <LinkButton
+      className="font-medium"
       onClick={() =>
         openDialog(ResourceComponentsDialog, {
           resolve: {
@@ -51,6 +52,6 @@ export const ResourceShowMoreComponents = ({
       }
     >
       {translate('Show more')}
-    </button>
+    </LinkButton>
   );
 };

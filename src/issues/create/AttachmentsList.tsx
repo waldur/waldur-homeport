@@ -15,7 +15,7 @@ export const AttachmentsList: FunctionComponent<{ attachments }> = ({
         <FileDownloader
           url={attachment.file}
           name={attachment.name}
-          className="text-btn hover:text-brand inline-flex items-center gap-1.5"
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center gap-1.5"
         >
           <CloudArrowDownIcon size={20} weight="bold" />
           {attachment.name}

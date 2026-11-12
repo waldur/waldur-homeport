@@ -1,6 +1,6 @@
 import { FC, useRef, useState, useEffect } from 'react';
 
-import { Badge, ModalBody, ModalTitle } from 'waldur-ui';
+import { Badge, LinkButton, ModalBody, ModalTitle } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -106,13 +106,9 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
         )}
       </div>
       {isTruncated && (
-        <button
-          type="button"
-          className="text-anchor mt-1.5 text-sm"
-          onClick={handleShowMore}
-        >
+        <LinkButton className="mt-1.5" onClick={handleShowMore}>
           {translate('Show more')}
-        </button>
+        </LinkButton>
       )}
     </div>
   );

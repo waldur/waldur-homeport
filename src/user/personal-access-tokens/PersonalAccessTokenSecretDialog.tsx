@@ -63,7 +63,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
         <FormHeading as="p">{translate('Your token')}</FormHeading>
         <div className="flex items-center gap-1.5 p-2.5 bg-tertiary dark:bg-quaternary rounded-lg">
           <button
-            className="text-btn shrink-0"
+            className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary shrink-0 inline-flex items-center"
             type="button"
             onClick={toggleSecret}
           >

@@ -42,7 +42,7 @@ describe('TableNav', () => {
     );
   });
 
-  it('keeps string titles off the text-anchor link style', () => {
+  it('keeps string titles off the default link anchor style', () => {
     render(
       <TableNav
         tabs={[
@@ -52,10 +52,10 @@ describe('TableNav', () => {
       />,
     );
 
-    // `.text-anchor` (given by Link to string children) sets `border: none`
-    // and an underline on hover, which wrecks the tab.
+    // Link's default text styling sets brand color and hover underline,
+    // which TabNav suppresses with its own trigger styling.
     expect(screen.getByRole('link', { name: 'Plain title' })).not.toHaveClass(
-      'text-anchor',
+      'text-[var(--text-brand-secondary)]',
     );
   });
 

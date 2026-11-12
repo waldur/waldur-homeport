@@ -31,7 +31,6 @@ export const MenuItem = ({
           {icon}
         </span>
       )}
-      {/* A span, so Link doesn't give the label its `text-anchor` style. */}
       <span>{label}</span>
     </Link>
   </li>

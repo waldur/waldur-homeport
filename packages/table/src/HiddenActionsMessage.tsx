@@ -1,7 +1,7 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { translate } from 'waldur-i18n-runtime';
-import { BaseButton, FeaturedIcon } from 'waldur-ui';
+import { BaseButton, FeaturedIcon, LinkButton } from 'waldur-ui';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProps } from './types';
@@ -27,13 +27,12 @@ export const HiddenActionsMessage: FunctionComponent<
         <p className="text-quaternary mb-1">
           {translate('Some functionality may not be accessible.')}
         </p>
-        <button
-          type="button"
-          className="text-anchor font-medium"
+        <LinkButton
+          className="font-medium"
           onClick={() => toggleColumn(COLUMN_ACTIONS_KEY, { keys: [] }, true)}
         >
           {translate('Restore column')}
-        </button>
+        </LinkButton>
       </div>
       <div className="ms-auto">
         <BaseButton

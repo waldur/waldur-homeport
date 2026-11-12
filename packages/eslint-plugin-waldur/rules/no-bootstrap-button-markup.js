@@ -56,7 +56,7 @@ export default {
         if (!element || !BUTTON_ELEMENTS.has(element)) {
           return;
         }
-        // Exact token, not a substring: `btn-close`, `text-btn` and
+        // Exact token, not a substring: `btn-close`, `link-btn` and
         // `action-btn` are not Bootstrap buttons, and matching
         // them would drown the rule in false positives.
         if (!getClassNameTokens(node).has('btn')) {

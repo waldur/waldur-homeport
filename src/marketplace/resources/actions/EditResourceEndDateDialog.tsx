@@ -3,7 +3,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, LinkButton } from 'waldur-ui';
 
 import { formatISODate, parseDate } from '@/core/dateUtils';
 import { SubmitButton, DateGroup } from '@/form';
@@ -164,9 +164,8 @@ export const EditResourceEndDateDialog: FunctionComponent<
                             ).toLocaleString(DateTime.DATE_MED),
                           },
                         )}
-                        <button
-                          className="text-anchor font-medium block mt-1.5"
-                          type="button"
+                        <LinkButton
+                          className="font-medium block mt-1.5"
                           onClick={() => {
                             form.change(
                               'end_date',
@@ -175,7 +174,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                           }}
                         >
                           {translate('Use project date')}
-                        </button>
+                        </LinkButton>
                       </>
                     }
                     className="mt-4"

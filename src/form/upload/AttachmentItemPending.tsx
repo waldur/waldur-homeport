@@ -1,7 +1,7 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { BaseButton, Progress } from 'waldur-ui';
+import { BaseButton, LinkButton, Progress } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -44,13 +44,13 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
       }
     >
       {error ? (
-        <button
-          type="button"
-          className="text-anchor text-anchor-danger mt-1"
+        <LinkButton
+          variant="danger"
+          className="mt-1"
           onClick={() => onRetry(file)}
         >
           {translate('Try again')}
-        </button>
+        </LinkButton>
       ) : progress || progress === 0 ? (
         progress ? (
           <Progress className="mt-1.5" value={progress} />

@@ -79,7 +79,7 @@ export const formatFileValue = (
     <FileDownloader
       url={url}
       name={name}
-      className="text-btn hover:text-brand inline-flex items-center"
+      className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
     >
       <DownloadSimpleIcon weight="bold" className="me-1" />
       {options.text}

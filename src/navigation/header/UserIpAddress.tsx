@@ -29,7 +29,7 @@ export const UserIpAddress = ({ ip }: { ip: string }) => {
           <span className="block mb-[0.5rem]">{translate('IP address')}:</span>
           <div className="flex justify-between text-quaternary">
             <span>{ip}</span>
-            <span className="text-btn" aria-hidden="true">
+            <span aria-hidden="true">
               <CopyIcon weight="bold" size={20} />
             </span>
           </div>

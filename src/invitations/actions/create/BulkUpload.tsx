@@ -7,7 +7,7 @@ import {
 import Papa from 'papaparse';
 import { FC, useCallback, useState } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, LinkButton } from 'waldur-ui';
 
 import { FileUploadField } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -128,13 +128,9 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             'Import your mailing list from a .csv file. You can download an {example}',
             {
               example: (
-                <button
-                  className="text-anchor"
-                  type="button"
-                  onClick={onDownloadClick}
-                >
+                <LinkButton onClick={onDownloadClick}>
                   example_file.csv
-                </button>
+                </LinkButton>
               ),
             },
             formatJsxTemplate,

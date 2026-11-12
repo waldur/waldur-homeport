@@ -15,7 +15,7 @@ interface OwnProps {
   buttonClassName?: string;
   /**
    * Renders as a real design-token icon button (`buttonVariants()`,
-   * icon-only) instead of the default bare `text-btn` reset — for contexts
+   * icon-only) instead of the default bare reset — for contexts
    * where the copy affordance needs its own hit target and hover fill
    * rather than sitting inline with surrounding text/other icons.
    */
@@ -61,7 +61,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
       className={clsx(
         buttonVariant
           ? buttonVariants({ variant: buttonVariant, iconOnly: true })
-          : 'text-btn in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2',
+          : 'bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2',
         buttonClassName,
       )}
       type="button"

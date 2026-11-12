@@ -10,9 +10,7 @@
     &:not(.nav-link) {
       color: var(--text-quinary) !important;
     }
-    &:not(.btn-icon):not(.text-btn):not(.text-link):not(.nav-link):not(
-        .text-anchor
-      ) {
+    &:not(.btn-icon):not(.nav-link) {
       background-color: var(--btn-disabled-bg) !important;
       border-color: var(--btn-disabled-bg) !important;
     }

@@ -93,7 +93,7 @@ For bars whose panel is drawn elsewhere by the router. It renders a `<nav>` (nam
 
 `TabNav` takes its tabs as data, like the `items` form of `Tabs`; there are no item components to compose.
 
-**Items are links.** Give a navigating item `link: <Link state="…" params={…} />` so the tab stays a real anchor: middle-click, Ctrl/Cmd-click, "open in new tab" and the URL preview all work. `TabNav` replaces the link's children with the item's `title` (in a span, so a string title doesn't pick up Metronic's `.text-anchor`) and asserts the tab colours over the global `a { color }` rule. Don't navigate with `onSelect` + `router.stateService.go(...)`: that makes the tabs buttons.
+**Items are links.** Give a navigating item `link: <Link state="…" params={…} />` so the tab stays a real anchor: middle-click, Ctrl/Cmd-click, "open in new tab" and the URL preview all work. `TabNav` replaces the link's children with the item's `title` (in a span, so a string title doesn't pick up default link styling) and asserts the tab colours over the global `a { color }` rule. Don't navigate with `onSelect` + `router.stateService.go(...)`: that makes the tabs buttons.
 
 ```tsx
 import { TabNav } from 'waldur-ui';

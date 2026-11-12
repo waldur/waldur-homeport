@@ -12,7 +12,11 @@ export class SecretField extends Component<
   render() {
     return (
       <>
-        <button className="text-btn" type="button" onClick={this.toggle}>
+        <button
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary inline-flex items-center"
+          type="button"
+          onClick={this.toggle}
+        >
           {this.state.showSecret ? (
             <EyeSlashIcon size={20} weight="bold" />
           ) : (

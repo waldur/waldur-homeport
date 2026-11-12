@@ -62,7 +62,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-0"
                       type="button"
                     >
@@ -96,7 +96,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-1"
                       type="button"
                     >
@@ -130,7 +130,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-2"
                       type="button"
                     >
@@ -164,7 +164,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-3"
                       type="button"
                     >
@@ -202,7 +202,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       data-slot="cell-data"
                     >
                       <a
-                        class="text-anchor"
+                        class="text-[var(--text-brand-secondary)] hover:underline"
                         href="marketplace-resource-details{"resource_uuid":"9a4b8e1c0d2f4a7b8c3d5e6f7a8b9c01"}"
                       >
                         vm1
@@ -213,7 +213,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     >
                       <button
                         aria-label="Copy to clipboard"
-                        class="text-btn in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2"
+                        class="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2"
                         type="button"
                       >
                         <span

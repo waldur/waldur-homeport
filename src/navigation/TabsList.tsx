@@ -266,8 +266,7 @@ export const TabsList: FC = () => {
             >
               {/* A disabled tab must say why it is unavailable. The tooltip
                   sits inside the link, which keeps pointer events, so the
-                  hover trigger still fires. The label is a span so Link
-                  doesn't give it its `text-anchor` style. */}
+                  hover trigger still fires. */}
               {parentTab.disabled && parentTab.disabledReason ? (
                 <Tooltip label={parentTab.disabledReason}>
                   <span className="inline-flex items-center">

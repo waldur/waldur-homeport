@@ -500,7 +500,7 @@ Radix's `Slot` clones trigger elements and attaches positioning refs and event h
 
 #### Spacing and colour classes on panels
 
-The surfaces reset their own margin and padding (`m-[0px] p-[0px]`); a caller's `py-*` or `my-*` replaces it. Tailwind-merge also reads `text-anchor` and `text-primary` as two colours and drops the first; put such classes on the `asChild` child (Slot joins class names without merging them) rather than on the row (see `ResourceAccessButton.tsx`).
+The surfaces reset their own margin and padding (`m-[0px] p-[0px]`); a caller's `py-*` or `my-*` replaces it. When customizing colours, be mindful that `tailwind-merge` (`cn`) reconciles conflicting `text-*` utility classes; put specific style overrides on the `asChild` child (Slot joins class names without merging them) rather than on the row (see `ResourceAccessButton.tsx`).
 
 ---
 
@@ -526,7 +526,7 @@ The header user menu, the language submenu, page-tab submenus, the footer menus 
 - **Nav look**: Metronic's `.menu-sub-dropdown` panel and `.menu-link` row, measured against the live app. Colours come from the `--menu-*` tokens in `menu.css`; the shadow is `--dropdown-shadow`.
 - **Row options instead of theme classes**: `density` (`default` 10×16px, `compact` 8×9.75px, `base` 8×12px) and `tone` (gray-600 or gray-700). Every highlighted row is gray-700 on gray-50. A panel sets them for its rows with `density` / `tone` props, as `data-*` attributes the rows' group variants read (the footer uses `compact`; `MenuPopover.Content` defaults to `base`/gray-700 for the filter rows).
 - **Highlighted rows**: hover, Radix `[data-highlighted]`, an open submenu (`data-[state=open]`), a checked radio row (`data-[state=checked]`, e.g. the current language) and `.active` (what `UISrefActive` adds) share one style (the `menu-row-active:` variant); disabled rows (`data-disabled`) are skipped.
-- **`NavMenuLink`**: a row that is a ui-router `Link`. It wraps its label in a span so `Link` doesn't add `text-anchor`.
+- **`NavMenuLink`**: a row that is a ui-router `Link`. It wraps its label in a span so `Link` doesn't override the row's text styling.
 - **Page tabs and footer bar** (`TabsList.tsx`, `footer/MenuItem.tsx`) are plain `<nav><ul>` link lists with their own Tailwind classes and `--page-tab-*` tokens (the footer links use `text-brand-600 dark:text-brand-300` directly). The current tab is marked with `aria-current`.
 
 ---

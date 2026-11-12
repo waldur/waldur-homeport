@@ -456,8 +456,7 @@ export const BreadcrumbHiddenItems: FC<{ items: IBreadcrumbItem[] }> = ({
                     className: HIDDEN_LINK_CLASS,
                     onClickCapture: item.onClick,
                   },
-                  // In a span: the app's Link styles a bare string label as
-                  // Metronic's .text-anchor.
+                  // In a span: avoids router Link applying its default anchor text styling
                   <span>{item.text}</span>,
                 )
               ) : href ? (

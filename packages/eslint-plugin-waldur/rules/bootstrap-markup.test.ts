@@ -19,7 +19,7 @@ describe('no-bootstrap-button-markup', () => {
   ruleTester.run('no-bootstrap-button-markup', noBootstrapButtonMarkup as any, {
     valid: [
       // Substrings of `btn` are not the Bootstrap button class.
-      { code: 'const A = () => <button className="text-btn" />;' },
+      { code: 'const A = () => <button className="custom-btn" />;' },
       { code: 'const A = () => <button className="btn-close" />;' },
       {
         code: 'const A = () => <button className="action-btn" />;',
