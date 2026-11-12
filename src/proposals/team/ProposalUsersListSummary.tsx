@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
 import { proposalProposalsListUsersList } from 'waldur-js-client';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, LinkButton } from 'waldur-ui';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { PROPOSAL_ACTIVITY_SECTION_ID } from '@/proposals/activity/ProposalActivitySection';
@@ -150,13 +150,9 @@ export const ProposalUsersListSummary: FC<{
             'Who added or removed whom, and when, is listed under {activity}.',
             {
               activity: (
-                <button
-                  type="button"
-                  className="text-link"
-                  onClick={showActivity}
-                >
+                <LinkButton variant="subtle" onClick={showActivity}>
                   {translate('Activity')}
-                </button>
+                </LinkButton>
               ),
             },
             formatJsxTemplate,

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useRef } from 'react';
 import Dropzone, { DropzoneOptions, DropzoneRef } from 'react-dropzone';
 
-import { IconSquare } from 'waldur-ui';
+import { IconSquare, LinkButton } from 'waldur-ui';
 
 import { formatJsx, translate } from '@/i18n';
 
@@ -87,14 +87,13 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
                 '<button>Click to upload</button> or drag and drop',
                 {
                   button: (child) => (
-                    <button
-                      className="text-anchor font-medium"
-                      type="button"
+                    <LinkButton
+                      className="font-medium"
                       onClick={chooseFile}
                       disabled={rest.disabled}
                     >
                       {child}
-                    </button>
+                    </LinkButton>
                   ),
                 },
                 formatJsx,

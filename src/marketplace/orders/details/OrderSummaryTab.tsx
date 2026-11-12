@@ -52,7 +52,7 @@ export const OrderSummaryTab = ({
                 <Link
                   state="support.detail"
                   params={{ issue_uuid: order.issue.uuid }}
-                  className="text-link"
+                  className="text-primary underline hover:text-[var(--text-brand-secondary)] hover:no-underline"
                 >
                   {order.issue.key || order.issue.uuid}
                 </Link>

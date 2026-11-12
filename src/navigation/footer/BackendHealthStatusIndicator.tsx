@@ -49,7 +49,7 @@ export const BackendHealthStatusIndicator: FC = () => {
       <Tooltip label={label}>
         <button
           type="button"
-          className="text-btn"
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer inline-flex items-center text-quaternary hover:text-secondary"
           aria-label={label}
           onClick={() => openDialog(BackendHealthStatusDialog, { size: 'lg' })}
         >

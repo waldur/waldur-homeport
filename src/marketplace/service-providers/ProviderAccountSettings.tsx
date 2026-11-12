@@ -3,6 +3,7 @@ import { ServiceProvider } from 'waldur-js-client';
 
 import {
   BaseButton,
+  LinkButton,
   ModalBody,
   ModalTitle,
   PropertyCard,
@@ -131,13 +132,11 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
         {translate(
           'How the accounts people get on your offerings are named and set up.',
         )}{' '}
-        <button
-          type="button"
-          className="text-anchor"
+        <LinkButton
           onClick={() => openDialog(AccountSettingsIntroDialog, { size: 'lg' })}
         >
           {translate('Show more')}
-        </button>
+        </LinkButton>
       </p>
       <EditFieldProvider scope={serviceProvider} callback={update}>
         <PropertyList hideActions={!canUpdate}>

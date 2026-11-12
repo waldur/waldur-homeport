@@ -150,15 +150,18 @@ export const StepFormPageIndicator: FC<{
               )}
             </>
           ),
-          // Another page's name takes the Link component's look (text-anchor),
+          // Another page's name takes the Link component's look,
           // so it reads as clickable; the open page's stays plain.
-          ...(key !== page && { labelClass: 'text-anchor' }),
+          ...(key !== page && {
+            labelClass:
+              'text-[var(--text-brand-secondary)] hover:underline cursor-pointer',
+          }),
           ...(failed
             ? {
                 variant: 'danger',
                 labelClass:
                   key !== page
-                    ? 'text-anchor text-anchor-danger'
+                    ? 'text-danger hover:underline cursor-pointer'
                     : 'text-danger',
                 icon: <WarningCircleIcon size={16} weight="bold" />,
               }

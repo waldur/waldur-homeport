@@ -6,7 +6,7 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { BaseButton, ModalBody, ModalTitle } from 'waldur-ui';
+import { BaseButton, LinkButton, ModalBody, ModalTitle } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -125,15 +125,13 @@ export const ProviderUsernameConflicts: FC<ProviderUsernameConflictsProps> = ({
           {translate(
             'People with different usernames on different offerings. They must be resolved before offerings can share accounts.',
           )}{' '}
-          <button
-            type="button"
-            className="text-anchor"
+          <LinkButton
             onClick={() =>
               openDialog(UsernameConflictsIntroDialog, { size: 'lg' })
             }
           >
             {translate('Show more')}
-          </button>
+          </LinkButton>
         </>
       }
       verboseName={translate('username conflicts')}

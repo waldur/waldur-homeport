@@ -1,5 +1,7 @@
 export { BaseButton, buttonVariants } from './BaseButton';
 export type { BaseButtonProps, ButtonSize, ButtonVariant } from './BaseButton';
+export { LinkButton, linkButtonVariants } from './LinkButton';
+export type { LinkButtonProps } from './LinkButton';
 export {
   BUTTON_ICON_SIZES,
   getButtonIconSize,

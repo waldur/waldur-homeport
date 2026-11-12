@@ -1,6 +1,6 @@
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { PropertyItem, Tooltip } from 'waldur-ui';
+import { LinkButton, PropertyItem, Tooltip } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { truncate } from '@/core/utils';
@@ -31,9 +31,8 @@ export const OfferingDetailsField = ({
           <Tooltip label={offering.name?.length > 30 ? offering.name : null}>
             <span>{truncate(offering.name)}</span>
           </Tooltip>{' '}
-          <button
-            className="text-link"
-            type="button"
+          <LinkButton
+            variant="subtle"
             onClick={() =>
               openDialog(OfferingDetailsDialog, {
                 resolve: { offering, concealBillingInfo },
@@ -42,7 +41,7 @@ export const OfferingDetailsField = ({
             }
           >
             [{translate('Show offering')}]
-          </button>
+          </LinkButton>
         </>
       }
     />

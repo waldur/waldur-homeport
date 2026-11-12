@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { LinkButton } from 'waldur-ui';
+
 import { ExternalLink } from '@/core/ExternalLink';
 import { lazyComponent } from '@/core/lazyComponent';
 import { useModal } from '@/modal/actions';
@@ -31,8 +33,6 @@ export const ProviderTermsOfService: FunctionComponent<
   return props.termsOfServiceLink ? (
     <ExternalLink url={props.termsOfServiceLink} label={props.label} iconless />
   ) : (
-    <button className="text-anchor" type="button" onClick={onClick}>
-      {props.label}
-    </button>
+    <LinkButton onClick={onClick}>{props.label}</LinkButton>
   );
 };

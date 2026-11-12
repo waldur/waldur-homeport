@@ -81,9 +81,7 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
         {user ? user.full_name : translate('Guest')}
       </div>
       {user ? (
-        // The classes the email had as a Link (Link's text-anchor, which
-        // replaced text-muted): the brand link colour.
-        <span className="font-medium hover:text-brand text-xs text-anchor">
+        <span className="font-medium text-[var(--text-brand-secondary)] text-xs">
           {user.email}
         </span>
       ) : (

@@ -1,4 +1,4 @@
-import { PropertyItem } from 'waldur-ui';
+import { LinkButton, PropertyItem } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -24,9 +24,8 @@ export const PlanDetailsField = ({ resource }) => {
             mode={getResourceBillingMode(resource)}
             className="me-1"
           />
-          <button
-            className="text-link"
-            type="button"
+          <LinkButton
+            variant="subtle"
             onClick={() =>
               openDialog(PlanDetailsDialog, {
                 resolve: { resourceId: resource.uuid },
@@ -35,7 +34,7 @@ export const PlanDetailsField = ({ resource }) => {
             }
           >
             [{translate('Show plan')}]
-          </button>
+          </LinkButton>
         </>
       }
     />

@@ -9,6 +9,7 @@ import {
 
 import {
   Badge,
+  LinkButton,
   PropertyItem,
   PropertyList,
   Tabs,
@@ -143,14 +144,12 @@ const RuleCell: FC<{
           }
         >
           {onOpen ? (
-            <button
-              type="button"
-              className="text-anchor"
+            <LinkButton
               aria-label={translate('Open the mail')}
               onClick={() => onOpen(rule)}
             >
               {ruleLabel(rule)}
-            </button>
+            </LinkButton>
           ) : (
             <span>{ruleLabel(rule)}</span>
           )}
@@ -310,16 +309,14 @@ const AlwaysSentList: FC<{
                   {row.mail_types.map((key) => {
                     const [mailType, variant = ''] = key.split(':');
                     return (
-                      <button
+                      <LinkButton
                         key={key}
-                        type="button"
-                        className="text-anchor"
                         onClick={() => onOpen({ mailType, variant })}
                       >
                         {row.mail_types.length > 1
                           ? mailTypeLabel(key)
                           : translate('Mail')}
-                      </button>
+                      </LinkButton>
                     );
                   })}
                 </div>

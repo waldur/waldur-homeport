@@ -259,7 +259,7 @@ export const UsageReportVis: FC<Props> = ({
                 );
                 setExcelProgress(null);
               }}
-              className="text-btn hover:text-brand"
+              className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
             >
               <FileXlsIcon size={20} weight="bold" />
             </button>
@@ -273,7 +273,7 @@ export const UsageReportVis: FC<Props> = ({
                   'usage_report.json',
                 )
               }
-              className="text-btn hover:text-brand"
+              className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
             >
               <FileArrowDownIcon size={20} weight="bold" />
             </button>

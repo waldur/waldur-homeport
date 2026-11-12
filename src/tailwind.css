@@ -219,7 +219,7 @@
   body a:hover,
   body a:active,
   body a:focus {
-    text-decoration: none !important;
+    text-decoration: none;
   }
 
   html body {

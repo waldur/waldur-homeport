@@ -116,7 +116,10 @@ describe('Link', () => {
   it('styles a plain text link as an anchor', () => {
     render(<Link state="profile.details">Profile</Link>);
 
-    expect(screen.getByText('Profile')).toHaveClass('text-anchor');
+    expect(screen.getByText('Profile')).toHaveClass(
+      'text-[var(--text-brand-secondary)]',
+    );
+    expect(screen.getByText('Profile')).toHaveClass('hover:underline');
   });
 
   it('does not add anchor styling to a link rendered as a button', () => {
@@ -126,7 +129,9 @@ describe('Link', () => {
       </Link>,
     );
 
-    expect(screen.getByText('Profile')).not.toHaveClass('text-anchor');
+    expect(screen.getByText('Profile')).not.toHaveClass(
+      'text-[var(--text-brand-secondary)]',
+    );
   });
 
   it('keeps anchor styling when the caller only passes an unrelated btn-* class', () => {
@@ -136,6 +141,22 @@ describe('Link', () => {
       </Link>,
     );
 
-    expect(screen.getByText('Profile')).toHaveClass('text-anchor');
+    expect(screen.getByText('Profile')).toHaveClass(
+      'text-[var(--text-brand-secondary)]',
+    );
+    expect(screen.getByText('Profile')).toHaveClass('hover:underline');
+  });
+
+  it('allows caller className to override the default text color', () => {
+    render(
+      <Link state="profile.details" className="text-secondary font-medium">
+        Profile
+      </Link>,
+    );
+
+    expect(screen.getByText('Profile')).toHaveClass('text-secondary');
+    expect(screen.getByText('Profile')).not.toHaveClass(
+      'text-[var(--text-brand-secondary)]',
+    );
   });
 });

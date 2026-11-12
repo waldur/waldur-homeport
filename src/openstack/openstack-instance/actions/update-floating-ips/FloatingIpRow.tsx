@@ -36,7 +36,7 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
             <button
               onClick={() => onClick(pair.address)}
               type="button"
-              className="text-btn pe-2.5"
+              className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary pe-2.5 inline-flex items-center"
             >
               <Tooltip label={translate('Copy to clipboard')}>
                 <CopyIcon size={20} weight="bold" />

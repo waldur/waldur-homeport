@@ -77,7 +77,7 @@ const ResourceField = ({ row }) => {
     <div className="flex items-center gap-1">
       <BaseButton
         variant="tertiary-ghost"
-        className="text-anchor font-normal"
+        className="text-[var(--text-brand-secondary)] hover:underline font-normal"
         onClick={callback}
         label={row.name || row.offering_name}
         size="lg"

@@ -78,7 +78,7 @@ const DocumentsCell: FC<{ row: RoundMeetingNote }> = ({ row }) =>
           key={document.uuid}
           url={document.file}
           name={document.name}
-          className="text-btn hover:text-brand inline-flex items-center"
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
         >
           <DownloadSimpleIcon weight="bold" className="me-1" />
           {document.name}

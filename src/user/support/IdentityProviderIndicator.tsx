@@ -39,7 +39,7 @@ export const IdentityProviderIndicator = ({
           label={translate('Manage profile')}
           url={user.identity_provider_management_url}
           iconless
-          className="text-anchor"
+          className="text-[var(--text-brand-secondary)] hover:underline text-sm"
         />
       ) : null}
     </div>

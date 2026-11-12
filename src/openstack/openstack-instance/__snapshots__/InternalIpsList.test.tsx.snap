@@ -129,7 +129,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-0"
                       type="button"
                     >
@@ -163,7 +163,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-1"
                       type="button"
                     >
@@ -197,7 +197,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-2"
                       type="button"
                     >
@@ -231,7 +231,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     <button
                       aria-label="Pin column"
                       aria-pressed="false"
-                      class="text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
+                      class="bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]"
                       data-testid="pin-toggle-column-3"
                       type="button"
                     >

@@ -31,7 +31,7 @@ Comprehensive architectural reference, design system manual, and practical usage
    - [Prohibition of `.svg-icon` Wrappers](#prohibition-of-svg-icon-wrappers)
 5. [Links Rendered as Buttons](#5-links-rendered-as-buttons)
    - [Supported Link Props](#supported-link-props)
-   - [Text-Anchor Suppression](#text-anchor-suppression)
+   - [Default Link Styling](#default-link-styling)
    - [Specialized Entity Link Wrappers](#specialized-entity-link-wrappers)
    - [Prohibited Link Button Patterns](#prohibited-link-button-patterns)
 6. [Dropdown & Menu Toggles](#6-dropdown-menu-toggles)
@@ -464,9 +464,9 @@ import { Link } from '@/core/Link';
 - `buttonSize`: Any `ButtonSize` (`'sm'`, `'md'`, `'lg'`). Defaults to `'md'`.
 - `buttonIconOnly`: Boolean for square icon-only anchors.
 
-### Text-Anchor Suppression
+### Default Link Styling
 
-When `buttonVariant` is omitted, `Link` applies the default `.text-anchor` class (brand-colored underline text link). When `buttonVariant` is present, `Link` automatically suppresses `.text-anchor`, allowing `buttonVariants()` to control all colors.
+When `buttonVariant` is omitted, `Link` applies default text link styles (brand-colored underline text link). When `buttonVariant` is present, `Link` applies `buttonVariants()` to control all colors and structure.
 
 ### Specialized Entity Link Wrappers
 
