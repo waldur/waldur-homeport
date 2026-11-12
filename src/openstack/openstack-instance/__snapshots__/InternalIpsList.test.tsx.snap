@@ -52,7 +52,7 @@ exports[`InternalIpsList > renders list 1`] = `
           </div>
         </div>
         <div
-          class="grow order-2 flex items-center max-sm:flex-wrap whitespace-nowrap gap-3 ms-auto justify-end"
+          class="order-2 flex items-center max-sm:flex-wrap whitespace-nowrap gap-3 ms-auto justify-end"
         >
           <div
             class="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-3"

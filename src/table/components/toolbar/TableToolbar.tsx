@@ -125,14 +125,16 @@ export function TableToolbarActions() {
       {(config.hasQuery || showActionsColumn) && (
         <div
           className={classNames(
-            'grow order-2 flex items-center',
+            'order-2 flex items-center',
             // In a tabbed card's header the toolbar shares the width with the
             // card title; let search and buttons wrap instead of overflowing.
             // Bootstrap's .flex-wrap is !important and would beat a Tailwind
             // sm:flex-nowrap, so wrap only below sm for a standalone table.
             portal?.toolbar ? 'flex-wrap' : 'max-sm:flex-wrap',
             'whitespace-nowrap gap-3',
-            showTitle ? 'ms-auto justify-end' : 'justify-between',
+            // With a title, the title takes the free width, so the selection
+            // bar sits beside the search instead of in the middle.
+            showTitle ? 'ms-auto justify-end' : 'grow justify-between',
           )}
         >
           {config.hasQuery && (
