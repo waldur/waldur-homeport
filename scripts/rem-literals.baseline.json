@@ -83,7 +83,6 @@
   "src/proposals/update/CallUpdateContainer.tsx": 1,
   "src/styles/legacy/_base.scss": 2,
   "src/styles/legacy/_reboot.scss": 33,
-  "src/styles/legacy/ai-assistant/_ask-user-form.scss": 22,
   "src/styles/legacy/ai-assistant/_history-sidebar.scss": 1,
   "src/styles/legacy/ai-assistant/_markdown.scss": 35,
   "src/styles/legacy/ai-assistant/_thread.scss": 66,
