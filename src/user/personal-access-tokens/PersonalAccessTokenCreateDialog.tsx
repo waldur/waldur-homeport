@@ -12,7 +12,6 @@ import {
 
 import { BaseButton } from 'waldur-ui';
 
-import { PermissionOptions } from '@/administration/roles/PermissionOptions';
 import { lazyComponent } from '@/core/lazyComponent';
 import { required } from '@/core/validators';
 import { StringGroup, SelectGroup, DateGroup } from '@/form';
@@ -26,6 +25,7 @@ import { useNotify } from '@/store/notify';
 
 import { labelForType } from './entityFetchers';
 import { EntityScopePicker } from './EntityScopePicker';
+import { getScopeOptions } from './scopeOptions';
 
 const PersonalAccessTokenSecretDialog = lazyComponent(() =>
   import('./PersonalAccessTokenSecretDialog').then((module) => ({
@@ -104,21 +104,10 @@ export const PersonalAccessTokenCreateDialog: React.FC<
     });
   }, []);
 
-  const scopeOptions = useMemo(() => {
-    if (!availableScopes) return [];
-    const result: { value: string; label: string }[] = [];
-    for (const group of PermissionOptions) {
-      for (const opt of group.options) {
-        if (availableScopes.has(opt.value)) {
-          result.push({
-            value: opt.value,
-            label: `${group.label}: ${opt.label}`,
-          });
-        }
-      }
-    }
-    return result;
-  }, [availableScopes]);
+  const scopeOptions = useMemo(
+    () => (availableScopes ? getScopeOptions(availableScopes) : []),
+    [availableScopes],
+  );
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);

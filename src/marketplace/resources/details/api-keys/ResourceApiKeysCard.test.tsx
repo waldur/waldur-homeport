@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ENV } from '@/core/config';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -166,7 +167,13 @@ const openRowActions = async (rowIndex: number) => {
 };
 
 describe('ResourceApiKeysCard', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // As permissions.yaml grants it: a member reveals the project's shared keys.
+    (ENV as any).roles = [
+      { name: 'PROJECT.MEMBER', permissions: ['RESOURCE.REVEAL_API_KEY'] },
+    ];
+  });
 
   it('lists the keys with their state via the standard table', async () => {
     vi.mocked(hasConsumerPermission).mockReturnValue(true);
