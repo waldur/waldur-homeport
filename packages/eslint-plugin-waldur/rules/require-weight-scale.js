@@ -27,8 +27,8 @@ import { inJsxStyle } from '../lib/jsx-style.js';
 
 import { notAClassList } from './class-name-tokens.js';
 
-/** Bootstrap's former weight classes, to the Tailwind class of the same weight. */
-export const RETIRED_WEIGHTS = {
+/** Former weight classes, to the Tailwind class of the same weight. */
+const RETIRED_WEIGHTS = {
   'fw-light': 'font-light',
   'fw-normal': 'font-normal',
   'fw-bold': 'font-medium',

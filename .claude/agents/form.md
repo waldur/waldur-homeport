@@ -89,7 +89,7 @@ React Final Form requires all form-related components within `<Form>` context:
 ### FormGroup Benefits
 
 - **Reduced Code Duplication**: Eliminates repetitive label/field structures.
-- **Consistent Styling**: Automatic spacing with standard Metronic classes.
+- **Consistent Styling**: Automatic spacing with standard Tailwind classes.
 - **Better Accessibility**: Automatic `controlId` generation for proper label/input association.
 - **Unified Props**: Layout props (`label`, `help`, `required`) and field props (`name`, `validate`) are passed to a single component.
 
@@ -111,7 +111,7 @@ import { StringGroup } from '@/form';
 />
 ```
 
-#### ⚠️ Legacy: Manual FormGroup Wrapping
+#### ⚠️ Deprecated: Manual FormGroup Wrapping
 
 Used only for complex layouts or `FieldArray` where a single label covers multiple inputs.
 

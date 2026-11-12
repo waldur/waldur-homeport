@@ -40,8 +40,7 @@ const PageTabTitle: FC<{ tab: Tab; active: boolean }> = ({ tab, active }) => (
 );
 
 /**
- * A page tab, ported from Metronic's `.menu-link` in Toolbar.tsx's old
- * `menu-rounded menu-gray-500 menu-state-bg-light-primary` row: gray-500,
+ * A page tab: gray-500,
  * and brand text on a light brand background when hovered or current. The
  * current tab is marked with `aria-current`. The tab row scrolls, which
  * clips an outline drawn outside the tab, so the focus ring is inset; it
@@ -122,13 +121,10 @@ const findActiveTab = (tabs, router) => {
 };
 
 /**
- * The parent-tab-with-children case: a top-level trigger whose original
- * Metronic trigger config opened either an inline accordion (below `lg`)
- * on click or a floating dropdown (`lg`+) on hover, per Metronic's own
- * responsive CSS (`.menu-lg-down-accordion`,
- * `.menu-sub-down-accordion.menu-sub-dropdown`).
+ * The parent-tab-with-children case: a top-level trigger that opens a floating
+ * dropdown menu.
  *
- * Both modes collapse to the same Radix dropdown here. The trigger is a
+ * The trigger is a
  * plain button that only opens the menu (click, Enter, Space, ArrowDown,
  * or hover at `lg`+); it does not navigate, so every destination,
  * including the first, is a menu item (WCAG 2.1.1, no link nested in a

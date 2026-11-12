@@ -23,7 +23,7 @@ const meta: Meta<typeof ModalShell> = {
     docs: {
       description: {
         component:
-          "waldur-homeport's own modal without Bootstrap: ModalShell (Radix Dialog in Bootstrap's scrollable-overlay shape, with sizes, centring, a scrolling body, a static backdrop and a confirm layer) and ModalDialog (the header with icon, title, subtitle and close button, the body and the footer), in the app's px geometry.",
+          "waldur-homeport's modal: ModalShell (Radix Dialog in a scrollable-overlay shape, with sizes, centring, a scrolling body, a static backdrop and a confirm layer) and ModalDialog (the header with icon, title, subtitle and close button, the body and the footer), in the app's px geometry.",
       },
     },
   },

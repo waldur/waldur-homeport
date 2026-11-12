@@ -16,7 +16,7 @@ export type ConfiguredSidebarStyle = SidebarStyle | 'auto';
  * Mirrors `style` onto `target`'s data-sidebar-style attribute, the signal
  * sidebar.css's --nav-item-* and --sidebar-bg tokens key off
  * via `[data-sidebar-style='...']` (see that file's comment for the full
- * Metronic $asides cross-reference). Takes the resolved style as a plain
+ * style cross-reference). Takes the resolved style as a plain
  * argument rather than reading ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE
  * itself — same reasoning as initFontFamily()/initBrandTokens(): callers
  * own where their config comes from and stay the single source of truth.
@@ -34,7 +34,7 @@ export function applySidebarStyle(
  * theme-named styles matches. This used to be more complicated: an earlier
  * version of sidebar.css gave 'dark'/'light' a second block that
  * *inverted* each under `[data-theme='dark']` (a mistaken port of a
- * Metronic quirk that didn't actually apply here — see that file's own
+ * legacy quirk that didn't actually apply here — see that file's own
  * comment), which made this straightforward mapping select the visually
  * *wrong* style. Now that sidebar.css's five styles are all fixed,
  * unconditional looks (matching "primary"/"accent"/"accent-light", which

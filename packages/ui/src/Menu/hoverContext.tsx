@@ -21,7 +21,7 @@ export interface HoverHandlers {
  * Open-on-hover for a top-level menu. Radix's Trigger opens only on click
  * or keyboard, so `open` is controlled here. Both the trigger and the
  * content need the handlers, or the menu closes while the pointer crosses
- * the gap between them; the 200ms close delay (Metronic's own) keeps it
+ * the gap between them; the 200ms close delay keeps it
  * from flickering shut when the pointer briefly leaves the panel.
  */
 export const useHoverOpen = (

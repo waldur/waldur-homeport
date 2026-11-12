@@ -92,8 +92,8 @@ export const OrganisationAdminExample: Story = {
 /**
  * The app header's own layout (src/navigation/header/AppHeader.tsx) with
  * stand-ins for its data-bound parts. Its play function (and the
- * AppHeaderGeometry* stories below) pin it to the geometry the Metronic
- * header had, so keep the classes here the same as AppHeader's.
+ * AppHeaderGeometry* stories below) pin it to the legacy geometry,
+ * so keep the classes here the same as AppHeader's.
  */
 export const AppHeaderLayout: Story = {
   render: () => (
@@ -160,8 +160,8 @@ export const AppHeaderLayout: Story = {
 };
 
 /*
- * Geometry of AppHeaderLayout, pinned to what the Metronic header had now that
- * its stylesheets (layout/_header.scss, custom/_nav.scss) are gone and there is
+ * Geometry of AppHeaderLayout, pinned to legacy geometry now that
+ * its stylesheets are gone and there is
  * nothing left to diff against. Every number was measured on the legacy header
  * in the signed-in app, at the 13px desktop root and the 12px mobile one: the
  * spacing is rem-based, so it differs between the two. The Vitest runner sizes

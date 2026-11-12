@@ -50,11 +50,9 @@ const ALERT_ICON: Record<
 };
 
 /**
- * AlertItem — notification / message row component ported from the legacy
- * Bootstrap/Metronic `src/core/AlertItem.tsx`.
+ * AlertItem — notification / message row component.
  *
- * Real values (root font-size is 13px in Metronic, expressed below as arbitrary
- * rem/px values matching design tokens and computed measurements):
+ * Values (expressed below as rem/px values matching design tokens and computed measurements):
  * - `full-width`: py-[1.23rem] px-0 (15.99px vertical padding) with a 1px border-bottom
  * - `floating`: p-[1.23rem] (15.99px padding all around), rounded-[0.475rem] (6.175px radius), full border
  * - Border color: var(--border-secondary) (#E4E7EC light / #1F242F dark)

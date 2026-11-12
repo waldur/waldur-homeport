@@ -53,7 +53,7 @@ Comprehensive architectural reference, design system manual, and practical usage
 9. [Component Decision Matrix](#9-component-decision-matrix)
 10. [Linting Rules & Prohibited Anti-Patterns](#10-linting-rules-prohibited-anti-patterns)
     - [ESLint Rules Matrix](#eslint-rules-matrix)
-    - [Converting Legacy Call Sites](#converting-legacy-call-sites)
+    - [Common Call Site Migrations](#common-call-site-migrations)
     - [Good vs. Bad Code Comparison](#good-vs-bad-code-comparison)
 
 ---
@@ -248,7 +248,7 @@ All button colors are defined in [`packages/design-tokens/src/css/components/but
 
 ### Why `data-disabled` and Direct Tooltips Replace Wrapper Spans
 
-In legacy implementations, Tailwind/shadcn applied `disabled:pointer-events-none` to disabled buttons. However, `pointer-events: none` prevents the browser from firing `mouseenter` and `pointerover` events on `<button disabled>`. To make tooltips work on disabled buttons, libraries commonly introduced a workaround: wrapping the button in an extra `<span className="inline-block">`.
+Historically, Tailwind/shadcn applied `disabled:pointer-events-none` to disabled buttons. However, `pointer-events: none` prevents the browser from firing `mouseenter` and `pointerover` events on `<button disabled>`. To make tooltips work on disabled buttons, libraries commonly introduced a workaround: wrapping the button in an extra `<span className="inline-block">`.
 
 **The wrapper `<span>` created severe architectural problems:**
 
@@ -435,7 +435,7 @@ When `pending={true}`:
 
 > [!CAUTION]
 > **Never wrap button icons in `.svg-icon`**.
-> `.svg-icon` has been retired (#530) and is prohibited by ESLint (`no-retired-bootstrap-utility`). Always pass bare Phosphor icons directly to `iconNode`.
+> Always pass bare Phosphor icons directly to `iconNode`.
 
 ---
 
@@ -486,7 +486,7 @@ import { ProjectLink } from '@/project/ProjectLink';
 ### Prohibited Link Button Patterns
 
 ```tsx
-// ❌ PROHIBITED: Hand-written legacy btn classes on Link
+// ❌ PROHIBITED: Hand-written btn classes on Link
 <Link state="project.details" className="btn btn-primary btn-sm">
   {translate('View')}
 </Link>
@@ -708,19 +708,18 @@ Used in forms that track dirty/unsaved state.
 | ESLint Rule                                     | Severity | What It Enforces                                                                                                                                                        |
 | :---------------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `no-restricted-imports`                         | `error`  | Blocks importing from retired packages. Directs developers to `BaseButton`, `SubmitButton`, `CloseDialogButton`, or `Menu.TriggerButton`. |
-| `waldur-custom/no-bootstrap-button-markup`      | `error`  | Blocks `<button className="btn ...">`, `<a className="btn ...">`, and any hand-rolled button markup using legacy `.btn` classes.        |
 | `waldur-custom/enforce-disabled-button-tooltip` | `error`  | Enforces that every disabled `<BaseButton>` has a `tooltip` or `disabledReason` explaining why the action is unavailable.                |
 | `waldur-custom/enforce-dialog-button-order`     | `error`  | Enforces standard dialog button order: dismissive buttons (`CloseDialogButton`) on the left, affirmative/submission buttons (`SubmitButton`) on the right.              |
 | `waldur-custom/no-edit-button-size-override`    | `error`  | Blocks overriding `size="sm"` on `EditButton`; requires using `CompactEditButton` instead.                                                                              |
 
-### Converting Legacy Call Sites
+### Common Call Site Migrations
 
 | From                                                                | To                                                                                                                                                                      |
 | :------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<button className="btn btn-x btn-sm">`                             | `<BaseButton variant="…" size="sm" label={…} />`                                                                                                                        |
 | `<a className="btn …">` / `Link` with `btn` classes                 | `<Link buttonVariant="…" buttonSize="…">`                                                                                                                               |
 | `ToggleButtonGroup`, `btn-group` + `btn-check`                      | `SegmentedControl`                                                                                                                                                      |
-| `ButtonGroup` of unrelated actions                                  | `<div className="d-flex gap-2">` of `BaseButton`s                                                                                                                       |
+| `ButtonGroup` of unrelated actions                                  | `<div className="flex gap-2">` of `BaseButton`s                                                                                                                         |
 | Radix `Trigger asChild` around a button                             | `BaseButton` directly (it is `forwardRef`); use a raw element + `buttonVariants()` only when the trigger's child must have a specific DOM shape (see `ActionsDropdown`) |
 | HTML built as a string (chart tooltips)                             | `class="${buttonVariants({ variant, size })}"`                                                                                                                          |
 | `disabled` with no explanation                                      | Add `disabledReason`                                                                                                                                                    |
@@ -728,7 +727,7 @@ Used in forms that track dirty/unsaved state.
 
 **Rules of thumb when converting:**
 
-1. **Do not use `btn-*` classes**: Legacy classes like `btn-sm`, `btn-icon`, or `btn-active-icon-danger` are retired. Pick first-class `variant` and `size` props instead.
+1. **Do not use `btn-*` classes**: Classes like `btn-sm`, `btn-icon`, or `btn-active-icon-danger` are retired. Pick first-class `variant` and `size` props instead.
 2. **Verify replacement in place**: Old rules often had container-level minimum heights or widths that stopped applying when converted to `BaseButton`. If a converted button looks smaller than before, set `size` explicitly (`sm`, `md`, `lg`).
 
 ### Good vs. Bad Code Comparison
@@ -736,7 +735,7 @@ Used in forms that track dirty/unsaved state.
 #### 1. Button Imports & Wrappers
 
 ```tsx
-// ❌ BAD: Hand-written legacy btn classes
+// ❌ BAD: Hand-written btn classes
 <button className="btn btn-primary btn-sm">Submit</button>
 
 // ✅ GOOD: Standard BaseButton
@@ -761,7 +760,7 @@ import { BaseButton } from 'waldur-ui';
 #### 3. Icons in Buttons
 
 ```tsx
-// ❌ BAD: Metronic svg-icon wrapper (ruins icon color contrast)
+// ❌ BAD: svg-icon wrapper (ruins icon color contrast)
 <BaseButton
   label={translate('Delete')}
   iconNode={<span className="svg-icon"><TrashIcon /></span>}
@@ -777,7 +776,7 @@ import { BaseButton } from 'waldur-ui';
 #### 4. Links as Buttons
 
 ```tsx
-// ❌ BAD: Anchor with legacy btn class
+// ❌ BAD: Anchor with btn class
 <Link state="project.create" className="btn btn-primary">
   {translate('Create')}
 </Link>

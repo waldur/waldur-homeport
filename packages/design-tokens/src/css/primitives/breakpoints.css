@@ -1,9 +1,9 @@
 /**
  * Standard grid breakpoints aligned across Waldur:
- * Bootstrap $grid-breakpoints, core constants (GRID_BREAKPOINTS), and waldur-ui (BREAKPOINTS).
+ * core constants (GRID_BREAKPOINTS) and waldur-ui (BREAKPOINTS).
  *
  * Guarantees `lg` resolves to 992px identically across Tailwind `lg:` variants,
- * Bootstrap `.d-lg-*` classes, SCSS media queries, and useMediaQuery() hooks.
+ * SCSS media queries, and useMediaQuery() hooks.
  */
 @theme {
   --breakpoint-sm: 576px;

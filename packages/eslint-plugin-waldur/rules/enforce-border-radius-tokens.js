@@ -13,14 +13,11 @@
  *   rounded-full (9999px)
  *
  * The rule reports and autofixes:
- * - `retired`: legacy Bootstrap radius classes (`rounded-0` -> `rounded-none`,
- *   `rounded-pill` -> `rounded-full`, `rounded-circle` -> `rounded-full`), and
- *   the bare `rounded` / `rounded-1..3` Bootstrap used to emit with
- *   `!important` (8px / 6px, 8px, 8px), which Bootstrap no longer generates
- *   (#503). Tailwind's own `rounded` is 0.25rem, off the pinned scale.
- * - `bareRounded`: `md:rounded` and other variants of the bare name never
- *   matched Bootstrap's class, so they were Tailwind's 0.25rem; reported
- *   without a fix, since `rounded-lg` would change them.
+ * - `retired`: non-standard radius classes (`rounded-0` -> `rounded-none`,
+ *   `rounded-pill` -> `rounded-full`, `rounded-circle` -> `rounded-full`,
+ *   `rounded` -> `rounded-lg`, `rounded-1` -> `rounded-md`, `rounded-2` -> `rounded-lg`,
+ *   `rounded-3` -> `rounded-lg`).
+ * - `bareRounded`: `md:rounded` and other variants of the bare name.
  * - `offScale`: arbitrary pixel classes matching a scale token
  *   (e.g. `rounded-[6px]` -> `rounded-md`, `rounded-[8px]` -> `rounded-lg`).
  * - `inline`: inline `style={{ borderRadius: ... }}` in JSX elements.
@@ -30,7 +27,7 @@ import { inJsxStyle } from '../lib/jsx-style.js';
 
 import { notAClassList } from './class-name-tokens.js';
 
-export const RETIRED_BOOTSTRAP = {
+const RETIRED_BOOTSTRAP = {
   'rounded-0': 'rounded-none',
   'rounded-pill': 'rounded-full',
   'rounded-circle': 'rounded-full',

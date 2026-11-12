@@ -64,7 +64,7 @@ export interface AppShellProps {
   onHelpClick?: () => void;
   onNotificationsClick?: () => void;
   hasNotifications?: boolean;
-  /** No default Waldur footer design exists yet (the real Bootstrap/Metronic
+  /** No default Waldur footer design exists yet (the
    * app has none either) — this is a structural slot for whenever one is,
    * not an extracted duplicate. Renders below the scrollable content area,
    * outside its overflow-y-auto, so it stays visible while content scrolls. */
@@ -97,7 +97,7 @@ export interface AppShellProps {
  * only collapse toggle now, so an app can't end up with a collapsed rail
  * it has no control to reopen. That toggle used to sit in the TopBar's
  * left slot instead; it moved next to the thing it collapses, matching
- * both the sidebar mockup and waldur-homeport's own real Metronic aside
+ * both the sidebar mockup and waldur-homeport's own sidebar
  * (src/navigation/sidebar/BrandName.tsx), whose header row has the same
  * three controls.
  *

@@ -19,7 +19,7 @@
  * It stays silent on everything an inline style is genuinely for: a value
  * measured or animated at runtime, a CSS custom property bridging a varying
  * value into a literal utility (the documented pattern — see
- * docs/tailwind-shadcn-migration-notes.md), a spread of a caller's `style`,
+ * docs/design-tokens.md), a spread of a caller's `style`,
  * and any declaration with no utility to name (gradients, `maskType`,
  * `animation`). `fontSize`, `fontWeight` and `borderRadius` belong to
  * require-font-size-scale, require-weight-scale and
@@ -264,11 +264,8 @@ const LENGTH_KEYWORDS = {
 const FRACTION_SUFFIXES = new Set(['1/2', '1/4', '3/4']);
 
 /**
- * Prefixes where steps 25, 50, 75 and 100 are off limits: Bootstrap used
- * `w-50` for 50% and Tailwind reads it as 200px, so `no-bootstrap-layout-utility`
- * reports the name whichever was meant. 100px, 200px, 300px and 400px on one
- * of these take the arbitrary form instead. (`max-w-*` and `max-h-*` are not
- * affected — Bootstrap spelled those `mw-100` and `mh-100`.)
+ * Prefixes where numeric steps 25, 50, 75 and 100 are ambiguous with percentage
+ * values: 100px, 200px, 300px and 400px on these take the arbitrary form instead.
  */
 const AMBIGUOUS_STEP_PREFIXES = new Set([
   'w',

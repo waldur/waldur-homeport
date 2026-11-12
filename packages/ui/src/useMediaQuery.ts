@@ -2,7 +2,7 @@ import { useCallback, useSyncExternalStore } from 'react';
 
 /**
  * Standard grid breakpoints aligned across Waldur:
- * Bootstrap $grid-breakpoints, Tailwind screens, and core constants.
+ * Tailwind screens and core constants.
  */
 export const BREAKPOINTS = {
   xs: 0,

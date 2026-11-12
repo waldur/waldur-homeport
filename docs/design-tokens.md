@@ -246,7 +246,7 @@ micro-apps all get the same utilities; `waldur-ui` and `shell` depend on them.
 
 ## Retired colour utilities
 
-Legacy colour classes paint nothing, and every colour class is Tailwind's and follows the design tokens. A bare `border` sets only the width, so it always names a colour: `border border-secondary` (`waldur-custom/require-border-color`, autofix).
+Obsolete colour classes paint nothing, and every colour class is Tailwind's and follows the design tokens. A bare `border` sets only the width, so it always names a colour: `border border-secondary` (`waldur-custom/require-border-color`, autofix).
 
 | Retired Class                                      | Replacement                                                               |
 | -------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -261,13 +261,6 @@ Legacy colour classes paint nothing, and every colour class is Tailwind's and fo
 
 `FormText` (waldur-ui) is `text-tertiary`; give it `className="text-quaternary"` for a quieter line, or `text-danger` for an error.
 
-- **The `waldur-custom/no-bootstrap-color-utility` lint rule** reports a retired name with its
-  replacement, and a class built as `` `text-${variant}` `` (map each variant to a full class
-  name). It skips strings that hold a name rather than a class list: a BaseButton
-  `variant="text-danger"`, an object key outside `classNames()`/`cn()`, a comparison, a
-  TypeScript literal type.
-- **`src/tailwindBootstrapColors.test.ts`** compiles the legacy SCSS and checks it emits no
-  `!important` colour class, and that Tailwind defines none of the retired names.
 - **Borders name their colour**: `border` (and `border-t`, `border-b-2`, …) sets only the
   width; without a colour class the line takes `currentColor`. Give every state an explicit
   colour, e.g. `rounded-lg border border-secondary` and `border-brand` when selected.
@@ -348,14 +341,14 @@ One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
 | 600    | `font-semibold` | `var(--font-weight-semibold)` | Headings, titles         |
 | 700    | `font-bold`     | `var(--font-weight-bold)`     | Strong headings, figures |
 
-- **Font weights (`font-*`).** Standard Tailwind `font-*` utilities are used (`font-light` … `font-bold`). The `waldur-custom/require-weight-scale` rule autofixes legacy `fw-*` classes.
+- **Font weights (`font-*`).** Standard Tailwind `font-*` utilities are used (`font-light` … `font-bold`). The `waldur-custom/require-weight-scale` rule autofixes obsolete `fw-*` classes.
 - **No other steps.** The theme clears Tailwind's `thin`, `extralight`, `extrabold` and `black`,
   so those classes compile to nothing, and an arbitrary `font-[600]` is reported: Inter is not
   loaded at other weights, and the browser would only fall back to the nearest loaded one.
 - **No inline `fontWeight`** on a JSX element: it outranks every stylesheet. Chart and PDF
   options (ECharts `fontWeight`) are not styles and keep their own.
 - **SCSS** reads `var(--font-weight-*)`: stylelint rejects a number or keyword in component
-  SCSS, and `src/tailwindBootstrapColors.test.ts` checks the compiled legacy CSS.
+  SCSS.
 - A utility does not outrank an **unlayered** stylesheet (a component's `.scss` imported from
   TSX). Where such a rule sets the weight of the same element, drop the weight from the rule, or,
   if the rule is right for everything else it matches, use the important modifier on that element
@@ -366,7 +359,7 @@ One scale, the five weights `fonts.css` loads (Inter 300–700), declared in
 One scale: Tailwind's, with `--spacing` pinned to `4px` in `primitives/spacing.css`, so
 `gap-3` is 12px and `mb-1.5` is 6px at any root font size.
 
-Spacing uses standard Tailwind steps (`p-3`, `mb-1.5`, `gap-2`). The `waldur-custom/no-retired-bootstrap-utility` ESLint rule reports legacy utility names (`mb-md-4` → `md:mb-3`, `mt-n2` → `-mt-1.5`, `gap-8px` → `gap-2`) with the corresponding Tailwind class.
+Spacing uses standard Tailwind steps (`p-3`, `mb-1.5`, `gap-2`).
 
 - **Write Tailwind's step**: `mb-3` is 12px. Use standard Tailwind steps; do not use arbitrary pixel values like `[6.5px]` to approximate non-standard steps.
 - **No runtime class names.** Tailwind generates only the names it finds in source, so
@@ -392,10 +385,9 @@ phone), not 576px. A px value off the whole-or-half step is named as an arbitrar
 (`margin: 17` is `m-[17px]`), so choosing 16 or 20 stays a decision someone makes.
 
 Two kinds of value skip the scale and take the arbitrary form. One is a px off the whole-or-half
-step, as above. The other is a step Bootstrap made ambiguous: `w`, `h`, `min-w`, `min-h`, `top`,
+step, as above. The other is a step that was ambiguous: `w`, `h`, `min-w`, `min-h`, `top`,
 `bottom`, `start` and `end` at 25, 50, 75 or 100 — so `minWidth: 200` is `min-w-[200px]`, not
-`min-w-50`, which `no-bootstrap-layout-utility` reports because Bootstrap used that name for 50%.
-`max-w-*` and `max-h-*` are unaffected; Bootstrap spelled those `mw-100` and `mh-100`.
+`min-w-50`, to avoid ambiguity between percentage and pixel values.
 
 An inline style is still right where the value is not static:
 
@@ -403,8 +395,7 @@ An inline style is still right where the value is not static:
   handle's `transform`, a stagger's `animationDelay`.
 - **A custom property bridging a varying value into a literal utility** — `style={{ '--w': px }}`
   with `w-[var(--w)]`. Tailwind generates only the class names it finds in source, so this is the
-  way to vary one; see
-  [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md).
+  way to vary one.
 - **A forwarded `style` prop** — where a caller's object is spread in, merge order decides the
   winner, so the rule leaves the whole object alone.
 - **A declaration with no utility** — a gradient, `maskType`, an `animation` shorthand.
@@ -520,8 +511,6 @@ unnoticed.
 | No new duplicate roles (same value in both themes)      | `DUPLICATE_BASELINE` in `scripts/audit-tokens.mjs`, via the same two                 |
 | Status `-fg` clears AA on every surface                 | `statusContrast.test.ts`                                                             |
 | Badge `solid` and Progress fills stay identical         | `progressTokens.test.ts`                                                             |
-| Legacy stylesheet emits no colour utility               | `src/tailwindBootstrapColors.test.ts`                                                |
-| No retired colour class name                            | `waldur-custom/no-bootstrap-color-utility`                                           |
 | Every semantic utility waldur-ui/shell use is declared  | `tailwindTheme.test.ts`                                                              |
 | A bare `border` names its colour                        | `waldur-custom/require-border-color` (autofix)                                       |
 | State colours from the status matrix, not raw ramps     | `waldur-custom/no-raw-status-ramp`                                                   |
@@ -530,9 +519,8 @@ unnoticed.
 | Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint                   |
 | Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint                    |
 | No static inline declarations                           | `waldur-custom/no-static-inline-style`                                               |
-| Legacy stylesheet emits no `fw-*`; Tailwind on scale    | `src/tailwindBootstrapColors.test.ts`                                                |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
-| No `--bs-*` reads                                       | `waldur-custom/no-bootstrap-css-vars`, stylelint                                     |
+| No `--bs-*` reads in stylesheets                        | stylelint                                                                            |
 | Hard-coded colours (hex, `rgb()`, named) only go down   | `no-literal-color` (ESLint and stylelint), `yarn colors:check`                       |
 | Raw `rem` lengths only go down                          | `no-rem-length` (ESLint and stylelint), `yarn rem:check`                             |
 
@@ -665,7 +653,7 @@ Rules for a new token:
 2. Read by a `waldur-ui` component, or by several call sites? Add it to `packages/design-tokens`,
    in the file for its domain or component, prefixed by its owner (`--card-*`, `--table-*`).
 3. Import a new file from `index.css`, which stays a categorized list of imports.
-4. Keep the Metronic source note and the light and dark values in the same file.
+4. Keep the source note and the light and dark values in the same file.
 5. If it is a sidebar style token (`--nav-*`, `--sidebar-bg`) it must not be
    theme-scoped. Add new files to `FILES` in `sidebarTheme.test.ts`, which checks this.
 6. Custom properties (`--*`) must not be declared in stylesheets outside `packages/design-tokens/`
@@ -689,7 +677,7 @@ Rules for a new token:
 
 ## Retiring `--bs-*`
 
-Legacy `--bs-*` custom properties sit outside the token architecture. Read the design tokens instead:
+Obsolete `--bs-*` custom properties sit outside the token architecture. Read the design tokens instead:
 
 | `--bs-*`                                       | Token                                                         |
 | ---------------------------------------------- | ------------------------------------------------------------- |
@@ -711,14 +699,8 @@ or handle that read `--bs-gray-400` is `--border-divider-strong`, not the muted 
 one-off with no role (a `--bs-gray-300` guide line, `--bs-dark` as a border) gets the ramp step
 plus its `gray-dark` mirror at the call site.
 
-Two checks keep new reads out: the `waldur-custom/no-bootstrap-css-vars` ESLint rule (TS/TSX,
-including `getCssVar('--bs-…')`) and stylelint's `declaration-property-value-disallowed-list` and
-`property-disallowed-list` (CSS/SCSS). stylelint has no ignore list, so both apply to
-`src/styles/**` too: the few places that must set one of the legacy `.table` custom properties
-carry a `stylelint-disable` comment saying why. The ESLint rule has no exemption either and checks
-all TS/TSX.
-
-Outside that SCSS nothing reads them any more, so neither check has a per-file allow list.
+Stylelint rules (`declaration-property-value-disallowed-list` and `property-disallowed-list`)
+disallow `--bs-*` reads in stylesheets (CSS/SCSS). Outside SCSS nothing reads them.
 
 ## Adding or changing a value
 
@@ -730,8 +712,8 @@ Changing a light value changes what the app renders across all components at onc
 
 ## Verifying a refactor changes nothing
 
-When the generator, the data model or the Metronic SCSS changes and no pixel should move,
-snapshot the Metronic stylesheet before and compare after:
+When the generator, the data model or the legacy SCSS changes and no pixel should move,
+snapshot the legacy stylesheet before and compare after:
 
 ```bash
 node scripts/color-diff.mjs save /tmp/before.json   # on the base commit
@@ -747,6 +729,6 @@ For the CSS side, compile `src/tailwind.css` with `@tailwindcss/node` and diff t
 commits in both themes with `scripts/theme-snapshots.mjs` (see
 [visual-testing.md](visual-testing.md) → "Storybook comparison").
 
-Metronic stylesheets consume CSS custom properties directly (`var(--text-primary)`,
+Legacy stylesheets consume CSS custom properties directly (`var(--text-primary)`,
 `var(--bg-primary)`, `var(--border-primary)`, etc.), ensuring identical token resolution
-across both Metronic and Tailwind components.
+across both legacy and Tailwind components.

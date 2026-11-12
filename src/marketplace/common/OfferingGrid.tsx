@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 
 import { OfferingCard } from './OfferingCard';
 
-// Literal class names so Tailwind generates them: `width` is the old Bootstrap
+// Literal class names so Tailwind generates them: `width` is the legacy
 // column span (out of 12) from `xl` up.
 const XL_COLUMNS: Record<number, string> = {
   2: 'xl:grid-cols-6',

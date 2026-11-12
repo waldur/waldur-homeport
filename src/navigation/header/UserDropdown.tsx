@@ -23,9 +23,8 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
   return (
     // Not a BaseButton: the trigger's content is an avatar image plus a
     // two-line name/role block (and a conditional Staff badge), none of
-    // which fits BaseButton's single iconNode + label slots. The original
-    // className carried bare `btn` purely for Bootstrap's button reset
-    // (no variant class), so that reset is reproduced directly here instead.
+    // which fits BaseButton's single iconNode + label slots. Reset is
+    // applied directly via inline Tailwind classes.
     <button
       ref={ref}
       type="button"

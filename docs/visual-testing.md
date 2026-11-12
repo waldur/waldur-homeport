@@ -13,7 +13,7 @@ passes every other check and still changes the page.
 | Question                                                                  | Tool                                                                   | Needs                   |
 | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------- |
 | Did my branch change how any story renders, compared with `develop`?      | [Storybook comparison](#storybook-comparison-every-story-base-vs-head) | Two Storybook builds    |
-| Does the new component render like the old one it replaces?               | [Parity specs](#parity-specs-old-and-new-side-by-side) (a recipe)      | Storybook on :6006      |
+| Does the new component render like the old one it replaces?               | [Parity specs](#parity-specs-side-by-side-comparison) (a recipe)       | Storybook on :6006      |
 | Is a migrated layout still the size it was measured to be?                | [Geometry checks](#geometry-checks-pinned-measurements)                | Nothing (play function) |
 | How do the busy screens look before and after, with real data?            | [Integration-testing screenshots](#integration-testing-screenshots)    | The MR's CI pipeline    |
 | Does a keyboard focus ring stay visible?                                  | `Foundations/Focus ring` (`src/theme/FocusRing.stories.tsx`)           | Nothing (play function) |
@@ -46,10 +46,7 @@ differences to the merge request.
 - **The root font size is 13px (12px below `md`).** rem values differ between the two, so measure
   at both viewports when a layout is rem-based (the `AppHeaderLayout*` stories do).
 - **Storybook is not the app for focus and hover.** `storybook-addon-pseudo-states` rewrites
-  `:focus-visible` and `:hover` selectors (see
-  [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) → "Testing Gotchas &
-  Pitfalls" → "Storybook rewrites pseudo-classes").
-  Confirm focus and hover results against the dev server on :8001.
+  `:focus-visible` and `:hover` selectors. Confirm focus and hover results against the dev server on :8001.
 - **Never bulk-accept a baseline.** Look at every changed image, and state in the merge request
   what changed and by how much.
 
@@ -109,39 +106,22 @@ largest ratios and every `size changed` entry (the page got taller or shorter), 
 the change you meant, and name the stories you checked in the merge request. A ratio says how much
 of the page changed, not by how much: a 1px shift near the top of a story changes most of it.
 
-## Parity specs: old and new side by side
+## Parity specs: side by side comparison
 
-A parity spec renders the old implementation and its replacement on one Storybook page and diffs
+A parity spec renders two implementations on one Storybook page and diffs
 the two live renders against each other, in the same browser and run, so there is no committed
 baseline to go stale.
 
-**Nothing in the repo does this today, and nothing should**: a parity spec needs something to render
-the old half, and legacy frameworks and `src/metronic` are all gone (epic #467). A parity
-story goes once nothing renders the old half — `base-button-parity`, `card-parity` and
-`stat-card-parity` each went when theirs did, the last when `src/core/StatsCard.tsx` itself moved
-onto waldur-ui's `Card` and both halves of the pair became the same card. Their shared machinery,
-`e2e-visual/visualParityHarness.ts`, went with the last of them: `yarn deps:unused` (knip) reports a
-file nothing imports, and the ignore list is for generated and vendored files, not for code kept on
-spec.
+This pattern is a recipe for migrations that replace a component in place:
 
-So this section is a recipe, not a description of live code. Recover the harness from history
-(`git show 842ccdd716^:e2e-visual/visualParityHarness.ts`, or any of the three specs beside it) on
-the next migration that replaces a component in place. It ran as the Playwright `visual` project
-against Storybook on :6006; that project and `e2e-visual/` itself have since gone too, so restore
-them from history as well (the commit that ported the focus-ring and geometry specs to play
-functions removed them). Once the new component stands alone, pin its numbers with a
-[geometry check](#geometry-checks-pinned-measurements) instead.
-
-The shape of one, as `stat-card-parity.spec.ts` had it:
-
-1. **The story** (title `Migration/<Component> Parity`) renders each case twice, wrapped in
-   `data-pair="<case>" data-role="old"` and `data-role="new"`, at the same fixed width.
+1. **The story** renders each case twice, wrapped in
+   `data-pair="<case>" data-role="variant-a"` and `data-role="variant-b"`, at the same fixed width.
 2. **The spec** creates a harness and runs each case in both themes:
 
    ```typescript
    const { gotoParity, expectPixelParity } = createParityHarness({
-     storyId: 'migration-statcard-parity--default',
-     diffDir: path.join(__dirname, '../test-results/stat-card-parity-diffs'),
+     storyId: 'component-parity--default',
+     diffDir: path.join(__dirname, '../test-results/parity-diffs'),
      thresholds: {
        maxDimensionSlackPx: 0.5,
        diffRatioThreshold: 0.06,
@@ -153,8 +133,8 @@ The shape of one, as `stat-card-parity.spec.ts` had it:
 
    // In each test, after `await gotoParity(page, theme)`:
    await expectPixelParity(
-     page.locator(`[data-pair="${caseId}"][data-role="old"]`),
-     page.locator(`[data-pair="${caseId}"][data-role="new"]`),
+     page.locator(`[data-pair="${caseId}"][data-role="variant-a"]`),
+     page.locator(`[data-pair="${caseId}"][data-role="variant-b"]`),
      `${theme}-${caseId}`,
    );
    ```
@@ -162,22 +142,18 @@ The shape of one, as `stat-card-parity.spec.ts` had it:
 3. **The checks**, in order: dimensions (`boundingBox()`, within `maxDimensionSlackPx`), the
    pixelmatch ratio (`diffRatioThreshold`), and dominant-colour chromaticity
    (`chromaticityTolerance`), which catches a wrong hue on a small, text-heavy element that a ratio
-   would pass. A failing case writes `<name>-old.png`, `-new.png` and `-diff.png` to `diffDir`.
+   would pass. A failing case writes `<name>-a.png`, `-b.png` and `-diff.png` to `diffDir`.
 4. **Thresholds are measured, not borrowed.** Run the spec, record the largest ratio and
    chromaticity across all cases and both themes, and set each threshold a little above that
-   noise, and write the measurement in a comment next to the threshold. Never copy another
-   component's numbers: a small text-heavy element's antialiasing noise floor is many times a
-   large solid block's, so one component's passing threshold hides the other's real regression.
+   noise floor.
    `expectBufferParity()` takes two captured buffers, for cases that need an interaction (hover,
-   focus) between the old and the new capture.
+   focus) between the two captures.
 
 ## Geometry checks: pinned measurements
 
-Once the old implementation is gone there is nothing left to render beside the new one, so a
-play function pins the numbers instead. The `AppHeaderLayout` stories in
+When components stand alone, play functions pin the measurements instead. The `AppHeaderLayout` stories in
 `packages/ui/src/TopBar/TopBar.stories.tsx` render the header at a desktop and a mobile viewport,
-in both themes, and assert each element's `getBoundingClientRect()` against values measured on the
-legacy header, within 0.3px. `yarn test:storybook` runs them with every other story, in CI too.
+in both themes, and assert each element's `getBoundingClientRect()` against reference values, within 0.3px. `yarn test:storybook` runs them with every other story, in CI too.
 
 Use this pattern for a layout whose measurements must survive a refactor: find elements by
 `data-testid`, record where each expected number came from, and make each viewport and theme its
@@ -217,8 +193,6 @@ of real pages with data that need no local backend.
   compiled legacy stylesheet gains an unused class or its selectors are added or reordered, and
   prints the selector diff. After an intended change, run `yarn styles:usage save` and commit the
   baseline. See [development-setup.md](development-setup.md).
-- **`src/tailwindBootstrapColors.test.ts`** compiles both stylesheets and checks that the legacy stylesheet
-  emits no colour utility that would collide with Tailwind's.
 
 ## What CI runs
 

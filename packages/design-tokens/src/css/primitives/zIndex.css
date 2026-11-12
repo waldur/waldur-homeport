@@ -2,25 +2,24 @@
  * Named z-index layers for the Tailwind/shadcn side of the app, in one place.
  *
  * The full stacking order the app lives with, lowest first. Only the rows
- * marked "token" are defined here; the rest come from Bootstrap/Metronic and
+ * marked "token" are defined here; the rest are reference layers and
  * are listed so an ordering constraint can be read off one list instead of
  * being re-derived from comments scattered across files:
  *
  *       95  Stepper form sidebar (sticky, src/form/SidebarLayout.tsx)
- *       99  Metronic fixed toolbar (page tabs, layout/_variables.scss)
+ *       99  Fixed toolbar (page tabs)
  *      100  --z-index-header         token  (the app header, waldur-ui TopBar)
  *      101  Outstanding (impersonation) bar (src/navigation/OutstandingBar.tsx)
- *      105  --z-index-sidebar-panel   token  (= Metronic $aside-config z-index)
- *      105  --z-index-nav-menu        token  (Metronic's old menu dropdown z-index)
- *      110  --z-index-mobile-drawer   token  (= Metronic $drawer z-index)
- *     1000  --z-index-header-popover  token  (= Bootstrap $zindex-dropdown)
- *     1050  --z-index-modal-backdrop  token  (= Bootstrap $zindex-modal-backdrop)
- *     1055  --z-index-modal          token  (= Bootstrap $zindex-modal)
+ *      105  --z-index-sidebar-panel   token  (sidebar panel)
+ *      105  --z-index-nav-menu        token  (menu dropdown)
+ *      110  --z-index-mobile-drawer   token  (mobile drawer)
+ *     1000  --z-index-header-popover  token  (header popover)
+ *     1050  --z-index-modal-backdrop  token  (modal backdrop)
+ *     1055  --z-index-modal          token  (modal dialog)
  *     1060  --z-index-confirm-backdrop token (a confirm over a modal)
  *     1065  --z-index-confirm        token
- *     1070  --z-index-popover        token  (= Bootstrap $zindex-popover;
- *                                            waldur-ui's PopoverContent)
- *     1080  Bootstrap $zindex-tooltip
+ *     1070  --z-index-popover        token  (waldur-ui's PopoverContent)
+ *     1080  Tooltip layer
  *     1100  --z-index-dropdown-menu token  (action menus, waldur-ui's
  *                                            ACTIONS_MENU_PANEL_CLASSNAME)
  *     1110  --z-index-picker-popover token  (date pickers and the invite
@@ -31,8 +30,8 @@
  *     1180  --z-index-tooltip        token  (above toast, so a toast's own
  *                                            Dismiss tooltip stays visible)
  *
- * Only values chosen to match a still-present Metronic layer belong here —
- * components with no such parity requirement (Dialog, Popover, DropdownMenu)
+ * Only values chosen to match a coordinated layer belong here —
+ * components with no such requirement (Dialog, Popover, DropdownMenu)
  * keep Tailwind's built-in z-50/z-10. (Popover now has a layer of its own:
  * --z-index-popover.) `--z-index-*` is one of Tailwind's own
  * theme namespaces, so each token also becomes a real `z-<name>` utility.
@@ -55,9 +54,7 @@
      drop down over the fixed toolbar and page tabs, so Tailwind's z-50
      leaves them painted underneath. */
   --z-index-header-popover: 1000;
-  /* waldur-ui's Modal (ModalShell), on the layers of the Bootstrap modal it
-     replaced, which the popover/menu/picker layers above were chosen to
-     clear. A confirmation opened over a modal (ModalShell's
+  /* waldur-ui's Modal (ModalShell). A confirmation opened over a modal (ModalShell's
      layer="confirm") sits one step above it, as the app's
      .confirm-modal/.confirm-backdrop did. */
   --z-index-modal-backdrop: 1050;
@@ -65,8 +62,7 @@
   --z-index-confirm-backdrop: 1060;
   --z-index-confirm: 1065;
   /* waldur-ui's PopoverContent (the column picker, call settings, search
-     results). Bootstrap's popover layer, which the react-bootstrap popovers
-     these replace sat on: above modals, so a popover opened in one shows. */
+     results): above modals, so a popover opened in one shows. */
   --z-index-popover: 1070;
   /* Action menus (row actions, "Add" menus). They open from tables inside
      modals, so they sit above the modal and below tooltips. */

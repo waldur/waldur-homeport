@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Compiles the Metronic stylesheets and records the colour every declaration
+// Compiles the legacy stylesheets and records the colour every declaration
 // resolves to, in the light and the dark theme, so a refactor of the SCSS
 // colour variables can be checked declaration by declaration.
 //

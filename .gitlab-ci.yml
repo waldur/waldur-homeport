@@ -225,8 +225,8 @@ Check translation template is current:
         exit 1
       fi
 
-# Asserts that classes emitted by Bootstrap and Metronic stylesheets do not
-# regress in usage and that selectors are not added, modified or reordered (issue #469).
+# Asserts that classes emitted by legacy stylesheets do not
+# regress in usage and that selectors are not added, modified or reordered.
 Check Bootstrap CSS usage:
   <<: *linter-rules
   script:

@@ -195,7 +195,7 @@ describe('MatrixChatHeader', () => {
     const item = await screen.findByText('Start call');
     expect(item).toBeTruthy();
     // Radix marks a disabled row with aria-disabled/data-disabled rather
-    // than Bootstrap's `.disabled` class — real semantics assistive tech can
+    // than a visual class — real semantics assistive tech can
     // read, where the previous markup only looked disabled.
     // eslint-disable-next-line testing-library/no-node-access
     expect(item.closest('[role="menuitem"]')).toHaveAttribute(

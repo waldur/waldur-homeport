@@ -6,26 +6,13 @@
  * Both themes are defined in this file.
  */
 :root {
-  /* The modal backdrop, distinct from the Sheet's drawer overlay: the
-     app's former Bootstrap $modal-backdrop-bg (`rgba($backdrop-color, .7)`,
-     with $backdrop-color = $gray-900 in light mode — hence gray-900 at 70%
-     here), plus the blur its custom/_modal.scss added on top
-     (`.modal-backdrop.show { backdrop-filter: blur(3px) }`).
-
-     The alpha belongs to the color, not to an opacity: the app pinned
-     $modal-backdrop-opacity to 1 with the comment "Opacity breaks the
-     blur filter of backdrop". Modal.tsx animates opacity 0 → 1 on
-     enter/exit only, so the resting state is always the full-alpha
-     color. Written as a literal rgba() like every other value in this
-     block — a var() inside rgba() isn't valid, and color-mix() appears
-     nowhere else in this package. */
+  /* The modal backdrop, distinct from the Sheet's drawer overlay:
+     gray-900 at 70% with 3px blur. */
   --modal-backdrop-bg: rgba(16, 24, 40, 0.7);
   --modal-backdrop-blur: 3px;
 
-  /* The Modal's box shadow: the app's former Bootstrap
-     $modal-content-box-shadow-xs below the sm breakpoint and
-     $modal-content-box-shadow-sm-up from it. Unbranched by theme in
-     the source, so not redefined below. */
+  /* The Modal's box shadow:
+     --modal-shadow-xs below the sm breakpoint and --modal-shadow from it. */
   --modal-shadow-xs:
     0 12px 14px -4px rgba(16, 24, 40, 0.1),
     0 6px 6px -4px rgba(16, 24, 40, 0.04);
@@ -60,8 +47,7 @@
 
 :root[data-theme='dark'] {
   /* The app's dark veil: the darkest dark surface, gray-dark-900
-     (#161b26), at half strength. Its Bootstrap modal replaced Bootstrap's
-     own dark branch, a light gray-50 scrim, with it on purpose. The blur is unbranched, so --modal-backdrop-blur isn't
+     (#161b26), at half strength. The blur is unbranched, so --modal-backdrop-blur isn't
      redefined here. */
   --modal-backdrop-bg: rgba(22, 27, 38, 0.5);
 }

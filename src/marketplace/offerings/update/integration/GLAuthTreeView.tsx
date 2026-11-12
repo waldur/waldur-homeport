@@ -340,8 +340,7 @@ const NodeRow: FC<NodeRowProps> = ({ id, row, style, isActive, showFocus }) => {
       data-node-id={data.id}
     >
       {guides.map((_, i) => (
-        // Metronic's $border-dashed-color ($gray-300). Arbitrary values, as
-        // Metronic's own .border-gray-300 is !important and theme-inverted.
+        // Gray dashed guide lines with theme-inverted border colors in dark mode.
         <span
           key={i}
           aria-hidden="true"

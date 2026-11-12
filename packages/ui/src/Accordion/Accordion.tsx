@@ -7,14 +7,13 @@ import { unscrollPanel } from '../unscrollPanel';
 
 /**
  * shadcn's Accordion recipe (https://ui.shadcn.com/docs/components/accordion)
- * on Radix Accordion, replacing react-bootstrap's Accordion. Radix gives the
+ * on Radix Accordion. Radix gives the
  * header a real <button> inside a heading, aria-expanded/aria-controls,
  * arrow/Home/End keys between headers, and `type="multiple"` for groups
  * where several panels stay open (the table filters sidebar).
  *
  * The open header is `brand-700` (`brand-200` in dark), the runtime tenant
- * colour — Bootstrap's version baked in the build-time default green. The
- * chevron is an icon in `currentColor`, so it always matches the header.
+ * colour. The chevron is an icon in `currentColor`, so it always matches the header.
  *
  * A closed panel's children are unmounted (Radix renders `isOpen &&
  * children`). Fine for display content; for form fields that must keep
@@ -45,7 +44,7 @@ export const AccordionTrigger = forwardRef<
   ElementRef<typeof AccordionPrimitive.Trigger>,
   AccordionTriggerProps
 >(({ className, headerClassName, children, ...props }, ref) => (
-  // Radix renders an <h3>; reset Bootstrap/Metronic heading margin and type
+  // Radix renders an <h3>; reset heading margin and type
   // so the trigger's own classes decide the look.
   <AccordionPrimitive.Header
     className={cn('m-0 flex [font:inherit]', headerClassName)}

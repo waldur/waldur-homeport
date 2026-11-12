@@ -7,7 +7,7 @@ import { menuSeparator } from './MenuSeparator';
 
 // The class sets each menu look renders, sorted so that a refactor that only
 // reorders classes still passes. These were measured against the original
-// Metronic/Bootstrap menus; a change here is a visible change.
+// menus; a change here is a visible change.
 const classes = (value: string) => value.split(/\s+/).filter(Boolean).sort();
 
 describe('menu looks', () => {

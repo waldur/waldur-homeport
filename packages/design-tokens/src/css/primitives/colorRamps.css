@@ -42,8 +42,7 @@
   --color-gray-dark-900: #161b26;
   --color-gray-dark-950: #0c111d;
 
-  /* Destructive / validation. Called `danger` in the SCSS variables and
-     Bootstrap. */
+  /* Destructive / validation. Called `danger` in the SCSS variables. */
   --color-error-25: #fffbfa;
   --color-error-50: #fef3f2;
   --color-error-100: #fee4e2;
@@ -86,12 +85,11 @@
   --color-success-900: #054f31;
   --color-success-950: #053321;
 
-  /* Sparser than gray/error/warning/success: steps Metronic never defined
-     (25/100/800, and 400 for most hues) are left out rather than invented.
-     `info` and `purple` are byte-identical at every step — this app's "info"
-     hue is the same violet as "purple", not blue. Like every ramp, these are
-     the same in both themes: dark UI picks other steps through the semantic
-     tokens. */
+  /* Sparser than gray/error/warning/success: unused steps (25/100/800, and
+     400 for most hues) are left out rather than invented. `info` and `purple`
+     are byte-identical at every step — this app's "info" hue is the same
+     violet as "purple", not blue. Like every ramp, these are the same in both
+     themes: dark UI picks other steps through the semantic tokens. */
   --color-info-50: #f4f3ff;
   --color-info-200: #d9d6fe;
   --color-info-300: #bdb4fe;

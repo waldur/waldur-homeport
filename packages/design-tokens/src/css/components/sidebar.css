@@ -14,20 +14,16 @@
  * sidebarTheme.test.ts enforces both. --sidebar-border is the one
  * exception, see below.
  *
- * Do not swap dark and light per theme. An earlier version did, copying
- * Metronic, which flips them under isDarkMode(); but Metronic's own
- * $gray-25/$gray-950 invert there too, so its two flips cancelled out and the
- * compiled sidebar was the same near-black in both builds. Copying only the
- * outer flip produced a near-white "dark" sidebar in dark theme.
+ * Do not swap dark and light per theme: the compiled sidebar is the same
+ * tone in both builds.
  *
  * :root:not([data-sidebar-style]) is the fallback for markup that never calls
  * applySidebarStyle() (a Storybook story). It is the `dark` style, matching the
  * `|| 'dark'` default in WaldurSidebarBrand.tsx and useSidebarLayoutShim.ts.
  *
  * Text does not change in a menu item's active state, only the background does
- * (active items keep --nav-item-text). --nav-section-label is not from Metronic, whose section
- * label colour was near-black and unreadable on the dark styles: each style
- * sets a tint that reads with the icons beside it.
+ * (active items keep --nav-item-text). --nav-section-label sets a tint that
+ * reads with the icons beside it.
  */
 @import '../primitives/colors.css';
 

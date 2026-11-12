@@ -6,7 +6,7 @@ import { ThemeName } from './types';
 const THEMES: ThemeName[] = ['light', 'dark'];
 
 /**
- * Applies a theme. The Bootstrap stylesheet (imported once, from the entry
+ * Applies a theme. The stylesheet (imported once, from the entry
  * module) is one file for both themes: its colours read the design tokens,
  * and the few dark-only rules key off data-theme (the dark-theme mixin), like
  * Tailwind's dark: variant.

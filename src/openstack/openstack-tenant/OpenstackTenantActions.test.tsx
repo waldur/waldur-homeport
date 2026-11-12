@@ -53,9 +53,7 @@ const renderComponent = (userOverrides = {}) => {
 };
 
 // Rows are queried by role="menuitem", not role="button": an action row is a
-// Radix menu item now, which is the accurate role for a row inside a menu —
-// the react-bootstrap Dropdown.Item this replaced rendered a bare <button>
-// with no menu semantics at all.
+// Radix menu item now, which is the accurate role for a row inside a menu.
 describe('OpenstackTenantActions', () => {
   const originalRoles = ENV.roles;
   afterEach(() => {

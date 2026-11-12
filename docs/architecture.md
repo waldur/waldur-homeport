@@ -270,7 +270,7 @@ BaseButton (from 'waldur-ui' — Tailwind/shadcn, general purpose actions, size=
 
 A `no-restricted-imports` entry (**error**, in `eslint.config.js`) blocks importing from retired UI packages, directing developers to `BaseButton`, `SubmitButton`, or `waldur-ui`.
 
-`waldur-custom/no-bootstrap-button-markup` (**error**) catches legacy button markup — `<button className="btn btn-danger">`. `Link` builds its button classes from `buttonVariants()` via its `buttonVariant` prop, and action menus use `waldur-ui`'s `Menu` in the actions look (`ActionsMenu`).
+Buttons use `waldur-ui`'s `Button` or `BaseButton`, and `no-unknown-class` flags unrecognized button classes. `Link` builds its button classes from `buttonVariants()` via its `buttonVariant` prop, and action menus use `waldur-ui`'s `Menu` in the actions look (`ActionsMenu`).
 
 ## Key Directories
 
@@ -290,7 +290,7 @@ A `no-restricted-imports` entry (**error**, in `eslint.config.js`) blocks import
 - `src/quotas/` - Resource quotas management
 - `src/theme/` - Theme management (dark/light mode)
 - `src/user/` - User management
-- `src/styles/` - SCSS entry point and the legacy stylesheets
+- `src/styles/` - SCSS entry point and stylesheets
 
 ## Backend Integration
 

@@ -11,7 +11,7 @@ const meta: Meta<typeof StepLoading> = {
     docs: {
       description: {
         component:
-          'Step discovery loading indicator for multi-step wizards. Replaces react-bootstrap Spinner with waldur-ui LoadingSpinner.',
+          'Step discovery loading indicator for multi-step wizards using waldur-ui LoadingSpinner.',
       },
     },
   },

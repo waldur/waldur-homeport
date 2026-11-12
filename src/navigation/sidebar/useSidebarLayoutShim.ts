@@ -54,12 +54,10 @@ export function useSidebarLayoutShim() {
     };
   }, [state, isMobile]);
 
-  // Auto-minimize on medium desktop widths (768–1399px), ported from the
-  // production BrandName.tsx's own resize effect — same band, same
-  // "only when the user hasn't manually toggled" gate, now driving the new
-  // sidebar's setOpen directly (the effect above publishes the result).
+  // Auto-minimize on medium desktop widths (768–1399px), unless the user
+  // has manually toggled the sidebar.
   // Uses refs for open and setOpen so the window resize listener is registered
-  // once on mount rather than re-registering and re-running on every open state change.
+  // once on mount rather than re-registering on open state changes.
   useEffect(() => {
     const handleResize = () => {
       if (userToggledRef.current) return;
@@ -78,8 +76,7 @@ export function useSidebarLayoutShim() {
   }, []);
 
   // Sidebar style-variant token: reactive to theme changes so 'auto' keeps
-  // following the app's light/dark toggle, matching the inline logic this
-  // replaces in the pre-migration Sidebar.tsx/BrandName.tsx.
+  // following the app's light/dark toggle.
   useEffect(() => {
     const configured = (ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE ||
       'dark') as ConfiguredSidebarStyle;
@@ -88,8 +85,7 @@ export function useSidebarLayoutShim() {
 
   return {
     /** Call from the sidebar trigger's onClick — marks the collapse state
-     * as user-chosen so the auto-minimize-on-resize effect above stops
-     * overriding it, matching BrandName.tsx's own setUserHasToggled(true). */
+     * as user-chosen so the auto-minimize-on-resize effect stops overriding it. */
     markUserToggled: () => {
       userToggledRef.current = true;
     },

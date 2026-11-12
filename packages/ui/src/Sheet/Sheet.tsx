@@ -12,8 +12,7 @@ import { cn } from '../cn';
  * the mobile breakpoint). Colors point at
  * the waldur-design-tokens tokens instead of shadcn's own
  * default palette. The overlay background (--drawer-overlay-bg) and
- * content shadow (--drawer-shadow) are Metronic's own real "Drawer"
- * component values (its closest real equivalent to a slide-in Sheet), not
+ * content shadow (--drawer-shadow) are drawer component values, not
  * generic Tailwind defaults — see waldur-design-tokens/sheet.css's comment on those
  * tokens.
  *
@@ -62,8 +61,8 @@ export const SheetOverlay = forwardRef<
       // focus"). Letting Radix mount/unmount this normally (present only
       // while genuinely open or mid-exit-animation) keeps those
       // side-effects scoped to real open state instead.
-      // z-mobile-drawer (110, packages/design-tokens/src/css/zIndex.css), not z-50 — Metronic's
-      // mobile drawer (.aside.drawer-mobile-on) sits at z-index: 110,
+      // z-mobile-drawer (110, packages/design-tokens/src/css/zIndex.css), not z-50 —
+      // the mobile drawer sits at z-index: 110,
       // above its own header's z-index: 100 — measured live, and distinct
       // from the desktop panel's z-sidebar-panel (105, Sidebar.tsx's matching
       // comment), not the same value reused. At z-50 this overlay painted *under*
@@ -87,7 +86,7 @@ SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
   // z-mobile-drawer (110), not z-50 — same reason as SheetOverlay's above:
-  // Metronic's real mobile drawer measures at z-index: 110, not the
+  // the mobile drawer measures at z-index: 110, not the
   // desktop panel's z-sidebar-panel (105).
   // data-[state=closed]:pointer-events-none: this node is still present
   // (not yet unmounted) during the closing slide-out transition, same

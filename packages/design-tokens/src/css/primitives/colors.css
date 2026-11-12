@@ -6,9 +6,8 @@
  * Ramps (gray, error, warning, success, info and the accent hues, steps
  * 25-950) come from colorRamps.css, which is GENERATED. Edit
  * tokens/colors.json and run `yarn tokens:generate`; never edit the output.
- * Sass reads none of these, and since #481 the theme defines no Sass colour
- * at all: $white and $black went with the Bootstrap shim.
- * See docs/design-tokens.md.
+ * Sass reads none of these, and the theme defines no Sass colour
+ * at all. See docs/design-tokens.md.
  *
  * Every ramp is physical: step 900 is dark in both themes. The dark theme is
  * chosen by the semantic tokens, whose dark-theme blocks pick different steps
@@ -18,7 +17,7 @@
  * `gray-dark`, that dark surfaces read instead: the dark-theme blocks and the
  * `dark` sidebar style. Nothing overrides
  * `--color-gray-N` per theme, so a bare `text-gray-500` is the same colour in
- * both. (The SCSS `$gray-N` is different again: it is inverted per theme.)
+ * both.
  *
  * Brand is deliberately not a ramp here. It is tenant-configurable, so it is
  * injected at runtime as --brand-* (initBrandTokens(), called once at

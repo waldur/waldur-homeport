@@ -6,7 +6,7 @@ import { useResolvedVar } from '../react';
 import { shortValue, type Token, type TokenFile } from './tokenSource';
 
 /**
- * Monospace text. Not `<Mono>`: Metronic styles that element globally (a
+ * Monospace text. Not `<Mono>`: legacy styles format that element globally (a
  * filled, shadowed box), which these tables do not want.
  */
 export function Mono({

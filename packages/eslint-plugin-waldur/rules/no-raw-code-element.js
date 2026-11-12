@@ -2,7 +2,7 @@
  * ESLint rule: inline code and keys are waldur-ui's Code and Kbd, never a
  * bare <code> or <kbd>.
  *
- * Metronic styled every `code` element globally, so a bare tag looked right
+ * Legacy styles styled every `code` element globally, so a bare tag looked right
  * anywhere and code that wanted another look had to fight the global rule.
  * That rule is gone: the look now lives in the components, on semantic
  * tokens (--text-code, --bg-code, --inline-shadow), and a bare tag renders as plain monospace text. Markdown and HTML

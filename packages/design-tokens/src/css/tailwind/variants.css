@@ -18,7 +18,7 @@
 @custom-variant menu-row-active (&:is(:hover, [data-highlighted], [data-state='open'], [data-state='checked'], .active):not([data-disabled]));
 
 /* A highlighted row in an action menu (waldur-ui's ACTIONS_MENU_ROW_CLASSNAME):
-   Bootstrap's `.dropdown-item` also highlighted on :focus and :active. */
+   highlighted on :focus and :active. */
 @custom-variant action-row-active (&:is(:hover, :focus, :active, [data-highlighted], .active):not([data-disabled], :disabled, .disabled));
 
 /* A disabled action-menu row, however it is marked: Radix's data-disabled,
@@ -33,7 +33,7 @@
    header, body or footer, nor inside one. Those are the wrappers a dialog
    puts between the box and its sections (a <form>, ModalDialog's own
    <div>); making them shrinking flex columns lets the body, and only the
-   body, scroll. The chained :not()s keep the specificity of the rule in
-   the app's Bootstrap modal had (ModalRoot.css), which wrappers' own display
+   body, scroll. The chained :not()s keep the specificity of the rule
+   the modal had (ModalRoot.css), which wrappers' own display
    classes never beat. */
 @custom-variant modal-passthrough (& *:not([data-slot='modal-header']):not([data-slot='modal-body']):not([data-slot='modal-footer']):not([data-slot='modal-header'] *):not([data-slot='modal-body'] *):not([data-slot='modal-footer'] *));

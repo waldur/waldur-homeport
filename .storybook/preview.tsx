@@ -24,8 +24,7 @@ sb.mock(import('../src/core/api.ts'));
 /**
  * Seeds brand tokens the same way afterBootstrap.tsx's
  * initCssVariables() does at real app load — every story needs this since
- * Storybook never runs the real app's bootstrap path. See
- * docs/tailwind-shadcn-migration-notes.md.
+ * Storybook never runs the real app's bootstrap path.
  */
 function seedBrandVars() {
   if (!ENV.plugins?.WALDUR_CORE) {
@@ -43,7 +42,7 @@ function seedBrandVars() {
 
 /**
  * applyTheme() (src/theme/utils.ts) sets data-theme on <html>, which both
- * the Bootstrap stylesheet imported above and Tailwind's dark: variant key
+ * the SCSS stylesheet imported above and Tailwind's dark: variant key
  * off — the same switch the real app uses.
  */
 const withTheme = (Story, context) => {
@@ -137,8 +136,6 @@ const preview: Preview = {
             'LanguageMenu',
             'ActionsDropdown',
           ],
-          'Migration',
-          ['BaseButton (Legacy)', 'BaseButton Parity', 'StatCard Parity'],
         ],
       },
     },

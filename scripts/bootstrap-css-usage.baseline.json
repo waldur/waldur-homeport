@@ -1,7 +1,7 @@
 {
-  "compiledByteSize": 63490,
-  "totalClasses": 244,
-  "totalUsed": 244,
+  "compiledByteSize": 63380,
+  "totalClasses": 243,
+  "totalUsed": 243,
   "totalUnused": 0,
   "unused": {},
   "selectors": [
@@ -134,10 +134,8 @@
     "@layer bootstrap :: .disabled-view",
     "@layer bootstrap :: .disabled-view a",
     "@layer bootstrap :: .disabled-view button",
-    "@layer bootstrap :: .disabled-view a:not(.nav-link)",
-    "@layer bootstrap :: .disabled-view button:not(.nav-link)",
-    "@layer bootstrap :: .disabled-view a:not(.btn-icon):not(.nav-link)",
-    "@layer bootstrap :: .disabled-view button:not(.btn-icon):not(.nav-link)",
+    "@layer bootstrap :: .disabled-view a:not(.btn-icon)",
+    "@layer bootstrap :: .disabled-view button:not(.btn-icon)",
     "@layer bootstrap :: .disabled-view a.btn-icon",
     "@layer bootstrap :: .disabled-view button.btn-icon",
     "@layer bootstrap :: .disabled-view a svg",

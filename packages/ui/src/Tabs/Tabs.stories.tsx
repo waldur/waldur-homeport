@@ -245,9 +245,8 @@ export const ColouredCounts: Story = {
 };
 
 /**
- * `automatic` (the default) selects as focus moves, which is what the old
- * Bootstrap tabs did; `manual` moves focus with the arrow keys and selects on
- * Enter or Space.
+ * `automatic` (the default) selects as focus moves;
+ * `manual` moves focus with the arrow keys and selects on Enter or Space.
  */
 export const ActivationModes: Story = {
   render: () => (

@@ -18,10 +18,10 @@
  * editor's long-lived ESLint server picks up a class added to an .scss
  * file without a restart.
  *
- * Compiling the SCSS takes seconds (Bootstrap's index.scss alone is most of
+ * Compiling the SCSS takes seconds (legacy index.scss alone is most of
  * it), so the stylesheet classes are also cached on disk under
  * node_modules/.cache, keyed by every stylesheet's path, size and mtime and
- * by yarn.lock (which pins the Bootstrap partials it pulls in). A commit's
+ * by yarn.lock. A commit's
  * pre-commit lint and a fresh editor session then skip the compile unless a
  * stylesheet changed.
  */

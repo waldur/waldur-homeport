@@ -12,9 +12,8 @@ export type CheckSize = 'sm' | 'md';
  *
  * Motion matches the legacy `$form-check-transition`: 0.15s `ease-in-out`
  * (the CSS keyword, hence `ease-[ease-in-out]` — Tailwind's own `ease-in-out`
- * is a different curve), switched off under `prefers-reduced-motion`, as
- * Bootstrap's `transition` mixin did. The marks appear without a transition,
- * as the legacy background images did.
+ * is a different curve), switched off under `prefers-reduced-motion`.
+ * The marks appear without a transition.
  *
  * Every class here is a literal: Tailwind only generates class names it
  * finds written out in source, so none of them can be assembled at runtime.

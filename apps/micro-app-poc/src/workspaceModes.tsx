@@ -71,7 +71,7 @@ export const getWorkspaceModes = (): ModeOption[] => [
       'Invoices, cost analytics and financial reporting across organisations.',
     ),
     icon: <ChartPieSliceIcon size={22} weight="bold" />,
-    // 'blue', not 'info' — Metronic's own $info is purple (badgeColors.css
+    // 'blue', not 'info' — $info is purple (badgeColors.css
     // inherits that), which would have made this tile a second copy of
     // Service provider's. The mockup shows both this and End user in blue.
     variant: 'blue',

@@ -82,8 +82,8 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
             )}
           </div>
           {(title || meta || right) && (
-            // pt-1.5 and the extra 1.5 in gap-y: the space Bootstrap's g-2 gutter
-            // put above each line of the row, which mt-auto kept from being
+            // pt-1.5 and the extra 1.5 in gap-y: the vertical spacing
+            // above each line of the row, which mt-auto kept from being
             // cancelled.
             <div className="flex flex-wrap items-end justify-between mt-auto pt-1.5 gap-x-3 gap-y-4.5">
               {(title || meta) && (

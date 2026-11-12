@@ -44,9 +44,8 @@ const stickyClassName = classNames(
   'h-[calc(100vh-var(--layout-sticky-top)-10px)]',
 );
 
-// Beside the form from xl: what the Metronic `.drawer` classes it borrowed
-// still applied under the sticky placement above (a flex box scrolling its
-// own overflow, pinned to the bottom and right edges).
+// Beside the form from xl: a flex box scrolling its
+// own overflow, pinned to the bottom and right edges.
 const sideColumnClassName = 'flex overflow-auto bottom-0 right-0';
 
 const cardClassName = classNames(

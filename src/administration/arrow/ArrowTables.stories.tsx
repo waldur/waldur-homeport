@@ -27,8 +27,7 @@ import { Step3Preview } from './setup/Step3Preview';
 /**
  * Every table and property list in the Arrow admin screens, fed fixed
  * fixtures through a stubbed fetch, so the screens render without a backend
- * and look the same on every run. Used to compare the screens before and
- * after the hand-rolled table migration (#563).
+ * and look the same on every run.
  */
 
 const range = (n: number) => Array.from({ length: n }, (_, i) => i + 1);

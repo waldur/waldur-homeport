@@ -25,7 +25,7 @@ const meta: Meta<typeof MenuPopover> = {
     docs: {
       description: {
         component:
-          '`MenuPopover.Content` takes `look="nav"` (the default: the table filter menus and pickers, whose rows default to Metronic\'s base padding in gray-700) or `look="actions"`. A panel with no menu rows (the column picker, search results, call settings) is a plain `Popover` (see Overlays/Popover). `MenuPopover.Item` is a button row that does not close the panel; `Menu.Item` inside a popover closes it.',
+          '`MenuPopover.Content` takes `look="nav"` (the default: the table filter menus and pickers, whose rows default to base padding in gray-700) or `look="actions"`. A panel with no menu rows (the column picker, search results, call settings) is a plain `Popover` (see Overlays/Popover). `MenuPopover.Item` is a button row that does not close the panel; `Menu.Item` inside a popover closes it.',
       },
     },
   },

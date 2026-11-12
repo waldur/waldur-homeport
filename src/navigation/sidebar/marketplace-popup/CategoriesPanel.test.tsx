@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { CategoriesPanel } from './CategoriesPanel';
 
-// react-bootstrap renders a ListGroupItem carrying only an onClick as a plain
+// A list row carrying only an onClick used to be rendered as a plain
 // <li>, so the rows of this dialog used to be unreachable by keyboard: Tab
 // cycled the selects above them and never entered the list.
 describe('CategoriesPanel', () => {

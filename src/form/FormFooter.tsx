@@ -25,7 +25,7 @@ interface FormFooterProps {
   showCancel?: boolean;
   /** Apply flex-1 class for full-width buttons */
   fullWidth?: boolean;
-  /** Bootstrap variant for submit button - defaults to 'primary' */
+  /** Button variant for submit button - defaults to 'primary' */
   submitVariant?: ButtonVariant;
   /** Additional buttons to render (e.g., Accept, Reject) */
   extraButtons?: ReactNode;
