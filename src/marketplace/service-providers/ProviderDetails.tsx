@@ -37,15 +37,13 @@ export const ProviderDetails: FunctionComponent = () => {
     queryFn: () => loadProviderData(customer_uuid),
   });
 
-  useTitle(
-    value ? value.provider.customer_name : translate('Provider details'),
-  );
+  useTitle(value?.provider?.customer_name ?? translate('Provider details'));
 
   if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (error) {
+  if (error || !value?.provider) {
     return <>{translate('Unable to load service provider.')}</>;
   }
   return <ProviderDetailsBody {...value} />;

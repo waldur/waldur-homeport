@@ -28,7 +28,7 @@ export const ProviderDetailsContainer: React.FC<{}> = () => {
     return <LoadingSpinner />;
   }
 
-  if (error) {
+  if (error || !data?.provider) {
     return <>{translate('Unable to load service provider.')}</>;
   }
   return <ServiceProviderDetails provider={data.provider} />;
