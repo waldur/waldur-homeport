@@ -19,21 +19,24 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
   return (
     <>
       <div className="flex flex-wrap gap-1.5 mb-1.5 items-center">
-        <h3 className="mb-0 me-1.5 min-w-0 wrap-anywhere">{resource.name}</h3>
-        <CopyToClipboardButton
-          value={resource.name}
-          className="hover:text-brand cursor-pointer"
-          size={20}
-        />
-
-        <ResourceStateField
-          resource={resource}
-          shape="pill"
-          tone="outline"
-          hasBullet
-          size="sm"
-        />
-        {refreshButton}
+        <div className="flex items-center gap-1.5 min-w-0">
+          <h3 className="mb-0 me-1.5 min-w-0 wrap-anywhere">{resource.name}</h3>
+          <div className="flex shrink-0 items-center gap-1.5">
+            <CopyToClipboardButton
+              value={resource.name}
+              className="hover:text-brand cursor-pointer"
+              size={20}
+            />
+            <ResourceStateField
+              resource={resource}
+              shape="pill"
+              tone="outline"
+              hasBullet
+              size="sm"
+            />
+            {refreshButton}
+          </div>
+        </div>
 
         <ResourceFlags resource={resource} />
       </div>
