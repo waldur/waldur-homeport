@@ -32,7 +32,10 @@ describe('Accounting menu with affiliate earnings', () => {
       {
         name: RoleEnum.CUSTOMER_OWNER,
         template_name: null,
-        permissions: [PermissionEnum.VIEW_CUSTOMER_ACCOUNTING],
+        permissions: [
+          PermissionEnum.VIEW_CUSTOMER_ACCOUNTING,
+          PermissionEnum.LIST_INVOICES,
+        ],
       },
       { name: RoleEnum.CUSTOMER_READER, template_name: null, permissions: [] },
     ] as any;
