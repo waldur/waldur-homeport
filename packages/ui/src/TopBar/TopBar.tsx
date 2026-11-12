@@ -175,7 +175,8 @@ export interface IconButtonProps extends ComponentProps<'button'> {
 /**
  * The header look is Metronic's legacy `.btn-nav-item` (with `.svg-icon-2`
  * icon sizing), which it replaced after a pixel comparison of the two;
- * e2e-visual/top-bar-geometry.spec.ts keeps its measured size and spacing:
+ * the AppHeaderLayout stories' play function (TopBar.stories.tsx) keeps its
+ * measured size and spacing:
  *
  * - 40px square, 6px radius, the header's own surface (`bg-primary`).
  * - Icon in rem, not px: 1.54rem (`md`, legacy `svg-icon-2`) and 1.85rem (`lg`, legacy `svg-icon-1x`),

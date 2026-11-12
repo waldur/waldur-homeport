@@ -62,7 +62,7 @@ Use this agent when:
 
 - `yarn test` - Vitest unit tests
 - `yarn test:e2e` - Playwright E2E tests
-- `yarn test:visual` - Playwright visual regression tests
+- `yarn test:storybook` - Storybook stories and their play functions, including the focus-ring and header-geometry checks
 
 ## Build System Configuration
 

@@ -39,7 +39,6 @@
     "deps:dedupe": "yarn dedupe --check",
     "test": "vitest --project=unit",
     "test:e2e": "playwright test --project e2e",
-    "test:e2e:visual": "playwright test --project visual --workers=1",
     "test:storybook": "vitest --project=storybook run",
     "apps:typecheck": "yarn workspaces foreach -A --include 'apps/*' run typecheck",
     "apps:build": "yarn workspaces foreach -A --include 'apps/*' run build",
@@ -57,8 +56,6 @@
     "i18n:search": "node locales/tools/searchTranslations.cjs",
     "i18n:analyze-changes": "node locales/tools/analyzeTranslations.cjs",
     "i18n:edit": "node locales/tools/translationEdit.cjs",
-    "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

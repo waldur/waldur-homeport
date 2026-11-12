@@ -86,7 +86,14 @@ export default mergeConfig(
             browser: {
               enabled: true,
               headless: true,
-              provider: playwright({}),
+              // Docker gives a container a 64MB /dev/shm, which Chromium
+              // outgrows partway through the run: the page dies and Vitest
+              // reports "Browser connection was closed", in a different story
+              // each time, leaving the rest of the files unrun. Chromium then
+              // writes that shared memory to /tmp instead.
+              provider: playwright({
+                launchOptions: { args: ['--disable-dev-shm-usage'] },
+              }),
               instances: [
                 {
                   browser: 'chromium',

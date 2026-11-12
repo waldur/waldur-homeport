@@ -10,15 +10,14 @@ passes every other check and still changes the page.
 
 ## Which tool answers which question
 
-| Question                                                               | Tool                                                                   | Needs                       |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------- |
-| Did my branch change how any story renders, compared with `develop`?   | [Storybook comparison](#storybook-comparison-every-story-base-vs-head) | Two Storybook builds        |
-| Does the new component render like the old one it replaces?            | [Parity specs](#parity-specs-old-and-new-side-by-side) (a recipe)      | Storybook on :6006          |
-| Is a migrated layout still the size it was measured to be?             | [Geometry specs](#geometry-specs-pinned-measurements)                  | Storybook on :6006          |
-| Do real pages with data still look the same?                           | [Page screenshots](#page-screenshots-with-local-baselines)             | App on :8001 with a backend |
-| How do the busy screens look before and after, with real data?         | [Integration-testing screenshots](#integration-testing-screenshots)    | The MR's CI pipeline        |
-| Does a keyboard focus ring stay visible?                               | `e2e-visual/focus-ring.spec.ts`                                        | Storybook on :6006          |
-| Did a SCSS refactor change a resolved colour, or what legacy styles emit? | [Stylesheet checks](#stylesheet-checks-no-browser)                     | Nothing                     |
+| Question                                                                  | Tool                                                                   | Needs                   |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------- |
+| Did my branch change how any story renders, compared with `develop`?      | [Storybook comparison](#storybook-comparison-every-story-base-vs-head) | Two Storybook builds    |
+| Does the new component render like the old one it replaces?               | [Parity specs](#parity-specs-old-and-new-side-by-side) (a recipe)      | Storybook on :6006      |
+| Is a migrated layout still the size it was measured to be?                | [Geometry checks](#geometry-checks-pinned-measurements)                | Nothing (play function) |
+| How do the busy screens look before and after, with real data?            | [Integration-testing screenshots](#integration-testing-screenshots)    | The MR's CI pipeline    |
+| Does a keyboard focus ring stay visible?                                  | `Foundations/Focus ring` (`src/theme/FocusRing.stories.tsx`)           | Nothing (play function) |
+| Did a SCSS refactor change a resolved colour, or what legacy styles emit? | [Stylesheet checks](#stylesheet-checks-no-browser)                     | Nothing                 |
 
 For a refactor that should change nothing (tokens, SCSS moves, component internals), run the
 Storybook comparison: it covers every story in both themes and needs no backend. For a change that moves
@@ -45,7 +44,7 @@ differences to the merge request.
   pixel after it, so a pixel ratio cannot tell "everything moved 1px" from "one thing moved 20px".
   A parity spec checks dimensions first for this reason.
 - **The root font size is 13px (12px below `md`).** rem values differ between the two, so measure
-  at both viewports when a layout is rem-based (`top-bar-geometry.spec.ts` does).
+  at both viewports when a layout is rem-based (the `AppHeaderLayout*` stories do).
 - **Storybook is not the app for focus and hover.** `storybook-addon-pseudo-states` rewrites
   `:focus-visible` and `:hover` selectors (see
   [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) → "Testing Gotchas &
@@ -127,8 +126,11 @@ spec.
 
 So this section is a recipe, not a description of live code. Recover the harness from history
 (`git show 842ccdd716^:e2e-visual/visualParityHarness.ts`, or any of the three specs beside it) on
-the next migration that replaces a component in place. Once the new component stands alone, pin its
-numbers with a [geometry spec](#geometry-specs-pinned-measurements) instead.
+the next migration that replaces a component in place. It ran as the Playwright `visual` project
+against Storybook on :6006; that project and `e2e-visual/` itself have since gone too, so restore
+them from history as well (the commit that ported the focus-ring and geometry specs to play
+functions removed them). Once the new component stands alone, pin its numbers with a
+[geometry check](#geometry-checks-pinned-measurements) instead.
 
 The shape of one, as `stat-card-parity.spec.ts` had it:
 
@@ -169,33 +171,19 @@ The shape of one, as `stat-card-parity.spec.ts` had it:
    `expectBufferParity()` takes two captured buffers, for cases that need an interaction (hover,
    focus) between the old and the new capture.
 
-## Geometry specs: pinned measurements
+## Geometry checks: pinned measurements
 
 Once the old implementation is gone there is nothing left to render beside the new one, so a
-geometry spec pins the numbers instead. `top-bar-geometry.spec.ts` renders the
-`navigation-topbar--app-header-layout` story at a desktop and a mobile viewport, in both themes,
-and asserts each element's `boundingBox()` against values measured on the legacy header, within
-0.3px. Use this pattern for a layout whose measurements must survive a refactor: find elements by
-`data-testid`, and record where each expected number came from.
+play function pins the numbers instead. The `AppHeaderLayout` stories in
+`packages/ui/src/TopBar/TopBar.stories.tsx` render the header at a desktop and a mobile viewport,
+in both themes, and assert each element's `getBoundingClientRect()` against values measured on the
+legacy header, within 0.3px. `yarn test:storybook` runs them with every other story, in CI too.
 
-## Page screenshots with local baselines
-
-`charts.spec.ts` and `wizards.spec.ts` sign in to the app on :8001 as `staff` / `demo`, open real
-pages and dialogs and call `toHaveScreenshot()` (project `visual`, `maxDiffPixelRatio: 0.01`).
-They need a backend with that user, and their baselines (`e2e-visual/snapshots/`) are
-git-ignored: each machine keeps its own. To compare two branches with them, write the baselines on
-the base and run against them on the head:
-
-```bash
-git switch develop
-yarn playwright test charts wizards --project=visual --workers=1 --update-snapshots
-git switch my-branch
-yarn playwright test charts wizards --project=visual --workers=1
-```
-
-(`yarn test:visual` and `yarn test:visual:update` run every Playwright project, including `e2e`.)
-
-Playwright writes the expected, actual and diff images of each failure to `test-results/`.
+Use this pattern for a layout whose measurements must survive a refactor: find elements by
+`data-testid`, record where each expected number came from, and make each viewport and theme its
+own story. The Vitest runner sizes the page from `globals.viewport`, which takes an object naming
+one of the presets in `.storybook/preview.tsx`: `globals: { viewport: { value: 'mobile' } }`. A bare
+string (`viewport: 'mobile'`) is ignored, and the story renders at 1200×900.
 
 ## Integration-testing screenshots
 
@@ -234,14 +222,14 @@ of real pages with data that need no local backend.
 
 ## What CI runs
 
-| Job                         | What it catches                                                                                                                            |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Run Storybook tests         | A story that fails to render or whose play function fails (`yarn test:storybook`). No pixel comparison; `allow_failure` on merge requests. |
-| `yarn styles:usage compare` | Added or reordered selectors and new unused classes in the legacy stylesheet.                                                              |
-| Trigger integration tests   | The downstream E2E suite, with its `docs/screenshots/` artifacts.                                                                          |
+| Job                         | What it catches                                                                                                                                                                          |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Run Storybook tests         | A story that fails to render or whose play function fails (`yarn test:storybook`), including the focus-ring and geometry checks. No pixel comparison; `allow_failure` on merge requests. |
+| `yarn styles:usage compare` | Added or reordered selectors and new unused classes in the legacy stylesheet.                                                                                                            |
+| Trigger integration tests   | The downstream E2E suite, with its `docs/screenshots/` artifacts.                                                                                                                        |
 
-The `e2e-visual` specs and `theme-snapshots.mjs` do not run in CI. Run the ones that fit the change
-locally and put the result in the merge request.
+`theme-snapshots.mjs` does not run in CI. Run it locally when the change can move pixels and put the
+result in the merge request.
 
 ## Reporting a visual change in a merge request
 
@@ -254,15 +242,13 @@ locally and put the result in the merge request.
 
 ## Commands
 
-| Command                                                              | What it does                                                                |
-| -------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `yarn build-storybook`                                               | Static Storybook in `storybook-static/`, the input of `theme-snapshots.mjs` |
-| `node scripts/theme-snapshots.mjs capture …` / `compare …`           | Storybook comparison                                                        |
-| `node scripts/theme-snapshots.mjs root-invariance …`                 | Stories that render differently at a 13px and a 20px root                   |
-| `yarn test:e2e:visual`                                               | Every `e2e-visual` spec (project `visual`, one worker)                      |
-| `yarn playwright test top-bar-geometry --project=visual --workers=1` | One spec; the argument is a filter, and a path is read as a project name    |
-| `yarn test:visual:update`                                            | Rewrite the local `toHaveScreenshot()` baselines (every project)            |
+| Command                                                       | What it does                                                                |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `yarn build-storybook`                                        | Static Storybook in `storybook-static/`, the input of `theme-snapshots.mjs` |
+| `node scripts/theme-snapshots.mjs capture …` / `compare …`    | Storybook comparison                                                        |
+| `node scripts/theme-snapshots.mjs root-invariance …`          | Stories that render differently at a 13px and a 20px root                   |
+| `yarn test:storybook`                                         | Every story and its play function, the focus-ring and geometry checks too   |
+| `yarn vitest --project=storybook run <path/to/X.stories.tsx>` | One story file                                                              |
 
-`playwright.config.ts` starts the app (`yarn start`, :8001) and Storybook (`yarn storybook --ci`,
-:6006), and outside CI reuses ones already running. A spec may import `packages/ui/src/...`
-modules directly, but not the `waldur-ui` barrel, whose modules touch `document` at import time.
+`yarn test:storybook` runs each story in headless Chromium through `@storybook/addon-vitest`; it
+needs no running Storybook or app.

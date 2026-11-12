@@ -405,26 +405,27 @@ it('allows selecting a country', async () => {
 
 ---
 
-## 5. E2E & Visual Testing (Playwright)
+## 5. E2E & Visual Testing
 
-E2E and visual regression tests are implemented using [Playwright](https://playwright.dev/).
+E2E tests are implemented using [Playwright](https://playwright.dev/).
 
-- **Location**: `e2e/` (Workflows) and `e2e-visual/` (Visual Regression).
-- **Focus**: Critical user journeys and visual consistency across themes.
+- **Location**: `e2e/` (Workflows).
+- **Focus**: Critical user journeys.
 - **Visual regression**: [visual-testing.md](visual-testing.md) covers which tool answers which
   question: the Storybook comparison of every story against `develop` (`scripts/theme-snapshots.mjs`),
-  parity and geometry specs, page screenshots, the integration-testing screenshots and what to
-  report in a merge request. None of the visual checks run in CI.
+  geometry and focus-ring checks in play functions, parity specs, the integration-testing
+  screenshots and what to report in a merge request. The play-function checks run in CI with
+  `yarn test:storybook`; the pixel comparisons do not.
 
 ---
 
 ## 6. Essential Commands
 
-| Command            | Description                   |
-| :----------------- | :---------------------------- |
-| `yarn test`        | Run unit tests with Vitest    |
-| `yarn test:e2e`    | Run E2E tests with Playwright |
-| `yarn test:visual` | Run every Playwright project  |
+| Command               | Description                                  |
+| :-------------------- | :------------------------------------------- |
+| `yarn test`           | Run unit tests with Vitest                   |
+| `yarn test:e2e`       | Run E2E tests with Playwright                |
+| `yarn test:storybook` | Render every story and run its play function |
 
 ---
 
