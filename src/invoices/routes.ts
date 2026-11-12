@@ -2,7 +2,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
 import { translate } from '@/i18n';
 import { isAccountingMode } from '@/invoices/accountingMode';
-import { canViewAccounting } from '@/workspace/selectors';
+import { canViewCustomerInvoices } from '@/permissions/invoiceVisibility';
 
 export const states: StateDeclaration[] = [
   {
@@ -15,7 +15,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Invoices'),
-      permissions: [canViewAccounting],
+      permissions: [canViewCustomerInvoices],
       priority: 130,
     },
   },
@@ -35,6 +35,7 @@ export const states: StateDeclaration[] = [
           ? translate('Accounting record')
           : translate('Invoice'),
       skipBreadcrumb: true,
+      permissions: [canViewCustomerInvoices],
     },
   },
 ];

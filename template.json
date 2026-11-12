@@ -13036,6 +13036,7 @@
     }
   },
   "Comma-separated list of columns for users table.": {},
+  "Comma-separated list of email addresses that are told when a user submits an onboarding justification for manual review, and when an organization is created after passing automatic validation without review. The emails link to the relevant page and carry no details of the applicant or the organization. Leave empty to send none. The onboarding.justification_submitted and onboarding.customer_created_automatically notifications must also be enabled, as new notifications are disabled by default.": {},
   "Comma-separated list of email addresses to notify.": {
     "context": {
       "feature_area": "policies"
@@ -29167,6 +29168,7 @@
       "feature_area": "workflow-description"
     }
   },
+  "How long, in seconds, a re-authentication grant stays usable. Users confirm their identity again, with their password or a passkey, before changing their email, their API token lifetime, their passkeys or their personal access tokens; the grant this returns is good for one such change within this time.": {},
   "How maintenance notifications are delivered.": {},
   "How many days ahead a deadline counts as due soon: for reviews on the call manager dashboard, where past-due reviews are always included, and for the tasks in My tasks, where past-due tasks count as overdue instead.": {},
   "How many days back a reported metric point may be timestamped.": {},
@@ -29829,7 +29831,7 @@
   "If true, the version endpoint queries GitHub for the latest released Waldur version. Disable in deployments without outbound internet access to avoid failed requests to api.github.com.": {},
   "If true, user email in Waldur database and in invitatation must strictly match.": {},
   "If true, users with staff role are notified when request for order approval is generated": {},
-  "If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user's primary lookup field is updated to the OIDC claim value.": {},
+  "If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user's primary lookup field is updated to the OIDC claim value. An email the user set themselves (a self-service email change) is not matched; a login that finds only such an account is refused, and staff setting the email makes it matchable.": {},
   "If you already know who you want to invite, use the \"Invite by email\" button to send invitations directly, with an optional message and a maximum number of assignments. The reviewer will receive an email with a link to accept or decline.": {
     "context": {
       "feature_area": "reviewer-pool"

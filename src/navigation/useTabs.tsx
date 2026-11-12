@@ -50,23 +50,42 @@ const sortStates = (states: StateDeclaration[]) => {
   ];
 };
 
+const isAllowed = (state) =>
+  isFeatureVisible(state.data?.feature) &&
+  (!state.data?.permissions ||
+    state.data.permissions.every((permission) => permission(store.getState())));
+
 const filterState = (parent, child) =>
-  isFeatureVisible(child.data?.feature) &&
   isChild(parent, child) &&
   child.data?.breadcrumb &&
   !child.data?.skipBreadcrumb &&
-  (!child.data?.permissions ||
-    child.data.permissions.every((permission) => permission(store.getState())));
+  isAllowed(child);
+
+/**
+ * A group with children is a dropdown and never navigates itself. Left with no
+ * child to show, it turns into a plain link to its `redirectTo` — so when that
+ * page is closed to the user too, the group leads nowhere but the
+ * access-denied page and is dropped instead.
+ */
+const leadsSomewhere = (tab, allStates) => {
+  if (tab.children.length > 0 || !tab.redirectTo) {
+    return true;
+  }
+  const targetName =
+    typeof tab.redirectTo === 'string' ? tab.redirectTo : tab.redirectTo.state;
+  const target = allStates.find((state) => state.name === targetName);
+  return !target || isAllowed(target);
+};
 
 export const getTabs = (root, allStates) =>
-  sortStates(allStates.filter((state) => filterState(root, state))).map(
-    (parent) => ({
+  sortStates(allStates.filter((state) => filterState(root, state)))
+    .map((parent) => ({
       ...stateToTab(parent),
       children: sortStates(
         allStates.filter((child) => filterState(parent, child)),
       ).map(stateToTab),
-    }),
-  );
+    }))
+    .filter((tab) => leadsSomewhere(tab, allStates));
 
 export const useTabs = (): Tab[] => {
   const router = useRouter();

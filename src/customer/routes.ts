@@ -14,6 +14,7 @@ import { translate } from '@/i18n';
 import { getActivePaymentProfile } from '@/invoices/details/utils';
 import { hasSupport } from '@/issues/hooks';
 import { PermissionEnum } from '@/permissions/enums';
+import { canViewCustomerInvoices } from '@/permissions/invoiceVisibility';
 import { canViewCustomerTeam } from '@/permissions/teamVisibility';
 import {
   canViewAccounting,
@@ -338,8 +339,14 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Accounting'),
       priority: 140,
+      // Shows the tab group only: each child lists under its own permissions,
+      // so an invoice viewer gets Invoices, an affiliate gets Affiliate
+      // earnings, and only accounting viewers get the rest.
       permissions: [
-        (state) => canViewAccounting(state) || canOpenAffiliateEarnings(state),
+        (state) =>
+          canViewAccounting(state) ||
+          canViewCustomerInvoices(state) ||
+          canOpenAffiliateEarnings(state),
       ],
     },
   },
