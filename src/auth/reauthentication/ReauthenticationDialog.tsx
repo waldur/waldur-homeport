@@ -43,6 +43,10 @@ const getDescription = (challenge: ReauthenticationChallenge) => {
       return translate(
         "To create or rotate a personal access token, confirm it's you.",
       );
+    case 'widen_personal_access_token_networks':
+      return translate(
+        "To let a personal access token work from more networks, confirm it's you.",
+      );
     default:
       return (
         challenge.detail ?? translate("To make this change, confirm it's you.")
