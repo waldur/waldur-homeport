@@ -282,7 +282,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'show_matrix_chat',
-        description: translate('Render the project Matrix chat UI. Backend access is gated separately on the MATRIX_ENABLED Constance setting.'),
+        description: translate('Render the project Matrix chat UI. Backend access is gated separately on the MATRIX_ENABLED setting.'),
       },
       {
         key: 'show_permission_reviews',
@@ -318,7 +318,7 @@ export const FeaturesDescription: FeatureSection[] = [
     items: [
       {
         key: 'affiliates',
-        description: translate('Show affiliate program menus and pages. Backend enforcement is controlled separately by the AFFILIATES_ENABLED Constance setting.'),
+        description: translate('Show affiliate program menus and pages. Backend enforcement is controlled separately by the AFFILIATES_ENABLED setting.'),
       },
       {
         key: 'arrow',
@@ -332,7 +332,7 @@ export const FeaturesDescription: FeatureSection[] = [
     items: [
       {
         key: 'integration',
-        description: translate('Render the SRAM integration administration page and SRAM markers in team lists. Backend access is gated separately on the SRAM_INTEGRATION_ENABLED Constance setting.'),
+        description: translate('Render the SRAM integration administration page and SRAM markers in team lists. Backend access is gated separately on the SRAM_INTEGRATION_ENABLED setting.'),
       },
     ],
   },

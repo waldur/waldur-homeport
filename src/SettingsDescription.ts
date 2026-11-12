@@ -1265,6 +1265,24 @@ export const SettingsDescription = [
         default: 300,
         type: 'integer',
       },
+      {
+        key: 'PASSWORD_FAILURES_PER_ADDRESS_LIMIT',
+        description: translate('How many failed password attempts one client address may make, across all usernames, within PASSWORD_FAILURES_PER_ADDRESS_WINDOW_MINUTES of its first. An address that reaches it gets 429 from password sign-in, re-authentication with a password and the admin login for PASSWORD_FAILURES_PER_ADDRESS_COOLOFF_MINUTES, and is then counted afresh. Successful attempts do not count. IPv6 addresses count per /64. 0 turns the limit off. Accounts are locked separately, after 5 failures, for 10 minutes.'),
+        default: 50,
+        type: 'integer',
+      },
+      {
+        key: 'PASSWORD_FAILURES_PER_ADDRESS_WINDOW_MINUTES',
+        description: translate('The window, in minutes from an address\'s first failed password, over which PASSWORD_FAILURES_PER_ADDRESS_LIMIT counts that address\'s failures.'),
+        default: 60,
+        type: 'integer',
+      },
+      {
+        key: 'PASSWORD_FAILURES_PER_ADDRESS_COOLOFF_MINUTES',
+        description: translate('How long, in minutes, an address that reached PASSWORD_FAILURES_PER_ADDRESS_LIMIT is refused password sign-in, re-authentication with a password and the admin login.'),
+        default: 10,
+        type: 'integer',
+      },
     ],
   },
   {
@@ -1742,7 +1760,7 @@ export const SettingsDescription = [
       {
         key: 'AI_ASSISTANT_MODEL',
         description: translate('Name of the AI Assistant model to use for inference.'),
-        default: 'qwen3.5-122b-nothinking',
+        default: '',
         type: 'string',
       },
       {
