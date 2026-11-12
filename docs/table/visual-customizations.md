@@ -73,7 +73,7 @@ Adjust header toolbar visibility and standalone modes:
 - **`hasActionBar={false}`**: Hides the card header toolbar (title, actions, search) entirely.
 - **`hasHeaders={false}`**: Hides column titles (`<thead>`).
 - **`hideIfEmpty={true}`**: Renders nothing (`null`) if the dataset contains no items.
-- **`standalone={true}`**: Renders the table directly without the wrapping Metronic Card layout (prevents double borders/paddings when nested in tabs, drawers, or cards).
+- **`standalone={true}`**: Renders the table directly without the wrapping Card layout (prevents double borders/paddings when nested in tabs, drawers, or cards).
 
 ---
 

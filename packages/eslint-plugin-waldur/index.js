@@ -13,15 +13,6 @@ import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
 import noArbitraryBorderWidth from './rules/no-arbitrary-border-width.js';
-import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
-import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
-import noBootstrapCssVars from './rules/no-bootstrap-css-vars.js';
-import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
-import noBootstrapFormControl from './rules/no-bootstrap-form-control.js';
-import noBootstrapFormSelect from './rules/no-bootstrap-form-select.js';
-import noBootstrapGrid from './rules/no-bootstrap-grid.js';
-import noBootstrapLayoutUtility from './rules/no-bootstrap-layout-utility.js';
-import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
@@ -37,7 +28,6 @@ import noRawCodeElement from './rules/no-raw-code-element.js';
 import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noRemLength from './rules/no-rem-length.js';
-import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
 import noStaticInlineStyle from './rules/no-static-inline-style.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
@@ -65,7 +55,6 @@ export default {
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
     'enforce-dialog-button-order': enforceDialogButtonOrder,
-    'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,
     'no-native-date-input': noNativeDateInput,
     'no-raw-code-element': noRawCodeElement,
@@ -73,24 +62,15 @@ export default {
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,
     'dynamic-tab-params': dynamicTabParams,
-    'no-bootstrap-css-vars': noBootstrapCssVars,
-    'no-bootstrap-form-check': noBootstrapFormCheck,
-    'no-bootstrap-layout-utility': noBootstrapLayoutUtility,
     'require-border-color': requireBorderColor,
     'no-arbitrary-border-width': noArbitraryBorderWidth,
     'no-raw-status-ramp': noRawStatusRamp,
     'prefer-token-utility': preferTokenUtility,
-    'no-retired-bootstrap-utility': noRetiredBootstrapUtility,
     'prefer-typed-property': preferTypedProperty,
     'property-item-in-list': propertyItemInList,
     'require-dark-pair': requireDarkPair,
     'require-font-size-scale': requireFontSizeScale,
     'require-weight-scale': requireWeightScale,
-    'no-bootstrap-color-utility': noBootstrapColorUtility,
-    'no-bootstrap-form-control': noBootstrapFormControl,
-    'no-bootstrap-form-select': noBootstrapFormSelect,
-    'no-bootstrap-tabs': noBootstrapTabs,
-    'no-bootstrap-grid': noBootstrapGrid,
     'no-orphan-form-label': noOrphanFormLabel,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,

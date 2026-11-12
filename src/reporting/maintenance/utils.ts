@@ -107,7 +107,7 @@ function formatSignedDuration(deltaMinutes: number): string {
 
 /**
  * Format the backend-computed overrun (actual_end - scheduled_end, in minutes)
- * for table/UI rendering. Returns text and a Bootstrap text-* className.
+ * for table/UI rendering. Returns text and a text-* className.
  */
 export function formatDelta(overrunMinutes: number | null | undefined): {
   text: string;

@@ -25,9 +25,9 @@ import { useMatrixCall } from './useMatrixCall';
 const MatrixCallView = lazy(() => import('./MatrixCallView'));
 
 // Copy every same-origin stylesheet from the main document into the PiP
-// window so LiveKit and Bootstrap render the way they do in-page. Cross-origin
+// window so LiveKit and app components render the way they do in-page. Cross-origin
 // sheets are re-linked by href; anything else falls through silently.
-// TODO: profile under Bootstrap + LiveKit + Metronic load to see if the
+// TODO: profile under load to see if the
 // inline cssRules copy hitches the main thread on first PiP open; if so,
 // flip to <link rel="stylesheet"> cloning for any sheet with an `href`.
 function cloneStylesheetsInto(doc: Document) {

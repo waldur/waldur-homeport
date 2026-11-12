@@ -18,8 +18,8 @@ import {
 const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 /**
- * waldur-ui's Input and Textarea outside waldur-homeport: no Bootstrap, no
- * Metronic, a 16px root. They must look exactly as they do in the app, so
+ * waldur-ui's Input and Textarea outside waldur-homeport:
+ * with a 16px root. They must look exactly as they do in the app, so
  * every state is on show -- the email field turns invalid once it has been
  * left with a bad address.
  */

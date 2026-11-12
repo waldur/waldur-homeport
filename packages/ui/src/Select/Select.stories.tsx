@@ -5,8 +5,7 @@ import { AsyncSelect } from './AsyncSelect';
 import { CreatableSelect } from './CreatableSelect';
 import { Select } from './Select';
 
-// Same sample data used to verify this component live against the
-// pre-migration deployment (see waldur-homeport's Resources list filters):
+// Sample filter option data for stories:
 // resource states for the multi-select cases, organizations for single-select.
 const STATE_OPTIONS = [
   { value: 'creating', label: 'Creating' },
@@ -40,7 +39,7 @@ const meta: Meta<typeof Select> = {
     docs: {
       description: {
         component:
-          "React-select wrapped in Waldur's Tailwind design tokens instead of react-select's own emotion styles (`unstyled: true` + a `classNames` config in tailwindStyles.ts). Every value here — border color/radius, control height, menu shadow, checkbox styling, placeholder color — was pinned by computed-style diffing against the live pre-migration (Bootstrap/SCSS) select, not eyeballed, since react-select ships several properties (`minHeight`, `fontSize: inherit`, `display: block` on Option) *unconditionally*, outside its own `unstyled` branch, as unlayered emotion CSS that silently beats a normal-priority Tailwind utility — those spots need the `!` important modifier and are commented inline in tailwindStyles.ts. Dark mode is a real second theme, not a filter: toggle it with the theme control in the toolbar above.",
+          "React-select wrapped in Waldur's Tailwind design tokens instead of react-select's own emotion styles (`unstyled: true` + a `classNames` config in tailwindStyles.ts). Every value here — border color/radius, control height, menu shadow, checkbox styling, placeholder color — was pinned by computed-style diffing against the legacy select, not eyeballed, since react-select ships several properties (`minHeight`, `fontSize: inherit`, `display: block` on Option) *unconditionally*, outside its own `unstyled` branch, as unlayered emotion CSS that silently beats a normal-priority Tailwind utility — those spots need the `!` important modifier and are commented inline in tailwindStyles.ts. Dark mode is a real second theme, not a filter: toggle it with the theme control in the toolbar above.",
       },
     },
   },

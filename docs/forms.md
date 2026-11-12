@@ -95,8 +95,7 @@ say (both already return nothing without an error) and do not wrap it in
 another alert, or it is read twice. A one-off error line written with
 `<FormText variant="danger">` needs `role="alert"` itself.
 
-Never use `form-label`, `form-text`, and `required` classes; the
-`waldur-custom/no-bootstrap-form-control` lint rule rejects them.
+Never use `form-label`, `form-text`, and `required` classes.
 
 ## Autonomous Field Group Architecture (*Group Pattern)
 
@@ -108,7 +107,7 @@ We provide a set of components suffixed with `*Group` (e.g., `StringGroup`, `Sel
 2. React Final Form's `<Field>` wrapper
 3. The layout, label, and validation structure via `<FormGroup>`
 
-### ❌ Bad Example: Manual Wrapping (Legacy)
+### ❌ Bad Example: Manual Wrapping (Deprecated)
 
 ```tsx
 import { Field } from 'react-final-form';
@@ -345,7 +344,7 @@ import { TabbedSection } from '@/form/TabbedSection';
 
 ### Don't do this
 
-- ❌ Don't add fields to a monolithic switch-based `EditFieldDialog`. The legacy `src/customer/details/EditFieldDialog.tsx`, `src/user/support/EditFieldDialog.tsx`, etc. have all been removed.
+- ❌ Don't add fields to a monolithic switch-based `EditFieldDialog`. The former `src/customer/details/EditFieldDialog.tsx`, `src/user/support/EditFieldDialog.tsx`, etc. have all been removed.
 - ❌ Don't write your own edit button + `openDialog(SomeEditDialog, …)` lazy loader when an `*EditField` would do — the standardized dialog handles validation, dirty-state, and submit wiring for you.
 - ❌ Don't render `*EditField` outside an `EditFieldProvider`. The HOC throws — you'll see `<withEditField(X)>: "scope" and "callback" must be provided…`.
 - ❌ Don't pass a component that is already wrapped with `withFormGroup` to `withEditField`. The edit dialog injects its own label, so a `*Group` component produces double labels — wrap the base field (e.g. `StringField`) instead.

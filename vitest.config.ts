@@ -86,9 +86,13 @@ export default mergeConfig(
             browser: {
               enabled: true,
               headless: true,
+              // Docker gives a container a 64MB /dev/shm, so Chromium writes
+              // its shared memory to /tmp instead. That alone does not stop
+              // the crash: one page running every story file in turn still
+              // dies partway through ("Browser connection was closed", in a
+              // different story each time), so CI runs the suite in thirds,
+              // each in a fresh browser.
               provider: playwright({
-                // Docker gives Chromium a 64MB /dev/shm; once the run fills it,
-                // the page crashes mid-run ("Browser connection was closed").
                 launchOptions: { args: ['--disable-dev-shm-usage'] },
               }),
               instances: [

@@ -160,14 +160,9 @@ describe('TableSidebarFilterValues', () => {
 });
 
 /**
- * Regression coverage for the Radix conversion: TableMenuFilterItem
- * (filterPosition="menu") used to rely on Metronic's own imperative
- * flyout trigger and a MutationObserver watching for its `.show` class.
- * Both are gone now — this exercises the real
- * StringFilter -> withTableFilter -> TableFilterItem chain, unmocked,
- * the same way the offering script editor's own typeahead fix was verified
- * earlier in this migration: type a full word into the flyout's input
- * and confirm every keystroke lands, not just enough to prove it opens.
+ * TableMenuFilterItem (filterPosition="menu"):
+ * Exercises StringFilter -> withTableFilter -> TableFilterItem chain unmocked,
+ * confirming typing and flyout actions work correctly.
  */
 describe('TableMenuFilterItem (filterPosition="menu")', () => {
   const renderMenuFilter = (apply = vi.fn()) => {
@@ -223,20 +218,9 @@ describe('TableMenuFilterItem (filterPosition="menu")', () => {
 });
 
 /**
- * Regression coverage for the mobile/sidebar filter drawer bug: reported
- * live as filter rows ("Parent offering", "Category", "Organization")
- * rendering empty and disappearing shortly after the drawer opened.
- * Root cause was that TableSidebarFilterItem rendered `props.children`
- * unconditionally inside Accordion.Body — react-bootstrap's underlying
- * Collapse mounts its children regardless of collapsed state, so with
- * `alwaysOpen` every sidebar filter row's field mounted at once. For an
- * AsyncSelectFilter that meant every row's forced `autoFocus: true` (see
- * useSelect.ts's `tableFilterProps`, which doesn't distinguish sidebar
- * from menu position) fired simultaneously, starving the main thread —
- * confirmed live in Storybook, not reproducible under jsdom's simpler
- * event loop, so this test instead pins the *mounting* contract the fix
- * relies on: a row's own field must not exist in the DOM until that
- * row's own accordion section is the expanded one.
+ * TableSidebarFilterItem (filterPosition="sidebar"):
+ * Pins the mounting contract for sidebar filters: a row's field must not
+ * exist in the DOM until that row's own accordion section is expanded.
  */
 describe('TableSidebarFilterItem (filterPosition="sidebar")', () => {
   const renderSidebarFilter = () => {

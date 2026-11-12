@@ -12,7 +12,7 @@
  *   --radius-xl: 12px
  *   --radius-2xl: 16px
  *   --radius-modal: 20px (the Sidebar mode-switcher card; the Modal itself is
- *                    --radius-xl, the app's former Bootstrap modal radius)
+ *                    --radius-xl)
  *   --radius-full: 9999px (pills, circular badges, status dots)
  *
  * --radius-full replaces Tailwind's own `rounded-full`, which is

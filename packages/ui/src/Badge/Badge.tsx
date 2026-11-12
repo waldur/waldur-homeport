@@ -174,7 +174,7 @@ const badgeVariants = cva(
     variants: {
       size: {
         // `leading-[18px]` keeps a small badge 24px tall, the same as an
-        // unsized one. Metronic's `.badge-sm` carried `line-height: 18px`; the
+        // unsized one; legacy `.badge-sm` carried `line-height: 18px`; the
         // Tailwind rewrite dropped it and left the base `leading-[20px]` in
         // place, which made the *small* badge 26px — 2px taller than the
         // default it is supposed to be smaller than.

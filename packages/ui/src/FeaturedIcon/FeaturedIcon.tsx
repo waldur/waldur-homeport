@@ -9,9 +9,9 @@ export type FeaturedIconTone = 'outline' | 'solid';
 
 export type FeaturedIconSize = 'sm' | 'md' | 'lg' | 'xl';
 
-// Metronic's real px values (_icon.scss), kept in one place rather than
+// Real px values, kept in one place rather than
 // re-derived per render. `solid` sizes the *outer* ring, not `outer` —
-// Metronic's `.featured-icon-solid` is a few px larger than the outline
+// `.featured-icon-solid` is a few px larger than the outline
 // tone at the same `size` so the flat fill reads as generously padded
 // around the same inner icon, not just a border removed.
 const OUTER_SIZE = { sm: 34, md: 38, lg: 42, xl: 46 };

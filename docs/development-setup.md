@@ -29,7 +29,7 @@ For detailed testing standards and strategy, see [Testing Standards & Strategy](
 
 - `yarn test` - Run unit tests with Vitest
 - `yarn test:e2e` - Run Playwright E2E tests
-- `yarn test:visual` - Run every Playwright project, including the visual specs (see [visual-testing.md](visual-testing.md))
+- `yarn test:storybook` - Render every story and run its play function, including the focus-ring and header-geometry checks (see [visual-testing.md](visual-testing.md))
 
 ### Dependency Management
 
@@ -240,9 +240,9 @@ http://localhost:8001/projects/{uuid}/manage/?include_terminated=true&tab=genera
 - Check network requests to verify API calls are working correctly
 - Use `take_snapshot` to verify UI changes are applied
 
-## Legacy CSS Usage & Retirement
+## Legacy CSS Usage Tracking
 
-As part of the Tailwind + shadcn migration (Epic #467), `scripts/bootstrap-css-usage.mjs` tracks classes emitted by legacy stylesheets and ensures that dead classes do not accumulate and selector order does not regress:
+`scripts/bootstrap-css-usage.mjs` tracks classes emitted by legacy stylesheets and ensures that dead classes do not accumulate and selector order does not regress:
 
 - `yarn styles:usage report`: Compiles each SCSS partial, extracts emitted class names, and compares them against whole tokens in tracked source files (`src/`, `packages/`, `apps/`). Prints per-partial used and unused class counts and names.
   - **False positives**: Whole-token matching treats words in comments or strings (e.g. `visible`, `table`, `scroll`) as a use. Therefore, a "used" count is an upper bound.
@@ -250,7 +250,7 @@ As part of the Tailwind + shadcn migration (Epic #467), `scripts/bootstrap-css-u
   - Fails if a new unused class appears in any partial.
   - Fails and prints a unified diff if selectors are added, modified, or reordered.
   - Passes when classes and selectors are removed.
-- `yarn styles:usage save [baseline.json]`: Saves the current compiled byte size, per-partial unused classes, and source-order selector list to the baseline JSON. Each later task in Epic #467 that removes dead rules re-runs `save` and commits the smaller baseline.
+- `yarn styles:usage save [baseline.json]`: Saves the current compiled byte size, per-partial unused classes, and source-order selector list to the baseline JSON when dead rules are removed.
 
 ## Translation Management
 

@@ -25,7 +25,7 @@ const meta: Meta<typeof Menu> = {
     docs: {
       description: {
         component:
-          'Radix DropdownMenu with the app\'s looks built in. `look="nav"` (the default) is the header, page-tab and footer menus; `look="actions"` is row actions and "Add" menus. Rows read the look and the panel\'s row options through React context, so submenus inherit them. See docs/tailwind-shadcn-migration-notes.md, "Dropdown & Menu System Map".',
+          'Radix DropdownMenu with the app\'s looks built in. `look="nav"` (the default) is the header, page-tab and footer menus; `look="actions"` is row actions and "Add" menus. Rows read the look and the panel\'s row options through React context, so submenus inherit them. See docs/menus.md.',
       },
     },
   },
@@ -55,10 +55,9 @@ const Gallery = ({ children }: { children: ReactNode }) => (
 );
 
 /**
- * The two looks, open. Nav: Metronic's `.menu-sub-dropdown` (no border, the
- * page background, gray-600 rows on a gray-50 highlight). Actions:
- * Bootstrap's `.dropdown-menu` as this app configured it (13px panel, 14px
- * gray-700 rows, a 130px minimum width).
+ * The two looks, open. Nav: no border, the page background,
+ * gray-600 rows on a gray-50 highlight. Actions: actions panel
+ * (13px panel, 14px gray-700 rows, a 130px minimum width).
  */
 export const Looks: Story = {
   render: () => (

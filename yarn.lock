@@ -15064,8 +15064,6 @@ __metadata:
 "stylelint-plugin-waldur@workspace:*, stylelint-plugin-waldur@workspace:packages/stylelint-plugin-waldur":
   version: 0.0.0-use.local
   resolution: "stylelint-plugin-waldur@workspace:packages/stylelint-plugin-waldur"
-  dependencies:
-    postcss-selector-parser: "npm:^7.1.6"
   languageName: unknown
   linkType: soft
 
@@ -16239,7 +16237,6 @@ __metadata:
     "@storybook/react-vite": "npm:^10.6.3"
     "@svgr/core": "npm:^8.1.0"
     "@svgr/plugin-svgo": "npm:^8.1.0"
-    "@tailwindcss/node": "npm:^4.3.3"
     "@tailwindcss/vite": "npm:^4.3.3"
     "@tanstack/react-query": "npm:^5.80.6"
     "@tanstack/react-virtual": "npm:^3.14.23"

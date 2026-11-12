@@ -6,38 +6,31 @@
  * Both themes are defined in this file.
  */
 :root {
-  /* Spacing and dimensions matching live Metronic .card ($card-px: 1.85rem,
-     $card-py: 1.23rem and $card-header-height: 70px, in the former
-     src/styles/bootstrap/_variables.scss, deleted with the Bootstrap shim in
-     #481). Preserved in rem so scaling with root font-size remains exact. */
+  /* Spacing and dimensions (card padding-x: 1.85rem,
+     card padding-y: 1.23rem and card header height: 70px).
+     Preserved in rem so scaling with root font-size remains exact. */
   --card-padding-x: 1.85rem;
   --card-padding-y: 1.23rem;
   --card-header-min-height: 70px;
-  /* The header's vertical padding, and the title's and toolbar's margins
-     ($card-header-py). */
+  /* The header's vertical padding, and the title's and toolbar's margins. */
   --card-header-py: 0.5rem;
-  /* Bootstrap's .card-title margin-bottom ($card-title-spacer-y), for a
-     title outside a header; .card-subtitle pulls up by half of it. */
+  /* Title margin-bottom for a title outside a header; subtitle pulls up by half of it. */
   --card-title-spacer-y: 0.5rem;
   /* A card's description: CardDescription, a <small> in a title. Off the
-     type scale, as Metronic's was. */
+     type scale. */
   --card-description-font-size: 1rem;
-  /* Bootstrap's bare .card-body padding ($card-spacer-x/y). */
+  /* Card body padding. */
   --card-spacer: 1rem;
-  /* The gap after Metronic's .card-label in a title. */
+  /* The gap after the label in a title. */
   --card-label-gap: 0.75rem;
 
-  /* Collapsible card header (waldur-ui AccordionCard), matching the
-     Metronic card it replaced: header text/caret ($gray-700), title
-     ($headings-color), the compact variant's title (.text-secondary) and
-     the solid header strip ($gray-50). */
+  /* Collapsible card header (waldur-ui AccordionCard). */
   --card-header-text: var(--color-gray-700);
   --card-title-text: var(--color-gray-900);
   --card-title-secondary-text: var(--color-gray-700);
   --card-header-solid-bg: var(--color-gray-50);
 
-  /* Card's light-mode shadow (once $card-box-shadow in the Bootstrap shim's
-     _variables.scss, #481); dark mode draws a border instead (Card.tsx). */
+  /* Card's light-mode shadow; dark mode draws a border instead (Card.tsx). */
   --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
   /* The default card's border width: none in light, 1px in dark. One
      token, so a caller's border-width utility replaces it in both themes. */
@@ -54,11 +47,10 @@
   --card-edge-width: 1px;
 }
 
-/* Hooks HomePort's context stylesheet (src/styles/legacy/_card.scss) sets
-   on one Card part to restyle it by where it sits: a table card's header,
-   a solid header, a card in an expanded table row. Each part reads its hook
-   with its own value as the fallback (Card.tsx). They don't inherit, so a
-   hook set on one part never reaches a nested card's part. */
+/* Context hooks set on Card parts to restyle them by where they sit: a table
+   card's header, a solid header, a card in an expanded table row. Each part
+   reads its hook with its own value as the fallback (Card.tsx). They don't
+   inherit, so a hook set on one part never reaches a nested card's part. */
 @property --card-surface-bg {
   syntax: '*';
   inherits: false;
@@ -135,10 +127,7 @@
 /* Card's variants (Card.tsx's `variant` and `size`). They set the part
    hooks above, plus root properties no Card utility sets, so they work
    wherever waldur-ui is loaded. In the `base` layer, so a utility the
-   caller passes still wins, and so do HomePort's context rules for a card
-   in a table or an expanded row (src/styles/legacy, `bootstrap` layer).
-   Each reaches every part inside the card, nested cards' too, as
-   Metronic's .card-solid, .card-sm and .card-widget did. */
+   caller passes still wins. */
 @layer base {
   /* variant="solid": the header is a full-width --bg-secondary strip. */
   [data-slot='card'][data-variant='solid'] {

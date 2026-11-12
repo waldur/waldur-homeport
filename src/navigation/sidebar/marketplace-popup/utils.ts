@@ -134,7 +134,7 @@ export const fetchLastNOfferings = async (
 export const SELECTABLE_ROW_FOCUS_RING_CLASSNAME =
   'focus-visible:outline-offset-[calc(var(--focus-ring-width)*-1)]';
 
-/** A react-bootstrap ListGroupItem with only an onClick renders a plain <li>:
+/** A list row with only an onClick might render as a plain <li>:
  * clickable, but the keyboard can neither reach nor activate it. These props
  * make the row a control without changing a class, so the list looks the same.
  * `disabled` rows stay out of the tab order -- there is nothing to activate. */

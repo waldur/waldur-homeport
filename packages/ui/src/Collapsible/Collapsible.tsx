@@ -26,9 +26,9 @@ import { unscrollPanel } from '../unscrollPanel';
  * a closed panel's children are unmounted even with `forceMount`. That
  * drops react-final-form fields (their values and validation unregister)
  * and any other state inside the panel. With `keepMounted` the children
- * stay mounted and are only `hidden` while closed — what react-bootstrap's
- * Accordion/Collapse did. It slides too, by transitioning grid rows
- * (0fr ↔ 1fr) rather than Radix's measured height — see KeptMountedPanel.
+ * stay mounted and are only `hidden` while closed. It slides too, by
+ * transitioning grid rows (0fr ↔ 1fr) rather than Radix's measured
+ * height — see KeptMountedPanel.
  */
 interface CollapsibleContextValue {
   open: boolean;

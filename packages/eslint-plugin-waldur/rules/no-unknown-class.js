@@ -29,21 +29,12 @@
  * Only static text is judged: a token that touches a `${…}` in a template
  * literal (`text-${tone}`) is a fragment, not a class, and is skipped.
  *
- * Classes that predate the rule are listed per file in
- * unknown-classes.baseline.json at the repository root. A listed class is
- * not reported in that file; any other unknown class is, however many listed
- * ones the same change removes. A listed class that the file no longer has
- * (fixed, or now defined by a stylesheet) is reported as stale, so the list
- * only shrinks. `yarn lint:classes:baseline` rewrites it.
- *
  * A class that deliberately styles nothing — a hook for a test selector or a
  * third-party script — goes in the rule's `allow` option (regexes), so each
  * one is a visible decision rather than an exception hidden in the source.
  */
 
-import { readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
-import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 import { createSyncFn } from 'synckit';
@@ -54,11 +45,6 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 // working directory, so running ESLint from a subdirectory (or an editor
 // with per-folder working directories) resolves the same entry point.
 const REPO_ROOT = path.resolve(HERE, '../../..');
-
-const BASELINE_FILE = 'unknown-classes.baseline.json';
-
-// Set by scripts/unknown-classes-baseline.mjs to see every unknown class.
-const IGNORE_BASELINE = process.env.WALDUR_UNKNOWN_CLASS_BASELINE === 'ignore';
 
 const askOracle = createSyncFn(
   path.join(HERE, '../lib/class-oracle.worker.js'),
@@ -90,21 +76,6 @@ const unwrap = (node) =>
     ? unwrap(node.expression)
     : node;
 
-let baseline = { mtimeMs: -1, entries: {} };
-
-/** unknown-classes.baseline.json, re-read when it changes on disk. */
-const readBaseline = (file) => {
-  try {
-    const { mtimeMs } = statSync(file);
-    if (mtimeMs !== baseline.mtimeMs) {
-      baseline = { mtimeMs, entries: JSON.parse(readFileSync(file, 'utf8')) };
-    }
-  } catch {
-    baseline = { mtimeMs: -1, entries: {} };
-  }
-  return baseline.entries;
-};
-
 export default {
   meta: {
     type: 'problem',
@@ -127,8 +98,6 @@ export default {
     messages: {
       unknown:
         '"{{ token }}" is not a Tailwind utility and no stylesheet defines it, so it styles nothing.{{ hint }}',
-      stale:
-        '"{{ token }}" is listed for this file in unknown-classes.baseline.json, but the file no longer has it as an unknown class (fixed, removed, or now defined). Run `yarn lint:classes:baseline` to update the list.',
     },
   },
 
@@ -137,10 +106,6 @@ export default {
     const entryPoint = options.entryPoint ?? 'src/tailwind.css';
     const allow = (options.allow ?? []).map((source) => new RegExp(source));
     const sourceCode = context.sourceCode;
-    const relativeFile = path
-      .relative(REPO_ROOT, context.filename)
-      .split(path.sep)
-      .join('/');
 
     /** token → nodes it was found on */
     const found = new Map();
@@ -353,24 +318,16 @@ export default {
       },
       CallExpression: collectCall,
 
-      'Program:exit'(program) {
-        const listed = IGNORE_BASELINE
-          ? []
-          : (readBaseline(path.join(REPO_ROOT, BASELINE_FILE))[relativeFile] ??
-            []);
-        if (!found.size && !listed.length) return;
+      'Program:exit'() {
+        if (!found.size) return;
 
-        const unknown = found.size
-          ? askOracle({
-              root: REPO_ROOT,
-              entryPoint,
-              tokens: [...found.keys()],
-            })
-          : [];
-        const unknownTokens = new Set(unknown.map(({ token }) => token));
+        const unknown = askOracle({
+          root: REPO_ROOT,
+          entryPoint,
+          tokens: [...found.keys()],
+        });
 
         for (const { token, suggestion } of unknown) {
-          if (listed.includes(token)) continue;
           for (const node of found.get(token)) {
             context.report({
               node,
@@ -379,16 +336,6 @@ export default {
                 token,
                 hint: suggestion ? ` Did you mean "${suggestion}"?` : '',
               },
-            });
-          }
-        }
-        for (const token of listed) {
-          if (!unknownTokens.has(token)) {
-            context.report({
-              node: program,
-              loc: { line: 1, column: 0 },
-              messageId: 'stale',
-              data: { token },
             });
           }
         }

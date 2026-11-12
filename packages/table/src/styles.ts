@@ -51,7 +51,7 @@ export function getPinnedActionsClasses(
  * header controls (sort toggle, column filter toggle, pin toggle).
  */
 export const HEADER_CONTROL_BTN_CLASS =
-  'text-btn min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary';
+  'bg-transparent border-0 p-0 m-0 cursor-pointer min-w-[24px] min-h-[24px] justify-center -my-1 -mr-1 ml-0 [&_svg]:text-quinary hover:[&_svg]:text-quaternary';
 
 /**
  * Hover elevation on table rows (`TableContent` when `hoverShadow` is enabled).

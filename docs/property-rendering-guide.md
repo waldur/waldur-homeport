@@ -626,16 +626,4 @@ The ESLint rule `waldur-custom/prefer-typed-property` continuously audits code f
 - Detects boolean ternaries (`x ? translate('Yes') : translate('No')`) → suggests `propVal.boolean`.
 - Detects calls to `renderFieldOrDash(x)` inside `PropertyItem`.
 
-### Baseline Workflow
-
-Existing legacy occurrences are tracked in `typed-property.baseline.json`. The baseline rule acts as a one-way ratchet:
-
-- As legacy occurrences are cleaned up, the baseline count drops.
-- A file with fewer legacy occurrences than listed is reported as stale.
-- To sync the baseline after cleaning up legacy files:
-
-```bash
-yarn lint:properties:baseline
-```
-
-Never add new exemptions or raise baseline counts for new code. All new property rendering must use `PropertyList`, `PropertyItem`, and `propVal.*`.
+All new property rendering must use `PropertyList`, `PropertyItem`, and `propVal.*`.

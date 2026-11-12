@@ -5,14 +5,10 @@ import { tableStoryBaseProps, TableStoryRow } from './storyFixtures';
 import { withTableProviders } from './storyProviders';
 
 /**
- * Deterministic state-matrix coverage for `<Table>`, ahead of the planned
- * Bootstrap/Metronic -> Tailwind CSS port (see
- * docs/tailwind-shadcn-migration-notes.md). The goal of these stories is to
- * give the upcoming Playwright `toHaveScreenshot()` golden-master captures
- * something fixed to point at: every story below renders from the same
- * static fixtures (storyFixtures.tsx) with no randomness and no relative
- * time, so a baseline captured today diffs only on real rendering changes,
- * not on content drift.
+ * Deterministic state-matrix coverage for `<Table>`.
+ * Every story renders from static fixtures (storyFixtures.tsx) with no
+ * randomness and no relative time, so baselines diff only on real rendering
+ * changes, not on content drift.
  *
  * This file covers the base data states only (loading/empty/error/
  * populated) — everything else is grouped into sibling files under the

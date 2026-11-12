@@ -19,25 +19,23 @@ import { useFocusThroughRemovals } from './useFocusThroughRemovals';
 import { useInsidePointerDown } from './useInsidePointerDown';
 
 /**
- * waldur-homeport's modal, without Bootstrap: the geometry of Bootstrap 5's
- * .modal as Metronic and the app restyled it (the $modal-* variables,
- * custom/_modal.scss and src/modal/ModalRoot.css this replaced), value for
+ * waldur-homeport's modal: the dialog geometry, value for
  * value, on a Radix Dialog. The app's src/modal/ModalShell.tsx and
  * ModalDialog.tsx re-export this.
  *
  * Unlike shadcn's Dialog recipe (a single box), this keeps
- * Bootstrap's "scrollable overlay" shape: the overlay is the fixed,
+ * a "scrollable overlay" shape: the overlay is the fixed,
  * scrolling layer and the content is the dialog box inside it, so a tall
  * dialog that is not `scrollable` scrolls the page-sized overlay, as
  * before.
  *
- * Every length is in px. Bootstrap's are rem against Metronic's 13px root
- * (1.85rem padding = 24px), and a micro-app has a 16px root, so rem would
- * make the two apps' dialogs different sizes.
+ * Every length is in px. Using rem against different root font sizes
+ * (13px in homeport, 16px in micro-apps) would make the two apps' dialogs
+ * different sizes.
  *
  * The header, body and footer carry `data-slot="modal-header"` (and so on)
  * for stylesheets and tests that need to reach into a dialog, in place of
- * Bootstrap's .modal-header/.modal-body/.modal-footer class names.
+ * legacy class names.
  */
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -58,8 +56,8 @@ export const useModalHide = () => useContext(ModalHideContext);
  */
 export const ModalShellContext = createContext<{ named: boolean } | null>(null);
 
-// Bootstrap's .modal-dialog margin: .5rem, and 1.75rem from sm up, at the
-// 13px root. A centred or scrollable box fills the viewport less these.
+// Outer dialog margin: 6.5px (.5rem), and 22.75px (1.75rem) from sm up.
+// A centred or scrollable box fills the viewport less these.
 const SIZE_CLASSNAMES: Record<ModalSize, string> = {
   sm: 'sm:max-w-[400px]',
   md: 'max-w-[544px]',
@@ -132,7 +130,7 @@ export const ModalShell: FC<ModalShellProps> = ({
   const named = typeof title === 'string' && title !== '';
   const confirm = layer === 'confirm';
 
-  // Bootstrap's .fade: the backdrop and the overlay fade over .15s linear,
+  // Fade animation: the backdrop and the overlay fade over .15s linear,
   // while the box inside the overlay slides (Modal's keyframes in
   // waldur-design-tokens/animations.css). `forwards` holds the faded-out
   // frame until Radix's Presence unmounts the node.
@@ -189,10 +187,10 @@ export const ModalShell: FC<ModalShellProps> = ({
               dialogClassName,
             )}
             aria-describedby={undefined}
-            // As Bootstrap's: only the visible box takes the pointer, so a
-            // click in the rest of the outer box (the full height, when
-            // centred) reaches the overlay and closes the dialog. Radix sets
-            // pointer-events inline, so a class could not override it.
+            // Only the visible box takes the pointer, so a click in the rest
+            // of the outer box (the full height, when centred) reaches the
+            // overlay and closes the dialog. Radix sets pointer-events inline,
+            // so a class could not override it.
             // eslint-disable-next-line waldur-custom/no-static-inline-style -- a class cannot outrank Radix's own inline pointer-events
             style={{ pointerEvents: 'none' }}
             onPointerDownOutside={(event) => {
@@ -249,10 +247,10 @@ export const ModalShell: FC<ModalShellProps> = ({
 };
 
 /**
- * Bootstrap's .btn-close in a modal header: its X glyph at 1em (13px), in
+ * Close button in a modal header: its X glyph at 1em (13px), in
  * gray-400 (gray-dark-500 in dark mode) at half opacity, padded out to a
  * 37px target that bleeds into the header's padding, and lifted to the
- * header's top edge, as the app's Bootstrap modal had it.
+ * header's top edge.
  */
 export const ModalCloseButton = forwardRef<
   HTMLButtonElement,
@@ -468,7 +466,7 @@ export const ModalDialog: FC<ModalDialogProps> = ({
     {Boolean(extra) && (
       <ModalHeader className={extraClassName}>{extra}</ModalHeader>
     )}
-    {/* Bootstrap's `.modal-header ~ .modal-body`: 12px under a header
+    {/* Body spacing under a header: 12px under a header
         rather than 24px. Set here, not with a sibling selector, so a
         caller's bodyClassName still overrides it. */}
     <ModalBody

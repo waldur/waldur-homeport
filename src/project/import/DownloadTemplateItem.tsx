@@ -1,7 +1,7 @@
 import { DownloadSimpleIcon, FileCsvIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, LinkButton } from 'waldur-ui';
 
 import { AttachmentCard } from '@/form/upload/AttachmentCard';
 import { translate } from '@/i18n';
@@ -20,13 +20,12 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
         <FileCsvIcon size={20} weight="bold" className="text-quaternary" />
       }
       title={
-        <button
-          type="button"
-          className="font-medium text-secondary text-anchor"
+        <LinkButton
+          className="font-medium text-secondary hover:text-[var(--text-brand-secondary)]"
           onClick={props.onClick}
         >
           {props.name}.csv
-        </button>
+        </LinkButton>
       }
       subtitle={props.size}
       actions={

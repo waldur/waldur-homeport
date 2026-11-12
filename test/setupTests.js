@@ -75,8 +75,8 @@ if (typeof globalThis.IntersectionObserver === 'undefined') {
   };
 }
 
-// react-bootstrap transitions (Collapse, Fade, Modal) end on a fallback timer
-// from dom-helpers that fires ~5 ms after they start. When a file's last test
+// Overlay transitions (Collapse, Fade, Modal) end on a fallback timer
+// that fires ~5 ms after they start. When a file's last test
 // ends mid-transition, that timer can fire after jsdom is torn down and fail
 // the whole run with "document is not defined", even though every test passed.
 // Coverage collection used to delay teardown long enough to hide this. Letting

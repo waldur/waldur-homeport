@@ -40,20 +40,10 @@ const SaveFilterDialog = lazyTableDialog(() =>
   })),
 );
 
-// TableBody.tsx's hasFilterMenu() decides whether to show a cell's inline
-// "filter by this value" shortcut by querying the DOM for
-// `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` — a
-// selector that assumes this Content lives *inside* the page's content
-// wrapper, matching Metronic's own pre-Radix markup (never portaled).
-// Radix Popover.Portal defaults to document.body, which moves this
-// Content — and every `#filter-item-*` row inside it — clean outside
-// `#kt_content_container`, so that selector silently stopped matching
-// and the inline shortcut stopped appearing at all (reported live:
-// "inline & column table filters does not work anymore"). Anchoring the
-// portal back inside the content wrapper restores the assumption without
-// touching hasFilterMenu() itself. Falls back to Radix's own default
-// (document.body) wherever the wrapper isn't present — Storybook/tests
-// that don't render the real layout shell.
+// Anchors the Popover portal inside `#kt_content_container` so that inline
+// column filter shortcuts find `#filter-item-{key}` via DOM queries within
+// the page's content area. Falls back to document.body when rendered outside
+// the app layout shell (e.g. tests, Storybook).
 const getFilterMenuPortalContainer = () =>
   document.getElementById('kt_content_container') ?? undefined;
 
@@ -317,9 +307,8 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   // wrapper's own render output, never a direct child of what's passed
   // here — the static check always saw one childless wrapper element and
   // always evaluated false, silently hiding the column-filter toggle for
-  // every column, on every page, ever since it was introduced. Checking
-  // the real rendered DOM instead — the same thing the pre-Radix Metronic
-  // version did — works at any nesting depth.
+  // every column, on every page. Checking the rendered DOM node works
+  // at any nesting depth.
   //
   // A callback ref, not `useRef` + `useEffect`: Radix's `Presence` (what
   // `forceMount` relies on) defers actually mounting Content's real DOM

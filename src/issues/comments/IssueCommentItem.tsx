@@ -93,7 +93,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
               <button
                 onClick={openUserDialog}
                 type="button"
-                className="text-btn text-secondary font-medium hover:text-brand text-sm me-2.5"
+                className="bg-transparent border-0 p-0 m-0 cursor-pointer text-secondary font-medium hover:text-brand text-sm me-2.5"
               >
                 {comment.author_name}
               </button>

@@ -9,9 +9,8 @@ import { Link } from '@/core/Link';
  * Menu.Item composed with the app's Link. The header, page tabs and footer
  * menus are otherwise plain waldur-ui `Menu` parts in the nav look.
  *
- * The label sits in a span because Link gives a bare string child its
- * `text-anchor` link style (brand colour, larger font, underline on hover),
- * which also replaces the row's own text colour.
+ * The label sits in a span so Link does not override the row's own
+ * text styling.
  */
 export const NavMenuLink = ({
   state,

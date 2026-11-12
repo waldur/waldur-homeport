@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Checks class usage for the Bootstrap and Metronic stylesheets and tracks
+// Checks class usage for the legacy stylesheets and tracks
 // compiled selector order and size.
 //
 //   node scripts/bootstrap-css-usage.mjs report
@@ -36,10 +36,7 @@ export const DEFAULT_BASELINE = path.join(
 );
 
 // Each `name` keys the partial's entry in bootstrap-css-usage.baseline.json:
-// `legacy/<path>`. Every partial here is Waldur's own: Bootstrap and its Sass
-// configuration are gone (#481), and each compiles from legacy/_mixins.scss
-// alone, so a reference to a Bootstrap variable or mixin fails `report`,
-// `save` and `compare`.
+// `legacy/<path>`. Every partial here compiles from legacy/_mixins.scss alone.
 export const PARTIALS = [
   {
     name: 'legacy/reboot',
@@ -265,12 +262,9 @@ export function findNewUnusedClasses(baselineUnused, currentUnused) {
 }
 
 /**
- * Bootstrap's own Sass function names, from the 5.1.3 `scss/_functions.scss`
- * that used to be a dependency. The package is gone (#481), so the list is
- * frozen here: nothing can read it from node_modules any more, and a legacy
- * partial that calls one of these names would get a plain CSS function
- * passed through rather than a Sass error. That silent pass-through is what
- * `checkLegacyDecoupled` catches, so the guard outlives the package.
+ * Bootstrap Sass function names. A partial that calls one of these names
+ * would get a plain CSS function passed through rather than a Sass error.
+ * That pass-through is what `checkLegacyDecoupled` catches.
  */
 const BOOTSTRAP_FUNCTIONS = [
   'add',
@@ -295,7 +289,7 @@ const BOOTSTRAP_FUNCTIONS = [
 ];
 
 /**
- * Metronic's own Sass helpers, which lived alongside the overrides in the
+ * Legacy Sass helpers, which lived alongside the overrides in the
  * former `src/styles/bootstrap/_functions.scss`. Frozen here for the same
  * reason as the list above: the file is gone, so a legacy partial calling
  * `get(...)` would emit it as a plain CSS function instead of failing.

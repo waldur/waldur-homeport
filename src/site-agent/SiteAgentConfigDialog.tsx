@@ -12,6 +12,7 @@ import {
   FormField,
   FormLabel,
   FormText,
+  LinkButton,
   NativeSelect,
 } from 'waldur-ui';
 
@@ -190,15 +191,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
         <FormField className="mb-3">
           <FormLabel>{translate('Select SLURM Offerings')}</FormLabel>
           <div className="mb-1.5">
-            <button
-              type="button"
-              className="text-btn text-brand"
-              onClick={handleSelectAll}
-            >
+            <LinkButton onClick={handleSelectAll}>
               {selectedOfferings.length === offerings.length
                 ? translate('Deselect all')
                 : translate('Select all')}
-            </button>
+            </LinkButton>
           </div>
           <div className="border border-secondary rounded-lg p-2.5 overflow-y-auto max-h-50">
             {offerings.map((offering) => (

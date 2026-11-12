@@ -233,17 +233,8 @@ describe('TableBody', () => {
 });
 
 /**
- * Regression coverage for a live bug: TableBody.tsx's InlineFilterButton
- * only renders for a cell when hasFilterMenu() finds
- * `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` in the
- * DOM — a selector written for Metronic's own markup, never portaled.
- * TableFiltersMenu.tsx's Radix Popover.Portal defaulted to document.body,
- * which moves that whole subtree (and every `#filter-item-*` row in it)
- * outside `#kt_content_container`, so the selector silently stopped
- * matching and the inline "filter by this value" shortcut stopped
- * appearing at all — reported live as "inline & column table filters
- * does not work anymore". Fixed by anchoring the Portal's `container`
- * back inside `#kt_content_container`.
+ * TableBody row actions:
+ * Tests row action rendering and interaction.
  */
 describe('TableBody row actions', () => {
   // Holds state, like an open row-action menu does.

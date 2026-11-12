@@ -930,7 +930,7 @@
 // PopoverContent's popover layer (z-popover) clears.
 .tc-members-popover {
   width: 260px;
-  // Bootstrap popovers default to a smaller font; pin the members list to the
+  // Pin the members list to the
   // chat's body size so names are readable.
   font-size: var(--text-sm);
   max-height: 320px;

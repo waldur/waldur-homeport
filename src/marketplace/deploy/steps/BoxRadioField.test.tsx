@@ -5,13 +5,9 @@ import { describe, expect, it, vi } from 'vitest';
 import { BoxRadioField } from './BoxRadioField';
 
 /**
- * Regression coverage for the Radix conversion: the version-options
- * flyout (each choice with `options`) used to be a Metronic-driven
- * dropdown nested inside a <button> — a real dropdown <div> nested
- * inside another interactive element. It's a Menu
- * (Radix DropdownMenu) now, composed via asChild onto the existing
- * inner <div> rather than Radix's own default <button> Trigger, to
- * avoid nesting a button inside a button.
+ * BoxRadioField version-options dropdown:
+ * Tests the version-options Menu flyout composed via asChild onto the
+ * inner container, avoiding nested button elements.
  */
 describe('BoxRadioField version-options dropdown', () => {
   const choices = [

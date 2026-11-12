@@ -19,7 +19,7 @@
  * It stays silent on everything an inline style is genuinely for: a value
  * measured or animated at runtime, a CSS custom property bridging a varying
  * value into a literal utility (the documented pattern — see
- * docs/tailwind-shadcn-migration-notes.md), a spread of a caller's `style`,
+ * docs/design-tokens.md), a spread of a caller's `style`,
  * and any declaration with no utility to name (gradients, `maskType`,
  * `animation`). `fontSize`, `fontWeight` and `borderRadius` belong to
  * require-font-size-scale, require-weight-scale and
@@ -33,34 +33,15 @@
  * step is named as an arbitrary utility instead, so that an off-grid 17px is a
  * decision a person makes rather than a `m-4.25` nobody can read.
  *
- * Declarations that predate the rule are counted per file and per property in
- * inline-style.baseline.json at the repository root. A file may hold as many
- * of each as it lists; one more is reported. A file holding fewer than listed
- * is reported as stale, so the counts only shrink.
- * `yarn lint:styles:baseline` rewrites the file.
- *
  * See docs/inline-style-retirement-plan.md.
  */
 
-import path from 'node:path';
-import process from 'node:process';
-
-import {
-  createBaselineReader,
-  REPO_ROOT,
-  repoRelative,
-} from '../lib/baseline.js';
 import {
   inJsxStyle,
   staticStyleValue,
   styleKeyName,
   styleObjectHasSpread,
 } from '../lib/jsx-style.js';
-
-const BASELINE_FILE = 'inline-style.baseline.json';
-
-// Set by scripts/static-inline-style-baseline.mjs to see every case.
-const IGNORE_BASELINE = process.env.WALDUR_INLINE_STYLE_BASELINE === 'ignore';
 
 /**
  * Declarations whose value is a keyword, mapped to the utility for it.
@@ -283,11 +264,8 @@ const LENGTH_KEYWORDS = {
 const FRACTION_SUFFIXES = new Set(['1/2', '1/4', '3/4']);
 
 /**
- * Prefixes where steps 25, 50, 75 and 100 are off limits: Bootstrap used
- * `w-50` for 50% and Tailwind reads it as 200px, so `no-bootstrap-layout-utility`
- * reports the name whichever was meant. 100px, 200px, 300px and 400px on one
- * of these take the arbitrary form instead. (`max-w-*` and `max-h-*` are not
- * affected — Bootstrap spelled those `mw-100` and `mh-100`.)
+ * Prefixes where numeric steps 25, 50, 75 and 100 are ambiguous with percentage
+ * values: 100px, 200px, 300px and 400px on these take the arbitrary form instead.
  */
 const AMBIGUOUS_STEP_PREFIXES = new Set([
   'w',
@@ -369,8 +347,6 @@ export const utilityFor = (property, value) => {
   return null;
 };
 
-const readBaseline = createBaselineReader();
-
 export default {
   meta: {
     type: 'suggestion',
@@ -384,17 +360,10 @@ export default {
     messages: {
       prefer:
         'Every value of this inline `{{ property }}` is a literal, so it is a class in disguise: use "{{ utility }}" in className instead. An inline style outranks every stylesheet, so it also opts this element out of dark mode, responsive variants and the token scales.',
-      stale:
-        'inline-style.baseline.json lists {{ listed }} inline "{{ property }}" declaration(s) for this file, but it has {{ found }}. Run `yarn lint:styles:baseline` to update the list.',
     },
   },
 
   create(context) {
-    const relativeFile = repoRelative(context.filename);
-
-    /** property name → [{ node, utility }] */
-    const found = new Map();
-
     return {
       Property(node) {
         const property = styleKeyName(node);
@@ -404,41 +373,11 @@ export default {
         if (value === null) return;
         const utility = utilityFor(property, value);
         if (!utility) return;
-        if (!found.has(property)) found.set(property, []);
-        found.get(property).push({ node, utility });
-      },
-
-      'Program:exit'(program) {
-        const listed = IGNORE_BASELINE
-          ? {}
-          : (readBaseline(path.join(REPO_ROOT, BASELINE_FILE))[relativeFile] ??
-            {});
-
-        for (const [property, hits] of found) {
-          if (hits.length <= (listed[property] ?? 0)) continue;
-          for (const { node, utility } of hits) {
-            context.report({
-              node,
-              messageId: 'prefer',
-              data: { property, utility },
-            });
-          }
-        }
-        for (const [property, count] of Object.entries(listed)) {
-          const have = found.get(property)?.length ?? 0;
-          if (have < count) {
-            context.report({
-              node: program,
-              loc: { line: 1, column: 0 },
-              messageId: 'stale',
-              data: {
-                property,
-                listed: String(count),
-                found: String(have),
-              },
-            });
-          }
-        }
+        context.report({
+          node,
+          messageId: 'prefer',
+          data: { property, utility },
+        });
       },
     };
   },

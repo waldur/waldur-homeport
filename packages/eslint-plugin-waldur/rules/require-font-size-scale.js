@@ -93,7 +93,7 @@ const split = (token) => {
 
 const escape = (s) => s.replace(/[[\]()|\\.*+?^$-]/g, '\\$&');
 
-export const getFontSizeReplacement = (name) => {
+const getFontSizeReplacement = (name) => {
   if (RETIRED_FONT_SIZES[name]) return RETIRED_FONT_SIZES[name];
   const m = /^fs-(sm|md|lg|xl|xxl)-([0-9][a-z0-9]*)$/.exec(name);
   if (m) {

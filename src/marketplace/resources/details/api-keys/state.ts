@@ -2,6 +2,7 @@ import { Resource, ResourceApiKeyAction, User } from 'waldur-js-client';
 
 import { BadgeVariant } from 'waldur-ui';
 
+import { ENV } from '@/core/config';
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import {
@@ -13,6 +14,7 @@ import {
   getRestrictionResumes,
   RestrictedResource,
 } from '@/marketplace/resources/details/spendingLimitRestriction';
+import { PermissionEnum } from '@/permissions/enums';
 import { isProjectMember } from '@/permissions/isProjectMember';
 
 import { ApiKeyRow, ApiKeyState, KeyComponent } from './types';
@@ -28,9 +30,10 @@ export const getStateVariant = (
 };
 
 // Mirrors the backend's reveal checks, which hold staff and support to them
-// too: a role on the resource's project or its organization, and for a
-// personal key, being its assignee. Staff reveal any other key by
-// impersonating someone who may.
+// too: a role on the resource's project or its organization; for a personal
+// key, being its assignee; and for a shared key, a role there that carries
+// RESOURCE.REVEAL_API_KEY. Staff reveal any other key by impersonating someone
+// who may.
 export const getRevealBlockedReason = (
   row: ApiKeyRow,
   user: User | undefined,
@@ -56,15 +59,36 @@ export const getRevealBlockedReason = (
             "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating its assignee.",
           )
         : translate(
-            "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating one of them.",
+            "Only members of the resource's project or organization can reveal its keys. As staff, you can reveal this key by impersonating a member who may.",
           );
     }
     return translate(
       "Only members of the resource's project or organization can reveal its keys.",
     );
   }
-  if (row.user_uuid && row.user_uuid !== user?.uuid) {
-    return translate('Only the assignee can reveal this key.');
+  if (row.user_uuid) {
+    // Assigning the key is what entrusts the assignee with it: they need no
+    // permission, and nobody else may.
+    return row.user_uuid === user?.uuid
+      ? undefined
+      : translate('Only the assignee can reveal this key.');
+  }
+  // Read from the roles alone: staff and a site-wide grant do not count here.
+  const mayReveal = Boolean(
+    user?.permissions?.some(
+      ({ scope_type, scope_uuid, role_name }) =>
+        ((scope_type === 'project' && scope_uuid === resource.project_uuid) ||
+          (scope_type === 'customer' &&
+            scope_uuid === resource.customer_uuid)) &&
+        ENV.roles
+          ?.find(({ name }) => name === role_name)
+          ?.permissions.includes(PermissionEnum.REVEAL_RESOURCE_API_KEY),
+    ),
+  );
+  if (!mayReveal) {
+    return translate(
+      'Your role in this project or organization does not allow revealing its shared keys.',
+    );
   }
   return undefined;
 };

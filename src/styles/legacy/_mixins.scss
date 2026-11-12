@@ -3,10 +3,9 @@
 @use 'sass:map';
 @use 'sass:math';
 
-// Styles for the dark theme, from the one stylesheet that serves both: the
+// Styles for the dark theme, from the stylesheet that serves both: the
 // app sets data-theme on <html>. :where() keeps the selector's specificity, so
-// the override never outranks a state rule (.active, :hover) it would not
-// have outranked in the old dark stylesheet. Prefer a design token that
+// the override never outranks a state rule (.active, :hover). Prefer a design token that
 // already differs per theme; this is for a pairing no token has.
 @mixin dark-theme {
   :where([data-theme='dark']) & {
@@ -14,19 +13,16 @@
   }
 }
 
-// Styles for the light theme only (what used to be left out of the dark
-// stylesheet).
+// Styles for the light theme only.
 @mixin light-theme {
   :where(:root:not([data-theme='dark'])) & {
     @content;
   }
 }
 
-// The old dark stylesheet inverted the SCSS ramps: $danger-600 (error-600)
-// was error-300 there, $blue-50 was blue-900. For a one-off status or accent
-// colour with no semantic slot, this keeps that pairing: the step in the light
-// theme, its mirror in the dark one, from the CSS ramps (--color-<ramp>-<step>).
-// $alpha mixes it with transparent, as rgba($colour, $alpha) did.
+// For a one-off status or accent colour with no semantic slot, provides an
+// inverted pairing between light and dark themes from the CSS ramps
+// (--color-<ramp>-<step>). $alpha mixes it with transparent.
 $_ramp-mirror: (
   25: 950,
   50: 900,

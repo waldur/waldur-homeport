@@ -53,7 +53,7 @@ export const FileDownloader = ({
       type="button"
       className={
         className ??
-        `text-btn hover:text-brand${children ? '' : ` w-${size}px`}`
+        `bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center${children ? '' : ` w-${size}px`}`
       }
       onClick={handleDownload}
       disabled={loading}

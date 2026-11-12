@@ -376,7 +376,7 @@ export const MailCustomisePane: FC<{
                   <Link
                     state="support-notification-messages"
                     label={translate("Edit the portal's wording")}
-                    className="text-anchor me-1.5"
+                    className="me-1.5"
                   />
                 )}
                 {override && (

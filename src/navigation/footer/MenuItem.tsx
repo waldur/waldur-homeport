@@ -7,9 +7,8 @@ import { Link } from '@/core/Link';
  * FooterDropdownLink (FooterDropdownItems.tsx) instead.
  */
 /**
- * A footer bar link, ported from Metronic's `.menu-brand .menu-link` with
- * the `px-3` every call site used: brand-coloured (Metronic's menu-brand:
- * brand-600, brand-300 in dark mode), 8px x 9.75px. Shared with
+ * A footer bar link with
+ * `px-3`: brand-coloured (brand-600, brand-300 in dark mode), 8px x 9.75px. Shared with
  * FooterDropdown's trigger.
  */
 export const FOOTER_LINK_CLASSNAME =
@@ -31,7 +30,6 @@ export const MenuItem = ({
           {icon}
         </span>
       )}
-      {/* A span, so Link doesn't give the label its `text-anchor` style. */}
       <span>{label}</span>
     </Link>
   </li>

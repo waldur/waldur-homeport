@@ -237,17 +237,14 @@ describe('no-static-inline-style', () => {
     expect(utilityFor('marginLeft', 46)).toBe('ms-11.5');
   });
 
-  // no-bootstrap-layout-utility rejects w/h/min-w/min-h/top/bottom/start/end
-  // at steps 25, 50, 75 and 100, because Bootstrap used those names for
-  // percentages. The two rules have to agree, or the codemod writes a class
-  // the linter then rejects.
-  it('avoids the steps Bootstrap made ambiguous', () => {
+  // Avoids numeric steps 25, 50, 75 and 100 on w/h/min-w/min-h/top/bottom/start/end
+  // due to ambiguity with percentage values.
+  it('avoids ambiguous numeric steps', () => {
     expect(utilityFor('minWidth', 200)).toBe('min-w-[200px]');
     expect(utilityFor('width', 100)).toBe('w-[100px]');
     expect(utilityFor('width', 300)).toBe('w-[300px]');
     expect(utilityFor('height', 400)).toBe('h-[400px]');
     expect(utilityFor('top', 200)).toBe('top-[200px]');
-    // max-w and max-h were never ambiguous: Bootstrap spelled them mw-/mh-.
     expect(utilityFor('maxWidth', 200)).toBe('max-w-50');
     expect(utilityFor('maxHeight', 400)).toBe('max-h-100');
     // Other prefixes keep the step.

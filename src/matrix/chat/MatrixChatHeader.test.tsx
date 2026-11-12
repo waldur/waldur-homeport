@@ -195,7 +195,7 @@ describe('MatrixChatHeader', () => {
     const item = await screen.findByText('Start call');
     expect(item).toBeTruthy();
     // Radix marks a disabled row with aria-disabled/data-disabled rather
-    // than Bootstrap's `.disabled` class — real semantics assistive tech can
+    // than a visual class — real semantics assistive tech can
     // read, where the previous markup only looked disabled.
     // eslint-disable-next-line testing-library/no-node-access
     expect(item.closest('[role="menuitem"]')).toHaveAttribute(
@@ -317,7 +317,7 @@ describe('MatrixChatHeader', () => {
       name: 'project.dashboard',
       url: '/projects/:uuid',
     });
-    const { container } = render(
+    render(
       <UIRouter router={router}>
         <MatrixChatHeader
           roomUuid="room-1"
@@ -326,16 +326,16 @@ describe('MatrixChatHeader', () => {
         />
       </UIRouter>,
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const link = container.querySelector('a.text-anchor');
-    expect(link).not.toBeNull();
-    expect(link!.textContent).toBe('LLM Training Pipeline');
+    expect(
+      screen.getByRole('link', { name: 'LLM Training Pipeline' }),
+    ).toBeInTheDocument();
   });
 
   it('renders the room name as plain text when projectUuid is missing', () => {
-    const { container } = renderHeader();
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    expect(container.querySelector('a.text-anchor')).toBeNull();
+    renderHeader();
+    expect(
+      screen.queryByRole('link', { name: 'LLM Training Pipeline' }),
+    ).toBeNull();
     expect(screen.getByText('LLM Training Pipeline')).toBeTruthy();
   });
 

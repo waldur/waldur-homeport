@@ -90,6 +90,9 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
           }
         }}
         className={cn(
+          typeof (label || children) === 'string' &&
+            !buttonVariant &&
+            'text-[var(--text-brand-secondary)] hover:underline',
           buttonVariant &&
             buttonVariants({
               variant: buttonVariant,
@@ -97,9 +100,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
               iconOnly: buttonIconOnly,
             }),
           className,
-          typeof (label || children) === 'string' &&
-            !buttonVariant &&
-            'text-anchor',
         )}
         role={onClick ? 'button' : undefined}
         {...rest}

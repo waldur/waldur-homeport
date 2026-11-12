@@ -191,7 +191,7 @@ export const FullNavigation: Story = {
  * subitem alignment, separators, and disabled states. "Buckets"/"Access
  * Keys" are two accordions deep (Projects -> Data Lake -> leaf) — they sit
  * only ~10px right of their depth-1 siblings ("Cloud Infrastructure" etc),
- * matching Metronic's real per-level accordion indention step, not a full
+ * matching the real per-level accordion indention step, not a full
  * extra icon-width column.
  */
 export const AccordionHierarchy: Story = {
@@ -527,22 +527,11 @@ export const InteractiveStyle: StoryObj<{ style: SidebarStyle }> = {
 };
 
 /**
- * Regression coverage for the mobile-Sheet bugs hit during the
- * Bootstrap/Metronic → Tailwind migration: forceMount kept Radix's
- * Overlay/Content permanently mounted so the entrance transition had a
- * "from" frame to animate away from, which also made Radix's own
- * mount-triggered (not open-triggered) side effects permanent —
- * hideOthers() (aria-hidden) and disableOutsidePointerEvents (a `body {
- * pointer-events: none }`) chief among them. That left the *rest of the
- * page*, including the toggle itself, genuinely unclickable from the
- * very first page load, confirmed live via Chromium's own "Blocked
- * aria-hidden on an element because its descendant retained focus"
- * warning. The eventual fix (Sheet.tsx) replaced forceMount with
- * Tailwind's `starting:` variant (a real `@starting-style` block), so
- * Presence mounts/unmounts on genuine open/close like any other Radix
- * dialog — this exercises that full cycle. mobileBreakpoint is set
- * absurdly high so the Sheet branch renders regardless of whatever real
- * viewport the test runner's browser happens to use.
+ * Mobile Sheet interaction:
+ * Exercises the open/close cycle for the mobile Sheet drawer, verifying that
+ * Presence mounts and unmounts cleanly without leaving lingering pointer-events
+ * or aria-hidden attributes on the document body. mobileBreakpoint is set
+ * high so the Sheet branch renders across test viewports.
  */
 export const MobileSheetInteraction: Story = {
   render: () => (

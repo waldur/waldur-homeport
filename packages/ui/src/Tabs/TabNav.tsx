@@ -220,7 +220,7 @@ const TabNavItem = ({
   const trigger = isLink ? (
     // No click handler on the link: a router `Link` given one turns into
     // role="button". The label sits in a span so a string title does not
-    // pick up Metronic's `.text-anchor` (border, underline on hover).
+    // pick up default link anchor styling.
     <Slot {...shared} tabIndex={disabled ? -1 : undefined}>
       {cloneElement(
         link,

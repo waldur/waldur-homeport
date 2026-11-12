@@ -14,9 +14,9 @@ const meta: Meta<typeof Popover> = {
     docs: {
       description: {
         component:
-          'Radix Popover for the Metronic `menu-sub-dropdown` popups that hold ' +
+          'Radix Popover for popup panels that hold ' +
           'form controls rather than command rows — see Popover.tsx for the ' +
-          'menu-vs-popover rule and the Bootstrap parity values.',
+          'menu-vs-popover rule and parity values.',
       },
     },
   },

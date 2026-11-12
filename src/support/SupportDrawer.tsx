@@ -103,7 +103,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
           </div>
         )}
 
-        {/* Panes stay mounted across tab switches (the old Bootstrap default) so the
+        {/* Panes stay mounted across tab switches so the
             Team chat keeps its Matrix connection and any active call alive
             while the user is on the Helpdesk tab. */}
         <div className="grow overflow-hidden">

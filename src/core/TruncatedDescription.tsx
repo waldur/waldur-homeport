@@ -2,6 +2,8 @@ import { truncate } from 'es-toolkit/compat';
 import { FC } from 'react';
 import { useToggle } from 'react-use';
 
+import { LinkButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface TruncatedDescriptionProps {
@@ -30,14 +32,10 @@ export const TruncatedDescription: FC<TruncatedDescriptionProps> = ({
   return (
     <div className={className}>
       {collapsed ? truncate(text, { length: max }) : text}
-      <button
-        type="button"
-        className="text-anchor font-medium"
-        onClick={onClick || setCollapsed}
-      >
+      <LinkButton className="font-medium" onClick={onClick || setCollapsed}>
         &nbsp;
         {collapsed ? translate('Show more') : translate('Show less')}
-      </button>
+      </LinkButton>
     </div>
   );
 };

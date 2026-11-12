@@ -1303,7 +1303,7 @@ export const OrganisationAllocationTab: FC = () => {
                   );
                   setExcelProgress(null);
                 }}
-                className="text-btn hover:text-brand"
+                className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
               >
                 <FileXlsIcon size={20} weight="bold" />
               </button>
@@ -1364,7 +1364,7 @@ export const OrganisationAllocationTab: FC = () => {
                   );
                   setExcelProgress(null);
                 }}
-                className="text-btn hover:text-brand"
+                className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
               >
                 <FileXlsIcon size={20} weight="bold" />
               </button>

@@ -147,17 +147,16 @@ actually-deployable micro-app.
   drifted copy. That resolves fine for any app inside this workspace
   (this one included) but is a real constraint worth knowing before
   assuming these two packages work from a fully separate install.
-- **No Metronic-workaround CSS needed.** `waldur-homeport`'s own
+- **No root-workaround CSS needed.** `waldur-homeport`'s own
   `tailwind.css` pins `--spacing`/`--text-*`/`--radius-*` to px because
-  Metronic forces a 13px root font-size. This app has no Metronic, so
-  Tailwind's default rem scale (assuming 16px) is already correct with no
-  override — evidence that override is a homeport-specific patch, not
+  its stylesheets force a 13px root font-size. This app has no
+  root override, so Tailwind's default rem scale (assuming 16px) is already correct
+  with no override — evidence that override is a homeport-specific patch, not
   something `BaseButton` itself requires. `Card.tsx`/`StatCard.tsx` lean on
-  this directly: their padding/gaps are arbitrary rem values (`px-[2.25rem]`,
-  not `px-[29px]`), matching the real Bootstrap component's own rem-based
-  spacing at _any_ root font-size — this app's genuine 16px root and
-  `waldur-homeport`'s forced 13px root both resolve correctly from the
-  same class, with no per-app override needed.
+  this directly: their padding/gaps are rem values (`px-[2.25rem]`,
+  not `px-[29px]`), matching rem-based spacing at _any_ root font-size —
+  this app's genuine 16px root and `waldur-homeport`'s 13px root both
+  resolve correctly from the same class, with no per-app override needed.
 - **`useIsMobile()`'s `window.innerWidth` read raced the real viewport.**
   Running `Sidebar` in this app (not just Storybook) surfaced a real,
   reproducible bug: `window.innerWidth` measured `0` at the exact moment

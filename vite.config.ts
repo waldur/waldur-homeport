@@ -10,12 +10,8 @@ import { waldurBootSplash } from 'waldur-boot-splash/vite';
 import { collectMicroApps } from './scripts/micro-apps-registry.mjs';
 import reactDisplayNamePlugin from './vite-plugin-react-displayname.js';
 
-// Tailwind ships in the real app bundle now (src/index.tsx imports
-// tailwind.css), not just in Storybook — it is the prerequisite for using
-// packages/ui's Tailwind/Radix primitives anywhere in src/. .storybook/
-// main.ts still registers its own, separate instance of this plugin; the
-// two are independent and both are needed. See
-// docs/tailwind-shadcn-migration-notes.md.
+// Tailwind is imported by src/index.tsx for the real app bundle;
+// .storybook/main.ts registers its own instance for Storybook.
 // The micro-apps registry the quick shortcuts menu reads. The image writes
 // it at build time from the apps it holds (Dockerfile); the dev server lists
 // every apps/* member, read again on each request so a package.json edit

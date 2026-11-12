@@ -49,7 +49,11 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
   ) : attachment.file instanceof File ? (
     <FileIcon size={iconSize} weight="bold" />
   ) : attachment.mime_type?.startsWith('image') ? (
-    <button className="text-btn hover:text-brand" onClick={openModal}>
+    <button
+      type="button"
+      className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex"
+      onClick={openModal}
+    >
       <ImageFetcher
         url={attachment.file}
         name={fileName}

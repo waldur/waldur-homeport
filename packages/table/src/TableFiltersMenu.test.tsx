@@ -12,12 +12,9 @@ import { TableFiltersMenu } from './TableFiltersMenu';
 import { FilterItem } from './types';
 
 /**
- * Regression coverage for the Radix conversion: TableFiltersMenu used to
- * drive both its own trigger+menu pair and a per-column "jump straight to
- * this filter" auto-open through Metronic's own imperative menu JS
- * (a dropdown-shown listener calling menuInstance.show(item)). It's a
- * controlled Radix Popover now, with the auto-open threaded through
- * TableFilterContext's `openMenuName` instead.
+ * TableFiltersMenu tests:
+ * Tests the trigger and popover menu interactions, including auto-opening
+ * targeted column filters via TableFilterContext's `openMenuName`.
  */
 describe('TableFiltersMenu', () => {
   const renderMenu = (
@@ -184,7 +181,7 @@ describe('TableFiltersMenu', () => {
   });
 
   it("keeps a filter row in the DOM while its menu is closed, for TableBody.tsx's hasFilterMenu() to find", () => {
-    // Metronic's own markup was always mounted (CSS-hidden while closed);
+    // Legacy markup was always mounted (CSS-hidden while closed);
     // Radix's default would unmount this — forceMount restores the
     // original always-present behaviour. TableBody.tsx's hasFilterMenu()
     // decides whether to show a cell's inline-filter shortcut by

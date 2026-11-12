@@ -1,28 +1,20 @@
 /**
  * Text input and textarea tokens for waldur-ui's Input and Textarea.
  *
- * Every value is the one the Bootstrap/Metronic `.form-control` stylesheet
- * resolved to (the former forms/_form-control.scss and
- * custom/_forms.scss and the `$input-*` overrides,
- * the former `$form-feedback-*` ones included):
- *
- *   bg                    $input-bg                        bg-primary
- *   text                  $input-color                     text-primary
- *   border                $input-border-color              border-primary
- *   placeholder           $input-placeholder-color         text-quaternary
- *   hover border          custom/_forms.scss               fg-brand-accent
- *     (brand-500; brand-400 in dark mode, one step lighter than the legacy
- *     raw brand-500, which no semantic role holds in both themes)
- *   focus border / ring   $input-focus-*                   border-brand, 1px
- *   invalid border        $form-feedback-invalid-color     status-danger-border
- *   invalid focus         $form-focus-feedback-invalid-color status-danger-solid
- *   invalid icon colour   $form-feedback-icon-invalid      status-danger-solid (the
- *     legacy icon was error-500 in light mode, error-400 in dark)
- *   disabled bg / text    $input-disabled-*                bg-secondary / text-disabled
- *   readonly bg           $input-readonly-bg               bg-primary
- *   solid bg / focus bg   $input-solid-bg(-focus)          bg-tertiary / bg-quaternary
- *   solid text            $input-solid-color               text-secondary
- *   solid focus border    custom/_forms.scss               border-divider-strong
+ *   bg                    --bg-primary
+ *   text                  --text-primary
+ *   border                --border-primary
+ *   placeholder           --text-quaternary
+ *   hover border          --fg-brand-accent
+ *   focus border / ring   --border-brand, 1px
+ *   invalid border        --status-danger-border
+ *   invalid focus         --status-danger-solid
+ *   invalid icon colour   --status-danger-solid
+ *   disabled bg / text    --bg-secondary / --text-disabled
+ *   readonly bg           --bg-primary
+ *   solid bg / focus bg   --bg-tertiary / --bg-quaternary
+ *   solid text            --text-secondary
+ *   solid focus border    --border-divider-strong
  *
  * Each token reads a semantic role, and the roles switch with the theme, so
  * this file has no dark-mode block.

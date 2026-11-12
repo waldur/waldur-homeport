@@ -27,7 +27,7 @@ const meta: Meta<typeof Progress> = {
     docs: {
       description: {
         component:
-          'A meter for a known value, stacked segments or an unknown amount. The track is always neutral and `variant` colours the fill (same colours as `Badge` solid). Replaces the Bootstrap `.progress` / `ProgressBar`. Heights are fixed by `size`: `xs` 4px, `sm` 6px, `md` 8px (default), `lg` 24px.',
+          'A meter for a known value, stacked segments or an unknown amount. The track is always neutral and `variant` colours the fill (same colours as `Badge` solid). Heights are fixed by `size`: `xs` 4px, `sm` 6px, `md` 8px (default), `lg` 24px.',
       },
     },
   },

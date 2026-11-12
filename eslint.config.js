@@ -28,11 +28,11 @@ const RESTRICTED_IMPORTS = [
     message:
       'react-bootstrap is retired. Use Tailwind CSS and waldur-ui components.',
   },
-  // lodash-es is retired (#455); es-toolkit replaced it.
+  // lodash-es is retired; es-toolkit replaced it.
   {
     name: 'lodash-es',
     message:
-      'lodash-es is retired (#455). Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
+      'lodash-es is retired. Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
   },
 ];
 
@@ -117,13 +117,9 @@ export default tseslint
         'waldur-custom/enforce-badge-props-consistency': 'error',
         'waldur-custom/no-manual-icon-colors-in-badges': 'error',
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
-        // Zero instances remain; see the rule's docblock.
-        'waldur-custom/no-bootstrap-button-markup': 'error',
         // Raw <table> markup becomes Table, SimpleTable, PropertyList or, for
         // a form grid, allow-listed waldur-ui Table primitives (decision tree:
-        // docs/table/migration-guide.md). Tables that predate the rule are
-        // counted per file in hand-rolled-table.baseline.json, which only
-        // shrinks: `yarn lint:tables:baseline` after migrating some.
+        // docs/table/migration-guide.md).
         'waldur-custom/no-hand-rolled-table': 'error',
         'waldur-custom/no-hand-rolled-modal-footer': 'error',
         // Zero instances remain: every native date/time input was replaced by
@@ -135,24 +131,6 @@ export default tseslint
         'waldur-custom/enforce-dialog-button-order': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',
-        // Zero instances remain: every checkbox, radio and switch is a waldur-ui
-        // Checkbox/Radio/Switch, and the .form-check styles are deleted.
-        'waldur-custom/no-bootstrap-form-check': 'error',
-        // Native selects are waldur-ui's NativeSelect; Form.Select and
-        // .form-select are going away.
-        'waldur-custom/no-bootstrap-form-select': 'error',
-        // Text inputs are waldur-ui's Input, Textarea, NumberInput, SecretInput,
-        // InputGroup and RangeInput; FormControl, InputGroup and the
-        // form-control / input-group classes are going away.
-        'waldur-custom/no-bootstrap-form-control': 'error',
-        // Zero instances remain: every progress bar is a waldur-ui Progress and
-        // the .progress styles are deleted.
-        // Zero instances remain: every dialog is waldur-ui's Modal and the
-        // .modal / .btn-close styles are deleted.
-        'waldur-custom/no-bootstrap-tabs': 'error',
-        // Zero instances remain: layouts are Tailwind grid/flex, and Bootstrap's
-        // grid and the .table gutter utilities are no longer compiled.
-        'waldur-custom/no-bootstrap-grid': 'error',
         // A FormLabel outside a FormField names no control: use FormFieldset +
         // FormLegend for a group, FormHeading for a caption.
         'waldur-custom/no-orphan-form-label': 'error',
@@ -174,12 +152,11 @@ export default tseslint
         // For a single item, use direct Tailwind CSS or merge into an adjacent
         // list. A warning while existing single-item lists are converted.
         'waldur-custom/no-lone-property-item-in-list': 'warn',
-        // Tailwind's `border` sets only the width (Bootstrap's .border, retired
-        // in #478, also drew --border-secondary): a bare one needs a colour.
+        // Tailwind's `border` sets only the width: a bare one needs a colour.
         // Autofixes to `border border-secondary`.
         'waldur-custom/require-border-color': 'error',
         // Tailwind's border widths are pixels: `border`, `border-t-2`, not
-        // `border-[1px]` (the workaround while Bootstrap owned `border`).
+        // `border-[1px]`.
         'waldur-custom/no-arbitrary-border-width': 'error',
         // State colours come from the status matrix (semantic/status.css);
         // deliberate exceptions carry an eslint-disable with the reason.
@@ -191,30 +168,16 @@ export default tseslint
         // A ramp step, white or a hex is the same colour in both themes: use a
         // semantic utility or give it a dark: partner in the same class list.
         'waldur-custom/require-dark-pair': 'error',
-        // Font weight is one scale (font-light … font-bold); Bootstrap's fw-*
-        // are retired, and their "bold" was 500. Autofixes fw-* classes.
+        // Font weight is one scale (font-light … font-bold). Autofixes fw-* classes.
         'waldur-custom/require-weight-scale': 'error',
-        // Font size is one pinned scale (text-xs … text-4xl); Bootstrap's fs-*
-        // are retired. Autofixes fs-* to Tailwind.
+        // Font size is one pinned scale (text-xs … text-4xl). Autofixes fs-* to Tailwind.
         'waldur-custom/require-font-size-scale': 'error',
-        // Bootstrap emits no colour utility any more: its old class names
-        // (text-danger, bg-light, border-bottom, …) paint nothing.
-        'waldur-custom/no-bootstrap-color-utility': 'error',
-        // Bootstrap generates no utility (#478): its spellings Tailwind does not
-        // share compile to nothing.
-        'waldur-custom/no-retired-bootstrap-utility': 'error',
         // A class that neither Tailwind nor any stylesheet defines styles
-        // nothing — a typo or a leftover. Existing ones are listed per file
-        // in unknown-classes.baseline.json; any other one fails.
+        // nothing — a typo or a leftover.
         'waldur-custom/no-unknown-class': [
           'error',
           { allow: UNKNOWN_CLASS_HOOKS },
         ],
-        // Bootstrap layout utilities (d-*, flex-column, items-*, justify-*, w-100, etc.)
-        // have direct Tailwind equivalents. Autofixes to Tailwind.
-        'waldur-custom/no-bootstrap-layout-utility': 'error',
-        // Zero instances remain: every --bs-* read in TS/TSX is a design token.
-        'waldur-custom/no-bootstrap-css-vars': 'error',
         // Hard-coded colours beyond a file's count in
         // scripts/color-literals.baseline.json (the `yarn colors:check` ratchet).
         'waldur-custom/no-literal-color': 'error',
@@ -223,9 +186,7 @@ export default tseslint
         'waldur-custom/no-rem-length': 'error',
         // A style={{ … }} whose every value is a literal is a class in
         // disguise, and outranks every stylesheet while it stays inline.
-        // Declarations that predate the rule are counted per file and per
-        // property in inline-style.baseline.json, which only shrinks:
-        // `yarn lint:styles:baseline` after moving some. The staged plan is
+        // How the existing ones were retired:
         // docs/inline-style-retirement-plan.md.
         'waldur-custom/no-static-inline-style': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
@@ -238,9 +199,7 @@ export default tseslint
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
         // A PropertyItem formatting its value by hand should be the typed
-        // property for it (src/property/propertyFields.tsx). Rows that predate
-        // the rule are counted in typed-property.baseline.json, which only
-        // shrinks: `yarn lint:properties:baseline` after moving some.
+        // property for it (src/property/propertyFields.tsx).
         'waldur-custom/prefer-typed-property': 'error',
         'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
         'waldur-custom/no-direct-field-adapter': 'error',
@@ -466,8 +425,6 @@ export default tseslint
         'waldur-custom/require-dark-pair': 'off',
         'waldur-custom/require-weight-scale': 'off',
         'waldur-custom/require-font-size-scale': 'off',
-        'waldur-custom/no-retired-bootstrap-utility': 'off',
-        'waldur-custom/no-bootstrap-layout-utility': 'off',
         // Tests pass made-up classes to check they are forwarded.
         'waldur-custom/no-unknown-class': 'off',
         'waldur-custom/no-lone-property-item-in-list': 'off',
@@ -487,36 +444,21 @@ export default tseslint
       },
     },
     {
-      // The rule's own fixtures contain the variables it flags.
-      files: [
-        'packages/eslint-plugin-waldur/rules/no-bootstrap-css-vars.test.ts',
-      ],
-      rules: { 'waldur-custom/no-bootstrap-css-vars': 'off' },
-    },
-    {
       // The rules' own fixtures contain the class lists they flag.
       files: [
         'packages/eslint-plugin-waldur/rules/require-border-color.test.ts',
         'packages/eslint-plugin-waldur/rules/no-arbitrary-border-width.test.ts',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.test.ts',
-        'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.test.ts',
-        'packages/eslint-plugin-waldur/rules/no-bootstrap-layout-utility.test.ts',
         'packages/eslint-plugin-waldur/rules/require-font-size-scale.test.ts',
         'packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.test.ts',
-        // The rules themselves (class lists, built names), and the test that
-        // checks the list against Bootstrap.
-        'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.js',
-        'packages/eslint-plugin-waldur/rules/no-bootstrap-layout-utility.js',
+        // The rules themselves (class lists, built names).
         'packages/eslint-plugin-waldur/rules/require-font-size-scale.js',
         'packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.js',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.js',
         'packages/eslint-plugin-waldur/rules/prefer-token-utility.js',
         'packages/eslint-plugin-waldur/rules/prefer-token-utility.test.ts',
-        'src/tailwindBootstrapColors.test.ts',
       ],
       rules: {
-        'waldur-custom/no-bootstrap-color-utility': 'off',
-        'waldur-custom/no-bootstrap-layout-utility': 'off',
         'waldur-custom/require-font-size-scale': 'off',
         'waldur-custom/enforce-border-radius-tokens': 'off',
         'waldur-custom/require-border-color': 'off',

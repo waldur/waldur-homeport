@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+
+import { ENV } from '@/core/config';
 
 import {
   getAtLimitReason,
@@ -387,10 +389,24 @@ describe('a key on a paused resource', () => {
 
 describe('getRevealBlockedReason', () => {
   const resource = { project_uuid: 'proj-1', customer_uuid: 'cust-1' };
-  const role = (scope_type: string, scope_uuid: string) => ({
+  const role = (
+    scope_type: string,
+    scope_uuid: string,
+    role_name = 'ROLE',
+  ) => ({
     scope_type,
     scope_uuid,
-    role_name: 'ROLE',
+    role_name,
+  });
+  const initialRoles = ENV.roles;
+  beforeEach(() => {
+    (ENV as any).roles = [
+      { name: 'ROLE', permissions: ['RESOURCE.REVEAL_API_KEY'] },
+      { name: 'READER', permissions: ['RESOURCE.LIST'] },
+    ];
+  });
+  afterEach(() => {
+    (ENV as any).roles = initialRoles;
   });
   const user = (overrides: Record<string, unknown> = {}) =>
     ({ uuid: 'me', permissions: [], ...overrides }) as any;
@@ -436,7 +452,7 @@ describe('getRevealBlockedReason', () => {
   it('points staff outside the project at impersonation', () => {
     const staff = user({ is_staff: true });
     expect(getRevealBlockedReason(ok(), staff, resource)).toBe(
-      `${NOT_A_MEMBER} As staff, you can reveal this key by impersonating one of them.`,
+      `${NOT_A_MEMBER} As staff, you can reveal this key by impersonating a member who may.`,
     );
     expect(
       getRevealBlockedReason(
@@ -466,5 +482,34 @@ describe('getRevealBlockedReason', () => {
         ),
       ).toBe(NOT_THE_ASSIGNEE);
     }
+  });
+
+  const NO_REVEAL_PERMISSION =
+    'Your role in this project or organization does not allow revealing its shared keys.';
+  const reader = user({ permissions: [role('project', 'proj-1', 'READER')] });
+
+  it('keeps a shared key from a role without the reveal permission', () => {
+    for (const other of [
+      reader,
+      user({ permissions: [role('customer', 'cust-1', 'READER')] }),
+      // Staff and a site-wide grant do not stand in for the role.
+      user({ ...reader, is_staff: true }),
+      user({
+        permissions: [
+          role('project', 'proj-1', 'READER'),
+          role('global', 'site', 'ROLE'),
+        ],
+      }),
+    ]) {
+      expect(getRevealBlockedReason(ok(), other, resource)).toBe(
+        NO_REVEAL_PERMISSION,
+      );
+    }
+  });
+
+  it('lets the assignee reveal their key without the reveal permission', () => {
+    expect(
+      getRevealBlockedReason(ok({ user_uuid: 'me' }), reader, resource),
+    ).toBeUndefined();
   });
 });

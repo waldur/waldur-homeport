@@ -23,9 +23,8 @@
  *
  * Tailwind's other steps (thin, extralight, extrabold, black) are cleared, so
  * those classes do not exist: Inter is not loaded at those weights, and the
- * browser would only fall back to the nearest one. Bootstrap's fw-* classes
- * are retired too (their "bold" was 500); the require-weight-scale lint rule
- * keeps both out. SCSS reads var(--font-weight-*). `static`, so the variables
+ * browser would only fall back to the nearest one; the require-weight-scale lint rule
+ * enforces the supported weight scale. SCSS reads var(--font-weight-*). `static`, so the variables
  * exist for SCSS even where no utility uses them.
  */
 @theme static {

@@ -36,18 +36,17 @@ const MENU_ROW_FOCUS_RING_CLASSNAME =
 //
 // - density default (`.menu-dropdown-default`'s row): 10px x 16px,
 //   line-height 1.432.
-// - density compact: Metronic's base padding (0.615rem) with the `px-3`
+// - density compact: 8px (0.615rem) with the `px-3`
 //   (0.75rem) the footer menus and BoxRadioField put on their rows.
-// - density base (Metronic's base `.menu-link` padding, 0.615rem x
-//   0.923rem): the filter and picker popovers.
+// - density base (base link padding, 8px x
+//   12px): the filter and picker popovers.
 //   compact and base rows inherit the panel's line-height.
 // - tone default is menu-gray-600; strong is menu-gray-700 (not on disabled
 //   rows, which keep their own colour).
 //
 // A highlighted row (`menu-row-active:`, waldur-design-tokens/variants.css:
 // hovered, keyboard-highlighted, an open submenu's trigger, the checked
-// radio row or `.active`) is gray-700 on gray-50, Metronic's
-// menu-state-bg-gray.
+// radio row or `.active`) is gray-700 on gray-50 (`--menu-item-hover-bg`).
 const NAV_MENU_ITEM_CLASSNAME = [
   'flex cursor-pointer items-center no-underline select-none transition-colors duration-200',
   'px-[16px] py-[10px] leading-[1.432] text-[var(--menu-item-text)]',

@@ -49,50 +49,27 @@ export const ResourcesMenuFilters = () => {
                 {filterItem.label}
               </span>
               <span
-                // rounded-lg (8px) + text-sm, not rounded-full + text-xs —
-                // Metronic's real .badge-lg chip (measured live) is a
-                // rounded rect, not a pill, at ~14px text — this is the
+                // rounded-lg (8px) + text-sm: a
+                // rounded rect chip at ~14px text — this is the
                 // value itself (the org/project name), so it stays at full
                 // text-sm/--nav-item-text strength regardless of the
                 // smaller, muted caption label beside it.
-                // gap-[4px] (not gap-1 — the app's legacy 13px root
-                // font-size, see sidebarMenuButtonVariants' own comment,
-                // shrinks gap-1's 0.25rem to 3.25px) + pr-[9px], not
-                // gap-1.5/pr-[3px]: Metronic's real .badge-lg.has-right-icon
-                // (measured live) reserves $badge-icon-space (4px) between
-                // the text and the icon, and $badge-padding-x-lg - 2px
-                // (9px) between the icon and the badge's own right edge —
-                // this reproduces that exact spacing with a flex gap
-                // instead of the original's absolutely-positioned
-                // .right-icon.
+                // gap-[4px] + pr-[9px]: reserves 4px
+                // between the text and the icon, and 9px
+                // between the icon and the badge's own right edge.
                 className="flex max-w-[60%] items-center gap-[4px] truncate rounded-lg bg-[var(--nav-item-active-bg)] py-[3px] pr-[9px] pl-[11px] text-sm text-[var(--nav-item-text)]"
               >
                 <span className="truncate">
                   {filterItem.value?.abbreviation || filterItem.value?.name}
                 </span>
-                {/* Not the shared RemoveFilterBadgeButton: its own
-                    text-quinary/text-hover-gray-500 classes are Bootstrap
-                    utilities marked !important in Metronic's (unlayered)
-                    stylesheet, which no Tailwind utility class can ever
-                    override — including with Tailwind's own `!` modifier,
-                    since a layered !important always loses to an
-                    unlayered one regardless of source order (confirmed
-                    live: the override silently no-opped). That default
-                    gray is fine for RemoveFilterBadgeButton's other,
-                    still-Bootstrap callers (regular light-background table
-                    filters), but doesn't adapt to the sidebar's own theme
-                    tokens — measured live, it rendered as a near-invisible
-                    mid-gray against a dark sidebar style's active-bg pill.
-                    A plain button sidesteps the fight entirely. */}
+                {/* A plain button adapts to the sidebar's theme tokens. */}
                 <button
                   type="button"
                   onClick={() => removeFilter(filterItem.name)}
                   aria-label={translate('Remove filter')}
-                  // size-[12px], not size-3: this app's legacy 13px root
-                  // font-size (see sidebarMenuButtonVariants' own comment)
-                  // shrinks rem-based utilities — size-3 (0.75rem) would
-                  // render as 9.75px instead of the 12px this reproduces
-                  // (Metronic's real $badge-icon-size, measured live).
+                  // size-[12px], not size-3: this app's 13px root
+                  // font-size shrinks rem-based utilities — size-3 (0.75rem)
+                  // would render as 9.75px instead of the 12px needed.
                   className="flex size-[12px] shrink-0 items-center justify-center text-[var(--nav-item-icon)] hover:text-[var(--nav-item-text)]"
                 >
                   <XIcon weight="bold" size={12} />

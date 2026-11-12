@@ -22,7 +22,7 @@
  * `danger`, not `error`: roles are named by intent, like the button and
  * ActionItem variants; `error` is only the name of the red ramp.
  *
- * Tailwind utilities (tailwind/theme.css), named like Bootstrap 5.3's:
+ * Tailwind utilities (tailwind/theme.css):
  * `text-warning` is -fg, `bg-warning` and `border-warning` are -solid,
  * `bg-warning-subtle` and `border-warning-subtle` are -bg and -border
  * (`text-info` / `bg-info-subtle`, `text-neutral` / `bg-neutral-subtle` for

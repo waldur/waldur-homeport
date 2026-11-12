@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
+import { LinkButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
 import { BaseInputField } from '@/form/InputField';
@@ -15,15 +17,14 @@ const NamespaceSwitcher: FunctionComponent = () => (
   <Field
     name="useNewNamespace"
     component={(fieldProps) => (
-      <button
-        className="text-btn text-primary"
-        type="button"
+      <LinkButton
+        variant="subtle"
         onClick={() => fieldProps.input.onChange(!fieldProps.input.value)}
       >
         {fieldProps.input.value
           ? translate('Use an existing namespace')
           : translate('Add to a new namespace')}
-      </button>
+      </LinkButton>
     )}
   />
 );

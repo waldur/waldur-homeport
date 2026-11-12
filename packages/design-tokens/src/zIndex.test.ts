@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 /**
- * The z-index tokens exist to sit at specific points in a stack whose other
- * layers live in Bootstrap/Metronic SCSS (see the table in zIndex.css). The
- * constraints are ordering constraints, so that is what is asserted — a
- * re-numbered token can't silently end up under a modal or behind a toast.
+ * The z-index tokens exist to sit at specific points in a stack (see the table
+ * in zIndex.css). The constraints are ordering constraints, so that is what is
+ * asserted — a re-numbered token can't silently end up under a modal or behind
+ * a toast.
  */
 
 const read = (relative: string) =>
@@ -23,17 +23,17 @@ const token = (name: string): number => {
   return Number(m[1]);
 };
 
-// Bootstrap's own stack (node_modules/bootstrap/scss/_variables.scss).
-const BOOTSTRAP = {
+// Reference overlay stack heights.
+const OVERLAY_STACK = {
   modal: 1055,
   popover: 1070,
   tooltip: 1080,
 };
-const METRONIC_TOOLBAR = 99;
+const TOOLBAR_ZINDEX = 99;
 
 describe('z-index tokens', () => {
   it('puts the header above the page tabs, below the sidebar panel and drawer', () => {
-    expect(token('header')).toBeGreaterThan(METRONIC_TOOLBAR);
+    expect(token('header')).toBeGreaterThan(TOOLBAR_ZINDEX);
     expect(token('header')).toBeLessThan(token('sidebar-panel'));
     // AppHeader lifts it to the drawer's + 1 while a drawer is open, which
     // must still sit under the header's own popovers.
@@ -43,21 +43,21 @@ describe('z-index tokens', () => {
   it('puts the sidebar panel and mobile drawer above the header, below overlays', () => {
     expect(token('sidebar-panel')).toBeGreaterThan(token('header'));
     expect(token('mobile-drawer')).toBeGreaterThan(token('header'));
-    expect(token('mobile-drawer')).toBeLessThan(BOOTSTRAP.modal);
+    expect(token('mobile-drawer')).toBeLessThan(OVERLAY_STACK.modal);
   });
 
   it('puts header popovers above the header, toolbar and sidebar, below modals', () => {
     expect(token('header-popover')).toBeGreaterThan(token('header'));
-    expect(token('header-popover')).toBeGreaterThan(METRONIC_TOOLBAR);
+    expect(token('header-popover')).toBeGreaterThan(TOOLBAR_ZINDEX);
     expect(token('header-popover')).toBeGreaterThan(token('sidebar-panel'));
     expect(token('header-popover')).toBeGreaterThan(token('mobile-drawer'));
-    expect(token('header-popover')).toBeLessThan(BOOTSTRAP.modal);
+    expect(token('header-popover')).toBeLessThan(OVERLAY_STACK.modal);
   });
 
   it('puts nav menus above the header and toolbar, below modals', () => {
     expect(token('nav-menu')).toBeGreaterThan(token('header'));
-    expect(token('nav-menu')).toBeGreaterThan(METRONIC_TOOLBAR);
-    expect(token('nav-menu')).toBeLessThan(BOOTSTRAP.modal);
+    expect(token('nav-menu')).toBeGreaterThan(TOOLBAR_ZINDEX);
+    expect(token('nav-menu')).toBeLessThan(OVERLAY_STACK.modal);
   });
 
   it('keeps the drawer and the desktop panel distinct', () => {
@@ -65,28 +65,28 @@ describe('z-index tokens', () => {
   });
 
   it('puts date-picker popups above modals and dropdowns, below toasts', () => {
-    expect(token('picker-popover')).toBeGreaterThan(BOOTSTRAP.modal);
-    expect(token('picker-popover')).toBeGreaterThan(BOOTSTRAP.popover);
+    expect(token('picker-popover')).toBeGreaterThan(OVERLAY_STACK.modal);
+    expect(token('picker-popover')).toBeGreaterThan(OVERLAY_STACK.popover);
     expect(token('picker-popover')).toBeGreaterThan(token('dropdown-menu'));
     expect(token('picker-popover')).toBeLessThan(token('toast'));
   });
 
-  it('puts popovers on the Bootstrap popover layer, above modals, below menus', () => {
-    expect(token('popover')).toBe(BOOTSTRAP.popover);
-    expect(token('popover')).toBeGreaterThan(BOOTSTRAP.modal);
+  it('puts popovers on the popover layer, above modals, below menus', () => {
+    expect(token('popover')).toBe(OVERLAY_STACK.popover);
+    expect(token('popover')).toBeGreaterThan(OVERLAY_STACK.modal);
     expect(token('popover')).toBeGreaterThan(token('header-popover'));
     expect(token('popover')).toBeLessThan(token('dropdown-menu'));
     expect(token('popover')).toBeLessThan(token('picker-popover'));
   });
 
   it('puts action menus above modals and tooltips, below date pickers', () => {
-    expect(token('dropdown-menu')).toBeGreaterThan(BOOTSTRAP.modal);
-    expect(token('dropdown-menu')).toBeGreaterThan(BOOTSTRAP.tooltip);
+    expect(token('dropdown-menu')).toBeGreaterThan(OVERLAY_STACK.modal);
+    expect(token('dropdown-menu')).toBeGreaterThan(OVERLAY_STACK.tooltip);
     expect(token('dropdown-menu')).toBeLessThan(token('picker-popover'));
   });
 
-  it("puts the modal on Bootstrap's modal layers, a confirm above it", () => {
-    expect(token('modal')).toBe(BOOTSTRAP.modal);
+  it('puts the modal on modal layers, a confirm above it', () => {
+    expect(token('modal')).toBe(OVERLAY_STACK.modal);
     expect(token('modal-backdrop')).toBeLessThan(token('modal'));
     expect(token('modal-backdrop')).toBeGreaterThan(token('header-popover'));
     expect(token('confirm-backdrop')).toBeGreaterThan(token('modal'));
@@ -99,10 +99,10 @@ describe('z-index tokens', () => {
     expect(token('picker-popover')).toBeGreaterThan(token('confirm'));
   });
 
-  it('puts toasts above every Bootstrap overlay', () => {
-    expect(token('toast')).toBeGreaterThan(BOOTSTRAP.modal);
-    expect(token('toast')).toBeGreaterThan(BOOTSTRAP.popover);
-    expect(token('toast')).toBeGreaterThan(BOOTSTRAP.tooltip);
+  it('puts toasts above every overlay', () => {
+    expect(token('toast')).toBeGreaterThan(OVERLAY_STACK.modal);
+    expect(token('toast')).toBeGreaterThan(OVERLAY_STACK.popover);
+    expect(token('toast')).toBeGreaterThan(OVERLAY_STACK.tooltip);
     expect(token('toast')).toBeGreaterThan(token('dropdown-menu'));
   });
 

@@ -62,7 +62,7 @@ interface MatrixChatHeaderProps {
 /**
  * Compact chat-window header (design "H2 Final"): avatar, room name, a
  * members popover trigger and a kebab menu. Drawer chrome (close/expand)
- * stays on the Metronic drawer that wraps this panel.
+ * stays on the drawer that wraps this panel.
  */
 export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   roomUuid,

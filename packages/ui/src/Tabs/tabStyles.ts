@@ -40,10 +40,9 @@ export const tabListVariants = ({
 // The focus ring is inset on purpose: tab strips sit in scroll frames
 // (`overflow-x-auto overflow-y-hidden`) that clip anything drawn outside the
 // trigger, so an offset ring was cut off on the top and left.
-// The explicit zero top and side borders matter for anchor tabs: a class such
-// as Metronic's `.text-anchor` (`border: none`) resets every border width to
-// `medium`, and `border-solid` then draws a box around the tab. Buttons never
-// showed it because the Tailwind base layer zeroes their borders.
+// The explicit zero top and side borders matter for anchor tabs: resetting
+// border width ensures `border-solid` does not draw a box around the tab.
+// Buttons never showed it because the Tailwind base layer zeroes their borders.
 export const tabTriggerVariants = ({ className }: TabStyleProps = {}) =>
   cn(
     'relative z-[1] -mb-px inline-flex items-center justify-center border-b-2 border-solid border-b-transparent border-t-0 border-x-0 px-[4px] pt-[4px] pb-[10px] text-sm leading-5 font-semibold text-[var(--tabs-text)] transition-colors cursor-pointer whitespace-nowrap',

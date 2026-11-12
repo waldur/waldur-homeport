@@ -10,6 +10,7 @@ import {
   SquaresFourIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 
 import { Menu } from '../Menu';
 
@@ -90,9 +91,9 @@ export const OrganisationAdminExample: Story = {
 
 /**
  * The app header's own layout (src/navigation/header/AppHeader.tsx) with
- * stand-ins for its data-bound parts. e2e-visual/top-bar-geometry.spec.ts
- * measures it against the geometry the Metronic header had, so keep the
- * classes here the same as AppHeader's.
+ * stand-ins for its data-bound parts. Its play function (and the
+ * AppHeaderGeometry* stories below) pin it to the legacy geometry,
+ * so keep the classes here the same as AppHeader's.
  */
 export const AppHeaderLayout: Story = {
   render: () => (
@@ -154,4 +155,123 @@ export const AppHeaderLayout: Story = {
       }
     />
   ),
+  globals: { viewport: { value: 'widescreen' } },
+  play: ({ canvasElement }) => checkAppHeaderGeometry(canvasElement),
+};
+
+/*
+ * Geometry of AppHeaderLayout, pinned to legacy geometry now that
+ * its stylesheets are gone and there is
+ * nothing left to diff against. Every number was measured on the legacy header
+ * in the signed-in app, at the 13px desktop root and the 12px mobile one: the
+ * spacing is rem-based, so it differs between the two. The Vitest runner sizes
+ * the page from `globals.viewport`, so each layout and theme is its own story.
+ */
+
+const TOLERANCE = 0.3;
+
+const LAYOUTS = {
+  desktop: {
+    height: 65,
+    padding: 32,
+    // ms-[0.25rem] / ms-[0.75rem] at a 13px root.
+    gap: 3.25,
+    userGap: 9.75,
+  },
+  mobile: {
+    height: 55,
+    padding: 15,
+    gap: 3,
+    userGap: 9,
+  },
+} as const;
+
+const near = (actual: number, expected: number, what: string) =>
+  expect(
+    Math.abs(actual - expected),
+    `${what}: ${actual} vs ${expected}`,
+  ).toBeLessThanOrEqual(TOLERANCE);
+
+/** The colour a token resolves to, read through a probe element. */
+const tokenColor = (name: string) => {
+  const probe = document.createElement('div');
+  probe.style.color = `var(${name})`;
+  document.body.appendChild(probe);
+  const color = getComputedStyle(probe).color;
+  probe.remove();
+  return color;
+};
+
+async function checkAppHeaderGeometry(canvasElement: HTMLElement) {
+  const byId = (testId: string) => {
+    const el = canvasElement.querySelector<HTMLElement>(
+      `[data-testid="${testId}"]`,
+    );
+    if (!el) throw new Error(`${testId} is not rendered`);
+    return el;
+  };
+  const box = (testId: string) => byId(testId).getBoundingClientRect();
+
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+  const layout = isDesktop ? LAYOUTS.desktop : LAYOUTS.mobile;
+
+  // The bar.
+  const barEl = byId('top-bar');
+  const bar = barEl.getBoundingClientRect();
+  const cs = getComputedStyle(barEl);
+  const border = parseFloat(cs.borderBottomWidth);
+  near(bar.height, layout.height, 'height');
+  near(parseFloat(cs.paddingLeft), layout.padding, 'padding-left');
+  near(parseFloat(cs.paddingRight), layout.padding, 'padding-right');
+  await expect(border).toBeGreaterThan(0);
+  await expect(`${cs.borderBottomStyle} ${cs.borderBottomColor}`).toBe(
+    `solid ${tokenColor('--border-secondary')}`,
+  );
+  await expect(cs.backgroundColor).toBe(tokenColor('--bg-primary'));
+
+  // The actions.
+  const search = box('search');
+  const support = box('support');
+  const pending = box('pending');
+  const user = box('user');
+  for (const [id, b] of Object.entries({ search, support, pending })) {
+    near(b.width, 40, `${id} width`);
+    near(b.height, 40, `${id} height`);
+    // Centred in the bar above its bottom rule.
+    near(b.y - bar.y, (layout.height - border - 40) / 2, `${id} top`);
+  }
+  near(support.x - search.right, layout.gap, 'search → support');
+  near(pending.x - support.right, layout.gap, 'support → pending');
+  near(user.right, bar.right - layout.padding, 'user menu end');
+
+  if (isDesktop) {
+    near(user.x - pending.right, layout.userGap, 'pending → user');
+    near(box('crumbs').x, bar.x + layout.padding, 'breadcrumbs start');
+    await expect(byId('nav-toggle')).not.toBeVisible();
+    await expect(byId('divider')).not.toBeVisible();
+  } else {
+    const divider = box('divider');
+    near(divider.x - pending.right, layout.gap, 'pending → divider');
+    near(divider.height, 40, 'divider height');
+    near(user.x - divider.right, layout.userGap, 'divider → user');
+    // -ms-[0.5rem] pulls the toggle half a step into the padding.
+    const toggle = box('nav-toggle');
+    near(toggle.x - bar.x, layout.padding - 6, 'nav toggle start');
+    near(toggle.width, 40, 'nav toggle width');
+  }
+}
+
+export const AppHeaderLayoutDark: Story = {
+  ...AppHeaderLayout,
+  globals: { viewport: { value: 'widescreen' }, theme: 'dark' },
+};
+
+export const AppHeaderLayoutMobile: Story = {
+  ...AppHeaderLayout,
+  globals: { viewport: { value: 'mobile' } },
+};
+
+export const AppHeaderLayoutMobileDark: Story = {
+  ...AppHeaderLayout,
+  globals: { viewport: { value: 'mobile' }, theme: 'dark' },
 };

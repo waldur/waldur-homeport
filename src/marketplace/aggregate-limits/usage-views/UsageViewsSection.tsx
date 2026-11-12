@@ -160,7 +160,7 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
             actions={
               variants.length > 1 && (
                 // Labels wrap onto a second line on a narrow card instead of
-                // the strip scrolling, as the Bootstrap strip did.
+                // the strip scrolling.
                 <TabsList bordered={false} aria-label={translate('Usage view')}>
                   {variants.map((v) => (
                     <TabsTrigger

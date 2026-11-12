@@ -36,7 +36,7 @@
       }
     },
     "error": {
-      "description": "Destructive / validation. Called `danger` in the SCSS variables and Bootstrap.",
+      "description": "Destructive / validation. Called `danger` in the SCSS variables.",
       "steps": {
         "25": { "light": "#fffbfa" },
         "50": { "light": "#fef3f2" },
@@ -87,7 +87,7 @@
       }
     },
     "info": {
-      "note": "Sparser than gray/error/warning/success: steps Metronic never defined (25/100/800, and 400 for most hues) are left out rather than invented. `info` and `purple` are byte-identical at every step \u2014 this app's \"info\" hue is the same violet as \"purple\", not blue. Like every ramp, these are the same in both themes: dark UI picks other steps through the semantic tokens.",
+      "note": "Sparser than gray/error/warning/success: unused steps (25/100/800, and 400 for most hues) are left out rather than invented. `info` and `purple` are byte-identical at every step \u2014 this app's \"info\" hue is the same violet as \"purple\", not blue. Like every ramp, these are the same in both themes: dark UI picks other steps through the semantic tokens.",
       "steps": {
         "50": { "light": "#f4f3ff" },
         "200": { "light": "#d9d6fe" },

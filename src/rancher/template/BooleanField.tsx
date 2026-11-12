@@ -8,8 +8,7 @@ import { FieldProps } from '../types';
 import { DecoratedLabel } from './DecoratedLabel';
 
 const renderControl = (props) => (
-  // react-bootstrap's Form.Check rendered its children *instead of* the
-  // input, so this field used to show a label and no checkbox at all.
+  // Renders a styled checkbox with its decorated label.
   <Checkbox
     checked={Boolean(props.input.value)}
     onChange={(e) => props.input.onChange(e.target.checked)}

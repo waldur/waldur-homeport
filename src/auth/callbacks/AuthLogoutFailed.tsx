@@ -17,7 +17,7 @@ export const AuthLogoutFailed: FunctionComponent = () => {
       {typeof message === 'string' && <p className="mt-2.5">{message}</p>}
       <p className="mt-2.5">
         <button
-          className="text-btn inline-flex items-center gap-1.5"
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-primary inline-flex items-center gap-1.5"
           type="button"
           onClick={explicitLogout}
         >

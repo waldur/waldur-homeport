@@ -24,7 +24,7 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   return (
     <div className="copyToClipboard">
       <button
-        className="text-btn"
+        className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary inline-flex items-center"
         type="button"
         aria-label={translate('Copy to clipboard')}
         onClick={onClick}

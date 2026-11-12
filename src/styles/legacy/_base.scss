@@ -5,7 +5,7 @@
   small,
   .small {
     color: var(--text-quaternary);
-    // stylelint-disable-next-line waldur/font-size-scale -- Metronic's .card-title small, kept as it is (moving card text onto the scale is a separate step)
+    // stylelint-disable-next-line waldur/font-size-scale -- .card-title small font-size, kept as it is (moving card text onto the scale is a separate step)
     font-size: var(--card-description-font-size);
   }
 
@@ -35,58 +35,4 @@
 .btn-text-align {
   line-height: 1.5;
   padding: calc(0.75rem + 1px) calc(1.5rem + 1px);
-}
-
-.text-link {
-  background-color: transparent;
-  border: none;
-  display: inline-flex;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  color: var(--text-primary);
-  text-decoration: underline;
-
-  &:hover {
-    color: var(--text-brand-secondary);
-    text-decoration: none;
-  }
-}
-.text-anchor {
-  background-color: transparent;
-  color: var(--text-brand-secondary);
-  text-decoration: none;
-  font-size: var(--text-sm);
-  border: none;
-  cursor: pointer;
-  display: inline;
-  margin: 0;
-  padding: 0;
-
-  &:hover {
-    color: var(--text-brand-secondary);
-    text-decoration: underline !important;
-    transition: all 0.2s ease;
-  }
-  &:disabled {
-    color: var(--text-disabled);
-    cursor: not-allowed;
-    text-decoration: none !important;
-  }
-
-  &.text-anchor-danger {
-    color: var(--status-danger-fg);
-    &:hover {
-      color: var(--status-danger-fg);
-    }
-  }
-}
-.text-btn {
-  background-color: transparent;
-  color: var(--text-quaternary);
-  border: none;
-  cursor: pointer;
-  display: inline;
-  margin: 0;
-  padding: 0;
 }

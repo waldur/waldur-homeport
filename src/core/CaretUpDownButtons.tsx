@@ -27,7 +27,10 @@ export const CaretUpDownButtons = (props: CaretUpDownButtonsProps) => {
         data-testid={props.upTestId}
         onClick={props.onClickUp}
         aria-label={props.upLabel}
-        className={classNames('text-btn', props.upClassName)}
+        className={classNames(
+          'bg-transparent border-0 p-0 m-0 cursor-pointer inline text-quaternary hover:text-primary',
+          props.upClassName,
+        )}
       >
         <CaretUpSmallIcon />
       </button>
@@ -36,7 +39,10 @@ export const CaretUpDownButtons = (props: CaretUpDownButtonsProps) => {
         data-testid={props.downTestId}
         onClick={props.onClickDown}
         aria-label={props.downLabel}
-        className={classNames('text-btn', props.downClassName)}
+        className={classNames(
+          'bg-transparent border-0 p-0 m-0 cursor-pointer inline text-quaternary hover:text-primary',
+          props.downClassName,
+        )}
       >
         <CaretDownSmallIcon />
       </button>

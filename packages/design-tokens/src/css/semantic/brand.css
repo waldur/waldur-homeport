@@ -9,8 +9,8 @@
  *
  * In Tailwind, `text-brand`, `border-brand` and `outline-brand` are
  * --text-brand; the other roles use the arbitrary form
- * (`bg-[var(--bg-brand-solid)]`). In SCSS, read these instead of $primary,
- * which compiles to a static default green.
+ * (`bg-[var(--bg-brand-solid)]`). In SCSS, read these CSS variables so dynamic
+ * tenant branding is respected.
  *
  * Both themes are defined in this file.
  */
@@ -21,7 +21,7 @@
   --bg-brand-primary: var(--brand-50);
   --bg-brand-primary-alt: var(--brand-50);
   --bg-brand-secondary: var(--brand-100);
-  /* One step stronger than --bg-brand-secondary (SCSS $brand-200): the
+  /* One step stronger than --bg-brand-secondary: the
      secondary button's hover and a checked switch's disabled track. */
   --bg-brand-tertiary: var(--brand-200);
   --bg-brand-solid: var(--brand-600);
@@ -47,14 +47,10 @@
      tab's underline and the secondary button's icon. */
   --fg-brand-accent: var(--brand-500);
 
-  /* Focus ring: one ring for everything that doesn't bring its own.
-     Buttons already draw a brand ring (button.css's --btn-*-focus-ring, and
-     Metronic's .btn:focus-visible), but links, breadcrumbs, sidebar rows and
-     anything else with no focus styling of its own fell through to the
-     browser default -- blue on Chrome/Safari, so keyboard users saw two
-     different rings depending on what they landed on. Same brand steps as
-     the button rings: 600 on light, 500 on dark, where the ramp is lighter
-     against dark surfaces. */
+  /* Focus ring: consistent ring for elements that don't bring custom focus styling
+     (links, breadcrumbs, sidebar rows, etc.) instead of falling through to the
+     browser default. Same brand steps as the button rings: 600 on light, 500 on
+     dark, where the ramp is lighter against dark surfaces. */
   --focus-ring-color: var(--brand-600);
   --focus-ring-width: 2px;
   /* 0, like every button in the app -- a ring that hugs one control and floats

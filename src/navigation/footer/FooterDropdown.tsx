@@ -46,7 +46,7 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
           side="top"
           align="end"
           className="p-[6.5px] min-w-[200px]"
-          // Metronic's base row padding with the footer's `px-3`.
+          // Base row padding with the footer's `px-3`.
           density="compact"
         >
           <ul className="m-[0px] list-none p-[0px]">{children}</ul>

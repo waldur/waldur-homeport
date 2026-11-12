@@ -15,7 +15,7 @@ describe('FooterDropdown', () => {
     );
 
     expect(screen.getByText('Test Dropdown')).toBeInTheDocument();
-    // Radix mounts the panel only once open, unlike Metronic's original
+    // Radix mounts the panel only once open, unlike the original
     // always-in-DOM-just-hidden markup this replaces.
     expect(screen.queryByTestId('child')).not.toBeInTheDocument();
 
@@ -24,7 +24,7 @@ describe('FooterDropdown', () => {
   });
 
   // A real <a> row (DocsLink, Privacy policy) once fell through to
-  // Bootstrap's green `a` colour while the plain rows stayed gray. Every
+  // the green `a` colour while the plain rows stayed gray. Every
   // row now carries the shared row colour itself instead of relying on a
   // theme class on the panel. jsdom has no stylesheet cascade, so this
   // checks the class rather than the computed colour.

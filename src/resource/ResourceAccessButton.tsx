@@ -84,10 +84,8 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                 href={endpoint.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                // On the link, not the row: the row's classes go through
-                // tailwind-merge, which reads `text-anchor` and `text-brand`
-                // as two colours and drops `text-anchor`; Slot only joins them.
-                className="text-anchor text-brand"
+                // On the link, not the row: Radix Slot joins row and link classes.
+                className="text-brand hover:underline"
               >
                 <span className="flex items-center">
                   <ArrowSquareOutIcon

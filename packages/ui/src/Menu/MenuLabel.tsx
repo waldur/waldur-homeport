@@ -6,8 +6,7 @@ import { cn } from '../cn';
 
 import { MenuLook, useMenuLook } from './menuContext';
 
-/** A section caption: Metronic's `.menu-section` (nav) or Bootstrap's
- * `.dropdown-header` (actions). */
+/** A section caption: nav section or dropdown header (actions). */
 export const menuLabel = cva('', {
   variants: {
     look: {

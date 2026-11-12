@@ -1,6 +1,8 @@
 import { FC, memo, useCallback, useMemo } from 'react';
 import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
 
+import { LinkButton } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -55,13 +57,9 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
         {
           title: translate('Version'),
           render: ({ row }) => (
-            <button
-              type="button"
-              className="text-anchor text-start"
-              onClick={() => openViewDialog(row)}
-            >
+            <LinkButton onClick={() => openViewDialog(row)}>
               {renderFieldOrDash(row.version)}
-            </button>
+            </LinkButton>
           ),
         },
         {

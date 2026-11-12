@@ -17,7 +17,7 @@ const meta: Meta<typeof Accordion> = {
     docs: {
       description: {
         component:
-          'Accordion (Accordion, AccordionItem, AccordionTrigger, AccordionContent) ported from the shadcn recipe on Radix Accordion. Real heading + button triggers, arrow-key navigation between headers, and the open header in the runtime brand colour. Closed panels unmount — use Collapsible with `keepMounted` for form fields. The filter stories mirror the mobile table filters sidebar: inline table-filter selects (auto-focused, open until blurred) and yes/no checkboxes.',
+          'Accordion (Accordion, AccordionItem, AccordionTrigger, AccordionContent). Real heading + button triggers, arrow-key navigation between headers, and the open header in the runtime brand colour. Closed panels unmount — use Collapsible with `keepMounted` for form fields. The filter stories mirror the mobile table filters sidebar: inline table-filter selects (auto-focused, open until blurred) and yes/no checkboxes.',
       },
     },
   },

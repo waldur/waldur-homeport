@@ -20,7 +20,7 @@ const meta: Meta<typeof Switch> = {
     docs: {
       description: {
         component:
-          'A hidden native checkbox with a drawn track and knob (`peer-*`). Replaces the Bootstrap `.form-switch` / `.form-switch-sm` (44×24 / 36×20); pass `label` for the whole row.',
+          'A hidden native checkbox with a drawn track and knob (`peer-*`) (44×24 / 36×20); pass `label` for the whole row.',
       },
     },
   },

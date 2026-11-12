@@ -2,16 +2,10 @@
  * Tailwind entry point for both the real app (imported by src/index.tsx)
  * and Storybook (.storybook/preview.tsx). One file, so a story and the
  * running app cannot drift on layer order, the px `@theme` overrides or
- * the brand-token bridge. Full reasoning for every choice below:
- * docs/tailwind-shadcn-migration-notes.md.
+ * the brand-token bridge.
  */
 
-/* Layer order theme < base (preflight) < bootstrap < utilities — NOT
-   bootstrap ranked below everything, which broke the real BaseButton
-   outright (Tailwind's preflight reset wiped Bootstrap's own styling). Does
-   NOT fix Bootstrap's !important utility classes (.border, .bg-transparent)
-   colliding with same-named Tailwind utilities — those still need
-   differently-named classes at the call site. See migration notes. */
+/* Layer order: theme < base (preflight) < bootstrap < utilities. */
 @layer theme, base, bootstrap, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
@@ -28,7 +22,7 @@
 @source '../index.html';
 @source '../.storybook';
 
-/* Space between a table's columns, in place of Metronic's .table.gx-*:
+/* Space between a table's columns:
    `table-col-gap-4` pads each cell's inner sides only, so the first and last
    cells keep the edge padding (--table-edge-px) TableView gives them. */
 @utility table-col-gap-* {
@@ -40,7 +34,7 @@
   }
 }
 
-/* Vertical cell padding, in place of Metronic's .table.gy-*:
+/* Vertical cell padding:
    Pads header and body cells, replacing arbitrary `[&_td]:py-* [&_th]:py-*`. */
 @utility table-row-py-* {
   :is(th, td) {
@@ -73,9 +67,8 @@
 
 /* The app's one focus ring, for everything that doesn't style its own —
    links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so
-   Metronic's .btn ring (bootstrap layer) and the BaseButton variants
-   (utilities) still win where they apply, and an element that deliberately
-   suppresses its outline keeps doing so. */
+   the BaseButton variants (utilities) still win where they apply, and an
+   element that deliberately suppresses its outline keeps doing so. */
 @layer base {
   :focus-visible {
     outline: var(--focus-ring-width) solid var(--focus-ring-color);
@@ -83,7 +76,7 @@
   }
 }
 
-/* Preflight's one rule that Bootstrap has no counterpart for, and so the
+/* Preflight's one rule that legacy styles had no counterpart for, and so the
    only part of it that actually reaches the app:
 
      img, svg, video, canvas, audio, iframe, embed, object { display: block }
@@ -116,9 +109,7 @@
    parent and never depended on preflight's rule to begin with. Verify that
    still holds before moving one of them into an inline-flow context. */
 /* The ring's corner for controls that bring no radius of their own. It sits in
-   `bootstrap`, not `base`, because Bootstrap's reboot forced
-   `button { border-radius: 0 }` there; only preflight's `base` copy of that
-   rule is left, which it outranks either way. Without it every plain <button>
+   `bootstrap`, not `base`, so it outranks preflight. Without it plain buttons
    (the column pin, the favourite star) would keep square corners while the
    padded buttons beside them are rounded. A component that sets its own radius still
    wins: same specificity, and its stylesheet loads after this one. */
@@ -146,22 +137,9 @@
     height: revert;
   }
 
-  /* The other preflight rule Bootstrap only half-covers:
-
-       ol, ul, menu { list-style: none; margin: 0; padding: 0 }
-
-     The reboot (styles/legacy/_reboot.scss) has its own `margin-bottom`/
-     `padding-left` for lists, so those win on layer order — `list-style` is
-     the single property with no reboot counterpart, which is why only it is
-     reverted here rather than the whole rule. Without this, every bare
-     <ul>/<ol> loses its bullets: ~30 in .tsx directly, plus every list in
-     Markdown the app renders as user content (SafeMarkdown /
-     TruncatedMarkdown — offering descriptions, announcements, terms of
-     service, user agreements), none of which carry a class to style back.
-
-     Metronic's own list-based components (.menu, .nav, .pagination) set
-     `list-style: none` themselves at class specificity, so they are
-     untouched by this and stay bulletless. */
+  /* Reverts list-style so unstyled ul/ol elements keep their bullets in
+     rendered Markdown and rich text. List-based components (.menu, .nav,
+     .pagination) set `list-style: none` themselves at class specificity. */
   ol,
   ul,
   menu {
@@ -169,12 +147,8 @@
   }
 }
 
-/* The page's base styles, from Metronic's core/layout/_base.scss and the
-   body background in layout/_main.scss. They stay in the `bootstrap` layer,
-   where they always were, so they compete with the reboot
-   (styles/legacy/_reboot.scss) exactly as before. This file loads before the
-   Metronic stylesheet, so the body rules use `html body` to keep beating the
-   reboot's `body` rules regardless of order.
+/* The page's base styles. Placed in the `bootstrap` cascade layer to match
+   precedence.
 
    Root font size: 13px, 12px below md. Every rem in the app is relative to
    it. Body text is 1.077rem (14px at the 13px root). A deployment font's
@@ -219,7 +193,7 @@
   body a:hover,
   body a:active,
   body a:focus {
-    text-decoration: none !important;
+    text-decoration: none;
   }
 
   html body {
@@ -237,7 +211,7 @@
     opacity: 1;
   }
 
-  /* Links fade between colours (Metronic's text component). */
+  /* Links fade between colours. */
   a {
     transition:
       color 0.2s ease,
@@ -289,7 +263,7 @@
   }
 }
 
-/* Thin native scrollbars on desktop, from Metronic's components/_scroll.scss.
+/* Thin native scrollbars on desktop.
    Below lg the platform's own scrollbars are left alone. */
 @layer bootstrap {
   @media (min-width: 992px) {

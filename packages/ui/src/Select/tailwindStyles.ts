@@ -13,14 +13,13 @@ import { cn } from '../cn';
  *    `unstyled ? {} : {...}` branches, as unlayered emotion CSS. Unlayered
  *    beats a normal-priority Tailwind utility regardless of source order,
  *    so those spots need the `!` important modifier.
- * 2. Bootstrap used to generate `!important` utilities under Tailwind's
+ * 2. Legacy utilities used to generate `!important` rules under Tailwind's
  *    names (`border`, `shadow-sm`, `shadow-lg`), which beat Tailwind's
  *    despite its later layer, so this file spelled some values as
- *    arbitrary utilities (`shadow-[...]`). Bootstrap generates no utility
- *    any more (#478); the names are Tailwind's.
+ *    arbitrary utilities (`shadow-[...]`).
  *
- * Values throughout are pinned to the live pre-migration (Bootstrap/SCSS)
- * deployment via computed-style diffing, not eyeballed.
+ * Values throughout are pinned to the legacy deployment via computed-style diffing,
+ * not eyeballed.
  */
 export interface SelectTailwindConfigOptions {
   size?: 'sm';
@@ -127,8 +126,8 @@ export const getSelectTailwindClassNames = <
     placeholder: ({ isDisabled }) =>
       cn(
         'truncate select-none',
-        // `--text-quaternary`, not `--text-quinary`: the old
-        // select's placeholder and a plain Bootstrap `.form-control`'s
+        // `--text-quaternary`, not `--text-quinary`: the
+        // select's placeholder and an input's
         // `::placeholder` render in the same color; `-muted` is a step
         // lighter and only matches elsewhere by coincidence.
         isDisabled ? 'text-[var(--text-disabled)]' : 'text-quaternary',

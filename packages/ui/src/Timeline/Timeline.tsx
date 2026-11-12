@@ -54,7 +54,7 @@ export interface TimelineConnectorProps extends ComponentPropsWithoutRef<'div'> 
   /**
    * Line style variant.
    * - 'solid': 2px solid line in `--border-secondary` (default, matches Version History & Comments)
-   * - 'dashed': 1px dashed line in `--border-divider-medium` (matches legacy Metronic default)
+   * - 'dashed': 1px dashed line in `--border-divider-medium`
    * @default 'solid'
    */
   variant?: 'solid' | 'dashed';

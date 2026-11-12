@@ -1,13 +1,8 @@
 /**
- * Button color tokens for the Tailwind/shadcn BaseButton rebuild.
+ * Button color tokens for BaseButton.
  *
  * Composed from the base ramps in colors.css and the runtime brand ramp
- * (--brand-*, set by this package's initBrandTokens()). Every
- * mapping below was cross-checked against the real BaseButton via
- * getComputedStyle and against Waldur's reference design system — see
- * waldur-homeport/docs/tailwind-shadcn-migration-notes.md for the
- * cross-check methodology and the evidence behind every per-state color
- * fix below.
+ * (--brand-*, set by this package's initBrandTokens()).
  *
  * primary/secondary reference the runtime --brand-* ramp directly
  * (brand-reactive). danger/warning/success compose from the fixed
@@ -16,8 +11,7 @@
  * but its focus ring references the brand ramp, so tertiary buttons do
  * need the brand tokens seeded.
  *
- * Zero dependency on Metronic's compiled SCSS — deliberate, so any
- * consumer gets the same look without shipping Metronic.
+ * Standalone tokens with zero dependency on SCSS stylesheets.
  */
 @import '../primitives/colors.css';
 
@@ -44,9 +38,9 @@
   /* Brand, not gray: the gray ring was 1.10:1 on white, failing WCAG 1.4.11. */
   --btn-tertiary-focus-ring: var(--brand-600);
 
-  /* Deliberately separate from --btn-tertiary-bg-hover — see migration notes. */
+  /* Deliberately separate from --btn-tertiary-bg-hover. */
   --btn-text-secondary-hover-bg: var(--color-gray-100);
-  /* Now the same brand ring as tertiary; the hover bg above stays separate. */
+  /* Brand ring matching tertiary. */
   --btn-text-secondary-focus-ring: var(--brand-600);
 
   /* danger/warning/success text and pressed fills are the 700 step: the
@@ -82,11 +76,11 @@
      across all three since the real button uses the same value for all
      of them, same precedent as the shared --btn-disabled-* tokens above.
      White here, on the dark 700 press fills; the dark theme presses to
-     light fills and turns it dark. See migration notes. */
+     light fills and turns it dark. */
   --btn-pressed-text-on-vivid: #ffffff;
 
-  /* text-primary is genuinely asymmetric between themes — light is
-     brand-reactive, dark is a fixed gray. See migration notes. */
+  /* text-primary is asymmetric between themes: light is
+     brand-reactive, dark is a fixed gray. */
   --btn-text-primary-color: var(--brand-700);
   --btn-text-secondary-color: var(--color-gray-700);
   --btn-text-danger-color: var(--color-error-700);
@@ -101,15 +95,12 @@
      brightens all the way to gray-50, since gray-300's contrast against a
      dark page is too weak to double as feedback. Asymmetric, like
      --btn-pressed-text-on-vivid, which follows its press fill: white on
-     the dark light-theme fills, dark on the light dark-theme fills. See
-     migration notes. */
+     the dark light-theme fills, dark on the light dark-theme fills. */
   --btn-text-primary-pressed: var(--btn-text-primary-color);
 }
 
 :root[data-theme='dark'] {
-  /* Missing entirely before — fell back to :root's brand-600, one step
-     too dark for a ring meant to stand out against a dark page. See
-     migration notes. */
+  /* Stands out against dark surfaces. */
   --btn-primary-focus-ring: var(--brand-500);
 
   --btn-secondary-bg: var(--brand-900);

@@ -296,8 +296,7 @@ describe('bootstrapCssUsage', () => {
     });
 
     it('compile from legacy/_mixins.scss alone', () => {
-      // Bootstrap's _config.scss is gone (#481), so every partial is on its
-      // own: each must compile with nothing but the mixins ahead of it.
+      // Every partial is standalone: each must compile with nothing but the mixins ahead of it.
       expect(own).toHaveLength(PARTIALS.length);
       for (const p of own) {
         expect(() => compilePartial(p.scss), p.name).not.toThrow();

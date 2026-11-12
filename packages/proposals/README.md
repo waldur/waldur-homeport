@@ -34,7 +34,7 @@ proposal domain built from them.
 
 ## Moving code here
 
-Follow the `waldur-form` extraction (#450): `git mv` the module into this
+Follow the `waldur-form` extraction: `git mv` the module into this
 package, replace the old file in `src/` with a one-line re-export so the
 portal's imports do not change, and swap the module's `@/` imports for
 their package equivalents (`waldur-i18n-runtime`, `waldur-form`,
@@ -46,7 +46,7 @@ Still in `src/` and next in line:
   `ContributionCard` and `useContributionActions` here. Move it once the
   open MRs editing it (!8254, !8255) have merged, and drop the copies.
 - `StepChecklistSection.tsx`, the step's form: needs file upload in
-  `waldur-form` (homeport #482).
+  `waldur-form`.
 - The workflow timeline: needs `FormSteps`/`ProgressSteps` in `waldur-ui`.
 - Resource requests and activity: need tables. The portal's is now the
-  `waldur-table` package, so these can move (homeport #454).
+  `waldur-table` package, so these can move.

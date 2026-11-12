@@ -212,7 +212,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   // at once used to fire each AsyncSelectFilter's forced `autoFocus: true`
   // (useSelect.ts's `tableFilterProps`) simultaneously, starving the main
   // thread for over a second — reported live as the mobile filter drawer's
-  // rows rendering empty and disappearing. react-bootstrap's Accordion.Body
+  // rows rendering empty and disappearing. The legacy accordion body
   // mounted everything, so this used to need a manual `isExpanded` gate.
   return (
     <AccordionItem value={props.name}>

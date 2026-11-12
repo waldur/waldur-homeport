@@ -155,7 +155,7 @@ export const HpcFilesTab: FC<{ resource: Resource }> = ({ resource }) => {
         render: ({ row }) => (
           <button
             type="button"
-            className="text-btn flex items-center gap-2 text-start"
+            className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-primary flex items-center gap-2 text-start disabled:cursor-not-allowed disabled:text-[var(--text-disabled)]"
             onClick={() => open(row)}
             disabled={!currentPath}
           >

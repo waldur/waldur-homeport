@@ -1,8 +1,4 @@
-// The app's SCSS entry point: Waldur's own legacy stylesheets, and nothing
-// else. Bootstrap and Metronic are gone — the npm package with them (#481) —
-// so there is no Sass configuration step any more: no functions, no variable
-// overrides, no `_config.scss`. What is left descends from those stylesheets
-// and stands on its own.
+// The application's SCSS entry point.
 
 // At the top level on purpose, not inside the layer below: Sass scopes a
 // variable declared in a block to that block, and `legacy/matrix/call-livekit`
@@ -12,8 +8,7 @@
 // Named cascade layer so Tailwind utilities can outrank this on pages where
 // both are loaded — matches src/tailwind.css's `@layer bootstrap` order. The
 // name is the layer's, kept because src/tailwind.css declares the order
-// `theme, base, bootstrap, utilities`; see
-// docs/tailwind-shadcn-migration-notes.md for why these rank where they do.
+// `theme, base, bootstrap, utilities`.
 @layer bootstrap {
   // stylelint-disable-next-line no-invalid-position-at-import-rule -- layered on purpose
   @import 'legacy/index';

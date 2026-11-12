@@ -114,16 +114,12 @@ export const MobileViewport: Story = {
  * — hovering the "Name" cell reveals a funnel icon; clicking it adds a
  * "name" filter using that row's own value, without opening the filter
  * menu. `TableBody.tsx`'s `hasFilterMenu()` gates the icon on a real DOM
- * query, `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}` —
- * a hardcoded selector (Metronic's own pre-Radix markup assumption, never
- * updated), not a React prop check. Real app pages always have
- * `#kt_content_container` as their content wrapper; Storybook doesn't, so
- * this story adds it by hand — omit it and the icon silently never
- * appears, exactly as it would if this table were rendered outside the
- * real page shell. `filters={tableStoryFilters}` is what makes
- * `#filter-item-name` exist in the first place (`TableFiltersMenu`'s
- * "Add filter" list `forceMount`s its content regardless of open state —
- * see that file's own comment).
+ * query, `#kt_content_container [data-slot="table-filters-menu"] #filter-item-{key}`.
+ * Real app pages always have `#kt_content_container` as their content wrapper;
+ * Storybook doesn't, so this story adds it by hand.
+ * `filters={tableStoryFilters}` is what makes `#filter-item-name` exist in the
+ * first place (`TableFiltersMenu`'s "Add filter" list `forceMount`s its content
+ * regardless of open state).
  *
  * That DOM query runs synchronously during `TableCell`'s render, and
  * `TableCell`/`TableCells`/`TableBody` are all `memo`'d — so the query's

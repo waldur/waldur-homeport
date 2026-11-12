@@ -252,9 +252,7 @@ export interface TableProps<RowType = any> extends TableState {
    * The status tint of a row. Prefer it to `rowClass` for "this row is
    * overdue / just saved / needs attention": a variant is checked by the
    * compiler and painted from the status matrix, where a class string is
-   * neither — the Bootstrap `table-danger` and `table-success` it replaces
-   * were defined in no stylesheet and so painted nothing at all. Return
-   * `undefined` for an ordinary row.
+   * neither. Return `undefined` for an ordinary row.
    */
   rowVariant?:
     (({ row }: { row: RowType }) => RowVariant | undefined) | RowVariant;

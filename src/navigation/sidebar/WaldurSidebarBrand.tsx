@@ -56,7 +56,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
     <Link state="profile.details">
       {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
         <>
-          {/* Metronic's original collapsed-and-not-hovered aside
+          {/* Collapsed-and-not-hovered aside
               behavior swaps to this compact mark when truly collapsed,
               not just hides the brand row outright —
               group-data-[collapsible=icon]/panel:block does the same swap here.
@@ -70,8 +70,8 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
           <img
             src={sidebarLogo}
             alt={logoAlt}
-            // w-full, not just max-h-7 max-w-[190px] — the old Metronic
-            // .logo class only caps max-height, leaving width auto so
+            // w-full, not just max-h-7 max-w-[190px] — the legacy
+            // logo styling only caps max-height, leaving width auto so
             // the browser scales it to the image's own aspect ratio;
             // forcing width to 190px here independently of height
             // stretched every logo whose natural ratio doesn't happen
@@ -82,8 +82,8 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
         </>
       ) : sidebarLogo ? (
         // No SIDEBAR_LOGO_MOBILE configured for this deployment — no
-        // compact mark to swap to, so (like Metronic without one
-        // either) this visually hides in the collapsed rail rather than
+        // compact mark to swap to, so
+        // this visually hides in the collapsed rail rather than
         // rendering a truncated/oversized full wordmark into ~48px.
         <img
           src={sidebarLogo}

@@ -65,9 +65,8 @@ describe('VerticalProgressSteps', () => {
     }
   });
 
-  // Regression: the current step used `bg-${variant}`, i.e. `bg-primary`.
-  // Once Bootstrap stopped emitting .bg-primary that resolved to the white
-  // surface (and lost to the component stylesheet anyway), leaving a white
+  // Regression: the current step used `bg-${variant}`, i.e. `bg-primary`,
+  // which resolved to the white surface, leaving a white
   // icon on a light-gray circle.
   it('never builds a bg-primary or bg-secondary class', () => {
     render(<VerticalProgressSteps steps={steps(1)} />);

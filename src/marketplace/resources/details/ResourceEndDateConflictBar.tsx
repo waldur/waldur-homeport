@@ -35,7 +35,12 @@ export const ResourceEndDateConflictBar = () => {
             )}
           </span>
         </p>
-        <button className="text-btn ms-auto" onClick={toggle}>
+        <button
+          type="button"
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary ms-auto inline-flex items-center"
+          onClick={toggle}
+          aria-label={translate('Dismiss')}
+        >
           <XIcon size={20} weight="bold" />
         </button>
       </div>
