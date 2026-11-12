@@ -185,7 +185,7 @@ A class or attribute can have readers that no unit test covers. Before removing 
 - **Stylesheets:** `.name` in `.scss`/`.css`, including nested BEM (`&--modifier`, `&__part`).
 - **Arbitrary variants:** `[&_.name]`, `has-[.name]`, `group-[.name]` and `[&_[data-slot=name]]` in class strings.
 - **App code:** `querySelector`, `closest`, `matches`, `classList`, `:has(…)`.
-- **Tests and stories:** `toHaveClass`, `querySelector`, `getByTestId`, play functions; `e2e/` and `e2e-visual/`.
+- **Tests and stories:** `toHaveClass`, `querySelector`, `getByTestId`, play functions; `e2e/`.
 - **The integration suite:** waldur-integration-testing's `tests/**/*.py`, especially `tests/components/homeport_hooks.py`.
 - **Git history:** `git log -G'\.name\b' -- '*.scss' '*.css'` shows whether the name was ever styled.
 
