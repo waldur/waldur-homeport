@@ -42705,6 +42705,7 @@
   },
   "OS": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "blocks"
     }
   },
@@ -59545,6 +59546,7 @@
   },
   "SSH Key": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "blocks"
     }
   },
