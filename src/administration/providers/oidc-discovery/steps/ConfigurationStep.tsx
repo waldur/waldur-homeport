@@ -191,7 +191,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
         placeholder="sub"
         label={translate('User Claim')}
         description={translate(
-          'The OIDC claim to use as the value for user lookup.',
+          'Space-separated list of OIDC claims to use as the value for user lookup; the first one present is used. Read from the UserInfo response only.',
         )}
       />
       <StringGroup
