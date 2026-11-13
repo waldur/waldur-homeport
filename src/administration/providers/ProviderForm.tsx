@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Fragment } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
 import { AlertItem, BaseButton } from 'waldur-ui';
@@ -17,6 +18,8 @@ import {
   isProfileAttributeEnabled,
   ProfileAttribute,
 } from '@/user/support/profileAttributes';
+
+import { EmailClaimWarning } from './EmailClaimWarning';
 
 // Component for allowed redirects field with individual URL entries
 const AllowedRedirectsField = () => {
@@ -266,7 +269,7 @@ export const ProviderForm = () => {
         name="extra_fields"
         label={translate('Extra fields')}
         help={translate(
-          'Space-separated list of additional OIDC claims to persist in the user profile details.',
+          'Space-separated list of additional OIDC claims to persist in the user profile details. Read from the UserInfo response only.',
         )}
       />
       <StringGroup
@@ -280,18 +283,22 @@ export const ProviderForm = () => {
         placeholder="sub"
         label={translate('User claim')}
         help={translate(
-          'Space seprated list of OIDC claims to be used as the value for the lookup field.',
+          'Space-separated list of OIDC claims to be used as the value for the lookup field. Read from the UserInfo response only.',
         )}
       />
       {visibleMappingFields.map(({ field, label }) => (
-        <StringGroup
-          key={field}
-          name={`attribute_mapping.${field}`}
-          label={label}
-          help={translate(
-            'The OIDC claim to be used as the value for this field.',
+        <Fragment key={field}>
+          <StringGroup
+            name={`attribute_mapping.${field}`}
+            label={label}
+            help={translate(
+              'Space-separated list of OIDC claims; the first one present is used. Claims are read from the UserInfo response and the ID token, with UserInfo taking precedence.',
+            )}
+          />
+          {field === 'email' && (
+            <EmailClaimWarning claims={savedMapping.email} />
           )}
-        />
+        </Fragment>
       ))}
       <AllowedRedirectsField />
       <BooleanGroup name="is_active" label={translate('Enabled')} />

@@ -10,6 +10,8 @@ import {
   CardContent,
 } from 'waldur-ui';
 
+import { EmailClaimWarning } from '@/administration/providers/EmailClaimWarning';
+import { ID_TOKEN_PROTOCOL_CLAIMS } from '@/administration/providers/oidcClaims';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import {
@@ -127,7 +129,17 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
             value={mapping.customClaim || ''}
             onChange={(e) => handleCustomClaimChange(e.target.value)}
             aria-label={translate('Custom claim name')}
-            placeholder={translate('Enter custom claim name')}
+            placeholder={translate(
+              'Claim name, or several separated by spaces',
+            )}
+          />
+        )}
+
+        {field.field === 'email' && (
+          <EmailClaimWarning
+            claims={
+              mapping?.isCustom ? mapping.customClaim : mapping?.selectedClaim
+            }
           />
         )}
 
@@ -179,7 +191,11 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
       ...(values.discoveryResult?.claims_supported || []),
       ...(values.manualClaims || []),
     ];
-    return [...new Set(claims)];
+    // ID-token protocol claims (iss, aud, nonce, …) are never mapped by the
+    // backend, so offering them would only produce a mapping that stays empty.
+    return [...new Set(claims)].filter(
+      (claim) => !ID_TOKEN_PROTOCOL_CLAIMS.has(claim),
+    );
   }, [values.discoveryResult?.claims_supported, values.manualClaims]);
 
   // Initialize mappings from existing provider or auto-select first available claim
@@ -253,7 +269,7 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
       <h4 className="mb-3">{translate('Claim Mapping')}</h4>
       <p className="text-quaternary mb-3">
         {translate(
-          'Map OIDC claims from your identity provider to Waldur user profile fields. Only enabled profile attributes are shown.',
+          'Map OIDC claims from your identity provider to Waldur user profile fields. Claims are read from the UserInfo response and the ID token, with UserInfo taking precedence. A custom claim may list several claims separated by spaces; the first one present is used. Only enabled profile attributes are shown.',
         )}
       </p>
 

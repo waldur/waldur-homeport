@@ -327,4 +327,30 @@ describe('UpdateProviderDialog', () => {
 
     expect(screen.getByText('Civil number field')).toBeInTheDocument();
   });
+
+  it('warns when email is mapped to a claim that may not be an address', () => {
+    renderWithProviders(
+      <UpdateProviderDialog
+        resolve={oidcResolve({
+          attribute_mapping: { email: 'preferred_username email' },
+        })}
+      />,
+    );
+
+    expect(
+      screen.getByText('This claim may not be a verified email address'),
+    ).toBeInTheDocument();
+  });
+
+  it('does not warn when email is mapped to the email claim', () => {
+    renderWithProviders(
+      <UpdateProviderDialog
+        resolve={oidcResolve({ attribute_mapping: { email: 'email' } })}
+      />,
+    );
+
+    expect(
+      screen.queryByText('This claim may not be a verified email address'),
+    ).not.toBeInTheDocument();
+  });
 });

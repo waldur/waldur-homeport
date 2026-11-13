@@ -12415,6 +12415,11 @@
       "feature_area": "steps"
     }
   },
+  "Claim name, or several separated by spaces": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "Claims": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -23224,11 +23229,6 @@
   "Enter custom IP": {
     "context": {
       "feature_area": "update-internal-ips"
-    }
-  },
-  "Enter custom claim name": {
-    "context": {
-      "feature_area": "steps"
     }
   },
   "Enter custom message...": {
@@ -35469,7 +35469,7 @@
       "feature_area": "setup"
     }
   },
-  "Map OIDC claims from your identity provider to Waldur user profile fields. Only enabled profile attributes are shown.": {
+  "Map OIDC claims from your identity provider to Waldur user profile fields. Claims are read from the UserInfo response and the ID token, with UserInfo taking precedence. A custom claim may list several claims separated by spaces; the first one present is used. Only enabled profile attributes are shown.": {
     "context": {
       "feature_area": "steps"
     }
@@ -64494,12 +64494,22 @@
       "feature_area": "common"
     }
   },
-  "Space seprated list of OIDC claims to be used as the value for the lookup field.": {
+  "Space-separated list of OIDC claims to be used as the value for the lookup field. Read from the UserInfo response only.": {
     "context": {
       "feature_area": "providers"
     }
   },
-  "Space-separated list of additional OIDC claims to persist in the user profile details.": {
+  "Space-separated list of OIDC claims to use as the value for user lookup; the first one present is used. Read from the UserInfo response only.": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
+  "Space-separated list of OIDC claims; the first one present is used. Claims are read from the UserInfo response and the ID token, with UserInfo taking precedence.": {
+    "context": {
+      "feature_area": "providers"
+    }
+  },
+  "Space-separated list of additional OIDC claims to persist in the user profile details. Read from the UserInfo response only.": {
     "context": {
       "feature_area": "providers"
     }
@@ -67575,16 +67585,6 @@
       "feature_area": "steps"
     }
   },
-  "The OIDC claim to be used as the value for this field.": {
-    "context": {
-      "feature_area": "providers"
-    }
-  },
-  "The OIDC claim to use as the value for user lookup.": {
-    "context": {
-      "feature_area": "steps"
-    }
-  },
   "The OIDC discovery endpoint URL. You can enter either the full .well-known/openid-configuration URL or the issuer base URL.": {
     "context": {
       "feature_area": "steps"
@@ -69211,6 +69211,11 @@
   "The managers of the offerings accepted into the call. Each offering’s provider manages its team in the marketplace; the call cannot invite them.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "The mapped email is trusted at sign-in: it can link the login to an existing account with the same email, accept invitations sent to it, and decide whether the user may sign in at all. Map it only if the identity provider guarantees the value is the address of the user, for example a single-tenant Entra ID application whose sign-in names are the email addresses of its users.": {
+    "context": {
+      "feature_area": "providers"
     }
   },
   "The maximum must not be below the minimum.": {
@@ -71690,6 +71695,11 @@
   "This check uses your identity from your account. Complete your profile to continue.": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "This claim may not be a verified email address": {
+    "context": {
+      "feature_area": "providers"
     }
   },
   "This cluster was configured with a different topology than the offering now allows.": {
