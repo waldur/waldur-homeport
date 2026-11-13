@@ -40,10 +40,16 @@ export function useMatrixTotalUnread(excludeRoomId?: string | null): number {
     };
     recompute();
     client.on('Room.timeline' as any, recompute);
+    // Rooms are encrypted: a live event reaches the timeline undecrypted, and
+    // the SDK only raises the room's count once it decrypts. The room event it
+    // emits then is not re-emitted on the client, but the SDK's own decryption
+    // handler is registered first, so the count is already raised here.
+    client.on('Event.decrypted' as any, recompute);
     client.on('Room.receipt' as any, recompute);
     client.on('accountData' as any, recompute);
     return () => {
       client.removeListener('Room.timeline' as any, recompute);
+      client.removeListener('Event.decrypted' as any, recompute);
       client.removeListener('Room.receipt' as any, recompute);
       client.removeListener('accountData' as any, recompute);
     };

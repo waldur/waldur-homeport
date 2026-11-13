@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { matrixRoomsList } from 'waldur-js-client';
 
@@ -7,21 +7,30 @@ import { useUser } from '@/workspace/hooks';
 
 import { useMatrixTotalUnread } from './useMatrixTotalUnread';
 
-const { client } = vi.hoisted(() => {
-  const room = (roomId: string, unread: number) => ({
+const { client, unread, emit } = vi.hoisted(() => {
+  const unread: Record<string, number> = {};
+  const listeners: Record<string, Set<(...args: any[]) => void>> = {};
+  const room = (roomId: string) => ({
     roomId,
     getMyMembership: () => 'join',
-    getUnreadNotificationCount: () => unread,
+    getUnreadNotificationCount: () => unread[roomId],
   });
   return {
+    unread,
+    emit: (name: string, ...args: any[]) =>
+      listeners[name]?.forEach((listener) => listener(...args)),
     client: {
       getRooms: () => [
-        room('!project:localhost', 3),
-        room('!dm:localhost', 2),
-        room('!other-project:localhost', 1),
+        room('!project:localhost'),
+        room('!dm:localhost'),
+        room('!other-project:localhost'),
       ],
-      on: () => undefined,
-      removeListener: () => undefined,
+      on: (name: string, listener: (...args: any[]) => void) => {
+        (listeners[name] ??= new Set()).add(listener);
+      },
+      removeListener: (name: string, listener: (...args: any[]) => void) => {
+        listeners[name]?.delete(listener);
+      },
     },
   };
 });
@@ -33,6 +42,11 @@ vi.mock('./useMatrixClient', () => ({
 
 describe('useMatrixTotalUnread', () => {
   beforeEach(() => {
+    Object.assign(unread, {
+      '!project:localhost': 3,
+      '!dm:localhost': 2,
+      '!other-project:localhost': 1,
+    });
     vi.mocked(useUser).mockReturnValue({ uuid: 'user-1' } as any);
     vi.mocked(matrixRoomsList).mockResolvedValue({
       data: [
@@ -61,5 +75,20 @@ describe('useMatrixTotalUnread', () => {
 
     await waitFor(() => expect(matrixRoomsList).toHaveBeenCalled());
     await waitFor(() => expect(result.current).toBe(1));
+  });
+
+  // In an encrypted room the event reaches the timeline still encrypted; the
+  // SDK raises the room's count only once it decrypts, and the room event it
+  // emits for that is not re-emitted on the client.
+  it('follows a count raised when a live event decrypts', async () => {
+    const { result } = renderHookWithProviders(() => useMatrixTotalUnread());
+    await waitFor(() => expect(result.current).toBe(4));
+
+    act(() => {
+      unread['!project:localhost'] = 4;
+      emit('Event.decrypted', { getRoomId: () => '!project:localhost' });
+    });
+
+    await waitFor(() => expect(result.current).toBe(5));
   });
 });
