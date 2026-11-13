@@ -29168,6 +29168,7 @@
       "feature_area": "workflow-description"
     }
   },
+  "How long, in minutes, an address that reached PASSWORD_FAILURES_PER_ADDRESS_LIMIT is refused password sign-in, re-authentication with a password and the admin login.": {},
   "How long, in seconds, a re-authentication grant stays usable. Users confirm their identity again, with their password or a passkey, before changing their email, their API token lifetime, their passkeys or their personal access tokens; the grant this returns is good for one such change within this time.": {},
   "How maintenance notifications are delivered.": {},
   "How many days ahead a deadline counts as due soon: for reviews on the call manager dashboard, where past-due reviews are always included, and for the tasks in My tasks, where past-due tasks count as overdue instead.": {},
@@ -29187,6 +29188,7 @@
       "feature_area": "update"
     }
   },
+  "How many failed password attempts one client address may make, across all usernames, within PASSWORD_FAILURES_PER_ADDRESS_WINDOW_MINUTES of its first. An address that reaches it gets 429 from password sign-in, re-authentication with a password and the admin login for PASSWORD_FAILURES_PER_ADDRESS_COOLOFF_MINUTES, and is then counted afresh. Successful attempts do not count. IPv6 addresses count per /64. 0 turns the limit off. Accounts are locked separately, after 5 failures, for 10 minutes.": {},
   "How many invoice lines the merge rewrites under the chosen policy, and which usage summaries it recomputes afterwards.": {
     "context": {
       "feature_area": "offering-merges"
@@ -54989,12 +54991,12 @@
       "feature_area": "features"
     }
   },
-  "Render the SRAM integration administration page and SRAM markers in team lists. Backend access is gated separately on the SRAM_INTEGRATION_ENABLED Constance setting.": {
+  "Render the SRAM integration administration page and SRAM markers in team lists. Backend access is gated separately on the SRAM_INTEGRATION_ENABLED setting.": {
     "context": {
       "feature_area": "features"
     }
   },
-  "Render the project Matrix chat UI. Backend access is gated separately on the MATRIX_ENABLED Constance setting.": {
+  "Render the project Matrix chat UI. Backend access is gated separately on the MATRIX_ENABLED setting.": {
     "context": {
       "feature_area": "features"
     }
@@ -63267,7 +63269,7 @@
       "feature_area": "integration"
     }
   },
-  "Show affiliate program menus and pages. Backend enforcement is controlled separately by the AFFILIATES_ENABLED Constance setting.": {
+  "Show affiliate program menus and pages. Backend enforcement is controlled separately by the AFFILIATES_ENABLED setting.": {
     "context": {
       "feature_area": "features"
     }
@@ -70936,6 +70938,7 @@
       "feature_area": "manage"
     }
   },
+  "The window, in minutes from an address's first failed password, over which PASSWORD_FAILURES_PER_ADDRESS_LIMIT counts that address's failures.": {},
   "The wording cannot be rendered.": {
     "context": {
       "feature_area": "mail"
