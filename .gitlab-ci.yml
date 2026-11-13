@@ -373,7 +373,11 @@ Run Storybook tests:
         - .storybook/**/*
       allow_failure: true
   script:
-    - yarn test:storybook
+    # In thirds, each in a fresh browser: one Chromium page running every
+    # story file in turn fills up and is closed mid-run.
+    - yarn test:storybook --shard=1/3
+    - yarn test:storybook --shard=2/3
+    - yarn test:storybook --shard=3/3
 
 Run E2E tests:
   image:
