@@ -11,11 +11,12 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { BaseButton, Card, CardContent } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
 
 import { LONG_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { ModelCard1 } from '@/core/ModelCard1';
 import { translate } from '@/i18n';
 import {
   findResourcePlan,
@@ -25,6 +26,7 @@ import {
   formatQuotaUnits,
   getQuotaCellProps,
 } from '@/marketplace/resources/details/ResourceComponentItem';
+import { PublicResourceLink } from '@/marketplace/resources/list/PublicResourceLink';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { getResourceAccessEndpoints, isSshFormat } from '@/resource/utils';
 import { useNotify } from '@/store/notify';
@@ -90,118 +92,113 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
   const hasGettingStarted = offering?.getting_started || endpoints.length > 0;
 
   return (
-    <Card bordered className="mb-2.5">
-      <CardContent className="py-3">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-1.5">
-          <div className="grow">
-            <h5 className="mb-1">{resource.name}</h5>
-            <small className="text-quaternary">
-              {resource.offering_name} ({resource.category_title})
-            </small>
-          </div>
-          <ResourceStateField
-            resource={resource}
-            shape="pill"
-            tone="outline"
-            size="sm"
-          />
+    <ModelCard1
+      title={resource.name}
+      titleNode={
+        <span className="flex items-center justify-between gap-2">
+          <PublicResourceLink row={resource} />
+          <ResourceStateField resource={resource} shape="pill" tone="outline" />
+        </span>
+      }
+      body={
+        <div className="text-sm">
+          <PropertyList
+            variant="summary"
+            termWidth="sm"
+            space={1.5}
+            hideIfEmpty
+          >
+            <PropertyItem
+              label={translate('Offering')}
+              value={`${resource.offering_name} (${resource.category_title})`}
+            />
+            <PropertyItem
+              label={translate('Access resource')}
+              value={
+                endpoints.length > 0 && (
+                  <span className="flex flex-wrap gap-x-3 gap-y-1">
+                    {endpoints.map((endpoint, index) => (
+                      <span key={index} className="flex items-center">
+                        <a
+                          href={endpoint.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-brand no-underline flex items-center"
+                        >
+                          <ArrowSquareOutIcon
+                            size={14}
+                            weight="bold"
+                            className="me-1"
+                          />
+                          {endpoint.name}
+                        </a>
+                        <BaseButton
+                          variant="text-secondary"
+                          onClick={() => copyText(endpoint.url)}
+                          tooltip={
+                            isSshFormat(endpoint.url) && resource.username
+                              ? formatSshCommand(
+                                  endpoint.url,
+                                  resource.username,
+                                )
+                              : endpoint.url
+                          }
+                          iconNode={<CopyIcon size={14} weight="bold" />}
+                        />
+                      </span>
+                    ))}
+                  </span>
+                )
+              }
+            />
+            <PropertyItem
+              label={translate('Description')}
+              value={offering?.description}
+            />
+            <PropertyItem
+              label={translate('Components')}
+              value={
+                isLoadingOffering ? (
+                  <span className="flex items-center text-quaternary">
+                    <LoadingSpinnerSimple className="me-1.5" />
+                    {translate('Loading details...')}
+                  </span>
+                ) : (
+                  components.length > 0 && (
+                    <span className="flex flex-wrap gap-x-4 gap-y-1">
+                      {components
+                        .slice(0, MAX_COMPONENTS_DISPLAY)
+                        .map((component) => (
+                          <span key={component.type}>
+                            <span className="font-medium">
+                              {component.limit
+                                ? `${component.usage}/${component.limit}`
+                                : component.usage}
+                              {component.isTotal &&
+                                ` ${formatQuotaUnits(undefined, true)}`}
+                            </span>{' '}
+                            <span className="text-quaternary">
+                              {component.title}
+                            </span>
+                          </span>
+                        ))}
+                      {components.length > MAX_COMPONENTS_DISPLAY && (
+                        <span className="text-quaternary">
+                          {translate('+{count} more', {
+                            count: components.length - MAX_COMPONENTS_DISPLAY,
+                          })}
+                        </span>
+                      )}
+                    </span>
+                  )
+                )
+              }
+            />
+          </PropertyList>
         </div>
-
-        {/* Offering description */}
-        {offering?.description && (
-          <p className="text-quaternary text-xs mb-2.5">
-            {offering.description}
-          </p>
-        )}
-
-        {/* Components section */}
-        {isLoadingOffering ? (
-          <div className="flex items-center text-quaternary mb-2.5">
-            {}
-            <LoadingSpinnerSimple className="me-1.5" />
-            <span className="text-xs">{translate('Loading details...')}</span>
-          </div>
-        ) : (
-          components.length > 0 && (
-            <div className="mb-2.5">
-              <div className="text-quaternary text-xs font-medium mb-1.5">
-                {translate('Components')}
-              </div>
-              <div className="grid grid-cols-2 gap-1.5 md:grid-cols-4">
-                {components
-                  .slice(0, MAX_COMPONENTS_DISPLAY)
-                  .map((component) => (
-                    <div key={component.type}>
-                      <div className="border border-secondary rounded-lg p-1.5 text-center">
-                        <div className="font-medium">
-                          {component.limit
-                            ? `${component.usage}/${component.limit}`
-                            : component.usage}
-                          {component.isTotal &&
-                            ` ${formatQuotaUnits(undefined, true)}`}
-                        </div>
-                        <div className="text-quaternary text-xs">
-                          {component.title}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-              {components.length > MAX_COMPONENTS_DISPLAY && (
-                <div className="text-quaternary text-xs mt-1">
-                  {translate('+{count} more', {
-                    count: components.length - MAX_COMPONENTS_DISPLAY,
-                  })}
-                </div>
-              )}
-            </div>
-          )
-        )}
-
-        {/* Access endpoints */}
-        {endpoints.length > 0 && (
-          <div className="mb-2.5">
-            <div className="text-quaternary text-xs font-medium mb-1.5">
-              {translate('Access resource')}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {endpoints.map((endpoint, index) => (
-                <div
-                  key={index}
-                  className="flex items-center border border-secondary rounded-lg px-1.5 py-1"
-                >
-                  <a
-                    href={endpoint.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-brand no-underline flex items-center me-1.5"
-                  >
-                    <ArrowSquareOutIcon
-                      size={14}
-                      weight="bold"
-                      className="me-1"
-                    />
-                    <span className="text-xs">{endpoint.name}</span>
-                  </a>
-                  <BaseButton
-                    variant="text-secondary"
-                    onClick={() => copyText(endpoint.url)}
-                    tooltip={
-                      isSshFormat(endpoint.url) && resource.username
-                        ? formatSshCommand(endpoint.url, resource.username)
-                        : endpoint.url
-                    }
-                    iconNode={<CopyIcon size={14} weight="bold" />}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Actions */}
-        <div className="flex justify-between items-center">
+      }
+      footer={
+        <div className="flex justify-between items-center w-full">
           <div>
             {hasGettingStarted && (
               <Link
@@ -230,7 +227,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
             <ArrowRightIcon size={16} weight="bold" className="ms-1" />
           </Link>
         </div>
-      </CardContent>
-    </Card>
+      }
+    />
   );
 };
