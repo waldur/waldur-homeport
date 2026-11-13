@@ -24102,7 +24102,7 @@
       "feature_area": "ranking"
     }
   },
-  "Every proposal of every call is listed in the administration:": {
+  "Every proposal of every call is listed in the administration.": {
     "context": {
       "feature_area": "proposal"
     }
@@ -40260,6 +40260,11 @@
   "No open round available.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "No order details": {
+    "context": {
+      "feature_area": "list"
     }
   },
   "No order information available.": {
@@ -72247,6 +72252,11 @@
       "primary_ui_type": "label"
     }
   },
+  "This order has no purchase order, reference or error message.": {
+    "context": {
+      "feature_area": "list"
+    }
+  },
   "This order requires your approval.": {
     "context": {
       "feature_area": "UserPendingActionsList"
@@ -89658,6 +89668,11 @@
     }
   },
   "routers": {
+    "context": {
+      "feature_area": "openstack-tenant"
+    }
+  },
+  "routes": {
     "context": {
       "feature_area": "openstack-tenant"
     }
