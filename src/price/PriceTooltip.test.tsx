@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { afterEach, describe, it, expect } from 'vitest';
 
 import { ENV } from '@/core/config';
 
@@ -10,10 +10,10 @@ describe('PriceTooltip', () => {
   const originalFeatures = ENV.FEATURES;
 
   const setBillingMode = (enabled: boolean) => {
-    ENV.FEATURES = { customer: { billing_mode: enabled } };
+    ENV.FEATURES = { customer: { show_invoices_with_vat: enabled } };
   };
 
-  beforeEach(() => {
+  afterEach(() => {
     ENV.FEATURES = originalFeatures;
   });
 

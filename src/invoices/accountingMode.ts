@@ -5,7 +5,7 @@ export type AccountingMode = 'accounting' | 'billing';
 
 /**
  * How the deployment presents costs, set globally by the
- * `customer.billing_mode` feature flag (off by default).
+ * `customer.show_invoices_with_vat` feature flag (off by default).
  *
  * - `accounting`: costs and prices exclude VAT, and monthly records are
  *   shown as accounting records.
@@ -13,6 +13,8 @@ export type AccountingMode = 'accounting' | 'billing';
  *   as invoices.
  */
 export const getAccountingMode = (): AccountingMode =>
-  isFeatureVisible(CustomerFeatures.billing_mode) ? 'billing' : 'accounting';
+  isFeatureVisible(CustomerFeatures.show_invoices_with_vat)
+    ? 'billing'
+    : 'accounting';
 
 export const isAccountingMode = () => getAccountingMode() === 'accounting';
