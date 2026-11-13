@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -11,6 +11,7 @@ import {
 import { renderWithProviders } from '@/test/harness';
 import {
   clearSelect,
+  getSelectByLabel,
   openAndSelectOption,
   typeAndSelectOption,
 } from '@/test/select';
@@ -189,6 +190,71 @@ describe('SoftwareCatalogDialog', () => {
         }),
       );
     });
+  });
+
+  it('names a shared CPU build after its own machine', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplaceSoftwareCatalogsCpuTargetsList).mockResolvedValue({
+      data: [
+        {
+          cpu_family: 'x86_64',
+          cpu_microarchitecture: 'intel/sapphirerapids',
+          full_arch: 'x86_64/intel/graniterapids',
+        },
+        {
+          cpu_family: 'x86_64',
+          cpu_microarchitecture: 'intel/sapphirerapids',
+          full_arch: 'x86_64/intel/sapphirerapids',
+        },
+        {
+          cpu_family: 'x86_64',
+          cpu_microarchitecture: 'amd/zen4',
+          full_arch: 'x86_64/amd/zen4',
+        },
+        {
+          cpu_family: 'x86_64',
+          cpu_microarchitecture: 'amd/zen4',
+          full_arch: 'x86_64/amd/zen5',
+        },
+      ],
+    } as any);
+
+    renderComponent('add');
+    await typeAndSelectOption(user, 'Software catalog', 'EESSI', /EESSI 2025/);
+    await openAndSelectOption(user, 'Enabled CPU family', 'x86_64');
+
+    const container = getSelectByLabel('Enabled CPU microarchitecture');
+    const combobox = within(container).getByRole('combobox');
+    await user.click(combobox);
+
+    const sapphire = await screen.findByRole('option', {
+      name: /x86_64\/intel\/sapphirerapids/,
+    });
+    expect(sapphire).toHaveTextContent(
+      'Also covers x86_64/intel/graniterapids',
+    );
+    expect(
+      screen.queryByRole('option', { name: /^x86_64\/intel\/graniterapids/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('option', { name: /x86_64\/amd\/zen4/ }),
+    ).toHaveTextContent('Also covers x86_64/amd/zen5');
+
+    await user.type(combobox, 'granite');
+    expect(
+      await screen.findByRole('option', { name: /sapphirerapids/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: /zen4/ }),
+    ).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('option', { name: /sapphirerapids/ }));
+    expect(
+      within(container).getByText('x86_64/intel/sapphirerapids'),
+    ).toBeInTheDocument();
+    expect(
+      within(container).queryByText(/Also covers/),
+    ).not.toBeInTheDocument();
   });
 
   it('loads CPU targets for EESSI catalogs', async () => {

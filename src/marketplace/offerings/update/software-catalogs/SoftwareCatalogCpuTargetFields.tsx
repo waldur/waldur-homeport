@@ -8,10 +8,30 @@ import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import {
+  buildCpuMicroarchitectureOptions,
   canonicalizeCpuMicroarchitectures,
+  CpuMicroarchitectureOption,
+  cpuMicroarchitectureOptionMatches,
   keepAllowedCpuValues,
   resolveSoftwareCatalogFromForm,
 } from '../../softwareCatalogCpu';
+import { formatOptionWithDescription } from '../formatOptionWithDescription';
+
+const describeCpuMicroarchitectureOption = (
+  option: CpuMicroarchitectureOption,
+): string | undefined => {
+  if (option.alsoCovers.length > 0) {
+    return translate('Also covers {paths}', {
+      paths: option.alsoCovers.join(', '),
+    });
+  }
+  if (option.coveredPaths.length > 0) {
+    return translate('Covers {paths}', {
+      paths: option.coveredPaths.join(', '),
+    });
+  }
+  return undefined;
+};
 
 const sameCpuValues = (left: string[], right: string[]) =>
   left.length === right.length &&
@@ -65,19 +85,10 @@ export const SoftwareCatalogCpuTargetFields: FC = () => {
         selectedFamilies.length === 0 ||
         selectedFamilies.includes(target.cpu_family),
     );
-    const seen = new Set<string>();
-    return filtered
-      .filter((target) => {
-        if (seen.has(target.cpu_microarchitecture)) {
-          return false;
-        }
-        seen.add(target.cpu_microarchitecture);
-        return true;
-      })
-      .map((target) => ({
-        value: target.cpu_microarchitecture,
-        label: target.full_arch,
-      }));
+    return buildCpuMicroarchitectureOptions(filtered).map((option) => ({
+      ...option,
+      description: describeCpuMicroarchitectureOption(option),
+    }));
   }, [cpuTargets, selectedFamilies]);
 
   useEffect(() => {
@@ -183,6 +194,8 @@ export const SoftwareCatalogCpuTargetFields: FC = () => {
         label={translate('Enabled CPU microarchitecture')}
         placeholder={translate('Select CPU microarchitecture...')}
         options={microarchitectureOptions}
+        formatOptionLabel={formatOptionWithDescription}
+        filterOption={cpuMicroarchitectureOptionMatches}
         isMulti
         isClearable
         simpleValue
