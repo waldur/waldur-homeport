@@ -30,4 +30,9 @@ describe('ResourceOrderExpandableRow', () => {
     render(<ResourceOrderExpandableRow row={row({ state: 'done' })} />);
     expect(screen.queryByText('Error message')).toBeNull();
   });
+
+  it('shows an empty state when the order has nothing to show', () => {
+    render(<ResourceOrderExpandableRow row={row({ state: 'done' })} />);
+    expect(screen.getByText('No order details')).toBeTruthy();
+  });
 });

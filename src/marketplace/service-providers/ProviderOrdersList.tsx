@@ -9,7 +9,7 @@ import { OrdersTableComponent } from '../orders/list/OrdersTableComponent';
 
 import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
 
-export const ProviderOrdersList = ({ provider }) => {
+export const ProviderOrdersList = ({ provider, standalone = true }) => {
   const provider_uuid = provider.customer_uuid;
   const filterValues = useFilterValues('ProviderOrdersList');
 
@@ -53,7 +53,8 @@ export const ProviderOrdersList = ({ provider }) => {
         />
       }
       filter={filter}
-      standalone
+      standalone={standalone}
+      hideTitle={!standalone}
       enableMultiSelect
       multiSelectActions={OrdersBulkActions}
     />

@@ -6,21 +6,15 @@ import {
   openstackRoutersEffectiveRoutesRetrieve,
 } from 'waldur-js-client';
 
-import {
-  BadgeVariant,
-  Code,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from 'waldur-ui';
+import { BadgeVariant, Code } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { SimpleTable } from '@/table/SimpleTable';
+import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useRowsTable } from '@/table/useRowsTable';
 
 interface Props {
   routerUuid: string;
@@ -146,9 +140,6 @@ const ROUTE_COLUMNS: Column<EffectiveRoute>[] = [
   { title: translate('On subnet / network'), render: SubnetCell },
 ];
 
-const rowKey = (row: EffectiveRoute, idx: number): string =>
-  `${row.source}-${row.destination}-${idx}`;
-
 export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
   const { data, isLoading, isError, refetch } =
     useQuery<EffectiveRoutesResponse>({
@@ -161,35 +152,34 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
       },
     });
 
+  const routes = data?.routes ?? [];
+  const tableProps = useRowsTable<EffectiveRoute>(
+    `router-effective-routes-${routerUuid}`,
+    routes,
+    data,
+  );
+
   if (isLoading) return <LoadingSpinner />;
   if (isError || !data) return <LoadingErred loadData={refetch} />;
 
-  // Annotate rows with a synthetic uuid so SimpleTable's default key picks it
-  // up; SimpleTable defaults to `rowKey="uuid"` but our routes have no UUID.
-  const rows = data.routes.map((r, idx) => ({
-    ...r,
-    uuid: rowKey(r, idx),
-  }));
-
   return (
-    <Card className="mt-3">
-      <CardHeader className="flex justify-between items-center">
-        <CardTitle as="div" className="mb-0">
-          {translate('Effective routes')}
-        </CardTitle>
+    <Table<EffectiveRoute>
+      {...tableProps}
+      columns={ROUTE_COLUMNS}
+      title={translate('Effective routes')}
+      verboseName={translate('routes')}
+      tableActions={
         <SnatBadge snat={data.snat} hasGateway={data.has_external_gateway} />
-      </CardHeader>
-      <CardContent>
-        {rows.length === 0 ? (
-          <div className="text-quaternary">
-            {translate(
-              'No routes — attach an interface or set a gateway to populate this table.',
-            )}
-          </div>
-        ) : (
-          <SimpleTable<EffectiveRoute> columns={ROUTE_COLUMNS} rows={rows} />
-        )}
-      </CardContent>
-    </Card>
+      }
+      emptyMessage={translate(
+        'No routes — attach an interface or set a gateway to populate this table.',
+      )}
+      hideRefresh
+      className="mt-5.5"
+      headerClassName="min-h-[40px] py-0"
+      titleClassName="h4 font-medium text-secondary"
+      minHeight="auto"
+      placeholderHasRetry={false}
+    />
   );
 };

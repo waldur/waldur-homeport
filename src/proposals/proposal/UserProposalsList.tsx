@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -7,12 +7,13 @@ import {
   proposalProposalsFacetsList,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
-
+import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
+import { LayoutSlot } from '@/navigation/slots';
 import { parseCallFilterParam } from '@/proposals/callFilterParam';
 import {
   requestListTitle,
@@ -60,6 +61,7 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
   const {
     params: { call },
   } = useCurrentStateAndParams();
+  const router = useRouter();
   // Memoised so the object identity is stable; it seeds initialFilters below.
   const callObj = useMemo(() => parseCallFilterParam(call), [call]);
 
@@ -194,24 +196,19 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
       {/* Staff and support read every proposal; their list is the user's
           own, and says where the rest are. */}
       {staffReach && standalone && (
-        <AlertItem
-          type="floating"
-          variant="info"
-          className="mb-4"
-          data-testid="own-proposals-note"
-          title={translate('Only the proposals you take part in')}
-          body={
-            <>
-              {translate(
-                'Every proposal of every call is listed in the administration:',
-              )}{' '}
-              <Link
-                state="admin-proposals"
-                label={translate('All proposals')}
-              />
-            </>
-          }
-        />
+        <LayoutSlot name="announcements">
+          <AnnouncementBar
+            label={translate('Only the proposals you take part in')}
+            hasColon
+            description={translate(
+              'Every proposal of every call is listed in the administration.',
+            )}
+            actionLabel={translate('All proposals')}
+            onAction={() => router.stateService.go('admin-proposals')}
+            icon={ANNOUNCEMENT_ICON.information.icon}
+            variant={ANNOUNCEMENT_ICON.information.variant}
+          />
+        </LayoutSlot>
       )}
       <Table
         {...tableProps}
