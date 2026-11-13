@@ -11,6 +11,7 @@ import { useModal } from '@/modal/actions';
 interface PlanDescriptionButtonProps {
   planDescription?: string;
   size?: ButtonSize;
+  asLink?: boolean;
 }
 
 const PlanDescription = lazyComponent(() =>
@@ -41,6 +42,18 @@ export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
       resolve: { plan_description: planDescription },
       size: 'lg',
     });
+
+  if (props.asLink) {
+    return (
+      <BaseButton
+        label={translate('View details')}
+        onClick={handleClick}
+        variant="text-primary"
+        className="-ms-1.5"
+        size="sm"
+      />
+    );
+  }
 
   return (
     <BaseButton

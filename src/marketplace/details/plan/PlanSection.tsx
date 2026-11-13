@@ -73,7 +73,9 @@ const PlanCard = ({
         {planDescription && (
           <PropertyItem
             label={translate('Description')}
-            value={<PlanDescriptionButton planDescription={planDescription} />}
+            value={
+              <PlanDescriptionButton planDescription={planDescription} asLink />
+            }
           />
         )}
       </PropertyList>
