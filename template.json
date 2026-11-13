@@ -71307,11 +71307,6 @@
       "feature_area": "cookies"
     }
   },
-  "These fields can be synced via the Identity Bridge.": {
-    "context": {
-      "feature_area": "support"
-    }
-  },
   "These filters are not valid.": {
     "context": {
       "feature_area": "reports"
