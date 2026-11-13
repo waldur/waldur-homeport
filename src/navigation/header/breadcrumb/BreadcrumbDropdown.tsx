@@ -190,7 +190,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
               size="lg"
             />
             {!isEmpty(formValues) && (
-              <HeaderButtonBullet size={8} blink={false} className="-me-1.5" />
+              <HeaderButtonBullet size={8} className="-me-1.5" />
             )}
           </div>
         )}

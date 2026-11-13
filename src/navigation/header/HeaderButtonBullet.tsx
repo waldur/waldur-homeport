@@ -22,7 +22,6 @@ const SIZES: Record<number, string> = {
 
 export interface HeaderButtonBulletProps {
   size?: number;
-  blink?: boolean;
   variant?: HeaderButtonBulletVariant;
   className?: string;
   style?: CSSProperties;
@@ -31,7 +30,6 @@ export interface HeaderButtonBulletProps {
 
 export const HeaderButtonBullet: FC<HeaderButtonBulletProps> = ({
   size = 6,
-  blink = true,
   variant = 'success',
   className = null,
   style,
@@ -42,7 +40,6 @@ export const HeaderButtonBullet: FC<HeaderButtonBulletProps> = ({
       'inline-block shrink-0 rounded-full absolute top-0 end-0 -translate-x-1/2 -translate-y-1/2',
       BULLET_COLORS[variant],
       SIZES[size],
-      blink && 'animation-blink',
       className,
     )}
     style={{ width: size, height: size, ...style }}

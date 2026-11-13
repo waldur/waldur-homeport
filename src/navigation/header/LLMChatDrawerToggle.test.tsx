@@ -120,7 +120,7 @@ describe('LLMChatDrawerToggle', () => {
     );
   });
 
-  it("blinks for a visitor's unread reply, held in shared state so any entry point can clear it", () => {
+  it("marks a visitor's unread reply, held in shared state so any entry point can clear it", () => {
     vi.mocked(useUser).mockReturnValue(undefined);
     vi.mocked(isAnonymousVisitor).mockReturnValue(true);
     anonymousMessages = [{ role: 'assistant' }];
@@ -133,7 +133,7 @@ describe('LLMChatDrawerToggle', () => {
     );
   });
 
-  it('marks a parked conversation quietly, and a new reply loudly', () => {
+  it('marks a parked conversation in grey, and a new reply in green', () => {
     authenticatedThreads = new Map([['t1', [{ role: 'user' }]]]);
 
     const { rerender } = render(<LLMChatDrawerToggle />);

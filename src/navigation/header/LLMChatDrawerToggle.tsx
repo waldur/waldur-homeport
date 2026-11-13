@@ -85,7 +85,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
   };
 
   // Minimized: a conversation left behind the shut drawer. An unseen reply
-  // blinks; one merely parked sits quiet so it cannot pass for a notification.
+  // is green; one merely parked is grey so it cannot pass for a notification.
   const hasParkedChat = isVisitor
     ? anonymousMessages.length > 0
     : (threads.get(currentThreadId)?.length ?? 0) > 0;
@@ -93,7 +93,6 @@ export const LLMChatDrawerToggle: React.FC = () => {
   const marker = hasParkedChat ? (
     <HeaderButtonBullet
       variant={hasReply ? 'success' : 'gray-500'}
-      blink={hasReply}
       className="pointer-events-none"
     />
   ) : null;
