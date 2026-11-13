@@ -9,7 +9,11 @@
 
     color: var(--text-quinary) !important;
 
-    &:not(.btn-icon) {
+    // Only controls with a fill of their own take the disabled fill. Inline
+    // ones (LinkButton, bare icon buttons such as a table's Pin column, a
+    // text Link) declare `bg-transparent` and stay transparent, as they do
+    // when disabled outside this view.
+    &:not(.btn-icon):not(.bg-transparent) {
       background-color: var(--btn-disabled-bg) !important;
       border-color: var(--btn-disabled-bg) !important;
     }

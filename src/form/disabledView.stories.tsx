@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
-import { Checkbox, Radio, Switch } from 'waldur-ui';
+import { BaseButton, Checkbox, LinkButton, Radio, Switch } from 'waldur-ui';
 
 /**
  * A page for an "Unavailable" offering or resource is wrapped in
@@ -99,6 +99,45 @@ export const LabelsDoNotToggleInADisabledView: Story = {
     for (const name of LABELS) {
       await userEvent.click(available.getByText(`Available ${name}`));
       await expect(available.getByLabelText(`Available ${name}`)).toBeChecked();
+    }
+  },
+};
+
+const TRANSPARENT = 'rgba(0, 0, 0, 0)';
+
+/**
+ * Only a control with a fill of its own takes the disabled fill. An inline
+ * control (a LinkButton, a bare icon button such as a table's Pin column, a
+ * text-variant button) stays transparent, as it is when disabled outside the
+ * view, instead of growing a grey box.
+ */
+export const OnlyFilledControlsTakeTheDisabledFill: Story = {
+  render: () => (
+    <div className="disabled-view flex items-center gap-4">
+      <BaseButton variant="primary" label="Filled" />
+      <BaseButton variant="text-secondary" label="Text" />
+      <LinkButton>Inline link</LinkButton>
+      <button
+        type="button"
+        className="bg-transparent border-0 p-0 m-0 cursor-pointer"
+      >
+        Bare
+      </button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const style = (name: string) =>
+      getComputedStyle(canvas.getByRole('button', { name }));
+    const bg = (name: string) => style(name).backgroundColor;
+
+    // The theme stylesheet is swapped in after the first render.
+    await waitFor(() => expect(style('Bare').pointerEvents).toBe('none'), {
+      timeout: 15000,
+    });
+    await expect(bg('Filled')).not.toBe(TRANSPARENT);
+    for (const name of ['Text', 'Inline link', 'Bare']) {
+      await expect(bg(name)).toBe(TRANSPARENT);
     }
   },
 };
