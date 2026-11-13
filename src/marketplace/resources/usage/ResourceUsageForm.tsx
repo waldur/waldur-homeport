@@ -393,7 +393,6 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                       ) && (
                         <HeaderButtonBullet
                           size={10}
-                          blink={false}
                           variant="danger"
                           className="-me-1.5"
                         />

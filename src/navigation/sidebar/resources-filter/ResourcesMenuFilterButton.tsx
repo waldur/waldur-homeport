@@ -50,7 +50,6 @@ export const ResourcesMenuFilterButton = () => {
         {(values?.organization || values?.project) && (
           <HeaderButtonBullet
             size={9}
-            blink={false}
             variant="primary"
             className="-me-1.5 mt-1.5 border border-secondary border-2"
           />

@@ -31,15 +31,10 @@ const meta: Meta<typeof HeaderButtonBullet> = {
       control: { type: 'number', min: 4, max: 20, step: 1 },
       description: 'The diameter of the bullet in pixels.',
     },
-    blink: {
-      control: 'boolean',
-      description: 'Whether the bullet pulses/blinks continuously.',
-    },
   },
   args: {
     variant: 'success',
     size: 6,
-    blink: true,
   },
   parameters: {
     docs: {
@@ -47,7 +42,7 @@ const meta: Meta<typeof HeaderButtonBullet> = {
         component:
           'A notification dot / bullet indicator anchored to header or navigation buttons. ' +
           'Supports 4 semantic variants (`success`, `primary` brand mark, `danger`, and `gray-500`), ' +
-          'customizable pixel sizing, and continuous blink animation.',
+          'and customizable pixel sizing.',
       },
     },
   },
@@ -88,8 +83,8 @@ export const Default: Story = {
       '-translate-x-1/2',
       '-translate-y-1/2',
       'bg-success',
-      'animation-blink',
     );
+    await expect(bullet).not.toHaveClass('animation-blink');
   },
 };
 
@@ -102,11 +97,7 @@ export const Variants: Story = {
       <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border border-secondary text-secondary">
           <BellIcon size={20} weight="bold" />
-          <HeaderButtonBullet
-            variant="success"
-            blink={false}
-            data-testid="bullet-success"
-          />
+          <HeaderButtonBullet variant="success" data-testid="bullet-success" />
         </div>
         <span className="text-xs text-secondary font-medium">
           success (default)
@@ -116,11 +107,7 @@ export const Variants: Story = {
       <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border border-secondary text-secondary">
           <FunnelSimpleIcon size={20} weight="bold" />
-          <HeaderButtonBullet
-            variant="primary"
-            blink={false}
-            data-testid="bullet-primary"
-          />
+          <HeaderButtonBullet variant="primary" data-testid="bullet-primary" />
         </div>
         <span className="text-xs text-secondary font-medium">
           primary (brand mark)
@@ -130,11 +117,7 @@ export const Variants: Story = {
       <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border border-secondary text-secondary">
           <BellIcon size={20} weight="bold" />
-          <HeaderButtonBullet
-            variant="danger"
-            blink={false}
-            data-testid="bullet-danger"
-          />
+          <HeaderButtonBullet variant="danger" data-testid="bullet-danger" />
         </div>
         <span className="text-xs text-secondary font-medium">danger</span>
       </div>
@@ -142,11 +125,7 @@ export const Variants: Story = {
       <div className="flex flex-col items-center gap-1.5">
         <div className="relative inline-flex size-10 items-center justify-center rounded-lg border border-secondary text-secondary">
           <ChatCircleDotsIcon size={20} weight="bold" />
-          <HeaderButtonBullet
-            variant="gray-500"
-            blink={false}
-            data-testid="bullet-gray"
-          />
+          <HeaderButtonBullet variant="gray-500" data-testid="bullet-gray" />
         </div>
         <span className="text-xs text-secondary font-medium">gray-500</span>
       </div>
@@ -181,7 +160,6 @@ export const Sizes: Story = {
             <BellIcon size={20} weight="bold" />
             <HeaderButtonBullet
               size={size}
-              blink={false}
               data-testid={`bullet-size-${size}`}
             />
           </div>
@@ -200,39 +178,6 @@ export const Sizes: Story = {
         height: `${size}px`,
       });
     }
-  },
-};
-
-/**
- * Side-by-side comparison of static vs blinking animation.
- */
-export const BlinkingVsStatic: Story = {
-  render: () => (
-    <div className="flex items-center gap-6">
-      <div className="flex flex-col items-center gap-1.5">
-        <div className="relative inline-flex size-10 items-center justify-center rounded-lg border border-secondary text-secondary">
-          <BellIcon size={20} weight="bold" />
-          <HeaderButtonBullet blink={false} data-testid="bullet-static" />
-        </div>
-        <span className="text-xs text-secondary font-medium">Static</span>
-      </div>
-
-      <div className="flex flex-col items-center gap-1.5">
-        <div className="relative inline-flex size-10 items-center justify-center rounded-lg border border-secondary text-secondary">
-          <BellIcon size={20} weight="bold" />
-          <HeaderButtonBullet blink={true} data-testid="bullet-blinking" />
-        </div>
-        <span className="text-xs text-secondary font-medium">Blinking</span>
-      </div>
-    </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const staticBullet = canvas.getByTestId('bullet-static');
-    const blinkingBullet = canvas.getByTestId('bullet-blinking');
-
-    await expect(staticBullet).not.toHaveClass('animation-blink');
-    await expect(blinkingBullet).toHaveClass('animation-blink');
   },
 };
 
@@ -262,7 +207,6 @@ export const RealWorldButtons: Story = {
         <FunnelSimpleIcon size={18} weight="bold" />
         <HeaderButtonBullet
           size={9}
-          blink={false}
           variant="primary"
           className="-me-2 mt-1.5 border border-2 border-secondary"
         />
@@ -275,7 +219,7 @@ export const RealWorldButtons: Story = {
         aria-label="AI Assistant"
       >
         <ChatCircleDotsIcon size={20} weight="bold" />
-        <HeaderButtonBullet variant="gray-500" blink={false} />
+        <HeaderButtonBullet variant="gray-500" />
       </button>
     </div>
   ),
