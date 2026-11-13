@@ -12,7 +12,6 @@ import {
   Badge,
   PropertyItem,
   PropertyList,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -27,12 +26,14 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton, StringGroup } from '@/form';
 import { CompactEditButton } from '@/form/CompactEditButton';
+import { BooleanEditField, EditFieldProvider } from '@/form/editFields';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { propVal } from '@/property/propertyFields';
+import { ROW_SECTIONS_CLASS, RowSection } from '@/proposals/ExpandableRowParts';
 import { DASH_ESCAPE_CODE, ROW_VARIANT_CLASSES } from '@/table/constants';
 
 import { formatIsdName, IsdBadges } from './IsdBadges';
@@ -170,9 +171,6 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
     },
   });
 
-  const toggleIdentityManager = (checked: boolean) =>
-    toggleMutation.mutateAsync(checked);
-
   const openEditIsdsDialog = () => {
     openDialog(EditManagedIsdsDialog, {
       resolve: { user, managedIsds, onUpdated: setManagedIsds },
@@ -181,39 +179,35 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
   };
 
   return (
-    <div>
-      <div className="flex min-h-[52px] items-center justify-between gap-6 py-4 border-b border-secondary">
-        <div>
-          <label
-            htmlFor="identity-manager-toggle"
-            className="font-medium text-secondary mb-0 cursor-pointer"
-          >
-            {translate('Identity manager')}
-          </label>
-        </div>
-        <Switch
-          id="identity-manager-toggle"
-          checked={isManager}
-          onCheckedChange={toggleIdentityManager}
-          label={isManager ? translate('Enabled') : translate('Disabled')}
-          disabled={toggleMutation.isPending}
+    <PropertyList detailsMode termWidth="md" className="gap-x-6">
+      <EditFieldProvider
+        scope={{ is_identity_manager: isManager }}
+        callback={(values) =>
+          toggleMutation.mutateAsync(Boolean(values.is_identity_manager))
+        }
+      >
+        <BooleanEditField
+          name="is_identity_manager"
+          label={translate('Identity manager')}
+          renderValue={(value) =>
+            propVal.boolean(Boolean(value), { display: 'badge' })?.node
+          }
         />
-      </div>
+      </EditFieldProvider>
       {isManager && (
-        <PropertyList detailsMode>
-          <PropertyItem
-            label={translate('Managed ISDs')}
-            value={<IsdBadges isds={managedIsds} />}
-            actions={
-              <CompactEditButton
-                onClick={openEditIsdsDialog}
-                fieldName={translate('Managed ISDs')}
-              />
-            }
-          />
-        </PropertyList>
+        <PropertyItem
+          label={translate('Managed ISDs')}
+          value={<IsdBadges isds={managedIsds} />}
+          actions={
+            <CompactEditButton
+              variant="secondary"
+              onClick={openEditIsdsDialog}
+              fieldName={translate('Managed ISDs')}
+            />
+          }
+        />
       )}
-    </div>
+    </PropertyList>
   );
 };
 
@@ -249,38 +243,42 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
   const attributeEntries = Object.entries(attributeSources);
 
   return (
-    <div className="flex flex-col gap-5">
-      {/* Section: Identity Manager Settings */}
-      <div>
-        <h5 className="mb-3">{translate('Identity manager settings')}</h5>
+    <div className={ROW_SECTIONS_CLASS}>
+      <RowSection title={translate('Identity manager settings')}>
         <IdentityManagerSettings user={user} />
-      </div>
+      </RowSection>
 
-      {/* Section A: Status Summary */}
-      <PropertyList hideActions detailsMode>
-        <PropertyItem
-          label={translate('Federation status')}
-          value={propVal.boolean(status.is_federated, {
-            wording: [translate('Federated'), translate('Local')],
-            display: 'badge',
-          })}
-        />
-        <PropertyItem
-          label={translate('Connected ISDs')}
-          value={<IsdBadges isds={status.active_isds} />}
-        />
-        {status.managed_isds?.length > 0 && (
+      <RowSection title={translate('Status')}>
+        <PropertyList variant="summary" space={1.5}>
           <PropertyItem
-            label={translate('Managed ISDs')}
-            value={<IsdBadges isds={status.managed_isds} />}
+            label={translate('Federation status')}
+            value={propVal.boolean(status.is_federated, {
+              wording: [translate('Federated'), translate('Local')],
+              display: 'badge',
+            })}
           />
-        )}
-      </PropertyList>
+          <PropertyItem
+            label={translate('Connected ISDs')}
+            value={<IsdBadges isds={status.active_isds} />}
+          />
+          {status.managed_isds?.length > 0 && (
+            <PropertyItem
+              label={translate('Managed ISDs')}
+              value={<IsdBadges isds={status.managed_isds} />}
+            />
+          )}
+          <PropertyItem
+            label={translate('Effective bridge fields')}
+            value={propVal.list(status.effective_bridge_fields, {
+              display: 'badges',
+            })}
+          />
+        </PropertyList>
+      </RowSection>
 
       {/* Section B: Attribute Provenance Table */}
       {attributeEntries.length > 0 && (
-        <div>
-          <h5 className="mb-3">{translate('Attribute provenance')}</h5>
+        <RowSection title={translate('Attribute provenance')}>
           <Table className="align-middle">
             <TableHeader>
               <TableRow>
@@ -325,29 +323,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
               })}
             </TableBody>
           </Table>
-        </div>
-      )}
-
-      {/* Section C: Effective Bridge Fields */}
-      {status.effective_bridge_fields?.length > 0 && (
-        <div>
-          <h5 className="mb-3">{translate('Effective bridge fields')}</h5>
-          <p className="text-quaternary mb-2.5">
-            {translate('These fields can be synced via the Identity Bridge.')}
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {status.effective_bridge_fields.map((field) => (
-              <Badge
-                key={field}
-                variant="secondary"
-                shape="pill"
-                tone="outline"
-              >
-                {field}
-              </Badge>
-            ))}
-          </div>
-        </div>
+        </RowSection>
       )}
     </div>
   );
