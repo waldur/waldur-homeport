@@ -1,7 +1,11 @@
+/* BaseButton is nowrap, but the label here carries an operator-chosen
+   provider name of any length, so it wraps instead of overflowing the
+   button. minmax(0, 1fr) lets the text track shrink below its content. */
 .login-button {
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: auto minmax(0, 1fr);
   justify-content: normal;
+  white-space: normal;
   margin: 10px 0;
   width: 100%;
 }
@@ -25,6 +29,8 @@
   font-size: var(--text-sm);
   display: flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
   height: 100%;
+  overflow-wrap: anywhere;
 }
