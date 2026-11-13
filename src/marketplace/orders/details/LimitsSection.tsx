@@ -1,34 +1,19 @@
-import { PencilSimpleIcon, XIcon } from '@phosphor-icons/react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import {
   OrderDetails,
   PublicOfferingDetails,
   OfferingComponent,
 } from 'waldur-js-client';
 
-import {
-  BaseButton,
-  Checkbox,
-  Menu,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardToolbar,
-} from 'waldur-ui';
+import { Menu } from 'waldur-ui';
 
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
 import { useModal } from '@/modal/actions';
-import { NoResult } from '@/navigation/header/search/NoResult';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { EditOrderFieldDialog } from './EditOrderFieldDialog';
 import { useOrderEditable } from './hooks';
@@ -46,183 +31,96 @@ export const LimitsSection = ({
 }) => {
   const editable = useOrderEditable(order);
   const { openDialog } = useModal();
-  const [selected, setSelected] = useState<string[]>([]);
+  const hasLimits = Object.keys(limits ?? {}).length > 0;
+  const rows = hasLimits ? components : [];
 
-  const isAllSelected =
-    components.length > 0 && selected.length >= components.length;
-  const hasSelection = selected.length > 0;
+  const tableProps = useTable<OfferingComponent>({
+    table: `order-limits-${order?.uuid}`,
+    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+  });
 
-  const headerCheckRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (headerCheckRef.current) {
-      headerCheckRef.current.indeterminate = hasSelection && !isAllSelected;
-    }
-  }, [hasSelection, isAllSelected]);
-
-  const toggleAll = () => {
-    setSelected(isAllSelected ? [] : components.map((c) => c.type));
-  };
-
-  const toggleOne = (type: string) => {
-    setSelected((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
-    );
-  };
-
-  const clearSelection = () => setSelected([]);
-
-  const openBulkEditDialog = () => {
+  const openEditDialog = (extra: Record<string, any>) =>
     openDialog(EditOrderFieldDialog, {
-      resolve: {
-        order,
-        offering,
-        name: 'limits',
-        selectedComponents: selected,
-      },
+      resolve: { order, offering, name: 'limits', ...extra },
       initialValues: { limits: order.limits },
       size: 'lg',
     });
-  };
 
-  const openSingleEditDialog = (componentType: string) => {
-    openDialog(EditOrderFieldDialog, {
-      resolve: {
-        order,
-        offering,
-        name: 'limits',
-        component: componentType,
-      },
-      initialValues: { limits: order.limits },
-      size: 'lg',
-    });
-  };
-
-  const selectedRows = useMemo(
-    () => components.filter((c) => selected.includes(c.type)),
-    [components, selected],
-  );
-
-  if (components.length === 0 || !Object.keys(limits ?? {}).length) {
-    return (
-      <Card bordered>
-        <CardHeader className="custom-card-header custom-padding-zero">
-          <CardTitle as="div">
-            <h3>{translate('Limits')}</h3>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <NoResult
-            title={translate('No limits found for this order')}
-            buttonTitle={null}
-            message={null}
-            noAction
-          />
-        </CardContent>
-      </Card>
-    );
-  }
   return (
-    <Card bordered>
-      <CardHeader className="custom-card-header custom-padding-zero">
-        <CardTitle as="div">
-          <h3>{translate('Limits')}</h3>
-        </CardTitle>
-        {editable && hasSelection && (
-          <CardToolbar className="flex items-center gap-2.5">
-            <div className="flex items-center self-stretch font-normal text-primary">
-              <BaseButton
-                iconNode={<XIcon weight="bold" />}
-                tooltip={translate('Clear selection')}
-                onClick={clearSelection}
-                variant="text-secondary"
-                className="me-1"
-                size="sm"
-              />
-              <span>
-                ({selectedRows.length}) {translate('Selected')}
-              </span>
-            </div>
-            <Menu>
-              <Menu.TriggerButton variant="primary">
-                {translate('All actions')}
-              </Menu.TriggerButton>
-              <Menu.Content look="actions" side="bottom">
-                <Menu.Item
-                  icon={<PencilSimpleIcon weight="bold" />}
-                  onSelect={openBulkEditDialog}
-                >
-                  {translate('Edit')}
-                </Menu.Item>
-              </Menu.Content>
-            </Menu>
-          </CardToolbar>
-        )}
-      </CardHeader>
-      <CardContent>
-        <Table density="normal">
-          <TableHeader>
-            <TableRow>
-              {editable && (
-                <TableHead className="w-2.5 ps-4 pe-0">
-                  <Checkbox
-                    ref={headerCheckRef}
-                    data-testid="select-all"
-                    aria-label={translate('Select all components')}
-                    checked={isAllSelected}
-                    onChange={toggleAll}
-                  />
-                </TableHead>
-              )}
-              <TableHead>{translate('Name')}</TableHead>
-              <TableHead>{translate('Measured unit')}</TableHead>
-              <TableHead>{translate('Limit')}</TableHead>
-              {editable && (
-                <TableHead className="w-[50px] text-left">
-                  {translate('Actions')}
-                </TableHead>
-              )}
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {components.map((component, id) => (
-              <TableRow key={id}>
-                {editable && (
-                  <TableCell className="ps-4 pe-0">
-                    <Checkbox
-                      aria-label={component.name}
-                      checked={selected.includes(component.type)}
-                      onChange={() => toggleOne(component.type)}
-                    />
-                  </TableCell>
-                )}
-                <TableCell className="capitalize font-medium text-primary">
-                  {component.name}
-                </TableCell>
-                <TableCell className="capitalize">
-                  {component.measured_unit}
-                </TableCell>
-                <TableCell className="capitalize">
-                  {component.is_boolean
-                    ? limits[component.type]
-                      ? translate('Enabled')
-                      : translate('Disabled')
-                    : limits[component.type]}
-                </TableCell>
-                {editable && (
-                  <TableCell>
-                    <ActionsDropdown size="sm">
-                      <EditAction
-                        action={() => openSingleEditDialog(component.type)}
-                      />
-                    </ActionsDropdown>
-                  </TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+    <Table<OfferingComponent>
+      {...tableProps}
+      rowKey="type"
+      title={translate('Limits')}
+      verboseName={translate('limits')}
+      emptyMessage={translate('No limits found for this order')}
+      columns={[
+        {
+          title: translate('Name'),
+          render: ({ row }) => (
+            <span className="capitalize font-medium text-primary">
+              {row.name}
+            </span>
+          ),
+        },
+        {
+          title: translate('Measured unit'),
+          render: ({ row }) => (
+            <span className="capitalize">{row.measured_unit}</span>
+          ),
+        },
+        {
+          title: translate('Limit'),
+          render: ({ row }) => (
+            <span className="capitalize">
+              {row.is_boolean
+                ? limits[row.type]
+                  ? translate('Enabled')
+                  : translate('Disabled')
+                : limits[row.type]}
+            </span>
+          ),
+        },
+      ]}
+      enableMultiSelect={editable}
+      multiSelectActions={
+        editable
+          ? ({ rows: selected }) => (
+              <Menu>
+                <Menu.TriggerButton variant="primary">
+                  {translate('All actions')}
+                </Menu.TriggerButton>
+                <Menu.Content look="actions" side="bottom">
+                  <Menu.Item
+                    icon={<PencilSimpleIcon weight="bold" />}
+                    onSelect={() =>
+                      openEditDialog({
+                        selectedComponents: selected.map((c) => c.type),
+                      })
+                    }
+                  >
+                    {translate('Edit')}
+                  </Menu.Item>
+                </Menu.Content>
+              </Menu>
+            )
+          : undefined
+      }
+      rowActions={
+        editable
+          ? ({ row }) => (
+              <ActionsDropdown size="sm">
+                <EditAction
+                  action={() => openEditDialog({ component: row.type })}
+                />
+              </ActionsDropdown>
+            )
+          : undefined
+      }
+      hasQuery={false}
+      hasPagination={false}
+      hoverShadow={false}
+      placeholderHasRetry={false}
+      minHeight="auto"
+    />
   );
 };

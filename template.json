@@ -60952,11 +60952,6 @@
       "feature_area": "call-templates"
     }
   },
-  "Select all components": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "Select all of {programme}": {
     "context": {
       "variables": {
@@ -61851,7 +61846,7 @@
   "Selected": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "manage"
     }
   },
   "Selected Arrow Customer": {
@@ -88705,7 +88700,7 @@
   },
   "limits": {
     "context": {
-      "feature_area": "confirmation-drawer"
+      "feature_area": "details"
     }
   },
   "listener": {

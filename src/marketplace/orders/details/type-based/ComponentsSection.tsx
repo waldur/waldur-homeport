@@ -1,13 +1,13 @@
-import { useMemo } from 'react';
+import { useId, useMemo } from 'react';
 
 import { ENV } from '@/core/config';
 import { formatCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { Component } from '@/marketplace/details/plan/types';
 import { PriceTooltip } from '@/price/PriceTooltip';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-
-import { DetailsTable } from './DetailsTable';
 
 export const ComponentsSection = ({
   title,
@@ -20,6 +20,13 @@ export const ComponentsSection = ({
   showQuantity?: boolean;
   hidePrices?: boolean;
 }) => {
+  const id = useId();
+  const tableProps = useTable({
+    table: `order-components-${id}`,
+    fetchData: () =>
+      Promise.resolve({ rows: components, resultCount: components.length }),
+  });
+
   if (!components.length) return null;
 
   const columns = [
@@ -73,10 +80,21 @@ export const ComponentsSection = ({
   ];
 
   return (
-    <div className="mb-5">
-      <DetailsTable rows={components} columns={columns} />
-      <p className="text-quaternary mt-1.5 mb-0 text-xs">{title}</p>
-    </div>
+    <section className="mb-5">
+      <h6 className="text-sm font-semibold text-secondary mb-2.5">{title}</h6>
+      <Table
+        {...tableProps}
+        columns={columns}
+        verboseName={translate('components')}
+        hideTitle
+        hasActionBar={false}
+        hasPagination={false}
+        hoverShadow={false}
+        placeholderHasRetry={false}
+        minHeight="auto"
+        className="[&>[data-slot=card-content]]:[--card-content-px:0px] [&>[data-slot=card-content]]:[--card-content-pb:0px]"
+      />
+    </section>
   );
 };
 
