@@ -9,10 +9,6 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('Organization workspace'),
     items: [
       {
-        key: 'billing_mode',
-        description: translate('Show costs and prices with VAT included and present monthly invoices instead of accounting records. When off, costs are shown without VAT.'),
-      },
-      {
         key: 'payments_for_staff_only',
         description: translate('Make payments menu visible for staff users only.'),
       },
@@ -23,6 +19,10 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'show_domain',
         description: translate('Allows to hide domain field in organization detail.'),
+      },
+      {
+        key: 'show_invoices_with_vat',
+        description: translate('Show costs and prices with VAT included and present monthly invoices instead of accounting records. When off, costs are shown without VAT.'),
       },
       {
         key: 'show_onboarding',

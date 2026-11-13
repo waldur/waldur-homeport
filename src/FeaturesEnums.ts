@@ -2,10 +2,10 @@
 // Do not edit it manually. All manual changes would be overridden.
 
 export enum CustomerFeatures {
-  billing_mode = 'customer.billing_mode',
   payments_for_staff_only = 'customer.payments_for_staff_only',
   show_banking_data = 'customer.show_banking_data',
   show_domain = 'customer.show_domain',
+  show_invoices_with_vat = 'customer.show_invoices_with_vat',
   show_onboarding = 'customer.show_onboarding',
   show_openportal_remote_projects = 'customer.show_openportal_remote_projects',
   show_organisation_reporting = 'customer.show_organisation_reporting',
