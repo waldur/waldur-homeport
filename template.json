@@ -4835,6 +4835,15 @@
       "feature_area": "details"
     }
   },
+  "Also covers {paths}": {
+    "context": {
+      "variables": {
+        "paths": {
+          "type": "url"
+        }
+      }
+    }
+  },
   "Also delete chat history exports": {
     "context": {
       "feature_area": "matrix"
@@ -15722,6 +15731,15 @@
         },
         "outcomes": {
           "type": "unknown"
+        }
+      }
+    }
+  },
+  "Covers {paths}": {
+    "context": {
+      "variables": {
+        "paths": {
+          "type": "url"
         }
       }
     }
