@@ -25,7 +25,8 @@ export async function previewProjectDigest(
 }
 
 export async function sendTestDigest(customerUuid: string) {
-  await customersProjectDigestConfigSendTest({
+  const response = await customersProjectDigestConfigSendTest({
     path: { uuid: customerUuid },
   });
+  return response.data;
 }
