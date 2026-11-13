@@ -28,7 +28,11 @@ import { ProjectDigestSummaryButton } from './ProjectDigestSummaryButton';
 
 export const ProjectDigestConfigPage: FC = () => {
   const customer = useCustomer();
-  const { showErrorResponse, showSuccess } = useNotify();
+  const {
+    showErrorResponse,
+    showSuccess,
+    showRedirectMessage: showWarning,
+  } = useNotify();
 
   const {
     data: config,
@@ -63,10 +67,15 @@ export const ProjectDigestConfigPage: FC = () => {
 
   const handleSendTest = useCallback(async () => {
     try {
-      await sendTestDigest(customer.uuid);
-      showSuccess(
-        translate('Test digest email has been sent to your email address.'),
-      );
+      const result = await sendTestDigest(customer.uuid);
+      if (result.sent) {
+        showSuccess(
+          translate('Test digest email has been sent to your email address.'),
+        );
+      } else {
+        // The backend's detail already says nothing was sent, and why.
+        showWarning(result.detail, '');
+      }
     } catch (error) {
       showErrorResponse(error, translate('Unable to send test digest email.'));
     }
