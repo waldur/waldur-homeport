@@ -248,6 +248,7 @@ export function buildStorageBarOptions(
   return {
     color: getPalette(),
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
       formatter: (params: any) => {
@@ -488,6 +489,7 @@ export function buildStorageTimeseriesOptions(
   return {
     color: getPalette(),
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: 'cross' },
       formatter: (params: any) => {

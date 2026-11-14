@@ -421,6 +421,7 @@ export function buildTimeseriesOptions(
   return {
     color: getPalette(),
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: 'cross' },
       formatter: (params: any) => {
@@ -494,6 +495,7 @@ export function buildPieOptions(
 
   return {
     tooltip: {
+      confine: true,
       trigger: 'item',
       formatter: translate('{name}: {value} h ({percent}%)', {
         name: '{b}',
@@ -724,6 +726,7 @@ export function buildJobsTimeseriesOptions(
   return {
     color: getPalette(),
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: 'cross' },
       formatter: (params: any) => {
@@ -1017,6 +1020,7 @@ export function buildAvgWaitTimeseriesOptions(
   return {
     color: getPalette(),
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: 'cross' },
       formatter: (params: any) => {
@@ -1099,6 +1103,7 @@ export function buildAvgWaitPieOptions(
 
   return {
     tooltip: {
+      confine: true,
       trigger: 'item',
       formatter: translate('{name}: {value} min avg ({percent}%)', {
         name: '{b}',

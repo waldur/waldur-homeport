@@ -232,6 +232,7 @@ const buildChartOptions = (
 
   return {
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: isLine ? 'cross' : 'shadow' },
       formatter: (params: any[]) => {
@@ -377,6 +378,7 @@ const buildConsumptionChartOptions = (
 
   return {
     tooltip: {
+      confine: true,
       trigger: 'axis',
       axisPointer: { type: isLine ? 'cross' : 'shadow' },
       formatter: (params: any[]) => {
