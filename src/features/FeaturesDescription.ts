@@ -237,6 +237,10 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('Project workspace'),
     items: [
       {
+        key: 'enforce_allowed_domains',
+        description: translate('Enforce the rules of an OpenPortal award on local team changes. Despite its name, this flag gates both the award\'s membership and role lock and its allowed email domains: adding, removing or re-roling members and inviting users is refused if the award does not permit it.'),
+      },
+      {
         key: 'estimated_cost',
         description: translate('Render estimated cost column in projects list.'),
       },
