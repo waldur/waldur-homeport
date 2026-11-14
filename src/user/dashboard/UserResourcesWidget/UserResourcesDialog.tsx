@@ -9,6 +9,7 @@ import { fetchResultCount } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { router } from '@/router';
 
@@ -52,14 +53,14 @@ export const UserResourcesDialog: FC = () => {
       iconNode={<RocketLaunchIcon weight="bold" />}
       iconColor="info"
       footer={
-        <div className="flex justify-end w-full">
+        <>
+          <CloseDialogButton />
           <BaseButton
             onClick={handleViewAllResources}
             label={translate('View all resources')}
             variant="primary"
-            size="lg"
           />
-        </div>
+        </>
       }
     >
       {isLoading ? (
@@ -73,16 +74,12 @@ export const UserResourcesDialog: FC = () => {
           {translate('No resources found.')}
         </div>
       ) : (
-        <div className="mt-3">
-          {data?.projects?.map((project, index) => (
-            <ResourceProjectGroup
-              key={project.uuid}
-              project={project}
-              defaultOpen={index === 0}
-            />
+        <div className="flex flex-col gap-5">
+          {data?.projects?.map((project) => (
+            <ResourceProjectGroup key={project.uuid} project={project} />
           ))}
           {data?.hasMore && (
-            <div className="text-center text-quaternary mt-3 pt-1.5 border-t border-t-secondary">
+            <div className="text-center text-quaternary">
               {translate(
                 'Showing {displayed} of {total} resources. Click "View all resources" to see the complete list.',
                 {

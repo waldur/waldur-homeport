@@ -1,9 +1,7 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
-
-import { AccordionCard } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
@@ -21,21 +19,18 @@ const MAX_TEAM_MEMBERS_DISPLAY = 5;
 
 interface ResourceProjectGroupProps {
   project: ProjectInfo;
-  defaultOpen?: boolean;
 }
 
 export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
   project,
-  defaultOpen = false,
 }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
   const user = useUser();
   const showTeam = canViewTeam(user, {
     customerId: project.customerUuid,
     projectId: project.uuid,
   });
 
-  // Lazy load project details when accordion is opened
+  // Load project details
   const { data: projectDetails, isLoading: isLoadingDetails } = useQuery({
     queryKey: ['project-details-onboarding', project.uuid],
     queryFn: async () => {
@@ -44,11 +39,10 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
       });
       return response.data;
     },
-    enabled: isOpen,
     staleTime: STALE_TIME, // Cache for 5 minutes
   });
 
-  // Lazy load team members when accordion is opened
+  // Load team members
   const { data: teamData, isLoading: isLoadingTeam } = useQuery({
     queryKey: ['project-team-onboarding', project.uuid],
     queryFn: async () => {
@@ -75,89 +69,79 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
         totalCount,
       };
     },
-    enabled: isOpen && showTeam,
+    enabled: showTeam,
     staleTime: STALE_TIME,
   });
-
-  const title = (
-    <span>
-      {translate('Project')}: {project.name}
-      <span className="text-quaternary ms-1.5 font-normal text-xs">
-        ({translate('Organization')}: {project.customerName})
-      </span>
-    </span>
-  );
 
   const isLoading = isLoadingDetails || isLoadingTeam;
   const hasTeamMembers = teamData?.members?.length > 0;
 
   return (
-    <AccordionCard
-      title={title}
-      subtitle={translate('{count} resources', {
-        count: project.resources.length,
-      })}
-      isOpen={isOpen}
-      onToggle={setIsOpen}
-      className="mb-3"
-    >
+    <section className="flex flex-col gap-3">
+      <div>
+        <div className="text-base font-medium text-primary">
+          {translate('Project')}: {project.name}
+          <span className="text-quaternary ms-1.5 font-normal text-xs">
+            ({translate('Organization')}: {project.customerName})
+          </span>
+        </div>
+        <div className="text-quaternary text-sm">
+          {translate('{count} resources', {
+            count: project.resources.length,
+          })}
+        </div>
+      </div>
       {isLoading ? (
-        <div className="flex items-center justify-center py-3">
-          {}
+        <div className="flex items-center py-3">
           <LoadingSpinnerSimple />
           <span className="ms-1.5 text-quaternary">
             {translate('Loading project details...')}
           </span>
         </div>
       ) : (
-        <>
-          {/* Project summary section */}
-          {(projectDetails?.description || hasTeamMembers) && (
-            <div className="border border-secondary rounded-lg p-3 mb-3">
-              {projectDetails?.description && (
-                <p className="text-quaternary mb-2.5">
-                  {projectDetails.description}
-                </p>
-              )}
-              {hasTeamMembers && (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <SymbolsGroup
-                      items={teamData.members}
-                      max={MAX_TEAM_MEMBERS_DISPLAY}
-                      length={teamData.totalCount}
-                      size={32}
-                      nameKey="user_full_name"
-                      emailKey="user_email"
-                      imageKey="user_image"
-                    />
-                    <span className="text-quaternary text-xs">
-                      {translate('{count} team members', {
-                        count: teamData.totalCount,
-                      })}
-                    </span>
-                  </div>
-                  <Link
-                    state="project-team"
-                    params={{ uuid: project.uuid }}
-                    buttonVariant="text-primary"
-                    buttonSize="sm"
-                    className="p-0"
-                  >
-                    {translate('View team')}
-                    <ArrowRightIcon size={14} weight="bold" className="ms-1" />
-                  </Link>
+        (projectDetails?.description || hasTeamMembers) && (
+          <div>
+            {projectDetails?.description && (
+              <p className="text-quaternary mb-2.5">
+                {projectDetails.description}
+              </p>
+            )}
+            {hasTeamMembers && (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <SymbolsGroup
+                    items={teamData.members}
+                    max={MAX_TEAM_MEMBERS_DISPLAY}
+                    length={teamData.totalCount}
+                    size={32}
+                    nameKey="user_full_name"
+                    emailKey="user_email"
+                    imageKey="user_image"
+                  />
+                  <span className="text-quaternary text-xs">
+                    {translate('{count} team members', {
+                      count: teamData.totalCount,
+                    })}
+                  </span>
                 </div>
-              )}
-            </div>
-          )}
-
-          {/* Resources list */}
-          {project.resources.map((resource) => (
-            <ResourceQuickInfo key={resource.uuid} resource={resource} />
-          ))}
-        </>
+                <Link
+                  state="project-team"
+                  params={{ uuid: project.uuid }}
+                  buttonVariant="text-primary"
+                  buttonSize="sm"
+                  className="p-0"
+                >
+                  {translate('View team')}
+                  <ArrowRightIcon size={14} weight="bold" className="ms-1" />
+                </Link>
+              </div>
+            )}
+          </div>
+        )
       )}
-    </AccordionCard>
+      {project.resources.map((resource) => (
+        <ResourceQuickInfo key={resource.uuid} resource={resource} />
+      ))}
+    </section>
   );
 };
