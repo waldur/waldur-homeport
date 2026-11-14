@@ -36,7 +36,7 @@ const WeekdayToggle: FunctionComponent<{
         />
         <label
           htmlFor={id}
-          className="m-0 inline-block size-[30px] cursor-pointer rounded-full bg-quaternary text-center text-sm leading-[30px] text-primary peer-checked:bg-[var(--bg-brand-solid)] peer-checked:text-[var(--text-primary-on-brand)] peer-focus-visible:outline-[2px] peer-focus-visible:outline-solid peer-focus-visible:outline-[var(--focus-ring-color)] peer-focus-visible:outline-offset-[2px]"
+          className="m-0 inline-block size-[30px] cursor-pointer rounded-full bg-quaternary text-center text-sm leading-[30px] text-primary peer-checked:bg-brand-solid peer-checked:text-[var(--text-primary-on-brand)] peer-focus-visible:outline-[2px] peer-focus-visible:outline-solid peer-focus-visible:outline-[var(--focus-ring-color)] peer-focus-visible:outline-offset-[2px]"
         >
           {label}
         </label>

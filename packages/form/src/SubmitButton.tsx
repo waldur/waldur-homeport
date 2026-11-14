@@ -71,7 +71,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
       // A large SubmitButton is a dialog/form footer action: it carries the
       // same width floor as the CloseDialogButton beside it. A small one is
       // for a popover or an inline form, where the floor would be wrong.
-      size === 'lg' && 'min-w-[var(--dialog-action-min-w)]',
+      size === 'lg' && 'min-w-dialog-action',
       className,
     )}
     disabled={disabled || invalid}

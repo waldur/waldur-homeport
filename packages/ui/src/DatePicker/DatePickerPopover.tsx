@@ -422,9 +422,8 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
                 : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
                   'border-secondary bg-primary hover:border-brand-500',
               // Open reads as focused while its calendar is showing.
-              'focus-within:border-[var(--border-brand)] focus-within:ring-1 focus-within:ring-[var(--border-brand)]',
-              open &&
-                'border-[var(--border-brand)] ring-1 ring-[var(--border-brand)]',
+              'focus-within:border-brand-subtle focus-within:ring-1 focus-within:ring-[var(--border-brand)]',
+              open && 'border-brand-subtle ring-1 ring-[var(--border-brand)]',
               invalid &&
                 'border-danger hover:border-danger focus-within:border-danger',
               disabled &&

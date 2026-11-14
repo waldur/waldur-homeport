@@ -86,7 +86,7 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
   return (
     <div
       title={cssVar}
-      className="overflow-hidden rounded-md border border-secondary bg-[var(--card-bg)]"
+      className="overflow-hidden rounded-md border border-secondary bg-card"
     >
       <div
         className="flex h-14 items-end px-1.5 pb-1.5 font-mono text-xs font-semibold"
@@ -138,7 +138,7 @@ function RampPage({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="bg-[var(--page-bg)] p-5">
+    <div className="bg-page p-5">
       <h3 className="mb-1 text-base font-semibold text-primary">{title}</h3>
       <p className="mb-5 max-w-3xl text-xs text-quaternary">{blurb}</p>
       {ramps.map((ramp) => (

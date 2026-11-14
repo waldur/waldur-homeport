@@ -409,7 +409,7 @@ export const MailCustomisePane: FC<{
                 <BaseButton
                   variant="primary"
                   size="lg"
-                  className="min-w-[var(--dialog-action-min-w)]"
+                  className="min-w-dialog-action"
                   label={translate('Save for this call')}
                   pending={submitting}
                   disabled={submitting || (Boolean(override) && pristine)}

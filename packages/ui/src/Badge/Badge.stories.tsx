@@ -80,7 +80,7 @@ export const Playground: Story = {};
  */
 export const VariantToneMatrix: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)] space-y-6">
+    <div className="p-5 bg-page space-y-6">
       {TONES.map((tone) => (
         <div key={tone}>
           <h4 className="text-xs uppercase font-mono text-quaternary mb-2.5">

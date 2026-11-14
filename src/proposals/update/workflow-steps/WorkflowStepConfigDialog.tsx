@@ -169,7 +169,7 @@ const StepConfigForm: FC<
               <BaseButton
                 variant="secondary"
                 size="lg"
-                className="min-w-[var(--dialog-action-min-w)]"
+                className="min-w-dialog-action"
                 label={translate('Back to check')}
                 onClick={() => selectPage('check')}
               />

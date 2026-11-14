@@ -67,7 +67,7 @@ export const MailDialog: FC<Props> = ({ resolve }) => {
             <BaseButton
               variant="primary"
               size="lg"
-              className="min-w-[var(--dialog-action-min-w)]"
+              className="min-w-dialog-action"
               label={translate('Edit')}
               onClick={() =>
                 router.stateService.go(CALL_MAIL_STATE, {

@@ -79,7 +79,7 @@ export const AllVariants: Story = {
 
 export const InlineProse: Story = {
   render: () => (
-    <div className="max-w-md p-4 text-sm text-secondary leading-relaxed bg-[var(--card-bg)] rounded-lg border border-secondary">
+    <div className="max-w-md p-4 text-sm text-secondary leading-relaxed bg-card rounded-lg border border-secondary">
       <p>
         The requested virtual instance is currently scheduled for deployment.{' '}
         <LinkButton variant="brand">Check live provisioning log</LinkButton> for
@@ -98,7 +98,7 @@ export const ExpandCollapseToggle: Story = {
     const [expanded, setExpanded] = useState(false);
 
     return (
-      <div className="max-w-md p-4 bg-[var(--card-bg)] rounded-lg border border-secondary text-sm">
+      <div className="max-w-md p-4 bg-card rounded-lg border border-secondary text-sm">
         <p className="text-secondary">
           {expanded
             ? 'OpenStack provides an open-source cloud computing platform for public and private clouds. It controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a dashboard or via the OpenStack API.'
@@ -136,7 +136,7 @@ export const StateMatrix: Story = {
     },
   },
   render: () => (
-    <div className="p-6 inline-block bg-[var(--page-bg)]">
+    <div className="p-6 inline-block bg-page">
       {/* eslint-disable-next-line waldur-custom/no-hand-rolled-table */}
       <table className="border-collapse text-sm">
         <thead>

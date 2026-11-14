@@ -15,7 +15,7 @@ const DEFAULT_VARIANT = 'primary';
 // completed step; success/warning/danger read the status matrix. Exactly one
 // background class per state, so two utilities never compete on one element.
 const CURRENT_STEP_BG: Record<string, string> = {
-  primary: 'bg-[var(--bg-brand-solid)]',
+  primary: 'bg-brand-solid',
   success: 'bg-success',
   warning: 'bg-warning',
   danger: 'bg-danger',
@@ -57,7 +57,7 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
             // to the top of the next row.
             "not-last:after:absolute not-last:after:top-[41px] not-last:after:left-[12.5px] not-last:after:h-[calc(100%-41px)] not-last:after:w-[2px] not-last:after:content-['']",
             isCompleted
-              ? 'not-last:after:bg-[var(--bg-brand-solid)]'
+              ? 'not-last:after:bg-brand-solid'
               : 'not-last:after:bg-[var(--border-divider)]',
           )}
         >
@@ -77,9 +77,9 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
               className={classNames(
                 'relative z-1 flex size-[25px] shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 group-enabled:group-hover:scale-105',
                 isCompleted
-                  ? 'bg-[var(--bg-brand-solid)]'
+                  ? 'bg-brand-solid'
                   : isCurrent
-                    ? (CURRENT_STEP_BG[variant] ?? 'bg-[var(--bg-brand-solid)]')
+                    ? (CURRENT_STEP_BG[variant] ?? 'bg-brand-solid')
                     : 'bg-tertiary',
                 isCurrent &&
                   (CURRENT_STEP_RING[variant] ?? CURRENT_STEP_RING.primary),

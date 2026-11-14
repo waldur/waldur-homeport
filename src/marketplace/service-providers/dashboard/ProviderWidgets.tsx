@@ -123,7 +123,7 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
   <Card
     asChild
     bordered
-    className="grow min-h-[225px] hover:border-[var(--border-brand)]"
+    className="grow min-h-[225px] hover:border-brand-subtle"
   >
     <Link state={item.to.state} params={item.to.params}>
       <CardContent className="py-8 px-5">

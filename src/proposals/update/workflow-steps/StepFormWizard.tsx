@@ -153,8 +153,7 @@ export const StepFormPageIndicator: FC<{
           // Another page's name takes the Link component's look,
           // so it reads as clickable; the open page's stays plain.
           ...(key !== page && {
-            labelClass:
-              'text-[var(--text-brand-secondary)] hover:underline cursor-pointer',
+            labelClass: 'text-brand-secondary hover:underline cursor-pointer',
           }),
           ...(failed
             ? {
@@ -200,7 +199,7 @@ export const StepFormBackButton: FC<{ isFirst: boolean; goBack(): void }> = ({
     <BaseButton
       variant="tertiary"
       size="lg"
-      className="min-w-[var(--dialog-action-min-w)] me-auto"
+      className="min-w-dialog-action me-auto"
       label={translate('Back')}
       iconNode={<CaretLeftIcon weight="bold" />}
       onClick={goBack}
@@ -218,7 +217,7 @@ export const StepFormNextButton: FC<{
     <BaseButton
       variant={variant}
       size="lg"
-      className="min-w-[var(--dialog-action-min-w)]"
+      className="min-w-dialog-action"
       label={translate('Next')}
       iconNode={<CaretRightIcon weight="bold" />}
       iconRight={true}

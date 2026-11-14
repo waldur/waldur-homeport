@@ -168,7 +168,7 @@ const ButtonGroupQuestion: FC<{
               className={classNames(
                 'inline-flex items-center gap-1.5 h-[34px] px-3.5 text-sm font-medium leading-none rounded-md border whitespace-nowrap cursor-pointer transition-colors duration-150',
                 picked
-                  ? 'text-[var(--text-brand-secondary)] bg-brand-subtle border-[var(--border-brand-solid)]'
+                  ? 'text-brand-secondary bg-brand-subtle border-[var(--border-brand-solid)]'
                   : 'text-primary bg-secondary border-secondary enabled:hover:bg-tertiary enabled:hover:border-primary',
                 dimmed && 'opacity-35',
                 disabled && 'cursor-default opacity-70',
@@ -183,7 +183,7 @@ const ButtonGroupQuestion: FC<{
                   className={classNames(
                     'inline-flex items-center justify-center shrink-0 size-3.5 rounded-sm border',
                     picked
-                      ? 'text-[var(--text-primary-on-brand)] bg-[var(--bg-brand-solid)] border-[var(--border-brand-solid)]'
+                      ? 'text-[var(--text-primary-on-brand)] bg-brand-solid border-[var(--border-brand-solid)]'
                       : 'text-secondary bg-secondary border-secondary',
                   )}
                   aria-hidden="true"

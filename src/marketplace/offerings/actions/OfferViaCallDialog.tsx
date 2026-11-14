@@ -62,7 +62,7 @@ const renderFooter = ({
       {step > 0 && (
         <BaseButton
           variant="tertiary"
-          className="min-w-[var(--dialog-action-min-w)] me-auto"
+          className="min-w-dialog-action me-auto"
           onClick={() => onPrev()}
           label={translate('Back')}
           iconNode={<CaretLeftIcon weight="bold" />}

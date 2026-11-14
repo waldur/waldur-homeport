@@ -40,9 +40,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
             <div
               className={classNames(
                 'absolute inset-0 z-2 flex items-center justify-center rounded-xl border-2 p-5 text-center',
-                isDragReject
-                  ? 'border-danger-subtle'
-                  : 'border-[var(--border-brand)]',
+                isDragReject ? 'border-danger-subtle' : 'border-brand-subtle',
               )}
             >
               {/* Hidden since the overlay border alone signals the drop
@@ -50,9 +48,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
               <div
                 className={classNames(
                   'hidden max-w-[250px] rounded-lg border-2 bg-primary px-7.5 py-5 text-primary',
-                  isDragReject
-                    ? 'border-danger-subtle'
-                    : 'border-[var(--border-brand)]',
+                  isDragReject ? 'border-danger-subtle' : 'border-brand-subtle',
                 )}
               >
                 {isDragReject

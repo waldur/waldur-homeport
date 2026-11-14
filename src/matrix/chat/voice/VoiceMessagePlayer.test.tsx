@@ -81,7 +81,7 @@ describe('VoiceMessagePlayer', () => {
         'p-0',
         'border-0',
         'rounded-full',
-        'bg-[var(--bg-brand-solid)]',
+        'bg-brand-solid',
         'text-white',
         'cursor-pointer',
         'hover:bg-[var(--btn-primary-bg-hover)]',
@@ -145,7 +145,7 @@ describe('VoiceMessagePlayer', () => {
       });
 
       const bars = screen.getAllByTestId('voice-bar');
-      expect(bars[0]).toHaveClass('bg-[var(--bg-brand-solid)]');
+      expect(bars[0]).toHaveClass('bg-brand-solid');
       expect(bars[bars.length - 1]).toHaveClass('bg-[var(--border-primary)]');
     });
   });

@@ -68,8 +68,8 @@ const Frame: FC<{ children: ReactNode; wide?: boolean }> = ({
   <div
     className={
       wide
-        ? 'grid grid-cols-1 gap-5 bg-[var(--page-bg)] p-5 md:grid-cols-2'
-        : 'max-w-xl bg-[var(--page-bg)] p-5'
+        ? 'grid grid-cols-1 gap-5 bg-page p-5 md:grid-cols-2'
+        : 'max-w-xl bg-page p-5'
     }
   >
     {children}

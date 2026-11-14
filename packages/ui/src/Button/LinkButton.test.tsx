@@ -11,7 +11,7 @@ describe('LinkButton', () => {
     render(<LinkButton>Click me</LinkButton>);
     const button = screen.getByRole('button', { name: 'Click me' });
     expect(button).toHaveAttribute('type', 'button');
-    expect(button).toHaveClass('text-[var(--text-brand-secondary)]');
+    expect(button).toHaveClass('text-brand-secondary');
     expect(button).toHaveClass('text-sm');
   });
 

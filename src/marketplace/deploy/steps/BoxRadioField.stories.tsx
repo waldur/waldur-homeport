@@ -75,7 +75,7 @@ const meta: Meta<typeof BoxRadioField> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-5 bg-[var(--page-bg)] min-h-[360px] rounded-lg">
+      <div className="p-5 bg-page min-h-[360px] rounded-lg">
         <Story />
       </div>
     ),
@@ -287,7 +287,7 @@ const BoxRadioFieldHarness = ({
         choices={choices}
         {...props}
       />
-      <div className="p-2.5 bg-[var(--card-bg)] border border-secondary rounded-md text-xs font-mono text-quinary flex items-center justify-between">
+      <div className="p-2.5 bg-card border border-secondary rounded-md text-xs font-mono text-quinary flex items-center justify-between">
         <span>Current input.value:</span>
         <span className="font-bold text-primary">{JSON.stringify(value)}</span>
       </div>

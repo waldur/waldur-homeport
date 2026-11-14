@@ -73,7 +73,7 @@ export const WizardForm: FC<WizardFormProps> = ({
           {props.step > 0 && (
             <BaseButton
               variant="tertiary"
-              className="min-w-[var(--dialog-action-min-w)] me-auto"
+              className="min-w-dialog-action me-auto"
               onClick={props.onPrev}
               label={translate('Back')}
               iconNode={<CaretLeftIcon weight="bold" />}

@@ -23,7 +23,7 @@ const withStoryTheme: Decorator = (Story, context) => {
   }, [theme]);
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme: () => {} }}>
-      <div className="min-h-[240px] bg-[var(--card-bg)] p-5">
+      <div className="min-h-[240px] bg-card p-5">
         <Story />
       </div>
     </ThemeContext.Provider>

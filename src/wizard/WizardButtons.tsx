@@ -36,7 +36,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         iconNode={<CaretLeftIcon weight="bold" />}
         disabled={submitting}
         disabledReason={translate('Submission in progress')}
-        className="min-w-[var(--dialog-action-min-w)]"
+        className="min-w-dialog-action"
         variant="tertiary"
         size="lg"
       />
@@ -59,7 +59,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         label={translate('Next')}
         onClick={goNext}
         variant="primary"
-        className="min-w-[var(--dialog-action-min-w)]"
+        className="min-w-dialog-action"
         disabled={invalid}
         tooltip={tooltip}
         data-testid={isFirstStep ? 'next-button-step-0' : 'next-button-step-1'}

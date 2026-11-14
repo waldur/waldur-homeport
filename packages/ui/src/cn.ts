@@ -27,11 +27,16 @@ const Z_INDEX_LAYERS = [
 // caller's `shadow-raised` replaces a component's own shadow class.
 const SHADOW_TOKENS = ['raised'];
 
+// Min-width utilities named after design tokens (tailwind/theme.css), so a
+// caller's `min-w-[60px]` replaces a dialog button's `min-w-dialog-action`.
+const MIN_WIDTH_TOKENS = ['dialog-action'];
+
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
       z: [{ z: Z_INDEX_LAYERS }],
       shadow: [{ shadow: SHADOW_TOKENS }],
+      'min-w': [{ 'min-w': MIN_WIDTH_TOKENS }],
     },
   },
 });

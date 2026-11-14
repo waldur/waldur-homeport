@@ -42,7 +42,7 @@ export const BlockActionButton = forwardRef<
           '[&>svg]:shrink-0',
           'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
           variant === 'primary'
-            ? 'border-[var(--border-brand)] bg-[var(--btn-secondary-bg)] text-[var(--text-brand-primary)] [&>svg]:text-[var(--btn-secondary-icon)] hover:bg-[var(--btn-secondary-bg-hover)] hover:scale-[1.02] active:translate-y-0 disabled:hover:bg-[var(--btn-secondary-bg)]'
+            ? 'border-brand-subtle bg-[var(--btn-secondary-bg)] text-[var(--text-brand-primary)] [&>svg]:text-[var(--btn-secondary-icon)] hover:bg-[var(--btn-secondary-bg-hover)] hover:scale-[1.02] active:translate-y-0 disabled:hover:bg-[var(--btn-secondary-bg)]'
             : 'border-primary bg-primary text-secondary [&>svg]:text-quaternary hover:bg-primary-hover hover:scale-[1.02] active:translate-y-0 disabled:hover:bg-primary',
           className,
         )}

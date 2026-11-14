@@ -92,7 +92,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         className={cn(
           typeof (label || children) === 'string' &&
             !buttonVariant &&
-            'bg-transparent text-[var(--text-brand-secondary)] hover:underline',
+            'bg-transparent text-brand-secondary hover:underline',
           buttonVariant &&
             buttonVariants({
               variant: buttonVariant,

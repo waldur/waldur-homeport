@@ -50,7 +50,7 @@ const PHYSICAL = new RegExp(
 
 /** A theme-stable solid fill other than a raw step: the status solids, --bg-*-solid. */
 const NAMED_SOLID =
-  /^bg-(?:success|warning|danger|\[var\(--(?:bg-[\w-]*solid|status-\w+-solid)\)\])$/;
+  /^bg-(?:success|warning|danger|brand-solid|\[var\(--(?:bg-[\w-]*solid|status-\w+-solid)\)\])$/;
 
 const HINTS = [
   [/^bg-white$/, 'bg-primary'],

@@ -9,11 +9,11 @@ export const linkButtonVariants = cva(
     variants: {
       variant: {
         brand:
-          'text-[var(--text-brand-secondary)] hover:underline disabled:text-[var(--text-disabled)] disabled:no-underline',
+          'text-brand-secondary hover:underline disabled:text-[var(--text-disabled)] disabled:no-underline',
         danger:
           'text-danger hover:underline disabled:text-[var(--text-disabled)] disabled:no-underline',
         subtle:
-          'text-primary underline hover:text-[var(--text-brand-secondary)] hover:no-underline disabled:text-[var(--text-disabled)] disabled:no-underline',
+          'text-primary underline hover:text-brand-secondary hover:no-underline disabled:text-[var(--text-disabled)] disabled:no-underline',
       },
       size: {
         sm: 'text-sm',
