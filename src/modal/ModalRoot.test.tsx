@@ -734,9 +734,10 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
     const backgroundBtn = screen.getByTestId('background-btn');
     backgroundBtn.focus();
 
-    // Focus guard returns focus to modal's first focusable element
-    const closeBtn = screen.getByRole('button', { name: /close/i });
-    expect(document.activeElement).toBe(closeBtn);
+    // The trap returns focus to where it last was in the modal: the dialog
+    // itself, where it starts when the close button is its first control.
+    expect(document.activeElement).toBe(screen.getByRole('dialog'));
+    expect(backgroundBtn).not.toHaveFocus();
   });
 
   it('hides the page behind it from assistive technology', async () => {

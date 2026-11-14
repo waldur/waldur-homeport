@@ -118,7 +118,7 @@ export function Sidebar({
           // Hover-expanded rail styling with subtle drop shadow
           canHoverExpand &&
             isHoverExpanded &&
-            'md:w-(--sidebar-width) md:shadow-[5px_0px_10px_rgba(70,78,95,0.075)]',
+            'md:w-(--sidebar-width) md:shadow-[var(--sidebar-hover-shadow)]',
           className,
         )}
         data-collapsible={panelCollapsible}

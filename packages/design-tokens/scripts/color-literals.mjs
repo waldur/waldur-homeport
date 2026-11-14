@@ -84,8 +84,16 @@ export function repoPath(file) {
   return path.relative(repoRoot, path.resolve(file)).split(path.sep).join('/');
 }
 
-const HEX = /(?<![&\w])#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{3,4})(?![\w-])/gi;
-const COLOR_FUNCTION = /(?<![\w-])(?:rgba?|hsla?)\(/gi;
+// `_` is a space inside a Tailwind arbitrary value
+// (`shadow-[0_1px_2px_rgba(0,0,0,0.1)]`, `shadow-[0_0_0_1px_#ccc]`), so a
+// literal may follow one; any other word character before it makes it part
+// of a longer name. After a `_`, a colour function counts only with a number
+// for its first argument, so a snake_case call such as `to_rgb(color)` is not
+// one. A hex followed by `_` stays an anchor or a name (`#add_user`).
+const HEX =
+  /(?<![&a-z0-9])#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{3,4})(?![\w-])/gi;
+const COLOR_FUNCTION =
+  /(?<![a-z0-9_-])(?:rgba?|hsla?)\(|(?<=_)(?:rgba?|hsla?)\((?=\s*[\d.])/gi;
 
 // CSS named colours, minus the keywords that are not a fixed colour
 // (transparent, currentColor, inherit, …).

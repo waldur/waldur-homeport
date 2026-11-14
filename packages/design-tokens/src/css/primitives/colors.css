@@ -40,6 +40,15 @@
 
 @import './colorRamps.css';
 
+/* White as a primitive, for translucent white over a coloured surface
+   (the `primary` sidebar style): color-mix(in srgb, var(--color-white) 10%,
+   transparent). Tailwind declares the same value; `static` so it is emitted
+   whether or not a `*-white` utility is used. Translucent black is mixed from
+   --shadow-color (elevation.css). */
+@theme static {
+  --color-white: #ffffff;
+}
+
 :root {
   /* Default static fallback for tenant-configurable brand colour */
   --brand-color: #111a13;
