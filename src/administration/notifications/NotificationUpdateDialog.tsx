@@ -16,17 +16,12 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { NotificationForm } from './NotificationForm';
 
 function findDifferentTemplates(
-  formTemplate: { templates: NotificationTemplateDetailSerializers[] },
-  initTemplate: { templates: NotificationTemplateDetailSerializers[] },
+  formTemplates: NotificationTemplateDetailSerializers[],
+  baseTemplates: NotificationTemplateDetailSerializers[],
 ) {
-  const formTemplates = formTemplate.templates;
-  const initTemplates = initTemplate.templates;
-
-  return formTemplates.filter((template1) => {
-    const matchingTemplate2 = initTemplates.find(
-      (template2) => template2.content === template1.content,
-    );
-    return !matchingTemplate2;
+  return formTemplates.filter((formTemplate) => {
+    const base = baseTemplates.find((t) => t.uuid === formTemplate.uuid);
+    return base && formTemplate.content !== base.content;
   });
 }
 
@@ -46,9 +41,10 @@ export const NotificationUpdateDialog = ({
 
   const { mutateAsync } = useManagedMutation<any, any, any>({
     mutationFn: async (formData) => {
-      const templatesToUpdate = findDifferentTemplates(formData, {
-        templates: normalizedTemplates,
-      });
+      const templatesToUpdate = findDifferentTemplates(
+        formData.templates,
+        normalizedTemplates,
+      );
 
       if (templatesToUpdate.length === 0) {
         return;

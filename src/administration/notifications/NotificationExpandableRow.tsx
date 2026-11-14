@@ -44,7 +44,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                   </h6>
                   <CopyToClipboard
                     label={translate('Copy')}
-                    value={template.content}
+                    value={template.content ?? template.original_content}
                     textButton
                     rightIcon
                     className="my-1.5 hover:text-brand"
@@ -52,7 +52,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                 </CardHeader>
                 <CardContent className="p-6">
                   <pre className="text-secondary text-sm mb-0">
-                    {template.content}
+                    {template.content ?? template.original_content}
                   </pre>
                 </CardContent>
               </Card>
