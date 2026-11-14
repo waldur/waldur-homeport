@@ -106,6 +106,17 @@ export const buildCreditEvents = (
 ): CreditEvent[] => {
   const todayIso = isoDate(today);
   const events: CreditEvent[] = [];
+  const projectEnd = input.project?.end_date || null;
+  const projectEffectiveEnd = input.project?.effective_end_date || null;
+  // When the project terminates every resource and is deleted. Nothing is left
+  // to draw credit or to trip a policy after this, so a projection dated past
+  // it describes an event that cannot occur — and says so beside a row stating
+  // that everything was terminated days earlier. Scheduled events are not
+  // bounded this way: they are dated facts rather than extrapolations of a burn
+  // rate that stops here.
+  const projectTerminates = projectEffectiveEnd || projectEnd;
+  const outlivesProject = (date: string) =>
+    Boolean(projectTerminates) && date > projectTerminates;
   // Whether anything is actually stopping the work right now. The credit rows
   // below each say "resources keep running", which is true of what that row
   // describes and false of the project as a whole once a pausing policy has
@@ -152,7 +163,11 @@ export const buildCreditEvents = (
   // projection — dated today — rather than being left with nothing to show.
   const cappedWithNothingDrawable =
     input.isLimitedByOrganizationCredit && input.spendableValue <= 0;
-  if (input.exhaustionDate && !cappedWithNothingDrawable) {
+  if (
+    input.exhaustionDate &&
+    !cappedWithNothingDrawable &&
+    !outlivesProject(input.exhaustionDate)
+  ) {
     // The projection runs against what can actually be drawn. When the
     // organization is the constraint that is the organization's balance, not
     // this allocation — titling it "credit balance is empty" contradicted the
@@ -241,8 +256,6 @@ export const buildCreditEvents = (
     });
   }
 
-  const projectEnd = input.project?.end_date || null;
-  const projectEffectiveEnd = input.project?.effective_end_date || null;
   if (projectEnd) {
     // Only a real grace window earns its own row; without one the pause and the
     // termination are the same event and one row states it better than two.
@@ -305,6 +318,12 @@ export const buildCreditEvents = (
     if (policy.etaDays === null || policy.etaDays < 0) {
       continue;
     }
+    const etaDate = isoDate(parseDate(today).plus({ days: policy.etaDays }));
+    // Same reasoning as the exhaustion projection: a policy that would fire
+    // after every resource is terminated will not fire.
+    if (policy.etaDays > 0 && outlivesProject(etaDate)) {
+      continue;
+    }
     // 0 is not a projection that rounded down — the server reports it only when
     // the threshold is crossed *and* the policy is genuinely triggered, which
     // for a cost policy also requires the credit balance to have fallen to the
@@ -313,9 +332,7 @@ export const buildCreditEvents = (
     const reached = policy.etaDays === 0;
     const event: CreditEvent = {
       kind: 'policy',
-      date: reached
-        ? todayIso
-        : isoDate(parseDate(today).plus({ days: policy.etaDays })),
+      date: reached ? todayIso : etaDate,
       title: policy.actionLabel,
       // An organization-wide cap is measured against every project under it,
       // so the reader has to know the action is not driven by this project

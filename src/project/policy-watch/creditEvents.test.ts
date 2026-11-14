@@ -423,3 +423,85 @@ describe('buildCreditEvents', () => {
     expect(events[0].title).toBe('Credit balance is empty');
   });
 });
+
+// From a dashboard screenshot: a project ending 10 Nov with grace to 10 Dec,
+// showing "Grace period ends 10 Dec — every remaining resource is terminated"
+// directly above "Credit balance is empty 19 Dec — resources keep running".
+// Both cannot be true, and the second cannot happen at all: nothing draws the
+// credit once the resources are gone.
+describe('projections past the end of the project', () => {
+  const ending = {
+    project: {
+      end_date: '2026-11-10',
+      effective_end_date: '2026-12-10',
+    },
+  };
+
+  it('drops a run-out date that falls after every resource is terminated', () => {
+    const events = build({ ...ending, exhaustionDate: '2026-12-19' });
+
+    expect(kinds(events)).toEqual(['project-pause', 'project-end']);
+    expect(
+      events.some((e) => e.consequence.includes('resources keep running')),
+    ).toBe(false);
+  });
+
+  it('keeps one that falls before, which is the case worth warning about', () => {
+    const events = build({ ...ending, exhaustionDate: '2026-12-01' });
+
+    expect(kinds(events)).toEqual([
+      'project-pause',
+      'exhaustion',
+      'project-end',
+    ]);
+  });
+
+  it('keeps a run-out date on the day the project terminates', () => {
+    const events = build({ ...ending, exhaustionDate: '2026-12-10' });
+
+    expect(kinds(events)).toContain('exhaustion');
+  });
+
+  it('drops a policy projected to fire after the project is gone', () => {
+    const events = build({
+      ...ending,
+      exhaustionDate: null,
+      policies: [
+        { actionLabel: 'Notify', etaDays: 400 },
+        { actionLabel: 'Pause', etaDays: 30 },
+      ],
+    });
+
+    expect(events.filter((e) => e.kind === 'policy')).toHaveLength(1);
+    expect(events.find((e) => e.kind === 'policy')?.title).toBe('Pause');
+  });
+
+  // A threshold already reached is a fact about today, not a projection.
+  it('keeps a policy that has already reached its threshold', () => {
+    const events = build({
+      ...ending,
+      exhaustionDate: null,
+      policies: [{ actionLabel: 'Pause', etaDays: 0 }],
+    });
+
+    expect(events.filter((e) => e.kind === 'policy')).toHaveLength(1);
+  });
+
+  // The credit's own end date is a scheduled fact, not an extrapolation of a
+  // burn rate, so it stays even when it falls after the project ends.
+  it('keeps the credit expiry, which is scheduled rather than projected', () => {
+    const events = build({
+      ...ending,
+      exhaustionDate: null,
+      creditEndDate: '2027-01-01',
+    });
+
+    expect(kinds(events)).toContain('credit-expiry');
+  });
+
+  it('leaves a project with no end date unbounded', () => {
+    const events = build({ exhaustionDate: '2030-01-01' });
+
+    expect(kinds(events)).toEqual(['exhaustion']);
+  });
+});
