@@ -22,6 +22,8 @@ vi.mock('./VirtualMenuList', () => {
   return { VirtualMenuList: MenuListStub };
 });
 
+import { FormField } from '../Form';
+
 import { VirtualMenuList } from './VirtualMenuList';
 import { WindowedSelect } from './WindowedSelect';
 
@@ -60,9 +62,8 @@ describe('WindowedSelect — windowing threshold', () => {
   });
 });
 
-// The portal props come from useSelect's `defaultPortalingProps`, which this
-// component spreads rather than restates. Assert them here so the two cannot
-// drift: only the hook's copy is covered end-to-end (by
+// The portal props come from useSelect, like every other select's. Assert
+// them here too: only the plain Select is covered end-to-end (by
 // src/drawer/DrawerRoot.test.tsx, which clicks an option in a drawer).
 describe('WindowedSelect — portaling defaults', () => {
   test('forwards the shared portal props to react-select', () => {
@@ -93,5 +94,41 @@ describe('WindowedSelect — portaling defaults', () => {
       zIndex: 9999,
       pointerEvents: 'auto',
     });
+  });
+});
+
+// Built on useSelect, so it behaves like the other selects in a form.
+describe('WindowedSelect — shared select behaviour', () => {
+  test('takes its input id from the enclosing field, so the label names it', () => {
+    baseSelectProps.length = 0;
+    render(
+      <FormField controlId="country">
+        <WindowedSelect options={makeOptions(3)} />
+      </FormField>,
+    );
+    expect(baseSelectProps[0].inputId).toBe('country');
+  });
+
+  test("maps `disabled` to react-select's `isDisabled`", () => {
+    baseSelectProps.length = 0;
+    render(<WindowedSelect options={makeOptions(3)} disabled />);
+    expect(baseSelectProps[0].isDisabled).toBe(true);
+  });
+
+  test('keeps picked options in an open multi-select menu', () => {
+    baseSelectProps.length = 0;
+    render(<WindowedSelect options={makeOptions(3)} isMulti />);
+    expect(baseSelectProps[0].hideSelectedOptions).toBe(false);
+    expect(baseSelectProps[0].closeMenuOnSelect).toBe(false);
+  });
+
+  test('takes only the look of `tableFilter`, not the filter behaviour', () => {
+    baseSelectProps.length = 0;
+    render(<WindowedSelect options={makeOptions(3)} variant="tableFilter" />);
+    const [props] = baseSelectProps;
+    expect(props.menuIsOpen).toBeUndefined();
+    expect(props.autoFocus).toBeUndefined();
+    expect(props.menuPortalTarget).toBe(document.body);
+    expect(props.components.Control).toBeUndefined();
   });
 });

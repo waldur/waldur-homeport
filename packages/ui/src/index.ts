@@ -38,7 +38,6 @@ export * from './NoResult';
 export * from './Popover';
 export * from './Progress';
 export * from './PropertyList';
-export * from './ScrollArea';
 export * from './ScrollSpy';
 export * from './SegmentedControl';
 export * from './Select';

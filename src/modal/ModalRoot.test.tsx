@@ -20,7 +20,7 @@ import { Select } from '@/form/select';
 
 import { useModal } from './actions';
 import { ConfirmModalRoot } from './ConfirmModalRoot';
-import { ModalContext, ModalProvider } from './ModalContext';
+import { ModalContext, ModalProvider, ModalStateContext } from './ModalContext';
 import { ModalDialog } from './ModalDialog';
 import { ModalRoot } from './ModalRoot';
 
@@ -182,6 +182,35 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
       document.querySelector('[data-slot="modal-backdrop"]'),
     ).toBeInTheDocument();
     expect(document.querySelector('[data-slot="modal"]')).toBeInTheDocument();
+  });
+
+  it('does not re-render components that only use the actions when a dialog opens or closes', async () => {
+    const user = userEvent.setup();
+    let renders = 0;
+    const ActionsOnly = () => {
+      useModal();
+      renders++;
+      return null;
+    };
+    const Bystander = React.memo(ActionsOnly);
+
+    render(
+      <ModalProvider>
+        <ModalTrigger component={SampleDialog} />
+        <Bystander />
+        <ModalRoot />
+      </ModalProvider>,
+    );
+    expect(renders).toBe(1);
+
+    await user.click(screen.getByTestId('trigger-btn'));
+    expect(await screen.findByTestId('input-1')).toBeInTheDocument();
+    await user.keyboard('{Escape}');
+    await waitFor(() =>
+      expect(screen.queryByTestId('input-1')).not.toBeInTheDocument(),
+    );
+
+    expect(renders).toBe(1);
   });
 
   it('returns focus to the original trigger after closing a nested dialog', async () => {
@@ -403,20 +432,23 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
 
     render(
       <ModalContext.Provider
-        value={
-          {
+        value={{
+          openDialog: vi.fn(),
+          closeDialog: vi.fn(),
+          returnFocusRef: { current: null },
+          confirm: confirmMock,
+        }}
+      >
+        <ModalStateContext.Provider
+          value={{
             modalComponent: DirtyDialog,
             modalProps: {},
             confirmComponent: null,
             confirmProps: {},
-            openDialog: vi.fn(),
-            closeDialog: vi.fn(),
-            returnFocusRef: { current: null },
-            confirm: confirmMock,
-          } as any
-        }
-      >
-        <ModalRoot />
+          }}
+        >
+          <ModalRoot />
+        </ModalStateContext.Provider>
       </ModalContext.Provider>,
     );
 
@@ -455,20 +487,23 @@ describe('ModalRoot (a modal Radix Dialog)', () => {
 
     render(
       <ModalContext.Provider
-        value={
-          {
+        value={{
+          openDialog: vi.fn(),
+          closeDialog: closeDialogMock,
+          returnFocusRef: { current: null },
+          confirm: confirmMock,
+        }}
+      >
+        <ModalStateContext.Provider
+          value={{
             modalComponent: DirtyDialog,
             modalProps: { showCancel: true },
             confirmComponent: null,
             confirmProps: {},
-            openDialog: vi.fn(),
-            closeDialog: closeDialogMock,
-            returnFocusRef: { current: null },
-            confirm: confirmMock,
-          } as any
-        }
-      >
-        <ModalRoot />
+          }}
+        >
+          <ModalRoot />
+        </ModalStateContext.Provider>
       </ModalContext.Provider>,
     );
 

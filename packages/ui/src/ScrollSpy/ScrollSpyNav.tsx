@@ -106,16 +106,16 @@ export const ScrollSpyNav = forwardRef<HTMLElement, ScrollSpyNavProps>(
       [itemsProp, tabsProp],
     );
 
-    const sectionIds = useMemo(() => {
-      const keys: string[] = [];
-      items.forEach((tab) => {
-        keys.push(tab.key);
-        if (tab.children?.length) {
-          keys.push(...tab.children.map((child) => child.key));
-        }
-      });
-      return keys;
-    }, [items]);
+    // Keyed on the keys themselves, not on `items`: callers often build the
+    // array inline (a step list carrying each step's error state), and a new
+    // array with the same keys must not tear down and rebuild the observer.
+    const sectionKey = items
+      .flatMap((tab) => [tab.key, ...(tab.children ?? []).map((c) => c.key)])
+      .join('\u0000');
+    const sectionIds = useMemo(
+      () => (sectionKey ? sectionKey.split('\u0000') : []),
+      [sectionKey],
+    );
 
     const visibleSectionId = useScrollTracker({
       sectionIds,

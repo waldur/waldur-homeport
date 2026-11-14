@@ -16,13 +16,8 @@ import {
   CustomSelectProps,
 } from './types';
 
-/**
- * The portaling props every select in this package shares. Exported so
- * WindowedSelect — which renders react-select directly instead of going
- * through these hooks — spreads the same values rather than repeating them;
- * deliberately not re-exported from the package root, it is internal.
- */
-export const defaultPortalingProps = {
+/** The portaling props every select in this package shares. */
+const defaultPortalingProps = {
   menuPortalTarget: document.body,
   styles: {
     // A modal Radix Dialog (the app drawer) sets `pointer-events: none` on
@@ -53,15 +48,24 @@ const tableFilterStyles = {
   }),
 };
 
-export const useSelect = <
-  T extends CustomSelectProps | CustomCreatableSelectProps,
->(
-  props: T,
-) => {
+const defaultGetOptionValue = (option: any) => option.value;
+
+type AnySelectProps =
+  | CustomSelectProps
+  | CustomCreatableSelectProps
+  | CustomAsyncSelectProps
+  | CustomAsyncCreatableSelectProps;
+
+/**
+ * What every select in this package shares, whatever its option source:
+ * control id, components, value and handlers (plain or react-final-form),
+ * the table-filter and multi-select behaviour, disabled, and classes.
+ */
+const useBaseSelectProps = (props: AnySelectProps) => {
   const controlId = useControlId(props.inputId || props.id);
   const isTableFilter = props.variant === 'tableFilter';
 
-  const composedComponents = composeComponents(
+  const components = composeComponents(
     {
       ...(isTableFilter ? { Control: FilterSelectControl } : {}),
       ...props.components,
@@ -69,41 +73,24 @@ export const useSelect = <
     props.isMulti,
   );
 
-  const getOptionValue =
-    props.getOptionValue || ((option: any) => option.value);
-
-  const value = props.input ? props.input.value : props.value;
-
-  const menuIsOpen = props.menuIsOpen || isTableFilter;
-
-  const options = useMemo(() => {
-    if (menuIsOpen && Array.isArray(props.options) && value !== null) {
-      return reorderOptions(
-        props.options,
-        value,
-        getOptionValue,
-        props.isMulti,
-      );
-    }
-    return props.options;
-  }, [menuIsOpen, props.options, value, getOptionValue, props.isMulti]);
+  const classNames = useMemo(
+    () =>
+      getSelectTailwindClassNames({
+        size: props.size,
+        variant: props.variant,
+        hasError: Boolean(props.meta?.touched && props.meta?.error),
+      }),
+    [props.size, props.variant, props.meta?.touched, props.meta?.error],
+  );
 
   const onChange = (newValue, actionMeta) => {
-    if (props.input) {
-      props.input.onChange(newValue);
-    }
-    if (props.onChange) {
-      props.onChange(newValue, actionMeta);
-    }
+    props.input?.onChange?.(newValue);
+    props.onChange?.(newValue, actionMeta);
   };
 
   const onBlur = (event) => {
-    if (props.input) {
-      props.input.onBlur(event);
-    }
-    if (props.onBlur) {
-      props.onBlur(event);
-    }
+    props.input?.onBlur?.(event);
+    props.onBlur?.(event);
   };
 
   const tableFilterProps = isTableFilter
@@ -120,57 +107,68 @@ export const useSelect = <
         menuPortalTarget: undefined,
         menuPosition: undefined,
         menuPlacement: undefined,
-        styles: tableFilterStyles,
       }
     : {};
 
   const multiProps = props.isMulti
-    ? {
-        hideSelectedOptions: false,
-        closeMenuOnSelect: false,
-      }
+    ? { hideSelectedOptions: false, closeMenuOnSelect: false }
     : {};
 
-  const isDisabled = props.isDisabled || props.disabled;
-
-  const classNamesConfig = useMemo(
-    () =>
-      getSelectTailwindClassNames({
-        size: props.size,
-        variant: props.variant,
-        hasError: Boolean(props.meta?.touched && props.meta?.error),
-      }),
-    [props.size, props.variant, props.meta?.touched, props.meta?.error],
-  );
-
   return {
-    ...defaultPortalingProps,
-    ...multiProps,
-    ...tableFilterProps,
-    ...props,
-    // After `props`: `composedComponents` already folds in the caller's own
-    // `components`, so spreading the raw prop last would drop every default
-    // (checkbox options, tags, indicators) as soon as one part is overridden.
-    components: composedComponents,
-    // Merged, not replaced: a caller passing its own `styles` would otherwise
-    // drop the portal z-index and the `pointer-events: auto` above, and the
-    // symptom — an unclickable menu inside the modal drawer — surfaces far
-    // from the call that caused it. Per-key overrides still win.
-    styles: {
-      ...defaultPortalingProps.styles,
-      ...(isTableFilter ? tableFilterStyles : {}),
-      ...props.styles,
+    /** Defaults; the caller's props are spread over these. */
+    defaults: { ...defaultPortalingProps, ...multiProps, ...tableFilterProps },
+    /** Spread after the caller's props: these always win. */
+    overrides: {
+      // `composeComponents` already folds in the caller's own `components`,
+      // so spreading the raw prop last would drop every default (checkbox
+      // options, tags, indicators) as soon as one part is overridden.
+      components,
+      // Merged, not replaced: a caller passing its own `styles` would
+      // otherwise drop the portal z-index and the `pointer-events: auto`
+      // above, and the symptom — an unclickable menu inside the modal
+      // drawer — surfaces far from the call that caused it. Per-key
+      // overrides still win.
+      styles: {
+        ...defaultPortalingProps.styles,
+        ...(isTableFilter ? tableFilterStyles : {}),
+        ...props.styles,
+      },
+      unstyled: true,
+      classNames,
+      isDisabled: props.isDisabled || props.disabled,
+      inputId: controlId,
+      id: undefined,
+      value: props.input ? props.input.value : props.value,
+      onChange,
+      onBlur,
     },
-    unstyled: true,
-    classNames: classNamesConfig,
-    isDisabled,
-    inputId: controlId,
-    id: undefined,
-    value,
-    options,
-    onChange,
-    onBlur,
+    menuIsOpen: props.menuIsOpen || isTableFilter,
+    getOptionValue: props.getOptionValue || defaultGetOptionValue,
   };
+};
+
+export const useSelect = <
+  T extends CustomSelectProps | CustomCreatableSelectProps,
+>(
+  props: T,
+) => {
+  const { defaults, overrides, menuIsOpen, getOptionValue } =
+    useBaseSelectProps(props);
+  const { value } = overrides;
+
+  const options = useMemo(() => {
+    if (menuIsOpen && Array.isArray(props.options) && value !== null) {
+      return reorderOptions(
+        props.options,
+        value,
+        getOptionValue,
+        props.isMulti,
+      );
+    }
+    return props.options;
+  }, [menuIsOpen, props.options, value, getOptionValue, props.isMulti]);
+
+  return { ...defaults, ...props, ...overrides, options };
 };
 
 export const useAsyncSelect = <
@@ -178,23 +176,9 @@ export const useAsyncSelect = <
 >(
   props: T,
 ) => {
-  const controlId = useControlId(props.inputId || props.id);
-  const isTableFilter = props.variant === 'tableFilter';
-
-  const composedComponents = composeComponents(
-    {
-      ...(isTableFilter ? { Control: FilterSelectControl } : {}),
-      ...props.components,
-    },
-    props.isMulti,
-  );
-
-  const getOptionValue =
-    props.getOptionValue || ((option: any) => option.value);
-
-  const value = props.input ? props.input.value : props.value;
-
-  const menuIsOpen = props.menuIsOpen || isTableFilter;
+  const { defaults, overrides, menuIsOpen, getOptionValue } =
+    useBaseSelectProps(props);
+  const { value } = overrides;
 
   const loadOptions = useMemo(() => {
     if (menuIsOpen && props.loadOptions) {
@@ -218,83 +202,11 @@ export const useAsyncSelect = <
     return props.loadOptions;
   }, [menuIsOpen, props.loadOptions, value, getOptionValue, props.isMulti]);
 
-  const onChange = (newValue, actionMeta) => {
-    if (props.input) {
-      props.input.onChange(newValue);
-    }
-    if (props.onChange) {
-      props.onChange(newValue, actionMeta);
-    }
-  };
-
-  const onBlur = (event) => {
-    if (props.input) {
-      props.input.onBlur(event);
-    }
-    if (props.onBlur) {
-      props.onBlur(event);
-    }
-  };
-
-  const tableFilterProps = isTableFilter
-    ? {
-        autoFocus: true,
-        // The filter popover shows one filter at a time, so its menu stays
-        // open. Where several filters are expanded together (the mobile
-        // sidebar), `menuAlwaysOpen={false}` makes each an ordinary
-        // dropdown instead: opened by the autofocus, closed on blur, so only
-        // one menu shows at a time.
-        ...(props.menuAlwaysOpen === false
-          ? { openMenuOnFocus: true }
-          : { menuIsOpen: true }),
-        menuPortalTarget: undefined,
-        menuPosition: undefined,
-        menuPlacement: undefined,
-        styles: tableFilterStyles,
-      }
-    : {};
-
-  const multiProps = props.isMulti
-    ? {
-        hideSelectedOptions: false,
-        closeMenuOnSelect: false,
-      }
-    : {};
-
-  const isDisabled = props.isDisabled || props.disabled;
-
-  const classNamesConfig = useMemo(
-    () =>
-      getSelectTailwindClassNames({
-        size: props.size,
-        variant: props.variant,
-        hasError: Boolean(props.meta?.touched && props.meta?.error),
-      }),
-    [props.size, props.variant, props.meta?.touched, props.meta?.error],
-  );
-
   return {
     additional: { page: 1 },
-    ...defaultPortalingProps,
-    ...multiProps,
-    ...tableFilterProps,
+    ...defaults,
     ...props,
-    // After `props` — see the same line in `useSelect` above.
-    components: composedComponents,
-    // Merged, not replaced — see the same block in `useSelect` above.
-    styles: {
-      ...defaultPortalingProps.styles,
-      ...(isTableFilter ? tableFilterStyles : {}),
-      ...props.styles,
-    },
-    unstyled: true,
-    classNames: classNamesConfig,
-    isDisabled,
-    inputId: controlId,
-    id: undefined,
-    value,
-    onChange,
-    onBlur,
+    ...overrides,
     loadOptions,
   };
 };

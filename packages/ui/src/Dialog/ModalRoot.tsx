@@ -12,7 +12,7 @@ import { translate } from 'waldur-i18n-runtime';
 
 import { DirtyFormContext } from './DirtyFormContext';
 import { ModalShell } from './Modal';
-import { useModal } from './modalContext';
+import { useModal, useModalState } from './modalContext';
 
 export interface ModalRootProps {
   /**
@@ -31,8 +31,8 @@ export interface ModalRootProps {
  * ask first.
  */
 export const ModalRoot: FC<ModalRootProps> = ({ errorBoundary }) => {
-  const { modalComponent, modalProps, closeDialog, confirm, returnFocusRef } =
-    useModal();
+  const { closeDialog, confirm, returnFocusRef } = useModal();
+  const { modalComponent, modalProps } = useModalState();
 
   const lastContentRef = useRef<{
     component: ComponentType<any> | string;
@@ -140,7 +140,8 @@ export const ModalRoot: FC<ModalRootProps> = ({ errorBoundary }) => {
  * ModalRoot. Closing it rejects the confirm's promise.
  */
 export const ConfirmModalRoot: FC<ModalRootProps> = ({ errorBoundary }) => {
-  const { confirmComponent, confirmProps, closeDialog } = useModal();
+  const { closeDialog } = useModal();
+  const { confirmComponent, confirmProps } = useModalState();
 
   const lastContentRef = useRef<{
     component: ComponentType<any> | string;

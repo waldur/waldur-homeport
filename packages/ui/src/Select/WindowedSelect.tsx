@@ -1,10 +1,9 @@
 import { FC, useMemo } from 'react';
 import BaseSelect from 'react-select';
 
-import { composeComponents } from './SelectHelper';
 import { getSelectTailwindClassNames } from './tailwindStyles';
 import { CustomSelectProps } from './types';
-import { defaultPortalingProps } from './useSelect';
+import { useSelect } from './useSelect';
 import { VirtualMenuList } from './VirtualMenuList';
 
 const DEFAULT_WINDOW_THRESHOLD = 100;
@@ -29,52 +28,46 @@ const countOptions = (options: unknown): number => {
   return options.length;
 };
 
+/**
+ * A Select that virtualizes its menu once the list is long (countries, time
+ * zones). Everything else — label linking, disabled, multi-select defaults,
+ * portaling, classes — comes from `useSelect`, like every other select.
+ */
 export const WindowedSelect: FC<WindowedSelectProps> = ({
-  components = undefined,
   windowThreshold = DEFAULT_WINDOW_THRESHOLD,
+  variant,
   ...props
 }) => {
-  const composedComponents = composeComponents(
-    components,
-    (props as any).isMulti,
-  );
-
-  const shouldVirtualize = useMemo(
-    () => countOptions((props as any).options) >= windowThreshold,
-    [(props as any).options, windowThreshold],
-  );
-
-  const finalComponents = shouldVirtualize
-    ? { ...composedComponents, MenuList: VirtualMenuList }
-    : composedComponents;
-
-  const classNamesConfig = useMemo(
+  // `variant` only styles a windowed select. The table-filter behaviour
+  // useSelect attaches to it (autofocus, an inline menu that stays open, the
+  // search-icon control) is for the generated filters; the one windowed
+  // select that passes `tableFilter`, the saved-filter list in the filters
+  // menu, only wants the look.
+  const selectProps = useSelect(props);
+  const classNames = useMemo(
     () =>
       getSelectTailwindClassNames({
         size: props.size,
-        variant: props.variant,
+        variant,
         hasError: Boolean(props.meta?.touched && props.meta?.error),
       }),
-    [props.size, props.variant, props.meta?.touched, props.meta?.error],
+    [props.size, variant, props.meta?.touched, props.meta?.error],
+  );
+
+  const shouldVirtualize = useMemo(
+    () => countOptions(props.options) >= windowThreshold,
+    [props.options, windowThreshold],
   );
 
   return (
     <BaseSelect
-      // This component renders react-select directly rather than through
-      // useSelect, so it takes the shared portal target, z-index,
-      // `pointer-events: auto` and menu-height cap from the one definition —
-      // see `defaultPortalingProps` for what each is for.
-      {...defaultPortalingProps}
-      {...(props as any)}
-      // Merged, not replaced: a caller's own `styles` must not drop the
-      // portal defaults above. Per-key overrides still win.
-      styles={{
-        ...defaultPortalingProps.styles,
-        ...(props as any).styles,
-      }}
-      components={finalComponents}
-      unstyled={true}
-      classNames={classNamesConfig}
+      {...selectProps}
+      classNames={classNames}
+      components={
+        shouldVirtualize
+          ? { ...selectProps.components, MenuList: VirtualMenuList }
+          : selectProps.components
+      }
     />
   );
 };

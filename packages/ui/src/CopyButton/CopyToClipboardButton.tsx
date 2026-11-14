@@ -1,15 +1,16 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { clsx } from 'clsx';
-import { useCallback, FunctionComponent } from 'react';
+import { FunctionComponent, MouseEvent } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { buttonVariants, ButtonVariant } from '../Button';
 import { Tooltip } from '../Tooltip';
 
-import { useCopyFeedback } from './CopyButton';
+import { copyToClipboard, useCopyFeedback } from './CopyButton';
 
 interface OwnProps {
-  value;
+  /** Copied as text; a number (an id, a count) is stringified. */
+  value: string | number;
   size?: number;
   className?: string;
   buttonClassName?: string;
@@ -45,40 +46,41 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
 }) => {
   const onCopied = useCopyFeedback();
 
-  const onClick = useCallback(
-    (event) => {
-      event.stopPropagation();
-      event.preventDefault();
-      navigator.clipboard.writeText(value).then(() => {
-        onCopied?.({ value, name: verbose });
-      });
-    },
-    [value, verbose, onCopied],
-  );
+  const onClick = (event: MouseEvent) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const text = String(value);
+    copyToClipboard(text).then((ok) => {
+      if (ok) onCopied?.({ value: text, name: verbose });
+    });
+  };
 
-  const CopyButton = () => (
-    <button
-      className={clsx(
-        buttonVariant
-          ? buttonVariants({ variant: buttonVariant, iconOnly: true })
-          : 'bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2',
-        buttonClassName,
-      )}
-      type="button"
-      aria-label={label}
-      onClick={(e) => onClick(e)}
-    >
-      <Tooltip label={label}>
+  // Rendered inline rather than as a nested component: one defined inside
+  // this function would be a new component type on every render, remounting
+  // the button (closing its tooltip, dropping keyboard focus) each time the
+  // parent re-renders. The tooltip wraps the button, not the icon, so it
+  // opens on keyboard focus as well as on hover.
+  const button = (
+    <Tooltip label={label}>
+      <button
+        className={clsx(
+          buttonVariant
+            ? buttonVariants({ variant: buttonVariant, iconOnly: true })
+            : 'bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2',
+          buttonClassName,
+        )}
+        type="button"
+        aria-label={label}
+        onClick={onClick}
+      >
         <CopyIcon weight="bold" size={size} />
-      </Tooltip>
-    </button>
+      </button>
+    </Tooltip>
   );
 
   return onlyButton ? (
-    <CopyButton />
+    button
   ) : (
-    <div className={clsx('my-1', className)}>
-      <CopyButton />
-    </div>
+    <div className={clsx('my-1', className)}>{button}</div>
   );
 };

@@ -70,9 +70,7 @@ type Story = StoryObj<typeof Sidebar>;
  * own `isSub` check (from ambient useSidebarSubDepth()) adds the
  * `rounded-none` corner and per-level indentation automatically, and this
  * bullet-spacer keeps the label text-aligned with a sibling row that *does*
- * have an icon at the same depth. Deliberately not the SidebarMenuSubButton
- * export below — that's a pl-11-based alternative nobody in this codebase
- * actually uses; this is the one real production behavior renders.
+ * have an icon at the same depth.
  */
 const SubNavItem = ({
   label,

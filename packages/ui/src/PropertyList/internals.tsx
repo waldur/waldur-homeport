@@ -39,14 +39,32 @@ export const hasContent = (content: unknown): boolean => {
 // What `renderFieldOrDash` shows for a missing value; never worth copying.
 export const DASH = '—';
 
-export const DashNode: FC = () => (
+/**
+ * A placeholder's visible text, plus what a screen reader says instead when
+ * the glyph means nothing read aloud ("—", "N/A"). `aria-label` cannot do it:
+ * ARIA prohibits it on a `<span>` with no role, so it is ignored.
+ */
+const PlaceholderText: FC<{ label: ReactNode; srText?: string }> = ({
+  label,
+  srText,
+}) => (
   <span
     data-slot="property-placeholder"
     className="text-quaternary font-normal select-none"
-    aria-label={translate('Not specified')}
   >
-    {DASH}
+    {srText ? (
+      <>
+        <span aria-hidden="true">{label}</span>
+        <span className="sr-only">{srText}</span>
+      </>
+    ) : (
+      label
+    )}
   </span>
+);
+
+export const DashNode: FC = () => (
+  <PlaceholderText label={DASH} srText={translate('Not specified')} />
 );
 
 export const DASH_NODE = <DashNode />;
@@ -79,15 +97,7 @@ export const renderPropertyPlaceholder = (
 ): ReactNode => {
   if (isPlaceholderPreset(placeholder)) {
     const { label, srText } = getPlaceholderPreset(placeholder);
-    return (
-      <span
-        data-slot="property-placeholder"
-        className="text-quaternary font-normal select-none"
-        aria-label={srText}
-      >
-        {label}
-      </span>
-    );
+    return <PlaceholderText label={label} srText={srText} />;
   }
 
   if (placeholder === undefined || placeholder === null) {
@@ -95,14 +105,7 @@ export const renderPropertyPlaceholder = (
   }
 
   if (typeof placeholder === 'string' || typeof placeholder === 'number') {
-    return (
-      <span
-        data-slot="property-placeholder"
-        className="text-quaternary font-normal select-none"
-      >
-        {placeholder}
-      </span>
-    );
+    return <PlaceholderText label={placeholder} />;
   }
 
   return (
