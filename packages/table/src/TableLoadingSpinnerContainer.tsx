@@ -8,6 +8,7 @@ export const TableSpinner = () => (
   <SpinnerIcon
     className="animation-spin text-brand"
     role="status"
+    data-slot="spinner"
     weight="bold"
   />
 );

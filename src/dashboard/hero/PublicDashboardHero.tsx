@@ -33,6 +33,7 @@ export const PublicDashboardHero: FC<
   return (
     <div
       className={classNames('public-dashboard-hero', props.containerClassName)}
+      data-testid="dashboard-hero"
     >
       <div
         className={classNames(

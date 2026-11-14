@@ -9,6 +9,7 @@ export const LoadingSpinnerSimple = ({ className, ...rest }: IconProps) => {
     <SpinnerIcon
       className={classNames('animation-spin', textClass, className)}
       role="status"
+      data-slot="spinner"
       weight="bold"
       {...rest}
     />

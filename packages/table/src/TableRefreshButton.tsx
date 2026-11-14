@@ -8,7 +8,7 @@ import { Sorting } from './types';
 export const LoadingSpinner: FunctionComponent = () => (
   <BaseButton
     iconNode={
-      <span className="animation-spin">
+      <span className="animation-spin" data-slot="spinner">
         <ArrowsClockwiseIcon weight="bold" />
       </span>
     }
