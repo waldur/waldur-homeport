@@ -13158,7 +13158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"papaparse@npm:^5.2.2":
+"papaparse@npm:^5.4.0":
   version: 5.5.4
   resolution: "papaparse@npm:5.5.4"
   checksum: 10c0/8942ae45dcc171b720fd67953f825a544fdeeeadb85cf28a239d016fd6cff0c59650e667b3158a9a0153c6e1d7674c199603bcf360d854ce7edce822eb7f7bb6
@@ -16302,7 +16302,7 @@ __metadata:
     mermaid: "npm:^11.16.1"
     monaco-editor: "npm:^0.52.2"
     oxlint: "npm:^1.67.0"
-    papaparse: "npm:^5.2.2"
+    papaparse: "npm:^5.4.0"
     pixelmatch: "npm:^7.2.0"
     playwright: "npm:1.61.1"
     pngjs: "npm:^7.0.0"
@@ -16519,7 +16519,7 @@ __metadata:
     es-toolkit: "npm:^1.52.0"
     jszip: "npm:^3.10.1"
     luxon: "npm:^3.7.2"
-    papaparse: "npm:^5.2.2"
+    papaparse: "npm:^5.4.0"
     react: "npm:^18.3.0"
     react-dom: "npm:^18.3.0"
     react-select: "npm:^5.10.0"

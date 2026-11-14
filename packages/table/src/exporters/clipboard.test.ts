@@ -28,6 +28,17 @@ describe('exportToClipboard', () => {
     expect(writtenText).toContain('Bob');
   });
 
+  it('escapes cells a spreadsheet would read as a formula', async () => {
+    await exportToClipboard(undefined, {
+      fields: ['name', 'amount'],
+      data: [['=1+1', '-12.5']],
+    });
+
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+      `name,amount\r\n"'=1+1",-12.5`,
+    );
+  });
+
   it('returns a promise', () => {
     const result = exportToClipboard(undefined, [{ x: 1 }]);
     expect(result).toBeInstanceOf(Promise);

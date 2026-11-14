@@ -1,10 +1,9 @@
-import Papa from 'papaparse';
 import { FC, useMemo } from 'react';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
-import saveAsCsv from '@/table/exporters/csv';
+import saveAsCsv, { toCsv } from '@/table/exporters/csv';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import templateFile from './organizations_template.json';
@@ -15,7 +14,7 @@ const onDownloadClick = () => saveAsCsv(getTemplateName(), templateFile);
 
 export const Step1DownloadTemplate: FC<WizardFormStepProps> = (props) => {
   const fileSize = useMemo(() => {
-    const csv = Papa.unparse(templateFile);
+    const csv = toCsv(templateFile);
     const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
 
     return formatFilesize(blob.size, 'B');
