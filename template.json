@@ -4101,11 +4101,7 @@
       "feature_area": "charts"
     }
   },
-  "All domains allowed": {
-    "context": {
-      "feature_area": "managed-projects"
-    }
-  },
+  "All domains allowed": {},
   "All entries": {
     "context": {
       "feature_area": "generated"
@@ -39735,6 +39731,7 @@
       "feature_area": "steps"
     }
   },
+  "No domains allowed": {},
   "No duplicate support users found for this backend ID.": {
     "context": {
       "feature_area": "support-users"
@@ -41352,6 +41349,11 @@
   "Nobody is told": {
     "context": {
       "feature_area": "workflow-description"
+    }
+  },
+  "Nobody will be able to join.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Nobody: no preview": {
@@ -57413,6 +57415,11 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "Restrict who may join": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Restricted": {
     "context": {
       "primary_ui_type": "title",
@@ -68548,6 +68555,18 @@
         }
       },
       "feature_area": "diagram"
+    }
+  },
+  "The current allowed domains are not known.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "actions",
+      "action_type": "create"
+    }
+  },
+  "The current allowed domains could not be loaded, so they cannot be changed here.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "The customer enters one number, and each chosen limit component is set to a formula of it, such as input * 2. The calculated limits are priced like any other and cannot be edited by the customer.": {},
@@ -85139,6 +85158,11 @@
   "When no usage is reported for the next month": {
     "context": {
       "feature_area": "usage"
+    }
+  },
+  "When off, anyone may join the project, whatever their email address.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "When off, the step is skipped: it stays out of the workflow preview and no proposal ever enters it.": {

@@ -18,6 +18,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
+import { allowedDomainsProperty } from '@/openportal/allowedDomains';
 import { DetailsDiff } from '@/openportal/DetailsDiff';
 import { getMembershipControlLabels } from '@/openportal/membershipControl';
 import { propVal } from '@/property/propertyFields';
@@ -129,8 +130,7 @@ export const RemoteProjectDetail = () => {
             />
             <PropertyItem
               label={translate('Allowed domains')}
-              value={propVal.list(row.allowed_domains)}
-              placeholder={translate('All domains allowed')}
+              {...allowedDomainsProperty(row.allowed_domains)}
             />
             <PropertyItem
               label={translate('Earliest approve')}

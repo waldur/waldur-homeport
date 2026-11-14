@@ -18,6 +18,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
+import { allowedDomainsProperty } from '@/openportal/allowedDomains';
 import { getMembershipControlLabels } from '@/openportal/membershipControl';
 import { propVal } from '@/property/propertyFields';
 
@@ -218,8 +219,7 @@ export const ManagedProjectDetail = () => {
             />
             <PropertyItem
               label={translate('Allowed domains')}
-              value={propVal.list(details?.allowed_domains)}
-              placeholder={translate('All domains allowed')}
+              {...allowedDomainsProperty(details?.allowed_domains)}
             />
           </PropertyList>
         </CardContent>
