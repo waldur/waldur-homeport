@@ -1,4 +1,5 @@
 import { EChartsOption } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
@@ -31,7 +32,7 @@ export const OrdersDailyCostChart: FC<OrdersDailyCostChartProps> = ({
         axisPointer: { type: 'shadow' },
         formatter: (params) => {
           const value = params[0]?.value || 0;
-          return `${params[0]?.name}: ${defaultCurrency(value)}`;
+          return `${escape(params[0]?.name)}: ${escape(defaultCurrency(value))}`;
         },
       },
       grid: {

@@ -562,4 +562,30 @@ describe('ResourceUsageChart', () => {
       expect(result.userUsages).toEqual([]);
     });
   });
+
+  it('escapes names in the usage tooltip', () => {
+    const name = '<img src=x onerror=alert(1)>';
+    const result = getEChartOptions(
+      { type: 'cpu', measured_unit: 'cores', billing_type: 'usage' },
+      [],
+      [],
+      1,
+      '#1f77b4',
+    );
+    const tooltip = (result.tooltip.formatter as any)([
+      {
+        axisValue: name,
+        marker: '',
+        seriesName: name,
+        data: {
+          value: 1,
+          description: name,
+          details: [{ username: name, usage: 1, measured_unit: name }],
+        },
+      },
+    ]);
+
+    expect(tooltip.split('&lt;img src=x onerror=alert(1)&gt;')).toHaveLength(6);
+    expect(tooltip).not.toContain('<img');
+  });
 });

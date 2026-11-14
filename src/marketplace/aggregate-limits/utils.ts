@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 
@@ -159,21 +160,21 @@ export function useAggregateLimitChart(
 
           const usageValue = usageBar.data.rawValue;
 
-          let tooltip = component.name;
+          let tooltip = escape(component.name);
           tooltip += component.measured_unit
-            ? ` (${component.measured_unit})<br/>`
+            ? ` (${escape(component.measured_unit)})<br/>`
             : '<br/>';
           tooltip += `<small>${billingTypeLabel} </small><br/>`;
-          tooltip += `${usageBar.marker} ${usageName}: ${usageValue} ${component.measured_unit}<br/>`;
+          tooltip += `${usageBar.marker} ${usageName}: ${usageValue} ${escape(component.measured_unit)}<br/>`;
 
           const terminatedBar = bySeries(terminatedName);
           if (terminatedBar?.data?.rawValue > 0) {
-            tooltip += `${terminatedBar.marker} ${terminatedName}: ${terminatedBar.data.rawValue} ${component.measured_unit}<br/>`;
+            tooltip += `${terminatedBar.marker} ${terminatedName}: ${terminatedBar.data.rawValue} ${escape(component.measured_unit)}<br/>`;
           }
 
           const limitBar = bySeries(limitName);
           if (component.limit != null && limitBar) {
-            tooltip += `${limitBar.marker} ${limitName}: ${component.limit} ${component.measured_unit}`;
+            tooltip += `${limitBar.marker} ${limitName}: ${component.limit} ${escape(component.measured_unit)}`;
           }
           return tooltip;
         },

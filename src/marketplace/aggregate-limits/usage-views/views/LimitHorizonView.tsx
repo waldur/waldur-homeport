@@ -1,4 +1,5 @@
 import { useQueries } from '@tanstack/react-query';
+import { escape } from 'es-toolkit/compat';
 import { FC, useMemo } from 'react';
 import {
   Project,
@@ -320,20 +321,20 @@ export const LimitHorizonView: FC<Props> = ({
         if (!r) return '';
         const pct = Math.round(r.fillRatio * 100);
         const period = r.periodLabel
-          ? `<small>${r.periodLabel}</small><br/>`
+          ? `<small>${escape(r.periodLabel)}</small><br/>`
           : '';
         const headerLines = [
-          `<strong>${r.offeringName} · ${r.componentName}</strong>`,
-          `<small class="text-quaternary rich-text">${translate('Type')}: <code>${r.componentType}</code> · ${
+          `<strong>${escape(r.offeringName)} · ${escape(r.componentName)}</strong>`,
+          `<small class="text-quaternary rich-text">${translate('Type')}: <code>${escape(r.componentType)}</code> · ${
             r.billingType === 'limit'
               ? translate('Limit-based')
               : translate('Usage-based')
           }</small>`,
           period,
           `${translate('Period')}: ${formatDate(r.start)} → <strong>${formatDate(r.end)}</strong>`,
-          `${translate('Used')}: <strong>${r.used.toLocaleString()}</strong> / ${r.limit.toLocaleString()} ${r.measuredUnit} (${pct}%)`,
+          `${translate('Used')}: <strong>${r.used.toLocaleString()}</strong> / ${r.limit.toLocaleString()} ${escape(r.measuredUnit)} (${pct}%)`,
           r.terminated > 0
-            ? `${TERMINATED_SERIES_NAME()}: <strong>${r.terminated.toLocaleString()}</strong> ${r.measuredUnit}`
+            ? `${TERMINATED_SERIES_NAME()}: <strong>${r.terminated.toLocaleString()}</strong> ${escape(r.measuredUnit)}`
             : '',
           `<small class="text-info">↻ ${translate('Next reset')}: ${formatDate(r.end)}</small>`,
         ];
@@ -353,9 +354,9 @@ export const LimitHorizonView: FC<Props> = ({
               .map((p) => {
                 const share = Math.round((p.usage / total) * 100);
                 const name = p.isRemoved
-                  ? `${p.name} <small class="text-quaternary">${translate('(removed)')}</small>`
-                  : p.name;
-                return `<div style="display:flex;justify-content:space-between;gap:8px"><span>${name}</span><span><strong>${p.usage.toLocaleString()}</strong> ${r.measuredUnit} <small>(${share}%)</small></span></div>`;
+                  ? `${escape(p.name)} <small class="text-quaternary">${translate('(removed)')}</small>`
+                  : escape(p.name);
+                return `<div style="display:flex;justify-content:space-between;gap:8px"><span>${name}</span><span><strong>${p.usage.toLocaleString()}</strong> ${escape(r.measuredUnit)} <small>(${share}%)</small></span></div>`;
               })
               .join('');
             headerLines.push(

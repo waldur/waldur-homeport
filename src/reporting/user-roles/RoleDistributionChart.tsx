@@ -1,4 +1,5 @@
 import { EChartsOption } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 import { FC, useCallback, useMemo } from 'react';
 import { CustomerMemberCount } from 'waldur-js-client';
 
@@ -35,7 +36,7 @@ export const RoleDistributionChart: FC<RoleDistributionChartProps> = ({
           const param = params[0];
           const percent =
             total > 0 ? ((param.value / total) * 100).toFixed(1) : 0;
-          return `${param.name}: ${param.value.toLocaleString()} (${percent}%)`;
+          return `${escape(param.name)}: ${param.value.toLocaleString()} (${percent}%)`;
         },
       },
       grid: {

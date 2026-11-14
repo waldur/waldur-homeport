@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { FC, useCallback, useMemo } from 'react';
 import { OfferingCost } from 'waldur-js-client';
 
@@ -39,7 +40,7 @@ export const OfferingCostsChart: FC<OfferingCostsChartProps> = ({ data }) => {
     (params: any) => {
       const param = params[0];
       const percent = total > 0 ? ((param.value / total) * 100).toFixed(1) : 0;
-      return `${param.name}: ${defaultCurrency(param.value)} (${percent}%)`;
+      return `${escape(param.name)}: ${escape(defaultCurrency(param.value))} (${percent}%)`;
     },
     [total],
   );

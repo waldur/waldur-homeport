@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { FC, useMemo, useState } from 'react';
 
 import { generateBrandColors } from 'waldur-design-tokens';
@@ -141,10 +142,12 @@ export const TreemapView: FC<Props> = ({ components }) => {
     const unit = mode === 'pct' ? '%' : '';
     const label = meta?.label ?? info.name;
     const levelChip = meta?.level
-      ? `<span style="display:inline-block;background:${colors.track};color:${colors.muted};padding:1px 6px;border-radius:8px;font-size:10px;margin-right:4px">${meta.level}</span>`
+      ? `<span style="display:inline-block;background:${colors.track};color:${colors.muted};padding:1px 6px;border-radius:8px;font-size:10px;margin-right:4px">${escape(meta.level)}</span>`
       : '';
-    const detail = meta?.detail ? `<br/><small>${meta.detail}</small>` : '';
-    return `${levelChip}<strong>${label}</strong><br/>${
+    const detail = meta?.detail
+      ? `<br/><small>${escape(meta.detail)}</small>`
+      : '';
+    return `${levelChip}<strong>${escape(label)}</strong><br/>${
       mode === 'pct' ? translate('Saturation') : translate('Size')
     }: ${v}${unit}${detail}`;
   };

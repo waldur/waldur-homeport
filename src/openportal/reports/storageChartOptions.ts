@@ -8,6 +8,7 @@
  */
 
 import type { EChartsOption } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 
 import {
   getCategoricalColors,
@@ -260,9 +261,9 @@ export function buildStorageBarOptions(
         if (isProjectRow) {
           const vol = rowLabel.replace(projectPrefix, '');
           const q = projectQuotas[vol];
-          if (!q) return rowLabel;
+          if (!q) return escape(rowLabel);
           const pct = (q.usedFraction * 100).toFixed(1);
-          return `<b>${rowLabel}</b><br/>${translate(
+          return `<b>${escape(rowLabel)}</b><br/>${translate(
             '{usage} / {limit} ({percent}%)',
             {
               usage: q.usageFormatted,
@@ -273,14 +274,16 @@ export function buildStorageBarOptions(
         }
 
         const uid = uids[localNames.indexOf(rowLabel)] ?? rowLabel;
-        const lines: string[] = [`<b>${rowLabel}</b> <small>(${uid})</small>`];
+        const lines: string[] = [
+          `<b>${escape(rowLabel)}</b> <small>(${escape(uid)})</small>`,
+        ];
         for (const vol of visibleUserVols) {
           const q = report.quotaForUser(uid)?.[vol];
           if (q) {
             const pct = (q.usedFraction * 100).toFixed(1);
             lines.push(
               translate('{volume}: {usage} / {limit} ({percent}%)', {
-                volume: vol,
+                volume: escape(vol),
                 usage: q.usageFormatted,
                 limit: q.limitFormatted,
                 percent: pct,
@@ -498,7 +501,7 @@ export function buildStorageTimeseriesOptions(
         const { rows } = buildTooltipRows(params, (v) =>
           translate('{value} {unit}', { value: v.toFixed(2), unit: unitLabel }),
         );
-        return `<b>${date}</b><br/>${rows}`;
+        return `<b>${escape(date)}</b><br/>${rows}`;
       },
     },
     legend: timeseriesLegend(allNames),
@@ -615,7 +618,7 @@ export function buildStorageProjectBarOptions(
       formatter: (params: any) => {
         if (!Array.isArray(params) || params.length === 0) return '';
         const label = params[0].axisValueLabel ?? params[0].name;
-        return `<b>${label}</b><br/>${translate('{value} {unit}', {
+        return `<b>${escape(label)}</b><br/>${translate('{value} {unit}', {
           value: (params[0].value as number).toFixed(2),
           unit: unitLabel,
         })}`;
@@ -788,7 +791,7 @@ export function buildStorageProjectTimeseriesOptions(
         const { rows } = buildTooltipRows(params, (v) =>
           translate('{value} {unit}', { value: v.toFixed(2), unit: unitLabel }),
         );
-        return `<b>${date}</b><br/>${rows}`;
+        return `<b>${escape(date)}</b><br/>${rows}`;
       },
     },
     legend: timeseriesLegend(allNames),

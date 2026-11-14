@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 import { ServiceProviderRevenues } from 'waldur-js-client';
@@ -27,7 +28,7 @@ export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
 
   const tooltipFormatter = useCallback((params: any) => {
     const param = Array.isArray(params) ? params[0] : params;
-    return `${param.name}: ${defaultCurrency(param.value)}`;
+    return `${escape(param.name)}: ${escape(defaultCurrency(param.value))}`;
   }, []);
 
   const getExportData = useCallback(

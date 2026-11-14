@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { FC, useMemo, useCallback } from 'react';
 
@@ -117,7 +118,7 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
               : null;
             const monthly = renderFieldOrDash(point?.usage?.toLocaleString());
 
-            result += `${param.marker} ${param.seriesName}<br/>`;
+            result += `${param.marker} ${escape(param.seriesName)}<br/>`;
             result += `&nbsp;&nbsp;${translate('Monthly')}: ${monthly}<br/>`;
             result += `&nbsp;&nbsp;${translate('Cumulative')}: ${cumulative}<br/>`;
           }

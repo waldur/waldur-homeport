@@ -1,4 +1,5 @@
 import { EChartsOption } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 import { FC, useMemo } from 'react';
 import { DailyOrderStats } from 'waldur-js-client';
 
@@ -61,7 +62,7 @@ export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
           const param = params[0];
           const data = chartData[param.dataIndex];
           return `
-            <div>${data.date}</div>
+            <div>${escape(data.date)}</div>
             <div>${translate('Success rate')}: ${data.successRate}%</div>
             <div>${translate('Done')}: ${data.done}</div>
             <div>${translate('Erred')}: ${data.erred}</div>
