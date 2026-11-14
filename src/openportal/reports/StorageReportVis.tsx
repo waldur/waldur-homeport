@@ -70,7 +70,8 @@ export const StorageReportVis: FC<Props> = ({
 
   const volumes = useMemo(() => (report ? report.volumes() : []), [report]);
 
-  const hasDailyData = useMemo(() => (report?.dates.length ?? 0) > 0, [report]);
+  // One snapshot is a point, not a series: the time series needs two.
+  const hasDailyData = useMemo(() => (report?.dates.length ?? 0) > 1, [report]);
 
   const [view, setView] = useState<ChartView>('bar');
   const [volumeFilter, setVolumeFilter] = useState<string>('all');

@@ -15491,6 +15491,11 @@
       "feature_area": "playground"
     }
   },
+  "Could not load offering and user names; showing identifiers instead.": {
+    "context": {
+      "feature_area": "reports"
+    }
+  },
   "Could not load workflow progress.": {
     "context": {
       "feature_area": "proposal"
