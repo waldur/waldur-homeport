@@ -1,4 +1,3 @@
-import Papa from 'papaparse';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormState } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
@@ -6,7 +5,7 @@ import { Customer } from 'waldur-js-client';
 import { formatDate } from '@/core/dateUtils';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
-import saveAsCsv from '@/table/exporters/csv';
+import saveAsCsv, { toCsv } from '@/table/exporters/csv';
 
 import { DownloadTemplateItem } from './DownloadTemplateItem';
 import { ProjectImportFormData } from './types';
@@ -54,7 +53,7 @@ export const Step3DownloadTemplate: FC<Step3Props> = ({
 
   const fileSize = useMemo(() => {
     if (!template) return null;
-    const csv = Papa.unparse(template);
+    const csv = toCsv(template);
     const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
     return formatFilesize(blob.size, 'B');
   }, [template]);

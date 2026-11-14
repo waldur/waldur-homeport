@@ -9,7 +9,7 @@ import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
-import saveAsCsv from '@/table/exporters/csv';
+import saveAsCsv, { toCsv } from '@/table/exporters/csv';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import templateFile from './offering_users_template.json';
@@ -97,7 +97,7 @@ const onDownloadClick = () => saveAsCsv(getTemplateName(), templateFile);
 
 export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
   const fileSize = useMemo(() => {
-    const csv = Papa.unparse(templateFile);
+    const csv = toCsv(templateFile);
     const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
 
     return formatFilesize(blob.size, 'B');
