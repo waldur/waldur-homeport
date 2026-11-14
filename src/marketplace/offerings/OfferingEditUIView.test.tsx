@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplacePluginsList } from 'waldur-js-client';
 
@@ -91,6 +92,44 @@ describe('OfferingEditUIView', () => {
 
     expect(credentialsChild).toBeDefined();
     expect(credentialsChild.title).toBe('Credentials');
+  });
+
+  it('keeps rendering when the offering type has no plugin', async () => {
+    let resolvePlugins;
+    (marketplacePluginsList as any).mockReturnValue(
+      new Promise((resolve) => {
+        resolvePlugins = resolve;
+      }),
+    );
+    const offering = {
+      type: 'Legacy.Removed',
+      name: 'Legacy Offering',
+      state: 'Draft',
+    } as any;
+
+    renderWithProviders(
+      <OfferingEditUIView
+        offeringData={{ offering }}
+        refetchOffering={vi.fn()}
+        isLoadingOffering={false}
+        isRefetchingOffering={false}
+        errorOffering={null}
+      />,
+    );
+    const rendersBeforePlugins = (usePageTabsTransmitter as any).mock.calls
+      .length;
+
+    // Components are derived once the plugin list arrives. Without a matching
+    // plugin that render used to throw "reading 'components'", so the view
+    // never rendered again.
+    resolvePlugins({
+      data: [{ offering_type: 'Marketplace.Basic', components: [] }],
+    });
+    await waitFor(() =>
+      expect((usePageTabsTransmitter as any).mock.calls.length).toBeGreaterThan(
+        rendersBeforePlugins,
+      ),
+    );
   });
 
   const renderTabsFor = (offering) => {

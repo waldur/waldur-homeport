@@ -33,9 +33,9 @@ async function loadOrder(order_uuid: string) {
     marketplacePluginsList().then((response) => response.data),
   ]);
 
-  const pluginLimits = plugins.find(
-    (plugin) => plugin.offering_type === offering.type,
-  ).available_limits;
+  const pluginLimits =
+    plugins.find((plugin) => plugin.offering_type === offering.type)
+      ?.available_limits || [];
   const limits = offering.effective_available_limits || pluginLimits;
   return {
     order,
