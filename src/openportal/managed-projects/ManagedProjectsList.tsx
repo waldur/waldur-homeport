@@ -104,10 +104,13 @@ export const ManagedProjectsList = () => {
     },
   });
 
+  // Sort keys are the API's own (ManagedProjectViewSet.ordering_fields): the
+  // backend silently ignores any other, which leaves the column looking
+  // sortable while the order never changes.
   const columns: Array<Column> = [
     {
       title: translate('Project'),
-      orderField: 'row.details.name',
+      orderField: 'details__name',
       render: ({ row }) => (
         <Link
           state="marketplace-provider-managed-project-detail"
@@ -127,15 +130,23 @@ export const ManagedProjectsList = () => {
       id: 'notes',
     },
     {
+      title: translate('Identifier'),
+      orderField: 'identifier',
+      render: ({ row }) => renderFieldOrDash(row.identifier),
+      keys: ['identifier'],
+      optional: true,
+      id: 'identifier',
+    },
+    {
       title: translate('Offering'),
-      orderField: 'row.offering',
+      orderField: 'project_template__offering',
       render: ({ row }) => renderOffering(row.destination),
       keys: ['offering'],
       id: 'offering',
     },
     {
       title: translate('Project Template'),
-      orderField: 'row.details.class',
+      orderField: 'project_template__name',
       render: ({ row }) => renderProjectTemplate(row),
       keys: ['project-template'],
       id: 'project-template',
@@ -149,6 +160,7 @@ export const ManagedProjectsList = () => {
     },
     {
       title: translate('Created'),
+      orderField: 'created',
       render: ({ row }) => (
         <>{row.created ? formatDateTime(row.created) : DASH_ESCAPE_CODE}</>
       ),
@@ -190,6 +202,7 @@ export const ManagedProjectsList = () => {
     },
     {
       title: translate('State'),
+      orderField: 'state',
       render: ({ row }) => (
         <>
           {row.state}
@@ -218,6 +231,7 @@ export const ManagedProjectsList = () => {
       title={translate('Managed Projects')}
       showPageSizeSelector={true}
       standalone
+      hasQuery
       hasOptionalColumns
       expandableRowClassName="py-1.5 pe-1.5"
       expandableRow={ManagedProjectExpandableRow}
