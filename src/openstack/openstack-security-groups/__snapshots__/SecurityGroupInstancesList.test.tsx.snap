@@ -214,11 +214,10 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       <button
                         aria-label="Copy to clipboard"
                         class="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary in-[:is(td,th)]:inline-flex in-[:is(td,th)]:items-center in-[:is(td,th)]:justify-center in-[:is(td,th)]:min-w-[24px] in-[:is(td,th)]:min-h-[24px] in-[:is(td,th)]:mx-[calc((1em-24px)/2)] in-[:is(td,th)]:my-0 in-[:is(td,th)]:align-middle in-[:is(td,th)]:focus-visible:-outline-offset-2"
+                        data-state="closed"
                         type="button"
                       >
                         <span
-                          class=""
-                          data-state="closed"
                           data-testid="CopyIcon"
                           weight="bold"
                         />

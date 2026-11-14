@@ -91,23 +91,6 @@ export function useBreakpointUp(
 }
 
 /**
- * Returns true when the viewport width is between min (inclusive) and max (exclusive).
- * Uses `(min-width: ${minPx}px) and (max-width: ${maxPx - 1}px)`.
- */
-export function useBreakpointBetween(
-  min: BreakpointKey | number,
-  max: BreakpointKey | number,
-  serverFallback = false,
-): boolean {
-  const minPx = resolveBreakpointPx(min);
-  const maxPx = resolveBreakpointPx(max);
-  return useMediaQuery(
-    `(min-width: ${minPx}px) and (max-width: ${maxPx - 1}px)`,
-    serverFallback,
-  );
-}
-
-/**
  * Returns true when the primary pointer device cannot hover (e.g. mobile phones, touch tablets).
  * Useful for switching hover-only tooltips or menus to tap/click toggles.
  */

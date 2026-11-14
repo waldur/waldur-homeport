@@ -4,6 +4,7 @@ import {
   ReactNode,
   useCallback,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -12,7 +13,11 @@ import {
   ConfirmationDialog,
   DeleteConfirmationDialog,
 } from './ConfirmationDialog';
-import { ModalContext, setModalServiceTarget } from './modalContext';
+import {
+  ModalContext,
+  ModalStateContext,
+  setModalServiceTarget,
+} from './modalContext';
 import type {
   AppModalProps,
   ConfirmationOptions,
@@ -56,6 +61,9 @@ export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
   >(null);
   const [modalProps, setModalProps] = useState<any>({});
   const returnFocusRef = useRef<HTMLElement | null>(null);
+  // Whether a dialog is open, for openDialog to tell opening from replacing
+  // without depending on the state (which would change its identity).
+  const isOpenRef = useRef(false);
 
   const [confirmComponent, setConfirmComponent] = useState<
     ComponentType<any> | string | null
@@ -64,17 +72,19 @@ export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const openDialog = useCallback(
     <T,>(component: ComponentType<T> | string, props?: T & AppModalProps) => {
-      if (!modalComponent) {
+      if (!isOpenRef.current) {
         returnFocusRef.current = getReturnFocusTarget();
       }
+      isOpenRef.current = true;
       setModalComponent(() => component);
       setModalProps(props || {});
     },
-    [modalComponent],
+    [],
   );
 
   const closeDialog = useCallback((type: ModalAction = 'HIDE_MODAL') => {
     if (type === 'HIDE_MODAL') {
+      isOpenRef.current = false;
       setModalComponent(null);
       setModalProps({});
     } else if (type === 'HIDE_CONFIRM') {
@@ -113,20 +123,23 @@ export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
   }, [openDialog, closeDialog, confirm]);
 
+  // Two contexts: the actions never change, so the hundreds of components
+  // that only open or close dialogs don't re-render when one opens; the
+  // state changes with every dialog and is read by the roots alone.
+  const actions = useMemo(
+    () => ({ openDialog, closeDialog, confirm, returnFocusRef }),
+    [openDialog, closeDialog, confirm],
+  );
+  const state = useMemo(
+    () => ({ modalComponent, modalProps, confirmComponent, confirmProps }),
+    [modalComponent, modalProps, confirmComponent, confirmProps],
+  );
+
   return (
-    <ModalContext.Provider
-      value={{
-        modalComponent,
-        modalProps,
-        confirmComponent,
-        confirmProps,
-        openDialog,
-        closeDialog,
-        returnFocusRef,
-        confirm,
-      }}
-    >
-      {children}
+    <ModalContext.Provider value={actions}>
+      <ModalStateContext.Provider value={state}>
+        {children}
+      </ModalStateContext.Provider>
     </ModalContext.Provider>
   );
 };

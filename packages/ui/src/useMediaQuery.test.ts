@@ -3,7 +3,6 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
   BREAKPOINTS,
-  useBreakpointBetween,
   useBreakpointDown,
   useBreakpointUp,
   useMediaQuery,
@@ -157,22 +156,6 @@ describe('Breakpoint Helpers', () => {
 
     renderHook(() => useBreakpointUp(1400));
     expect(queries).toContain('(min-width: 1400px)');
-  });
-
-  it('useBreakpointBetween queries between min and max range safely', () => {
-    const queries: string[] = [];
-    window.matchMedia = vi.fn().mockImplementation((query: string) => {
-      queries.push(query);
-      return {
-        matches: false,
-        media: query,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      };
-    });
-
-    renderHook(() => useBreakpointBetween('sm', 'lg'));
-    expect(queries).toContain('(min-width: 576px) and (max-width: 991px)');
   });
 
   it('useNoHover queries (hover: none)', () => {

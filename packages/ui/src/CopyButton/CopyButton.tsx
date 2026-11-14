@@ -4,6 +4,8 @@ import {
   FC,
   PropsWithChildren,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 
@@ -56,6 +58,19 @@ export const CopyFeedbackProvider: FC<
 export const useCopyFeedback = () => useContext(CopyFeedbackContext);
 
 /**
+ * Writes `value` to the clipboard. Resolves `false` instead of throwing when
+ * the browser refuses — a denied permission, or no Clipboard API at all on an
+ * insecure origin — so a caller gives no "copied" feedback for a failed copy.
+ */
+export const copyToClipboard = (value: string): Promise<boolean> => {
+  if (!navigator.clipboard) return Promise.resolve(false);
+  return navigator.clipboard.writeText(value).then(
+    () => true,
+    () => false,
+  );
+};
+
+/**
  * The button swaps its label (label → copiedLabel, then back) after a copy,
  * and reports the copy to an enclosing `CopyFeedbackProvider`, which the app
  * turns into a toast. Extracted here since the same value/label/onClick/
@@ -72,12 +87,18 @@ export function CopyButton({
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const onCopied = useContext(CopyFeedbackContext);
+  // One timer at a time: a second copy restarts the 1.5s, and an unmount
+  // cancels it.
+  const resetTimer = useRef<number>();
+  useEffect(() => () => window.clearTimeout(resetTimer.current), []);
 
   const handleClick = () => {
-    navigator.clipboard.writeText(value).then(() => {
+    copyToClipboard(value).then((ok) => {
+      if (!ok) return;
       setCopied(true);
       onCopied?.({ value, name });
-      window.setTimeout(() => setCopied(false), 1500);
+      window.clearTimeout(resetTimer.current);
+      resetTimer.current = window.setTimeout(() => setCopied(false), 1500);
     });
   };
 

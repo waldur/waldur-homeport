@@ -124,7 +124,7 @@ describe('PropertyList', () => {
     expect(
       screen.getByRole('definition', { name: 'Router' }),
     ).toHaveTextContent('\u2014');
-    expect(screen.getByLabelText('Not specified')).toBeInTheDocument();
+    expect(screen.getByText('Not specified')).toBeInTheDocument();
     expect(screen.getByRole('definition', { name: 'Nodes' })).toHaveTextContent(
       '0',
     );
@@ -640,11 +640,11 @@ describe('PropertyList', () => {
       expect(
         screen.getByRole('definition', { name: 'Preset NA' }),
       ).toHaveTextContent('N/A');
-      expect(screen.getByLabelText('Not applicable')).toBeInTheDocument();
+      expect(screen.getByText('Not applicable')).toBeInTheDocument();
       expect(
         screen.getByRole('definition', { name: 'Preset Dash' }),
       ).toHaveTextContent('—');
-      expect(screen.getByLabelText('Not specified')).toBeInTheDocument();
+      expect(screen.getByText('Not specified')).toBeInTheDocument();
     });
 
     it('inherits emptyPlaceholder from PropertyList context', () => {

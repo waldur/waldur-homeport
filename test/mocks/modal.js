@@ -5,12 +5,16 @@ const mockModalActions = {
   openDialog: vi.fn(),
   closeDialog: vi.fn(),
   confirm: vi.fn().mockResolvedValue(undefined),
+  returnFocusRef: { current: null },
+};
+const mockModalState = {
   modalComponent: null,
   modalProps: {},
   confirmComponent: null,
   confirmProps: {},
 };
 const mockUseModal = vi.fn(() => mockModalActions);
+const mockUseModalState = vi.fn(() => mockModalState);
 const mockModalService = {
   open: mockModalActions.openDialog,
   close: mockModalActions.closeDialog,
@@ -19,6 +23,7 @@ const mockModalService = {
 
 vi.mock('@/modal/actions', () => ({
   useModal: mockUseModal,
+  useModalState: mockUseModalState,
   ModalService: mockModalService,
 }));
 
@@ -32,6 +37,7 @@ vi.mock(
   async (importOriginal) => ({
     ...(await importOriginal()),
     useModal: mockUseModal,
+    useModalState: mockUseModalState,
     ModalService: mockModalService,
   }),
 );

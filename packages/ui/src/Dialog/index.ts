@@ -27,8 +27,14 @@ export {
   DeleteConfirmationDialog,
 } from './ConfirmationDialog';
 export { DirtyFormContext } from './DirtyFormContext';
-export { ModalContext, ModalService, useModal } from './modalContext';
-export type { ModalContextValue } from './modalContext';
+export {
+  ModalContext,
+  ModalService,
+  ModalStateContext,
+  useModal,
+  useModalState,
+} from './modalContext';
+export type { ModalContextValue, ModalStateValue } from './modalContext';
 export { ModalProvider } from './ModalProvider';
 export { ConfirmModalRoot, ModalRoot } from './ModalRoot';
 export type { ModalRootProps } from './ModalRoot';

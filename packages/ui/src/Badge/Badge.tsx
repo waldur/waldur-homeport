@@ -259,7 +259,6 @@ export interface BadgeProps
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   onlyIcon?: boolean;
-  alignIcon?: boolean;
   hasBullet?: boolean;
   tooltip?: ReactNode;
   tooltipProps?: Partial<TooltipProps>;
@@ -277,7 +276,6 @@ export const Badge = forwardRef<HTMLElement, BadgeProps>(
       leftIcon,
       rightIcon,
       onlyIcon,
-      alignIcon,
       hasBullet,
       tooltip,
       tooltipProps,
@@ -288,7 +286,6 @@ export const Badge = forwardRef<HTMLElement, BadgeProps>(
     ref,
   ) => {
     const isButton = as === 'button';
-    void alignIcon;
 
     const hasContent =
       children !== undefined &&

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { FeedbackPrompt, feedbackSurveysPrompt } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { useModal } from '@/modal/actions';
+import { useModal, useModalState } from '@/modal/actions';
 import { useProfileCompletenessContext } from '@/user/ProfileCompletenessContext';
 import { useUser } from '@/workspace/hooks';
 
@@ -33,7 +33,8 @@ const markChecked = (key: string) => {
 };
 
 export const FeedbackPromptCheck: FC = () => {
-  const { openDialog, modalComponent } = useModal();
+  const { openDialog } = useModal();
+  const { modalComponent } = useModalState();
   const user = useUser();
   const [prompt, setPrompt] = useState<FeedbackPrompt>();
   // Not over the profile and terms form that blocks navigation.

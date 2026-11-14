@@ -330,6 +330,27 @@ describe('ScrollSpy Suite', () => {
       { key: 'sec-review', title: 'Review & submit' },
     ];
 
+    it('keeps its observer when re-rendered with a new array of the same sections', () => {
+      SAMPLE_ITEMS.forEach(({ key }) => {
+        const el = document.createElement('section');
+        el.id = key;
+        document.body.appendChild(el);
+      });
+      const { rerender } = render(<ScrollSpyNav items={[...SAMPLE_ITEMS]} />);
+      const observer = globalThis.__ioInstances.at(-1);
+      expect(observer).toBeDefined();
+
+      rerender(<ScrollSpyNav items={[...SAMPLE_ITEMS]} />);
+      expect(globalThis.__ioInstances.at(-1)).toBe(observer);
+
+      rerender(
+        <ScrollSpyNav
+          items={[...SAMPLE_ITEMS, { key: 'sec-extra', title: 'Extra' }]}
+        />,
+      );
+      expect(globalThis.__ioInstances.at(-1)).not.toBe(observer);
+    });
+
     it('returns null when items array is empty', () => {
       render(<ScrollSpyNav items={[]} />);
       expect(screen.queryByRole('navigation')).not.toBeInTheDocument();

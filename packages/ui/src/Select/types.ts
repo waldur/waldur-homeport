@@ -20,7 +20,8 @@ interface SelectFieldMeta {
   error?: any;
 }
 
-export type CustomSelectProps = {
+/** What this package adds to every react-select flavour. */
+interface SelectExtraProps {
   size?: 'sm';
   variant?: 'tableFilter' | 'tableCell';
   /** `tableFilter` only: keep the inline menu permanently open (default). */
@@ -28,37 +29,18 @@ export type CustomSelectProps = {
   input?: SelectFieldInputProps;
   meta?: SelectFieldMeta;
   disabled?: boolean;
-} & SelectProps<any, any, any>;
+}
 
-export type CustomCreatableSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter' | 'tableCell';
-  /** `tableFilter` only: keep the inline menu permanently open (default). */
-  menuAlwaysOpen?: boolean;
-  input?: SelectFieldInputProps;
-  meta?: SelectFieldMeta;
-  disabled?: boolean;
-} & CreatableProps<any, any, any>;
+export type CustomSelectProps = SelectExtraProps & SelectProps<any, any, any>;
 
-export type CustomAsyncSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter' | 'tableCell';
-  /** `tableFilter` only: keep the inline menu permanently open (default). */
-  menuAlwaysOpen?: boolean;
-  input?: SelectFieldInputProps;
-  meta?: SelectFieldMeta;
-  disabled?: boolean;
-} & AsyncPaginateProps<any, GroupBase<any>, any, any>;
+export type CustomCreatableSelectProps = SelectExtraProps &
+  CreatableProps<any, any, any>;
 
-export type CustomAsyncCreatableSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter' | 'tableCell';
-  /** `tableFilter` only: keep the inline menu permanently open (default). */
-  menuAlwaysOpen?: boolean;
-  input?: SelectFieldInputProps;
-  meta?: SelectFieldMeta;
-  disabled?: boolean;
-} & AsyncPaginateProps<any, GroupBase<any>, any, any> &
+export type CustomAsyncSelectProps = SelectExtraProps &
+  AsyncPaginateProps<any, GroupBase<any>, any, any>;
+
+export type CustomAsyncCreatableSelectProps = SelectExtraProps &
+  AsyncPaginateProps<any, GroupBase<any>, any, any> &
   CreatableProps<any, any, any>;
 
 export type AsyncSelectLoader<

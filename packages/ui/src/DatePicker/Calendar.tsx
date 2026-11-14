@@ -149,20 +149,8 @@ export function Calendar({
         ...formatters,
       }}
       components={{
-        Root: ({ className, rootRef, ...rootProps }) => (
-          <div
-            data-slot="calendar"
-            ref={rootRef}
-            className={className}
-            {...rootProps}
-          />
-        ),
-        Chevron: ({ className, orientation }) =>
-          orientation === 'left' ? (
-            <CaretLeftIcon className={cn('size-4', className)} weight="bold" />
-          ) : (
-            <CaretRightIcon className={cn('size-4', className)} weight="bold" />
-          ),
+        Root: CalendarRoot,
+        Chevron: CalendarChevron,
         Day: CalendarDay,
         DayButton: CalendarDayButton,
         MonthsDropdown: CalendarMonthsDropdown,
@@ -175,6 +163,9 @@ export function Calendar({
   );
 }
 
+type CalendarComponents = NonNullable<
+  ComponentProps<typeof DayPicker>['components']
+>;
 type DateLib = Parameters<
   NonNullable<
     ComponentProps<typeof DayPicker>['formatters']
@@ -230,6 +221,36 @@ const navButton = cn(
   // Hide the navigation arrow past minDate/maxDate rather than dimming it.
   'disabled:invisible aria-disabled:invisible',
 );
+
+// Module-level, like the parts below: react-day-picker renders these as
+// component types, so a function created in Calendar's render would be a new
+// type every render and remount the whole grid — on every keystroke in a date
+// input whose calendar is open, losing a month/year dropdown's state with it.
+function CalendarRoot({
+  className,
+  rootRef,
+  ...rootProps
+}: ComponentProps<NonNullable<CalendarComponents['Root']>>) {
+  return (
+    <div
+      data-slot="calendar"
+      ref={rootRef}
+      className={className}
+      {...rootProps}
+    />
+  );
+}
+
+function CalendarChevron({
+  className,
+  orientation,
+}: ComponentProps<NonNullable<CalendarComponents['Chevron']>>) {
+  return orientation === 'left' ? (
+    <CaretLeftIcon className={cn('size-4', className)} weight="bold" />
+  ) : (
+    <CaretRightIcon className={cn('size-4', className)} weight="bold" />
+  );
+}
 
 /**
  * react-day-picker renders an empty cell for an outside day beyond the

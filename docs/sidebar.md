@@ -36,7 +36,7 @@ All Sidebar components are co-located in `packages/ui/src/Sidebar/`:
 | `SidebarRoot.tsx`          | Shell wrapper, desktop rail, mobile drawer, trigger | `Sidebar`, `SidebarTrigger`, `SidebarInset`                                                                              |
 | `SidebarLayout.tsx`        | Structural layout slots and Radix ScrollArea        | `SidebarHeader`, `SidebarContent`, `SidebarFooter`, `SidebarGroup`, `SidebarMenu`, `SidebarMenuItem`, `SidebarSeparator` |
 | `SidebarMenuButton.tsx`    | Interactive button primitive, tooltips, badge       | `SidebarMenuButton`, `SidebarMenuBadge`, `sidebarMenuButtonVariants`                                                     |
-| `SidebarMenuSub.tsx`       | Nested accordions and height-measured Collapsible   | `SidebarMenuSub`, `SidebarMenuSubItem`, `SidebarMenuSubButton`, `SidebarMenuAccordion`, `SidebarMenuSeparator`           |
+| `SidebarMenuSub.tsx`       | Nested accordions and height-measured Collapsible   | `SidebarMenuSub`, `SidebarMenuAccordion`, `SidebarMenuSeparator`                                                         |
 | `SidebarMenuTree.tsx`      | Recursive tree rendering, overflow pagination       | `SidebarMenuTree`, `useExclusiveOpen`, `SidebarMenuTreeItem`                                                             |
 | `SidebarConvenience.tsx`   | Dashboard mockup convenience wrappers               | `SidebarBrand`, `SidebarModeCard`, `SidebarNavItem`, `SidebarMenuLinkItem`, `SidebarCallToAction`, `SidebarSection`      |
 | `SidebarToggleGraphic.tsx` | Canonical SVG glyph for collapse button             | `SidebarToggleGraphic`                                                                                                   |

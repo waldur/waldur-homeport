@@ -698,7 +698,6 @@ import { Badge } from 'waldur-ui';
 | `leftIcon`     | `ReactNode`                                                                                     | no       | —       | Icon displayed on left       |
 | `rightIcon`    | `ReactNode`                                                                                     | no       | —       | Icon displayed on right      |
 | `onlyIcon`     | `boolean`                                                                                       | no       | `false` | Show icon only, no text      |
-| `alignIcon`    | `boolean`                                                                                       | no       | `false` | Align icon vertically        |
 | `tooltip`      | `ReactNode`                                                                                     | no       | —       | Tooltip text                 |
 | `tooltipProps` | `Partial<TipProps>`                                                                             | no       | —       | Custom tooltip configuration |
 | `light`        | `boolean`                                                                                       | no       | `false` | Use light background         |

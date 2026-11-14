@@ -1,7 +1,5 @@
 import { CaretDownIcon } from '@phosphor-icons/react';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
 import {
   ComponentProps,
   CSSProperties,
@@ -57,61 +55,6 @@ export const SidebarMenuSub = forwardRef<
   );
 });
 SidebarMenuSub.displayName = 'SidebarMenuSub';
-
-/**
- * List item inside a `SidebarMenuSub`.
- */
-export function SidebarMenuSubItem({
-  className,
-  ...props
-}: ComponentProps<'li'>) {
-  return <li className={cn('relative', className)} {...props} />;
-}
-
-const sidebarMenuSubButtonVariants = cva(
-  'flex h-10 w-full items-center gap-2.5 overflow-hidden rounded-none pl-11 pr-[12px] py-[7px] text-left text-sm font-medium text-[var(--nav-item-text)] transition-colors',
-  {
-    variants: {
-      active: {
-        true: 'bg-[var(--nav-item-active-bg)]',
-        false: 'hover:bg-[var(--nav-item-hover-bg)]',
-      },
-    },
-    defaultVariants: {
-      active: false,
-    },
-  },
-);
-
-/**
- * Props for `SidebarMenuSubButton`.
- */
-export interface SidebarMenuSubButtonProps
-  extends
-    ComponentProps<'button'>,
-    VariantProps<typeof sidebarMenuSubButtonVariants> {
-  /** When true, delegates rendering and ref to its child element (via Radix Slot). */
-  asChild?: boolean;
-}
-
-/**
- * Interactive button styled specifically for nested submenu items with fixed left indentation.
- */
-export function SidebarMenuSubButton({
-  asChild = false,
-  active,
-  className,
-  ...props
-}: SidebarMenuSubButtonProps) {
-  const Comp = asChild ? Slot : 'button';
-  return (
-    <Comp
-      data-active={active}
-      className={cn(sidebarMenuSubButtonVariants({ active }), className)}
-      {...props}
-    />
-  );
-}
 
 /**
  * Full-bleed list separator for dividing groups within a menu or submenu list.

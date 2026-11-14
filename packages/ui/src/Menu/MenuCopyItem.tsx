@@ -6,6 +6,8 @@ import {
   useState,
 } from 'react';
 
+import { copyToClipboard } from '../CopyButton/CopyButton';
+
 import { MenuItem } from './MenuItem';
 
 type MenuCopyItemProps = Omit<
@@ -46,7 +48,8 @@ export const MenuCopyItem = ({
       {...props}
       onSelect={(event) => {
         event.preventDefault();
-        void navigator.clipboard.writeText(value).then(() => {
+        void copyToClipboard(value).then((ok) => {
+          if (!ok) return;
           setCopied(true);
           clearTimeout(timeout.current);
           timeout.current = setTimeout(() => setCopied(false), 1500);

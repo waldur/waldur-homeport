@@ -12,11 +12,12 @@ import type {
   ModalAction,
 } from './modalTypes';
 
+/**
+ * The open/close/confirm actions. Their identities never change, so a
+ * component that only opens or closes dialogs — every row action, every
+ * CloseDialogButton — does not re-render when a dialog opens or closes.
+ */
 export interface ModalContextValue {
-  modalComponent: ComponentType<any> | string | null;
-  modalProps: any;
-  confirmComponent: ComponentType<any> | string | null;
-  confirmProps: any;
   openDialog: <T>(
     component: ComponentType<T> | string,
     props?: T & AppModalProps,
@@ -31,7 +32,17 @@ export interface ModalContextValue {
   ) => Promise<any>;
 }
 
+/** The open dialog and the open confirmation, for the roots that render them. */
+export interface ModalStateValue {
+  modalComponent: ComponentType<any> | string | null;
+  modalProps: any;
+  confirmComponent: ComponentType<any> | string | null;
+  confirmProps: any;
+}
+
 export const ModalContext = createContext<ModalContextValue | null>(null);
+
+export const ModalStateContext = createContext<ModalStateValue | null>(null);
 
 type ModalServiceTarget = Pick<
   ModalContextValue,
@@ -45,11 +56,24 @@ export const setModalServiceTarget = (target: ModalServiceTarget | null) => {
   modalServiceTarget = target;
 };
 
-/** The open dialog, its props and the open/close/confirm actions. */
+/** The open/close/confirm actions; stable across dialogs opening and closing. */
 export const useModal = () => {
   const context = useContext(ModalContext);
   if (!context) {
     throw new Error('useModal must be used within a ModalProvider');
+  }
+  return context;
+};
+
+/**
+ * The open dialog and confirmation. Reading it re-renders the caller whenever
+ * a dialog opens or closes, so only the roots and the rare component that has
+ * to know whether a dialog is open use it.
+ */
+export const useModalState = () => {
+  const context = useContext(ModalStateContext);
+  if (!context) {
+    throw new Error('useModalState must be used within a ModalProvider');
   }
   return context;
 };
