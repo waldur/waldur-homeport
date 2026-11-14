@@ -98,6 +98,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
           return (
             <div
               key={index}
+              data-slot="box-radio"
               className={classNames('box-radio', {
                 'flex-wrap': hasOptions,
                 active: isChecked,
@@ -147,7 +148,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                     ))}
                 </div>
               </div>
-              <div className="box-radio-info">
+              <div className="box-radio-info" data-slot="box-radio-info">
                 {hasOptions && (
                   <Select
                     value={selectedVersions[index]}
@@ -189,6 +190,8 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
         return (
           <div
             key={index}
+            data-slot="box-radio"
+            data-state={isChecked ? 'checked' : 'unchecked'}
             className={classNames('box-radio', { active: isChecked })}
           >
             <label className="box-radio-header">
@@ -212,6 +215,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
             </label>
             <button
               className="box-radio-info"
+              data-slot="box-radio-info"
               type="button"
               onClick={() => onChange(selectedVersions[index].value)}
             >

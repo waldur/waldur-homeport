@@ -310,6 +310,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
               align="start"
               sideOffset={2}
               className="tc-members-popover"
+              aria-label={translate('Room members')}
             >
               <MatrixMembersList />
             </PopoverContent>

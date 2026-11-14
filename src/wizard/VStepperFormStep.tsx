@@ -63,7 +63,11 @@ export const StepContent: FC<
   <>
     {disabled && <div className="step-blocker" />}
     <StepDisabledNotice disabled={disabled} reason={disabledReason} />
-    <fieldset className="step-fieldset" disabled={disabled}>
+    <fieldset
+      className="step-fieldset"
+      data-slot="step-fieldset"
+      disabled={disabled}
+    >
       {children}
     </fieldset>
   </>
@@ -84,7 +88,11 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
       data-testid={props.id}
     >
       {props.disabled && <div className="step-blocker" />}
-      <fieldset className="step-fieldset" disabled={props.disabled}>
+      <fieldset
+        className="step-fieldset"
+        data-slot="step-fieldset"
+        disabled={props.disabled}
+      >
         <CardHeader className="gap-1.5">
           <div className="flex items-center me-1.5">
             <div>

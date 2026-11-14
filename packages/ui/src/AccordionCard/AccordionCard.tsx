@@ -55,6 +55,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
     <Collapsible open={open} onOpenChange={onOpenChange} keepMounted>
       <div
         id={props.id}
+        data-slot="accordion-card"
         className={cn(
           // min-w-0: so a card in a flex/grid row can
           // shrink and let wide content scroll instead of widening it.
@@ -66,6 +67,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
         )}
       >
         <div
+          data-slot="accordion-card-header"
           className={cn(
             'flex flex-nowrap items-center justify-between text-sm font-bold text-[color:var(--card-header-text)]',
             'mx-[1.85rem] min-h-[70px] pt-[1.85rem] pb-[1.23rem]',
