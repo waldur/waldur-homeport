@@ -295,7 +295,7 @@ export const OfferingEditUIView = ({
       offeringData?.offering && plugins
         ? plugins.data.find(
             (plugin) => plugin.offering_type === offeringData.offering.type,
-          ).components
+          )?.components || []
         : [],
     [plugins, offeringData?.offering],
   );

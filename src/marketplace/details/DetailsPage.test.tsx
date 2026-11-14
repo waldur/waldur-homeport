@@ -86,6 +86,20 @@ describe('OfferingDetailsPage (deploy form)', () => {
     expect(await screen.findByText('Deploy form')).toBeInTheDocument();
   });
 
+  // An offering type with no frontend plugin (a legacy type, or a plugin the
+  // deployment does not run) must not take the page down.
+  it('deploys from an offering whose type has no plugin', async () => {
+    vi.mocked(isMarketplaceVisible).mockReturnValue(true);
+    vi.mocked(marketplacePluginsList).mockResolvedValue({
+      data: [{ offering_type: 'Marketplace.Basic', available_limits: [] }],
+    } as any);
+    renderPage({ state: 'Active', shared: true, type: 'Legacy.Removed' });
+    expect(await screen.findByText('Deploy form')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Unable to load offering details.'),
+    ).not.toBeInTheDocument();
+  });
+
   it('is not found for an inactive offering', async () => {
     vi.mocked(isMarketplaceVisible).mockReturnValue(true);
     renderPage({ state: 'Paused', shared: true });
