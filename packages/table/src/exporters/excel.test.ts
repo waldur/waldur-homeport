@@ -18,6 +18,70 @@ describe('Excel exporter', () => {
     expect(sharedStrings.formatStrings()).toBe('<si><t>1&gt;0</t></si>');
   });
 
+  // XML 1.0 forbids most control characters outright, escaped or not, and
+  // text pasted from Word or a PDF can carry them: one in any string made the
+  // whole shared string table unreadable, so Excel dropped every text cell.
+  describe('characters XML cannot carry', () => {
+    const parses = (sharedStrings: SharedStrings) => {
+      const doc = new DOMParser().parseFromString(
+        sharedStrings.serialize(),
+        'application/xml',
+      );
+      return doc.getElementsByTagName('parsererror').length === 0;
+    };
+
+    it('writes control characters as Excel escapes, keeping the XML valid', () => {
+      const sharedStrings = new SharedStrings();
+      sharedStrings.getIndex('Line one\u000bline two\u000cend\u0001');
+      expect(sharedStrings.formatStrings()).toBe(
+        '<si><t>Line one_x000B_line two_x000C_end_x0001_</t></si>',
+      );
+      expect(parses(sharedStrings)).toBe(true);
+    });
+
+    it('writes the non-characters U+FFFE and U+FFFF as escapes', () => {
+      const sharedStrings = new SharedStrings();
+      sharedStrings.getIndex('a\ufffeb\uffffc');
+      expect(sharedStrings.formatStrings()).toBe(
+        '<si><t>a_xFFFE_b_xFFFF_c</t></si>',
+      );
+      expect(parses(sharedStrings)).toBe(true);
+    });
+
+    it('replaces an unpaired surrogate, which has no UTF-8 encoding', () => {
+      const sharedStrings = new SharedStrings();
+      sharedStrings.getIndex('cut emoji \ud83d');
+      expect(sharedStrings.formatStrings()).toBe(
+        '<si><t>cut emoji \ufffd</t></si>',
+      );
+      expect(parses(sharedStrings)).toBe(true);
+    });
+
+    it('keeps whole emoji, accents and line breaks as they are', () => {
+      const sharedStrings = new SharedStrings();
+      sharedStrings.getIndex('Zoë 🚀\nsecond line\ttabbed');
+      expect(sharedStrings.formatStrings()).toBe(
+        '<si><t>Zoë 🚀\nsecond line\ttabbed</t></si>',
+      );
+    });
+
+    it('escapes text that looks like an Excel escape, so it reads back as typed', () => {
+      const sharedStrings = new SharedStrings();
+      sharedStrings.getIndex('code_x0041_');
+      expect(sharedStrings.formatStrings()).toBe(
+        '<si><t>code_x005F_x0041_</t></si>',
+      );
+    });
+
+    it('keeps leading and trailing spaces, which Excel otherwise trims', () => {
+      const sharedStrings = new SharedStrings();
+      sharedStrings.getIndex('  indented ');
+      expect(sharedStrings.formatStrings()).toBe(
+        '<si><t xml:space="preserve">  indented </t></si>',
+      );
+    });
+  });
+
   it('serializes excel sheet correctly', () => {
     const rows = [
       ['Alice', 10],

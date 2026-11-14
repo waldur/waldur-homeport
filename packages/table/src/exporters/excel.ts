@@ -47,16 +47,44 @@ export class SharedStrings {
   }
 
   escapeValue(value) {
-    return value
-      .replace(/&/g, '&amp;')
-      .replace(/'/g, '&apos;')
-      .replace(/>/g, '&gt;')
-      .replace(/</g, '&lt;');
+    return (
+      value
+        // Text that already reads as an Excel escape (_x0041_) would be
+        // decoded on opening; escaping its underscore keeps it as typed.
+        .replace(/_(x[0-9A-Fa-f]{4}_)/g, '_x005F_$1')
+        // An unpaired surrogate (half an emoji, cut off) has no UTF-8
+        // encoding; it becomes the replacement character, as any decoder
+        // would make it.
+        .replace(
+          /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g,
+          '\uFFFD',
+        )
+        // XML 1.0 cannot carry these at all, escaped as entities or not, and
+        // one of them makes the whole shared string table unreadable: Excel
+        // then drops every text cell in the workbook. Pasted text brings them
+        // in (a vertical tab from Word, a form feed from a PDF). Excel's own
+        // _xHHHH_ escape keeps them, and Excel restores them on opening.
+        .replace(
+          // eslint-disable-next-line no-control-regex -- matching them is the point
+          /[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g,
+          (char) =>
+            `_x${char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')}_`,
+        )
+        .replace(/&/g, '&amp;')
+        .replace(/'/g, '&apos;')
+        .replace(/>/g, '&gt;')
+        .replace(/</g, '&lt;')
+    );
   }
 
   formatStrings() {
     return this.strings
-      .map((value) => `<si><t>${this.escapeValue(value)}</t></si>`)
+      .map((value) =>
+        // Excel trims leading and trailing whitespace unless told to keep it.
+        /^\s|\s$/.test(value)
+          ? `<si><t xml:space="preserve">${this.escapeValue(value)}</t></si>`
+          : `<si><t>${this.escapeValue(value)}</t></si>`,
+      )
       .join('');
   }
 
