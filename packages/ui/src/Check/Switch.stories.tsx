@@ -49,8 +49,8 @@ export const InSettingsRow: Story = {
     const [twoFactor, setTwoFactor] = useState(false);
 
     return (
-      <div className="p-5 bg-[var(--page-bg)] max-w-md space-y-4">
-        <div className="flex items-center justify-between p-2.5 rounded-md border border-secondary bg-[var(--card-bg)]">
+      <div className="p-5 bg-page max-w-md space-y-4">
+        <div className="flex items-center justify-between p-2.5 rounded-md border border-secondary bg-card">
           <div>
             <div className="text-sm font-semibold text-primary">
               Email Notifications
@@ -62,7 +62,7 @@ export const InSettingsRow: Story = {
           <Switch checked={emailNotifs} onCheckedChange={setEmailNotifs} />
         </div>
 
-        <div className="flex items-center justify-between p-2.5 rounded-md border border-secondary bg-[var(--card-bg)]">
+        <div className="flex items-center justify-between p-2.5 rounded-md border border-secondary bg-card">
           <div>
             <div className="text-sm font-semibold text-primary">
               Two-Factor Authentication

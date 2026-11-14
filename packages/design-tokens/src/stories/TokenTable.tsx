@@ -69,7 +69,7 @@ export function TokenPage({
   children: ReactNode;
 }) {
   return (
-    <div className="bg-[var(--page-bg)] p-5">
+    <div className="bg-page p-5">
       <h3 className="mb-1 text-base font-semibold text-primary">{title}</h3>
       {intro && <Doc text={intro} />}
       {children}
@@ -96,10 +96,7 @@ function Preview({ token, value }: { token: Token; value: string }) {
   const v = `var(${token.name})`;
   if (isShadow(token.name)) {
     return (
-      <div
-        className="size-10 rounded-md bg-[var(--card-bg)]"
-        style={{ boxShadow: v }}
-      />
+      <div className="size-10 rounded-md bg-card" style={{ boxShadow: v }} />
     );
   }
   if (!parseColor(value) && !/rgba?\(|color-mix|#/.test(value)) {
@@ -108,7 +105,7 @@ function Preview({ token, value }: { token: Token; value: string }) {
   if (isLine(token.name)) {
     return (
       <div
-        className="size-10 rounded-md bg-[var(--card-bg)]"
+        className="size-10 rounded-md bg-card"
         style={{ border: `2px solid ${v}` }}
       />
     );
@@ -246,7 +243,7 @@ export function TokenTable({
   ];
   return (
     <div
-      className="grid items-start gap-x-4 rounded-md border border-secondary bg-[var(--card-bg)] px-3 [&>.contents>*]:border-t [&>.contents>*]:border-t-secondary"
+      className="grid items-start gap-x-4 rounded-md border border-secondary bg-card px-3 [&>.contents>*]:border-t [&>.contents>*]:border-t-secondary"
       style={{ gridTemplateColumns: columns }}
     >
       {header.map((h, i) => (

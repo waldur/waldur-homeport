@@ -46,6 +46,9 @@ describe('require-dark-pair', () => {
         code: "const M = { info: 'bg-info-600', danger: 'bg-danger text-white' };",
       },
       {
+        code: 'const A = () => <span className="bg-brand-solid text-white" />;',
+      },
+      {
         code: 'const A = () => <span className="bg-[var(--bg-brand-solid)] text-white" />;',
       },
       // Names, not class lists.

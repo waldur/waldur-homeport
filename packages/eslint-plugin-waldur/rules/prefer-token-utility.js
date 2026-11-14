@@ -12,12 +12,12 @@
  *   border-t-[var(--border-divider)]     →  border-t-divider
  *
  * The table of (utility prefix, variable) → utility is read from theme.css
- * itself, never kept here: a variable without a utility (`--bg-brand-solid`,
- * `--border-brand`, every component token such as `--input-bg`) is left
- * alone, and a utility added to theme.css is enforced with no edit to this
+ * itself, never kept here: a variable without a utility
+ * (`--bg-brand-secondary`, every component token such as `--input-bg`) is
+ * left alone, and a utility added to theme.css is enforced with no edit to this
  * rule. The match is on the prefix as well as the variable, because the same
- * variable can back different utilities (`border-brand` reads --text-brand,
- * not --border-brand).
+ * variable can back different utilities (`border-brand` reads --text-brand;
+ * --border-brand is `border-brand-subtle`).
  *
  * Out of scope: the status matrix (`--status-*`, reported by
  * no-raw-status-ramp) and the colour ramps (`--color-*`, `--brand-N`).

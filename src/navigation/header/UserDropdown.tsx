@@ -80,7 +80,7 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
         {user ? user.full_name : translate('Guest')}
       </div>
       {user ? (
-        <span className="font-medium text-[var(--text-brand-secondary)] text-xs">
+        <span className="font-medium text-brand-secondary text-xs">
           {user.email}
         </span>
       ) : (

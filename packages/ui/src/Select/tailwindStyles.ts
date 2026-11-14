@@ -82,7 +82,7 @@ export const getSelectTailwindClassNames = <
             ? // --border-brand: the old focus color ($border-brand),
               // brand-300 in light and brand-400 in dark. No shadow: the old focused control has
               // exactly one box-shadow layer (this ring).
-              'border-[var(--border-brand)] ring-1 ring-[var(--border-brand)]'
+              'border-brand-subtle ring-1 ring-[var(--border-brand)]'
             : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
               'border-secondary hover:border-brand-500',
         // Flat disabled fill, not an opacity wash: matches the old

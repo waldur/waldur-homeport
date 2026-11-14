@@ -17,7 +17,7 @@ const meta: Meta<typeof TablePagination> = {
   component: TablePagination,
   decorators: [
     (Story) => (
-      <div className="bg-[var(--card-bg)]">
+      <div className="bg-card">
         <Story />
       </div>
     ),

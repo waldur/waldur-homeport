@@ -21,7 +21,7 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
       }
       title={
         <LinkButton
-          className="font-medium text-secondary hover:text-[var(--text-brand-secondary)]"
+          className="font-medium text-secondary hover:text-brand-secondary"
           onClick={props.onClick}
         >
           {props.name}.csv

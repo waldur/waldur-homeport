@@ -52,7 +52,7 @@ export const AllCases: Story = {
     const [secretVisible, setSecretVisible] = useState(false);
 
     return (
-      <div className="flex flex-col gap-8 max-w-2xl p-6 bg-[var(--page-bg)] border border-secondary rounded-xl text-sm">
+      <div className="flex flex-col gap-8 max-w-2xl p-6 bg-page border border-secondary rounded-xl text-sm">
         {/* Section 1: LinkButton Variants & Prose */}
         <section className="space-y-3">
           <h3 className="font-semibold text-primary border-b border-secondary pb-2">
@@ -72,7 +72,7 @@ export const AllCases: Story = {
               Subtle (disabled)
             </LinkButton>
           </div>
-          <p className="text-secondary leading-relaxed bg-[var(--card-bg)] p-3 rounded-lg border border-secondary">
+          <p className="text-secondary leading-relaxed bg-card p-3 rounded-lg border border-secondary">
             Inline prose demonstration: You can{' '}
             <LinkButton variant="brand">view the activity logs</LinkButton> to
             inspect past events, or{' '}
@@ -88,7 +88,7 @@ export const AllCases: Story = {
           <h3 className="font-semibold text-primary border-b border-secondary pb-2">
             2. TruncatedDescription (inline expand/collapse button)
           </h3>
-          <div className="bg-[var(--card-bg)] p-3 rounded-lg border border-secondary">
+          <div className="bg-card p-3 rounded-lg border border-secondary">
             <TruncatedDescription
               max={80}
               text="OpenStack is an open source platform that uses pooled virtual resources to build and manage private and public clouds. It delivers massive scalability and enterprise reliability."
@@ -104,7 +104,7 @@ export const AllCases: Story = {
 
           <div className="grid grid-cols-2 gap-4">
             {/* Copy button */}
-            <div className="bg-[var(--card-bg)] p-3 rounded-lg border border-secondary flex items-center justify-between">
+            <div className="bg-card p-3 rounded-lg border border-secondary flex items-center justify-between">
               <div>
                 <span className="text-xs text-quinary block">
                   CopyToClipboardButton
@@ -117,7 +117,7 @@ export const AllCases: Story = {
             </div>
 
             {/* Carets */}
-            <div className="bg-[var(--card-bg)] p-3 rounded-lg border border-secondary flex items-center justify-between">
+            <div className="bg-card p-3 rounded-lg border border-secondary flex items-center justify-between">
               <div>
                 <span className="text-xs text-quinary block">
                   CaretUpDownButtons
@@ -132,7 +132,7 @@ export const AllCases: Story = {
           </div>
 
           {/* Secret field reveal */}
-          <div className="bg-[var(--card-bg)] p-3 rounded-lg border border-secondary flex items-center justify-between">
+          <div className="bg-card p-3 rounded-lg border border-secondary flex items-center justify-between">
             <div>
               <span className="text-xs text-quinary block">
                 SecretField Action Buttons
@@ -157,7 +157,7 @@ export const AllCases: Story = {
           </div>
 
           {/* Attachment list item button */}
-          <div className="bg-[var(--card-bg)] p-3 rounded-lg border border-secondary flex items-center justify-between">
+          <div className="bg-card p-3 rounded-lg border border-secondary flex items-center justify-between">
             <div className="flex items-center gap-2">
               <FileIcon size={18} weight="bold" className="text-quaternary" />
               <span>certificate.pem</span>
@@ -178,7 +178,7 @@ export const AllCases: Story = {
           <h3 className="font-semibold text-primary border-b border-secondary pb-2">
             4. Navigational Link (core Link.tsx styling)
           </h3>
-          <div className="flex flex-col gap-2 bg-[var(--card-bg)] p-3 rounded-lg border border-secondary">
+          <div className="flex flex-col gap-2 bg-card p-3 rounded-lg border border-secondary">
             <div>
               <span className="text-xs text-quinary block mb-1">
                 Default plain text link (brand-secondary + hover underline):

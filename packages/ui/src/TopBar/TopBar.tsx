@@ -140,7 +140,7 @@ export const SearchField = ({
   <div
     className={cn(
       'flex w-full max-w-md items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm',
-      'border-secondary bg-[var(--card-bg)] text-quinary',
+      'border-secondary bg-card text-quinary',
       className,
     )}
   >
@@ -187,10 +187,10 @@ const iconButton = cva('relative', {
         'flex size-[40px] shrink-0 items-center justify-center rounded-md border-0 bg-primary p-[0px] text-quinary outline-none',
         'transition-all duration-200 ease-[ease]',
         '[&_svg]:transition-colors [&_svg]:duration-300 [&_svg]:ease-[ease]',
-        'hover:bg-[var(--btn-secondary-bg)] hover:text-[var(--text-brand-secondary)]',
-        'focus-visible:bg-[var(--btn-secondary-bg)] focus-visible:text-[var(--text-brand-secondary)]',
+        'hover:bg-[var(--btn-secondary-bg)] hover:text-brand-secondary',
+        'focus-visible:bg-[var(--btn-secondary-bg)] focus-visible:text-brand-secondary',
         'focus-visible:shadow-[0_0_0_0.155rem_var(--border-brand-solid)]',
-        'aria-expanded:bg-[var(--btn-secondary-bg)] aria-expanded:text-[var(--text-brand-secondary)]',
+        'aria-expanded:bg-[var(--btn-secondary-bg)] aria-expanded:text-brand-secondary',
       ],
       base: ICON_BUTTON_BASE_CLASSNAME,
     },

@@ -202,7 +202,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       data-slot="cell-data"
                     >
                       <a
-                        class="bg-transparent text-[var(--text-brand-secondary)] hover:underline"
+                        class="bg-transparent text-brand-secondary hover:underline"
                         href="marketplace-resource-details{"resource_uuid":"9a4b8e1c0d2f4a7b8c3d5e6f7a8b9c01"}"
                       >
                         vm1

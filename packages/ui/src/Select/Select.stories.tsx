@@ -56,7 +56,7 @@ export const Playground: Story = {};
  */
 export const Sizes: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)] flex items-end gap-5">
+    <div className="p-5 bg-page flex items-end gap-5">
       <div className="w-64">
         <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Default
@@ -86,7 +86,7 @@ export const Sizes: Story = {
  */
 export const ControlStates: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)] flex items-start gap-5">
+    <div className="p-5 bg-page flex items-start gap-5">
       <div className="w-64">
         <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Default
@@ -143,7 +143,7 @@ export const ControlStates: Story = {
  */
 export const SingleVsMultiOptions: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)] flex items-start gap-5">
+    <div className="p-5 bg-page flex items-start gap-5">
       <div className="w-64">
         <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Single-select (checkmark)
@@ -194,7 +194,7 @@ export const SingleVsMultiOptions: Story = {
  */
 export const TableFilterVariant: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)] flex items-start gap-5">
+    <div className="p-5 bg-page flex items-start gap-5">
       <div className="w-72">
         <div className="text-xs uppercase font-mono text-quinary mb-1.5">
           Empty (icon shown)
@@ -280,7 +280,7 @@ export const Async: Story = {
       return { options, hasMore: false };
     };
     return (
-      <div className="p-5 bg-[var(--page-bg)] w-64">
+      <div className="p-5 bg-page w-64">
         {/* `defaultOptions={true}`, not a literal array: that asks
             react-select-async-paginate to fetch the first page itself via
             `loadOptions('')` on mount/open — passing the same array as a
@@ -306,7 +306,7 @@ export const Creatable: Story = {
       null,
     );
     return (
-      <div className="p-5 bg-[var(--page-bg)] w-64">
+      <div className="p-5 bg-page w-64">
         <CreatableSelect
           options={options}
           value={value}

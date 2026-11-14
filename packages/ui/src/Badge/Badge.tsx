@@ -54,7 +54,7 @@ export const BADGE_STYLES: Record<
   Record<'solid' | 'light' | 'outline', string>
 > = {
   primary: {
-    solid: 'border-transparent bg-[var(--bg-brand-solid)] text-white',
+    solid: 'border-transparent bg-brand-solid text-white',
     light: 'border-transparent bg-brand-50 text-brand dark:bg-brand-950',
     outline:
       'bg-brand-subtle border-brand-200 text-brand-700 dark:border-brand-700 dark:text-brand-200',

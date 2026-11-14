@@ -116,9 +116,7 @@ describe('Link', () => {
   it('styles a plain text link as an anchor', () => {
     render(<Link state="profile.details">Profile</Link>);
 
-    expect(screen.getByText('Profile')).toHaveClass(
-      'text-[var(--text-brand-secondary)]',
-    );
+    expect(screen.getByText('Profile')).toHaveClass('text-brand-secondary');
     expect(screen.getByText('Profile')).toHaveClass('hover:underline');
   });
 
@@ -129,9 +127,7 @@ describe('Link', () => {
       </Link>,
     );
 
-    expect(screen.getByText('Profile')).not.toHaveClass(
-      'text-[var(--text-brand-secondary)]',
-    );
+    expect(screen.getByText('Profile')).not.toHaveClass('text-brand-secondary');
   });
 
   it('keeps anchor styling when the caller only passes an unrelated btn-* class', () => {
@@ -141,9 +137,7 @@ describe('Link', () => {
       </Link>,
     );
 
-    expect(screen.getByText('Profile')).toHaveClass(
-      'text-[var(--text-brand-secondary)]',
-    );
+    expect(screen.getByText('Profile')).toHaveClass('text-brand-secondary');
     expect(screen.getByText('Profile')).toHaveClass('hover:underline');
   });
 
@@ -155,8 +149,6 @@ describe('Link', () => {
     );
 
     expect(screen.getByText('Profile')).toHaveClass('text-secondary');
-    expect(screen.getByText('Profile')).not.toHaveClass(
-      'text-[var(--text-brand-secondary)]',
-    );
+    expect(screen.getByText('Profile')).not.toHaveClass('text-brand-secondary');
   });
 });

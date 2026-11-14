@@ -23,7 +23,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
     <>
       <BaseButton
         variant="tertiary"
-        className="min-w-[var(--dialog-action-min-w)] me-auto"
+        className="min-w-dialog-action me-auto"
         onClick={() => props.onPrev(values)}
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}

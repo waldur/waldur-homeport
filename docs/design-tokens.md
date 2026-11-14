@@ -200,7 +200,9 @@ step 600. Tailwind sees the ramp through the `--color-brand-*` bridge in `tailwi
 brand-tinted surface is `bg-brand-subtle` (`--bg-brand-subtle`: brand-50, brand-900 in dark). Brand text and lines are `text-brand` / `border-brand` /
 `outline-brand`, which read the role `--text-brand`: `--brand-color` in light, `--brand-300` in
 dark, where the tenant colour is too dark to read. A solid brand fill is
-`bg-[var(--bg-brand-solid)]`. Semantic brand roles: `--bg-brand-*`, `--border-brand*`,
+`bg-brand-solid`, brand-coloured secondary text (links) `text-brand-secondary`, and the pale
+brand edge (`--border-brand`) is `border-brand-subtle`, named like the status matrix's tinted
+`-subtle` border since `border-brand` is already the line colour. Semantic brand roles: `--bg-brand-*`, `--border-brand*`,
 `--fg-brand-*`, `--text-brand*`, `--focus-ring-color`.
 
 ## Tailwind utilities for the roles
@@ -220,20 +222,26 @@ micro-apps all get the same utilities; `waldur-ui` and `shell` depend on them.
 
 > **A utility and the variable of the same name are the same colour.**
 
-| Utility                                                 | Is                                             |
-| ------------------------------------------------------- | ---------------------------------------------- |
-| `text-primary` … `text-senary`                          | `var(--text-primary)` … `var(--text-senary)`   |
-| `bg-primary`, `bg-primary-hover`                        | `var(--bg-primary)`, `var(--bg-primary-hover)` |
-| `bg-secondary`, `bg-tertiary`, `bg-quaternary`          | `var(--bg-secondary)` …                        |
-| `border-primary`, `border-secondary`, `border-tertiary` | `var(--border-primary)` …                      |
-| `border-divider`                                        | `var(--border-divider)`                        |
-| `text-brand`, `border-brand`, `outline-brand`           | `var(--brand-color)`                           |
+| Utility                                                 | Is                                                |
+| ------------------------------------------------------- | ------------------------------------------------- |
+| `text-primary` … `text-senary`                          | `var(--text-primary)` … `var(--text-senary)`      |
+| `bg-primary`, `bg-primary-hover`                        | `var(--bg-primary)`, `var(--bg-primary-hover)`    |
+| `bg-secondary`, `bg-tertiary`, `bg-quaternary`          | `var(--bg-secondary)` …                           |
+| `border-primary`, `border-secondary`, `border-tertiary` | `var(--border-primary)` …                         |
+| `border-divider`                                        | `var(--border-divider)`                           |
+| `text-brand`, `border-brand`, `outline-brand`           | `var(--brand-color)`                              |
+| `bg-brand-solid`, `bg-brand-subtle`                     | `var(--bg-brand-solid)`, `var(--bg-brand-subtle)` |
+| `text-brand-secondary`                                  | `var(--text-brand-secondary)`                     |
+| `border-brand-subtle`                                   | `var(--border-brand)`                             |
+| `bg-page`, `bg-card`                                    | `var(--page-bg)`, `var(--card-bg)`                |
 
 - **No exceptions.** `text-primary` used to be the brand colour; its brand uses were renamed to
   `text-brand`, and `text-primary` is now `var(--text-primary)` like every other step.
 - Prefer the named utility to the arbitrary form: `text-quaternary`, not
-  `text-[var(--text-quaternary)]`. Roles with no utility (`--bg-brand-*`,
-  `--text-brand-*`) use the arbitrary form; the status matrix has its own (above).
+  `text-[var(--text-quaternary)]`. Roles with no utility (`--bg-brand-primary-alt`,
+  `--bg-brand-secondary`, `--fg-brand-*`, `--text-brand-primary`) use the arbitrary form; the status matrix has its own (above).
+- `min-w-dialog-action` (`var(--dialog-action-min-w)`) is the one size here: the minimum
+  width of a dialog or wizard footer button.
 - There is no `bg-secondary` _text_ colour, `text-secondary` _background_ and so on: each name
   exists only for the property it belongs to.
 - Removed aliases: `bg-surface-faint` (now `bg-secondary`), `bg-bg-primary` (`bg-primary`),
@@ -478,11 +486,11 @@ to prevent fractional `rem` compression under Waldur's forced 13px root font siz
 The three sizes an interactive control comes in, pinned in px in
 `primitives/controls.css` (`@theme static`):
 
-| Token                  | Size | Read as                            | Use                                     |
-| ---------------------- | ---- | ---------------------------------- | --------------------------------------- |
-| `--control-height-sm`  | 28px | `h-[var(--control-height-sm)]`     | compact buttons, pagination, table rows |
-| `--control-height-md`  | 36px | `min-h-[var(--control-height-md)]` | the default button and control          |
-| `--control-height-lg`  | 44px | `min-h-[var(--control-height-lg)]` | large buttons, form fields              |
+| Token                 | Size | Read as                            | Use                                     |
+| --------------------- | ---- | ---------------------------------- | --------------------------------------- |
+| `--control-height-sm` | 28px | `h-[var(--control-height-sm)]`     | compact buttons, pagination, table rows |
+| `--control-height-md` | 36px | `min-h-[var(--control-height-md)]` | the default button and control          |
+| `--control-height-lg` | 44px | `min-h-[var(--control-height-lg)]` | large buttons, form fields              |
 
 These are the sizes [ui-consistency-guidelines.md](ui-consistency-guidelines.md) already named
 ("Three standard sizes: 44px (large), 36px (default), 28px (small)"); the token gives them a name
@@ -497,7 +505,7 @@ unnoticed.
   the spelling, not a second token.
 - **Two library sizes sit off the scale on purpose** and say so where they are: `Select`'s
   `isTableCell` is 35px (the measured height of the control it replaced) and `DatePicker`'s
-  default trigger is 40px (the *form-control* minimum the same guide gives, while `Select`, also a
+  default trigger is 40px (the _form-control_ minimum the same guide gives, while `Select`, also a
   field, is 44px — the guide carries both numbers, and that is unresolved).
 - **No `--control-height` for 40px yet**, deliberately: naming it would bake that contradiction
   into the scale.

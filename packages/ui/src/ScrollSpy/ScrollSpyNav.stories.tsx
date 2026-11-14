@@ -111,7 +111,7 @@ export const Default: Story = {
     'aria-label': 'Form steps',
   },
   render: (args) => (
-    <div className="w-72 p-3 bg-[var(--page-bg)] rounded-lg border border-secondary">
+    <div className="w-72 p-3 bg-page rounded-lg border border-secondary">
       <ScrollSpyNav {...args} />
     </div>
   ),
@@ -122,7 +122,7 @@ export const Default: Story = {
  */
 export const PartiallyCompleted: Story = {
   render: () => (
-    <div className="w-80 p-3 bg-[var(--page-bg)]">
+    <div className="w-80 p-3 bg-page">
       <Card>
         <CardHeader className="pb-1.5">
           <CardTitle className="text-sm font-semibold">Progress</CardTitle>
@@ -165,7 +165,7 @@ export const WithValidationErrors: Story = {
     ];
 
     return (
-      <div className="w-80 p-3 bg-[var(--page-bg)]">
+      <div className="w-80 p-3 bg-page">
         <Card>
           <CardHeader className="pb-1.5">
             <CardTitle className="text-sm font-semibold">Progress</CardTitle>
@@ -231,7 +231,7 @@ export const InteractiveScrolling: Story = {
     }));
 
     return (
-      <div className="flex gap-5 max-w-4xl h-[480px] bg-[var(--page-bg)] p-5 rounded-xl border border-secondary">
+      <div className="flex gap-5 max-w-4xl h-[480px] bg-page p-5 rounded-xl border border-secondary">
         {/* Sticky sidebar */}
         <div className="w-64 shrink-0">
           <Card className="h-full">
@@ -259,7 +259,7 @@ export const InteractiveScrolling: Story = {
             <div
               key={sec.id}
               id={sec.id}
-              className={`p-5 bg-[var(--card-bg)] rounded-lg border border-secondary border-l-4 ${sec.color} shadow-xs min-h-[220px]`}
+              className={`p-5 bg-card rounded-lg border border-secondary border-l-4 ${sec.color} shadow-xs min-h-[220px]`}
             >
               <h3 className="text-base font-bold text-primary">{sec.title}</h3>
               <p className="mt-1.5 text-sm text-quaternary">
@@ -283,7 +283,7 @@ export const InteractiveScrolling: Story = {
  */
 export const InsideCard: Story = {
   render: () => (
-    <div className="w-80 p-3 bg-[var(--page-bg)]">
+    <div className="w-80 p-3 bg-page">
       <Card>
         <CardHeader className="pb-1.5">
           <CardTitle className="text-sm font-bold uppercase tracking-wider text-quaternary">
@@ -350,7 +350,7 @@ export const WizardFormSteps: Story = {
     ];
 
     return (
-      <div className="w-80 p-3 bg-[var(--page-bg)]">
+      <div className="w-80 p-3 bg-page">
         <Card>
           <CardHeader className="pb-1.5">
             <CardTitle className="text-sm font-semibold">
@@ -425,7 +425,7 @@ export const WithStatusIndicators: Story = {
     ];
 
     return (
-      <div className="w-80 p-3 bg-[var(--page-bg)]">
+      <div className="w-80 p-3 bg-page">
         <Card>
           <CardContent className="pt-5">
             <ScrollSpyNav items={statusItems} activeKey="step-2" />

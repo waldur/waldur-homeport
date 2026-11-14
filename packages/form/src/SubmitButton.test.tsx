@@ -44,7 +44,7 @@ describe('SubmitButton', () => {
  * case here: they pass no `size` at all and inherit the lg default.
  */
 describe('SubmitButton dialog action width floor', () => {
-  const FLOOR = 'min-w-[var(--dialog-action-min-w)]';
+  const FLOOR = 'min-w-dialog-action';
 
   it('applies the floor when no size is passed, via the lg default', () => {
     renderButton();

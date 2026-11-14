@@ -28,7 +28,7 @@ describe('prefer-token-utility', () => {
       { code: "const c = 'text-quaternary bg-primary border-brand';" },
       // A variable with no utility keeps the arbitrary form.
       {
-        code: "const c = 'bg-[var(--bg-brand-solid)] border-[var(--border-brand)]';",
+        code: "const c = 'bg-[var(--bg-brand-secondary)] text-[var(--fg-brand-primary)]';",
       },
       // Component tokens have no utilities.
       {
@@ -94,13 +94,15 @@ describe('the utility table is read from theme.css', () => {
   it('maps a prefix and variable to the utility', () => {
     expect(utilities.get('text|--text-tertiary')).toBe('tertiary');
     expect(utilities.get('bg|--bg-primary')).toBe('primary');
-    // theme.css points border-brand at --text-brand, so --border-brand has none.
+    // theme.css points border-brand at --text-brand; --border-brand, the
+    // pale tint, is border-brand-subtle.
     expect(utilities.get('border|--text-brand')).toBe('brand');
-    expect(utilities.has('border|--border-brand')).toBe(false);
+    expect(utilities.get('border|--border-brand')).toBe('brand-subtle');
+    expect(utilities.get('bg|--card-bg')).toBe('card');
   });
 
   it('has no entry for a variable without a utility, or an excluded one', () => {
-    expect(utilities.has('bg|--bg-brand-solid')).toBe(false);
+    expect(utilities.has('bg|--bg-brand-secondary')).toBe(false);
     expect([...utilities.keys()].some((k) => k.includes('--status-'))).toBe(
       false,
     );

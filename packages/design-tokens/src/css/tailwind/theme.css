@@ -23,13 +23,21 @@
  * Same for success and warning; info and neutral have `text-*` and
  * `bg-*-subtle` only.
  *
+ * Page and card surfaces: `bg-page` is var(--page-bg), `bg-card` is
+ * var(--card-bg) (background.css).
+ *
  * Brand: `text-brand`, `border-brand` and `outline-brand` are var(--text-brand)
  * (semantic/brand.css: the tenant colour in light, a lighter step in dark).
  * Lines read it too, not --border-brand, which is the pale tint for a brand
- * surface's edge. A solid brand fill is `bg-[var(--bg-brand-solid)]`. The
+ * surface's edge: that one is `border-brand-subtle`, like the status
+ * matrix's tinted `-subtle` border. A solid brand fill is `bg-brand-solid`,
+ * brand-coloured secondary text `text-brand-secondary`. The
  * --color-brand-N keys bridge the runtime ramp (initBrandTokens()) as
  * `bg-brand-50`, `text-brand-700`, …: physical steps, like `gray-N`, so a
  * tint needs its dark mirror (`bg-brand-subtle`).
+ *
+ * One size: `min-w-dialog-action` is var(--dialog-action-min-w)
+ * (components/dialog.css), the minimum width of a dialog's footer buttons.
  *
  * This file is every utility whose value is a variable defined elsewhere;
  * the primitives (colorRamps.css, radius.css, …) declare their own utilities,
@@ -49,6 +57,8 @@
   --background-color-tertiary: var(--bg-tertiary);
   --background-color-quaternary: var(--bg-quaternary);
   --background-color-media: var(--bg-media);
+  --background-color-page: var(--page-bg);
+  --background-color-card: var(--card-bg);
 
   --border-color-primary: var(--border-primary);
   --border-color-secondary: var(--border-secondary);
@@ -74,6 +84,7 @@
   --background-color-neutral-subtle: var(--status-neutral-bg);
 
   --background-color-brand-subtle: var(--bg-brand-subtle);
+  --background-color-brand-solid: var(--bg-brand-solid);
 
   --border-color-success: var(--status-success-solid);
   --border-color-warning: var(--status-warning-solid);
@@ -83,8 +94,12 @@
   --border-color-danger-subtle: var(--status-danger-border);
 
   --text-color-brand: var(--text-brand);
+  --text-color-brand-secondary: var(--text-brand-secondary);
   --border-color-brand: var(--text-brand);
+  --border-color-brand-subtle: var(--border-brand);
   --outline-color-brand: var(--text-brand);
+
+  --min-width-dialog-action: var(--dialog-action-min-w);
 
   --color-brand-25: var(--brand-25);
   --color-brand-50: var(--brand-50);

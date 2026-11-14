@@ -77,7 +77,7 @@ export const Small: Story = {
   args: {
     title: 'Advanced settings',
     size: 'sm',
-    className: 'bg-[var(--page-bg)]',
+    className: 'bg-page',
     titleClassName: 'text-sm',
     defaultOpen: true,
     children: 'Card body content.',

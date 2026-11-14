@@ -391,7 +391,7 @@ function CalendarDropdown({
           role="group"
           aria-label={ariaLabel}
           data-slot="calendar-dropdown-panel"
-          className="absolute inset-x-0 top-[52px] bottom-0 z-10 grid content-start gap-y-[8px] overflow-y-auto bg-[var(--card-bg)] py-[4px]"
+          className="absolute inset-x-0 top-[52px] bottom-0 z-10 grid content-start gap-y-[8px] overflow-y-auto bg-card py-[4px]"
           style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
         >
           {options?.map((option) => {

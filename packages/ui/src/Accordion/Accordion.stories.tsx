@@ -126,7 +126,7 @@ const FiltersFrame = ({
   children: ReactNode;
   style?: CSSProperties;
 }) => (
-  <div className="max-w-sm bg-[var(--card-bg)] p-3" style={style}>
+  <div className="max-w-sm bg-card p-3" style={style}>
     {children}
   </div>
 );
@@ -234,11 +234,11 @@ const PERMISSION_GROUPS = [
  */
 export const Boxed: Story = {
   render: () => (
-    <div className="max-w-md bg-[var(--page-bg)] p-5">
+    <div className="max-w-md bg-page p-5">
       <Accordion
         type="multiple"
         defaultValue={['project']}
-        className="rounded-md border border-solid border-secondary bg-[var(--card-bg)]"
+        className="rounded-md border border-solid border-secondary bg-card"
       >
         {PERMISSION_GROUPS.map((group) => (
           <AccordionItem key={group.value} value={group.value}>

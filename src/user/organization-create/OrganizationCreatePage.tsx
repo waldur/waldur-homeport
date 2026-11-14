@@ -385,7 +385,7 @@ export const OrganizationCreatePage: FC = () => {
                             ? translate('You are on the first step')
                             : undefined
                         }
-                        className="min-w-[var(--dialog-action-min-w)]"
+                        className="min-w-dialog-action"
                         label={translate('Back')}
                         iconNode={<CaretLeftIcon weight="bold" />}
                         size="lg"
@@ -393,7 +393,7 @@ export const OrganizationCreatePage: FC = () => {
                       <div className="flex gap-2.5">
                         <BaseButton
                           variant="tertiary"
-                          className="min-w-[var(--dialog-action-min-w)]"
+                          className="min-w-dialog-action"
                           onClick={handleCancel}
                           label={translate('Cancel')}
                           size="lg"

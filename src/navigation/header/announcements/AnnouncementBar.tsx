@@ -144,7 +144,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
         {showMoreButton && (
           <button
             type="button"
-            className="shrink-0 cursor-pointer whitespace-nowrap border-0 bg-transparent p-0 text-sm text-[var(--text-brand-secondary)] hover:underline"
+            className="shrink-0 cursor-pointer whitespace-nowrap border-0 bg-transparent p-0 text-sm text-brand-secondary hover:underline"
             onClick={onShowMore}
             aria-label={
               label || title

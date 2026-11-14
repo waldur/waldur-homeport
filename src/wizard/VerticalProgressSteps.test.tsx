@@ -45,10 +45,10 @@ describe('VerticalProgressSteps', () => {
   it('paints completed and current steps brand and upcoming ones neutral', () => {
     render(<VerticalProgressSteps steps={steps(2)} />);
     const [first, second, current, upcoming] = markers();
-    expect(first).toHaveClass('bg-[var(--bg-brand-solid)]');
-    expect(second).toHaveClass('bg-[var(--bg-brand-solid)]');
+    expect(first).toHaveClass('bg-brand-solid');
+    expect(second).toHaveClass('bg-brand-solid');
     expect(current).toHaveClass(
-      'bg-[var(--bg-brand-solid)]',
+      'bg-brand-solid',
       'ring-4',
       'ring-[var(--bg-brand-subtle)]',
     );
@@ -104,8 +104,8 @@ describe('VerticalProgressSteps', () => {
   it('draws the connector brand below completed steps only', () => {
     render(<VerticalProgressSteps steps={steps(2)} />);
     const [first, second, current, last] = items();
-    expect(first).toHaveClass('not-last:after:bg-[var(--bg-brand-solid)]');
-    expect(second).toHaveClass('not-last:after:bg-[var(--bg-brand-solid)]');
+    expect(first).toHaveClass('not-last:after:bg-brand-solid');
+    expect(second).toHaveClass('not-last:after:bg-brand-solid');
     expect(current).toHaveClass('not-last:after:bg-[var(--border-divider)]');
     // The last step has no connector: the not-last: variant drops it.
     expect(last).toHaveClass("not-last:after:content-['']");

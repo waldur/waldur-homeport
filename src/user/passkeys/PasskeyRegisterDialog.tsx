@@ -157,7 +157,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
                   variant="primary"
                   size="lg"
                   type="button"
-                  className="min-w-[var(--dialog-action-min-w)]"
+                  className="min-w-dialog-action"
                   data-testid="passkey-register-retry"
                 />
               )

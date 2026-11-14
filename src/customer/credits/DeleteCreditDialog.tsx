@@ -79,7 +79,7 @@ export const DeleteCreditDialog: FC<DeleteCreditDialogProps> = ({
           <BaseButton
             variant="danger"
             size="lg"
-            className="min-w-[var(--dialog-action-min-w)]"
+            className="min-w-dialog-action"
             pending={isPending}
             disabled={isLoading}
             disabledReason={

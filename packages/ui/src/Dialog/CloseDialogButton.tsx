@@ -62,7 +62,7 @@ export const CloseDialogButton: React.FC<CloseDialogButtonProps> = ({
 
   return (
     <BaseButton
-      className={cn('min-w-[var(--dialog-action-min-w)]', className)}
+      className={cn('min-w-dialog-action', className)}
       onClick={handleClick}
       variant={variant}
       size="lg"

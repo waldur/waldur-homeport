@@ -50,7 +50,7 @@ const shadowFile: TokenFile = {
 function ShadowCard({ token }: { token: Token & { file?: string } }) {
   return (
     <div
-      className="flex h-32 flex-col items-center justify-center rounded-md bg-[var(--card-bg)] p-3 text-center"
+      className="flex h-32 flex-col items-center justify-center rounded-md bg-card p-3 text-center"
       style={{ boxShadow: `var(${token.name})` }}
     >
       <Mono className="text-xs font-semibold text-primary">{token.name}</Mono>

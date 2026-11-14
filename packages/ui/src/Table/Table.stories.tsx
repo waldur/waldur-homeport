@@ -29,8 +29,8 @@ type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)]">
-      <div className="rounded-md border border-secondary bg-[var(--card-bg)] overflow-hidden">
+    <div className="p-5 bg-page">
+      <div className="rounded-md border border-secondary bg-card overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow>
@@ -92,8 +92,8 @@ export const Default: Story = {
 
 export const Compact: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)]">
-      <div className="rounded-md border border-secondary bg-[var(--card-bg)] overflow-hidden">
+    <div className="p-5 bg-page">
+      <div className="rounded-md border border-secondary bg-card overflow-hidden">
         <Table density="compact">
           <TableHeader>
             <TableRow>
@@ -133,8 +133,8 @@ export const Compact: Story = {
 
 export const Spacious: Story = {
   render: () => (
-    <div className="p-5 bg-[var(--page-bg)]">
-      <div className="rounded-md border border-secondary bg-[var(--card-bg)] overflow-hidden">
+    <div className="p-5 bg-page">
+      <div className="rounded-md border border-secondary bg-card overflow-hidden">
         <Table density="spacious">
           <TableHeader>
             <TableRow>

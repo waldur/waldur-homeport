@@ -192,7 +192,7 @@ const FormModalComponent: FC<
                 label={translate('Go back')}
                 onClick={() => setStep(1)}
                 variant="tertiary"
-                className="min-w-[var(--dialog-action-min-w)]"
+                className="min-w-dialog-action"
                 size="lg"
               />
             )}

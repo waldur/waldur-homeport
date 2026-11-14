@@ -28,7 +28,7 @@ const px = (v: string) => Number.parseFloat(v);
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-md border border-secondary bg-[var(--card-bg)] p-3">
+    <div className="rounded-md border border-secondary bg-card p-3">
       {children}
     </div>
   );
@@ -64,7 +64,7 @@ export const Spacing: Story = {
                   {base ? `${n * px(value(base))}px` : ''}
                 </Mono>
                 <div
-                  className="h-3 rounded-sm bg-[var(--bg-brand-solid)]"
+                  className="h-3 rounded-sm bg-brand-solid"
                   style={{ width: base ? `${n * px(value(base))}px` : 0 }}
                 />
               </div>
@@ -211,7 +211,7 @@ function BreakpointsPage() {
                 </Mono>
                 <Mono className="text-[11px] text-quaternary">{value(t)}</Mono>
                 <div
-                  className={`h-3 rounded-sm ${active ? 'bg-[var(--bg-brand-solid)]' : 'bg-tertiary'}`}
+                  className={`h-3 rounded-sm ${active ? 'bg-brand-solid' : 'bg-tertiary'}`}
                   style={{ width: `${(w / max) * 100}%` }}
                 />
               </div>

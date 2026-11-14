@@ -55,7 +55,7 @@ describe('TableNav', () => {
     // Link's default text styling sets brand color and hover underline,
     // which TabNav suppresses with its own trigger styling.
     expect(screen.getByRole('link', { name: 'Plain title' })).not.toHaveClass(
-      'text-[var(--text-brand-secondary)]',
+      'text-brand-secondary',
     );
   });
 

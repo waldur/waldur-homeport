@@ -24,10 +24,10 @@ export default meta;
 type Story = StoryObj<typeof Collapsible>;
 
 const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
-  <div className="max-w-sm bg-[var(--page-bg)] p-5">
+  <div className="max-w-sm bg-page p-5">
     <Collapsible
       keepMounted={keepMounted}
-      className="rounded-md border border-secondary bg-[var(--card-bg)] text-primary"
+      className="rounded-md border border-secondary bg-card text-primary"
     >
       <CollapsibleTrigger className="group flex w-full items-center justify-between px-5 py-4 text-sm font-semibold">
         Advanced settings

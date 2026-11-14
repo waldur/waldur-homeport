@@ -175,7 +175,7 @@ export const VoiceMessagePlayer: FC<VoiceMessagePlayerProps> = ({
       <audio ref={audioRef} src={src} preload="auto" />
       <button
         type="button"
-        className="shrink-0 size-8 grid place-items-center p-0 border-0 rounded-full bg-[var(--bg-brand-solid)] text-white cursor-pointer hover:bg-[var(--btn-primary-bg-hover)]"
+        className="shrink-0 size-8 grid place-items-center p-0 border-0 rounded-full bg-brand-solid text-white cursor-pointer hover:bg-[var(--btn-primary-bg-hover)]"
         onClick={toggle}
         aria-label={playing ? translate('Pause') : translate('Play')}
       >
@@ -199,9 +199,7 @@ export const VoiceMessagePlayer: FC<VoiceMessagePlayerProps> = ({
             data-testid="voice-bar"
             className={classNames(
               'flex-1 min-w-[2px] rounded-full transition-colors duration-100',
-              i < playedBars
-                ? 'bg-[var(--bg-brand-solid)]'
-                : 'bg-[var(--border-primary)]',
+              i < playedBars ? 'bg-brand-solid' : 'bg-[var(--border-primary)]',
             )}
             style={{
               height: `${Math.max(10, (value / MAX_WAVEFORM_VALUE) * 100)}%`,
