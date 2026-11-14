@@ -60,4 +60,26 @@ describe('per-offering bars', () => {
     expect(tooltip).toContain('(10%)');
     expect(tooltip).toContain('Terminated resources');
   });
+
+  it('escapes component, offering, period and unit names in the tooltip', () => {
+    const name = '<img src=x onerror=alert(1)>';
+    const options = chart([
+      row({
+        name,
+        offering_name: name,
+        current_period_label: name,
+        measured_unit: name,
+        limit_usage_terminated: 40,
+      }),
+    ]);
+    const params = options.series.map((s) => ({
+      seriesName: s.name,
+      dataIndex: 0,
+      marker: '',
+      data: s.data[0],
+    }));
+    const tooltip = options.tooltip.formatter(params);
+    expect(tooltip).toContain('&lt;img src=x onerror=alert(1)&gt;');
+    expect(tooltip).not.toContain('<img');
+  });
 });

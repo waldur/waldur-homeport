@@ -1,4 +1,5 @@
 import { EChartsOption } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
@@ -32,7 +33,7 @@ export const TopOfferingsByRevenueChart: FC<
         axisPointer: { type: 'shadow' },
         formatter: (params: any) => {
           const value = params[0].value;
-          return `${params[0].name}: ${defaultCurrency(value)}`;
+          return `${escape(params[0].name)}: ${escape(defaultCurrency(value))}`;
         },
       },
       grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },

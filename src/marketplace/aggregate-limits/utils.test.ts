@@ -82,4 +82,20 @@ describe('useAggregateLimitChart', () => {
       'Limit',
     ]);
   });
+
+  it('escapes the component name and unit in the tooltip', () => {
+    const name = '<img src=x onerror=alert(1)>';
+    const options = chart([
+      component({ name, measured_unit: name, usage_terminated: 2 }),
+    ]);
+    const params = options.series.map((s) => ({
+      seriesName: s.name,
+      dataIndex: 0,
+      marker: '',
+      data: s.data[0],
+    }));
+    const tooltip = options.tooltip.formatter(params);
+    expect(tooltip).toContain('&lt;img src=x onerror=alert(1)&gt;');
+    expect(tooltip).not.toContain('<img');
+  });
 });

@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import { FC, useMemo, useCallback } from 'react';
 
@@ -109,7 +110,7 @@ export const ResourceLimitsHistoryChart: FC<
           );
           let result = `<strong>${date}</strong><br/>`;
           for (const param of params) {
-            result += `${param.marker} ${param.seriesName}: ${renderFieldOrDash(param.value[1]?.toLocaleString())}<br/>`;
+            result += `${param.marker} ${escape(param.seriesName)}: ${renderFieldOrDash(param.value[1]?.toLocaleString())}<br/>`;
           }
           return result;
         },

@@ -4,6 +4,7 @@
  */
 
 import type { EChartsOption } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 
 import {
   getCategoricalColors,
@@ -92,6 +93,35 @@ export function gridOverride(seriesCount: number, hiddenBottom = 70): object {
 const tooltipDot = (color: string) =>
   `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${color};margin-right:4px"></span>`;
 
+/** How many series the allocation charts' tooltip lists before "Others". */
+const ALLOCATION_TOOLTIP_ITEMS = 25;
+
+/**
+ * Axis tooltip of the organisation allocation charts: the largest non-zero
+ * series first, the rest summed into one "Others" row. Series and axis names
+ * are project names, escaped because ECharts inserts the result as HTML.
+ */
+export function allocationTooltip(params: any[]): string {
+  const active = params
+    .filter((p) => p.value !== 0 && p.value != null)
+    .sort((a, b) => b.value - a.value);
+  if (active.length === 0) return escape(params[0]?.axisValueLabel ?? '');
+  const shown = active.slice(0, ALLOCATION_TOOLTIP_ITEMS);
+  const rest = active.slice(ALLOCATION_TOOLTIP_ITEMS);
+  const othersTotal = rest.reduce((s, p) => s + Number(p.value), 0);
+  const rows = shown
+    .map(
+      (p) =>
+        `${p.marker}${escape(p.seriesName)}: <b>${Number(p.value).toFixed(2)}</b>`,
+    )
+    .join('<br/>');
+  const othersRow =
+    rest.length > 0
+      ? `<br/>Others (${rest.length}): <b>${othersTotal.toFixed(2)}</b>`
+      : '';
+  return `${escape(active[0].axisValueLabel)}<br/>${rows}${othersRow}`;
+}
+
 /**
  * Build tooltip rows from axis params, sorted largest-first.
  * Shows at most MAX_TOOLTIP_ITEMS entries with an "others" summary.
@@ -116,7 +146,7 @@ export function buildTooltipRows(
   const rowLines = [
     ...shown.map(
       (p: any) =>
-        `${tooltipDot(p.color)}${p.seriesName}: <b>${fmtVal(p.value as number)}</b>`,
+        `${tooltipDot(p.color)}${escape(p.seriesName)}: <b>${fmtVal(p.value as number)}</b>`,
     ),
     ...(rest.length > 0
       ? [
@@ -430,7 +460,7 @@ export function buildTimeseriesOptions(
         const { rows, total } = buildTooltipRows(params, (v) =>
           translate('{value} h', { value: v.toFixed(2) }),
         );
-        return `<b>${label}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${total.toFixed(2)} h</b>`;
+        return `<b>${escape(label)}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${total.toFixed(2)} h</b>`;
       },
     },
     legend: timeseriesLegend(allNames),
@@ -590,7 +620,7 @@ export function buildProjectTimeseriesOptions(
         const { rows, total } = buildTooltipRows(params, (v) =>
           translate('{value} h', { value: v.toFixed(2) }),
         );
-        return `<b>${label}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${total.toFixed(2)} h</b>`;
+        return `<b>${escape(label)}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${total.toFixed(2)} h</b>`;
       },
     },
     legend: timeseriesLegend(projNames),
@@ -735,7 +765,7 @@ export function buildJobsTimeseriesOptions(
         const { rows, total } = buildTooltipRows(params, (v) =>
           String(Math.round(v)),
         );
-        return `<b>${label}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${Math.round(total)}</b>`;
+        return `<b>${escape(label)}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${Math.round(total)}</b>`;
       },
     },
     legend: timeseriesLegend(allNames),
@@ -872,7 +902,7 @@ export function buildProjectJobsTimeseriesOptions(
         const { rows, total } = buildTooltipRows(params, (v) =>
           String(Math.round(v)),
         );
-        return `<b>${label}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${Math.round(total)}</b>`;
+        return `<b>${escape(label)}</b><br/>${rows}<br/><hr style="margin:4px 0"/>${translate('Total')}: <b>${Math.round(total)}</b>`;
       },
     },
     legend: timeseriesLegend(projNames),
@@ -1035,7 +1065,7 @@ export function buildAvgWaitTimeseriesOptions(
         const rowLines = [
           ...shown.map(
             (p: any) =>
-              `${tooltipDot(p.color)}${p.seriesName}: <b>${translate('{value} min', { value: p.value })}</b>`,
+              `${tooltipDot(p.color)}${escape(p.seriesName)}: <b>${translate('{value} min', { value: p.value })}</b>`,
           ),
           ...(rest.length > 0
             ? [
@@ -1043,7 +1073,7 @@ export function buildAvgWaitTimeseriesOptions(
               ]
             : []),
         ];
-        return `<b>${label}</b><br/>${rowLines.join('<br/>')}`;
+        return `<b>${escape(label)}</b><br/>${rowLines.join('<br/>')}`;
       },
     },
     legend: timeseriesLegend([...displayNames, translate('Total avg')]),
@@ -1208,13 +1238,13 @@ export function buildProjectAvgWaitTimeseriesOptions(
         const rowLines = [
           ...shown.map(
             (p: any) =>
-              `${tooltipDot(p.color)}${p.seriesName}: <b>${p.value} min</b>`,
+              `${tooltipDot(p.color)}${escape(p.seriesName)}: <b>${p.value} min</b>`,
           ),
           ...(rest.length > 0
             ? [`<i class="text-quaternary">…${rest.length} others</i>`]
             : []),
         ];
-        return `<b>${label}</b><br/>${rowLines.join('<br/>')}`;
+        return `<b>${escape(label)}</b><br/>${rowLines.join('<br/>')}`;
       },
     },
     legend: timeseriesLegend(projNames),

@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { escape } from 'es-toolkit/compat';
 import { FC, useMemo, useState } from 'react';
 import {
   Project,
@@ -235,7 +236,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
           if (!params?.length) return '';
           const lines = params.map(
             (p) =>
-              `${p.marker} ${p.seriesName}: <strong>${p.value}</strong> ${current.measured_unit ?? ''}`,
+              `${p.marker} ${escape(p.seriesName)}: <strong>${p.value}</strong> ${escape(current.measured_unit)}`,
           );
           if (deltaPct !== null) {
             lines.push(

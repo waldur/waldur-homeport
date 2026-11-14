@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { DateTime } from 'luxon';
 import {
   PublicOfferingDetails,
@@ -77,7 +78,7 @@ const formatChart = (
       },
       formatter: (params) => {
         const date = params[0].axisValue;
-        let tooltip = `<div class="mb-1"><b>${date}</b></div>`;
+        let tooltip = `<div class="mb-1"><b>${escape(date)}</b></div>`;
 
         params.forEach((param) => {
           const val = param.data.value;
@@ -88,9 +89,9 @@ const formatChart = (
             return;
           }
 
-          tooltip += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(val, true, 2)}</b>`;
+          tooltip += `<br/>${param.marker} ${escape(param.seriesName)}: <b>${formatUsageValue(val, true, 2)}</b>`;
           if (description) {
-            tooltip += ` (${description})`;
+            tooltip += ` (${escape(description)})`;
           }
 
           if (details?.length) {
@@ -100,7 +101,7 @@ const formatChart = (
               details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
             const len = hasMoreBtn ? MAX_SHOW_ITEMS : Infinity;
             details.slice(0, len).forEach((d) => {
-              tooltip += `<li>${d.username} - ${formatUsageValue(d.usage, true, 2)} ${d.measured_unit}</li>`;
+              tooltip += `<li>${escape(d.username)} - ${formatUsageValue(d.usage, true, 2)} ${escape(d.measured_unit)}</li>`;
             });
             tooltip += `</ul>`;
 

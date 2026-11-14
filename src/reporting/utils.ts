@@ -1,4 +1,5 @@
 import { EChartsOption, graphic } from 'echarts';
+import { escape } from 'es-toolkit/compat';
 
 import { hexToRgb } from 'waldur-design-tokens';
 
@@ -65,9 +66,9 @@ export const getUsageLineChartOptions = (
       trigger: 'axis',
       order: 'seriesDesc',
       formatter: (params: any) => {
-        let res = `${params[0].axisValue}`;
+        let res = escape(params[0].axisValue);
         params.forEach((param) => {
-          res += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(
+          res += `<br/>${param.marker} ${escape(param.seriesName)}: <b>${formatUsageValue(
             param.data,
           )}</b>`;
         });

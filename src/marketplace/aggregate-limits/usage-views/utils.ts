@@ -1,3 +1,4 @@
+import { escape } from 'es-toolkit/compat';
 import { useMemo } from 'react';
 import { ComponentsUsageStatsPerOffering } from 'waldur-js-client';
 
@@ -112,22 +113,22 @@ export function useAggregateLimitChart(
 
           const usageValue = usageBar.data.rawValue;
 
-          let tooltip = `${component.name} · ${component.offering_name}<br/>`;
+          let tooltip = `${escape(component.name)} · ${escape(component.offering_name)}<br/>`;
           tooltip += `<small>${billingTypeLabel}`;
           if (component.current_period_label) {
-            tooltip += ` · ${component.current_period_label}`;
+            tooltip += ` · ${escape(component.current_period_label)}`;
           }
           tooltip += `</small><br/>`;
-          tooltip += `${usageBar.marker} ${usageName}: ${numberFormatter.format(usageValue || 0)} ${component.measured_unit}<br/>`;
+          tooltip += `${usageBar.marker} ${usageName}: ${numberFormatter.format(usageValue || 0)} ${escape(component.measured_unit)}<br/>`;
 
           const terminatedBar = bySeries(terminatedName);
           if (terminatedBar?.data?.rawValue > 0) {
-            tooltip += `${terminatedBar.marker} ${terminatedName}: ${numberFormatter.format(terminatedBar.data.rawValue)} ${component.measured_unit}<br/>`;
+            tooltip += `${terminatedBar.marker} ${terminatedName}: ${numberFormatter.format(terminatedBar.data.rawValue)} ${escape(component.measured_unit)}<br/>`;
           }
 
           const limitBar = bySeries(limitName);
           if (component.limit != null && limitBar) {
-            tooltip += `${limitBar.marker} ${limitName}: ${numberFormatter.format(component.limit)} ${component.measured_unit}`;
+            tooltip += `${limitBar.marker} ${limitName}: ${numberFormatter.format(component.limit)} ${escape(component.measured_unit)}`;
             if (component.limit > 0) {
               const pct = Math.round(
                 ((usageValue || 0) / component.limit) * 100,
