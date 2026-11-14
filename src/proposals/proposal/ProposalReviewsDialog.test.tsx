@@ -7,6 +7,7 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderWithProviders } from '@/test/harness';
 
 import { ProposalReviewsDialog } from './ProposalReviewsDialog';
@@ -198,6 +199,34 @@ describe('ProposalReviewsDialog with reviews', () => {
       ),
     ).toBeInTheDocument();
     expect(await screen.findByText('Lise Meitner')).toBeInTheDocument();
+  });
+});
+
+describe('ProposalReviewsDialog scores', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(proposalProtectedCallsWorkflowStepsList).mockResolvedValue({
+      data: [],
+    } as any);
+  });
+
+  // A draft score, or the default 0 of a declined review, must not read as a
+  // final rating to the call manager.
+  it('shows the score of submitted reviews only', async () => {
+    vi.mocked(proposalReviewsList).mockResolvedValue(
+      page([
+        { uuid: 'r-1', state: 'submitted', summary_score: 4 },
+        { uuid: 'r-2', state: 'in_review', summary_score: 3 },
+        { uuid: 'r-3', state: 'rejected', summary_score: 0 },
+      ]),
+    );
+    renderDialog([submission, review('active')]);
+
+    expect(await screen.findByText('4')).toBeInTheDocument();
+    const scores = screen
+      .getAllByLabelText('Score')
+      .map((cell) => cell.textContent);
+    expect(scores).toEqual(['4', DASH_ESCAPE_CODE, DASH_ESCAPE_CODE]);
   });
 });
 

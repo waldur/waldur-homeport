@@ -43,6 +43,11 @@ const dataParser = (data: ProposalReview[], query) => {
 };
 
 const renderReviewScoreField = ({ row }) => {
+  // A draft score (in review) or the default 0 (declined) would read as a
+  // final rating, so only a submitted review shows its stars.
+  if (row.state !== 'submitted') {
+    return null;
+  }
   return <RateStars value={row.summary_score} />;
 };
 
