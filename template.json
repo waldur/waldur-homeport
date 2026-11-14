@@ -58986,6 +58986,11 @@
       "feature_area": "matrix"
     }
   },
+  "Room members": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Room must be active or in error state to disable.": {
     "context": {
       "feature_area": "matrix"
