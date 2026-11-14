@@ -2,8 +2,8 @@
  * Lightweight localStorage cache for OpenPortal report data.
  *
  * All entries are versioned — bumping CACHE_VERSION invalidates everything.
- * setCached silently drops data when the storage quota is exceeded so callers
- * never need to handle errors.
+ * setCached evicts existing entries (largest first, oldest as a tiebreaker)
+ * when the storage quota is exceeded, so callers never need to handle errors.
  */
 
 import { DateTime } from 'luxon';
@@ -27,6 +27,44 @@ interface CacheEntry<T> {
   data: T;
   cachedAt: number;
 }
+
+/** Any version's prefix: `openportal-v<N>-`. */
+const ANY_VERSION_KEY = /^openportal-v\d+-/;
+
+/** No reader accepts an entry older than the longest TTL. */
+const MAX_TTL = Math.max(...Object.values(TTL));
+
+/**
+ * Remove entries no code will ever read again: those from another
+ * CACHE_VERSION, and those older than the longest TTL. Bumping the version
+ * only makes old entries invisible, and getCached only removes an expired
+ * entry when the same key is asked for again, so without this both kinds sit
+ * in localStorage forever, still consuming quota.
+ */
+(function purgeStaleEntries() {
+  try {
+    const now = Date.now();
+    for (const key of Object.keys(localStorage)) {
+      if (!ANY_VERSION_KEY.test(key)) continue;
+      if (!key.startsWith(PREFIX)) {
+        localStorage.removeItem(key);
+        continue;
+      }
+      try {
+        const raw = localStorage.getItem(key);
+        const entry = raw ? (JSON.parse(raw) as CacheEntry<unknown>) : null;
+        if (!entry || !(now - entry.cachedAt <= MAX_TTL)) {
+          localStorage.removeItem(key);
+        }
+      } catch {
+        // Malformed entry: nothing can read it.
+        localStorage.removeItem(key);
+      }
+    }
+  } catch {
+    // localStorage unavailable: nothing to purge.
+  }
+})();
 
 /**
  * Read a cached value. Returns null if the key is missing, expired, or
@@ -62,16 +100,73 @@ export function getCacheAge(key: string): Date | null {
   }
 }
 
+interface StoredEntryMeta {
+  key: string;
+  size: number;
+  cachedAt: number;
+}
+
+function listEntries(excludeKey: string): StoredEntryMeta[] {
+  const entries: StoredEntryMeta[] = [];
+  for (const key of Object.keys(localStorage)) {
+    if (!key.startsWith(PREFIX) || key === excludeKey) continue;
+    const raw = localStorage.getItem(key);
+    if (!raw) continue;
+    let cachedAt = 0;
+    try {
+      cachedAt = (JSON.parse(raw) as CacheEntry<unknown>).cachedAt ?? 0;
+    } catch {
+      // Malformed entry — treat as oldest so it's evicted first among ties.
+    }
+    entries.push({ key, size: raw.length, cachedAt });
+  }
+  return entries;
+}
+
+/** Bounds the eviction loop if quota can never be satisfied for a single write. */
+const MAX_EVICTIONS = 50;
+
 /**
- * Persist data under `key`. Silently ignores QuotaExceededError so callers
- * never need to handle storage failures.
+ * Other cache entries in the order they are evicted: largest first, oldest
+ * as a tiebreaker. Never includes `keepKey` (the entry being written).
+ */
+function evictionOrder(keepKey: string): string[] {
+  return listEntries(keepKey)
+    .sort((a, b) => b.size - a.size || a.cachedAt - b.cachedAt)
+    .map((entry) => entry.key);
+}
+
+/**
+ * Persist data under `key`. If the storage quota is exceeded, evicts other
+ * cache entries (largest first, oldest as a tiebreaker) and retries, so
+ * callers never need to handle storage failures.
+ *
+ * Eviction is what makes it safe to keep caching whole report payloads: a
+ * large write pushes out the biggest stale entries rather than being dropped
+ * itself, so the small per-identifier mapping entries survive.
  */
 export function setCached(key: string, data: unknown): void {
+  const fullKey = `${PREFIX}${key}`;
   try {
     const entry: CacheEntry<unknown> = { data, cachedAt: Date.now() };
-    localStorage.setItem(`${PREFIX}${key}`, JSON.stringify(entry));
+    const serialized = JSON.stringify(entry);
+    // The candidates are listed once, when the first write fails, and evicted
+    // in that order until the write fits.
+    let candidates: string[] | null = null;
+    for (let attempt = 0; attempt <= MAX_EVICTIONS; attempt++) {
+      try {
+        localStorage.setItem(fullKey, serialized);
+        return;
+      } catch {
+        candidates ??= evictionOrder(fullKey);
+        const next = candidates.shift();
+        if (next === undefined) return;
+        localStorage.removeItem(next);
+      }
+    }
   } catch {
-    // Storage quota exceeded or serialisation error — continue without caching.
+    // Serialisation error, or storage that cannot even be read (blocked
+    // site data): continue without caching.
   }
 }
 
