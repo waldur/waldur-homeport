@@ -321,7 +321,15 @@ const ReviewsTable: FC<{
         },
         {
           title: translate('Score'),
-          render: ({ row }) => <>{renderFieldOrDash(row.summary_score)}</>,
+          // A draft score of a review still in progress, or the default 0 of
+          // one the reviewer declined, would read as a final rating.
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
+                row.state === 'submitted' ? row.summary_score : null,
+              )}
+            </>
+          ),
           keys: ['summary_score'],
         },
         !forApplicant && {
