@@ -212,6 +212,11 @@
       }
     }
   },
+  "(1 day left)": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "(1 required question unanswered)": {
     "context": {
       "feature_area": "proposal"
@@ -257,6 +262,16 @@
       "feature_area": "support"
     }
   },
+  "(expired 1 day ago)": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
+  "(expired today)": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "(expired {n} days ago)": {
     "context": {
       "variables": {
@@ -276,6 +291,21 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "workflow-steps"
+    }
+  },
+  "(in 1 day)": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
+  "(in grace period, 1 day left)": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
+  "(in grace period, last day)": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "(in grace period, {n} days left)": {
@@ -306,6 +336,11 @@
   "(included in total)": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "(last day)": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "(no input)": {
@@ -367,6 +402,16 @@
         }
       },
       "feature_area": "common"
+    }
+  },
+  "({n} days left)": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "project"
     }
   },
   "*.example.com, user@example.org": {
@@ -562,6 +607,11 @@
   "1 day overdue": {
     "context": {
       "feature_area": "UserPendingActionsList"
+    }
+  },
+  "1 day remaining": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "1 error": {
@@ -30289,6 +30339,11 @@
       "feature_area": "reports"
     }
   },
+  "In grace, last day": {
+    "context": {
+      "feature_area": "project"
+    }
+  },
   "In grace, {n}d left": {
     "context": {
       "variables": {
@@ -32776,6 +32831,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "remote-projects"
+    }
+  },
+  "Last day": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "Last delivered": {
@@ -72369,13 +72429,13 @@
       }
     }
   },
-  "This project ended on {endDate}. Resources will remain active until {effectiveEndDate}.": {
+  "This project ended on {endDate}. Resources will remain active until the end of {lastActiveDate}.": {
     "context": {
       "variables": {
         "endDate": {
           "type": "date"
         },
-        "effectiveEndDate": {
+        "lastActiveDate": {
           "type": "date"
         }
       },
@@ -73318,6 +73378,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "thread"
+    }
+  },
+  "Today is the last day": {
+    "context": {
+      "feature_area": "project"
     }
   },
   "Together for the whole round": {
@@ -94734,6 +94799,16 @@
         }
       },
       "feature_area": "openstack-hypervisors"
+    }
+  },
+  "{n}d left": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "project"
     }
   },
   "{offeringName} offering has been moved to {organizationName} organization.": {

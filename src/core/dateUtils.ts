@@ -128,6 +128,35 @@ export const formatRelative: DateFormatter = (date) => {
   return target.toRelative({ base: now, rounding: 'round' });
 };
 
+/* ── End dates are exclusive ──────────────────────────────────────────────────
+ *
+ * Waldur ends access *at* an end date, not after it: Project.is_expired is
+ * `effective_end_date <= today`, so on the date itself the project is already
+ * over and the resources are gone. The last day anyone can actually use it is
+ * therefore the day before.
+ *
+ * Users read "ends 30 Sep" as "I have until the 30th" and lose a day of work
+ * to it, so anything counting down to an end date counts to the last usable
+ * day instead, and any sentence phrased as "active until" names that day
+ * rather than the end date.
+ */
+
+/** The last day access is available for an (exclusive) end date. */
+export const lastAccessDate = (endDate: DateInput): DateTime =>
+  parseDate(endDate).startOf('day').minus({ days: 1 });
+
+/**
+ * Whole days from today to the last day of access.
+ * 0 means today is the last day; negative means access has already ended.
+ */
+export const daysUntilAccessEnds = (endDate: DateInput): number =>
+  Math.round(
+    lastAccessDate(endDate).diff(
+      DateTime.now().setZone(parseDate(endDate).zone).startOf('day'),
+      'days',
+    ).days,
+  );
+
 export const formatRelativeWithHour: DateFormatter = (date) => {
   const dateDiff = parseDate(date).diffNow(['hours', 'minutes']);
 

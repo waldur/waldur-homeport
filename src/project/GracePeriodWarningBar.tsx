@@ -1,10 +1,12 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { formatDate } from '@/core/dateUtils';
+import { formatDate, lastAccessDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { LayoutWarningBar } from '@/navigation/LayoutWarningBar';
 import { useProject } from '@/workspace/hooks';
+
+import { getEndDateStatus } from './endDateStatus';
 
 export const GracePeriodWarningBar: FC = () => {
   const project = useProject();
@@ -17,14 +19,13 @@ export const GracePeriodWarningBar: FC = () => {
     return null;
   }
 
-  const today = new Date();
-  const effectiveEndDateObj = new Date(project.effective_end_date);
-  const isExpired = effectiveEndDateObj < today;
-  const isInGracePeriod = project.is_in_grace_period;
-
-  if (!isExpired && !isInGracePeriod) {
+  // Decided from the dates: on the effective end date the backend still
+  // reports is_in_grace_period, but the project has already expired.
+  const status = getEndDateStatus(project, 0);
+  if (status?.kind !== 'expired' && status?.kind !== 'grace') {
     return null;
   }
+  const isExpired = status.kind === 'expired';
 
   const endDate = formatDate(project.end_date);
   const effectiveEndDate = formatDate(project.effective_end_date);
@@ -47,8 +48,12 @@ export const GracePeriodWarningBar: FC = () => {
       ) : (
         <GracePeriodMessage
           endDate={endDate}
-          effectiveEndDate={effectiveEndDate}
-          effectiveEndDateObj={effectiveEndDateObj}
+          // Resources are terminated at the start of effective_end_date, so
+          // the day to name is the one before it.
+          lastActiveDate={formatDate(
+            lastAccessDate(project.effective_end_date),
+          )}
+          daysRemaining={status.daysLeft}
         />
       )}
     </LayoutWarningBar>
@@ -57,16 +62,9 @@ export const GracePeriodWarningBar: FC = () => {
 
 const GracePeriodMessage: FC<{
   endDate: string;
-  effectiveEndDate: string;
-  effectiveEndDateObj: Date;
-}> = ({ endDate, effectiveEndDate, effectiveEndDateObj }) => {
-  const daysRemaining = Math.max(
-    0,
-    Math.ceil(
-      (effectiveEndDateObj.getTime() - new Date().getTime()) /
-        (1000 * 60 * 60 * 24),
-    ),
-  );
+  lastActiveDate: string;
+  daysRemaining: number;
+}> = ({ endDate, lastActiveDate, daysRemaining }) => {
   const urgencyClass =
     daysRemaining <= 3
       ? 'text-danger font-medium'
@@ -77,13 +75,17 @@ const GracePeriodMessage: FC<{
   return (
     <>
       {translate(
-        'This project ended on {endDate}. Resources will remain active until {effectiveEndDate}.',
-        { endDate, effectiveEndDate },
+        'This project ended on {endDate}. Resources will remain active until the end of {lastActiveDate}.',
+        { endDate, lastActiveDate },
       )}{' '}
       <span className={urgencyClass}>
-        {translate('{daysRemaining} days remaining', {
-          daysRemaining: String(daysRemaining),
-        })}
+        {daysRemaining <= 0
+          ? translate('Today is the last day')
+          : daysRemaining === 1
+            ? translate('1 day remaining')
+            : translate('{daysRemaining} days remaining', {
+                daysRemaining: String(daysRemaining),
+              })}
       </span>
       .
     </>

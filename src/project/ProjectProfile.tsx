@@ -20,6 +20,7 @@ import { useUser, useCustomer } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { ProjectActions } from './dashboard/ProjectActions';
+import { getEndDateStatus } from './endDateStatus';
 
 interface ProjectProfileProps {
   project: Project;
@@ -133,40 +134,51 @@ const ProjectKindCard = ({ project }: ProjectProfileProps) => {
 const APPROACHING_DAYS = 30;
 
 const ProjectEndDate = ({ project }: ProjectProfileProps) => {
-  const today = new Date();
-  const endDateObj = new Date(project.end_date);
-  const effectiveEndDateObj = project.effective_end_date
-    ? new Date(project.effective_end_date)
-    : endDateObj;
-  const daysToEnd = Math.ceil(
-    (endDateObj.getTime() - today.getTime()) / 86400000,
-  );
-  const daysSinceEffectiveEnd = Math.floor(
-    (today.getTime() - effectiveEndDateObj.getTime()) / 86400000,
-  );
+  // Decided from the dates, as the grace period banner is: on the effective
+  // end date is_in_grace_period is still true, but the project has expired.
+  const status = getEndDateStatus(project, APPROACHING_DAYS);
 
   let className = '';
   let suffix: string | null = null;
-  if (project.is_in_grace_period) {
-    className = 'text-warning';
-    const daysLeft = Math.max(
-      0,
-      Math.ceil((effectiveEndDateObj.getTime() - today.getTime()) / 86400000),
-    );
-    suffix = translate('(in grace period, {n} days left)', {
-      n: String(daysLeft),
-    });
-  } else if (daysSinceEffectiveEnd > 0) {
-    className = 'text-danger';
-    suffix = translate('(expired {n} days ago)', {
-      n: String(daysSinceEffectiveEnd),
-    });
-  } else if (daysToEnd >= 0 && daysToEnd <= APPROACHING_DAYS) {
+  if (status?.kind === 'grace') {
     className = 'text-warning';
     suffix =
-      daysToEnd === 0
+      status.daysLeft === 0
+        ? translate('(in grace period, last day)')
+        : status.daysLeft === 1
+          ? translate('(in grace period, 1 day left)')
+          : translate('(in grace period, {n} days left)', {
+              n: String(status.daysLeft),
+            });
+  } else if (status?.kind === 'expired') {
+    className = 'text-danger';
+    suffix =
+      status.daysAgo === 0
+        ? translate('(expired today)')
+        : status.daysAgo === 1
+          ? translate('(expired 1 day ago)')
+          : translate('(expired {n} days ago)', {
+              n: String(status.daysAgo),
+            });
+  } else if (status?.kind === 'approaching' && status.endsAccess) {
+    // No grace period: access is lost on the end date itself, so count the
+    // days that are left to use.
+    className = 'text-warning';
+    suffix =
+      status.daysLeft === 0
+        ? translate('(last day)')
+        : status.daysLeft === 1
+          ? translate('(1 day left)')
+          : translate('({n} days left)', { n: String(status.daysLeft) });
+  } else if (status?.kind === 'approaching') {
+    // A grace period follows, so the end date is an ordinary last day.
+    className = 'text-warning';
+    suffix =
+      status.daysLeft === 0
         ? translate('(today)')
-        : translate('(in {n} days)', { n: String(daysToEnd) });
+        : status.daysLeft === 1
+          ? translate('(in 1 day)')
+          : translate('(in {n} days)', { n: String(status.daysLeft) });
   }
 
   return (
