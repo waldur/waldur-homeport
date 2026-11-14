@@ -19,14 +19,16 @@ import { CheckMark } from '../Check/CheckMark';
 import { Tag } from '../Tag';
 import { Tooltip } from '../Tooltip';
 
+import { hasCustomSingleValue } from './slots';
+
 // `classNamePrefix` used to add `metronic-select__input` to the real
 // `<input>` element automatically; the Tailwind migration's `unstyled` +
 // `classNames` config has no equivalent for it, since react-select's
 // documented `inputClassName` prop turns out not to be wired to anything —
 // `Select`'s `renderInput()` never forwards it into the props it passes to
-// the `Input` component, so it's silently dropped. E2E locators
-// (waldur-integration-testing's tests/components/select.py) still depend
-// on this literal class to find the input, so it's added here by composing
+// the `Input` component, so it's silently dropped. The literal class is kept
+// for selectors written against it (E2E tests use the input's
+// `data-slot="select-input"`, set below), so it's added here by composing
 // react-select's own `innerRef` callback (which is how it tracks the input
 // for focus management) rather than wrapping the DOM in an extra element,
 // which would break the grid-based single-value/placeholder overlay
@@ -46,6 +48,7 @@ export const MetronicInput = (props: any) => {
     <components.Input
       {...props}
       innerRef={composedRef}
+      data-slot="select-input"
       aria-busy={props.selectProps?.isLoading || undefined}
     />
   );
@@ -67,7 +70,9 @@ export const SelectDropdownIndicator = (props: DropdownIndicatorProps) => (
 
 export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
   <components.Control {...props}>
-    {!(props.hasValue && props.selectProps.components.SingleValue) && (
+    {!(
+      props.hasValue && hasCustomSingleValue(props.selectProps.components)
+    ) && (
       <MagnifyingGlassIcon
         size={20}
         weight="bold"

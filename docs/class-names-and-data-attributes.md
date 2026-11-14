@@ -35,7 +35,7 @@ An attribute says what it is for in its own name. A styling refactor leaves it a
 | Find an element from app code (`querySelector`, `:has`) | `data-slot` (or an `id`)                                  | `[data-slot="table-filters-menu"] #filter-item-…`                                      |
 | Find an element in a test                               | its role and accessible name                              | `getByRole('button', { name: 'Set filters' })`, `get_by_role("dialog", name=…)`        |
 | … when it has no role or name that identifies it        | `data-testid`                                             | `data-testid="page-toolbar"`, `data-testid="team-chat-conversation"`                   |
-| Find a third-party widget's parts (react-select)        | the library's own classes, allow-listed                   | `.metronic-select__menu` (`UNKNOWN_CLASS_HOOKS` in `eslint.config.js`)                 |
+| Find a third-party widget's parts (react-select)        | the `data-slot` the wrapper adds to them                  | `[data-slot="select-menu"]` (waldur-ui `Select/slots.ts`)                              |
 
 ## Native state and ARIA first
 
@@ -197,7 +197,7 @@ A hook another repository reads moves in three steps, because each repository's 
 
 ## Exceptions
 
-Some classes have to stay as hooks even though they style nothing, for example react-select's `metronic-select__*`, which the library generates and the E2E suite reads. List such a class as a pattern in `UNKNOWN_CLASS_HOOKS` in `eslint.config.js`, with a comment saying who reads it. Keep that list short: every entry is a contract with no type check behind it.
+Some classes have to stay as hooks even though they style nothing, for example react-select's `metronic-select__*`, which stylesheets and the RTL helpers in `src/test/select.ts` read (the E2E suite uses the parts' `data-slot`). List such a class as a pattern in `UNKNOWN_CLASS_HOOKS` in `eslint.config.js`, with a comment saying who reads it. Keep that list short: every entry is a contract with no type check behind it.
 
 ## Checklist
 

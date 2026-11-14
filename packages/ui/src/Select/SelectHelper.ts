@@ -7,6 +7,7 @@ import {
   SelectDropdownIndicator,
   SelectOption,
 } from './components';
+import { withSelectSlots } from './slots';
 
 export const reorderOptions = (options, value, getOptionValue, isMulti) => {
   if (!Array.isArray(options) || value === null) return options;
@@ -88,5 +89,5 @@ export const composeComponents = (components: any, isMulti: boolean) => {
     };
   }
 
-  return { ...defaultComponents, ...components };
+  return withSelectSlots({ ...defaultComponents, ...components });
 };

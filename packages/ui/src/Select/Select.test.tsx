@@ -290,3 +290,85 @@ describe('useSelect — components', () => {
     expect(result.current.components.DropdownIndicator).toBeDefined();
   });
 });
+
+// data-slot hooks have no role or name to query by: the attribute is the
+// contract under test.
+/* eslint-disable testing-library/no-node-access */
+describe('Select — data-slot hooks', () => {
+  const slot = (container: HTMLElement, name: string) =>
+    container.ownerDocument.querySelector(`[data-slot="${name}"]`);
+
+  it('marks the container, control, input, value and clear button', () => {
+    const { container } = render(
+      <Select
+        options={options}
+        value={options[1]}
+        isClearable
+        onChange={() => {}}
+      />,
+    );
+    expect(slot(container, 'select')).toBeInTheDocument();
+    expect(slot(container, 'select-control')).toBeInTheDocument();
+    expect(slot(container, 'select-input')).toBe(screen.getByRole('combobox'));
+    expect(slot(container, 'select-single-value')).toHaveTextContent('B');
+    expect(slot(container, 'select-clear-indicator')).toBeInTheDocument();
+  });
+
+  it('marks the open menu', async () => {
+    // A table filter's menu is always open and not portaled, so jsdom renders
+    // it without measuring the control.
+    const { container } = render(
+      <Select
+        variant="tableFilter"
+        options={options}
+        value={null}
+        onChange={() => {}}
+      />,
+    );
+    await waitFor(() =>
+      expect(slot(container, 'select-menu')).toHaveTextContent('A'),
+    );
+  });
+
+  it('marks a part the caller replaced', () => {
+    const SingleValue = ({ innerProps, data }: any) => (
+      <span {...innerProps}>custom {data.label}</span>
+    );
+    const { container } = render(
+      <Select
+        options={options}
+        value={options[0]}
+        components={{ SingleValue }}
+        onChange={() => {}}
+      />,
+    );
+    expect(slot(container, 'select-single-value')).toHaveTextContent(
+      'custom A',
+    );
+  });
+
+  it('keeps the same part types across renders', () => {
+    const { result, rerender } = renderHook(() => useSelect({ options }));
+    const first = result.current.components;
+    rerender();
+    expect(result.current.components.Control).toBe(first.Control);
+    expect(result.current.components.SingleValue).toBe(first.SingleValue);
+  });
+
+  it('still shows the table filter search icon beside a plain value', () => {
+    const { container } = render(
+      <Select
+        variant="tableFilter"
+        options={options}
+        value={options[0]}
+        onChange={() => {}}
+      />,
+    );
+    expect(
+      slot(container, 'select-control')?.querySelector(
+        '[data-testid="MagnifyingGlassIcon"]',
+      ),
+    ).toBeInTheDocument();
+  });
+});
+/* eslint-enable testing-library/no-node-access */

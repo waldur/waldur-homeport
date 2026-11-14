@@ -45,10 +45,10 @@ export const getSelectTailwindClassNames = <
   return {
     // `metronic-select-container`/`metronic-select__*` literal classes are
     // kept everywhere in this file alongside the Tailwind utilities:
-    // LocalLogin.css, VStepperFormStep.scss, SavedFilterSelect.scss and
-    // the E2E test helpers (waldur-integration-testing's
-    // tests/components/select.py) all still hook into these names
-    // directly, the same way `classNamePrefix` used to let them.
+    // LocalLogin.css, VStepperFormStep.scss, BoxRadioField.scss and the RTL
+    // helpers in src/test/select.ts still hook into these names, the same
+    // way `classNamePrefix` used to let them. E2E tests find the parts by
+    // their `data-slot` instead (slots.ts).
     container: () => 'metronic-select-container w-full text-sm relative',
 
     control: ({ isFocused, isDisabled }) => {
@@ -114,10 +114,7 @@ export const getSelectTailwindClassNames = <
 
     singleValue: ({ isDisabled }) =>
       cn(
-        // Literal class, same reasoning as `container`/`control`/etc above:
-        // E2E tests (tests/pages/resources/vmware_vm/order.py and others)
-        // assert against `.metronic-select__single-value` directly to read
-        // back a single-select's displayed value.
+        // Literal class, same reasoning as `container`/`control`/etc above.
         'metronic-select__single-value',
         'text-primary leading-normal truncate',
         isDisabled && 'text-quinary',
