@@ -123,7 +123,9 @@ export const ManagedProjectsList = () => {
       title: translate('Notes'),
       render: ({ row }) => <NotesButton row={row} refetch={tableProps.fetch} />,
       keys: ['notes'],
-      optional: true,
+      // Not optional: the count shows which awards carry notes from the
+      // awarding portal, and the dialog reads them without opening each
+      // award. Adding a note there is for staff only, as in the backend.
       id: 'notes',
     },
     {
