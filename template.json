@@ -40852,11 +40852,7 @@
       "feature_area": "managed-projects"
     }
   },
-  "No role assigned": {
-    "context": {
-      "feature_area": "managed-projects"
-    }
-  },
+  "No role assigned": {},
   "No role data found": {
     "context": {
       "feature_area": "user-roles"
@@ -85577,11 +85573,7 @@
       "feature_area": "actions"
     }
   },
-  "Will not be added to project": {
-    "context": {
-      "feature_area": "managed-projects"
-    }
-  },
+  "Will not be added to project": {},
   "Window": {
     "context": {
       "feature_area": "create"
@@ -95721,8 +95713,7 @@
         "role": {
           "type": "unknown"
         }
-      },
-      "feature_area": "managed-projects"
+      }
     }
   },
   "{role} on the organization": {

@@ -6,6 +6,8 @@ import { Link } from '@/core/Link';
 import { translate } from '@/i18n/translate';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
+import { memberRoleLabel } from './utils';
+
 interface OwnProps {
   row: ManagedProject;
 }
@@ -58,45 +60,6 @@ const Offering: FC<{ destination?: string | null }> = ({ destination }) => {
   return <>-</>;
 };
 
-const RoleString: FC<{ role: any; projectTemplate: any }> = ({
-  role,
-  projectTemplate,
-}) => {
-  if (!role) {
-    return <>{translate('No role assigned')}</>;
-  }
-  if (!projectTemplate || !projectTemplate.role_mapping) {
-    return <>{translate('Will not be added to project')}</>;
-  }
-
-  let mapped_role = projectTemplate.role_mapping[role];
-
-  if (!mapped_role) {
-    mapped_role = Object.entries(projectTemplate.role_mapping).find(
-      ([key]) => key.toLowerCase() === role.toLowerCase(),
-    )?.[1];
-
-    if (!mapped_role) {
-      return (
-        <>
-          {translate('{role} has no mapping - will not be added to project', {
-            role,
-          })}
-        </>
-      );
-    }
-  }
-
-  return (
-    <>
-      {mapped_role.description ||
-        mapped_role.name ||
-        mapped_role.uuid ||
-        translate('Not set')}
-    </>
-  );
-};
-
 const MembersList = ({ members, projectTemplate }) => {
   if (!members || Object.keys(members).length === 0) {
     return <>{translate('No members assigned')}</>;
@@ -107,7 +70,7 @@ const MembersList = ({ members, projectTemplate }) => {
       {Object.entries(members).map(([key, value]) => (
         <div key={key}>
           &nbsp;&nbsp;{key} :{' '}
-          <RoleString role={value} projectTemplate={projectTemplate} />
+          {memberRoleLabel(value as string, projectTemplate)}
         </div>
       ))}
     </>

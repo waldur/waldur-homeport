@@ -1,15 +1,19 @@
+import { PlusIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCallback } from 'react';
 import { openportalManagedProjectsRetrieveGet } from 'waldur-js-client';
 
 import {
   Badge,
+  BaseButton,
   PropertyItem,
   PropertyList,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+  CardToolbar,
 } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
@@ -17,13 +21,16 @@ import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
 import { allowedDomainsProperty } from '@/openportal/allowedDomains';
 import { getMembershipControlLabels } from '@/openportal/membershipControl';
 import { propVal } from '@/property/propertyFields';
+import { useUser } from '@/workspace/hooks';
 
 import { ManagedProjectActions } from './ManagedProjectActions';
 import { ManagedProjectAuditLog } from './ManagedProjectAuditLog';
+import { ManagedProjectNotesDialog } from './ManagedProjectNotesDialog';
 import { isEmbargoed } from './utils';
 
 const LinkField = ({
@@ -46,6 +53,14 @@ export const ManagedProjectDetail = () => {
   const {
     params: { identifier, destination },
   } = useCurrentStateAndParams();
+  const { openDialog } = useModal();
+  const user = useUser();
+  const router = useRouter();
+  // The project is gone after a delete, so go back to the list rather than
+  // refetch it into a 404.
+  const backToList = useCallback(() => {
+    router.stateService.go('marketplace-provider-managed-projects');
+  }, [router]);
 
   const {
     data: row,
@@ -81,7 +96,11 @@ export const ManagedProjectDetail = () => {
             <h3 className="mb-0">
               {details?.name || row.identifier || translate('Unnamed project')}
             </h3>
-            <ManagedProjectActions project={row} refetch={refetch} />
+            <ManagedProjectActions
+              project={row}
+              refetch={refetch}
+              onDeleted={backToList}
+            />
           </div>
 
           <PropertyList variant="summary" hideIfEmpty={false}>
@@ -230,6 +249,27 @@ export const ManagedProjectDetail = () => {
           <CardTitle as="div" className="mb-0">
             {translate('Notes')}
           </CardTitle>
+          {/* add-note is staff-only on the backend. */}
+          {user?.is_staff && (
+            <CardToolbar>
+              <BaseButton
+                label={translate('Add note')}
+                iconNode={<PlusIcon weight="bold" />}
+                variant="tertiary"
+                onClick={() =>
+                  openDialog(ManagedProjectNotesDialog, {
+                    row,
+                    resolve: {
+                      refetch: async () => {
+                        await refetch();
+                      },
+                    },
+                    size: 'md',
+                  })
+                }
+              />
+            </CardToolbar>
+          )}
         </CardHeader>
         <CardContent>
           {details?.notes && details.notes.length > 0 ? (
@@ -239,7 +279,9 @@ export const ManagedProjectDetail = () => {
                   <div className="text-quaternary small">
                     {note.author} &middot; {formatDateTime(note.timestamp)}
                   </div>
-                  <div>{note.text}</div>
+                  <div className="whitespace-pre-wrap break-words">
+                    {note.text}
+                  </div>
                 </div>
               ))}
             </div>

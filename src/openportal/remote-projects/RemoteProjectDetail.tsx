@@ -241,7 +241,9 @@ export const RemoteProjectDetail = () => {
                   <div className="text-quaternary small">
                     {note.author} &middot; {formatDateTime(note.timestamp)}
                   </div>
-                  <div>{note.text}</div>
+                  <div className="whitespace-pre-wrap break-words">
+                    {note.text}
+                  </div>
                 </div>
               ))}
             </div>
