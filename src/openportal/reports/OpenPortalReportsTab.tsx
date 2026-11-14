@@ -50,6 +50,9 @@ import { UsageReportVis } from './UsageReportVis';
 
 const MAX_USER_MAPPINGS = 100;
 
+/** Module-level so the fallback keeps a stable identity across renders. */
+const EMPTY_NAME_MAPS: NameMaps = {};
+
 /** Group reports by "year-month" so the user can select a specific month */
 const groupByMonth = <T extends { year: number; month: number }>(
   items: T[],
@@ -116,10 +119,17 @@ export const OpenPortalReportsTab: FC = () => {
   const hasReports = !!(usageReports || storageReports);
 
   // ── Fetch name mappings once reports are available ───────────────────────
-  const { data: nameMaps } = useQuery<NameMaps>({
+  const {
+    data: nameMaps,
+    isPending: mappingsPending,
+    error: mappingsError,
+  } = useQuery<NameMaps>({
     queryKey: ['openportal-project-mappings', project?.uuid],
     refetchOnWindowFocus: false,
     staleTime: Infinity,
+    // Names are decoration and a failure falls back to identifiers, so one
+    // retry is enough before the charts are shown without them.
+    retry: 1,
     queryFn: async () => {
       const usage = usageReports ?? [];
       const storage = storageReports ?? [];
@@ -148,12 +158,21 @@ export const OpenPortalReportsTab: FC = () => {
         .slice(0, MAX_USER_MAPPINGS);
       const offerings = await fetchOfferingMapping(offeringIds);
       const users = await fetchUserMapping(userIds);
+      // Both mapping endpoints answer with null for an identifier they
+      // cannot resolve rather than omitting it, so the nulls have to be
+      // dropped before reading .name off the values. Skipping this filter is
+      // what used to throw here and, because a rejected query leaves nameMaps
+      // undefined, silently blanked the whole report.
       const maps = {
         offering: Object.fromEntries(
-          Object.entries(offerings).map(([k, v]) => [k, v.name]),
+          Object.entries(offerings)
+            .filter(([, v]) => v != null)
+            .map(([k, v]) => [k, v.name]),
         ),
         user: Object.fromEntries(
-          Object.entries(users).map(([k, v]) => [k, v.full_name]),
+          Object.entries(users)
+            .filter(([, v]) => v != null)
+            .map(([k, v]) => [k, v.full_name]),
         ),
       } as NameMaps;
       return maps;
@@ -201,7 +220,18 @@ export const OpenPortalReportsTab: FC = () => {
       ? storageForResource
       : (storageByMonth[activeMonth] ?? []);
 
-  const isLoading = usageLoading || storageLoading;
+  // Identifier names are decoration; the charts read fine against raw
+  // identifiers. So a failed lookup falls back to empty maps instead of
+  // withholding the report, while a lookup still in flight keeps the charts
+  // back for the moment it takes, to avoid a flash of raw identifiers.
+  const effectiveNameMaps: NameMaps | undefined = mappingsError
+    ? EMPTY_NAME_MAPS
+    : nameMaps;
+
+  const isLoading =
+    usageLoading ||
+    storageLoading ||
+    (hasReports && mappingsPending && !mappingsError);
 
   const reportsCacheAge =
     !isLoading && project ? getCacheAge(`project-usage-${project.uuid}`) : null;
@@ -306,26 +336,36 @@ export const OpenPortalReportsTab: FC = () => {
             />
           )}
 
+        {/* Names are optional, so this is a note rather than an error: the
+            charts below are complete, they just label by raw identifier. */}
+        {mappingsError && (
+          <p className="text-tertiary text-sm mb-4">
+            {translate(
+              'Could not load offering and user names; showing identifiers instead.',
+            )}
+          </p>
+        )}
+
         {/* Usage chart */}
-        {activeUsage.length > 0 && nameMaps !== undefined && (
+        {activeUsage.length > 0 && effectiveNameMaps !== undefined && (
           <div className="mb-5">
             <h4 className="font-semibold mb-2.5">{translate('Usage')}</h4>
             <UsageReportVis
               reports={activeUsage}
               height="400px"
-              nameMaps={nameMaps}
+              nameMaps={effectiveNameMaps}
             />
           </div>
         )}
 
         {/* Storage chart */}
-        {activeStorage.length > 0 && nameMaps !== undefined && (
+        {activeStorage.length > 0 && effectiveNameMaps !== undefined && (
           <div>
             <h4 className="font-semibold mb-2.5">{translate('Storage')}</h4>
             <StorageReportVis
               reports={activeStorage}
               height="360px"
-              nameMaps={nameMaps}
+              nameMaps={effectiveNameMaps}
             />
           </div>
         )}
