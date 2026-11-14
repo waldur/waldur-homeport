@@ -29,6 +29,28 @@ describe('findColorLiterals in scripts', () => {
     ]);
   });
 
+  it('finds literals inside a Tailwind arbitrary value', () => {
+    const source = [
+      "const a = 'md:shadow-[5px_0px_10px_rgba(70,78,95,0.075)]';",
+      "const b = '[box-shadow:0_1px_2px_rgb(16_24_40/0.06)]';",
+      "const c = 'shadow-[0_0_0_1px_#ccc]';",
+    ].join('\n');
+    expect(values(source, 'a.ts')).toEqual([
+      'rgba(70,78,95,0.075)',
+      'rgb(16_24_40/0.06)',
+      '#ccc',
+    ]);
+  });
+
+  it('does not take a snake_case call or a hex-like anchor for a colour', () => {
+    const source = [
+      'const a = to_rgb(color);',
+      "const b = '#add_user';",
+      "const c = 'see #bad_request';",
+    ].join('\n');
+    expect(values(source, 'a.ts')).toEqual([]);
+  });
+
   it('reports the line and column of each literal', () => {
     const [literal] = findColorLiterals("\nconst c = '#fff';", 'a.ts');
     expect(literal).toMatchObject({ line: 2, column: 12 });

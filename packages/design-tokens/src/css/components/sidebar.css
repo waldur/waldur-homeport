@@ -32,6 +32,8 @@
    sidebar's own surface. */
 :root {
   --sidebar-border: var(--color-gray-200);
+  /* The collapsed rail expanded on hover, floating over the page. */
+  --sidebar-hover-shadow: 5px 0 10px rgb(70 78 95 / 7.5%);
 }
 
 :root[data-theme='dark'] {
@@ -96,20 +98,40 @@
 /* primary: the brand colour as the surface, translucent white on top. */
 [data-sidebar-style='primary'] {
   --sidebar-bg: var(--brand-color);
-  --nav-item-hover-bg: rgba(255, 255, 255, 0.1);
-  --nav-item-active-bg: rgba(255, 255, 255, 0.15);
-  --nav-item-text: rgba(255, 255, 255, 0.85);
-  --nav-item-icon: rgba(255, 255, 255, 0.7);
-  --nav-section-label: rgba(255, 255, 255, 0.6);
-  --nav-separator: rgba(255, 255, 255, 0.15);
-  --nav-badge-border: rgba(255, 255, 255, 0.2);
-  --nav-badge-text: #ffffff;
-  --nav-accordion-active: rgba(255, 255, 255, 0.15);
-  --nav-sub-accordion-active: rgba(255, 255, 255, 0.1);
-  --nav-item-subitem-bg: rgba(255, 255, 255, 0.08);
-  --nav-item-subitem2-bg: rgba(255, 255, 255, 0.12);
-  --nav-scrollbar-color: rgba(255, 255, 255, 0.2);
-  --nav-scrollbar-hover-color: rgba(255, 255, 255, 0.35);
+  --nav-item-hover-bg: color-mix(in srgb, var(--color-white) 10%, transparent);
+  --nav-item-active-bg: color-mix(in srgb, var(--color-white) 15%, transparent);
+  --nav-item-text: color-mix(in srgb, var(--color-white) 85%, transparent);
+  --nav-item-icon: color-mix(in srgb, var(--color-white) 70%, transparent);
+  --nav-section-label: color-mix(in srgb, var(--color-white) 60%, transparent);
+  --nav-separator: color-mix(in srgb, var(--color-white) 15%, transparent);
+  --nav-badge-border: color-mix(in srgb, var(--color-white) 20%, transparent);
+  --nav-badge-text: var(--color-white);
+  --nav-accordion-active: color-mix(
+    in srgb,
+    var(--color-white) 15%,
+    transparent
+  );
+  --nav-sub-accordion-active: color-mix(
+    in srgb,
+    var(--color-white) 10%,
+    transparent
+  );
+  --nav-item-subitem-bg: color-mix(in srgb, var(--color-white) 8%, transparent);
+  --nav-item-subitem2-bg: color-mix(
+    in srgb,
+    var(--color-white) 12%,
+    transparent
+  );
+  --nav-scrollbar-color: color-mix(
+    in srgb,
+    var(--color-white) 20%,
+    transparent
+  );
+  --nav-scrollbar-hover-color: color-mix(
+    in srgb,
+    var(--color-white) 35%,
+    transparent
+  );
 }
 
 /* accent: a dark shade of the brand colour, light brand tints on top. */

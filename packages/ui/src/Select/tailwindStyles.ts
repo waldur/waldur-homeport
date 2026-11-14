@@ -158,15 +158,14 @@ export const getSelectTailwindClassNames = <
     menu: () =>
       cn(
         'metronic-select__menu',
-        // Radius and shadow match the old menu's own values (a 1px outline plus a soft
-        // 4px/11px drop shadow — the old menu has no real `border-width`
-        // either, just this shadow).
+        // --listbox-shadow keeps the old menu's own values: a 1px outline
+        // plus a soft 4px/11px drop, the same in both themes.
         'z-[9999] overflow-hidden bg-primary',
         // `--bg-primary` matches the control's background in both themes.
         // A table filter's menu sits flat inside its panel, as before the
         // Tailwind migration: no outline, shadow, gap or rounded corners.
         !isTableFilter &&
-          'mt-[8px] rounded-lg border border-solid border-secondary shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_4px_11px_0_rgba(0,0,0,0.1)]',
+          'mt-[8px] rounded-lg border border-solid border-secondary shadow-[var(--listbox-shadow)]',
       ),
 
     menuList: ({ isMulti }) =>

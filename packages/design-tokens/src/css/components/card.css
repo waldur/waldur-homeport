@@ -31,7 +31,7 @@
   --card-header-solid-bg: var(--color-gray-50);
 
   /* Card's light-mode shadow; dark mode draws a border instead (Card.tsx). */
-  --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
+  --card-shadow: 0px 0px 20px 0px rgb(76 87 125 / 2%);
   /* The default card's border width: none in light, 1px in dark. One
      token, so a caller's border-width utility replaces it in both themes. */
   --card-edge-width: 0px;

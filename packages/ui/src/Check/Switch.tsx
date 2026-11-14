@@ -138,8 +138,8 @@ export function SwitchVisual({
           'inline-block size-[16px] rounded-full bg-[var(--switch-knob)] transition-transform duration-150 ease-[ease-in-out] motion-reduce:transition-none',
           // Switch's knob, with no input to read state from.
           checked
-            ? 'translate-x-[17px] [box-shadow:0_1px_2px_rgb(16_24_40/0.06)]'
-            : 'translate-x-[1px] [box-shadow:0_0_0_1px_var(--switch-knob-border),0_1px_2px_rgb(16_24_40/0.06)]',
+            ? 'translate-x-[17px] [box-shadow:var(--switch-knob-shadow)]'
+            : 'translate-x-[1px] [box-shadow:0_0_0_1px_var(--switch-knob-border),var(--switch-knob-shadow)]',
         )}
       />
     </span>

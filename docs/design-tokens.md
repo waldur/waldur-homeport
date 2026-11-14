@@ -564,7 +564,17 @@ unused part of a gauge; `text`, `textSecondary` and `textQuaternary` for labels;
 for an accent chip; `shadow(alpha)` for a canvas shadow; `getCategoricalColors(n)` (up to 16)
 for series. Chart tooltips use the card surface (`src/echarts/themes.ts`), so tooltip HTML takes
 the text utilities (`class="text-quaternary"`). A shadow or darkening tint in a stylesheet is
-`color-mix(in srgb, var(--shadow-color) 8%, transparent)` (`semantic/elevation.css`). Files where the literal is the point are listed with
+`color-mix(in srgb, var(--shadow-color) 8%, transparent)` (`semantic/elevation.css`).
+
+A translucent colour is a token or ramp step at an alpha, never an `rgba()` literal. In a class
+list that is slash notation, which works on every colour utility, semantic ones included:
+`bg-brand-solid/10`, `bg-media/40`, `bg-gray-900/50` (Tailwind compiles it
+to `color-mix(in oklab, … 10%, transparent)`). In a stylesheet, token sources included, it is
+`color-mix(in srgb, var(--color-gray-900) 10%, transparent)`; translucent white is
+`var(--color-white)`, translucent black `var(--shadow-color)`. A shadow with its own geometry is a
+token (`--knob-shadow`, `--tooltip-shadow`, `--sidebar-hover-shadow`) read as
+`shadow-[var(--…)]`, not a literal inside `shadow-[…]`: the detector reads Tailwind's
+arbitrary values too (`_` stands for a space there). Files where the literal is the point are listed with
 their reason in `ALLOWED`: token sources and the boot splash, the login-page layout artwork,
 masks, output rendered outside the app's stylesheet (PDF, email preview, data-URI images,
 off-screen exports) and third-party or generated colours. Tests, stories and mocks are skipped.

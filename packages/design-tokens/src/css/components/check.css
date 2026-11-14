@@ -47,6 +47,8 @@
   --switch-track-checked-disabled: var(--bg-brand-tertiary);
   --switch-knob: var(--fg-white);
   --switch-knob-border: var(--border-primary);
+  /* The knob's slight lift, under its ring while off. */
+  --switch-knob-shadow: var(--knob-shadow);
   --switch-knob-disabled: var(--text-senary);
   --switch-knob-checked-disabled: var(--bg-primary);
 

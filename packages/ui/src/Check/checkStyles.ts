@@ -102,8 +102,8 @@ export const SWITCH_TRACK =
 /** The knob: a 1px ring in the knob-border colour while off. */
 export const SWITCH_KNOB =
   'pointer-events-none absolute top-[2px] left-[2px] rounded-full bg-[var(--switch-knob)] transition-transform duration-150 ease-[ease-in-out] motion-reduce:transition-none ' +
-  '[box-shadow:0_0_0_1px_var(--switch-knob-border),0_1px_2px_rgb(16_24_40/0.06)] ' +
-  'peer-checked:[box-shadow:0_1px_2px_rgb(16_24_40/0.06)] ' +
+  '[box-shadow:0_0_0_1px_var(--switch-knob-border),var(--switch-knob-shadow)] ' +
+  'peer-checked:[box-shadow:var(--switch-knob-shadow)] ' +
   'peer-disabled:bg-[var(--switch-knob-disabled)] peer-disabled:[box-shadow:none] ' +
   'peer-[:checked:disabled]:bg-[var(--switch-knob-checked-disabled)]';
 

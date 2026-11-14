@@ -65,6 +65,10 @@ const SIZE_CLASSNAMES: Record<ModalSize, string> = {
   xl: 'lg:max-w-[840px] xl:max-w-[1140px]',
 };
 
+/** What Radix's focus trap takes first: controls, not links (it skips them). */
+const FIRST_TABBABLE =
+  'button:not(:disabled), input:not(:disabled):not([type="hidden"]), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+
 export interface ModalShellProps {
   open: boolean;
   onHide: () => void;
@@ -208,6 +212,20 @@ export const ModalShell: FC<ModalShellProps> = ({
                 event.preventDefault();
               }
             }}
+            onOpenAutoFocus={(event) => {
+              // Radix focuses the first tabbable element. When that is the
+              // header's close button (a confirm, or any dialog with no field
+              // of its own), start on the dialog itself instead: a screen
+              // reader reads its name, and opening it from the keyboard does
+              // not light up the close button's focus ring. Tab still reaches
+              // the button first. (Not called when a field has autoFocus.)
+              const content = contentRef.current;
+              const first = content?.querySelector(FIRST_TABBABLE);
+              if (first?.matches('[data-slot="modal-close"]')) {
+                event.preventDefault();
+                content.focus({ preventScroll: true });
+              }
+            }}
             onCloseAutoFocus={onCloseAutoFocus}
           >
             {named && (
@@ -264,7 +282,7 @@ export const ModalCloseButton = forwardRef<
       aria-label={translate('Close')}
       data-slot="modal-close"
       className={cn(
-        'mt-[-6.5px] mr-[-12px] mb-[-12px] ml-auto box-content size-[13px] shrink-0 self-start rounded-lg border-0 bg-transparent p-[12px] text-[var(--color-gray-400)] opacity-50 hover:opacity-75 focus-visible:opacity-100 focus-visible:shadow-[0_0_0_0.25rem_color-mix(in_srgb,var(--focus-ring-color)_25%,transparent)] focus-visible:outline-none dark:text-[var(--color-gray-dark-500)]',
+        'mt-[-6.5px] mr-[-12px] mb-[-12px] ml-auto box-content size-[13px] shrink-0 self-start rounded-lg border-0 bg-transparent p-[12px] text-[var(--color-gray-400)] opacity-50 hover:opacity-75 focus-visible:opacity-100 dark:text-[var(--color-gray-dark-500)]',
         className,
       )}
       onClick={onClick ?? (hide ? () => hide() : undefined)}

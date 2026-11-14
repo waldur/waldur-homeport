@@ -8,17 +8,21 @@
 :root {
   /* The modal backdrop, distinct from the Sheet's drawer overlay:
      gray-900 at 70% with 3px blur. */
-  --modal-backdrop-bg: rgba(16, 24, 40, 0.7);
+  --modal-backdrop-bg: color-mix(
+    in srgb,
+    var(--color-gray-900) 70%,
+    transparent
+  );
   --modal-backdrop-blur: 3px;
 
   /* The Modal's box shadow:
      --modal-shadow-xs below the sm breakpoint and --modal-shadow from it. */
   --modal-shadow-xs:
-    0 12px 14px -4px rgba(16, 24, 40, 0.1),
-    0 6px 6px -4px rgba(16, 24, 40, 0.04);
+    0 12px 14px -4px color-mix(in srgb, var(--color-gray-900) 10%, transparent),
+    0 6px 6px -4px color-mix(in srgb, var(--color-gray-900) 4%, transparent);
   --modal-shadow:
-    0 20px 24px -4px rgba(16, 24, 40, 0.1),
-    0 8px 8px -4px rgba(16, 24, 40, 0.04);
+    0 20px 24px -4px color-mix(in srgb, var(--color-gray-900) 10%, transparent),
+    0 8px 8px -4px color-mix(in srgb, var(--color-gray-900) 4%, transparent);
 
   /* The minimum width of a footer action button (CloseDialogButton and a
      large SubmitButton, which apply it themselves; a BaseButton used as a
@@ -49,5 +53,9 @@
   /* The app's dark veil: the darkest dark surface, gray-dark-900
      (#161b26), at half strength. The blur is unbranched, so --modal-backdrop-blur isn't
      redefined here. */
-  --modal-backdrop-bg: rgba(22, 27, 38, 0.5);
+  --modal-backdrop-bg: color-mix(
+    in srgb,
+    var(--color-gray-dark-900) 50%,
+    transparent
+  );
 }
