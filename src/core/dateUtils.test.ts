@@ -1,7 +1,11 @@
 import { DateTime, Settings } from 'luxon';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { formatRelative } from './dateUtils';
+import {
+  daysUntilAccessEnds,
+  formatRelative,
+  lastAccessDate,
+} from './dateUtils';
 
 describe('formatRelative', () => {
   afterEach(() => {
@@ -90,5 +94,50 @@ describe('formatRelative', () => {
     Settings.now = () => fixedNow;
 
     expect(formatRelative('2026-09-01T09:00:00')).toBe('5 hours ago');
+  });
+});
+
+// Waldur ends access *at* an end date (Project.is_expired is
+// `effective_end_date <= today`), so a project ending 30 Sep is unusable on
+// the 30th and the last day anyone can work is the 29th. Users read the end
+// date as their last day and lose a day to it, so these helpers count to the
+// last usable day instead.
+describe('exclusive end dates', () => {
+  afterEach(() => {
+    Settings.now = () => Date.now();
+  });
+
+  const freezeAt = (iso: string) => {
+    const fixedNow = DateTime.fromISO(iso).toMillis();
+    Settings.now = () => fixedNow;
+  };
+
+  it('treats the day before the end date as the last day of access', () => {
+    expect(lastAccessDate('2026-09-30').toISODate()).toBe('2026-09-29');
+  });
+
+  it('counts one day fewer than the gap to the end date', () => {
+    freezeAt('2026-09-16');
+
+    // 16 Sep to 30 Sep is 14 days, but the 30th is already gone.
+    expect(daysUntilAccessEnds('2026-09-30')).toBe(13);
+  });
+
+  it('is not thrown off by the time of day', () => {
+    freezeAt('2026-09-16T23:30:00');
+
+    expect(daysUntilAccessEnds('2026-09-30')).toBe(13);
+  });
+
+  it('reports zero on the last usable day', () => {
+    freezeAt('2026-09-29T09:00:00');
+
+    expect(daysUntilAccessEnds('2026-09-30')).toBe(0);
+  });
+
+  it('goes negative once access has ended', () => {
+    freezeAt('2026-09-30T09:00:00');
+
+    expect(daysUntilAccessEnds('2026-09-30')).toBe(-1);
   });
 });
