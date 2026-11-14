@@ -4561,7 +4561,11 @@
       "feature_area": "openportal-remote"
     }
   },
-  "Allow": {},
+  "Allow": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Allow \"N/A\" answer": {
     "context": {
       "feature_area": "questions"
@@ -4642,6 +4646,16 @@
   "Allow users to provide custom project name and description": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Allow {client} to access your account?": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
     }
   },
   "Allow-list": {
@@ -5470,6 +5484,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Application": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Application Credential": {
     "context": {
       "primary_ui_type": "label"
@@ -5522,6 +5541,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "cluster"
+    }
+  },
+  "Application website": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Applications": {
@@ -5698,6 +5722,11 @@
       "feature_area": "roles"
     }
   },
+  "Approve apps from your own sign-in": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Approve justification": {
     "context": {
       "primary_ui_type": "title",
@@ -5766,6 +5795,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "shell"
+    }
+  },
+  "Apps cannot be approved with an access token. Sign in to Waldur as yourself and connect the app again.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "Apps cannot connect to this portal": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Appservice": {},
@@ -8419,6 +8458,7 @@
   "Authorization login.": {},
   "Authorization password.": {},
   "Authorization token.": {},
+  "Authorize application": {},
   "Auto": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -11969,6 +12009,11 @@
   "Check name": {
     "context": {
       "feature_area": "footer"
+    }
+  },
+  "Check the Waldur address in the app's settings, then connect it again. If the address is right, contact your Waldur administrator.": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Check user access": {
@@ -27757,6 +27802,16 @@
       "feature_area": "marketplace-popup"
     }
   },
+  "Go back to the app and connect it again.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "Go back to the app and connect it again. If it keeps failing, contact your Waldur administrator.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Go to configuration": {
     "context": {
       "feature_area": "common"
@@ -31936,6 +31991,16 @@
       "feature_area": "create"
     }
   },
+  "It can now act as you, with the access you allowed.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "It did not get access to your account.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "It fits.": {
     "context": {
       "feature_area": "diagram"
@@ -32031,6 +32096,16 @@
         }
       },
       "feature_area": "email"
+    }
+  },
+  "It will be able to do what your staff account can do anywhere in this portal, not only in your own organizations and projects. Allow it only if you trust it with that.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "It will be able to see what your support account can see anywhere in this portal, not only in your own organizations and projects. Allow it only if you trust it with that.": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Italy": {},
@@ -42069,6 +42144,11 @@
       "feature_area": "remote-projects"
     }
   },
+  "Not you? Sign out": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Note": {
     "context": {
       "primary_ui_type": "title",
@@ -44048,6 +44128,11 @@
   "Only the proposals you take part in": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Only the user can let an app act as them. Stop impersonating to answer this request as yourself.": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month, and all-time where a component offers it. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
@@ -57578,6 +57663,16 @@
       "feature_area": "call"
     }
   },
+  "Return to {client}": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
+    }
+  },
   "Returned to applicant": {},
   "Returned to the pool": {
     "context": {
@@ -62143,6 +62238,11 @@
       "feature_area": "integration"
     }
   },
+  "Sends you back to": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Sensitive information detected": {
     "context": {
       "feature_area": "shared"
@@ -63889,6 +63989,11 @@
       "feature_area": "integration"
     }
   },
+  "Signed in as": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Signed in as {username}": {
     "context": {
       "variables": {
@@ -65301,6 +65406,11 @@
   "Stop impersonating": {
     "context": {
       "feature_area": "administration"
+    }
+  },
+  "Stop impersonating to approve apps": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Stop mailing {audience} when {event}?": {
@@ -66829,6 +66939,16 @@
       "action_type": "update"
     }
   },
+  "Taking you back to {client}…": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
+    }
+  },
   "Target": {
     "context": {
       "primary_ui_type": "title",
@@ -67720,6 +67840,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "announcements"
+    }
+  },
+  "The app acts as you. It never gets more access than your own account has.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "The app will be able to:": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "The applicant": {
@@ -71531,6 +71661,44 @@
     }
   },
   "This amount is too large.": {},
+  "This app asks for access Waldur does not offer": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "oauth"
+    }
+  },
+  "This app asks for staff access": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "This app asks for support access": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "This app cannot connect to Waldur this way": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "oauth"
+    }
+  },
+  "This app is set up for another server": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "oauth"
+    }
+  },
+  "This app registered itself. Waldur has not checked its name.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "This app will not work for your account yet": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "This assignment item is blocked due to a conflict of interest. Forcing an unblock will allow the reviewer to proceed with reviewing the proposal \"{proposal}\". A reason is required for audit purposes.": {
     "context": {
       "variables": {
@@ -72324,6 +72492,11 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "This portal does not let apps connect to Waldur accounts. If you need it, contact your Waldur administrator.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "This preview shows policy impact based on example values. Select a resource to see projections based on real usage.": {
     "context": {
       "feature_area": "policies"
@@ -72543,6 +72716,12 @@
   "This setting is not changed on a page of the call; the finding says what to do.": {
     "context": {
       "feature_area": "workflow-check"
+    }
+  },
+  "This sign-in request cannot be used": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "oauth"
     }
   },
   "This signs the user out of that credential": {
@@ -74818,6 +74997,12 @@
       "feature_area": "lifecycle"
     }
   },
+  "Unable to allow access.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "oauth"
+    }
+  },
   "Unable to apply action.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -76278,6 +76463,12 @@
       "feature_area": "actions"
     }
   },
+  "Unable to deny access.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "oauth"
+    }
+  },
   "Unable to deregister event consumer.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -77147,6 +77338,11 @@
   "Unable to load the role hygiene report.": {
     "context": {
       "feature_area": "hygiene"
+    }
+  },
+  "Unable to load the sign-in request.": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Unable to load the suggested reviewers.": {
@@ -81029,6 +81225,16 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Update the app or check its settings, then connect it again.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "Update the app, or contact whoever provides it.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "Update thumbnail": {
     "context": {
       "primary_ui_type": "label",
@@ -84364,6 +84570,12 @@
       "feature_area": "policies"
     }
   },
+  "Waldur could not complete this request": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "oauth"
+    }
+  },
   "Waldur deployment settings": {},
   "Waldur holds no recovery key for you yet. Open the chat in Waldur first: it sets up encryption, or asks for the recovery key you already use in another Matrix app.": {
     "context": {
@@ -86972,6 +87184,21 @@
   "Your account does not satisfy the applicant eligibility requirements of this call.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Your account has staff access, so an app has to ask for staff access before it can work for you. This app did not ask for it.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "Your account has support access, so an app has to ask for support access before it can work for you. This app did not ask for it.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
+  "Your answer is being sent.": {
+    "context": {
+      "feature_area": "oauth"
     }
   },
   "Your answers are being submitted.": {
@@ -90754,6 +90981,26 @@
       },
       "feature_area": "dashboard",
       "action_type": "update"
+    }
+  },
+  "{client} is connected": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
+    }
+  },
+  "{client} was not connected": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
     }
   },
   "{code}: {count}× ({names})": {

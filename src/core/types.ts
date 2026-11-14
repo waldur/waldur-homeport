@@ -21,6 +21,10 @@ interface DataDeclaration {
    * When authenticated user tries to access protected state, error page is shown.
    */
   anonymous: boolean;
+  /** A signed-out visitor goes through login and back here even on a
+   * catalogue_only portal, which otherwise sends them to the marketplace.
+   */
+  keepThroughLogin?: boolean;
   erred: boolean;
   hideHeaderMenu: boolean;
   /** Header shows a Go back button in place of the breadcrumbs. */

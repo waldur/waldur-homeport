@@ -5,6 +5,8 @@ import { Select } from '@/form/select';
 import { translate } from './translate';
 import { useLanguageSelector } from './useLanguageSelector';
 
+import './LanguageSelectorBox.css';
+
 export const LanguageSelectorBox: FunctionComponent = () => {
   const { currentLanguage, languageChoices, setLanguage } =
     useLanguageSelector();
