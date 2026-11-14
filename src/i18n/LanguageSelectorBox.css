@@ -1,0 +1,7 @@
+/* Kept with the component: pages other than the login page show it too. */
+.login-lang-select {
+  width: 100px;
+}
+.login-lang-select .metronic-select__control {
+  border-color: transparent;
+}

@@ -9,6 +9,7 @@ import { states as issuesRoutes } from '@/issues/routes';
 import { states as marketplaceRoutes } from '@/marketplace/routes';
 import { states as marketplaceChecklistRoutes } from '@/marketplace-checklist/routes';
 import { states as marketplaceRemoteRoutes } from '@/marketplace-remote/routes';
+import { states as oauthRoutes } from '@/oauth/routes';
 import { states as openportalRoutes } from '@/openportal/routes';
 import { states as projectRoutes } from '@/project/routes';
 import { states as proposalsRoutes } from '@/proposals/routes';
@@ -40,6 +41,7 @@ export const states: StateDeclaration[] = [
   ...rancherRoutes,
   ...reportingRoutes,
   ...openportalRoutes,
+  ...oauthRoutes,
   ...aboutRoutes,
   ...errorRoutes,
 ];

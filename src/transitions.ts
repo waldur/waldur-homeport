@@ -203,7 +203,11 @@ export function attachTransitions() {
       }
 
       // If `catalogue_only` feature is enabled, user should be redirected to marketplace landing page.
-      if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {
+      // Except a page that has to survive the login, such as an OAuth client's request.
+      if (
+        isFeatureVisible(MarketplaceFeatures.catalogue_only) &&
+        !transition.to().data?.keepThroughLogin
+      ) {
         return transition.router.stateService.target(
           'public.marketplace-landing',
         );

@@ -1,5 +1,5 @@
 import { RejectType } from '@uirouter/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 const mockIsAuthenticated = vi.fn();
 const mockIsCurrentUserValid = vi.fn();
@@ -104,6 +104,7 @@ vi.mock('./user/passkeys/enforcement', () => ({
   needsPasskeyEnrollment: (...args) => mockNeedsPasskeyEnrollment(...args),
 }));
 
+import { isFeatureVisible } from './features/connect';
 import {
   setDocumentTitle,
   setDocumentTitleUnread,
@@ -116,9 +117,10 @@ function createMockTransition(
   // The destination path UI-Router builds for the transition, ancestors
   // included. Nodes carry the resolvables the deep-link hook looks for.
   treeChangesTo: any[] = [],
+  data: object = {},
 ) {
   return {
-    to: () => ({ name: toStateName, data: {}, params: () => params }),
+    to: () => ({ name: toStateName, data, params: () => params }),
     from: () => ({ name: '' }),
     params: (type?: string) => (type === 'from' ? {} : params),
     treeChanges: () => ({ to: treeChangesTo }),
@@ -770,5 +772,57 @@ describe('Deep-link resolve await', () => {
     );
 
     expect(mockGetAsync).not.toHaveBeenCalled();
+  });
+});
+
+describe('Login guard for an anonymous visitor', () => {
+  const findLoginGuard = () =>
+    onStartHandlers.find(
+      (h) =>
+        typeof h.criteria.to === 'function' &&
+        h.criteria.to({ data: { auth: true } }),
+    );
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+    mockIsAuthenticated.mockReturnValue(false);
+    vi.mocked(isFeatureVisible).mockReturnValue(true);
+    attachTransitions();
+  });
+
+  afterEach(() => {
+    vi.mocked(isFeatureVisible).mockReturnValue(false);
+  });
+
+  it('sends a visitor to the catalogue on a catalogue-only portal', () => {
+    findLoginGuard().callback(createMockTransition('dashboard'));
+
+    expect(mockTarget).toHaveBeenCalledWith('public.marketplace-landing');
+  });
+
+  it('keeps a page flagged keepThroughLogin through the login on a catalogue-only portal', () => {
+    const params = { client_id: 'abc', state: 'xyz' };
+    findLoginGuard().callback(
+      createMockTransition('oauth-consent', params, [], {
+        auth: true,
+        keepThroughLogin: true,
+      }),
+    );
+
+    expect(mockTarget).toHaveBeenCalledWith(
+      'login',
+      { toState: 'oauth-consent', toParams: params },
+      { location: 'replace' },
+    );
+  });
+
+  it('goes by the flag, not by the page name', () => {
+    findLoginGuard().callback(createMockTransition('oauth-consent'));
+
+    expect(mockTarget).toHaveBeenCalledWith('public.marketplace-landing');
   });
 });
