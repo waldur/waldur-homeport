@@ -1,10 +1,12 @@
 import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
+import { RoleType } from 'waldur-js-client';
 
 import { ButtonVariant, buttonVariants, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
+import { canManageCallsOf } from '@/proposals/callOperators';
 import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
@@ -18,7 +20,8 @@ interface OwnProps {
   buttonIconOnly?: boolean;
 }
 
-const PERMISSION_MAP = {
+// The page each kind of role scope opens, typed by the SDK's role scopes.
+const PERMISSION_MAP: Partial<Record<RoleType, string>> = {
   customer: 'organization.dashboard',
   project: 'marketplace-projects',
   call_organizer: 'call-management.dashboard',
@@ -28,7 +31,7 @@ const PERMISSION_MAP = {
   service_provider: 'marketplace-provider-dashboard',
 };
 
-const PERMISSION_PRIORITY = [
+const PERMISSION_PRIORITY: RoleType[] = [
   'customer',
   'project',
   'call_organizer',
@@ -52,12 +55,21 @@ const useOrganizationLinkState = (uuid: string) => {
           p.scope_type === scope &&
           (p.customer_uuid === uuid || p.scope_uuid === uuid),
       );
-      if (hasPermission) {
-        return PERMISSION_MAP[scope];
+      if (!hasPermission) continue;
+      // A call role leads to the organisation's call management only for
+      // those who may run its calls; a reviewer or panel member of a call
+      // would be refused there, and reads the organisation instead.
+      if (
+        (scope === 'call' || scope === 'call_organizer') &&
+        !canManageCallsOf(user, uuid)
+      ) {
+        return PERMISSION_MAP.customer;
       }
+      return PERMISSION_MAP[scope];
     }
 
-    // If no permissions match, there is no link
+    // No role that opens the organisation: there is no link. An offering
+    // role alone does not -- the organisation is not readable through it.
     return null;
   }, [user, uuid]);
 };
