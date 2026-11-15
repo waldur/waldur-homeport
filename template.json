@@ -3243,6 +3243,11 @@
       "feature_area": "options"
     }
   },
+  "Added by an administrator": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Added by staff. It cannot be changed here.": {
     "context": {
       "feature_area": "details"
@@ -5532,6 +5537,7 @@
   },
   "Application": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "oauth"
     }
   },
@@ -5851,6 +5857,11 @@
   "Apps cannot connect to this portal": {
     "context": {
       "feature_area": "oauth"
+    }
+  },
+  "Apps you allow to access your account, such as AI assistants connected through MCP, appear here.": {
+    "context": {
+      "feature_area": "connected-apps"
     }
   },
   "Appservice": {},
@@ -14529,6 +14540,12 @@
       "feature_area": "support"
     }
   },
+  "Connected apps": {
+    "context": {
+      "feature_area": "user"
+    }
+  },
+  "Connected apps cannot be managed when you sign in with an access token.": {},
   "Connected subnets": {
     "context": {
       "feature_area": "update-internal-ips"
@@ -26561,6 +26578,12 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "First authorized": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "connected-apps"
+    }
+  },
   "First day of billing month (date)": {},
   "First month to pay. Empty: from the first invoice.": {
     "context": {
@@ -29164,6 +29187,12 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "hpas"
+    }
+  },
+  "Host": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "connected-apps"
     }
   },
   "Host memory": {
@@ -33099,7 +33128,7 @@
   "Last used": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "passkeys"
+      "feature_area": "connected-apps"
     }
   },
   "Last used from IP": {
@@ -37078,6 +37107,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Metadata document (CIMD)": {
+    "context": {
+      "feature_area": "connected-apps"
     }
   },
   "Metered": {
@@ -44212,6 +44246,7 @@
       "feature_area": "oauth"
     }
   },
+  "Only the user can see and revoke their connected apps.": {},
   "Only then can keys be limited per day, week, quarter or year, where a component offers those periods; otherwise keys are limited per month, and all-time where a component offers it. Turn on only if the site agent reports each key’s usage per day, or those limits are never reached.": {
     "context": {
       "feature_area": "integration"
@@ -54027,6 +54062,12 @@
       "feature_area": "service-providers"
     }
   },
+  "Registered via": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "connected-apps"
+    }
+  },
   "Registered with": {
     "context": {
       "feature_area": "pubsub"
@@ -60369,6 +60410,12 @@
     }
   },
   "Scoped affiliation": {},
+  "Scopes": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "connected-apps"
+    }
+  },
   "Score": {
     "context": {
       "primary_ui_type": "title",
@@ -62131,6 +62178,11 @@
   "Self-managed": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Self-registered (DCR)": {
+    "context": {
+      "feature_area": "connected-apps"
     }
   },
   "Sell": {
@@ -88175,6 +88227,11 @@
       "feature_area": "coi-review"
     }
   },
+  "connected apps": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "consumer access subnets": {
     "context": {
       "feature_area": "access-subnets"
@@ -91007,6 +91064,16 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "{app} will no longer be able to access your account. To use it again, you have to connect it again.": {
+    "context": {
+      "variables": {
+        "app": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "connected-apps"
     }
   },
   "{audience}, 1 person": {

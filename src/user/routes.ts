@@ -39,6 +39,8 @@ const canUsePersonalAccessTokens = (state) => {
   );
 };
 
+const isMcpEnabled = () => Boolean(ENV.plugins.WALDUR_CORE.MCP_ENABLED);
+
 const canAccessOrganization = (state) => {
   const hideFromProjectMembers = isFeatureVisible(
     MarketplaceFeatures.hide_organization_information_from_project_members,
@@ -84,7 +86,8 @@ export const states: StateDeclaration[] = [
           isStaffOrSupportOrImpersonating(state) ||
           !isFeatureVisible(UserFeatures.conceal_api_token) ||
           canUsePersonalAccessTokens(state) ||
-          arePasskeysEnabled(),
+          arePasskeysEnabled() ||
+          isMcpEnabled(),
       ],
     },
   },
@@ -370,6 +373,20 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Personal access tokens'),
       permissions: [canUsePersonalAccessTokens],
+    },
+  },
+  {
+    name: 'profile-connected-apps',
+    url: 'connected-apps/',
+    component: lazyComponent(() =>
+      import('./connected-apps/ConnectedAppsList').then((module) => ({
+        default: module.ConnectedAppsList,
+      })),
+    ),
+    parent: 'profile-credentials',
+    data: {
+      breadcrumb: () => translate('Connected apps'),
+      permissions: [isMcpEnabled],
     },
   },
 
