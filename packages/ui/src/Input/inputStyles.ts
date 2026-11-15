@@ -44,7 +44,7 @@ const HOVER_SELECT =
 // Shape, horizontal padding and type per size, shared by every field.
 const size = {
   sm: 'rounded-md pl-[calc(10px+var(--input-start,0px))] pr-[calc(10px+var(--input-end,0px))] text-xs leading-[17px]',
-  md: 'rounded-lg pl-[calc(12px+var(--input-start,0px))] pr-[calc(12px+var(--input-end,0px))] text-sm leading-[20px]',
+  md: 'rounded-lg pl-[calc(12px+var(--input-start,0px))] pr-[calc(12px+var(--input-end,0px))] text-sm leading-5',
   lg: 'rounded-lg pl-[calc(19.5px+var(--input-start,0px))] pr-[calc(19.5px+var(--input-end,0px))] text-base leading-[23px]',
 } as const;
 

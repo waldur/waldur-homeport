@@ -155,6 +155,9 @@ export default tseslint
         // Tailwind's border widths are pixels: `border`, `border-t-2`, not
         // `border-[1px]`.
         'waldur-custom/no-arbitrary-border-width': 'error',
+        // --spacing is 4px, so a line height on the grid is a step:
+        // `leading-5`, not `leading-[20px]`. Autofixes.
+        'waldur-custom/no-arbitrary-leading': 'error',
         // State colours come from the status matrix (semantic/status.css);
         // deliberate exceptions carry an eslint-disable with the reason.
         'waldur-custom/no-raw-status-ramp': 'error',
@@ -445,6 +448,7 @@ export default tseslint
       files: [
         'packages/eslint-plugin-waldur/rules/require-border-color.test.ts',
         'packages/eslint-plugin-waldur/rules/no-arbitrary-border-width.test.ts',
+        'packages/eslint-plugin-waldur/rules/no-arbitrary-leading.test.ts',
         'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.test.ts',
         'packages/eslint-plugin-waldur/rules/require-font-size-scale.test.ts',
         'packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.test.ts',
@@ -460,6 +464,7 @@ export default tseslint
         'waldur-custom/enforce-border-radius-tokens': 'off',
         'waldur-custom/require-border-color': 'off',
         'waldur-custom/no-arbitrary-border-width': 'off',
+        'waldur-custom/no-arbitrary-leading': 'off',
         'waldur-custom/prefer-token-utility': 'off',
         'waldur-custom/no-raw-status-ramp': 'off',
       },

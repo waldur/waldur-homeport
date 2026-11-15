@@ -37,7 +37,7 @@ export const FormText = forwardRef<HTMLElement, FormTextProps>(
       ref={ref}
       id={useDescriptionId(id)}
       className={cn(
-        'mt-[6.5px] block text-sm leading-[14px] font-normal',
+        'mt-[6.5px] block text-sm leading-3.5 font-normal',
         VARIANTS[variant],
         className,
       )}

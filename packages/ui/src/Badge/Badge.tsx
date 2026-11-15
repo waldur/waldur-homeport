@@ -169,16 +169,16 @@ export const BADGE_STYLES: Record<
 
 // CVA only handles structural layout variants now.
 const badgeVariants = cva(
-  'badge inline-flex items-center justify-center border border-secondary text-sm leading-[20px] font-medium transition-colors',
+  'badge inline-flex items-center justify-center border border-secondary text-sm leading-5 font-medium transition-colors',
   {
     variants: {
       size: {
-        // `leading-[18px]` keeps a small badge 24px tall, the same as an
+        // `leading-4.5` (18px) keeps a small badge 24px tall, the same as an
         // unsized one; legacy `.badge-sm` carried `line-height: 18px`; the
-        // Tailwind rewrite dropped it and left the base `leading-[20px]` in
+        // Tailwind rewrite dropped it and left the base `leading-5` in
         // place, which made the *small* badge 26px — 2px taller than the
         // default it is supposed to be smaller than.
-        sm: 'text-xs leading-[18px]',
+        sm: 'text-xs leading-4.5',
         lg: 'text-sm',
       },
       shape: {

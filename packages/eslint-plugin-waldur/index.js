@@ -13,6 +13,7 @@ import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
 import noArbitraryBorderWidth from './rules/no-arbitrary-border-width.js';
+import noArbitraryLeading from './rules/no-arbitrary-leading.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
@@ -64,6 +65,7 @@ export default {
     'dynamic-tab-params': dynamicTabParams,
     'require-border-color': requireBorderColor,
     'no-arbitrary-border-width': noArbitraryBorderWidth,
+    'no-arbitrary-leading': noArbitraryLeading,
     'no-raw-status-ramp': noRawStatusRamp,
     'prefer-token-utility': preferTokenUtility,
     'prefer-typed-property': preferTypedProperty,

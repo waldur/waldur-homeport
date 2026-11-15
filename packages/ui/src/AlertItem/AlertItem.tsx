@@ -60,8 +60,8 @@ const ALERT_ICON: Record<
  * - Icon: FeaturedIcon size="lg" by default (42px outer ring, 32px inner, 24px icon)
  *   with -mt-[0.77rem] (-10.01px); `iconSize`/`iconClassName` let a caller
  *   (e.g. Toast, which uses the smaller 'md' default) override either.
- * - Title: text-sm (14px) font-medium (500) leading-[20px] text-primary
- * - Body: text-sm (14px) font-normal (400) leading-[20px] text-quaternary
+ * - Title: text-sm (14px) font-medium (500) leading-5 (20px) text-primary
+ * - Body: text-sm (14px) font-normal (400) leading-5 (20px) text-quaternary
  * - Actions: flex items-start pr-[2px] gap-[12px]
  */
 export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(

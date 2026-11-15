@@ -467,7 +467,7 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
             key={error.id}
             id={error.id}
             data-slot="date-picker-error"
-            className="mt-[4px] text-xs leading-[16px] text-danger"
+            className="mt-[4px] text-xs leading-4 text-danger"
           >
             {error.message}
           </div>
