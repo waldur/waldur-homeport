@@ -21,38 +21,16 @@ import { Tooltip } from '../Tooltip';
 
 import { hasCustomSingleValue } from './slots';
 
-// `classNamePrefix` used to add `metronic-select__input` to the real
-// `<input>` element automatically; the Tailwind migration's `unstyled` +
-// `classNames` config has no equivalent for it, since react-select's
-// documented `inputClassName` prop turns out not to be wired to anything —
-// `Select`'s `renderInput()` never forwards it into the props it passes to
-// the `Input` component, so it's silently dropped. The literal class is kept
-// for selectors written against it (E2E tests use the input's
-// `data-slot="select-input"`, set below), so it's added here by composing
-// react-select's own `innerRef` callback (which is how it tracks the input
-// for focus management) rather than wrapping the DOM in an extra element,
-// which would break the grid-based single-value/placeholder overlay
-// react-select relies on for this same input.
-export const MetronicInput = (props: any) => {
-  const composedRef = (node: HTMLInputElement | null) => {
-    node?.classList.add('metronic-select__input');
-    if (typeof props.innerRef === 'function') {
-      props.innerRef(node);
-    } else if (props.innerRef) {
-      props.innerRef.current = node;
-    }
-  };
-  // aria-busy tells assistive tech, and end-to-end tests, that the options
-  // are still loading.
-  return (
-    <components.Input
-      {...props}
-      innerRef={composedRef}
-      data-slot="select-input"
-      aria-busy={props.selectProps?.isLoading || undefined}
-    />
-  );
-};
+// The input is react-select's own, marked with its data-slot: Input has no
+// `innerProps`, and passes other props on to the <input>. aria-busy tells
+// assistive tech, and end-to-end tests, that the options are still loading.
+export const SelectInput = (props: any) => (
+  <components.Input
+    {...props}
+    data-slot="select-input"
+    aria-busy={props.selectProps?.isLoading || undefined}
+  />
+);
 
 export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {
   return (

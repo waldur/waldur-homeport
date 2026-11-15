@@ -57,11 +57,6 @@ const RADIX_MENU_IMPORTS = [
 // waldur-custom/no-unknown-class must not report them. Prefer a data-testid
 // for a new hook; remove an entry here only together with its selector there.
 const UNKNOWN_CLASS_HOOKS = [
-  // react-select's BEM names, kept by waldur-ui's Select (tailwindStyles.ts)
-  // for a few stylesheets, src/test/select.ts, and the class fallbacks in
-  // waldur-integration-testing's tests/components/homeport_hooks.py, which
-  // otherwise finds the parts by their data-slot (Select/slots.ts).
-  '^metronic-select(?:-container|__[\\w-]+)$',
   // The call workflow's SVG diagrams (proposals/workflow-description/diagram)
   // style these through the <style> element each one renders, which no
   // stylesheet the rule reads can see.

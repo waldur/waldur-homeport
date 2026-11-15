@@ -43,22 +43,12 @@ export const getSelectTailwindClassNames = <
   const isTableCell = variant === 'tableCell';
 
   return {
-    // `metronic-select-container`/`metronic-select__*` literal classes are
-    // kept everywhere in this file alongside the Tailwind utilities:
-    // LocalLogin.css, VStepperFormStep.scss, BoxRadioField.scss and the RTL
-    // helpers in src/test/select.ts still hook into these names, the same
-    // way `classNamePrefix` used to let them. E2E tests find the parts by
-    // their `data-slot` instead (slots.ts).
-    container: () => 'metronic-select-container w-full text-sm relative',
+    // Only styling here: stylesheets, parents and tests find a part by the
+    // `data-slot` slots.ts gives it.
+    container: () => 'w-full text-sm relative',
 
     control: ({ isFocused, isDisabled }) => {
-      const stateClasses = cn(
-        'metronic-select__control',
-        isFocused && 'metronic-select__control--is-focused',
-        isDisabled && 'metronic-select__control--is-disabled',
-      );
       return cn(
-        stateClasses,
         // `font-normal`: a control must not inherit an ambient weight from its
         // host — `.card-header` sets `font-weight: 700`, which rendered the
         // value and placeholder bold in every card-toolbar select.
@@ -113,12 +103,7 @@ export const getSelectTailwindClassNames = <
       'hover:bg-error-100 dark:hover:bg-error-900 hover:text-danger rounded-sm px-[2px] cursor-pointer transition-colors',
 
     singleValue: ({ isDisabled }) =>
-      cn(
-        // Literal class, same reasoning as `container`/`control`/etc above.
-        'metronic-select__single-value',
-        'text-primary leading-normal truncate',
-        isDisabled && 'text-quinary',
-      ),
+      cn('text-primary leading-normal truncate', isDisabled && 'text-quinary'),
 
     placeholder: ({ isDisabled }) =>
       cn(
@@ -145,7 +130,7 @@ export const getSelectTailwindClassNames = <
 
     clearIndicator: () =>
       cn(
-        'metronic-select__clear-indicator text-quinary hover:text-danger cursor-pointer transition-colors',
+        'text-quinary hover:text-danger cursor-pointer transition-colors',
         // Filter panels hide the dropdown arrow above, so the clear
         // button needs its own breathing room instead of sharing the
         // indicators gap.
@@ -154,7 +139,6 @@ export const getSelectTailwindClassNames = <
 
     menu: () =>
       cn(
-        'metronic-select__menu',
         // --listbox-shadow keeps the old menu's own values: a 1px outline
         // plus a soft 4px/11px drop, the same in both themes.
         'z-[9999] overflow-hidden bg-primary',
@@ -165,10 +149,8 @@ export const getSelectTailwindClassNames = <
           'mt-[8px] rounded-lg border border-solid border-secondary shadow-[var(--listbox-shadow)]',
       ),
 
-    menuList: ({ isMulti }) =>
+    menuList: () =>
       cn(
-        'metronic-select__menu-list',
-        isMulti && 'metronic-select__menu-list--is-multi',
         // No `py-*`: the menu already clips to its own rounded corners
         // (`overflow-hidden` above), so an unpadded list lets the first/
         // last row's hover fill go flush to the border instead of
@@ -177,13 +159,6 @@ export const getSelectTailwindClassNames = <
       ),
 
     option: ({ isFocused, isSelected, isDisabled, isMulti }) => {
-      const stateClasses = cn(
-        'metronic-select__option',
-        isSelected && 'metronic-select__option--is-selected',
-        isFocused && 'metronic-select__option--is-focused',
-        isDisabled && 'metronic-select__option--is-disabled',
-      );
-
       const colorClasses = cn(
         isSelected
           ? 'bg-primary-hover text-primary'
@@ -200,7 +175,7 @@ export const getSelectTailwindClassNames = <
       // `[data-select-check]`) on the far right. Multi-select renders two
       // real children (checkbox, label) that `justify-between` would shove
       // apart instead of keeping together — the old SCSS scoped this the
-      // same way, to `:not(.metronic-select__menu-list--is-multi)` only.
+      // same way, to single-select menus only.
       // The `grow` rule (also single-select only, as in the old SCSS) lets
       // a custom Option's content fill the row, so anything it right-aligns
       // (RoleOption's type badge, UserListOptionInline's icons) stays at the
@@ -208,7 +183,6 @@ export const getSelectTailwindClassNames = <
       // filter's `line-clamp-2` skip the check, which keeps its own size.
       if (isTableFilter) {
         return cn(
-          stateClasses,
           'flex! items-center gap-[8px] h-[40px] px-[12px] py-[2px]',
           !isMulti
             ? 'justify-between [&>*:not([data-select-check])]:grow [&>*:not([data-select-check])]:line-clamp-2'
@@ -219,7 +193,6 @@ export const getSelectTailwindClassNames = <
       }
 
       return cn(
-        stateClasses,
         'flex! items-center gap-[8px] px-[16px] py-[10px] cursor-pointer select-none transition-colors text-sm!',
         // `gap-[8px]` keeps the content clear of the selected row's check.
         !isMulti && 'justify-between [&>*:not([data-select-check])]:grow',

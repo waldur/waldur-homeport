@@ -314,7 +314,7 @@ describe('Select — data-slot hooks', () => {
     expect(slot(container, 'select-clear-indicator')).toBeInTheDocument();
   });
 
-  it('marks the open menu', async () => {
+  it('marks the open menu and its options', async () => {
     // A table filter's menu is always open and not portaled, so jsdom renders
     // it without measuring the control.
     const { container } = render(
@@ -327,6 +327,9 @@ describe('Select — data-slot hooks', () => {
     );
     await waitFor(() =>
       expect(slot(container, 'select-menu')).toHaveTextContent('A'),
+    );
+    expect(slot(container, 'select-option')).toBe(
+      screen.getAllByRole('option')[0],
     );
   });
 
