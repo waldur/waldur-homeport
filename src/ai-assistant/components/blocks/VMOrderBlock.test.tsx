@@ -10,10 +10,13 @@ import {
   VMOrderFormProvider,
 } from './VMOrderBlock';
 
+const h = vi.hoisted(() => ({ isLast: true }));
+
 vi.mock('@assistant-ui/react', () => ({
   ThreadPrimitive: {
     Suggestion: ({ children }: any) => <>{children}</>,
   },
+  useAuiState: (selector) => selector({ message: { isLast: h.isLast } }),
 }));
 
 vi.mock('@/core/Link', () => ({
@@ -43,6 +46,7 @@ const mockBlock = (fields: Partial<UIBlock>): UIBlock => ({
 describe('VMOrderBlock', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    h.isLast = true;
   });
 
   it('renders a skeleton loader when block is loading', () => {
@@ -225,6 +229,7 @@ describe('VMOrderBlock', () => {
       <VMOrderFormProvider>
         <VMOrderBlock
           block={mockBlock({
+            status: 'streaming',
             order_status: 'success',
             order_id: 'order-uuid-1234',
             name: 'prod-vm',
@@ -291,5 +296,74 @@ describe('VMOrderBlock', () => {
     expect(
       screen.queryByRole('button', { name: /Modify/i }),
     ).not.toBeInTheDocument();
+  });
+
+  describe('success toast', () => {
+    const card = (status: UIBlock['status']) =>
+      mockBlock({
+        status,
+        order_status: 'success',
+        order_id: 'order',
+        name: 'vm-1',
+      });
+
+    it('announces a VM created in the running reply', () => {
+      render(<VMOrderBlock block={card('streaming')} />);
+
+      expect(useNotify().showSuccess).toHaveBeenCalledOnce();
+    });
+
+    it('does not announce it again when the reply ends', () => {
+      const { rerender } = render(<VMOrderBlock block={card('streaming')} />);
+      rerender(<VMOrderBlock block={card('complete')} />);
+
+      expect(useNotify().showSuccess).toHaveBeenCalledOnce();
+    });
+
+    it('stays quiet for a saved card', () => {
+      render(<VMOrderBlock block={card('complete')} />);
+
+      expect(useNotify().showSuccess).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('saved form', () => {
+    const form: UIBlock = {
+      id: 'vm',
+      key: 'vm_order',
+      content: '',
+      status: 'complete',
+      order_status: 'form',
+      name: 'vm-1',
+      flavors: [{ name: 'small', cores: 1, ram: 1024 }],
+      images: [{ name: 'ubuntu' }],
+    } as UIBlock;
+
+    const renderForm = (isLast: boolean) => {
+      h.isLast = isLast;
+      render(
+        <VMOrderFormProvider>
+          <VMOrderBlock block={form} />
+        </VMOrderFormProvider>,
+      );
+    };
+
+    it('takes choices in the last message', () => {
+      renderForm(true);
+
+      expect(screen.getByText('Configure your VM:')).toBeInTheDocument();
+    });
+
+    it('is a plain card in an earlier message', () => {
+      renderForm(false);
+
+      expect(screen.queryByText('Configure your VM:')).toBeNull();
+    });
+
+    it('is a plain card in the read-only views', () => {
+      render(<VMOrderBlock block={form} />);
+
+      expect(screen.queryByText('Configure your VM:')).toBeNull();
+    });
   });
 });

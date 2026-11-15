@@ -144,6 +144,18 @@ export interface UIBlock {
     arguments?: Record<string, unknown>;
   };
   result?: UIBlock;
+
+  // Reasoning fields (when key === 'reasoning'). `duration_ms` is the thinking
+  // time the backend measured; `startedAt` is when a live block began, for the
+  // timer shown before that arrives.
+  duration_ms?: number;
+  startedAt?: number;
+  // A reply's folded process (see groupProcess): its reasoning and the
+  // narration between tool calls, in order.
+  steps?: UIBlock[];
+  // The process of a reply still working towards its answer: opened, it shows
+  // the live reasoning, also between model calls.
+  working?: boolean;
 }
 
 export interface UIBlockProps {

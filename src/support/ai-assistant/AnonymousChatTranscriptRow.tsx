@@ -14,6 +14,7 @@ import { AlertItem, Badge, Tooltip } from 'waldur-ui';
 
 import { OfflineBlockContext } from '@/ai-assistant/components/blocks/offlineBlockContext';
 import { MessageDataInspector } from '@/ai-assistant/components/shared/MessageDataInspector';
+import { groupProcess } from '@/ai-assistant/lib/blocks/groupProcess';
 import { flattenToolBlocks } from '@/ai-assistant/lib/messages/messageUtils';
 import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -224,7 +225,7 @@ const InteractionTurns: FunctionComponent<{
                 {translate('(no text reply)')}
               </span>
             ) : (
-              renderable.map((block) => {
+              groupProcess(renderable).map((block) => {
                 const Component = uiRegistry.getComponent(block.key);
                 return <Component key={block.id} block={block} />;
               })

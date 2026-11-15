@@ -4,6 +4,8 @@ import { CodeBlock } from '@/ai-assistant/components/blocks/CodeBlock';
 import { HomePortNavBlock } from '@/ai-assistant/components/blocks/HomePortNavBlock';
 import { HpcJobBlock } from '@/ai-assistant/components/blocks/HpcJobBlock';
 import { MarkdownBlock } from '@/ai-assistant/components/blocks/MarkdownBlock';
+import { NarrationBlock } from '@/ai-assistant/components/blocks/NarrationBlock';
+import { ReasoningBlock } from '@/ai-assistant/components/blocks/ReasoningBlock';
 import { ResourceListBlock } from '@/ai-assistant/components/blocks/ResourceListBlock';
 import { ToolLoadingBlock } from '@/ai-assistant/components/blocks/ToolLoadingBlock';
 import { VMOrderBlock } from '@/ai-assistant/components/blocks/VMOrderBlock';
@@ -68,4 +70,14 @@ uiRegistry.register({
 uiRegistry.register({
   key: 'ask_user_form',
   component: AskUserFormBlock,
+});
+
+uiRegistry.register({
+  key: 'reasoning',
+  component: ReasoningBlock,
+});
+
+uiRegistry.register({
+  key: 'narration',
+  component: NarrationBlock,
 });

@@ -1,5 +1,7 @@
 import {
   AssistantRuntimeProvider,
+  MessageByIndexProvider,
+  ThreadMessageLike,
   useExternalStoreRuntime,
 } from '@assistant-ui/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -29,17 +31,23 @@ const StoryRouter: FC<{ children: ReactNode }> = ({ children }) => {
   return <UIRouter router={router}>{children}</UIRouter>;
 };
 
+// The card takes choices only in the last message of a thread, so the story
+// renders it inside one.
+const STORY_MESSAGES: ThreadMessageLike[] = [
+  { id: 'story-message', role: 'assistant', content: [] },
+];
+
 const StoryAssistantRuntime: FC<{ children: ReactNode }> = ({ children }) => {
   const runtime = useExternalStoreRuntime({
     isRunning: false,
-    messages: [],
+    messages: STORY_MESSAGES,
     convertMessage: (m) => m,
     onNew: async () => {},
   });
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      {children}
+      <MessageByIndexProvider index={0}>{children}</MessageByIndexProvider>
     </AssistantRuntimeProvider>
   );
 };

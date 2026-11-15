@@ -7,6 +7,8 @@ import { UIBlock } from '@/ai-assistant/lib/types';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 
+const PROCESS_KEYS = new Set(['reasoning', 'narration']);
+
 interface MessageDataInspectorProps {
   blocks: UIBlock[];
 }
@@ -14,13 +16,30 @@ interface MessageDataInspectorProps {
 export const MessageDataInspector: FC<MessageDataInspectorProps> = ({
   blocks,
 }) => {
+  // The blocks as stored, so support sees what was saved.
+  const processBlocks = blocks.filter((b) => PROCESS_KEYS.has(b.key));
   const toolBlocks = blocks.filter((b) => b.key === 'tool');
-  const uiBlocks = blocks.filter((b) => b.key !== 'tool');
+  const uiBlocks = blocks.filter(
+    (b) => b.key !== 'tool' && !PROCESS_KEYS.has(b.key),
+  );
 
-  if (toolBlocks.length === 0 && uiBlocks.length === 0) return null;
+  if (
+    toolBlocks.length === 0 &&
+    uiBlocks.length === 0 &&
+    processBlocks.length === 0
+  ) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col gap-1 mt-1.5">
+      {processBlocks.length > 0 && (
+        <InspectorSection
+          label={translate('reasoning and narration data')}
+          count={processBlocks.length}
+          blocks={processBlocks}
+        />
+      )}
       {toolBlocks.length > 0 && (
         <InspectorSection
           label={translate('tool call data')}

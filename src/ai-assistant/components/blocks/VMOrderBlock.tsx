@@ -1,3 +1,4 @@
+import { useAuiState } from '@assistant-ui/react';
 import {
   CheckCircleIcon,
   PencilSimpleIcon,
@@ -182,6 +183,7 @@ const SelectFormStep: FC<
 
 // Context to share form state between VMOrderBlock and VMOrderActions
 interface VMOrderFormState {
+  interactive: boolean;
   selectedFlavor: string;
   setSelectedFlavor: (value: string) => void;
   selectedImage: string;
@@ -201,9 +203,12 @@ export const VMOrderFormProvider: FC<{ children: React.ReactNode }> = ({
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<string>('');
   const [selectedOffering, setSelectedOffering] = useState<string>('');
+  // Only the last message has the footer that sends the choices.
+  const interactive = useAuiState((state) => state.message.isLast);
 
   const value = useMemo(
     () => ({
+      interactive,
       selectedFlavor,
       setSelectedFlavor,
       selectedImage,
@@ -213,7 +218,13 @@ export const VMOrderFormProvider: FC<{ children: React.ReactNode }> = ({
       selectedOffering,
       setSelectedOffering,
     }),
-    [selectedFlavor, selectedImage, selectedProject, selectedOffering],
+    [
+      interactive,
+      selectedFlavor,
+      selectedImage,
+      selectedProject,
+      selectedOffering,
+    ],
   );
 
   return (
@@ -228,6 +239,7 @@ const useVMOrderForm = () => {
   if (!context) {
     // Return dummy state if context not available (shouldn't happen in normal flow)
     return {
+      interactive: false,
       selectedFlavor: '',
       setSelectedFlavor: () => {},
       selectedImage: '',
@@ -248,6 +260,7 @@ const useVMOrderForm = () => {
 export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   const { showSuccess } = useNotify();
   const {
+    interactive,
     selectedFlavor,
     setSelectedFlavor,
     selectedImage,
@@ -258,12 +271,17 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
     setSelectedOffering,
   } = useVMOrderForm();
 
-  // Show success notification when VM creation completes
+  // Show success notification when VM creation completes. Only live: a saved
+  // card keeps its state, and reopening the thread would repeat the message.
   useEffect(() => {
-    if (block.order_status === 'success' && !block.error) {
+    if (
+      block.order_status === 'success' &&
+      !block.error &&
+      block.status === 'streaming'
+    ) {
       showSuccess(translate('Operation completed successfully'));
     }
-  }, [block.order_status, block.error]);
+  }, [block.order_status, block.error, block.status]);
 
   const isLoading = block.status === 'loading';
   if (isLoading) {
@@ -275,10 +293,9 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   }
 
   const hasError = !!block.error;
-  // `order_status` is only set on the live path (blockManager renames the wire
-  // `status` field). The audit log reads the raw persisted block where that
-  // rename hasn't happened, so fall back to `order_id` — only present once
-  // the VM creation has completed — as a result-state signal.
+  // Cards saved before the backend stored `order_status` have none, so fall
+  // back to `order_id`, only present once the VM creation has completed, as a
+  // result-state signal.
   const isResult =
     block.order_status === 'success' ||
     block.order_status === 'error' ||
@@ -286,7 +303,7 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
     !!block.order_id;
 
   // Project form mode - show project selector
-  if (block.order_status === 'project_form' && block.projects) {
+  if (interactive && block.order_status === 'project_form' && block.projects) {
     return (
       <SelectFormStep
         intro={translate('Please select a project to create your VM in.')}
@@ -303,7 +320,11 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   }
 
   // Offering form mode - show cloud provider selector
-  if (block.order_status === 'offering_form' && block.offerings) {
+  if (
+    interactive &&
+    block.order_status === 'offering_form' &&
+    block.offerings
+  ) {
     return (
       <SelectFormStep
         intro={translate('Please select a cloud provider for your VM.')}
@@ -317,7 +338,12 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   }
 
   // Form mode - show flavor/image selectors
-  if (block.order_status === 'form' && block.flavors && block.images) {
+  if (
+    interactive &&
+    block.order_status === 'form' &&
+    block.flavors &&
+    block.images
+  ) {
     const hasFlavors = block.flavors.length > 0;
     const hasImages = block.images.length > 0;
 

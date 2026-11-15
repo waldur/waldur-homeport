@@ -157,7 +157,8 @@ describe('AnonymousChatPanel', () => {
       />,
     );
     expect(screen.getByText(/session has expired/)).toBeTruthy();
-    expect(screen.queryByRole('status')).toBeNull();
+    // Only the running reply has a live region, and it has nothing to say.
+    expect(screen.getByRole('status')).toBeEmptyDOMElement();
   });
 
   it('does not show loading dots on a warning-only message while a newer turn is running', () => {
@@ -193,7 +194,8 @@ describe('AnonymousChatPanel', () => {
       />,
     );
     expect(screen.getByText('Sensitive information detected')).toBeTruthy();
-    expect(screen.queryByRole('status')).toBeNull();
+    // Only the running reply has a live region, and it has nothing to say.
+    expect(screen.getByRole('status')).toBeEmptyDOMElement();
   });
 
   it('surfaces the error when an assistant message fails (e.g. rate limit)', () => {

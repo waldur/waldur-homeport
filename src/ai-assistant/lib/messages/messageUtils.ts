@@ -1,6 +1,7 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
 import { Message } from 'waldur-js-client';
 
+import { groupProcess } from '@/ai-assistant/lib/blocks/groupProcess';
 import {
   UIBlock,
   BlockBasedMetadata,
@@ -198,12 +199,19 @@ export const messageBlocks = (message: Message): UIBlock[] =>
 export function extractTextFromBlocks(blocks: UIBlock[]): string {
   if (!blocks || blocks.length === 0) return '';
 
-  return blocks
-    .map((block) => {
-      const extractor = blockExtractors[block.key] ?? ((b) => b.content);
-      return extractor(block);
-    })
-    .join('\n\n');
+  // Copy what shows below the thinking header of a finished reply.
+  return (
+    groupProcess(blocks)
+      .filter((block) => block.key !== 'reasoning')
+      .map((block) => {
+        const extractor = blockExtractors[block.key] ?? ((b) => b.content);
+        return extractor(block);
+      })
+      // Line breaks between narration and a tool call arrive as blocks of their
+      // own, until the reply is saved.
+      .filter((text) => text?.trim())
+      .join('\n\n')
+  );
 }
 
 const patchMessageMetadata = (
