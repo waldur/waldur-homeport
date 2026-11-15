@@ -376,6 +376,13 @@ Spacing uses standard Tailwind steps (`p-3`, `mb-1.5`, `gap-2`).
 - **No new rem lengths.** A padding, margin, gap, width or offset in rem follows the root; write
   px, or the Tailwind step that equals it (`p-3`, not `p-[0.923rem]`; `calc(var(--spacing) * 3)`
   in a stylesheet). See [Root font size](#root-font-size).
+- **Line height is on the same grid.** `leading-N` is N × 4px, so a pixel line height that
+  lands on a half step is written as that step: `leading-5`, not `leading-[20px]`;
+  `leading-4.5`, not `leading-[18px]` (`waldur-custom/no-arbitrary-leading`, autofix). A
+  `text-*` size already sets its own line height (see [Font size](#font-size)). Odd pixel
+  values (`leading-[17px]`, `leading-[23px]` on the small and large `Input`), unitless ratios
+  (`leading-[1.75]`) and `leading-[inherit]` are left to the rule: they have no equal step, so
+  moving one changes pixels and needs a visual check.
 
 ## Inline styles
 
@@ -526,6 +533,7 @@ unnoticed.
 | Font size on the scale; no `fs-*` or inline size        | `waldur-custom/require-font-size-scale` (autofixes `fs-*`), `waldur/font-size-scale` |
 | Font weight on the scale; no `fw-*` or inline weight    | `waldur-custom/require-weight-scale` (autofixes `fw-*`), stylelint                   |
 | Corner radius on the scale; no retired or inline radius | `waldur-custom/enforce-border-radius-tokens` (autofix), stylelint                    |
+| Pixel line heights on the 4px grid written as a step    | `waldur-custom/no-arbitrary-leading` (autofix)                                       |
 | No static inline declarations                           | `waldur-custom/no-static-inline-style`                                               |
 | Every physical colour has a `dark:` counterpart         | `waldur-custom/require-dark-pair`                                                    |
 | No `--bs-*` reads in stylesheets                        | stylelint                                                                            |

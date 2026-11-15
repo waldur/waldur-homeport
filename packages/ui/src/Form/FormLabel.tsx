@@ -23,7 +23,7 @@ export const FormLabel = forwardRef<HTMLLabelElement, FormLabelProps>(
         ref={ref}
         htmlFor={target}
         className={cn(
-          'mb-[6.5px] inline-block text-sm leading-[20px] font-medium text-secondary',
+          'mb-[6.5px] inline-block text-sm leading-5 font-medium text-secondary',
           required &&
             "after:pl-[3.25px] after:font-bold after:text-danger after:content-['*']",
           className,

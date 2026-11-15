@@ -16,7 +16,7 @@ export const FormLegend = forwardRef<HTMLLegendElement, FormLegendProps>(
     <legend
       ref={ref}
       className={cn(
-        'float-none mb-[6.5px] w-auto p-0 text-sm leading-[20px] font-medium text-secondary',
+        'float-none mb-[6.5px] w-auto p-0 text-sm leading-5 font-medium text-secondary',
         required &&
           "after:pl-[3.25px] after:font-bold after:text-danger after:content-['*']",
         className,

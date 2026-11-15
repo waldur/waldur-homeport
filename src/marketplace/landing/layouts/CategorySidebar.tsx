@@ -81,7 +81,7 @@ const CategorySidebarItem: FC<CategorySidebarItemProps> = ({
     </span>
     {count !== undefined && (
       <span
-        className="inline-flex items-center justify-center rounded-full border border-secondary bg-transparent px-[9px] py-[1px] text-sm font-medium leading-[20px] text-primary"
+        className="inline-flex items-center justify-center rounded-full border border-secondary bg-transparent px-[9px] py-[1px] text-sm font-medium leading-5 text-primary"
         aria-label={translate('{count} offerings', { count })}
       >
         {count}
