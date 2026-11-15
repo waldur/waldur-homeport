@@ -18,10 +18,7 @@ import {
 import { FormGroup } from '@/form/FormGroup';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
 import { translate } from '@/i18n';
-import {
-  DependencyInfo,
-  evaluateQuestionVisibility,
-} from '@/marketplace-checklist/questionDependencies';
+import { getVisibleQuestions } from '@/marketplace-checklist/questionDependencies';
 import { useQuestionNumberValidator } from '@/marketplace-checklist/utils';
 
 import { QuestionWithMetadata } from './utils';
@@ -57,13 +54,15 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
       {} as Record<string, string>,
     );
 
-    return evaluateQuestionVisibility(
-      question.dependencies_info as unknown as
-        DependencyInfo | null | undefined,
+    const questions = allQuestions.some((q) => q.uuid === question.uuid)
+      ? allQuestions
+      : [...allQuestions, question];
+    return getVisibleQuestions(
+      questions,
       questionDescToFieldName,
       formValues,
-    );
-  }, [question.dependencies_info, allQuestions, formValues]);
+    ).some((q) => q.uuid === question.uuid);
+  }, [question, allQuestions, formValues]);
 
   if (!isVisible) {
     return null;

@@ -22,7 +22,7 @@ import { useAccordionUrlState } from '@/core/useAccordionUrlState';
 import { hasUnsavedChanges, NavigationBlocker } from '@/form/NavigationBlocker';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
-import { evaluateCondition } from '@/marketplace-checklist/questionDependencies';
+import { getVisibleQuestions } from '@/marketplace-checklist/questionDependencies';
 import { useModal } from '@/modal/actions';
 import { useCallFixedDuration } from '@/proposals/callQueries';
 import { usesCallVocabulary, requestListState } from '@/proposals/presentation';
@@ -67,28 +67,12 @@ const isComplianceComplete = (
     questionDescToFieldName[q.description] = `compliance_${q.uuid}`;
   });
 
-  // Check if a question is visible based on its dependencies
-  const isQuestionVisible = (question: any): boolean => {
-    const depInfo = question.dependencies_info;
-    if (!depInfo || !depInfo.conditions?.length) {
-      return true; // No dependencies = always visible
-    }
-
-    const results = depInfo.conditions.map((condition: any) => {
-      const fieldName = questionDescToFieldName[condition.question_description];
-      const answerValue = fieldName ? formValues[fieldName] : undefined;
-      return evaluateCondition(condition, answerValue);
-    });
-
-    return depInfo.logic === 'or'
-      ? results.some(Boolean)
-      : results.every(Boolean);
-  };
-
   // Get visible required questions
-  const visibleRequiredQuestions = checklistData.questions.filter(
-    (q: any) => q.required && isQuestionVisible(q),
-  );
+  const visibleRequiredQuestions = getVisibleQuestions(
+    checklistData.questions,
+    questionDescToFieldName,
+    formValues,
+  ).filter((q: any) => q.required);
 
   // Check if all visible required questions have answers
   return visibleRequiredQuestions.every((question: any) => {

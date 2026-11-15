@@ -21,10 +21,7 @@ import {
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { ChecklistFileUpload } from '@/marketplace-checklist/ChecklistFileUpload';
-import {
-  DependencyInfo,
-  evaluateQuestionVisibility,
-} from '@/marketplace-checklist/questionDependencies';
+import { getVisibleQuestions } from '@/marketplace-checklist/questionDependencies';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Proposal } from '@/proposals/types';
 import { proposalWorkflowStatesKey } from '@/proposals/workflow/queries';
@@ -111,15 +108,8 @@ export const ChecklistQuestions: FC<{
   }, [questions]);
   return (
     <>
-      {questions
-        .filter((question) =>
-          evaluateQuestionVisibility(
-            question.dependencies_info as DependencyInfo,
-            fieldNames,
-            values || {},
-          ),
-        )
-        .map((question) => {
+      {getVisibleQuestions(questions, fieldNames, values || {}).map(
+        (question) => {
           const fieldName = `compliance_${question.uuid}`;
           const Component = getFieldComponent(question.question_type);
           const isFileQuestion = ['file', 'multiple_files'].includes(
@@ -170,7 +160,8 @@ export const ChecklistQuestions: FC<{
               )}
             </FormGroup>
           );
-        })}
+        },
+      )}
     </>
   );
 };

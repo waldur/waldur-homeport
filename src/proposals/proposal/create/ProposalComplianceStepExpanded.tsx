@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
@@ -13,10 +13,7 @@ import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { ChecklistFileUpload } from '@/marketplace-checklist/ChecklistFileUpload';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
-import {
-  DependencyInfo,
-  evaluateQuestionVisibility,
-} from '@/marketplace-checklist/questionDependencies';
+import { getVisibleQuestions } from '@/marketplace-checklist/questionDependencies';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { useNotify } from '@/store/notify';
 import { VStepperFormStepProps } from '@/wizard';
@@ -144,23 +141,19 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
     );
   }, [checklistData]);
 
-  // Check if a question is visible based on its dependencies and current form values
-  const isQuestionVisible = useCallback(
-    (question: (typeof checklistData.questions)[0]): boolean => {
-      return evaluateQuestionVisibility(
-        question.dependencies_info as DependencyInfo,
-        questionUuidToFieldName,
-        values || {},
-      );
-    },
-    [questionUuidToFieldName, values],
-  );
-
   // Filter to visible questions
   const visibleQuestions = useMemo(() => {
     if (!checklistData?.questions) return [];
-    return checklistData.questions.filter(isQuestionVisible);
-  }, [checklistData, isQuestionVisible]);
+    // The response is a union of array types; a common element type lets the
+    // helper keep the question fields
+    const questions: Array<(typeof checklistData.questions)[number]> =
+      checklistData.questions;
+    return getVisibleQuestions(
+      questions,
+      questionUuidToFieldName,
+      values || {},
+    );
+  }, [checklistData, questionUuidToFieldName, values]);
 
   // The header counts what submitting needs: the visible required
   // questions. Counted with the optional ones, "9/10 answered" read as one
