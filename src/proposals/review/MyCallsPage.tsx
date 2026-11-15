@@ -11,9 +11,8 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+import { MyReviewsLayout } from './MyReviewsLayout';
 import { useMyWorkTitle } from './myWorkTitle';
-import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
-import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
 // Extended type to include review stats from backend
@@ -157,14 +156,7 @@ export const MyCallsPage: FC = () => {
   );
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Reviewer profile summary */}
-      <ReviewerProfileSummaryCard />
-
-      {/* Stats widgets */}
-      <ReviewStatsWidgets />
-
-      {/* Calls table */}
+    <MyReviewsLayout>
       <Table<CallReviewerPoolExtended>
         {...tableProps}
         columns={columns}
@@ -174,6 +166,6 @@ export const MyCallsPage: FC = () => {
         hasOptionalColumns
         hasQuery
       />
-    </div>
+    </MyReviewsLayout>
   );
 };

@@ -16,10 +16,9 @@ import {
   MyInvitationsFilter,
   MY_INVITATIONS_FILTER_FORM_ID,
 } from './MyInvitationsFilter';
+import { MyReviewsLayout } from './MyReviewsLayout';
 import { useMyWorkTitle } from './myWorkTitle';
 import { ExpiredResponseNotice, ResponseTimeLeft } from './ResponseDeadline';
-import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
-import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
 // The API reports an invitation past its deadline as expired even before the
@@ -86,12 +85,7 @@ export const MyInvitationsPage: FC = () => {
   });
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Reviewer profile summary */}
-      <ReviewerProfileSummaryCard />
-      {/* Stats widgets */}
-      <ReviewStatsWidgets />
-      {/* Invitations table */}
+    <MyReviewsLayout>
       <Table<CallReviewerPool>
         {...tableProps}
         title={myWorkTitle}
@@ -147,6 +141,6 @@ export const MyInvitationsPage: FC = () => {
         hasQuery
         formId={MY_INVITATIONS_FILTER_FORM_ID}
       />
-    </div>
+    </MyReviewsLayout>
   );
 };

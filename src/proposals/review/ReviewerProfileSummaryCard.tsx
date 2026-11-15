@@ -5,6 +5,7 @@ import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
 import { Avatar, Badge, BaseButton, Card, CardContent } from 'waldur-ui';
 
+import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
@@ -12,34 +13,35 @@ import { translate } from '@/i18n';
 import { router } from '@/router';
 import { useUser } from '@/workspace/hooks';
 
-interface ReviewerProfileSummaryCardProps {
-  onProfileStatus?: (hasProfile: boolean) => void;
-}
-
-export const ReviewerProfileSummaryCard: FC<
-  ReviewerProfileSummaryCardProps
-> = ({ onProfileStatus }) => {
+/**
+ * The current user's reviewer profile, or null when they have none (404).
+ * One query for the My reviews header: the summary card, the stats and the
+ * layout that decides whether to show the stats all read it, and its fixed
+ * key keeps it cached while the user switches tab.
+ */
+export const useMyReviewerProfile = () => {
   const currentUser = useUser();
-
-  const { data: profile, isLoading } = useQuery({
+  return useQuery({
     queryKey: ['reviewer-profile-me-summary'],
     queryFn: async () => {
       try {
         const response = await reviewerProfilesMeRetrieve();
-        const profileData = response.data;
-        onProfileStatus?.(true);
-        return profileData;
+        return response.data;
       } catch (error) {
-        // Return null if profile doesn't exist (404)
         if ((error as any)?.response?.status === 404) {
-          onProfileStatus?.(false);
           return null;
         }
         throw error;
       }
     },
     enabled: !!currentUser,
+    staleTime: FAST_STALE_TIME,
   });
+};
+
+export const ReviewerProfileSummaryCard: FC = () => {
+  const currentUser = useUser();
+  const { data: profile, isLoading } = useMyReviewerProfile();
 
   const handleManageProfile = () => {
     router.stateService.go('profile-manage', { tab: 'reviewer-profile' });

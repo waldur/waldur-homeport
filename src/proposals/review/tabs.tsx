@@ -13,6 +13,7 @@ import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
 import { useUser } from '@/workspace/hooks';
 
+import { isReviewer } from './myWorkTitle';
 import { preloadTabPages } from './tabPreload';
 import { useMyTasksCount } from './useMyTasksCount';
 
@@ -22,28 +23,15 @@ import { useMyTasksCount } from './useMyTasksCount';
  */
 const tally = (count: number) => count || undefined;
 
-/** Holds a call role whose work these tabs list. */
-const hasReviewerRole = (user) =>
-  Boolean(
-    user?.permissions?.some(
-      (permission) =>
-        permission.scope_type === 'call' &&
-        ['CALL.REVIEWER', 'CALL.PANEL_MEMBER'].includes(permission.role_name),
-    ),
-  );
-
-export const useMyReviewsTabs = (): TableTab[] => {
+/**
+ * Whether the user does review work: holds a reviewer or panel member role
+ * on a call, or has reviews, assignments or reviewer pool invitations -- an
+ * invitee holds no role until they accept, and accepting needs the reviewer
+ * profile this tells them to create. The My reviews tabs and the header
+ * above them both go by it; its counts are the tabs' tallies.
+ */
+export const useReviewingStanding = () => {
   const user = useUser();
-  const { state } = useCurrentStateAndParams();
-  // Load every tab's page now: switching tab then mounts it without a
-  // spinner frame, which read as the page blinking.
-  useEffect(() => {
-    preloadTabPages();
-  }, []);
-
-  // Count the open workflow tasks waiting for the user.
-  const tasksCount = useMyTasksCount();
-
   // Count all reviews assigned to user
   const { data: reviewsCount = 0 } = useQuery({
     queryKey: ['reviews-count', user?.uuid],
@@ -72,6 +60,42 @@ export const useMyReviewsTabs = (): TableTab[] => {
     },
   });
 
+  // Whether the user was ever invited to a reviewer pool, whatever the answer.
+  const { data: poolInvitationsCount = 0 } = useQuery({
+    queryKey: ['my-pool-invitations-any-count', user?.uuid],
+    queryFn: async () => {
+      const response = await callReviewerPoolsList({
+        query: { my_invitations: true, page_size: 1 },
+      });
+      return fetchResultCount(response);
+    },
+    enabled: !!user?.uuid,
+  });
+
+  return {
+    reviewsCount,
+    assignmentsCount,
+    reviewing:
+      isReviewer(user) ||
+      reviewsCount > 0 ||
+      assignmentsCount > 0 ||
+      poolInvitationsCount > 0,
+  };
+};
+
+export const useMyReviewsTabs = (): TableTab[] => {
+  const user = useUser();
+  const { state } = useCurrentStateAndParams();
+  // Load every tab's page now: switching tab then mounts it without a
+  // spinner frame, which read as the page blinking.
+  useEffect(() => {
+    preloadTabPages();
+  }, []);
+
+  // Count the open workflow tasks waiting for the user.
+  const tasksCount = useMyTasksCount();
+  const { reviewsCount, assignmentsCount, reviewing } = useReviewingStanding();
+
   // Count pending invitations
   const { data: invitationsCount = 0 } = useQuery({
     queryKey: ['invitations-pending-count-tabs'],
@@ -99,18 +123,6 @@ export const useMyReviewsTabs = (): TableTab[] => {
     enabled: !!user?.uuid,
   });
 
-  // Whether the user was ever invited to a reviewer pool, whatever the answer.
-  const { data: poolInvitationsCount = 0 } = useQuery({
-    queryKey: ['my-pool-invitations-any-count', user?.uuid],
-    queryFn: async () => {
-      const response = await callReviewerPoolsList({
-        query: { my_invitations: true, page_size: 1 },
-      });
-      return fetchResultCount(response);
-    },
-    enabled: !!user?.uuid,
-  });
-
   // Count accepted calls (active in reviewer pool)
   const { data: callsCount = 0 } = useQuery({
     queryKey: ['my-calls-count', user?.uuid],
@@ -131,11 +143,7 @@ export const useMyReviewsTabs = (): TableTab[] => {
     // A reviewer's tabs for someone who reviews; an evaluator role's for
     // someone who holds one. An applicant keeps Tasks alone. The open page's
     // tab stays, so a link to it never loses its place.
-    const reviews =
-      hasReviewerRole(user) ||
-      reviewsCount > 0 ||
-      assignmentsCount > 0 ||
-      poolInvitationsCount > 0;
+    const reviews = reviewing;
     const shown = {
       tasks: true,
       reviews,
@@ -188,9 +196,8 @@ export const useMyReviewsTabs = (): TableTab[] => {
     ];
     return tabs.filter((tab) => shown[tab.key] || tab.state === state.name);
   }, [
-    user,
     state.name,
-    poolInvitationsCount,
+    reviewing,
     tasksCount,
     reviewsCount,
     assignmentsCount,

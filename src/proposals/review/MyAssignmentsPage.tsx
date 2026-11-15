@@ -21,10 +21,9 @@ import { useTable } from '@/table/useTable';
 import { AcceptAssignmentAction } from './AcceptAssignmentAction';
 import { DeclineAssignmentAction } from './DeclineAssignmentAction';
 import { fetchMyAssignmentBatches } from './fetchMyAssignmentBatches';
+import { MyReviewsLayout } from './MyReviewsLayout';
 import { useMyWorkTitle } from './myWorkTitle';
 import { ExpiredResponseNotice, ResponseTimeLeft } from './ResponseDeadline';
-import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
-import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
 interface AssignmentItemActionsProps {
@@ -204,10 +203,7 @@ export const MyAssignmentsPage: FC = () => {
   });
 
   return (
-    <div className="flex flex-col gap-4">
-      <ReviewerProfileSummaryCard />
-      <ReviewStatsWidgets />
-
+    <MyReviewsLayout>
       <Table<MyAssignmentBatch>
         {...tableProps}
         title={myWorkTitle}
@@ -278,6 +274,6 @@ export const MyAssignmentsPage: FC = () => {
         expandableRow={BatchExpandableRow}
         hasQuery
       />
-    </div>
+    </MyReviewsLayout>
   );
 };
