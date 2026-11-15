@@ -196,6 +196,7 @@
   "Filter results by chosen organization and project": "Filter results by chosen organisation and project",
   "Finalized": "Finalised",
   "Finalized — will overwrite": "Finalised — will overwrite",
+  "First authorized": "First authorised",
   "Flag a conflict when the reviewer and a proposal team member currently list the same department at the same organization in their reviewer profiles. Team members without a reviewer profile are not checked.": "Flag a conflict when the reviewer and a proposal team member currently list the same department at the same organisation in their reviewer profiles. Team members without a reviewer profile are not checked.",
   "Flag a conflict when the reviewer is, or was within the lookback period, affiliated with the applicant organization.": "Flag a conflict when the reviewer is, or was within the lookback period, affiliated with the applicant organisation.",
   "Force import consumption data from Arrow, including finalized periods. Select a resource and date range to preview.": "Force import consumption data from Arrow, including finalised periods. Select a resource and date range to preview.",
