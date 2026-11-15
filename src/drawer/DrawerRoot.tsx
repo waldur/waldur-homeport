@@ -8,6 +8,7 @@ import {
   BaseButton,
   useFocusThroughRemovals,
   useInsidePointerDown,
+  useBreakpointUp,
 } from 'waldur-ui';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
@@ -15,6 +16,8 @@ import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 
 import { DrawerContext } from './DrawerContext';
+import { DrawerResizeHandle } from './DrawerResizeHandle';
+import { DRAWER_WIDE_WIDTH } from './drawerWidth';
 import { DRAWER_SHELL_CLASS, DrawerShellClass } from './shellClasses';
 
 export const DrawerRoot: FunctionComponent = () => {
@@ -30,7 +33,11 @@ export const DrawerRoot: FunctionComponent = () => {
     drawerProps,
     closeDrawer,
     expanded,
+    width: draggedWidth,
+    wide,
+    setWide,
     historyOpen,
+    panel,
     setPanel,
   } = context;
   const [isDirtyContext, setIsDirtyContext] = React.useState(false);
@@ -48,9 +55,33 @@ export const DrawerRoot: FunctionComponent = () => {
   );
   // Expanded, the panel spans the page beside the sidebar, following it as
   // it collapses or expands (useSidebarLayoutShim).
+  // Otherwise the width the user dragged it to, or the drawer's own.
   const width = expanded
     ? 'calc(100% - var(--layout-sidebar-width, 0px))'
-    : drawerProps.width;
+    : draggedWidth !== null
+      ? `${draggedWidth}px`
+      : drawerProps.width;
+  const resizable = Boolean(drawerProps.resizable);
+  const isDesktop = useBreakpointUp('lg');
+  // The contents switch to their expanded layout (history sidebar, script
+  // panel, Team chat dock) by the panel's actual width, so a drawer dragged
+  // wide gets it as well as an expanded one. Only where the user chooses the
+  // width: below lg the panel is full width, and a fixed-width drawer is
+  // laid out for the width it has.
+  React.useEffect(() => {
+    if (!panel || !resizable || !isDesktop) {
+      setWide(false);
+      return;
+    }
+    const observer = new ResizeObserver(([entry]) => {
+      setWide(entry.contentRect.width >= DRAWER_WIDE_WIDTH);
+    });
+    observer.observe(panel);
+    return () => {
+      observer.disconnect();
+      setWide(false);
+    };
+  }, [panel, resizable, isDesktop, setWide]);
   // A Tab out of a select would land on the drawer itself (see the hook).
   useFocusThroughRemovals(contentRef, isOpen);
   const isDirtyForm = isDirtyContext;
@@ -109,13 +140,22 @@ export const DrawerRoot: FunctionComponent = () => {
         data-slot="drawer"
         data-shell={shell}
         data-expanded={expanded || undefined}
+        // Expanded counts even where the page beside the sidebar is
+        // narrower than DRAWER_WIDE_WIDTH, as it did before resizing.
+        data-wide={expanded || wide || undefined}
         data-history-open={historyOpen || undefined}
         className={classNames(
           'fixed right-0 flex bg-primary',
           'animate-[waldur-drawer-slide-in_0.3s_ease-in-out] data-[state=closed]:animate-[waldur-drawer-slide-out_0.3s_ease-in-out_forwards]',
           // Full width below lg, drawerProps.width (or the expanded width)
           // from lg.
-          'w-full lg:w-[var(--drawer-width,800px)]',
+          // The width mid-drag (--drawer-drag-width, set by
+          // DrawerResizeHandle) wins over the state's.
+          'w-full lg:w-[var(--drawer-drag-width,var(--drawer-width,800px))]',
+          // A dragged width never reaches under the sidebar, also after the
+          // window narrows.
+          resizable &&
+            'lg:max-w-[calc(100%-var(--layout-sidebar-width,0px))] data-[resizing]:transition-none data-[resizing]:select-none',
           floating
             ? [
                 // A panel hanging from the header (and the impersonation bar),
@@ -252,6 +292,8 @@ export const DrawerRoot: FunctionComponent = () => {
             </div>
           )}
         </div>
+        {/* After the contents, so the dialog's initial focus lands on them. */}
+        {resizable && <DrawerResizeHandle panel={panel} />}
       </Dialog.Content>
     </Dialog.Root>
   );

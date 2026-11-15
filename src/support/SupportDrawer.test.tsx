@@ -6,7 +6,7 @@ const h = vi.hoisted(() => ({
   matrixChatEnabled: true,
   hasSupport: true,
   totalUnread: 0,
-  drawerExpanded: false,
+  drawerWide: false,
 }));
 
 vi.mock('@/matrix/utils', () => ({
@@ -34,8 +34,8 @@ vi.mock('@/navigation/header/quick-issue-drawer/QuickIssueContainer', () => ({
   QuickIssueContainer: () => <div data-testid="quick-issue-container" />,
 }));
 
-vi.mock('@/drawer/useDrawerExpanded', () => ({
-  useDrawerExpanded: () => h.drawerExpanded,
+vi.mock('@/drawer/useDrawerWide', () => ({
+  useDrawerWide: () => h.drawerWide,
 }));
 vi.mock('./HelpdeskExpanded', () => ({
   HelpdeskExpanded: () => <div data-testid="helpdesk-expanded" />,
@@ -51,7 +51,7 @@ beforeEach(() => {
   h.matrixChatEnabled = true;
   h.hasSupport = true;
   h.totalUnread = 0;
-  h.drawerExpanded = false;
+  h.drawerWide = false;
   resetSupportDrawerPreferences();
 });
 
@@ -106,7 +106,7 @@ describe('SupportDrawer', () => {
   });
 
   it('lets the user switch to Helpdesk after a room deep-link opened on Team chat', async () => {
-    h.drawerExpanded = false;
+    h.drawerWide = false;
     h.matrixChatEnabled = true;
     h.hasSupport = true;
 
@@ -133,7 +133,7 @@ describe('SupportDrawer', () => {
   });
 
   it('returns to Team chat for a later request for the same room', async () => {
-    h.drawerExpanded = false;
+    h.drawerWide = false;
     h.matrixChatEnabled = true;
     h.hasSupport = true;
     const { rerender } = render(
@@ -150,7 +150,7 @@ describe('SupportDrawer', () => {
   });
 
   it('renders the compact issue list on the Helpdesk tab when the drawer is not expanded', () => {
-    h.drawerExpanded = false;
+    h.drawerWide = false;
     h.matrixChatEnabled = false;
     h.hasSupport = true;
 
@@ -161,7 +161,7 @@ describe('SupportDrawer', () => {
   });
 
   it('renders the two-pane Helpdesk when the drawer is expanded', () => {
-    h.drawerExpanded = true;
+    h.drawerWide = true;
     h.matrixChatEnabled = false;
     h.hasSupport = true;
 

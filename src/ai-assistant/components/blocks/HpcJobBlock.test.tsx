@@ -21,8 +21,8 @@ vi.mock('@/drawer/actions', () => ({
   useOptionalDrawer: () => h.drawer,
 }));
 
-vi.mock('@/drawer/useDrawerExpanded', () => ({
-  useDrawerExpanded: () => h.expanded,
+vi.mock('@/drawer/useDrawerWide', () => ({
+  useDrawerWide: () => h.expanded,
 }));
 
 vi.mock('@/core/Link', () => ({

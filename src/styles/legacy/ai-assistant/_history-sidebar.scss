@@ -1,15 +1,16 @@
 // Sidebar hidden by default
-[data-slot='drawer']:not([data-expanded='true']):not([data-history-open='true'])
+[data-slot='drawer']:not([data-wide='true']):not([data-history-open='true'])
   .aui-history-sidebar {
   display: none !important;
 }
 
-// Desktop: show sidebar and switch to row layout when drawer is expanded
-[data-slot='drawer'][data-expanded='true'] .aui-chat-drawer {
+// Desktop: show sidebar and switch to row layout when the drawer is expanded
+// or dragged wide enough (data-wide, see DrawerRoot)
+[data-slot='drawer'][data-wide='true'] .aui-chat-drawer {
   flex-direction: row;
 }
 
-[data-slot='drawer'][data-expanded='true'] .aui-history-sidebar {
+[data-slot='drawer'][data-wide='true'] .aui-history-sidebar {
   display: flex;
 }
 

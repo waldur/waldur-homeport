@@ -10,13 +10,13 @@ const h = vi.hoisted(() => ({
   matrixClient: {} as any,
   rooms: {} as any,
   call: {} as any,
-  drawerExpanded: false,
+  drawerWide: false,
   lastRoomUuid: null as string | null,
   roomOptions: {} as object,
 }));
 
-vi.mock('@/drawer/useDrawerExpanded', () => ({
-  useDrawerExpanded: () => h.drawerExpanded,
+vi.mock('@/drawer/useDrawerWide', () => ({
+  useDrawerWide: () => h.drawerWide,
 }));
 
 vi.mock('./useMatrixClient', () => ({
@@ -79,7 +79,7 @@ beforeEach(() => {
     error: null,
   };
   h.rooms = { rooms: ROOMS, totalUnread: 0, isLoading: false };
-  h.drawerExpanded = false;
+  h.drawerWide = false;
   h.lastRoomUuid = null;
 });
 
@@ -249,11 +249,11 @@ describe('MatrixChatPanel — call stability across expand', () => {
     const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     expect(h.drawerMountCount).toBe(1);
 
-    h.drawerExpanded = true;
+    h.drawerWide = true;
     rerender(<MatrixChatPanel defaultRoomUuid="room-1" />);
     expect(h.drawerMountCount).toBe(1);
 
-    h.drawerExpanded = false;
+    h.drawerWide = false;
     rerender(<MatrixChatPanel defaultRoomUuid="room-1" />);
     expect(h.drawerMountCount).toBe(1);
   });
@@ -262,7 +262,7 @@ describe('MatrixChatPanel — call stability across expand', () => {
 describe('MatrixChatPanel — responsive dock layout', () => {
   it('does not dock sidebar on mobile even when drawer is expanded', () => {
     setViewport('mobile');
-    h.drawerExpanded = true;
+    h.drawerWide = true;
 
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     // eslint-disable-next-line testing-library/no-node-access
@@ -271,7 +271,7 @@ describe('MatrixChatPanel — responsive dock layout', () => {
 
   it('docks sidebar on desktop when drawer is expanded', () => {
     setViewport('desktop');
-    h.drawerExpanded = true;
+    h.drawerWide = true;
 
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);
     // eslint-disable-next-line testing-library/no-node-access
