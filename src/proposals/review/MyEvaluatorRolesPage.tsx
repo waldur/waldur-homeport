@@ -23,6 +23,7 @@ import { useUser } from '@/workspace/hooks';
 import { CoiDeclaration } from '../coi-declaration/CoiDeclaration';
 import { coiStateLabel } from '../proposal-roles/constants';
 
+import { MyReviewsLayout } from './MyReviewsLayout';
 import { useMyWorkTitle } from './myWorkTitle';
 import { useMyReviewsTabs } from './tabs';
 
@@ -130,25 +131,27 @@ export const MyEvaluatorRolesPage: FC = () => {
   ];
 
   return (
-    <Table<ProposalRoleAssignment>
-      {...tableProps}
-      columns={columns}
-      title={myWorkTitle}
-      tabs={tabs}
-      verboseName={translate('evaluator roles')}
-      rowActions={({ row, fetch }) =>
-        row.awaits_coi_confirmation ? (
-          <ActionsDropdown
-            row={row}
-            refetch={fetch}
-            actions={[
-              ({ row, refetch }) => (
-                <ConfirmNoConflictAction row={row} refetch={refetch} />
-              ),
-            ]}
-          />
-        ) : null
-      }
-    />
+    <MyReviewsLayout>
+      <Table<ProposalRoleAssignment>
+        {...tableProps}
+        columns={columns}
+        title={myWorkTitle}
+        tabs={tabs}
+        verboseName={translate('evaluator roles')}
+        rowActions={({ row, fetch }) =>
+          row.awaits_coi_confirmation ? (
+            <ActionsDropdown
+              row={row}
+              refetch={fetch}
+              actions={[
+                ({ row, refetch }) => (
+                  <ConfirmNoConflictAction row={row} refetch={refetch} />
+                ),
+              ]}
+            />
+          ) : null
+        }
+      />
+    </MyReviewsLayout>
   );
 };

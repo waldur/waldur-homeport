@@ -20,6 +20,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { DelegatedTaskActions } from './DelegatedTaskActions';
+import { MyReviewsLayout } from './MyReviewsLayout';
 import { MY_TASKS_TABLE } from './myTasksTable';
 import { useMyWorkTitle } from './myWorkTitle';
 import { useMyReviewsTabs } from './tabs';
@@ -240,33 +241,33 @@ export const MyTasksPage: FC = () => {
   ];
 
   return (
-    <Table<MyTask>
-      {...tableProps}
-      columns={columns}
-      title={myWorkTitle}
-      // The page's own title above the card, as My proposals has it.
-      standalone
-      // A strip of one tab says nothing: shown only with a second one.
-      tabs={tabs.length > 1 ? tabs : undefined}
-      filters={<ProposalMyTasksFilter />}
-      verboseName={translate('tasks')}
-      emptyMessage={
-        filter.due
-          ? translate('No task waiting for you matches this deadline.')
-          : translate('Nothing waiting for you.')
-      }
-      rowVariant={({ row }) => (row.is_overdue ? 'danger' : undefined)}
-      hasQuery={false}
-      // Only a delegated task has actions; with none on the page there is
-      // no Actions column, rather than an empty one.
-      rowActions={
-        tableProps.rows?.some((task) => task.needed === 'accept_delegation')
-          ? ({ row }) =>
-              row.needed === 'accept_delegation' ? (
-                <DelegatedTaskActions task={row} refetch={tableProps.fetch} />
-              ) : null
-          : undefined
-      }
-    />
+    <MyReviewsLayout>
+      <Table<MyTask>
+        {...tableProps}
+        columns={columns}
+        title={myWorkTitle}
+        // A strip of one tab says nothing: shown only with a second one.
+        tabs={tabs.length > 1 ? tabs : undefined}
+        filters={<ProposalMyTasksFilter />}
+        verboseName={translate('tasks')}
+        emptyMessage={
+          filter.due
+            ? translate('No task waiting for you matches this deadline.')
+            : translate('Nothing waiting for you.')
+        }
+        rowVariant={({ row }) => (row.is_overdue ? 'danger' : undefined)}
+        hasQuery={false}
+        // Only a delegated task has actions; with none on the page there is
+        // no Actions column, rather than an empty one.
+        rowActions={
+          tableProps.rows?.some((task) => task.needed === 'accept_delegation')
+            ? ({ row }) =>
+                row.needed === 'accept_delegation' ? (
+                  <DelegatedTaskActions task={row} refetch={tableProps.fetch} />
+                ) : null
+            : undefined
+        }
+      />
+    </MyReviewsLayout>
   );
 };

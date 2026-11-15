@@ -61,7 +61,10 @@ vi.mock('@/table/Table', () => ({
   ),
 }));
 
-vi.mock('./tabs', () => ({ useMyReviewsTabs: () => [] }));
+vi.mock('./tabs', () => ({
+  useMyReviewsTabs: () => [],
+  useReviewingStanding: () => ({ reviewing: false }),
+}));
 
 vi.mock('@/core/Link', () => ({
   Link: ({ label }) => <a href="#proposal">{label}</a>,

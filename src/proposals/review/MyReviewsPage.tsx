@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useMemo } from 'react';
 import {
   proposalReviewsList,
   ProposalReviewsListData,
@@ -23,12 +23,11 @@ import { useUser } from '@/workspace/hooks';
 
 import { EndingField } from '../EndingField';
 
+import { MyReviewsLayout } from './MyReviewsLayout';
 import { useMyWorkTitle } from './myWorkTitle';
 import { OwnReviewStateRenderer } from './OwnReviewStateRenderer';
-import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewsExpandableRow } from './ReviewsExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
-import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
 // Counts what each filter can still take; see '@/table/facets'.
@@ -53,12 +52,7 @@ export const MyReviewsPage: FC = () => {
     return result;
   }, [user, filterValues]);
 
-  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
   const tabs = useMyReviewsTabs();
-
-  const handleProfileStatus = useCallback((profileExists: boolean) => {
-    setHasProfile(profileExists);
-  }, []);
 
   const tableProps = useTable({
     table: 'MyReviewsList',
@@ -75,106 +69,92 @@ export const MyReviewsPage: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Reviewer profile summary */}
-      <ReviewerProfileSummaryCard onProfileStatus={handleProfileStatus} />
-      {/* The table carries the tabs, so it renders without a profile too:
-          an evaluator holds proposal roles and needs no reviewer profile. */}
-      {hasProfile !== null && (
-        <>
-          {hasProfile && <ReviewStatsWidgets />}
-
-          {/* Reviews table with tabs */}
-          <Table<ProposalReview>
-            {...tableProps}
-            formId={ProposalReviewsFilterFormId}
-            title={myWorkTitle}
-            tabs={tabs}
-            columns={[
-              {
-                title: translate('UUID'),
-                render: ({ row }) => <>{row.uuid}</>,
-                keys: ['uuid'],
-                id: 'uuid',
-                optional: true,
-              },
-              {
-                title: translate('Proposal name'),
-                // Opens the review: in progress to continue it, finished to
-                // read it.
-                render: ({ row }) => (
-                  <Link
-                    state="proposal-review"
-                    params={{ review_uuid: row.uuid }}
-                    label={row.proposal_name}
-                    className="font-medium"
-                  />
-                ),
-                keys: ['proposal_name'],
-                id: 'proposal',
-              },
-              {
-                title: translate('Proposal slug'),
-                render: ({ row }) => (
-                  <Link
-                    state="proposal-review"
-                    params={{
-                      review_uuid: row.uuid,
-                    }}
-                    label={(row as any).proposal_slug}
-                  />
-                ),
-                keys: ['proposal_slug'] as any,
-                id: 'proposal_slug',
-              },
-              {
-                title: translate('Call'),
-                render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
-                filter: 'call',
-                inlineFilter: (row) => ({
-                  name: row.call_name,
-                  uuid: row.call_uuid,
-                }),
-                keys: ['call_name'],
-                id: 'call',
-              },
-              {
-                title: translate('Round'),
-                render: ({ row }) => <>{row.round_name}</>,
-                keys: ['round_name'],
-                id: 'round',
-                optional: true,
-              },
-              {
-                title: translate('Review due'),
-                render: ({ row }) => (
-                  <EndingField endDate={row.review_end_date} />
-                ),
-                keys: ['review_end_date'],
-                id: 'review_due',
-              },
-              {
-                title: translate('State'),
-                render: OwnReviewStateRenderer,
-                filter: 'state',
-                inlineFilter: (row) =>
-                  getOwnReviewStateOptions().filter(
-                    (s) => s.value === row.state,
-                  ),
-                keys: ['state'],
-                id: 'state',
-              },
-            ]}
-            verboseName={translate('reviews')}
-            hasQuery={true}
-            rowActions={ReviewsRowActions}
-            filters={<ProposalReviewsFilter hideReviewer />}
-            showPageSizeSelector={true}
-            expandableRow={ReviewsExpandableRow}
-            hasOptionalColumns
-          />
-        </>
-      )}
-    </div>
+    <MyReviewsLayout>
+      {/* Reviews table with tabs */}
+      <Table<ProposalReview>
+        {...tableProps}
+        formId={ProposalReviewsFilterFormId}
+        title={myWorkTitle}
+        tabs={tabs}
+        columns={[
+          {
+            title: translate('UUID'),
+            render: ({ row }) => <>{row.uuid}</>,
+            keys: ['uuid'],
+            id: 'uuid',
+            optional: true,
+          },
+          {
+            title: translate('Proposal name'),
+            // Opens the review: in progress to continue it, finished to
+            // read it.
+            render: ({ row }) => (
+              <Link
+                state="proposal-review"
+                params={{ review_uuid: row.uuid }}
+                label={row.proposal_name}
+                className="font-medium"
+              />
+            ),
+            keys: ['proposal_name'],
+            id: 'proposal',
+          },
+          {
+            title: translate('Proposal slug'),
+            render: ({ row }) => (
+              <Link
+                state="proposal-review"
+                params={{
+                  review_uuid: row.uuid,
+                }}
+                label={(row as any).proposal_slug}
+              />
+            ),
+            keys: ['proposal_slug'] as any,
+            id: 'proposal_slug',
+          },
+          {
+            title: translate('Call'),
+            render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
+            filter: 'call',
+            inlineFilter: (row) => ({
+              name: row.call_name,
+              uuid: row.call_uuid,
+            }),
+            keys: ['call_name'],
+            id: 'call',
+          },
+          {
+            title: translate('Round'),
+            render: ({ row }) => <>{row.round_name}</>,
+            keys: ['round_name'],
+            id: 'round',
+            optional: true,
+          },
+          {
+            title: translate('Review due'),
+            render: ({ row }) => <EndingField endDate={row.review_end_date} />,
+            keys: ['review_end_date'],
+            id: 'review_due',
+          },
+          {
+            title: translate('State'),
+            render: OwnReviewStateRenderer,
+            filter: 'state',
+            inlineFilter: (row) =>
+              getOwnReviewStateOptions().filter((s) => s.value === row.state),
+            keys: ['state'],
+            id: 'state',
+          },
+        ]}
+        verboseName={translate('reviews')}
+        hasQuery={true}
+        rowActions={ReviewsRowActions}
+        filters={<ProposalReviewsFilter hideReviewer />}
+        showPageSizeSelector={true}
+        expandableRow={ReviewsExpandableRow}
+        hasOptionalColumns
+      />
+    </MyReviewsLayout>
   );
 };

@@ -184,6 +184,13 @@ describe('MyTasksPage', () => {
     expect(tableProps.value.table).toBe('MyTasks');
   });
 
+  // The same carded title as every other My reviews tab, not a page heading.
+  it('titles the table like the other tabs', () => {
+    renderPage();
+    expect(tableProps.value.title).toBe('My tasks');
+    expect(tableProps.value.standalone).toBeUndefined();
+  });
+
   it('asks for the tasks the Due filter holds, and says when none match', () => {
     renderPage({
       MyTasks: {

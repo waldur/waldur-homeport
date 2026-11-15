@@ -1,10 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import {
-  callReviewerPoolsList,
-  proposalReviewsList,
-  reviewerProfilesMeRetrieve,
-} from 'waldur-js-client';
+import { callReviewerPoolsList, proposalReviewsList } from 'waldur-js-client';
 
 import { StatCardGrid } from 'waldur-ui';
 
@@ -12,23 +8,12 @@ import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
+import { useMyReviewerProfile } from './ReviewerProfileSummaryCard';
+
 export const ReviewStatsWidgets: FC = () => {
   const user = useUser();
 
-  const { data: profile, isLoading: profileLoading } = useQuery({
-    queryKey: ['reviewer-profile-me-stats'],
-    queryFn: async () => {
-      try {
-        const response = await reviewerProfilesMeRetrieve();
-        return response.data;
-      } catch (error) {
-        if ((error as any)?.response?.status === 404) {
-          return null;
-        }
-        throw error;
-      }
-    },
-  });
+  const { data: profile, isLoading: profileLoading } = useMyReviewerProfile();
 
   // Count reviews in progress (state = in_review)
   const { data: inProgressCount = 0 } = useQuery({
