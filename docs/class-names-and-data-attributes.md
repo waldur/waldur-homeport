@@ -197,7 +197,7 @@ A hook another repository reads moves in three steps, because each repository's 
 
 ## Exceptions
 
-Some classes have to stay as hooks even though they style nothing, for example react-select's `metronic-select__*`, which stylesheets and the RTL helpers in `src/test/select.ts` read (the E2E suite uses the parts' `data-slot`). List such a class as a pattern in `UNKNOWN_CLASS_HOOKS` in `eslint.config.js`, with a comment saying who reads it. Keep that list short: every entry is a contract with no type check behind it.
+Rarely, a class has to stay as a hook even though it styles nothing, for example one a third-party script reads. List such a class as a pattern in `UNKNOWN_CLASS_HOOKS` in `eslint.config.js`, with a comment saying who reads it. Keep that list short: every entry is a contract with no type check behind it.
 
 ## Checklist
 

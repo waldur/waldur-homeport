@@ -99,10 +99,10 @@ describe('CountrySelectField', () => {
       expect(screen.getByText('Estonia')).toBeInTheDocument();
     });
 
-    // Find the clear indicator by class (react-select uses aria-hidden on indicators)
+    // Find the clear indicator by its slot (react-select uses aria-hidden on indicators)
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const clearIndicator = container.querySelector(
-      '.metronic-select__clear-indicator',
+      '[data-slot="select-clear-indicator"]',
     );
     expect(clearIndicator).toBeInTheDocument();
     await user.click(clearIndicator!);

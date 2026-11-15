@@ -2,6 +2,6 @@
 .login-lang-select {
   width: 100px;
 }
-.login-lang-select .metronic-select__control {
+.login-lang-select [data-slot='select-control'] {
   border-color: transparent;
 }

@@ -1,10 +1,10 @@
 import {
   FilterSelectClearIndicator,
-  MetronicInput,
   MultiSelectLimitedValueContainer,
   MultiSelectOption,
   MultiSelectValue,
   SelectDropdownIndicator,
+  SelectInput,
   SelectOption,
 } from './components';
 import { withSelectSlots } from './slots';
@@ -76,7 +76,7 @@ export const composeComponents = (components: any, isMulti: boolean) => {
   let defaultComponents: any = {
     ClearIndicator: FilterSelectClearIndicator,
     DropdownIndicator: SelectDropdownIndicator,
-    Input: MetronicInput,
+    Input: SelectInput,
     Option: SelectOption,
   };
 

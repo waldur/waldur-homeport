@@ -2,10 +2,9 @@ import { ComponentType, createElement } from 'react';
 import { components as defaultComponents } from 'react-select';
 
 /**
- * The `data-slot` each react-select part carries, so tests and stylesheets
- * can find it without react-select's `metronic-select__*` class names
- * (see docs/class-names-and-data-attributes.md). The input gets its slot
- * from `MetronicInput`, which has no `innerProps`.
+ * The `data-slot` each react-select part carries: how stylesheets, parents
+ * and tests find a part (see docs/class-names-and-data-attributes.md). The
+ * input gets its slot from `SelectInput`, which has no `innerProps`.
  */
 const SELECT_SLOTS = {
   SelectContainer: 'select',
@@ -13,6 +12,7 @@ const SELECT_SLOTS = {
   Menu: 'select-menu',
   SingleValue: 'select-single-value',
   ClearIndicator: 'select-clear-indicator',
+  Option: 'select-option',
 } as const;
 
 type SlottedPart = keyof typeof SELECT_SLOTS;

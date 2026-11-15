@@ -57,7 +57,7 @@ const ListOption: FC<OptionProps & { remove }> = (props) => (
         onClick={(e) => props.remove(e, props.getValue()[0])}
         variant="text-danger"
         // Shown while the option is hovered. (Formerly SavedFilterSelect.scss.)
-        className="opacity-0 transition-opacity duration-200 ease-[ease] in-[.metronic-select\_\_option:hover]:opacity-100"
+        className="opacity-0 transition-opacity duration-200 ease-[ease] in-[[data-slot=select-option]:hover]:opacity-100"
         size="sm"
       />
     </div>

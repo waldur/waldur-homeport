@@ -2,6 +2,8 @@ import { screen, within, MatcherFunction } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { escapeRegExp } from 'es-toolkit/compat';
 
+const SELECT = '[data-slot="select"]';
+
 /**
  * Helpers for interacting with react-select / react-select-async-paginate
  * components in tests rendered via FormGroup (which wraps each field in a
@@ -12,7 +14,7 @@ import { escapeRegExp } from 'es-toolkit/compat';
  * Locate the FormGroup container that wraps a react-select by its label text.
  * Works with both the standard `@/form/FormGroup` and the marketplace
  * `FormGroup` by walking up the DOM until an ancestor containing a
- * `.metronic-select-container` is found.
+ * select (`[data-slot="select"]`) is found.
  */
 export const getSelectByLabel = (labelText: string | RegExp): HTMLElement => {
   const labels = screen.queryAllByText(labelText);
@@ -31,10 +33,7 @@ export const getSelectByLabel = (labelText: string | RegExp): HTMLElement => {
         ? element.parentElement
         : (element as HTMLElement);
     while (node) {
-      if (
-        node.classList.contains('metronic-select-container') ||
-        node.querySelector('.metronic-select-container')
-      ) {
+      if (node.matches(SELECT) || node.querySelector(SELECT)) {
         return node;
       }
       node = node.parentElement;
@@ -123,7 +122,7 @@ export const clearSelect = async (
 ) => {
   const container = getSelectByLabel(labelText);
   const clearButton = container.querySelector(
-    '.metronic-select__clear-indicator',
+    '[data-slot="select-clear-indicator"]',
   );
   if (clearButton) {
     await user.click(clearButton);

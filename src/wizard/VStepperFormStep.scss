@@ -18,7 +18,7 @@
   &.step-disabled {
     /* react-select isn't a native control, so the fieldset can't disable
        it; native inputs and buttons use their own :disabled styles. */
-    .metronic-select__control {
+    [data-slot='select-control'] {
       background-color: var(--bg-secondary);
       cursor: not-allowed;
     }

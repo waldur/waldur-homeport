@@ -154,7 +154,7 @@
         gap: 16px;
         column-gap: 16px;
 
-        .metronic-select-container {
+        [data-slot='select'] {
           min-width: 115px;
         }
       }

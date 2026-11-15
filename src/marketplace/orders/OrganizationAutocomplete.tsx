@@ -38,7 +38,7 @@ export const OrganizationAutocomplete: FunctionComponent<
   // arrow here would be a fresh function on every parent render, causing
   // to unmount and re-mount the underlying AsyncSelect
   // each time — destroying focus, ongoing API calls, and the inner
-  // `.metronic-select__control` DOM node. useCallback fixes this; props
+  // control DOM node. useCallback fixes this; props
   // that the inner closure depends on are listed in the deps array.
   const placeholder = props.placeholder || translate('Select organization...');
   const noOptionsMessage =
