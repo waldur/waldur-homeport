@@ -3,7 +3,7 @@ import { FC, useEffect, useRef } from 'react';
 
 import { Badge, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
-import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
+import { useDrawerWide } from '@/drawer/useDrawerWide';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { MatrixChatPanel } from '@/matrix/chat/MatrixChatPanel';
@@ -35,7 +35,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
   const showChat = isMatrixChatEnabled();
   const showHelpdesk = hasSupport();
   const matrixUnread = useMatrixTotalUnread();
-  const drawerExpanded = useDrawerExpanded();
+  const drawerWide = useDrawerWide();
 
   const storedTab = useSupportTab();
   // A room deep-link ("Open in team chat", "Return to call") must land on the
@@ -121,7 +121,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
           )}
           {showHelpdesk && (
             <TabsContent value="helpdesk" className="h-full">
-              {drawerExpanded ? (
+              {drawerWide ? (
                 <div className="support-drawer-helpdesk support-drawer-helpdesk--expanded h-full w-full">
                   <HelpdeskExpanded />
                 </div>

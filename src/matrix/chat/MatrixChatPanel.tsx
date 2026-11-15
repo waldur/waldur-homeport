@@ -17,7 +17,7 @@ import {
   setChatDrawerPreference,
   useChatDrawerPreference,
 } from '@/chat/chatDrawerPreferences';
-import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
+import { useDrawerWide } from '@/drawer/useDrawerWide';
 import { translate } from '@/i18n';
 
 import { MatrixCallPortalContext } from './call/MatrixCallPortalContext';
@@ -59,12 +59,12 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     resolveSenders: true,
   });
 
-  // The conversation-list sidebar shows only in the expanded ("full screen")
-  // drawer or the standalone Communication page — matching the AI history
-  // sidebar. Otherwise the panel is just the open conversation.
-  const drawerExpanded = useDrawerExpanded();
+  // The conversation-list sidebar shows only in a wide drawer (expanded, or
+  // dragged wide) or the standalone Communication page — matching the AI
+  // history sidebar. Otherwise the panel is just the open conversation.
+  const drawerWide = useDrawerWide();
   const isAtLeastMd = useBreakpointUp('md');
-  const showDock = (drawerExpanded || Boolean(forceDock)) && isAtLeastMd;
+  const showDock = (drawerWide || Boolean(forceDock)) && isAtLeastMd;
 
   const [selectedRoomUuid, setSelectedRoomUuid] = useState<string | null>(
     () => defaultRoomUuid ?? getChatDrawerPreference('lastRoomUuid'),

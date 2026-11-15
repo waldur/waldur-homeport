@@ -7,6 +7,7 @@ import React, {
   useLayoutEffect,
 } from 'react';
 
+import { DRAWER_MIN_WIDTH, readStoredDrawerWidth } from './drawerWidth';
 import { DrawerShellClass } from './shellClasses';
 
 export interface DrawerProps {
@@ -17,6 +18,14 @@ export interface DrawerProps {
   width?: string;
   /** Opens the drawer as one of the floating cards (see shellClasses.ts). */
   shellClass?: DrawerShellClass;
+  /**
+   * The user can drag the drawer's left edge to resize it (from lg); on by
+   * default. The width is remembered per `shellClass`; a drawer without one
+   * keeps it only while open.
+   */
+  resizable?: boolean;
+  /** Narrowest the user can drag it to, in px (DRAWER_MIN_WIDTH by default). */
+  minWidth?: number;
   [key: string]: any;
 }
 
@@ -27,6 +36,19 @@ interface DrawerContextValue {
   /** The expand ("full screen") toggle's state; reset when a drawer opens. */
   expanded: boolean;
   setExpanded: (expanded: boolean) => void;
+  /**
+   * The width the user dragged the drawer to, in px, or null for
+   * `drawerProps.width`. Restored from storage when a resizable drawer opens.
+   */
+  width: number | null;
+  setWidth: (width: number | null) => void;
+  /**
+   * A resizable drawer from lg is wide enough for the expanded layout
+   * (DRAWER_WIDE_WIDTH), whether expanded or dragged that wide. Kept by
+   * DrawerRoot; read through useDrawerWide.
+   */
+  wide: boolean;
+  setWide: (wide: boolean) => void;
   /** The AI chat history sidebar below lg; reset when a drawer opens. */
   historyOpen: boolean;
   setHistoryOpen: (historyOpen: boolean) => void;
@@ -63,7 +85,17 @@ export let drawerServiceRef: Pick<
 
 const DEFAULT_DRAWER_PROPS: DrawerProps = {
   width: '800px',
+  resizable: true,
 };
+
+/** The width a drawer opens at: the one last dragged to, if it has one. */
+const getOpeningWidth = (props?: DrawerProps): number | null =>
+  props?.resizable === false
+    ? null
+    : readStoredDrawerWidth(
+        props?.shellClass,
+        props?.minWidth ?? DRAWER_MIN_WIDTH,
+      );
 
 export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -73,6 +105,8 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
     useState<ComponentType<any> | null>(null);
   const [drawerProps, setDrawerProps] = useState<any>(DEFAULT_DRAWER_PROPS);
   const [expanded, setExpanded] = useState(false);
+  const [width, setWidth] = useState<number | null>(null);
+  const [wide, setWide] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [panel, setPanel] = useState<HTMLElement | null>(null);
 
@@ -82,6 +116,7 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
       // Every drawer opens as a panel; closing keeps the expanded width
       // through the slide-out instead.
       setExpanded(false);
+      setWidth(getOpeningWidth(props));
       setHistoryOpen(false);
       setDrawerComponent(() => component);
       setDrawerProps({ ...DEFAULT_DRAWER_PROPS, ...props });
@@ -93,10 +128,13 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
     setIsOpen(false);
     setDrawerComponent(null);
     // The shell class has to outlast the slide-out, or the card drops to the
-    // default full-height panel over the page header while it leaves.
+    // default full-height panel over the page header while it leaves; and
+    // so does whether it resizes, or a drawer that opted out would gain a
+    // handle while it leaves.
     setDrawerProps((prev) => ({
       ...DEFAULT_DRAWER_PROPS,
       shellClass: prev.shellClass,
+      resizable: prev.resizable,
     }));
   }, []);
 
@@ -109,6 +147,7 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
       }
       if (!isOpen) {
         setExpanded(false);
+        setWidth(getOpeningWidth(props));
         setHistoryOpen(false);
       }
       setDrawerComponent(() => component);
@@ -135,6 +174,10 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
         renderDrawer,
         expanded,
         setExpanded,
+        width,
+        setWidth,
+        wide,
+        setWide,
         historyOpen,
         setHistoryOpen,
         panel,

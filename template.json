@@ -20849,6 +20849,11 @@
       "feature_area": "reports"
     }
   },
+  "Drag to resize, double-click to reset": {
+    "context": {
+      "feature_area": "drawer"
+    }
+  },
   "Drawable today": {
     "context": {
       "primary_ui_type": "label",
@@ -56401,6 +56406,11 @@
   "Resetting the demo": {
     "context": {
       "feature_area": "demo-presets"
+    }
+  },
+  "Resize panel": {
+    "context": {
+      "feature_area": "drawer"
     }
   },
   "Resolution SLA field name": {},

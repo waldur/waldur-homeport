@@ -50,6 +50,8 @@ export const openSupportDrawer = (
     title: options.title ?? translate('Support'),
     toolbar: SupportDrawerToolbar,
     width: '800px',
+    // The helpdesk table's toolbar (search, refresh, export, create) fits.
+    minWidth: 680,
     shellClass: DRAWER_SHELL_CLASS.support,
     defaultRoomUuid: options.defaultRoomUuid,
     matrixRoomAlias: options.matrixRoomAlias ?? undefined,

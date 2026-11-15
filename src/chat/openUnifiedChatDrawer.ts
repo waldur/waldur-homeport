@@ -35,6 +35,8 @@ export const openUnifiedChatDrawer = (
     title: options.title ?? translate('AI assistant'),
     toolbar: LLMChatDrawerToolbar,
     width: '800px',
+    // The chat and its composer still read well this narrow.
+    minWidth: 420,
     shellClass: DRAWER_SHELL_CLASS.ai,
   });
 };

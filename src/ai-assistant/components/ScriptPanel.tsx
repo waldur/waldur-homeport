@@ -12,7 +12,7 @@ import {
 
 import { BaseButton } from 'waldur-ui';
 
-import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
+import { useDrawerWide } from '@/drawer/useDrawerWide';
 import { translate } from '@/i18n';
 import {
   HpcJobFile,
@@ -50,14 +50,15 @@ const ScriptPanelContext = createContext<ScriptPanelContextValue | null>(null);
 export const useScriptPanel = () => useContext(ScriptPanelContext);
 
 /**
- * Job cards register their script here. Beside the full-screen chat the panel
+ * Job cards register their script here. Beside a wide chat (expanded, or
+ * dragged wide) the panel
  * shows the latest one, or the one picked with "View script", so a long script
  * no longer pushes the conversation off screen.
  */
 export const ScriptPanelProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const available = useDrawerExpanded();
+  const available = useDrawerWide();
   const [entries, setEntries] = useState<ScriptPanelEntry[]>([]);
   const [pinnedKey, setPinnedKey] = useState<string | null>(null);
   const [closed, setClosed] = useState(false);
