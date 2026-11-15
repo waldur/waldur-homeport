@@ -20,6 +20,7 @@ import { Badge } from 'waldur-ui';
 import { OfflineBlockContext } from '@/ai-assistant/components/blocks/offlineBlockContext';
 import { MessageDataInspector } from '@/ai-assistant/components/shared/MessageDataInspector';
 import { VersionSelector } from '@/ai-assistant/components/shared/VersionSelector';
+import { groupProcess } from '@/ai-assistant/lib/blocks/groupProcess';
 import { getFeedbackCategoryLabel } from '@/ai-assistant/lib/feedback/categories';
 import {
   groupBySequenceIndex,
@@ -216,7 +217,8 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
               {translate('(empty message)')}
             </span>
           ) : isAssistant ? (
-            blocks.map((block) => {
+            // Same view as the chat: one folded "Thought for Ns" per reply.
+            groupProcess(blocks).map((block) => {
               const Component = uiRegistry.getComponent(block.key);
               return <Component key={block.id} block={block} />;
             })

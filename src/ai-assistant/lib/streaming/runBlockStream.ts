@@ -1,6 +1,7 @@
 import { ChatResponse } from 'waldur-js-client';
 
 import {
+  finishLiveReasoning,
   markBlocksComplete,
   updateBlocks,
 } from '@/ai-assistant/lib/blocks/blockManager';
@@ -112,9 +113,22 @@ export async function runBlockStream({
     setMessages((prev) =>
       prev.map((m) => {
         if (m.id !== assistantId) return m;
-        // Don't overwrite an incomplete (error/cancel) status.
-        if (m.status?.type === 'incomplete') return m;
         const existing = m.metadata?.custom as BlockBasedMetadata | undefined;
+        // Don't overwrite an incomplete (error/cancel) status, but stop the
+        // timer of a reasoning block the failure cut off.
+        if (m.status?.type === 'incomplete') {
+          if (!existing?.blocks) return m;
+          return {
+            ...m,
+            metadata: {
+              ...m.metadata,
+              custom: {
+                ...existing,
+                blocks: finishLiveReasoning(existing.blocks),
+              },
+            },
+          };
+        }
         const withCompletedBlocks = {
           ...m,
           metadata: {

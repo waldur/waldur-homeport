@@ -26,7 +26,30 @@ const rejectingStream = (error: any): AsyncIterable<any> => ({
   [Symbol.asyncIterator]: () => ({ next: () => Promise.reject(error) }),
 });
 
+const failingAfter = (parts: any[], error: any): AsyncIterable<any> => ({
+  async *[Symbol.asyncIterator]() {
+    for (const p of parts) yield p;
+    throw error;
+  },
+});
+
 describe('runBlockStream', () => {
+  it('stops the thinking timer when the stream fails mid-thought', async () => {
+    const messages = { current: [seed()] as readonly ThreadMessageLike[] };
+    await runBlockStream({
+      stream: failingAfter([{ k: 'reasoning', c: 'Hm' }], new Error('boom')),
+      assistantId: 'a1',
+      signal: new AbortController().signal,
+      setMessages: trackedSetMessages(messages),
+      mapError: () => 'mapped message',
+    });
+    const m = messages.current[0];
+    const [block] = (m.metadata?.custom as any).blocks;
+    expect(m.status).toMatchObject({ type: 'incomplete', reason: 'error' });
+    expect(block).toMatchObject({ key: 'reasoning', status: 'complete' });
+    expect(block.duration_ms).toEqual(expect.any(Number));
+  });
+
   it('accumulates blocks and completes the message', async () => {
     const messages = { current: [seed()] as readonly ThreadMessageLike[] };
     const onComplete = vi.fn();

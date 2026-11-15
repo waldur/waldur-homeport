@@ -274,3 +274,13 @@
     transform: translateX(100%);
   }
 }
+
+/* The AI Assistant's status text: a highlight moves across it. */
+@keyframes waldur-shimmer {
+  from {
+    background-position: 110% 0;
+  }
+  to {
+    background-position: -110% 0;
+  }
+}

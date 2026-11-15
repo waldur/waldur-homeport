@@ -33,8 +33,62 @@ export function updateBlocks(
     }
   }
 
+  // Any other frame ends the thinking. A tool call coming next sends no frame,
+  // so the backend also ends it with { k: 'reasoning', d: <ms> }.
+  if (part.k !== 'reasoning') {
+    existingBlocks = completeReasoning(existingBlocks);
+  }
+
+  if (part.k === 'reasoning') {
+    const durationMs = (part as Record<string, unknown>).d as
+      number | undefined;
+    if (durationMs !== undefined) {
+      return completeReasoning(existingBlocks, durationMs);
+    }
+    const lastBlock = existingBlocks[existingBlocks.length - 1];
+    if (lastBlock?.key === 'reasoning' && lastBlock.status === 'streaming') {
+      return [
+        ...existingBlocks.slice(0, -1),
+        { ...lastBlock, content: lastBlock.content + (part.c ?? '') },
+      ];
+    }
+    return [
+      ...existingBlocks,
+      {
+        id: randomUUID(),
+        key: 'reasoning',
+        content: part.c ?? '',
+        status: 'streaming',
+        startedAt: Date.now(),
+      },
+    ];
+  }
+
+  // Each model call's narration is a block of its own, as the backend stores
+  // it; appending would run two calls' narration together.
+  if (part.k === 'narration') {
+    return [
+      ...existingBlocks,
+      {
+        id: randomUUID(),
+        key: 'narration',
+        content: part.c ?? '',
+        status: 'complete',
+      },
+    ];
+  }
+
   // Handle 'load' key: create empty block with loading status
   if (part.k === 'load' && part.t) {
+    // The tools of one model call run with no frame in between.
+    const lastBlock = existingBlocks[existingBlocks.length - 1];
+    if (
+      part.t === 'tool' &&
+      lastBlock?.key === 'tool' &&
+      lastBlock.status === 'loading'
+    ) {
+      return existingBlocks;
+    }
     return [
       ...existingBlocks,
       {
@@ -239,11 +293,40 @@ export function updateBlocks(
   return existingBlocks;
 }
 
-export function markBlocksComplete(blocks: UIBlock[]): UIBlock[] {
-  return blocks.map((block) => ({
+function finishReasoning(block: UIBlock, durationMs?: number): UIBlock {
+  return {
     ...block,
-    status: 'complete' as const,
-  }));
+    status: 'complete',
+    duration_ms:
+      durationMs ??
+      block.duration_ms ??
+      (block.startedAt ? Date.now() - block.startedAt : undefined),
+  };
+}
+
+function completeReasoning(blocks: UIBlock[], durationMs?: number): UIBlock[] {
+  const lastBlock = blocks[blocks.length - 1];
+  if (lastBlock?.key !== 'reasoning' || lastBlock.status !== 'streaming') {
+    return blocks;
+  }
+  return [...blocks.slice(0, -1), finishReasoning(lastBlock, durationMs)];
+}
+
+// For a stream that failed or was stopped: its other blocks keep their status.
+export function finishLiveReasoning(blocks: UIBlock[]): UIBlock[] {
+  return blocks.map((block) =>
+    block.key === 'reasoning' && block.status === 'streaming'
+      ? finishReasoning(block)
+      : block,
+  );
+}
+
+export function markBlocksComplete(blocks: UIBlock[]): UIBlock[] {
+  return blocks.map((block) =>
+    block.key === 'reasoning' && block.status === 'streaming'
+      ? finishReasoning(block)
+      : { ...block, status: 'complete' as const },
+  );
 }
 
 /** The hpc_job stream part; the SDK's ChatResponse types only vm_order fields. */

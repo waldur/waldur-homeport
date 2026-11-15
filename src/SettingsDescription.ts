@@ -1777,9 +1777,15 @@ export const SettingsDescription = [
       },
       {
         key: 'AI_ASSISTANT_STREAM_TIMEOUT_SECONDS',
-        description: translate('Hard timeout in seconds for a full streaming request including LLM completion.'),
+        description: translate('Seconds a streaming request may go without receiving anything from the LLM or sending anything to the client before it times out.'),
         default: 120,
         type: 'integer',
+      },
+      {
+        key: 'AI_ASSISTANT_SHOW_REASONING',
+        description: translate('Stream and store a thinking model\'s reasoning for logged-in users, and show what the model says before a tool call as narration. Anonymous users get neither.'),
+        default: false,
+        type: 'boolean',
       },
       {
         key: 'AI_ASSISTANT_TOKEN_LIMIT_DAILY',

@@ -1,10 +1,13 @@
 import { FC, memo, useMemo } from 'react';
 
+import { groupProcess } from '@/ai-assistant/lib/blocks/groupProcess';
 import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
 import { UIBlock, UIBlockProps } from '@/ai-assistant/lib/types';
 
 interface BlockRendererProps {
   blocks: UIBlock[];
+  // Whether the reply is still being written; see groupProcess.
+  isStreaming?: boolean;
 }
 
 /**
@@ -61,14 +64,20 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       prev.block.context === next.block.context &&
       // Check chart fields — a chart arrives complete in one part
       prev.block.title === next.block.title &&
-      prev.block.series === next.block.series
+      prev.block.series === next.block.series &&
+      prev.block.duration_ms === next.block.duration_ms &&
+      prev.block.working === next.block.working &&
+      prev.block.startedAt === next.block.startedAt
     );
   },
 );
 
 MemoizedBlock.displayName = 'MemoizedBlock';
 
-export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
+export const BlockRenderer: FC<BlockRendererProps> = ({
+  blocks,
+  isStreaming = false,
+}) => {
   // Filter out empty blocks (memoized to prevent recalculation)
   // Allow loading blocks through even with empty content - they show their own loading UI
   // Allow vm_order blocks with structured data even if content is empty
@@ -76,9 +85,14 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
   // Allow homeport_nav blocks — they render from `links`, often have no `content`
   const validBlocks = useMemo(
     () =>
-      blocks.filter(
+      groupProcess(blocks, { streaming: isStreaming }).filter(
         (block) =>
-          block.content ||
+          // Line breaks a model writes between narration and a tool call
+          // arrive as their own block; rendered, each adds an empty row.
+          block.content?.trim() ||
+          // A working header is the reply's status row, even before its
+          // reasoning has any text.
+          (block.key === 'reasoning' && block.working) ||
           block.status === 'loading' ||
           block.key === 'resource_list' ||
           block.key === 'homeport_nav' ||
@@ -94,7 +108,7 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
               block.order_status ||
               block.status === 'streaming')),
       ),
-    [blocks],
+    [blocks, isStreaming],
   );
 
   return (
