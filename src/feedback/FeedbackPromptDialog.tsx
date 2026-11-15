@@ -19,10 +19,7 @@ import { composeValidators, required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { QuestionAnswerField } from '@/marketplace-checklist/QuestionAnswerField';
-import {
-  DependencyInfo,
-  evaluateQuestionVisibility,
-} from '@/marketplace-checklist/questionDependencies';
+import { getVisibleQuestions as visibleQuestionsFor } from '@/marketplace-checklist/questionDependencies';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -89,13 +86,7 @@ export const FeedbackPromptDialog: FC<FeedbackPromptDialogProps> = ({
   );
 
   const getVisibleQuestions = (values) =>
-    (data?.questions || []).filter((question) =>
-      evaluateQuestionVisibility(
-        question.dependencies_info as DependencyInfo,
-        fieldNames,
-        values || {},
-      ),
-    );
+    visibleQuestionsFor(data?.questions || [], fieldNames, values || {});
 
   const toAnswers = (values) =>
     buildAnswers(
