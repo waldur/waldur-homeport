@@ -64,6 +64,7 @@ export const CallEnum = {
   call_document_added: 'call_document_added',
   call_document_removed: 'call_document_removed',
   review_assignment_force_unblocked: 'review_assignment_force_unblocked',
+  review_assignments_closed_on_leaving_pool: 'review_assignments_closed_on_leaving_pool',
   reviewer_invitation_force_accepted: 'reviewer_invitation_force_accepted',
   reviewer_workload_limit_overridden: 'reviewer_workload_limit_overridden',
 };
