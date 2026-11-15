@@ -68937,6 +68937,11 @@
       "feature_area": "changelog"
     }
   },
+  "The endpoint does not expose any chat model.": {
+    "context": {
+      "feature_area": "playground"
+    }
+  },
   "The endpoint does not expose any model.": {
     "context": {
       "feature_area": "playground",
