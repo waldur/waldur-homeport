@@ -33,7 +33,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { RedirectStorage } from '@/core/StorageManager';
 import { getErrorStatus } from '@/error/utils';
-import { formatJsxTemplate, translate } from '@/i18n';
+import { formatJsx, formatJsxTemplate, translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useTitle } from '@/navigation/title';
 import { propVal } from '@/property/propertyFields';
@@ -263,7 +263,11 @@ const ConsentForm: FC<{
 
       <div>
         <p className="mb-2 font-medium text-primary">
-          {translate('The app will be able to:')}
+          {translate(
+            '{client} will be able to:',
+            { client: <strong>{details.client_name}</strong> },
+            formatJsxTemplate,
+          )}
         </p>
         <ul className="flex list-none flex-col gap-1.5 pl-0">
           {details.scopes.map((scope) => (
@@ -279,9 +283,21 @@ const ConsentForm: FC<{
         </ul>
       </div>
 
-      <p className="text-tertiary">
+      <p className="text-primary">
         {translate(
-          'The app acts as you. It never gets more access than your own account has.',
+          '{client} can act on your behalf with the permissions above.',
+          { client: <strong>{details.client_name}</strong> },
+          formatJsxTemplate,
+        )}{' '}
+        {translate(
+          'You can disconnect it any time under <Link>Connected apps</Link>.',
+          {
+            // A new tab, so this request stays open.
+            Link: (s) => (
+              <Link state="profile-connected-apps" label={s} target="_blank" />
+            ),
+          },
+          formatJsx,
         )}
       </p>
 
@@ -350,7 +366,7 @@ const DecisionResult: FC<{
       }
       message={
         allowed
-          ? translate('It can now act as you, with the access you allowed.')
+          ? translate('It can now act on your behalf.')
           : translate('It did not get access to your account.')
       }
       status={translate('Taking you back to {client}…', {
