@@ -25,7 +25,6 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
-import { useSelector } from 'react-redux';
 import {
   chatQuotaUsageRetrieve,
   chatSuggestionsRetrieve,
@@ -60,8 +59,7 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
-import { useUser } from '@/workspace/hooks';
-import { getImpersonatorUser } from '@/workspace/selectors';
+import { useImpersonatorUser, useUser } from '@/workspace/hooks';
 
 export const Thread: FC = () => {
   const { loadingThreadId, currentThreadId, threads } = useThreadContext();
@@ -157,7 +155,7 @@ const SUGGESTIONS_ID = 'aui-thread-suggestions';
 // are in the key; only the ids are cached, the copy is built on render.
 const useThreadSuggestions = () => {
   const user = useUser();
-  const impersonator = useSelector(getImpersonatorUser);
+  const impersonator = useImpersonatorUser();
   const { data: ids } = useQuery({
     queryKey: ['chatSuggestions', user?.uuid, impersonator?.uuid],
     queryFn: () =>

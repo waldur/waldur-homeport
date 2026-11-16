@@ -11,18 +11,13 @@ import {
   ThreadSuggestions,
   VISIBLE_SUGGESTIONS,
 } from '@/ai-assistant/components/Thread';
-import { useUser } from '@/workspace/hooks';
+import { useImpersonatorUser, useUser } from '@/workspace/hooks';
 
 const state: {
   workspace: { user?: { uuid: string }; impersonatorUser?: { uuid: string } };
 } = {
   workspace: { user: { uuid: 'user-1' } },
 };
-
-vi.mock('react-redux', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('react-redux')>()),
-  useSelector: (selector: (s: unknown) => unknown) => selector(state),
-}));
 
 vi.mock('@assistant-ui/react', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@assistant-ui/react')>()),
@@ -73,6 +68,9 @@ describe('ThreadSuggestions', () => {
     vi.mocked(client.chatSuggestionsRetrieve).mockClear();
     state.workspace = { user: { uuid: 'user-1' } };
     vi.mocked(useUser).mockImplementation(() => state.workspace.user as any);
+    vi.mocked(useImpersonatorUser).mockImplementation(
+      () => state.workspace.impersonatorUser as any,
+    );
   });
 
   it('shows the offered prompts and no More when they all fit', async () => {
