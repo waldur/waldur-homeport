@@ -213,7 +213,6 @@ export const UserAffiliationsList: FunctionComponent<
         emptyMessage={translate(
           'Roles are granted by creating an organization or accepting an invitation to an organization or project.',
         )}
-        placeholderActions={headerActions}
         placeholderHasRetry={hasSearchOrFilters}
         filters={
           hasActionBar ? (
