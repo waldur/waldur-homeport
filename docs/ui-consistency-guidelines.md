@@ -938,16 +938,39 @@ const isWide = useBreakpointUp('xl'); // >= 1200px
 const cannotHover = useMediaQuery('(hover: none)');
 ```
 
-### 11.2 Filter Position Adaptation
+### 11.2 Page Width vs Window Width
+
+The window's width and the page's are not the same: a drawer docked beside the page makes the page narrower while the window stays wide. Page content lays itself out by the **page**; the app's chrome by the window.
+
+| What                                                                                                                                       | Lays out by | Use                                                                                                        |
+| :----------------------------------------------------------------------------------------------------------------------------------------- | :---------- | :--------------------------------------------------------------------------------------------------------- |
+| Page content: heroes, page tabs, cards, tables, forms on a page                                                                            | the page    | `page-sm:` … `page-2xl:`, `page-max-sm:` … `page-max-xl:`; `usePageBreakpointUp` / `usePageBreakpointDown` |
+| The chrome: sidebar, header, drawers and dialogs themselves; whatever is about the screen's edge (a card bleeding to the edges on a phone) | the window  | `sm:` … `2xl:`, `max-*:`; `useBreakpointUp` / `useBreakpointDown`                                          |
+
+- The `page-*` variants are container queries on the nearest `page` container, at the same widths as the screens (576/768/992/1200/1400). Inside the layout that is its page region (`src/navigation/Layout.tsx`): the region left of a docked drawer, sidebar included. Everywhere else it is `<body>` (`design-tokens/.../variants.css`): drawers and dialogs, which portal to `<body>`, the micro-apps and Storybook all lay out by the window as before.
+- `usePageBreakpointUp` / `usePageBreakpointDown` measure the same boxes (`PageWidthProvider` in the layout, `<body>` elsewhere), so a class and a hook on the same component always agree. They re-render only when a breakpoint is crossed.
+- Both read a width that leaves out a classic scrollbar (Windows, Linux, macOS set to always show scrollbars), so with no drawer docked a `page-*` variant switches up to a scrollbar's width (~15px) of window later than its screen variant. The sidebar's auto-collapse adds the scrollbar back and keeps its window thresholds exactly.
+- The sidebar collapses to its icon rail by the page region's width, so beside a docked drawer the page behaves as in a window of that width. One difference: below `lg` a window turns the sidebar into a sheet opened from the header; beside a docked drawer it stays a rail, since the header, which goes by the window, shows no button to open the sheet.
+- Content portaled out of the page (a popover, a menu) reads the layout's width in a hook but `<body>`'s in CSS: keep `page-*` classes out of portaled content, or use the hook there.
 
 ```tsx
-// Automatically converts 'menu' to 'sidebar' on small screens
-const isSm = useBreakpointDown('sm');
+import { usePageBreakpointDown } from 'waldur-ui';
+
+const isSm = usePageBreakpointDown('sm'); // the page is < 576px wide
+
+<div className="grid grid-cols-1 page-md:grid-cols-2 gap-x-5">…</div>;
+```
+
+### 11.3 Filter Position Adaptation
+
+```tsx
+// Automatically converts 'menu' to 'sidebar' on a narrow page
+const isSm = usePageBreakpointDown('sm');
 const filterPosition =
   isSm && originalPosition === 'menu' ? 'sidebar' : originalPosition;
 ```
 
-### 11.3 Interactive Element Sizing
+### 11.4 Interactive Element Sizing
 
 **Form controls (inputs, selects, textareas):**
 

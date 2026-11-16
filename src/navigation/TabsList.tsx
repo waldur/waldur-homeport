@@ -164,7 +164,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
     <Menu open={open} onOpenChange={setOpen} openOnHover="desktop">
       <li
         data-testid={tabTestId(parentTab)}
-        className="flex items-center me-0 lg:me-1.5"
+        className="flex items-center me-0 page-lg:me-1.5"
       >
         <Menu.Trigger asChild>
           <button

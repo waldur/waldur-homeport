@@ -1,6 +1,7 @@
 export { cn } from './cn';
 export { saveFile } from './saveFile';
 export * from './useMediaQuery';
+export * from './pageWidth';
 export { useDebouncedValue } from './useDebouncedValue';
 export { isEmptyValue } from './isEmptyValue';
 export { nextId } from './nextId';

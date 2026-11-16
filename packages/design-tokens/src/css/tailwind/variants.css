@@ -37,3 +37,32 @@
    the modal had (ModalRoot.css), which wrappers' own display
    classes never beat. */
 @custom-variant modal-passthrough (& *:not([data-slot='modal-header']):not([data-slot='modal-body']):not([data-slot='modal-footer']):not([data-slot='modal-header'] *):not([data-slot='modal-body'] *):not([data-slot='modal-footer'] *));
+
+/* The page's width rather than the window's: container queries on the
+   nearest `page` container. Homeport's layout makes its page region one (the
+   region left of a docked drawer, sidebar included); everything else --
+   drawers and dialogs, which portal to <body>, the micro-apps, Storybook --
+   falls back to <body> (below), as wide as the window less any classic
+   scrollbar. With no drawer docked a page-* variant therefore matches where
+   its screen variant does, give or take a scrollbar's width; with one
+   docked, the page is narrower by the drawer. Page content uses these, the
+   app's chrome (sidebar, header, drawers and dialogs themselves) the screen
+   variants. Same widths as the screens (primitives/breakpoints.css). The
+   waldur-ui hooks usePageBreakpointUp/Down measure the same boxes. */
+@custom-variant page-sm (@container page (width >= 576px));
+@custom-variant page-md (@container page (width >= 768px));
+@custom-variant page-lg (@container page (width >= 992px));
+@custom-variant page-xl (@container page (width >= 1200px));
+@custom-variant page-2xl (@container page (width >= 1400px));
+@custom-variant page-max-sm (@container page (width < 576px));
+@custom-variant page-max-md (@container page (width < 768px));
+@custom-variant page-max-lg (@container page (width < 992px));
+@custom-variant page-max-xl (@container page (width < 1200px));
+
+/* The fallback `page` container: whatever is outside homeport's page region
+   lays itself out by the window (see the page-* variants above). */
+@layer base {
+  body {
+    container: page / inline-size;
+  }
+}

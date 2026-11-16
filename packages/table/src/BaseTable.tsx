@@ -12,7 +12,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useStore } from 'react-redux';
 import {
   TablePagination,
-  useBreakpointDown,
+  usePageBreakpointDown,
   Card,
   CardContent,
   CardHeader,
@@ -384,7 +384,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       >
         {/* Standalone header */}
         {props.standalone && (
-          <div className="flex justify-between gap-3 mb-6 max-sm:mb-4">
+          <div className="flex justify-between gap-3 mb-6 page-max-sm:mb-4">
             <div>
               <div className="flex items-center self-stretch gap-1.5">
                 <h1 className="mb-0 text-2xl">
@@ -409,7 +409,9 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               )}
             </div>
             {!props.standaloneActionsInTable && (
-              <div className="hidden sm:flex gap-3">{props.tableActions}</div>
+              <div className="hidden page-sm:flex gap-3">
+                {props.tableActions}
+              </div>
             )}
           </div>
         )}
@@ -514,7 +516,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             <div
               ref={tableResponsiveRef}
               data-slot="table-responsive"
-              className="@container/table overflow-x-auto relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe in-[[data-slot=modal-content]]:border in-[[data-slot=modal-content]]:border-solid in-[[data-slot=modal-content]]:border-secondary in-[[data-slot=modal-content]]:rounded-lg"
+              className="@container/table overflow-x-auto relative page-max-md:flex page-max-md:flex-col page-max-md:items-center page-max-md:items-center-safe in-[[data-slot=modal-content]]:border in-[[data-slot=modal-content]]:border-solid in-[[data-slot=modal-content]]:border-secondary in-[[data-slot=modal-content]]:rounded-lg"
               style={{ minHeight: tallestPage || props.minHeight || 300 }}
               onScroll={debouncedScrollHandler}
             >
@@ -559,7 +561,7 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     initColumnPositions,
   } = props;
 
-  const isSm = useBreakpointDown('sm');
+  const isSm = usePageBreakpointDown('sm');
 
   const filterPosition =
     isSm && originalFilterPosition === 'menu'

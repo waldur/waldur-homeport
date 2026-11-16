@@ -17,7 +17,11 @@ const setOpen = vi.fn((value: boolean) => {
 });
 let mockTheme: 'dark' | 'light' = 'dark';
 
+// The page's width: the layout's page region, or the window outside it.
+let mockPageWidth = 1600;
+
 vi.mock('waldur-ui', () => ({
+  usePageBreakpointUp: (px: number) => mockPageWidth >= px,
   useSidebar: () => ({
     state: mockSidebarState,
     open: mockOpen,
@@ -47,6 +51,7 @@ describe('useSidebarLayoutShim', () => {
     mockOpen = true;
     mockMobile = false;
     mockTheme = 'dark';
+    mockPageWidth = 1600;
     ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE = 'dark';
   });
 
@@ -56,69 +61,80 @@ describe('useSidebarLayoutShim', () => {
     expect(applySidebarStyle).toHaveBeenCalledWith('dark');
   });
 
-  it('markUserToggled stops the resize-driven auto-minimize from firing', () => {
-    const { result } = renderHook(() => useSidebarLayoutShim());
+  it('markUserToggled stops the auto-minimize from firing', () => {
+    const { result, rerender } = renderHook(() => useSidebarLayoutShim());
     result.current.markUserToggled();
     setOpen.mockClear();
 
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      value: 1000,
-    });
-    window.dispatchEvent(new Event('resize'));
+    mockPageWidth = 1000;
+    rerender();
 
     expect(setOpen).not.toHaveBeenCalled();
   });
 
-  it('auto-minimizes on resize to medium desktop width when open', () => {
+  it('auto-minimizes on a medium desktop width when open', () => {
     mockOpen = true;
-    renderHook(() => useSidebarLayoutShim());
+    const { rerender } = renderHook(() => useSidebarLayoutShim());
     setOpen.mockClear();
 
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      value: 1000,
-    });
-    window.dispatchEvent(new Event('resize'));
+    mockPageWidth = 1000;
+    rerender();
 
     expect(setOpen).toHaveBeenCalledWith(false);
   });
 
-  it('auto-expands on resize to wide desktop width when collapsed', () => {
+  it("goes by the page's width: a docked drawer narrows it as a window would", () => {
+    mockOpen = true;
+    mockPageWidth = 900;
+    renderHook(() => useSidebarLayoutShim());
+
+    expect(setOpen).toHaveBeenCalledWith(false);
+  });
+
+  it('auto-expands on a wide desktop width when collapsed', () => {
     mockOpen = false;
     mockSidebarState = 'collapsed';
-    renderHook(() => useSidebarLayoutShim());
+    mockPageWidth = 1000;
+    const { rerender } = renderHook(() => useSidebarLayoutShim());
     setOpen.mockClear();
 
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      value: 1500,
-    });
-    window.dispatchEvent(new Event('resize'));
+    mockPageWidth = 1500;
+    rerender();
 
     expect(setOpen).toHaveBeenCalledWith(true);
   });
 
-  it('registers resize listener only once and does not re-register when open changes', () => {
-    const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
+  it('acts only when a threshold is crossed, not as the sidebar toggles', () => {
+    mockOpen = true;
     const { rerender } = renderHook(() => useSidebarLayoutShim());
+    setOpen.mockClear();
 
-    const initialResizeCalls = addEventListenerSpy.mock.calls.filter(
-      ([event]) => event === 'resize',
-    ).length;
-    expect(initialResizeCalls).toBe(1);
-
-    // Simulate sidebar open state changing
+    // The user collapsing it on a wide page is left alone.
     mockOpen = false;
     mockSidebarState = 'collapsed';
     rerender();
 
-    const afterRerenderCalls = addEventListenerSpy.mock.calls.filter(
-      ([event]) => event === 'resize',
-    ).length;
-    expect(afterRerenderCalls).toBe(1);
+    expect(setOpen).not.toHaveBeenCalled();
+  });
 
-    addEventListenerSpy.mockRestore();
+  it("counts a classic scrollbar back in, as the window's width does", () => {
+    // A 1410px window with a 15px scrollbar: the page region is 1395px, the
+    // window still wide enough to keep the sidebar open.
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 1410,
+    });
+    Object.defineProperty(document.documentElement, 'clientWidth', {
+      configurable: true,
+      value: 1395,
+    });
+    mockPageWidth = 1395;
+    mockOpen = true;
+    renderHook(() => useSidebarLayoutShim());
+
+    expect(setOpen).not.toHaveBeenCalled();
+    // jsdom's own values back.
+    delete (document.documentElement as any).clientWidth;
   });
 
   it('publishes the width the sidebar takes on <html> and removes it on unmount', () => {

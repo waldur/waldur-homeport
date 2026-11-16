@@ -5,7 +5,7 @@ import {
   ConfiguredSidebarStyle,
   resolveSidebarStyle,
 } from 'waldur-design-tokens';
-import { useSidebar } from 'waldur-ui';
+import { usePageBreakpointUp, useSidebar } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { useTheme } from '@/theme/useTheme';
@@ -55,25 +55,28 @@ export function useSidebarLayoutShim() {
   }, [state, isMobile]);
 
   // Auto-minimize on medium desktop widths (768–1399px), unless the user
-  // has manually toggled the sidebar.
-  // Uses refs for open and setOpen so the window resize listener is registered
-  // once on mount rather than re-registering on open state changes.
+  // has manually toggled the sidebar. The width is the page's (the layout's
+  // page region, sidebar included): a drawer docked beside the page narrows
+  // it as a narrower window would. The page region leaves out a classic
+  // scrollbar, which the window's width counts; added back, so that with no
+  // drawer docked the thresholds fall where they always have. Only crossing
+  // a threshold re-runs this, not each pixel of a resize.
+  // A document not laid out yet (clientWidth 0) has no scrollbar to count.
+  const documentWidth =
+    typeof document === 'undefined' ? 0 : document.documentElement.clientWidth;
+  const scrollbar =
+    documentWidth > 0 ? Math.max(0, window.innerWidth - documentWidth) : 0;
+  const medium = usePageBreakpointUp(768 - scrollbar);
+  const wide = usePageBreakpointUp(1400 - scrollbar);
   useEffect(() => {
-    const handleResize = () => {
-      if (userToggledRef.current) return;
-      const width = window.innerWidth;
-      const shouldMinimize = width >= 768 && width < 1400;
-      const currentOpen = openRef.current;
-      if (shouldMinimize && currentOpen) {
-        setOpenRef.current(false);
-      } else if (!shouldMinimize && width >= 1400 && !currentOpen) {
-        setOpenRef.current(true);
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    if (userToggledRef.current) return;
+    const shouldMinimize = medium && !wide;
+    if (shouldMinimize && openRef.current) {
+      setOpenRef.current(false);
+    } else if (wide && !openRef.current) {
+      setOpenRef.current(true);
+    }
+  }, [medium, wide]);
 
   // Sidebar style-variant token: reactive to theme changes so 'auto' keeps
   // following the app's light/dark toggle.

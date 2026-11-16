@@ -2,7 +2,7 @@ import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { translate } from 'waldur-i18n-runtime';
-import { BaseButton, useBreakpointDown } from 'waldur-ui';
+import { BaseButton, usePageBreakpointDown } from 'waldur-ui';
 
 import { clearAllFilters } from './actions';
 import { TableFiltersMenu } from './TableFiltersMenu';
@@ -34,7 +34,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
     props.applyFiltersFn(true);
   }, [props, dispatch]);
 
-  const isMd = useBreakpointDown('md');
+  const isMd = usePageBreakpointDown('md');
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
