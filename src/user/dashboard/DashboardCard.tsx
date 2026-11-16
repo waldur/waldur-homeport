@@ -3,6 +3,8 @@ import { FC, ReactNode } from 'react';
 
 import { Card, CardContent } from 'waldur-ui';
 
+import { CLICKABLE_CARD_CLASSNAME } from '@/core/clickableCard';
+
 interface DashboardCardProps {
   title: string;
   message: string;
@@ -28,7 +30,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
     <Card
       bordered
       className={classNames('min-h-30', {
-        'hover:border-brand cursor-pointer': isClickable,
+        [CLICKABLE_CARD_CLASSNAME]: isClickable,
         'opacity-50 cursor-default': !isClickable,
       })}
       onClick={isClickable ? onClick : undefined}

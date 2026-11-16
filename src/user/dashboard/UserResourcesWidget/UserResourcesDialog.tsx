@@ -11,6 +11,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { FixedHeightTabs } from '@/proposals/workflow-description/FixedHeightTabs';
 import { router } from '@/router';
 
 import { ResourceProjectGroup } from './ResourceProjectGroup';
@@ -44,6 +45,13 @@ export const UserResourcesDialog: FC = () => {
     router.stateService.go('all-resources');
   };
 
+  const showingNote =
+    data?.hasMore &&
+    translate('Showing {displayed} of {total} resources', {
+      displayed: MAX_RESOURCES_DISPLAY,
+      total: data.totalCount,
+    });
+
   return (
     <ModalDialog
       title={translate('Getting Started with Your Resources')}
@@ -54,11 +62,17 @@ export const UserResourcesDialog: FC = () => {
       iconColor="info"
       footer={
         <>
+          {showingNote && (
+            <span className="text-quaternary me-auto hidden sm:block">
+              {showingNote}
+            </span>
+          )}
           <CloseDialogButton />
           <BaseButton
             onClick={handleViewAllResources}
             label={translate('View all resources')}
             variant="primary"
+            size="lg"
           />
         </>
       }
@@ -75,18 +89,23 @@ export const UserResourcesDialog: FC = () => {
         </div>
       ) : (
         <div className="flex flex-col gap-5">
-          {data?.projects?.map((project) => (
-            <ResourceProjectGroup key={project.uuid} project={project} />
-          ))}
-          {data?.hasMore && (
-            <div className="text-center text-quaternary">
-              {translate(
-                'Showing {displayed} of {total} resources. Click "View all resources" to see the complete list.',
-                {
-                  displayed: MAX_RESOURCES_DISPLAY,
-                  total: data.totalCount,
-                },
-              )}
+          {data.projects.length > 1 ? (
+            <FixedHeightTabs
+              items={data.projects.map((project) => ({
+                value: project.uuid,
+                title: project.name,
+                count: project.resources.length,
+                content: <ResourceProjectGroup project={project} inTab />,
+              }))}
+              listClassName="mb-4"
+            />
+          ) : (
+            <ResourceProjectGroup project={data.projects[0]} />
+          )}
+          {/* On a phone the footer wraps, so the note stays in the body. */}
+          {showingNote && (
+            <div className="text-center text-quaternary sm:hidden">
+              {showingNote}
             </div>
           )}
         </div>

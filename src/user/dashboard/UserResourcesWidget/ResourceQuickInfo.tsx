@@ -1,11 +1,10 @@
 import {
-  ArrowRightIcon,
   ArrowSquareOutIcon,
   BookOpenIcon,
   CopyIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, MouseEvent, useCallback, useMemo } from 'react';
 import {
   marketplaceResourcesOfferingRetrieve,
   Resource,
@@ -28,7 +27,9 @@ import {
 } from '@/marketplace/resources/details/ResourceComponentItem';
 import { PublicResourceLink } from '@/marketplace/resources/list/PublicResourceLink';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { useModal } from '@/modal/actions';
 import { getResourceAccessEndpoints, isSshFormat } from '@/resource/utils';
+import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 
 interface ResourceQuickInfoProps {
@@ -91,12 +92,33 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
 
   const hasGettingStarted = offering?.getting_started || endpoints.length > 0;
 
+  const { closeDialog } = useModal();
+
+  // The card opens the resource, as ProjectCard and OrganizationCard do; its
+  // own links and buttons stop the click so they do only what they say.
+  const handleCardClick = () => {
+    closeDialog();
+    router.stateService.go('marketplace-resource-details', {
+      resource_uuid: resource.uuid,
+    });
+  };
+
+  const stopPropagation = (e: MouseEvent) => e.stopPropagation();
+
   return (
     <ModelCard1
+      clickable
+      onClick={handleCardClick}
       title={resource.name}
       titleNode={
         <span className="flex items-center justify-between gap-2">
-          <PublicResourceLink row={resource} />
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+          <span
+            className="flex items-center gap-1 min-w-0"
+            onClick={stopPropagation}
+          >
+            <PublicResourceLink row={resource} />
+          </span>
           <ResourceStateField resource={resource} shape="pill" tone="outline" />
         </span>
       }
@@ -116,7 +138,11 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
               label={translate('Access resource')}
               value={
                 endpoints.length > 0 && (
-                  <span className="flex flex-wrap gap-x-3 gap-y-1">
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+                  <span
+                    className="flex flex-wrap gap-x-3 gap-y-1"
+                    onClick={stopPropagation}
+                  >
                     {endpoints.map((endpoint, index) => (
                       <span key={index} className="flex items-center">
                         <a
@@ -198,35 +224,23 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         </div>
       }
       footer={
-        <div className="flex justify-between items-center w-full">
-          <div>
-            {hasGettingStarted && (
-              <Link
-                state="marketplace-resource-details"
-                params={{
-                  resource_uuid: resource.uuid,
-                  tab: 'getting-started',
-                }}
-                buttonVariant="text-primary"
-                buttonSize="sm"
-                className="p-0 me-2.5"
-              >
-                <BookOpenIcon size={16} weight="bold" className="me-1" />
-                {translate('Getting started')}
-              </Link>
-            )}
+        hasGettingStarted && (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+          <div onClick={stopPropagation}>
+            <Link
+              state="marketplace-resource-details"
+              params={{
+                resource_uuid: resource.uuid,
+                tab: 'getting-started',
+              }}
+              buttonVariant="text-primary"
+              buttonSize="sm"
+            >
+              <BookOpenIcon size={16} weight="bold" />
+              {translate('Getting started')}
+            </Link>
           </div>
-          <Link
-            state="marketplace-resource-details"
-            params={{ resource_uuid: resource.uuid }}
-            buttonVariant="text-primary"
-            buttonSize="sm"
-            className="p-0"
-          >
-            {translate('View details')}
-            <ArrowRightIcon size={16} weight="bold" className="ms-1" />
-          </Link>
-        </div>
+        )
       }
     />
   );
