@@ -143,7 +143,6 @@ export const RemoteProjectsList = () => {
       verboseName={translate('Remote Projects')}
       title={translate('Remote Projects')}
       showPageSizeSelector={true}
-      standalone
       hasQuery
       hasOptionalColumns
       tableActions={

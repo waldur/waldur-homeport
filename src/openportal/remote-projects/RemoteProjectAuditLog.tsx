@@ -147,7 +147,6 @@ export const RemoteProjectAuditLog = ({
       title={hideTitle ? undefined : translate('Audit log')}
       hideTitle={hideTitle}
       showPageSizeSelector={true}
-      standalone={!remoteProjectUuid}
       hasActionBar={!remoteProjectUuid}
       hasQuery={!remoteProjectUuid}
       hasOptionalColumns
