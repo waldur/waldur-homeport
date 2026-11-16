@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { getIdentityProviders } from '@/administration/api';
-import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -13,7 +12,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
 import DefaultVideoBackground from '../default-video-background.mp4';
-import { getHeroBackgroundImage } from '../heroImage';
+import { getHeroBackgroundImage, getHeroImageUrl } from '../heroImage';
 import { LoginLogo } from '../LoginLogo';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
@@ -49,7 +48,7 @@ export const VideoBackgroundLayout = () => {
           loop
           muted
           playsInline
-          poster={getIconUrl('hero_image')}
+          poster={getHeroImageUrl()}
           onError={handleVideoError}
         >
           <source src={videoUrl} type="video/mp4" />
