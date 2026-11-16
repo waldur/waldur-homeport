@@ -14,6 +14,7 @@ import {
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 import { DrawerContext, drawerState } from './DrawerContext';
 import { DOCK_MIN_PAGE_WIDTH } from './drawerDock';
@@ -84,12 +85,15 @@ export const DrawerRoot: FunctionComponent = () => {
       window.removeEventListener('resize', measure);
     };
   }, [isOpen, isDesktop, panel]);
-  // The floating card drawers but the assistant's can dock (the toggle in
-  // their header). A full-height drawer, a form say, cannot: it is modal,
-  // and a dialog switching between modal and not remounts what it holds.
+  // The floating card drawers can dock (the toggle in their header). A
+  // full-height drawer, a form say, cannot: it is modal, and a dialog
+  // switching between modal and not remounts what it holds. Nor can the
+  // assistant a signed-out visitor opens: the sign-in pages have no page
+  // layout to dock beside.
+  const user = useUser();
   const dockable =
     Boolean(drawerProps.shellClass) &&
-    drawerProps.shellClass !== DRAWER_SHELL_CLASS.ai;
+    !(drawerProps.shellClass === DRAWER_SHELL_CLASS.ai && !user);
   // Docked, as the user chose: the page stays usable, and clicking it or
   // going to another page leaves the drawer open. Expanded, the drawer spans
   // the page and covers it as any drawer does.

@@ -3,12 +3,14 @@ import userEvent from '@testing-library/user-event';
 import { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { User } from 'waldur-js-client';
 
 import { Menu, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { Select } from '@/form/select';
 import { ActionsMenu } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
 import { DrawerService, useDrawer } from './actions';
 import { DrawerProvider } from './DrawerContext';
@@ -464,6 +466,33 @@ describe('DrawerRoot', () => {
 
       act(() => DrawerService.closeOnNavigation());
       expect(getDrawer()).toHaveAttribute('data-state', 'open');
+    });
+
+    it('is offered on the assistant to a signed-in user', async () => {
+      const { openShelled } = renderDrawer();
+      act(() => openShelled());
+      await screen.findByTestId('drawer-content');
+
+      expect(screen.getByTestId('drawer-dock-toggle')).toHaveAttribute(
+        'aria-pressed',
+        'false',
+      );
+    });
+
+    it('is not offered on the assistant a signed-out visitor opens', async () => {
+      // Signed out: no user (the test setup's default is a signed-in one).
+      vi.mocked(useUser).mockReturnValue(undefined);
+      try {
+        const { openShelled } = renderDrawer();
+        act(() => openShelled());
+        await screen.findByTestId('drawer-content');
+
+        expect(
+          screen.queryByTestId('drawer-dock-toggle'),
+        ).not.toBeInTheDocument();
+      } finally {
+        vi.mocked(useUser).mockReturnValue({} as User);
+      }
     });
 
     it('is not offered on a full-height drawer, which stays modal', async () => {
