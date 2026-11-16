@@ -188,7 +188,7 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
             ? // Term above value at every width: no term track to squeeze
               // the value in a narrow cell.
               'flex flex-col m-0'
-            : 'flex flex-wrap m-0 sm:grid sm:grid-cols-[var(--dt-width)_minmax(0,1fr)] sm:gap-6 items-baseline',
+            : 'flex flex-wrap m-0 page-sm:grid page-sm:grid-cols-[var(--dt-width)_minmax(0,1fr)] page-sm:gap-6 items-baseline',
           space ? SPACE_CLASSES[space] : undefined,
           props.className,
         )}
@@ -198,7 +198,7 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
             data-slot="property-term"
             className={cn(
               'w-full text-secondary font-medium break-words m-0',
-              !ctx.stacked && 'sm:w-auto',
+              !ctx.stacked && 'page-sm:w-auto',
               ctx.labelClass,
               props.labelClass,
             )}
@@ -230,8 +230,8 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
               aria-labelledby={ddLabelledBy}
               className={cn(
                 'w-full m-0 text-quaternary [&_p]:m-0',
-                !ctx.stacked && 'sm:w-auto',
-                i > 0 && !ctx.stacked && 'sm:col-start-2',
+                !ctx.stacked && 'page-sm:w-auto',
+                i > 0 && !ctx.stacked && 'page-sm:col-start-2',
                 !hasEllipsis && 'wrap-break-word',
                 hasEllipsis && 'min-w-0 overflow-hidden',
                 ctx.valueClass,
@@ -267,7 +267,7 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
     <RowTag
       {...rowProps}
       className={cn(
-        'm-0 col-span-full grid grid-cols-1 sm:grid-cols-subgrid gap-x-6 gap-y-1 py-4 min-h-[52px] border-b border-secondary last:border-b-0',
+        'm-0 col-span-full grid grid-cols-1 page-sm:grid-cols-subgrid gap-x-6 gap-y-1 py-4 min-h-[52px] border-b border-secondary last:border-b-0',
         ctx.alignTop ? 'items-start' : 'items-center',
         props.className,
       )}
@@ -328,11 +328,11 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
             className={cn(
               'm-0 min-w-0',
               i > 0
-                ? 'sm:col-start-2'
+                ? 'page-sm:col-start-2'
                 : hasTerm
                   ? ctx.hideActions
-                    ? 'sm:col-start-2'
-                    : 'sm:col-start-2 sm:col-span-2 flex items-center justify-between gap-4 sm:grid sm:grid-cols-subgrid'
+                    ? 'page-sm:col-start-2'
+                    : 'page-sm:col-start-2 page-sm:col-span-2 flex items-center justify-between gap-4 page-sm:grid page-sm:grid-cols-subgrid'
                   : 'col-span-full',
               ctx.alignTop ? 'items-start' : 'items-center',
             )}
@@ -345,7 +345,10 @@ const PropertyItemBody: FC<PropertyItemProps> = (allProps) => {
                 ctx.detailsMode || props.disabled
                   ? 'text-quaternary font-normal'
                   : 'text-tertiary',
-                !showActions && !ctx.hideActions && hasTerm && 'sm:col-span-2',
+                !showActions &&
+                  !ctx.hideActions &&
+                  hasTerm &&
+                  'page-sm:col-span-2',
                 ctx.valueClass,
                 props.valueClass,
               )}
@@ -448,11 +451,11 @@ const listVariantClasses = (
       'grid grid-cols-1',
       resolvedTermWidth
         ? hideActions
-          ? 'sm:grid-cols-[var(--dt-width)_1fr]'
-          : 'sm:grid-cols-[var(--dt-width)_1fr_auto]'
+          ? 'page-sm:grid-cols-[var(--dt-width)_1fr]'
+          : 'page-sm:grid-cols-[var(--dt-width)_1fr_auto]'
         : hideActions
-          ? 'sm:grid-cols-[minmax(140px,max-content)_1fr] sm:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(150px,33.333%)_1fr] md:grid-cols-[minmax(190px,max-content)_1fr] md:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(200px,33.333%)_1fr]'
-          : 'sm:grid-cols-[minmax(150px,25%)_1fr_auto] sm:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(150px,33.333%)_1fr_auto] md:grid-cols-[minmax(200px,25%)_1fr_auto] md:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(200px,33.333%)_1fr_auto]',
+          ? 'page-sm:grid-cols-[minmax(140px,max-content)_1fr] page-sm:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(150px,33.333%)_1fr] page-md:grid-cols-[minmax(190px,max-content)_1fr] page-md:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(200px,33.333%)_1fr]'
+          : 'page-sm:grid-cols-[minmax(150px,25%)_1fr_auto] page-sm:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(150px,33.333%)_1fr_auto] page-md:grid-cols-[minmax(200px,25%)_1fr_auto] page-md:[&:has(>div>dt>[data-slot=property-description])]:grid-cols-[minmax(200px,33.333%)_1fr_auto]',
     ],
     // `summary` rows lay out their own label/value widths (CSS grid with
     // `--dt-width`), so the list is a plain block.

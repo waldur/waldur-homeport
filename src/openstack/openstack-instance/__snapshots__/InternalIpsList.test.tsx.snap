@@ -52,10 +52,10 @@ exports[`InternalIpsList > renders list 1`] = `
           </div>
         </div>
         <div
-          class="order-2 flex items-center max-sm:flex-wrap whitespace-nowrap gap-3 ms-auto justify-end"
+          class="order-2 flex items-center page-max-sm:flex-wrap whitespace-nowrap gap-3 ms-auto justify-end"
         >
           <div
-            class="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-3"
+            class="flex page-sm:justify-end page-max-sm:flex-wrap whitespace-nowrap gap-3"
           >
             <button
               class="inline-flex items-center justify-center gap-1.5 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)] hover:bg-[var(--btn-tertiary-bg-hover)] focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 px-[16px] py-[10px]"
@@ -80,7 +80,7 @@ exports[`InternalIpsList > renders list 1`] = `
       data-slot="card-content"
     >
       <div
-        class="@container/table overflow-x-auto relative max-md:flex max-md:flex-col max-md:items-center max-md:items-center-safe in-[[data-slot=modal-content]]:border in-[[data-slot=modal-content]]:border-solid in-[[data-slot=modal-content]]:border-secondary in-[[data-slot=modal-content]]:rounded-lg"
+        class="@container/table overflow-x-auto relative page-max-md:flex page-max-md:flex-col page-max-md:items-center page-max-md:items-center-safe in-[[data-slot=modal-content]]:border in-[[data-slot=modal-content]]:border-solid in-[[data-slot=modal-content]]:border-secondary in-[[data-slot=modal-content]]:rounded-lg"
         data-slot="table-responsive"
         style="min-height: 300px;"
       >

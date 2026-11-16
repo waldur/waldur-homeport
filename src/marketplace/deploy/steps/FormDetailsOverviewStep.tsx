@@ -50,7 +50,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
       >
         <PropertyList
           variant="summary"
-          className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5"
+          className="grid grid-cols-[repeat(auto-fit,minmax(max(min(280px,100%),calc((100%_-_20px)/2)),1fr))] text-sm gap-x-5"
           // "Label: value" inline, as each sits in half the card: a fixed
           // term column would wrap the value. Capped at half the row, so a
           // long translated label wraps rather than squeezing the value.
@@ -76,7 +76,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           />
         </PropertyList>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 items-end gap-x-5">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(max(min(280px,100%),calc((100%_-_20px)/2)),1fr))] items-end gap-x-5">
           <div>
             <CustomerField
               organizationGroups={props.offering.organization_groups}
@@ -104,7 +104,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
     >
       <PropertyList
         variant="summary"
-        className="grid grid-cols-1 sm:grid-cols-2 text-sm gap-x-5"
+        className="grid grid-cols-[repeat(auto-fit,minmax(max(min(280px,100%),calc((100%_-_20px)/2)),1fr))] text-sm gap-x-5"
         termWidth="fit-content(50%)"
       >
         <PropertyItem

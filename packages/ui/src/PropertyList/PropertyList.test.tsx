@@ -230,8 +230,10 @@ describe('PropertyList', () => {
     );
 
     const row = screen.getByTestId('state-row');
-    expect(row.style.getPropertyValue('--dt-width')).toBe('10rem');
-    expect(row).toHaveClass('sm:grid-cols-[var(--dt-width)_minmax(0,1fr)]');
+    expect(row.style.getPropertyValue('--dt-width')).toBe('min(10rem, 45%)');
+    expect(row).toHaveClass(
+      'page-sm:grid-cols-[var(--dt-width)_minmax(0,1fr)]',
+    );
   });
 
   it('passes a list summary layout to every row, item termWidth winning', () => {
@@ -249,7 +251,9 @@ describe('PropertyList', () => {
 
     expect(screen.getByTestId('state-row')).toHaveClass('mb-2.5');
     const regionRow = screen.getByTestId('region-row');
-    expect(regionRow.style.getPropertyValue('--dt-width')).toBe('15rem');
+    expect(regionRow.style.getPropertyValue('--dt-width')).toBe(
+      'min(15rem, 45%)',
+    );
   });
 
   it('stacks term above value in a stacked summary list, with no term track', () => {
@@ -268,7 +272,7 @@ describe('PropertyList', () => {
     // A term track would leave a narrow cell's value no width at all.
     const row = screen.getByTestId('cpu-row');
     expect(row).toHaveClass('flex', 'flex-col', 'mb-1');
-    expect(row).not.toHaveClass('sm:grid');
+    expect(row).not.toHaveClass('page-sm:grid');
     expect(row.className).not.toContain('grid-cols');
     // termWidth means nothing without a term track, so no --dt-width either.
     expect(row.style.getPropertyValue('--dt-width')).toBe('');
@@ -277,8 +281,8 @@ describe('PropertyList', () => {
       ...screen.getAllByRole('definition'),
     ]) {
       expect(cell).toHaveClass('w-full');
-      expect(cell).not.toHaveClass('sm:w-auto');
-      expect(cell).not.toHaveClass('sm:col-start-2');
+      expect(cell).not.toHaveClass('page-sm:w-auto');
+      expect(cell).not.toHaveClass('page-sm:col-start-2');
     }
   });
 
@@ -828,21 +832,27 @@ describe('PropertyList', () => {
       );
 
       const listEl = screen.getByTestId('pl-test');
-      expect(listEl.style.getPropertyValue('--dt-width')).toBe('12.5rem');
+      expect(listEl.style.getPropertyValue('--dt-width')).toBe(
+        'min(12.5rem, 45%)',
+      );
 
       rerender(
         <PropertyList termWidth="sm" data-testid="pl-test">
           <PropertyList.Item label="CPU" value="4 cores" />
         </PropertyList>,
       );
-      expect(listEl.style.getPropertyValue('--dt-width')).toBe('10rem');
+      expect(listEl.style.getPropertyValue('--dt-width')).toBe(
+        'min(10rem, 45%)',
+      );
 
       rerender(
         <PropertyList termWidth="220px" data-testid="pl-test">
           <PropertyList.Item label="CPU" value="4 cores" />
         </PropertyList>,
       );
-      expect(listEl.style.getPropertyValue('--dt-width')).toBe('220px');
+      expect(listEl.style.getPropertyValue('--dt-width')).toBe(
+        'min(220px, 45%)',
+      );
     });
 
     it('applies grid column template matching var(--dt-width) in summary mode', () => {
@@ -857,8 +867,10 @@ describe('PropertyList', () => {
       );
 
       const row = screen.getByTestId('row-os');
-      expect(row).toHaveClass('sm:grid');
-      expect(row).toHaveClass('sm:grid-cols-[var(--dt-width)_minmax(0,1fr)]');
+      expect(row).toHaveClass('page-sm:grid');
+      expect(row).toHaveClass(
+        'page-sm:grid-cols-[var(--dt-width)_minmax(0,1fr)]',
+      );
     });
 
     it('supports data-driven rendering via items prop array', () => {
@@ -922,8 +934,8 @@ describe('PropertyList', () => {
       expect(dds[2]).toHaveTextContent('9.9.9.9');
 
       // Subsequent dd elements carry sm:col-start-2 to align in the value column
-      expect(dds[1]).toHaveClass('sm:col-start-2');
-      expect(dds[2]).toHaveClass('sm:col-start-2');
+      expect(dds[1]).toHaveClass('page-sm:col-start-2');
+      expect(dds[2]).toHaveClass('page-sm:col-start-2');
 
       // Each dd has its own copy button
       const copyButtons = screen.getAllByRole('button', {

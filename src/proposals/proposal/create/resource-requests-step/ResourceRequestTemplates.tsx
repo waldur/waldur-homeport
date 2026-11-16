@@ -77,7 +77,7 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
           cost and the purchase order behind a sideways scroll. */}
       <PropertyList
         variant="summary"
-        className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3"
+        className="grid grid-cols-[repeat(auto-fit,minmax(max(min(380px,100%),calc((100%_-_20px)/2)),1fr))] gap-x-5 text-sm mb-3"
         termWidth="md"
       >
         <PropertyItem
