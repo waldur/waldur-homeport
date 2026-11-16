@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import {
   BreadcrumbsProvider,
   cn,
+  PageWidthProvider,
   SidebarProvider,
   useBreadcrumbItems,
   useBreakpointDown,
@@ -73,6 +74,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
   const breadcrumbs = useBreadcrumbItems();
   const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
+  const [pageElement, setPageElement] = useState<HTMLDivElement | null>(null);
   // What pages render into the chrome (LayoutSlot), and which slots are
   // filled.
   const { value: slots, slotRef, filled } = useLayoutSlots();
@@ -182,77 +184,88 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
                   <ImpersonationBar />
                 </OutstandingBar>
               )}
-              <div className="flex flex-row grow shrink-0">
-                <UnifiedSidebar />
-                <div className="flex flex-col flex-auto min-w-0">
-                  <CookiesConsent />
-                  <div
-                    ref={headerRef}
-                    className={classNames(
-                      // -mb-px: what follows starts under the group's bottom
-                      // rule, as it did under the fixed header.
-                      'sticky top-[var(--layout-page-bar-height,0px)] -mb-px print:hidden',
-                      floatingDrawerOpen ? 'z-[111]' : 'z-header',
-                    )}
-                  >
-                    <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
-                  </div>
-                  <BreadcrumbMain mobile ref={breadcrumbBarRef} />
-                  {!hasHero && pageTabs}
-                  <Announcements extraRef={slotRef.announcements} />
-                  <WarningBar />
-                  <OfferingUsersWarningBar />
-                  <RemovedProjectWarningBar />
-                  <GracePeriodWarningBar />
-                  <div
-                    // The page content under the chrome; also the hook
-                    // BillingDetails.scss prints the invoice from.
-                    data-slot="page-content"
-                    className={classNames(
-                      'flex flex-col grow',
-                      // A hero or a full-page view runs edge to edge; other
-                      // pages get the content spacing above and below.
-                      hasHero || fullPage
-                        ? 'p-[0px]'
-                        : 'py-[15px] lg:py-[32px]',
-                    )}
-                  >
-                    {hasHero && (
-                      <div
-                        ref={slotRef.hero}
-                        className="hero w-full flex flex-col"
-                      />
-                    )}
-                    {hasHero && pageTabs}
+              <div
+                ref={setPageElement}
+                // The page: the region left of a docked drawer, sidebar
+                // included -- as wide as the window with no drawer docked.
+                // Page content lays itself out by its width: the `page-*`
+                // variants query this container, the page breakpoint hooks
+                // measure it (PageWidthProvider). A docked drawer sets
+                // --layout-docked-drawer-width while it sits beside the page.
+                className="@container/page flex flex-row grow shrink-0 lg:pr-[var(--layout-docked-drawer-width,0px)]"
+              >
+                <PageWidthProvider element={pageElement}>
+                  <UnifiedSidebar />
+                  <div className="flex flex-col flex-auto min-w-0">
+                    <CookiesConsent />
                     <div
+                      ref={headerRef}
                       className={classNames(
-                        'w-full flex grow shrink-0',
-                        hasHero && !fullPage && 'py-[1.24rem]',
+                        // -mb-px: what follows starts under the group's bottom
+                        // rule, as it did under the fixed header.
+                        'sticky top-[var(--layout-page-bar-height,0px)] -mb-px print:hidden',
+                        floatingDrawerOpen ? 'z-[111]' : 'z-header',
                       )}
                     >
-                      {state?.data?.auth && !currentUser ? (
-                        <LoadingSpinner />
-                      ) : (
-                        children
+                      <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
+                    </div>
+                    <BreadcrumbMain mobile ref={breadcrumbBarRef} />
+                    {!hasHero && pageTabs}
+                    <Announcements extraRef={slotRef.announcements} />
+                    <WarningBar />
+                    <OfferingUsersWarningBar />
+                    <RemovedProjectWarningBar />
+                    <GracePeriodWarningBar />
+                    <div
+                      // The page content under the chrome; also the hook
+                      // BillingDetails.scss prints the invoice from.
+                      data-slot="page-content"
+                      className={classNames(
+                        'flex flex-col grow',
+                        // A hero or a full-page view runs edge to edge; other
+                        // pages get the content spacing above and below.
+                        hasHero || fullPage
+                          ? 'p-[0px]'
+                          : 'py-[15px] lg:py-[32px]',
                       )}
+                    >
+                      {hasHero && (
+                        <div
+                          ref={slotRef.hero}
+                          className="hero w-full flex flex-col"
+                        />
+                      )}
+                      {hasHero && pageTabs}
                       <div
-                        // Also the portal target TableFiltersMenu looks up.
-                        id="kt_content_container"
-                        // A full-page view drops the container's side padding;
-                        // cn() so its p-[0px] replaces the container's px-*.
-                        className={cn(
-                          PAGE_CONTAINER_CLASSNAME,
-                          fullPage && 'p-[0px] lg:p-[0px]',
+                        className={classNames(
+                          'w-full flex grow shrink-0',
+                          hasHero && !fullPage && 'py-[1.24rem]',
                         )}
                       >
-                        <PermissionLayout>
-                          <UIView />
-                        </PermissionLayout>
+                        {state?.data?.auth && !currentUser ? (
+                          <LoadingSpinner />
+                        ) : (
+                          children
+                        )}
+                        <div
+                          // Also the portal target TableFiltersMenu looks up.
+                          id="kt_content_container"
+                          // A full-page view drops the container's side padding;
+                          // cn() so its p-[0px] replaces the container's px-*.
+                          className={cn(
+                            PAGE_CONTAINER_CLASSNAME,
+                            fullPage && 'p-[0px] lg:p-[0px]',
+                          )}
+                        >
+                          <PermissionLayout>
+                            <UIView />
+                          </PermissionLayout>
+                        </div>
                       </div>
                     </div>
+                    <AppFooter />
                   </div>
-                  <AppFooter />
-                </div>
+                </PageWidthProvider>
               </div>
             </div>
           </ProfileCompletenessProvider>

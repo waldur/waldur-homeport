@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardToolbar,
   titleCase,
-  useBreakpointDown,
+  usePageBreakpointDown,
 } from 'waldur-ui';
 
 import { useTableContext } from '../../context';
@@ -46,7 +46,7 @@ export function TableToolbarActions() {
     filtersStorage,
   } = useTableContext();
 
-  const isSm = useBreakpointDown('sm');
+  const isSm = usePageBreakpointDown('sm');
 
   // Handler for filter button click
   const onClickFilterButton = useCallback(
@@ -127,7 +127,7 @@ export function TableToolbarActions() {
             // In a tabbed card's header the toolbar shares the width with the
             // card title; let search and buttons wrap instead of overflowing.
             // Wrap only below sm for a standalone table.
-            portal?.toolbar ? 'flex-wrap' : 'max-sm:flex-wrap',
+            portal?.toolbar ? 'flex-wrap' : 'page-max-sm:flex-wrap',
             'whitespace-nowrap gap-3',
             // With a title, the title takes the free width, so the selection
             // bar sits beside the search instead of in the middle.
@@ -137,7 +137,7 @@ export function TableToolbarActions() {
           {config.hasQuery && (
             <div className="flex items-center gap-3">
               {slots.beforeSearch}
-              <div className="table-toolbar-search w-80 max-w-80 flex-none max-md:w-full max-md:max-w-full max-md:flex-auto">
+              <div className="table-toolbar-search w-80 max-w-80 flex-none page-max-md:w-full page-max-md:max-w-full page-max-md:flex-auto">
                 <TableQuery
                   query={query}
                   setQuery={actions.setQuery}
@@ -159,7 +159,7 @@ export function TableToolbarActions() {
           )}
 
           {showActionsColumn && (
-            <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-3">
+            <div className="flex page-sm:justify-end page-max-sm:flex-wrap whitespace-nowrap gap-3">
               <TableButtons
                 table={config.table}
                 rows={rows}

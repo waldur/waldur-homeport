@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react';
-import { useBreakpointDown } from 'waldur-ui';
+import { usePageBreakpointDown } from 'waldur-ui';
 
 import { TableColumnButton } from './TableColumnsButton';
 import { TableDisplayModeButton } from './TableDisplayModeButton';
@@ -15,7 +15,7 @@ interface TableButtonsProps extends TableProps {
 }
 
 export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
-  const isSm = useBreakpointDown('sm');
+  const isSm = usePageBreakpointDown('sm');
 
   const showExportInDropdown =
     (props.enableExport && props.showExportInDropdown) ||
@@ -67,7 +67,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   return (
     <>
       {showDefaultActions && (
-        <div className="flex sm:justify-end max-sm:flex-wrap whitespace-nowrap gap-3 grow sm:grow-0">
+        <div className="flex page-sm:justify-end page-max-sm:flex-wrap whitespace-nowrap gap-3 grow page-sm:grow-0">
           {/* Filter */}
           {props.renderFilterButton !== false &&
             ['menu', 'sidebar'].includes(props.filterPosition) &&
