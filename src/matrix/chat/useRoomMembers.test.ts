@@ -19,6 +19,7 @@ vi.mock('./useMatrixClient', () => ({
 vi.mock('./useRoomMemberNames', () => ({
   useRoomMemberNames: () => new Map(),
   useRoomMemberImages: () => new Map(),
+  useRoomMemberRoles: () => new Map([['@mart:s', 'Panel chair']]),
 }));
 
 const fakeRoom = {
@@ -64,5 +65,14 @@ describe('useRoomMembers', () => {
     const { result } = renderHook(() => useRoomMembers());
     const bot = result.current.find((m) => m.userId === '@bot:s');
     expect(bot?.powerLevel).toBe(100);
+  });
+
+  it('carries what each member takes part as, where the room names it', () => {
+    const { result } = renderHook(() => useRoomMembers());
+    const byId = Object.fromEntries(
+      result.current.map((m) => [m.userId, m.roleLabel]),
+    );
+    expect(byId['@mart:s']).toBe('Panel chair');
+    expect(byId['@lea:s']).toBeUndefined();
   });
 });

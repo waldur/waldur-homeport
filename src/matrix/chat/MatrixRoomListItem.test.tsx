@@ -138,3 +138,37 @@ describe('MatrixRoomListItem', () => {
     });
   });
 });
+
+describe('MatrixRoomListItem for a step discussion', () => {
+  const discussion = {
+    ...defaultProps,
+    name: 'Regular Access · Panel meeting · Round 1 · Physics',
+    scopeType: 'step_discussion',
+    scopeSubtitle: 'Panel meeting · Round 1 · Physics',
+  };
+
+  it('marks the room as a discussion and names its step and call', () => {
+    render(<MatrixRoomListItem {...discussion} preview="Hello" />);
+
+    const kind = screen.getByTestId('room-kind-discussion');
+    expect(kind).toHaveTextContent('Discussion');
+    expect(kind).toHaveTextContent('Regular Access');
+    expect(
+      screen.getByText('Panel meeting · Round 1 · Physics'),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('room-avatar-discussion')).toBeInTheDocument();
+  });
+
+  it('leaves a project room unmarked', () => {
+    render(
+      <MatrixRoomListItem
+        {...defaultProps}
+        scopeType="project"
+        scopeSubtitle="Acme"
+      />,
+    );
+
+    expect(screen.queryByTestId('room-kind-discussion')).toBeNull();
+    expect(screen.getByText('Acme')).toBeInTheDocument();
+  });
+});

@@ -204,6 +204,9 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
                         // -mb-px: what follows starts under the group's bottom
                         // rule, as it did under the fixed header.
                         'sticky top-[var(--layout-page-bar-height,0px)] -mb-px print:hidden',
+                        // The header spans a docked drawer too: the drawer hangs
+                        // from it (DrawerRoot).
+                        'lg:-mr-[var(--layout-docked-drawer-width,0px)]',
                         floatingDrawerOpen ? 'z-[111]' : 'z-header',
                       )}
                     >

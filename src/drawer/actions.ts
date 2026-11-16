@@ -1,6 +1,11 @@
 import { ComponentType, useContext } from 'react';
 
-import { DrawerContext, drawerServiceRef, DrawerProps } from './DrawerContext';
+import {
+  DrawerContext,
+  drawerServiceRef,
+  drawerState,
+  DrawerProps,
+} from './DrawerContext';
 import { DRAWER_SHELL_CLASS, DrawerShellClass } from './shellClasses';
 
 export const useDrawer = () => {
@@ -47,6 +52,10 @@ export const DrawerService = {
   },
   close: () => {
     if (drawerServiceRef) drawerServiceRef.closeDrawer();
+  },
+  /** On going to another page: closes the drawer unless it is docked now. */
+  closeOnNavigation: () => {
+    if (drawerServiceRef && !drawerState.docked) drawerServiceRef.closeDrawer();
   },
   render: <P = any>(
     drawerComponent: ComponentType<P>,

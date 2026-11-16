@@ -799,6 +799,7 @@ describe('MatrixAskToasts', () => {
     actions[0].onClick();
     expect(openSupportDrawer).toHaveBeenCalledWith(h.openDrawer, {
       defaultRoomUuid: 'room-uuid',
+      discussion: false,
     });
   });
 
@@ -972,6 +973,7 @@ describe('MatrixAskToasts', () => {
         actions[0].onClick();
         expect(openSupportDrawer).toHaveBeenCalledWith(h.openDrawer, {
           defaultRoomUuid: 'room-uuid',
+          discussion: false,
         });
       });
 

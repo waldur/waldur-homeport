@@ -7,6 +7,12 @@ const h = vi.hoisted(() => ({
   hasSupport: true,
   totalUnread: 0,
   drawerWide: false,
+  memberRooms: [{ uuid: 'room-1', scope_type: 'project' }] as
+    | Array<{
+        uuid: string;
+        scope_type: string | null;
+      }>
+    | undefined,
 }));
 
 vi.mock('@/matrix/utils', () => ({
@@ -21,11 +27,22 @@ vi.mock('@/matrix/chat/useMatrixTotalUnread', () => ({
   useMatrixTotalUnread: () => h.totalUnread,
 }));
 
+vi.mock('@/matrix/chat/useMemberMatrixRooms', () => ({
+  useMemberMatrixRooms: () => ({ data: h.memberRooms }),
+}));
+
 vi.mock('@/matrix/chat/MatrixChatPanel', () => ({
-  MatrixChatPanel: ({ roomListRequest }: { roomListRequest?: number }) => (
+  MatrixChatPanel: ({
+    roomListRequest,
+    kind,
+  }: {
+    roomListRequest?: number;
+    kind?: string;
+  }) => (
     <div
       data-testid="matrix-chat-panel"
       data-room-list-request={roomListRequest}
+      data-kind={kind}
     />
   ),
 }));
@@ -52,6 +69,7 @@ beforeEach(() => {
   h.hasSupport = true;
   h.totalUnread = 0;
   h.drawerWide = false;
+  h.memberRooms = [{ uuid: 'room-1', scope_type: 'project' }];
   resetSupportDrawerPreferences();
 });
 
@@ -171,5 +189,78 @@ describe('SupportDrawer', () => {
     expect(
       screen.queryByTestId('quick-issue-container'),
     ).not.toBeInTheDocument();
+  });
+
+  describe('Discussions', () => {
+    const discussion = { uuid: 'room-2', scope_type: 'step_discussion' };
+
+    it('has a tab of its own beside Team chat, listing the discussions', async () => {
+      h.memberRooms = [{ uuid: 'room-1', scope_type: 'project' }, discussion];
+      render(<SupportDrawer />);
+
+      expect(screen.getByTestId('matrix-chat-panel')).toHaveAttribute(
+        'data-kind',
+        'project',
+      );
+      await userEvent.click(screen.getByRole('tab', { name: /Discussions/ }));
+      expect(screen.getByTestId('matrix-chat-panel')).toHaveAttribute(
+        'data-kind',
+        'step_discussion',
+      );
+    });
+
+    it('opens a discussion room asked for on its tab', () => {
+      h.memberRooms = [{ uuid: 'room-1', scope_type: 'project' }, discussion];
+      render(<SupportDrawer defaultRoomUuid="room-2" />);
+
+      expect(screen.getByRole('tab', { name: /Discussions/ })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+    });
+
+    it('opens one just started on its tab before the room list has it', () => {
+      render(<SupportDrawer defaultRoomUuid="room-9" discussionRequested />);
+
+      expect(screen.getByRole('tab', { name: /Discussions/ })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+    });
+
+    it('leaves out an empty Team chat for someone in discussions alone', () => {
+      h.memberRooms = [discussion];
+      render(<SupportDrawer />);
+
+      expect(
+        screen.queryByRole('tab', { name: /Team chat/ }),
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('tab', { name: /Discussions/ })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+    });
+
+    it('keeps a stored Discussions tab while the rooms are loading', () => {
+      h.memberRooms = undefined;
+      setSupportTab('discussions');
+      render(<SupportDrawer />);
+
+      expect(screen.getByRole('tab', { name: /Discussions/ })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+      expect(sessionStorage.getItem('waldur/support-drawer-tab')).toBe(
+        JSON.stringify('discussions'),
+      );
+    });
+
+    it('is not offered to someone in no discussion', () => {
+      render(<SupportDrawer />);
+
+      expect(
+        screen.queryByRole('tab', { name: /Discussions/ }),
+      ).not.toBeInTheDocument();
+    });
   });
 });

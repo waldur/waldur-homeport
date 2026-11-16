@@ -1,5 +1,10 @@
 import { useCallback, useSyncExternalStore } from 'react';
 
+import {
+  readSessionPreference,
+  writeSessionPreference,
+} from '@/core/sessionPreference';
+
 /** Which tab the unified chat drawer opens on. AI-only since the drawer split. */
 type ChatDrawerTab = 'ai';
 
@@ -8,6 +13,8 @@ interface ChatDrawerPreferences {
   activeTab: ChatDrawerTab;
   /** Team chat room to reopen, or null for the default. */
   lastRoomUuid: string | null;
+  /** Step discussion room to reopen on the Discussions tab, or null. */
+  lastDiscussionRoomUuid: string | null;
   /** Shared collapsed state of the AI history and Team chat sidebars. */
   sidebarCollapsed: boolean;
   /**
@@ -23,12 +30,19 @@ type PreferenceKey = keyof ChatDrawerPreferences;
 const DEFAULTS: ChatDrawerPreferences = {
   activeTab: 'ai',
   lastRoomUuid: null,
+  lastDiscussionRoomUuid: null,
   sidebarCollapsed: false,
   matrixCompactView: 'detail',
 };
 
-// Module-scoped: survives drawer close/reopen, resets on page reload.
-let preferences: ChatDrawerPreferences = { ...DEFAULTS };
+const STORAGE_KEY = 'waldur/chat-drawer-preferences';
+
+// Survives drawer close/reopen and a reload of the tab (session storage), so
+// a chat drawer reopened after a reload shows the room it showed.
+let preferences: ChatDrawerPreferences = {
+  ...DEFAULTS,
+  ...readSessionPreference<Partial<ChatDrawerPreferences>>(STORAGE_KEY),
+};
 
 const listeners = new Set<() => void>();
 
@@ -51,12 +65,14 @@ export const setChatDrawerPreference = <K extends PreferenceKey>(
 ): void => {
   if (preferences[key] === value) return;
   preferences = { ...preferences, [key]: value };
+  writeSessionPreference(STORAGE_KEY, preferences);
   notify();
 };
 
 /** Reset every preference to its default. Primarily used by tests. */
 export const resetChatDrawerPreferences = (): void => {
   preferences = { ...DEFAULTS };
+  writeSessionPreference(STORAGE_KEY, null);
   notify();
 };
 

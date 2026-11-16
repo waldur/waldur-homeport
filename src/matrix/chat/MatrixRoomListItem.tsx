@@ -1,5 +1,6 @@
 import {
   BellSlashIcon,
+  ChatsCircleIcon,
   FileIcon,
   ImageIcon,
   MicrophoneIcon,
@@ -9,20 +10,29 @@ import {
 } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
-import { Avatar, Badge, cn } from 'waldur-ui';
+import { Badge, cn } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
-import { getChatAvatarClass } from './chatColors';
 import { PreviewKind } from './previewClassifier';
+import { isDiscussionRoom, RoomAvatar, roomTitle } from './roomKind';
 import { formatRelativeTime } from './utils';
 
 interface MatrixRoomListItemProps {
   uuid: string;
   name: string;
   scopeName?: string;
+  /** The kind of room: a project's, or a step discussion's. */
+  scopeType?: string | null;
+  /** What the room is for: a project's organization, a discussion's step. */
+  scopeSubtitle?: string | null;
+  /**
+   * Whether a discussion is marked as one: needless in a list of
+   * discussions alone.
+   */
+  markKind?: boolean;
   preview?: string;
   /** Structured kind of the last event, driving icon/filename/size rendering. */
   previewKind?: PreviewKind;
@@ -109,6 +119,9 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
   uuid,
   name,
   scopeName,
+  scopeType,
+  scopeSubtitle,
+  markKind = true,
   preview,
   previewKind = 'text',
   previewFileName,
@@ -136,7 +149,10 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
     previewKind === 'audio' ||
     previewKind === 'file';
 
+  const discussion = isDiscussionRoom(scopeType);
+  const { title, context } = roomTitle(name, scopeType, scopeSubtitle);
   const fallback =
+    (discussion ? null : scopeSubtitle) ||
     scopeName ||
     (membersCount != null
       ? translate('{count} members', { count: membersCount })
@@ -152,11 +168,7 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
       onClick={onClick}
     >
       <div className="place-self-center size-12">
-        <Avatar
-          name={name}
-          size={48}
-          fallbackClassName={getChatAvatarClass(uuid)}
-        />
+        <RoomAvatar uuid={uuid} name={name} scopeType={scopeType} size={48} />
       </div>
       <div className="min-w-0 flex flex-col gap-1">
         <div className="flex items-center gap-2">
@@ -168,7 +180,7 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
                 : 'text-secondary font-medium',
             )}
           >
-            {name}
+            {title}
           </span>
           {lastActivity > 0 && (
             <span className="shrink-0 text-xs text-quaternary tabular-nums">
@@ -176,6 +188,32 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
             </span>
           )}
         </div>
+        {discussion && (
+          // A discussion says so, and which step and panel or proposal it is
+          // for, whatever its last message: its name alone reads like one more
+          // project room's.
+          <div
+            className="flex items-center gap-1.5 min-w-0"
+            data-testid="room-kind-discussion"
+          >
+            {markKind && (
+              <Badge
+                variant="info"
+                size="sm"
+                leftIcon={<ChatsCircleIcon weight="bold" />}
+                shape="pill"
+                className="shrink-0"
+              >
+                {translate('Discussion')}
+              </Badge>
+            )}
+            {context && (
+              <span className="min-w-0 truncate text-xs text-tertiary">
+                {context}
+              </span>
+            )}
+          </div>
+        )}
         <div className="flex items-center gap-2">
           <div
             className={cn(

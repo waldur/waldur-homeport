@@ -10,14 +10,16 @@ import { BaseButton } from 'waldur-ui';
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { StepDiscussionButton } from '@/proposals/discussions/StepDiscussionButton';
 import { RoundScopedBadge } from '@/proposals/workflow/RoundScopedBadge';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { roundStepState } from './roundSteps';
+import { roundStepState, shownRoundDiscussions } from './roundSteps';
 
 const OpenRoundStepDialog = lazyComponent(() =>
   import('./OpenRoundStepDialog').then((m) => ({
@@ -37,6 +39,34 @@ interface RoundStepsPanelProps {
   canEdit: boolean;
   refetch(): void;
 }
+
+/**
+ * The discussions of a step run once per round: one per panel on a call with
+ * panels, listing those the viewer takes part in or oversees. While Matrix
+ * chat is disabled, only the closed ones' records.
+ */
+const RoundStepDiscussions: FC<{ step: RoundStep; refetch(): void }> = ({
+  step,
+  refetch,
+}) => {
+  const discussions = shownRoundDiscussions(step, isMatrixChatEnabled());
+  return discussions.length ? (
+    <div className="flex flex-col items-start gap-1.5 mt-1.5 min-w-0 max-w-full">
+      {discussions.map((discussion) => (
+        <StepDiscussionButton
+          key={discussion.panel_uuid ?? 'round'}
+          discussion={discussion}
+          target={{
+            round_step_uuid: step.round_step_uuid,
+            panel_uuid: discussion.panel_uuid,
+          }}
+          panelName={discussion.panel_name}
+          refetch={refetch}
+        />
+      ))}
+    </div>
+  ) : null;
+};
 
 const AdvanceButton: FC<{
   callUuid: string;
@@ -196,7 +226,10 @@ export const RoundStepsPanel: FC<RoundStepsPanelProps> = ({
         {
           title: translate('State'),
           render: ({ row }) => (
-            <>{roundStepState(row) || renderFieldOrDash(null)}</>
+            <>
+              {roundStepState(row) || renderFieldOrDash(null)}
+              <RoundStepDiscussions step={row} refetch={tableProps.fetch} />
+            </>
           ),
           width: '35%',
           ellipsis: false,

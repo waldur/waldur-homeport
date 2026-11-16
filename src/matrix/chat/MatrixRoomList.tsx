@@ -16,12 +16,20 @@ import { RoomCallState } from './call/useAllRoomCallStates';
 import { MatrixRoomListItem } from './MatrixRoomListItem';
 import { MatrixRoomRailItem } from './MatrixRoomRailItem';
 import { PreviewKind } from './previewClassifier';
-import { buildRoomSections, ChatRoomSummary, RoomFilter } from './roomSections';
+import {
+  buildRoomSections,
+  ChatRoomSummary,
+  matchesKind,
+  RoomFilter,
+  RoomKindFilter,
+} from './roomSections';
 
 interface EnrichedRoom {
   uuid: string;
   room_name?: string;
   scope_name?: string;
+  scope_type?: string | null;
+  scope_subtitle?: string | null;
   state?: string;
   room_alias?: string;
   unreadCount: number;
@@ -44,6 +52,11 @@ interface MatrixRoomListProps {
   activeRoomUuid?: string;
   collapsed?: boolean;
   onToggleCollapse?: () => void;
+  /**
+   * Which kind of room to list: Team chat's team rooms, or the step
+   * discussions; every room by default, as on the Communication page.
+   */
+  kind?: RoomKindFilter;
 }
 
 export const MatrixRoomList: FC<MatrixRoomListProps> = ({
@@ -53,14 +66,22 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
   activeRoomUuid,
   collapsed,
   onToggleCollapse,
+  kind = 'all',
 }) => {
   const [filter, setFilter] = useState<RoomFilter>('all');
   const [search, setSearch] = useState('');
 
   const activeRooms = useMemo(
-    () => rooms.filter((r) => r.state === 'active'),
-    [rooms],
+    () =>
+      rooms.filter(
+        (r) =>
+          r.state === 'active' &&
+          matchesKind({ scopeType: r.scope_type }, kind),
+      ),
+    [rooms, kind],
   );
+  // A list of one kind need not mark each room with it.
+  const markKind = kind === 'all';
 
   const byUuid = useMemo(
     () => new Map(activeRooms.map((r) => [r.uuid, r])),
@@ -73,6 +94,8 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
         uuid: r.uuid,
         name: r.room_name || r.room_alias || r.uuid,
         scopeName: r.scope_name,
+        scopeType: r.scope_type,
+        scopeSubtitle: r.scope_subtitle,
         unreadCount: r.unreadCount,
         mentionCount: r.mentionCount,
         lastActivity: r.lastActivity,
@@ -130,6 +153,9 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
               key={room.uuid}
               uuid={room.uuid}
               name={room.name}
+              scopeType={room.scopeType}
+              scopeSubtitle={room.scopeSubtitle}
+              markKind={markKind}
               unreadCount={room.unreadCount}
               mentionCount={room.mentionCount}
               activeCall={byUuid.get(room.uuid)?.activeCall ?? null}
@@ -179,9 +205,17 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
           {!hasRooms ? (
             <NoResult
               title={translate('No conversations yet')}
-              message={translate(
-                'Team chat rooms are created automatically for your projects.',
-              )}
+              message={
+                kind === 'step_discussion'
+                  ? translate(
+                      'The discussions of the workflow steps you work on appear here once someone starts them.',
+                    )
+                  : kind === 'project'
+                    ? translate('Rooms for your projects appear here.')
+                    : translate(
+                        'Rooms for your projects, and for the discussions of the workflow steps you work on, appear here.',
+                      )
+              }
               noAction
             />
           ) : isFiltered ? (
@@ -208,6 +242,9 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
                 uuid={summary.uuid}
                 name={summary.name}
                 scopeName={room.scope_name}
+                scopeType={room.scope_type}
+                scopeSubtitle={room.scope_subtitle}
+                markKind={markKind}
                 preview={room.preview}
                 previewKind={room.previewKind}
                 previewFileName={room.previewFileName}

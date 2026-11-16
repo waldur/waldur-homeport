@@ -31,6 +31,12 @@ export const MyCallsPageLazy = lazyComponent(() =>
   import('./MyCallsPage').then((module) => ({ default: module.MyCallsPage })),
 );
 
+export const MyDiscussionsPageLazy = lazyComponent(() =>
+  import('@/proposals/discussions/MyDiscussionsPage').then((module) => ({
+    default: module.MyDiscussionsPage,
+  })),
+);
+
 const preloadMyTasksPages = () =>
   Promise.all(
     [
@@ -40,6 +46,7 @@ const preloadMyTasksPages = () =>
       MyInvitationsPageLazy,
       MyEvaluatorRolesPageLazy,
       MyCallsPageLazy,
+      MyDiscussionsPageLazy,
     ].map((page) => page.preload()),
   );
 

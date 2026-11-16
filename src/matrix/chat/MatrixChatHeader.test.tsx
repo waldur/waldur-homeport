@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -9,6 +10,7 @@ import {
   UIRouterReact,
 } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { proposalStepDiscussionsRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
@@ -329,6 +331,37 @@ describe('MatrixChatHeader', () => {
     expect(
       screen.getByRole('link', { name: 'LLM Training Pipeline' }),
     ).toBeInTheDocument();
+  });
+
+  it('marks a discussion room and links its proposal, not a project', async () => {
+    vi.mocked(proposalStepDiscussionsRetrieve).mockResolvedValue({
+      data: { uuid: 'discussion-1', proposal_uuid: 'proposal-1' },
+    } as any);
+    const router = new UIRouterReact();
+    router.plugin(servicesPlugin);
+    router.plugin(pushStateLocationPlugin);
+    router.stateRegistry.register({
+      name: 'proposals.manage-proposal',
+      url: '/proposals/:proposal_uuid',
+    });
+    render(
+      <QueryClientProvider client={new QueryClient()}>
+        <UIRouter router={router}>
+          <MatrixChatHeader
+            roomUuid="room-1"
+            roomName="Panel meeting · Quantum codes"
+            discussionUuid="discussion-1"
+          />
+        </UIRouter>
+      </QueryClientProvider>,
+    );
+    expect(screen.getByTestId('chat-header-discussion')).toHaveTextContent(
+      'Discussion',
+    );
+    const link = await screen.findByRole('link', {
+      name: 'Panel meeting · Quantum codes',
+    });
+    expect(link.getAttribute('href')).toContain('proposal-1');
   });
 
   it('renders the room name as plain text when projectUuid is missing', () => {

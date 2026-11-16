@@ -50,6 +50,8 @@ import { useVoiceRecorder } from './voice/useVoiceRecorder';
 interface MatrixChatDrawerProps {
   roomUuid: string;
   projectUuid?: string;
+  /** The step discussion the room is for, when it is one. */
+  discussionUuid?: string;
   roomAlias?: string | null;
   /** Room name resolved by the caller — avoids a redundant rooms lookup. */
   roomName?: string;
@@ -59,6 +61,7 @@ interface MatrixChatDrawerProps {
 export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   roomUuid,
   projectUuid,
+  discussionUuid,
   roomAlias,
   roomName,
   onBack,
@@ -240,6 +243,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               }
               roomAlias={roomAlias}
               projectUuid={projectUuid}
+              discussionUuid={discussionUuid}
               onBack={onBack}
             />
 

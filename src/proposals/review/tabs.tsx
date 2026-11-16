@@ -6,10 +6,16 @@ import {
   myAssignmentBatchesList,
   proposalReviewsList,
   proposalRoleAssignmentsList,
+  proposalStepDiscussionsList,
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
+import { isMatrixChatEnabled } from '@/matrix/utils';
+import {
+  MY_DISCUSSIONS_KEY,
+  useStartableDiscussions,
+} from '@/proposals/discussions/queries';
 import { TableTab } from '@/table/types';
 import { useUser } from '@/workspace/hooks';
 
@@ -139,6 +145,37 @@ export const useMyReviewsTabs = (): TableTab[] => {
     enabled: !!user?.uuid,
   });
 
+  // The discussions the user takes part in: any, for the tab (a closed one's
+  // record stays reachable), and the open ones for its tally, with those they
+  // could start. The two counts are asked side by side, not one after the
+  // other; the startable list is shared with the Discussions page's. None
+  // without Matrix chat.
+  const chatEnabled = isMatrixChatEnabled();
+  const { data: discussionsCount = 0 } = useQuery({
+    queryKey: [...MY_DISCUSSIONS_KEY, 'count', user?.uuid],
+    queryFn: async () => {
+      const response = await proposalStepDiscussionsList({
+        query: { mine: true, page_size: 1 },
+      });
+      return fetchResultCount(response);
+    },
+    enabled: !!user?.uuid && chatEnabled,
+  });
+  const { data: openDiscussionsCount = 0 } = useQuery({
+    queryKey: [...MY_DISCUSSIONS_KEY, 'open-count', user?.uuid],
+    queryFn: async () => {
+      const response = await proposalStepDiscussionsList({
+        query: { mine: true, state: 'open', page_size: 1 },
+      });
+      return fetchResultCount(response);
+    },
+    enabled: !!user?.uuid && chatEnabled,
+  });
+  // Those waiting for the user to start them count too: before anyone has
+  // started one, they are what the tab is there for.
+  const { data: startable } = useStartableDiscussions(user?.uuid, chatEnabled);
+  const startableCount = startable?.length ?? 0;
+
   return useMemo(() => {
     // A reviewer's tabs for someone who reviews; an evaluator role's for
     // someone who holds one. An applicant keeps Tasks alone. The open page's
@@ -151,6 +188,7 @@ export const useMyReviewsTabs = (): TableTab[] => {
       invitations: reviews,
       'evaluator-roles': evaluatorRolesCount > 0,
       calls: reviews,
+      discussions: chatEnabled && (discussionsCount > 0 || startableCount > 0),
     };
     const tabs: TableTab[] = [
       {
@@ -193,6 +231,18 @@ export const useMyReviewsTabs = (): TableTab[] => {
         count: tally(callsCount),
         state: 'reviews-calls',
       },
+      {
+        key: 'discussions',
+        title: translate('Discussions'),
+        count: tally(openDiscussionsCount + startableCount),
+        countLabel: startableCount
+          ? translate('{open} open, {startable} to start', {
+              open: openDiscussionsCount,
+              startable: startableCount,
+            })
+          : translate('{count} open', { count: openDiscussionsCount }),
+        state: 'reviews-discussions',
+      },
     ];
     return tabs.filter((tab) => shown[tab.key] || tab.state === state.name);
   }, [
@@ -204,5 +254,9 @@ export const useMyReviewsTabs = (): TableTab[] => {
     invitationsCount,
     evaluatorRolesCount,
     callsCount,
+    chatEnabled,
+    discussionsCount,
+    openDiscussionsCount,
+    startableCount,
   ]);
 };

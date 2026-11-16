@@ -7,10 +7,19 @@
 
 export type RoomFilter = 'all' | 'unread' | 'mentions';
 
+/**
+ * Which kinds of room to list: every kind; the team rooms -- projects', and
+ * any other room that is not a step discussion; or the step discussions.
+ */
+export type RoomKindFilter = 'all' | 'project' | 'step_discussion';
+
 export interface ChatRoomSummary {
   uuid: string;
   name: string;
   scopeName?: string;
+  /** The backend's `scope_type`: 'project', 'step_discussion', or none. */
+  scopeType?: string | null;
+  scopeSubtitle?: string | null;
   unreadCount: number;
   mentionCount: number;
   /** Last activity, ms epoch. 0 when unknown — sorts to the bottom. */
@@ -30,7 +39,8 @@ const matchesSearch = (room: ChatRoomSummary, query: string) => {
   if (!q) return true;
   return (
     room.name.toLowerCase().includes(q) ||
-    (room.scopeName?.toLowerCase().includes(q) ?? false)
+    (room.scopeName?.toLowerCase().includes(q) ?? false) ||
+    (room.scopeSubtitle?.toLowerCase().includes(q) ?? false)
   );
 };
 
@@ -40,8 +50,17 @@ const matchesFilter = (room: ChatRoomSummary, filter: RoomFilter) => {
   return true;
 };
 
+export const matchesKind = (
+  room: Pick<ChatRoomSummary, 'scopeType'>,
+  kind: RoomKindFilter,
+) =>
+  kind === 'all' ||
+  (kind === 'step_discussion'
+    ? room.scopeType === 'step_discussion'
+    : room.scopeType !== 'step_discussion');
+
 /**
- * Group rooms for display. With the default `all` filter and no search the
+ * Group rooms for display. With the default `all` filters and no search the
  * list is split into Unread / Recent sections; otherwise it collapses to a
  * single flat `results` section.
  */

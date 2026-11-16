@@ -30,6 +30,7 @@ interface OwnProps {
 const getOptions = (row: CallWorkflowStep) => {
   const flags: string[] = [];
   if (row.blind_review) flags.push(translate('Blind review'));
+  if (row.has_discussion) flags.push(translate('Discussion'));
   if (row.requires_coi_confirmation)
     flags.push(translate('Conflict-of-interest confirmation'));
   if (row.applicant_visible) flags.push(translate('Visible to applicant'));

@@ -1,4 +1,4 @@
-import { XIcon } from '@phosphor-icons/react';
+import { PushPinIcon, PushPinSlashIcon, XIcon } from '@phosphor-icons/react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
@@ -15,9 +15,10 @@ import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 
-import { DrawerContext } from './DrawerContext';
+import { DrawerContext, drawerState } from './DrawerContext';
+import { DOCK_MIN_PAGE_WIDTH } from './drawerDock';
 import { DrawerResizeHandle } from './DrawerResizeHandle';
-import { DRAWER_WIDE_WIDTH } from './drawerWidth';
+import { DRAWER_MIN_WIDTH, DRAWER_WIDE_WIDTH } from './drawerWidth';
 import { DRAWER_SHELL_CLASS, DrawerShellClass } from './shellClasses';
 
 export const DrawerRoot: FunctionComponent = () => {
@@ -39,6 +40,9 @@ export const DrawerRoot: FunctionComponent = () => {
     historyOpen,
     panel,
     setPanel,
+    docked: dockChosen,
+    setDocked,
+    setBesidePage,
   } = context;
   const [isDirtyContext, setIsDirtyContext] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -56,13 +60,116 @@ export const DrawerRoot: FunctionComponent = () => {
   // Expanded, the panel spans the page beside the sidebar, following it as
   // it collapses or expands (useSidebarLayoutShim).
   // Otherwise the width the user dragged it to, or the drawer's own.
-  const width = expanded
-    ? 'calc(100% - var(--layout-sidebar-width, 0px))'
-    : draggedWidth !== null
-      ? `${draggedWidth}px`
-      : drawerProps.width;
   const resizable = Boolean(drawerProps.resizable);
   const isDesktop = useBreakpointUp('lg');
+  // Whether the page keeps DOCK_MIN_PAGE_WIDTH beside the drawer: below it,
+  // the page's layout -- chosen by the window's width -- would overflow.
+  const [roomBeside, setRoomBeside] = React.useState(true);
+  React.useEffect(() => {
+    if (!isOpen || !isDesktop || !panel) return;
+    // The page region left of the drawer, sidebar included: what the page
+    // lays itself out by once the drawer docks.
+    const measure = () =>
+      setRoomBeside(
+        document.documentElement.clientWidth -
+          panel.getBoundingClientRect().width >=
+          DOCK_MIN_PAGE_WIDTH,
+      );
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(panel);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [isOpen, isDesktop, panel]);
+  // The floating card drawers but the assistant's can dock (the toggle in
+  // their header). A full-height drawer, a form say, cannot: it is modal,
+  // and a dialog switching between modal and not remounts what it holds.
+  const dockable =
+    Boolean(drawerProps.shellClass) &&
+    drawerProps.shellClass !== DRAWER_SHELL_CLASS.ai;
+  // Docked, as the user chose: the page stays usable, and clicking it or
+  // going to another page leaves the drawer open. Expanded, the drawer spans
+  // the page and covers it as any drawer does.
+  // Docked only from lg, where its toggle shows: below it the drawer fills
+  // the screen, and a docked one could neither be undocked nor tapped away.
+  const docked = dockable && dockChosen && isOpen && !expanded && isDesktop;
+  // Beside the page: from lg, while the page keeps room beside the drawer,
+  // the page narrows to make room for it; otherwise the drawer stays over the
+  // page's right side until it is made narrower.
+  const besidePage = docked && isDesktop && roomBeside;
+  // Docked, it may have been dragged narrower than the drawer's own minimum
+  // (so as to leave the page room); floating, it is never narrower than that.
+  const ownMin: number = drawerProps.minWidth ?? DRAWER_MIN_WIDTH;
+  const shownWidth =
+    draggedWidth !== null && !docked
+      ? Math.max(draggedWidth, ownMin)
+      : draggedWidth;
+  const width = expanded
+    ? 'calc(100% - var(--layout-sidebar-width, 0px))'
+    : shownWidth !== null
+      ? `${shownWidth}px`
+      : drawerProps.width;
+  React.useLayoutEffect(() => {
+    drawerState.docked = docked;
+  }, [docked]);
+  // The page narrows by the docked drawer's width (Layout), so that nothing
+  // on it hides under the drawer.
+  React.useEffect(() => {
+    setBesidePage(besidePage);
+  }, [besidePage, setBesidePage]);
+  // A floating card is not modal -- a dialog switching between modal and not
+  // remounts its contents, and it must not as it docks -- so nothing blocks
+  // the page under it. A click outside it closes it and is swallowed, as a
+  // modal's would be, rather than also acting on the page: Radix dismisses a
+  // non-modal dialog only on the click, after the page has handled it.
+  const floatingOverPage =
+    isOpen && Boolean(drawerProps.shellClass) && !docked && !expanded;
+  const onHideRef = React.useRef<() => void>(() => undefined);
+  React.useEffect(() => {
+    if (!floatingOverPage || !panel) return;
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Element | null;
+      if (!target || panel.contains(target)) return;
+      // The header's drawer toggles close or switch it themselves; menus,
+      // popovers and dialogs it opened render outside it.
+      if (
+        target.closest(
+          '[data-drawer-toggle], [data-radix-popper-content-wrapper], [role=dialog], [role=menu], [role=listbox]',
+        )
+      ) {
+        return;
+      }
+      const swallow = (click: MouseEvent) => {
+        click.preventDefault();
+        click.stopPropagation();
+        onHideRef.current();
+      };
+      document.addEventListener('click', swallow, {
+        capture: true,
+        once: true,
+      });
+      // A pointerdown with no click after it (a drag) must not eat a later
+      // one.
+      window.setTimeout(
+        () => document.removeEventListener('click', swallow, { capture: true }),
+        1000,
+      );
+    };
+    document.addEventListener('pointerdown', onPointerDown, true);
+    return () =>
+      document.removeEventListener('pointerdown', onPointerDown, true);
+  }, [floatingOverPage, panel]);
+  React.useEffect(() => {
+    if (!besidePage || !width) return;
+    const root = document.documentElement.style;
+    root.setProperty('--layout-docked-drawer-width', width);
+    return () => {
+      root.removeProperty('--layout-docked-drawer-width');
+    };
+  }, [besidePage, width]);
   // The contents switch to their expanded layout (history sidebar, script
   // panel, Team chat dock) by the panel's actual width, so a drawer dragged
   // wide gets it as well as an expanded one. Only where the user chooses the
@@ -98,6 +205,7 @@ export const DrawerRoot: FunctionComponent = () => {
     }
     closeDrawer();
   };
+  onHideRef.current = onHide;
 
   const shell = drawerProps.shellClass as DrawerShellClass | undefined;
   const floating = Boolean(shell);
@@ -107,6 +215,11 @@ export const DrawerRoot: FunctionComponent = () => {
   return (
     <Dialog.Root
       open={isOpen}
+      // A floating card is never modal, docked or not: switching would
+      // remount its contents (a live chat, say) and replay its slide-in.
+      // Floating, a click outside still closes it (onInteractOutside);
+      // docked, it leaves the page live. A full-height drawer stays modal.
+      modal={!floating}
       onOpenChange={(open) => {
         if (!open) onHide();
       }}
@@ -179,6 +292,11 @@ export const DrawerRoot: FunctionComponent = () => {
         )}
         style={{ '--drawer-width': width } as React.CSSProperties}
         aria-describedby={undefined}
+        // Clicking or focusing the page beside a docked drawer works on the
+        // page; only the drawer's own close or Escape closes it.
+        onInteractOutside={(event) => {
+          if (docked) event.preventDefault();
+        }}
         onPointerDownOutside={(event) => {
           if (isInsidePointerDown(event)) {
             event.preventDefault();
@@ -236,6 +354,35 @@ export const DrawerRoot: FunctionComponent = () => {
                   : 'my-[0.5rem] gap-[0.5rem]',
               )}
             >
+              {dockable && !expanded && (
+                // A floating card can dock beside the page from lg.
+                <span className="hidden lg:inline-flex">
+                  <BaseButton
+                    iconNode={
+                      dockChosen ? (
+                        <PushPinSlashIcon weight="bold" />
+                      ) : (
+                        <PushPinIcon weight="bold" />
+                      )
+                    }
+                    tooltip={
+                      !dockChosen
+                        ? translate('Dock beside the page')
+                        : roomBeside
+                          ? translate('Float over the page')
+                          : translate(
+                              'Docked: it stays open as you browse, but the window is too narrow to show the page beside it. Make the drawer narrower to see both, or click to float over the page.',
+                            )
+                    }
+                    aria-pressed={dockChosen}
+                    onClick={() => setDocked(!dockChosen)}
+                    variant="tertiary-ghost"
+                    tooltipSide="bottom"
+                    size="md"
+                    data-testid="drawer-dock-toggle"
+                  />
+                </span>
+              )}
               {drawerProps.toolbar ? (
                 React.createElement(drawerProps.toolbar, { close: onHide })
               ) : (
@@ -293,7 +440,7 @@ export const DrawerRoot: FunctionComponent = () => {
           )}
         </div>
         {/* After the contents, so the dialog's initial focus lands on them. */}
-        {resizable && <DrawerResizeHandle panel={panel} />}
+        {resizable && <DrawerResizeHandle panel={panel} docked={docked} />}
       </Dialog.Content>
     </Dialog.Root>
   );

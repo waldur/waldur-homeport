@@ -47,6 +47,8 @@ import { CriteriaListField } from './CriteriaListField';
 import { StatusLabelsFields } from './StatusLabelsFields';
 import {
   contributorRole,
+  discussionDisabledReason,
+  dormantDiscussion,
   StepFormPage,
   StepFormValues,
   stepFieldShown,
@@ -100,6 +102,24 @@ const SyncPerOfferingSource: FC<{ values: StepFormValues }> = ({ values }) => {
       form.change('contributor_source', 'requested_offering_team');
     }
   }, [form, values.per_requested_offering, values.contributor_source]);
+  return null;
+};
+
+/**
+ * A step that cannot have a discussion -- one turned into a blind review --
+ * loses the one it had, so the switch reads as what will be saved.
+ */
+const SyncDiscussion: FC<{
+  kind: StepKind | undefined;
+  values: StepFormValues;
+}> = ({ kind, values }) => {
+  const form = useForm<StepFormValues>();
+  const blocked = Boolean(discussionDisabledReason(kind, values));
+  useEffect(() => {
+    if (blocked && values.has_discussion) {
+      form.change('has_discussion', false);
+    }
+  }, [form, blocked, values.has_discussion]);
   return null;
 };
 
@@ -243,6 +263,7 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
   const has = (field: string) => kindHasField(kind, field);
   const show = (field: keyof StepFormValues) =>
     stepFieldShown(field, kind, values, { showEnableSwitch });
+  const discussionReason = discussionDisabledReason(kind, values);
   const completedByRole = values.completer === 'proposal_role';
   const contributedByRole = (values.contributor_source ?? '').startsWith(
     'proposal_role:',
@@ -762,6 +783,44 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
           />
         )}
 
+        {show('has_discussion') && (
+          <BooleanGroup
+            name="has_discussion"
+            label={translate('Discussion')}
+            disabled={Boolean(discussionReason)}
+            description={
+              discussionReason ||
+              (dormantDiscussion(kind, values)
+                ? translate(
+                    'Matrix chat is disabled, so the discussion is dormant and can only be switched off.',
+                  )
+                : translate(
+                    'An end-to-end encrypted chat and video room for the people working on the step, kept with its record. Once the step completes, the room is exported and closed. On a step run once per round, one room per round, and per panel on a call with panels.',
+                  ))
+            }
+          />
+        )}
+
+        {show('discussion_call_managers') && (
+          <BooleanGroup
+            name="discussion_call_managers"
+            label={translate('Call managers join the discussion')}
+            description={translate(
+              'The call managers join the room as observers.',
+            )}
+          />
+        )}
+
+        {show('discussion_panel_members') && (
+          <BooleanGroup
+            name="discussion_panel_members"
+            label={translate('Panel members join the discussion')}
+            description={translate(
+              "The members of the proposal's panel join the room, besides the step's contributors and completers.",
+            )}
+          />
+        )}
+
         {show('checklist') && (
           <SelectGroup
             name="checklist"
@@ -1007,6 +1066,7 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
       {has('per_requested_offering') && (
         <SyncPerOfferingSource values={values} />
       )}
+      {has('has_discussion') && <SyncDiscussion kind={kind} values={values} />}
       {pages.map((key) =>
         key === 'check' ? null : (
           <div

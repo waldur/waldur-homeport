@@ -8,9 +8,19 @@ import { translate } from '@/i18n';
 import { getChatAvatarClass } from './chatColors';
 import { useRoomMembers } from './useRoomMembers';
 
-function getRoleBadge(powerLevel: number) {
+/**
+ * The member's badge: the bot, then what the member takes part as where the
+ * room names it -- a step discussion's Panel chair or Reviewer, green for a
+ * moderator -- else a project room's admins.
+ */
+function getRoleBadge(powerLevel: number, roleLabel?: string) {
   if (powerLevel >= 100)
     return { label: translate('Bot'), variant: 'secondary' as const };
+  if (roleLabel)
+    return {
+      label: roleLabel,
+      variant: powerLevel >= 50 ? ('success' as const) : ('info' as const),
+    };
   if (powerLevel >= 50)
     return { label: translate('Admin'), variant: 'success' as const };
   return null;
@@ -26,7 +36,7 @@ export const MatrixMembersList: FC = () => {
       </div>
       <div className="flex flex-col gap-1">
         {members.map((m) => {
-          const roleBadge = getRoleBadge(m.powerLevel);
+          const roleBadge = getRoleBadge(m.powerLevel, m.roleLabel);
           const invited = m.membership === 'invite';
           return (
             <div

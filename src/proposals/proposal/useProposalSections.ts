@@ -3,8 +3,13 @@ import { useMemo, useRef } from 'react';
 import { ProposalWorkflowStepInstance } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { PROPOSAL_ACTIVITY_SECTION_ID } from '@/proposals/activity/ProposalActivitySection';
 import { AWARDED_RESOURCES_SECTION_ID } from '@/proposals/awardedResources';
+import {
+  STEP_DISCUSSIONS_SECTION_ID,
+  stepsWithDiscussion,
+} from '@/proposals/discussions/StepDiscussionsSection';
 import { Proposal } from '@/proposals/types';
 
 import {
@@ -135,6 +140,15 @@ export const getOpenByDefault = ({
   }
   if (current?.kind === 'assignment') {
     open.add('step-evaluators');
+  }
+  // The current step's discussion, while it may still be had: not while
+  // Matrix chat is disabled, which leaves only closed ones' records.
+  if (
+    current?.discussion &&
+    current.discussion.state !== 'closed' &&
+    isMatrixChatEnabled()
+  ) {
+    open.add(STEP_DISCUSSIONS_SECTION_ID);
   }
   if (current?.collects_reviewer_suggestions) {
     open.add('step-my-reviewer-suggestions');
@@ -307,6 +321,11 @@ export const useProposalSections = (
       translate('{step}: contributions', { step: step.step_name }),
     );
   }
+  add(
+    !preview && stepsWithDiscussion(input.workflowStates).length > 0,
+    STEP_DISCUSSIONS_SECTION_ID,
+    translate('Discussions'),
+  );
   add(show.evaluators, 'step-evaluators', translate('Evaluators'));
   add(
     show.myReviewerSuggestions &&

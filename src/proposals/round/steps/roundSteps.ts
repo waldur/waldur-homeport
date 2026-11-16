@@ -2,6 +2,7 @@ import { RoundStep } from 'waldur-js-client';
 
 import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { translate } from '@/i18n';
+import { discussionAction } from '@/proposals/discussions/discussionAction';
 
 /** A date as the API takes it, from what a date-time field holds. */
 export const toIsoDate = (value: string | Date | null | undefined) => {
@@ -53,3 +54,18 @@ export const roundStepState = (step: RoundStep): string => {
       })
     : translate('Open');
 };
+
+/**
+ * The discussions of a round step to show the viewer, one per panel on a call
+ * with panels: those with something to offer. While Matrix chat is
+ * disabled, only the closed ones' records.
+ */
+export const shownRoundDiscussions = (
+  step: Pick<RoundStep, 'round_step_uuid' | 'discussions'>,
+  chatEnabled: boolean,
+) =>
+  step.round_step_uuid
+    ? (step.discussions ?? []).filter((discussion) =>
+        Boolean(discussionAction(discussion, chatEnabled)),
+      )
+    : [];

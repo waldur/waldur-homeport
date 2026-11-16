@@ -40,6 +40,11 @@ vi.mock('waldur-design-tokens', () => ({
     configured === 'auto' ? (theme === 'dark' ? 'dark' : 'light') : configured,
 }));
 
+let mockBesidePage = false;
+vi.mock('@/drawer/actions', () => ({
+  useOptionalDrawer: () => ({ besidePage: mockBesidePage }),
+}));
+
 vi.mock('@/theme/useTheme', () => ({
   useTheme: () => ({ theme: mockTheme }),
 }));
@@ -52,6 +57,7 @@ describe('useSidebarLayoutShim', () => {
     mockMobile = false;
     mockTheme = 'dark';
     mockPageWidth = 1600;
+    mockBesidePage = false;
     ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE = 'dark';
   });
 
@@ -87,6 +93,20 @@ describe('useSidebarLayoutShim', () => {
     mockOpen = true;
     mockPageWidth = 900;
     renderHook(() => useSidebarLayoutShim());
+
+    expect(setOpen).toHaveBeenCalledWith(false);
+  });
+
+  it('collapses to its rail at any width beside a docked drawer', () => {
+    // A page the drawer leaves 700px: below 768px a window would turn the
+    // sidebar into a sheet, which a wide window's header offers no button for.
+    mockPageWidth = 700;
+    mockOpen = true;
+    const { rerender } = renderHook(() => useSidebarLayoutShim());
+    expect(setOpen).not.toHaveBeenCalled();
+
+    mockBesidePage = true;
+    rerender();
 
     expect(setOpen).toHaveBeenCalledWith(false);
   });

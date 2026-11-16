@@ -17,6 +17,11 @@ interface OpenSupportDrawerOptions {
   title?: string;
   /** Team chat's room list, rather than the last tab and room. */
   roomList?: boolean;
+  /**
+   * The room asked for is a step discussion's: it opens on the Discussions
+   * tab even before the room list has it, as just after it was started.
+   */
+  discussion?: boolean;
 }
 
 type OpenDrawer = ReturnType<typeof useDrawer>['openDrawer'];
@@ -57,5 +62,10 @@ export const openSupportDrawer = (
     matrixRoomAlias: options.matrixRoomAlias ?? undefined,
     roomListRequest: options.roomList ? roomListRequests : undefined,
     roomRequest: asksForRoom ? roomRequests : undefined,
+    discussionRequested: Boolean(options.discussion),
+    // The chat sits beside the page: the page stays usable, and going to
+    // another page leaves the drawer open, so that a discussion's
+    // materials can be read beside it.
+    docked: true,
   });
 };

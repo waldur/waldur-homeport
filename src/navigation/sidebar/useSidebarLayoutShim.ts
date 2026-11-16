@@ -8,6 +8,7 @@ import {
 import { usePageBreakpointUp, useSidebar } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
+import { useOptionalDrawer } from '@/drawer/actions';
 import { useTheme } from '@/theme/useTheme';
 
 /**
@@ -68,15 +69,19 @@ export function useSidebarLayoutShim() {
     documentWidth > 0 ? Math.max(0, window.innerWidth - documentWidth) : 0;
   const medium = usePageBreakpointUp(768 - scrollbar);
   const wide = usePageBreakpointUp(1400 - scrollbar);
+  // Beside a docked drawer the sidebar collapses to its rail at any width:
+  // below 768px a window would turn it into a sheet opened from the header,
+  // but the header goes by the window and offers no button for one here.
+  const besideDrawer = Boolean(useOptionalDrawer()?.besidePage);
   useEffect(() => {
     if (userToggledRef.current) return;
-    const shouldMinimize = medium && !wide;
+    const shouldMinimize = !wide && (medium || besideDrawer);
     if (shouldMinimize && openRef.current) {
       setOpenRef.current(false);
     } else if (wide && !openRef.current) {
       setOpenRef.current(true);
     }
-  }, [medium, wide]);
+  }, [medium, wide, besideDrawer]);
 
   // Sidebar style-variant token: reactive to theme changes so 'auto' keeps
   // following the app's light/dark toggle.

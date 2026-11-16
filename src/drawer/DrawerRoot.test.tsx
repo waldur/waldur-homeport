@@ -2,7 +2,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Menu, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
 
@@ -10,7 +10,7 @@ import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { Select } from '@/form/select';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 
-import { useDrawer } from './actions';
+import { DrawerService, useDrawer } from './actions';
 import { DrawerProvider } from './DrawerContext';
 import { DrawerRoot } from './DrawerRoot';
 
@@ -388,5 +388,92 @@ describe('DrawerRoot', () => {
     expect(screen.getByTestId('comp-a')).toBeInTheDocument();
     expect(screen.getByText('Drawer A')).toBeInTheDocument();
     expect(screen.queryByTestId('comp-b')).not.toBeInTheDocument();
+  });
+
+  describe('docked beside the page', () => {
+    beforeEach(() => {
+      localStorage.clear();
+    });
+
+    it('stays open on a click on the page and on going to another page', async () => {
+      const user = userEvent.setup();
+      let openDrawer!: ReturnType<typeof useDrawer>['openDrawer'];
+      render(
+        <DrawerProvider>
+          <button type="button">On the page</button>
+          <OpenButton onOpen={(fn) => (openDrawer = fn)} />
+          <DrawerRoot />
+        </DrawerProvider>,
+      );
+      act(() =>
+        openDrawer(DrawerContent, {
+          title: 'Panel',
+          shellClass: 'support-drawer-active',
+          docked: true,
+        }),
+      );
+      await screen.findByTestId('drawer-content');
+
+      await user.click(screen.getByRole('button', { name: 'On the page' }));
+      expect(getDrawer()).toHaveAttribute('data-state', 'open');
+
+      act(() => DrawerService.closeOnNavigation());
+      expect(getDrawer()).toHaveAttribute('data-state', 'open');
+    });
+
+    it('floats over the page, as before, unless docked', async () => {
+      const { open } = renderDrawer();
+      act(() => open());
+      await screen.findByTestId('drawer-content');
+
+      act(() => DrawerService.closeOnNavigation());
+      await waitFor(() =>
+        expect(screen.queryByTestId('drawer-content')).not.toBeInTheDocument(),
+      );
+    });
+
+    it('docks or floats as the user chose, remembered for the kind of drawer', async () => {
+      const user = userEvent.setup();
+      let openDrawer!: ReturnType<typeof useDrawer>['openDrawer'];
+      render(
+        <DrawerProvider>
+          <OpenButton onOpen={(fn) => (openDrawer = fn)} />
+          <DrawerRoot />
+        </DrawerProvider>,
+      );
+      act(() =>
+        openDrawer(DrawerContent, {
+          title: 'Panel',
+          shellClass: 'support-drawer-active',
+        }),
+      );
+      const content = await screen.findByTestId('drawer-content');
+
+      const toggle = screen.getByTestId('drawer-dock-toggle');
+      expect(toggle).toHaveAttribute('aria-pressed', 'false');
+      await user.click(toggle);
+      expect(screen.getByTestId('drawer-dock-toggle')).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      );
+      expect(
+        localStorage.getItem('waldur/drawer-docked/support-drawer-active'),
+      ).toBe('true');
+      // Its contents stay as they were: the drawer is not opened again.
+      expect(screen.getByTestId('drawer-content')).toBe(content);
+
+      act(() => DrawerService.closeOnNavigation());
+      expect(getDrawer()).toHaveAttribute('data-state', 'open');
+    });
+
+    it('is not offered on a full-height drawer, which stays modal', async () => {
+      const { open } = renderDrawer();
+      act(() => open());
+      await screen.findByTestId('drawer-content');
+
+      expect(
+        screen.queryByTestId('drawer-dock-toggle'),
+      ).not.toBeInTheDocument();
+    });
   });
 });
