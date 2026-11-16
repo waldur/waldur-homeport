@@ -10,12 +10,10 @@ import {
 } from '@assistant-ui/react';
 import {
   ArrowClockwiseIcon,
-  SparkleIcon,
-  CubeIcon,
-  ChartBarIcon,
-  FileTextIcon,
-  HandCoinsIcon,
+  CaretDownIcon,
+  CaretUpIcon,
   PencilSimpleIcon,
+  SparkleIcon,
   WarningCircleIcon,
   CoinsIcon,
 } from '@phosphor-icons/react';
@@ -23,12 +21,14 @@ import { useQuery } from '@tanstack/react-query';
 import React, {
   createContext,
   type FC,
-  ReactNode,
   useContext,
   useEffect,
   useMemo,
 } from 'react';
-import { chatQuotaUsageRetrieve } from 'waldur-js-client';
+import {
+  chatQuotaUsageRetrieve,
+  chatSuggestionsRetrieve,
+} from 'waldur-js-client';
 
 import { BaseButton, Badge } from 'waldur-ui';
 
@@ -46,6 +46,7 @@ import { AssistantComposer } from '@/ai-assistant/components/shared/AssistantCom
 import { AssistantMessageContent } from '@/ai-assistant/components/shared/AssistantMessageContent';
 import { UserMessageShell } from '@/ai-assistant/components/shared/UserMessageShell';
 import { VersionSelector } from '@/ai-assistant/components/shared/VersionSelector';
+import { getSuggestionCopy } from '@/ai-assistant/components/suggestionCopy';
 import { useVersionSelector } from '@/ai-assistant/hooks/useVersionSelector';
 import { extractTextFromBlocks } from '@/ai-assistant/lib/messages/messageUtils';
 import { isThreadLoading } from '@/ai-assistant/lib/thread/isThreadLoading';
@@ -54,19 +55,11 @@ import {
   BlockHistoryEntry,
 } from '@/ai-assistant/lib/types';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
-import { useUser } from '@/workspace/hooks';
-
-type SuggestionItem = {
-  label: string;
-  icon: ReactNode;
-  action: string;
-  hidden?: boolean;
-};
+import { useImpersonatorUser, useUser } from '@/workspace/hooks';
 
 export const Thread: FC = () => {
   const { loadingThreadId, currentThreadId, threads } = useThreadContext();
@@ -150,65 +143,99 @@ const ThreadWelcome: FC = () => {
   );
 };
 
-// The docs suggestion goes when staff turn the documentation search off,
-// since the assistant then has no documentation to search.
-export const getThreadSuggestions = (): SuggestionItem[] => {
-  const suggestions: SuggestionItem[] = [
-    {
-      label: translate('Create VM'),
-      icon: <CubeIcon weight="bold" />,
-      action: translate('I want to create a VM'),
-    },
-    {
-      label: translate('Analyze usage'),
-      icon: <ChartBarIcon weight="bold" />,
-      action: translate('Analyze my current usage'),
-    },
-    {
-      label: translate('Search docs'),
-      icon: <FileTextIcon weight="bold" />,
-      action: translate('Search documentation for...'),
-      hidden: ENV.plugins.WALDUR_CORE.DOCS_SEARCH_ENABLED === false,
-    },
-    {
-      label: translate('Manage accounts'),
-      icon: <PencilSimpleIcon weight="bold" />,
-      action: translate('Help me manage my accounts'),
-    },
-    {
-      label: translate('Visualize costs'),
-      icon: <HandCoinsIcon weight="bold" />,
-      action: translate('Visualize my costs'),
-    },
-    {
-      label: translate('More'),
-      icon: <SparkleIcon weight="bold" />,
-      action: translate('Show me more options'),
-    },
-  ];
-  return suggestions.filter((item) => !item.hidden);
+// How many quick prompts show before "More".
+export const VISIBLE_SUGGESTIONS = 5;
+const SUGGESTIONS_ID = 'aui-thread-suggestions';
+
+// Which quick prompts this user is offered comes from the backend, which
+// knows the tools they have, what the portal has switched on and their own
+// data. Fetched when the empty thread shows, not on page load; a failed
+// request shows no prompts rather than ones that may lead nowhere.
+// The list depends on who asks and whether staff impersonate them, so both
+// are in the key; only the ids are cached, the copy is built on render.
+const useThreadSuggestions = () => {
+  const user = useUser();
+  const impersonator = useImpersonatorUser();
+  const { data: ids } = useQuery({
+    queryKey: ['chatSuggestions', user?.uuid, impersonator?.uuid],
+    queryFn: () =>
+      chatSuggestionsRetrieve().then((r) =>
+        r.data.suggestions.map((item) => item.id),
+      ),
+    staleTime: 5 * 60 * 1000,
+    enabled: !!user?.uuid,
+  });
+  return useMemo(() => getSuggestionCopy(ids ?? []), [ids]);
 };
 
-const ThreadSuggestions: FC = () => {
-  const suggestions = getThreadSuggestions();
+// A template prompt fills the composer; put the caret there so the user can
+// finish the question, also from the keyboard.
+const focusComposer = (from: HTMLElement) => {
+  requestAnimationFrame(() => {
+    const input = from
+      .closest('.aui-thread-root')
+      ?.querySelector<HTMLTextAreaElement>('textarea.aui-composer-input');
+    if (input) {
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  });
+};
+
+export const ThreadSuggestions: FC = () => {
+  const suggestions = useThreadSuggestions();
+  const [expanded, setExpanded] = React.useState(false);
+  const hasMore = suggestions.length > VISIBLE_SUGGESTIONS;
+  const shown = expanded
+    ? suggestions
+    : suggestions.slice(0, VISIBLE_SUGGESTIONS);
+
+  if (!suggestions.length) {
+    return null;
+  }
 
   return (
-    <div className="aui-thread-welcome-suggestions">
-      {suggestions.map((suggestedAction, index) => (
+    <div className="aui-thread-welcome-suggestions" id={SUGGESTIONS_ID}>
+      {shown.map((suggestion) => (
         <ThreadPrimitive.Suggestion
-          key={index}
-          prompt={suggestedAction.action}
-          send
+          key={suggestion.id}
+          prompt={suggestion.prompt}
+          send={suggestion.send}
           asChild
         >
           <BaseButton
             variant="tertiary"
             className="aui-thread-welcome-suggestion-btn"
-            iconNode={suggestedAction.icon}
-            label={suggestedAction.label}
+            iconNode={suggestion.icon}
+            label={suggestion.label}
+            onClick={
+              suggestion.send
+                ? undefined
+                : (event: React.MouseEvent<HTMLElement>) =>
+                    focusComposer(event.currentTarget)
+            }
           />
         </ThreadPrimitive.Suggestion>
       ))}
+      {hasMore && (
+        // Expands in place: it sends nothing, so it costs no tokens.
+        <BaseButton
+          variant="tertiary"
+          className="aui-thread-welcome-suggestion-btn"
+          iconNode={
+            expanded ? (
+              <CaretUpIcon weight="bold" />
+            ) : (
+              <CaretDownIcon weight="bold" />
+            )
+          }
+          label={expanded ? translate('Less') : translate('More')}
+          aria-label={translate('More suggestions')}
+          aria-expanded={expanded}
+          aria-controls={SUGGESTIONS_ID}
+          onClick={() => setExpanded(!expanded)}
+        />
+      )}
     </div>
   );
 };

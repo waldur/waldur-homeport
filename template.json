@@ -10832,6 +10832,12 @@
       "feature_area": "chat"
     }
   },
+  "Call insights": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
   "Call is playing in Picture-in-Picture": {
     "context": {
       "feature_area": "call"
@@ -12061,6 +12067,12 @@
   "Check for updates": {
     "context": {
       "feature_area": "marketplace"
+    }
+  },
+  "Check my credit": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
     }
   },
   "Check name": {
@@ -26463,10 +26475,33 @@
       "primary_ui_type": "label"
     }
   },
+  "Find HPC software": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
   "Find a call that fits your work and apply for resources.": {},
+  "Find a matching call": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
+  "Find a service": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
   "Find and replace article codes across offering components": {
     "context": {
       "feature_area": "article-codes"
+    }
+  },
+  "Find open calls that match my research on": {
+    "context": {
+      "feature_area": "ai-assistant"
     }
   },
   "Find potential reviewers using affinity matching. Generate matches based on the call description, proposals, or custom keywords, then confirm suggestions and send invitations.": {},
@@ -28790,7 +28825,12 @@
       "feature_area": "shell"
     }
   },
-  "Help me manage my accounts": {
+  "Help me find a service for": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
+  "Help me with my draft proposal": {
     "context": {
       "feature_area": "ai-assistant"
     }
@@ -28798,6 +28838,12 @@
   "Help us understand how visitors interact with the website. (Currently unavailable)": {
     "context": {
       "feature_area": "cookies"
+    }
+  },
+  "Help with my proposal": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
     }
   },
   "Helpdesk": {
@@ -29271,6 +29317,11 @@
       "feature_area": "policies"
     }
   },
+  "How do I": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "How does the review process work?": {
     "context": {
       "feature_area": "invitations"
@@ -29371,6 +29422,11 @@
   "How many times a user is prompted at most.": {
     "context": {
       "feature_area": "feedback"
+    }
+  },
+  "How much credit do I have left?": {
+    "context": {
+      "feature_area": "ai-assistant"
     }
   },
   "How new organizations are onboarded and how projects behave.": {
@@ -31955,6 +32011,11 @@
       "feature_area": "affiliations"
     }
   },
+  "Is this software available on the cluster:": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Israel": {},
   "Issue": {
     "context": {
@@ -33423,6 +33484,11 @@
       "feature_area": "TenantTopology"
     }
   },
+  "Less": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Less than": {
     "context": {
       "primary_ui_type": "label"
@@ -34886,6 +34952,17 @@
       "feature_area": "create"
     }
   },
+  "Look up a user": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
+  "Look up the user": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Lost": {
     "context": {
       "primary_ui_type": "label",
@@ -35283,12 +35360,6 @@
         }
       },
       "feature_area": "partitions"
-    }
-  },
-  "Manage accounts": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "ai-assistant"
     }
   },
   "Manage api key for resource": {
@@ -37853,7 +37924,6 @@
   },
   "More": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "ai-assistant"
     }
   },
@@ -37880,6 +37950,11 @@
   "More message actions": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "More suggestions": {
+    "context": {
+      "feature_area": "ai-assistant"
     }
   },
   "More tabs": {
@@ -38266,6 +38341,12 @@
       "feature_area": "chat"
     }
   },
+  "My HPC jobs": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
   "My Proposals": {
     "context": {
       "feature_area": "proposals"
@@ -38275,6 +38356,12 @@
   "My call tasks": {
     "context": {
       "feature_area": "marketplace"
+    }
+  },
+  "My invoices": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
     }
   },
   "My offerings": {
@@ -38293,9 +38380,16 @@
       "feature_area": "offerings"
     }
   },
+  "My resources": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
   "My reviews": {
     "context": {
-      "feature_area": "sidebar"
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
     }
   },
   "My tasks": {
@@ -46237,6 +46331,12 @@
       "feature_area": "openstack-hypervisors"
     }
   },
+  "Overdrawn projects": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
+    }
+  },
   "Overdrawn: {remaining} remaining.": {
     "context": {
       "variables": {
@@ -47428,7 +47528,7 @@
   "Pending orders": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "provider"
+      "feature_area": "ai-assistant"
     }
   },
   "Pending organization approval": {
@@ -60659,11 +60759,6 @@
       "feature_area": "ai-assistant"
     }
   },
-  "Search documentation for...": {
-    "context": {
-      "feature_area": "ai-assistant"
-    }
-  },
   "Search flavors...": {
     "context": {
       "feature_area": "common"
@@ -63518,6 +63613,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Show a chart of my monthly costs": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Show a saturation bar per offering component against a timeline, with the current date and the next limit reset marked.": {
     "context": {
       "feature_area": "features"
@@ -63700,6 +63800,11 @@
       "feature_area": "features"
     }
   },
+  "Show insights for the active calls": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Show kind field in project create dialog.": {
     "context": {
       "feature_area": "features"
@@ -63715,14 +63820,29 @@
       "feature_area": "issues"
     }
   },
-  "Show me more options": {
+  "Show more": {
+    "context": {
+      "feature_area": "core"
+    }
+  },
+  "Show my recent HPC jobs": {
     "context": {
       "feature_area": "ai-assistant"
     }
   },
-  "Show more": {
+  "Show my recent invoices": {
     "context": {
-      "feature_area": "core"
+      "feature_area": "ai-assistant"
+    }
+  },
+  "Show my resources": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
+  "Show my review workload": {
+    "context": {
+      "feature_area": "ai-assistant"
     }
   },
   "Show notes ({count})": {
@@ -84372,11 +84492,6 @@
       "feature_area": "ai-assistant"
     }
   },
-  "Visualize my costs": {
-    "context": {
-      "feature_area": "ai-assistant"
-    }
-  },
   "Voice message": {
     "context": {
       "feature_area": "chat",
@@ -85680,6 +85795,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Which of my orders are pending?": {
+    "context": {
+      "feature_area": "ai-assistant"
+    }
+  },
   "Which price to use for invoice items: sell or buy": {
     "context": {
       "feature_area": "settings"
@@ -85689,6 +85809,11 @@
   "Which projects": {
     "context": {
       "feature_area": "sram"
+    }
+  },
+  "Which projects are overdrawn?": {
+    "context": {
+      "feature_area": "ai-assistant"
     }
   },
   "Which proposal fields are collected and which applicant details are shown.": {},
@@ -85870,6 +85995,12 @@
   "Why do we need this?": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "Why is my resource paused?": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
     }
   },
   "Why is the change needed?": {

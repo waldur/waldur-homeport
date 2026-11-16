@@ -5,9 +5,17 @@ import {
   setCurrentProject,
   setCurrentUser,
 } from './actions';
-import { getCustomer, getProject, getUser } from './selectors';
+import {
+  getCustomer,
+  getImpersonatorUser,
+  getProject,
+  getUser,
+} from './selectors';
 
 export const useUser = () => useSelector(getUser);
+
+// The staff user impersonating the current user, if any.
+export const useImpersonatorUser = () => useSelector(getImpersonatorUser);
 
 export const useCustomer = () => useSelector(getCustomer);
 
