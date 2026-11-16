@@ -1740,6 +1740,12 @@ export const SettingsDescription = [
         options: [{ value: 'disabled', label: 'Disabled' }, { value: 'staff', label: 'Staff users' }, { value: 'staff_and_support', label: 'Staff and support users' }, { value: 'all', label: 'All users' }, { value: 'anonymous', label: 'All users including anonymous' }],
       },
       {
+        key: 'DOCS_SEARCH_ENABLED',
+        description: translate('Let users search the bundled Waldur documentation: the AI assistant\'s and MCP\'s search_docs tool, and the /api/docs-search/ endpoint. Turn it off to keep the Waldur documentation out of answers, for example when this portal provides its own documentation to end users.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
         key: 'AI_ASSISTANT_BACKEND_TYPE',
         description: translate('Type of AI Assistant backend. For example: vllm, openai, ollama.'),
         default: 'vllm',

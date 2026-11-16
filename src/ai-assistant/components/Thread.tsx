@@ -54,6 +54,7 @@ import {
   BlockHistoryEntry,
 } from '@/ai-assistant/lib/types';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -64,6 +65,7 @@ type SuggestionItem = {
   label: string;
   icon: ReactNode;
   action: string;
+  hidden?: boolean;
 };
 
 export const Thread: FC = () => {
@@ -148,7 +150,9 @@ const ThreadWelcome: FC = () => {
   );
 };
 
-const ThreadSuggestions: FC = () => {
+// The docs suggestion goes when staff turn the documentation search off,
+// since the assistant then has no documentation to search.
+export const getThreadSuggestions = (): SuggestionItem[] => {
   const suggestions: SuggestionItem[] = [
     {
       label: translate('Create VM'),
@@ -164,6 +168,7 @@ const ThreadSuggestions: FC = () => {
       label: translate('Search docs'),
       icon: <FileTextIcon weight="bold" />,
       action: translate('Search documentation for...'),
+      hidden: ENV.plugins.WALDUR_CORE.DOCS_SEARCH_ENABLED === false,
     },
     {
       label: translate('Manage accounts'),
@@ -181,6 +186,11 @@ const ThreadSuggestions: FC = () => {
       action: translate('Show me more options'),
     },
   ];
+  return suggestions.filter((item) => !item.hidden);
+};
+
+const ThreadSuggestions: FC = () => {
+  const suggestions = getThreadSuggestions();
 
   return (
     <div className="aui-thread-welcome-suggestions">
