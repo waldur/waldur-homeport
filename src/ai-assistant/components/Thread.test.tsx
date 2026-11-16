@@ -11,6 +11,18 @@ import {
   ThreadSuggestions,
   VISIBLE_SUGGESTIONS,
 } from '@/ai-assistant/components/Thread';
+import { useUser } from '@/workspace/hooks';
+
+const state: {
+  workspace: { user?: { uuid: string }; impersonatorUser?: { uuid: string } };
+} = {
+  workspace: { user: { uuid: 'user-1' } },
+};
+
+vi.mock('react-redux', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('react-redux')>()),
+  useSelector: (selector: (s: unknown) => unknown) => selector(state),
+}));
 
 vi.mock('@assistant-ui/react', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@assistant-ui/react')>()),
@@ -58,6 +70,9 @@ describe('getSuggestionCopy', () => {
 describe('ThreadSuggestions', () => {
   beforeEach(() => {
     vi.mocked(ThreadPrimitive.Suggestion).mockClear();
+    vi.mocked(client.chatSuggestionsRetrieve).mockClear();
+    state.workspace = { user: { uuid: 'user-1' } };
+    vi.mocked(useUser).mockImplementation(() => state.workspace.user as any);
   });
 
   it('shows the offered prompts and no More when they all fit', async () => {
@@ -89,6 +104,11 @@ describe('ThreadSuggestions', () => {
     const calls = vi.mocked(client.chatSuggestionsRetrieve).mock.calls.length;
 
     await userEvent.click(screen.getByText('More'));
+    expect(
+      screen
+        .getByRole('button', { name: 'More suggestions' })
+        .getAttribute('aria-expanded'),
+    ).toBe('true');
 
     expect(screen.getByText('Create VM')).toBeTruthy();
     expect(screen.getByText('Less')).toBeTruthy();
@@ -109,6 +129,72 @@ describe('ThreadSuggestions', () => {
       prompt: 'Help me find a service for ',
       send: false,
     });
+    // The space is added in code, so a translation cannot drop it.
+    expect(getSuggestionCopy(['search_docs'])[0].prompt).toBe('How do I ');
+  });
+
+  it('asks again when staff start impersonating someone', async () => {
+    respond(['look_up_user']);
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+    const view = render(
+      <QueryClientProvider client={queryClient}>
+        <ThreadSuggestions />
+      </QueryClientProvider>,
+    );
+    await screen.findByText('Look up a user');
+
+    state.workspace = {
+      user: { uuid: 'user-2' },
+      impersonatorUser: { uuid: 'user-1' },
+    };
+    respond(['create_vm']);
+    view.rerender(
+      <QueryClientProvider client={queryClient}>
+        <ThreadSuggestions />
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText('Create VM')).toBeTruthy();
+    expect(screen.queryByText('Look up a user')).toBeNull();
+    expect(client.chatSuggestionsRetrieve).toHaveBeenCalledTimes(2);
+  });
+
+  it('collapses again with Less', async () => {
+    respond([
+      'resource_paused',
+      'review_workload',
+      'pending_orders',
+      'check_credit',
+      'my_resources',
+      'create_vm',
+    ]);
+    renderSuggestions();
+    await screen.findByText('Why is my resource paused?');
+
+    await userEvent.click(
+      screen.getByRole('button', { name: 'More suggestions' }),
+    );
+    expect(screen.getByText('Create VM')).toBeTruthy();
+    await userEvent.click(
+      screen.getByRole('button', { name: 'More suggestions' }),
+    );
+    expect(screen.queryByText('Create VM')).toBeNull();
+  });
+
+  it('shows no More for exactly five', async () => {
+    respond([
+      'resource_paused',
+      'review_workload',
+      'pending_orders',
+      'check_credit',
+      'my_resources',
+    ]);
+    renderSuggestions();
+
+    await screen.findByText('My resources');
+    expect(screen.queryByText('More')).toBeNull();
   });
 
   it('shows nothing when the request fails', async () => {

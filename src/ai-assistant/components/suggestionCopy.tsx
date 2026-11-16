@@ -24,6 +24,7 @@ import type { ChatSuggestionIdEnum } from 'waldur-js-client';
 import { translate } from '@/i18n';
 
 export interface SuggestionCopy {
+  id: ChatSuggestionIdEnum;
   label: string;
   prompt: string;
   icon: ReactNode;
@@ -35,7 +36,11 @@ export interface SuggestionCopy {
 // The backend decides which quick prompts a user is offered and in which
 // order (GET /api/chat/suggestions/); the wording lives here. A Record over
 // the SDK's id union makes tsc fail when the backend adds an id without copy.
-const COPY: Record<ChatSuggestionIdEnum, () => SuggestionCopy> = {
+// The start of a question the user finishes: the space is added here, not in
+// the translation, where a translator could drop it.
+const template = (text: string) => `${text.trimEnd()} `;
+
+const COPY: Record<ChatSuggestionIdEnum, () => Omit<SuggestionCopy, 'id'>> = {
   resource_paused: () => ({
     label: translate('Why is my resource paused?'),
     prompt: translate('Why is my resource paused?'),
@@ -92,19 +97,19 @@ const COPY: Record<ChatSuggestionIdEnum, () => SuggestionCopy> = {
   }),
   find_service: () => ({
     label: translate('Find a service'),
-    prompt: translate('Help me find a service for '),
+    prompt: template(translate('Help me find a service for')),
     icon: <MagnifyingGlassIcon weight="bold" />,
     send: false,
   }),
   find_call: () => ({
     label: translate('Find a matching call'),
-    prompt: translate('Find open calls that match my research on '),
+    prompt: template(translate('Find open calls that match my research on')),
     icon: <MegaphoneIcon weight="bold" />,
     send: false,
   }),
   search_docs: () => ({
     label: translate('Search docs'),
-    prompt: translate('How do I '),
+    prompt: template(translate('How do I')),
     icon: <FileTextIcon weight="bold" />,
     send: false,
   }),
@@ -122,7 +127,7 @@ const COPY: Record<ChatSuggestionIdEnum, () => SuggestionCopy> = {
   }),
   hpc_software: () => ({
     label: translate('Find HPC software'),
-    prompt: translate('Is this software available on the cluster: '),
+    prompt: template(translate('Is this software available on the cluster:')),
     icon: <PackageIcon weight="bold" />,
     send: false,
   }),
@@ -140,7 +145,7 @@ const COPY: Record<ChatSuggestionIdEnum, () => SuggestionCopy> = {
   }),
   look_up_user: () => ({
     label: translate('Look up a user'),
-    prompt: translate('Look up the user '),
+    prompt: template(translate('Look up the user')),
     icon: <UserCircleIcon weight="bold" />,
     send: false,
   }),
@@ -153,4 +158,4 @@ export const getSuggestionCopy = (ids: readonly string[]): SuggestionCopy[] =>
     .filter((id): id is ChatSuggestionIdEnum =>
       Object.prototype.hasOwnProperty.call(COPY, id),
     )
-    .map((id) => COPY[id]());
+    .map((id) => ({ id, ...COPY[id]() }));

@@ -26499,7 +26499,7 @@
       "feature_area": "article-codes"
     }
   },
-  "Find open calls that match my research on ": {
+  "Find open calls that match my research on": {
     "context": {
       "feature_area": "ai-assistant"
     }
@@ -28825,7 +28825,7 @@
       "feature_area": "shell"
     }
   },
-  "Help me find a service for ": {
+  "Help me find a service for": {
     "context": {
       "feature_area": "ai-assistant"
     }
@@ -29317,7 +29317,7 @@
       "feature_area": "policies"
     }
   },
-  "How do I ": {
+  "How do I": {
     "context": {
       "feature_area": "ai-assistant"
     }
@@ -32011,7 +32011,7 @@
       "feature_area": "affiliations"
     }
   },
-  "Is this software available on the cluster: ": {
+  "Is this software available on the cluster:": {
     "context": {
       "feature_area": "ai-assistant"
     }
@@ -34958,7 +34958,7 @@
       "feature_area": "ai-assistant"
     }
   },
-  "Look up the user ": {
+  "Look up the user": {
     "context": {
       "feature_area": "ai-assistant"
     }
@@ -37950,6 +37950,11 @@
   "More message actions": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "More suggestions": {
+    "context": {
+      "feature_area": "ai-assistant"
     }
   },
   "More tabs": {

@@ -25,6 +25,7 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
+import { useSelector } from 'react-redux';
 import {
   chatQuotaUsageRetrieve,
   chatSuggestionsRetrieve,
@@ -60,6 +61,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
 import { useUser } from '@/workspace/hooks';
+import { getImpersonatorUser } from '@/workspace/selectors';
 
 export const Thread: FC = () => {
   const { loadingThreadId, currentThreadId, threads } = useThreadContext();
@@ -145,23 +147,45 @@ const ThreadWelcome: FC = () => {
 
 // How many quick prompts show before "More".
 export const VISIBLE_SUGGESTIONS = 5;
+const SUGGESTIONS_ID = 'aui-thread-suggestions';
 
 // Which quick prompts this user is offered comes from the backend, which
 // knows the tools they have, what the portal has switched on and their own
 // data. Fetched when the empty thread shows, not on page load; a failed
 // request shows no prompts rather than ones that may lead nowhere.
-const useThreadSuggestions = () =>
-  useQuery({
-    queryKey: ['chatSuggestions'],
+// The list depends on who asks and whether staff impersonate them, so both
+// are in the key; only the ids are cached, the copy is built on render.
+const useThreadSuggestions = () => {
+  const user = useUser();
+  const impersonator = useSelector(getImpersonatorUser);
+  const { data: ids } = useQuery({
+    queryKey: ['chatSuggestions', user?.uuid, impersonator?.uuid],
     queryFn: () =>
       chatSuggestionsRetrieve().then((r) =>
-        getSuggestionCopy(r.data.suggestions.map((item) => item.id)),
+        r.data.suggestions.map((item) => item.id),
       ),
     staleTime: 5 * 60 * 1000,
+    enabled: !!user?.uuid,
   });
+  return useMemo(() => getSuggestionCopy(ids ?? []), [ids]);
+};
+
+// A template prompt fills the composer; put the caret there so the user can
+// finish the question, also from the keyboard.
+const focusComposer = (from: HTMLElement) => {
+  requestAnimationFrame(() => {
+    const input = from
+      .closest('.aui-thread-root')
+      ?.querySelector<HTMLTextAreaElement>('textarea.aui-composer-input');
+    if (input) {
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  });
+};
 
 export const ThreadSuggestions: FC = () => {
-  const { data: suggestions = [] } = useThreadSuggestions();
+  const suggestions = useThreadSuggestions();
   const [expanded, setExpanded] = React.useState(false);
   const hasMore = suggestions.length > VISIBLE_SUGGESTIONS;
   const shown = expanded
@@ -173,10 +197,10 @@ export const ThreadSuggestions: FC = () => {
   }
 
   return (
-    <div className="aui-thread-welcome-suggestions">
+    <div className="aui-thread-welcome-suggestions" id={SUGGESTIONS_ID}>
       {shown.map((suggestion) => (
         <ThreadPrimitive.Suggestion
-          key={suggestion.label}
+          key={suggestion.id}
           prompt={suggestion.prompt}
           send={suggestion.send}
           asChild
@@ -186,6 +210,12 @@ export const ThreadSuggestions: FC = () => {
             className="aui-thread-welcome-suggestion-btn"
             iconNode={suggestion.icon}
             label={suggestion.label}
+            onClick={
+              suggestion.send
+                ? undefined
+                : (event: React.MouseEvent<HTMLElement>) =>
+                    focusComposer(event.currentTarget)
+            }
           />
         </ThreadPrimitive.Suggestion>
       ))}
@@ -202,7 +232,9 @@ export const ThreadSuggestions: FC = () => {
             )
           }
           label={expanded ? translate('Less') : translate('More')}
+          aria-label={translate('More suggestions')}
           aria-expanded={expanded}
+          aria-controls={SUGGESTIONS_ID}
           onClick={() => setExpanded(!expanded)}
         />
       )}
