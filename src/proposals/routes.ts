@@ -8,6 +8,7 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 import { isCallsSectionVisible } from '@/marketplace/serviceAccessMode';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { callsSection } from '@/navigation/sidebar/sidebarSection';
 import {
   canManageCallsOf,
@@ -19,6 +20,7 @@ import { getMyWorkTitle } from '@/proposals/review/myWorkTitle';
 import {
   MyAssignmentsPageLazy,
   MyCallsPageLazy,
+  MyDiscussionsPageLazy,
   MyEvaluatorRolesPageLazy,
   MyInvitationsPageLazy,
   MyReviewsPageLazy,
@@ -538,6 +540,17 @@ export const states: StateDeclaration[] = [
     parent: 'reviews',
     component: MyCallsPageLazy,
     data: myReviewsTab,
+  },
+  {
+    name: 'reviews-discussions',
+    url: 'discussions/',
+    parent: 'reviews',
+    component: MyDiscussionsPageLazy,
+    data: {
+      ...myReviewsTab,
+      // Discussions are Matrix rooms: there are none without Matrix chat.
+      permissions: [() => isMatrixChatEnabled()],
+    },
   },
 
   // Every call this user can manage, whichever organisation runs it. The

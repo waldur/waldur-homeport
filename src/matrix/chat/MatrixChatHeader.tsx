@@ -7,10 +7,11 @@ import {
   PhoneIcon,
   TerminalWindowIcon,
 } from '@phosphor-icons/react';
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 
 import {
   Avatar,
+  Badge,
   BaseButton,
   Menu,
   Popover,
@@ -34,6 +35,7 @@ import { getChatAvatarClass } from './chatColors';
 import { ComposerCommand } from './commands/composerCommands';
 import { MatrixCommandsDialog } from './commands/MatrixCommandsDialog';
 import { useComposerCommands } from './commands/useComposerCommands';
+import { DiscussionMaterials, useRoomDiscussion } from './DiscussionMaterials';
 import { MatrixMembersList } from './MatrixMembersList';
 import { useMatrixMessageActions } from './MatrixMessageActionsContext';
 import {
@@ -41,6 +43,7 @@ import {
   RoomNotificationLevel,
   setRoomNotificationLevel,
 } from './notificationLevel';
+import { DISCUSSION_ROOM, RoomAvatar } from './roomKind';
 import { useMatrixClient } from './useMatrixClient';
 import { useMatrixTotalUnread } from './useMatrixTotalUnread';
 import { useRoomMembers } from './useRoomMembers';
@@ -50,12 +53,77 @@ import { useRoomMembers } from './useRoomMembers';
 const CHECKED_LEVEL_CLASSNAME =
   'data-[state=checked]:bg-[var(--menu-item-hover-bg)]';
 
+/**
+ * The room's name in the header, cut off where it does not fit; the full
+ * name then shows on hover. Whether it is cut off is asked as the pointer or
+ * focus arrives: the drawer's width settles after the header mounts.
+ */
+const RoomName: FC<{ name: string; children: ReactNode }> = ({
+  name,
+  children,
+}) => {
+  const [cutOff, setCutOff] = useState(false);
+  const check = (event: { currentTarget: HTMLElement }) => {
+    const element = event.currentTarget;
+    setCutOff(element.scrollWidth > element.clientWidth);
+  };
+  return (
+    <span
+      className="truncate min-w-0"
+      title={cutOff ? name : undefined}
+      onPointerEnter={check}
+      onFocus={check}
+      data-testid="chat-header-room-name"
+    >
+      {children}
+    </span>
+  );
+};
+
+/**
+ * A discussion room's title: marked as a discussion, its name linking to the
+ * discussion's proposal, or plain for a round's discussion.
+ */
+const DiscussionTitle: FC<{ uuid: string; roomName: string }> = ({
+  uuid,
+  roomName,
+}) => {
+  const { data } = useRoomDiscussion(uuid);
+  return (
+    <span className="flex items-center gap-1.5 min-w-0">
+      <Badge
+        variant="info"
+        size="sm"
+        leftIcon={<ChatsCircleIcon weight="bold" />}
+        shape="pill"
+        className="shrink-0"
+        data-testid="chat-header-discussion"
+      >
+        {translate('Discussion')}
+      </Badge>
+      <RoomName name={roomName}>
+        {data?.proposal_uuid ? (
+          <Link
+            state="proposals.manage-proposal"
+            params={{ proposal_uuid: data.proposal_uuid }}
+            label={roomName}
+          />
+        ) : (
+          roomName
+        )}
+      </RoomName>
+    </span>
+  );
+};
+
 interface MatrixChatHeaderProps {
   roomUuid: string;
   roomName: string;
   roomAlias?: string | null;
   /** Project UUID the room is scoped to — turns the name into a link. */
   projectUuid?: string | null;
+  /** The step discussion the room is for: marks it, and links its proposal. */
+  discussionUuid?: string | null;
   onBack?: () => void;
 }
 
@@ -69,6 +137,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   roomName,
   roomAlias,
   projectUuid,
+  discussionUuid,
   onBack,
 }) => {
   const members = useRoomMembers();
@@ -280,22 +349,34 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         </div>
       )}
 
-      <Avatar
-        name={roomName}
-        size={40}
-        fallbackClassName={getChatAvatarClass(roomUuid)}
-      />
+      {discussionUuid ? (
+        <RoomAvatar
+          uuid={roomUuid}
+          name={roomName}
+          scopeType={DISCUSSION_ROOM}
+          size={40}
+        />
+      ) : (
+        <Avatar
+          name={roomName}
+          size={40}
+          fallbackClassName={getChatAvatarClass(roomUuid)}
+        />
+      )}
 
       <div className="flex items-baseline gap-1 grow min-w-0">
-        {projectUuid ? (
-          <Link
-            state="project.dashboard"
-            params={{ uuid: projectUuid }}
-            label={roomName}
-            className="truncate"
-          />
+        {discussionUuid ? (
+          <DiscussionTitle uuid={discussionUuid} roomName={roomName} />
+        ) : projectUuid ? (
+          <RoomName name={roomName}>
+            <Link
+              state="project.dashboard"
+              params={{ uuid: projectUuid }}
+              label={roomName}
+            />
+          </RoomName>
         ) : (
-          <span className="truncate">{roomName}</span>
+          <RoomName name={roomName}>{roomName}</RoomName>
         )}
         {roomOpen && members.length > 0 && (
           <Popover>
@@ -318,6 +399,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         )}
       </div>
 
+      {discussionUuid && <DiscussionMaterials uuid={discussionUuid} />}
       <div>{kebab}</div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import { matchesKind, RoomKindFilter } from './roomSections';
 import { useMatrixClient } from './useMatrixClient';
 import { useMemberMatrixRooms } from './useMemberMatrixRooms';
 
@@ -11,16 +12,26 @@ import { useMemberMatrixRooms } from './useMemberMatrixRooms';
  * client, whose unread the drawer has nowhere to show. Muted rooms carry a 0
  * server-side notification count, so they drop out on their own. Pass
  * `excludeRoomId` to omit the open room — used by the back button to flag
- * unread in *other* rooms.
+ * unread in *other* rooms — and `kind` to count only the team rooms or only
+ * the step discussions, as the drawer's tabs do.
  */
-export function useMatrixTotalUnread(excludeRoomId?: string | null): number {
+export function useMatrixTotalUnread(
+  excludeRoomId?: string | null,
+  kind: RoomKindFilter = 'all',
+): number {
   const { client, connectionState } = useMatrixClient();
   const { data: rooms } = useMemberMatrixRooms();
   const [total, setTotal] = useState(0);
 
   const waldurRoomIds = useMemo(
-    () => new Set((rooms ?? []).map((r) => r.room_id).filter(Boolean)),
-    [rooms],
+    () =>
+      new Set(
+        (rooms ?? [])
+          .filter((r) => matchesKind({ scopeType: r.scope_type }, kind))
+          .map((r) => r.room_id)
+          .filter(Boolean),
+      ),
+    [rooms, kind],
   );
 
   useEffect(() => {

@@ -1,5 +1,9 @@
 import { useMatrixClient } from './useMatrixClient';
-import { useRoomMemberImages, useRoomMemberNames } from './useRoomMemberNames';
+import {
+  useRoomMemberImages,
+  useRoomMemberNames,
+  useRoomMemberRoles,
+} from './useRoomMemberNames';
 import { resolveMemberName } from './utils';
 
 interface RoomMember {
@@ -9,6 +13,8 @@ interface RoomMember {
   image?: string;
   membership: string;
   powerLevel: number;
+  /** What the member takes part as, where the kind of room names it. */
+  roleLabel?: string;
 }
 
 /**
@@ -20,6 +26,7 @@ export function useRoomMembers(): RoomMember[] {
   const { client, activeRoomId, activeRoomUuid } = useMatrixClient();
   const memberNames = useRoomMemberNames(activeRoomUuid ?? undefined);
   const memberImages = useRoomMemberImages(activeRoomUuid ?? undefined);
+  const memberRoles = useRoomMemberRoles(activeRoomUuid ?? undefined);
 
   if (!client || !activeRoomId) return [];
 
@@ -43,6 +50,7 @@ export function useRoomMembers(): RoomMember[] {
       image: memberImages.get(m.userId),
       membership: m.membership as string,
       powerLevel: (powerLevels[m.userId] ?? 0) as number,
+      roleLabel: memberRoles.get(m.userId),
     }))
     .sort((a, b) => {
       // Joined before invited, then by power level.

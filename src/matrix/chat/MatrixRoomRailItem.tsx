@@ -1,14 +1,20 @@
 import { PhoneIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Avatar, Badge, cn, Tooltip } from 'waldur-ui';
+import { Badge, cn, Tooltip } from 'waldur-ui';
+
+import { translate } from '@/i18n';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
-import { getChatAvatarClass } from './chatColors';
+import { isDiscussionRoom, RoomAvatar } from './roomKind';
 
 interface MatrixRoomRailItemProps {
   uuid: string;
   name: string;
+  scopeType?: string | null;
+  scopeSubtitle?: string | null;
+  /** Whether a discussion is named as one: needless among discussions alone. */
+  markKind?: boolean;
   unreadCount: number;
   mentionCount: number;
   activeCall: RoomCallState | null;
@@ -23,6 +29,9 @@ interface MatrixRoomRailItemProps {
 export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
   uuid,
   name,
+  scopeType,
+  scopeSubtitle,
+  markKind = true,
   unreadCount,
   mentionCount,
   activeCall,
@@ -30,12 +39,17 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
   onClick,
 }) => {
   const isUnread = unreadCount > 0;
+  const label = !isDiscussionRoom(scopeType)
+    ? name
+    : markKind
+      ? translate('Discussion: {name}', { name: scopeSubtitle || name })
+      : scopeSubtitle || name;
 
   return (
-    <Tooltip label={name} side="right">
+    <Tooltip label={label} side="right">
       <button
         type="button"
-        aria-label={name}
+        aria-label={label}
         onClick={onClick}
         className={cn(
           'relative flex p-1 border-0 rounded-lg bg-transparent cursor-pointer transition-colors hover:bg-secondary',
@@ -43,11 +57,12 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
             'bg-[var(--bg-brand-secondary)] hover:bg-[var(--bg-brand-secondary)]',
         )}
       >
-        <Avatar
+        <RoomAvatar
+          uuid={uuid}
           name={name}
+          scopeType={scopeType}
           size={32}
           shape="square"
-          fallbackClassName={getChatAvatarClass(uuid)}
         />
         {activeCall && (
           <span

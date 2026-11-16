@@ -7,6 +7,13 @@ import React, {
   useLayoutEffect,
 } from 'react';
 
+import {
+  DOCKED_MIN_WIDTH,
+  dockKey,
+  readStoredDocked,
+  storeDocked,
+} from './drawerDock';
+import { rememberOpenDrawer } from './drawerRestore';
 import { DRAWER_MIN_WIDTH, readStoredDrawerWidth } from './drawerWidth';
 import { DrawerShellClass } from './shellClasses';
 
@@ -26,6 +33,12 @@ export interface DrawerProps {
   resizable?: boolean;
   /** Narrowest the user can drag it to, in px (DRAWER_MIN_WIDTH by default). */
   minWidth?: number;
+  /**
+   * Whether the drawer opens docked beside the page rather than floating
+   * over it, until the user chooses for this kind of drawer (its
+   * `shellClass`). See the context's `docked`.
+   */
+  docked?: boolean;
   [key: string]: any;
 }
 
@@ -49,6 +62,21 @@ interface DrawerContextValue {
    */
   wide: boolean;
   setWide: (wide: boolean) => void;
+  /**
+   * The user's choice to dock the drawer beside the page: the page stays
+   * usable, clicking it or going to another page leaves the drawer open, and
+   * the page narrows to make room for it. It holds from lg while the page
+   * keeps DOCK_MIN_PAGE_WIDTH beside it (DrawerRoot); otherwise the drawer
+   * floats over the page. Remembered per kind of drawer.
+   */
+  docked: boolean;
+  setDocked: (docked: boolean) => void;
+  /**
+   * Docked and actually beside the page, which it narrows (DrawerRoot): the
+   * sidebar collapses to its rail then, at any width.
+   */
+  besidePage: boolean;
+  setBesidePage: (besidePage: boolean) => void;
   /** The AI chat history sidebar below lg; reset when a drawer opens. */
   historyOpen: boolean;
   setHistoryOpen: (historyOpen: boolean) => void;
@@ -73,7 +101,12 @@ export const DrawerContext = createContext<DrawerContextValue | null>(null);
  * effects comparing against the drawer that is showing), kept by
  * DrawerProvider once each change commits (before any effect reads it).
  */
-export const drawerState: { isOpen: boolean; shellClass?: DrawerShellClass } = {
+export const drawerState: {
+  isOpen: boolean;
+  shellClass?: DrawerShellClass;
+  /** Docked beside the page now (DrawerRoot): it stays open on navigation. */
+  docked?: boolean;
+} = {
   isOpen: false,
 };
 
@@ -88,13 +121,19 @@ const DEFAULT_DRAWER_PROPS: DrawerProps = {
   resizable: true,
 };
 
+/** Whether a drawer opens docked: as last chosen, else as it asks. */
+const getOpeningDocked = (props?: DrawerProps): boolean =>
+  readStoredDocked(dockKey(props?.shellClass)) ?? Boolean(props?.docked);
+
 /** The width a drawer opens at: the one last dragged to, if it has one. */
 const getOpeningWidth = (props?: DrawerProps): number | null =>
   props?.resizable === false
     ? null
     : readStoredDrawerWidth(
         props?.shellClass,
-        props?.minWidth ?? DRAWER_MIN_WIDTH,
+        // A docked drawer may have been left narrower than its own minimum;
+        // DrawerRoot widens it back while it floats.
+        Math.min(props?.minWidth ?? DRAWER_MIN_WIDTH, DOCKED_MIN_WIDTH),
       );
 
 export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
@@ -108,6 +147,8 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
   const [width, setWidth] = useState<number | null>(null);
   const [wide, setWide] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [docked, setDockedState] = useState(false);
+  const [besidePage, setBesidePage] = useState(false);
   const [panel, setPanel] = useState<HTMLElement | null>(null);
 
   const openDrawer = useCallback(
@@ -118,13 +159,27 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
       setExpanded(false);
       setWidth(getOpeningWidth(props));
       setHistoryOpen(false);
+      setDockedState(getOpeningDocked(props));
       setDrawerComponent(() => component);
       setDrawerProps({ ...DEFAULT_DRAWER_PROPS, ...props });
+      rememberOpenDrawer(props?.shellClass);
     },
     [],
   );
 
+  const setDocked = useCallback(
+    (next: boolean) => {
+      setDockedState(next);
+      storeDocked(dockKey(drawerProps.shellClass), next);
+    },
+    [drawerProps.shellClass],
+  );
+
   const closeDrawer = useCallback(() => {
+    // Only a drawer that is open is forgotten: the first page's navigation
+    // closes "the drawer" before any is open, which must not wipe the one to
+    // restore (RestoreOpenDrawer).
+    if (drawerState.isOpen) rememberOpenDrawer(undefined);
     setIsOpen(false);
     setDrawerComponent(null);
     // The shell class has to outlast the slide-out, or the card drops to the
@@ -149,6 +204,7 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
         setExpanded(false);
         setWidth(getOpeningWidth(props));
         setHistoryOpen(false);
+        setDockedState(getOpeningDocked(props));
       }
       setDrawerComponent(() => component);
       setDrawerProps({ ...DEFAULT_DRAWER_PROPS, ...props });
@@ -180,6 +236,10 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
         setWide,
         historyOpen,
         setHistoryOpen,
+        docked,
+        setDocked,
+        besidePage,
+        setBesidePage,
         panel,
         setPanel,
       }}

@@ -10,6 +10,7 @@ import {
 import { translate } from '@/i18n';
 
 import { useDrawer } from './actions';
+import { DOCKED_MIN_WIDTH } from './drawerDock';
 import {
   clampDrawerWidth,
   DRAWER_MIN_WIDTH,
@@ -44,12 +45,15 @@ interface DragState {
  * Also a focusable separator: arrow keys resize, Home/End go to the narrowest
  * and widest, and a double click goes back to the default width.
  */
-export const DrawerResizeHandle: FC<{ panel: HTMLElement | null }> = ({
-  panel,
-}) => {
+export const DrawerResizeHandle: FC<{
+  panel: HTMLElement | null;
+  /** Docked beside the page: it can go down to DOCKED_MIN_WIDTH. */
+  docked?: boolean;
+}> = ({ panel, docked }) => {
   const { width, setWidth, expanded, setExpanded, drawerProps } = useDrawer();
   const storageKey: string | undefined = drawerProps.shellClass;
-  const min: number = drawerProps.minWidth ?? DRAWER_MIN_WIDTH;
+  const ownMin: number = drawerProps.minWidth ?? DRAWER_MIN_WIDTH;
+  const min = docked ? Math.min(ownMin, DOCKED_MIN_WIDTH) : ownMin;
   const handleRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<DragState | null>(null);
 

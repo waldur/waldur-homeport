@@ -1,5 +1,6 @@
 import { User } from 'waldur-js-client';
 
+import { forgetDrawerSession } from '@/drawer/drawerSession';
 import { router } from '@/router';
 import store from '@/store/store';
 import { rememberBlockedNavigation } from '@/user/blockedNavigation';
@@ -148,6 +149,9 @@ export async function redirectOnSuccess() {
 }
 
 export function clearAuthCache() {
+  // The chat drawer and what a reload would restore of it belong to the
+  // session that is ending.
+  forgetDrawerSession();
   resetSessionState({ queries: false });
   clearImpersonationData();
   clearAuthTokens();

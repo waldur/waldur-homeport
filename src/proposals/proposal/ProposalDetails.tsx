@@ -29,6 +29,7 @@ import {
   useAwardedResources,
 } from '@/proposals/awardedResources';
 import { useCallFixedDuration } from '@/proposals/callQueries';
+import { StepDiscussionsSection } from '@/proposals/discussions/StepDiscussionsSection';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
@@ -528,6 +529,12 @@ export const ProposalDetails = ({
               workflowStates={workflowStates}
               hiddenStepUuids={stepsReadAsInputs}
               refetch={refetch}
+            />
+          )}
+          {!preview && (
+            <StepDiscussionsSection
+              proposalUuid={proposal.uuid}
+              workflowStates={workflowStates}
             />
           )}
           {show.evaluators && (

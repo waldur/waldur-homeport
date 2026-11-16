@@ -1,6 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { getOpenByDefault } from './useProposalSections';
+
+const matrix = vi.hoisted(() => ({ enabled: true }));
+vi.mock('@/matrix/utils', () => ({
+  isMatrixChatEnabled: () => matrix.enabled,
+}));
 
 const step = (uuid: string, overrides = {}) =>
   ({
@@ -187,5 +192,32 @@ describe('getOpenByDefault', () => {
     expect(situation({ steps: [], releasable: [step('report')] })).toContain(
       'step-released-reports',
     );
+  });
+
+  describe("the current step's discussion", () => {
+    afterEach(() => {
+      matrix.enabled = true;
+    });
+    const discussing = (state: string) =>
+      step('review', {
+        status: 'active',
+        discussion: { uuid: 'd1', state, can_open: true },
+      });
+
+    it('opens while it may still be had', () => {
+      const current = discussing('open');
+      expect(situation({ steps: [current], active: current })).toContain(
+        'step-discussions',
+      );
+    });
+
+    // A step may keep a dormant discussion while chat is disabled.
+    it('stays folded while Matrix chat is disabled', () => {
+      matrix.enabled = false;
+      const current = discussing('open');
+      expect(situation({ steps: [current], active: current })).not.toContain(
+        'step-discussions',
+      );
+    });
   });
 });

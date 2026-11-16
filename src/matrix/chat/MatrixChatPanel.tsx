@@ -25,6 +25,8 @@ import { useMatrixCall } from './call/useMatrixCall';
 import { MatrixChatDrawer } from './MatrixChatDrawer';
 import { MatrixEncryptionNotice } from './MatrixEncryptionNotice';
 import { MatrixRoomList } from './MatrixRoomList';
+import { isDiscussionRoom, roomTitle } from './roomKind';
+import { matchesKind, RoomKindFilter } from './roomSections';
 import { useAllMatrixRooms } from './useAllMatrixRooms';
 import { useMatrixClient } from './useMatrixClient';
 
@@ -43,7 +45,17 @@ interface MatrixChatPanelProps {
   roomListRequest?: number;
   /** A new value opens defaultRoomUuid again, also after the user moved on. */
   roomRequest?: number;
+  /**
+   * Which kind of room the panel lists and opens: the team rooms, or the
+   * step discussions. Each kind remembers its own last room. Every room by
+   * default, as on the Communication page.
+   */
+  kind?: RoomKindFilter;
 }
+
+/** Where the last room of a kind is remembered. */
+const lastRoomKey = (kind: RoomKindFilter) =>
+  kind === 'step_discussion' ? 'lastDiscussionRoomUuid' : 'lastRoomUuid';
 
 export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   defaultRoomUuid,
@@ -53,8 +65,10 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   hideRoomList,
   roomListRequest,
   roomRequest,
+  kind = 'all',
 }) => {
-  const { connect, connectionState, deniedRoomUuids } = useMatrixClient();
+  const { connect, connectionState, deniedRoomUuids, activeRoomUuid } =
+    useMatrixClient();
   const { rooms, totalUnread, isLoading, error } = useAllMatrixRooms({
     resolveSenders: true,
   });
@@ -67,7 +81,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   const showDock = (drawerWide || Boolean(forceDock)) && isAtLeastMd;
 
   const [selectedRoomUuid, setSelectedRoomUuid] = useState<string | null>(
-    () => defaultRoomUuid ?? getChatDrawerPreference('lastRoomUuid'),
+    () => defaultRoomUuid ?? getChatDrawerPreference(lastRoomKey(kind)),
   );
   const [sidebarCollapsed, setSidebarCollapsed] =
     useChatDrawerPreference('sidebarCollapsed');
@@ -79,6 +93,36 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     defaultRoomUuid ? 'detail' : getChatDrawerPreference('matrixCompactView'),
   );
 
+  const activeRooms = useMemo(
+    () => rooms.filter((r) => r.state === 'active'),
+    [rooms],
+  );
+  // The rooms of the kind shown: those the list holds and a remembered room
+  // must be one of.
+  const kindRooms = useMemo(
+    () =>
+      activeRooms.filter((r) =>
+        matchesKind({ scopeType: (r as any).scope_type }, kind),
+      ),
+    [activeRooms, kind],
+  );
+
+  // Switching between Team chat and Discussions: each opens the room it
+  // showed last, or its list. Declared before the deep-link effect below, so
+  // that a deep link switching the tab at the same time wins.
+  const shownKindRef = useRef(kind);
+  useEffect(() => {
+    if (shownKindRef.current === kind) return;
+    shownKindRef.current = kind;
+    const last = getChatDrawerPreference(lastRoomKey(kind));
+    const room = last && kindRooms.some((r) => r.uuid === last) ? last : null;
+    setSelectedRoomUuid(room);
+    setCompactView(room ? 'detail' : 'list');
+    if (room && connectionState === 'connected' && room !== activeRoomUuid) {
+      connect(room);
+    }
+  }, [kind, kindRooms, connectionState, activeRoomUuid, connect]);
+
   // When the parent re-passes a new defaultRoomUuid after mount (e.g. opening
   // the drawer to a specific room while it's already open), sync selection and
   // view immediately instead of waiting for the next idle connect cycle.
@@ -89,11 +133,6 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     );
     setCompactView('detail');
   }, [defaultRoomUuid, roomRequest]);
-
-  const activeRooms = useMemo(
-    () => rooms.filter((r) => r.state === 'active'),
-    [rooms],
-  );
 
   // Apply a deep-linked room only once per value, not whenever the client's
   // active room drifts. Comparing against the live active room (instead of the
@@ -139,11 +178,16 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     // A room the page asked for is not a preference to forget: if the user
     // cannot open it, the connection says so.
     if (selectedRoomUuid === defaultRoomUuid) return;
+    // Only a room that is gone. One of the other kind is the room shown
+    // before the tab switched: the switch (above) picks this kind's room in
+    // the same commit, and forgetting here would undo it.
     if (!activeRooms.some((r) => r.uuid === selectedRoomUuid)) {
       setSelectedRoomUuid(null);
-      setChatDrawerPreference('lastRoomUuid', null);
+      if (getChatDrawerPreference(lastRoomKey(kind)) === selectedRoomUuid) {
+        setChatDrawerPreference(lastRoomKey(kind), null);
+      }
     }
-  }, [isLoading, error, activeRooms, selectedRoomUuid, defaultRoomUuid]);
+  }, [isLoading, error, activeRooms, selectedRoomUuid, defaultRoomUuid, kind]);
 
   const changeCompactView = useCallback((view: 'list' | 'detail') => {
     setCompactView(view);
@@ -159,11 +203,11 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
       // Picking a room settles the deep link, even one not yet opened.
       appliedDefaultRoomRef.current = deepLinkKey;
       setSelectedRoomUuid(uuid);
-      setChatDrawerPreference('lastRoomUuid', uuid);
+      setChatDrawerPreference(lastRoomKey(kind), uuid);
       changeCompactView('detail');
       connect(uuid);
     },
-    [connect, changeCompactView, deepLinkKey],
+    [connect, changeCompactView, deepLinkKey, kind],
   );
 
   // Floating widget / cross-room banner ask the panel to switch back to the
@@ -238,8 +282,25 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
           key={detailRoomUuid}
           roomUuid={detailRoomUuid}
           roomAlias={detailRoomAlias}
-          roomName={(detailRoom as any)?.room_name}
-          projectUuid={(detailRoom as any)?.scope_uuid}
+          roomName={
+            (detailRoom as any)?.room_name &&
+            roomTitle(
+              (detailRoom as any).room_name,
+              (detailRoom as any).scope_type,
+              (detailRoom as any).scope_subtitle,
+            ).title
+          }
+          // A discussion room's scope is the discussion, not a project.
+          projectUuid={
+            isDiscussionRoom((detailRoom as any)?.scope_type)
+              ? undefined
+              : (detailRoom as any)?.scope_uuid
+          }
+          discussionUuid={
+            isDiscussionRoom((detailRoom as any)?.scope_type)
+              ? (detailRoom as any)?.scope_uuid
+              : undefined
+          }
           onBack={
             showDock || hideRoomList
               ? undefined
@@ -261,6 +322,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
       isLoading={isLoading}
       onSelect={handleRoomSelect}
       activeRoomUuid={undefined}
+      kind={kind}
     />
   ) : (
     <div
@@ -284,6 +346,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
             activeRoomUuid={detailRoomUuid ?? undefined}
             collapsed={sidebarCollapsed}
             onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+            kind={kind}
           />
         </div>
       )}

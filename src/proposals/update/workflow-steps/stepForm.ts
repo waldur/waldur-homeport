@@ -13,6 +13,7 @@ import {
 
 import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { translate } from '@/i18n';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { AllocationTime } from '@/proposals/types';
 import {
   hasNegativeOutcome,
@@ -56,6 +57,17 @@ export interface StepFormValues {
   delegable_to: string;
   min_score_threshold: string | null;
   blind_review: boolean;
+  /** A tracked Matrix discussion for the people working on the step. */
+  has_discussion: boolean;
+  /**
+   * Whether the saved step has a discussion. Not edited: while Matrix chat is
+   * disabled, a discussion the step has can be switched off, not on.
+   */
+  saved_has_discussion: boolean;
+  /** The call managers join the discussion as observers. */
+  discussion_call_managers: boolean;
+  /** The members of the proposal's panel join the discussion. */
+  discussion_panel_members: boolean;
   requires_coi_confirmation: boolean;
   /** The step's own conflict-of-interest declaration; empty for the call's. */
   coi_declaration_text: string;
@@ -121,6 +133,10 @@ export const EMPTY_STEP_VALUES: StepFormValues = {
   delegable_to: '',
   min_score_threshold: null,
   blind_review: false,
+  has_discussion: false,
+  saved_has_discussion: false,
+  discussion_call_managers: true,
+  discussion_panel_members: false,
   requires_coi_confirmation: false,
   coi_declaration_text: '',
   criteria: [],
@@ -209,6 +225,10 @@ export const stepFormValues = (step: CallWorkflowStep): StepFormValues => ({
   delegable_to: delegableToValue(step),
   min_score_threshold: step.min_score_threshold ?? null,
   blind_review: step.blind_review ?? false,
+  has_discussion: step.has_discussion ?? false,
+  saved_has_discussion: step.has_discussion ?? false,
+  discussion_call_managers: step.discussion_call_managers ?? true,
+  discussion_panel_members: step.discussion_panel_members ?? false,
   requires_coi_confirmation: step.requires_coi_confirmation ?? false,
   coi_declaration_text: step.coi_declaration_text ?? '',
   criteria: (step.criteria ?? [])
@@ -370,6 +390,21 @@ export const buildStepBody = (
     body.min_score_threshold = values.min_score_threshold || null;
   }
   if (has('blind_review')) body.blind_review = !!values.blind_review;
+  // The discussion settings are edited only while Matrix chat is enabled;
+  // otherwise they are left as they are, so a step keeps the discussion it
+  // has, unless it is switched off. A step that cannot have one is saved
+  // without, chat or not: the backend refuses a blind step with a
+  // discussion, and only refuses turning one on while chat is disabled.
+  if (discussionSent(kind, values)) {
+    body.has_discussion =
+      !!values.has_discussion && !discussionDisabledReason(kind, values);
+  }
+  if (has('discussion_call_managers') && isMatrixChatEnabled()) {
+    body.discussion_call_managers = !!values.discussion_call_managers;
+  }
+  if (has('discussion_panel_members') && isMatrixChatEnabled()) {
+    body.discussion_panel_members = !!values.discussion_panel_members;
+  }
   if (has('requires_coi_confirmation')) {
     body.requires_coi_confirmation = !!values.requires_coi_confirmation;
   }
@@ -464,6 +499,81 @@ export const runConditionBody = (
       }
     : null;
 };
+
+/**
+ * Why a step of `kind` with `values` cannot have a discussion, if it cannot:
+ * Matrix shows who speaks, so not on a blind review, and never on the
+ * applicant's own step.
+ */
+export const discussionDisabledReason = (
+  kind: StepKind | undefined,
+  values: Pick<
+    StepFormValues,
+    | 'blind_review'
+    | 'per_requested_offering'
+    | 'contributor_source'
+    | 'completer'
+  >,
+): string | undefined => {
+  if (kind?.id === 'applicant_action') {
+    return translate(
+      "The applicant's own step cannot have a discussion: discussions are for the people evaluating the proposal.",
+    );
+  }
+  if (values.blind_review) {
+    return translate(
+      'A blind review cannot have a discussion: the discussion shows who speaks. Turn blind review off first.',
+    );
+  }
+  // Mirrors the backend: on a proposal requesting several offerings, one
+  // room would hold every offering's team, whose work is each their own.
+  if (
+    values.per_requested_offering ||
+    values.contributor_source === 'requested_offering_team' ||
+    values.completer === 'offering_manager'
+  ) {
+    return translate(
+      "A step done by the requested offerings' teams cannot have a discussion: one room would hold the teams of every offering the proposal requests.",
+    );
+  }
+  return undefined;
+};
+
+/**
+ * Whether the step keeps a discussion while Matrix chat is disabled -- one
+ * switched on before chat was, or copied with its call. It is dormant: the
+ * dialog lets it be switched off, not on.
+ */
+export const dormantDiscussion = (
+  kind: StepKind | undefined,
+  values: Pick<StepFormValues, 'saved_has_discussion'>,
+): boolean =>
+  kindHasField(kind, 'has_discussion') &&
+  !isMatrixChatEnabled() &&
+  Boolean(values.saved_has_discussion);
+
+/**
+ * Whether saving a step of `kind` with `values` sends `has_discussion`, and so
+ * whether the check page lists it: while Matrix chat is enabled; on a step
+ * that cannot have a discussion, which is saved without one whether chat is
+ * enabled or not; and on a dormant discussion switched off.
+ */
+const discussionSent = (
+  kind: StepKind | undefined,
+  values: Pick<
+    StepFormValues,
+    | 'blind_review'
+    | 'per_requested_offering'
+    | 'contributor_source'
+    | 'completer'
+    | 'has_discussion'
+    | 'saved_has_discussion'
+  >,
+): boolean =>
+  kindHasField(kind, 'has_discussion') &&
+  (isMatrixChatEnabled() ||
+    Boolean(discussionDisabledReason(kind, values)) ||
+    (dormantDiscussion(kind, values) && !values.has_discussion));
 
 /** Whether a step may run alongside the one before it: never the
  * allocation decision, nor a step of the applicant. */
@@ -589,6 +699,11 @@ const FIELD_PAGES: Record<keyof StepFormValues, StepFormPage> = {
   min_score_threshold: 'evaluation',
   criteria: 'evaluation',
   blind_review: 'evaluation',
+  has_discussion: 'evaluation',
+  // Never shown: no step kind lists it among its fields.
+  saved_has_discussion: 'evaluation',
+  discussion_call_managers: 'evaluation',
+  discussion_panel_members: 'evaluation',
   checklist: 'evaluation',
   checklist_required: 'evaluation',
   input_steps: 'inputs',
@@ -680,6 +795,23 @@ export const stepFieldShown = (
       );
     case 'coi_declaration_text':
       return Boolean(values.requires_coi_confirmation);
+    // Discussions are Matrix rooms: offered only while Matrix chat is. While
+    // it is disabled, the switch still shows on a step that cannot have a
+    // discussion, off and saying why, and on a dormant discussion, which may
+    // be switched off. The check page lists it only when it is sent.
+    case 'has_discussion':
+      return (
+        isMatrixChatEnabled() ||
+        Boolean(discussionDisabledReason(kind, values)) ||
+        dormantDiscussion(kind, values)
+      );
+    case 'discussion_call_managers':
+    case 'discussion_panel_members':
+      return (
+        isMatrixChatEnabled() &&
+        Boolean(values.has_discussion) &&
+        !discussionDisabledReason(kind, values)
+      );
     case 'allows_conditional_acceptance':
       return values.outcome_set === 'per_offering';
     case 'is_allocation_decision':
@@ -747,7 +879,8 @@ export const stepFormPages = (
   return options.withCheck ? [...pages, 'check'] : pages;
 };
 
-/** The fields `page` shows for a step of `kind` with `values`. */
+/** The fields `page` shows for a step of `kind` with `values`, as the check
+ * page reads them back: those saving sends. */
 export const pageFields = (
   page: StepFormPage,
   kind: StepKind | undefined,
@@ -758,7 +891,9 @@ export const pageFields = (
     (field) =>
       FIELD_PAGES[field] === page &&
       field !== 'kind' &&
-      stepFieldShown(field, kind, values, options),
+      stepFieldShown(field, kind, values, options) &&
+      // What saving sends: a dormant discussion left on is not.
+      (field !== 'has_discussion' || discussionSent(kind, values)),
   );
 
 // A field's error, or the errors of its items (criteria).

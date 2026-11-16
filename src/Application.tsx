@@ -17,6 +17,7 @@ import { renderStateLink } from '@/core/Link';
 import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
+import { RestoreOpenDrawer } from '@/drawer/RestoreOpenDrawer';
 import { MatrixRoot } from '@/matrix/MatrixRoot';
 import { ModalProvider } from '@/modal/ModalContext';
 import { ModalRoot } from '@/modal/ModalRoot';
@@ -66,6 +67,7 @@ const ApplicationInner: FunctionComponent = () => {
                             <ConfirmModalRoot />
                             <ReauthenticationRoot />
                             <DrawerRoot />
+                            <RestoreOpenDrawer />
                             <UIView />
                             <BootSplashGate />
                             <DemoResetOverlay />

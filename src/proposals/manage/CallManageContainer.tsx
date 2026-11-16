@@ -12,6 +12,7 @@ import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { LayoutSlot } from '@/navigation/slots';
 import { useTitle } from '@/navigation/title';
@@ -35,6 +36,7 @@ import {
 } from '../utils';
 
 import { CallDashboard } from './CallDashboard';
+import { CallDiscussionsList } from './CallDiscussionsList';
 import { CallEventsList } from './CallEventsList';
 import { CallProposalsList } from './CallProposalsList';
 import { CallReviewsList } from './CallReviewsList';
@@ -73,6 +75,15 @@ const Body = ({ call, refetch, loading }) => {
             key: 'reviewer-pool',
             title: translate('Reviewer pool'),
             component: ReviewerPoolContainer,
+          },
+        // The discussions of the call's steps, whoever takes part: for
+        // those the backend shows them all to, as Reports.
+        !isFeatureVisible(MarketplaceFeatures.call_only) &&
+          isMatrixChatEnabled() &&
+          canReadCallReports(user, call) && {
+            key: 'discussions',
+            title: translate('Discussions'),
+            component: CallDiscussionsList,
           },
         {
           // What the call awards, against what it has requested and

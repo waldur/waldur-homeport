@@ -836,6 +836,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "A blind review cannot have a discussion: the discussion shows who speaks. Turn blind review off first.": {},
   "A body such as a governing board adopts each round's results. The adoption is recorded while the round is deciding, and the round's results cannot be published until it is; once adopted, a held decision can no longer be reopened.": {
     "context": {
       "feature_area": "configuration"
@@ -1189,6 +1190,7 @@
     }
   },
   "A snapshot of all messages in a room, read and decrypted by the Matrix bot and saved as an encrypted JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically when a room is disabled or its project is deleted. Exports older than the retention period are deleted, except the newest of each room.": {},
+  "A step done by the requested offerings' teams cannot have a discussion: one room would hold the teams of every offering the proposal requests.": {},
   "A step the call team handles internally.": {},
   "A submitted proposal requests this offering, so its rules no longer change.": {},
   "A summary of the conversation goes to the helpdesk, and only you can confirm it.": {
@@ -5028,6 +5030,11 @@
   "An earlier submission could be overtaken. To allocate the others now, give a reason; it is recorded.": {
     "context": {
       "feature_area": "lifecycle"
+    }
+  },
+  "An end-to-end encrypted chat and video room for the people working on the step, kept with its record. Once the step completes, the room is exported and closed. On a step run once per round, one room per round, and per panel on a call with panels.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "An error has occurred.": {},
@@ -10868,6 +10875,11 @@
   "Call managers": {
     "context": {
       "feature_area": "workflow"
+    }
+  },
+  "Call managers join the discussion": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "Call managers of the call": {
@@ -20363,6 +20375,33 @@
       "feature_area": "providers"
     }
   },
+  "Discussion": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "chat"
+    }
+  },
+  "Discussion closed": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
+  "Discussion: {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
+  "Discussions": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "discussions"
+    }
+  },
   "Disk": {
     "context": {
       "primary_ui_type": "title",
@@ -20569,6 +20608,16 @@
       "feature_area": "call"
     }
   },
+  "Dock beside the page": {
+    "context": {
+      "feature_area": "drawer"
+    }
+  },
+  "Docked: it stays open as you browse, but the window is too narrow to show the page beside it. Make the drawer narrower to see both, or click to float over the page.": {
+    "context": {
+      "feature_area": "drawer"
+    }
+  },
   "Docker Compose": {
     "context": {
       "feature_area": "changelog"
@@ -20766,6 +20815,11 @@
       "feature_area": "transfer"
     }
   },
+  "Download the exported history": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "Download {file}": {
     "context": {
       "variables": {
@@ -20938,7 +20992,7 @@
   "Due": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "proposal"
+      "feature_area": "discussions"
     }
   },
   "Due date": {
@@ -22985,6 +23039,11 @@
   "End-to-end encrypted": {
     "context": {
       "feature_area": "call"
+    }
+  },
+  "End-to-end encrypted chat and video rooms for the people working on a step. Once the step completes, the room's history is kept with the step's record and the room closes.": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "End-to-end flow": {
@@ -26862,6 +26921,11 @@
       "feature_area": "create"
     }
   },
+  "Float over the page": {
+    "context": {
+      "feature_area": "drawer"
+    }
+  },
   "Floating IP": {
     "context": {
       "primary_ui_type": "title",
@@ -30598,6 +30662,11 @@
   "Include attributes": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Include closed": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "Include components": {
@@ -34663,7 +34732,7 @@
   },
   "Loading…": {
     "context": {
-      "feature_area": "proposals"
+      "feature_area": "chat"
     }
   },
   "Local": {
@@ -35516,6 +35585,16 @@
       "feature_area": "roles"
     }
   },
+  "Manage {call}": {
+    "context": {
+      "variables": {
+        "call": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
   "Managed": {
     "context": {
       "primary_ui_type": "label"
@@ -36087,6 +36166,11 @@
       "feature_area": "update"
     }
   },
+  "Materials": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Materials engineering": {
     "context": {
       "primary_ui_type": "label"
@@ -36107,6 +36191,11 @@
   "Matrix chat": {
     "context": {
       "feature_area": "administration"
+    }
+  },
+  "Matrix chat is disabled, so the discussion is dormant and can only be switched off.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "Matrix diagnostics": {
@@ -40009,6 +40098,21 @@
       "feature_area": "steps"
     }
   },
+  "No discussion has been started yet.": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
+  "No discussion of this call has been started. A step with a discussion gets one when someone working on it starts it.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "No discussion of this call is open.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "No domains allowed": {},
   "No duplicate support users found for this backend ID.": {
     "context": {
@@ -40873,6 +40977,11 @@
   "No proposal of this round is at this step now.": {
     "context": {
       "feature_area": "lifecycle"
+    }
+  },
+  "No proposal you may read": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "No proposals found. Consider using \"Call description\" instead.": {
@@ -42317,7 +42426,7 @@
   "Not started": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "reports"
+      "feature_area": "discussions"
     }
   },
   "Not started: {count}": {
@@ -44220,6 +44329,11 @@
       "feature_area": "workflow-check"
     }
   },
+  "Only open": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "Only orders for plans without usage-based components are eligible.": {
     "context": {
       "feature_area": "manage"
@@ -44329,6 +44443,17 @@
   "Only the owner of a shared network can turn port security off on it.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Only the people taking part in the discussion can open it, while the step is active.": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
+  "Only the people working on the step take part in its discussion.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "discussions"
     }
   },
   "Only the proposals you take part in": {
@@ -44452,6 +44577,11 @@
   "Open console": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Open discussion": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "Open documentation": {
@@ -45005,7 +45135,8 @@
   },
   "Opened": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "discussions"
     }
   },
   "Opened in {opened} of {count} rounds": {
@@ -46771,7 +46902,7 @@
   "Panel": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "manage"
+      "feature_area": "discussions"
     }
   },
   "Panel chair": {
@@ -46804,6 +46935,11 @@
   "Panel members": {
     "context": {
       "feature_area": "workflow"
+    }
+  },
+  "Panel members join the discussion": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "Panel members of the call": {
@@ -49966,6 +50102,11 @@
       "feature_area": "usage-trends"
     }
   },
+  "Previous discussion": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "Previous end date": {
     "context": {
       "feature_area": "UserPendingActionsList"
@@ -51570,6 +51711,12 @@
       "feature_area": "create"
     }
   },
+  "Proposal or round": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "discussions"
+    }
+  },
   "Proposal page": {
     "context": {
       "feature_area": "dry-run"
@@ -51715,6 +51862,26 @@
   "Proposals of these sub-domains go to this panel, whichever panel their domain goes to.": {
     "context": {
       "feature_area": "panels"
+    }
+  },
+  "Proposals of {round}": {
+    "context": {
+      "variables": {
+        "round": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
+  "Proposals on {panel}": {
+    "context": {
+      "variables": {
+        "panel": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
     }
   },
   "Proposals per call and round: how many were submitted, where they stand and how many were accepted.": {},
@@ -53561,6 +53728,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "pubsub"
+    }
+  },
+  "Ready to start": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "Ready to submit": {
@@ -59186,6 +59358,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "livekit"
+    }
+  },
+  "Rooms for your projects appear here.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Rooms for your projects, and for the discussions of the workflow steps you work on, appear here.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Rooms will appear here when a call starts.": {
@@ -65194,6 +65376,11 @@
       "feature_area": "staff-request"
     }
   },
+  "Start a new discussion": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "Start and end time must be in the future.": {
     "context": {
       "feature_area": "maintenance"
@@ -65251,6 +65438,11 @@
   "Start deciding and record the adoption of the results before publishing them.": {
     "context": {
       "feature_area": "rounds"
+    }
+  },
+  "Start discussion": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "Start from the portal's wording": {
@@ -65468,7 +65660,7 @@
   "Step": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "manage"
+      "feature_area": "discussions"
     }
   },
   "Step completed": {
@@ -65635,6 +65827,11 @@
         }
       },
       "feature_area": "diagram"
+    }
+  },
+  "Steps you work on have a discussion nobody has started yet. Starting one creates its room and invites everyone taking part.": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "Still thinking…": {
@@ -67206,6 +67403,12 @@
       "action_type": "update"
     }
   },
+  "Taking part": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "discussions"
+    }
+  },
   "Taking you back to {client}…": {
     "context": {
       "variables": {
@@ -67377,11 +67580,6 @@
   "Team chat": {
     "context": {
       "feature_area": "support"
-    }
-  },
-  "Team chat rooms are created automatically for your projects.": {
-    "context": {
-      "feature_area": "chat"
     }
   },
   "Team invitations": {
@@ -68196,6 +68394,7 @@
     }
   },
   "The applicant's labels cannot show counts: the applicant is not told how their evaluation is staffed.": {},
+  "The applicant's own step cannot have a discussion: discussions are for the people evaluating the proposal.": {},
   "The assistant is at capacity today. Please try again tomorrow.": {
     "context": {
       "feature_area": "anonymous"
@@ -68404,6 +68603,11 @@
   "The call manager may invite the reviewers you suggest to the call’s reviewer pool. The applicant does not see your suggestions.": {
     "context": {
       "feature_area": "reviewer-suggestions"
+    }
+  },
+  "The call managers join the room as observers.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "The call needs proposals and accepted pool members with a reviewer profile.": {
@@ -69079,6 +69283,28 @@
       "feature_area": "project-digest"
     }
   },
+  "The discussion can be started while the step is active, by the people taking part in it.": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
+  "The discussion room could not be created. Try again later, or contact support if it keeps failing.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "discussions"
+    }
+  },
+  "The discussion room is not ready yet. Try opening the discussion again in a moment.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "discussions"
+    }
+  },
+  "The discussions of the workflow steps you work on appear here once someone starts them.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "The draft is being canceled.": {
     "context": {
       "feature_area": "ticketDraft"
@@ -69692,6 +69918,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "meeting-notes"
+    }
+  },
+  "The members of the proposal's panel join the room, besides the step's contributors and completers.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "The merge draft has been created.": {
@@ -73992,6 +74223,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Took part": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "Toolbar level": {
     "context": {
       "feature_area": "questions"
@@ -77600,6 +77836,11 @@
       "feature_area": "proposal"
     }
   },
+  "Unable to load the discussion.": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "Unable to load the email configuration": {
     "context": {
       "feature_area": "email"
@@ -77857,6 +78098,12 @@
   "Unable to open file": {
     "context": {
       "feature_area": "hpc"
+    }
+  },
+  "Unable to open the discussion.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "discussions"
     }
   },
   "Unable to open the final report.": {
@@ -85921,9 +86168,19 @@
       "feature_area": "workflow-description"
     }
   },
+  "Who takes part": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "Who the orders for resources granted by this call are created by. That person is named on each order and receives the order notifications.": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "Who took part": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "Who was added to or removed from the proposal team, role changes, and team invitations.": {
@@ -87297,6 +87554,11 @@
       "action_type": "create"
     }
   },
+  "You have taken part in no discussion.": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "You have the right to request service without additional approval.": {},
   "You have unsaved changes": {
     "context": {
@@ -87398,6 +87660,11 @@
     }
   },
   "You started a call": {},
+  "You take part in no open discussion. Discussions appear here when a step you work on has one.": {
+    "context": {
+      "feature_area": "discussions"
+    }
+  },
   "You take this contribution over and fill it in.": {
     "context": {
       "feature_area": "contributions"
@@ -87408,6 +87675,7 @@
       "feature_area": "contributions"
     }
   },
+  "You were added to a discussion": {},
   "You were added to a team chat": {},
   "You were added to {count} team chats": {
     "context": {
@@ -88503,6 +88771,11 @@
     "context": {
       "primary_ui_type": "text_content",
       "feature_area": "integration"
+    }
+  },
+  "discussions": {
+    "context": {
+      "feature_area": "discussions"
     }
   },
   "disks": {
@@ -92473,6 +92746,16 @@
       "feature_area": "landing"
     }
   },
+  "{count} open": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "review"
+    }
+  },
   "{count} open tasks across calls": {
     "context": {
       "variables": {
@@ -94065,6 +94348,19 @@
       "feature_area": "ai-assistant"
     }
   },
+  "{label} ({panel})": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "panel": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "discussions"
+    }
+  },
   "{label} change": {
     "context": {
       "variables": {
@@ -95386,6 +95682,19 @@
       }
     }
   },
+  "{open} open, {startable} to start": {
+    "context": {
+      "variables": {
+        "open": {
+          "type": "unknown"
+        },
+        "startable": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "review"
+    }
+  },
   "{outside} is in months outside “Earlier invoices from” and “Earlier invoices until”, which this credit does not pay.": {
     "context": {
       "variables": {
@@ -96356,6 +96665,19 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{round}, {panel}": {
+    "context": {
+      "variables": {
+        "round": {
+          "type": "unknown"
+        },
+        "panel": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "discussions"
     }
   },
   "{router} (disconnected)": {

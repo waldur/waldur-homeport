@@ -24,6 +24,7 @@ import {
   getRoomNotificationLevel,
   RoomNotificationLevel,
 } from './notificationLevel';
+import { isDiscussionRoom } from './roomKind';
 import { useMatrixClient } from './useMatrixClient';
 import { useMemberMatrixRooms } from './useMemberMatrixRooms';
 import { resolveMemberName } from './utils';
@@ -86,10 +87,12 @@ const messageTitle = (name: string, count: number) =>
     ? translate('{count} new messages', { count })
     : translate('New message from {name}', { name });
 
-const welcomeTitle = (count = 1) =>
+const welcomeTitle = (count = 1, discussion = false) =>
   count > 1
     ? translate('You were added to {count} team chats', { count })
-    : translate('You were added to a team chat');
+    : discussion
+      ? translate('You were added to a discussion')
+      : translate('You were added to a team chat');
 
 /**
  * Toasts a mention, a reply or an admin's `@room` in a Waldur room that is
@@ -160,6 +163,7 @@ export const MatrixAskToasts: FunctionComponent = () => {
             onClick: () =>
               openSupportDrawer(openDrawer, {
                 defaultRoomUuid: waldurRoom.uuid,
+                discussion: isDiscussionRoom(waldurRoom.scope_type),
               }),
           },
         ],
@@ -192,7 +196,15 @@ export const MatrixAskToasts: FunctionComponent = () => {
         !summaryRooms.size &&
         onScreen.length + roomIds.length <= WELCOME_TOAST_LIMIT
       ) {
-        roomIds.forEach((roomId) => showToast(roomId, welcomeTitle()));
+        roomIds.forEach((roomId) =>
+          showToast(
+            roomId,
+            welcomeTitle(
+              1,
+              isDiscussionRoom(waldurRoomsRef.current.get(roomId)?.scope_type),
+            ),
+          ),
+        );
         return;
       }
       // Once collapsed, it stays one toast until it closes.
@@ -223,7 +235,9 @@ export const MatrixAskToasts: FunctionComponent = () => {
         messages: 0,
         lastEventId: eventId,
         welcome: true,
-        parkedTitle: visible ? undefined : welcomeTitle(),
+        parkedTitle: visible
+          ? undefined
+          : welcomeTitle(1, isDiscussionRoom(waldurRoom.scope_type)),
       });
       return visible;
     };

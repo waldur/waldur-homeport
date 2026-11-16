@@ -34,6 +34,24 @@ function buildMemberImageMap(
   return map;
 }
 
+/**
+ * Merge per-room member queries into one Matrix user ID -> role label map:
+ * what each member takes part as, where the kind of room names it.
+ */
+function buildMemberRoleMap(
+  results: Array<{ data?: MatrixRoomMember[] }>,
+): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const result of results) {
+    for (const member of result.data ?? []) {
+      if (member.role_label) {
+        map.set(member.matrix_user_id, member.role_label);
+      }
+    }
+  }
+  return map;
+}
+
 /** Shared per-room member queries; deduped by React Query across all consumers. */
 function useRoomMembersData(roomUuids: string[], staleTime?: number) {
   return useQueries({
@@ -99,4 +117,17 @@ function useAllRoomMemberImages(roomUuids: string[]): Map<string, string> {
 /** Map of Matrix user ID -> image URL for a single room's members. */
 export function useRoomMemberImages(roomUuid?: string): Map<string, string> {
   return useAllRoomMemberImages(roomUuid ? [roomUuid] : []);
+}
+
+/**
+ * Map of Matrix user ID -> what the member takes part as, for a single
+ * room's members -- in a step discussion, say, Panel chair or Reviewer.
+ * Same stable-memo discipline as the name map.
+ */
+export function useRoomMemberRoles(roomUuid?: string): Map<string, string> {
+  const results = useRoomMembersData(roomUuid ? [roomUuid] : []);
+  const updatedAtKey = results.map((r) => r.dataUpdatedAt ?? 0).join('|');
+  const resultsRef = useRef(results);
+  resultsRef.current = results;
+  return useMemo(() => buildMemberRoleMap(resultsRef.current), [updatedAtKey]);
 }

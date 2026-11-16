@@ -40,9 +40,14 @@ import {
 } from './workspace/selectors';
 
 export function attachTransitions() {
-  router.transitionService.onSuccess({}, function () {
+  router.transitionService.onSuccess({}, function (transition) {
     ModalService.close();
-    DrawerService.close();
+    // A docked drawer, such as the chats, stays open beside the next page.
+    // The first page of a load leaves no page behind: a chat drawer reopened
+    // after a reload (RestoreOpenDrawer) stays.
+    if (transition.from().name) {
+      DrawerService.closeOnNavigation();
+    }
   });
 
   router.transitionService.onSuccess({}, function () {

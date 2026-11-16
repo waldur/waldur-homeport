@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'vitest';
 
-import { buildRoomSections, type ChatRoomSummary } from './roomSections';
+import {
+  buildRoomSections,
+  type ChatRoomSummary,
+  matchesKind,
+} from './roomSections';
 
 const room = (
   over: Partial<ChatRoomSummary> & { name: string },
@@ -76,5 +80,44 @@ describe('buildRoomSections', () => {
   it('returns an empty array when nothing matches', () => {
     const rooms = [room({ name: 'Alpha' })];
     expect(buildRoomSections(rooms, 'all', 'zzz')).toEqual([]);
+  });
+});
+
+describe('rooms by kind', () => {
+  const rooms = [
+    room({ name: 'Climate', scopeType: 'project', lastActivity: 2 }),
+    room({
+      name: 'Legacy organization room',
+      scopeType: null,
+      lastActivity: 0,
+    }),
+    room({
+      name: 'Regular Access · Panel meeting',
+      scopeType: 'step_discussion',
+      scopeSubtitle: 'Panel meeting · Physics',
+      lastActivity: 1,
+    }),
+  ];
+
+  it('tells team rooms from step discussions', () => {
+    const names = (kind) =>
+      rooms.filter((r) => matchesKind(r, kind)).map((r) => r.name);
+    expect(names('all')).toEqual([
+      'Climate',
+      'Legacy organization room',
+      'Regular Access · Panel meeting',
+    ]);
+    // Team chat: every room that is not a step discussion.
+    expect(names('project')).toEqual(['Climate', 'Legacy organization room']);
+    expect(names('step_discussion')).toEqual([
+      'Regular Access · Panel meeting',
+    ]);
+  });
+
+  it('finds a discussion by its subtitle', () => {
+    const found = buildRoomSections(rooms, 'all', 'physics');
+    expect(found.flatMap((s) => s.rooms.map((r) => r.name))).toEqual([
+      'Regular Access · Panel meeting',
+    ]);
   });
 });
