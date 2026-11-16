@@ -1018,8 +1018,8 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-ai-assistant-settings',
-    url: 'ai-assistant-settings/?setting',
-    params: { setting: { dynamic: true } },
+    url: 'ai-assistant-settings/?tab&setting',
+    params: { tab: { dynamic: true }, setting: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./ai-assistant/AIAssistantSettings').then((module) => ({

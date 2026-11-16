@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { AI_ASSISTANT_TABS } from '@/administration/ai-assistant/AIAssistantSettings';
 import { ARROW_TABS } from '@/administration/arrow/ArrowDashboard';
 import { CALL_MANAGEMENT_TABS } from '@/administration/call-management/AdministrationCallManagement';
 import { MARKETPLACE_TABS } from '@/administration/marketplace/AdministrationMarketplace';
@@ -104,6 +105,7 @@ describe('administration settings registry', () => {
     const pageTabKeys: Record<string, string[]> = Object.fromEntries(
       Object.entries({
         'admin-branding': BRANDING_TABS,
+        'admin-ai-assistant-settings': AI_ASSISTANT_TABS,
         'admin-marketplace-settings': MARKETPLACE_TABS,
         'admin-software-catalog-settings': SOFTWARE_CATALOG_TABS,
         'admin-call-management-settings': CALL_MANAGEMENT_TABS,
@@ -154,6 +156,10 @@ describe('administration settings registry', () => {
     expect(getSettingLocation('CURRENCY_NAME')).toMatchObject({
       state: 'admin-branding',
       params: { tab: 'marketplace' },
+    });
+    expect(getSettingLocation('AI_ASSISTANT_TOKEN_LIMIT_DAILY')).toMatchObject({
+      state: 'admin-ai-assistant-settings',
+      params: { tab: 'limits' },
     });
     expect(getSettingLocation('MCP_ENABLED')).toMatchObject({
       state: 'admin-personal-access-tokens-settings',

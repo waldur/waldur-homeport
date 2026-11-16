@@ -64,6 +64,7 @@ export const getSettingGroupLocations = (): Record<
   const databasePage = translate('Database');
   const loggingTelemetryPage = translate('Logging & telemetry');
   const workersPage = translate('Workers & messaging');
+  const aiAssistantPage = translate('AI Assistant settings');
 
   return {
     // Branding (User interface › Branding)
@@ -376,10 +377,44 @@ export const getSettingGroupLocations = (): Record<
       category: configCategory,
       pageTitle: translate('Custom scripts'),
     },
-    [translate('AI assistant settings')]: {
+    [translate('AI assistant general')]: {
       state: 'admin-ai-assistant-settings',
+      params: { tab: 'general' },
       category: configCategory,
-      pageTitle: translate('AI Assistant settings'),
+      pageTitle: aiAssistantPage,
+      tabTitle: translate('General'),
+      feature: SupportFeatures.enable_llm_assistant,
+    },
+    [translate('AI assistant model')]: {
+      state: 'admin-ai-assistant-settings',
+      params: { tab: 'model' },
+      category: configCategory,
+      pageTitle: aiAssistantPage,
+      tabTitle: translate('Model'),
+      feature: SupportFeatures.enable_llm_assistant,
+    },
+    [translate('AI assistant limits')]: {
+      state: 'admin-ai-assistant-settings',
+      params: { tab: 'limits' },
+      category: configCategory,
+      pageTitle: aiAssistantPage,
+      tabTitle: translate('Limits'),
+      feature: SupportFeatures.enable_llm_assistant,
+    },
+    [translate('AI assistant conversations')]: {
+      state: 'admin-ai-assistant-settings',
+      params: { tab: 'conversations' },
+      category: configCategory,
+      pageTitle: aiAssistantPage,
+      tabTitle: translate('Conversations'),
+      feature: SupportFeatures.enable_llm_assistant,
+    },
+    [translate('AI assistant public chat')]: {
+      state: 'admin-ai-assistant-settings',
+      params: { tab: 'public-chat' },
+      category: configCategory,
+      pageTitle: aiAssistantPage,
+      tabTitle: translate('Public assistant'),
       feature: SupportFeatures.enable_llm_assistant,
     },
     [translate('User Actions')]: {

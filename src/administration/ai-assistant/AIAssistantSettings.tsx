@@ -1,27 +1,40 @@
-import { useQuery } from '@tanstack/react-query';
-import { overrideSettingsRetrieve } from 'waldur-js-client';
-
 import { AlertItem } from 'waldur-ui';
 
-import { LoadingErred } from '@/core/LoadingErred';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { SupportFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { SettingsDescription } from '@/SettingsDescription';
 
-import { SettingsCard } from '../settings/SettingsCard';
+import { SettingsTab, SettingsWithTabs } from '../settings/SettingsWithTabs';
 
-const AI_ASSISTANT_SETTINGS = SettingsDescription.find(
-  (group) => group.description === translate('AI assistant settings'),
-);
+export const AI_ASSISTANT_TABS: SettingsTab[] = [
+  {
+    key: 'general',
+    title: translate('General'),
+    groupName: translate('AI assistant general'),
+  },
+  {
+    key: 'model',
+    title: translate('Model'),
+    groupName: translate('AI assistant model'),
+  },
+  {
+    key: 'limits',
+    title: translate('Limits'),
+    groupName: translate('AI assistant limits'),
+  },
+  {
+    key: 'conversations',
+    title: translate('Conversations'),
+    groupName: translate('AI assistant conversations'),
+  },
+  {
+    key: 'public-chat',
+    title: translate('Public assistant'),
+    groupName: translate('AI assistant public chat'),
+  },
+];
 
 export const AIAssistantSettings = () => {
-  const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ['AIAssistantSettings'],
-    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
-  });
-
   // Only show if AI assistant feature is enabled
   if (!isFeatureVisible(SupportFeatures.enable_llm_assistant)) {
     return (
@@ -35,14 +48,11 @@ export const AIAssistantSettings = () => {
     );
   }
 
-  return isLoading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <LoadingErred
-      message={translate('Unable to load AI Assistant configuration.')}
-      loadData={refetch}
+  return (
+    <SettingsWithTabs
+      title={translate('AI Assistant settings')}
+      tabs={AI_ASSISTANT_TABS}
+      queryKey="AIAssistantSettings"
     />
-  ) : data && AI_ASSISTANT_SETTINGS ? (
-    <SettingsCard group={AI_ASSISTANT_SETTINGS} values={data} />
-  ) : null;
+  );
 };
