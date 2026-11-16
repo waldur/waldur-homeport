@@ -732,7 +732,6 @@
   "Utilization rate": "Utilisation rate",
   "View key details about the organization, project, offering, and provider for your resource.": "View key details about the organisation, project, offering, and provider for your resource.",
   "Visualize costs": "Visualise costs",
-  "Visualize my costs": "Visualise my costs",
   "Waiting for organization credit": "Waiting for organisation credit",
   "Waldur Organization": "Waldur Organisation",
   "Warning: Changing the slug may break external integrations that rely on this value, and it will rename this organization’s custom roles (their names include the slug). Ensure that all dependent systems are updated before proceeding.": "Warning: Changing the slug may break external integrations that rely on this value, and it will rename this organisation’s custom roles (their names include the slug). Ensure that all dependent systems are updated before proceeding.",
