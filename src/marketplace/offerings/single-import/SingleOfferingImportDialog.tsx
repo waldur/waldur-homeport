@@ -7,15 +7,16 @@ import {
   OfferingExportDataRequest,
 } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
-import { ModalDialog } from '@/modal/ModalDialog';
-import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
   WizardButtons,
   WizardStepIndicator,
   WizardTabs,
   useWizard,
-} from '@/wizard';
+} from 'waldur-wizard';
+
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useCustomer } from '@/workspace/hooks';
 
 import { ImportErrorBoundary } from './ImportErrorBoundary';

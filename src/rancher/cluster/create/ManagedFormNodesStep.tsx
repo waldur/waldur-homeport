@@ -3,6 +3,8 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-final-form';
 import { Offering } from 'waldur-js-client';
 
+import { StepCard } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { NumberGroup } from '@/form';
 import { FilterBox } from '@/form/FilterBox';
@@ -12,7 +14,6 @@ import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { FlavorTable } from '@/openstack/openstack-instance/deploy/FlavorTable';
 import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
 
@@ -32,11 +33,11 @@ export const ManagedFormNodesStep = (props: FormStepProps) => {
   );
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Worker nodes hardware configuration')}
       id={props.id}
       disabled={!openstackOffering || props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         <div className="ms-auto">
           <FilterBox
@@ -83,6 +84,6 @@ export const ManagedFormNodesStep = (props: FormStepProps) => {
           </div>
         </>
       ) : null}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

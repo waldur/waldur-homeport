@@ -6,12 +6,14 @@ import {
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { AtLeast } from '@/core/types';
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
-import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { Step1OfferingAndPlan } from './Step1OfferingAndPlan';
 import { Step3FinalConfig } from './Step3FinalConfig';

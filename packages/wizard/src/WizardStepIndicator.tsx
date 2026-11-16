@@ -1,8 +1,7 @@
 import { FC, useMemo } from 'react';
+import { translate } from 'waldur-i18n-runtime';
+import { ProgressSteps } from 'waldur-ui';
 
-import { translate } from '@/i18n';
-
-import { ProgressSteps } from './ProgressSteps';
 import type { WizardStep, WizardStepIndicatorProps } from './types';
 
 /**

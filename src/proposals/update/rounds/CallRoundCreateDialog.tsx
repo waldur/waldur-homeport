@@ -8,6 +8,9 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -20,7 +23,6 @@ import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
 } from '@/proposals/workflow/queries';
-import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormThirdPage } from './WizardFormThirdPage';

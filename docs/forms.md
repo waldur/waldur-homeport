@@ -554,6 +554,50 @@ catch (e) {
 }
 ```
 
+## Where the wizard lives
+
+Multi-step forms are split by what they depend on, so micro-apps
+([micro-apps.md](micro-apps.md)) use the same ones:
+
+- **`waldur-ui`** (`packages/ui/src/Steps`) holds the step primitives, which
+  know no form library and no router: `StepCard` and `StepLock` (one step of a
+  long form, lockable), `StepNav` and `getStepNavItems` (the side nav with a
+  status per step), `ProgressSteps`, `VerticalProgressSteps` and
+  `StepLoading`, plus `StepperLayout` (`Container`, `Header`, `Body`,
+  `Aside`), the page of a long form with its sticky side column.
+- **`waldur-wizard`** (`packages/wizard`) holds what runs on react-final-form:
+  `Wizard`, `WizardModal`, `WizardForm`, `WizardFormContainer`,
+  `WizardButtons`, `WizardStepIndicator`, `WizardTabs`, `useWizard`, and for
+  long forms `StepDefinition` with `useStepStatuses`, which turns the form's
+  errors into the statuses `StepNav` draws.
+
+Homeport imports them from the packages too: there is no `@/wizard` module
+any more (ESLint points such an import to the packages). The old names are
+gone with it: `VStepperFormStepCard` is `StepCard`, `StepContent` is
+`StepLock`, `VStepperFormStep` is `StepDefinition` and `VStepperFormStepProps`
+is `StepComponentProps`. What stays in the app is `FormSteps`
+(`@/wizard/FormSteps`), which routes its nav links through UI-Router, and
+`SidebarLayout` (`@/form/SidebarLayout`), which is `StepperLayout` in the
+portal's page frame.
+
+`StepperLayout.Aside` sticks below whatever sticks above the page, read from
+two CSS variables the app's chrome sets on an ancestor:
+
+- `--layout-sticky-top`: where sticky content sticks inside its scroller
+  (default `0px`). The portal's `Layout` measures it (header, breadcrumb bar,
+  page tabs; `src/navigation/chromeHeights.ts`).
+- `--layout-sticky-height`: the scroller's visible height there (default
+  `100vh` less `--layout-sticky-top`, right while the window scrolls, as in
+  the portal). waldur-shell's `AppShell` scrolls an inner pane below its top
+  bar instead, so it makes that pane a size container and sets it to
+  `100cqh`.
+
+A micro-app imports from the package entry points (`import { StepCard,
+StepNav } from 'waldur-ui'`, `import { Wizard, useStepStatuses } from
+'waldur-wizard'`) and adds `packages/wizard/src` to its Tailwind `@source`
+list. Like `waldur-table`, the package may import nothing from `@/…` or a
+router; ESLint enforces it.
+
 ## Modal Form Architecture
 
 **Key Issue**: React Final Form context boundaries - submit buttons must be inside the `<Form>` component.

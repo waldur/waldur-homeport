@@ -1,157 +1,29 @@
-import {
-  CheckCircleIcon,
-  CircleIcon,
-  LockIcon,
-  WarningCircleIcon,
-  XCircleIcon,
-} from '@phosphor-icons/react';
-import classNames from 'classnames';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { getStepNavItems } from 'waldur-ui';
+import { useStepStatuses, UseStepStatusesOptions } from 'waldur-wizard';
 
-import { flattenObject } from '@/core/utils';
-import { FieldErrorMessage } from '@/form/FieldError';
 import { ScrollSpyNav } from '@/navigation/ScrollSpyNav';
 
-import { VStepperFormStep } from './VStepperFormStep';
-
-export const FormSteps: FC<{
-  steps: Pick<VStepperFormStep, 'label' | 'id' | 'fields' | 'required'>[];
-  completedSteps?: boolean[];
-  disabledSteps?: boolean[];
-  errors?;
-  criticalErrors?;
-  showRequiredErrors?: boolean;
-  /** Suppress the trailing status icon column. Use for read-only navigation
-   *  where completion / error state isn't meaningful (e.g. viewing a
-   *  submitted proposal). */
-  hideStatusIcons?: boolean;
-  /** Called with the step's id when the reader picks it. */
-  onSelect?(id: string): void;
-}> = ({
-  steps,
-  completedSteps = [],
-  disabledSteps = [],
-  errors = [],
-  criticalErrors,
-  showRequiredErrors,
-  hideStatusIcons,
-  onSelect,
-}) => {
-  const nonRequiredErrors = useMemo(() => {
-    const errorsFlatten = flattenObject(errors);
-    const result = {};
-    for (const key in errorsFlatten) {
-      if (!errorsFlatten[key]) continue;
-      if (Array.isArray(errorsFlatten[key])) {
-        errorsFlatten[key].forEach((err: any) => {
-          if (
-            typeof err === 'string' &&
-            (!err.includes('required') || showRequiredErrors)
-          ) {
-            if (!(key in result)) Object.assign(result, { [key]: [] });
-            result[key].push(err);
-          }
-        });
-      } else if (
-        typeof errorsFlatten[key] === 'string' &&
-        (!errorsFlatten[key].includes('required') || showRequiredErrors)
-      ) {
-        Object.assign(result, { [key]: errorsFlatten[key] });
-      }
-    }
-    return result;
-  }, [errors]);
-
-  const criticalErrorsMap = useMemo(() => {
-    const errorsFlatten = flattenObject(criticalErrors);
-    const result = {};
-    for (const key in errorsFlatten) {
-      if (!errorsFlatten[key]) continue;
-      if (Array.isArray(errorsFlatten[key])) {
-        errorsFlatten[key].forEach((err: any) => {
-          if (!(key in result)) Object.assign(result, { [key]: [] });
-          result[key].push(err);
-        });
-      } else if (typeof errorsFlatten[key] === 'string') {
-        Object.assign(result, { [key]: errorsFlatten[key] });
-      }
-    }
-    return result;
-  }, [criticalErrors]);
-
-  const tabs = steps.map((step, i) => {
-    let criticalErrors = {};
-    let normalErrors = {};
-    if (step.fields) {
-      step.fields.forEach((key) => {
-        if (criticalErrorsMap[key]) {
-          Object.assign(criticalErrors, { [key]: criticalErrorsMap[key] });
-        }
-        if (nonRequiredErrors[key]) {
-          Object.assign(normalErrors, { [key]: nonRequiredErrors[key] });
-        }
-      });
-      if (Object.keys(criticalErrors).length === 1) {
-        criticalErrors = Object.values(criticalErrors).flat().filter(Boolean);
-      }
-      if (Object.keys(normalErrors).length === 1) {
-        normalErrors = Object.values(normalErrors).flat().filter(Boolean);
-      }
-    }
-
-    const hasCriticalErrors = Boolean(Object.keys(criticalErrors).length);
-    const hasNormalErrors = Boolean(Object.keys(normalErrors).length);
-
-    const isDisabled = disabledSteps[i];
-
-    return {
-      key: step.id,
-      title: (
-        <div
-          data-error={hasCriticalErrors || hasNormalErrors ? '' : undefined}
-          className={classNames(
-            'flex justify-between items-center w-full',
-            isDisabled && 'text-quaternary',
-          )}
-        >
-          {step.label}
-          {hideStatusIcons ? null : isDisabled ? (
-            <LockIcon weight="bold" className="text-quaternary" size={20} />
-          ) : step.fields && hasCriticalErrors ? (
-            <Tooltip
-              label={<FieldErrorMessage error={criticalErrors} />}
-              side="left"
-              autoWidth
-            >
-              <XCircleIcon weight="bold" size={20} className="text-danger" />
-            </Tooltip>
-          ) : step.fields && hasNormalErrors ? (
-            <Tooltip
-              label={<FieldErrorMessage error={normalErrors} />}
-              side="left"
-              autoWidth
-            >
-              <WarningCircleIcon
-                weight="bold"
-                size={20}
-                className="text-warning"
-              />
-            </Tooltip>
-          ) : completedSteps[i] ? (
-            <CheckCircleIcon weight="bold" className="text-success" size={20} />
-          ) : step.required ? (
-            <CircleIcon weight="bold" className="text-quaternary" size={20} />
-          ) : null}
-        </div>
-      ),
-    };
-  });
-
+/**
+ * The side nav of a long, single-page form (an order form, a proposal):
+ * waldur-wizard's step statuses drawn by waldur-ui's step nav items, with
+ * the links routed through UI-Router.
+ */
+export const FormSteps: FC<
+  UseStepStatusesOptions & {
+    /** Suppress the trailing status icon column. Use for read-only
+     *  navigation where completion / error state isn't meaningful (e.g.
+     *  viewing a submitted proposal). */
+    hideStatusIcons?: boolean;
+    /** Called with the step's id when the reader picks it. */
+    onSelect?(id: string): void;
+  }
+> = ({ hideStatusIcons, onSelect, ...options }) => {
+  const steps = useStepStatuses(options);
   return (
     <ScrollSpyNav
-      items={tabs}
+      items={getStepNavItems(steps, { hideStatusIcons })}
       onSelect={onSelect ? (key) => onSelect(key) : undefined}
     />
   );

@@ -9,11 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { ExcelParseResult } from './types';
 

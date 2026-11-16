@@ -1,5 +1,6 @@
+import { StepDefinition } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
-import { VStepperFormStep } from '@/wizard';
 
 import { ProposalDetailsOverviewStep } from '../../create/ProposalDetailsOverviewStep';
 import { FormResourceRequestsStep } from '../../create/resource-requests-step/FormResourceRequestsStep';
@@ -11,10 +12,8 @@ import { ReviewTeamStep } from './ReviewTeamStep';
 
 /** `withCompliance`: the proposal was submitted under a compliance checklist
  *  (see `proposalHasCompliance`). */
-export const createReviewSteps = (
-  withCompliance = false,
-): VStepperFormStep[] => {
-  const steps: VStepperFormStep[] = [
+export const createReviewSteps = (withCompliance = false): StepDefinition[] => {
+  const steps: StepDefinition[] = [
     {
       label: translate('Details overview'),
       id: 'step-general',

@@ -1,10 +1,7 @@
-import classNames from 'classnames';
-
-import { AccordionCard } from 'waldur-ui';
+import { StepAccordionCard } from 'waldur-ui';
 
 import { getAllModelsOption } from '@/marketplace/common/modelSelection';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
-import { StepContent } from '@/wizard/VStepperFormStep';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
@@ -13,23 +10,19 @@ export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
   const { customer } = useOrderFormData();
 
   return (
-    <AccordionCard
+    <StepAccordionCard
+      disabled={props.disabled}
+      disabledReason={props.disabledReason}
       title={props.title}
       id={props.id}
-      className={classNames('step-card', props.disabled && 'step-disabled')}
       defaultOpen
     >
-      <StepContent
-        disabled={props.disabled}
-        disabledReason={props.disabledTooltip}
-      >
-        <OptionsForm
-          options={props.offering.options}
-          customer={customer}
-          allModelsOption={getAllModelsOption(props.offering.resource_options)}
-          orderForm
-        />
-      </StepContent>
-    </AccordionCard>
+      <OptionsForm
+        options={props.offering.options}
+        customer={customer}
+        allModelsOption={getAllModelsOption(props.offering.resource_options)}
+        orderForm
+      />
+    </StepAccordionCard>
   );
 };

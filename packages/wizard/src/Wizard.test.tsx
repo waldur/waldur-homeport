@@ -159,11 +159,11 @@ describe('Wizard', () => {
       );
     });
 
-    it('has form element with wizard class', () => {
+    it('renders the wizard as a form', () => {
       renderWizard();
 
       const form = screen.getByTestId('wizard-dialog');
-      expect(form).toHaveClass('wizard');
+      expect(form.tagName).toBe('FORM');
     });
   });
 

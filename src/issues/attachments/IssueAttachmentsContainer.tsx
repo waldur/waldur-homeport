@@ -1,11 +1,16 @@
 import { Issue } from 'waldur-js-client';
 
-import { Card, CardContent, CardHeader, CardTitle } from 'waldur-ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  RefreshIconButton,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
 import { useIssueAttachments, useUploadAttachments } from './api';
 import { IssueAttachmentsContext } from './IssueAttachmentsContext';
@@ -32,7 +37,7 @@ export const IssueAttachmentsContainer: React.FC<
         <CardHeader>
           <CardTitle as="div">
             <span className="me-1.5">{translate('Attachments')}</span>
-            <RefreshButton refetch={refetch} loading={isLoading} />
+            <RefreshIconButton refetch={refetch} loading={isLoading} />
           </CardTitle>
         </CardHeader>
         <CardContent>

@@ -15,10 +15,10 @@ import {
   TableHeader,
   TableRow,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { FieldMappingChoice, OidcFormValues } from '../types';
 

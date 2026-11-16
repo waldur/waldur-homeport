@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import { translate } from 'waldur-i18n-runtime';
 
-import { LoadingSpinner } from 'waldur-ui';
-
-import { translate } from '@/i18n';
+import { cn } from '../cn';
+import { LoadingSpinner } from '../LoadingSpinner';
 
 interface StepLoadingProps {
   message?: string;
@@ -10,7 +10,7 @@ interface StepLoadingProps {
 }
 
 export const StepLoading: FC<StepLoadingProps> = ({ message, className }) => (
-  <div className={`text-center py-10 ${className ?? ''}`.trim()}>
+  <div className={cn('text-center py-10', className)}>
     <LoadingSpinner
       size={32}
       className="text-brand inline-block"

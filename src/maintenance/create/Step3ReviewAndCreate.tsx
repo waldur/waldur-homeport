@@ -3,11 +3,11 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { PropertyItem, PropertyList } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { formatMediumDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { InternalNotes } from '../InternalNotesField';
 import { MAINTENANCE_TYPE, MaintenanceForm } from '../types';

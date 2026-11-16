@@ -2,7 +2,7 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { vmwareNetworksList } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, StepCard } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -12,7 +12,6 @@ import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { VStepperFormStepCard } from '@/wizard';
 
 export const FormNetworkStep = (props: FormStepProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
@@ -34,11 +33,11 @@ export const FormNetworkStep = (props: FormStepProps) => {
   });
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Network interfaces')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         showExperimentalUiComponents ? (
           <div className="flex justify-end grow">
@@ -74,6 +73,6 @@ export const FormNetworkStep = (props: FormStepProps) => {
           fieldName="attributes.networks"
         />
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

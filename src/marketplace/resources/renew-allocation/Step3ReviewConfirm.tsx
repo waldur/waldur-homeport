@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { StringGroup } from '@/form';
@@ -20,7 +21,6 @@ import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
 

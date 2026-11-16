@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { getAllModelsOption } from '@/marketplace/common/modelSelection';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
@@ -12,7 +14,6 @@ import {
   pricesConcealed,
   RequestedResourceCostLabel,
 } from '@/proposals/RequestedResourceCostLabel';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const ResourceRequestWizardFormThirdPage: FunctionComponent<
   WizardFormStepProps

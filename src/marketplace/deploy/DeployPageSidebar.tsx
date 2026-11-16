@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from 'waldur-ui';
 import { SidebarProps } from '@/form/SidebarProps';
 import { translate } from '@/i18n';
 import { OrderSummary } from '@/marketplace/details/OrderSummary';
-import { FormSteps } from '@/wizard';
+import { FormSteps } from '@/wizard/FormSteps';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
 

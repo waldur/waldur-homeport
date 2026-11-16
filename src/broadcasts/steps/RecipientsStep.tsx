@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { AudienceFields } from '../AudienceFields';
 import { RecipientsList } from '../RecipientsList';

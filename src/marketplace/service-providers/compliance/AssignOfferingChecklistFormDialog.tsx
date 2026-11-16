@@ -6,10 +6,12 @@ import {
   marketplaceProviderOfferingsUpdateComplianceChecklist,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { ASSIGN_CHECKLIST_TO_OFFERINGS_FORM_ID } from '../constants';
 

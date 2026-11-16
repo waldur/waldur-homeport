@@ -1,7 +1,9 @@
 import { FC, useCallback } from 'react';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
-import { ProgressStep, Wizard } from '@/wizard';
 
 import type { ArrowSetupFormValues } from '../types';
 

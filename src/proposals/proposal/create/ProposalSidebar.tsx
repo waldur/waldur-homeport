@@ -10,7 +10,7 @@ import { SidebarProps } from '@/form/SidebarProps';
 import { TosNotification } from '@/form/TosNotification';
 import { translate } from '@/i18n';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
-import { FormSteps } from '@/wizard';
+import { FormSteps } from '@/wizard/FormSteps';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;

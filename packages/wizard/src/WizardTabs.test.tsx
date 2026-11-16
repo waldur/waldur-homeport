@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import type { ProgressStep } from 'waldur-ui';
 
-import { ProgressStep } from './ProgressSteps';
 import { WizardTabs } from './WizardTabs';
 
 const steps: ProgressStep[] = [

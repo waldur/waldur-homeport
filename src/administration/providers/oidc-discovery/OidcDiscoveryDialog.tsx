@@ -5,9 +5,11 @@ import {
   IdentityProviderRequest,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProgressStep, Wizard } from '@/wizard';
 
 import { ConfigurationStep } from './steps/ConfigurationStep';
 import { ConnectionStep } from './steps/ConnectionStep';

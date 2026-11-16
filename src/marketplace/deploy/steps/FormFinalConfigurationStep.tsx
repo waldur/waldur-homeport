@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 
+import { StepCard } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { DateGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
@@ -29,11 +30,11 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
   const dateFieldProps = useOrderStartDateBounds(project);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Final configuration')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <ResourceNameGroup
         nameValidate={props.params?.nameValidate}
@@ -61,6 +62,6 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
       {!hasPrepaidComponents && (
         <TerminationDateField offering={props.offering} />
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { SelectGroup, StringGroup, CountrySelectGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
@@ -11,7 +13,6 @@ import {
   getPersonalTitleOptions,
 } from '@/user/support/aai-constants';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getLockReason, lockedProps, lockedSelectProps } from './lockedFields';
 

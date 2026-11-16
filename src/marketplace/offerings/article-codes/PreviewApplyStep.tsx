@@ -4,6 +4,7 @@ import type { ArticleCodeUpdatePreviewItem } from 'waldur-js-client';
 import { marketplaceArticleCodeUpdateApply } from 'waldur-js-client';
 
 import { BaseButton, Code } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@/marketplace/offerings/constants';
@@ -13,7 +14,6 @@ import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { ArticleCodeFormValues } from './types';
 

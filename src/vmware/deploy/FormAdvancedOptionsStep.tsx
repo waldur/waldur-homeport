@@ -6,13 +6,14 @@ import {
   vmwareFoldersList,
 } from 'waldur-js-client';
 
+import { StepCard } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 export const FormAdvancedOptionsStep = (props: FormStepProps) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;
@@ -64,12 +65,12 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
   });
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Advanced options')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       {data && (
         <div className="mx-auto w-full max-w-[1440px]">
@@ -108,6 +109,6 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
           )}
         </div>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

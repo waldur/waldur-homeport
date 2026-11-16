@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 /**
  * The round's review duration, kept for existing rounds: a review is due

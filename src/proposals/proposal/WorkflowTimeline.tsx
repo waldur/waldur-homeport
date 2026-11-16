@@ -6,6 +6,8 @@ import {
   ProposalWorkflowStepInstance,
 } from 'waldur-js-client';
 
+import { ProgressStep, ProgressSteps } from 'waldur-ui';
+
 import { formatDate, formatDateTime, formatRelative } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
@@ -14,7 +16,6 @@ import {
   usesCallVocabulary,
   showsWorkflowSteps,
 } from '@/proposals/presentation';
-import { ProgressStep, ProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { heldDecisionLabel } from '../roundLifecycle';

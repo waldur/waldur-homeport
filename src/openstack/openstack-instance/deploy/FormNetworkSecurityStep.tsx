@@ -27,6 +27,7 @@ import {
   Switch,
   Tooltip,
   WarningTip,
+  StepCard,
 } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
@@ -42,7 +43,6 @@ import {
 } from '@/openstack/openstack-network/utils';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { SharedByLabel } from '../SharedByLabel';
 import {
@@ -545,12 +545,12 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
   }, [data, form, fipQuotaExhausted]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Network and security')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <div className="mb-4 -mt-3 border-b border-b-secondary">
         {showSshKeyWarning && (
@@ -656,6 +656,6 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           )}
         </FormText>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -1,13 +1,13 @@
 import { AccordionCard } from 'waldur-ui';
+import { StepComponentProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { TeamSection } from '@/proposals/team/TeamSection';
 import { Proposal, ProposalReview } from '@/proposals/types';
-import { VStepperFormStepProps } from '@/wizard';
 
 import { StepHeaderContent } from './StepHeaderContent';
 
-export const ProposalTeamStep = (props: VStepperFormStepProps) => {
+export const ProposalTeamStep = (props: StepComponentProps) => {
   const proposal: Proposal = props.params.proposal;
   const change = props.params?.change;
   const reviews: ProposalReview[] = props.params?.reviews;

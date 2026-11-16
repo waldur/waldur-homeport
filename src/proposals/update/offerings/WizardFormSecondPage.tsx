@@ -3,13 +3,14 @@ import { FunctionComponent, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   props,

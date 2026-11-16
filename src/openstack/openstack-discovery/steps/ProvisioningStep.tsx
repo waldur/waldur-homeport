@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { BaseButton } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import {
   StringGroup,
@@ -12,7 +13,6 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { OpenStackDiscoveryFormValues } from '../types';
 

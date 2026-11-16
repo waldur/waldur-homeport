@@ -77,7 +77,8 @@ Central foundation for marketplace offering deployment flows:
 ### Step Definition Structure
 
 ```typescript
-interface VStepperFormStep {
+// StepDefinition, from waldur-wizard
+interface StepDefinition {
   label: string; // Display name
   id: string; // Unique identifier
   component: React.ComponentType; // React component

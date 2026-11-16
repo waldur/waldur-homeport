@@ -12,12 +12,14 @@ import {
   QuestionAdmin,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, Wizard } from '@/wizard';
 import { Customer } from '@/workspace/types';
 
 import { Step1ProjectInfo } from './Step1ProjectInfo';

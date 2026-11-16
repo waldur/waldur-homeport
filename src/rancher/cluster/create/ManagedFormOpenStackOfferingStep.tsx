@@ -5,10 +5,11 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { StepCard } from 'waldur-ui';
+
 import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 export const ManagedFormOpenStackOfferingStep = (props: FormStepProps) => {
   const { data: offerings, isLoading } = useQuery<
@@ -29,12 +30,12 @@ export const ManagedFormOpenStackOfferingStep = (props: FormStepProps) => {
   });
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('OpenStack offering')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <Field name="attributes.openstack_offering">
         {({ input, meta }) => (
@@ -47,6 +48,6 @@ export const ManagedFormOpenStackOfferingStep = (props: FormStepProps) => {
           />
         )}
       </Field>
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

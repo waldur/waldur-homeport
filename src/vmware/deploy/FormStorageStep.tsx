@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
+import { StepCard } from 'waldur-ui';
+
 import { composeValidators } from '@/core/validators';
 import { FieldError } from '@/form';
 import { StaticField } from '@/form/StaticField';
@@ -8,7 +10,6 @@ import { translate } from '@/i18n';
 import { maxAmount } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { useVMwareLimitsLoader } from './utils';
 
@@ -58,14 +59,14 @@ export const FormStorageStep = (props: FormStepProps) => {
   const { limits } = useVMwareLimitsLoader(props.offering.scope_uuid);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Storage')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <StaticDiskField limits={limits} />
       <GuestOSField />
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -343,7 +343,7 @@ export const BaseDeployPage = ({
                 offering={selectedOffering}
                 params={step.params}
                 disabled={step.id !== 'step-general' && Boolean(blockedReason)}
-                disabledTooltip={blockedReason}
+                disabledReason={blockedReason}
                 previewMode
               />
             </div>
@@ -374,13 +374,13 @@ export const BaseDeployPage = ({
                 offering={selectedOffering}
                 params={step.params}
                 disabled={step.id !== 'step-general' && Boolean(blockedReason)}
-                disabledTooltip={blockedReason}
+                disabledReason={blockedReason}
               />
             </div>
           ))}
         </SidebarLayout.Body>
 
-        <SidebarLayout.Sidebar transparent>
+        <SidebarLayout.Sidebar>
           <DeployPageSidebar
             steps={formSteps}
             offering={selectedOffering}

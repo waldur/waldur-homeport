@@ -1,18 +1,17 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-
-import { Tooltip, BaseButton } from 'waldur-ui';
-
-import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
-import { translate } from '@/i18n';
-import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ModalDialog } from '@/modal/ModalDialog';
+import { SubmitButton } from 'waldur-form';
+import { translate } from 'waldur-i18n-runtime';
+import { Tooltip, BaseButton, LoadingSpinner, cn } from 'waldur-ui';
+import { CloseDialogButton } from 'waldur-ui';
+import { ModalDialog } from 'waldur-ui';
 
 import type { WizardStepProps } from './types';
+import {
+  WIZARD_BODY_CLASSNAME,
+  WIZARD_CONTENT_CLASSNAME,
+} from './wizardClasses';
 import { WizardStepIndicator } from './WizardStepIndicator';
-
-import './wizard.scss';
 
 interface WizardModalProps extends WizardStepProps {
   children: ReactNode;
@@ -51,7 +50,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
       // SubmitButton, which left the Next button wordless.
       iconNode={
         props.loading ? (
-          <LoadingSpinnerSimple />
+          <LoadingSpinner className="text-brand" />
         ) : !isLastStep ? (
           <CaretRightIcon weight="bold" />
         ) : null
@@ -60,11 +59,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
   );
 
   return (
-    <form
-      className="wizard"
-      onSubmit={props.handleSubmit}
-      data-testid="wizard-dialog"
-    >
+    <form onSubmit={props.handleSubmit} data-testid="wizard-dialog">
       <ModalDialog
         title={props.title}
         subtitle={props.subtitle}
@@ -100,8 +95,9 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
         }
         headerClassName="pb-4"
         {...(modalProps || {})}
+        bodyClassName={cn('p-0', modalProps?.bodyClassName)}
       >
-        <div className="wizard-big wizard-body">
+        <div className={WIZARD_BODY_CLASSNAME}>
           {!props.hideStepper && props.steps.length > 1 && (
             <WizardStepIndicator
               steps={props.steps}
@@ -121,7 +117,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
             />
           )}
 
-          <div className="content">{props.children}</div>
+          <div className={WIZARD_CONTENT_CLASSNAME}>{props.children}</div>
         </div>
       </ModalDialog>
     </form>

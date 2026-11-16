@@ -1,8 +1,10 @@
 import arrayMutators from 'final-form-arrays';
 import { FC, useMemo } from 'react';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard, WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
-import { ProgressStep, Wizard, WizardModal, WizardStepProps } from '@/wizard';
 
 import {
   hasOptionSettings,

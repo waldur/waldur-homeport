@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { STALE_TIME } from '@/core/constants';
 import { fetchCustomerProjects } from '@/customer/workspace/fetchCustomer';
-import { WizardModal, WizardStepProps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 

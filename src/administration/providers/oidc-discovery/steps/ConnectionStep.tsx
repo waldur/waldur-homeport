@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
 import { AlertItem } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { required, url as urlValidator } from '@/core/validators';
 import { StringGroup, SecretGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 export const ConnectionStep: FC<WizardStepProps> = (props) => {
   const existingProvider = props.data?.existingProvider;

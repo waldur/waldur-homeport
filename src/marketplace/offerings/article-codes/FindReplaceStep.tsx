@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { required } from '@/core/validators';
 import {
@@ -21,7 +22,6 @@ import {
 } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { OfferingStateOptions } from '@/table/generated/MarketplaceProviderOfferingsFilter';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { ArticleCodeFormValues } from './types';
 

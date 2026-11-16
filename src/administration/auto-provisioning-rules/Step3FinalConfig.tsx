@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { AlertItem } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
   const { submitting } = useFormState({ subscription: { submitting: true } });

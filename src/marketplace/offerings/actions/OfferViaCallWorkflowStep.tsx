@@ -1,8 +1,9 @@
 import { FC, useMemo } from 'react';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { OfferViaCallStep } from './offerViaCall';
 import { selectableSteps } from './offerViaCallForm';

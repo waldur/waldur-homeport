@@ -1,8 +1,6 @@
-import { useState, createElement } from 'react';
+import { useCallback, useState, createElement } from 'react';
 import { Form } from 'react-final-form';
-import { useToggle } from 'react-use';
-
-import { translate } from '@/i18n';
+import { translate } from 'waldur-i18n-runtime';
 
 import type {
   WizardFooterRenderProps,
@@ -41,7 +39,13 @@ export function Wizard<FormValues = any>({
 }: WizardProps<FormValues>) {
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
-  const [loading, setLoading] = useToggle(false);
+  const [loading, setLoadingState] = useState(false);
+  // Sets a boolean it is given, toggles otherwise (react-use's useToggle).
+  const setLoading = useCallback(
+    (next?: unknown) =>
+      setLoadingState((prev) => (typeof next === 'boolean' ? next : !prev)),
+    [],
+  );
 
   const resolveSteps = (values) =>
     typeof props.steps === 'function' ? props.steps(values) : props.steps;

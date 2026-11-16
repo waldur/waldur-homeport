@@ -78,6 +78,9 @@ export const getSelectTailwindClassNames = <
         // Flat disabled fill, not an opacity wash.
         isDisabled &&
           'border-[var(--input-disabled-border)] bg-[var(--input-disabled-bg)] cursor-not-allowed hover:border-[var(--input-disabled-border)]',
+        // react-select ignores a disabled <fieldset> (a locked wizard step),
+        // so it takes the same disabled look from there.
+        'in-[fieldset:disabled]:border-[var(--input-disabled-border)] in-[fieldset:disabled]:bg-[var(--input-disabled-bg)] in-[fieldset:disabled]:cursor-not-allowed',
       );
     },
 

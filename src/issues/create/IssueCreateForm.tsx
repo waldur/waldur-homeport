@@ -2,15 +2,16 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 
-import { translate } from '@/i18n';
-import { ModalDialog } from '@/modal/ModalDialog';
+import { ProgressStep } from 'waldur-ui';
 import {
-  ProgressStep,
   WizardButtons,
   WizardStepIndicator,
   WizardTabs,
   useWizard,
-} from '@/wizard';
+} from 'waldur-wizard';
+
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useUser } from '@/workspace/hooks';
 
 import { useRequestTypes } from '../api';

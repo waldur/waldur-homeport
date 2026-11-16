@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { required } from '@/core/validators';
 import { CommaSeparatedListGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { UserClaimsField } from './UserClaimsField';
 import { validateEmailPatterns } from './utils';

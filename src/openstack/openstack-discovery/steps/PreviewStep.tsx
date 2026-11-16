@@ -14,14 +14,15 @@ import {
   PropertyItem,
   PropertyList,
   Code,
+  StepLoading,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { propVal } from '@/property/propertyFields';
-import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
 

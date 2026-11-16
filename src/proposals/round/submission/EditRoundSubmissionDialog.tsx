@@ -5,6 +5,8 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -13,7 +15,6 @@ import { useOpenEndedRoundBlockedReason } from '@/proposals/roundCutoff';
 import { Call } from '@/proposals/types';
 import { WizardFormFirstPage } from '@/proposals/update/rounds/WizardFormFirstPage';
 import { getRoundInitialValues, roundTimesInZone } from '@/proposals/utils';
-import { WizardFormContainer } from '@/wizard';
 
 interface EditRoundSubmissionDialogProps {
   resolve: {

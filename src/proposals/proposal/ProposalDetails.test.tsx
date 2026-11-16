@@ -78,8 +78,8 @@ vi.mock('@/proposals/awardedResources', async (importOriginal) => ({
   useAwardedResources: () => ({ data: undefined }),
 }));
 // The progress rail, reduced to the entries it is handed.
-vi.mock('@/wizard', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@/wizard')>()),
+vi.mock('@/wizard/FormSteps', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/wizard/FormSteps')>()),
   FormSteps: ({ steps }) => (
     <ul aria-label="On this page">
       {steps.map((step) => (

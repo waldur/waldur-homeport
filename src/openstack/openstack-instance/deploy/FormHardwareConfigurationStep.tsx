@@ -3,11 +3,12 @@ import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-final-form';
 import { OpenStackFlavor, OpenStackImage } from 'waldur-js-client';
 
+import { StepCard } from 'waldur-ui';
+
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { calculateSystemVolumeSize } from '../utils';
 
@@ -52,11 +53,11 @@ export const FormHardwareConfigurationStep = (props: FormStepProps) => {
   }, [image, flavor]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Hardware configuration')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         <div className="ms-auto">
           <FilterBox
@@ -94,6 +95,6 @@ export const FormHardwareConfigurationStep = (props: FormStepProps) => {
         siblingVolumes={[SYSTEM_VOLUME]}
         optional={true}
       />
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

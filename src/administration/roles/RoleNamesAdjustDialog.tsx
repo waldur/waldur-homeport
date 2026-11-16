@@ -9,7 +9,8 @@ import {
   rolesUpdateDescriptionsUpdate,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, ProgressStep } from 'waldur-ui';
+import { Wizard, WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { getAllPages } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -22,7 +23,6 @@ import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { formatRoleType } from '@/permissions/utils';
-import { ProgressStep, Wizard, WizardModal, WizardStepProps } from '@/wizard';
 
 import { getRoles } from './utils';
 

@@ -6,6 +6,9 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -16,7 +19,6 @@ import {
   ProposalResourceFormData,
 } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { ResourceRequestWizardFormFirstPage } from './ResourceRequestWizardFormFirstPage';
 import { ResourceRequestWizardFormSecondPage } from './ResourceRequestWizardFormSecondPage';

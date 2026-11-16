@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { lockedProps } from './lockedFields';
 

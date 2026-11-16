@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
+import { RefreshIconButton } from 'waldur-ui';
+
 import {
   BooleanEditField,
   NumberEditField,
@@ -15,7 +17,6 @@ import { AttributeCell } from '@/marketplace/common/AttributeCell';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';
 
 import { EditCategoryButton } from './EditCategoryButton';
@@ -51,7 +52,10 @@ export const AttributesSection: FC<OfferingSectionProps & { category }> = (
             <span className="me-1.5">
               {translate('Category')}: {props.category.title}
             </span>
-            <RefreshButton refetch={props.refetch} loading={props.loading} />
+            <RefreshIconButton
+              refetch={props.refetch}
+              loading={props.loading}
+            />
           </>
         }
         actions={<EditCategoryButton {...props} />}

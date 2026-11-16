@@ -3,6 +3,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianValidateCredentials } from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { url } from '@/core/validators';
 import {
@@ -14,7 +15,6 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getAtlassianAuthMethodChoices } from '../../atlassianAuth';
 import { AtlassianFormValues, extractCredentials } from '../types';

@@ -1,17 +1,18 @@
 import { useMemo } from 'react';
 
+import { StepComponentProps } from 'waldur-wizard';
+
 import { Panel } from '@/core/Panel';
 import { BaseEventsList } from '@/events/BaseEventsList';
 import { translate } from '@/i18n';
 import { ProposalReview } from '@/proposals/types';
-import { VStepperFormStepProps } from '@/wizard';
 
 /**
  * The review's history, newest first: assigned, accepted, submitted and so on.
  * The reviewer and the call team read it; the backend gives nobody else any
  * of it.
  */
-export const ReviewActivityStep = (props: VStepperFormStepProps) => {
+export const ReviewActivityStep = (props: StepComponentProps) => {
   const review: ProposalReview | undefined = props.params?.reviews?.[0];
   const filter = useMemo(() => ({ scope: review?.url }), [review?.url]);
 

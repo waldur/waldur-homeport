@@ -10,10 +10,12 @@ import {
   maintenanceAnnouncementOfferingsPartialUpdate,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProgressStep, Wizard } from '@/wizard';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 import { getMaintenanceOfferings, parsePartitions } from '../utils';

@@ -10,6 +10,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  RefreshIconButton,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -18,7 +19,6 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
-import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';
 
 import { AddEndpointButton } from './AddEndpointButton';
@@ -42,7 +42,7 @@ export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
       <CardHeader>
         <CardTitle as="div" className="h5">
           <span className="me-1.5">{translate('Endpoints')}</span>
-          <RefreshButton refetch={props.refetch} loading={props.loading} />
+          <RefreshIconButton refetch={props.refetch} loading={props.loading} />
         </CardTitle>
         {canAdd && (
           <CardToolbar>

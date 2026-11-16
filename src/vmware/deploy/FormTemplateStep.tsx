@@ -3,6 +3,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { VmwareTemplate, vmwareTemplatesList } from 'waldur-js-client';
 
+import { StepCard } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -13,7 +15,6 @@ import { StepCardTabs, TabSpec } from '@/marketplace/deploy/steps/StepCardTabs';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { generateSystemImageChoices } from '@/marketplace/deploy/utils';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { VStepperFormStepCard } from '@/wizard';
 
 const tabs: TabSpec[] = [
   { title: translate('Images'), key: 'images' },
@@ -104,11 +105,11 @@ export const FormTemplateStep = (props: FormStepProps) => {
   }, [mounted, props.offering, data, onChangeImage, form]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Template')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         showExperimentalUiComponents ? (
           <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
@@ -139,6 +140,6 @@ export const FormTemplateStep = (props: FormStepProps) => {
           )}
         </Field>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

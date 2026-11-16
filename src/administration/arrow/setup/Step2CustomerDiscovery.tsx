@@ -13,12 +13,12 @@ import {
   TableHeader,
   TableRow,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { useDiscoverArrowCustomers } from '../api';
 import type { ArrowSetupFormValues } from '../types';

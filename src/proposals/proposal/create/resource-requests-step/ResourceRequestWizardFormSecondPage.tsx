@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { FormField, FormLabel } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { SHORT_STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -21,7 +22,6 @@ import { ReadOnlyComponentsProvider } from '@/marketplace/details/plan/readOnlyC
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 import { fixedRuleComponents } from '@/proposals/budgets';
 import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { RequestBudgetBounds } from './RequestBudgetBounds';
 

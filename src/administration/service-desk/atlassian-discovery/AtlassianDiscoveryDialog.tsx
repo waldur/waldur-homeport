@@ -2,8 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { supportSettingsAtlassianCurrentSettingsRetrieve } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
-import { ProgressStep, Wizard } from '@/wizard';
 
 import { getConfiguredValue } from '../atlassianAuth';
 

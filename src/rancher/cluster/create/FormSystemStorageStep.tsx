@@ -1,10 +1,11 @@
 import { Fragment, useCallback } from 'react';
 
+import { StepCard } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import {
   FormNodeStorageRow,
@@ -29,12 +30,12 @@ export const FormSystemStorageStep = (props: FormStepProps) => {
   );
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('System storage')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       {nodes?.length ? (
         <FormNodeStorageTable volumeTypeChoices={data?.volumeTypeChoices}>
@@ -58,6 +59,6 @@ export const FormSystemStorageStep = (props: FormStepProps) => {
           {translate('Please add a node')}
         </StepCardPlaceholder>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

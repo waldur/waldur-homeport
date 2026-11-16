@@ -7,6 +7,16 @@ import {
   projectsCreate,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import {
+  WIZARD_BODY_CLASSNAME,
+  WIZARD_CONTENT_CLASSNAME,
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from 'waldur-wizard';
+
 import { formatISODate } from '@/core/dateUtils';
 import { getCustomer } from '@/customer/utils';
 import { translate } from '@/i18n';
@@ -14,13 +24,6 @@ import { formatOrderForCreate } from '@/marketplace/details/utils';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import {
-  ProgressStep,
-  WizardButtons,
-  WizardStepIndicator,
-  WizardTabs,
-  useWizard,
-} from '@/wizard';
 
 import { Step1ImportType } from './Step1ImportType';
 import { Step2SelectOffering } from './Step2SelectOffering';
@@ -31,7 +34,6 @@ import { ProjectImportFormData } from './types';
 import { cleanObjectEmptyFields, parseProjectsAndResourcesFile } from './utils';
 
 import './ProjectImportDialog.scss';
-import '@/wizard/wizard.scss';
 
 interface ProjectImportDialogProps {
   resolve: {
@@ -284,7 +286,7 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
           <form onSubmit={handleSubmit} data-testid="project-import-dialog">
             <ModalDialog
               title={translate('Bulk import of projects')}
-              bodyClassName="h-[500px] wizard"
+              bodyClassName="h-[500px]"
               footer={
                 <WizardButtons
                   isFirstStep={isFirstStep}
@@ -317,8 +319,8 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
                 }
                 disabled={submitting}
               />
-              <div className="wizard-big wizard-body">
-                <div className="content">
+              <div className={WIZARD_BODY_CLASSNAME}>
+                <div className={WIZARD_CONTENT_CLASSNAME}>
                   <WizardTabs
                     steps={currentSteps}
                     currentStep={effectiveStep}

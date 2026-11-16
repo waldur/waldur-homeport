@@ -623,7 +623,7 @@ export const ProposalSubmissionStep: FC<{
                 ))}
               </SidebarLayout.Body>
 
-              <SidebarLayout.Sidebar transparent>
+              <SidebarLayout.Sidebar>
                 <ProposalSidebar
                   steps={shownSteps}
                   resourceRows={resourceRows as any}

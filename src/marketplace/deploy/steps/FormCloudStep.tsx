@@ -7,14 +7,13 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, StepCard } from 'waldur-ui';
 
 import { parseNextPage } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { VStepperFormStepCard } from '@/wizard';
 import { useProject } from '@/workspace/hooks';
 
 import { useOrderFormData } from '../selectors';
@@ -158,11 +157,11 @@ export const FormCloudStep = (props: FormStepProps) => {
   ]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={props.title || translate('Cloud')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         showExperimentalUiComponents ? (
           <div className="flex justify-between grow items-center">
@@ -236,6 +235,6 @@ export const FormCloudStep = (props: FormStepProps) => {
           </div>
         </>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -1,5 +1,6 @@
+import { ProgressStep } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ProgressStep } from '@/wizard';
 
 import { CredentialsTab } from './CredentialsTab';
 import { ImportReviewTab } from './ImportReviewTab';

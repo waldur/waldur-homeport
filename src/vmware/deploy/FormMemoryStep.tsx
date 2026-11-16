@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { StepCard } from 'waldur-ui';
+
 import { composeValidators } from '@/core/validators';
 import { SliderNumberGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -9,7 +11,6 @@ import {
   parseIntField,
 } from '@/marketplace/common/utils';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { minOne, useVMwareLimitsLoader } from './utils';
 
@@ -25,11 +26,11 @@ export const FormMemoryStep = (props: FormStepProps) => {
   );
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Memory')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <SliderNumberGroup
         name="limits.ram"
@@ -42,6 +43,6 @@ export const FormMemoryStep = (props: FormStepProps) => {
         required={true}
         max={limits.max_ram}
       />
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -4,6 +4,7 @@ import { useToggle } from 'react-use';
 
 import { BadgeVariant, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { truncate } from '@/core/utils';
@@ -14,7 +15,6 @@ import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { fetchAllCustomers } from './api';
 import { ColumnMapping, ExcelParseResult, UsageImportRow } from './types';

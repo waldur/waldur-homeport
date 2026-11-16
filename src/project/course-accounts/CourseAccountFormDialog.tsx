@@ -20,7 +20,9 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
+  ProgressStep,
 } from 'waldur-ui';
+import { WizardStepIndicator } from 'waldur-wizard';
 
 import { required } from '@/core/validators';
 import { EmailGroup, SubmitButton, TextGroup } from '@/form';
@@ -29,7 +31,6 @@ import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, WizardStepIndicator } from '@/wizard';
 import { useProject } from '@/workspace/hooks';
 
 import templateFile from './course_accounts_template.json';

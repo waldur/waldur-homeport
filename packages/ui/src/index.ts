@@ -44,6 +44,7 @@ export * from './Select';
 export * from './Sheet';
 export * from './Sidebar';
 export * from './StatCard';
+export * from './Steps';
 export * from './Table';
 export * from './Tabs';
 export * from './Tag';

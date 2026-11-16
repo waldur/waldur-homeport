@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { AccordionCard } from 'waldur-ui';
+import { StepComponentProps } from 'waldur-wizard';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -16,7 +17,6 @@ import { invalidateProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { VStepperFormStepProps } from '@/wizard';
 
 import { AddCommentButton } from '../../create-review/AddCommentButton';
 import { FieldReviewComments } from '../../create-review/FieldReviewComments';
@@ -148,7 +148,7 @@ const ProposalResourcesTableComponent: FC<ProposalResourcesTableProps> = ({
   );
 };
 
-export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
+export const FormResourceRequestsStep = (props: StepComponentProps) => {
   const proposal: Proposal = props.params.proposal;
   const change = props.params?.change;
   const reviews: ProposalReview[] = props.params?.reviews;

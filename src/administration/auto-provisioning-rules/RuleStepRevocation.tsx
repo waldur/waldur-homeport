@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { AlertItem } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getCustomerRoles, getProjectRoles } from '@/permissions/utils';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { rowsToClaims, toList } from './utils';
 

@@ -1,18 +1,14 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { useForm } from 'react-final-form';
-
+import { SubmitButton } from 'waldur-form';
+import { translate } from 'waldur-i18n-runtime';
+import type { ProgressStep } from 'waldur-ui';
 import { BaseButton } from 'waldur-ui';
+import { CloseDialogButton } from 'waldur-ui';
+import { ModalDialog } from 'waldur-ui';
 
-import { SubmitButton } from '@/form';
-import { translate } from '@/i18n';
-import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ModalDialog } from '@/modal/ModalDialog';
-
-import type { ProgressStep } from './ProgressSteps';
 import { WizardStepIndicator } from './WizardStepIndicator';
-
-import '@/wizard/wizard.scss';
 
 export interface WizardFormStepProps {
   title: string;
@@ -96,7 +92,7 @@ export const WizardForm: FC<WizardFormProps> = ({
       }
       {...(props.modalProps || {})}
     >
-      <div className="wizard-big wizard-body">
+      <div>
         {!props.hideStepper && (
           <WizardStepIndicator
             steps={props.steps}
@@ -104,7 +100,7 @@ export const WizardForm: FC<WizardFormProps> = ({
             onClick={handleStepClick}
           />
         )}
-        <div className="content">{children}</div>
+        <div>{children}</div>
       </div>
     </ModalDialog>
   );

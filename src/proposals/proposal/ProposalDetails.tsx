@@ -32,7 +32,7 @@ import { useCallFixedDuration } from '@/proposals/callQueries';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
-import { FormSteps } from '@/wizard';
+import { FormSteps } from '@/wizard/FormSteps';
 import { useUser } from '@/workspace/hooks';
 
 import { changesAnyHolder, evaluatorAccess } from '../proposal-roles/access';
@@ -567,7 +567,7 @@ export const ProposalDetails = ({
           )}
           <ProposalActivitySection proposal={proposal} />
         </SidebarLayout.Body>
-        <SidebarLayout.Sidebar transparent>
+        <SidebarLayout.Sidebar>
           {/* The step's actions come first: they are what the viewer is here
             for, and below the rail and the totals they sat a screen down. */}
           {stepActionsShown && (

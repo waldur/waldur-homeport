@@ -8,7 +8,8 @@ import { useRouter } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 import { marketplacePlansList, ProviderOffering } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, ProgressStep } from 'waldur-ui';
+import { Wizard, WizardFooterRenderProps } from 'waldur-wizard';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
@@ -16,7 +17,6 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProgressStep, Wizard, WizardFooterRenderProps } from '@/wizard';
 
 import { offerViaCall, OfferViaCallStep } from './offerViaCall';
 import { OfferViaCallDetailsStep } from './OfferViaCallDetailsStep';

@@ -1,12 +1,13 @@
 import { FC, useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { required } from '@/core/validators';
 import { FieldError, SelectField } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { ExcelParseResult } from './types';
 import { getMonthOptions, getYearOptions, parseExcelFile } from './utils';

@@ -3,7 +3,13 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
-import { Badge, Card, CardContent } from 'waldur-ui';
+import {
+  Badge,
+  Card,
+  CardContent,
+  ProgressSteps,
+  VerticalProgressSteps,
+} from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -14,7 +20,6 @@ import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink'
 import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { isSiteAgentOfferingType } from '@/site-agent/constants';
 import { ActionsMenu } from '@/table/ActionsDropdown';
-import { ProgressSteps, VerticalProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { ResourceViewChangeButton } from './ResourceViewChangeButton';

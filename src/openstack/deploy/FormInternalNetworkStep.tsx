@@ -1,12 +1,11 @@
 import { useToggle } from 'react-use';
 
-import { Switch } from 'waldur-ui';
+import { Switch, StepCard } from 'waldur-ui';
 
 import { BooleanGroup, StringGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';
 import { validateTenantSubnetCidr } from '../utils';
@@ -15,11 +14,11 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
   const [advancedEnabled, setAdvancedEnabled] = useToggle(false);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Internal network')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         <div className="ms-auto">
           <Switch
@@ -59,6 +58,6 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
           />
         </>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -1,14 +1,12 @@
-import classNames from 'classnames';
 import { useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Offering } from 'waldur-js-client';
 
-import { AccordionCard } from 'waldur-ui';
+import { StepAccordionCard } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { StepContent } from '@/wizard/VStepperFormStep';
 
 import { FormStepProps } from '../types';
 
@@ -94,37 +92,33 @@ export const FormQoSSelectionStep = (props: FormStepProps) => {
   }
 
   return (
-    <AccordionCard
+    <StepAccordionCard
+      disabled={props.disabled}
+      disabledReason={props.disabledReason}
       title={props.title}
       id={props.id}
-      className={classNames('step-card', props.disabled && 'step-disabled')}
       defaultOpen
     >
-      <StepContent
-        disabled={props.disabled}
-        disabledReason={props.disabledTooltip}
-      >
-        {partitions.length > 0 && (
-          <SelectGroup
-            name="attributes.partition"
-            label={translate('Partition')}
-            placeholder={translate('Select partition...')}
-            options={partitionOptions}
-            isClearable
-            simpleValue
-          />
-        )}
+      {partitions.length > 0 && (
         <SelectGroup
-          name="attributes.qos"
-          label={translate('Quality of service (QoS)')}
-          placeholder={translate('Select QoS...')}
-          options={qosOptions}
+          name="attributes.partition"
+          label={translate('Partition')}
+          placeholder={translate('Select partition...')}
+          options={partitionOptions}
           isClearable
           simpleValue
-          required={qosRequired}
-          validate={qosRequired ? required : undefined}
         />
-      </StepContent>
-    </AccordionCard>
+      )}
+      <SelectGroup
+        name="attributes.qos"
+        label={translate('Quality of service (QoS)')}
+        placeholder={translate('Select QoS...')}
+        options={qosOptions}
+        isClearable
+        simpleValue
+        required={qosRequired}
+        validate={qosRequired ? required : undefined}
+      />
+    </StepAccordionCard>
   );
 };

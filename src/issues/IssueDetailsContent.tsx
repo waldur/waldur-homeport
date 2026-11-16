@@ -8,6 +8,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  RefreshIconButton,
 } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
@@ -17,7 +18,6 @@ import { FormattedJira } from '@/core/FormattedJira';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { linkify, withLineBreaks } from '@/issues/utils';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 import { propVal } from '@/property/propertyFields';
 import { useUser } from '@/workspace/hooks';
 
@@ -69,7 +69,7 @@ export const IssueDetailsContent: FunctionComponent<
             {(staffOrSupport || context === 'provider') && (
               <IssueSlaBadge issue={issue} />
             )}
-            <RefreshButton refetch={refetch} loading={isRefetching} />
+            <RefreshIconButton refetch={refetch} loading={isRefetching} />
           </div>
         }
         actions={

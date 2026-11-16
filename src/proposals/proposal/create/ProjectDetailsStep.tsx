@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
 import { AccordionCard } from 'waldur-ui';
+import { StepComponentProps } from 'waldur-wizard';
 
 import { validateMaxLength } from '@/core/validators';
 import { SelectGroup, StringGroup, TextGroup } from '@/form';
@@ -12,7 +13,6 @@ import { ScienceDomainGroup } from '@/project/create/ScienceDomainGroup';
 import { formatPrepaidMonths } from '@/proposals/prepaidDuration';
 import { isOnProposalTeam } from '@/proposals/team/teamRules';
 import { ProposalReview } from '@/proposals/types';
-import { VStepperFormStepProps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { fieldPart, isPartEditable } from '../changeRequests';
@@ -48,7 +48,7 @@ const validateDescription = validateMaxLength(
   PROPOSAL_FIELD_MAX_LENGTH.description,
 );
 
-export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
+export const ProjectDetailsStep = (props: StepComponentProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
   const proposal = props.params?.proposal;
   const user = useUser();

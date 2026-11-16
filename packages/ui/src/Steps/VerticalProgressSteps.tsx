@@ -1,6 +1,7 @@
 import { CheckIcon, CircleIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC } from 'react';
+
+import { cn } from '../cn';
 
 import type { ProgressStep } from './ProgressSteps';
 
@@ -51,7 +52,7 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
       return (
         <li
           key={step.key ?? index}
-          className={classNames(
+          className={cn(
             'relative',
             // The connector to the next step: from below this step's circle
             // to the top of the next row.
@@ -65,7 +66,7 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
               ProgressSteps: no button, no hover. */}
           <Step
             {...(isClickable && { type: 'button' as const })}
-            className={classNames(
+            className={cn(
               'group flex w-full items-start gap-[1rem] border-0 bg-transparent px-0 py-[1rem] text-left transition-all duration-300 focus:outline-2 focus:outline-offset-2 focus:outline-brand focus:outline-solid disabled:cursor-not-allowed disabled:opacity-60',
               isClickable && 'cursor-pointer',
             )}
@@ -74,7 +75,7 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
           >
             <div
               data-testid="step-marker"
-              className={classNames(
+              className={cn(
                 'relative z-1 flex size-[25px] shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 group-enabled:group-hover:scale-105',
                 isCompleted
                   ? 'bg-brand-solid'

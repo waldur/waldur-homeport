@@ -15,6 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  StepCard,
 } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -26,7 +27,6 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { NODES_FIELD_ARRAY } from './constants';
 import { RANCHER_NODE_ROLES } from './RANCHER_NODE_ROLES';
@@ -274,12 +274,12 @@ export const FormNodesStep = (props: FormStepProps) => {
   );
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Nodes')}
       id={props.id}
       loading={isLoading || templateLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       className="step-nodes"
     >
       {flavors && flavors.length > 0 ? (
@@ -306,6 +306,6 @@ export const FormNodesStep = (props: FormStepProps) => {
           {translate('Please select a tenant first')}
         </StepCardPlaceholder>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

@@ -43,6 +43,9 @@ import {
   PropertyList,
   Select,
   Tooltip,
+  ProgressStep,
+  ProgressSteps,
+  VerticalProgressSteps,
 } from 'waldur-ui';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
@@ -64,7 +67,6 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useRowsTable } from '@/table/useRowsTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { ProgressStep, ProgressSteps, VerticalProgressSteps } from '@/wizard';
 import { isStaff } from '@/workspace/selectors';
 
 import { FixedHeightTabs } from '../FixedHeightTabs';

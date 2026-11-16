@@ -1,9 +1,10 @@
+import { StepComponentProps } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { TeamSection } from '@/proposals/team/TeamSection';
 import { Proposal, ProposalReview } from '@/proposals/types';
-import { VStepperFormStepProps } from '@/wizard';
 
-export const ReviewTeamStep = (props: VStepperFormStepProps) => {
+export const ReviewTeamStep = (props: StepComponentProps) => {
   const proposal: Proposal = props.params.proposal;
   const onAddCommentClick = props.params?.onAddCommentClick;
   const reviews: ProposalReview[] = props.params?.reviews;
