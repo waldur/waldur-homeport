@@ -103,40 +103,29 @@ const computeStats = (fields: ProfileField[]): TabStats => {
   };
 };
 
-const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
-  if (stats.missingMandatory > 0) {
-    return (
-      <Tooltip
-        label={translate('Missing required fields: {fields}', {
-          fields: stats.missingMandatoryFields.join(', '),
-        })}
-      >
-        <Badge
-          data-testid="tab-badge-danger"
-          variant="danger"
-          size="sm"
-          shape="circle"
-          tone="outline"
-          className="ms-1.5"
-        >
-          {stats.missingMandatory}
-        </Badge>
-      </Tooltip>
-    );
-  }
-  return (
-    <Badge
-      variant="neutral"
-      size="sm"
-      shape="circle"
-      tone="outline"
-      className="ms-1.5"
-      data-testid="tab-badge-total"
+// A tab missing required fields shows a red count, styled as the shared tab
+// count, with a tooltip naming them; otherwise it takes the shared tab count.
+const MissingBadge = ({ stats }: { stats: TabStats }) =>
+  stats.missingMandatory > 0 ? (
+    <Tooltip
+      label={translate('Missing required fields: {fields}', {
+        fields: stats.missingMandatoryFields.join(', '),
+      })}
     >
-      {stats.total}
-    </Badge>
-  );
-};
+      <Badge
+        data-testid="tab-badge-danger"
+        variant="danger"
+        shape="pill"
+        tone="outline"
+        className="ms-1.5 -my-[2px] text-danger"
+      >
+        {stats.missingMandatory}
+      </Badge>
+    </Tooltip>
+  ) : null;
+
+const tabCount = (stats: TabStats) =>
+  stats.missingMandatory > 0 ? undefined : stats.total;
 
 const FieldList = ({
   fields,
@@ -1117,6 +1106,13 @@ export const UserProfileTabs = ({
     [baseCallback, fieldWarnings, confirm],
   );
 
+  const stats = Object.fromEntries(
+    Object.entries(tabFields).map(([key, fields]) => [
+      key,
+      computeStats(fields),
+    ]),
+  ) as Record<keyof typeof tabFields, TabStats>;
+
   return (
     <EditFieldProvider scope={user} callback={handleUpdate}>
       <TabbedSection
@@ -1130,10 +1126,11 @@ export const UserProfileTabs = ({
       >
         <TabbedSection.Tab
           id="basic"
+          count={tabCount(stats.basic)}
           title={
             <>
               {translate('Basic info')}
-              <TabBadge stats={computeStats(tabFields.basic)} tabKey="basic" />
+              <MissingBadge stats={stats.basic} />
             </>
           }
         >
@@ -1142,13 +1139,11 @@ export const UserProfileTabs = ({
         {hasPersonalFields && (
           <TabbedSection.Tab
             id="personal"
+            count={tabCount(stats.personal)}
             title={
               <>
                 {translate('Personal')}
-                <TabBadge
-                  stats={computeStats(tabFields.personal)}
-                  tabKey="personal"
-                />
+                <MissingBadge stats={stats.personal} />
               </>
             }
           >
@@ -1163,13 +1158,11 @@ export const UserProfileTabs = ({
         {hasGeographicFields && (
           <TabbedSection.Tab
             id="geographic"
+            count={tabCount(stats.geographic)}
             title={
               <>
                 {translate('Geographic')}
-                <TabBadge
-                  stats={computeStats(tabFields.geographic)}
-                  tabKey="geographic"
-                />
+                <MissingBadge stats={stats.geographic} />
               </>
             }
           >
@@ -1181,13 +1174,11 @@ export const UserProfileTabs = ({
         )}
         <TabbedSection.Tab
           id="organization"
+          count={tabCount(stats.organization)}
           title={
             <>
               {translate('Affiliation')}
-              <TabBadge
-                stats={computeStats(tabFields.organization)}
-                tabKey="organization"
-              />
+              <MissingBadge stats={stats.organization} />
             </>
           }
         >
@@ -1195,13 +1186,11 @@ export const UserProfileTabs = ({
         </TabbedSection.Tab>
         <TabbedSection.Tab
           id="system"
+          count={tabCount(stats.system)}
           title={
             <>
               {translate('System')}
-              <TabBadge
-                stats={computeStats(tabFields.system)}
-                tabKey="system"
-              />
+              <MissingBadge stats={stats.system} />
             </>
           }
         >
@@ -1210,14 +1199,12 @@ export const UserProfileTabs = ({
         {isVisibleStaffOrSupport && (
           <TabbedSection.Tab
             id="staff"
+            count={tabCount(stats.staff)}
             title={
               <>
                 <StaffOnlyIndicator className="me-1" />
                 {translate('Internal')}
-                <TabBadge
-                  stats={computeStats(tabFields.staff)}
-                  tabKey="staff"
-                />
+                <MissingBadge stats={stats.staff} />
               </>
             }
           >

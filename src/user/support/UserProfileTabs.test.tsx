@@ -514,8 +514,8 @@ describe('UserProfileTabs', () => {
     it('shows light badge with total field count on each tab', () => {
       renderTabs();
 
-      const lightBadges = screen.getAllByTestId('tab-badge-total');
-      expect(lightBadges.length).toBeGreaterThan(0);
+      const basicInfoTab = screen.getByRole('tab', { name: /Basic info/ });
+      expect(within(basicInfoTab).getByText(/^\d+$/)).toBeInTheDocument();
     });
 
     it('shows badge-danger when MANDATORY_USER_ATTRIBUTES config has a missing field', () => {
@@ -679,7 +679,7 @@ describe('UserProfileTabs', () => {
   describe('badge counts match rendered fields', () => {
     const getTabTotal = (name: RegExp) => {
       const tab = screen.getByRole('tab', { name });
-      return within(tab).getByTestId('tab-badge-total').textContent;
+      return within(tab).getByText(/^\d+$/).textContent;
     };
 
     beforeEach(() => {
