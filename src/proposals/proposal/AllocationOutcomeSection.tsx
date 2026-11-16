@@ -451,7 +451,7 @@ const AllocationOutcome: FC<{
         termWidth="sm"
         className={
           project
-            ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-5 text-sm mb-3'
+            ? 'grid grid-cols-[repeat(auto-fit,minmax(max(min(380px,100%),calc((100%_-_20px)/2)),1fr))] gap-x-5 text-sm mb-3'
             : 'grid grid-cols-1 gap-x-5 text-sm mb-3'
         }
       >

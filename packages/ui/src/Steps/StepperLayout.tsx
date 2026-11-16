@@ -26,7 +26,7 @@ const Container: FC<PartProps> = ({ className, ...props }) => (
     className={cn(
       '[--stepper-sticky-top:var(--layout-sticky-top,0px)]',
       '[--stepper-sticky-height:var(--layout-sticky-height,calc(100vh_-_var(--stepper-sticky-top)))]',
-      'flex flex-col xl:flex-row gap-4 pb-8',
+      'flex flex-col page-xl:flex-row gap-4 pb-8',
       className,
     )}
     {...props}
@@ -44,7 +44,10 @@ const Header: FC<PartProps> = ({ className, ...props }) => (
 const Body: FC<PartProps> = ({ className, ...props }) => (
   <div
     data-slot="stepper-layout-body"
-    className={cn('flex flex-col lg:flex-auto lg:min-w-0 gap-4', className)}
+    className={cn(
+      'flex flex-col page-lg:flex-auto page-lg:min-w-0 gap-4',
+      className,
+    )}
     {...props}
   />
 );
@@ -52,15 +55,20 @@ const Body: FC<PartProps> = ({ className, ...props }) => (
 /**
  * The side column: 10px below the sticky top, as tall as the space left
  * there, scrolling its own overflow; 300px wide from xl, 350px past 1650px.
- * Below xl it is a full-width block as tall as its content.
+ * Below xl it is a full-width block as tall as its content. The widths are
+ * the page's, not the window's (the `page-*` variants): beside a docked
+ * drawer the side column goes under the body as on a narrower window.
  */
 const Aside: FC<PartProps> = ({ className, children, ...props }) => (
   <div
     data-slot="stepper-layout-aside"
     className={cn(
       'sticky z-95 w-full shrink-0',
-      'top-[calc(var(--stepper-sticky-top)+10px)] h-[calc(var(--stepper-sticky-height)-10px)] max-xl:h-auto',
-      'xl:flex xl:w-[300px] xl:overflow-auto xl:bottom-0 xl:right-0 min-[1651px]:w-[350px]',
+      'top-[calc(var(--stepper-sticky-top)+10px)] h-[calc(var(--stepper-sticky-height)-10px)] page-max-xl:h-auto',
+      'page-xl:flex page-xl:overflow-auto page-xl:bottom-0 page-xl:right-0',
+      // Both widths in one family of container query, so that the wider one
+      // comes later in the stylesheet and wins past 1650px.
+      '@min-[1200px]/page:w-[300px] @min-[1651px]/page:w-[350px]',
       className,
     )}
     {...props}

@@ -168,11 +168,22 @@ export const TERM_WIDTH_PRESETS: Record<TermWidthPreset, string> = {
   xl: '18rem', // 288px
 };
 
+/** A term width that is a fixed length (a preset, `150px`, `12rem`). */
+const FIXED_LENGTH = /^\d+(\.\d+)?(px|rem|em)$/;
+
+/**
+ * The term track's width. A fixed length is capped at 45% of the row, so
+ * that in a narrow row -- a column of a two-column list, a page beside a
+ * docked drawer -- the value keeps room instead of wrapping letter by letter;
+ * a wide row keeps the full width. Anything else (a percentage, `auto`,
+ * `fit-content(...)`) is passed through as is: `min()` takes lengths only.
+ */
 export const resolveTermWidth = (
   width?: TermWidthPreset | string,
 ): string | undefined => {
   if (!width) return undefined;
-  return TERM_WIDTH_PRESETS[width as TermWidthPreset] ?? width;
+  const resolved = TERM_WIDTH_PRESETS[width as TermWidthPreset] ?? width;
+  return FIXED_LENGTH.test(resolved) ? `min(${resolved}, 45%)` : resolved;
 };
 
 /** The value a row renders: `value`, or `children` when it has no value. */

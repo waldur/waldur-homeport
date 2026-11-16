@@ -65,4 +65,11 @@
   body {
     container: page / inline-size;
   }
+
+  /* The width of a drawer docked beside the page, which homeport's page
+     region is padded by (src/navigation/Layout.tsx). The drawer sets it on
+     <html> while it sits beside the page; none docked, 0. */
+  :root {
+    --layout-docked-drawer-width: 0px;
+  }
 }
