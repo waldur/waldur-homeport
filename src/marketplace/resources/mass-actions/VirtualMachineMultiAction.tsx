@@ -36,7 +36,13 @@ export const VirtualMachineMultiAction = ({
         (resource) =>
           !parseValidators(validators, {
             user,
-            resource: resource.backend_metadata,
+            // backend_metadata carries the VM state but not its scope, which
+            // the power-permission validator needs for non-staff users.
+            resource: {
+              ...resource.backend_metadata,
+              project_uuid: resource.project_uuid,
+              customer_uuid: resource.customer_uuid,
+            },
           }),
       ),
     [vms, user, validators],
