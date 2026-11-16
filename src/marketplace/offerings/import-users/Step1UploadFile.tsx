@@ -2,6 +2,8 @@ import Papa from 'papaparse';
 import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { formatFilesize } from '@/core/utils';
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
@@ -10,7 +12,6 @@ import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
 import saveAsCsv, { toCsv } from '@/table/exporters/csv';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import templateFile from './offering_users_template.json';
 

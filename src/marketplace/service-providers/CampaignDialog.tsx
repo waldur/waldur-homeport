@@ -8,7 +8,8 @@ import {
   promotionsCampaignsUpdate,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, ProgressStep } from 'waldur-ui';
+import { WizardStepIndicator } from 'waldur-wizard';
 
 import { required, requiredArray } from '@/core/validators';
 import {
@@ -25,7 +26,6 @@ import { providerOfferingsAutocomplete } from '@/marketplace/common/autocomplete
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, WizardStepIndicator } from '@/wizard';
 import { useCustomer } from '@/workspace/hooks';
 
 import { CampaignFormData } from './types';

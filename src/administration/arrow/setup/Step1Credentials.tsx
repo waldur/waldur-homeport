@@ -2,12 +2,12 @@ import { FC, useState } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 
 import { AlertItem } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { url, required } from '@/core/validators';
 import { SubmitButton, StringGroup, SecretGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { useValidateArrowCredentials } from '../api';
 import type { ArrowSetupFormValues } from '../types';

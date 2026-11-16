@@ -3,12 +3,13 @@ import { FC, useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { proposalProtectedCallsOfferingsList } from 'waldur-js-client';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const getOfferings = (call_uuid: string) =>
   getAllPages((page) =>

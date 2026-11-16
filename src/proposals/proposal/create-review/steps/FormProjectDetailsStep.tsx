@@ -1,8 +1,9 @@
+import { StepComponentProps } from 'waldur-wizard';
+
 import { ProjectDetailsSummary } from '@/proposals/proposal/create/ProjectDetailsSummary';
 import { Proposal, ProposalReview } from '@/proposals/types';
-import { VStepperFormStepProps } from '@/wizard';
 
-export const FormProjectDetailsStep = (props: VStepperFormStepProps) => {
+export const FormProjectDetailsStep = (props: StepComponentProps) => {
   const proposal: Proposal = props.params?.proposal;
   const reviews: ProposalReview[] = props.params?.reviews;
   const onAddCommentClick = props.params?.onAddCommentClick;

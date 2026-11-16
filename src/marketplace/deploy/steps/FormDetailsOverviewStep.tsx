@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import { PropertyItem, PropertyList, StepCard } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { Image } from '@/core/Image';
@@ -8,7 +8,6 @@ import { translate } from '@/i18n';
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
 import { CustomerField } from '@/marketplace/details/CustomerField';
 import { ProjectField } from '@/marketplace/details/ProjectField';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { DetailsOverviewButton } from '../DetailsOverviewButton';
 import { useOrderFormData } from '../selectors';
@@ -36,7 +35,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
   if (props.offering.shared) {
     // Render with organization and project fields
     return (
-      <VStepperFormStepCard
+      <StepCard
         title={translate('General information')}
         id={props.id}
         disabled={props.disabled}
@@ -91,12 +90,12 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             />
           </div>
         </div>
-      </VStepperFormStepCard>
+      </StepCard>
     );
   }
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Details overview')}
       id={props.id}
       actions={
@@ -137,6 +136,6 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           hideIfEmpty={false}
         />
       </PropertyList>
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

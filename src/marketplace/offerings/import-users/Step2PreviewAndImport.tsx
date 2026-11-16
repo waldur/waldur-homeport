@@ -9,6 +9,7 @@ import {
 
 import { BadgeVariant, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { truncate } from '@/core/utils';
 import { deleteDuplicateRecords } from '@/customer/import/utils';
@@ -21,7 +22,6 @@ import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { OfferingUserRecord, RecordStatus } from './types';
 import { parseOfferingUsersFile, validateOfferingUserCreation } from './utils';

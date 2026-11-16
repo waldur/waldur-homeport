@@ -9,10 +9,12 @@ import {
   UserRequest,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, Wizard } from '@/wizard';
 import { useUser, useSetUser } from '@/workspace/hooks';
 
 import { parseGender } from './aai-constants';

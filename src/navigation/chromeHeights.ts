@@ -26,6 +26,8 @@ export interface ChromeHeights {
  *   stick below it and the header.
  * - `--layout-sticky-top`: below everything that sticks, for sticky page
  *   content such as a form's or a category list's sidebar.
+ * The window scrolls, so the visible height below it is `100vh` less this,
+ * which is waldur-ui StepperLayout's default for `--layout-sticky-height`.
  */
 export const getChromeVariables = ({
   pageBar,

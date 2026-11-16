@@ -10,6 +10,7 @@
   "packages/ui/src/Sidebar/SidebarMenuSub.tsx": 1,
   "packages/ui/src/Sidebar/SidebarProvider.tsx": 1,
   "packages/ui/src/StatCard/StatCard.tsx": 3,
+  "packages/ui/src/Steps/VerticalProgressSteps.tsx": 4,
   "packages/ui/src/Tabs/tabStyles.ts": 1,
   "packages/ui/src/Toast/Toast.tsx": 1,
   "packages/ui/src/TopBar/TopBar.tsx": 3,
@@ -49,7 +50,6 @@
   "src/drawer/DrawerRoot.tsx": 9,
   "src/form/ImageField.scss": 4,
   "src/form/MarkdownEditor.scss": 1,
-  "src/form/SidebarLayout.scss": 2,
   "src/form/TabbedSection.tsx": 1,
   "src/marketplace/category/HeroSection.scss": 3,
   "src/marketplace/deploy/steps/BoxRadioField.scss": 5,
@@ -92,7 +92,5 @@
   "src/tailwind.css": 3,
   "src/user/dashboard/UserProfileHero.tsx": 1,
   "src/user/OfferingUsersWarningBar.scss": 2,
-  "src/user/organization-create/OrganizationReviewStatus.scss": 2,
-  "src/wizard/VerticalProgressSteps.tsx": 4,
-  "src/wizard/wizard.scss": 3
+  "src/user/organization-create/OrganizationReviewStatus.scss": 2
 }

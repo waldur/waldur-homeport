@@ -4,6 +4,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
 import { FormField, FormLabel } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
@@ -15,7 +16,6 @@ import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes'
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
   const categoriesQuery = useQuery({

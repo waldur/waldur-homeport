@@ -7,6 +7,9 @@ import {
   ResourceRenewRequest,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
+
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -16,7 +19,6 @@ import {
   getFormLimitSerializer,
 } from '@/marketplace/common/registry';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import { ProgressStep, Wizard } from '@/wizard';
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
 

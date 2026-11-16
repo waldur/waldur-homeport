@@ -4,16 +4,17 @@ import { useState } from 'react';
 import { Form } from 'react-final-form';
 import { remoteWaldurApiImportOffering } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
-import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/notify';
 import {
   WizardButtons,
   WizardStepIndicator,
   WizardTabs,
   useWizard,
-} from '@/wizard';
+} from 'waldur-wizard';
+
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/notify';
 import { useCustomer } from '@/workspace/hooks';
 
 import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';

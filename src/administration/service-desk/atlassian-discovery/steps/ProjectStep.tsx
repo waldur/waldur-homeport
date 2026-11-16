@@ -3,12 +3,19 @@ import { FC, useState, useEffect } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Card, CardContent, Radio } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  Card,
+  CardContent,
+  Radio,
+  StepLoading,
+} from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { AtlassianFormValues, extractCredentials } from '../types';
 

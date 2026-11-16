@@ -6,6 +6,9 @@ import {
   proposalProposalsAwardedResourcesSet,
 } from 'waldur-js-client';
 
+import { ProgressStep } from 'waldur-ui';
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -15,7 +18,6 @@ import {
 } from '@/proposals/awardedResources';
 import { Proposal } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { ResourceRequestWizardFormFirstPage } from './create/resource-requests-step/ResourceRequestWizardFormFirstPage';
 import { ResourceRequestWizardFormSecondPage } from './create/resource-requests-step/ResourceRequestWizardFormSecondPage';

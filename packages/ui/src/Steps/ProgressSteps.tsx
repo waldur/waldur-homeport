@@ -1,7 +1,7 @@
 import { CheckIcon, CircleIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import { cn } from 'waldur-ui';
+import { cn } from '../cn';
 
 type Variant =
   | 'primary'

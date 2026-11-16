@@ -4,6 +4,7 @@ import { Field } from 'react-final-form';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
 import { AccordionCard, FormText } from 'waldur-ui';
+import { StepComponentProps } from 'waldur-wizard';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -16,7 +17,6 @@ import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { getVisibleQuestions } from '@/marketplace-checklist/questionDependencies';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { useNotify } from '@/store/notify';
-import { VStepperFormStepProps } from '@/wizard';
 
 import { isComplianceAnswerFilled } from './complianceUtils';
 import { QuestionDependencyHint } from './QuestionDependencyHint';
@@ -54,7 +54,7 @@ const BOOLEAN_OPTIONS = [
   { value: false, label: translate('No') },
 ];
 
-export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
+export const ProposalComplianceStepExpanded: FC<StepComponentProps> = (
   props,
 ) => {
   const proposal = props.params?.proposal;

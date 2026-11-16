@@ -1,17 +1,18 @@
+import { StepCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { FormSSHPublicKeysField } from '@/openstack/openstack-instance/deploy/FormSSHPublicKeysField';
-import { VStepperFormStepCard } from '@/wizard';
 
 export const FormSSHPublicKeysStep = (props: FormStepProps) => {
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('SSH public keys')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <FormSSHPublicKeysField />
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

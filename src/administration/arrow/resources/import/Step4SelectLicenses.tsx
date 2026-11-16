@@ -3,12 +3,12 @@ import { useFormState } from 'react-final-form';
 import { ArrowLicense } from 'waldur-js-client';
 
 import { AlertItem, Badge } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { useDiscoverLicenses } from '../../api';
 

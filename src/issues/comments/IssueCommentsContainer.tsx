@@ -8,11 +8,11 @@ import {
   CardHeader,
   CardTitle,
   CardToolbar,
+  RefreshIconButton,
 } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
 import { ISSUE_COMMENTS_QUERY_KEY } from './constants';
 import { IssueCommentButton } from './IssueCommentButton';
@@ -48,7 +48,7 @@ export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
         <CardHeader>
           <CardTitle as="div">
             <span className="me-1.5">{translate('Comments')}</span>
-            <RefreshButton refetch={refetch} loading={isLoading} />
+            <RefreshIconButton refetch={refetch} loading={isLoading} />
           </CardTitle>
           <CardToolbar>
             <IssueCommentButton />

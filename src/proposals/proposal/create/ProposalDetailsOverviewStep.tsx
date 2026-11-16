@@ -1,7 +1,8 @@
 import { ClipboardTextIcon, EyeIcon } from '@phosphor-icons/react';
 import { ProposalWorkflowStepInstance } from 'waldur-js-client';
 
-import { BaseButton, PropertyItem, PropertyList } from 'waldur-ui';
+import { BaseButton, PropertyItem, PropertyList, StepCard } from 'waldur-ui';
+import { StepComponentProps } from 'waldur-wizard';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -17,7 +18,6 @@ import {
 } from '@/proposals/ProjectDurationNote';
 import { isOpenEnded } from '@/proposals/roundCutoff';
 import { Proposal } from '@/proposals/types';
-import { VStepperFormStepCard, VStepperFormStepProps } from '@/wizard';
 
 import { isReviewStep } from '../reviewStage';
 
@@ -76,7 +76,7 @@ const ReviewsButton = ({ proposal, workflowStates, forApplicant }) => {
   );
 };
 
-export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
+export const ProposalDetailsOverviewStep = (props: StepComponentProps) => {
   const proposal: Proposal = props.params.proposal;
   // Only surfaced where reviews are relevant (call-manager proposal view); the
   // backend also scopes review visibility.
@@ -93,7 +93,7 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
     props.params.reviews?.length > 0;
   const projectDuration = useProjectDuration(proposal);
   return (
-    <VStepperFormStepCard
+    <StepCard
       id={props.id}
       title={translate('Details overview')}
       actions={
@@ -164,6 +164,6 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
           />
         )}
       </PropertyList>
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

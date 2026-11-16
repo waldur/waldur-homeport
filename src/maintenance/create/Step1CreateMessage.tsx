@@ -7,6 +7,8 @@ import {
   maintenanceAnnouncementTemplateOfferingsList,
 } from 'waldur-js-client';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -20,7 +22,6 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { MaintenanceForm } from '../types';
 import { getMaintenanceOfferingFormFields, validateWindow } from '../utils';

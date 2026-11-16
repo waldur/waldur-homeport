@@ -13,7 +13,13 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { BaseButton, Card, CardContent } from 'waldur-ui';
+import {
+  BaseButton,
+  Card,
+  CardContent,
+  ProgressSteps,
+  VerticalProgressSteps,
+} from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { omit } from '@/core/utils';
@@ -24,7 +30,6 @@ import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { ProgressSteps, VerticalProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { formatTimelineEntry } from './utils';

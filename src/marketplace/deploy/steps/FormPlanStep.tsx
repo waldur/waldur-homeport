@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { StepCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { OrderSummaryButton } from '@/marketplace/details/OrderSummaryButton';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
@@ -7,7 +9,6 @@ import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { PlanSpendingLimits } from '@/marketplace/details/plan/PlanSpendingLimits';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 import { getOrderablePlans } from '@/marketplace/offerings/details/planPricing';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
@@ -26,18 +27,18 @@ export const FormPlanStep = (props: FormStepProps) => {
     return null;
   }
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Plan')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         !props.previewMode && (
           <OrderSummaryButton
             offering={props.offering}
             className="ms-auto"
             disabled={props.disabled}
-            disabledReason={props.disabledTooltip}
+            disabledReason={props.disabledReason}
           />
         )
       }
@@ -54,6 +55,6 @@ export const FormPlanStep = (props: FormStepProps) => {
         readOnlyLimits={props.params?.readOnlyLimits}
       />
       <PlanSpendingLimits offering={props.offering} />
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

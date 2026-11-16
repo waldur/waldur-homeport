@@ -23,7 +23,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  StepLoading,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
@@ -32,7 +34,6 @@ import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { renderFieldOrDash } from '@/table/utils';
-import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
 

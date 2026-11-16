@@ -8,46 +8,47 @@ The application features a comprehensive set of reusable UI components organized
 
 ### Tables and Data Display
 
-| Component               | Location                            | Description                | Key Features                                                |
-| ----------------------- | ----------------------------------- | -------------------------- | ----------------------------------------------------------- |
+| Component               | Location                                     | Description                | Key Features                                                |
+| ----------------------- | -------------------------------------------- | -------------------------- | ----------------------------------------------------------- |
 | **Table**               | `packages/table/src/Table.tsx`               | Main table component       | Filtering, sorting, pagination, column visibility, export   |
 | **ActionsDropdown**     | `packages/table/src/ActionsDropdown.tsx`     | Dropdown for table actions | Row actions with `ActionItem`; a wrapper over `ActionsMenu` |
 | **ExpandableContainer** | `packages/table/src/ExpandableContainer.tsx` | Collapsible row details    | Table row expansion, detail views                           |
-| **TablePagination**     | `waldur-ui`                         | Pagination controls        | Page navigation, size selection                             |
+| **TablePagination**     | `waldur-ui`                                  | Pagination controls        | Page navigation, size selection                             |
 
 ### Menus and Popovers
 
-| Component       | Location                              | Description                          | Key Features                                                                                    |
-| --------------- | ------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| **Menu**        | `packages/ui/src/Menu/` (`waldur-ui`) | Every dropdown menu                  | `nav` and `actions` looks, `density` / `tone` on the panel, submenus, radio rows, `openOnHover` |
-| **MenuPopover** | `packages/ui/src/Menu/` (`waldur-ui`) | Menu surface for panels with inputs  | Filter and picker popovers with menu rows, `forceMount`; panels with no rows use `Popover`      |
-| **ActionsMenu** | `packages/table/src/ActionsDropdown.tsx`       | Action menu with its trigger         | Kebab, labeled, "Add" or custom toggle; `actions-menu` / `action-item` test ids                 |
-| **ActionItem**  | `src/resource/actions/ActionItem.tsx` | An action row                        | Icon, tooltip, staff indicator; filtered by `ActionList`                                        |
-| **NavMenuLink** | `src/navigation/NavMenu.tsx`          | A nav menu row that is a router link | ui-router `state`/`params`                                                                      |
+| Component       | Location                                 | Description                          | Key Features                                                                                    |
+| --------------- | ---------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| **Menu**        | `packages/ui/src/Menu/` (`waldur-ui`)    | Every dropdown menu                  | `nav` and `actions` looks, `density` / `tone` on the panel, submenus, radio rows, `openOnHover` |
+| **MenuPopover** | `packages/ui/src/Menu/` (`waldur-ui`)    | Menu surface for panels with inputs  | Filter and picker popovers with menu rows, `forceMount`; panels with no rows use `Popover`      |
+| **ActionsMenu** | `packages/table/src/ActionsDropdown.tsx` | Action menu with its trigger         | Kebab, labeled, "Add" or custom toggle; `actions-menu` / `action-item` test ids                 |
+| **ActionItem**  | `src/resource/actions/ActionItem.tsx`    | An action row                        | Icon, tooltip, staff indicator; filtered by `ActionList`                                        |
+| **NavMenuLink** | `src/navigation/NavMenu.tsx`             | A nav menu row that is a router link | ui-router `state`/`params`                                                                      |
 
 See the [menus guide](menus.md) for when to use which, recipes and how the looks work.
 
 ### Forms and Input Components
 
-| Component                            | Location                          | Description            | Key Features                                                                      |
-| ------------------------------------ | --------------------------------- | ---------------------- | --------------------------------------------------------------------------------- |
-| **WizardForm**                       | `src/wizard/WizardForm.tsx`       | Multi-step form wizard | Step navigation, validation, progress indicator                                   |
-| **VStepperFormStepCard**             | `src/wizard/VStepperFormStep.tsx` | Card-based form step   | Loading state, disabled state with tooltip                                        |
-| **Checkbox / Radio / Switch**        | `waldur-ui`                       | Check controls         | `label`/`description`/`tooltip` props, `md`/`sm`, `checked` + `onCheckedChange`   |
-| **RadioGroup**                       | `waldur-ui`                       | Set of radio options   | Options in, value out; fieldset + legend, `orientation`                           |
-| **Input / Textarea**                 | `waldur-ui`                       | Text controls          | Native props + ref, `invalid` (sets `aria-invalid`), `solid`, `md`/`sm` in px     |
-| **InputGroup**                       | `waldur-ui`                       | Adornments in a field  | `start` / `end` nodes, `invalid` icon, `align`; measures them so padding fits     |
-| **NumberInput / SecretInput**        | `waldur-ui`                       | Number, secret inputs  | Steppers + unit + clamp on blur; show/hide button                                 |
-| **RangeInput**                       | `waldur-ui`                       | Range slider           | Token-coloured track filled to the thumb                                          |
-| **FormField / FormLabel / FormText** | `waldur-ui`                       | Field, label, help     | `controlId` links label and control; `required`; `as="td"`                        |
-| **NativeSelect**                     | `waldur-ui`                       | Browser `<select>`     | `<option>` children, `sm`/`md`/`lg`, `fit`, caret icon; `Select` for search/multi |
-| **SelectField**                      | `src/form/SelectField.tsx`        | Dropdown selection     | Options, search, validation                                                       |
-| **StringField**                      | `src/form/StringField.tsx`        | Text input field       | RFF adapter over `Input`; validation, placeholder, leading `icon`                 |
-| **NumberField**                      | `src/form/NumberField.tsx`        | Numeric input          | Min/max validation, step control                                                  |
-| **DateField**                        | `src/form/DateField.tsx`          | Date picker            | Date selection, validation                                                        |
-| **FileUploadField**                  | `src/form/FileUploadField.tsx`    | File upload            | Drag & drop, validation                                                           |
-| **MarkdownEditor**                   | `src/form/MarkdownEditor.tsx`     | Markdown editor        | Preview, syntax highlighting                                                      |
-| **SecretField**                      | `src/form/SecretField.tsx`        | Password/secret input  | Show/hide toggle, validation                                                      |
+| Component                            | Location                       | Description            | Key Features                                                                      |
+| ------------------------------------ | ------------------------------ | ---------------------- | --------------------------------------------------------------------------------- |
+| **WizardForm**                       | `waldur-wizard`                | Multi-step form wizard | Step navigation, validation, progress indicator                                   |
+| **StepCard / StepLock**              | `waldur-ui`                    | Card-based form step   | Loading state; `disabled` locks the step (`inert`) and shows `disabledReason`     |
+| **StepNav**                          | `waldur-ui`                    | Side nav of form steps | A status per step (`locked`/`error`/`warning`/`complete`/`required`), scroll spy  |
+| **Checkbox / Radio / Switch**        | `waldur-ui`                    | Check controls         | `label`/`description`/`tooltip` props, `md`/`sm`, `checked` + `onCheckedChange`   |
+| **RadioGroup**                       | `waldur-ui`                    | Set of radio options   | Options in, value out; fieldset + legend, `orientation`                           |
+| **Input / Textarea**                 | `waldur-ui`                    | Text controls          | Native props + ref, `invalid` (sets `aria-invalid`), `solid`, `md`/`sm` in px     |
+| **InputGroup**                       | `waldur-ui`                    | Adornments in a field  | `start` / `end` nodes, `invalid` icon, `align`; measures them so padding fits     |
+| **NumberInput / SecretInput**        | `waldur-ui`                    | Number, secret inputs  | Steppers + unit + clamp on blur; show/hide button                                 |
+| **RangeInput**                       | `waldur-ui`                    | Range slider           | Token-coloured track filled to the thumb                                          |
+| **FormField / FormLabel / FormText** | `waldur-ui`                    | Field, label, help     | `controlId` links label and control; `required`; `as="td"`                        |
+| **NativeSelect**                     | `waldur-ui`                    | Browser `<select>`     | `<option>` children, `sm`/`md`/`lg`, `fit`, caret icon; `Select` for search/multi |
+| **SelectField**                      | `src/form/SelectField.tsx`     | Dropdown selection     | Options, search, validation                                                       |
+| **StringField**                      | `src/form/StringField.tsx`     | Text input field       | RFF adapter over `Input`; validation, placeholder, leading `icon`                 |
+| **NumberField**                      | `src/form/NumberField.tsx`     | Numeric input          | Min/max validation, step control                                                  |
+| **DateField**                        | `src/form/DateField.tsx`       | Date picker            | Date selection, validation                                                        |
+| **FileUploadField**                  | `src/form/FileUploadField.tsx` | File upload            | Drag & drop, validation                                                           |
+| **MarkdownEditor**                   | `src/form/MarkdownEditor.tsx`  | Markdown editor        | Preview, syntax highlighting                                                      |
+| **SecretField**                      | `src/form/SecretField.tsx`     | Password/secret input  | Show/hide toggle, validation                                                      |
 
 ### Button Components
 
@@ -278,7 +279,7 @@ export const MyEditButton = ({ row, refetch }) => (
 | **CopyToClipboard**       | `src/core/CopyToClipboard.tsx`        | Copy functionality | Click to copy, success feedback |
 | **CopyToClipboardButton** | `src/core/CopyToClipboardButton.tsx`  | Copy button        | Icon button, tooltip            |
 | **Tooltip**               | `packages/ui/src/Tooltip/Tooltip.tsx` | Tooltip wrapper    | Help text, positioning          |
-| **ProgressSteps**         | `src/wizard/ProgressSteps.tsx`        | Step indicator     | Multi-step processes, progress  |
+| **ProgressSteps**         | `waldur-ui`                           | Step indicator     | Multi-step processes, progress  |
 
 ## Component Design Principles
 
@@ -326,7 +327,8 @@ interface DeployPageProps {
 ### Step Definition Structure
 
 ```js
-interface VStepperFormStep<T = VStepperFormStepProps> {
+// StepDefinition, from waldur-wizard
+interface StepDefinition<T = StepComponentProps> {
   label: string;                    // Display name
   id: string;                      // Unique identifier
   component: React.ComponentType<T>; // React component to render

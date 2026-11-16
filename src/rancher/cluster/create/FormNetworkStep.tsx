@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useForm } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, StepCard } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
@@ -12,7 +12,6 @@ import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { formatSubnets, useFormTenant } from './utils';
 
@@ -34,12 +33,12 @@ export const FormNetworkStep = (props: FormStepProps) => {
   }, [data, form]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Network')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         showExperimentalUiComponents ? (
           <div className="flex justify-end grow">
@@ -70,6 +69,6 @@ export const FormNetworkStep = (props: FormStepProps) => {
           {translate('Please select a tenant first')}
         </StepCardPlaceholder>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

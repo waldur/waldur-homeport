@@ -158,7 +158,7 @@ export const ProposalReviewCreatePage = () => {
                   </div>
                 ))}
               </SidebarLayout.Body>
-              <SidebarLayout.Sidebar transparent>
+              <SidebarLayout.Sidebar>
                 <CreatePageSidebar
                   steps={formSteps}
                   review={reviewObject}

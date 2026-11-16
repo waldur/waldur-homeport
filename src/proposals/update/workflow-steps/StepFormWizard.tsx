@@ -7,10 +7,10 @@ import { FormApi } from 'final-form';
 import { FC, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, ProgressStep } from 'waldur-ui';
+import { WizardStepIndicator } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
-import { ProgressStep, WizardStepIndicator } from '@/wizard';
 
 import {
   pagesWithErrors,

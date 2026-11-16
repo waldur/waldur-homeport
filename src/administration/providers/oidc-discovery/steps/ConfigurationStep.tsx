@@ -3,12 +3,12 @@ import { FC, useEffect } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { AlertItem, BaseButton } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
 import { BooleanGroup, FormGroup, StringGroup } from '@/form';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { OidcFormValues } from '../types';
 

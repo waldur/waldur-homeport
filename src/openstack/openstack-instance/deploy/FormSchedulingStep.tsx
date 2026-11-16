@@ -1,5 +1,4 @@
 import { XIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-final-form';
 import {
@@ -7,7 +6,7 @@ import {
   openstackServerGroupsList,
 } from 'waldur-js-client';
 
-import { AccordionCard, BaseButton, Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip, StepAccordionCard } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -60,64 +59,61 @@ export const FormSchedulingStep = (props: FormStepProps) => {
   }
 
   return (
-    <Tooltip label={props.disabledTooltip}>
-      <span>
-        <AccordionCard
-          title={translate('Scheduling')}
-          subtitle={translate(
-            'Server groups control how instances are placed on physical hosts.',
-          )}
-          id={props.id}
-          className={classNames('step-card', props.disabled && 'step-disabled')}
-        >
-          <Table<OpenStackServerGroup>
-            {...tableProps}
-            className="-mt-3"
-            columns={[
-              {
-                title: translate('Name'),
-                render: ({ row }) => row.name,
-              },
-              {
-                title: translate('Policy'),
-                render: ({ row }) => {
-                  if (!row.policy) return DASH_ESCAPE_CODE;
-                  const tooltip = policyTooltips[row.policy];
-                  return tooltip ? (
-                    <Tooltip label={tooltip}>
-                      <span style={{ borderBottom: '1px dotted currentColor' }}>
-                        {row.policy}
-                      </span>
-                    </Tooltip>
-                  ) : (
-                    row.policy
-                  );
-                },
-              },
-            ]}
-            title={translate('Server group')}
-            verboseName={translate('server groups')}
-            tableActions={
-              serverGroup ? (
-                <BaseButton
-                  onClick={clearSelection}
-                  label={translate('Clear')}
-                  iconNode={<XIcon weight="bold" />}
-                  variant="text-primary"
-                  size="lg"
-                />
-              ) : null
-            }
-            hoverable
-            fieldType="radio"
-            fieldName="attributes.server_group"
-            cardBordered={false}
-            minHeight="auto"
-            headerClassName="mx-0"
-            titleClassName="text-sm text-secondary"
-          />
-        </AccordionCard>
-      </span>
-    </Tooltip>
+    <StepAccordionCard
+      disabled={props.disabled}
+      disabledReason={props.disabledReason}
+      title={translate('Scheduling')}
+      subtitle={translate(
+        'Server groups control how instances are placed on physical hosts.',
+      )}
+      id={props.id}
+    >
+      <Table<OpenStackServerGroup>
+        {...tableProps}
+        className="-mt-3"
+        columns={[
+          {
+            title: translate('Name'),
+            render: ({ row }) => row.name,
+          },
+          {
+            title: translate('Policy'),
+            render: ({ row }) => {
+              if (!row.policy) return DASH_ESCAPE_CODE;
+              const tooltip = policyTooltips[row.policy];
+              return tooltip ? (
+                <Tooltip label={tooltip}>
+                  <span style={{ borderBottom: '1px dotted currentColor' }}>
+                    {row.policy}
+                  </span>
+                </Tooltip>
+              ) : (
+                row.policy
+              );
+            },
+          },
+        ]}
+        title={translate('Server group')}
+        verboseName={translate('server groups')}
+        tableActions={
+          serverGroup ? (
+            <BaseButton
+              onClick={clearSelection}
+              label={translate('Clear')}
+              iconNode={<XIcon weight="bold" />}
+              variant="text-primary"
+              size="lg"
+            />
+          ) : null
+        }
+        hoverable
+        fieldType="radio"
+        fieldName="attributes.server_group"
+        cardBordered={false}
+        minHeight="auto"
+        headerClassName="mx-0"
+        titleClassName="text-sm text-secondary"
+      />
+    </StepAccordionCard>
   );
 };

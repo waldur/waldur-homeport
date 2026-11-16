@@ -4,12 +4,12 @@ import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { NativeSelect, PropertyList, PropertyItem } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';

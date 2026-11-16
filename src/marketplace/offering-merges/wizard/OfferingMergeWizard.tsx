@@ -16,13 +16,15 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  ProgressStep,
+  VerticalProgressSteps,
 } from 'waldur-ui';
+import { WIZARD_VERTICAL_BODY_CLASSNAME } from 'waldur-wizard';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProgressStep, VerticalProgressSteps } from '@/wizard';
 
 import {
   LIST_PARAMS,
@@ -51,8 +53,6 @@ import { MappingStep } from './MappingStep';
 import { PreviewStep } from './PreviewStep';
 import { RunStep } from './RunStep';
 import { getSelectionTypes, MergeSelection, SelectStep } from './SelectStep';
-
-import '@/wizard/wizard.scss';
 
 const STEP_SELECT = 0;
 const STEP_PREVIEW = 4;
@@ -466,7 +466,7 @@ export const OfferingMergeWizard: FC = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-5.5">
+        <div className="flex flex-col lg:flex-row gap-5.5">
           <div className="shrink-0 w-70">
             <VerticalProgressSteps
               steps={steps}
@@ -482,7 +482,7 @@ export const OfferingMergeWizard: FC = () => {
                 )}
               </p>
             )}
-            <div className="wizard-body-vertical">{renderStep()}</div>
+            <div className={WIZARD_VERTICAL_BODY_CLASSNAME}>{renderStep()}</div>
             <div className="flex justify-between mt-4 pt-4 border-t border-t-secondary">
               <BaseButton
                 label={translate('Back')}

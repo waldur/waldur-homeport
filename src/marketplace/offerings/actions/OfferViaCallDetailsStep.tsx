@@ -3,6 +3,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { callManagingOrganisationsList } from 'waldur-js-client';
 
 import { Badge, PropertyList, PropertyItem } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -10,7 +11,6 @@ import { required } from '@/core/validators';
 import { AsyncSelectGroup, DateGroup, SelectGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 const loadOrganizations = organizationAutocomplete({
   field: ['name', 'uuid', 'abbreviation'],

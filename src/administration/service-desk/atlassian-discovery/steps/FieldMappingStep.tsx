@@ -6,12 +6,12 @@ import {
   supportSettingsAtlassianDiscoverPriorities,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, StepLoading } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { StepLoading, WizardModal, WizardStepProps } from '@/wizard';
 
 import { AtlassianFormValues, extractCredentials } from '../types';
 

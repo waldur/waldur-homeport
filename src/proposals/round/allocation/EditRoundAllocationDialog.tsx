@@ -6,6 +6,8 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
+import { WizardFormContainer } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -17,7 +19,6 @@ import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
 } from '@/proposals/workflow/queries';
-import { WizardFormContainer } from '@/wizard';
 
 interface EditRoundAllocationDialogProps {
   resolve: {

@@ -6,13 +6,12 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, StepCard } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { nextId } from '@/core/nextId';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { BookingProps } from '../types';
 import {
@@ -140,12 +139,12 @@ export const FormPeriodsStep = (props: FormStepProps) => {
   });
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Periods')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <FieldArray
         name="attributes.schedules"
@@ -153,6 +152,6 @@ export const FormPeriodsStep = (props: FormStepProps) => {
         availableSchedules={props.offering.attributes['schedules'] || []}
         bookedItems={bookedItems}
       />
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

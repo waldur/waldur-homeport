@@ -6,14 +6,14 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, ProgressStep } from 'waldur-ui';
+import { Wizard, WizardFooterRenderProps } from 'waldur-wizard';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ProgressStep, Wizard, WizardFooterRenderProps } from '@/wizard';
 
 import { MessageStep, RecipientsStep } from './steps';
 import { BroadcastFormData } from './types';

@@ -4,6 +4,7 @@ import { useToggle } from 'react-use';
 import { Customer } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
@@ -12,7 +13,6 @@ import { createClientPaginatedFetcher } from '@/table/api';
 import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import {
   deleteDuplicateRecords,

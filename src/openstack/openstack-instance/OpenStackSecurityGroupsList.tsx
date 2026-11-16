@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
   CardToolbar,
+  RefreshIconButton,
 } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -19,7 +20,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 import { TablePlaceholder } from '@/table/TablePlaceholder';
 
 import { OpenStackSecurityGroupsTable } from '../openstack-security-groups/OpenStackSecurityGroupsDialog';
@@ -100,7 +100,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
       <CardHeader>
         <CardTitle as="div">
           <span className="me-1.5">{translate('Security groups details')}</span>
-          <RefreshButton
+          <RefreshIconButton
             refetch={activeKey === 'resource' ? props.refetch : refetchPort}
             loading={props.isLoading || isRefetchingPort}
           />

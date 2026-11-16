@@ -9,7 +9,7 @@ vi.mock('@/form/FloatingSubmitButton', () => ({
   FloatingSubmitButton: ({ label }) => <button type="submit">{label}</button>,
 }));
 vi.mock('@/form/TosNotification', () => ({ TosNotification: () => null }));
-vi.mock('@/wizard', () => ({ FormSteps: () => null }));
+vi.mock('@/wizard/FormSteps', () => ({ FormSteps: () => null }));
 vi.mock('@/proposals/ProposalCostTotal', () => ({
   ProposalCostTotal: () => null,
 }));

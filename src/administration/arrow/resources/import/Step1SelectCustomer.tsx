@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { ArrowCustomerMappingAutocomplete } from '../../mappings/ArrowCustomerMappingAutocomplete';
 

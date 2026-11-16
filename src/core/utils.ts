@@ -223,30 +223,6 @@ export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
 
 export const cleanObject = (value: any) => JSON.parse(JSON.stringify(value));
 
-/**
- *
- * @param obj
- * @returns flatten object
- * @example
- * const x = {a: {z: "z1", x: "x1"}, b: "b1"};
- * flattenObject(x) === {'a.z': "z1", 'a.x': "x1", b: "b1"}
- */
-export const flattenObject = (obj): Record<string, any> => {
-  const result = {};
-
-  for (const i in obj) {
-    if (typeof obj[i] === 'object' && !Array.isArray(obj[i])) {
-      const temp = flattenObject(obj[i]);
-      for (const j in temp) {
-        result[i + '.' + j] = temp[j];
-      }
-    } else {
-      result[i] = obj[i];
-    }
-  }
-  return result;
-};
-
 export const detectOS = () => {
   const nAgt = window.navigator.userAgent;
   let os = 'Unknown';

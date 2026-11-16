@@ -4,7 +4,8 @@ import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, ProgressStep, VerticalProgressSteps } from 'waldur-ui';
+import { WIZARD_VERTICAL_BODY_CLASSNAME } from 'waldur-wizard';
 
 import { SubmitButton } from '@/form';
 import { SidebarLayout } from '@/form/SidebarLayout';
@@ -12,7 +13,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PAGE_CONTAINER_XXL_CLASSNAME } from '@/navigation/pageContainer';
 import { useNotify } from '@/store/notify';
-import { ProgressStep, VerticalProgressSteps } from '@/wizard';
 
 import { useAutoValidation, useChecklistCache } from './hooks';
 import { OrganizationCreateStep1 } from './OrganizationCreateStep1';
@@ -26,8 +26,6 @@ import {
   handleManualVerification,
   handleVerificationStatus,
 } from './utils';
-
-import '@/wizard/wizard.scss';
 
 export const OrganizationCreatePage: FC = () => {
   const { confirm } = useModal();
@@ -328,7 +326,7 @@ export const OrganizationCreatePage: FC = () => {
           <Form<OrganizationCreateFormValues>
             onSubmit={handleFormSubmit}
             render={({ handleSubmit, submitting }) => (
-              <form className="wizard wizard-vertical" onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 {/* Track validationMethod changes */}
                 <FormSpy<OrganizationCreateFormValues>
                   subscription={{ values: true }}
@@ -351,7 +349,7 @@ export const OrganizationCreatePage: FC = () => {
 
                   {/* Main Content */}
                   <div className="grow">
-                    <div className="wizard-body-vertical">
+                    <div className={WIZARD_VERTICAL_BODY_CLASSNAME}>
                       {step === 0 && <OrganizationCreateStep1 />}
                       {step === 1 && (
                         <OrganizationCreateStep2

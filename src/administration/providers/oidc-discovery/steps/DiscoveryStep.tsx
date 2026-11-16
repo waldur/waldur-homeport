@@ -21,13 +21,13 @@ import {
   TableHeader,
   TableRow,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { OidcFormValues } from '../types';
 

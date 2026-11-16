@@ -34,6 +34,13 @@ const RESTRICTED_IMPORTS = [
     message:
       'lodash-es is retired. Use native code, or es-toolkit / es-toolkit/compat where lodash semantics matter.',
   },
+  // The wizard moved to packages (docs/forms.md → "Where the wizard lives");
+  // only FormSteps, which routes through UI-Router, stays in src/wizard.
+  {
+    name: '@/wizard',
+    message:
+      'Import the wizard from "waldur-wizard" (Wizard, WizardModal, useWizard, StepDefinition, useStepStatuses) and the step parts from "waldur-ui" (StepCard, StepLock, StepNav, ProgressSteps, StepperLayout). FormSteps is "@/wizard/FormSteps".',
+  },
 ];
 
 // Menus and popovers are built from waldur-ui's Menu / MenuPopover (see
@@ -350,6 +357,33 @@ export default tseslint
                 regex: '^@uirouter/',
                 message:
                   'The table knows no router: go through TableHost (packages/table/src/host.tsx).',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      // waldur-wizard ships to micro-apps too, so, like waldur-table, it
+      // reads nothing of the portal's and knows no router. Its tests run
+      // inside homeport and may use its harness.
+      files: ['packages/wizard/src/**/*.{ts,tsx}'],
+      ignores: ['**/*.test.{ts,tsx}', '**/*.stories.tsx'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [...RESTRICTED_IMPORTS, ...RADIX_MENU_IMPORTS],
+            patterns: [
+              {
+                regex: '^@/',
+                message:
+                  'waldur-wizard imports nothing from the portal: take it from a package (waldur-ui, waldur-form, waldur-i18n-runtime).',
+              },
+              {
+                regex: '^@uirouter/',
+                message:
+                  'The wizard knows no router: take links or navigation as props.',
               },
             ],
           },

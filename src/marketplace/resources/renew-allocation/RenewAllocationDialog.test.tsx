@@ -12,7 +12,8 @@ import { renderWithProviders } from '@/test/harness';
 import { RenewAllocationDialog } from './RenewAllocationDialog';
 
 // Mock Wizard because it's complex and we want to test RenewAllocationDialog's onSubmit
-vi.mock('@/wizard', () => ({
+vi.mock('waldur-wizard', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('waldur-wizard')>()),
   Wizard: ({ onSubmit, initialValues, title }) => (
     <div>
       <h1>{title}</h1>

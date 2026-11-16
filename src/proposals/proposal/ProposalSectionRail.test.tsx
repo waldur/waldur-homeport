@@ -153,8 +153,8 @@ vi.mock('../proposal-roles/queries', () => ({
 }));
 
 // Named in the rail with the label the mock FormSteps renders.
-vi.mock('@/wizard', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@/wizard')>()),
+vi.mock('@/wizard/FormSteps', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/wizard/FormSteps')>()),
   FormSteps: ({ steps }) => (
     <ul aria-label="On this page">
       {steps.map((step) => (

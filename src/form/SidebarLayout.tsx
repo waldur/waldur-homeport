@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 
-import { useBreakpointDown, Card, CardContent, CardHeader } from 'waldur-ui';
+import { cn, StepperLayout } from 'waldur-ui';
 
 import { useFullPage } from '@/navigation/context';
 import {
@@ -9,115 +8,40 @@ import {
   PAGE_CONTAINER_XXL_CLASSNAME,
 } from '@/navigation/pageContainer';
 
-import './SidebarLayout.scss';
+/**
+ * waldur-ui's StepperLayout in the portal's page frame. Its sticky column
+ * sits below the portal's sticky chrome through `--layout-sticky-top`,
+ * which Layout measures (navigation/chromeHeights.ts).
+ */
 
 /** `fluid`: the full width of the page, as a list page has it, not capped. */
 const frame = (fluid?: boolean) =>
   fluid ? PAGE_CONTAINER_CLASSNAME : PAGE_CONTAINER_XXL_CLASSNAME;
 
 const Container: FC<PropsWithChildren<{ fluid?: boolean }>> = (props) => (
-  <div
-    className={classNames(
-      frame(props.fluid),
-      'flex flex-col xl:flex-row gap-4 pb-8',
-    )}
-  >
+  <StepperLayout.Container className={frame(props.fluid)}>
     {props.children}
-  </div>
+  </StepperLayout.Container>
 );
-
-const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
-  <div
-    className={classNames(
-      'flex flex-col lg:flex-auto lg:min-w-0 gap-4',
-      props.className,
-    )}
-  >
-    {props.children}
-  </div>
-);
-
-// Sticks below the sticky header, page tabs and impersonation bar
-// (--layout-sticky-top, measured by Layout in navigation/chromeHeights.ts).
-const stickyClassName = classNames(
-  'sticky z-95',
-  'h-[calc(100vh-var(--layout-sticky-top)-10px)]',
-);
-
-// Beside the form from xl: a flex box scrolling its
-// own overflow, pinned to the bottom and right edges.
-const sideColumnClassName = 'flex overflow-auto bottom-0 right-0';
-
-const cardClassName = classNames(
-  stickyClassName,
-  'top-(--layout-sticky-top)',
-  'in-[[data-page-tabs]]:h-[calc(100vh-var(--layout-sticky-top))]',
-);
-
-const transparentClassName = classNames(
-  stickyClassName,
-  'top-[calc(var(--layout-sticky-top)+10px)]',
-  'in-[[data-page-tabs]]:top-[calc(var(--layout-sticky-top)+20px)]',
-  'in-[[data-page-tabs]]:h-fit',
-);
-
-const Sidebar: FC<
-  PropsWithChildren<{
-    title?: string;
-    transparent?: boolean;
-    hideOnVertical?: boolean;
-  }>
-> = (props) => {
-  const isVMode = useBreakpointDown('xl');
-  useFullPage();
-
-  return !props.transparent ? (
-    <div
-      className={classNames(
-        'v-stepper-form-sidebar',
-        cardClassName,
-        isVMode ? props.hideOnVertical && 'hidden' : sideColumnClassName,
-      )}
-    >
-      <Card bordered className="w-full">
-        {props.title ? (
-          <CardHeader>
-            <div className="me-1.5">
-              <h4 className="mb-0">{props.title}</h4>
-            </div>
-          </CardHeader>
-        ) : null}
-        <CardContent>{props.children}</CardContent>
-      </Card>
-    </div>
-  ) : (
-    <div
-      className={classNames(
-        'v-stepper-form-sidebar transparent',
-        transparentClassName,
-        isVMode ? props.hideOnVertical && 'hidden' : sideColumnClassName,
-      )}
-    >
-      <div className="w-full">
-        {props.title ? <h4>{props.title}</h4> : null}
-        {props.children}
-      </div>
-    </div>
-  );
-};
 
 const Header: FC<PropsWithChildren<{ className?: string; fluid?: boolean }>> = (
   props,
 ) => (
-  <div
-    className={classNames(
-      frame(props.fluid),
-      'v-stepper-form-header',
-      props.className,
-    )}
-  >
+  <StepperLayout.Header className={cn(frame(props.fluid), props.className)}>
     {props.children}
-  </div>
+  </StepperLayout.Header>
 );
+
+const Body = StepperLayout.Body;
+
+// Below page tabs the column sits 10px lower and is as tall as its content.
+const Sidebar: FC<PropsWithChildren> = (props) => {
+  useFullPage();
+  return (
+    <StepperLayout.Aside className="in-[[data-page-tabs]]:top-[calc(var(--layout-sticky-top)+20px)] in-[[data-page-tabs]]:h-fit">
+      {props.children}
+    </StepperLayout.Aside>
+  );
+};
 
 export const SidebarLayout = { Container, Header, Body, Sidebar };

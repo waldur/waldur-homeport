@@ -2,13 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   props,

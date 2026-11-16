@@ -2,10 +2,11 @@ import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { required } from '@/core/validators';
 import { AsyncSelectGroup, DateGroup, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { templateAutocomplete } from '../autocomplete';
 import { BroadcastFormData, MessageTemplate } from '../types';

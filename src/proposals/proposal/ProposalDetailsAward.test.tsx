@@ -38,7 +38,7 @@ vi.mock('./create/utils', () => ({
 vi.mock('./AwardedResourcesSection', () => ({
   AwardedResourcesSection: () => <div>Award section</div>,
 }));
-vi.mock('@/wizard', () => ({
+vi.mock('@/wizard/FormSteps', () => ({
   FormSteps: ({ steps }: { steps: { label: string }[] }) => (
     <ul>
       {steps.map((step) => (

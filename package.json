@@ -136,6 +136,7 @@
     "waldur-table": "workspace:*",
     "waldur-telemetry": "workspace:*",
     "waldur-ui": "workspace:*",
+    "waldur-wizard": "workspace:*",
     "yjs": "^13.5.22"
   },
   "devDependencies": {

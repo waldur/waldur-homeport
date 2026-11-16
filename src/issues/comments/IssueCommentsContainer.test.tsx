@@ -11,8 +11,9 @@ vi.mock('./IssueCommentButton', () => ({
   IssueCommentButton: () => <button data-testid="add-comment-btn">Add</button>,
 }));
 
-vi.mock('@/marketplace/offerings/update/components/RefreshButton', () => ({
-  RefreshButton: ({ loading }: { loading: boolean }) => (
+vi.mock('waldur-ui', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('waldur-ui')>()),
+  RefreshIconButton: ({ loading }: { loading: boolean }) => (
     <button data-testid="reload-btn" disabled={loading}>
       Reload
     </button>

@@ -4,6 +4,8 @@ import { useForm, useFormState } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { getUUID } from '@/core/utils';
 import { SelectField, StringField, TextField } from '@/form';
 import { translate } from '@/i18n';
@@ -11,7 +13,6 @@ import { resetSelection, selectRow } from '@/table/actions';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { MAINTENANCE_IMPACT_LEVEL, MaintenanceForm } from '../types';
 

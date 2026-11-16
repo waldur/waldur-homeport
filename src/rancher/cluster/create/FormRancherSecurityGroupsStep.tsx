@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useForm } from 'react-final-form';
 import { openstackSecurityGroupsList } from 'waldur-js-client';
 
+import { StepCard } from 'waldur-ui';
+
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { FormSecurityGroupsField } from '@/openstack/openstack-instance/deploy/FormSecurityGroupsField';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { useFormTenant } from './utils';
 
@@ -47,11 +48,11 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
   }, [form, defaultItems]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Security groups')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       {tenant ? (
         <FormSecurityGroupsField offering={props.offering} />
@@ -60,6 +61,6 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
           {translate('Please select a tenant first')}
         </StepCardPlaceholder>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

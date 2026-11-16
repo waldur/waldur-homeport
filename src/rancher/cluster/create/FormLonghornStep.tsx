@@ -1,8 +1,9 @@
+import { StepCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
-import { VStepperFormStepCard } from '@/wizard';
 
 import { InstallLonghornField } from './InstallLonghornField';
 
@@ -12,11 +13,11 @@ export const FormLonghornStep = (props: FormStepProps) => {
   const openstackOffering = attributes.openstack_offering;
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Longhorn')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
     >
       <InstallLonghornField />
       {enabled ? (
@@ -33,6 +34,6 @@ export const FormLonghornStep = (props: FormStepProps) => {
           />
         </div>
       ) : null}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

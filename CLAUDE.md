@@ -311,12 +311,13 @@ YARN_LINK_FOLDER=../.yarn-link ./docs/update-local-sdk.sh ../waldur-mastermind .
 
 ## Wizard Migration Patterns
 
-When migrating wizard dialogs to use `@/wizard`, follow these patterns:
+When migrating wizard dialogs to use `waldur-wizard` (`packages/wizard`; its step parts such as `ProgressStep` and `StepCard` are `waldur-ui`'s, see `docs/forms.md` → "Where the wizard lives"), follow these patterns:
 
 ### Basic Pattern (Standard Wizards)
 
 ```tsx
-import { Wizard, WizardModal, WizardStepProps } from '@/wizard';
+import type { ProgressStep } from 'waldur-ui';
+import { Wizard, WizardModal, WizardStepProps } from 'waldur-wizard';
 
 // Define steps
 const steps: ProgressStep[] = [

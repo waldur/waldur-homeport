@@ -16,6 +16,7 @@ import {
   CardContent,
   CardHeader,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -23,7 +24,6 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { propVal } from '@/property/propertyFields';
 import { SimpleTable } from '@/table/SimpleTable';
 import { Column } from '@/table/types';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { arrowQueryKeys } from '../api';
 import type { ArrowSetupFormValues } from '../types';

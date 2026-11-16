@@ -1,8 +1,7 @@
 import { FormApi } from 'final-form';
 import { ComponentType, useEffect, useRef, useState } from 'react';
 import { Form, useFormState } from 'react-final-form';
-
-import type { ProgressStep } from './ProgressSteps';
+import type { ProgressStep } from 'waldur-ui';
 
 interface WizardFormContainerProps<FormValues = any> {
   form?: string;

@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
 import { Checklist, checklistsAdminList } from 'waldur-js-client';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -10,7 +12,6 @@ import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
   const { isLoading, error, data, refetch } = useQuery({

@@ -2,19 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import React, { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 
-import { LoadingSpinner } from 'waldur-ui';
+import { LoadingSpinner, ProgressStep } from 'waldur-ui';
+import {
+  WizardButtons,
+  WizardStepIndicator,
+  WizardTabs,
+  useWizard,
+} from 'waldur-wizard';
 
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import {
-  ProgressStep,
-  WizardButtons,
-  WizardStepIndicator,
-  WizardTabs,
-  useWizard,
-} from '@/wizard';
 
 import { loadData } from '../change-limits/utils';
 

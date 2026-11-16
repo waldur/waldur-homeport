@@ -6,6 +6,7 @@ import { FC, useCallback } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
@@ -13,7 +14,6 @@ import { StringGroup, BooleanGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { SecretField } from '@/form/SecretField';
 import { translate } from '@/i18n';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getProtectedFieldProps } from '../getProtectedFieldProps';
 import { UserFormData, UserFormDialogData } from '../UserFormTypes';

@@ -8,12 +8,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  RefreshIconButton,
 } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { getBackendHealthStatus } from '@/navigation/footer/BackendHealthStatusIndicator';
@@ -33,7 +33,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
       title={
         <>
           <span className="me-1.5">{translate('Backend health status')}</span>
-          <RefreshButton refetch={reFetch} loading={loading} />
+          <RefreshIconButton refetch={reFetch} loading={loading} />
         </>
       }
       bodyClassName="h-[275px]"

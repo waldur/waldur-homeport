@@ -17,6 +17,7 @@ import {
   TabsList,
   TabsTrigger,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -26,7 +27,6 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { filterOfferingComponents } from '@/marketplace/common/registry';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
 import { ChangeLimitsComponent } from '../change-limits/ChangeLimitsComponent';

@@ -5,6 +5,8 @@ import {
   QuestionAdmin,
 } from 'waldur-js-client';
 
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -12,7 +14,6 @@ import { FormGroup } from '@/form';
 import { FormFieldError } from '@/form/FormFieldError';
 import { translate } from '@/i18n';
 import { QuestionAnswerField } from '@/marketplace-checklist/QuestionAnswerField';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 export const Step2Metadata: FC<WizardStepProps> = (props) => {
   // Fetch customer checklist questions

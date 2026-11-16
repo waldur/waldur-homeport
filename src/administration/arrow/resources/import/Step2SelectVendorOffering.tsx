@@ -4,11 +4,11 @@ import { Field, useFormState } from 'react-final-form';
 import { adminArrowVendorOfferingMappingsList } from 'waldur-js-client';
 
 import { AlertItem, NativeSelect } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const VendorOfferingSelect = ({ input }: { input: any }) => {
   const formState = useFormState<{

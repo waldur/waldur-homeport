@@ -1,12 +1,13 @@
 import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { formatISOWithoutZone } from '@/core/dateUtils';
 import { required } from '@/core/validators';
 import { DateTimeGroup } from '@/form';
 import { translate } from '@/i18n';
 import { AllocationTime } from '@/proposals/types';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 interface WizardFormThirdPageProps extends WizardFormStepProps {
   // The call's allocation-timing mode, configured on the call's allocation

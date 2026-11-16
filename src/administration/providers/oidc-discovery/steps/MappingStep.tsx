@@ -9,6 +9,7 @@ import {
   Card,
   CardContent,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { EmailClaimWarning } from '@/administration/providers/EmailClaimWarning';
 import { ID_TOKEN_PROTOCOL_CLAIMS } from '@/administration/providers/oidcClaims';
@@ -18,7 +19,6 @@ import {
   isProfileAttributeEnabled,
   ProfileAttribute,
 } from '@/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type {
   FieldMappingChoice,

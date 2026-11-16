@@ -2,10 +2,11 @@ import Papa from 'papaparse';
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { TemplateUploaderField } from '@/project/import/TemplateUploaderField';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const MAX_LENGTH = 1000;
 

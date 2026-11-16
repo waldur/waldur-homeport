@@ -4,6 +4,7 @@ import { Field, useForm, useFormState } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
 import { AlertItem, FormField, FormLabel } from 'waldur-ui';
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -13,7 +14,6 @@ import { SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { showsCallContext } from '@/proposals/presentation';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 /** How many requests of the proposal already use each call offering. */
 export const countRequestsByOffering = (

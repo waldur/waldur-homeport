@@ -301,7 +301,14 @@ function AppShellContent({
             }
           />
 
-          <div className="flex flex-1 flex-col overflow-y-auto">
+          {/* The page scrolls here, below the top bar, so sticky page
+              content (StepperLayout's column) sticks at this pane's top
+              and is as tall as the pane: a size container, whose height
+              `100cqh` then is. Size containment also makes the pane the
+              containing block of `position: fixed` content inside it, so
+              such content belongs in a portal (dialogs, menus and toasts
+              already are). */}
+          <div className="flex flex-1 flex-col overflow-y-auto [container-type:size] [--layout-sticky-top:0px] [--layout-sticky-height:100cqh]">
             <ShellErrorBoundary>{children}</ShellErrorBoundary>
           </div>
           {footer}

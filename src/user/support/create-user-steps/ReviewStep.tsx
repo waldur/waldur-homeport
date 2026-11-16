@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { PropertyItem, PropertyList } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -10,7 +11,6 @@ import {
   getOrganizationTypeOptions,
 } from '@/user/support/aai-constants';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { UserFormData, UserFormDialogData } from '../UserFormTypes';
 

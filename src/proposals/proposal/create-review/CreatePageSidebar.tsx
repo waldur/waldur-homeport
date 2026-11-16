@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { proposalReviewsReject } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
+import { StepDefinition } from 'waldur-wizard';
 
 import { Panel } from '@/core/Panel';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -13,13 +14,12 @@ import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
-import { VStepperFormStep } from '@/wizard';
 
 import { SubmitReviewDialog } from './SubmitReviewDialog';
 
 interface CreatePageSidebarProps {
   /** The sections rendered on the page, in order. */
-  steps: VStepperFormStep[];
+  steps: StepDefinition[];
   review: ProposalReview;
   /** Whose requests the summary totals. */
   proposal: Proposal;

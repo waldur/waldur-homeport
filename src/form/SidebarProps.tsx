@@ -1,7 +1,7 @@
-import { VStepperFormStep } from '@/wizard';
+import { StepDefinition } from 'waldur-wizard';
 
 export interface SidebarProps {
-  steps?: VStepperFormStep[];
+  steps?: StepDefinition[];
   completedSteps?: boolean[];
   disabledSteps?: boolean[];
   submitting?: boolean;

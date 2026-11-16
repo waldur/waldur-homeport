@@ -27,6 +27,11 @@ export interface AccordionCardProps extends PropsWithChildren {
   secondary?: boolean;
   /** Slim header and body, for cards nested in dialogs. */
   size?: 'sm';
+  /**
+   * The card can't be folded or unfolded: its toggles are disabled (out of
+   * the tab order), and the card is marked `data-state="locked"`.
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -52,10 +57,16 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
   };
 
   return (
-    <Collapsible open={open} onOpenChange={onOpenChange} keepMounted>
+    <Collapsible
+      open={open}
+      onOpenChange={onOpenChange}
+      disabled={props.disabled}
+      keepMounted
+    >
       <div
         id={props.id}
         data-slot="accordion-card"
+        data-state={props.disabled ? 'locked' : undefined}
         className={cn(
           // min-w-0: so a card in a flex/grid row can
           // shrink and let wide content scroll instead of widening it.

@@ -1,10 +1,11 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useMemo } from 'react';
 
+import { ProgressStep, ProgressSteps as MainProgressSteps } from 'waldur-ui';
+
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { Proposal } from '@/proposals/types';
-import { ProgressStep, ProgressSteps as MainProgressSteps } from '@/wizard';
 
 interface ProgressStepsProps {
   proposal: Proposal;

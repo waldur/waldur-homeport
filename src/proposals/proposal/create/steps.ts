@@ -1,6 +1,7 @@
+import { StepDefinition } from 'waldur-wizard';
+
 import { translate } from '@/i18n';
 import { Call, ProposalFieldConfig } from '@/proposals/types';
-import { VStepperFormStep } from '@/wizard';
 
 import { ProjectDetailsStep } from './ProjectDetailsStep';
 import { ProposalComplianceStepExpanded } from './ProposalComplianceStepExpanded';
@@ -19,12 +20,12 @@ export const createProposalSteps = (
     proposal_field_config?: ProposalFieldConfig;
     allowed_duration_months?: number[] | null;
   },
-): VStepperFormStep[] => {
+): StepDefinition[] => {
   // Which fields the Project details step asks for, and which of them block
   // submission, is per-call configuration rather than a constant.
   const fieldStates = getFieldStates(call?.proposal_field_config);
   const asksDuration = asksForDuration(call);
-  const baseSteps: VStepperFormStep[] = [
+  const baseSteps: StepDefinition[] = [
     {
       label: translate('Details overview'),
       id: 'step-general',
@@ -63,7 +64,7 @@ export const createProposalSteps = (
 
   // Add the compliance step when the call has a compliance checklist.
   if (call?.compliance_checklist) {
-    const complianceStep: VStepperFormStep = {
+    const complianceStep: StepDefinition = {
       label: translate('Compliance checklist'),
       id: 'step-compliance',
       component: ProposalComplianceStepExpanded,

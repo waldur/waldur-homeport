@@ -69,7 +69,7 @@ Rules:
 - **Never add ARIA just to get a hook.** ARIA changes what assistive technology announces. A role or state that is not true misleads users, and no ARIA is better than wrong ARIA. For a styling or test hook, use `data-*`.
 - **Do not mirror ARIA in `data-*`.** Style and test against `aria-expanded`, not a `data-expanded` you keep in sync with it. Radix is the one exception: it sets `data-state="open"` alongside `aria-expanded`, and `data-[state=…]:` is fine for its components, especially for states ARIA cannot express, such as a closing animation.
 - **Tests check the ARIA attribute**, not its `data-*` twin: `expect(trigger).toHaveAttribute('aria-expanded', 'true')`.
-- **A visual marker still needs an accessible counterpart.** `FormSteps`' `data-error` only colours a step's title; `aria-invalid` would be wrong on a navigation link. The error must also reach assistive technology some other way, such as an icon with an accessible name, or text linked with `aria-describedby`.
+- **A visual marker still needs an accessible counterpart.** `StepNav`'s `data-error` only colours a step's title; `aria-invalid` would be wrong on a navigation link. The error must also reach assistive technology some other way, such as an icon with an accessible name, or text linked with `aria-describedby`.
 
 ## Class names
 
@@ -138,7 +138,7 @@ For state that assistive technology should know, use the native attribute or ARI
 - **Style it with Tailwind's data variants.** On the element itself: `data-[state=open]:…`, `data-[selected]:…`. From an ancestor marked `group`: `group-data-[state=open]:…`. From the parent onto a child: `[&_[data-error]]:…`.
 
 ```tsx
-// FormSteps: a step title marks itself while its section is invalid…
+// StepNav: a step title marks itself while its section is invalid…
 const title = (
   <div data-error={hasErrors ? '' : undefined} className="flex items-center">
     {step.label}

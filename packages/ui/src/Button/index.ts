@@ -6,3 +6,5 @@ export { BUTTON_ICON_SIZES, getButtonIconSize } from './buttonIconSizes';
 export { ButtonCaret } from './ButtonCaret';
 export type { ButtonCaretProps } from './ButtonCaret';
 export { ICON_BUTTON_BASE_CLASSNAME } from './iconButtonStyles';
+export { RefreshIconButton } from './RefreshIconButton';
+export type { RefreshIconButtonProps } from './RefreshIconButton';

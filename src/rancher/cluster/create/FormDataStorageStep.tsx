@@ -2,14 +2,13 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback } from 'react';
 import { FieldArray } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, StepCard } from 'waldur-ui';
 
 import { isFeatureVisible } from '@/features/connect';
 import { RancherFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { VStepperFormStepCard } from '@/wizard';
 
 import {
   FormNodeStorageRow,
@@ -88,12 +87,12 @@ export const FormDataStorageStep = (props: FormStepProps) => {
   );
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Data storage')}
       id={props.id}
       loading={isLoading}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       className="step-data-storage"
     >
       {nodes?.length ? (
@@ -119,6 +118,6 @@ export const FormDataStorageStep = (props: FormStepProps) => {
           {translate('Please add a node')}
         </StepCardPlaceholder>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

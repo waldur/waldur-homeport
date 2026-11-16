@@ -1,6 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { formatISOWithoutZone, parseDate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
 import {
@@ -11,7 +13,6 @@ import {
   BooleanGroup,
 } from '@/form';
 import { translate } from '@/i18n';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const cadenceOptions = [
   { value: 'monthly', label: translate('Monthly') },

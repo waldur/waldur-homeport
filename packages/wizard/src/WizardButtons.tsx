@@ -1,11 +1,9 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-
+import { SubmitButton } from 'waldur-form';
+import { translate } from 'waldur-i18n-runtime';
 import { BaseButton } from 'waldur-ui';
-
-import { SubmitButton } from '@/form';
-import { translate } from '@/i18n';
-import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { CloseDialogButton } from 'waldur-ui';
 
 export interface WizardButtonsProps {
   goBack(): void;

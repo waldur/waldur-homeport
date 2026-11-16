@@ -17,12 +17,12 @@ import {
   TableHeader,
   TableRow,
 } from 'waldur-ui';
+import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { propVal } from '@/property/propertyFields';
-import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { getAtlassianAuthMethodChoices } from '../../atlassianAuth';
 import { AtlassianFormValues, extractCredentials } from '../types';

@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { Field } from 'react-final-form';
 import { openstackImagesList } from 'waldur-js-client';
 
-import { FormHeading } from 'waldur-ui';
+import { FormHeading, StepCard } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -16,7 +16,6 @@ import { translate } from '@/i18n';
 import { BoxRadioField } from '@/marketplace/deploy/steps/BoxRadioField';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { generateSystemImageChoices } from '@/marketplace/deploy/utils';
-import { VStepperFormStepCard } from '@/wizard';
 
 export const FormImageStep = (props: FormStepProps) => {
   const [query, setQuery] = useState('');
@@ -51,11 +50,11 @@ export const FormImageStep = (props: FormStepProps) => {
   const choices = useMemo(() => generateSystemImageChoices(data), [data]);
 
   return (
-    <VStepperFormStepCard
+    <StepCard
       title={translate('Image')}
       id={props.id}
       disabled={props.disabled}
-      disabledTooltip={props.disabledTooltip}
+      disabledReason={props.disabledReason}
       actions={
         <div className="ms-auto">
           <FilterBox
@@ -89,6 +88,6 @@ export const FormImageStep = (props: FormStepProps) => {
           )}
         </Field>
       )}
-    </VStepperFormStepCard>
+    </StepCard>
   );
 };

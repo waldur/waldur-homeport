@@ -1,10 +1,11 @@
 import { FC, useMemo } from 'react';
 
+import { WizardForm, WizardFormStepProps } from 'waldur-wizard';
+
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
 import saveAsCsv, { toCsv } from '@/table/exporters/csv';
-import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import templateFile from './organizations_template.json';
 
