@@ -1,7 +1,8 @@
-import { ArrowRightIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
+
+import { PropertyItem, PropertyList } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
@@ -19,10 +20,13 @@ const MAX_TEAM_MEMBERS_DISPLAY = 5;
 
 interface ResourceProjectGroupProps {
   project: ProjectInfo;
+  /** The project's tab already names it and counts its resources. */
+  inTab?: boolean;
 }
 
 export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
   project,
+  inTab,
 }) => {
   const user = useUser();
   const showTeam = canViewTeam(user, {
@@ -78,37 +82,30 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
 
   return (
     <section className="flex flex-col gap-3">
-      <div>
-        <div className="text-base font-medium text-primary">
-          {translate('Project')}: {project.name}
-          <span className="text-quaternary ms-1.5 font-normal text-xs">
-            ({translate('Organization')}: {project.customerName})
-          </span>
-        </div>
-        <div className="text-quaternary text-sm">
-          {translate('{count} resources', {
-            count: project.resources.length,
-          })}
-        </div>
-      </div>
-      {isLoading ? (
-        <div className="flex items-center py-3">
-          <LoadingSpinnerSimple />
-          <span className="ms-1.5 text-quaternary">
-            {translate('Loading project details...')}
-          </span>
-        </div>
-      ) : (
-        (projectDetails?.description || hasTeamMembers) && (
-          <div>
-            {projectDetails?.description && (
-              <p className="text-quaternary mb-2.5">
-                {projectDetails.description}
-              </p>
-            )}
-            {hasTeamMembers && (
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
+      <div className="text-sm">
+        <PropertyList variant="summary" termWidth="sm" space={1.5} hideIfEmpty>
+          {!inTab && (
+            <PropertyItem label={translate('Project')} value={project.name} />
+          )}
+          <PropertyItem
+            label={translate('Organization')}
+            value={project.customerName}
+          />
+          {!inTab && (
+            <PropertyItem
+              label={translate('Resources')}
+              value={project.resources.length}
+            />
+          )}
+          <PropertyItem
+            label={translate('Description')}
+            value={projectDetails?.description}
+          />
+          <PropertyItem
+            label={translate('Team')}
+            value={
+              hasTeamMembers && (
+                <span className="flex items-center gap-2.5">
                   <SymbolsGroup
                     items={teamData.members}
                     max={MAX_TEAM_MEMBERS_DISPLAY}
@@ -118,26 +115,29 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
                     emailKey="user_email"
                     imageKey="user_image"
                   />
-                  <span className="text-quaternary text-xs">
+                  <span className="text-quaternary">
                     {translate('{count} team members', {
                       count: teamData.totalCount,
                     })}
                   </span>
-                </div>
-                <Link
-                  state="project-team"
-                  params={{ uuid: project.uuid }}
-                  buttonVariant="text-primary"
-                  buttonSize="sm"
-                  className="p-0"
-                >
-                  {translate('View team')}
-                  <ArrowRightIcon size={14} weight="bold" className="ms-1" />
-                </Link>
-              </div>
-            )}
-          </div>
-        )
+                  <Link
+                    state="project-team"
+                    params={{ uuid: project.uuid }}
+                    label={translate('View team')}
+                  />
+                </span>
+              )
+            }
+          />
+        </PropertyList>
+      </div>
+      {isLoading && (
+        <div className="flex items-center py-3">
+          <LoadingSpinnerSimple />
+          <span className="ms-1.5 text-quaternary">
+            {translate('Loading project details...')}
+          </span>
+        </div>
       )}
       {project.resources.map((resource) => (
         <ResourceQuickInfo key={resource.uuid} resource={resource} />

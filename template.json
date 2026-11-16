@@ -63984,7 +63984,7 @@
       "feature_area": "import-usage"
     }
   },
-  "Showing {displayed} of {total} resources. Click \"View all resources\" to see the complete list.": {
+  "Showing {displayed} of {total} resources": {
     "context": {
       "variables": {
         "displayed": {
