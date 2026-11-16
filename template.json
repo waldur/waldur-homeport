@@ -32215,7 +32215,7 @@
       "feature_area": "create"
     }
   },
-  "It can now act as you, with the access you allowed.": {
+  "It can now act on your behalf.": {
     "context": {
       "feature_area": "oauth"
     }
@@ -68307,16 +68307,6 @@
       "feature_area": "announcements"
     }
   },
-  "The app acts as you. It never gets more access than your own account has.": {
-    "context": {
-      "feature_area": "oauth"
-    }
-  },
-  "The app will be able to:": {
-    "context": {
-      "feature_area": "oauth"
-    }
-  },
   "The applicant": {
     "context": {
       "primary_ui_type": "label",
@@ -87263,6 +87253,11 @@
       "feature_area": "invitations"
     }
   },
+  "You can disconnect it any time under <Link>Connected apps</Link>.": {
+    "context": {
+      "feature_area": "oauth"
+    }
+  },
   "You can find offerings to order in the service catalog": {},
   "You can not create group invitations.": {
     "context": {
@@ -91613,6 +91608,16 @@
       "action_type": "update"
     }
   },
+  "{client} can act on your behalf with the permissions above.": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
+    }
+  },
   "{client} is connected": {
     "context": {
       "variables": {
@@ -91624,6 +91629,16 @@
     }
   },
   "{client} was not connected": {
+    "context": {
+      "variables": {
+        "client": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "oauth"
+    }
+  },
+  "{client} will be able to:": {
     "context": {
       "variables": {
         "client": {
