@@ -417,17 +417,19 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
               size === 'sm'
                 ? 'min-h-[var(--control-height-sm)] ps-[8px] pe-[2px]'
                 : 'min-h-[var(--control-height-md)] ps-[11px] pe-[4px]',
+              // The default, hover, focus, invalid and disabled states are
+              // the Input's (waldur-design-tokens/input.css).
               solid
                 ? 'border-transparent bg-tertiary'
-                : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
-                  'border-secondary bg-primary hover:border-brand-500',
+                : 'border-[var(--input-border)] bg-[var(--input-bg)] hover:border-[var(--input-border-hover)]',
               // Open reads as focused while its calendar is showing.
-              'focus-within:border-brand-subtle focus-within:ring-1 focus-within:ring-[var(--border-brand)]',
-              open && 'border-brand-subtle ring-1 ring-[var(--border-brand)]',
+              'focus-within:border-[var(--input-border-focus)] focus-within:[box-shadow:var(--input-focus-ring)]',
+              open &&
+                'border-[var(--input-border-focus)] [box-shadow:var(--input-focus-ring)]',
               invalid &&
-                'border-danger hover:border-danger focus-within:border-danger',
+                'border-[var(--input-invalid-border)] hover:border-[var(--input-invalid-border)] focus-within:border-[var(--input-invalid-border-focus)] focus-within:[box-shadow:var(--input-invalid-focus-ring)]',
               disabled &&
-                'cursor-not-allowed bg-secondary hover:border-secondary',
+                'cursor-not-allowed border-[var(--input-disabled-border)] bg-[var(--input-disabled-bg)] hover:border-[var(--input-disabled-border)]',
             )}
           >
             {inputs}

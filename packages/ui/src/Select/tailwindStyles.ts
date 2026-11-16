@@ -55,7 +55,7 @@ export const getSelectTailwindClassNames = <
         'flex items-center justify-between w-full transition-colors font-normal',
         // 8px radius matches the old control's $border-radius (Tailwind's
         // `rounded-md` step is 6px).
-        'rounded-lg border border-solid bg-primary',
+        'rounded-lg border border-solid bg-[var(--input-bg)]',
         // Gotcha #1: `min-h-*!` overrides react-select's forced 38px.
         // Heights are the --control-height steps, like Input and Button
         // (bar the table-cell variant); `px-[11px]` doubles as the
@@ -66,18 +66,18 @@ export const getSelectTailwindClassNames = <
           : isSm
             ? 'min-h-[var(--control-height-sm)]! px-[8px] py-[1px] text-sm'
             : 'min-h-[var(--control-height-md)]! px-[11px] py-[5px] text-sm',
+        // The default, hover, focus, invalid and disabled states are the
+        // Input's (waldur-design-tokens/input.css).
         hasError
-          ? 'border-danger-subtle ring-1 ring-[var(--status-danger-border)]'
+          ? isFocused
+            ? 'border-[var(--input-invalid-border-focus)] [box-shadow:var(--input-invalid-focus-ring)]'
+            : 'border-[var(--input-invalid-border)]'
           : isFocused
-            ? // --border-brand: the old focus color ($border-brand),
-              // brand-300 in light and brand-400 in dark. No shadow: the old focused control has
-              // exactly one box-shadow layer (this ring).
-              'border-brand-subtle ring-1 ring-[var(--border-brand)]'
-            : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
-              'border-secondary hover:border-brand-500',
-        // Flat disabled fill, not an opacity wash: matches the old
-        // $input-disabled-bg, which dimmed only the placeholder text.
-        isDisabled && 'bg-secondary cursor-not-allowed',
+            ? 'border-[var(--input-border-focus)] [box-shadow:var(--input-focus-ring)]'
+            : 'border-[var(--input-border)] hover:border-[var(--input-border-hover)]',
+        // Flat disabled fill, not an opacity wash.
+        isDisabled &&
+          'border-[var(--input-disabled-border)] bg-[var(--input-disabled-bg)] cursor-not-allowed hover:border-[var(--input-disabled-border)]',
       );
     },
 
