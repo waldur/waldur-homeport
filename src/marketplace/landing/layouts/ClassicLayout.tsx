@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 
 import { getIconUrl } from '@/core/api';
+import { ENV } from '@/core/config';
 import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
 import DefaultDarkImage from '@/dashboard/hero/servers-room-dark.png';
 import DefaultLightImage from '@/dashboard/hero/servers-room-light.png';
@@ -20,8 +21,12 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
   const { theme } = useTheme();
   const title = getMarketplaceTitle();
 
-  const backendImage = getIconUrl('marketplace_hero_image');
-  const defaultImage = theme === 'dark' ? DefaultDarkImage : DefaultLightImage;
+  // Only set by the configuration endpoint when an operator uploaded one.
+  const image = ENV.plugins.WALDUR_CORE.MARKETPLACE_HERO_IMAGE
+    ? getIconUrl('marketplace_hero_image')
+    : theme === 'dark'
+      ? DefaultDarkImage
+      : DefaultLightImage;
 
   return (
     <div>
@@ -29,7 +34,7 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
         header={translate('Welcome to')}
         title={title}
         context="marketplace"
-        backgroundImage={`url(${backendImage}), url(${defaultImage})`}
+        backgroundImage={`url(${image})`}
       >
         <OfferingsSearchBox />
       </LandingHeroSection>
