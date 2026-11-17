@@ -1,23 +1,21 @@
-import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useMemo } from 'react';
-
 import {
-  Card,
-  CardContent,
-  PropertyItem,
-  PropertyList,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from 'waldur-ui';
+  ArrowDownIcon,
+  ArrowUpIcon,
+  EyeIcon,
+  MinusIcon,
+} from '@phosphor-icons/react';
+import { FunctionComponent, useEffect, useMemo, useRef } from 'react';
 
+import { Table as UITable, TableBody, TableCell, TableRow } from 'waldur-ui';
+
+import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
-import { defaultCurrency } from '@/core/formatCurrency';
+import { formatCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { isAccountingMode } from '@/invoices/accountingMode';
-import { propVal } from '@/property/propertyFields';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 import { Customer } from '@/workspace/types';
 
 import { groupInvoiceItems, isOpenInvoice } from '../details/utils';
@@ -41,135 +39,162 @@ interface MonthOverviewProps {
   >;
   customer: Customer;
   costTrend?: -1 | 0 | 1;
+  /** Reloads the month, from the card's refresh button. */
+  refetch?: () => void;
 }
 
-const OverviewItemTr = ({ title, value }) => {
-  return (
-    <TableRow divided={false} hoverable={false}>
-      <TableCell className="text-[length:inherit] text-inherit underline w-full px-0 py-2.5">
-        {title}
-      </TableCell>
-      <TableCell className="text-[length:inherit] text-quaternary whitespace-nowrap p-0">
-        {value}
-      </TableCell>
-    </TableRow>
-  );
-};
+// The header names the currency once, so the cells hold plain amounts.
+const formatAmount = (value: string | number) =>
+  formatCurrency(value, '', 2).trim();
 
 export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   invoice,
   customer,
   costTrend,
+  refetch,
 }) => {
   const isCurrentMonth = isOpenInvoice(invoice) && !invoice.invoice_date;
   const accountingMode = isAccountingMode();
   const maxProjectsShowCount = isCurrentMonth && !accountingMode ? 4 : 5;
 
-  const projects = useMemo(() => {
-    if (invoice) {
-      return groupInvoiceItems(invoice.items);
-    }
-    return [];
-  }, [invoice]);
+  const allRows = useMemo(() => groupInvoiceItems(invoice.items), [invoice]);
+  const rows = useMemo(
+    () => allRows.slice(0, maxProjectsShowCount),
+    [allRows, maxProjectsShowCount],
+  );
 
   const showTotalSection =
-    !isCurrentMonth &&
-    projects &&
-    projects.length > 1 &&
-    Number(invoice.tax) > 0;
+    !isCurrentMonth && rows.length > 1 && Number(invoice.tax) > 0;
 
-  const date = useMemo(() => {
-    if (invoice) {
-      return parseDate(
+  const date = useMemo(
+    () =>
+      parseDate(
         formatPeriod({ year: invoice.year, month: invoice.month }),
-      ).toFormat('LLLL yyyy');
-    }
-  }, [invoice]);
+      ).toFormat('LLLL yyyy'),
+    [invoice],
+  );
 
-  if (!invoice) {
-    return null;
-  }
+  // The rows come with the invoice; the table shows whichever arrived last.
+  const rowsRef = useRef(rows);
+  rowsRef.current = rows;
+  const tableProps = useTable({
+    table: `month-overview-${invoice.uuid}`,
+    fetchData: () =>
+      Promise.resolve({
+        rows: rowsRef.current,
+        resultCount: rowsRef.current.length,
+      }),
+  });
+  const { fetch } = tableProps;
+  useEffect(() => {
+    fetch();
+  }, [rows, fetch]);
+
+  const totals = [
+    !accountingMode && {
+      label: translate('VAT'),
+      value: invoice.tax,
+    },
+    { label: translate('Subtotal'), value: invoice.price },
+    { label: translate('Total'), value: invoice.total },
+  ].filter(Boolean);
 
   return (
-    <Card bordered className="h-full">
-      <CardContent>
-        <div className="grid grid-cols-2 gap-x-5 h-full">
-          <div>
-            {isCurrentMonth && !accountingMode ? (
-              <div className="flex items-center">
-                <div className="text-start">
-                  <EstimatedCost />
-                  <h4 className="mb-3">{date}</h4>
-                </div>
-                <span className="text-primary ms-3 inline-flex items-center">
-                  {costTrend === -1 ? (
-                    <ArrowDownIcon size={20} weight="bold" />
-                  ) : costTrend === 1 ? (
-                    <ArrowUpIcon size={20} weight="bold" />
-                  ) : (
-                    <MinusIcon size={20} weight="bold" />
-                  )}
-                </span>
-              </div>
+    <Table
+      {...tableProps}
+      title={
+        <span className="inline-flex items-center gap-1.5">
+          {date}
+          {isCurrentMonth && !accountingMode && (
+            <span className="text-primary inline-flex">
+              {costTrend === -1 ? (
+                <ArrowDownIcon size={20} weight="bold" />
+              ) : costTrend === 1 ? (
+                <ArrowUpIcon size={20} weight="bold" />
+              ) : (
+                <MinusIcon size={20} weight="bold" />
+              )}
+            </span>
+          )}
+        </span>
+      }
+      subtitle={
+        <span className="flex flex-wrap gap-x-3">
+          <span>{translate('{count} records', { count: allRows.length })}</span>
+          {isCurrentMonth && !accountingMode && <EstimatedCost />}
+        </span>
+      }
+      verboseName={translate('Resources')}
+      columns={[
+        {
+          title: translate('Resource'),
+          render: ({ row }) =>
+            row.resource_uuid ? (
+              <Link
+                state="marketplace-resource-details"
+                params={{ resource_uuid: row.resource_uuid }}
+                label={row.resource_name}
+              />
             ) : (
-              <h2 className="mb-5">{date}</h2>
-            )}
-            <Table scrollable={false} className="text-xs">
-              <TableBody>
-                {projects.slice(0, maxProjectsShowCount).map((project) => (
-                  <OverviewItemTr
-                    key={project.resource_uuid}
-                    title={project.resource_name}
-                    value={defaultCurrency(project.total)}
-                  />
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          <div>
-            <div className="flex flex-col justify-between items-end h-full">
-              <div>
-                {showTotalSection && (
-                  <PropertyList
-                    variant="compact"
-                    className="font-medium text-xs w-3/4"
-                    labelClass="underline"
-                    valueClass="text-quaternary"
-                  >
-                    {!accountingMode && (
-                      <PropertyItem
-                        label={translate('VAT')}
-                        value={propVal.currency(invoice.tax)}
-                      />
-                    )}
-                    <PropertyItem
-                      label={translate('Subtotal')}
-                      value={propVal.currency(invoice.price)}
-                    />
-                    <PropertyItem
-                      label={translate('Total')}
-                      value={propVal.currency(invoice.total)}
-                    />
-                  </PropertyList>
-                )}
-              </div>
-              <div>
-                <Link
-                  state="billingDetails"
-                  params={{
-                    uuid: customer.uuid,
-                    invoice_uuid: invoice.uuid,
-                  }}
-                  buttonVariant="tertiary"
-                  buttonSize="sm"
+              <>{row.resource_name}</>
+            ),
+        },
+        {
+          title: translate('Amount ({currency})', {
+            currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+          }),
+          render: ({ row }) => <>{formatAmount(row.total)}</>,
+          className: 'text-end',
+          // The header cell lays its label out in a flex row of its own.
+          headerClassName: 'text-end [&>div]:justify-end',
+        },
+      ]}
+      tableActions={
+        <Link
+          state="billingDetails"
+          params={{
+            uuid: customer.uuid,
+            invoice_uuid: invoice.uuid,
+          }}
+          buttonVariant="tertiary"
+        >
+          <EyeIcon weight="bold" />
+          {translate('View details')}
+        </Link>
+      }
+      footer={
+        showTotalSection && (
+          <UITable
+            scrollable={false}
+            className="bg-secondary border-t border-t-secondary align-middle"
+          >
+            <TableBody>
+              {totals.map((item) => (
+                <TableRow
+                  key={item.label}
+                  hoverable={false}
+                  className="text-sm font-medium"
                 >
-                  {translate('Details')}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+                  <TableCell className="text-end text-primary">
+                    {item.label}:
+                  </TableCell>
+                  <TableCell
+                    width="12%"
+                    className="text-end text-primary whitespace-nowrap min-w-[150px]"
+                  >
+                    {formatAmount(item.value)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </UITable>
+        )
+      }
+      fetch={refetch ?? fetch}
+      hasQuery={false}
+      hasPagination={false}
+      minHeight="auto"
+      placeholderHasRetry={false}
+    />
   );
 };

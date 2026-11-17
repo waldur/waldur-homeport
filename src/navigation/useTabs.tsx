@@ -27,10 +27,24 @@ const isChildOf = (parentName: string, state: StateDeclaration) =>
   state.name.startsWith(`${parentName}.`) ||
   (parentName && state.parent === parentName);
 
-export const isDescendantOf = (parentName: string, state: StateDeclaration) =>
-  isChildOf(parentName, state) ||
-  (state.parent &&
-    isDescendantOf(parentName, router.stateService.get(state.parent)));
+// A state named `a.b` with no `parent` is a child of `a`, as ui-router has it.
+const parentNameOf = (state: StateDeclaration) =>
+  (state.parent as string) ||
+  (state.name.includes('.')
+    ? state.name.slice(0, state.name.lastIndexOf('.'))
+    : undefined);
+
+export const isDescendantOf = (
+  parentName: string,
+  state: StateDeclaration | undefined,
+) =>
+  Boolean(state) &&
+  (isChildOf(parentName, state) ||
+    (parentNameOf(state) &&
+      isDescendantOf(
+        parentName,
+        router.stateService.get(parentNameOf(state)),
+      )));
 
 const stateToTab = (state: StateDeclaration) => ({
   title: state.data.breadcrumb(),

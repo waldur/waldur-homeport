@@ -15,6 +15,7 @@ export const OverviewLastMonths: FunctionComponent = () => {
     isLoading,
     error,
     data: value,
+    refetch,
   } = useQuery({
     queryKey: ['OverviewLastMonths', customer?.uuid],
     queryFn: () =>
@@ -65,12 +66,17 @@ export const OverviewLastMonths: FunctionComponent = () => {
             invoice={value[0]}
             customer={customer}
             costTrend={lastMonthTotalCompare}
+            refetch={refetch}
           />
         </div>
       )}
       {value[1] && (
         <div>
-          <MonthOverview invoice={value[1]} customer={customer} />
+          <MonthOverview
+            invoice={value[1]}
+            customer={customer}
+            refetch={refetch}
+          />
         </div>
       )}
     </div>

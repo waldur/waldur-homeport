@@ -5,6 +5,7 @@ import {
   FunctionComponent,
   MutableRefObject,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -90,6 +91,32 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actionsRef }) => {
     /* watch wrapper width to check arrows, on page loaded */
     tabsWrapperRef.current?.clientWidth,
   ]);
+
+  // Bring the current tab into the row's view, so a tab past the row's edge
+  // still shows as selected. The tabs render after the row, so watch for them.
+  useEffect(() => {
+    const row = tabsScrollRef.current;
+    const nav = tabsWrapperRef.current;
+    if (!row || !nav) return;
+    const reveal = () => {
+      const tab = nav.querySelector<HTMLElement>('[aria-current]');
+      if (!tab) return;
+      const rowBox = row.getBoundingClientRect();
+      const tabBox = tab.getBoundingClientRect();
+      if (tabBox.left < rowBox.left || tabBox.right > rowBox.right) {
+        row.scrollLeft +=
+          tabBox.left - rowBox.left - rowBox.width / 2 + tabBox.width / 2;
+      }
+    };
+    reveal();
+    const observer = new MutationObserver(reveal);
+    observer.observe(nav, {
+      subtree: true,
+      childList: true,
+      attributeFilter: ['aria-current'],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
