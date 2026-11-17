@@ -42,7 +42,10 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
           </CardTitle>
           {subtitle && (
             <div
-              className={classNames('text-quaternary mt-1', subtitleClassName)}
+              className={classNames(
+                'text-quaternary font-normal mt-1',
+                subtitleClassName,
+              )}
             >
               <p className="text-sm mb-0">{subtitle}</p>
             </div>

@@ -3,8 +3,8 @@
  */
 
 /* eslint-disable no-console */
+import { CloudArrowDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import classNames from 'classnames';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import { projectsList } from 'waldur-js-client';
 
@@ -15,23 +15,21 @@ import {
   Checkbox,
   DatePicker,
   DateRangePicker,
-  FormField,
-  FormLabel,
   NativeSelect,
   parseDateValue,
   toIsoDate,
-  Card,
-  CardContent,
-  CardHeader,
+  NoResult,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
 import { LoadingErred } from '@/core/LoadingErred';
+import { Panel } from '@/core/Panel';
+import { FormGroup } from '@/form';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { useCustomer } from '@/workspace/hooks';
 
 import {
@@ -127,15 +125,10 @@ const ProjectAutocompleteDialog: FC<{
       title={translate('Select projects')}
       footer={
         <>
-          <BaseButton
-            variant="secondary"
-            size="sm"
-            onClick={onClose}
-            label={translate('Cancel')}
-          />
+          <CloseDialogButton />
           <BaseButton
             variant="primary"
-            size="sm"
+            size="lg"
             onClick={() => {
               onConfirm(draft);
               onClose();
@@ -149,42 +142,32 @@ const ProjectAutocompleteDialog: FC<{
         </>
       }
     >
-      <div className="grid grid-cols-12 gap-1.5 mb-2.5">
-        <div className="col-span-12 md:col-span-4">
-          <FormField>
-            <FormLabel className="small mb-1">{translate('Search')}</FormLabel>
+      <div className="grid grid-cols-1 gap-x-5 md:grid-cols-3">
+        <div>
+          <FormGroup label={translate('Search')}>
             <BaseInputField
               type="text"
-              size="sm"
               placeholder={translate('Filter by name…')}
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
             />
-          </FormField>
+          </FormGroup>
         </div>
-        <div className="col-span-6 md:col-span-4">
-          <FormField>
-            <FormLabel className="small mb-1">
-              {translate('Start date — after')}
-            </FormLabel>
+        <div>
+          <FormGroup label={translate('Start date — after')}>
             <DatePicker
-              size="sm"
               value={parseDateValue(startAfter)}
               onChange={(date) => setStartAfter(toIsoDate(date))}
             />
-          </FormField>
+          </FormGroup>
         </div>
-        <div className="col-span-6 md:col-span-4">
-          <FormField>
-            <FormLabel className="small mb-1">
-              {translate('End date — before')}
-            </FormLabel>
+        <div>
+          <FormGroup label={translate('End date — before')}>
             <DatePicker
-              size="sm"
               value={parseDateValue(endBefore)}
               onChange={(date) => setEndBefore(toIsoDate(date))}
             />
-          </FormField>
+          </FormGroup>
         </div>
       </div>
       <div className="flex items-center gap-3 mb-2.5 flex-wrap">
@@ -221,16 +204,16 @@ const ProjectAutocompleteDialog: FC<{
             count: visible.length,
           })}
         />
-        <span className="ms-auto text-quaternary small">
+        <span className="ms-auto text-quaternary">
           {translate('{count} of {total} selected', {
             count: draft.size,
             total: projects.length,
           })}
         </span>
       </div>
-      <div className="border border-secondary rounded-lg p-1.5 overflow-y-auto max-h-80">
+      <div className="overflow-y-auto max-h-80">
         {visible.length === 0 && (
-          <p className="text-quaternary small mb-0 p-1.5">
+          <p className="text-quaternary mb-0">
             {translate('No projects match the filters.')}
           </p>
         )}
@@ -285,7 +268,6 @@ const ProjectAutocompleteDialog: FC<{
 export const OrganisationReportsTab: FC = () => {
   const customer = useCustomer();
   const [loadTriggered, setLoadTriggered] = useState(false);
-  const [showLoadPrompt, setShowLoadPrompt] = useState(true);
 
   // ── Pre-filter: year / month ─────────────────────────────────────────────
   const [filterYear, setFilterYear] = useState<number | undefined>(undefined);
@@ -300,6 +282,22 @@ export const OrganisationReportsTab: FC = () => {
   const [includeFinished, setIncludeFinished] = useState(true);
   const [includeInGrace, setIncludeInGrace] = useState(true);
 
+  // The fields edit a draft; it is applied to the filters above (which drive
+  // the queries) only when the user clicks "Load reports".
+  const [draft, setDraft] = useState({
+    search: '',
+    startAfter: '',
+    endBefore: '',
+    year: undefined as number | undefined,
+    month: undefined as number | undefined,
+    includeFinished: true,
+    includeInGrace: true,
+  });
+  const setDraftField = <K extends keyof typeof draft>(
+    key: K,
+    value: (typeof draft)[K],
+  ) => setDraft((prev) => ({ ...prev, [key]: value }));
+
   // ── User mapping: load-all toggle ────────────────────────────────────────
   const [loadAllUserMappings, setLoadAllUserMappings] = useState(false);
 
@@ -312,6 +310,13 @@ export const OrganisationReportsTab: FC = () => {
     total: 0,
     statusMsg: '',
   });
+
+  const activeDuring = filterYear
+    ? filterMonth
+      ? `${filterYear}-${String(filterMonth).padStart(2, '0')}`
+      : String(filterYear)
+    : '';
+  const projectsCacheKey = `org-projects-${customer?.uuid}-${projectSearch}-${projectStartAfter}-${projectEndBefore}-${activeDuring}-${includeFinished}-${includeInGrace}-include_terminated`;
 
   const {
     data: projects,
@@ -332,12 +337,7 @@ export const OrganisationReportsTab: FC = () => {
       'terminated',
     ],
     queryFn: async () => {
-      const activeDuring = filterYear
-        ? filterMonth
-          ? `${filterYear}-${String(filterMonth).padStart(2, '0')}`
-          : String(filterYear)
-        : '';
-      const cacheKey = `org-projects-${customer!.uuid}-${projectSearch}-${projectStartAfter}-${projectEndBefore}-${activeDuring}-${includeFinished}-${includeInGrace}-include_terminated`;
+      const cacheKey = projectsCacheKey;
       const cached = getCached<OpenPortalProject[]>(cacheKey, TTL.LISTS);
       if (cached) return cached;
       let allProjects: OpenPortalProject[] = [];
@@ -409,9 +409,7 @@ export const OrganisationReportsTab: FC = () => {
   );
 
   const projectsCacheAge =
-    !projectsLoading && customer
-      ? getCacheAge(`org-projects-${customer.uuid}`)
-      : null;
+    !projectsLoading && customer ? getCacheAge(projectsCacheKey) : null;
 
   // ── Stage 2: Fetch reports ───────────────────────────────────────────────
   const [fetchProgress, setFetchProgress] = useState({ done: 0, total: 0 });
@@ -756,6 +754,33 @@ export const OrganisationReportsTab: FC = () => {
         ? 3
         : 0;
 
+  // One fixed action: applies the edited filters and loads fresh data.
+  const handleLoad = () => {
+    clearMappingCache();
+    clearCached(projectsCacheKey);
+    const unchanged =
+      loadTriggered &&
+      draft.search === projectSearch &&
+      draft.startAfter === projectStartAfter &&
+      draft.endBefore === projectEndBefore &&
+      draft.year === filterYear &&
+      draft.month === filterMonth &&
+      draft.includeFinished === includeFinished &&
+      draft.includeInGrace === includeInGrace;
+    setProjectSearch(draft.search);
+    setProjectStartAfter(draft.startAfter);
+    setProjectEndBefore(draft.endBefore);
+    setFilterYear(draft.year);
+    setFilterMonth(draft.month);
+    setIncludeFinished(draft.includeFinished);
+    setIncludeInGrace(draft.includeInGrace);
+    setLoadTriggered(true);
+    if (unchanged) {
+      refetchProjects();
+      refetchReports();
+    }
+  };
+
   // ── Slow-load warning timer ──────────────────────────────────────────────
   useEffect(() => {
     const isLoading = projectsLoading || reportsLoading || loadingStage === 3;
@@ -768,242 +793,213 @@ export const OrganisationReportsTab: FC = () => {
   }, [projectsLoading, reportsLoading, loadingStage]);
 
   return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-3')}>
-      {/* ── Toolbar ──────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-2.5 mb-3 flex-wrap">
-        <h4 className="mb-0">{translate('Usage Report')}</h4>
-
-        {projects && projects.length > 0 && (
-          <div className="flex items-center gap-1.5">
-            <span className="text-quaternary small">
-              {translate('{count} of {total} {project} selected', {
-                count: effectiveSelected.size,
-                total: projects.length,
-                project:
-                  projects.length !== 1
-                    ? translate('projects')
-                    : translate('project'),
-              })}
-            </span>
-            <BaseButton
-              variant="primary"
-              size="sm"
-              onClick={() =>
-                projects &&
-                openDialog(ProjectAutocompleteDialog, {
-                  size: 'lg',
-                  resolve: {
-                    projects,
-                    selected: effectiveSelected,
-                    onConfirm: (next) => {
-                      setSelectedProjects(next);
-                      setSelectedMonth('all');
-                    },
-                  },
-                })
-              }
-              label={translate('Filter selected projects')}
+    <div>
+      {/* ── Title, actions and controls ──────────────────────────────── */}
+      <Panel
+        cardBordered
+        className="mb-3"
+        title={translate('Usage report')}
+        subtitle={
+          !loadTriggered
+            ? translate('Usage reports not yet loaded')
+            : projectsCacheAge &&
+              translate('Cached {age}', {
+                age: formatCacheAge(projectsCacheAge),
+              })
+        }
+        actions={
+          <BaseButton
+            variant="primary"
+            size="lg"
+            pending={projectsLoading || reportsLoading}
+            onClick={handleLoad}
+            label={translate('Load reports')}
+            iconNode={<CloudArrowDownIcon weight="bold" />}
+          />
+        }
+      >
+        {/* Project pre-filters */}
+        <div className="grid grid-cols-1 gap-x-5 md:grid-cols-3">
+          <FormGroup label={translate('Project search')}>
+            <BaseInputField
+              type="text"
+              placeholder={translate('Name search (applied at load time)…')}
+              value={draft.search}
+              onChange={(e) => setDraftField('search', e.target.value)}
             />
-          </div>
-        )}
+          </FormGroup>
+          <FormGroup label={translate('Project period')}>
+            <DateRangePicker
+              value={
+                draft.startAfter && draft.endBefore
+                  ? [
+                      parseDateValue(draft.startAfter)!,
+                      parseDateValue(draft.endBefore)!,
+                    ]
+                  : undefined
+              }
+              onChange={(range) => {
+                setDraft((prev) => ({
+                  ...prev,
+                  startAfter: range ? toIsoDate(range[0]) : '',
+                  endBefore: range ? toIsoDate(range[1]) : '',
+                }));
+              }}
+              clearable
+            />
+          </FormGroup>
+        </div>
 
-        {allResources.length > 1 && (
-          <NativeSelect
-            size="sm"
-            fit
-            value={activeResource}
-            onChange={(e) => {
-              setSelectedResource(e.target.value);
-              setSelectedMonth('all');
-            }}
-          >
-            {allResources.map((r) => (
-              <option key={r} value={r}>
-                {nameMaps?.offering?.[r] ?? r}
-              </option>
-            ))}
-          </NativeSelect>
-        )}
+        {/* Project status checkboxes */}
+        <div className="flex items-center gap-3 mb-5.5 flex-wrap">
+          <Checkbox
+            id="includeFinished"
+            checked={draft.includeFinished}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setDraftField('includeFinished', e.target.checked)
+            }
+            className="mb-0"
+            label={translate('Finished')}
+          />
+          <Checkbox
+            id="includeInGrace"
+            checked={draft.includeInGrace}
+            disabled={!draft.includeFinished}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setDraftField('includeInGrace', e.target.checked)
+            }
+            className="mb-0"
+            label={translate('In grace period')}
+          />
+        </div>
 
-        {allMonths.length > 0 && (
-          <NativeSelect
-            size="sm"
-            fit
-            value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
-          >
-            <option value="all">{translate('All time')}</option>
-            {allMonths.map((m) => {
-              const [y, mo] = m.split('-');
-              return (
-                <option key={m} value={m}>
-                  {MONTH_NAMES[parseInt(mo, 10) - 1]} {y}
-                </option>
-              );
-            })}
-          </NativeSelect>
-        )}
+        <ReportPreFilters
+          year={draft.year}
+          month={draft.month}
+          onYearChange={(year) => setDraftField('year', year)}
+          onMonthChange={(month) => setDraftField('month', month)}
+        />
+
+        <p className="text-quaternary mb-0">
+          {translate(
+            'Fetches reports for each project in parallel — this may take 15–30 seconds for large organizations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organizations.',
+          )}
+        </p>
 
         {loadTriggered && (
-          <div className="ms-auto flex items-center gap-1.5">
-            {projectsCacheAge && (
-              <span className="text-quaternary small">
-                {translate('Cached {age}', {
-                  age: formatCacheAge(projectsCacheAge),
-                })}
-              </span>
+          <div className="flex flex-col gap-5 mt-5">
+            {loadingStage === 1 && (
+              <StageProgress
+                stage={1}
+                total={3}
+                label={translate('Loading project list')}
+                done={projectProgress.done}
+                max={projectProgress.total}
+                statusMsg={projectProgress.statusMsg || undefined}
+              />
             )}
-            <BaseButton
-              variant="secondary"
-              size="sm"
-              onClick={() => {
-                clearMappingCache();
-                if (customer) {
-                  clearCached(`org-projects-${customer.uuid}`);
-                }
-                refetchProjects();
-                if (loadTriggered) refetchReports();
-              }}
-              label={translate('Refresh')}
-            />
-            <BaseButton
-              variant="secondary"
-              size="sm"
-              onClick={() => setShowLoadPrompt(true)}
-              label={translate('Load new data…')}
-            />
+            {loadingStage === 2 && (
+              <StageProgress
+                stage={2}
+                total={3}
+                label={translate('Loading reports')}
+                done={fetchProgress.done}
+                max={fetchProgress.total}
+              />
+            )}
+            {loadingStage === 3 && (
+              <StageProgress
+                stage={3}
+                total={3}
+                label={translate('Loading name mappings')}
+                done={mappingsProgress.done}
+                max={mappingsProgress.total}
+                statusMsg={mappingsProgress.statusMsg || undefined}
+              />
+            )}
+            {projects && projects.length > 0 && (
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-quaternary">
+                  {translate('{count} of {total} {project} selected', {
+                    count: effectiveSelected.size,
+                    total: projects.length,
+                    project:
+                      projects.length !== 1
+                        ? translate('projects')
+                        : translate('project'),
+                  })}
+                </span>
+                <BaseButton
+                  variant="tertiary"
+                  onClick={() =>
+                    openDialog(ProjectAutocompleteDialog, {
+                      size: 'lg',
+                      resolve: {
+                        projects,
+                        selected: effectiveSelected,
+                        onConfirm: (next) => {
+                          setSelectedProjects(next);
+                          setSelectedMonth('all');
+                        },
+                      },
+                    })
+                  }
+                  label={translate('Filter selected projects')}
+                  iconNode={<FunnelSimpleIcon weight="bold" />}
+                />
+                {allResources.length > 1 && (
+                  <NativeSelect
+                    fit
+                    value={activeResource}
+                    onChange={(e) => {
+                      setSelectedResource(e.target.value);
+                      setSelectedMonth('all');
+                    }}
+                  >
+                    {allResources.map((r) => (
+                      <option key={r} value={r}>
+                        {nameMaps?.offering?.[r] ?? r}
+                      </option>
+                    ))}
+                  </NativeSelect>
+                )}
+                {allMonths.length > 0 && (
+                  <NativeSelect
+                    fit
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(e.target.value)}
+                  >
+                    <option value="all">{translate('All time')}</option>
+                    {allMonths.map((m) => {
+                      const [y, mo] = m.split('-');
+                      return (
+                        <option key={m} value={m}>
+                          {MONTH_NAMES[parseInt(mo, 10) - 1]} {y}
+                        </option>
+                      );
+                    })}
+                  </NativeSelect>
+                )}
+              </div>
+            )}
+            {loadTriggered &&
+              !projectsLoading &&
+              !reportsLoading &&
+              !projectsError &&
+              !reportsError &&
+              allUsage.length === 0 &&
+              allStorage.length === 0 && (
+                <NoResult
+                  title={translate('No reports found')}
+                  message={translate(
+                    'No OpenPortal reports found for the selected projects. Change the filters above and load again.',
+                  )}
+                  noAction
+                />
+              )}
           </div>
         )}
-      </div>
-
-      {/* ── Load prompt ──────────────────────────────────────────────── */}
-      {showLoadPrompt && !projectsLoading && !reportsLoading && (
-        <Card className="mb-3">
-          <CardContent>
-            <p className="mb-1.5">
-              {translate('Usage reports not yet loaded')}
-            </p>
-
-            {/* Project pre-filters */}
-            <div className="grid grid-cols-1 gap-1.5 mb-2.5 md:grid-cols-3">
-              <div>
-                <FormField>
-                  <FormLabel className="small mb-1">
-                    {translate('Project search')}
-                  </FormLabel>
-                  <BaseInputField
-                    type="text"
-                    placeholder={translate(
-                      'Name search (applied at load time)…',
-                    )}
-                    value={projectSearch}
-                    onChange={(e) => setProjectSearch(e.target.value)}
-                  />
-                </FormField>
-              </div>
-              <div>
-                <FormField>
-                  <FormLabel className="small mb-1">
-                    {translate('Project period')}
-                  </FormLabel>
-                  <DateRangePicker
-                    value={
-                      projectStartAfter && projectEndBefore
-                        ? [
-                            parseDateValue(projectStartAfter)!,
-                            parseDateValue(projectEndBefore)!,
-                          ]
-                        : undefined
-                    }
-                    onChange={(range) => {
-                      setProjectStartAfter(range ? toIsoDate(range[0]) : '');
-                      setProjectEndBefore(range ? toIsoDate(range[1]) : '');
-                    }}
-                    clearable
-                  />
-                </FormField>
-              </div>
-            </div>
-
-            {/* Project status checkboxes */}
-            <div className="flex items-center gap-3 mb-2.5 flex-wrap">
-              <Checkbox
-                id="includeFinished"
-                checked={includeFinished}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setIncludeFinished(e.target.checked)
-                }
-                className="mb-0"
-                label={translate('Finished')}
-              />
-              <Checkbox
-                id="includeInGrace"
-                checked={includeInGrace}
-                disabled={!includeFinished}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setIncludeInGrace(e.target.checked)
-                }
-                className="mb-0"
-                label={translate('In grace period')}
-              />
-            </div>
-
-            <ReportPreFilters
-              year={filterYear}
-              month={filterMonth}
-              onYearChange={setFilterYear}
-              onMonthChange={setFilterMonth}
-            />
-
-            <p className="text-quaternary small mb-2.5">
-              {translate(
-                'Fetches reports for each project in parallel — this may take 15–30 seconds for large organizations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organizations.',
-              )}
-            </p>
-
-            <BaseButton
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                setLoadTriggered(true);
-                setShowLoadPrompt(false);
-              }}
-              label={translate('Load reports')}
-            />
-          </CardContent>
-        </Card>
-      )}
-
-      {/* ── Progress bar ─────────────────────────────────────────────── */}
-      {loadingStage === 1 && (
-        <StageProgress
-          stage={1}
-          total={3}
-          label={translate('Loading project list')}
-          done={projectProgress.done}
-          max={projectProgress.total}
-          statusMsg={projectProgress.statusMsg || undefined}
-        />
-      )}
-      {loadingStage === 2 && (
-        <StageProgress
-          stage={2}
-          total={3}
-          label={translate('Loading reports')}
-          done={fetchProgress.done}
-          max={fetchProgress.total}
-        />
-      )}
-      {loadingStage === 3 && (
-        <StageProgress
-          stage={3}
-          total={3}
-          label={translate('Loading name mappings')}
-          done={mappingsProgress.done}
-          max={mappingsProgress.total}
-          statusMsg={mappingsProgress.statusMsg || undefined}
-        />
-      )}
+      </Panel>
 
       {/* ── Slow-load warning ────────────────────────────────────────── */}
       {showSlowWarning && (
@@ -1040,21 +1036,6 @@ export const OrganisationReportsTab: FC = () => {
         />
       )}
 
-      {loadTriggered &&
-        !projectsLoading &&
-        !reportsLoading &&
-        !projectsError &&
-        !reportsError &&
-        allUsage.length === 0 &&
-        allStorage.length === 0 &&
-        selectedUuids.length > 0 && (
-          <p className="text-quaternary">
-            {translate(
-              'No OpenPortal reports found for the selected projects.',
-            )}
-          </p>
-        )}
-
       {/* ── Truncated user mapping notice ────────────────────────────── */}
       {usersTruncatedCount > 0 && nameMaps !== undefined && (
         <AlertItem
@@ -1086,33 +1067,25 @@ export const OrganisationReportsTab: FC = () => {
       )}
 
       {/* ── Charts ───────────────────────────────────────────────────── */}
-      {activeUsage.length > 0 && nameMaps !== undefined && !showLoadPrompt && (
-        <Card className="mb-3">
-          <CardHeader>{translate('Usage')}</CardHeader>
-          <CardContent>
-            <UsageReportVis
-              reports={activeUsage}
-              height="400px"
-              nameMaps={nameMaps}
-            />
-          </CardContent>
-        </Card>
+      {activeUsage.length > 0 && nameMaps !== undefined && (
+        <Panel cardBordered className="mb-3" title={translate('Usage')}>
+          <UsageReportVis
+            reports={activeUsage}
+            height="400px"
+            nameMaps={nameMaps}
+          />
+        </Panel>
       )}
 
-      {activeStorage.length > 0 &&
-        nameMaps !== undefined &&
-        !showLoadPrompt && (
-          <Card className="mb-3">
-            <CardHeader>{translate('Storage')}</CardHeader>
-            <CardContent>
-              <StorageReportVis
-                reports={activeStorage}
-                height="360px"
-                nameMaps={nameMaps}
-              />
-            </CardContent>
-          </Card>
-        )}
+      {activeStorage.length > 0 && nameMaps !== undefined && (
+        <Panel cardBordered className="mb-3" title={translate('Storage')}>
+          <StorageReportVis
+            reports={activeStorage}
+            height="360px"
+            nameMaps={nameMaps}
+          />
+        </Panel>
+      )}
     </div>
   );
 };

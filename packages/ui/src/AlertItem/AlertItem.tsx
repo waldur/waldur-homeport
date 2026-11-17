@@ -54,7 +54,7 @@ const ALERT_ICON: Record<
  *
  * Values (expressed below as rem/px values matching design tokens and computed measurements):
  * - `full-width`: py-[1.23rem] px-0 (15.99px vertical padding) with a 1px border-bottom
- * - `floating`: p-[1.23rem] (15.99px padding all around), rounded-[0.475rem] (6.175px radius), full border
+ * - `floating`: p-[1.23rem] (15.99px padding all around), rounded-[0.475rem] (6.175px radius), full border, bg-primary
  * - Border color: var(--border-secondary) (#E4E7EC light / #1F242F dark)
  * - Row gap: gap-[0.846rem] (10.998px)
  * - Icon: FeaturedIcon size="lg" by default (42px outer ring, 32px inner, 24px icon)
@@ -95,7 +95,7 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
         className={cn(
           'flex gap-[0.846rem]',
           isFloating
-            ? 'p-[1.23rem] rounded-[0.475rem] border border-secondary'
+            ? 'p-[1.23rem] rounded-[0.475rem] border border-secondary bg-primary'
             : 'py-[1.23rem] px-0 border-b border-secondary',
           centered && 'text-center',
           className,

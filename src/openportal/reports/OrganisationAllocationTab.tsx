@@ -15,9 +15,15 @@
  * Visible to staff and support users only (via route permissions).
  */
 
-import { FileXlsIcon, WarningCircleIcon } from '@phosphor-icons/react';
+import {
+  CheckCircleIcon,
+  CloudArrowDownIcon,
+  FileXlsIcon,
+  FunnelSimpleIcon,
+  SlidersHorizontalIcon,
+  WarningCircleIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
@@ -33,20 +39,15 @@ import {
   Checkbox,
   DatePicker,
   DateRangePicker,
-  FormField,
-  FormLabel,
   SegmentedControl,
   type StatCardTone,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-  Tooltip,
   parseDateValue,
   toIsoDate,
-  Card,
-  CardContent,
-  CardHeader,
+  NoResult,
   StatCardGrid,
 } from 'waldur-ui';
 
@@ -54,11 +55,13 @@ import { getNextPageUrl } from '@/core/api';
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
+import { Panel } from '@/core/Panel';
+import { FormGroup } from '@/form';
 import { BaseInputField } from '@/form/InputField';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { PAGE_CONTAINER_CLASSNAME } from '@/navigation/pageContainer';
 import { useCustomer } from '@/workspace/hooks';
 
 import type { OpenPortalProject } from './api';
@@ -447,15 +450,10 @@ const ProjectAutocompleteDialog: FC<{
       title={translate('Select projects')}
       footer={
         <>
-          <BaseButton
-            variant="secondary"
-            size="sm"
-            onClick={onClose}
-            label={translate('Cancel')}
-          />
+          <CloseDialogButton />
           <BaseButton
             variant="primary"
-            size="sm"
+            size="lg"
             onClick={() => {
               onConfirm(draft);
               onClose();
@@ -471,12 +469,10 @@ const ProjectAutocompleteDialog: FC<{
         </>
       }
     >
-      <div className="grid grid-cols-12 gap-1.5 mb-2.5">
-        <div className="col-span-12 md:col-span-4">
-          <FormField>
-            <FormLabel className="small mb-1">{translate('Search')}</FormLabel>
+      <div className="grid grid-cols-1 gap-x-5 md:grid-cols-3">
+        <div>
+          <FormGroup label={translate('Search')}>
             <BaseInputField
-              size="sm"
               type="text"
               placeholder={translate('Filter by name…')}
               value={nameFilter}
@@ -484,31 +480,23 @@ const ProjectAutocompleteDialog: FC<{
                 setNameFilter(e.target.value)
               }
             />
-          </FormField>
+          </FormGroup>
         </div>
-        <div className="col-span-6 md:col-span-4">
-          <FormField>
-            <FormLabel className="small mb-1">
-              {translate('Start date — after')}
-            </FormLabel>
+        <div>
+          <FormGroup label={translate('Start date — after')}>
             <DatePicker
-              size="sm"
               value={parseDateValue(startAfter)}
               onChange={(date) => setStartAfter(toIsoDate(date))}
             />
-          </FormField>
+          </FormGroup>
         </div>
-        <div className="col-span-6 md:col-span-4">
-          <FormField>
-            <FormLabel className="small mb-1">
-              {translate('End date — before')}
-            </FormLabel>
+        <div>
+          <FormGroup label={translate('End date — before')}>
             <DatePicker
-              size="sm"
               value={parseDateValue(endBefore)}
               onChange={(date) => setEndBefore(toIsoDate(date))}
             />
-          </FormField>
+          </FormGroup>
         </div>
       </div>
 
@@ -518,16 +506,14 @@ const ProjectAutocompleteDialog: FC<{
           checked={allVisibleSelected && visible.length > 0}
           onChange={toggleAll}
           className="mb-0"
-          label={
-            <span className="small">
-              {allVisibleSelected
-                ? translate('Deselect all visible')
-                : translate('Select all visible')}
-              ({visible.length})
-            </span>
-          }
+          label={translate('{select} all visible ({count})', {
+            select: allVisibleSelected
+              ? translate('Deselect')
+              : translate('Select'),
+            count: visible.length,
+          })}
         />
-        <span className="ms-auto text-quaternary small">
+        <span className="ms-auto text-quaternary">
           {translate('{count} of {total} selected', {
             count: draft.size,
             total: projects.length,
@@ -535,9 +521,9 @@ const ProjectAutocompleteDialog: FC<{
         </span>
       </div>
 
-      <div className="border border-secondary rounded-lg p-1.5 overflow-y-auto max-h-80">
+      <div className="overflow-y-auto max-h-80">
         {visible.length === 0 && (
-          <p className="text-quaternary small mb-0 p-1.5">
+          <p className="text-quaternary mb-0">
             {translate('No projects match the filters.')}
           </p>
         )}
@@ -593,10 +579,14 @@ export const OrganisationAllocationTab: FC = () => {
 
   // ── Lazy-load — don't fire until user clicks "Load data" ─────────────────
   const [loadTriggered, setLoadTriggered] = useState(false);
-  const [showLoadPrompt, setShowLoadPrompt] = useState(true);
+  // Applied filters drive the queries; the fields edit a draft that is only
+  // applied when the user clicks "Load data".
   const [projectSearch, setProjectSearch] = useState('');
   const [projectStartAfter, setProjectStartAfter] = useState('');
   const [projectEndBefore, setProjectEndBefore] = useState('');
+  const [draftSearch, setDraftSearch] = useState('');
+  const [draftStartAfter, setDraftStartAfter] = useState('');
+  const [draftEndBefore, setDraftEndBefore] = useState('');
 
   // ── Fetch all projects in the organisation ──────────────────────────────
   const [projectProgress, setProjectProgress] = useState({
@@ -604,6 +594,8 @@ export const OrganisationAllocationTab: FC = () => {
     total: 0,
     statusMsg: '',
   });
+
+  const projectsCacheKey = `alloc-projects-${customer?.uuid}-${projectSearch}-${projectStartAfter}-${projectEndBefore}-include_terminated`;
 
   const {
     data: projects,
@@ -620,7 +612,7 @@ export const OrganisationAllocationTab: FC = () => {
       'terminated',
     ],
     queryFn: async () => {
-      const cacheKey = `alloc-projects-${customer!.uuid}-${projectSearch}-${projectStartAfter}-${projectEndBefore}-include_terminated`;
+      const cacheKey = projectsCacheKey;
       const cached = getCached<OpenPortalProject[]>(cacheKey, TTL.LISTS);
       if (cached) return cached;
       let allProjects: OpenPortalProject[] = [];
@@ -968,96 +960,193 @@ export const OrganisationAllocationTab: FC = () => {
     [noEndDateSummaries],
   );
 
-  return (
-    <div className={classNames(PAGE_CONTAINER_CLASSNAME, 'py-3')}>
-      {/* ── Toolbar ────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-2.5 mb-3 flex-wrap">
-        <h4 className="mb-0">{translate('Allocation Summary')}</h4>
+  const cacheAge = customer
+    ? getCacheAge(`alloc-summaries-${customer.uuid}`)
+    : null;
 
-        {projects && projects.length > 0 && (
-          <div className="flex items-center gap-1.5">
-            <span className="text-quaternary small">
-              {translate('{count} of {total} {project} selected', {
-                count: effectiveSelected.size,
-                total: projects.length,
-                project:
-                  projects.length !== 1
-                    ? translate('projects')
-                    : translate('project'),
-              })}
-            </span>
-            <BaseButton
-              variant="primary"
-              size="sm"
-              onClick={() =>
-                projects &&
-                openDialog(ProjectAutocompleteDialog, {
-                  size: 'lg',
-                  resolve: {
-                    projects,
-                    selected: effectiveSelected,
-                    onConfirm: (next) => {
-                      setSelectedProjects(next);
-                    },
-                  },
-                })
+  const downloadExcel = async () => {
+    setExcelProgress({ current: 0, total: 1 });
+    try {
+      await downloadAllocationExcel(
+        summaries,
+        currencyName,
+        `allocation-summary-${customer?.name ?? 'org'}`,
+        (current, total) => setExcelProgress({ current, total }),
+      );
+    } finally {
+      setExcelProgress(null);
+    }
+  };
+
+  const exportButton = (
+    <BaseButton
+      variant="tertiary"
+      size="lg"
+      pending={Boolean(excelProgress)}
+      onClick={downloadExcel}
+      label={translate('Export')}
+      iconNode={<FileXlsIcon weight="bold" />}
+    />
+  );
+
+  const excelSubtitle =
+    excelProgress &&
+    translate('Preparing Excel — sheet {current} of {total}…', {
+      current: excelProgress.current,
+      total: excelProgress.total,
+    });
+
+  // One fixed action: applies the edited filters and loads fresh data.
+  const handleLoad = () => {
+    if (customer) {
+      clearCached(projectsCacheKey, `alloc-summaries-${customer.uuid}`);
+    }
+    const unchanged =
+      loadTriggered &&
+      draftSearch === projectSearch &&
+      draftStartAfter === projectStartAfter &&
+      draftEndBefore === projectEndBefore;
+    setProjectSearch(draftSearch);
+    setProjectStartAfter(draftStartAfter);
+    setProjectEndBefore(draftEndBefore);
+    setLoadTriggered(true);
+    if (unchanged) {
+      refetchProjects();
+    }
+    if (loadTriggered) {
+      refetchSummaries();
+    }
+  };
+
+  return (
+    <div>
+      {/* ── Title, actions and controls ──────────────────────────────── */}
+      <Panel
+        cardBordered
+        className="mb-3"
+        title={translate('Allocation summary')}
+        subtitle={
+          !loadTriggered
+            ? translate('Allocation data not yet loaded')
+            : cacheAge &&
+              translate('Cached {age}', { age: formatCacheAge(cacheAge) })
+        }
+        actions={
+          <BaseButton
+            variant="primary"
+            size="lg"
+            pending={projectsLoading || summariesLoading}
+            onClick={handleLoad}
+            label={translate('Load data')}
+            iconNode={<CloudArrowDownIcon weight="bold" />}
+          />
+        }
+      >
+        {/* Project pre-filters */}
+        <div className="grid grid-cols-1 gap-x-5 md:grid-cols-3">
+          <FormGroup label={translate('Project search')}>
+            <BaseInputField
+              type="text"
+              placeholder={translate('Name search (applied at load time)…')}
+              value={draftSearch}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setDraftSearch(e.target.value)
               }
-              label={translate('Filter selected projects')}
             />
-          </div>
-        )}
+          </FormGroup>
+          <FormGroup label={translate('Project period')}>
+            <DateRangePicker
+              value={
+                draftStartAfter && draftEndBefore
+                  ? [
+                      parseDateValue(draftStartAfter)!,
+                      parseDateValue(draftEndBefore)!,
+                    ]
+                  : undefined
+              }
+              onChange={(range) => {
+                setDraftStartAfter(range ? toIsoDate(range[0]) : '');
+                setDraftEndBefore(range ? toIsoDate(range[1]) : '');
+              }}
+              clearable
+            />
+          </FormGroup>
+        </div>
+
+        <p className="text-quaternary mb-0">
+          {translate(
+            'Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.',
+          )}
+        </p>
 
         {loadTriggered && (
-          <div className="ms-auto flex items-center gap-1.5">
-            {(() => {
-              const age = customer
-                ? getCacheAge(`alloc-summaries-${customer.uuid}`)
-                : null;
-              return age ? (
-                <span className="text-quaternary small">
-                  {translate('Cached {age}', { age: formatCacheAge(age) })}
+          <div className="flex flex-col gap-5 mt-5">
+            {loadingStage === 1 && (
+              <StageProgress
+                stage={1}
+                total={2}
+                label={translate('Loading project list')}
+                done={projectProgress.done}
+                max={projectProgress.total}
+                statusMsg={projectProgress.statusMsg || undefined}
+              />
+            )}
+            {loadingStage === 2 && (
+              <StageProgress
+                stage={2}
+                total={2}
+                label={translate('Loading allocation summaries')}
+                done={summariesProgress.done}
+                max={summariesProgress.total}
+                statusMsg={summariesProgress.statusMsg || undefined}
+              />
+            )}
+            {projects && projects.length > 0 && (
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-quaternary">
+                  {translate('{count} of {total} {project} selected', {
+                    count: effectiveSelected.size,
+                    total: projects.length,
+                    project:
+                      projects.length !== 1
+                        ? translate('projects')
+                        : translate('project'),
+                  })}
                 </span>
-              ) : null;
-            })()}
-            <BaseButton
-              variant="secondary"
-              size="sm"
-              onClick={() => {
-                if (customer) {
-                  clearCached(
-                    `alloc-projects-${customer.uuid}`,
-                    `alloc-summaries-${customer.uuid}`,
-                  );
-                }
-                refetchProjects();
-                if (loadTriggered) refetchSummaries();
-              }}
-              label={translate('Refresh')}
-            />
-            <BaseButton
-              variant="secondary"
-              size="sm"
-              onClick={() => {
-                setShowLoadPrompt(true);
-                setLoadTriggered(false);
-              }}
-              label={translate('Load new data…')}
-            />
+                <BaseButton
+                  variant="tertiary"
+                  onClick={() =>
+                    openDialog(ProjectAutocompleteDialog, {
+                      size: 'lg',
+                      resolve: {
+                        projects,
+                        selected: effectiveSelected,
+                        onConfirm: (next) => {
+                          setSelectedProjects(next);
+                        },
+                      },
+                    })
+                  }
+                  label={translate('Filter selected projects')}
+                  iconNode={<FunnelSimpleIcon weight="bold" />}
+                />
+              </div>
+            )}
+            {loadTriggered &&
+              !summariesLoading &&
+              !summariesError &&
+              summaries.length === 0 && (
+                <NoResult
+                  title={translate('No allocation data found')}
+                  message={translate(
+                    'No accounting summaries found for the selected projects. Change the filters above and load again.',
+                  )}
+                  noAction
+                />
+              )}
           </div>
         )}
-      </div>
-
-      {/* ── Status ─────────────────────────────────────────────────────── */}
-      {loadingStage === 1 && (
-        <StageProgress
-          stage={1}
-          total={2}
-          label={translate('Loading project list')}
-          done={projectProgress.done}
-          max={projectProgress.total}
-          statusMsg={projectProgress.statusMsg || undefined}
-        />
-      )}
+      </Panel>
 
       {projectsError && (
         <LoadingErred
@@ -1070,87 +1159,6 @@ export const OrganisationAllocationTab: FC = () => {
         <LoadingErred
           message={translate('Failed to load accounting summaries')}
           loadData={refetchSummaries}
-        />
-      )}
-
-      {/* Load prompt — shown before the user triggers the fetch */}
-      {showLoadPrompt && !loadTriggered && (
-        <Card className="mb-3">
-          <CardContent>
-            <p className="mb-1">
-              {translate('Allocation data not yet loaded')}
-            </p>
-            <p className="mb-2.5 text-quaternary small">
-              {translate(
-                'Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.',
-              )}
-            </p>
-
-            {/* Project pre-filters */}
-            <div className="grid grid-cols-1 gap-1.5 mb-2.5 md:grid-cols-3">
-              <div>
-                <FormField>
-                  <FormLabel className="small mb-1">
-                    {translate('Project search')}
-                  </FormLabel>
-                  <BaseInputField
-                    type="text"
-                    placeholder={translate(
-                      'Name search (applied at load time)…',
-                    )}
-                    value={projectSearch}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setProjectSearch(e.target.value)
-                    }
-                  />
-                </FormField>
-              </div>
-              <div>
-                <FormField>
-                  <FormLabel className="small mb-1">
-                    {translate('Project period')}
-                  </FormLabel>
-                  <DateRangePicker
-                    value={
-                      projectStartAfter && projectEndBefore
-                        ? [
-                            parseDateValue(projectStartAfter)!,
-                            parseDateValue(projectEndBefore)!,
-                          ]
-                        : undefined
-                    }
-                    onChange={(range) => {
-                      setProjectStartAfter(range ? toIsoDate(range[0]) : '');
-                      setProjectEndBefore(range ? toIsoDate(range[1]) : '');
-                    }}
-                    clearable
-                  />
-                </FormField>
-              </div>
-            </div>
-
-            <BaseButton
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                setLoadTriggered(true);
-                setShowLoadPrompt(false);
-              }}
-              label={translate('Load data')}
-            />
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Progress bar while summaries are being fetched */}
-      {loadingStage === 2 && (
-        <StageProgress
-          stage={2}
-          total={2}
-          label={translate('Loading allocation summaries')}
-          done={summariesProgress.done}
-          max={summariesProgress.total}
-          statusMsg={summariesProgress.statusMsg || undefined}
         />
       )}
 
@@ -1173,17 +1181,6 @@ export const OrganisationAllocationTab: FC = () => {
           }
         />
       )}
-
-      {loadTriggered &&
-        !summariesLoading &&
-        !summariesError &&
-        summaries.length === 0 && (
-          <p className="text-quaternary p-3">
-            {translate(
-              'No accounting summaries found for the selected projects.',
-            )}
-          </p>
-        )}
 
       {/* ── Summary stats ───────────────────────────────────────────────── */}
       {summaries.length > 0 && (
@@ -1238,121 +1235,70 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-3">
-          <CardHeader className="flex items-center gap-2.5">
-            <span>{translate('Predicted allocation burn-down')}</span>
-
-            {chartOptions && (
-              <>
-                <GroupByToggle
-                  className="ms-auto"
-                  value={groupBy}
-                  onChange={setGroupBy}
-                />
-                <ChartTypeToggle value={chartType} onChange={setChartType} />
-              </>
-            )}
-
-            <Tooltip label={translate('Download Excel')}>
-              <button
-                type="button"
-                onClick={async () => {
-                  setExcelProgress({ current: 0, total: 1 });
-                  await downloadAllocationExcel(
-                    summaries,
-                    currencyName,
-                    `allocation-summary-${customer?.name ?? 'org'}`,
-                    (current, total) => setExcelProgress({ current, total }),
-                  );
-                  setExcelProgress(null);
-                }}
-                className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
-              >
-                <FileXlsIcon size={20} weight="bold" />
-              </button>
-            </Tooltip>
-            {excelProgress && (
-              <span className="text-quaternary small ms-1.5">
-                {translate('Preparing Excel — sheet {current} of {total}…', {
-                  current: excelProgress.current,
-                  total: excelProgress.total,
-                })}
-              </span>
-            )}
-          </CardHeader>
-          <CardContent>
-            {chartOptions ? (
-              <EChart options={chartOptions} height="420px" />
-            ) : (
-              <p className="text-quaternary mb-0">
-                {translate(
-                  'No projects with future end dates — nothing to plot.',
-                )}
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        <Panel
+          cardBordered
+          className="mb-3"
+          title={translate('Predicted allocation burn-down')}
+          subtitle={excelSubtitle}
+          actions={
+            <div className="flex items-center gap-3 flex-wrap">
+              {chartOptions && (
+                <>
+                  <GroupByToggle value={groupBy} onChange={setGroupBy} />
+                  <ChartTypeToggle value={chartType} onChange={setChartType} />
+                </>
+              )}
+              {exportButton}
+            </div>
+          }
+        >
+          {chartOptions ? (
+            <EChart options={chartOptions} height="420px" />
+          ) : (
+            <NoResult
+              title={translate('Nothing to plot')}
+              message={translate('No projects with future end dates.')}
+              noAction
+            />
+          )}
+        </Panel>
       )}
 
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-3">
-          <CardHeader className="flex items-center gap-2.5">
-            <span>{translate('Predicted daily consumption')}</span>
-
-            {consumptionOptions && (
-              <>
-                <GroupByToggle
-                  className="ms-auto"
-                  value={consumptionGroupBy}
-                  onChange={setConsumptionGroupBy}
-                />
-                <ChartTypeToggle
-                  value={consumptionChartType}
-                  onChange={setConsumptionChartType}
-                />
-              </>
-            )}
-
-            <Tooltip label={translate('Download Excel')}>
-              <button
-                type="button"
-                onClick={async () => {
-                  setExcelProgress({ current: 0, total: 1 });
-                  await downloadAllocationExcel(
-                    summaries,
-                    currencyName,
-                    `allocation-summary-${customer?.name ?? 'org'}`,
-                    (current, total) => setExcelProgress({ current, total }),
-                  );
-                  setExcelProgress(null);
-                }}
-                className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-brand inline-flex items-center"
-              >
-                <FileXlsIcon size={20} weight="bold" />
-              </button>
-            </Tooltip>
-            {excelProgress && (
-              <span className="text-quaternary small ms-1.5">
-                {translate('Preparing Excel — sheet {current} of {total}…', {
-                  current: excelProgress.current,
-                  total: excelProgress.total,
-                })}
-              </span>
-            )}
-          </CardHeader>
-          <CardContent>
-            {consumptionOptions ? (
-              <EChart options={consumptionOptions} height="420px" />
-            ) : (
-              <p className="text-quaternary mb-0">
-                {translate(
-                  'No projects with future end dates — nothing to plot.',
-                )}
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        <Panel
+          cardBordered
+          className="mb-3"
+          title={translate('Predicted daily consumption')}
+          subtitle={excelSubtitle}
+          actions={
+            <div className="flex items-center gap-3 flex-wrap">
+              {consumptionOptions && (
+                <>
+                  <GroupByToggle
+                    value={consumptionGroupBy}
+                    onChange={setConsumptionGroupBy}
+                  />
+                  <ChartTypeToggle
+                    value={consumptionChartType}
+                    onChange={setConsumptionChartType}
+                  />
+                </>
+              )}
+              {exportButton}
+            </div>
+          }
+        >
+          {consumptionOptions ? (
+            <EChart options={consumptionOptions} height="420px" />
+          ) : (
+            <NoResult
+              title={translate('Nothing to plot')}
+              message={translate('No projects with future end dates.')}
+              noAction
+            />
+          )}
+        </Panel>
       )}
 
       {/* ── Warning: projects without end dates ─────────────────────────── */}
@@ -1360,28 +1306,33 @@ export const OrganisationAllocationTab: FC = () => {
         <AlertItem
           type="floating"
           variant="warning"
+          className="mb-3"
           title={translate('Projects without an end date')}
           body={
             <>
               <span>
                 {noEndDateSummaries.length === 1
                   ? translate(
-                      '{count} project has no end date and is not shown in the burn-down chart. Together it represents <strong>{amount} {currencyName}</strong> of unspent allocation.',
+                      '{count} project has no end date and is not shown in the burn-down chart. Together it represents {amount} of unspent allocation.',
                       {
                         count: noEndDateSummaries.length,
-                        amount: fmtCredits(noEndDateUnspent),
-                        currencyName,
-                        strong: (text) => <strong>{text}</strong>,
+                        amount: (
+                          <strong>
+                            {fmtCredits(noEndDateUnspent)} {currencyName}
+                          </strong>
+                        ),
                       },
                       formatJsxTemplate,
                     )
                   : translate(
-                      '{count} projects have no end date and are not shown in the burn-down chart. Together they represent <strong>{amount} {currencyName}</strong> of unspent allocation.',
+                      '{count} projects have no end date and are not shown in the burn-down chart. Together they represent {amount} of unspent allocation.',
                       {
                         count: noEndDateSummaries.length,
-                        amount: fmtCredits(noEndDateUnspent),
-                        currencyName,
-                        strong: (text) => <strong>{text}</strong>,
+                        amount: (
+                          <strong>
+                            {fmtCredits(noEndDateUnspent)} {currencyName}
+                          </strong>
+                        ),
                       },
                       formatJsxTemplate,
                     )}
@@ -1418,523 +1369,525 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <Card className="mb-3">
-          <CardHeader className="flex items-center gap-1.5">
-            <span>{translate('Concerning Projects')}</span>
-            {slowStart.length +
-              inactive.length +
-              depleted.length +
-              offTrack.length >
-              0 && (
-              <Badge variant="warning" tone="outline">
-                {
-                  new Set<string>([
-                    ...slowStart.map(
-                      (s: ProjectAccountingSummary) => s.project_uuid,
-                    ),
-                    ...inactive.map(
-                      (s: ProjectAccountingSummary) => s.project_uuid,
-                    ),
-                    ...depleted.map(
-                      (s: ProjectAccountingSummary) => s.project_uuid,
-                    ),
-                    ...offTrack.map(
-                      (s: ProjectAccountingSummary) => s.project_uuid,
-                    ),
-                  ]).size
-                }
-              </Badge>
-            )}
+        <Panel
+          cardBordered
+          className="mb-3"
+          title={
+            <span className="flex items-center gap-1.5">
+              {translate('Concerning projects')}
+              {slowStart.length +
+                inactive.length +
+                depleted.length +
+                offTrack.length >
+                0 && (
+                <Badge variant="warning" tone="outline">
+                  {
+                    new Set<string>([
+                      ...slowStart.map(
+                        (s: ProjectAccountingSummary) => s.project_uuid,
+                      ),
+                      ...inactive.map(
+                        (s: ProjectAccountingSummary) => s.project_uuid,
+                      ),
+                      ...depleted.map(
+                        (s: ProjectAccountingSummary) => s.project_uuid,
+                      ),
+                      ...offTrack.map(
+                        (s: ProjectAccountingSummary) => s.project_uuid,
+                      ),
+                    ]).size
+                  }
+                </Badge>
+              )}
+            </span>
+          }
+          actions={
             <BaseButton
-              variant={showThresholds ? 'primary' : 'secondary'}
-              size="sm"
-              className="ms-auto"
+              variant="tertiary"
+              size="lg"
               onClick={() => setShowThresholds((v: boolean) => !v)}
-              label={translate('Thresholds')}
+              label={
+                showThresholds
+                  ? translate('Hide thresholds')
+                  : translate('Thresholds')
+              }
+              iconNode={<SlidersHorizontalIcon weight="bold" />}
             />
-          </CardHeader>
-
-          <CardContent>
-            {/* ── Threshold controls ──────────────────────────────────── */}
-            {showThresholds && (
-              <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded-lg small">
-                <div className="grid grid-cols-1 gap-1.5">
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="min-w-30">{translate('Slow start')}:</span>
-                    {translate(
-                      'started ≥ {input1} months ago with < {input2} % of allocation spent',
-                      {
-                        input1: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.slowStartMonths}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold('slowStartMonths', e.target.value)
-                            }
-                          />
-                        ),
-                        input2: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.slowStartPercent}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold('slowStartPercent', e.target.value)
-                            }
-                          />
-                        ),
-                      },
-                      formatJsxTemplate,
-                    )}
-                  </div>
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="min-w-30">{translate('Inactive')}:</span>
-                    {translate(
-                      'started ≥ {input1} months ago, after the {input2} th of the month, no spend this month, > {input3} % remaining',
-                      {
-                        input1: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.inactiveMonths}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold('inactiveMonths', e.target.value)
-                            }
-                          />
-                        ),
-                        input2: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.inactiveDayOfMonth}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold('inactiveDayOfMonth', e.target.value)
-                            }
-                          />
-                        ),
-                        input3: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.inactiveRemainingPercent}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold(
-                                'inactiveRemainingPercent',
-                                e.target.value,
-                              )
-                            }
-                          />
-                        ),
-                      },
-                      formatJsxTemplate,
-                    )}
-                  </div>
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="min-w-30">
-                      {translate('Nearly depleted')}:
-                    </span>
-                    {translate(
-                      '≥ {input1} % spent with ≥ {input2} days still remaining',
-                      {
-                        input1: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.depletedSpentPercent}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold(
-                                'depletedSpentPercent',
-                                e.target.value,
-                              )
-                            }
-                          />
-                        ),
-                        input2: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[70px] shrink-0"
-                            value={thresholds.depletedDaysRemaining}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold(
-                                'depletedDaysRemaining',
-                                e.target.value,
-                              )
-                            }
-                          />
-                        ),
-                      },
-                      formatJsxTemplate,
-                    )}
-                  </div>
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="min-w-30">{translate('Off track')}:</span>
-                    {translate(
-                      'after the {input1} th of the month, actual daily avg differs from predicted by > {input2} %',
-                      {
-                        input1: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.offTrackDayOfMonth}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold('offTrackDayOfMonth', e.target.value)
-                            }
-                          />
-                        ),
-                        input2: (
-                          <BaseInputField
-                            type="number"
-                            size="sm"
-                            containerClassName="w-[60px] shrink-0"
-                            value={thresholds.offTrackPercent}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                              setThreshold('offTrackPercent', e.target.value)
-                            }
-                          />
-                        ),
-                      },
-                      formatJsxTemplate,
-                    )}
-                  </div>
+          }
+        >
+          {/* ── Threshold controls ──────────────────────────────────── */}
+          {showThresholds && (
+            <div className="p-2.5 mb-2.5 bg-tertiary dark:bg-quaternary rounded-lg small">
+              <div className="grid grid-cols-1 gap-1.5">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="min-w-30">{translate('Slow start')}:</span>
+                  {translate(
+                    'started ≥ {input1} months ago with < {input2} % of allocation spent',
+                    {
+                      input1: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.slowStartMonths}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('slowStartMonths', e.target.value)
+                          }
+                        />
+                      ),
+                      input2: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.slowStartPercent}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('slowStartPercent', e.target.value)
+                          }
+                        />
+                      ),
+                    },
+                    formatJsxTemplate,
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="min-w-30">{translate('Inactive')}:</span>
+                  {translate(
+                    'started ≥ {input1} months ago, after the {input2} th of the month, no spend this month, > {input3} % remaining',
+                    {
+                      input1: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.inactiveMonths}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('inactiveMonths', e.target.value)
+                          }
+                        />
+                      ),
+                      input2: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.inactiveDayOfMonth}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('inactiveDayOfMonth', e.target.value)
+                          }
+                        />
+                      ),
+                      input3: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.inactiveRemainingPercent}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold(
+                              'inactiveRemainingPercent',
+                              e.target.value,
+                            )
+                          }
+                        />
+                      ),
+                    },
+                    formatJsxTemplate,
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="min-w-30">
+                    {translate('Nearly depleted')}:
+                  </span>
+                  {translate(
+                    '≥ {input1} % spent with ≥ {input2} days still remaining',
+                    {
+                      input1: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.depletedSpentPercent}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('depletedSpentPercent', e.target.value)
+                          }
+                        />
+                      ),
+                      input2: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[70px] shrink-0"
+                          value={thresholds.depletedDaysRemaining}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold(
+                              'depletedDaysRemaining',
+                              e.target.value,
+                            )
+                          }
+                        />
+                      ),
+                    },
+                    formatJsxTemplate,
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="min-w-30">{translate('Off track')}:</span>
+                  {translate(
+                    'after the {input1} th of the month, actual daily avg differs from predicted by > {input2} %',
+                    {
+                      input1: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.offTrackDayOfMonth}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('offTrackDayOfMonth', e.target.value)
+                          }
+                        />
+                      ),
+                      input2: (
+                        <BaseInputField
+                          type="number"
+                          size="sm"
+                          containerClassName="w-[60px] shrink-0"
+                          value={thresholds.offTrackPercent}
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setThreshold('offTrackPercent', e.target.value)
+                          }
+                        />
+                      ),
+                    },
+                    formatJsxTemplate,
+                  )}
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* ── All clear message ──────────────────────────────────── */}
+          {slowStart.length === 0 &&
+            inactive.length === 0 &&
+            depleted.length === 0 &&
+            offTrack.length === 0 && (
+              <NoResult
+                title={translate('No concerning projects')}
+                message={translate('No projects match the current thresholds.')}
+                icon={<CheckCircleIcon weight="bold" size={24} />}
+                noAction
+              />
             )}
 
-            {/* ── All clear message ──────────────────────────────────── */}
-            {slowStart.length === 0 &&
-              inactive.length === 0 &&
-              depleted.length === 0 &&
-              offTrack.length === 0 && (
-                <p className="text-quaternary mb-0">
-                  {translate(
-                    '✓ No concerning projects found with the current thresholds.',
-                  )}
-                </p>
-              )}
-
-            {/* ── Tabs ──────────────────────────────────────────────── */}
-            {(slowStart.length > 0 ||
-              inactive.length > 0 ||
-              depleted.length > 0 ||
-              offTrack.length > 0) && (
-              <Tabs
-                mount="all"
-                value={concerningTab}
-                onValueChange={(k) => setConcerningTab(k as any)}
-              >
-                <TabsList className="mb-2.5">
-                  <TabsTrigger value="slowStart">
-                    <>
-                      {translate('Slow start')}
-                      {slowStart.length > 0 && (
-                        <Badge
-                          variant="warning"
-                          tone="outline"
-                          className="ms-1.5"
-                        >
-                          {slowStart.length}
-                        </Badge>
+          {/* ── Tabs ──────────────────────────────────────────────── */}
+          {(slowStart.length > 0 ||
+            inactive.length > 0 ||
+            depleted.length > 0 ||
+            offTrack.length > 0) && (
+            <Tabs
+              mount="all"
+              value={concerningTab}
+              onValueChange={(k) => setConcerningTab(k as any)}
+            >
+              <TabsList className="mb-2.5">
+                <TabsTrigger value="slowStart">
+                  <>
+                    {translate('Slow start')}
+                    {slowStart.length > 0 && (
+                      <Badge
+                        variant="warning"
+                        tone="outline"
+                        className="ms-1.5"
+                      >
+                        {slowStart.length}
+                      </Badge>
+                    )}
+                  </>
+                </TabsTrigger>
+                <TabsTrigger value="inactive">
+                  <>
+                    {translate('Inactive')}
+                    {inactive.length > 0 && (
+                      <Badge
+                        variant="warning"
+                        tone="outline"
+                        className="ms-1.5"
+                      >
+                        {inactive.length}
+                      </Badge>
+                    )}
+                  </>
+                </TabsTrigger>
+                <TabsTrigger value="depleted">
+                  <>
+                    {translate('Nearly depleted')}
+                    {depleted.length > 0 && (
+                      <Badge variant="danger" tone="outline" className="ms-1.5">
+                        {depleted.length}
+                      </Badge>
+                    )}
+                  </>
+                </TabsTrigger>
+                <TabsTrigger value="offTrack">
+                  <>
+                    {translate('Off track')}
+                    {offTrack.length > 0 && (
+                      <Badge
+                        variant="warning"
+                        tone="outline"
+                        className="ms-1.5"
+                      >
+                        {offTrack.length}
+                      </Badge>
+                    )}
+                  </>
+                </TabsTrigger>
+              </TabsList>
+              <div className="tab-content">
+                <TabsContent value="slowStart">
+                  <div>
+                    <p className="text-quaternary small mb-1.5">
+                      {translate(
+                        'Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.',
+                        {
+                          months: thresholds.slowStartMonths,
+                          month:
+                            thresholds.slowStartMonths !== 1
+                              ? translate('months')
+                              : translate('month'),
+                          percent: thresholds.slowStartPercent,
+                        },
                       )}
-                    </>
-                  </TabsTrigger>
-                  <TabsTrigger value="inactive">
-                    <>
-                      {translate('Inactive')}
-                      {inactive.length > 0 && (
-                        <Badge
-                          variant="warning"
-                          tone="outline"
-                          className="ms-1.5"
-                        >
-                          {inactive.length}
-                        </Badge>
-                      )}
-                    </>
-                  </TabsTrigger>
-                  <TabsTrigger value="depleted">
-                    <>
-                      {translate('Nearly depleted')}
-                      {depleted.length > 0 && (
-                        <Badge
-                          variant="danger"
-                          tone="outline"
-                          className="ms-1.5"
-                        >
-                          {depleted.length}
-                        </Badge>
-                      )}
-                    </>
-                  </TabsTrigger>
-                  <TabsTrigger value="offTrack">
-                    <>
-                      {translate('Off track')}
-                      {offTrack.length > 0 && (
-                        <Badge
-                          variant="warning"
-                          tone="outline"
-                          className="ms-1.5"
-                        >
-                          {offTrack.length}
-                        </Badge>
-                      )}
-                    </>
-                  </TabsTrigger>
-                </TabsList>
-                <div className="tab-content">
-                  <TabsContent value="slowStart">
-                    <div>
-                      <p className="text-quaternary small mb-1.5">
-                        {translate(
-                          'Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.',
-                          {
-                            months: thresholds.slowStartMonths,
-                            month:
-                              thresholds.slowStartMonths !== 1
-                                ? translate('months')
-                                : translate('month'),
-                            percent: thresholds.slowStartPercent,
-                          },
-                        )}
+                    </p>
+                    {slowStart.length === 0 ? (
+                      <p className="text-quaternary mb-0">
+                        {translate('None.')}
                       </p>
-                      {slowStart.length === 0 ? (
-                        <p className="text-quaternary mb-0">
-                          {translate('None.')}
-                        </p>
-                      ) : (
-                        <ul className="mb-0">
-                          {slowStart.map((s: ProjectAccountingSummary) => {
-                            const spent =
-                              parseCredits(s.total_spend) +
-                              parseCredits(s.current_month_spend);
-                            const totalAlloc = parseCredits(s.total_credits);
-                            const pct = (
-                              (spent / (totalAlloc || 1)) *
-                              100
-                            ).toFixed(1);
-                            return (
-                              <li key={s.project_uuid} className="mb-1">
-                                <a
-                                  href={`/projects/${s.project_uuid}/`}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  {s.project_name}
-                                </a>
-                                {translate(
-                                  ' — started {date}, {pct}% spent ({spent} / {total} {currency})',
-                                  {
-                                    date: s.start_date,
-                                    pct,
-                                    spent: fmtCredits(spent),
-                                    total: fmtCredits(totalAlloc),
-                                    currency: currencyName,
-                                  },
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                    ) : (
+                      <ul className="mb-0">
+                        {slowStart.map((s: ProjectAccountingSummary) => {
+                          const spent =
+                            parseCredits(s.total_spend) +
+                            parseCredits(s.current_month_spend);
+                          const totalAlloc = parseCredits(s.total_credits);
+                          const pct = (
+                            (spent / (totalAlloc || 1)) *
+                            100
+                          ).toFixed(1);
+                          return (
+                            <li key={s.project_uuid} className="mb-1">
+                              <a
+                                href={`/projects/${s.project_uuid}/`}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {s.project_name}
+                              </a>
+                              {translate(
+                                ' — started {date}, {pct}% spent ({spent} / {total} {currency})',
+                                {
+                                  date: s.start_date,
+                                  pct,
+                                  spent: fmtCredits(spent),
+                                  total: fmtCredits(totalAlloc),
+                                  currency: currencyName,
+                                },
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                </TabsContent>
+                <TabsContent value="inactive">
+                  <div>
+                    <p className="text-quaternary small mb-1.5">
+                      {translate(
+                        "Started ≥ {months} {month} ago, no spend recorded this month, and more than {percent}% of allocation still remaining. Note: only the current month's activity is visible here.",
+                        {
+                          months: thresholds.inactiveMonths,
+                          month:
+                            thresholds.inactiveMonths !== 1
+                              ? translate('months')
+                              : translate('month'),
+                          percent: thresholds.inactiveRemainingPercent,
+                        },
                       )}
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="inactive">
-                    <div>
-                      <p className="text-quaternary small mb-1.5">
-                        {translate(
-                          "Started ≥ {months} {month} ago, no spend recorded this month, and more than {percent}% of allocation still remaining. Note: only the current month's activity is visible here.",
-                          {
-                            months: thresholds.inactiveMonths,
-                            month:
-                              thresholds.inactiveMonths !== 1
-                                ? translate('months')
-                                : translate('month'),
-                            percent: thresholds.inactiveRemainingPercent,
-                          },
-                        )}
+                    </p>
+                    {inactive.length === 0 ? (
+                      <p className="text-quaternary mb-0">
+                        {translate('None.')}
                       </p>
-                      {inactive.length === 0 ? (
-                        <p className="text-quaternary mb-0">
-                          {translate('None.')}
-                        </p>
-                      ) : (
-                        <ul className="mb-0">
-                          {inactive.map((s: ProjectAccountingSummary) => {
-                            const spent =
-                              parseCredits(s.total_spend) +
-                              parseCredits(s.current_month_spend);
-                            const totalAlloc = parseCredits(s.total_credits);
-                            const remaining = totalAlloc - spent;
-                            const pct = (
-                              (remaining / (totalAlloc || 1)) *
-                              100
-                            ).toFixed(1);
-                            return (
-                              <li key={s.project_uuid} className="mb-1">
-                                <a
-                                  href={`/projects/${s.project_uuid}/`}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  {s.project_name}
-                                </a>
-                                {translate(
-                                  ' — started {date}, {noSpend}, {pct}% remaining ({remaining} / {total} {currency})',
-                                  {
-                                    date: s.start_date,
-                                    noSpend: translate('no spend this month'),
-                                    pct,
-                                    remaining: fmtCredits(remaining),
-                                    total: fmtCredits(totalAlloc),
-                                    currency: currencyName,
-                                  },
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                    ) : (
+                      <ul className="mb-0">
+                        {inactive.map((s: ProjectAccountingSummary) => {
+                          const spent =
+                            parseCredits(s.total_spend) +
+                            parseCredits(s.current_month_spend);
+                          const totalAlloc = parseCredits(s.total_credits);
+                          const remaining = totalAlloc - spent;
+                          const pct = (
+                            (remaining / (totalAlloc || 1)) *
+                            100
+                          ).toFixed(1);
+                          return (
+                            <li key={s.project_uuid} className="mb-1">
+                              <a
+                                href={`/projects/${s.project_uuid}/`}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {s.project_name}
+                              </a>
+                              {translate(
+                                ' — started {date}, {noSpend}, {pct}% remaining ({remaining} / {total} {currency})',
+                                {
+                                  date: s.start_date,
+                                  noSpend: translate('no spend this month'),
+                                  pct,
+                                  remaining: fmtCredits(remaining),
+                                  total: fmtCredits(totalAlloc),
+                                  currency: currencyName,
+                                },
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                </TabsContent>
+                <TabsContent value="depleted">
+                  <div>
+                    <p className="text-quaternary small mb-1.5">
+                      {translate(
+                        'At least {percent}% of allocation spent, but still ≥ {days} days until the project ends — may need a top-up.',
+                        {
+                          percent: thresholds.depletedSpentPercent,
+                          days: thresholds.depletedDaysRemaining,
+                        },
                       )}
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="depleted">
-                    <div>
-                      <p className="text-quaternary small mb-1.5">
-                        {translate(
-                          'At least {percent}% of allocation spent, but still ≥ {days} days until the project ends — may need a top-up.',
-                          {
-                            percent: thresholds.depletedSpentPercent,
-                            days: thresholds.depletedDaysRemaining,
-                          },
-                        )}
+                    </p>
+                    {depleted.length === 0 ? (
+                      <p className="text-quaternary mb-0">
+                        {translate('None.')}
                       </p>
-                      {depleted.length === 0 ? (
-                        <p className="text-quaternary mb-0">
-                          {translate('None.')}
-                        </p>
-                      ) : (
-                        <ul className="mb-0">
-                          {depleted.map((s: ProjectAccountingSummary) => {
-                            const spent =
-                              parseCredits(s.total_spend) +
-                              parseCredits(s.current_month_spend);
-                            const totalAlloc = parseCredits(s.total_credits);
-                            const spentPct = (
-                              (spent / (totalAlloc || 1)) *
-                              100
-                            ).toFixed(1);
-                            const today = DateTime.now().startOf('day');
-                            const end = DateTime.fromISO(s.end_date!).startOf(
-                              'day',
-                            );
-                            const days = daysBetween(today, end);
-                            return (
-                              <li key={s.project_uuid} className="mb-1">
-                                <a
-                                  href={`/projects/${s.project_uuid}/`}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  {s.project_name}
-                                </a>
-                                {translate(
-                                  ' — {spentPct}% spent ({spent} / {total} {currency}), ends {date} ({days} days remaining)',
-                                  {
-                                    spentPct,
-                                    spent: fmtCredits(spent),
-                                    total: fmtCredits(totalAlloc),
-                                    currency: currencyName,
-                                    date: s.end_date,
-                                    days,
-                                  },
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                    ) : (
+                      <ul className="mb-0">
+                        {depleted.map((s: ProjectAccountingSummary) => {
+                          const spent =
+                            parseCredits(s.total_spend) +
+                            parseCredits(s.current_month_spend);
+                          const totalAlloc = parseCredits(s.total_credits);
+                          const spentPct = (
+                            (spent / (totalAlloc || 1)) *
+                            100
+                          ).toFixed(1);
+                          const today = DateTime.now().startOf('day');
+                          const end = DateTime.fromISO(s.end_date!).startOf(
+                            'day',
+                          );
+                          const days = daysBetween(today, end);
+                          return (
+                            <li key={s.project_uuid} className="mb-1">
+                              <a
+                                href={`/projects/${s.project_uuid}/`}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {s.project_name}
+                              </a>
+                              {translate(
+                                ' — {spentPct}% spent ({spent} / {total} {currency}), ends {date} ({days} days remaining)',
+                                {
+                                  spentPct,
+                                  spent: fmtCredits(spent),
+                                  total: fmtCredits(totalAlloc),
+                                  currency: currencyName,
+                                  date: s.end_date,
+                                  days,
+                                },
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                </TabsContent>
+                <TabsContent value="offTrack">
+                  <div>
+                    <p className="text-quaternary small mb-1.5">
+                      {translate(
+                        'After the {day}th of the month, actual daily average spend differs from predicted by more than {percent}%.',
+                        {
+                          day: thresholds.offTrackDayOfMonth,
+                          percent: thresholds.offTrackPercent,
+                        },
                       )}
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="offTrack">
-                    <div>
-                      <p className="text-quaternary small mb-1.5">
-                        {translate(
-                          'After the {day}th of the month, actual daily average spend differs from predicted by more than {percent}%.',
-                          {
-                            day: thresholds.offTrackDayOfMonth,
-                            percent: thresholds.offTrackPercent,
-                          },
-                        )}
+                    </p>
+                    {offTrack.length === 0 ? (
+                      <p className="text-quaternary mb-0">
+                        {translate('None.')}
                       </p>
-                      {offTrack.length === 0 ? (
-                        <p className="text-quaternary mb-0">
-                          {translate('None.')}
-                        </p>
-                      ) : (
-                        <ul className="mb-0">
-                          {offTrack.map((s: ProjectAccountingSummary) => {
-                            const today = DateTime.now().startOf('day');
-                            const end = DateTime.fromISO(s.end_date!).startOf(
-                              'day',
-                            );
-                            const remaining = Math.max(
-                              0,
-                              parseCredits(s.total_credits) -
-                                parseCredits(s.total_spend) -
-                                parseCredits(s.current_month_spend),
-                            );
-                            const predictedDaily =
-                              remaining / Math.max(1, daysBetween(today, end));
-                            const actualDaily =
-                              parseCredits(s.current_month_spend) /
-                              Math.max(1, today.day);
-                            const pct = (
-                              ((actualDaily - predictedDaily) /
-                                (predictedDaily || 1)) *
-                              100
-                            ).toFixed(1);
-                            const direction =
-                              actualDaily > predictedDaily ? 'over' : 'under';
-                            return (
-                              <li key={s.project_uuid} className="mb-1">
-                                <a
-                                  href={`/projects/${s.project_uuid}/`}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  {s.project_name}
-                                </a>
-                                {translate(
-                                  ' — {percentage}% {direction} (actual {actual} vs {predicted} {currency}/day',
-                                  {
-                                    direction,
-                                    percentage: Math.abs(
-                                      parseFloat(pct),
-                                    ).toFixed(1),
-                                    actual: fmtCredits(actualDaily),
-                                    predicted: fmtCredits(predictedDaily),
-                                    currency: currencyName,
-                                  },
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
-                    </div>
-                  </TabsContent>
-                </div>
-              </Tabs>
-            )}
-          </CardContent>
-        </Card>
+                    ) : (
+                      <ul className="mb-0">
+                        {offTrack.map((s: ProjectAccountingSummary) => {
+                          const today = DateTime.now().startOf('day');
+                          const end = DateTime.fromISO(s.end_date!).startOf(
+                            'day',
+                          );
+                          const remaining = Math.max(
+                            0,
+                            parseCredits(s.total_credits) -
+                              parseCredits(s.total_spend) -
+                              parseCredits(s.current_month_spend),
+                          );
+                          const predictedDaily =
+                            remaining / Math.max(1, daysBetween(today, end));
+                          const actualDaily =
+                            parseCredits(s.current_month_spend) /
+                            Math.max(1, today.day);
+                          const pct = (
+                            ((actualDaily - predictedDaily) /
+                              (predictedDaily || 1)) *
+                            100
+                          ).toFixed(1);
+                          const direction =
+                            actualDaily > predictedDaily ? 'over' : 'under';
+                          return (
+                            <li key={s.project_uuid} className="mb-1">
+                              <a
+                                href={`/projects/${s.project_uuid}/`}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {s.project_name}
+                              </a>
+                              {translate(
+                                ' — {percentage}% {direction} (actual {actual} vs {predicted} {currency}/day',
+                                {
+                                  direction,
+                                  percentage: Math.abs(parseFloat(pct)).toFixed(
+                                    1,
+                                  ),
+                                  actual: fmtCredits(actualDaily),
+                                  predicted: fmtCredits(predictedDaily),
+                                  currency: currencyName,
+                                },
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                </TabsContent>
+              </div>
+            </Tabs>
+          )}
+        </Panel>
       )}
     </div>
   );
