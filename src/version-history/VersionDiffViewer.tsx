@@ -1,31 +1,33 @@
 import { DiffEditor } from '@monaco-editor/react';
 import * as monacoEditor from 'monaco-editor';
-import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import {
-  SegmentedControl,
-  SegmentedControlOption,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'waldur-ui';
+import { SegmentedControl, SegmentedControlOption } from 'waldur-ui';
 
-import { StateIndicator } from '@/core/StateIndicator';
 import { initMonaco } from '@/form/monacoSetup';
 import { translate } from '@/i18n';
+import Table from '@/table/Table';
 import { LoadingSpinner } from '@/table/TableRefreshButton';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
-import { HistoryEntityType } from './types';
+import { FieldDiff, HistoryEntityType } from './types';
 import { computeFieldDiffs, formatFieldValue, serializeForDiff } from './utils';
 
 interface VersionDiffViewerProps {
   entityType: HistoryEntityType;
   currentVersion: VersionHistory | null;
   previousVersion: VersionHistory | null;
+  /** Extra controls for the header, beside the view switch. */
+  actions?: ReactNode;
 }
 
 type ViewMode = 'table' | 'json';
@@ -34,6 +36,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
   entityType,
   currentVersion,
   previousVersion,
+  actions,
 }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('table');
   const [isMonacoReady, setIsMonacoReady] = useState(false);
@@ -56,6 +59,8 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
     [diffs],
   );
 
+  const tableId = `${currentVersion?.id}-${previousVersion?.id ?? 'none'}`;
+
   const viewModeOptions: SegmentedControlOption<ViewMode>[] = useMemo(
     () => [
       { value: 'table', label: translate('Table') },
@@ -64,37 +69,36 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
     [],
   );
 
+  // Nothing to compare while loading or when there is no history; the
+  // revisions pane says which.
   if (!currentVersion) {
-    return (
-      <div className="flex justify-center items-center h-full text-quaternary text-sm">
-        {translate('Select a version to view details')}
-      </div>
-    );
+    return null;
   }
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b border-b-secondary">
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium me-1.5">{translate('Changes')}:</span>
-          <StateIndicator
-            label={`${changedCount} ${translate('field(s) changed')}`}
-            variant={changedCount > 0 ? 'warning' : 'secondary'}
-            tone="outline"
+      <div className="flex flex-wrap justify-between items-center gap-2.5 min-h-13 px-6 py-3 border-b border-b-secondary">
+        <div className="flex items-center whitespace-nowrap text-sm font-medium">
+          {translate('Changes ({count})', { count: changedCount })}
+        </div>
+        <div className="flex flex-wrap items-center gap-2.5">
+          {actions}
+          <SegmentedControl<ViewMode>
+            aria-label={translate('Diff view')}
+            size="sm"
+            options={viewModeOptions}
+            value={viewMode}
+            onValueChange={setViewMode}
           />
         </div>
-        <SegmentedControl<ViewMode>
-          aria-label={translate('Diff view')}
-          size="sm"
-          options={viewModeOptions}
-          value={viewMode}
-          onValueChange={setViewMode}
-        />
       </div>
 
       <div className="grow overflow-auto">
-        <div style={{ display: viewMode === 'table' ? undefined : 'none' }}>
-          <TableDiffView diffs={diffs} />
+        <div
+          className="[--table-edge-px:--spacing(6)] [&_[data-slot=card-content]]:[--card-content-px:0px] [&_.overflow-x-auto]:border-0 [&_.overflow-x-auto]:rounded-none"
+          style={{ display: viewMode === 'table' ? undefined : 'none' }}
+        >
+          <TableDiffView key={tableId} tableId={tableId} diffs={diffs} />
         </div>
         {isMonacoReady ? (
           <div
@@ -118,55 +122,55 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
   );
 };
 
+const renderDiffValue = (value: unknown) =>
+  value !== null && typeof value === 'object' ? (
+    <pre className="mb-0 text-xs whitespace-pre-wrap wrap-anywhere">
+      {formatFieldValue(value)}
+    </pre>
+  ) : (
+    formatFieldValue(value)
+  );
+
+const diffColumns: Column<FieldDiff>[] = [
+  {
+    title: translate('Field'),
+    render: ({ row }) => <>{row.label}</>,
+  },
+  {
+    title: translate('Previous'),
+    render: ({ row }) => <>{renderDiffValue(row.oldValue)}</>,
+  },
+  {
+    title: translate('Current'),
+    render: ({ row }) => <>{renderDiffValue(row.newValue)}</>,
+  },
+];
+
 const TableDiffView: FunctionComponent<{
-  diffs: ReturnType<typeof computeFieldDiffs>;
-}> = ({ diffs }) => {
-  if (diffs.length === 0) {
-    return (
-      <div className="text-center text-quaternary py-8 text-sm">
-        {translate('No fields to display')}
-      </div>
-    );
-  }
+  tableId: string;
+  diffs: FieldDiff[];
+}> = ({ tableId, diffs }) => {
+  const tableProps = useTable<FieldDiff>({
+    table: `version-diff-${tableId}`,
+    fetchData: () =>
+      Promise.resolve({ rows: diffs, resultCount: diffs.length }),
+  });
 
   return (
-    // The column minimums apply from md up: on a phone the three columns
-    // share the width, and long values (emails, UUIDs) break instead.
-    <Table className="align-middle mb-0">
-      <TableHeader>
-        <TableRow className="font-medium text-xs uppercase text-quaternary">
-          <TableHead className="ps-4 md:min-w-[150px]">
-            {translate('Field')}
-          </TableHead>
-          <TableHead className="md:min-w-[200px]">
-            {translate('Previous')}
-          </TableHead>
-          <TableHead className="md:min-w-[200px]">
-            {translate('Current')}
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {diffs.map((diff) => (
-          <TableRow
-            key={diff.field}
-            className={diff.changed ? 'bg-warning-subtle' : ''}
-          >
-            <TableCell className="ps-4">{diff.label}</TableCell>
-            <TableCell>
-              <pre className="mb-0 text-xs text-quaternary whitespace-normal wrap-anywhere bg-transparent">
-                {formatFieldValue(diff.oldValue)}
-              </pre>
-            </TableCell>
-            <TableCell>
-              <pre className="mb-0 text-xs whitespace-normal wrap-anywhere bg-transparent">
-                {formatFieldValue(diff.newValue)}
-              </pre>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Table<FieldDiff>
+      {...tableProps}
+      columns={diffColumns}
+      verboseName={translate('fields')}
+      rowKey="field"
+      hasPagination={false}
+      hideTitle
+      hasActionBar={false}
+      hoverShadow={false}
+      // The pane is the table's frame: no card and no dialog-table border.
+      cardBordered={false}
+      placeholderHasRetry={false}
+      minHeight="auto"
+    />
   );
 };
 

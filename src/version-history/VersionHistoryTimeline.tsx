@@ -33,16 +33,8 @@ export const VersionHistoryTimeline: FunctionComponent<
     );
   }
 
-  if (versions.length === 0) {
-    return (
-      <div className="text-center text-quaternary py-8 text-sm">
-        {translate('No version history available.')}
-      </div>
-    );
-  }
-
   return (
-    <Timeline className="mb-0 px-4 py-4" aria-label={translate('Revisions')}>
+    <Timeline className="mb-0 pb-2" aria-label={translate('Revisions')}>
       {versions.map((version, index) => (
         <VersionHistoryItem
           key={version.id}

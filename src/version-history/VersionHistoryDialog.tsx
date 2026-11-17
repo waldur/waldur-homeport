@@ -1,13 +1,16 @@
-import { ArrowLeftIcon } from '@phosphor-icons/react';
+import {
+  ArrowLeftIcon,
+  ClockCounterClockwiseIcon,
+} from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
 import { BaseButton, useBreakpointUp } from 'waldur-ui';
 
-import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { useVersionHistory } from './api';
 import { VersionHistoryDialogProps } from './types';
@@ -109,71 +112,70 @@ export const VersionHistoryDialog: FunctionComponent<
       footer={<CloseDialogButton label={translate('Close')} />}
       bodyClassName="p-0"
     >
-      <div className="flex flex-col h-[70vh]">
-        {/* Toolbar: wraps onto two rows on a phone. */}
-        <div className="flex flex-wrap justify-between items-center gap-2.5 px-4 py-3 border-b border-b-secondary">
-          <div className="flex items-center gap-1.5 whitespace-nowrap">
-            <span className="text-quaternary text-xs">
-              {translate('Total')}:
-            </span>
-            <StateIndicator
-              label={`${versions.length} ${translate('versions')}`}
-              variant="info"
-              tone="outline"
-            />
-          </div>
-          <VersionStateAtTimestamp
-            entityType={entityType}
-            entityUuid={entityUuid}
-            onVersionLoaded={handleTimestampVersionLoaded}
-          />
-        </div>
-
+      <div className="flex flex-col h-[70vh] border-t border-t-secondary">
         {/* Main content */}
-        <div className="flex grow overflow-hidden">
-          {showList && (
-            <div
-              ref={listRef}
-              className={
-                isWide
-                  ? 'border-r border-r-secondary overflow-auto w-[380px] min-w-[320px] shrink-0'
-                  : 'overflow-auto w-full'
-              }
-            >
-              <div className="font-medium text-sm px-4 py-3 border-b border-b-secondary">
-                {translate('Revisions')}
-              </div>
-              <VersionHistoryTimeline
-                versions={versions}
-                selectedVersionId={effectiveSelectedVersion?.id || null}
-                onSelectVersion={handleSelectVersion}
-                isLoading={isLoading}
-              />
-            </div>
-          )}
-
-          {showDiff && (
-            <div className="grow overflow-hidden flex flex-col min-w-0">
-              {!isWide && (
-                <div className="px-2.5 py-1.5 border-b border-b-secondary">
-                  <BaseButton
-                    ref={backRef}
-                    variant="text-secondary"
-                    size="sm"
-                    iconNode={<ArrowLeftIcon weight="bold" />}
-                    label={translate('Revisions')}
-                    onClick={() => showPane('list')}
-                  />
+        {!isLoading && versions.length === 0 ? (
+          <NoResult
+            icon={<ClockCounterClockwiseIcon weight="bold" size={24} />}
+            title={translate('No version history available.')}
+            message={null}
+            noAction
+          />
+        ) : (
+          <div className="flex grow overflow-hidden">
+            {showList && (
+              <div
+                ref={listRef}
+                className={
+                  isWide
+                    ? 'border-r border-r-secondary overflow-auto w-[380px] min-w-[320px] shrink-0'
+                    : 'overflow-auto w-full'
+                }
+              >
+                <div className="flex items-center min-h-13 font-medium text-sm px-6 py-3 border-b border-b-secondary">
+                  {translate('Revisions ({count})', {
+                    count: versions.length,
+                  })}
                 </div>
-              )}
-              <VersionDiffViewer
-                entityType={entityType}
-                currentVersion={effectiveSelectedVersion}
-                previousVersion={previousVersion}
-              />
-            </div>
-          )}
-        </div>
+                <VersionHistoryTimeline
+                  versions={versions}
+                  selectedVersionId={effectiveSelectedVersion?.id || null}
+                  onSelectVersion={handleSelectVersion}
+                  isLoading={isLoading}
+                />
+              </div>
+            )}
+
+            {showDiff && (
+              <div className="grow overflow-hidden flex flex-col min-w-0">
+                {!isWide && (
+                  <div className="px-2.5 py-1.5 border-b border-b-secondary">
+                    <BaseButton
+                      ref={backRef}
+                      variant="text-secondary"
+                      size="sm"
+                      iconNode={<ArrowLeftIcon weight="bold" />}
+                      label={translate('Revisions')}
+                      onClick={() => showPane('list')}
+                    />
+                  </div>
+                )}
+                <VersionDiffViewer
+                  entityType={entityType}
+                  currentVersion={effectiveSelectedVersion}
+                  previousVersion={previousVersion}
+                  actions={
+                    <VersionStateAtTimestamp
+                      entityType={entityType}
+                      entityUuid={entityUuid}
+                      onVersionLoaded={handleTimestampVersionLoaded}
+                    />
+                  }
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </ModalDialog>
   );

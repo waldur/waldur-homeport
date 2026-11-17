@@ -1,4 +1,5 @@
 import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { FieldDiff, HistoryEntityType } from './types';
 
@@ -179,7 +180,7 @@ function formatFieldName(field: string): string {
 
 export function formatFieldValue(value: unknown): string {
   if (value === null || value === undefined) {
-    return translate('N/A');
+    return DASH_ESCAPE_CODE;
   }
   if (typeof value === 'boolean') {
     return value ? translate('Yes') : translate('No');

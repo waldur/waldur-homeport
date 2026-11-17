@@ -1,3 +1,4 @@
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FunctionComponent, useState } from 'react';
 import { VersionHistory } from 'waldur-js-client';
@@ -63,6 +64,7 @@ export const VersionStateAtTimestamp: FunctionComponent<
         disabledReason={translate('Select a date and time first')}
         pending={isLoading}
         label={translate('Load')}
+        iconNode={<ArrowsClockwiseIcon weight="bold" />}
       />
       {error && (
         <span className="text-danger text-xs">
