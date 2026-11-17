@@ -124,10 +124,10 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const dialog = await openDialog(canvasElement);
     await expect(dialog.getByText('Version history: Big Corp')).toBeVisible();
-    await expect(dialog.getByText('3 versions')).toBeVisible();
+    await expect(dialog.getByText('Revisions (3)')).toBeVisible();
     // The current revision is selected and diffed against v2: name, email
     // and blocked changed.
-    await expect(await dialog.findByText('3 field(s) changed')).toBeVisible();
+    await expect(await dialog.findByText('Changes (3)')).toBeVisible();
     // A policy revision gets a badge and a readable comment.
     await expect(dialog.getByText('Policy')).toBeVisible();
     await expect(
@@ -142,7 +142,7 @@ export const SelectOlderRevision: Story = {
     const dialog = await openDialog(canvasElement);
     await userEvent.click(await dialog.findByText('Updated contact details'));
     // v2 against the initial revision: only the country changed.
-    await expect(await dialog.findByText('1 field(s) changed')).toBeVisible();
+    await expect(await dialog.findByText('Changes (1)')).toBeVisible();
   },
 };
 
@@ -175,9 +175,8 @@ export const NoHistory: Story = {
     await expect(
       await dialog.findByText('No version history available.'),
     ).toBeVisible();
-    await expect(
-      dialog.getByText('Select a version to view details'),
-    ).toBeVisible();
+    // One empty state for the whole body, not a pane each.
+    await expect(dialog.queryByText('Revisions')).not.toBeInTheDocument();
   },
 };
 
@@ -219,7 +218,7 @@ export const MobileListThenDiff: Story = {
     );
     const back = await dialog.findByRole('button', { name: 'Revisions' });
     await expect(back).toHaveFocus();
-    await expect(await dialog.findByText('1 field(s) changed')).toBeVisible();
+    await expect(await dialog.findByText('Changes (1)')).toBeVisible();
     await expect(dialog.queryByRole('list')).not.toBeInTheDocument();
 
     await userEvent.click(back);

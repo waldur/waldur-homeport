@@ -11894,6 +11894,16 @@
       "feature_area": "managed-projects"
     }
   },
+  "Changes ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "version-history"
+    }
+  },
   "Changes from template": {
     "context": {
       "primary_ui_type": "label",
@@ -26104,6 +26114,7 @@
   },
   "Field": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "steps"
     }
   },
@@ -40234,11 +40245,6 @@
   "No feature changes.": {
     "context": {
       "feature_area": "demo-presets"
-    }
-  },
-  "No fields to display": {
-    "context": {
-      "feature_area": "version-history"
     }
   },
   "No file has been imported": {
@@ -58717,6 +58723,16 @@
       "feature_area": "version-history"
     }
   },
+  "Revisions ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "version-history"
+    }
+  },
   "Revocation": {
     "context": {
       "primary_ui_type": "label"
@@ -61444,11 +61460,6 @@
   "Select a verification method": {
     "context": {
       "feature_area": "organization-create"
-    }
-  },
-  "Select a version to view details": {
-    "context": {
-      "feature_area": "version-history"
     }
   },
   "Select accounting period": {
@@ -89255,11 +89266,6 @@
       "feature_area": "feedback"
     }
   },
-  "field(s) changed": {
-    "context": {
-      "feature_area": "version-history"
-    }
-  },
   "fields": {
     "context": {
       "feature_area": "confirmation-drawer"
@@ -91193,11 +91199,6 @@
   "vendor offering mappings": {
     "context": {
       "feature_area": "vendorOfferings"
-    }
-  },
-  "versions": {
-    "context": {
-      "feature_area": "version-history"
     }
   },
   "vhosts": {

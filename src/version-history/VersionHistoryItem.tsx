@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
 import {
+  Avatar,
   Badge,
   cn,
-  TimelineConnector,
   TimelineContent,
   TimelineIcon,
   TimelineItem,
@@ -13,7 +13,6 @@ import {
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
-import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { formatPolicyComment, isPolicyComment } from './utils';
@@ -26,47 +25,13 @@ interface VersionHistoryItemProps {
   totalVersions: number;
 }
 
-const nameToColor = (name: string) => {
-  const colors = ['primary', 'success', 'info', 'warning', 'danger'] as const;
-  const hash = hashStr(name);
-  const index = (hash >>> 0) % colors.length;
-  return colors[index] || 'primary';
-};
-
-const hashStr = (str: string) => {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const chr = str.charCodeAt(i);
-    hash = (hash << 5) - hash + chr;
-    hash |= 0;
-  }
-  return hash;
-};
-
-const AVATAR_COLOR_CLASSES: Record<string, string> = {
-  primary: 'bg-brand-subtle text-brand',
-  success: 'bg-success-subtle text-success',
-  info: 'bg-info-subtle text-info',
-  warning: 'bg-warning-subtle text-warning',
-  danger: 'bg-danger-subtle text-danger',
-};
-
 const VersionAvatar: FunctionComponent<{
   userName: string;
 }> = ({ userName }) => {
-  const color = nameToColor(userName);
-
   // Decorative: the name is spelled out beside it.
   return (
     <TimelineIcon aria-hidden="true">
-      <div
-        className={cn(
-          'size-8 rounded-full flex items-center justify-center text-xs font-medium',
-          AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary,
-        )}
-      >
-        {getAbbreviation(userName)}
-      </div>
+      <Avatar name={userName} size={32} className="border border-secondary" />
     </TimelineIcon>
   );
 };
@@ -105,27 +70,27 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
     <TimelineItem
       isSelected={isSelected}
       className={cn(
-        'rounded-lg transition-colors',
-        isSelected ? 'bg-brand-subtle' : 'hover:bg-primary-hover',
-        'has-[>button:focus-visible]:outline-[var(--focus-ring-width)] has-[>button:focus-visible]:outline-[var(--focus-ring-color)] has-[>button:focus-visible]:outline-offset-[var(--focus-ring-offset)] has-[>button:focus-visible]:outline-solid',
+        // Full-width selectable rows, as in the Add resource categories list.
+        'px-6 py-3 border-b border-b-secondary transition-colors',
+        isSelected ? 'bg-tertiary' : 'hover:bg-secondary',
+        'has-[>button:focus-visible]:outline-[var(--focus-ring-width)] has-[>button:focus-visible]:outline-[var(--focus-ring-color)] has-[>button:focus-visible]:outline-offset-[calc(var(--focus-ring-width)*-1)] has-[>button:focus-visible]:outline-solid',
       )}
     >
-      <TimelineConnector />
       <VersionAvatar userName={userName} />
       <TimelineContent asChild>
         <button
           type="button"
-          className="after:absolute after:inset-0 after:z-1 block w-full py-1.5 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-2.5"
+          className="after:absolute after:inset-0 after:z-1 block w-full p-0 border-0 bg-transparent text-left text-inherit focus-visible:outline-none"
           aria-current={isSelected || undefined}
           onClick={onSelect}
         >
-          <span className="flex justify-between items-start">
+          <span className="flex justify-between items-start gap-2">
             <span className="block grow min-w-0">
               <span className={cn('block text-xs', mutedText)}>
                 <span className="font-medium text-sm mr-3">{userName}</span>
                 {isPolicyComment(version.revision_comment) && (
                   <Badge
-                    variant="warning"
+                    variant="neutral"
                     size="sm"
                     leftIcon={<ShieldWarningIcon weight="bold" />}
                     shape="pill"
@@ -136,6 +101,7 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
                   </Badge>
                 )}
                 <time
+                  className="whitespace-nowrap"
                   dateTime={version.revision_date}
                   title={formatMediumDateTime(version.revision_date)}
                 >
@@ -154,7 +120,7 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
             </span>
             <StateIndicator
               label={versionLabel}
-              variant={versionIndex === 0 ? 'success' : 'secondary'}
+              variant={versionIndex === 0 ? 'success' : 'neutral'}
               tone="outline"
               shape="pill"
             />

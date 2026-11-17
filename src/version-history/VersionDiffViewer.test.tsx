@@ -1,8 +1,19 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { ReactElement } from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { describe, expect, it } from 'vitest';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { VersionDiffViewer } from './VersionDiffViewer';
+
+// The diff table reads table state from the store.
+const renderViewer = (ui: ReactElement) =>
+  renderWithProviders(
+    <Provider store={createStore(() => ({}))}>{ui}</Provider>,
+  );
 
 const mockCurrentVersion = {
   uuid: 'v2',
@@ -18,7 +29,7 @@ const mockPreviousVersion = {
 
 describe('VersionDiffViewer', () => {
   it('renders SegmentedControl with Table and JSON view options', async () => {
-    render(
+    renderViewer(
       <VersionDiffViewer
         entityType="resource"
         currentVersion={mockCurrentVersion}
@@ -41,7 +52,7 @@ describe('VersionDiffViewer', () => {
 
   it('switches between Table and JSON view modes when selected', async () => {
     const user = userEvent.setup();
-    render(
+    renderViewer(
       <VersionDiffViewer
         entityType="resource"
         currentVersion={mockCurrentVersion}
