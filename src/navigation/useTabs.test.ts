@@ -1,6 +1,8 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getTabs } from './useTabs';
+import { router } from '@/router';
+
+import { getTabs, isDescendantOf } from './useTabs';
 
 vi.mock('@/store/store', () => ({ default: { getState: () => ({}) } }));
 vi.mock('@/features/connect', () => ({
@@ -89,5 +91,35 @@ describe('getTabs', () => {
 
   it('hides the group itself when its own guard fails', () => {
     expect(getTabs(root, [group([deny]), invoices([allow])])).toEqual([]);
+  });
+});
+
+describe('isDescendantOf', () => {
+  const states = {
+    layout: { name: 'layout' },
+    organization: { name: 'organization', parent: 'layout' },
+    'organization-billing': {
+      name: 'organization-billing',
+      parent: 'organization',
+    },
+  };
+  beforeEach(() => {
+    vi.mocked(router.stateService.get).mockImplementation(
+      ((name: string) => states[name]) as any,
+    );
+  });
+
+  it('follows the parent a dotted state name implies', () => {
+    expect(
+      isDescendantOf('organization', { name: 'organization-billing.billing' }),
+    ).toBe(true);
+  });
+
+  it('does not match an unrelated tree', () => {
+    expect(
+      isDescendantOf('marketplace-provider', {
+        name: 'organization-billing.billing',
+      }),
+    ).toBeFalsy();
   });
 });

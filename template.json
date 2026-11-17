@@ -4956,6 +4956,17 @@
       "feature_area": "affiliate-earnings"
     }
   },
+  "Amount ({currency})": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "currency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "list"
+    }
+  },
   "Amount *": {
     "context": {
       "feature_area": "usage"
@@ -84536,7 +84547,7 @@
   "View details": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "plan"
+      "feature_area": "list"
     }
   },
   "View event consumers": {
@@ -93288,6 +93299,16 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "{count} records": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "list"
     }
   },
   "{count} rejected": {
