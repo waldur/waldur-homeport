@@ -204,6 +204,10 @@ export function clearMappingCache(): void {
 
 /** Format a cache age for display, e.g. "3 hr ago". */
 export function formatCacheAge(cachedAt: Date): string {
+  // Under a second Luxon says "in 0 sec." / "0 sec. ago".
+  if (Date.now() - cachedAt.getTime() < 1000) {
+    return translate('just now');
+  }
   return (
     DateTime.fromJSDate(cachedAt).toRelative({ style: 'short' }) ??
     translate('just now')

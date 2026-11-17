@@ -49,9 +49,9 @@ export const ReportPreFilters: FC<ReportPreFiltersProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-2.5 mb-2.5 flex-wrap">
+    <div className="flex items-center gap-2.5 mb-5.5 flex-wrap">
       <FormField>
-        <FormLabel className="small mb-1">{translate('Month')}</FormLabel>
+        <FormLabel>{translate('Month')}</FormLabel>
         <MonthPicker
           value={value}
           onChange={handleChange}

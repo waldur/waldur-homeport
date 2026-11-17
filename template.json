@@ -4520,11 +4520,6 @@
       "feature_area": "policies"
     }
   },
-  "Allocation Summary": {
-    "context": {
-      "feature_area": "reports"
-    }
-  },
   "Allocation Unit": {
     "context": {
       "feature_area": "project-templates"
@@ -4601,7 +4596,7 @@
   },
   "Allocation summary": {
     "context": {
-      "feature_area": "openportal"
+      "feature_area": "reports"
     }
   },
   "Allocation timing": {
@@ -13983,7 +13978,7 @@
       "feature_area": "roles"
     }
   },
-  "Concerning Projects": {
+  "Concerning projects": {
     "context": {
       "feature_area": "reports"
     }
@@ -19766,11 +19761,6 @@
   "Deselect all": {
     "context": {
       "feature_area": "site-agent"
-    }
-  },
-  "Deselect all visible": {
-    "context": {
-      "feature_area": "reports"
     }
   },
   "Designates whether the user can access admin site.": {
@@ -29101,6 +29091,11 @@
   "Hide the template's changes": {
     "context": {
       "feature_area": "workflow-check"
+    }
+  },
+  "Hide thresholds": {
+    "context": {
+      "feature_area": "reports"
     }
   },
   "Hide workflow": {
@@ -39434,7 +39429,7 @@
       "feature_area": "inference"
     }
   },
-  "No OpenPortal reports found for the selected projects.": {
+  "No OpenPortal reports found for the selected projects. Change the filters above and load again.": {
     "context": {
       "feature_area": "reports"
     }
@@ -39521,7 +39516,7 @@
       "feature_area": "reports"
     }
   },
-  "No accounting summaries found for the selected projects.": {
+  "No accounting summaries found for the selected projects. Change the filters above and load again.": {
     "context": {
       "feature_area": "reports"
     }
@@ -39632,6 +39627,11 @@
   "No aggregated data found. Try adjusting your filters.": {
     "context": {
       "feature_area": "openstack-instances"
+    }
+  },
+  "No allocation data found": {
+    "context": {
+      "feature_area": "reports"
     }
   },
   "No allocation mapping": {
@@ -39912,6 +39912,11 @@
   "No components to pool": {
     "context": {
       "feature_area": "resource-pools"
+    }
+  },
+  "No concerning projects": {
+    "context": {
+      "feature_area": "reports"
     }
   },
   "No configuration content available": {
@@ -40952,12 +40957,17 @@
       "feature_area": "create"
     }
   },
+  "No projects match the current thresholds.": {
+    "context": {
+      "feature_area": "reports"
+    }
+  },
   "No projects match the filters.": {
     "context": {
       "feature_area": "reports"
     }
   },
-  "No projects with future end dates — nothing to plot.": {
+  "No projects with future end dates.": {
     "context": {
       "feature_area": "reports"
     }
@@ -41070,6 +41080,11 @@
   "No remote identifier provided.": {
     "context": {
       "feature_area": "managed-projects"
+    }
+  },
+  "No reports found": {
+    "context": {
+      "feature_area": "reports"
     }
   },
   "No request selected": {
@@ -61500,11 +61515,6 @@
   "Select all rows": {
     "context": {
       "feature_area": "table"
-    }
-  },
-  "Select all visible": {
-    "context": {
-      "feature_area": "reports"
     }
   },
   "Select allocation unit": {
@@ -82341,7 +82351,7 @@
   "Usage records, billing periods and quotas of past months. They follow the resources so history stays with them.": {},
   "Usage report": {
     "context": {
-      "feature_area": "openportal"
+      "feature_area": "reports"
     }
   },
   "Usage report has been submitted.": {
@@ -92985,7 +92995,7 @@
       "feature_area": "credits"
     }
   },
-  "{count} project has no end date and is not shown in the burn-down chart. Together it represents <strong>{amount} {currencyName}</strong> of unspent allocation.": {
+  "{count} project has no end date and is not shown in the burn-down chart. Together it represents {amount} of unspent allocation.": {
     "context": {
       "variables": {
         "count": {
@@ -92993,9 +93003,6 @@
         },
         "amount": {
           "type": "number"
-        },
-        "currencyName": {
-          "type": "string"
         }
       },
       "feature_area": "reports"
@@ -93076,7 +93083,7 @@
       "feature_area": "service-providers"
     }
   },
-  "{count} projects have no end date and are not shown in the burn-down chart. Together they represent <strong>{amount} {currencyName}</strong> of unspent allocation.": {
+  "{count} projects have no end date and are not shown in the burn-down chart. Together they represent {amount} of unspent allocation.": {
     "context": {
       "variables": {
         "count": {
@@ -93084,9 +93091,6 @@
         },
         "amount": {
           "type": "number"
-        },
-        "currencyName": {
-          "type": "string"
         }
       },
       "feature_area": "reports"
@@ -97992,11 +97996,6 @@
           "type": "unknown"
         }
       },
-      "feature_area": "reports"
-    }
-  },
-  "✓ No concerning projects found with the current thresholds.": {
-    "context": {
       "feature_area": "reports"
     }
   }
