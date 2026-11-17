@@ -13,6 +13,7 @@ import {
 vi.mock('@sentry/react', () => ({
   addBreadcrumb: vi.fn(),
   browserTracingIntegration: vi.fn(),
+  getClient: vi.fn(),
   init: vi.fn(),
   setUser: vi.fn(),
 }));
@@ -80,6 +81,31 @@ describe('tagPageTranslation', () => {
     expect(vi.mocked(Sentry.init).mock.calls[0][0]?.beforeSend).toBe(
       tagPageTranslation,
     );
+  });
+});
+
+describe('initSentry', () => {
+  const options = {
+    dsn: 'http://x',
+    release: '1',
+    environment: 'test',
+    tracePropagationTargets: [],
+  };
+
+  beforeEach(() => {
+    vi.mocked(Sentry.init).mockClear();
+  });
+
+  it('initializes the SDK when no client exists yet', () => {
+    vi.mocked(Sentry.getClient).mockReturnValue(undefined);
+    initSentry(options);
+    expect(Sentry.init).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves an existing client alone', () => {
+    vi.mocked(Sentry.getClient).mockReturnValue({} as any);
+    initSentry(options);
+    expect(Sentry.init).not.toHaveBeenCalled();
   });
 });
 

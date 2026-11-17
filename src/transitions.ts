@@ -39,8 +39,37 @@ import {
   getCustomer as getWorkspaceCustomer,
 } from './workspace/selectors';
 
+// Deregistration functions of the hooks currently attached.
+let attachedHooks: Array<() => void> = [];
+
+// Wraps a hook registrar, keeping its signature, so that the hooks it
+// registers can be removed when the transitions are attached again.
+const tracked = <F extends (...args: any[]) => any>(register: F): F =>
+  ((...args: Parameters<F>) => {
+    const deregister = register(...args);
+    if (typeof deregister === 'function') {
+      attachedHooks.push(deregister);
+    }
+    return deregister;
+  }) as F;
+
+/**
+ * Registers the app's router transition hooks. Calling it again replaces the
+ * hooks attached before instead of adding a second set, so each hook runs
+ * once per transition however often the bootstrap runs.
+ */
 export function attachTransitions() {
-  router.transitionService.onSuccess({}, function (transition) {
+  attachedHooks.forEach((deregister) => deregister());
+  attachedHooks = [];
+  const { transitionService } = router;
+  const hooks = {
+    onBefore: tracked(transitionService.onBefore.bind(transitionService)),
+    onStart: tracked(transitionService.onStart.bind(transitionService)),
+    onSuccess: tracked(transitionService.onSuccess.bind(transitionService)),
+    onError: tracked(transitionService.onError.bind(transitionService)),
+  };
+
+  hooks.onSuccess({}, function (transition) {
     ModalService.close();
     // A docked drawer, such as the chats, stays open beside the next page.
     // The first page of a load leaves no page behind: a chat drawer reopened
@@ -50,7 +79,7 @@ export function attachTransitions() {
     }
   });
 
-  router.transitionService.onSuccess({}, function () {
+  hooks.onSuccess({}, function () {
     document['scrollTop'] = 0;
     const wrapper = document.querySelector('#wrapper');
     if (wrapper) {
@@ -59,7 +88,7 @@ export function attachTransitions() {
   });
 
   // Check profile validity for ALL authenticated users, regardless of route auth setting
-  router.transitionService.onBefore(
+  hooks.onBefore(
     {
       to: () => AuthService.isAuthenticated(),
     },
@@ -146,7 +175,7 @@ export function attachTransitions() {
   // only its identity (waldur/waldur-mastermind#396). Whatever led them into
   // the organization — the Organizations list, header search, a breadcrumb or a
   // bookmark — they land in the provider workspace instead of an empty page.
-  router.transitionService.onBefore(
+  hooks.onBefore(
     { to: (state) => isDescendantOf('organization', state.self) },
     async (transition) => {
       if (!AuthService.isAuthenticated()) {
@@ -187,7 +216,7 @@ export function attachTransitions() {
   // If state parent is `auth` and user does not have authentication token,
   // he should be redirected to login page.
 
-  router.transitionService.onStart(
+  hooks.onStart(
     {
       to: (state) =>
         state.data && state.data.auth && !AuthService.isAuthenticated(),
@@ -231,7 +260,7 @@ export function attachTransitions() {
   // If state data has `anonymous` flag and user has authentication token,
   // he is redirected to dashboard.
 
-  router.transitionService.onStart(
+  hooks.onStart(
     {
       to: (state) =>
         state.data && state.data.anonymous && AuthService.isAuthenticated(),
@@ -241,7 +270,7 @@ export function attachTransitions() {
   // If state data has `feature` field and this feature is disabled,
   // user is redirected to the feature-disabled empty state.
 
-  router.transitionService.onStart(
+  hooks.onStart(
     {
       to: (state) =>
         state.data &&
@@ -258,7 +287,7 @@ export function attachTransitions() {
   );
 
   // Check resolvers before entering to a state
-  router.transitionService.onBefore({}, async (transition) => {
+  hooks.onBefore({}, async (transition) => {
     // The whole destination path, ancestors included. This used to climb
     // `parent` from the state *declaration*, which stops at any state named
     // with UI-Router's dot notation: UI-Router records the parent on its
@@ -284,7 +313,7 @@ export function attachTransitions() {
     );
   });
 
-  router.transitionService.onStart(
+  hooks.onStart(
     {
       to: (state, transition) =>
         state.data &&
@@ -313,7 +342,7 @@ export function attachTransitions() {
       ),
   );
 
-  router.transitionService.onError({}, (transition) => {
+  hooks.onError({}, (transition) => {
     const error = transition.error();
 
     // A transition also "fails" when it is superseded by a newer one, aborted
@@ -357,7 +386,7 @@ export function attachTransitions() {
     return goTo('errorPage.notFound', undefined, { location: false });
   });
 
-  router.transitionService.onStart({}, (transition) => {
+  hooks.onStart({}, (transition) => {
     const fromName = transition.from().name;
     if (fromName) {
       setPrevState(fromName);
@@ -366,13 +395,13 @@ export function attachTransitions() {
   });
 
   // Reaching a gated page means the user is through the gate: intent is spent.
-  router.transitionService.onSuccess({}, (transition) => {
+  hooks.onSuccess({}, (transition) => {
     if (isResumableState(transition.to().name)) {
       clearBlockedNavigation();
     }
   });
 
-  router.transitionService.onSuccess({}, () => {
+  hooks.onSuccess({}, () => {
     if (MatomoInstance) {
       // Matomo defaults to document.title, which carries the unread prefix.
       MatomoInstance.trackPageView({ documentTitle: getDocumentTitleBase() });
@@ -383,7 +412,7 @@ export function attachTransitions() {
   // isResumableState skips profile, error, login and home states, so gate
   // pages (profile-manage, the passkey interstitial) — where the user was
   // *sent*, not where they were going — are never stored as a destination.
-  router.transitionService.onSuccess({}, (transition) => {
+  hooks.onSuccess({}, (transition) => {
     if (
       transition.to().data?.auth &&
       isResumableState(transition.to().name) &&

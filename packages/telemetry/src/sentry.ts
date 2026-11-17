@@ -170,8 +170,16 @@ export interface SentryInitOptions {
   tracePropagationTargets: (string | RegExp)[];
 }
 
-/** Initializes the Sentry SDK with this codebase's shared breadcrumb scrubbing. */
+/**
+ * Initializes the Sentry SDK with this codebase's shared breadcrumb scrubbing.
+ * Does nothing once a client exists: a second init would add another set of
+ * request instrumentation, recording each request as several spans of which
+ * only one ever ends.
+ */
 export function initSentry(options: SentryInitOptions) {
+  if (Sentry.getClient()) {
+    return;
+  }
   Sentry.init({
     release: options.release,
     dsn: options.dsn,

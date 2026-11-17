@@ -1,3 +1,12 @@
+import {
+  focusManager,
+  onlineManager,
+  QueryClient,
+  QueryClientProvider,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
+import { act, render, waitFor } from '@testing-library/react';
+import { Suspense } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { configurationRetrieve } from 'waldur-js-client';
 
@@ -48,5 +57,47 @@ describe('loadConfig — error wrapping', () => {
       ),
       cause: networkError,
     });
+  });
+});
+
+describe('bootstrapQueryOptions', () => {
+  it('loads once per page load, however often the window regains focus', async () => {
+    const { bootstrapQueryOptions } = await import('./bootstrap');
+    const loadConfig = vi.fn(() => Promise.resolve(true));
+    const client = new QueryClient();
+    const Bootstrap = () => {
+      useSuspenseQuery({ ...bootstrapQueryOptions, queryFn: loadConfig });
+      return null;
+    };
+    render(
+      <QueryClientProvider client={client}>
+        <Suspense fallback={null}>
+          <Bootstrap />
+        </Suspense>
+      </QueryClientProvider>,
+    );
+    await waitFor(() => expect(loadConfig).toHaveBeenCalledTimes(1));
+
+    // React Query treats a suspense query as stale after a second; refocus
+    // and reconnect past that point.
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      for (let i = 0; i < 3; i++) {
+        await act(async () => {
+          vi.advanceTimersByTime(1500);
+          focusManager.setFocused(false);
+          focusManager.setFocused(true);
+          onlineManager.setOnline(false);
+          onlineManager.setOnline(true);
+          await vi.runOnlyPendingTimersAsync();
+        });
+      }
+    } finally {
+      vi.useRealTimers();
+      focusManager.setFocused(undefined);
+    }
+
+    expect(loadConfig).toHaveBeenCalledTimes(1);
+    client.clear();
   });
 });
