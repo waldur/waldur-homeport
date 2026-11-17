@@ -19,6 +19,17 @@ const onStartHandlers: Array<{ criteria: any; callback: any }> = [];
 const onSuccessHandlers: Array<{ criteria: any; callback: any }> = [];
 const onErrorHandlers: Array<{ criteria: any; callback: any }> = [];
 
+// Like UI-Router's, registering a hook returns the function that removes it.
+const register = (handlers: any[], hook: any) => {
+  handlers.push(hook);
+  return () => {
+    const index = handlers.indexOf(hook);
+    if (index !== -1) {
+      handlers.splice(index, 1);
+    }
+  };
+};
+
 vi.mock('@/store/store', () => ({
   default: { dispatch: vi.fn(), getState: (...args) => mockGetState(...args) },
 }));
@@ -71,18 +82,14 @@ vi.mock('./FeaturesEnums', () => ({
 vi.mock('./router', () => ({
   router: {
     transitionService: {
-      onBefore: (criteria, callback) => {
-        onBeforeHandlers.push({ criteria, callback });
-      },
-      onStart: (criteria, callback) => {
-        onStartHandlers.push({ criteria, callback });
-      },
-      onSuccess: (criteria, callback) => {
-        onSuccessHandlers.push({ criteria, callback });
-      },
-      onError: (criteria, callback) => {
-        onErrorHandlers.push({ criteria, callback });
-      },
+      onBefore: (criteria, callback) =>
+        register(onBeforeHandlers, { criteria, callback }),
+      onStart: (criteria, callback) =>
+        register(onStartHandlers, { criteria, callback }),
+      onSuccess: (criteria, callback) =>
+        register(onSuccessHandlers, { criteria, callback }),
+      onError: (criteria, callback) =>
+        register(onErrorHandlers, { criteria, callback }),
     },
     urlService: { path: vi.fn(() => '/') },
   },
@@ -824,5 +831,35 @@ describe('Login guard for an anonymous visitor', () => {
     findLoginGuard().callback(createMockTransition('oauth-consent'));
 
     expect(mockTarget).toHaveBeenCalledWith('public.marketplace-landing');
+  });
+});
+
+describe('attachTransitions', () => {
+  beforeEach(() => {
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+  });
+
+  it('keeps a single set of hooks when the bootstrap runs again', () => {
+    attachTransitions();
+    const counts = [
+      onBeforeHandlers.length,
+      onStartHandlers.length,
+      onSuccessHandlers.length,
+      onErrorHandlers.length,
+    ];
+    expect(counts.every((count) => count > 0)).toBe(true);
+
+    attachTransitions();
+    attachTransitions();
+
+    expect([
+      onBeforeHandlers.length,
+      onStartHandlers.length,
+      onSuccessHandlers.length,
+      onErrorHandlers.length,
+    ]).toEqual(counts);
   });
 });

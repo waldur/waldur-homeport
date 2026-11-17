@@ -14,7 +14,7 @@ import { ReauthenticationRoot } from '@/auth/reauthentication/ReauthenticationRo
 import { BootSplashGate } from '@/BootSplashGate';
 import { AppCopyFeedback } from '@/core/CopyFeedback';
 import { renderStateLink } from '@/core/Link';
-import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
+import { queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
 import { RestoreOpenDrawer } from '@/drawer/RestoreOpenDrawer';
@@ -25,7 +25,7 @@ import { RealtimeRoot } from '@/realtime/RealtimeRoot';
 import store from '@/store/store';
 
 import { BootErrorScreen } from './BootErrorScreen';
-import { loadConfig } from './core/bootstrap';
+import { bootstrapQueryOptions } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';
 import { ConfirmModalRoot } from './modal/ConfirmModalRoot';
 import { RouteLoadingBar } from './navigation/RouteLoadingBar';
@@ -37,10 +37,7 @@ import { ThemeProvider } from './theme/ThemeProvider';
 states.forEach((state) => router.stateRegistry.register(state));
 
 const ApplicationInner: FunctionComponent = () => {
-  useSuspenseQuery({
-    queryKey: BOOTSTRAP_QUERY_KEY,
-    queryFn: loadConfig,
-  });
+  useSuspenseQuery(bootstrapQueryOptions);
 
   return (
     <ErrorBoundary fallback={ErrorMessage}>
