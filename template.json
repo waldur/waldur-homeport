@@ -17169,7 +17169,8 @@
   "Current flavor": {},
   "Current limit": {
     "context": {
-      "feature_area": "change-limits"
+      "primary_ui_type": "title",
+      "feature_area": "reallocate-limits"
     }
   },
   "Current limits": {
@@ -48897,11 +48898,6 @@
   "Please enter at least one keyword.": {
     "context": {
       "feature_area": "reviewer-discovery"
-    }
-  },
-  "Please enter desired values in the rows below:": {
-    "context": {
-      "feature_area": "plan"
     }
   },
   "Please enter reason why offering has been paused.": {

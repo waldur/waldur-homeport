@@ -2,16 +2,7 @@ import { get } from 'es-toolkit/compat';
 import React from 'react';
 import { useFormState } from 'react-final-form';
 
-import {
-  Card,
-  CardContent,
-  Table,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'waldur-ui';
+import { Card } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -21,10 +12,9 @@ import {
   getPairedFormulaKeys,
 } from '@/marketplace/common/derivedLimits';
 import { useSyncDerivedLimits } from '@/marketplace/common/useSyncDerivedLimits';
-import { PriceTooltip } from '@/price/PriceTooltip';
+import { SimpleTable } from '@/table/SimpleTable';
 
-import { ComponentRow } from './ComponentRow';
-import { ComponentTotalRow } from './ComponentTotalRow';
+import { getLimitColumns, LimitTableRow } from './ComponentRow';
 import { FetchedData, getLimitChangeData } from './utils';
 
 interface ChangeLimitsComponentProps {
@@ -97,6 +87,36 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
     [data, newLimits, orderCanBeApproved],
   );
 
+  const columns = React.useMemo(
+    () =>
+      getLimitColumns({
+        shouldConcealPrices: limitChangeData.shouldConcealPrices,
+        limits: data.offeringLimits,
+        parentName,
+        derivedTypes,
+        readOnly,
+      }),
+    [
+      limitChangeData.shouldConcealPrices,
+      data.offeringLimits,
+      parentName,
+      derivedTypes,
+      readOnly,
+    ],
+  );
+  const rows: LimitTableRow[] = [
+    ...limitChangeData.components.map((component) => ({
+      uuid: component.type,
+      component,
+    })),
+    ...(limitChangeData.shouldConcealPrices
+      ? []
+      : limitChangeData.periodTotals.map((total) => ({
+          uuid: `total-${total.chargeMode}`,
+          total,
+        }))),
+  ];
+
   return (
     <div>
       {!readOnly && hasPairedOption ? (
@@ -113,47 +133,9 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
       ) : (
         <p>{translate('Resource does not have any plan.')}</p>
       )}
-      <Card variant="table" bordered className="full-width">
-        <CardContent className="p-0">
-          <Table className="align-middle">
-            <TableHeader>
-              <TableRow className="align-middle">
-                <TableHead>{translate('Component')}</TableHead>
-                <TableHead>{translate('Usage')}</TableHead>
-                <TableHead>{translate('Current limit')}</TableHead>
-                <TableHead>{translate('New limit')}</TableHead>
-                <TableHead>{translate('Difference')}</TableHead>
-                {limitChangeData.shouldConcealPrices ? null : (
-                  <TableHead className="sm:w-2/12">
-                    {translate('Price')}
-                    <PriceTooltip />
-                  </TableHead>
-                )}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {limitChangeData.components.map((component, index) => (
-                <ComponentRow
-                  key={index}
-                  component={component}
-                  limits={data.offeringLimits[component.type]}
-                  shouldConcealPrices={limitChangeData.shouldConcealPrices}
-                  parentName={parentName}
-                  derived={derivedTypes.has(component.type)}
-                  readOnly={readOnly}
-                />
-              ))}
-            </TableBody>
-            {limitChangeData.shouldConcealPrices ||
-            limitChangeData.periodTotals.length === 0 ? null : (
-              <TableFooter>
-                {limitChangeData.periodTotals.map((row) => (
-                  <ComponentTotalRow key={row.chargeMode} row={row} />
-                ))}
-              </TableFooter>
-            )}
-          </Table>
-        </CardContent>
+      {/* Shares the block with the plan line above, so it carries a border. */}
+      <Card variant="table" bordered>
+        <SimpleTable<LimitTableRow> columns={columns} rows={rows} />
       </Card>
     </div>
   );

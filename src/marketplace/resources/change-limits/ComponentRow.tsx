@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Field as FinalFormField } from 'react-final-form';
 
-import { FormField, FormText, Switch, TableCell, TableRow } from 'waldur-ui';
+import { FormField, FormText, Switch } from 'waldur-ui';
 
 import { composeValidators } from '@/core/validators';
 import { NumberField } from '@/form';
@@ -15,24 +15,30 @@ import {
 import { getResourceComponentValidator } from '@/marketplace/offerings/store/limits';
 import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
 import { PriceField } from '@/marketplace/resources/change-limits/PriceField';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import type { Column } from '@/table/types';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { ComponentRowType } from './utils';
+import { ComponentRowType, PeriodTotalRow } from './utils';
 
-interface ComponentRowProps {
+/** A component's limits, or one of the price totals under them. */
+export type LimitTableRow =
+  | { uuid: string; component: ComponentRowType; total?: never }
+  | { uuid: string; total: PeriodTotalRow; component?: never };
+
+interface LimitColumnsOptions {
   shouldConcealPrices: boolean;
-  component: ComponentRowType;
-  limits: Limits;
+  limits: Record<string, Limits>;
   /** For nested fields */
   parentName?: string;
   /** Calculated from order options: shown, not edited. */
-  derived?: boolean;
+  derivedTypes: { has: (type: string) => boolean };
   /** Shown without an input, as part of a preview. */
   readOnly?: boolean;
 }
 
-const CellWrapper: FC<any> = (props) => (
-  <FormField as="td" onClick={(e) => e.stopPropagation()}>
+const LimitInput: FC<any> = (props) => (
+  <FormField onClick={(e) => e.stopPropagation()}>
     {props.offeringComponent.is_boolean ? (
       <Switch
         label=""
@@ -52,56 +58,102 @@ const CellWrapper: FC<any> = (props) => (
   </FormField>
 );
 
-export const ComponentRow: FC<ComponentRowProps> = ({
-  component,
-  limits,
+export const getLimitColumns = ({
   shouldConcealPrices,
+  limits,
   parentName,
-  derived,
+  derivedTypes,
   readOnly,
-}) => {
-  return (
-    <TableRow data-testid={`row-${component.type}`}>
-      <TableCell className="whitespace-nowrap">{component.name}</TableCell>
-      <TableCell>{renderFieldOrDash(component.usage)}</TableCell>
-      <TableCell>{renderFieldOrDash(component.limit)}</TableCell>
-      {derived || readOnly ? (
-        <TableCell>
+}: LimitColumnsOptions): Column<LimitTableRow>[] => [
+  {
+    title: translate('Component'),
+    className: 'whitespace-nowrap',
+    render: ({ row }) =>
+      row.total ? (
+        <span className="font-semibold text-primary">{row.total.label}</span>
+      ) : (
+        <>{row.component.name}</>
+      ),
+  },
+  {
+    title: translate('Usage'),
+    render: ({ row }) =>
+      row.component ? <>{renderFieldOrDash(row.component.usage)}</> : null,
+  },
+  {
+    title: translate('Current limit'),
+    render: ({ row }) =>
+      row.component ? <>{renderFieldOrDash(row.component.limit)}</> : null,
+  },
+  {
+    title: translate('New limit'),
+    render: ({ row }) => {
+      const component = row.component;
+      if (!component) {
+        return null;
+      }
+      const derived = derivedTypes.has(component.type);
+      return derived || readOnly ? (
+        <>
           {renderFieldOrDash(component.newLimit)} {component.measured_unit}
           {derived ? (
             <FormText as="div" variant="muted">
               {translate('Calculated from the order options')}
             </FormText>
           ) : null}
-        </TableCell>
+        </>
       ) : (
         <FinalFormField
           name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
           parse={getLimitParser(component)}
           format={formatIntField}
-          validate={composeValidators(...getResourceComponentValidator(limits))}
+          validate={composeValidators(
+            ...getResourceComponentValidator(limits[component.type]),
+          )}
           min={0}
-          component={CellWrapper}
+          component={LimitInput}
           offeringComponent={component}
-          limits={limits}
+          limits={limits[component.type]}
         />
-      )}
-
-      <TableCell>
+      );
+    },
+  },
+  {
+    title: translate('Difference'),
+    render: ({ row }) =>
+      row.component ? (
         <ChangedLimitField
-          changedLimit={component.changedLimit}
-          unit={component.measured_unit}
+          changedLimit={row.component.changedLimit}
+          unit={row.component.measured_unit}
         />
-      </TableCell>
-      {shouldConcealPrices ? null : (
-        <TableCell>
-          <PriceField
-            price={component.price}
-            changedPrice={component.changedPrice}
-            suffix={component.priceSuffix}
-          />
-        </TableCell>
-      )}
-    </TableRow>
-  );
-};
+      ) : null,
+  },
+  ...(shouldConcealPrices
+    ? []
+    : [
+        {
+          title: (
+            <>
+              {translate('Price')}
+              <PriceTooltip />
+            </>
+          ),
+          render: ({ row }) =>
+            row.total ? (
+              <span className="font-medium text-primary">
+                <PriceField
+                  price={row.total.total}
+                  changedPrice={row.total.changedTotal}
+                  suffix={row.total.priceSuffix}
+                />
+              </span>
+            ) : (
+              <PriceField
+                price={row.component.price}
+                changedPrice={row.component.changedPrice}
+                suffix={row.component.priceSuffix}
+              />
+            ),
+        } as Column<LimitTableRow>,
+      ]),
+];
