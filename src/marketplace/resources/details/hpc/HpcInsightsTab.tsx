@@ -172,18 +172,6 @@ const JOB_CHARTS: Record<JobView, [number, number]> = {
   queue: [4, 5], // queue wait by partition
 };
 
-const JOB_VIEW_TEXT: Record<JobView, () => string> = {
-  jobs: () =>
-    translate(
-      'Jobs of this allocation from the cluster. Click a job in a chart to see its output.',
-    ),
-  efficiency: () =>
-    translate(
-      'How well jobs fit their time limits and use the cores and memory they ask for.',
-    ),
-  queue: () => translate('How long jobs waited to start, by partition.'),
-};
-
 const JobStatsSection: FC<{
   resourceUuid: string;
   days: number;
@@ -402,19 +390,23 @@ export const HpcInsightsTab: FC<{
     {
       value: 'jobs',
       title: translate('Jobs'),
-      hint: JOB_VIEW_TEXT.jobs(),
+      hint: translate(
+        'Jobs of this allocation from the cluster. Click a job in a chart to see its output.',
+      ),
       content: jobs('jobs'),
     },
     {
       value: 'efficiency',
       title: translate('Efficiency'),
-      hint: JOB_VIEW_TEXT.efficiency(),
+      hint: translate(
+        'How well jobs fit their time limits and use the cores and memory they ask for.',
+      ),
       content: jobs('efficiency'),
     },
     {
       value: 'queue',
       title: translate('Queue'),
-      hint: JOB_VIEW_TEXT.queue(),
+      hint: translate('How long jobs waited to start, by partition.'),
       content: jobs('queue'),
     },
     // The cluster's live state is FirecREST's.

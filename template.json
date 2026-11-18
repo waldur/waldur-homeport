@@ -29473,7 +29473,11 @@
     }
   },
   "How long each round takes from its cut-off to publishing results, and whether results came after the allocation date.": {},
-  "How long jobs waited to start, by partition.": {},
+  "How long jobs waited to start, by partition.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "How long raw points and hourly and daily roll-ups are kept.": {
     "context": {
       "feature_area": "metrics"
@@ -29617,7 +29621,11 @@
   },
   "How users reach services. 'calls': only through calls for proposals, no marketplace navigation. 'marketplace': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. 'both': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.": {},
   "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (for testing and sites without an identity provider: users generate a password in Waldur; needs the Waldur bot to be a homeserver admin), or 'oidc' (single sign-on configured on the homeserver; use this in production). Switching away from 'password' revokes no generated password and signs out no external client; to refuse password logins, set login_with_password = false on the homeserver.": {},
-  "How well jobs fit their time limits and use the cores and memory they ask for.": {},
+  "How well jobs fit their time limits and use the cores and memory they ask for.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "How would you like to sign in?": {
     "context": {
       "feature_area": "layouts"
@@ -32565,7 +32573,11 @@
   },
   "Jobs by project": {},
   "Jobs by user": {},
-  "Jobs of this allocation from the cluster. Click a job in a chart to see its output.": {},
+  "Jobs of this allocation from the cluster. Click a job in a chart to see its output.": {
+    "context": {
+      "feature_area": "hpc"
+    }
+  },
   "Jobs that finish far below their limit start sooner with a tighter one.": {
     "context": {
       "feature_area": "hpc"
