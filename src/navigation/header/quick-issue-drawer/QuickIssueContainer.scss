@@ -17,6 +17,14 @@
     padding: 0;
   }
 
+  // Dragged narrow, the columns share the drawer's width and long titles
+  // truncate instead of scrolling the table sideways.
+  @container page (width < 700px) {
+    table {
+      table-layout: fixed;
+    }
+  }
+
   > [data-slot='card-footer'] {
     padding: 0;
     background: transparent;

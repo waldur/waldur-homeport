@@ -3,9 +3,16 @@ import {
   ChatsTeardropIcon,
   LifebuoyIcon,
 } from '@phosphor-icons/react';
-import { FC, useEffect, useMemo, useRef } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Badge, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
+import {
+  Badge,
+  PageWidthProvider,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { useDrawerWide } from '@/drawer/useDrawerWide';
 import { translate } from '@/i18n';
@@ -46,6 +53,9 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
   const teamUnread = useMatrixTotalUnread(null, 'project');
   const discussionUnread = useMatrixTotalUnread(null, 'step_discussion');
   const drawerWide = useDrawerWide();
+  const [helpdeskElement, setHelpdeskElement] = useState<HTMLDivElement | null>(
+    null,
+  );
   const { data: memberRooms } = useMemberMatrixRooms();
 
   // The step discussions have a tab of their own, for those who take part in
@@ -212,8 +222,15 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
                   <HelpdeskExpanded />
                 </div>
               ) : (
-                <div className="support-drawer-helpdesk h-full w-full overflow-auto">
-                  <QuickIssueContainer />
+                // The requests table lays itself out by the drawer's width,
+                // not the page's, so it never scrolls sideways when narrowed.
+                <div
+                  ref={setHelpdeskElement}
+                  className="@container/page support-drawer-helpdesk h-full w-full overflow-auto"
+                >
+                  <PageWidthProvider element={helpdeskElement}>
+                    <QuickIssueContainer />
+                  </PageWidthProvider>
                 </div>
               )}
             </TabsContent>
