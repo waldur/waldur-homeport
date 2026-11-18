@@ -48900,11 +48900,6 @@
       "feature_area": "reviewer-discovery"
     }
   },
-  "Please enter desired values in the rows below:": {
-    "context": {
-      "feature_area": "plan"
-    }
-  },
   "Please enter reason why offering has been paused.": {
     "context": {
       "feature_area": "actions"

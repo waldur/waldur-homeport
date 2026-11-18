@@ -1,17 +1,11 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'waldur-ui';
+import { Card, HelpIcon } from 'waldur-ui';
 
+import { ENV } from '@/core/config';
 import { formatDate } from '@/core/dateUtils';
-import { defaultCurrency } from '@/core/formatCurrency';
+import { defaultCurrency, formatCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import {
@@ -19,66 +13,122 @@ import {
   getPrepaidDurationMonths,
 } from '@/marketplace/common/prepaidTotalDisplay';
 import { PriceTooltip } from '@/price/PriceTooltip';
+import { SimpleTable } from '@/table/SimpleTable';
+import type { Column } from '@/table/types';
+import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
-import { ComponentEditRow } from './ComponentEditRow';
-import { ComponentRow } from './ComponentRow';
-import { LimitlessComponentsTable } from './LimitlessComponentsTable';
-import { TotalLimitComponentsTable } from './TotalLimitComponentsTable';
 import { Component, PlanDetailsTableProps } from './types';
 
-const HeaderRow = (props: {
-  periods?: string[];
-  concealBillingInfo?: boolean;
-}) => (
-  <TableRow>
-    <TableHead>{translate('Component name')}</TableHead>
-    <TableHead>{translate('Unit')}</TableHead>
-    <TableHead>{translate('Quantity')}</TableHead>
-    {!props.concealBillingInfo &&
-      props.periods.map((period, index) => (
-        <TableHead className="sm:w-1/12" key={index}>
-          {period}
-          <PriceTooltip />
-        </TableHead>
-      ))}
-  </TableRow>
-);
+/** A component, or the total under the components. */
+interface PlanRow {
+  uuid: string;
+  component?: Component;
+  totals?: number[];
+}
 
-const FixedRows = (props: {
-  components: Component[];
-  concealBillingInfo?: boolean;
-}) => (
-  <>
-    {props.components.map((component, index) => (
-      <ComponentRow
-        key={index}
-        offeringComponent={component}
-        hidePrices={props.concealBillingInfo}
-      >
-        {component.amount}
-      </ComponentRow>
-    ))}
-  </>
-);
+const unitPrice = (price: number) =>
+  formatCurrency(price, ENV.plugins.WALDUR_CORE.CURRENCY_NAME, 4);
 
-const UsageRows = (props: {
-  components: Component[];
-  viewMode: boolean;
-  concealBillingInfo?: boolean;
-}) =>
-  props.viewMode ? (
-    <FixedRows
-      components={props.components}
-      concealBillingInfo={props.concealBillingInfo}
-    />
-  ) : (
+const toRows = (components: Component[], totals?: number[]): PlanRow[] => [
+  ...components.map((component) => ({ uuid: component.type, component })),
+  ...(totals ? [{ uuid: 'total', totals }] : []),
+];
+
+const nameColumn: Column<PlanRow> = {
+  title: translate('Component name'),
+  render: ({ row }) =>
+    row.component ? (
+      <>{row.component.name}</>
+    ) : (
+      <span className="font-semibold text-primary">{translate('Total')}</span>
+    ),
+};
+
+const unitColumn: Column<PlanRow> = {
+  title: translate('Unit'),
+  render: ({ row }) =>
+    row.component ? (
+      <>{renderFieldOrDash(row.component.measured_unit)}</>
+    ) : null,
+};
+
+const quantityColumn: Column<PlanRow> = {
+  title: translate('Quantity'),
+  render: ({ row }) => (row.component ? <>{row.component.amount}</> : null),
+};
+
+const unitPriceColumn: Column<PlanRow> = {
+  title: (
     <>
-      {props.components.map((component, index) => (
-        <ComponentEditRow key={index} component={component} />
-      ))}
+      {translate('Price per unit')}
+      <PriceTooltip />
     </>
-  );
+  ),
+  render: ({ row }) =>
+    row.component ? <>{unitPrice(row.component.price)}</> : null,
+};
+
+/** Components billed per unit of usage, once, or on each plan switch. */
+const PriceListTable = ({
+  components,
+  hidePrices,
+}: {
+  components: Component[];
+  hidePrices: boolean;
+}) => (
+  <Card variant="table" bordered>
+    <SimpleTable<PlanRow>
+      columns={[
+        nameColumn,
+        unitColumn,
+        ...(hidePrices ? [] : [unitPriceColumn]),
+      ]}
+      rows={toRows(components)}
+    />
+  </Card>
+);
+
+/** Components with a quantity, priced as quantity × unit price. */
+const SubtotalTable = ({
+  components,
+  total,
+  hidePrices,
+}: {
+  components: Component[];
+  total: number;
+  hidePrices: boolean;
+}) => (
+  <Card variant="table" bordered>
+    <SimpleTable<PlanRow>
+      columns={[
+        nameColumn,
+        unitColumn,
+        quantityColumn,
+        ...(hidePrices
+          ? []
+          : [
+              unitPriceColumn,
+              {
+                title: translate('Subtotal'),
+                render: ({ row }) => (
+                  <>
+                    {row.component
+                      ? unitPrice(row.component.subTotal)
+                      : unitPrice(row.totals[0])}
+                  </>
+                ),
+              } as Column<PlanRow>,
+            ]),
+      ]}
+      rows={toRows(components, hidePrices ? undefined : [total])}
+    />
+  </Card>
+);
+
+const Caption = ({ children }) => (
+  <p className="text-quaternary mt-1.5 mb-3 text-xs">{children}</p>
+);
 
 export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   props,
@@ -126,66 +176,64 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   );
   const hasExtraRows = fixedRows.length > 0 || otherLimitedRows.length > 0;
 
+  const hidePrices = Boolean(props.concealBillingInfo);
+  const showPeriods = !activeFixedPriceProfile && !hidePrices;
+  // Each table shares the dialog with the plan fields and its caption, so it
+  // carries a border (Card).
   return (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
         {hasExtraRows && (
-          <div className="mb-3">
-            <Table density="normal">
-              <TableHeader>
-                <HeaderRow
-                  periods={!activeFixedPriceProfile ? props.periods : []}
-                  concealBillingInfo={props.concealBillingInfo}
-                />
-              </TableHeader>
-              <TableBody>
-                {fixedRows.length > 0 && (
-                  <FixedRows
-                    components={fixedRows}
-                    concealBillingInfo={props.concealBillingInfo}
-                  />
-                )}
-                {!props.viewMode &&
-                  otherLimitedRows.length > 0 &&
-                  fixedRows.length > 0 && (
-                    <TableRow className="text-center">
-                      <TableCell colSpan={3 + props.periods.length}>
-                        {translate(
-                          'Please enter desired values in the rows below:',
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  )}
-                {otherLimitedRows.length > 0 && (
-                  <UsageRows
-                    components={otherLimitedRows}
-                    viewMode={props.viewMode}
-                    concealBillingInfo={props.concealBillingInfo}
-                  />
-                )}
-                {!activeFixedPriceProfile && !props.concealBillingInfo ? (
-                  <TableRow>
-                    <TableCell colSpan={3} className="font-bold">
-                      {translate('Total')}
-                    </TableCell>
-                    {props.totalPeriods.map((price, index) => (
-                      <TableCell key={index} className="font-bold">
-                        {defaultCurrency(price)}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ) : null}
-              </TableBody>
-            </Table>
-          </div>
+          <Card variant="table" bordered className="mb-3">
+            <SimpleTable<PlanRow>
+              columns={[
+                {
+                  ...nameColumn,
+                  render: ({ row }) =>
+                    row.component ? (
+                      <>
+                        {row.component.name}{' '}
+                        <HelpIcon label={row.component.type} />
+                      </>
+                    ) : (
+                      <nameColumn.render row={row} />
+                    ),
+                },
+                unitColumn,
+                quantityColumn,
+                ...(showPeriods
+                  ? props.periods.map((period, index): Column<PlanRow> => ({
+                      title: (
+                        <>
+                          {period}
+                          <PriceTooltip />
+                        </>
+                      ),
+                      render: ({ row }) => (
+                        <>
+                          {row.component
+                            ? formatCurrency(
+                                row.component.prices[index],
+                                ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                                3,
+                              )
+                            : defaultCurrency(row.totals[index])}
+                        </>
+                      ),
+                    }))
+                  : []),
+              ]}
+              rows={toRows(
+                [...fixedRows, ...otherLimitedRows],
+                showPeriods ? props.totalPeriods : undefined,
+              )}
+            />
+          </Card>
         )}
         {usageRows.length > 0 && (
           <>
-            <LimitlessComponentsTable
-              components={usageRows}
-              concealBillingInfo={props.concealBillingInfo}
-            />
-            <p className="text-quaternary mt-1.5 mb-3 text-xs">
+            <PriceListTable components={usageRows} hidePrices={hidePrices} />
+            <Caption>
               {hasExtraRows
                 ? translate(
                     'Additionally service provider can charge for usage of the following components',
@@ -193,44 +241,39 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 : translate(
                     'Service provider can charge for usage of the following components',
                   )}
-            </p>
+            </Caption>
           </>
         )}
         {totalLimitedRows.length > 0 && (
           <>
-            <TotalLimitComponentsTable
+            <SubtotalTable
               components={totalLimitedRows}
               total={totalLimitTotal}
-              viewMode={props.viewMode}
-              hidePrices={props.concealBillingInfo}
+              hidePrices={hidePrices}
             />
-            <p className="text-quaternary mt-1.5 mb-3 text-xs">
+            <Caption>
               {translate(
                 'Fee applied according to the maximum value reported by service provider over the whole active state of resource.',
               )}
-            </p>
+            </Caption>
           </>
         )}
         {initialRows.length > 0 && (
           <>
-            <LimitlessComponentsTable
-              components={initialRows}
-              concealBillingInfo={props.concealBillingInfo}
-            />
-            <p className="text-quaternary mt-1.5 mb-3 text-xs">
+            <PriceListTable components={initialRows} hidePrices={hidePrices} />
+            <Caption>
               {translate('A one-time fee applied on activation.')}
-            </p>
+            </Caption>
           </>
         )}
         {prepaidRows.length > 0 && (
           <>
-            <TotalLimitComponentsTable
+            <SubtotalTable
               components={prepaidRows}
               total={prepaidTotal}
-              viewMode={true}
-              hidePrices={props.concealBillingInfo}
+              hidePrices={hidePrices}
             />
-            <p className="text-quaternary mt-1.5 mb-3 text-xs">
+            <Caption>
               {props.startDate && props.endDate
                 ? (() => {
                     // Counted as the period is billed, like the quantities
@@ -258,18 +301,15 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 : translate(
                     'Prepaid fee applied on activation based on ordered quantity and duration.',
                   )}
-            </p>
+            </Caption>
           </>
         )}
         {switchRows.length > 0 && (
           <>
-            <LimitlessComponentsTable
-              components={switchRows}
-              concealBillingInfo={props.concealBillingInfo}
-            />
-            <p className="text-quaternary mt-1.5 mb-3 text-xs">
+            <PriceListTable components={switchRows} hidePrices={hidePrices} />
+            <Caption>
               {translate('Fee applied each time this plan is activated.')}
-            </p>
+            </Caption>
           </>
         )}
       </div>
