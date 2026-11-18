@@ -1718,14 +1718,8 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('AI assistant settings'),
+    description: translate('AI assistant general'),
     items: [
-      {
-        key: 'AI_ASSISTANT_NAME',
-        description: translate('Display name for the AI Assistant persona (e.g. \'Mari\', \'Waldur Assistant\').'),
-        default: 'Waldur Assistant',
-        type: 'string',
-      },
       {
         key: 'AI_ASSISTANT_ENABLED',
         description: translate('Enable AI Assistant feature and calls to the inference service.'),
@@ -1740,11 +1734,28 @@ export const SettingsDescription = [
         options: [{ value: 'disabled', label: 'Disabled' }, { value: 'staff', label: 'Staff users' }, { value: 'staff_and_support', label: 'Staff and support users' }, { value: 'all', label: 'All users' }, { value: 'anonymous', label: 'All users including anonymous' }],
       },
       {
+        key: 'AI_ASSISTANT_NAME',
+        description: translate('Display name for the AI Assistant persona (e.g. \'Mari\', \'Waldur Assistant\').'),
+        default: 'Waldur Assistant',
+        type: 'string',
+      },
+      {
+        key: 'AI_ASSISTANT_SYSTEM_PROMPT_CUSTOM_INSTRUCTIONS',
+        description: translate('Additional instructions injected into the AI Assistant system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.'),
+        default: '',
+        type: 'text_field',
+      },
+      {
         key: 'DOCS_SEARCH_ENABLED',
         description: translate('Let users search the bundled Waldur documentation: the AI assistant\'s and MCP\'s search_docs tool, and the /api/docs-search/ endpoint. Turn it off to keep the Waldur documentation out of answers, for example when this portal provides its own documentation to end users.'),
         default: true,
         type: 'boolean',
       },
+    ],
+  },
+  {
+    description: translate('AI assistant model'),
+    items: [
       {
         key: 'AI_ASSISTANT_BACKEND_TYPE',
         description: translate('Type of AI Assistant backend. For example: vllm, openai, ollama.'),
@@ -1770,12 +1781,6 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
-        key: 'AI_ASSISTANT_SYSTEM_PROMPT_CUSTOM_INSTRUCTIONS',
-        description: translate('Additional instructions injected into the AI Assistant system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.'),
-        default: '',
-        type: 'text_field',
-      },
-      {
         key: 'AI_ASSISTANT_COMPLETION_KWARGS',
         description: translate('Override keyword arguments merged on top of provider defaults for AI Assistant chat completion. Supported keys: temperature, top_p, top_k, max_tokens, max_completion_tokens, presence_penalty, frequency_penalty, repetition_penalty, stop, seed, reasoning_effort, extra_body. Leave empty to use provider defaults.'),
         default: {},
@@ -1793,6 +1798,11 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+    ],
+  },
+  {
+    description: translate('AI assistant limits'),
+    items: [
       {
         key: 'AI_ASSISTANT_TOKEN_LIMIT_DAILY',
         description: translate('Per-actor daily token cap (authenticated OR anonymous). -1 means unlimited.'),
@@ -1823,16 +1833,21 @@ export const SettingsDescription = [
         default: 60,
         type: 'integer',
       },
-      {
-        key: 'AI_ASSISTANT_SESSION_RETENTION_DAYS',
-        description: translate('Number of days to retain AI Assistant sessions before automatic deletion. Set to -1 to disable automatic cleanup.'),
-        default: 90,
-        type: 'integer',
-      },
+    ],
+  },
+  {
+    description: translate('AI assistant conversations'),
+    items: [
       {
         key: 'AI_ASSISTANT_HISTORY_LIMIT',
         description: translate('Maximum number of past messages included in the AI Assistant context window.'),
         default: 50,
+        type: 'integer',
+      },
+      {
+        key: 'AI_ASSISTANT_SESSION_RETENTION_DAYS',
+        description: translate('Number of days to retain AI Assistant sessions before automatic deletion. Set to -1 to disable automatic cleanup.'),
+        default: 90,
         type: 'integer',
       },
       {
@@ -1841,6 +1856,11 @@ export const SettingsDescription = [
         default: '',
         type: 'string',
       },
+    ],
+  },
+  {
+    description: translate('AI assistant public chat'),
+    items: [
       {
         key: 'ANONYMOUS_CHAT_USER_SLUG_SALT',
         description: translate('Scrypt salt for per-IP user_slug derivation. Empty disables slug computation (interactions are written without it).'),

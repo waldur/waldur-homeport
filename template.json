@@ -1227,7 +1227,7 @@
   },
   "AI Assistant settings": {
     "context": {
-      "feature_area": "administration"
+      "feature_area": "ai-assistant"
     }
   },
   "AI agents and other MCP clients calling Waldur tools with a user's access tokens.": {},
@@ -1237,12 +1237,32 @@
       "feature_area": "chat"
     }
   },
+  "AI assistant conversations": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
+  "AI assistant general": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
+  "AI assistant limits": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "AI assistant logs": {
     "context": {
       "feature_area": "issues"
     }
   },
-  "AI assistant settings": {
+  "AI assistant model": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
+  "AI assistant public chat": {
     "context": {
       "feature_area": "settings"
     }
@@ -15092,6 +15112,12 @@
     }
   },
   "Controls which user roles can access the AI Assistant. 'disabled': No role-based access. 'staff': Staff users only. 'staff_and_support': Staff and support users. 'all': All authenticated users. 'anonymous': All users including anonymous (enables the public anonymous chat endpoint).": {},
+  "Conversations": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
+    }
+  },
   "Converts what the user types; the prefix and suffix are kept as written. The validation pattern is checked before the prefix and suffix are added.": {
     "context": {
       "feature_area": "options"
@@ -33922,7 +33948,7 @@
   "Limits": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "qos"
+      "feature_area": "settings"
     }
   },
   "Limits & usage": {
@@ -37797,7 +37823,7 @@
   "Model": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "playground"
+      "feature_area": "settings"
     }
   },
   "Models": {
@@ -52487,6 +52513,12 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "common"
+    }
+  },
+  "Public assistant": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
     }
   },
   "Public calls": {
@@ -77367,11 +77399,6 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "payments"
-    }
-  },
-  "Unable to load AI Assistant configuration.": {
-    "context": {
-      "feature_area": "ai-assistant"
     }
   },
   "Unable to load Arrow sync settings.": {
