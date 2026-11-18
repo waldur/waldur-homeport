@@ -51,7 +51,7 @@ const Breadcrumbs: FC<{
 }> = ({ path, home, onNavigate }) => {
   const current = path ?? home;
   return (
-    <div className="flex flex-wrap items-center gap-1 mb-4">
+    <div className="flex flex-wrap items-center gap-1 py-2">
       <BaseButton
         variant="tertiary"
         size="sm"
@@ -199,7 +199,7 @@ export const HpcFilesTab: FC<{ resource: Resource }> = ({ resource }) => {
       <Table<HpcFile>
         {...tableProps}
         title={translate('Files')}
-        subtitle={<Breadcrumbs path={path} home={home} onNavigate={setPath} />}
+        nav={<Breadcrumbs path={path} home={home} onNavigate={setPath} />}
         verboseName={translate('files')}
         rowKey="name"
         cardBordered

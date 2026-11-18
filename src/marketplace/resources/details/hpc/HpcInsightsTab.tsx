@@ -1,6 +1,6 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { FC, ReactNode, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import type {
   ChartSpec,
   HpcComponentUsage,
@@ -54,17 +54,6 @@ const formatWindowTime = (epochSeconds: number) =>
     hour: '2-digit',
     minute: '2-digit',
   });
-
-/** One tab's panel: the line that says what it shows, then its content. */
-const Section: FC<{
-  description: string;
-  children: ReactNode;
-}> = ({ description, children }) => (
-  <div className="flex flex-col gap-6">
-    <p className="text-xs text-tertiary">{description}</p>
-    {children}
-  </div>
-);
 
 // Timelines (jobs, reservations) and the node heatmap read better across the
 // whole row.
@@ -151,11 +140,7 @@ const ComponentStats: FC<{ component: HpcComponentUsage }> = ({
 const AllocationSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
   const { data, isLoading, error } = useHpcUsage(resourceUuid);
   return (
-    <Section
-      description={translate(
-        'Usage the cluster reported to Waldur, against the allocation limits.',
-      )}
-    >
+    <div className="flex flex-col gap-6">
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -174,7 +159,7 @@ const AllocationSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
           ))}
         </>
       )}
-    </Section>
+    </div>
   );
 };
 
@@ -221,7 +206,7 @@ const JobStatsSection: FC<{
   );
   const totals = data?.totals;
   return (
-    <Section description={JOB_VIEW_TEXT[view]()}>
+    <div className="flex flex-col gap-6">
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -289,18 +274,14 @@ const JobStatsSection: FC<{
           />
         </>
       ) : null}
-    </Section>
+    </div>
   );
 };
 
 const ClusterSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
   const { data, isLoading, error } = useHpcClusterLoad(resourceUuid);
   return (
-    <Section
-      description={translate(
-        'Live node state and upcoming reservations, as the cluster reports them.',
-      )}
-    >
+    <div className="flex flex-col gap-6">
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -383,7 +364,7 @@ const ClusterSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
           <ChartGrid charts={data.charts} />
         </>
       ) : null}
-    </Section>
+    </div>
   );
 };
 
@@ -413,21 +394,38 @@ export const HpcInsightsTab: FC<{
     {
       value: 'allocation',
       title: translate('Allocation'),
+      hint: translate(
+        'Usage the cluster reported to Waldur, against the allocation limits.',
+      ),
       content: <AllocationSection resourceUuid={resource.uuid} />,
     },
-    { value: 'jobs', title: translate('Jobs'), content: jobs('jobs') },
+    {
+      value: 'jobs',
+      title: translate('Jobs'),
+      hint: JOB_VIEW_TEXT.jobs(),
+      content: jobs('jobs'),
+    },
     {
       value: 'efficiency',
       title: translate('Efficiency'),
+      hint: JOB_VIEW_TEXT.efficiency(),
       content: jobs('efficiency'),
     },
-    { value: 'queue', title: translate('Queue'), content: jobs('queue') },
+    {
+      value: 'queue',
+      title: translate('Queue'),
+      hint: JOB_VIEW_TEXT.queue(),
+      content: jobs('queue'),
+    },
     // The cluster's live state is FirecREST's.
     ...(firecrestEnabled
       ? [
           {
             value: 'cluster',
             title: translate('Cluster load'),
+            hint: translate(
+              'Live node state and upcoming reservations, as the cluster reports them.',
+            ),
             content: <ClusterSection resourceUuid={resource.uuid} />,
           },
         ]
@@ -443,7 +441,7 @@ export const HpcInsightsTab: FC<{
         <CardHeader className="border-b-0">
           <TabsList scrollable>
             {items.map((item) => (
-              <TabsTrigger key={item.value} value={item.value}>
+              <TabsTrigger key={item.value} value={item.value} hint={item.hint}>
                 {item.title}
               </TabsTrigger>
             ))}
