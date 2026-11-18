@@ -581,6 +581,12 @@ export const SettingsDescription = [
         type: 'image_field',
       },
       {
+        key: 'LOGIN_LOGO_DARK',
+        description: translate('The login page logo in dark mode. Falls back to LOGIN_LOGO when not set; language-specific logos apply to the light logo only.'),
+        default: '',
+        type: 'image_field',
+      },
+      {
         key: 'LOGIN_LOGO_MULTILINGUAL',
         description: translate('Language-specific login logos. Dict mapping language codes to image paths, e.g., {\'de\': \'path/to/german_logo.png\'}. Falls back to LOGIN_LOGO if requested language not found.'),
         default: {},

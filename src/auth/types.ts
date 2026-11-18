@@ -77,6 +77,7 @@ interface CoreConfiguration {
   HERO_IMAGE: string;
   MARKETPLACE_HERO_IMAGE?: string;
   LOGIN_LOGO: string;
+  LOGIN_LOGO_DARK?: string;
   POWERED_BY_LOGO: string;
   SIDEBAR_LOGO: string;
   SIDEBAR_LOGO_MOBILE: string;

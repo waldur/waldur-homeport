@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
+
+import { useLoginLogoUrl } from './useLoginLogoUrl';
 
 import './LoginLogo.css';
 
@@ -38,13 +39,16 @@ export const LoginLogo: FC<LoginLogoProps> = ({
   className,
   size = 'md',
   language,
-}) => (
-  <div className={classNames('login-logo', className)}>
-    <img
-      alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-      src={getIconUrl('login_logo', language)}
-      className="login-logo-image"
-      data-size={size}
-    />
-  </div>
-);
+}) => {
+  const src = useLoginLogoUrl(language);
+  return (
+    <div className={classNames('login-logo', className)}>
+      <img
+        alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+        src={src}
+        className="login-logo-image"
+        data-size={size}
+      />
+    </div>
+  );
+};
