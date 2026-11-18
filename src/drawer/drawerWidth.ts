@@ -1,8 +1,7 @@
 /**
  * Narrowest a resizable drawer gets unless it sets `minWidth`. Drawer
  * contents were only ever laid out at their default width or the full page
- * below lg, so a table toolbar or a form needs this much; the AI chat sets a
- * lower one, Support a higher one.
+ * below lg, so a table toolbar or a form needs this much.
  */
 export const DRAWER_MIN_WIDTH = 560;
 

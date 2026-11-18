@@ -55,17 +55,11 @@ export const openSupportDrawer = (
     title: options.title ?? translate('Support'),
     toolbar: SupportDrawerToolbar,
     width: '800px',
-    // The helpdesk table's toolbar (search, refresh, export, create) fits.
-    minWidth: 680,
     shellClass: DRAWER_SHELL_CLASS.support,
     defaultRoomUuid: options.defaultRoomUuid,
     matrixRoomAlias: options.matrixRoomAlias ?? undefined,
     roomListRequest: options.roomList ? roomListRequests : undefined,
     roomRequest: asksForRoom ? roomRequests : undefined,
     discussionRequested: Boolean(options.discussion),
-    // The chat sits beside the page: the page stays usable, and going to
-    // another page leaves the drawer open, so that a discussion's
-    // materials can be read beside it.
-    docked: true,
   });
 };
