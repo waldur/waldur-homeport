@@ -5,7 +5,8 @@ import { usersList, versionRetrieve } from 'waldur-js-client';
 
 import { FormField, FormLabel, Card, CardContent } from 'waldur-ui';
 
-import { getIconUrl, parseSelectData } from '@/core/api';
+import { useLoginLogoUrl } from '@/auth/useLoginLogoUrl';
+import { parseSelectData } from '@/core/api';
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
@@ -24,7 +25,7 @@ export const AdministrationProfile = ({
 }: AdministrationProfileProps) => {
   const router = useRouter();
 
-  const image = getIconUrl('login_logo');
+  const image = useLoginLogoUrl();
   const website = ENV.plugins.WALDUR_CORE.HOMEPORT_URL;
   const email = ENV.plugins.WALDUR_CORE.SITE_EMAIL;
   const phone = ENV.plugins.WALDUR_CORE.SITE_PHONE;

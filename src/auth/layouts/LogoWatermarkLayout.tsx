@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getIdentityProviders } from '@/administration/api';
-import { getIconUrl } from '@/core/api';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -14,13 +13,14 @@ import { LoginLogo } from '../LoginLogo';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
+import { useLoginLogoUrl } from '../useLoginLogoUrl';
 import { UserAuthWarning } from '../UserAuthWarning';
 
 import './LogoWatermarkLayout.css';
 
 export const LogoWatermarkLayout = () => {
   const features = useAuthFeatures();
-  const imageUrl = getIconUrl('login_logo');
+  const imageUrl = useLoginLogoUrl();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['IdentityProvidersConfigurations'],
