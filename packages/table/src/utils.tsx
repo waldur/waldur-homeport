@@ -12,6 +12,32 @@ import { Column } from './types';
 export const getColumnPinKey = (column: Column, index: number): string =>
   column.id ?? 'column-' + index;
 
+/** Brings the user's column order in line with the current column ids.
+ * Ids no longer among the columns are dropped; the rest keep the order the
+ * user gave them. A new id goes right after the id that precedes it in
+ * `ids`, or first when nothing precedes it. Returns `positions` itself when
+ * nothing changes. */
+export const mergeColumnPositions = (
+  positions: string[],
+  ids: string[],
+): string[] => {
+  const current = new Set(ids);
+  const merged = positions.filter((id) => current.has(id));
+  const placed = new Set(merged);
+  ids.forEach((id, index) => {
+    if (placed.has(id)) return;
+    // Every id before this one has been placed already, so the predecessor
+    // is in `merged` whenever there is one.
+    const at = index === 0 ? 0 : merged.indexOf(ids[index - 1]) + 1;
+    merged.splice(at, 0, id);
+    placed.add(id);
+  });
+  return merged.length === positions.length &&
+    merged.every((id, index) => id === positions[index])
+    ? positions
+    : merged;
+};
+
 /** Resolves the ordered list of visible columns for TableHeader and TableBody. */
 export const resolveVisibleColumns = (
   columns: Column[],

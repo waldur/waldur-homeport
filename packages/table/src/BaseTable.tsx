@@ -37,7 +37,11 @@ import {
   TableProps,
   TablesRootState,
 } from './types';
-import { computePinnedOffsets, computePinnedShadows } from './utils';
+import {
+  computePinnedOffsets,
+  computePinnedShadows,
+  mergeColumnPositions,
+} from './utils';
 
 const TABLE_DEFAULT_PROPS: Partial<TableProps> = {
   rows: [],
@@ -559,6 +563,7 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     activeColumns,
     rowActions,
     initColumnPositions,
+    columnPositions,
   } = props;
 
   const isSm = usePageBreakpointDown('sm');
@@ -587,17 +592,38 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     }
   }, [fetch, filterPosition, applyFilters]);
 
-  // Initialize optional columns
+  // Both column initialisations follow the set of column ids, not only the
+  // mount: a column can join `columns` later (a feature flag that resolves
+  // late, columns built from data that loads after the first render). They
+  // are keyed on this string because `columns` is often a new array on every
+  // render while its ids stay the same.
+  const columnIdsKey = JSON.stringify(columns?.map((column) => column.id));
+  const hasRowActions = Boolean(rowActions);
+
+  // Initialize optional columns. Only a column that was not among the
+  // columns the last time gets its default; one the user has already shown
+  // or hidden keeps that choice when another column comes or goes.
+  const initialisedColumns = useRef<Set<string>>(new Set());
   useEffect(() => {
-    if (columns?.length && hasOptionalColumns) {
-      columns.forEach((column) => {
-        toggleColumn(column.id, column, column.optional ? false : true);
-      });
-      if (rowActions) {
+    if (!columns?.length || !hasOptionalColumns) {
+      return;
+    }
+    const previous = initialisedColumns.current;
+    const current = new Set<string>();
+    columns.forEach((column) => {
+      current.add(column.id);
+      if (!previous.has(column.id)) {
+        toggleColumn(column.id, column, !column.optional);
+      }
+    });
+    if (hasRowActions) {
+      current.add(COLUMN_ACTIONS_KEY);
+      if (!previous.has(COLUMN_ACTIONS_KEY)) {
         toggleColumn(COLUMN_ACTIONS_KEY, { keys: [] }, true);
       }
     }
-  }, []);
+    initialisedColumns.current = current;
+  }, [columnIdsKey, hasOptionalColumns, hasRowActions]);
 
   // Refetch when columns are added
   const prevActiveCols = useRef<string[]>([]);
@@ -615,12 +641,31 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     }
   }, [activeColumns, fetch]);
 
-  // Initialize column positions
+  // Initialize column positions: in `columns` order on mount, as before.
+  // Later, merge the current ids into the order the user has made, so a
+  // reordered table keeps its order, a new column takes its place from
+  // `columns`, and a removed one leaves the positions. The positions are
+  // read through a ref so that dragging a column does not run this again.
+  const columnPositionsRef = useRef(columnPositions);
+  columnPositionsRef.current = columnPositions;
+  const positionsInitialised = useRef(false);
   useEffect(() => {
-    if (columns?.length) {
-      initColumnPositions(columns.map((column) => column.id));
+    if (!columns?.length) {
+      return;
     }
-  }, []);
+    const ids = columns.map((column) => column.id);
+    const current = columnPositionsRef.current ?? [];
+    const next = positionsInitialised.current
+      ? mergeColumnPositions(current, ids)
+      : ids;
+    positionsInitialised.current = true;
+    if (next !== current) {
+      // Until the next render brings the new positions in, this is what
+      // they are, should the effect run again first (StrictMode does).
+      columnPositionsRef.current = next;
+      initColumnPositions(next);
+    }
+  }, [columnIdsKey]);
 
   // The narrow-viewport filter panel belongs to the table, so it opens the
   // same way in any app, inside a drawer or not. Its fields change the
