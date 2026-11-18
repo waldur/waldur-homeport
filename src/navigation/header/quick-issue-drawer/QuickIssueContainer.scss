@@ -11,10 +11,96 @@
     margin: 0;
     padding: 0;
     border: 0;
+
+    // The search shrinks to keep the buttons beside it; they drop to a
+    // second line only once the search would get too narrow to use.
+    div:has(> .table-toolbar-search) {
+      flex: 1 1 calc(var(--spacing) * 40);
+      min-width: 0;
+    }
+
+    .table-toolbar-search {
+      flex: 1 1 auto;
+      width: auto;
+      min-width: 0;
+      max-width: calc(var(--spacing) * 80);
+    }
   }
 
   > [data-slot='card-content'] {
     padding: 0;
+  }
+
+  // The columns share the drawer's width, however narrow it is dragged,
+  // and long titles truncate instead of scrolling the table sideways.
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  // Key, Status and the staff columns after Title stay compact; Title,
+  // the one that tells requests apart, takes the rest. In percentages
+  // adding up to 100%: an expanded row spans the hidden columns too, and
+  // those would otherwise take a share of the width.
+  col {
+    min-width: 0 !important;
+    width: 15% !important;
+  }
+
+  col:nth-child(1) {
+    width: 27% !important;
+  }
+
+  col:nth-child(2) {
+    width: 20% !important;
+  }
+
+  col:nth-child(3):last-child {
+    width: 53% !important;
+  }
+
+  col:nth-child(3):nth-last-child(2) {
+    width: 33% !important;
+  }
+
+  col:nth-child(4):last-child {
+    width: 20% !important;
+  }
+
+  col:nth-child(3):nth-last-child(3) {
+    width: 23% !important;
+  }
+
+  // Docked very narrow: the key and the status badge keep their full
+  // text, so they get more of the width at the title's expense.
+  @container page (width < 480px) {
+    col {
+      width: 10% !important;
+    }
+
+    col:nth-child(1) {
+      width: 37% !important;
+    }
+
+    col:nth-child(2) {
+      width: 28% !important;
+    }
+
+    col:nth-child(3):last-child {
+      width: 35% !important;
+    }
+
+    col:nth-child(3):nth-last-child(2) {
+      width: 21% !important;
+    }
+
+    col:nth-child(4):last-child {
+      width: 14% !important;
+    }
+
+    col:nth-child(3):nth-last-child(3) {
+      width: 15% !important;
+    }
   }
 
   > [data-slot='card-footer'] {
