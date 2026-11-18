@@ -25,8 +25,9 @@ export const AttributeItem: FunctionComponent<AttributeItemProps> = (props) => {
       })}
     >
       <b>{props.section.title}</b>
-      {/* Rows read `title: value` on one line, as they did as plain divs. */}
-      <PropertyList variant="summary" termWidth="auto">
+      {/* A fixed term column, so every value in the section starts at the
+          same x: `auto` sizes each row's label track to its own label. */}
+      <PropertyList variant="summary" className="mt-2">
         {filteredAttributes
           .filter((attr) => isValidAttribute(props.attributes[attr.key]))
           .map((attr, index) => (

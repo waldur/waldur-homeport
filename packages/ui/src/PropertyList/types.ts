@@ -84,6 +84,10 @@ export interface PropertyListProps extends HTMLAttributes<HTMLElement> {
    * Fixed column width for the term (<dt>) column.
    * Presets: sm (160px), md (200px), lg (240px), xl (288px) or CSS string ('220px', '14rem').
    * Sets --dt-width CSS variable and aligns columns across independent lists.
+   * In `summary`, every row is its own grid, so a content-sized width (`auto`,
+   * `fit-content(...)`) is sized per row and the values of a multi-row list
+   * start at different x. Use it only for a single row or for deliberate
+   * inline `label: value` pairs; give a list of rows a fixed width.
    */
   termWidth?: TermWidthPreset | string;
   /**
