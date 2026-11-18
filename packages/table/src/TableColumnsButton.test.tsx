@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -66,6 +66,24 @@ describe('TableColumnsButton', () => {
     await screen.findByRole('list', { name: 'Columns' });
     expect(screen.getByText('Region')).toBeInTheDocument();
     expect(screen.queryByText('UUID')).not.toBeInTheDocument();
+  });
+
+  it('skips a position whose column has left the columns', async () => {
+    const user = userEvent.setup();
+    renderComponent({
+      columnPositions: ['name', 'removed', 'status', 'region', 'plan'],
+    });
+
+    await user.click(
+      screen.getByRole('button', { name: 'Toggle visible columns' }),
+    );
+
+    const list = await screen.findByRole('list', { name: 'Columns' });
+    expect(
+      within(list)
+        .getAllByRole('checkbox')
+        .map((checkbox) => checkbox.getAttribute('aria-label')),
+    ).toEqual(['Name', 'Status', 'Region', 'Plan']);
   });
 
   it('opens popover dialog with accessible name and list of columns', async () => {

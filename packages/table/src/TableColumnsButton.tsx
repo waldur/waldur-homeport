@@ -126,13 +126,16 @@ const ColumnsPopover = ({
     () =>
       columnPositions.filter(
         (id) =>
+          // A position can outlive its column for a render after the column
+          // left `columns`, until the table drops it from the positions.
+          columnMap[id] &&
           // A column kept for the export alone has nothing here to show or hide.
           (columnMap[id].visible ?? true) &&
           ((columnMap[id].keys && !query) ||
             typeof columnMap[id].title !== 'string' ||
             columnMap[id].title.toLowerCase().includes(query.toLowerCase())),
       ),
-    [columnMap, query],
+    [columnMap, columnPositions, query],
   );
 
   function handleDragEnd(event) {
