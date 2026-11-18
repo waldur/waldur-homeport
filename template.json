@@ -17169,7 +17169,8 @@
   "Current flavor": {},
   "Current limit": {
     "context": {
-      "feature_area": "change-limits"
+      "primary_ui_type": "title",
+      "feature_area": "reallocate-limits"
     }
   },
   "Current limits": {

@@ -72,9 +72,7 @@ export const getLimitColumns = ({
       row.total ? (
         <span className="font-semibold text-primary">{row.total.label}</span>
       ) : (
-        <span data-testid={`row-${row.component.type}`}>
-          {row.component.name}
-        </span>
+        <>{row.component.name}</>
       ),
   },
   {
