@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
-import { HelpIcon, PropertyItem } from 'waldur-ui';
+import { HelpIcon, PropertyItem, TableCell, TableRow } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatCurrency } from '@/core/formatCurrency';
@@ -32,31 +32,23 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 
   return (
-    <tr data-testid={`row-${props.offeringComponent.type}`}>
-      <td>
-        <p>
-          {props.offeringComponent.name}{' '}
-          <HelpIcon label={props.offeringComponent.type} />
-        </p>
-      </td>
-      <td className={props.className}>{props.children}</td>
-      <td>
-        <p>{renderFieldOrDash(props.offeringComponent.measured_unit)}</p>
-      </td>
+    <TableRow data-testid={`row-${props.offeringComponent.type}`}>
+      <TableCell className="font-medium">
+        {props.offeringComponent.name}{' '}
+        <HelpIcon label={props.offeringComponent.type} />
+      </TableCell>
+      <TableCell>
+        {renderFieldOrDash(props.offeringComponent.measured_unit)}
+      </TableCell>
+      <TableCell className={props.className}>{props.children}</TableCell>
       {!activeFixedPriceProfile && !props.hidePrices
         ? props.offeringComponent.prices.map((price, innerIndex) => (
-            <td key={innerIndex}>
-              <p>
-                {formatCurrency(
-                  price,
-                  ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                  3,
-                )}
-              </p>
-            </td>
+            <TableCell key={innerIndex}>
+              {formatCurrency(price, ENV.plugins.WALDUR_CORE.CURRENCY_NAME, 3)}
+            </TableCell>
           ))
         : null}
-    </tr>
+    </TableRow>
   );
 };
 

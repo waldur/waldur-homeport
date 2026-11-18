@@ -6,8 +6,9 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
+import { PropertyItem, PropertyList } from 'waldur-ui';
+
 import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
-import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -16,6 +17,7 @@ import { BillingPeriod } from '@/marketplace/common/BillingPeriod';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { propVal } from '@/property/propertyFields';
 import { VersionHistoryButton } from '@/version-history';
 
 import { getPlanBillingMode, getPlanBillingModeLabel } from './billingMode';
@@ -123,35 +125,34 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
         <p>{translate('Resource does not have plan.')}</p>
       ) : (
         <>
-          <p>
-            <strong>{translate('Plan name')}</strong>: {data.plan.name}
-          </p>
-          {data.plan.description && (
-            <p>
-              <strong>{translate('Plan description')}</strong>:{' '}
-              {data.plan.description}
-            </p>
-          )}
-          {getPlanBillingMode(data.offering, data.plan) && (
-            <p>
-              <strong>{translate('Billing mode')}</strong>:{' '}
-              {getPlanBillingModeLabel(
+          <PropertyList variant="summary" className="mb-5">
+            <PropertyItem
+              label={translate('Plan name')}
+              value={data.plan.name}
+            />
+            <PropertyItem
+              label={translate('Plan description')}
+              value={data.plan.description}
+            />
+            <PropertyItem
+              label={translate('Billing mode')}
+              value={getPlanBillingModeLabel(
                 getPlanBillingMode(data.offering, data.plan),
               )}
-            </p>
-          )}
-          {data.plan.unit_price > 0 && !concealBillingInfo && (
-            <>
-              <p>
-                <strong>{translate('Plan price')}</strong>:{' '}
-                {defaultCurrency(data.plan.unit_price)}
-              </p>
-              <p>
-                <strong>{translate('Billing period')}</strong>:{' '}
-                <BillingPeriod unit={data.plan.unit} />
-              </p>
-            </>
-          )}
+            />
+            {data.plan.unit_price > 0 && !concealBillingInfo && (
+              <>
+                <PropertyItem
+                  label={translate('Plan price')}
+                  value={propVal.currency(data.plan.unit_price)}
+                />
+                <PropertyItem
+                  label={translate('Billing period')}
+                  value={<BillingPeriod unit={data.plan.unit} />}
+                />
+              </>
+            )}
+          </PropertyList>
           <PureDetailsTable
             {...data}
             viewMode={true}
