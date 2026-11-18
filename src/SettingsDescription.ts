@@ -1174,6 +1174,29 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('S3 bucket browser'),
+    items: [
+      {
+        key: 'S3_BROWSER_ALLOWED_ENDPOINTS',
+        description: translate('Hosts the S3 bucket browser may contact, one per line or comma separated, each optionally with :port. The endpoint comes from what a provider\'s site agent publishes, so nothing is contacted unless listed.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'S3_BROWSER_VERIFY_TLS',
+        description: translate('Verify the TLS certificate of S3 gateways the bucket browser contacts.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'S3_BROWSER_MAX_UPLOAD_SIZE_MB',
+        description: translate('Largest file the S3 bucket browser uploads through Waldur, in MB. Larger files are left to S3 clients, whose instructions the browser shows.'),
+        default: 50,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('Table settings'),
     items: [
       {

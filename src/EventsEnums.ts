@@ -472,6 +472,8 @@ export const ResourcesEnum = {
   marketplace_resource_project_created: 'marketplace_resource_project_created',
   marketplace_resource_project_recovered: 'marketplace_resource_project_recovered',
   marketplace_resource_project_removed: 'marketplace_resource_project_removed',
+  marketplace_resource_s3_object_downloaded: 'marketplace_resource_s3_object_downloaded',
+  marketplace_resource_s3_storage_changed: 'marketplace_resource_s3_storage_changed',
   marketplace_resource_spending_limits_updated: 'marketplace_resource_spending_limits_updated',
   marketplace_resource_terminate_canceled: 'marketplace_resource_terminate_canceled',
   marketplace_resource_terminate_failed: 'marketplace_resource_terminate_failed',
@@ -598,6 +600,7 @@ export const SupportEnum = {
 export const Terms_of_serviceEnum = {
   terms_of_service_consent_granted: 'terms_of_service_consent_granted',
   terms_of_service_consent_revoked: 'terms_of_service_consent_revoked',
+  terms_of_service_replaced: 'terms_of_service_replaced',
   user_terms_of_service_accepted: 'user_terms_of_service_accepted',
 };
 
