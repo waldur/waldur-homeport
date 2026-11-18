@@ -1,6 +1,6 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { FC, ReactNode, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import type {
   ChartSpec,
   HpcComponentUsage,
@@ -14,11 +14,12 @@ import {
   BaseButton,
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
   StatCardGrid,
   Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from 'waldur-ui';
 
 import { ChartSpecView } from '@/core/charts/ChartSpecView';
@@ -53,26 +54,6 @@ const formatWindowTime = (epochSeconds: number) =>
     hour: '2-digit',
     minute: '2-digit',
   });
-
-const Section: FC<{
-  title: string;
-  description?: string;
-  children: ReactNode;
-}> = ({ title, description, children }) => (
-  <Card bordered className={HPC_CARD_CLASS}>
-    <CardHeader className="flex-col items-start justify-center gap-1">
-      <CardTitle className="text-lg font-semibold text-primary">
-        {title}
-      </CardTitle>
-      {description && (
-        <CardDescription className="text-xs text-tertiary">
-          {description}
-        </CardDescription>
-      )}
-    </CardHeader>
-    <CardContent className="flex flex-col gap-6">{children}</CardContent>
-  </Card>
-);
 
 // Timelines (jobs, reservations) and the node heatmap read better across the
 // whole row.
@@ -159,12 +140,7 @@ const ComponentStats: FC<{ component: HpcComponentUsage }> = ({
 const AllocationSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
   const { data, isLoading, error } = useHpcUsage(resourceUuid);
   return (
-    <Section
-      title={translate('Allocation')}
-      description={translate(
-        'Usage the cluster reported to Waldur, against the allocation limits.',
-      )}
-    >
+    <div className="flex flex-col gap-6">
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -183,7 +159,7 @@ const AllocationSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
           ))}
         </>
       )}
-    </Section>
+    </div>
   );
 };
 
@@ -194,25 +170,6 @@ const JOB_CHARTS: Record<JobView, [number, number]> = {
   jobs: [0, 2], // outcomes per day, job timeline
   efficiency: [2, 4], // time limit fit, CPU and memory efficiency
   queue: [4, 5], // queue wait by partition
-};
-
-const JOB_VIEW_TEXT: Record<JobView, () => [string, string]> = {
-  jobs: () => [
-    translate('Jobs'),
-    translate(
-      'Jobs of this allocation from the cluster. Click a job in a chart to see its output.',
-    ),
-  ],
-  efficiency: () => [
-    translate('Efficiency'),
-    translate(
-      'How well jobs fit their time limits and use the cores and memory they ask for.',
-    ),
-  ],
-  queue: () => [
-    translate('Queue'),
-    translate('How long jobs waited to start, by partition.'),
-  ],
 };
 
 const JobStatsSection: FC<{
@@ -236,9 +193,8 @@ const JobStatsSection: FC<{
     [openDialog, resourceUuid],
   );
   const totals = data?.totals;
-  const [title, description] = JOB_VIEW_TEXT[view]();
   return (
-    <Section title={title} description={description}>
+    <div className="flex flex-col gap-6">
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -306,19 +262,14 @@ const JobStatsSection: FC<{
           />
         </>
       ) : null}
-    </Section>
+    </div>
   );
 };
 
 const ClusterSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
   const { data, isLoading, error } = useHpcClusterLoad(resourceUuid);
   return (
-    <Section
-      title={translate('Cluster')}
-      description={translate(
-        'Live node state and upcoming reservations, as the cluster reports them.',
-      )}
-    >
+    <div className="flex flex-col gap-6">
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -401,7 +352,7 @@ const ClusterSection: FC<{ resourceUuid: string }> = ({ resourceUuid }) => {
           <ChartGrid charts={data.charts} />
         </>
       ) : null}
-    </Section>
+    </div>
   );
 };
 
@@ -427,54 +378,91 @@ export const HpcInsightsTab: FC<{
       firecrest={firecrestEnabled}
     />
   );
-  // The controls sit at the right end of the tab strip.
+  const items = [
+    {
+      value: 'allocation',
+      title: translate('Allocation'),
+      hint: translate(
+        'Usage the cluster reported to Waldur, against the allocation limits.',
+      ),
+      content: <AllocationSection resourceUuid={resource.uuid} />,
+    },
+    {
+      value: 'jobs',
+      title: translate('Jobs'),
+      hint: translate(
+        'Jobs of this allocation from the cluster. Click a job in a chart to see its output.',
+      ),
+      content: jobs('jobs'),
+    },
+    {
+      value: 'efficiency',
+      title: translate('Efficiency'),
+      hint: translate(
+        'How well jobs fit their time limits and use the cores and memory they ask for.',
+      ),
+      content: jobs('efficiency'),
+    },
+    {
+      value: 'queue',
+      title: translate('Queue'),
+      hint: translate('How long jobs waited to start, by partition.'),
+      content: jobs('queue'),
+    },
+    // The cluster's live state is FirecREST's.
+    ...(firecrestEnabled
+      ? [
+          {
+            value: 'cluster',
+            title: translate('Cluster load'),
+            hint: translate(
+              'Live node state and upcoming reservations, as the cluster reports them.',
+            ),
+            content: <ClusterSection resourceUuid={resource.uuid} />,
+          },
+        ]
+      : []),
+  ];
+  // The tab strip heads the card, with the controls at its right end.
   return (
-    <div className="relative">
-      <Tabs
-        value={view}
-        onValueChange={(value) => setView(value as InsightsView)}
-        listProps={{ className: 'mb-4 min-h-11' }}
-        items={[
-          {
-            value: 'allocation',
-            title: translate('Allocation'),
-            content: <AllocationSection resourceUuid={resource.uuid} />,
-          },
-          { value: 'jobs', title: translate('Jobs'), content: jobs('jobs') },
-          {
-            value: 'efficiency',
-            title: translate('Efficiency'),
-            content: jobs('efficiency'),
-          },
-          { value: 'queue', title: translate('Queue'), content: jobs('queue') },
-          // The cluster's live state is FirecREST's.
-          ...(firecrestEnabled
-            ? [
-                {
-                  value: 'cluster',
-                  title: translate('Cluster load'),
-                  content: <ClusterSection resourceUuid={resource.uuid} />,
-                },
-              ]
-            : []),
-        ]}
-      />
-      <div className="absolute end-0 top-0 flex items-center gap-3">
-        {isJobView(view) && (
-          <HpcPeriodSelect<number>
-            value={days}
-            options={getStatsPeriodOptions()}
-            onChange={setDays}
-          />
-        )}
-        <BaseButton
-          variant="tertiary"
-          size="sm"
-          onClick={refresh}
-          tooltip={translate('Refresh')}
-          iconNode={<ArrowClockwiseIcon weight="bold" />}
-        />
-      </div>
-    </div>
+    <Tabs
+      value={view}
+      onValueChange={(value) => setView(value as InsightsView)}
+    >
+      <Card bordered className={HPC_CARD_CLASS}>
+        <CardHeader className="border-b-0">
+          <TabsList scrollable>
+            {items.map((item) => (
+              <TabsTrigger key={item.value} value={item.value} hint={item.hint}>
+                {item.title}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          <div className="flex items-center gap-3">
+            {isJobView(view) && (
+              <HpcPeriodSelect<number>
+                value={days}
+                options={getStatsPeriodOptions()}
+                onChange={setDays}
+              />
+            )}
+            <BaseButton
+              variant="tertiary"
+              size="sm"
+              onClick={refresh}
+              tooltip={translate('Refresh')}
+              iconNode={<ArrowClockwiseIcon weight="bold" />}
+            />
+          </div>
+        </CardHeader>
+        <CardContent>
+          {items.map((item) => (
+            <TabsContent key={item.value} value={item.value}>
+              {item.content}
+            </TabsContent>
+          ))}
+        </CardContent>
+      </Card>
+    </Tabs>
   );
 };
