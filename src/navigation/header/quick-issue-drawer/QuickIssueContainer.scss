@@ -11,6 +11,20 @@
     margin: 0;
     padding: 0;
     border: 0;
+
+    // The search shrinks to keep the buttons beside it; they drop to a
+    // second line only once the search would get too narrow to use.
+    div:has(> .table-toolbar-search) {
+      flex: 1 1 calc(var(--spacing) * 40);
+      min-width: 0;
+    }
+
+    .table-toolbar-search {
+      flex: 1 1 auto;
+      width: auto;
+      min-width: 0;
+      max-width: calc(var(--spacing) * 80);
+    }
   }
 
   > [data-slot='card-content'] {
