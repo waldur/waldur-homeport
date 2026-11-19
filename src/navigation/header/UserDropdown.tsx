@@ -2,10 +2,12 @@ import { forwardRef, FunctionComponent } from 'react';
 
 import { Avatar, Badge, Menu, MenuDisclosure } from 'waldur-ui';
 
+import { ENV } from '@/core/config';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { NavMenuLink } from '@/navigation/NavMenu';
+import { ThemeSwitcher } from '@/theme/ThemeSwitcher';
 import { useUser } from '@/workspace/hooks';
 
 import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
@@ -94,9 +96,9 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
 
 /**
  * The user menu: a list of links (the profile pages, Log out, Sign in for
- * guests) and a few buttons (language, copy the IP address), so a
- * disclosure the keyboard Tabs through, not an application menu. The token
- * is on the API token page, and the theme switch is a header button.
+ * guests) and a few buttons (language, dark theme, copy the IP address), so
+ * a disclosure the keyboard Tabs through, not an application menu. The
+ * token is on the API token page.
  */
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useUser();
@@ -136,6 +138,13 @@ export const UserDropdownMenu: FunctionComponent = () => {
         <WebShellMenuItem />
 
         {user && <LogoutMenuItem />}
+
+        {!ENV.plugins.WALDUR_CORE.DISABLE_DARK_THEME && (
+          <>
+            <Menu.Separator />
+            <ThemeSwitcher />
+          </>
+        )}
 
         {/* Not with the token on the API token page: that page is hidden
             when the token is concealed, and the IP address is no secret. */}

@@ -28,7 +28,6 @@ import { LLMChatDrawerToggle } from './LLMChatDrawerToggle';
 import { MobileQuickShortcuts } from './MobileQuickShortcuts';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
-import { ThemeToggle } from './ThemeToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
 const AsideMobileToggle: FunctionComponent = () => {
@@ -136,7 +135,6 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           {Boolean(user) && showSupportDrawer && <QuickIssueDrawerToggle />}
           {Boolean(user) && <ConfirmationDrawerToggle />}
           {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
-          <ThemeToggle />
           {Boolean(user) && isSmallScr && (
             <span className="h-[40px] border-r border-r-secondary self-center ms-[0.25rem]" />
           )}

@@ -25,6 +25,11 @@ vi.mock('@/i18n/useLanguageSelector', () => ({
   }),
 }));
 
+const toggleTheme = vi.fn();
+vi.mock('@/theme/useTheme', () => ({
+  useTheme: () => ({ theme: 'light', toggleTheme }),
+}));
+
 vi.mock('@/core/Link', () => ({
   Link: forwardRef<HTMLAnchorElement, any>(
     ({ state, params, children, ...rest }, ref) => (
@@ -88,7 +93,9 @@ describe('UserDropdownMenu', () => {
     trigger.focus();
     await user.keyboard('{Enter}');
 
-    // The profile link, the language section, then the address.
+    // The profile link, the language section, the dark theme, then the
+    // address.
+    await user.tab();
     await user.tab();
     await user.tab();
     await user.tab();
@@ -97,6 +104,26 @@ describe('UserDropdownMenu', () => {
 
     expect(await navigator.clipboard.readText()).toBe('192.0.2.10');
     expect(useNotify().showSuccess).toHaveBeenCalled();
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('lets a user switch the dark theme on, keeping the menu open', async () => {
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-1',
+      full_name: 'Alice Example',
+      ip_address: '192.0.2.10',
+    } as any);
+    const user = userEvent.setup();
+    render(<UserDropdownMenu />);
+
+    const trigger = screen.getByRole('button', { name: 'User menu' });
+    await user.click(trigger);
+
+    const toggle = screen.getByRole('switch', { name: 'Dark theme' });
+    expect(toggle).toHaveAttribute('aria-checked', 'false');
+    await user.click(toggle);
+
+    expect(toggleTheme).toHaveBeenCalled();
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });
 });
