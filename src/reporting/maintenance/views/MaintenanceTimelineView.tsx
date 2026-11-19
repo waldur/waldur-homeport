@@ -3,7 +3,6 @@ import { FC, useMemo, useState, useCallback } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
-import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
@@ -96,28 +95,28 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
   }, [timelineItems]);
 
   const actions = (
-    <div className="flex gap-3 me-3">
-      <FormGroup label={translate('Group by')} className="max-w-[150px] mb-0">
-        <Select
-          value={selectedGrouping}
-          onChange={(option: GroupingOption | null) =>
-            option && setGroupBy(option.value)
-          }
-          options={groupingOptions}
-          isClearable={false}
-        />
-      </FormGroup>
-      <FormGroup label={translate('Color by')} className="max-w-[150px] mb-0">
-        <Select
-          value={selectedColor}
-          onChange={(option: ColorOption | null) =>
-            option && setColorBy(option.value)
-          }
-          options={colorOptions}
-          isClearable={false}
-        />
-      </FormGroup>
-    </div>
+    <>
+      <Select
+        aria-label={translate('Group by')}
+        value={selectedGrouping}
+        onChange={(option: GroupingOption | null) =>
+          option && setGroupBy(option.value)
+        }
+        options={groupingOptions}
+        isClearable={false}
+        className="w-[150px]"
+      />
+      <Select
+        aria-label={translate('Color by')}
+        value={selectedColor}
+        onChange={(option: ColorOption | null) =>
+          option && setColorBy(option.value)
+        }
+        options={colorOptions}
+        isClearable={false}
+        className="w-[150px]"
+      />
+    </>
   );
 
   return (
