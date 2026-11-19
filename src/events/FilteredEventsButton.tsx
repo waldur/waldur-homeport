@@ -16,6 +16,8 @@ const FilteredEventsDialog = lazyComponent(() =>
 
 interface FilteredEventsButtonProps {
   filter: any;
+  /** Defaults to "History log". */
+  title?: string;
   asDropdownItem?: boolean;
   size?: ButtonSize;
   variant?: ButtonVariant;
@@ -24,6 +26,7 @@ interface FilteredEventsButtonProps {
 
 export const FilteredEventsButton: FC<FilteredEventsButtonProps> = ({
   filter,
+  title,
   asDropdownItem = false,
   size = 'lg',
   variant = 'secondary',
@@ -31,22 +34,24 @@ export const FilteredEventsButton: FC<FilteredEventsButtonProps> = ({
 }) => {
   const { openDialog } = useModal();
 
+  const label = title ?? translate('History log');
   const callback = () =>
     openDialog(FilteredEventsDialog, {
       size: 'xl',
       filter,
+      title: label,
     });
 
   return asDropdownItem ? (
     <ActionItem
-      title={translate('History log')}
+      title={label}
       action={callback}
       iconNode={<BookOpenTextIcon weight="bold" />}
       className={className}
     />
   ) : (
     <BaseButton
-      label={translate('History log')}
+      label={label}
       onClick={callback}
       iconNode={<BookOpenTextIcon weight="bold" />}
       variant={variant}

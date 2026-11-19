@@ -20,6 +20,13 @@ import { isSiteAgentOfferingType } from '@/site-agent/constants';
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
+const getS3FlavorOptions = () => [
+  { value: 'generic', label: translate('Other S3-compatible gateway') },
+  { value: 'ceph', label: translate('Ceph RADOS Gateway') },
+  { value: 'minio', label: translate('MinIO-compatible (MinIO, RustFS)') },
+  { value: 'garage', label: translate('Garage') },
+];
+
 export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
   props,
 ) => {
@@ -40,6 +47,18 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
         ...pluginOptions,
         api_key_limits: pluginOptions?.api_key_limits !== false,
         api_key_daily_usage: pluginOptions?.api_key_daily_usage === true,
+      },
+    }),
+    [props.offering, pluginOptions],
+  );
+  // An offering that names no S3 gateway is browsed as a generic one; show
+  // and edit it as such.
+  const s3OptionsScope = useMemo(
+    () => ({
+      ...props.offering,
+      plugin_options: {
+        ...pluginOptions,
+        s3_browser_flavor: pluginOptions?.s3_browser_flavor || 'generic',
       },
     }),
     [props.offering, pluginOptions],
@@ -106,6 +125,35 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
               />
             </EditFieldProvider>
           )}
+          {isSiteAgentOfferingType(props.offering.type) && (
+            // Opt-in: it lets anyone who may reveal a key browse and change
+            // the resource's storage from the portal, and Waldur's backend
+            // must be able to reach the provider's S3 endpoint.
+            <BooleanEditField
+              name="plugin_options.enable_s3_browser"
+              label={translate('Enable S3 bucket browser')}
+              description={translate(
+                'Adds a Buckets tab to resources, where whoever may reveal an API key can list, download, upload small files to and delete from the resource’s S3 buckets. Staff must also allow the endpoint in S3_BROWSER_ALLOWED_ENDPOINTS.',
+              )}
+            />
+          )}
+          {isSiteAgentOfferingType(props.offering.type) &&
+            props.offering.plugin_options?.enable_s3_browser && (
+              <EditFieldProvider scope={s3OptionsScope} callback={update}>
+                <SelectEditField
+                  name="plugin_options.s3_browser_flavor"
+                  label={translate('S3 gateway')}
+                  description={translate(
+                    'Which S3 implementation serves the buckets. The browser shows only what it supports: bucket sizes on Ceph, no versioning, ACL or policy details on Garage. For another gateway, it shows whatever the gateway answers.',
+                  )}
+                  options={getS3FlavorOptions()}
+                  simpleValue
+                  renderValue={(value) =>
+                    getS3FlavorOptions().find((o) => o.value === value)?.label
+                  }
+                />
+              </EditFieldProvider>
+            )}
           <SelectEditField
             name="plugin_options.disabled_resource_actions"
             label={translate('Disabled resource actions')}
