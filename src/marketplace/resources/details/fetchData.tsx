@@ -231,6 +231,21 @@ export const getResourceTabs = ({
     tabs.push(apiKeysTab);
   }
 
+  // Browsing goes through one of the resource's API keys, so the tab sits next
+  // to them, on offerings that turn the browser on. Consumer view only: the
+  // provider side cannot reveal a consumer's keys.
+  if (offering?.plugin_options?.enable_s3_browser) {
+    tabs.push({
+      key: 'buckets',
+      title: translate('Buckets'),
+      component: lazyComponent(() =>
+        import('./s3-browser/S3BucketsTab').then((module) => ({
+          default: module.S3BucketsTab,
+        })),
+      ),
+    });
+  }
+
   if (scope) {
     const resourceTabs = getTabs(scope.resource_type) as any[];
     if (

@@ -5,6 +5,19 @@ import { renderWithProviders } from '@/test/harness';
 
 import { ResourceDisplayOptionsSection } from './ResourceDisplayOptionsSection';
 
+// The edit dialog starts from the value the button hands it; expose that.
+vi.mock('@/form/FieldEditButton', () => ({
+  FieldEditButton: ({ name, scope }: any) => (
+    <button
+      type="button"
+      data-testid={`edit-${name}`}
+      data-value={name
+        .split('.')
+        .reduce((value: any, key: string) => value?.[key], scope)}
+    />
+  ),
+}));
+
 const renderSection = (
   type: string,
   plugin_options: Record<string, unknown> = {},
@@ -62,5 +75,43 @@ describe('ResourceDisplayOptionsSection', () => {
     });
     expect(shownValue(KEY_LIMITS)).toHaveTextContent(/Disabled$/);
     expect(shownValue(DAILY_USAGE)).toHaveTextContent(/Enabled$/);
+  });
+
+  // The bucket browser is opt-in per offering and off until enabled.
+  it('offers the S3 bucket browser on a site-agent offering, off by default', () => {
+    renderSection('Marketplace.SiteAgent');
+    expect(shownValue('Enable S3 bucket browser')).toHaveTextContent(
+      /Disabled$/,
+    );
+  });
+
+  // The edit dialog starts from the same value the row shows, so an unset
+  // gateway opens as the generic one rather than as an empty select.
+  it('shows an unset S3 gateway as the generic one', () => {
+    renderSection('Marketplace.SiteAgent', { enable_s3_browser: true });
+    expect(shownValue('S3 gateway')).toHaveTextContent(
+      /Other S3-compatible gateway$/,
+    );
+    expect(
+      screen.getByTestId('edit-plugin_options.s3_browser_flavor'),
+    ).toHaveAttribute('data-value', 'generic');
+  });
+
+  it('shows the S3 gateway as stored', () => {
+    renderSection('Marketplace.SiteAgent', {
+      enable_s3_browser: true,
+      s3_browser_flavor: 'garage',
+    });
+    expect(shownValue('S3 gateway')).toHaveTextContent(/Garage$/);
+    expect(
+      screen.getByTestId('edit-plugin_options.s3_browser_flavor'),
+    ).toHaveAttribute('data-value', 'garage');
+  });
+
+  it('does not offer the S3 bucket browser without a site agent', () => {
+    renderSection('Marketplace.Basic');
+    expect(
+      screen.queryByText('Enable S3 bucket browser'),
+    ).not.toBeInTheDocument();
   });
 });

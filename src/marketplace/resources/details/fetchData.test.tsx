@@ -42,6 +42,21 @@ describe('getResourceTabs: API keys', () => {
   });
 });
 
+describe('getResourceTabs: S3 bucket browser', () => {
+  it('is not shown unless the offering enables it', () => {
+    expect(tabKeys({ has_api_keys: true }, {})).not.toContain('buckets');
+  });
+
+  it('is shown when the offering enables it', () => {
+    expect(
+      tabKeys(
+        { has_api_keys: true },
+        { plugin_options: { enable_s3_browser: true } },
+      ),
+    ).toContain('buckets');
+  });
+});
+
 describe('getResourceTabs: metrics', () => {
   it("shows the tab when the resource's offering reports metrics", () => {
     expect(tabKeys({}, {}, 2)).toContain('metrics');

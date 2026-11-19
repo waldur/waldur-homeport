@@ -1667,7 +1667,8 @@
   },
   "Access": {
     "context": {
-      "feature_area": "openstack-tenant"
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
     }
   },
   "Access & Discovery": {
@@ -1689,6 +1690,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Access control list": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Access denied": {},
@@ -3431,6 +3437,11 @@
   "Address field": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Adds a Buckets tab to resources, where whoever may reveal an API key can list, download, upload small files to and delete from the resource’s S3 buckets. Staff must also allow the endpoint in S3_BROWSER_ALLOWED_ENDPOINTS.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Adjust limits for a resource and redistribute freed capacity to other resources": {},
@@ -5373,6 +5384,7 @@
       "feature_area": "resource-pools"
     }
   },
+  "Any authenticated user": {},
   "Any condition matches (OR)": {
     "context": {
       "primary_ui_type": "label",
@@ -10214,6 +10226,74 @@
       "feature_area": "payments"
     }
   },
+  "Browse with key": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Bucket activity": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Bucket deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "s3-browser"
+    }
+  },
+  "Bucket name": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Bucket names are shared by every user of the storage service, so a common name may already be taken.": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Bucket policy": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Bucket {name} created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
+  "Buckets": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "details"
+    }
+  },
+  "Buckets are browsed with one of the resource’s API keys. This resource has no key that is ready yet.": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Buckets cannot be browsed": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Buckets: {n}": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "Budget enforcement": {
     "context": {
       "feature_area": "workflow-check"
@@ -10505,6 +10585,11 @@
     }
   },
   "COI, matching and assignment settings": {},
+  "CORS rules": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "CPU": {
     "context": {
       "primary_ui_type": "label",
@@ -10626,6 +10711,11 @@
   "CSV, every page.": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "Cache control": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Cache hit ratio": {
@@ -11640,6 +11730,11 @@
     }
   },
   "Centered Card": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Ceph RADOS Gateway": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -14966,10 +15061,25 @@
       "feature_area": "agreements"
     }
   },
+  "Content disposition": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Content encoding": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Content is overridden": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "notifications"
+    }
+  },
+  "Content type": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Context": {
@@ -16097,6 +16207,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "assignments",
       "action_type": "create"
+    }
+  },
+  "Create bucket": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Create call": {
@@ -18696,6 +18811,11 @@
       "feature_area": "vmware"
     }
   },
+  "Default encryption": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Default for offerings that do not set their own login shell. Leave empty to let each offering decide.": {
     "context": {
       "feature_area": "service-providers"
@@ -19048,6 +19168,22 @@
       "feature_area": "broadcasts"
     }
   },
+  "Delete bucket": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
+    }
+  },
+  "Delete bucket {bucket}? Only an empty bucket can be deleted.": {
+    "context": {
+      "variables": {
+        "bucket": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "Delete catalog": {
     "context": {
       "primary_ui_type": "title",
@@ -19106,9 +19242,31 @@
       "feature_area": "event-subscriptions"
     }
   },
+  "Delete file": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
+    }
+  },
   "Delete filter": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "Delete folder": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
+    }
+  },
+  "Delete folder {name} and every file in it? This cannot be undone.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "Delete invitation": {
@@ -19492,6 +19650,16 @@
         }
       },
       "feature_area": "rabbitmq"
+    }
+  },
+  "Delete {name}? This cannot be undone.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "Deleted": {
@@ -21238,6 +21406,11 @@
     }
   },
   "EESSI catalog version to load (auto-detect if empty)": {},
+  "ETag": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "EU VAT numbers are checked in the EU VIES system. Only a verified number is invoiced without VAT.": {
     "context": {
       "feature_area": "details"
@@ -22564,6 +22737,11 @@
       "feature_area": "steps"
     }
   },
+  "Enable S3 bucket browser": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Enable SCIM entitlement synchronization to external identity provider.": {},
   "Enable SCIM entitlements": {
     "context": {
@@ -22876,6 +23054,11 @@
   "Encrypted messages cannot be read": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "Encryption": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Encryption is being reset.": {
@@ -24385,6 +24568,7 @@
       "action_type": "read"
     }
   },
+  "Everyone (anonymous)": {},
   "Everyone evaluating on the call reads the proposal's step list.": {},
   "Everyone is signed out, you included. While the preset loads, the portal is unavailable; then it opens the sign-in page.": {
     "context": {
@@ -26221,6 +26405,12 @@
       "feature_area": "marketplace-checklist"
     }
   },
+  "File deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "s3-browser"
+    }
+  },
   "File download failed": {
     "context": {
       "primary_ui_type": "error_message",
@@ -26309,6 +26499,16 @@
   "Files on shared storage keep the old GID until they are changed with chgrp; renumbering them is up to you.": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Files up to {size}; larger ones need an S3 client.": {
+    "context": {
+      "variables": {
+        "size": {
+          "type": "number"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "Filesize": {
@@ -27032,6 +27232,12 @@
       "feature_area": "deploy"
     }
   },
+  "Folder deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "s3-browser"
+    }
+  },
   "Follow the job": {
     "context": {
       "feature_area": "blocks"
@@ -27722,6 +27928,11 @@
   },
   "GUID is expected.": {},
   "Gantt-style: one row per (offering · component) with usage saturation bars, \"Today\" line and next-reset markers.": {},
+  "Garage": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Gateway IP": {
     "context": {
       "feature_area": "deploy"
@@ -32776,6 +32987,16 @@
       "feature_area": "project-templates"
     }
   },
+  "Key: {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "Keycloak Configuration": {
     "context": {
       "feature_area": "create"
@@ -33598,6 +33819,11 @@
       "feature_area": "footer"
     }
   },
+  "Legal hold": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Legal name": {
     "context": {
       "primary_ui_type": "title",
@@ -33703,6 +33929,11 @@
     }
   },
   "Liechtenstein": {},
+  "Lifecycle rules": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Lifetime will be updated and reset upon saving the form. Token lifetime is prolonged each time a successful API call with the token is done.": {
     "context": {
       "feature_area": "api-key"
@@ -34654,6 +34885,11 @@
   "Loading computes summaries for every project in this organization and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "Loading connection details": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Loading custom fields and priorities...": {
@@ -37497,6 +37733,11 @@
       "feature_area": "common"
     }
   },
+  "MinIO-compatible (MinIO, RustFS)": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "MinMax (balanced load)": {},
   "Minimal": {
     "context": {
@@ -39441,6 +39682,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "administration"
+    }
+  },
+  "No API key to browse with": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "No Arrow customer mappings found": {
@@ -43202,6 +43448,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Object lock": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Object totals": {
     "context": {
       "feature_area": "rabbitmq"
@@ -43216,6 +43467,12 @@
   "Object types": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Objects": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
     }
   },
   "Observable objects": {
@@ -43908,7 +44165,11 @@
       "feature_area": "database-stats"
     }
   },
-  "On": {},
+  "On": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "On Synapse, add the YAML file to app_service_config_files and restart the homeserver": {
     "context": {
       "feature_area": "matrix"
@@ -46259,6 +46520,11 @@
   "Other Claims": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Other S3-compatible gateway": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Other agricultural sciences": {
@@ -52517,6 +52783,11 @@
       "feature_area": "common"
     }
   },
+  "Public access block": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Public access rules": {
     "context": {
       "primary_ui_type": "label",
@@ -52568,6 +52839,16 @@
   "Public projects are visible to anonymous users and allow membership applications.": {
     "context": {
       "feature_area": "project"
+    }
+  },
+  "Public through the ACL": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Public through the policy": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Publication": {
@@ -53787,6 +54068,16 @@
   "Readiness": {
     "context": {
       "feature_area": "call-management"
+    }
+  },
+  "Reading the bucket configuration…": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Reading the file details…": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Reads": {},
@@ -55715,6 +56006,11 @@
       "feature_area": "call-templates"
     }
   },
+  "Replace file": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Replace placeholder values with actual credentials and settings.": {
     "context": {
       "feature_area": "site-agent"
@@ -55728,6 +56024,16 @@
         }
       },
       "feature_area": "api-keys"
+    }
+  },
+  "Replace the secret placeholder with the key revealed on the API keys tab. Buckets are addressed path-style, which every client above supports.": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Replace the secret placeholder with the key’s secret, which the service provider hands out for this resource. Buckets are addressed path-style, which every client above supports.": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Replace with": {
@@ -59963,6 +60269,11 @@
       "feature_area": "matrix"
     }
   },
+  "S3 gateway": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "SAN": {
     "context": {
       "feature_area": "common"
@@ -63665,6 +63976,7 @@
       "feature_area": "actions"
     }
   },
+  "Set, nothing blocked": {},
   "Sets a limit component to the sum of other limit components, whether entered by the customer or calculated by a formula. The customer does not fill it in; the total is shown and priced.": {},
   "Setting": {
     "context": {
@@ -66013,6 +66325,12 @@
       "feature_area": "options"
     }
   },
+  "Storage class": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
+    }
+  },
   "Storage mode": {
     "context": {
       "feature_area": "update"
@@ -66863,7 +67181,7 @@
   "Suspended": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "reviewer"
+      "feature_area": "s3-browser"
     }
   },
   "Suspended or blocked": {
@@ -68574,6 +68892,16 @@
       "feature_area": "broadcasts"
     }
   },
+  "The browser uploads files up to {size}. Larger files, and whole folders, go faster with an S3 client.": {
+    "context": {
+      "variables": {
+        "size": {
+          "type": "number"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "The bulk action could not be completed.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -69856,6 +70184,7 @@
       "feature_area": "demo-presets"
     }
   },
+  "The login page logo in dark mode. Falls back to LOGIN_LOGO when not set; language-specific logos apply to the light logo only.": {},
   "The logo image rendered in the disclaimer area below the footer.": {},
   "The longest token lifetime you can choose is {duration}.": {
     "context": {
@@ -71404,6 +71733,7 @@
       "feature_area": "dry-run"
     }
   },
+  "The storage service did not answer.": {},
   "The submission triggers 1 email.": {
     "context": {
       "feature_area": "dry-run"
@@ -72665,6 +72995,11 @@
       "feature_area": "site-agent"
     }
   },
+  "This folder is empty.": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "This identity provider does not expose its supported claims in the discovery document. You can manually add claim names below based on your IdP documentation.": {
     "context": {
       "feature_area": "steps"
@@ -73213,6 +73548,11 @@
   "This request cannot be updated in its current state.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "This resource has no buckets yet.": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "This resource is paused, so none of its keys is served.": {
@@ -76441,6 +76781,12 @@
       "feature_area": "affiliates"
     }
   },
+  "Unable to create the bucket.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "s3-browser"
+    }
+  },
   "Unable to create the merge.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -76951,6 +77297,12 @@
       "feature_area": "affiliates"
     }
   },
+  "Unable to delete the bucket. A bucket must be empty first.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "s3-browser"
+    }
+  },
   "Unable to delete the call template.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -76961,6 +77313,18 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "proposal-roles"
+    }
+  },
+  "Unable to delete the file.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "s3-browser"
+    }
+  },
+  "Unable to delete the folder.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "s3-browser"
     }
   },
   "Unable to delete the meeting note.": {
@@ -77128,6 +77492,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "reviewer"
+    }
+  },
+  "Unable to download the file.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "s3-browser"
     }
   },
   "Unable to duplicate call.": {
@@ -77407,6 +77777,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "payments"
+    }
+  },
+  "Unable to list buckets": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Unable to list the bucket": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Unable to load Arrow sync settings.": {
@@ -78272,6 +78652,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "matrix"
+    }
+  },
+  "Unable to read the bucket configuration": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "Unable to read the file details": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Unable to read the metrics now.": {
@@ -80777,6 +81167,12 @@
       "feature_area": "form"
     }
   },
+  "Unable to upload the file.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "s3-browser"
+    }
+  },
   "Unable to verify company.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -81251,6 +81647,11 @@
   "Unnamed resource": {
     "context": {
       "feature_area": "project-detail"
+    }
+  },
+  "Unnamed rule": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Unpause offering": {
@@ -82099,6 +82500,11 @@
       "feature_area": "create"
     }
   },
+  "Upload with an S3 client": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Upload your completed organization template file": {
     "context": {
       "feature_area": "import"
@@ -82128,6 +82534,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Uploaded in parts": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Uploading...": {
@@ -82511,6 +82922,11 @@
   },
   "Usages of the resources": {},
   "Use 1–32 lowercase letters, digits, \"_\" and \"-\", starting with a letter or \"_\".": {},
+  "Use 3-63 lower-case letters, digits, dots or hyphens.": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "Use ORCID sandbox environment for testing. When enabled, uses sandbox URLs automatically.": {},
   "Use TRES billing units instead of raw TRES values": {
     "context": {
@@ -82555,6 +82971,11 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "Use an S3 client": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "Use an existing namespace": {
@@ -83122,6 +83543,11 @@
   "User menu": {
     "context": {
       "feature_area": "header"
+    }
+  },
+  "User metadata": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "User name": {
@@ -84434,6 +84860,12 @@
         }
       },
       "feature_area": "workflow-check"
+    }
+  },
+  "Versioning": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "s3-browser"
     }
   },
   "Versions": {
@@ -86084,6 +86516,11 @@
     }
   },
   "Which HEAppE deployment this offering targets. Not the same as the cluster ID.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Which S3 implementation serves the buckets. The browser shows only what it supports: bucket sizes on Ceph, no versioning, ACL or policy details on Garage. For another gateway, it shows whatever the gateway answers.": {
     "context": {
       "feature_area": "integration"
     }
@@ -88236,9 +88673,24 @@
     }
   },
   "a second": {},
+  "abort unfinished uploads after {n} days": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "absolute usage in measured_unit per bucket; tooltip shows period-total Δ%.": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "account": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "account {account}": {
@@ -88421,6 +88873,16 @@
     }
   },
   "at activation and on every plan switch": {},
+  "at most {n} objects": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "at {step}": {
     "context": {
       "variables": {
@@ -88491,6 +88953,16 @@
       "feature_area": "billing"
     }
   },
+  "blocks public ACLs": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
+  "blocks public policies": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "bootable": {
     "context": {
       "feature_area": "openstack-volume"
@@ -88504,6 +88976,11 @@
   "broadcasts": {
     "context": {
       "feature_area": "broadcasts"
+    }
+  },
+  "buckets": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "budgets": {
@@ -89296,6 +89773,26 @@
       "feature_area": "team"
     }
   },
+  "expire after {n} days": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
+  "expire old versions after {n} days": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "expired": {
     "context": {
       "feature_area": "reviewer-suggestions"
@@ -89476,6 +89973,11 @@
   "if its condition holds": {
     "context": {
       "feature_area": "diagram"
+    }
+  },
+  "ignores public ACLs": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "imported licenses": {
@@ -89826,6 +90328,11 @@
   "no": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "no actions": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "no active resources": {},
@@ -90491,6 +90998,11 @@
       "feature_area": "resources"
     }
   },
+  "restricts public buckets": {
+    "context": {
+      "feature_area": "s3-browser"
+    }
+  },
   "retention policies": {
     "context": {
       "feature_area": "metrics"
@@ -91100,6 +91612,16 @@
       "feature_area": "form"
     }
   },
+  "under {prefix}": {
+    "context": {
+      "variables": {
+        "prefix": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "unit": {},
   "units": {
     "context": {
@@ -91146,6 +91668,16 @@
       }
     }
   },
+  "up to {limit} per bucket": {
+    "context": {
+      "variables": {
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "updated": {
     "context": {
       "feature_area": "openstack"
@@ -91178,7 +91710,7 @@
   },
   "user": {
     "context": {
-      "feature_area": "reports"
+      "feature_area": "s3-browser"
     }
   },
   "user actions": {
@@ -91299,6 +91831,11 @@
   "when usage ≥": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "whole bucket": {
+    "context": {
+      "feature_area": "s3-browser"
     }
   },
   "whole call": {
@@ -94856,6 +95393,16 @@
       }
     }
   },
+  "{name} already exists here. Replace it?": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "{name} has been copied": {
     "context": {
       "primary_ui_type": "success_message",
@@ -94967,6 +95514,17 @@
           "type": "string"
         }
       }
+    }
+  },
+  "{name} uploaded.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "{name} used": {
@@ -95276,6 +95834,19 @@
       "feature_area": "checklists"
     }
   },
+  "{n} could not be deleted: {reason}": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        },
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "{n} course accounts have been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -95314,7 +95885,28 @@
         "n": {
           "type": "unknown"
         }
-      }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
+  "{n} delete markers": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
+  "{n} deleted, but some files are left; try again.": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "{n} entries": {
@@ -95447,6 +96039,16 @@
         }
       },
       "feature_area": "actions"
+    }
+  },
+  "{n} parts": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "{n} per DC": {
@@ -95589,6 +96191,16 @@
       "feature_area": "coi-settings"
     }
   },
+  "{n} storage class transitions": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "{n} tag(s) could not be deleted.": {
     "context": {
       "variables": {
@@ -95669,7 +96281,17 @@
           "type": "unknown"
         }
       },
-      "feature_area": "coi-settings"
+      "feature_area": "s3-browser"
+    }
+  },
+  "{n}+": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "{n}GB disk available": {
@@ -96937,6 +97559,19 @@
       "feature_area": "service-desk"
     }
   },
+  "{size} of {limit}": {
+    "context": {
+      "variables": {
+        "size": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "{stage} · {days} days": {
     "context": {
       "variables": {
@@ -97524,6 +98159,22 @@
       "feature_area": "api-keys"
     }
   },
+  "{used} of {limit} {scope} quota": {
+    "context": {
+      "variables": {
+        "used": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        },
+        "scope": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
+    }
+  },
   "{used} of {max} connections ({percent}%)": {
     "context": {
       "variables": {
@@ -97538,6 +98189,16 @@
         }
       },
       "feature_area": "database-stats"
+    }
+  },
+  "{used} stored, no storage quota": {
+    "context": {
+      "variables": {
+        "used": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "s3-browser"
     }
   },
   "{user1} and {user2} are typing...": {
