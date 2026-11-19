@@ -163,7 +163,6 @@ export const ManagedProjectAuditLog = ({
       title={hideTitle ? undefined : translate('Audit log')}
       hideTitle={hideTitle}
       showPageSizeSelector={true}
-      standalone={!scoped}
       hasActionBar={!scoped}
       hasQuery={!scoped}
       hasOptionalColumns

@@ -232,7 +232,6 @@ export const ManagedProjectsList = () => {
       verboseName={translate('Managed Projects')}
       title={translate('Managed Projects')}
       showPageSizeSelector={true}
-      standalone
       hasQuery
       hasOptionalColumns
       expandableRowClassName="py-1.5 pe-1.5"

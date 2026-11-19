@@ -53,7 +53,6 @@ export const ProviderOrdersList = ({ provider, standalone = true }) => {
         />
       }
       filter={filter}
-      standalone={standalone}
       hideTitle={!standalone}
       enableMultiSelect
       multiSelectActions={OrdersBulkActions}
