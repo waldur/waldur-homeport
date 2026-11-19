@@ -58,6 +58,11 @@ export const MARKETPLACE_TABS: SettingsTab[] = [
     title: translate('POSIX ID pools'),
     groupName: translate('POSIX ID pools'),
   },
+  {
+    key: 's3-bucket-browser',
+    title: translate('S3 bucket browser'),
+    groupName: translate('S3 bucket browser'),
+  },
 ];
 
 export const AdministrationMarketplace = () => (

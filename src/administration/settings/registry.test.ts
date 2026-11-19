@@ -186,6 +186,10 @@ describe('administration settings registry', () => {
       state: 'admin-marketplace-settings',
       params: { tab: 'posix-id-pools' },
     });
+    expect(getSettingLocation('S3_BROWSER_ALLOWED_ENDPOINTS')).toMatchObject({
+      state: 'admin-marketplace-settings',
+      params: { tab: 's3-bucket-browser' },
+    });
   });
 
   it('returns no items for regular (non-staff, non-support) users', () => {

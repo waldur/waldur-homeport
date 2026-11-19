@@ -60260,7 +60260,12 @@
       "feature_area": "matrix"
     }
   },
-  "S3 bucket browser": {},
+  "S3 bucket browser": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "settings"
+    }
+  },
   "S3 gateway": {
     "context": {
       "feature_area": "integration"
