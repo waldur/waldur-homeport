@@ -2,9 +2,9 @@ import { DateTime } from 'luxon';
 import { FC, useMemo, useState, useCallback } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
+import { FormHeading, SegmentedControl } from 'waldur-ui';
+
 import { ChartCard } from '@/core/ChartCard';
-import { FormGroup } from '@/form';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
 
@@ -28,14 +28,14 @@ interface ColorOption {
 }
 
 const groupingOptions: GroupingOption[] = [
-  { value: 'provider', label: translate('By provider') },
-  { value: 'offering', label: translate('By offering') },
+  { value: 'provider', label: translate('Provider') },
+  { value: 'offering', label: translate('Offering') },
 ];
 
 const colorOptions: ColorOption[] = [
-  { value: 'state', label: translate('By state') },
-  { value: 'impact', label: translate('By impact') },
-  { value: 'timing', label: translate('By timing') },
+  { value: 'state', label: translate('State') },
+  { value: 'impact', label: translate('Impact') },
+  { value: 'timing', label: translate('Timing') },
 ];
 
 interface MaintenanceTimelineViewProps {
@@ -52,9 +52,6 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
     () => toTimelineItems(announcements),
     [announcements],
   );
-
-  const selectedGrouping = groupingOptions.find((o) => o.value === groupBy);
-  const selectedColor = colorOptions.find((o) => o.value === colorBy);
 
   const getExportData = useCallback((): ExportData => {
     if (!timelineItems || timelineItems.length === 0) {
@@ -96,28 +93,28 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
   }, [timelineItems]);
 
   const actions = (
-    <div className="flex gap-3 me-3">
-      <FormGroup label={translate('Group by')} className="max-w-[150px] mb-0">
-        <Select
-          value={selectedGrouping}
-          onChange={(option: GroupingOption | null) =>
-            option && setGroupBy(option.value)
-          }
+    <>
+      <div className="flex items-center gap-2">
+        <FormHeading className="mb-0">{translate('Group by:')}</FormHeading>
+        <SegmentedControl<TimelineGrouping>
+          aria-label={translate('Group by')}
+          size="sm"
           options={groupingOptions}
-          isClearable={false}
+          value={groupBy}
+          onValueChange={setGroupBy}
         />
-      </FormGroup>
-      <FormGroup label={translate('Color by')} className="max-w-[150px] mb-0">
-        <Select
-          value={selectedColor}
-          onChange={(option: ColorOption | null) =>
-            option && setColorBy(option.value)
-          }
+      </div>
+      <div className="flex items-center gap-2">
+        <FormHeading className="mb-0">{translate('Color by:')}</FormHeading>
+        <SegmentedControl<TimelineColoring>
+          aria-label={translate('Color by')}
+          size="sm"
           options={colorOptions}
-          isClearable={false}
+          value={colorBy}
+          onValueChange={setColorBy}
         />
-      </FormGroup>
-    </div>
+      </div>
+    </>
   );
 
   return (

@@ -49,11 +49,11 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
   return (
     <Card bordered className="mb-8">
       <CardHeader>
-        <CardTitle as="div" className="h5">
-          {translate('Component usage chart')}
+        <CardTitle as="div">
+          <h3>{translate('Component usage chart')}</h3>
         </CardTitle>
       </CardHeader>
-      <CardContent className="mt-2.5 max-w-125 min-w-full">
+      <CardContent className="max-w-125 min-w-full">
         {loading ? (
           <LoadingSpinner />
         ) : error ? (

@@ -57,7 +57,6 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
       )}
       <Table<OfferingRole>
         {...tableProps}
-        cardBordered={false}
         title={translate('Roles')}
         columns={[
           {

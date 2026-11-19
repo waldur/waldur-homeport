@@ -10431,20 +10431,10 @@
       "feature_area": "affiliated-organizations"
     }
   },
-  "By impact": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
   "By industry": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "project-classification"
-    }
-  },
-  "By offering": {
-    "context": {
-      "primary_ui_type": "label"
     }
   },
   "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>.": {},
@@ -10468,7 +10458,6 @@
   "By proposal": {},
   "By provider": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "resource-pending"
     }
   },
@@ -10483,17 +10472,7 @@
       "feature_area": "api-key"
     }
   },
-  "By state": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
   "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": {},
-  "By timing": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
   "By user": {
     "context": {
       "primary_ui_type": "label",
@@ -13216,6 +13195,11 @@
   "Collects reviewer suggestions": {},
   "Colombia": {},
   "Color by": {
+    "context": {
+      "feature_area": "views"
+    }
+  },
+  "Color by:": {
     "context": {
       "feature_area": "views"
     }
@@ -74172,6 +74156,7 @@
   },
   "Timing": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "views"
     }
   },
