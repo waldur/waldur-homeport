@@ -8,7 +8,6 @@ import {
   CardTitle,
   PropertyItem,
   PropertyList,
-  PropertyListSection,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -31,24 +30,27 @@ export const PlanUsageList: FC<OwnProps> = (props) => (
       {!props.plansUsage?.length ? (
         <div className="text-quaternary">{translate('There are no plans')}</div>
       ) : (
-        <PropertyList className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           {props.plansUsage.map((plan) => (
-            <PropertyListSection key={plan.plan_uuid} title={plan.plan_name}>
-              <PropertyItem
-                label={translate('Active count')}
-                value={propVal.count(plan.usage)}
-              />
-              <PropertyItem
-                label={translate('Limit')}
-                value={propVal.number(plan.limit)}
-              />
-              <PropertyItem
-                label={translate('Remaining')}
-                value={propVal.number(plan.remaining)}
-              />
-            </PropertyListSection>
+            <div key={plan.plan_uuid}>
+              <h4 className="font-medium mb-3">{plan.plan_name}</h4>
+              <PropertyList variant="summary" hideIfEmpty={false}>
+                <PropertyItem
+                  label={translate('Active count')}
+                  value={propVal.count(plan.usage)}
+                />
+                <PropertyItem
+                  label={translate('Limit')}
+                  value={propVal.number(plan.limit)}
+                />
+                <PropertyItem
+                  label={translate('Remaining')}
+                  value={propVal.number(plan.remaining)}
+                />
+              </PropertyList>
+            </div>
           ))}
-        </PropertyList>
+        </div>
       )}
     </CardContent>
   </Card>
