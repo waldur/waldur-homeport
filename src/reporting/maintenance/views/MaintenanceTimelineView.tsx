@@ -96,26 +96,28 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
 
   const actions = (
     <>
-      <Select
-        aria-label={translate('Group by')}
-        value={selectedGrouping}
-        onChange={(option: GroupingOption | null) =>
-          option && setGroupBy(option.value)
-        }
-        options={groupingOptions}
-        isClearable={false}
-        className="w-[150px]"
-      />
-      <Select
-        aria-label={translate('Color by')}
-        value={selectedColor}
-        onChange={(option: ColorOption | null) =>
-          option && setColorBy(option.value)
-        }
-        options={colorOptions}
-        isClearable={false}
-        className="w-[150px]"
-      />
+      <div className="w-[150px]">
+        <Select
+          aria-label={translate('Group by')}
+          value={selectedGrouping}
+          onChange={(option: GroupingOption | null) =>
+            option && setGroupBy(option.value)
+          }
+          options={groupingOptions}
+          isClearable={false}
+        />
+      </div>
+      <div className="w-[150px]">
+        <Select
+          aria-label={translate('Color by')}
+          value={selectedColor}
+          onChange={(option: ColorOption | null) =>
+            option && setColorBy(option.value)
+          }
+          options={colorOptions}
+          isClearable={false}
+        />
+      </div>
     </>
   );
 
