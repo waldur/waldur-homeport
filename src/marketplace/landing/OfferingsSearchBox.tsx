@@ -15,7 +15,7 @@ import {
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Link } from '@/core/Link';
-import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
+import { markdownToPlainText } from '@/core/sanitize';
 import { truncate } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -101,7 +101,7 @@ export const OfferingSearchResult = ({
           <div className="text-base ellipsis">{item.name}</div>
           {Boolean(item.description) && (
             <div className="text-xs text-quaternary ellipsis">
-              <TextWithoutFormatting html={truncate(item.description, 60)} />
+              {truncate(markdownToPlainText(item.description), 60)}
             </div>
           )}
         </div>
