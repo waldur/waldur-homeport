@@ -29578,6 +29578,7 @@
     }
   },
   "Hostname of FreeIPA server.": {},
+  "Hosts the S3 bucket browser may contact, one per line or comma separated, each optionally with :port. The endpoint comes from what a provider's site agent publishes, so nothing is contacted unless listed.": {},
   "Hour": {
     "context": {
       "feature_area": "DatePicker"
@@ -33267,6 +33268,7 @@
     }
   },
   "Largest OTLP metrics body accepted, after decompression, in bytes.": {},
+  "Largest file the S3 bucket browser uploads through Waldur, in MB. Larger files are left to S3 clients, whose instructions the browser shows.": {},
   "Largest tables": {
     "context": {
       "feature_area": "database-stats"
@@ -44649,6 +44651,16 @@
   "Only members of this room can read its messages.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Only one Terms of Service version can be active at a time. Activating this version deactivates version {version}.": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "tos"
     }
   },
   "Only one conversation can be open at a time.": {
@@ -60269,6 +60281,7 @@
       "feature_area": "matrix"
     }
   },
+  "S3 bucket browser": {},
   "S3 gateway": {
     "context": {
       "feature_area": "integration"
@@ -84789,6 +84802,7 @@
       "feature_area": "openstack"
     }
   },
+  "Verify the TLS certificate of S3 gateways the bucket browser contacts.": {},
   "Verify your data before importing": {
     "context": {
       "feature_area": "import"
@@ -84860,6 +84874,16 @@
         }
       },
       "feature_area": "workflow-check"
+    }
+  },
+  "Version {version} will be deactivated": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "tos"
     }
   },
   "Versioning": {

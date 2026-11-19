@@ -20,6 +20,12 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import {
+  getActiveTosQueryKey,
+  TosReplacementWarning,
+  useActiveTos,
+} from './activeTos';
+
 interface AddTosFormData {
   version: string;
   add_as: string;
@@ -40,6 +46,7 @@ interface AddTosDialogProps {
 }
 
 export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
+  const { data: activeTos } = useActiveTos(resolve.offering.uuid);
   const updateMutation = useManagedMutation<any, AddTosFormData, any>({
     mutationFn: (formData) => {
       const body: OfferingTermsOfServiceCreateRequest = {
@@ -62,6 +69,9 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
       return marketplaceOfferingTermsOfServiceCreate({ body });
     },
     successMessage: translate('Terms of service has been added successfully.'),
+    invalidateQueries: [
+      { queryKey: getActiveTosQueryKey(resolve.offering.uuid) },
+    ],
     errorMessage: translate('Unable to add Terms of Service.'),
     refetch: resolve.refetch,
   });
@@ -120,6 +130,11 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
             )}
 
             <BooleanGroup name="is_active" label={translate('Is active')} />
+
+            <TosReplacementWarning
+              activeTos={activeTos}
+              activating={Boolean(values?.is_active)}
+            />
 
             <BooleanGroup
               name="requires_reconsent"
