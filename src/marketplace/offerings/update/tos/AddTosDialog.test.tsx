@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceOfferingTermsOfServiceCreate } from 'waldur-js-client';
+import {
+  marketplaceOfferingTermsOfServiceCreate,
+  marketplaceOfferingTermsOfServiceList,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
@@ -166,6 +169,29 @@ describe('AddTosDialog', () => {
           }),
         }),
       );
+    });
+  });
+
+  describe('when the offering already has an active version', () => {
+    beforeEach(() => {
+      vi.mocked(marketplaceOfferingTermsOfServiceList).mockResolvedValue({
+        data: [{ uuid: 'active-uuid', version: '1.0', is_active: true }],
+      } as any);
+    });
+
+    it('warns that activating the new version deactivates it', async () => {
+      const user = userEvent.setup();
+      renderDialog();
+
+      expect(
+        screen.queryByText('Version 1.0 will be deactivated'),
+      ).not.toBeInTheDocument();
+
+      await user.click(screen.getByRole('checkbox', { name: /Is active/i }));
+
+      expect(
+        await screen.findByText('Version 1.0 will be deactivated'),
+      ).toBeInTheDocument();
     });
   });
 });

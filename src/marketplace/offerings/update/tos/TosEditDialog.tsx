@@ -16,6 +16,12 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import {
+  getActiveTosQueryKey,
+  TosReplacementWarning,
+  useActiveTos,
+} from './activeTos';
+
 const addAsOptions = [
   { value: 'markdown', label: translate('Markdown') },
   { value: 'external_link', label: translate('External link') },
@@ -23,6 +29,7 @@ const addAsOptions = [
 
 export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
   const [activeTab, setActiveTab] = useState('write');
+  const { data: activeTos } = useActiveTos(tos.offering_uuid);
 
   const updateTosMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
@@ -52,6 +59,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
     successMessage: translate(
       'Terms of Service has been updated successfully.',
     ),
+    invalidateQueries: [{ queryKey: getActiveTosQueryKey(tos.offering_uuid) }],
     errorMessage: translate('Unable to update Terms of Service.'),
     refetch,
   });
@@ -160,6 +168,12 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               )}
 
               <BooleanGroup name="is_active" label={translate('Active')} />
+
+              <TosReplacementWarning
+                activeTos={activeTos}
+                activating={Boolean(values.is_active)}
+                currentUuid={tos.uuid}
+              />
 
               <BooleanGroup
                 name="requires_reconsent"
