@@ -160,9 +160,6 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
               options={periodOptions}
               value={period}
               onValueChange={setPeriod}
-              // Matches the export dropdown and the chart/table toggle, which
-              // are both `lg`, so the toolbar row reads as one height.
-              size="lg"
             />
           )}
           <UsageExportDropdown
@@ -190,7 +187,6 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
                 <ChartBarIcon weight="bold" />
               )
             }
-            size="lg"
           />
         </CardToolbar>
       </CardHeader>

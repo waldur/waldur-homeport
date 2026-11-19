@@ -261,7 +261,6 @@ export const UsageExportDropdown = (props: UsageExportDropdownProps) => {
   return (
     <ChartExportDropdown
       label={translate('Export all')}
-      size="lg"
       onExportPng={() => exportUsages('png')}
       onExportPdf={() => exportUsages('pdf')}
       onExportCsv={() => exportUsages('csv')}
