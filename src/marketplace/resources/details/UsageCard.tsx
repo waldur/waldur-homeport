@@ -138,20 +138,21 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
           {teamError && !teamRefused ? (
             <LoadingErred message={translate('Error')} loadData={refetchTeam} />
           ) : usersFilterOptions.length > 0 ? (
-            <Select
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => option.full_name || option.username}
-              value={users}
-              isMulti
-              placeholder={translate('All users')}
-              onChange={(value) => setUsers(value)}
-              options={usersFilterOptions}
-              isLoading={teamIsLoading}
-              // Fixed, not content-sized: the `w-full` container would other-
-              // wise claim the whole toolbar row when empty and grow with each
-              // chip, shifting every control beside it on every selection.
-              className="max-w-[250px]"
-            />
+            // Fixed, not content-sized: the select fills its container, so on
+            // its own it would claim the whole toolbar row and push the other
+            // controls onto the next one, or grow with each chip.
+            <div className="w-[250px]">
+              <Select
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.full_name || option.username}
+                value={users}
+                isMulti
+                placeholder={translate('All users')}
+                onChange={(value) => setUsers(value)}
+                options={usersFilterOptions}
+                isLoading={teamIsLoading}
+              />
+            </div>
           ) : null}
           {periodOptions.length > 1 && (
             <SegmentedControl<number>
