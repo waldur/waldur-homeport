@@ -6,16 +6,13 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
+  PropertyItem,
+  PropertyList,
+  PropertyListSection,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { DASH_ESCAPE_CODE } from '@/table/constants';
-import { renderFieldOrDash } from '@/table/utils';
+import { propVal } from '@/property/propertyFields';
 
 interface OwnProps {
   plansUsage: PlanUsageResponse[];
@@ -23,57 +20,36 @@ interface OwnProps {
   id?: string;
 }
 
-const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
-  <div>
-    <h4 className="font-medium mb-3">{plan.plan_name}:</h4>
-    <Table scrollable={false} className="text-tertiary mb-8">
-      <TableBody>
-        <TableRow divided={false} hoverable={false}>
-          <TableHead className="text-[length:inherit] text-secondary font-medium p-0 pe-5">
-            {translate('Active count')}:
-          </TableHead>
-          <TableCell className="text-[length:inherit] text-inherit p-0">
-            {plan.usage}
-          </TableCell>
-        </TableRow>
-        <TableRow divided={false} hoverable={false}>
-          <TableHead className="text-[length:inherit] text-secondary font-medium p-0 pe-5">
-            {translate('Limit')}:
-          </TableHead>
-          <TableCell className="text-[length:inherit] text-inherit p-0">
-            {renderFieldOrDash(plan.limit)}
-          </TableCell>
-        </TableRow>
-        <TableRow divided={false} hoverable={false}>
-          <TableHead className="text-[length:inherit] text-secondary font-medium p-0 pe-5">
-            {translate('Remaining')}:
-          </TableHead>
-          <TableCell className="text-[length:inherit] text-inherit p-0">
-            {plan.remaining === null ? DASH_ESCAPE_CODE : plan.remaining}
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </div>
-);
-
-export const PlanUsageList: FC<OwnProps> = (props) => {
-  return (
-    <Card bordered className={props.className} id={props.id}>
-      <CardHeader>
-        <CardTitle as="div">{translate('Plans')}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        {!props.plansUsage?.length && (
-          <div className="text-quaternary">
-            {translate('There are no plans')}
-          </div>
-        )}
-        {props.plansUsage &&
-          props.plansUsage.map((plan) => (
-            <PlanGroup key={plan.plan_uuid} plan={plan} />
+export const PlanUsageList: FC<OwnProps> = (props) => (
+  <Card bordered className={props.className} id={props.id}>
+    <CardHeader>
+      <CardTitle as="div">
+        <h3>{translate('Plans')}</h3>
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      {!props.plansUsage?.length ? (
+        <div className="text-quaternary">{translate('There are no plans')}</div>
+      ) : (
+        <PropertyList className="flex flex-col gap-6">
+          {props.plansUsage.map((plan) => (
+            <PropertyListSection key={plan.plan_uuid} title={plan.plan_name}>
+              <PropertyItem
+                label={translate('Active count')}
+                value={propVal.count(plan.usage)}
+              />
+              <PropertyItem
+                label={translate('Limit')}
+                value={propVal.number(plan.limit)}
+              />
+              <PropertyItem
+                label={translate('Remaining')}
+                value={propVal.number(plan.remaining)}
+              />
+            </PropertyListSection>
           ))}
-      </CardContent>
-    </Card>
-  );
-};
+        </PropertyList>
+      )}
+    </CardContent>
+  </Card>
+);

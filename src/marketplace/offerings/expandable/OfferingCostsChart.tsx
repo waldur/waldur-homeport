@@ -85,7 +85,9 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = ({
         <form onSubmit={handleSubmit}>
           <Card bordered className="mb-8">
             <CardHeader>
-              <CardTitle as="div">{translate('Offering cost chart')}</CardTitle>
+              <CardTitle as="div">
+                <h3>{translate('Offering cost chart')}</h3>
+              </CardTitle>
               <CardToolbar>
                 <div className="min-w-[200px]">
                   <AccountingRunningField />
