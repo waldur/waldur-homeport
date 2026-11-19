@@ -108,7 +108,7 @@ export const OrderMetadataTab = ({
         <PropertyItem
           label={translate('Offering description')}
           value={propVal.richText(order.offering_description, {
-            format: 'html',
+            format: 'markdown',
           })}
         />
 

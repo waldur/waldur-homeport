@@ -15,7 +15,7 @@ import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 import { LinkButton, Tooltip } from 'waldur-ui';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
-import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
+import { markdownToPlainText } from '@/core/sanitize';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
@@ -101,7 +101,7 @@ const OfferingListItem: FunctionComponent<{
                 {item.name}
               </h5>
               <p className="ellipsis text-xs mb-0 text-quaternary">
-                <TextWithoutFormatting html={truncate(item.description, 120)} />
+                {truncate(markdownToPlainText(item.description), 120)}
               </p>
             </div>
           </div>

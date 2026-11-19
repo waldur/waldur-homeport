@@ -11,6 +11,7 @@
  *  - Markdown, links only (announcement bar) → parseMarkdownLinksOnly()
  *  - Strip all tags, keep text              → stripHtml()
  *  - HTML as one line of display text      → htmlToPlainText()
+ *  - Markdown as one line of display text  → markdownToPlainText()
  */
 
 import DOMPurify, { type Config as DOMPurifyConfig } from 'dompurify';
@@ -87,8 +88,15 @@ export const sanitizeHtml = (html: string): string =>
  * final HTML structure, including any URLs that the markdown→HTML step
  * may have introduced.
  */
-export const parseMarkdown = (markdown: string): string =>
-  sanitizeHtml(marked.parse(markdown, { async: false }) as string);
+export const parseMarkdown = (markdown: string): string => {
+  try {
+    return sanitizeHtml(marked.parse(markdown, { async: false }) as string);
+  } catch {
+    // marked recurses per nesting level and overflows the stack on input such
+    // as thousands of `>`. Show the text unformatted instead of crashing.
+    return sanitizeHtml(markdown);
+  }
+};
 
 /**
  * Shared configuration for stripping all formatting except links.
@@ -135,5 +143,25 @@ export const htmlToPlainText = (html: string): string => {
     html.replace(BLOCK_TAG, ' $&'),
     'text/html',
   );
+  doc.body
+    .querySelectorAll('script, style, template, noscript')
+    .forEach((node) => node.remove());
   return (doc.body.textContent ?? '').replace(/\s+/g, ' ').trim();
+};
+
+/**
+ * Turns Markdown (which may also contain raw HTML) into a single line of plain
+ * text, so previews show the same words as the rendered Markdown without
+ * syntax such as `**` or `*` list markers.
+ */
+export const markdownToPlainText = (markdown: string): string => {
+  if (!markdown) {
+    return '';
+  }
+  try {
+    return htmlToPlainText(marked.parse(markdown, { async: false }) as string);
+  } catch {
+    // See parseMarkdown: deeply nested input overflows marked's stack.
+    return htmlToPlainText(markdown);
+  }
 };

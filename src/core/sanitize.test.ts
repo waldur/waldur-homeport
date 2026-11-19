@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { htmlToPlainText } from './sanitize';
+import {
+  htmlToPlainText,
+  markdownToPlainText,
+  parseMarkdown,
+} from './sanitize';
 
 describe('htmlToPlainText', () => {
   it('returns an empty string for empty input', () => {
@@ -31,7 +35,52 @@ describe('htmlToPlainText', () => {
     );
   });
 
+  it('drops the contents of script and style elements', () => {
+    expect(
+      htmlToPlainText('<p>Intro</p><script>var x=1</script><style>p{}</style>'),
+    ).toBe('Intro');
+  });
+
   it('decodes entities', () => {
     expect(htmlToPlainText('<p>R&amp;D &lt;GPU&gt;</p>')).toBe('R&D <GPU>');
+  });
+});
+
+describe('markdownToPlainText', () => {
+  it('returns an empty string for empty input', () => {
+    expect(markdownToPlainText('')).toBe('');
+  });
+
+  it('drops emphasis and list markers', () => {
+    expect(
+      markdownToPlainText(
+        '**Description**\n\nExpert consultation.\n\n**This service provides:**\n\n* Assessment\n* Selection',
+      ),
+    ).toBe(
+      'Description Expert consultation. This service provides: Assessment Selection',
+    );
+  });
+
+  it('still handles HTML descriptions', () => {
+    expect(
+      markdownToPlainText('<p>Training for:</p><ul><li>SME</li></ul>'),
+    ).toBe('Training for: SME');
+  });
+
+  it('keeps email addresses and decodes entities', () => {
+    expect(markdownToPlainText('Contact info@example.com for R&D')).toBe(
+      'Contact info@example.com for R&D',
+    );
+  });
+
+  it('does not throw on deeply nested markdown', () => {
+    expect(typeof markdownToPlainText('>'.repeat(3000) + 'x')).toBe('string');
+    expect(typeof markdownToPlainText('> - '.repeat(1000))).toBe('string');
+  });
+});
+
+describe('parseMarkdown', () => {
+  it('does not throw on deeply nested markdown', () => {
+    expect(typeof parseMarkdown('>'.repeat(3000) + 'x')).toBe('string');
   });
 });
