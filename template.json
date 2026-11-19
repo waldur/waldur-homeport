@@ -1100,7 +1100,7 @@
       "feature_area": "freeipa"
     }
   },
-  "A project group is the one POSIX group a project gets at this service provider, with a stable GID and the project members’ accounts as its members. Clusters grant access through it, and files on shared storage are owned by it.": {},
+  "A project group is the POSIX group a project gets at this provider, with a stable GID.": {},
   "A proposal goes to the panel covering its science sub-domain, or else its domain, when its evaluation starts. Evaluator roles for the proposal's panel are held by its chair or members.": {
     "context": {
       "feature_area": "panels"
@@ -1953,11 +1953,6 @@
   "Account settings": {
     "context": {
       "feature_area": "marketplace"
-    }
-  },
-  "Account settings are not enabled on this portal; ask its administrator to turn on provider accounts so project groups can be switched on.": {
-    "context": {
-      "feature_area": "project-groups"
     }
   },
   "Account settings have been updated.": {
@@ -74371,7 +74366,12 @@
       "feature_area": "organization-create"
     }
   },
-  "To start: set a project group GID range on the POSIX ID pool, adopt the groups your directory already holds, then enable project groups in the account settings.": {
+  "To start, set a GID range on the POSIX ID pool and add groups. Ask your administrator to turn on provider accounts to enable project groups.": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
+  "To start, set a GID range on the POSIX ID pool, add groups, then enable project groups in the account settings.": {
     "context": {
       "feature_area": "project-groups"
     }
