@@ -49,7 +49,7 @@ export const HelpdeskSetupCard: FC = () => {
         <BaseButton
           label={translate('Set up helpdesk')}
           variant="tertiary"
-          size="sm"
+          size="lg"
           onClick={() =>
             openDialog(HelpdeskSettingsForm, {
               resolve: {
