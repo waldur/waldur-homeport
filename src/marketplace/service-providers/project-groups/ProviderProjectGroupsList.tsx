@@ -1,5 +1,5 @@
 import { ArrowsClockwiseIcon, UploadSimpleIcon } from '@phosphor-icons/react';
-import { FC, ReactNode, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import {
   marketplaceServiceProviderProjectGroupsList,
   ServiceProvider,
@@ -95,16 +95,13 @@ export const ChangeGidAction: FC<{
 
 const WHAT_THEY_ARE = () =>
   translate(
-    'A project group is the one POSIX group a project gets at this service provider, with a stable GID and the project members’ accounts as its members. Clusters grant access through it, and files on shared storage are owned by it.',
+    'A project group is the POSIX group a project gets at this provider, with a stable GID.',
   );
 
 // Only those who can set project groups up are told how; for everyone else
 // the list may be empty because they see no groups, not because there are
 // none.
-const EmptyState: FC<{ canManage: boolean; actions?: ReactNode }> = ({
-  canManage,
-  actions,
-}) =>
+const EmptyState: FC<{ canManage: boolean }> = ({ canManage }) =>
   canManage ? (
     <NoResult
       title={translate('No project groups yet')}
@@ -112,22 +109,17 @@ const EmptyState: FC<{ canManage: boolean; actions?: ReactNode }> = ({
         <>
           <p className="mb-1.5">{WHAT_THEY_ARE()}</p>
           <p className="mb-0">
-            {translate(
-              'To start: set a project group GID range on the POSIX ID pool, adopt the groups your directory already holds, then enable project groups in the account settings.',
-            )}
+            {isFeatureVisible(MarketplaceFeatures.show_provider_accounts)
+              ? translate(
+                  'To start, set a GID range on the POSIX ID pool, add groups, then enable project groups in the account settings.',
+                )
+              : translate(
+                  'To start, set a GID range on the POSIX ID pool and add groups. Ask your administrator to turn on provider accounts to enable project groups.',
+                )}
           </p>
-          {/* The switch lives on the account settings page, which has its
-              own feature flag. */}
-          {!isFeatureVisible(MarketplaceFeatures.show_provider_accounts) && (
-            <p className="mb-0 mt-1.5">
-              {translate(
-                'Account settings are not enabled on this portal; ask its administrator to turn on provider accounts so project groups can be switched on.',
-              )}
-            </p>
-          )}
         </>
       }
-      actions={actions}
+      noAction
     />
   ) : (
     <NoResult
@@ -306,9 +298,7 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
       rowActions={canManage ? RowActions : undefined}
       tableActions={actions}
       placeholderComponent={
-        isFiltered ? undefined : (
-          <EmptyState canManage={canManage} actions={actions} />
-        )
+        isFiltered ? undefined : <EmptyState canManage={canManage} />
       }
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector

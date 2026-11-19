@@ -204,7 +204,7 @@ describe('ProviderProjectGroupsList', () => {
 
     expect(screen.getByText('No project groups yet')).toBeInTheDocument();
     expect(
-      screen.getByText(/enable project groups in the account settings/),
+      screen.getByText(/set a GID range on the POSIX ID pool/),
     ).toBeInTheDocument();
   });
 
@@ -214,7 +214,7 @@ describe('ProviderProjectGroupsList', () => {
 
     expect(screen.getByText('No project groups to show')).toBeInTheDocument();
     expect(
-      screen.queryByText(/enable project groups in the account settings/),
+      screen.queryByText(/set a GID range on the POSIX ID pool/),
     ).not.toBeInTheDocument();
   });
 
