@@ -39505,6 +39505,11 @@
       "feature_area": "details"
     }
   },
+  "No access to metrics": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "No account": {
     "context": {
       "feature_area": "reports"
@@ -87461,6 +87466,11 @@
   "You don't have permission to cancel this invitation.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "You don't have permission to see this project's metrics.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "You don't have permission to send this invitation.": {

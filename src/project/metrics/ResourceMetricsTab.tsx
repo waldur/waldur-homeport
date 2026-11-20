@@ -1,7 +1,11 @@
 import { FlagIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { marketplaceResourceMetricsList, Resource } from 'waldur-js-client';
+import {
+  marketplaceResourceMetricsList,
+  Resource,
+  ResourceMetric,
+} from 'waldur-js-client';
 
 import {
   HelpIcon,
@@ -21,6 +25,7 @@ import { INSTANCE_TYPE, VOLUME_TYPE } from '@/openstack/constants';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableRefreshButton } from '@/table/TableRefreshButton';
 
+import { emptyIfNotFound } from './emptyIfNotFound';
 import { getPollingStatus } from './instanceMetricsPolling';
 import { MetricCard } from './MetricCard';
 import {
@@ -48,7 +53,9 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
     queryFn: () =>
       marketplaceResourceMetricsList({
         query: { resource_uuid: resource.uuid },
-      }).then((response) => response.data),
+      })
+        .then((response) => response.data)
+        .catch(emptyIfNotFound<ResourceMetric[]>([])),
   });
   const queryClient = useQueryClient();
   // The last read before one was asked for, until a newer one shows up.

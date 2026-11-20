@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { marketplaceProjectMetricsList } from 'waldur-js-client';
+import { marketplaceProjectMetricsList, ProjectMetric } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -8,6 +8,7 @@ import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useProject } from '@/workspace/hooks';
 
+import { emptyIfNotFound } from './emptyIfNotFound';
 import { MetricCard } from './MetricCard';
 
 export const ProjectMetricsPage: FC = () => {
@@ -17,12 +18,27 @@ export const ProjectMetricsPage: FC = () => {
     queryFn: () =>
       marketplaceProjectMetricsList({
         query: { project_uuid: project.uuid },
-      }).then((response) => response.data),
+      })
+        .then((response) => response.data)
+        // The backend answers 404 for a project whose metrics the user may
+        // not read, though they may see the project and its Metrics tab.
+        .catch(emptyIfNotFound<ProjectMetric[] | null>(null)),
     enabled: Boolean(project),
   });
 
   if (!project || isLoading) return <LoadingSpinner />;
   if (error) return <LoadingErred loadData={refetch} />;
+  if (data === null) {
+    return (
+      <NoResult
+        title={translate('No access to metrics')}
+        message={translate(
+          "You don't have permission to see this project's metrics.",
+        )}
+        noAction
+      />
+    );
+  }
   if (!data?.length) {
     return (
       <NoResult
