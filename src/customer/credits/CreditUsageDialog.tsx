@@ -7,7 +7,7 @@ import {
   invoiceItemsTotalPriceRetrieve,
 } from 'waldur-js-client';
 
-import { parseDate } from '@/core/dateUtils';
+import { formatMonthName, parseDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -42,9 +42,7 @@ const generateYearOptions = () => {
 };
 
 const MONTH_OPTIONS = Array.from({ length: 12 }, (_, i) => ({
-  label: DateTime.local()
-    .set({ month: i + 1 })
-    .toFormat('LLLL'),
+  label: formatMonthName(DateTime.local().set({ month: i + 1 })),
   value: i + 1,
 }));
 

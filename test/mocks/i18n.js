@@ -7,6 +7,7 @@ vi.mock('@/i18n/LanguageUtilsService', () => ({
     dictionary: {},
   },
   getUserLocale: vi.fn(() => 'en'),
+  getDateLocale: vi.fn(() => 'en-GB'),
   numberFormatter: {
     format: vi.fn((val) => val.toString()),
   },

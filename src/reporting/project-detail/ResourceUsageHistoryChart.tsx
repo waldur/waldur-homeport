@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { FC, useMemo, useCallback } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatShortMonth } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getChartThemeColors } from '@/dashboard/chartColors';
@@ -101,9 +102,7 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
         trigger: 'axis',
         formatter: (params) => {
           if (!params || params.length === 0) return '';
-          const date = DateTime.fromISO(params[0].value[0]).toFormat(
-            'MMM yyyy',
-          );
+          const date = formatShortMonth(DateTime.fromISO(params[0].value[0]));
           let result = `<strong>${date}</strong><br/>`;
           for (const param of params) {
             const cumulative = renderFieldOrDash(
@@ -140,7 +139,7 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
         type: 'time',
         axisLabel: {
           formatter: (value: string) =>
-            DateTime.fromMillis(Number(value)).toFormat('MMM yyyy'),
+            formatShortMonth(DateTime.fromMillis(Number(value))),
         },
       },
       yAxis: {

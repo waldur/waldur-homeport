@@ -1,14 +1,26 @@
 import { DateTime, ToRelativeUnit } from 'luxon';
 
-type DateInput = DateTime | Date | string | number | number[];
+import { getDateLocale } from 'waldur-i18n-runtime';
+
+export type DateInput =
+  DateTime | Date | string | number | number[] | null | undefined;
 
 type DateFormatter = (date: DateInput) => string;
 
-export const parseDate = (value: DateInput) => {
+/** What a formatter shows for a missing or unparseable date: a dash, never
+ *  a plausible-looking date. Same character as the table's empty cell. */
+const MISSING_DATE = '\u2014';
+
+/**
+ * A DateTime for any date-like value. `null`/`undefined` give an *invalid*
+ * DateTime, not the current time: a missing `end_date` used to render as
+ * today, which reads as real data. Pass `DateTime.now()` when you mean now.
+ */
+export const parseDate = (value: DateInput): DateTime => {
   if (value instanceof DateTime) {
     return value;
   } else if (typeof value === 'undefined' || value === null) {
-    return DateTime.now();
+    return DateTime.invalid('missing date');
   } else if (typeof value === 'string') {
     // Parse ISO string while preserving original timezone info
     // If no timezone is specified, use local timezone as fallback
@@ -20,7 +32,7 @@ export const parseDate = (value: DateInput) => {
     return DateTime.fromJSDate(value);
   } else if (typeof value === 'number') {
     return DateTime.fromMillis(value);
-  } else if (value instanceof Array) {
+  } else if (Array.isArray(value)) {
     return DateTime.fromObject({
       year: value[0],
       month: value[1] + 1, // convert 0-based to 1-based
@@ -31,26 +43,112 @@ export const parseDate = (value: DateInput) => {
       millisecond: value[6],
     });
   }
+  return DateTime.invalid('unsupported date input');
 };
 
-// Date order is pinned, not taken from the locale, which puts the month first
-// in English. Month names and the clock stay localised.
+const DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/** Whether a value is a calendar date (`2026-09-10`) rather than an instant. */
+const isCalendarDate = (value: DateInput): value is string =>
+  typeof value === 'string' && DATE_ONLY_PATTERN.test(value);
+
+/**
+ * A calendar date: start of that day in the local zone. A timestamp keeps
+ * the date it names in its own offset, so `2026-09-30T00:00:00Z` is 30 Sep
+ * everywhere, rather than 29 Sep west of UTC as a local conversion makes it.
+ * Use it for values that are days (end dates, due dates), not instants.
+ */
+export const parseCalendarDate = (value: DateInput): DateTime => {
+  const parsed =
+    typeof value === 'string'
+      ? DateTime.fromISO(value, { setZone: true })
+      : parseDate(value);
+  if (!parsed.isValid) {
+    return parsed;
+  }
+  return DateTime.local(parsed.year, parsed.month, parsed.day);
+};
+
+/* ── Display formatting ──────────────────────────────────────────────────────
+ *
+ * Every display format is an Intl preset rendered in the date locale
+ * (`getDateLocale()`: the UI language, with plain English as en-GB so dates
+ * read day-first). Never a Luxon token string such as 'd LLL yyyy': no token
+ * string is right in every locale — LLL is a bare number in Lithuanian and the
+ * wrong case in Russian, MMMM without a day is the wrong case in Finnish and
+ * every Slavic language. The locale's own pattern gets all of that right.
+ * Token strings are for machine formats only (yyyy-MM, ISO), and the
+ * `waldur/no-display-date-tokens` lint rule keeps them that way.
+ */
+const display = (
+  date: DateInput,
+  preset: Intl.DateTimeFormatOptions,
+): string => {
+  const parsed = parseDate(date);
+  return parsed.isValid
+    ? parsed.toLocaleString(preset, { locale: getDateLocale() })
+    : MISSING_DATE;
+};
 
 /** @example 2027-02-26 */
 export const formatISODate: DateFormatter = (date) =>
   parseDate(date).toISODate();
 
-/** @example 26 Feb 2027 */
+/** @example 26 Feb 2027 (en), 26 февр. 2027 г. (ru), 26.2.2027 (fi) */
 export const formatDate: DateFormatter = (date) =>
-  parseDate(date).toFormat('d LLL yyyy');
+  display(date, DateTime.DATE_MED);
+
+/** @example 26 February 2027 */
+export const formatLongDate: DateFormatter = (date) =>
+  display(date, DateTime.DATE_FULL);
 
 /** @example 26 Feb 2027, 14:00 */
 export const formatDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('d LLL yyyy, t');
+  display(date, DateTime.DATETIME_MED);
+
+/** @example 26 Feb 2027, 14:00:05 — for event logs where seconds matter */
+export const formatDateTimeWithSeconds: DateFormatter = (date) =>
+  display(date, DateTime.DATETIME_MED_WITH_SECONDS);
 
 /** @example 14:21 */
 export const formatTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('T');
+  display(date, DateTime.TIME_SIMPLE);
+
+/** @example 26 Feb */
+export const formatDayMonth: DateFormatter = (date) =>
+  display(date, { day: 'numeric', month: 'short' });
+
+/** @example 26 Feb, 14:00 */
+export const formatDayMonthTime: DateFormatter = (date) =>
+  display(date, {
+    day: 'numeric',
+    month: 'short',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+
+/** @example July 2022 */
+export const formatMonth: DateFormatter = (date) =>
+  display(date, { month: 'long', year: 'numeric' });
+
+/** @example Jul 2022 */
+export const formatShortMonth: DateFormatter = (date) =>
+  display(date, { month: 'short', year: 'numeric' });
+
+/** @example July */
+export const formatMonthName: DateFormatter = (date) =>
+  display(date, { month: 'long' });
+
+/** @example 22 July 2024 at 14:00 EET */
+export const formatMediumDateTime: DateFormatter = (date) =>
+  display(date, { ...DateTime.DATETIME_FULL, timeZoneName: 'short' });
+
+/** @example 22 Jul 2024, 14:00 */
+export const formatShortDateTime: DateFormatter = formatDateTime;
+
+/** @example 2024-07-22T14:00 */
+export const formatISOWithoutZone: DateFormatter = (date) =>
+  parseDate(date).toFormat("yyyy-MM-dd'T'HH:mm");
 
 // Luxon picks the display unit (years/months/days/...) from the un-rounded
 // diff, then rounds the number within that unit. That means a value like
@@ -84,13 +182,14 @@ const CARRY_THRESHOLDS: Partial<
  *  the first moments of the morning. Whole days are therefore measured between
  *  start-of-day and start-of-day, and only sub-day units are dropped with them
  *  — a date has no hours to report. Timestamps keep instant precision. */
-const DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-
 const WHOLE_DAY_UNITS: ToRelativeUnit[] = ['years', 'months', 'days'];
 
 export const formatRelative: DateFormatter = (date) => {
-  const target = parseDate(date);
-  const isWholeDay = typeof date === 'string' && DATE_ONLY_PATTERN.test(date);
+  const isWholeDay = isCalendarDate(date);
+  const target = isWholeDay ? parseCalendarDate(date) : parseDate(date);
+  if (!target.isValid) {
+    return MISSING_DATE;
+  }
   const now = isWholeDay
     ? DateTime.fromObject({}, { zone: target.zone }).startOf('day')
     : DateTime.fromObject({}, { zone: target.zone });
@@ -143,7 +242,7 @@ export const formatRelative: DateFormatter = (date) => {
 
 /** The last day access is available for an (exclusive) end date. */
 export const lastAccessDate = (endDate: DateInput): DateTime =>
-  parseDate(endDate).startOf('day').minus({ days: 1 });
+  parseCalendarDate(endDate).minus({ days: 1 });
 
 /**
  * Whole days from today to the last day of access.
@@ -151,67 +250,106 @@ export const lastAccessDate = (endDate: DateInput): DateTime =>
  */
 export const daysUntilAccessEnds = (endDate: DateInput): number =>
   Math.round(
-    lastAccessDate(endDate).diff(
-      DateTime.now().setZone(parseDate(endDate).zone).startOf('day'),
-      'days',
-    ).days,
+    lastAccessDate(endDate).diff(DateTime.now().startOf('day'), 'days').days,
   );
 
-export const formatRelativeWithHour: DateFormatter = (date) => {
-  const dateDiff = parseDate(date).diffNow(['hours', 'minutes']);
+// Intl formatters are costly to build and these run per table cell, so one
+// is kept per locale and option set.
+const intlCache = new Map<string, Intl.NumberFormat | Intl.ListFormat>();
 
-  if (dateDiff.hours > 24) {
-    return parseDate(date).toRelative();
-  } else {
-    const hours = dateDiff.hours;
-    const minutes = dateDiff.minutes;
-
-    if (hours > 0 && minutes > 0) {
-      return `${hours} hours ${minutes.toFixed(0)} minutes`;
-    } else if (hours > 0) {
-      return `${hours} hours`;
-    } else {
-      return `${minutes.toFixed(0)} minutes`;
-    }
+const cachedIntl = <T extends Intl.NumberFormat | Intl.ListFormat>(
+  key: string,
+  build: () => T,
+): T => {
+  let formatter = intlCache.get(key) as T | undefined;
+  if (!formatter) {
+    formatter = build();
+    intlCache.set(key, formatter);
   }
+  return formatter;
 };
 
-// MMMM, not LLLL: the format form carries the right grammatical case when the
-// day precedes the month (fi heinäkuuta, ru июля, lt liepos). Identical in
-// English. The abbreviated formatters keep LLL — MMM degrades to a bare number
-// in Finnish and Czech, which is the thing this file exists to avoid.
-/** @example 22 July 2024, 14:00 GMT+2 */
-export const formatMediumDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('d MMMM yyyy, t ZZZZ');
+/** Whole units of a duration, largest first, in the date locale: "3 hours,
+ *  5 minutes" (long) or "2d 3h" (narrow). Zero units are left out; an empty
+ *  duration reads as zero of the smallest unit. */
+const formatDurationUnits = (
+  parts: [Intl.NumberFormatOptions['unit'], number][],
+  unitDisplay: 'long' | 'narrow',
+): string => {
+  const locale = getDateLocale();
+  const shown = parts.filter(([, value]) => value > 0);
+  const units = shown.length ? shown : parts.slice(-1);
+  const style = unitDisplay === 'narrow' ? 'narrow' : 'short';
+  const list = cachedIntl(
+    `list:${locale}:${style}`,
+    () => new Intl.ListFormat(locale, { type: 'unit', style }),
+  );
+  return list.format(
+    units.map(([unit, value]) =>
+      cachedIntl(
+        `unit:${locale}:${unit}:${unitDisplay}`,
+        () =>
+          new Intl.NumberFormat(locale, { style: 'unit', unit, unitDisplay }),
+      ).format(value),
+    ),
+  );
+};
 
-/** @example 22 Jul 2024, 14:00 */
-export const formatShortDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('d LLL yyyy, t');
+/** Time left until a date: hours and minutes within a day, relative beyond.
+ *  A date already past reads as relative ("3 hours ago"), never as a
+ *  countdown clamped to zero. */
+export const formatRelativeWithHour: DateFormatter = (date) => {
+  const target = parseDate(date);
+  if (!target.isValid) {
+    return MISSING_DATE;
+  }
+  const dateDiff = target.diffNow(['hours', 'minutes']);
+  if (dateDiff.toMillis() < 0) {
+    return formatRelative(target);
+  }
 
-/** @example 2024-07-22T14:00 */
-export const formatISOWithoutZone: DateFormatter = (date) =>
-  parseDate(date).toFormat("yyyy-MM-dd'T'T");
+  if (dateDiff.hours > 24) {
+    return target.toRelative({ locale: getDateLocale() });
+  }
+  return formatDurationUnits(
+    [
+      ['hour', Math.floor(dateDiff.hours)],
+      ['minute', Math.floor(dateDiff.minutes)],
+    ],
+    'long',
+  );
+};
 
-/** @example July 2022 */
-export const formatMonth: DateFormatter = (date) =>
-  parseDate(date).toFormat('MMMM yyyy');
-
-export const formatUptime = (date) => {
+/** How long since a start time, compactly: "2d 3h", "4h 10m", "5m". */
+export const formatUptime = (date: DateInput): string => {
   const start = parseDate(date);
-  const now = DateTime.now();
-  const diff = now.diff(start, ['days', 'hours', 'minutes']).toObject();
+  if (!start.isValid) {
+    return MISSING_DATE;
+  }
+  const diff = DateTime.now()
+    .diff(start, ['days', 'hours', 'minutes'])
+    .toObject();
 
   const days = Math.floor(diff.days || 0);
   const hours = Math.floor(diff.hours || 0);
   const minutes = Math.floor(diff.minutes || 0);
 
   if (days > 1000) {
-    return `${days}d`;
+    return formatDurationUnits([['day', days]], 'narrow');
   } else if (days > 0) {
-    return hours > 0 ? `${days}d ${hours}h` : `${days}d`;
-  } else if (hours > 0) {
-    return minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
-  } else {
-    return `${minutes}m`;
+    return formatDurationUnits(
+      [
+        ['day', days],
+        ['hour', hours],
+      ],
+      'narrow',
+    );
   }
+  return formatDurationUnits(
+    [
+      ['hour', hours],
+      ['minute', minutes],
+    ],
+    'narrow',
+  );
 };

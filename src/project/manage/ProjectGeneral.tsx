@@ -107,7 +107,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             )}
             disabled={
               project.start_date
-                ? parseDate(project.start_date) < parseDate(null)
+                ? parseDate(project.start_date) < DateTime.now()
                 : false
             }
             minDate={DateTime.now().toISO()}

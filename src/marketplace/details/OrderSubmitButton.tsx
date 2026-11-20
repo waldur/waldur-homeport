@@ -1,5 +1,6 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { FORM_ERROR } from 'final-form';
+import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
@@ -31,7 +32,7 @@ export const OrderSubmitButton = () => {
   const projectError = useMemo(() => {
     if (project?.end_date) {
       const endDate = parseDate(project.end_date);
-      const now = parseDate(null);
+      const now = DateTime.now();
       if (endDate.hasSame(now, 'day') || endDate < now) {
         return translate('Project has reached its end date.');
       }

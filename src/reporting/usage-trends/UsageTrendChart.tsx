@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatMonth } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
 
@@ -26,7 +27,7 @@ export const UsageTrendChart: FC<UsageTrendChartProps> = ({
     () => ({
       fields: [translate('Month'), translate('Usage'), translate('Resources')],
       data: (monthlyData || []).map((d) => [
-        DateTime.fromFormat(d.period, 'yyyy-MM').toFormat('MMMM yyyy'),
+        formatMonth(DateTime.fromFormat(d.period, 'yyyy-MM')),
         d.total_usage,
         d.resource_count,
       ]),

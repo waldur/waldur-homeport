@@ -8,7 +8,9 @@ export {
 
 export {
   LanguageUtilsService,
+  getDateLocale,
   getUserLocale,
+  toDateLocale,
   numberFormatter,
 } from './languageUtils';
 export type {

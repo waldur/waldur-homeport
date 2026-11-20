@@ -1,8 +1,10 @@
 import { ClockCountdownIcon } from '@phosphor-icons/react';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 
 import { BaseButton, RadialBackground, Card, CardContent } from 'waldur-ui';
 
+import { formatLongDate, formatTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 import './OrganizationReviewStatus.scss';
@@ -16,17 +18,8 @@ export const OrganizationReviewStatus: FunctionComponent<
   OrganizationReviewStatusProps
 > = ({ onGoToDashboard, companyName }) => {
   const displayName = renderFieldOrDash(companyName);
-  const submittedAt = new Date().toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour12: false,
-  });
-  const submittedTime = new Date().toLocaleTimeString(undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
+  const submittedAt = formatLongDate(DateTime.now());
+  const submittedTime = formatTime(DateTime.now());
 
   return (
     <Card className="border-0 shadow-raised">

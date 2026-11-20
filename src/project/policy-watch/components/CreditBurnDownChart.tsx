@@ -5,6 +5,7 @@ import { generateBrandColors } from 'waldur-design-tokens';
 import { HelpIcon } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
+import { formatShortMonth } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { getBrandColor } from '@/core/utils';
@@ -59,7 +60,7 @@ const padMonths = (
     ) as InvoiceCostFigures | undefined;
     points.push({
       iso: d.toISODate() || '',
-      label: d.toFormat('LLL yy'),
+      label: formatShortMonth(d),
       cost: num(match?.price),
       incurred: num(match?.incurred),
       // Compensation arrives negative; credit drawn is its magnitude.
@@ -77,7 +78,7 @@ const findXAxisBucket = (date: string, labels: string[]): string | null => {
   try {
     const d = DateTime.fromISO(date);
     if (!d.isValid) return null;
-    const target = d.startOf('month').toFormat('LLL yy');
+    const target = formatShortMonth(d.startOf('month'));
     return labels.includes(target) ? target : null;
   } catch {
     return null;
@@ -183,7 +184,7 @@ const burnDownOptions = (data: PolicyWatchData): any => {
     for (let i = 0; i < 12 && projected > 0; i++) {
       monthCursor = monthCursor.plus({ months: 1 });
       projected = Math.max(0, projected - burnPerMonth);
-      futureLabels.push(monthCursor.toFormat('LLL yy'));
+      futureLabels.push(formatShortMonth(monthCursor));
       futureValues.push(projected);
     }
   }

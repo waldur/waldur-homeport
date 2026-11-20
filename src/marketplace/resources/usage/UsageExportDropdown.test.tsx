@@ -42,21 +42,21 @@ describe('useUsageExport', () => {
       ],
 
       usages: [
-        { type: 'cpu', date: '2024-01-01', usage: 10 },
-        { type: 'ram', date: '2024-01-01', usage: 8 },
+        { type: 'cpu', billing_period: '2024-01-01', usage: 10 },
+        { type: 'ram', billing_period: '2024-01-01', usage: 8 },
       ],
 
       userUsages: [
         {
           username: 'user_1',
           component_type: 'cpu',
-          date: '2024-01-01',
+          billing_period: '2024-01-01',
           usage: 5,
         },
         {
           username: 'user_1',
           component_type: 'ram',
-          date: '2024-01-01',
+          billing_period: '2024-01-01',
           usage: 4,
         },
       ],
@@ -85,7 +85,7 @@ describe('useUsageExport', () => {
         data: [
           ['user_1', 'January 2024', 5, 4],
           ['Total of January 2024', 'January 2024', 10, 8],
-          ['Total', '01/2024', 10, 8],
+          ['Total', 'Jan 2024', 10, 8],
         ],
       },
     );
@@ -103,7 +103,7 @@ describe('useUsageExport', () => {
           {
             username: 'user_2',
             component_type: 'cpu',
-            date: '2024-01-01',
+            billing_period: '2024-01-01',
             usage: 3,
           },
         ],
@@ -131,7 +131,7 @@ describe('useUsageExport', () => {
         data: [
           ['user_1', 'January 2024', 5, 4],
           ['Total of January 2024', 'January 2024', 10, 8],
-          ['Total', '01/2024', 10, 8],
+          ['Total', 'Jan 2024', 10, 8],
         ],
       },
     );
@@ -149,7 +149,7 @@ describe('useUsageExport', () => {
           {
             username: 'robot_1',
             component_type: 'cpu',
-            date: '2024-01-01',
+            billing_period: '2024-01-01',
             usage: 3,
           },
         ],
@@ -171,7 +171,7 @@ describe('useUsageExport', () => {
           ['robot_1', 'January 2024', 3, '0'],
           ['user_1', 'January 2024', 5, 4],
           ['Total of January 2024', 'January 2024', 10, 8],
-          ['Total', '01/2024', 10, 8],
+          ['Total', 'Jan 2024', 10, 8],
         ],
       },
     );
@@ -260,7 +260,7 @@ describe('useUsageExport', () => {
         data: [
           ['user_1', 'January 2024', 5, 4],
           ['Total of January 2024', 'January 2024', 10, 8],
-          ['Total', '01/2024', 10, 8],
+          ['Total', 'Jan 2024', 10, 8],
         ],
       },
     );
@@ -271,7 +271,7 @@ describe('useUsageExport', () => {
       ...defaultProps,
       data: {
         ...defaultProps.data,
-        usages: [{ type: 'cpu', date: '2024-01-01', usage: 10 }], // Remove RAM usage
+        usages: [{ type: 'cpu', billing_period: '2024-01-01', usage: 10 }], // Remove RAM usage
       },
     };
 
@@ -288,7 +288,7 @@ describe('useUsageExport', () => {
         data: [
           ['user_1', 'January 2024', 5, '0'],
           ['Total of January 2024', 'January 2024', 10, 'N/A'],
-          ['Total', '01/2024', 10, 'N/A'],
+          ['Total', 'Jan 2024', 10, 'N/A'],
         ],
       },
     );

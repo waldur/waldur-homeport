@@ -1,3 +1,5 @@
+import { formatDateTimeWithSeconds } from '@/core/dateUtils';
+
 export type HealthLevel = 'success' | 'warning' | 'danger';
 
 /**
@@ -71,7 +73,7 @@ export const getTextClass = (health: HealthLevel): string => {
  */
 export const formatTimestamp = (timestamp: number | null): string => {
   if (timestamp === null) return '-';
-  return new Date(timestamp * 1000).toLocaleString();
+  return formatDateTimeWithSeconds(timestamp * 1000);
 };
 
 /**

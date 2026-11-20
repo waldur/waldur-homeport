@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { BookingStateField } from '@/booking/BookingStateField';
 import { BookingResource } from '@/booking/types';
-import { parseDate } from '@/core/dateUtils';
+import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -58,9 +58,9 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
         <div>
           {resource.attributes.schedules.map((sch, i) => (
             <span key={i} className="block font-medium">
-              {parseDate(sch.start).toFormat("dd'.'MM'.'yyyy HH:mm")}
+              {formatDateTime(sch.start)}
               {' - '}
-              {parseDate(sch.end).toFormat("dd'.'MM'.'yyyy HH:mm")}
+              {formatDateTime(sch.end)}
             </span>
           ))}
         </div>

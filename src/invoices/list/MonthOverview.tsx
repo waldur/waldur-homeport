@@ -9,7 +9,7 @@ import { FunctionComponent, useEffect, useMemo, useRef } from 'react';
 import { Table as UITable, TableBody, TableCell, TableRow } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
-import { parseDate } from '@/core/dateUtils';
+import { formatMonth, parseDate } from '@/core/dateUtils';
 import { formatCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -68,9 +68,9 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
 
   const date = useMemo(
     () =>
-      parseDate(
-        formatPeriod({ year: invoice.year, month: invoice.month }),
-      ).toFormat('LLLL yyyy'),
+      formatMonth(
+        parseDate(formatPeriod({ year: invoice.year, month: invoice.month })),
+      ),
     [invoice],
   );
 

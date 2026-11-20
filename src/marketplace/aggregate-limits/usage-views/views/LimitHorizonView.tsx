@@ -13,7 +13,7 @@ import {
   useChartThemeColors,
 } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
-import { getUserLocale } from '@/i18n/LanguageUtilsService';
+import { getDateLocale } from '@/i18n/LanguageUtilsService';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { Customer } from '@/workspace/types';
 
@@ -58,7 +58,7 @@ const SATURATION_COLOR = (ratio: number): string => {
 };
 
 const formatDate = (ms: number) =>
-  new Date(ms).toLocaleDateString(getUserLocale(), {
+  new Date(ms).toLocaleDateString(getDateLocale(), {
     month: 'short',
     day: 'numeric',
     year: 'numeric',

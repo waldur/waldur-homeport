@@ -6,6 +6,7 @@ import type {
   ChartSpec,
 } from 'waldur-js-client';
 
+import { formatDateTime } from '@/core/dateUtils';
 import { escapeHtml } from '@/core/utils';
 import { getChartThemeColors } from '@/dashboard/chartColors';
 
@@ -95,7 +96,7 @@ const buildAxis = (axis: ChartAxis, isX: boolean) => {
 const formatValue = (value: unknown, axis: ChartAxis): string => {
   if (value === null || value === undefined) return '–';
   if (axis.type === 'time' && typeof value === 'number') {
-    return new Date(value).toLocaleString();
+    return formatDateTime(value);
   }
   if (axis.type === 'category' && typeof value === 'number') {
     return axis.categories?.[value] ?? String(value);

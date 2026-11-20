@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { Project } from 'waldur-js-client';
 
-import { daysUntilAccessEnds, parseDate } from '@/core/dateUtils';
+import { daysUntilAccessEnds, parseCalendarDate } from '@/core/dateUtils';
 
 /** Where a project stands against its end dates. */
 export type EndDateStatus =
@@ -38,9 +38,9 @@ export const getEndDateStatus = (
     return null;
   }
   const today = DateTime.now().startOf('day');
-  const end = parseDate(project.end_date).startOf('day');
+  const end = parseCalendarDate(project.end_date);
   const accessEnds = project.effective_end_date
-    ? parseDate(project.effective_end_date).startOf('day')
+    ? parseCalendarDate(project.effective_end_date)
     : end;
 
   if (today >= accessEnds) {

@@ -8,6 +8,7 @@ import {
 
 import { FormField, FormLabel, FormText } from 'waldur-ui';
 
+import { formatMonth } from '@/core/dateUtils';
 import { SubmitButton } from '@/form';
 import { AsyncSelect, Select } from '@/form/select';
 import { PeriodOption } from '@/form/types';
@@ -35,7 +36,7 @@ const makePeriodOptions = (): PeriodChoice[] => {
   const choices: PeriodChoice[] = [];
   for (let i = 0; i < 24; i++) {
     choices.push({
-      label: date.toFormat('MMMM, yyyy'),
+      label: formatMonth(date),
       value: { year: date.year, month: date.month, current: i === 0 },
     });
     date = date.minus({ months: 1 });

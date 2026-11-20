@@ -1,5 +1,5 @@
+import { formatShortMonth } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
 interface PeriodOption {
   offset: number;
@@ -23,10 +23,7 @@ export function buildPeriodOptions(
     let label = '';
     if (limitPeriod === 'month') {
       const d = new Date(today.getFullYear(), today.getMonth() + off, 1);
-      label = d.toLocaleString(getUserLocale(), {
-        month: 'short',
-        year: 'numeric',
-      });
+      label = formatShortMonth(d);
     } else if (limitPeriod === 'quarterly') {
       const currentQ = Math.floor(today.getMonth() / 3) + 1;
       let q = currentQ + off;

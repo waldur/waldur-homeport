@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import {
   ComparatorEnum,
   MetricGoalPeriodEnum,
@@ -5,6 +6,7 @@ import {
   ProjectAggregationEnum,
 } from 'waldur-js-client';
 
+import { formatMonth } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
 export const getProjectAggregationOptions = (): {
@@ -55,11 +57,7 @@ export const formatMetricPeriod = (period: string, periodStart: string) => {
     });
   }
   return translate('{month}, so far', {
-    month: start.toLocaleDateString(undefined, {
-      month: 'long',
-      year: 'numeric',
-      timeZone: 'UTC',
-    }),
+    month: formatMonth(DateTime.fromJSDate(start, { zone: 'utc' })),
   });
 };
 

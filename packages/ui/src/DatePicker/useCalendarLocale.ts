@@ -1,6 +1,6 @@
 import type { Locale } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { LanguageUtilsService, toCanonicalLocale } from 'waldur-i18n-runtime';
+import { LanguageUtilsService, toDateLocale } from 'waldur-i18n-runtime';
 
 /**
  * date-fns locales for the languages in /locales, loaded on demand so only
@@ -49,8 +49,10 @@ const cache: Record<string, Locale> = {};
  */
 export const useCalendarLocale = (): Locale | undefined => {
   const language = LanguageUtilsService.getCurrentLanguage()?.code;
-  // Loader keys use canonical case (en-GB); the backend sends en-gb.
-  const code = language ? toCanonicalLocale(language) : undefined;
+  // The same date locale Luxon formats with: canonical case (the backend
+  // sends en-gb) and plain English as en-GB, so the calendar and the
+  // formatted dates around it agree.
+  const code = language ? toDateLocale(language) : undefined;
   const [locale, setLocale] = useState<Locale | undefined>(
     code ? cache[code] : undefined,
   );
