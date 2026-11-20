@@ -146,6 +146,12 @@ const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
+const nextFrames = async (count: number) => {
+  for (let i = 0; i < count; i++) {
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+  }
+};
+
 /** A fetcher that searches by name and pages like the API does. */
 const searchingFetcher =
   (projects: ProjectRow[], pageSize = projects.length) =>
@@ -434,6 +440,10 @@ export const LoadMore: Story = {
       timeout: 3000,
     });
     const listbox = canvas.getByRole('listbox');
+    // The sentinel's observer is attached in an effect once the rows render
+    // and takes its first reading on the next frame. A scroll that lands
+    // before that reading is never reported, so wait for it.
+    await nextFrames(2);
     listbox.scrollTop = listbox.scrollHeight;
     await waitFor(
       () => expect(canvas.getAllByRole('option')).toHaveLength(12),
