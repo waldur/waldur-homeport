@@ -9,8 +9,12 @@
  * - In many cases, it represents a misuse of PropertyList as an ad-hoc layout
  *   wrapper for a single switch, button, or form control.
  *
- * For a single row, use direct Tailwind CSS (e.g. flex layout) or merge it
- * into an adjacent PropertyList.
+ * For a single read-only row, use `SingleProperty` from waldur-ui (its own
+ * `<dl>`, laid out like a list row) or merge it into an adjacent PropertyList.
+ *
+ * An `*EditField` is exempt: it is a divided row whose label, value and edit
+ * button take their columns from the list's grid, so a card holding one
+ * editable setting still needs the list around it.
  */
 
 const DEFAULT_LISTS = new Set(['PropertyList']);
@@ -34,7 +38,6 @@ const isPropertyItem = (name, customItems) => {
   if (DEFAULT_ITEMS.has(name)) return true;
   if (customItems?.has(name)) return true;
   if (name.endsWith('Property') && name !== 'Property') return true;
-  if (name.endsWith('EditField')) return true;
   return false;
 };
 
@@ -68,7 +71,7 @@ export default {
     messages: {
       lonePropertyItem:
         'This <{{name}}> is the only property item in <{{list}}>.\n' +
-        '  A {{list}} is meant to display multiple properties; for a single item, use direct Tailwind CSS or merge with an adjacent list.',
+        '  A {{list}} is meant to display multiple properties; for a single item, use SingleProperty from waldur-ui or merge with an adjacent list.',
     },
   },
   create(context) {
@@ -113,6 +116,11 @@ export default {
             const elName = elementName(n.openingElement.name);
             if (isTransparentElement(elName, customTransparent)) {
               return analyzeSequence(n.children);
+            }
+            // An editable row needs the list's grid even on its own: it
+            // counts as a row but is never reported.
+            if (elName?.endsWith('EditField')) {
+              return 1;
             }
             if (isPropertyItem(elName, customItems)) {
               collectedItems.push({ node: n, name: elName });

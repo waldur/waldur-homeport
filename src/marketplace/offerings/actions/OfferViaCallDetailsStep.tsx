@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { callManagingOrganisationsList } from 'waldur-js-client';
 
-import { Badge, PropertyList, PropertyItem } from 'waldur-ui';
+import { Badge, SingleProperty } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -62,9 +62,12 @@ export const OfferViaCallDetailsStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <PropertyList variant="summary" termWidth="md" space={1.5}>
-        <PropertyItem label={translate('Offering')} value={offering.name} />
-      </PropertyList>
+      <SingleProperty
+        termWidth="md"
+        space={1.5}
+        label={translate('Offering')}
+        value={offering.name}
+      />
       <div className="mt-5.5">
         <StringGroup
           name="name"

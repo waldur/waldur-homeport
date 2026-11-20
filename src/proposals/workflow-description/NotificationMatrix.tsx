@@ -10,11 +10,10 @@ import {
 import {
   Badge,
   LinkButton,
-  PropertyItem,
-  PropertyList,
   Tabs,
   TabsItem,
   Tooltip,
+  SingleProperty,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
@@ -251,12 +250,11 @@ const FlagsList: FC<{
           <ExpandableContainer>
             {/* Wraps to the width the table shows; see FindingDetails. */}
             <div className="sticky left-0 w-[calc(100cqw-64px)]">
-              <PropertyList variant="summary" termWidth="120px">
-                <PropertyItem
-                  label={translate('Why')}
-                  value={whyText(row, description)}
-                />
-              </PropertyList>
+              <SingleProperty
+                termWidth="120px"
+                label={translate('Why')}
+                value={whyText(row, description)}
+              />
             </div>
           </ExpandableContainer>
         )}

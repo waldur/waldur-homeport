@@ -160,9 +160,10 @@ export default tseslint
           },
         ],
         // A PropertyList must not contain only a single, lone property item.
-        // For a single item, use direct Tailwind CSS or merge into an adjacent
-        // list. A warning while existing single-item lists are converted.
-        'waldur-custom/no-lone-property-item-in-list': 'warn',
+        // For a single item, use waldur-ui's SingleProperty or merge it into
+        // an adjacent list. A lone *EditField is exempt: its row takes its
+        // columns from the list.
+        'waldur-custom/no-lone-property-item-in-list': 'error',
         // Tailwind's `border` sets only the width: a bare one needs a colour.
         // Autofixes to `border border-secondary`.
         'waldur-custom/require-border-color': 'error',

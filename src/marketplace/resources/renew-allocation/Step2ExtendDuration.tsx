@@ -3,7 +3,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { NativeSelect, PropertyList, PropertyItem } from 'waldur-ui';
+import { NativeSelect, SingleProperty } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
@@ -75,17 +75,16 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <PropertyList variant="summary" termWidth="md">
-        {!isMulti && (
-          <PropertyItem
-            label={translate('Current end date')}
-            value={propVal.date(resources[0].end_date)}
-            placeholder="N/A"
-            hideIfEmpty={false}
-            className="mb-4"
-          />
-        )}
-      </PropertyList>
+      {!isMulti && (
+        <SingleProperty
+          termWidth="md"
+          label={translate('Current end date')}
+          value={propVal.date(resources[0].end_date)}
+          placeholder="N/A"
+          hideIfEmpty={false}
+          className="mb-4"
+        />
+      )}
       <FormGroup
         label={translate('Extension period')}
         description={

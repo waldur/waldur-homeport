@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import { SingleProperty } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -18,13 +18,11 @@ export const ApiKeyExpandableRow: FC<{
 }> = ({ row, components, resourceLimits }) => (
   <ExpandableContainer>
     <div className="flex flex-col gap-y-4 lg:w-7/12">
-      <PropertyList variant="summary">
-        <PropertyItem
-          label={translate('Description')}
-          value={row.description}
-          valueClass="whitespace-pre-line break-words"
-        />
-      </PropertyList>
+      <SingleProperty
+        label={translate('Description')}
+        value={row.description}
+        valueClass="whitespace-pre-line break-words"
+      />
       {components.flatMap((component) =>
         getComponentReadings(row, component, resourceLimits).map((reading) => (
           <UsageMeter

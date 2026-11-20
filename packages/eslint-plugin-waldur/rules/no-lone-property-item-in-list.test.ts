@@ -61,6 +61,17 @@ describe('no-lone-property-item-in-list', () => {
         {
           code: 'const A = () => <PropertyList><EditFieldProvider scope={scope} callback={cb}><StringEditField name="a" label="A" /><NumberEditField name="b" label="B" /></EditFieldProvider></PropertyList>;',
         },
+        // A lone editable row is exempt: it needs the list's grid.
+        {
+          code: 'const A = () => <PropertyList><StringEditField name="a" label="A" /></PropertyList>;',
+        },
+        {
+          code: 'const A = () => <PropertyList><EditFieldProvider scope={scope} callback={cb}><SelectEditField name="a" label="A" /></EditFieldProvider></PropertyList>;',
+        },
+        // SingleProperty stands alone, outside any list.
+        {
+          code: 'const A = () => <SingleProperty label="a" value="1" />;',
+        },
         // Empty list has no lone items.
         {
           code: 'const A = () => <PropertyList></PropertyList>;',
@@ -119,13 +130,14 @@ describe('no-lone-property-item-in-list', () => {
             },
           ],
         },
-        // Single EditField.
+        // An editable row counts as a row, but does not hide a lone read-only one
+        // in another list.
         {
-          code: 'const A = () => <PropertyList><StringEditField name="a" label="A" /></PropertyList>;',
+          code: 'const A = () => <><PropertyList><StringEditField name="a" label="A" /></PropertyList><PropertyList><PropertyItem label="b" /></PropertyList></>;',
           errors: [
             {
               messageId: 'lonePropertyItem',
-              data: { name: 'StringEditField', list: 'PropertyList' },
+              data: { name: 'PropertyItem', list: 'PropertyList' },
             },
           ],
         },
@@ -180,16 +192,6 @@ describe('no-lone-property-item-in-list', () => {
             {
               messageId: 'lonePropertyItem',
               data: { name: 'PropertyItem', list: 'PropertyList' },
-            },
-          ],
-        },
-        // Single item inside EditFieldProvider.
-        {
-          code: 'const A = () => <PropertyList><EditFieldProvider scope={scope} callback={cb}><StringEditField name="a" label="A" /></EditFieldProvider></PropertyList>;',
-          errors: [
-            {
-              messageId: 'lonePropertyItem',
-              data: { name: 'StringEditField', list: 'PropertyList' },
             },
           ],
         },

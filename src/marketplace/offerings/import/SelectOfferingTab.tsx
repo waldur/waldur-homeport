@@ -6,7 +6,7 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import { SingleProperty } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
@@ -72,14 +72,13 @@ export const SelectOfferingTab = () => {
 
   return (
     <div>
-      <PropertyList variant="summary" termWidth="auto">
-        <PropertyItem
-          label={translate('API URL')}
-          value={formData?.api_url}
-          className="border-b border-b-secondary border-t border-t-secondary py-4 mb-4"
-          labelClass="font-semibold me-2.5"
-        />
-      </PropertyList>
+      <SingleProperty
+        termWidth="auto"
+        label={translate('API URL')}
+        value={formData?.api_url}
+        className="border-b border-b-secondary border-t border-t-secondary py-4 mb-4"
+        labelClass="font-semibold me-2.5"
+      />
       <SelectGroup
         name="offerings"
         label={translate('Offerings')}

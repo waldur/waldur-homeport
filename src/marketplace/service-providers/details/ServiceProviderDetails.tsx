@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
-import { PropertyList, useBreadcrumbs, PropertyItem } from 'waldur-ui';
+import { useBreadcrumbs, SingleProperty } from 'waldur-ui';
 
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { isFeatureVisible } from '@/features/connect';
@@ -76,12 +76,11 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
         </div>
       }
     >
-      <PropertyList variant="summary" termWidth="auto">
-        <PropertyItem
-          label={translate('Description')}
-          value={data.provider.description}
-        />
-      </PropertyList>
+      <SingleProperty
+        termWidth="auto"
+        label={translate('Description')}
+        value={data.provider.description}
+      />
     </PublicDashboardHero>
   );
 };
