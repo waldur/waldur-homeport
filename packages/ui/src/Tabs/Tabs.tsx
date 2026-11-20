@@ -19,7 +19,7 @@ import {
   segmentedItemClassName,
   segmentedListClassName,
 } from '../SegmentedControl';
-import { Tooltip } from '../Tooltip';
+import { Tooltip, type TooltipProps } from '../Tooltip';
 
 import { resolveTabValue } from './resolveTabValue';
 import { TabCount, type TabCountProps } from './TabCount';
@@ -296,6 +296,8 @@ export interface TabsTriggerProps
     ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>,
     TabCountProps {
   tooltip?: ReactNode;
+  /** Extra props for the tooltip (`tooltip` or `hint`), such as `autoWidth`. */
+  tooltipProps?: Partial<Omit<TooltipProps, 'label' | 'children'>>;
   /**
    * Help text: shown as the tooltip (unless `tooltip` is set) and marked with
    * a question-mark icon. Use it instead of a `HelpIcon`, which is a button
@@ -314,6 +316,7 @@ export const TabsTrigger = forwardRef<
     {
       className,
       tooltip,
+      tooltipProps,
       hint,
       count,
       countVariant,
@@ -368,7 +371,7 @@ export const TabsTrigger = forwardRef<
         // role="presentation" preserves the tablist -> tab hierarchy, while
         // tabIndex={0} makes the disabled tab's explanation reachable by keyboard.
         return (
-          <Tooltip label={label}>
+          <Tooltip label={label} {...tooltipProps}>
             <span
               role="presentation"
               // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
@@ -380,7 +383,11 @@ export const TabsTrigger = forwardRef<
           </Tooltip>
         );
       }
-      return <Tooltip label={label}>{triggerNode}</Tooltip>;
+      return (
+        <Tooltip label={label} {...tooltipProps}>
+          {triggerNode}
+        </Tooltip>
+      );
     }
 
     return triggerNode;

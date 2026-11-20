@@ -214,27 +214,26 @@ export const TableHeaderCell: FC<TableHeaderCellProps> = ({
           )}
         </div>
         {onTogglePin && (
-          <button
-            type="button"
-            className={classNames(
-              HEADER_CONTROL_BTN_CLASS,
-              'inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]',
-            )}
-            data-testid={`pin-toggle-${pinKey}`}
-            aria-pressed={Boolean(pinned)}
-            aria-label={
-              pinned ? translate('Unpin column') : translate('Pin column')
-            }
-            onClick={() => onTogglePin(pinKey)}
+          // The tooltip goes on the button, so keyboard focus opens it too.
+          <Tooltip
+            label={pinned ? translate('Unpin column') : translate('Pin column')}
           >
-            <Tooltip
-              label={
+            <button
+              type="button"
+              className={classNames(
+                HEADER_CONTROL_BTN_CLASS,
+                'inline-flex items-center shrink-0 aria-pressed:[&_svg]:text-[var(--fg-brand-primary)]',
+              )}
+              data-testid={`pin-toggle-${pinKey}`}
+              aria-pressed={Boolean(pinned)}
+              aria-label={
                 pinned ? translate('Unpin column') : translate('Pin column')
               }
+              onClick={() => onTogglePin(pinKey)}
             >
               <PushPinIcon size={16} weight={pinned ? 'fill' : 'bold'} />
-            </Tooltip>
-          </button>
+            </button>
+          </Tooltip>
         )}
       </div>
     </th>

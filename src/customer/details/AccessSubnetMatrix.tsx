@@ -8,7 +8,7 @@ import {
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
-import { Checkbox, Tooltip } from 'waldur-ui';
+import { Checkbox, HelpIcon, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
@@ -222,15 +222,13 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
           <span className="whitespace-nowrap">
             {row.inet}
             {isLocked(row) && (
-              <Tooltip
+              <HelpIcon
                 label={translate('Added by staff. It cannot be changed here.')}
-              >
-                <LockIcon
-                  size={14}
-                  weight="bold"
-                  className="ms-1.5 text-quaternary"
-                />
-              </Tooltip>
+                aria-label={translate('Locked')}
+                icon={LockIcon}
+                size={14}
+                className="ms-1.5 text-quaternary"
+              />
             )}
           </span>
         ),

@@ -1,4 +1,4 @@
-import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-final-form';
 import {
@@ -6,7 +6,7 @@ import {
   openstackSecurityGroupsList,
 } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { BaseButton, WarningTip } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -140,17 +140,12 @@ export const FormSecurityGroupsField = ({ offering, ...props }: OwnProps) => {
             <>
               {row.name}{' '}
               {row.name === 'default' && (
-                <Tooltip
+                <WarningTip
                   label={translate(
                     'Removing default security group can remove egress access from the VM and block communication with Openstack metadata service.',
                   )}
-                >
-                  <WarningCircleIcon
-                    size={20}
-                    weight="bold"
-                    className="text-warning"
-                  />
-                </Tooltip>
+                  size={20}
+                />
               )}
             </>
           ),

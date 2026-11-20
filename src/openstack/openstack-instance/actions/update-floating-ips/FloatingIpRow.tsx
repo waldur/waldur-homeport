@@ -33,15 +33,16 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
       <TableCell className="md:w-5/12">
         {pair.address ? (
           <div className="btn-text-align">
-            <button
-              onClick={() => onClick(pair.address)}
-              type="button"
-              className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary pe-2.5 inline-flex items-center"
-            >
-              <Tooltip label={translate('Copy to clipboard')}>
+            <Tooltip label={translate('Copy to clipboard')}>
+              <button
+                onClick={() => onClick(pair.address)}
+                type="button"
+                aria-label={translate('Copy to clipboard')}
+                className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary pe-2.5 inline-flex items-center"
+              >
                 <CopyIcon size={20} weight="bold" />
-              </Tooltip>
-            </button>
+              </button>
+            </Tooltip>
             {pair.address}
           </div>
         ) : (

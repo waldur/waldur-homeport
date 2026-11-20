@@ -1,7 +1,8 @@
-import { PlusCircleIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import {
   Fragment,
+  SyntheticEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -25,9 +26,9 @@ import {
   FormLabel,
   FormText,
   Switch,
-  Tooltip,
   WarningTip,
   StepCard,
+  HelpIcon,
 } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
@@ -149,6 +150,8 @@ const CustomIpField = ({
   );
 };
 
+const stopSelectEvent = (e: SyntheticEvent) => e.stopPropagation();
+
 export const SubnetValueContainer = (props) => {
   if (!props.hasValue) {
     return (
@@ -164,8 +167,18 @@ export const SubnetValueContainer = (props) => {
     <components.ValueContainer {...props} className="pe-0">
       <div className="flex items-center justify-between ellipsis">
         {props.children}
-        <Tooltip
-          autoWidth
+        <HelpIcon
+          tooltipProps={{ autoWidth: true }}
+          aria-label={translate('Subnet details')}
+          size={20}
+          className="text-quaternary"
+          // The select opens its menu on a mouse-down or tap anywhere in the
+          // control, and on Space or an arrow key anywhere inside it; this one
+          // only shows the subnet's details. Its own Enter/Space still work:
+          // the events stop here, they are not cancelled.
+          onMouseDown={stopSelectEvent}
+          onTouchEnd={stopSelectEvent}
+          onKeyDown={stopSelectEvent}
           label={
             <div className="text-start">
               {translate('CIDR')}: {renderFieldOrDash(subnet.cidr)}
@@ -185,9 +198,7 @@ export const SubnetValueContainer = (props) => {
               {translate('Gateway IP')}: {renderFieldOrDash(subnet.gateway_ip)}
             </div>
           }
-        >
-          <QuestionIcon size={20} weight="bold" className="text-quaternary" />
-        </Tooltip>
+        />
       </div>
     </components.ValueContainer>
   );

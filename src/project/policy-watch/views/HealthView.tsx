@@ -5,7 +5,7 @@ import {
   AlertItem,
   StatCardGrid,
   type StatCardGridItem,
-  Tooltip,
+  HelpIcon,
 } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -45,9 +45,12 @@ const Metric: FC<{
 /** An info tip in the tile's corner, for a figure whose derivation is not
  *  obvious from its label. */
 const MetricTip: FC<{ id?: string; label: string }> = ({ label }) => (
-  <Tooltip label={label}>
-    <InfoIcon weight="bold" className="text-quaternary" />
-  </Tooltip>
+  <HelpIcon
+    label={label}
+    icon={InfoIcon}
+    size="1em"
+    className="text-quaternary"
+  />
 );
 
 /**

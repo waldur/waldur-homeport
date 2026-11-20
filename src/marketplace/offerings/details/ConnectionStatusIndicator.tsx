@@ -1,6 +1,6 @@
 import { CircleIcon } from '@phosphor-icons/react';
 
-import { FormField, FormLabel, Tooltip } from 'waldur-ui';
+import { FormField, FormLabel, HelpIcon } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -26,19 +26,21 @@ export const ConnectionStatusIndicator = ({ status }) => {
       </FormLabel>
       <div className="flex-1 min-w-0">
         {Array.from({ length: status.length }).map((_, i) => (
-          <Tooltip
+          <HelpIcon
             key={i}
+            aria-label={translate('{agent} - {status}', {
+              agent: status[i].agent_type,
+              status: status[i].status,
+            })}
+            icon={CircleIcon}
+            size="1em"
+            className={getStatusClassName(status[i])}
             label={translate('{agent} - {status}. Last request: {time}', {
               agent: status[i].agent_type,
               status: status[i].status,
               time: formatDateTime(status[i].last_request_timestamp),
             })}
-          >
-            <CircleIcon
-              weight="bold"
-              className={getStatusClassName(status[i])}
-            />
-          </Tooltip>
+          />
         ))}
       </div>
     </FormField>

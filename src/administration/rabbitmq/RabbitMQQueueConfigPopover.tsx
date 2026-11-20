@@ -1,7 +1,7 @@
 import { GearIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { PropertyList, Tooltip, PropertyItem } from 'waldur-ui';
+import { HelpIcon, PropertyList, PropertyItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -133,8 +133,14 @@ export const RabbitMQQueueConfigPopover: FC<
   );
 
   return (
-    <Tooltip side="left" autoWidth={true} label={popoverContent}>
-      <GearIcon size={18} weight="bold" className="cursor-pointer text-info" />
-    </Tooltip>
+    <HelpIcon
+      label={popoverContent}
+      aria-label={translate('Queue configuration')}
+      icon={GearIcon}
+      size={18}
+      side="left"
+      tooltipProps={{ autoWidth: true }}
+      className="cursor-pointer text-info"
+    />
   );
 };

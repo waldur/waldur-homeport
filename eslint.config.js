@@ -206,9 +206,9 @@ export default tseslint
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
         'waldur-custom/icon-button-needs-accessible-name': 'error',
-        // Existing call sites are migrated to HelpIcon incrementally; promote to
-        // 'error' once the count is zero.
-        'waldur-custom/no-tooltip-on-bare-icon': 'warn',
+        // A Tooltip around a bare icon is hover-only: use HelpIcon or
+        // WarningTip, or put the Tooltip on the button that holds the icon.
+        'waldur-custom/no-tooltip-on-bare-icon': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',

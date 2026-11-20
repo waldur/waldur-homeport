@@ -2,7 +2,7 @@ import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Resource, Offering } from 'waldur-js-client';
 
-import { PropertyCard, PropertyItem, PropertyList, Tooltip } from 'waldur-ui';
+import { PropertyCard, PropertyItem, PropertyList, HelpIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -58,13 +58,13 @@ const PendingChangeValue: FC<{
       <span>
         <OptionValue option={option} value={newValue} />
       </span>
-      <Tooltip label={translate('This value was changed in a pending order')}>
-        <InfoIcon
-          size={16}
-          weight="fill"
-          className="text-info cursor-pointer"
-        />
-      </Tooltip>
+      <HelpIcon
+        label={translate('This value was changed in a pending order')}
+        aria-label={translate('Pending change')}
+        icon={InfoIcon}
+        weight="fill"
+        className="text-info cursor-pointer"
+      />
     </span>
   );
 };

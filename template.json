@@ -15052,7 +15052,6 @@
   },
   "Content is overridden": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "notifications"
     }
   },
@@ -23991,6 +23990,15 @@
       "feature_area": "create"
     }
   },
+  "Error: {message}": {
+    "context": {
+      "variables": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "Errors": {
     "context": {
       "primary_ui_type": "label",
@@ -32342,6 +32350,7 @@
   },
   "Issue details": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "create"
     }
   },
@@ -35135,7 +35144,8 @@
   },
   "Locked": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "details"
     }
   },
   "Locks": {
@@ -47936,6 +47946,11 @@
       "feature_area": "resource-pending"
     }
   },
+  "Pending change": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Pending confirmations": {
     "context": {
       "primary_ui_type": "title",
@@ -54734,6 +54749,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Registration method: {method}": {
+    "context": {
+      "variables": {
+        "method": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "team"
     }
   },
   "Registration secret": {
@@ -66714,6 +66739,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "openstack-instance"
+    }
+  },
+  "Subnet details": {
+    "context": {
+      "feature_area": "deploy"
     }
   },
   "Subnet has been created.": {
@@ -81244,7 +81274,7 @@
   "Unavailable": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "list"
+      "feature_area": "form"
     }
   },
   "Unchanged": {
@@ -91953,6 +91983,19 @@
         }
       },
       "action_type": "create"
+    }
+  },
+  "{agent} - {status}": {
+    "context": {
+      "variables": {
+        "agent": {
+          "type": "unknown"
+        },
+        "status": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "{agent} - {status}. Last request: {time}": {

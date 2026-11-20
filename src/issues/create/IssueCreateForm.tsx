@@ -21,7 +21,6 @@ import { filterIssueTypes, getShowAllTypes } from '../types/utils';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { IssueDescriptionTab } from './IssueDescriptionTab';
-import { IssueDetailsStepLabel } from './IssueDetailsStepLabel';
 import { IssueDetailsTab } from './IssueDetailsTab';
 import { IssueFormData } from './types';
 
@@ -34,7 +33,7 @@ interface OwnProps {
 const steps: ProgressStep[] = [
   {
     key: 'details',
-    label: <IssueDetailsStepLabel />,
+    label: translate('Issue details'),
     description: [translate('Define issue type and context')],
     completed: true,
   },

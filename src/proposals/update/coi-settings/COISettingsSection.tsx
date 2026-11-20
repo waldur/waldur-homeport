@@ -7,7 +7,7 @@ import {
   proposalProtectedCallsCoiConfigurationRetrieve,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -163,15 +163,18 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       title={
         <span className="flex items-center gap-1.5">
           {translate('COI configuration')}
-          <Tooltip
+          <HelpIcon
             label={translate('Conflict of Interest')}
-            body={translate(
-              'COI settings control how conflicts of interest between reviewers and proposals are detected and handled. This includes co-authorship, institutional affiliations, and other relationships that may affect impartial review.',
-            )}
-            autoWidth
-          >
-            <InfoIcon weight="bold" className="text-quaternary" />
-          </Tooltip>
+            icon={InfoIcon}
+            size="1em"
+            className="text-quaternary"
+            tooltipProps={{
+              body: translate(
+                'COI settings control how conflicts of interest between reviewers and proposals are detected and handled. This includes co-authorship, institutional affiliations, and other relationships that may affect impartial review.',
+              ),
+              autoWidth: true,
+            }}
+          />
         </span>
       }
       actions={<COISummaryButton config={config} />}

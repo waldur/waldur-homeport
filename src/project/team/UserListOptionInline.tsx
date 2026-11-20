@@ -54,12 +54,23 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
       <div className="flex items-center gap-[5px]">
         {props.data.is_active === false && (
           <Tooltip label={translate('Inactive')}>
-            <ProhibitIcon weight="bold" />
+            <span role="img" aria-label={translate('Inactive')}>
+              <ProhibitIcon weight="bold" aria-hidden="true" />
+            </span>
           </Tooltip>
         )}
-        <Tooltip label={props.data.registration_method}>
-          <KeyIcon weight="bold" />
-        </Tooltip>
+        {props.data.registration_method && (
+          <Tooltip label={props.data.registration_method}>
+            <span
+              role="img"
+              aria-label={translate('Registration method: {method}', {
+                method: props.data.registration_method,
+              })}
+            >
+              <KeyIcon weight="bold" aria-hidden="true" />
+            </span>
+          </Tooltip>
+        )}
       </div>
     </div>
   </SelectOption>
