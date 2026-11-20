@@ -28,7 +28,7 @@ export const CannedResponseDialog: FC<OwnProps> = ({
         uuid: response!.uuid,
         body: {
           name: formData.name,
-          category: formData.category || undefined,
+          category: formData.category || '',
           text: formData.text,
         },
       });
@@ -36,7 +36,7 @@ export const CannedResponseDialog: FC<OwnProps> = ({
       await createMutation.mutateAsync({
         provider_helpdesk: helpdeskUuid,
         name: formData.name,
-        category: formData.category || undefined,
+        category: formData.category || '',
         text: formData.text,
       });
     }

@@ -359,10 +359,13 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
           } else {
             // Create new
             await onboardingQuestionMetadataCreate({
+              // Create only; both columns default to blank on the server.
               body: {
                 question: saved.url,
+                // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default is ''
                 maps_to_customer_field:
                   formData.maps_to_customer_field?.trim() || undefined,
+                // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default is ''
                 intent_field: formData.intent_field?.trim() || undefined,
               },
             });

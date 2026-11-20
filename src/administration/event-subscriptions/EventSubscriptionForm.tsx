@@ -44,6 +44,9 @@ export const EventSubscriptionForm = ({
       } else {
         return eventSubscriptionsCreate({
           body: {
+            // Create only (the edit branch sends nothing); an omitted
+            // description is stored as the model's blank default.
+            // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default is ''
             description: formValues.description || undefined,
           },
         });

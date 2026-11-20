@@ -15,6 +15,9 @@ export const MarkAsPaidDialog: FunctionComponent<any> = (props) => {
       invoicesPaid({
         path: { uuid: props.resolve.invoice.uuid },
         body: {
+          // A one-off action, not an update: PaidSerializer requires the date,
+          // so leaving it out surfaces the server's "required" error.
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- required action field, nothing to clear
           date: formData.date ? formatISODate(formData.date) : undefined,
           proof: fileSerializer(formData.proof),
         },
