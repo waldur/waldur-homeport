@@ -40,6 +40,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `api-integration.md` - React Query, CRUD patterns
 - `forms.md` - React Final Form and VStepperForm patterns
 - `property-fields.md` - Read-only rows: typed property formatters (`propVal.date`, `propVal.currency`, …), `prefer-typed-property`
+- `date-formatting.md` - Dates: `formatDate`/`formatMonth`/… from `@/core/dateUtils` (Intl presets in `getDateLocale()`), `parseCalendarDate`, `no-display-date-tokens`
 - `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, and the `nav-*` classes they replaced
 - `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
 - `modals.md` - Modals: `openDialog`, `ModalDialog`, `ModalShell`, waldur-ui Modal parts, `data-slot` styling hooks
@@ -216,6 +217,8 @@ variant="summary">` (or `ExpandableContainer asTable`, which renders
 - Lay out with Tailwind grid or flex (`grid grid-cols-1 md:grid-cols-2 gap-x-5`, or `md:grid-cols-12` with `md:col-span-*` children for mixed widths). See `docs/design-tokens.md`.
 
 - Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section. See `docs/tabs.md`
+
+- **Display dates through `@/core/dateUtils`** (`formatDate`, `formatDateTime`, `formatMonth`, `formatShortMonth`, `formatDayMonth`, `formatTime`, …), never `.toFormat('MMM yyyy')` or `toLocaleDateString(undefined)`: token strings get grammatical case and date order wrong outside English. Machine formats (`yyyy-MM`, ISO) stay `toFormat`. Linters enforce this (`no-display-date-tokens`, and `no-browser-locale-date` for native calls, which take `getDateLocale()`); see `docs/date-formatting.md`
 
 - Use the `waldur-ui` pickers (`DatePicker`, `DateRangePicker`, `MonthPicker`; `DateField`/`DateGroup` in forms) — never a native `<input type="date">`, `datetime-local`, `time`, `month` or `week`. Linter enforces this; see `docs/forms.md` → "Date & Time Pickers"
 

@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatDate, formatDayMonth } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { getChartBrandColor } from '@/dashboard/constants';
@@ -20,7 +21,7 @@ export const OrdersDailyCostChart: FC<OrdersDailyCostChartProps> = ({
 }) => {
   const chartOptions = useMemo((): EChartsOption => {
     const dates = dailyStats.map((d) =>
-      DateTime.fromISO(d.date).toFormat('MMM dd'),
+      formatDayMonth(DateTime.fromISO(d.date)),
     );
     const costs = dailyStats.map((d) =>
       d.total_cost ? parseFloat(d.total_cost) : 0,
@@ -68,7 +69,7 @@ export const OrdersDailyCostChart: FC<OrdersDailyCostChartProps> = ({
     () => ({
       fields: [translate('Date'), translate('Cost')],
       data: dailyStats.map((d) => [
-        DateTime.fromISO(d.date).toFormat('MMM dd, yyyy'),
+        formatDate(DateTime.fromISO(d.date)),
         d.total_cost || 0,
       ]),
     }),

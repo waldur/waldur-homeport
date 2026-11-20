@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { DateTime } from 'luxon';
 import React from 'react';
 import {
   marketplacePluginsList,
@@ -62,7 +63,7 @@ export const OfferingDetailsPage: React.FC = () => {
   usePermissionView(() => {
     if (project?.end_date) {
       const endDate = parseDate(project.end_date);
-      const now = parseDate(null);
+      const now = DateTime.now();
       if (endDate.hasSame(now, 'day') || endDate < now) {
         return {
           permission: 'restricted',

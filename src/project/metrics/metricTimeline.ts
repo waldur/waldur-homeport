@@ -1,4 +1,8 @@
+import { DateTime } from 'luxon';
+
+import { formatDayMonth } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { getDateLocale } from '@/i18n/LanguageUtilsService';
 
 /**
  * The span a metric card's chart covers, and how it buckets the points: days
@@ -57,11 +61,7 @@ const MIN_AXIS_DAYS = 14;
 // too, or a viewer west of Greenwich sees every bucket a day early.
 const dayKey = (time: number) => new Date(time).toISOString().slice(0, 10);
 const dayLabel = (time: number) =>
-  new Date(time).toLocaleDateString(undefined, {
-    timeZone: 'UTC',
-    month: 'short',
-    day: 'numeric',
-  });
+  formatDayMonth(DateTime.fromMillis(time, { zone: 'utc' }));
 
 const startOfUtcDay = (time: number) => Math.floor(time / DAY) * DAY;
 const floorTo = (time: number, step: number) => Math.floor(time / step) * step;
@@ -128,7 +128,7 @@ export const getTimelineAxis = (
   return {
     keys: starts.map(String),
     labels: starts.map((start) =>
-      new Date(start).toLocaleString(undefined, FINE_LABEL),
+      new Date(start).toLocaleString(getDateLocale(), FINE_LABEL),
     ),
   };
 };

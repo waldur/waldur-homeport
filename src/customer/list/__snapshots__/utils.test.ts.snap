@@ -3,7 +3,7 @@
 exports[`makeAccountingPeriods > iterates through months 1`] = `
 [
   {
-    "label": "October, 2021",
+    "label": "October 2021",
     "value": {
       "current": true,
       "month": 10,
@@ -11,7 +11,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "September, 2021",
+    "label": "September 2021",
     "value": {
       "current": false,
       "month": 9,
@@ -19,7 +19,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "August, 2021",
+    "label": "August 2021",
     "value": {
       "current": false,
       "month": 8,
@@ -27,7 +27,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "July, 2021",
+    "label": "July 2021",
     "value": {
       "current": false,
       "month": 7,
@@ -35,7 +35,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "June, 2021",
+    "label": "June 2021",
     "value": {
       "current": false,
       "month": 6,
@@ -43,7 +43,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "May, 2021",
+    "label": "May 2021",
     "value": {
       "current": false,
       "month": 5,
@@ -51,7 +51,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "April, 2021",
+    "label": "April 2021",
     "value": {
       "current": false,
       "month": 4,
@@ -59,7 +59,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "March, 2021",
+    "label": "March 2021",
     "value": {
       "current": false,
       "month": 3,
@@ -67,7 +67,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "February, 2021",
+    "label": "February 2021",
     "value": {
       "current": false,
       "month": 2,
@@ -75,7 +75,7 @@ exports[`makeAccountingPeriods > iterates through months 1`] = `
     },
   },
   {
-    "label": "January, 2021",
+    "label": "January 2021",
     "value": {
       "current": false,
       "month": 1,

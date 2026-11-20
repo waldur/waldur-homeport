@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon';
 
+import { formatMonth } from '@/core/dateUtils';
+
 /**
  * Get the current billing period in YYYY-MM format
  */
@@ -13,7 +15,7 @@ export const getCurrentBillingPeriod = (): string => {
 export const formatBillingPeriod = (period: string): string => {
   const date = DateTime.fromFormat(period, 'yyyy-MM');
   if (!date.isValid) return period;
-  return date.toFormat('MMMM yyyy');
+  return formatMonth(date);
 };
 
 /**

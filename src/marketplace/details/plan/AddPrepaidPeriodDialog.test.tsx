@@ -47,7 +47,7 @@ describe('AddPrepaidPeriodDialog', () => {
   it('renders with default duration and calculates correct end date', () => {
     // Freeze time to make test deterministic
     const today = '2024-01-15';
-    vi.setSystemTime(new Date(today));
+    vi.setSystemTime(DateTime.fromISO(today).toJSDate());
     const { constraints, project } = createFixtures();
     constraints.min_prepaid_duration = 3; // Set a different min duration
     renderComponent({ constraints, project });
@@ -89,7 +89,7 @@ describe('AddPrepaidPeriodDialog', () => {
   it('submits with correct end date for fixed duration', async () => {
     const user = userEvent.setup();
     const today = '2024-01-15';
-    vi.setSystemTime(new Date(today));
+    vi.setSystemTime(DateTime.fromISO(today).toJSDate());
 
     const { constraints, project } = createFixtures();
     constraints.min_prepaid_duration = 2;
@@ -110,7 +110,7 @@ describe('AddPrepaidPeriodDialog', () => {
   it('caps month options based on project end date', async () => {
     const user = userEvent.setup();
     const today = '2024-01-15';
-    vi.setSystemTime(new Date(today));
+    vi.setSystemTime(DateTime.fromISO(today).toJSDate());
 
     const { constraints, project } = createFixtures();
     project.end_date = '2024-04-10'; // ~3 months from now

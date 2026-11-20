@@ -4,6 +4,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { ServiceProviderRevenues } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatShortMonth } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { BarChart } from '@/reporting/users/charts/BarChart';
@@ -18,8 +19,8 @@ export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
   const chartData = useMemo(
     () =>
       (data || []).map((d) => ({
-        name: DateTime.fromObject({ year: d.year, month: d.month }).toFormat(
-          'MMM yyyy',
+        name: formatShortMonth(
+          DateTime.fromObject({ year: d.year, month: d.month }),
         ),
         value: d.total || 0,
       })),
@@ -35,9 +36,7 @@ export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
     () => ({
       fields: [translate('Month'), translate('Revenue')],
       data: (data || []).map((d) => [
-        DateTime.fromObject({ year: d.year, month: d.month }).toFormat(
-          'MMM yyyy',
-        ),
+        formatShortMonth(DateTime.fromObject({ year: d.year, month: d.month })),
         d.total || 0,
       ]),
     }),

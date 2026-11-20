@@ -129,6 +129,13 @@ export default tseslint
         // Zero instances remain: every native date/time input was replaced by
         // the waldur-ui pickers. See the rule's docblock.
         'waldur-custom/no-native-date-input': 'error',
+        // Display dates go through the src/core/dateUtils formatters (Intl
+        // presets in the date locale), never a Luxon token string such as
+        // 'd LLL yyyy'. See the rule's docblock.
+        'waldur-custom/no-display-date-tokens': 'error',
+        // Native date formatting takes getDateLocale(), never the browser's
+        // locale (no argument, undefined) or getUserLocale().
+        'waldur-custom/no-browser-locale-date': 'error',
         // Zero instances remain: inline code and keys are waldur-ui's Code
         // and Kbd, and nothing styles a bare <code> any more.
         'waldur-custom/no-raw-code-element': 'error',

@@ -442,7 +442,7 @@ describe('ResourceUsageChart', () => {
       ] as ComponentUsage[];
 
       const result = getTotalUsagePeriod(usages);
-      expect(result).toBe('01/2024 - 03/2024');
+      expect(result).toBe('Jan 2024 – Mar 2024');
     });
 
     it('should filter by component type if provided', () => {
@@ -454,7 +454,7 @@ describe('ResourceUsageChart', () => {
 
       const component = { type: 'ram' } as OfferingComponent;
       const result = getTotalUsagePeriod(usages, component);
-      expect(result).toBe('01/2024 - 03/2024');
+      expect(result).toBe('Jan 2024 – Mar 2024');
     });
 
     it('should return single period if min and max are same', () => {
@@ -463,7 +463,7 @@ describe('ResourceUsageChart', () => {
       ] as ComponentUsage[];
 
       const result = getTotalUsagePeriod(usages);
-      expect(result).toBe('01/2024');
+      expect(result).toBe('Jan 2024');
     });
 
     it('should return dash if no usages', () => {

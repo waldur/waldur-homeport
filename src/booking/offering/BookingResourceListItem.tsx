@@ -6,7 +6,7 @@ import { Badge, BaseButton } from 'waldur-ui';
 
 import { bookingStateAliases } from '@/booking/BookingStateField';
 import { BookingResource, EventInput } from '@/booking/types';
-import { parseDate } from '@/core/dateUtils';
+import { formatDayMonthTime, parseDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -158,11 +158,9 @@ export const BookingResourceListItem = ({
               <div className="flex justify-between">
                 <div>
                   <span className="block italic">
-                    {parseDate(layout.schedule.start).toFormat(
-                      "LLL dd',' HH:mm",
-                    )}
+                    {formatDayMonthTime(layout.schedule.start)}
                     {' - '}
-                    {parseDate(layout.schedule.end).toFormat("LLL dd',' HH:mm")}
+                    {formatDayMonthTime(layout.schedule.end)}
                   </span>
                   {item.attributes.schedules.length > 1 && (
                     <Badge shape="pill" tone="outline" className="my-1">

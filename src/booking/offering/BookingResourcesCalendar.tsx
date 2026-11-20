@@ -5,7 +5,7 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Calendar, useCalendarLocale } from 'waldur-ui';
 
 import { getTimeOptions } from '@/booking/utils';
-import { parseDate } from '@/core/dateUtils';
+import { formatLongDate, parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
 import { BookingResource } from '../types';
@@ -80,9 +80,7 @@ export const BookingResourcesCalendar: FunctionComponent<
       </div>
       {dates && dates[0] ? (
         <div className="w-full md:flex-1 md:min-w-0 p-3 flex flex-col">
-          <h2 className="font-medium">
-            {parseDate(dates[0]).toFormat('dd LLLL yyyy')}
-          </h2>
+          <h2 className="font-medium">{formatLongDate(dates[0])}</h2>
           <div className="timeline-list relative flex grow overflow-y-auto max-h-[225px]">
             <ul className="timeline-list-times">
               {getTimeOptions(60, true).map((time, i) => (

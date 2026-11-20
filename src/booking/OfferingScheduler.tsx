@@ -22,7 +22,7 @@ import {
 import { CustomRangeDatePicker } from '@/booking/deploy/CustomRangeDatePicker';
 import { BookingProps } from '@/booking/types';
 import { createBooking, getDurationOptions } from '@/booking/utils';
-import { parseDate } from '@/core/dateUtils';
+import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
 import { BusinessHoursGroup } from './components/BusinessHoursGroup';
@@ -174,13 +174,9 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
                 <b>{translate('Period {i}', { i: index + 1 })}:</b>&nbsp;
                 {fields.value[index]?.start && fields.value[index]?.end && (
                   <span>
-                    {parseDate(fields.value[index].start).toFormat(
-                      'dd LLLL yyyy HH:mm',
-                    )}
+                    {formatDateTime(fields.value[index].start)}
                     &nbsp;{translate('To')}&nbsp;
-                    {parseDate(fields.value[index].end).toFormat(
-                      'dd LLLL yyyy HH:mm',
-                    )}
+                    {formatDateTime(fields.value[index].end)}
                   </span>
                 )}
               </label>

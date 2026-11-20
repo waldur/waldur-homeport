@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatDate, formatDayMonth } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
@@ -18,7 +19,7 @@ export const OrdersDailyTypeChart: FC<OrdersDailyTypeChartProps> = ({
 }) => {
   const chartOptions = useMemo((): EChartsOption => {
     const dates = dailyStats.map((d) =>
-      DateTime.fromISO(d.date).toFormat('MMM dd'),
+      formatDayMonth(DateTime.fromISO(d.date)),
     );
 
     const types = Object.keys(ORDER_TYPES);
@@ -64,7 +65,7 @@ export const OrdersDailyTypeChart: FC<OrdersDailyTypeChartProps> = ({
     () => ({
       fields: [translate('Date'), ...Object.values(ORDER_TYPES)],
       data: dailyStats.map((d) => [
-        DateTime.fromISO(d.date).toFormat('MMM dd, yyyy'),
+        formatDate(DateTime.fromISO(d.date)),
         ...Object.keys(ORDER_TYPES).map((type) => d.by_type?.[type] || 0),
       ]),
     }),
