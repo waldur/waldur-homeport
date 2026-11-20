@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo, useState } from 'react';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList, SingleProperty } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
@@ -184,12 +184,11 @@ export const OpenStackTenantSummary: FunctionComponent<
       </div>
       {quotas.length > 0 && (
         <div className="mt-3">
-          <PropertyList variant="summary" termWidth="auto">
-            <PropertyItem
-              label={translate('Quotas')}
-              value={<QuotaBadges quotas={quotas} />}
-            />
-          </PropertyList>
+          <SingleProperty
+            termWidth="auto"
+            label={translate('Quotas')}
+            value={<QuotaBadges quotas={quotas} />}
+          />
         </div>
       )}
     </>

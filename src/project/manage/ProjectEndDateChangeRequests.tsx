@@ -8,7 +8,7 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import { SingleProperty } from 'waldur-ui';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -34,13 +34,11 @@ const isPending = (row: { state: string }) =>
 
 const ExpandableRow = ({ row }: { row: ProjectEndDateChangeRequest }) => (
   <ExpandableContainer>
-    <PropertyList variant="summary">
-      <PropertyItem
-        label={translate('Reason for modifying')}
-        value={row.comment}
-        hideIfEmpty={false}
-      />
-    </PropertyList>
+    <SingleProperty
+      label={translate('Reason for modifying')}
+      value={row.comment}
+      hideIfEmpty={false}
+    />
   </ExpandableContainer>
 );
 

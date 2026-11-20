@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { OfferingMerge, ProviderOfferingDetails } from 'waldur-js-client';
 
-import { PropertyCard, PropertyList, PropertyItem } from 'waldur-ui';
+import { PropertyCard, SingleProperty } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
@@ -138,14 +138,13 @@ export const MergeMappingsView: FC<{
         columns={columns(translate('Old key'), translate('New key'), false)}
       />
       <PropertyCard title={translate('Invoices')}>
-        <PropertyList>
-          <PropertyItem
-            label={translate('Invoice policy')}
-            value={propVal.enum(merge.invoice_policy ?? 'open_month', {
-              options: getInvoicePolicyOptions(),
-            })}
-          />
-        </PropertyList>
+        <SingleProperty
+          variant="divided"
+          label={translate('Invoice policy')}
+          value={propVal.enum(merge.invoice_policy ?? 'open_month', {
+            options: getInvoicePolicyOptions(),
+          })}
+        />
       </PropertyCard>
     </div>
   );

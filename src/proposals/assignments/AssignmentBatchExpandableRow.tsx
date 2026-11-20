@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { assignmentBatchesRetrieve } from 'waldur-js-client';
 
-import { Badge, PropertyList, PropertyItem } from 'waldur-ui';
+import { Badge, SingleProperty } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -70,12 +70,10 @@ export const AssignmentBatchExpandableRow: FC<
 
   return (
     <ExpandableContainer>
-      <PropertyList variant="summary">
-        <PropertyItem
-          label={translate('Manager notes')}
-          value={batch.manager_notes}
-        />
-      </PropertyList>
+      <SingleProperty
+        label={translate('Manager notes')}
+        value={batch.manager_notes}
+      />
 
       <Table
         {...tableProps}

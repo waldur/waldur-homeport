@@ -5,7 +5,13 @@ import {
   proposalProposalsRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  PropertyItem,
+  PropertyList,
+  SingleProperty,
+} from 'waldur-ui';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -346,13 +352,12 @@ const AcceptedDetails: FC<{ proposal: Proposal }> = ({ proposal }) => {
 const ClosedDetails: FC<{ proposal: Proposal }> = ({ proposal }) => (
   <RowSection title={translate('Decision')}>
     {proposal.allocation_comment ? (
-      <PropertyList variant="summary" space={1.5}>
-        <PropertyItem
-          label={translate('Comment')}
-          value={proposal.allocation_comment}
-          valueClass="whitespace-pre-line"
-        />
-      </PropertyList>
+      <SingleProperty
+        space={1.5}
+        label={translate('Comment')}
+        value={proposal.allocation_comment}
+        valueClass="whitespace-pre-line"
+      />
     ) : (
       <MutedLine text={translate('No comment was shared with the decision.')} />
     )}

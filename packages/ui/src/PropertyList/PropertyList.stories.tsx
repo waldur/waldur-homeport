@@ -17,6 +17,7 @@ import {
   PropertyList,
   type PropertyListVariant,
 } from './PropertyList';
+import { SingleProperty } from './SingleProperty';
 
 const meta: Meta<typeof PropertyList> = {
   title: 'Data Display/PropertyList',
@@ -415,6 +416,12 @@ export const LongDescription: Story = {
         value="100231"
         actions={<EditButton />}
       />
+      <PropertyItem
+        label="Login shell"
+        description="Shell started when the user logs in."
+        value="/bin/bash"
+        actions={<EditButton />}
+      />
     </PropertyList>
   ),
   play: async ({ canvasElement }) => {
@@ -435,6 +442,7 @@ export const CopyValue: Story = {
     <>
       <Section title="Divided">
         <PropertyList>
+          <PropertyItem label="Name" value="ncrc-prod-01" />
           <PropertyItem
             label="Backend ID"
             value="7c9e6679-7425-40de-944b-e0d58f90a811"
@@ -477,11 +485,17 @@ export const InlineControls: Story = {
             description="Days to keep backups."
             value={<Input defaultValue="30" />}
           />
+          <PropertyItem
+            label="Schedule"
+            description="When backups run, as a cron expression."
+            value={<Input defaultValue="0 2 * * *" />}
+          />
         </PropertyList>
       </Section>
       <Section title="Summary">
         <PropertyList variant="summary">
           <PropertyItem label="Snapshots" value={<Input defaultValue="7" />} />
+          <PropertyItem label="Prefix" value={<Input defaultValue="daily" />} />
         </PropertyList>
       </Section>
     </>
@@ -503,6 +517,7 @@ export const DisabledActions: Story = {
   ),
   render: () => (
     <PropertyList>
+      <PropertyItem label="Name" value="Jane Doe" />
       <PropertyItem
         label="Email"
         value="jane@example.com"
@@ -564,6 +579,42 @@ export const Standalone: Story = {
     await expect(canvas.getByText('Location')).toBeInTheDocument();
     await expect(canvas.getByText('Contact')).toBeInTheDocument();
     await expect(canvas.getByText('Country:')).toBeInTheDocument();
+  },
+};
+
+export const Single: Story = {
+  name: 'Behaviour: single property',
+  parameters: story(
+    'Where a list would hold one row, `SingleProperty` renders that row as its own `<dl>`: the `<dd>` is named by its `<dt>`, and it lays out like a `summary` row (the default, with the term width and bottom margin a summary list gives it) or a `divided` one. An empty value leaves it out in `summary`; `hideIfEmpty={false}` keeps it with a dash.',
+  ),
+  render: () => (
+    <>
+      <Section title="Summary">
+        <SingleProperty label="Description" value="Nightly backups" />
+        <SingleProperty label="Comment" value="" />
+        <SingleProperty label="Reason" value="" hideIfEmpty={false} />
+      </Section>
+      <Section title="Divided">
+        <SingleProperty
+          variant="divided"
+          label="Invoice policy"
+          value="Open month"
+        />
+      </Section>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole('definition', { name: 'Description:' }),
+    ).toHaveTextContent('Nightly backups');
+    await expect(canvas.queryByText('Comment:')).not.toBeInTheDocument();
+    await expect(
+      canvas.getByRole('definition', { name: 'Reason:' }),
+    ).toHaveTextContent('Not specified');
+    await expect(
+      canvas.getByRole('definition', { name: 'Invoice policy' }),
+    ).toHaveTextContent('Open month');
   },
 };
 

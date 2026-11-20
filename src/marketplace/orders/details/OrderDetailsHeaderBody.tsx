@@ -1,7 +1,7 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { OrderDetails } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import { Badge, PropertyItem, PropertyList, SingleProperty } from 'waldur-ui';
 
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
@@ -147,12 +147,11 @@ export const OrderDetailsHeaderBody = ({
       ) : null}
       {showPurchaseOrder && (
         <div className="w-full sm:w-auto sm:flex-none">
-          <PropertyList variant="summary" termWidth="125px">
-            <PropertyItem
-              label={translate('Purchase order')}
-              value={<PurchaseOrderBadge order={order} offering={offering} />}
-            />
-          </PropertyList>
+          <SingleProperty
+            termWidth="125px"
+            label={translate('Purchase order')}
+            value={<PurchaseOrderBadge order={order} offering={offering} />}
+          />
         </div>
       )}
     </div>

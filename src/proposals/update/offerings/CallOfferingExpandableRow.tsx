@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { RequestedOffering } from 'waldur-js-client';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import { SingleProperty } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
@@ -20,13 +20,11 @@ export const CallOfferingExpandableRow: FunctionComponent<
   CallOfferingExpandableRowProps
 > = ({ row, call, refetch, readOnlyReason }) => (
   <ExpandableContainer>
-    <PropertyList variant="summary">
-      <PropertyItem
-        label={translate('Plan')}
-        value={row.plan_details?.name}
-        hideIfEmpty={false}
-      />
-    </PropertyList>
+    <SingleProperty
+      label={translate('Plan')}
+      value={row.plan_details?.name}
+      hideIfEmpty={false}
+    />
     <div className="mt-3">
       <CallOfferingComponentRules
         offering={row}

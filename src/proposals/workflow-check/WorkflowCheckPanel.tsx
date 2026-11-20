@@ -3,7 +3,7 @@ import { useRouter } from '@uirouter/react';
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { WorkflowCheck, WorkflowCheckFinding } from 'waldur-js-client';
 
-import { Badge, PropertyItem, PropertyList } from 'waldur-ui';
+import { Badge, SingleProperty } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { StepFormPage } from '@/proposals/update/workflow-steps/stepForm';
@@ -154,10 +154,12 @@ const FindingActions: FC<FindingActionsProps> = ({
 const FindingDetails = ({ row }: { row: WorkflowCheckFinding }) => (
   <ExpandableContainer>
     <div className="sticky left-0 w-[calc(100cqw-64px)]">
-      <PropertyList variant="summary" termWidth="120px">
-        {/* Where and Setting are columns of the row; the message alone here. */}
-        <PropertyItem label={translate('Finding')} value={row.message} />
-      </PropertyList>
+      {/* Where and Setting are columns of the row; the message alone here. */}
+      <SingleProperty
+        termWidth="120px"
+        label={translate('Finding')}
+        value={row.message}
+      />
     </div>
   </ExpandableContainer>
 );

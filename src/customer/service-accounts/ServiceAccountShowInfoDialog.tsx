@@ -1,10 +1,4 @@
-import {
-  FormField,
-  FormLabel,
-  FormText,
-  PropertyList,
-  PropertyItem,
-} from 'waldur-ui';
+import { FormField, FormLabel, FormText, SingleProperty } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { BaseSecretField } from '@/form';
@@ -43,13 +37,11 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
           )}
         </FormText>
       </FormField>
-      <PropertyList variant="summary">
-        <PropertyItem
-          label={translate('Valid till')}
-          value={propVal.date(resolve.expiresAt, { precision: 'long' })}
-          labelClass="font-semibold"
-        />
-      </PropertyList>
+      <SingleProperty
+        label={translate('Valid till')}
+        value={propVal.date(resolve.expiresAt, { precision: 'long' })}
+        labelClass="font-semibold"
+      />
     </ModalDialog>
   );
 };

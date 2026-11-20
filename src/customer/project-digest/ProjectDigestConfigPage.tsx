@@ -1,13 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
 
-import {
-  BaseButton,
-  PropertyCard,
-  PropertyList,
-  Tooltip,
-  PropertyItem,
-} from 'waldur-ui';
+import { BaseButton, PropertyCard, Tooltip, SingleProperty } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -137,14 +131,13 @@ export const ProjectDigestConfigPage: FC = () => {
 
       {config?.last_sent_at && (
         <PropertyCard bordered title={translate('Status')}>
-          <PropertyList>
-            <PropertyItem
-              label={translate('Last sent')}
-              value={propVal.date(config.last_sent_at, {
-                precision: 'datetime',
-              })}
-            />
-          </PropertyList>
+          <SingleProperty
+            variant="divided"
+            label={translate('Last sent')}
+            value={propVal.date(config.last_sent_at, {
+              precision: 'datetime',
+            })}
+          />
         </PropertyCard>
       )}
     </>
