@@ -54,9 +54,9 @@ export const CustomerCreditDialog: FC<CustomerCreditDialogProps> = ({
         ...formData,
         customer: formData.customer.url,
         value: formData.value,
-        offerings: formData.offerings
-          ? formData.offerings.map((offering) => offering.url)
-          : undefined,
+        // An empty list means "all offerings", so a cleared field must be sent
+        // as [] for the update to lift the restriction.
+        offerings: (formData.offerings ?? []).map((offering) => offering.url),
       };
       return isEdit
         ? customerCreditsUpdate({

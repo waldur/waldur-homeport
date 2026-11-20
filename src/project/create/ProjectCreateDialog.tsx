@@ -85,9 +85,13 @@ export const ProjectCreateDialog = ({
             name: formData.name,
             slug: formData.slug,
             description: formData.description,
+            // Create only, sent as multipart form data (which cannot carry
+            // null); an omitted date is stored as null.
+            // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only multipart body, omitted date is null
             end_date: formData.end_date
               ? formatISODate(formData.end_date)
               : undefined,
+            // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only multipart body, omitted date is null
             start_date: formData.start_date
               ? formatISODate(formData.start_date)
               : undefined,

@@ -15,6 +15,9 @@ export const SubmitReportDialog: FC<ActionDialogProps> = ({
       marketplaceProviderResourcesSubmitReport({
         path: { uuid: resource.uuid },
         body: {
+          // The backend requires at least one section and has no way to
+          // clear a report, so an empty field is left to its validation error.
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- required action field, clearing is not supported
           report: formData.report ? JSON.parse(formData.report) : undefined,
         },
       }),

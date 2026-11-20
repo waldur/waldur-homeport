@@ -115,7 +115,7 @@ export default tseslint
 
         // Custom local rules
         'waldur-custom/no-template-in-translate': 'error',
-        'waldur-custom/no-undefined-in-mutation-body': 'warn',
+        'waldur-custom/no-undefined-in-mutation-body': 'error',
         'waldur-custom/enforce-actions-dropdown-in-tables': 'warn',
         'waldur-custom/enforce-badge-icon-patterns': 'error',
         'waldur-custom/enforce-badge-props-consistency': 'error',

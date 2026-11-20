@@ -38548,6 +38548,15 @@
   "Must be above 0.": {},
   "Must be at least 1.": {},
   "Must be at least 1000 (lower values are reserved for system accounts). The value must fall within the offering’s POSIX ID pool and is rejected if already allocated.": {},
+  "Must be at least {n}.": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Must be between {n} and {m}.": {
     "context": {
       "variables": {

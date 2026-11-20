@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
+import { atLeast, lessThanOrEqual, required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
@@ -33,11 +34,9 @@ const EditHealthMonitorDialog: FC<
           path: { uuid: resource.uuid },
           body: {
             name: formData.name,
-            delay: formData.delay ? Number(formData.delay) : undefined,
-            timeout: formData.timeout ? Number(formData.timeout) : undefined,
-            max_retries: formData.max_retries
-              ? Number(formData.max_retries)
-              : undefined,
+            delay: Number(formData.delay),
+            timeout: Number(formData.timeout),
+            max_retries: Number(formData.max_retries),
           },
         });
         showSuccess(translate('Health monitor has been updated.'));
@@ -67,14 +66,18 @@ const EditHealthMonitorDialog: FC<
           label: translate('Delay (seconds)'),
           type: 'integer',
           minValue: 1,
-          required: false,
+          // An existing monitor always has these values, so delay, timeout
+          // and max_retries cannot be cleared.
+          required: true,
+          validate: [required, atLeast(1)],
         },
         {
           name: 'timeout',
           label: translate('Timeout (seconds)'),
           type: 'integer',
           minValue: 1,
-          required: false,
+          required: true,
+          validate: [required, atLeast(1)],
         },
         {
           name: 'max_retries',
@@ -82,7 +85,8 @@ const EditHealthMonitorDialog: FC<
           type: 'integer',
           minValue: 1,
           maxValue: 10,
-          required: false,
+          required: true,
+          validate: [required, atLeast(1), lessThanOrEqual(10)],
         },
       ]}
       initialValues={{

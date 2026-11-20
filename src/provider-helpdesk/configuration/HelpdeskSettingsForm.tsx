@@ -31,7 +31,8 @@ export const HelpdeskSettingsForm: FC<OwnProps> = ({
   const handleSubmit = async (formData) => {
     const body = {
       backend_type: formData.backend_type?.value ?? formData.backend_type,
-      notification_email: formData.notification_email || undefined,
+      // Shared by create and update: '' clears the address on edit.
+      notification_email: formData.notification_email || '',
       is_active: formData.is_active,
       notify_on_new_ticket: formData.notify_on_new_ticket,
       notify_on_comment: formData.notify_on_comment,

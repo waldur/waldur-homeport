@@ -32,6 +32,8 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
           description: reason,
           summary: props.issueSummary,
           is_reported_manually: true,
+          // Create only, and the field is not nullable: no resource means no key.
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, field does not accept null
           resource: props.resource ? props.resource.name : undefined,
         },
       }).then((response) => response.data);

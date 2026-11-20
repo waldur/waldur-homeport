@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
+import { atLeast, lessThanOrEqual, required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
@@ -33,7 +34,7 @@ const EditMemberDialog: FC<ActionDialogProps<OpenStackPoolMember>> = ({
           path: { uuid: resource.uuid },
           body: {
             name: formData.name,
-            weight: formData.weight ? Number(formData.weight) : undefined,
+            weight: Number(formData.weight),
           },
         });
         showSuccess(translate('Member has been updated.'));
@@ -59,9 +60,12 @@ const EditMemberDialog: FC<ActionDialogProps<OpenStackPoolMember>> = ({
           name: 'weight',
           label: translate('Weight'),
           type: 'integer',
-          minValue: 0,
+          minValue: 1,
           maxValue: 256,
-          required: false,
+          // An existing member always has a weight, so the field cannot be
+          // cleared.
+          required: true,
+          validate: [required, atLeast(1), lessThanOrEqual(256)],
         },
       ]}
       initialValues={{

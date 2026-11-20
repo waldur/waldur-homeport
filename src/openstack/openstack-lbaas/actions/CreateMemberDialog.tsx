@@ -47,9 +47,13 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
       openstackPoolMembersCreate({
         body: {
           pool: resource.url,
+          // Create only: an empty field leaves the serializer default in place
+          // (blank name, weight 1).
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default applies
           name: formData.name || undefined,
           address: formData.address,
           protocol_port: Number(formData.protocol_port),
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default applies
           weight: formData.weight ? Number(formData.weight) : undefined,
           subnet: getSubnetUrl(formData.subnet),
         },
@@ -104,7 +108,7 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
               name="weight"
               label={translate('Weight')}
               required={false}
-              min={0}
+              min={1}
               max={256}
             />
             <AsyncSelectGroup
