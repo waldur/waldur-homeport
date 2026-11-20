@@ -11,12 +11,12 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  Tooltip,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardToolbar,
+  HelpIcon,
 } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -232,15 +232,18 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
         <CardTitle as="div">
           <h3>
             {translate('Matching settings')}{' '}
-            <Tooltip
+            <HelpIcon
               label={translate('Reviewer-Proposal Matching')}
-              body={translate(
-                'Configure how reviewers are matched to proposals based on expertise. Includes affinity calculation weights and assignment constraints.',
-              )}
-              autoWidth
-            >
-              <InfoIcon weight="bold" className="text-quaternary" />
-            </Tooltip>
+              icon={InfoIcon}
+              size="1em"
+              className="text-quaternary"
+              tooltipProps={{
+                body: translate(
+                  'Configure how reviewers are matched to proposals based on expertise. Includes affinity calculation weights and assignment constraints.',
+                ),
+                autoWidth: true,
+              }}
+            />
           </h3>
         </CardTitle>
         <CardToolbar>

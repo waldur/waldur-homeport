@@ -134,7 +134,14 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
       disabled={props.disabled}
       tooltip={props.tooltip}
       marker={
-        props.staff && <StaffOnlyIndicator className={STAFF_ICON_CLASSNAME} />
+        // markerDescription below tells a screen reader instead.
+        props.staff && (
+          <StaffOnlyIndicator
+            className={STAFF_ICON_CLASSNAME}
+            inControl
+            aria-hidden
+          />
+        )
       }
       markerDescription={props.staff ? translate('Staff action') : undefined}
       className={props.className}

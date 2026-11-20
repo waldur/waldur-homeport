@@ -151,12 +151,14 @@ export const AppFooter: FunctionComponent = () => {
             <BackendHealthStatusIndicator />
             {showUpgradeAvailable && (
               <Tooltip label={badgeLabel}>
-                <ArrowCircleUpIcon
-                  size={20}
-                  weight="bold"
+                <button
+                  type="button"
+                  aria-label={badgeLabel}
                   onClick={openUpgradeDialog}
-                  className={`ms-2 inline-block cursor-pointer ${badgeColorClass}`}
-                />
+                  className={`ms-2 inline-flex cursor-pointer border-0 bg-transparent p-0 align-middle ${badgeColorClass}`}
+                >
+                  <ArrowCircleUpIcon size={20} weight="bold" />
+                </button>
               </Tooltip>
             )}
           </div>

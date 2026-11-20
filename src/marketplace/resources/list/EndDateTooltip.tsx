@@ -1,6 +1,6 @@
 import { ClockIcon } from '@phosphor-icons/react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -19,13 +19,15 @@ export const EndDateTooltip = ({
   return (
     <>
       {' '}
-      <Tooltip
+      <HelpIcon
         label={translate('Termination date: {date}', {
           date: formatDate(end_date),
         })}
-      >
-        <ClockIcon weight="bold" />
-      </Tooltip>
+        aria-label={translate('Termination date')}
+        icon={ClockIcon}
+        size="1em"
+        className="text-inherit"
+      />
     </>
   );
 };

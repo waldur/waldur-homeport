@@ -34,7 +34,7 @@ export const CompensationPolicyButton = ({ row, refetch }) => {
     >
       <span className="inline-flex items-center gap-1">
         {translate('Compensation policy')}
-        <StaffOnlyIndicator />
+        <StaffOnlyIndicator inControl />
       </span>
     </Menu.Item>
   );

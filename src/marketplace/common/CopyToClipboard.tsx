@@ -23,16 +23,16 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   }, [value]);
   return (
     <div className="copyToClipboard">
-      <button
-        className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary inline-flex items-center"
-        type="button"
-        aria-label={translate('Copy to clipboard')}
-        onClick={onClick}
-      >
-        <Tooltip label={translate('Copy to clipboard')}>
+      <Tooltip label={translate('Copy to clipboard')}>
+        <button
+          className="bg-transparent border-0 p-0 m-0 cursor-pointer text-quaternary hover:text-secondary inline-flex items-center"
+          type="button"
+          aria-label={translate('Copy to clipboard')}
+          onClick={onClick}
+        >
           <CopyIcon weight="bold" />
-        </Tooltip>
-      </button>
+        </button>
+      </Tooltip>
     </div>
   );
 };

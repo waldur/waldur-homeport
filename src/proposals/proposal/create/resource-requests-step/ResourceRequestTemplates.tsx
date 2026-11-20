@@ -1,4 +1,4 @@
-import { CheckCircleIcon, CubeIcon, QuestionIcon } from '@phosphor-icons/react';
+import { CheckCircleIcon, CubeIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Form, useField } from 'react-final-form';
@@ -25,7 +25,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Tooltip,
+  HelpIcon,
 } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -148,7 +148,7 @@ const TableTitle = ({ single }: { single: boolean }) => (
     size="lg"
     leftIcon={<CubeIcon weight="bold" />}
     rightIcon={
-      <Tooltip
+      <HelpIcon
         label={
           single
             ? translate(
@@ -158,11 +158,9 @@ const TableTitle = ({ single }: { single: boolean }) => (
                 'This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed.',
               )
         }
-        autoWidth
-        contentClassName="max-w-[350px]"
-      >
-        <QuestionIcon weight="bold" size={16} className="w-full" />
-      </Tooltip>
+        tooltipProps={{ autoWidth: true, contentClassName: 'max-w-[350px]' }}
+        className="text-current"
+      />
     }
     shape="pill"
     tone="outline"

@@ -1,7 +1,7 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { Tooltip, Card, CardContent, CardHeader } from 'waldur-ui';
+import { Card, CardContent, CardHeader } from 'waldur-ui';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { translate } from '@/i18n';
@@ -22,16 +22,20 @@ export const NotificationExpandableRow: FunctionComponent<{
           defaultValue={row.templates[0]?.path}
           tabs={row.templates.map((template) => ({
             key: template.path,
+            // The tab is a button and cannot hold one, so the tooltip is the
+            // tab's own: it opens on keyboard focus and describes the tab.
+            tooltip: template.is_content_overridden
+              ? translate('Content is overridden')
+              : undefined,
             title: template.is_content_overridden ? (
               <span className="inline-flex items-center">
                 {formatHeader(template.path)}
-                <Tooltip label={translate('Content is overridden')}>
-                  <PencilSimpleIcon
-                    size={16}
-                    weight="bold"
-                    className="ms-2.5 text-quaternary"
-                  />
-                </Tooltip>
+                <PencilSimpleIcon
+                  size={16}
+                  weight="bold"
+                  aria-hidden="true"
+                  className="ms-2.5 text-quaternary"
+                />
               </span>
             ) : (
               formatHeader(template.path)

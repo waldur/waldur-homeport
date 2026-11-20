@@ -77,8 +77,21 @@ const formatKindOption = (
     {meta.context === 'menu' && option.description && (
       // Portal to body and sit above the portaled select menu (z-index 9999),
       // otherwise the menu paints over the tooltip.
+      // An option cannot hold a button, and is not a tab stop of its own: the
+      // glyph is a named image, read with the option.
       <Tooltip label={option.description} side="top" zIndex={10000}>
-        <QuestionIcon weight="regular" size={16} className="text-quaternary" />
+        <span
+          role="img"
+          aria-label={option.description}
+          className="inline-flex"
+        >
+          <QuestionIcon
+            weight="regular"
+            size={16}
+            aria-hidden="true"
+            className="text-quaternary"
+          />
+        </span>
       </Tooltip>
     )}
   </div>

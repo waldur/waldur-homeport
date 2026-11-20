@@ -2,7 +2,7 @@ import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -64,13 +64,19 @@ const BooleanIndicator: FC<{ value: boolean | undefined; label?: string }> = ({
 }) => {
   if (value === undefined || value === null) return <span>—</span>;
   return value ? (
-    <Tooltip label={label || translate('Yes')}>
-      <CheckIcon size={16} weight="bold" className="text-success" />
-    </Tooltip>
+    <HelpIcon
+      label={label || translate('Yes')}
+      aria-label={translate('Yes')}
+      icon={CheckIcon}
+      className="text-success"
+    />
   ) : (
-    <Tooltip label={label || translate('No')}>
-      <XIcon size={16} weight="bold" className="text-quaternary" />
-    </Tooltip>
+    <HelpIcon
+      label={label || translate('No')}
+      aria-label={translate('No')}
+      icon={XIcon}
+      className="text-quaternary"
+    />
   );
 };
 
