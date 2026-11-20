@@ -2830,6 +2830,11 @@
       "feature_area": "providers"
     }
   },
+  "Add it to your AI client. The client opens Waldur and asks you to approve it. Approved clients appear below.": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Add item": {
     "context": {
       "feature_area": "proposal"
@@ -3146,6 +3151,11 @@
   "Add the resource figures up": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Add the server URL above in your client's MCP settings, or paste this configuration if it asks for JSON.": {
+    "context": {
+      "feature_area": "connected-apps"
     }
   },
   "Add tier": {
@@ -4648,6 +4658,12 @@
   "Allow a GID outside the project group range": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Allow access on the Waldur page that opens in your browser.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "connected-apps"
     }
   },
   "Allow anonymous users to see plans": {},
@@ -11254,6 +11270,11 @@
       "feature_area": "proposal"
     }
   },
+  "Can't sign in through the browser?": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Canada": {},
   "Cancel": {
     "context": {
@@ -12689,6 +12710,12 @@
   "Classifiers": {
     "context": {
       "feature_area": "organizations-compliance"
+    }
+  },
+  "Claude Code": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "connected-apps"
     }
   },
   "Clean": {
@@ -14618,6 +14645,11 @@
       "feature_area": "coi-settings"
     }
   },
+  "Connect AI clients over MCP": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Connect Jira Service Management, then pick the project, request types and fields": {
     "context": {
       "feature_area": "atlassian-discovery"
@@ -14626,6 +14658,11 @@
   "Connect ORCID": {
     "context": {
       "feature_area": "reviewer"
+    }
+  },
+  "Connect an AI client": {
+    "context": {
+      "feature_area": "connected-apps"
     }
   },
   "Connect offerings from remote organizations with configurable rules and mappings.": {
@@ -16108,6 +16145,11 @@
   "Create a new ticket for the selected provider and notify them.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "Create a personal access token and send it in this header.": {
+    "context": {
+      "feature_area": "connected-apps"
     }
   },
   "Create a project": {
@@ -29813,6 +29855,11 @@
     }
   },
   "How to add a user to a project when an OpenPortal award lists them as a member. 'invitation': create a pending invitation, so the user accepts, agrees to the terms and is provisioned locally before gaining access. 'direct': create the account if it does not exist and grant the role immediately. A pending invitation is reported back to the allocating portal as a member either way, so the award reaches a consistent state without waiting for the user to act.": {},
+  "How to connect an AI assistant, such as Claude Code, to your account.": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "How to sync historical consumption:": {
     "context": {
       "feature_area": "settings"
@@ -46547,6 +46594,12 @@
       "primary_ui_type": "label"
     }
   },
+  "Other clients": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "connected-apps"
+    }
+  },
   "Other engineering and technologies": {
     "context": {
       "primary_ui_type": "label"
@@ -60189,6 +60242,12 @@
       "feature_area": "scenarios"
     }
   },
+  "Run this command in a terminal.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "connected-apps"
+    }
+  },
   "Running": {
     "context": {
       "primary_ui_type": "label",
@@ -63192,6 +63251,11 @@
       "feature_area": "create"
     }
   },
+  "Server URL": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Server error": {
     "context": {
       "primary_ui_type": "title"
@@ -64836,6 +64900,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Sign-in from AI clients is not set up on this server yet. Ask your administrator to configure it.": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Sign-in method": {
     "context": {
       "feature_area": "steps"
@@ -65641,6 +65710,11 @@
       "feature_area": "support"
     }
   },
+  "Staff and support: approve staff or support access when the consent page asks for it, or use a token with the STAFF.ACCESS or SUPPORT.ACCESS permission.": {
+    "context": {
+      "feature_area": "connected-apps"
+    }
+  },
   "Staff info: No active RequestTypes found.": {
     "context": {
       "feature_area": "create"
@@ -65763,6 +65837,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "actions"
+    }
+  },
+  "Start Claude Code, run /mcp and select waldur to sign in.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "connected-apps"
     }
   },
   "Start Date": {

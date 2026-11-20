@@ -126,6 +126,8 @@ interface CoreConfiguration {
   VAT_TAXATION_ENABLED?: boolean;
   PAT_ENABLED?: boolean;
   MCP_ENABLED?: boolean;
+  /** Whitespace-separated public URLs of the MCP server; the first is shown to users. */
+  MCP_RESOURCE_URLS?: string;
   API_TOKEN_MAX_LIFETIME_MINUTES?: number;
   KEYCLOAK_ICON: string;
   RANCHER_USERNAME_INPUT_LABEL: string;
