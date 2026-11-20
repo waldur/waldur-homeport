@@ -9,6 +9,7 @@ import {
   checklistsAdminQuestionsCreate,
   checklistsAdminQuestionsUpdate,
   onboardingQuestionMetadataCreate,
+  onboardingQuestionMetadataDestroy,
   onboardingQuestionMetadataUpdate,
 } from 'waldur-js-client';
 
@@ -17,6 +18,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { QuestionGeneralForm } from '@/marketplace-checklist/checklists/questions/QuestionGeneralForm';
+import { shouldRemoveOnboardingMetadata } from '@/marketplace-checklist/onboardingMetadata';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -174,6 +176,13 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
             },
           });
         }
+      } else if (
+        isEdit &&
+        shouldRemoveOnboardingMetadata(formData, question?.metadata_uuid)
+      ) {
+        await onboardingQuestionMetadataDestroy({
+          path: { uuid: question.metadata_uuid },
+        });
       }
     },
     successMessage: isEdit

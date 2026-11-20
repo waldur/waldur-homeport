@@ -16,6 +16,7 @@ import {
   checklistsAdminQuestionsCreate,
   checklistsAdminQuestionsUpdate,
   onboardingQuestionMetadataCreate,
+  onboardingQuestionMetadataDestroy,
   onboardingQuestionMetadataList,
   onboardingQuestionMetadataUpdate,
   QuestionAdmin,
@@ -32,6 +33,7 @@ import { AtLeast } from '@/core/types';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CHECKLIST_TABLE_ID } from '@/marketplace-checklist/constants';
+import { shouldRemoveOnboardingMetadata } from '@/marketplace-checklist/onboardingMetadata';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
 import { CHECKLIST_FLAGS } from '@/marketplace-checklist/utils';
 import { useModal } from '@/modal/actions';
@@ -377,6 +379,15 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
               queryKey: ['OnboardingMetadata', saved.uuid],
             });
           }, 1000);
+        } else if (
+          shouldRemoveOnboardingMetadata(formData, onboardingMetadata?.uuid)
+        ) {
+          await onboardingQuestionMetadataDestroy({
+            path: { uuid: onboardingMetadata.uuid },
+          });
+          // Drop the deleted row from the cache at once: reopening the
+          // question before a delayed refetch would edit a row that is gone.
+          queryClient.setQueryData(['OnboardingMetadata', saved.uuid], null);
         }
       }
 
