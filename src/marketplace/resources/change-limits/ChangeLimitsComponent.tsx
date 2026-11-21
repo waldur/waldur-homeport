@@ -13,9 +13,16 @@ import {
 } from '@/marketplace/common/derivedLimits';
 import { useSyncDerivedLimits } from '@/marketplace/common/useSyncDerivedLimits';
 import { SimpleTable } from '@/table/SimpleTable';
+import { useUser } from '@/workspace/hooks';
 
 import { getLimitColumns, LimitTableRow } from './ComponentRow';
-import { FetchedData, getLimitChangeData } from './utils';
+import {
+  applyLimitFloors,
+  FetchedData,
+  getIncreaseOnlyFloors,
+  getLimitChangeData,
+  mayLowerIncreaseOnlyLimits,
+} from './utils';
 
 interface ChangeLimitsComponentProps {
   data: FetchedData;
@@ -39,6 +46,7 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
   readOnly,
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
+  const user = useUser();
   const limitsName = parentName ? `${parentName}.limits` : 'limits';
   const options = data.offering.options?.options;
   const derivedTypes = React.useMemo(
@@ -87,20 +95,41 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
     [data, newLimits, orderCanBeApproved],
   );
 
+  // A limit its provider allows only to grow cannot go below the current one,
+  // unless the user is the provider or staff, whom the server lets lower it.
+  const mayLower = mayLowerIncreaseOnlyLimits(user, data.resource);
+  const floors = React.useMemo(
+    () =>
+      mayLower
+        ? {}
+        : getIncreaseOnlyFloors(data.offering, data.plan, data.limits),
+    [mayLower, data.offering, data.plan, data.limits],
+  );
+  const offeringLimits = React.useMemo(
+    () => applyLimitFloors(data.offeringLimits, floors),
+    [data.offeringLimits, floors],
+  );
+  const increaseOnlyTypes = React.useMemo(
+    () => new Set(Object.keys(floors)),
+    [floors],
+  );
+
   const columns = React.useMemo(
     () =>
       getLimitColumns({
         shouldConcealPrices: limitChangeData.shouldConcealPrices,
-        limits: data.offeringLimits,
+        limits: offeringLimits,
         parentName,
         derivedTypes,
+        increaseOnlyTypes,
         readOnly,
       }),
     [
       limitChangeData.shouldConcealPrices,
-      data.offeringLimits,
+      offeringLimits,
       parentName,
       derivedTypes,
+      increaseOnlyTypes,
       readOnly,
     ],
   );

@@ -11,6 +11,7 @@ import { translate } from '@/i18n';
 import { getPrepaidDescription } from '@/marketplace/common/billingTypes';
 
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
+import { ComponentIncreaseOnlyField } from './ComponentIncreaseOnlyField';
 import { ComponentMaxValueField } from './ComponentMaxValueField';
 import { ComponentMinValueField } from './ComponentMinValueField';
 
@@ -46,6 +47,7 @@ export const ComponentPrepaidFieldGroup: FC<{
       />
       {isPrepaid ? (
         <>
+          <ComponentIncreaseOnlyField />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-end">
             <div>
               <NumberGroup

@@ -13,6 +13,7 @@ import { OfferingDependentsWarning } from '@/marketplace/offerings/dependents/Of
 import { useOfferingDependents } from '@/marketplace/offerings/dependents/useOfferingDependents';
 import { getConflictDetail } from '@/marketplace/offerings/dependents/utils';
 import {
+  dropHiddenIncreaseOnly,
   dropHiddenPrepaidSettings,
   formatComponent,
 } from '@/marketplace/offerings/store/utils';
@@ -50,9 +51,11 @@ export const OfferingComponentDialog: FC<{
 
   const submitMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
-      const data = dropHiddenPrepaidSettings(
-        formatComponent(formData, resolve.offering),
-        resolve.component?.billing_type,
+      const data = dropHiddenIncreaseOnly(
+        dropHiddenPrepaidSettings(
+          formatComponent(formData, resolve.offering),
+          resolve.component?.billing_type,
+        ),
       );
       if (isEdit) {
         const payload = labelsLocked

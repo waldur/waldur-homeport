@@ -10,6 +10,7 @@ import {
   projectsRetrieve,
   PublicOfferingDetails,
   Resource,
+  User,
 } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
@@ -28,6 +29,8 @@ import {
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@/marketplace/offerings/store/types';
 import { TENANT_TYPE } from '@/openstack/constants';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 
 type PlanWithComponents = Pick<BasePublicPlan, 'components'>;
 
@@ -112,6 +115,65 @@ export const hasEditableLimitComponents = (
       plan,
     ).some((c) => c.billing_type === 'limit' || c.is_prepaid),
   );
+
+/**
+ * May the user lower a limit its provider allows only to grow? The
+ * restriction binds the consumer; staff and the offering's provider -- anyone
+ * who could approve the update order on the provider side, through a role on
+ * the offering, its organization or that organization's service provider --
+ * may still lower it, as on the server.
+ */
+export const mayLowerIncreaseOnlyLimits = (
+  user: Pick<User, 'is_staff' | 'permissions'> | undefined,
+  resource: Partial<Pick<Resource, 'provider_uuid' | 'offering_uuid'>>,
+): boolean =>
+  Boolean(
+    user &&
+    hasPermission(user, {
+      permission: PermissionEnum.APPROVE_ORDER,
+      customerId: resource.provider_uuid,
+      offeringId: resource.offering_uuid,
+    }),
+  );
+
+/**
+ * The current limit of every component that may only grow, as the lowest
+ * value a new limit may take. Limits are in the units of `currentLimits`.
+ */
+export const getIncreaseOnlyFloors = (
+  offering: Pick<PublicOfferingDetails, 'type' | 'components'>,
+  plan: PlanWithComponents | null | undefined,
+  currentLimits: Record<string, number>,
+): Record<string, number> =>
+  Object.fromEntries(
+    (offering?.components ? getEffectiveComponents(offering, plan) : [])
+      .filter(
+        (component) =>
+          component.limit_increase_only &&
+          (component.billing_type === 'limit' || component.is_prepaid) &&
+          typeof currentLimits?.[component.type] === 'number',
+      )
+      .map((component) => [component.type, currentLimits[component.type]]),
+  );
+
+/** Raises each component's minimum to its floor, where the floor is higher. */
+export const applyLimitFloors = (
+  limits: OfferingLimits,
+  floors: Record<string, number>,
+): OfferingLimits => {
+  if (!Object.keys(floors).length) {
+    return limits;
+  }
+  const result = { ...limits };
+  for (const [type, floor] of Object.entries(floors)) {
+    const current = result[type];
+    result[type] = {
+      min: Math.max(Number(current?.min) || 0, floor),
+      max: current?.max,
+    };
+  }
+  return result;
+};
 
 export const getRemainingMonths = (
   endDate: string,

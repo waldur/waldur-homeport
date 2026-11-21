@@ -6,6 +6,7 @@ import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper
 import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimitField';
 import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
 import { ComponentDecimalPlacesField } from './ComponentDecimalPlacesField';
+import { ComponentIncreaseOnlyField } from './ComponentIncreaseOnlyField';
 import { ComponentLegacyUsageLimit } from './ComponentLegacyUsageLimit';
 import {
   ComponentLimitPeriodField,
@@ -67,6 +68,9 @@ export const ComponentLimit: FC<{
             <div>
               <ComponentDecimalPlacesField offering={props.offering} />
             </div>
+          </div>
+          <div className="mt-4">
+            <ComponentIncreaseOnlyField />
           </div>
         </ComponentAccountingTypeWrapper>
       );

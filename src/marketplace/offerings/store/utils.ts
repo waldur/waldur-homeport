@@ -195,6 +195,38 @@ export const dropHiddenPrepaidSettings = <
   };
 };
 
+/**
+ * Whether the form offers the increase-only switch for a component: one whose
+ * limit the customer sets, with a minimum and maximum of its own.
+ */
+const showsIncreaseOnly = (component: {
+  billing_type?: string;
+  is_boolean?: boolean;
+  is_prepaid?: boolean;
+}): boolean =>
+  (component.billing_type === 'limit' && !component.is_boolean) ||
+  (component.billing_type === 'one' && Boolean(component.is_prepaid));
+
+/**
+ * A formatted component with the increase-only switch cleared where the form
+ * does not show it, so that a restriction the provider can no longer see is
+ * not left behind.
+ */
+export const dropHiddenIncreaseOnly = <
+  T extends {
+    billing_type?: string;
+    is_boolean?: boolean;
+    is_prepaid?: boolean;
+    limit_increase_only?: boolean;
+  },
+>(
+  component: T,
+): T => ({
+  ...component,
+  limit_increase_only:
+    showsIncreaseOnly(component) && Boolean(component.limit_increase_only),
+});
+
 export const formatComponent = (formData, offering?) => {
   // The dialog's own switch; the API reads the periods it leaves ticked.
   const { spending_limits_enabled, ...component } = formData;
