@@ -1,0 +1,3 @@
+# The nginx runtime stage runs `apk upgrade` on purpose to pick up Alpine
+# security fixes released after the base image was built.
+DKL-DI-0003
