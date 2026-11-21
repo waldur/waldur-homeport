@@ -76,7 +76,12 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
 
   return (
     <Form
-      onSubmit={(values) => changeLimitsMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        changeLimitsMutation.mutateAsync(values).catch(() => {
+          // useManagedMutation shows the server's reason, such as a limit
+          // that may only be increased.
+        })
+      }
       initialValues={asyncState.data ? asyncState.data.initialValues : {}}
       render={({
         handleSubmit,

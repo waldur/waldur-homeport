@@ -446,7 +446,8 @@ interface ComponentBounds {
 /**
  * Why the limits derived from these values would be refused: the server checks
  * every derived limit against its component's bounds, on a row the customer
- * cannot edit, so the input they come from has to say so.
+ * cannot edit, so the input they come from has to say so. `floors` holds the
+ * current limit of each component the customer may only raise.
  */
 export const getDerivedLimitBoundsError = (
   options: OptionsMap | undefined,
@@ -454,6 +455,7 @@ export const getDerivedLimitBoundsError = (
   limits: Record<string, unknown> | undefined,
   components: Record<string, (LimitPrecision & ComponentBounds) | undefined>,
   fallback?: Record<string, unknown>,
+  floors?: Record<string, number>,
 ): string | undefined => {
   const derived = computeDerivedLimits(
     options,
@@ -490,6 +492,17 @@ export const getDerivedLimitBoundsError = (
           component: name,
           value,
           min,
+        },
+      );
+    }
+    const floor = floors?.[type];
+    if (floor !== undefined && value < floor) {
+      return translate(
+        'Calculated {component} ({value}) is below its current limit of {current}, which can only be increased.',
+        {
+          component: name,
+          value,
+          current: floor,
         },
       );
     }

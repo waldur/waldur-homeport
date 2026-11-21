@@ -48,7 +48,12 @@ export const RequestLimitsChangeDialog: React.FC<
 
   return (
     <Form
-      onSubmit={(values) => mutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        mutation.mutateAsync(values).catch(() => {
+          // useManagedMutation shows the server's reason, such as a limit
+          // that may only be increased.
+        })
+      }
       initialValues={asyncState.value ? asyncState.value.initialValues : {}}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import { ChangeLimitsDialog } from './ChangeLimitsDialog';
 import * as fixtures from './fixtures';
@@ -299,6 +300,99 @@ describe('ChangeLimitsDialog', () => {
       expect(screen.getByText('Boolean Component')).toBeInTheDocument();
       // Switches and checkboxes in Waldur render a native input[type="checkbox"]
       expect(screen.getByRole('checkbox')).toBeInTheDocument();
+    });
+  });
+  describe('a limit its provider allows only to grow', () => {
+    beforeEach(async () => {
+      const { checkOrderCanBeApproved } =
+        await import('@/marketplace/orders/actions/selectors');
+      vi.mocked(checkOrderCanBeApproved).mockReturnValue(true);
+    });
+
+    const increaseOnlyData = {
+      ...mockFetchedData,
+      offering: {
+        ...fixtures.offering,
+        components: fixtures.offering.components.map((component) =>
+          component.type === 'cores'
+            ? { ...component, limit_increase_only: true }
+            : component,
+        ),
+      },
+    };
+
+    it('cannot be lowered below the current limit', async () => {
+      const user = userEvent.setup();
+      vi.mocked(loadData).mockResolvedValue(increaseOnlyData as any);
+      renderDialog();
+
+      await waitFor(() => {
+        expect(screen.getByText('Submit')).toBeInTheDocument();
+      });
+      expect(screen.getAllByText('Can only be increased')).toHaveLength(1);
+
+      const coresInput = screen.getAllByRole('spinbutton')[0];
+      expect(coresInput).toHaveAttribute('min', '66');
+      await user.clear(coresInput);
+      await user.type(coresInput, '10');
+      await waitFor(() => {
+        expect(screen.getByText('Submit')).toBeDisabled();
+      });
+
+      await user.clear(coresInput);
+      await user.type(coresInput, '70');
+      await waitFor(() => {
+        expect(screen.getByText('Submit')).toBeEnabled();
+      });
+    });
+
+    it('can be lowered by staff', async () => {
+      vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+      try {
+        const user = userEvent.setup();
+        vi.mocked(loadData).mockResolvedValue(increaseOnlyData as any);
+        renderDialog();
+
+        await waitFor(() => {
+          expect(screen.getByText('Submit')).toBeInTheDocument();
+        });
+        expect(screen.queryByText('Can only be increased')).toBeNull();
+
+        const coresInput = screen.getAllByRole('spinbutton')[0];
+        await user.clear(coresInput);
+        await user.type(coresInput, '10');
+        await waitFor(() => {
+          expect(screen.getByText('Submit')).toBeEnabled();
+        });
+      } finally {
+        vi.mocked(useUser).mockReturnValue({} as any);
+      }
+    });
+
+    it('shows the server refusing a lower limit', async () => {
+      vi.mocked(loadData).mockResolvedValue(increaseOnlyData as any);
+      const refusal = {
+        limits: [
+          'The limit of Cores can only be increased: it is 66 now, and 10 was requested.',
+        ],
+        status: 400,
+      };
+      vi.mocked(marketplaceResourcesUpdateLimits).mockRejectedValue(refusal);
+      const user = userEvent.setup();
+      renderDialog();
+
+      await waitFor(() => {
+        expect(screen.getByText('Submit')).toBeInTheDocument();
+      });
+      await user.click(screen.getByText('Submit'));
+
+      const { useNotify } = await import('@/store/notify');
+      await waitFor(() => {
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
+          refusal,
+          'Unable to submit limits change request.',
+        );
+      });
     });
   });
 });

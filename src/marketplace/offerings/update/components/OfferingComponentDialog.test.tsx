@@ -373,6 +373,66 @@ describe('OfferingComponentDialog', () => {
       });
     });
   });
+  describe('Increase only', () => {
+    it('is offered for a limit-based component and saved', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({ offering: mockOffering, component: mockComponent });
+
+      expect(
+        screen.getByText(
+          'Customers can raise this limit but not lower it. Service providers and staff can still lower it.',
+        ),
+      ).toBeInTheDocument();
+      await user.click(screen.getByLabelText(/Increase only/i));
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalledWith({
+          path: { uuid: 'offering-1' },
+          body: expect.objectContaining({
+            billing_type: 'limit',
+            limit_increase_only: true,
+          }),
+        });
+      });
+    });
+
+    it('is not offered for a usage-based component', async () => {
+      const user = userEvent.setup();
+      renderComponent({ offering: mockOffering });
+      await openAndSelectOption(user, /Accounting type/i, /Usage-based/i);
+      expect(screen.queryByLabelText(/Increase only/i)).not.toBeInTheDocument();
+    });
+
+    it('is cleared when the component no longer takes a limit', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      renderComponent({
+        offering: mockOffering,
+        component: { ...mockComponent, limit_increase_only: true },
+      });
+
+      expect(screen.getByLabelText(/Increase only/i)).toBeChecked();
+      await openAndSelectOption(user, /Accounting type/i, /Fixed price/i);
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalledWith({
+          path: { uuid: 'offering-1' },
+          body: expect.objectContaining({
+            billing_type: 'fixed',
+            limit_increase_only: false,
+          }),
+        });
+      });
+    });
+  });
+
   describe('Spending limits', () => {
     const usageComponent = {
       uuid: 'comp-2',

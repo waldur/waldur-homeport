@@ -16,8 +16,14 @@ import {
 } from '@/marketplace/common/modelSelection';
 import { splitOptionErrors } from '@/marketplace/common/optionErrors';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
+import { findResourcePlan } from '@/marketplace/details/plan/effectiveComponents';
+import {
+  getIncreaseOnlyFloors,
+  mayLowerIncreaseOnlyLimits,
+} from '@/marketplace/resources/change-limits/utils';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useUser } from '@/workspace/hooks';
 
 import { FormulaChangePreview } from './FormulaChangePreview';
 
@@ -37,6 +43,22 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
   const isFormula = option.type === 'component_formula';
   const offering = props.resolve.offering;
   const allModelsOption = getAllModelsOption(offering?.resource_options);
+  const user = useUser();
+  const resource = props.resolve.resource;
+  // The limits a customer may only raise: a new value that would derive a
+  // lower one is refused, unless the user is the provider or staff.
+  const mayLower = mayLowerIncreaseOnlyLimits(user, resource ?? {});
+  const derivedFloors = useMemo(
+    () =>
+      isFormula && !mayLower && offering
+        ? getIncreaseOnlyFloors(
+            offering,
+            findResourcePlan(offering.plans, resource?.plan_uuid),
+            (resource?.limits ?? {}) as Record<string, number>,
+          )
+        : undefined,
+    [isFormula, mayLower, offering, resource],
+  );
   const options = useMemo(() => {
     return {
       // The card only offers options that are visible for the resource's
@@ -87,11 +109,19 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
               offering,
             ),
             derivedFallback: props.resolve.resource?.limits,
+            derivedFloors,
             derivedPreview: true,
           }
         : {}),
     }),
-    [name, isFormula, offering, props.resolve.resource, allModelsOption],
+    [
+      name,
+      isFormula,
+      offering,
+      props.resolve.resource,
+      allModelsOption,
+      derivedFloors,
+    ],
   );
 
   const updateMutation = useManagedMutation<any, any, any>({
@@ -127,6 +157,11 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
           );
           if (Object.keys(attributes).length > 0) {
             return { attributes };
+          }
+          // A formula option is refused on the limits it derives, such as
+          // one its provider allows only to grow: that is about this value.
+          if (isFormula && body?.limits) {
+            return { attributes: { [name]: body.limits } };
           }
         }
       }}

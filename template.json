@@ -10805,6 +10805,22 @@
       "feature_area": "common"
     }
   },
+  "Calculated {component} ({value}) is below its current limit of {current}, which can only be increased.": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        },
+        "current": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Calculated {component} ({value}) is below its minimum of {min}.": {
     "context": {
       "variables": {
@@ -11268,6 +11284,11 @@
         }
       },
       "feature_area": "proposal"
+    }
+  },
+  "Can only be increased": {
+    "context": {
+      "feature_area": "change-limits"
     }
   },
   "Can't sign in through the browser?": {
@@ -17841,6 +17862,11 @@
   "Customers can order it at no cost. Nothing is charged for any component.": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "Customers can raise this limit but not lower it. Service providers and staff can still lower it.": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Customers can set spending limits": {
@@ -30410,8 +30436,8 @@
   "If true, project end date field becomes mandatory when creating or updating projects.": {},
   "If true, service provider owners and managers can manage offering lifecycle (activate, pause, unpause, archive, draft, delete) without staff approval.": {},
   "If true, the affiliation field is required when creating or updating projects.": {},
+  "If true, the email of the user accepting an invitation must match the invitation's (ignoring case), with no exceptions: staff accepting for a named user cannot bypass it with allow_email_mismatch. If false, users may accept with another address of their own, and staff accepting for a named user with a different address must pass allow_email_mismatch.": {},
   "If true, the version endpoint queries GitHub for the latest released Waldur version. Disable in deployments without outbound internet access to avoid failed requests to api.github.com.": {},
-  "If true, user email in Waldur database and in invitatation must strictly match.": {},
   "If true, users with staff role are notified when request for order approval is generated": {},
   "If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user's primary lookup field is updated to the OIDC claim value. An email the user set themselves (a self-service email change) is not matched; a login that finds only such an account is refused, and staff setting the email makes it matchable.": {},
   "If you already know who you want to invite, use the \"Invite by email\" button to send invitations directly, with an optional message and a maximum number of assignments. The reviewer will receive an email with a link to accept or decline.": {
@@ -31169,6 +31195,11 @@
   "Incorrect organization details": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Increase only": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Increase value": {

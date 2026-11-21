@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { describe, it, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 import {
   marketplaceResourcesRetrieve,
   marketplaceResourcesOfferingRetrieve,
@@ -7,11 +7,16 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import {
+  applyLimitFloors,
+  getIncreaseOnlyFloors,
   getLimitChangeData,
   loadData,
+  mayLowerIncreaseOnlyLimits,
 } from '@/marketplace/resources/change-limits/utils';
 import { TENANT_TYPE } from '@/openstack/constants';
+import { PermissionEnum } from '@/permissions/enums';
 
 import * as fixtures from './fixtures';
 
@@ -458,5 +463,114 @@ describe('Change resource limits', () => {
     // 10 cores × $1/day × 30 days = $300/mo
     expect(data.components[0].price).toBeCloseTo(300);
     expect(data.components[0].priceSuffix).toBe(' /mo');
+  });
+});
+
+describe('Limits that may only grow', () => {
+  const offering = {
+    type: 'Marketplace.Basic',
+    components: [
+      { type: 'cores', billing_type: 'limit', limit_increase_only: true },
+      { type: 'ram', billing_type: 'limit' },
+      { type: 'hours', billing_type: 'usage', limit_increase_only: true },
+    ],
+  } as any;
+
+  it('floors each increase-only limit component at its current limit', () => {
+    expect(
+      getIncreaseOnlyFloors(offering, null, { cores: 4, ram: 8, hours: 10 }),
+    ).toEqual({ cores: 4 });
+  });
+
+  it('has no floors for an offering without components', () => {
+    expect(getIncreaseOnlyFloors({} as any, null, { cores: 4 })).toEqual({});
+  });
+
+  it('raises a minimum to its floor and keeps a higher one', () => {
+    expect(
+      applyLimitFloors(
+        { cores: { min: 1, max: 10 }, ram: { min: 16, max: 64 } },
+        { cores: 4, ram: 8 },
+      ),
+    ).toEqual({ cores: { min: 4, max: 10 }, ram: { min: 16, max: 64 } });
+  });
+
+  it('leaves the limits alone without floors', () => {
+    const limits = { cores: { min: 1, max: 10 } };
+    expect(applyLimitFloors(limits, {})).toBe(limits);
+  });
+
+  const resource = { provider_uuid: 'provider-1', offering_uuid: 'offering-1' };
+  let originalRoles;
+
+  beforeEach(() => {
+    originalRoles = ENV.roles;
+    ENV.roles = [
+      { name: 'CUSTOMER.OWNER', permissions: [PermissionEnum.APPROVE_ORDER] },
+      { name: 'OFFERING.MANAGER', permissions: [PermissionEnum.APPROVE_ORDER] },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
+  it('binds a consumer', () => {
+    expect(
+      mayLowerIncreaseOnlyLimits(
+        {
+          is_staff: false,
+          permissions: [
+            {
+              scope_type: 'customer',
+              scope_uuid: 'consumer-1',
+              role_name: 'CUSTOMER.OWNER',
+            },
+          ],
+        } as any,
+        resource,
+      ),
+    ).toBe(false);
+    expect(mayLowerIncreaseOnlyLimits(undefined, resource)).toBe(false);
+  });
+
+  it('exempts the provider organization and the offering manager', () => {
+    expect(
+      mayLowerIncreaseOnlyLimits(
+        {
+          is_staff: false,
+          permissions: [
+            {
+              scope_type: 'customer',
+              scope_uuid: 'provider-1',
+              role_name: 'CUSTOMER.OWNER',
+            },
+          ],
+        } as any,
+        resource,
+      ),
+    ).toBe(true);
+    expect(
+      mayLowerIncreaseOnlyLimits(
+        {
+          is_staff: false,
+          permissions: [
+            {
+              scope_type: 'offering',
+              scope_uuid: 'offering-1',
+              customer_uuid: 'provider-1',
+              role_name: 'OFFERING.MANAGER',
+            },
+          ],
+        } as any,
+        resource,
+      ),
+    ).toBe(true);
+  });
+
+  it('exempts staff', () => {
+    expect(
+      mayLowerIncreaseOnlyLimits({ is_staff: true } as any, resource),
+    ).toBe(true);
   });
 });
