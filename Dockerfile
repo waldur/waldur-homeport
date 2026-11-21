@@ -89,6 +89,10 @@ RUN find dist -type f \( -name '*.js' -o -name '*.css' -o -name '*.svg' -o -name
 
 # production environment
 FROM ${DOCKER_REGISTRY}nginx:stable-alpine
+
+# Pick up package security fixes released since the base image was built.
+RUN apk upgrade --no-cache
+
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY --from=build /app/dist/index.html /usr/share/nginx/html/index.orig.html
 COPY --from=build /app/build-info/ /build-info/
