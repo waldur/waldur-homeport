@@ -1394,7 +1394,7 @@ export const SettingsDescription = [
       },
       {
         key: 'USER_DATA_ACCESS_LOG_RETENTION_DAYS',
-        description: translate('Number of days to retain user data access logs before automatic cleanup.'),
+        description: translate('Number of days to retain user data access logs before automatic cleanup. 0 keeps them forever.'),
         default: 90,
         type: 'integer',
       },

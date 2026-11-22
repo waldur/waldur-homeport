@@ -208,6 +208,10 @@ export const PermissionOptions = [
         value: 'OFFERING.ARCHIVE_PLAN',
       },
       {
+        label: translate('Change where a site agent connects, what it runs and what access it grants'),
+        value: 'OFFERING.UPDATE_AGENT_CONFIGURATION',
+      },
+      {
         label: translate('Create offering'),
         value: 'OFFERING.CREATE',
       },

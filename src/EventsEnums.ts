@@ -379,6 +379,7 @@ export const ProposalEnum = {
   proposal_panel_changed: 'proposal_panel_changed',
   proposal_rejected_at_round_completion: 'proposal_rejected_at_round_completion',
   proposal_report_released: 'proposal_report_released',
+  proposal_reviewers_notified: 'proposal_reviewers_notified',
   proposal_run_closed: 'proposal_run_closed',
   proposal_run_opened: 'proposal_run_opened',
   proposal_step_completed: 'proposal_step_completed',
