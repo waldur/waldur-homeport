@@ -14,10 +14,9 @@
  */
 
 import * as echarts from 'echarts';
-
 import { getCssVar } from 'waldur-design-tokens';
 
-import { getCategoricalColors } from '@/dashboard/chartColors';
+import { getCategoricalColors } from './chartColors';
 
 const ramp = (name: string, step: number) =>
   getCssVar(`--color-${name}-${step}`);

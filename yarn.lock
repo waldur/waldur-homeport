@@ -16134,6 +16134,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"waldur-ai-inference@workspace:apps/ai-inference":
+  version: 0.0.0-use.local
+  resolution: "waldur-ai-inference@workspace:apps/ai-inference"
+  dependencies:
+    "@phosphor-icons/react": "npm:^2.1.7"
+    "@sentry/react": "npm:^8.55.0"
+    "@tailwindcss/vite": "npm:^4.3.3"
+    "@tanstack/react-query": "npm:^5.80.6"
+    "@types/react": "npm:^18.3.0"
+    "@types/react-dom": "npm:^18.3.0"
+    "@vitejs/plugin-react": "npm:^6.0.2"
+    react: "npm:^18.3.0"
+    react-dom: "npm:^18.3.0"
+    react-redux: "npm:^8.0.0"
+    redux: "npm:^4.2.1"
+    tailwindcss: "npm:^4.3.3"
+    typescript: "npm:^5.7.3"
+    vite: "npm:^8.0.16"
+    waldur-api-client: "workspace:*"
+    waldur-boot-splash: "workspace:*"
+    waldur-charts: "workspace:*"
+    waldur-design-tokens: "workspace:*"
+    waldur-i18n-runtime: "workspace:*"
+    waldur-notifications: "workspace:*"
+    waldur-runtime-config: "workspace:*"
+    waldur-shell: "workspace:*"
+    waldur-table: "workspace:*"
+    waldur-ui: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "waldur-api-client@workspace:*, waldur-api-client@workspace:packages/api-client":
   version: 0.0.0-use.local
   resolution: "waldur-api-client@workspace:packages/api-client"
@@ -16171,6 +16202,20 @@ __metadata:
       optional: true
     vite:
       optional: true
+  languageName: unknown
+  linkType: soft
+
+"waldur-charts@workspace:*, waldur-charts@workspace:packages/charts":
+  version: 0.0.0-use.local
+  resolution: "waldur-charts@workspace:packages/charts"
+  dependencies:
+    "@phosphor-icons/react": "npm:^2.1.7"
+    echarts: "npm:^6.0.0"
+    waldur-design-tokens: "workspace:*"
+    waldur-i18n-runtime: "workspace:*"
+  peerDependencies:
+    react: ^18.3.0
+    waldur-js-client: "*"
   languageName: unknown
   linkType: soft
 
@@ -16341,6 +16386,7 @@ __metadata:
     waldur-api-client: "workspace:*"
     waldur-auth-core: "workspace:*"
     waldur-boot-splash: "workspace:*"
+    waldur-charts: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-form: "workspace:*"
     waldur-i18n-runtime: "workspace:*"

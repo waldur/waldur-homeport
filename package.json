@@ -125,6 +125,7 @@
     "waldur-api-client": "workspace:*",
     "waldur-auth-core": "workspace:*",
     "waldur-boot-splash": "workspace:*",
+    "waldur-charts": "workspace:*",
     "waldur-design-tokens": "workspace:*",
     "waldur-form": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",

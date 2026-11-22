@@ -14,7 +14,6 @@ import {
   IconButton,
   ModalProvider,
   ModalRoot,
-  SearchField,
   Sidebar,
   SidebarBrand,
   SidebarContent,
@@ -57,13 +56,18 @@ export interface AppShellProps {
    * finished element rather than raw data, the same way TopBar's own
    * left/center/right slots do. Omit for an app with no org switcher. */
   orgSwitcher?: ReactNode;
-  /** Defaults to a presentational SearchField — pass a different element,
-   * or `null` to render nothing, for an app that needs its own search. */
+  /** The top bar's middle: an app's own search or breadcrumbs. Empty by
+   * default; `null` is accepted for the same. */
   topBarCenter?: ReactNode | null;
+  /** Each top-bar button shows only for an app that passes its handler. */
   onAppsClick?: () => void;
   onHelpClick?: () => void;
   onNotificationsClick?: () => void;
   hasNotifications?: boolean;
+  /** Where the user menu's "Log out" goes: the portal's logout page, which
+   * signs out at the backend (and the identity provider, if any) and clears
+   * the stored token. Omit, and the menu offers no "Log out". */
+  logoutHref?: string;
   /** No default Waldur footer design exists yet (the
    * app has none either) — this is a structural slot for whenever one is,
    * not an extracted duplicate. Renders below the scrollable content area,
@@ -183,6 +187,7 @@ function AppShellContent({
   onHelpClick,
   onNotificationsClick,
   hasNotifications,
+  logoutHref,
   footer,
   children,
 }: AppShellProps & { runtimeConfig?: RuntimeConfigData }) {
@@ -257,46 +262,39 @@ function AppShellContent({
                 {orgSwitcher}
               </>
             }
-            center={
-              topBarCenter === null
-                ? undefined
-                : (topBarCenter ?? (
-                    // TopBar's middle starts its content at the left, for
-                    // breadcrumbs; this app's search sits in the middle.
-                    <div className="flex w-full items-center justify-center">
-                      <SearchField
-                        placeholder={translate('Search')}
-                        // '⌘K' isn't translatable content, just the universal
-                        // shortcut-key convention — not worth a prop until an
-                        // app actually needs a different one.
-                        shortcutHint="⌘K"
-                        className="hidden md:flex"
-                      />
-                    </div>
-                  ))
-            }
+            // Only what works: an app's own search or breadcrumbs here, and
+            // the Apps, Help and Notifications buttons only for an app that
+            // handles them. A search field that searches nothing, or a button
+            // that does nothing, is worse than none.
+            center={topBarCenter ?? undefined}
             right={
               // TopBar leaves spacing between actions to the caller.
               <div className="flex items-center gap-2">
-                <IconButton
-                  icon={<SquaresFourIcon size={18} weight="bold" />}
-                  label={translate('Apps')}
-                  className="hidden sm:flex"
-                  onClick={onAppsClick}
-                />
-                <IconButton
-                  icon={<QuestionIcon size={18} weight="bold" />}
-                  label={translate('Help')}
-                  className="hidden sm:flex"
-                  onClick={onHelpClick}
-                />
-                <IconButton
-                  icon={<BellIcon size={18} weight="bold" />}
-                  label={translate('Notifications')}
-                  hasIndicator={hasNotifications}
-                  onClick={onNotificationsClick}
-                />
-                <UserMenu />
+                {onAppsClick ? (
+                  <IconButton
+                    icon={<SquaresFourIcon size={18} weight="bold" />}
+                    label={translate('Apps')}
+                    className="hidden sm:flex"
+                    onClick={onAppsClick}
+                  />
+                ) : null}
+                {onHelpClick ? (
+                  <IconButton
+                    icon={<QuestionIcon size={18} weight="bold" />}
+                    label={translate('Help')}
+                    className="hidden sm:flex"
+                    onClick={onHelpClick}
+                  />
+                ) : null}
+                {onNotificationsClick ? (
+                  <IconButton
+                    icon={<BellIcon size={18} weight="bold" />}
+                    label={translate('Notifications')}
+                    hasIndicator={hasNotifications}
+                    onClick={onNotificationsClick}
+                  />
+                ) : null}
+                <UserMenu logoutHref={logoutHref} />
               </div>
             }
           />

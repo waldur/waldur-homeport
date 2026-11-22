@@ -3,7 +3,6 @@ import {
   CheckSquareOffsetIcon,
   EnvelopeSimpleIcon,
   FileTextIcon,
-  PackageIcon,
   TrayIcon,
   UsersThreeIcon,
 } from '@phosphor-icons/react';
@@ -16,14 +15,17 @@ import {
   LoadingSpinner,
   Menu,
   OrgSwitcher,
-  SidebarModeCard,
   SidebarNavItem,
   SidebarSection,
   WaldurLogo,
 } from 'waldur-ui';
 
 import { initials } from './format';
-import { providerOfferingRequestsUrl, providerOrdersUrl } from './links';
+import {
+  providerOfferingRequestsUrl,
+  providerOrdersUrl,
+  ROOT_APP_URL,
+} from './links';
 import { AwardsPage } from './pages/AwardsPage';
 import { DemandPage } from './pages/DemandPage';
 import { InboxPage } from './pages/InboxPage';
@@ -110,14 +112,8 @@ export const App = () => {
     <LinkProvider renderLink={renderLink}>
       <AppShell
         appName="provider-calls"
+        logoutHref={`${ROOT_APP_URL.replace(/\/$/, '')}/logout/`}
         logo={<WaldurLogo />}
-        sidebarHeader={
-          <SidebarModeCard
-            icon={<PackageIcon size={22} weight="bold" />}
-            title={translate('Service provider')}
-            subtitle={translate('Calls for proposals')}
-          />
-        }
         sidebarContent={
           <>
             <SidebarSection>

@@ -24,6 +24,12 @@
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["workspace", "waldur-provider-calls", "dev"],
       "port": 5181
+    },
+    {
+      "name": "ai-inference",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["workspace", "waldur-ai-inference", "dev:subpath"],
+      "port": 5183
     }
   ]
 }

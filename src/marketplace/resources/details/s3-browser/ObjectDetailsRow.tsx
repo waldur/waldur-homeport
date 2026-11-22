@@ -10,6 +10,7 @@ import {
   PropertyList,
 } from 'waldur-ui';
 
+import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -72,7 +73,7 @@ export const ObjectDetailsRow: FC<{
         details.lock_mode,
         details.retain_until &&
           translate('until {date}', {
-            date: new Date(details.retain_until).toLocaleString(),
+            date: formatDateTime(details.retain_until),
           }),
       ]
         .filter(Boolean)

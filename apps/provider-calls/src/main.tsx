@@ -16,6 +16,8 @@ import './tailwind.css';
 import 'waldur-design-tokens/fonts.css';
 
 bootstrapMicroApp({
+  // Every page needs a signed-in user: someone signed out goes to sign-in.
+  requireSession: true,
   // Back to the same page after logging in, not the portal's front page.
   onSessionExpired: () => {
     const next = encodeURIComponent(window.location.href);

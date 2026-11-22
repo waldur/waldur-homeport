@@ -40336,6 +40336,11 @@
       "feature_area": "table"
     }
   },
+  "No data to show yet.": {
+    "context": {
+      "feature_area": "charts"
+    }
+  },
   "No deadline": {
     "context": {
       "feature_area": "workflow-steps"
