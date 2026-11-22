@@ -48,6 +48,12 @@ export interface MicroAppBootstrapConfig {
   /** Defaults to a plain same-origin redirect to '/' — the correct handoff
    * for an app with no router of its own. Override for an app that has one. */
   onSessionExpired?: () => void;
+  /** For an app with no page an anonymous visitor may see: with no stored
+   * session it hands off to onSessionExpired at once, instead of loading
+   * and failing every request. Without it, a 401 leads to sign-in only
+   * once the tab has had a session (auth-core's handleUnauthorizedResponse),
+   * so a visitor who arrives signed out just sees the requests fail. */
+  requireSession?: boolean;
   /** True once the backend's plugin config has loaded — see AuthCoreConfig's
    * own comment on why this must stay separate from isOidcAccessTokenEnabled.
    * Defaults to `() => true`: most micro-apps have no such gate. */
@@ -103,9 +109,16 @@ export function bootstrapMicroApp(
   // as the portal's own formatter gives it; an app may register its own.
   setErrorResponseFormatter(formatApiError);
 
+  const tokenStorage = createSharedStorage('auth/token');
+  const onSessionExpired =
+    config.onSessionExpired ??
+    (() => {
+      window.location.href = '/';
+    });
+
   configureAuthCore({
     storage: {
-      token: createSharedStorage('auth/token'),
+      token: tokenStorage,
       method: createSharedStorage('auth/method'),
       impersonation: createSharedStorage('auth/impersonation'),
       language: languageStorage,
@@ -113,12 +126,12 @@ export function bootstrapMicroApp(
     getApiEndpoint: () => config.apiUrl ?? getApiUrlFromMeta(),
     isConfigLoaded: config.isConfigLoaded ?? (() => true),
     isOidcAccessTokenEnabled: config.isOidcAccessTokenEnabled ?? (() => false),
-    onSessionExpired:
-      config.onSessionExpired ??
-      (() => {
-        window.location.href = '/';
-      }),
+    onSessionExpired,
   });
+
+  if (config.requireSession && !tokenStorage.get()) {
+    onSessionExpired();
+  }
 
   initApiClient();
   initFontFamily(config.defaultFontFamily ?? 'Inter');

@@ -4,7 +4,7 @@ import { ENV } from '@/core/config';
 import { getQueryParams } from '@/core/filters';
 import { CookiesConsent } from '@/navigation/cookies/CookiesConsent';
 
-import { storeRedirect } from './authNavigation';
+import { rememberReturnUrl, storeRedirect } from './authNavigation';
 import {
   // Classic layouts
   CenteredCardLayout,
@@ -78,7 +78,10 @@ const LayoutComponents: Record<LandingPageLayout, React.ComponentType> = {
 export const LandingPage = () => {
   const { layout } = useLayoutSwitcher();
 
-  useEffect(() => storeRedirect(), []);
+  useEffect(() => {
+    storeRedirect();
+    rememberReturnUrl();
+  }, []);
 
   useEffect(() => {
     const params = getQueryParams();

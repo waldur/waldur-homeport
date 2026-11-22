@@ -86,6 +86,46 @@ export function signInAgainHere(provider: string) {
   window.location.assign(getOauthURL({ provider }));
 }
 
+// Where an app outside the portal's router asked to return after sign-in
+// (a micro-app sends `/login/?next=<its page>`). Kept for the tab, so it
+// survives a round trip through an identity provider.
+const RETURN_URL_KEY = 'waldur/auth/next';
+
+/**
+ * `value` as an address to return to after sign-in, or undefined. Only this
+ * origin's pages qualify, and not the sign-in or sign-out pages themselves:
+ * anything else would let a link send people off-site after they log in.
+ */
+export function safeReturnUrl(
+  value: string | null | undefined,
+  origin = window.location.origin,
+): string | undefined {
+  if (!value) return undefined;
+  let url: URL;
+  try {
+    url = new URL(value, origin);
+  } catch {
+    return undefined;
+  }
+  if (url.origin !== origin) return undefined;
+  if (/^\/(login|logout)(\/|$)/.test(url.pathname)) return undefined;
+  return url.href;
+}
+
+/** Remember the sign-in page's `?next=`, when it is one of this origin's. */
+export function rememberReturnUrl(search = window.location.search) {
+  const next = safeReturnUrl(new URLSearchParams(search).get('next'));
+  if (next) {
+    window.sessionStorage.setItem(RETURN_URL_KEY, next);
+  }
+}
+
+const takeReturnUrl = () => {
+  const next = safeReturnUrl(window.sessionStorage.getItem(RETURN_URL_KEY));
+  window.sessionStorage.removeItem(RETURN_URL_KEY);
+  return next;
+};
+
 interface NavigationTarget {
   toState: string;
   toParams: object;
@@ -125,6 +165,7 @@ const REPLACE_LOCATION = { location: 'replace' as const };
  * hook (see core/authCoreSetup.ts), so no document reload is needed.
  */
 export async function redirectOnSuccess() {
+  const returnUrl = takeReturnUrl();
   const redirect = RedirectStorage.get();
   let intended: NavigationTarget = {
     toState: getLandingState(),
@@ -137,6 +178,13 @@ export async function redirectOnSuccess() {
     }
   }
   const target = resolvePostLoginTarget(getUser(store.getState()), intended);
+  // A page outside the portal (a micro-app) asked to come back, and no gate
+  // stands in the way: leave the portal for it.
+  if (returnUrl && target === intended) {
+    RedirectStorage.remove();
+    window.location.replace(returnUrl);
+    return;
+  }
   try {
     await router.stateService.go(
       target.toState,

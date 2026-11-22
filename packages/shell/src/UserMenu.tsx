@@ -1,4 +1,4 @@
-import { CopyIcon } from '@phosphor-icons/react';
+import { CopyIcon, SignOutIcon } from '@phosphor-icons/react';
 import { translate } from 'waldur-i18n-runtime';
 import {
   Avatar,
@@ -78,7 +78,12 @@ function CopyButtonLook({
   );
 }
 
-export function UserMenu() {
+export function UserMenu({
+  logoutHref,
+}: {
+  /** Where "Log out" goes; without it the menu has no "Log out". */
+  logoutHref?: string;
+} = {}) {
   const currentUser = useCurrentUser();
   const { theme, toggleTheme } = useShellTheme();
   const { currentLanguage, languageChoices, onLanguageChange } =
@@ -226,6 +231,19 @@ export function UserMenu() {
               </>
             )}
           </Menu.CopyItem>
+        )}
+        {currentUser && logoutHref && (
+          <>
+            <Menu.Separator />
+            {/* A plain link: the portal's logout page does the signing out,
+                as its own user menu's "Log out" does. */}
+            <Menu.Item asChild className="text-[var(--menu-item-strong-text)]">
+              <a href={logoutHref}>
+                <SignOutIcon size={18} weight="bold" className="shrink-0" />
+                {translate('Log out')}
+              </a>
+            </Menu.Item>
+          </>
         )}
       </Menu.Content>
     </Menu>

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    // Mirrors waldur-homeport's own root tsconfig.json (strict: false,
+    // strictNullChecks: false, noImplicitAny: false), not a stricter
+    // default — packages/* were written and are only ever typechecked
+    // against those loose settings today. Turning this app's own
+    // compilerOptions strict surfaced ~80 real errors across api-client,
+    // auth-core, and design-tokens (implicit-any parameters, possibly-null
+    // values passed where a bare string is expected, etc.) — a genuine,
+    // previously-invisible coupling: those packages have always relied on
+    // homeport's loose root config to typecheck clean, not on being
+    // correct under normal strict TypeScript. Left as a known gap rather
+    // than silently worked around here; hardening packages/* to pass
+    // under strict mode is follow-up work, not in this skeleton's scope.
+    "strict": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": ["src", "vite.config.ts"]
+}

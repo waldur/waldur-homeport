@@ -56,6 +56,8 @@ import {
   clearAuthCache,
   localLogout,
   explicitLogout,
+  rememberReturnUrl,
+  safeReturnUrl,
 } from './authNavigation';
 
 // clearAuthTokens (called by clearAuthCache) now lives in waldur-auth-core
@@ -359,6 +361,45 @@ describe('authNavigation', () => {
       explicitLogout();
       expect(RedirectStorage.get()).toBeNull();
       expect(router.stateService.go).toHaveBeenCalledWith('login');
+    });
+  });
+
+  describe('returning to a page outside the portal', () => {
+    const origin = 'https://portal.example';
+
+    it('takes a page of this origin', () => {
+      expect(
+        safeReturnUrl('https://portal.example/ai-inference/keys/', origin),
+      ).toBe('https://portal.example/ai-inference/keys/');
+      expect(safeReturnUrl('/ai-inference/', origin)).toBe(
+        'https://portal.example/ai-inference/',
+      );
+    });
+
+    it('refuses other origins, so a link cannot send people off-site', () => {
+      expect(safeReturnUrl('https://evil.example/', origin)).toBeUndefined();
+      expect(safeReturnUrl('//evil.example/x', origin)).toBeUndefined();
+      expect(safeReturnUrl('javascript:alert(1)', origin)).toBeUndefined();
+    });
+
+    it('refuses the sign-in and sign-out pages and nothing', () => {
+      expect(safeReturnUrl('/login/', origin)).toBeUndefined();
+      expect(safeReturnUrl('/logout/', origin)).toBeUndefined();
+      expect(safeReturnUrl('', origin)).toBeUndefined();
+      expect(safeReturnUrl(null, origin)).toBeUndefined();
+    });
+
+    it("remembers the sign-in page's next for the tab", () => {
+      window.sessionStorage.clear();
+      rememberReturnUrl(
+        `?next=${encodeURIComponent(`${window.location.origin}/ai-inference/`)}`,
+      );
+      expect(window.sessionStorage.getItem('waldur/auth/next')).toBe(
+        `${window.location.origin}/ai-inference/`,
+      );
+      window.sessionStorage.clear();
+      rememberReturnUrl('?next=https%3A%2F%2Fevil.example%2F');
+      expect(window.sessionStorage.getItem('waldur/auth/next')).toBeNull();
     });
   });
 });
