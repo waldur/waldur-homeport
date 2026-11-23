@@ -342,7 +342,6 @@
   "Only pending invitations can be canceled.": "Only pending invitations can be cancelled.",
   "Only pending or planned invitations can be canceled.": "Only pending or planned invitations can be cancelled.",
   "Only pending, expired and canceled invitations can be sent again.": "Only pending, expired and cancelled invitations can be sent again.",
-  "Only resources with an Arrow license reference are shown": "Only resources with an Arrow licence reference are shown",
   "Only the calls of this organization use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.": "Only the calls of this organisation use the checklist, and only its people see it. Leave empty for a checklist the whole portal shares.",
   "Only {spendable} of the {allocated} allocated can be drawn — the organization credit balance is lower than this allocation.": "Only {spendable} of the {allocated} allocated can be drawn — the organisation credit balance is lower than this allocation.",
   "Optional. Attach a purchase order if your organization needs one to authorize this spend.": "Optional. Attach a purchase order if your organisation needs one to authorise this spend.",
