@@ -9,7 +9,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { isStaff } from '@/workspace/selectors';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import {
   FeedbackSurveyCreateButton,
@@ -44,8 +44,7 @@ const renderStatus = ({ row }: { row: FeedbackSurvey }) => {
 };
 
 export const FeedbackSurveysList = () => {
-  // Support can read surveys; only staff author them.
-  const canEdit = useSelector(isStaff);
+  const canEdit = useSelector(isStaffOrSupport);
   const tableProps = useTable({
     table: 'FeedbackSurveys',
     fetchData: createFetcher(feedbackSurveysList),
@@ -56,10 +55,6 @@ export const FeedbackSurveysList = () => {
       title: translate('Name'),
       render: ({ row }) => row.name,
       orderField: 'name',
-    },
-    {
-      title: translate('Questionnaire'),
-      render: ({ row }) => row.checklist_name,
     },
     {
       title: translate('Audience'),

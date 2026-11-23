@@ -25,6 +25,7 @@ import {
   isQuestionFileType,
   isQuestionLikertType,
   isQuestionSelectType,
+  RANGE_QUESTION_TYPES,
   useQuestionNumberValidator,
 } from '@/marketplace-checklist/utils';
 
@@ -61,7 +62,7 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
 
   const validators = [];
   if (question.required) validators.push(required);
-  if (type === 'number' && numberValidator) validators.push(numberValidator);
+  if (RANGE_QUESTION_TYPES.includes(type)) validators.push(numberValidator);
   const validate =
     validators.length > 0 ? composeValidators(...validators) : undefined;
 
@@ -104,6 +105,16 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
           }
         : {})}
       {...(isQuestionLikertType(type) ? { question } : {})}
+      {...(type === 'year'
+        ? {
+            minYear: question.min_value
+              ? Number(question.min_value)
+              : undefined,
+            maxYear: question.max_value
+              ? Number(question.max_value)
+              : undefined,
+          }
+        : {})}
       validate={validate}
       format={(value) => {
         if (type === 'single_select' && value) return value[0];

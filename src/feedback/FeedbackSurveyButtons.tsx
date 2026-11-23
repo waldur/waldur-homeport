@@ -10,9 +10,9 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
-const FeedbackSurveyFormDialog = lazyComponent(() =>
-  import('./FeedbackSurveyFormDialog').then((module) => ({
-    default: module.FeedbackSurveyFormDialog,
+const FeedbackSurveyWizard = lazyComponent(() =>
+  import('./wizard/FeedbackSurveyWizard').then((module) => ({
+    default: module.FeedbackSurveyWizard,
   })),
 );
 
@@ -20,7 +20,7 @@ export const FeedbackSurveyCreateButton: FunctionComponent<{ refetch }> = ({
   refetch,
 }) => (
   <CreateModalButton
-    dialog={FeedbackSurveyFormDialog}
+    dialog={FeedbackSurveyWizard}
     resolve={{ refetch }}
     size="lg"
   />
@@ -31,7 +31,7 @@ export const FeedbackSurveyEditButton: FunctionComponent<{
   refetch;
 }> = ({ row, refetch }) => (
   <EditModalButton
-    dialog={FeedbackSurveyFormDialog}
+    dialog={FeedbackSurveyWizard}
     row={row}
     buildResolve={(r) => ({ survey: r, refetch })}
     size="lg"

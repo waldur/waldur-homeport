@@ -24,7 +24,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { checklistTypeOptions, isCallFormChecklistType } from '../utils';
+import { checklistAdminTypeOptions, isCallFormChecklistType } from '../utils';
 
 const loadOrganizations = organizationAutocomplete({
   field: ['name', 'uuid'],
@@ -83,9 +83,9 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
   const allowedChecklistTypeOptions = useMemo(
     () =>
       showExperimentalUiComponents
-        ? checklistTypeOptions
-        : checklistTypeOptions.filter((opt) =>
-            ['project_metadata', 'feedback'].includes(opt.value),
+        ? checklistAdminTypeOptions
+        : checklistAdminTypeOptions.filter(
+            (opt) => opt.value === 'project_metadata',
           ),
     [],
   );

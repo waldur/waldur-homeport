@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Checklist, checklistsAdminList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -10,17 +10,22 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { ChecklistsTableActions } from '../ChecklistsTableActions';
 import { CHECKLIST_TABLE_ID } from '../constants';
-import { checklistTypeOptions } from '../utils';
+import { CHECKLIST_ADMIN_TYPES, checklistTypeOptions } from '../utils';
 
 import { ChecklistExpandableRow } from './ChecklistExpandableRow';
 import { ChecklistRowActions } from './ChecklistRowActions';
 import { ChecklistsBulkRemoveButton } from './ChecklistsBulkRemoveButton';
 
 export const ChecklistsTable: FC<TableWithPortal> = ({ portal }) => {
+  const filter = useMemo(
+    () => ({ checklist_type__in: CHECKLIST_ADMIN_TYPES }),
+    [],
+  );
   const tableProps = useTable({
     table: CHECKLIST_TABLE_ID,
     fetchData: createFetcher(checklistsAdminList),
     queryField: 'name',
+    filter,
   });
 
   return (

@@ -21,6 +21,7 @@ import {
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AtLeast } from '@/core/types';
 import { required } from '@/core/validators';
 import {
   RadioGroup,
@@ -36,6 +37,7 @@ import {
 } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
+import { VisibilityQuestion } from '@/marketplace-checklist/types';
 import { questionConditionOperatorOptions } from '@/marketplace-checklist/utils';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -81,7 +83,7 @@ export const FieldsListGroup = ({
   fields,
   questions,
 }: FieldArrayRenderProps<FieldValue, HTMLElement> & {
-  questions: QuestionAdmin[];
+  questions: VisibilityQuestion[];
 }) => {
   const addDisabled =
     fields.value?.some(
@@ -289,9 +291,12 @@ export const FieldsListGroup = ({
 export const QuestionVisibilityForm = ({
   checklistUuid,
   question,
+  questions,
 }: {
-  checklistUuid: string;
-  question?: QuestionAdmin;
+  checklistUuid?: string;
+  question?: AtLeast<QuestionAdmin, 'uuid'>;
+  // Unsaved siblings, given in place of fetching the checklist's questions.
+  questions?: VisibilityQuestion[];
 }) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['ChecklistQuestions', checklistUuid],
@@ -300,7 +305,26 @@ export const QuestionVisibilityForm = ({
         query: { checklist_uuid: checklistUuid },
       }).then((res) => res.data),
     staleTime: UI_STALE_TIME,
+    enabled: !questions,
   });
+
+  if (questions) {
+    return questions.length ? (
+      <FieldArray
+        name="conditions"
+        component={FieldsListGroup}
+        questions={questions}
+      />
+    ) : (
+      <NoResult
+        title={translate('There are no other questions yet')}
+        message={translate(
+          'Add more questions before setting visibility conditions.',
+        )}
+        noAction
+      />
+    );
+  }
 
   if (isLoading) {
     return <LoadingSpinner />;

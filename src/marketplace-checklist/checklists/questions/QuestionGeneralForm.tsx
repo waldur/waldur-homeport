@@ -4,7 +4,7 @@ import { Checklist } from 'waldur-js-client';
 import { ButtonCaret } from 'waldur-ui';
 
 import { AtLeast } from '@/core/types';
-import { greaterThan, required } from '@/core/validators';
+import { required } from '@/core/validators';
 import {
   StringGroup,
   TextGroup,
@@ -15,22 +15,46 @@ import {
 import { translate } from '@/i18n';
 import { LikertPreview } from '@/marketplace-checklist/LikertField';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
-import { questionTypeOptions } from '@/marketplace-checklist/utils';
+import {
+  isQuestionFileType,
+  questionTypeOptions,
+  RANGE_QUESTION_TYPES,
+} from '@/marketplace-checklist/utils';
 
 import { QuestionAnswerOptions } from './QuestionAnswerOptions';
 import { QuestionFileFields } from './QuestionFileFields';
 import { QuestionLikertFields } from './QuestionLikertFields';
 import { QuestionRichTextFields } from './QuestionRichTextFields';
 
-const gt = (value, allValues) =>
-  greaterThan(Number(allValues.min_value))(Number(value));
+// The server refuses a question of only spaces as blank.
+const requiredText = (value) =>
+  required(typeof value === 'string' ? value.trim() : value);
+
+const isBlank = (value) =>
+  value === null || value === undefined || value === '';
+
+// Either bound may be left out; equal bounds are allowed, as on the server.
+const notBelowMin = (value, allValues) =>
+  !isBlank(value) &&
+  !isBlank(allValues.min_value) &&
+  Number(value) < Number(allValues.min_value)
+    ? translate('Maximum value cannot be less than the minimum value.')
+    : undefined;
+
+// Unsaved questions have nowhere to keep uploads yet.
+const localQuestionTypeOptions = questionTypeOptions.filter(
+  (option) => !isQuestionFileType(option.value),
+);
 
 export const QuestionGeneralForm = ({
   values,
   checklist,
+  local,
 }: {
   values: ChecklistQuestionForm;
   checklist?: AtLeast<Checklist, 'uuid' | 'url' | 'checklist_type'>;
+  // The list a local question sits in sets its order.
+  local?: boolean;
 }) => {
   const isOnboardingCustomer =
     checklist?.checklist_type === 'onboarding_customer';
@@ -43,7 +67,7 @@ export const QuestionGeneralForm = ({
         name="description"
         placeholder={translate('Type your question here...')}
         maxLength={150}
-        validate={required}
+        validate={requiredText}
         label={translate('Question')}
         required
         space={4}
@@ -57,7 +81,7 @@ export const QuestionGeneralForm = ({
       />
       <SelectGroup
         name="question_type"
-        options={questionTypeOptions}
+        options={local ? localQuestionTypeOptions : questionTypeOptions}
         validate={required}
         simpleValue
         label={translate('Question type')}
@@ -69,16 +93,18 @@ export const QuestionGeneralForm = ({
         label={translate('Is required?')}
         space={4}
       />
-      <NumberGroup
-        name="order"
-        placeholder="0"
-        min={0}
-        label={translate('Question order')}
-        space={4}
-      />
+      {!local && (
+        <NumberGroup
+          name="order"
+          placeholder="0"
+          min={0}
+          label={translate('Question order')}
+          space={4}
+        />
+      )}
       {['single_select', 'multi_select'].includes(values.question_type) ? (
         <QuestionAnswerOptions />
-      ) : ['number', 'rating'].includes(values.question_type) ? (
+      ) : RANGE_QUESTION_TYPES.includes(values.question_type) ? (
         <>
           <NumberGroup
             name="min_value"
@@ -90,7 +116,7 @@ export const QuestionGeneralForm = ({
             name="max_value"
             label={translate('Max value')}
             placeholder="0"
-            validate={gt}
+            validate={notBelowMin}
             space={4}
           />
         </>

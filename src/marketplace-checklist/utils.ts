@@ -21,6 +21,30 @@ export const checklistTypeOptions: Array<{ label; value: ChecklistTypeEnum }> =
     { label: translate('Feedback survey'), value: 'feedback' },
   ];
 
+// Feedback checklists belong to their survey and are edited through it.
+export const checklistAdminTypeOptions = checklistTypeOptions.filter(
+  (opt) => opt.value !== 'feedback',
+);
+
+// Keyed by every type, so a type the API adds fails to compile until it is
+// placed here, rather than silently missing from the admin. The form does not
+// offer workflow-step checklists, but call imports create them, and the admin
+// is where they are listed.
+const LISTED_IN_ADMIN: Record<ChecklistTypeEnum, boolean> = {
+  project_compliance: true,
+  proposal_compliance: true,
+  offering_compliance: true,
+  project_metadata: true,
+  onboarding_customer: true,
+  onboarding_intent: true,
+  workflow_step: true,
+  feedback: false,
+};
+
+export const CHECKLIST_ADMIN_TYPES = (
+  Object.keys(LISTED_IN_ADMIN) as ChecklistTypeEnum[]
+).filter((type) => LISTED_IN_ADMIN[type]);
+
 // The types calls use as forms: only these may belong to an organization,
 // which limits them to that organization's own calls.
 const CALL_FORM_CHECKLIST_TYPES: ChecklistTypeEnum[] = [
@@ -102,11 +126,24 @@ export const CHECKLIST_FLAGS = {
   questionFormTriggers: false,
 };
 
+// The types the backend keeps a min and max for, and checks answers against.
+export const RANGE_QUESTION_TYPES: QuestionTypeEnum[] = [
+  'number',
+  'year',
+  'rating',
+];
+
 export const useQuestionNumberValidator = (question) =>
   useMemo(
     () => (value) => {
+      // Number(null) and Number('') are 0, which would fail a range like 1-5
+      // for an optional question the respondent cleared.
+      if (value === null || value === '') return undefined;
       const v = Number(value);
-      if ((!v && v !== 0) || question.question_type !== 'number')
+      if (
+        (!v && v !== 0) ||
+        !RANGE_QUESTION_TYPES.includes(question.question_type)
+      )
         return undefined;
       const max = question.max_value ? Number(question.max_value) : null;
       const min = question.min_value ? Number(question.min_value) : null;
