@@ -207,6 +207,25 @@ describe('EditFieldDialog', () => {
     expect(screen.queryByText('Not allowed.')).toBeNull();
   });
 
+  it('shows the message a callback rejects with for its field', async () => {
+    const callback = vi.fn().mockRejectedValue({
+      fieldError: ['Needs another permission.'],
+    });
+    renderDialog({
+      scope: { organization: 'AI Platform Services' },
+      name: 'organization',
+      callback,
+      emptyValue: '',
+    });
+
+    await userEvent.type(screen.getByRole('textbox'), ' Ltd');
+    await submit();
+
+    expect(
+      await screen.findByText('Needs another permission.'),
+    ).toBeInTheDocument();
+  });
+
   it('pre-fills the value at a nested path and submits the edit there', async () => {
     const callback = vi.fn().mockResolvedValue({});
     renderDialog({

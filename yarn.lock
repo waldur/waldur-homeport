@@ -16390,7 +16390,7 @@ __metadata:
     waldur-design-tokens: "workspace:*"
     waldur-form: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
-    waldur-js-client: "npm:8.1.5-rc.3.dev.20261123095912.708"
+    waldur-js-client: "npm:8.1.5-rc.3.dev.20261123124611.710"
     waldur-notifications: "workspace:*"
     waldur-proposals: "workspace:*"
     waldur-runtime-config: "workspace:*"
@@ -16413,10 +16413,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"waldur-js-client@npm:8.1.5-rc.3.dev.20261123095912.708":
-  version: 8.1.5-rc.3.dev.20261123095912.708
-  resolution: "waldur-js-client@npm:8.1.5-rc.3.dev.20261123095912.708"
-  checksum: 10c0/3be0bfda1e55ff73e6e0f6ebbfe45797a86c9ff9d927c03e582b32fae599c83908b33fe5006868dcbd1c0486ad3f4b1871e149b48378cd4c09348eb25715a441
+"waldur-js-client@npm:8.1.5-rc.3.dev.20261123124611.710":
+  version: 8.1.5-rc.3.dev.20261123124611.710
+  resolution: "waldur-js-client@npm:8.1.5-rc.3.dev.20261123124611.710"
+  checksum: 10c0/574dbe13a0567b1b9d69ea6c5b3be3a30c7a085246bb144b61ae9ca66e359be8e47c8c615882076abe2aab7c3fbdcd4bc351b0f79185bb9f38eb6be7e6027cbd
   languageName: node
   linkType: hard
 

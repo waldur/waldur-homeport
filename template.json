@@ -3983,7 +3983,19 @@
   "Agent": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "create"
+      "feature_area": "integration"
+    }
+  },
+  "Agent configuration": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offerings"
+    }
+  },
+  "Agent configuration has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "integration"
     }
   },
   "Agent identities": {
@@ -4056,6 +4068,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "site-agents"
+    }
+  },
+  "Agent-only fields per component, as JSON.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Aggregate TRES (GrpTRES)": {
@@ -9391,6 +9408,11 @@
       "feature_area": "integration"
     }
   },
+  "Backend components": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Backend health status": {
     "context": {
       "feature_area": "footer"
@@ -9400,6 +9422,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "resources"
+    }
+  },
+  "Backend settings": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Backend status: all services working": {
@@ -9428,6 +9455,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "site-agents"
+    }
+  },
+  "Backends": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Background task workers, the message broker and event publishing.": {
@@ -10516,6 +10548,11 @@
   "By organization type": {
     "context": {
       "feature_area": "usage-by-creator"
+    }
+  },
+  "By polling": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "By project": {
@@ -12004,6 +12041,11 @@
       "feature_area": "proposal"
     }
   },
+  "Change the backends and their settings in one save with \"Edit roles and backend settings together\" on the Backends tab.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Change the order of steps?": {
     "context": {
       "feature_area": "workflow-steps"
@@ -12169,6 +12211,7 @@
     }
   },
   "Changing password": {},
+  "Changing this needs the permission to change the agent configuration.": {},
   "Channels": {
     "context": {
       "feature_area": "rabbitmq"
@@ -14810,6 +14853,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Connect to the broker over TLS.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Connect your Arrow (ArrowSphere) account to synchronize billing data with Waldur.": {
     "context": {
       "feature_area": "settings"
@@ -16911,6 +16959,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Creates, updates and terminates resources on the backend.": {},
   "Creating": {
     "context": {
       "primary_ui_type": "label",
@@ -17677,6 +17726,11 @@
   "Custom Scripts": {
     "context": {
       "feature_area": "custom-scripts"
+    }
+  },
+  "Custom backends": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Custom claim": {
@@ -21899,6 +21953,11 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "Edit as JSON": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Edit as YAML": {
     "context": {
       "feature_area": "deploy"
@@ -22347,6 +22406,11 @@
   "Edit roles": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Edit roles and backend settings together": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Edit round allocation": {
@@ -23568,6 +23632,15 @@
   "Enter IPv6 address.": {},
   "Enter a CIDR address.": {},
   "Enter a GID.": {},
+  "Enter a JSON object, such as {\"key\": \"value\"}.": {
+    "context": {
+      "variables": {
+        "\"key\": \"value\"": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Enter a claim name first": {
     "context": {
       "feature_area": "steps"
@@ -27133,6 +27206,11 @@
       "feature_area": "cost-policies"
     }
   },
+  "Fix the backend components on the Backend settings tab first.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Fix the errors shown above first.": {
     "context": {
       "feature_area": "hpc"
@@ -28374,6 +28452,7 @@
       "feature_area": "policies"
     }
   },
+  "Gives offering users their usernames on the backend.": {},
   "Glassmorphism": {
     "context": {
       "primary_ui_type": "label"
@@ -30019,6 +30098,11 @@
       "feature_area": "service-providers"
     }
   },
+  "How the agent learns of team changes.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "How the allocation decision is held to the call's resource pools. Soft lets a call manager approve an award past what remains, with an override and a reason. Hard refuses it; only staff may override. Changing it affects only later decisions.": {
     "context": {
       "feature_area": "configuration"
@@ -30802,6 +30886,11 @@
       "feature_area": "single-import"
     }
   },
+  "Import backend resources": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Import call": {
     "context": {
       "feature_area": "transfer"
@@ -30928,6 +31017,11 @@
   "Import resource": {
     "context": {
       "feature_area": "import"
+    }
+  },
+  "Import resources found on the backend into Waldur.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Import screenshots": {
@@ -33152,6 +33246,11 @@
       "feature_area": "api-keys"
     }
   },
+  "Keep unmanaged backend users": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Keep until": {
     "context": {
       "primary_ui_type": "title",
@@ -33173,6 +33272,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Keeps the backend's users in step with resource teams.": {},
   "Kept": {
     "context": {
       "feature_area": "demo-presets"
@@ -37564,6 +37664,21 @@
       "feature_area": "core"
     }
   },
+  "Membership sync": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Membership sync keeps backend users Waldur has never known as offering users, instead of removing everyone not on the resource team. Users Waldur has known are still removed once they leave the team.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Membership sync keeps backend users Waldur never knew.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Memory": {
     "context": {
       "primary_ui_type": "label",
@@ -39329,6 +39444,7 @@
   },
   "Needed": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "provider-calls"
     }
   },
@@ -43117,6 +43233,7 @@
       "feature_area": "proposal-roles"
     }
   },
+  "Not valid JSON.": {},
   "Not verified": {
     "context": {
       "feature_area": "details"
@@ -45074,6 +45191,15 @@
       "feature_area": "matching"
     }
   },
+  "Only roles and backend_settings belong here: {keys}.": {
+    "context": {
+      "variables": {
+        "keys": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Only roles of the same scope can be compared.": {
     "context": {
       "feature_area": "roles"
@@ -46345,6 +46471,7 @@
     }
   },
   "Order placed": {},
+  "Order processing": {},
   "Order slug": {
     "context": {
       "feature_area": "details"
@@ -47117,6 +47244,11 @@
   "Over": {
     "context": {
       "feature_area": "metrics"
+    }
+  },
+  "Over STOMP": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Over budget": {},
@@ -48558,6 +48690,11 @@
       "feature_area": "accounts"
     }
   },
+  "Per component type, only what the agent reads beyond the offering's own components, such as unit_factor_reporting. Unit, unit factor and limits are set on the offering's components (Accounting → Components).": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Per day": {
     "context": {
       "primary_ui_type": "label"
@@ -48744,6 +48881,11 @@
   "Periodic cost components": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "Periodically take usernames from the backend.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Periods": {
@@ -54663,6 +54805,11 @@
     }
   },
   "Receive email update notifications: comma-separated list of email addresses that are emailed once for every new Waldur release this deployment can be upgraded to. Leave empty to send none. An address added later also receives the current release.": {},
+  "Receive events over STOMP": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Receive invoices instead of the owners when set": {
     "context": {
       "feature_area": "details"
@@ -54771,6 +54918,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "billing",
       "action_type": "create"
+    }
+  },
+  "Reconcile usernames": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Reconciled": {
@@ -56580,6 +56732,11 @@
   },
   "Report is invalid.": {},
   "Report released to the applicant": {},
+  "Report the rest when a component goes down.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Report usage": {
     "context": {
       "primary_ui_type": "label",
@@ -56663,6 +56820,7 @@
       "feature_area": "inputs"
     }
   },
+  "Reports usage from the backend to Waldur.": {},
   "Request": {
     "context": {
       "primary_ui_type": "title",
@@ -57321,6 +57479,7 @@
       "feature_area": "create"
     }
   },
+  "Required once its block is set": {},
   "Required only while visible.": {
     "context": {
       "feature_area": "options"
@@ -61041,6 +61200,21 @@
       "feature_area": "email"
     }
   },
+  "STOMP WebSocket host": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "STOMP WebSocket path": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "STOMP WebSocket port": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "SVG": {
     "context": {
       "feature_area": "diagram"
@@ -61057,6 +61231,11 @@
     }
   },
   "Safety margin": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Same as STOMP events": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -61892,6 +62071,11 @@
   "Secret options will be imported and may overwrite existing secrets.": {
     "context": {
       "feature_area": "single-import"
+    }
+  },
+  "Secrets the agent configuration file must hold": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Section": {
@@ -64098,6 +64282,7 @@
       "feature_area": "team"
     }
   },
+  "Set at least one of order processing, membership sync or reporting.": {},
   "Set automatically because reported usage reached the limit": {
     "context": {
       "feature_area": "details"
@@ -64479,6 +64664,16 @@
   "Settings impact": {
     "context": {
       "feature_area": "changelog"
+    }
+  },
+  "Settings of the backends above, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Settings of the backends, as JSON. No secrets.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Settings that describe an offering itself, such as its plans and components.": {},
@@ -65521,6 +65716,11 @@
   "Skip creation of default subnet": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Skip decreasing usage": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Skip floating IP assignment": {
@@ -67766,6 +67966,11 @@
       "feature_area": "orders"
     }
   },
+  "Switch to backends whose settings the current ones refuse.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Switch to dark mode": {
     "context": {
       "feature_area": "theme"
@@ -69221,6 +69426,11 @@
       "feature_area": "users"
     }
   },
+  "The agent reacts to orders and changes as they happen, instead of polling Waldur.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "The allocation decision becomes active again with its outcome cleared, and the proposal counts as undecided until it is decided anew. The applicant is not notified. The reopening is recorded in the event log of the proposal, without the reason or the outcome taken back, and the applicant's team sees that entry only once the round publishes its results.": {
     "context": {
       "feature_area": "workflow"
@@ -69405,6 +69615,11 @@
   "The backend may not keep this precision": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "The backends in use need no secrets.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "The base allocation for each TRES component is read from the resource limits (set when the resource is ordered or its limits are changed). Each offering can define multiple components (e.g. cpu, mem, gpu). SLURM limits are set per component, but the usage percentage that drives actions is a single value: allocation and usage are each summed across components using the TRES billing weights.": {
@@ -69761,6 +69976,11 @@
   "The conditions under which the offering can serve the proposal": {
     "context": {
       "feature_area": "contributions"
+    }
+  },
+  "The configuration the site agent loads for this offering. Secrets are not part of it: the agent takes them from its own configuration file.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "The conflict will be marked as a false positive and removed from active review.": {
@@ -70544,6 +70764,11 @@
       "feature_area": "manage"
     }
   },
+  "The four role backends and backend_settings, saved in one request. Use it to switch to a backend whose settings the current one refuses, or that requires settings the current one does not know. A role left blank is cleared. Secrets stay in the agent configuration file.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "The full report always covers every page": {
     "context": {
       "feature_area": "table"
@@ -70938,6 +71163,11 @@
   "The merge was refused": {
     "context": {
       "feature_area": "wizard"
+    }
+  },
+  "The message broker as the agent reaches it, which may differ from the address Waldur uses.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "The message could not be sent": {
@@ -73345,9 +73575,19 @@
       "feature_area": "dependents"
     }
   },
+  "This change needs the permission to change the offering's agent configuration. Ask an organization owner or staff.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "This change needs you to confirm your identity, and your account has no way to do that here. Please contact support.": {
     "context": {
       "feature_area": "reauthentication"
+    }
+  },
+  "This changed since you opened it. Close and reopen to edit the current value.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "This chart will populate once data is available.": {
@@ -74492,6 +74732,7 @@
       "feature_area": "actions"
     }
   },
+  "This would leave no role set, and with none the agent runs slurm for order processing, membership sync and reporting. Choose another backend instead, or set another role first.": {},
   "Thought briefly": {
     "context": {
       "feature_area": "blocks"
@@ -78857,6 +79098,11 @@
       "feature_area": "manage"
     }
   },
+  "Unable to load the agent's configuration.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Unable to load the application options for this offering.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -81619,6 +81865,12 @@
       "feature_area": "affiliates"
     }
   },
+  "Unable to update the agent configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "integration"
+    }
+  },
   "Unable to update the agent identity.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -82051,6 +82303,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "settings"
+    }
+  },
+  "Unit, unit factor and limits are set on the offering's components (Accounting → Components).": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "United Arab Emirates": {},
@@ -83546,6 +83803,11 @@
     }
   },
   "Use ORCID sandbox environment for testing. When enabled, uses sandbox URLs automatically.": {},
+  "Use TLS": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Use TRES billing units instead of raw TRES values": {
     "context": {
       "feature_area": "policies"
@@ -84724,6 +84986,7 @@
       "feature_area": "import-users"
     }
   },
+  "Username management": {},
   "Username of FreeIPA user with administrative privileges.": {},
   "Username of the new user": {
     "context": {
@@ -86721,6 +86984,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "What the agent loads": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "What the allocation decision granted, beside the request.": {
     "context": {
       "feature_area": "proposal"
@@ -87092,6 +87360,11 @@
   "When the step is due for every proposal of the round. Left empty, its duration counts from now.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "When the usage of a component goes down, report the usage of the other components without it, instead of holding back the whole report. Suits backends whose meters are independent, such as another Waldur.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "When to deactivate a federated user.": {},
@@ -87529,6 +87802,7 @@
   "WirtschaftsCompass API server URL": {},
   "WirtschaftsCompass API token": {},
   "With MATRIX_EXTERNAL_LOGIN_METHOD 'oidc': the registration method of the Waldur users who sign in to Waldur through the identity provider the homeserver's single sign-on uses, i.e. that identity provider's name in Waldur, such as 'keycloak'. Waldur gives a Matrix account only to those users, because the homeserver signs in any subject of that provider to the account its claim names. While blank, no user is given a Matrix account.": {},
+  "With STOMP events off, the agent does not sync memberships at all. Turn on Receive events over STOMP, or choose another option.": {},
   "With both organizations and offerings selected, only users of those offerings in those organizations are asked.": {
     "context": {
       "feature_area": "feedback"
@@ -89274,6 +89548,11 @@
   "Your session has expired, please enter credentials to continue.": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Your site's own plugins, not in the plugin catalog. Their settings are not checked.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Your team’s steps": {
@@ -92864,6 +93143,26 @@
         }
       },
       "feature_area": "call-management"
+    }
+  },
+  "{backend} (custom)": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
+  "{backend} (default)": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{behaviour} behavioral, {cosmetic} cosmetic": {
