@@ -231,7 +231,9 @@ describe('AgentConfigurationSection', () => {
       .catch((error) => error);
 
     expect(refusal.fieldError).toEqual([
-      'backend_settings.target_api_url: waldur: This setting is required.',
+      'backend_settings.target_api_url (waldur): This setting is required.',
+    ]);
+    expect(refusal.fieldHint).toEqual([
       expect.stringMatching(
         /^Change the backends and their settings in one save/,
       ),

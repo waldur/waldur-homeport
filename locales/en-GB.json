@@ -776,6 +776,7 @@
   "Your request has been submitted and is awaiting organization approval.": "Your request has been submitted and is awaiting organisation approval.",
   "Your request to join the organization {name} has been submitted. You'll receive a notification once it's reviewed and approved.": "Your request to join the organisation {name} has been submitted. You'll receive a notification once it's reviewed and approved.",
   "Your role in this project or organization does not allow revealing its shared keys.": "Your role in this project or organisation does not allow revealing its shared keys.",
+  "Your site's own plugins, not in the catalog.": "Your site's own plugins, not in the catalogue.",
   "Your site's own plugins, not in the plugin catalog. Their settings are not checked.": "Your site's own plugins, not in the plugin catalogue. Their settings are not checked.",
   "affiliated organizations": "affiliated organisations",
   "authorized as {role}": "authorised as {role}",

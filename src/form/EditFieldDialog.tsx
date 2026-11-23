@@ -4,6 +4,8 @@ import arrayMutators from 'final-form-arrays';
 import { useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 
+import { FormText } from 'waldur-ui';
+
 import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -29,6 +31,11 @@ const refusedFieldError = (error: any, name: string) => {
   const message = get(body, name) ?? body[name];
   return message ?? undefined;
 };
+
+// A callback may reject with `fieldHint` too: lines on what to do about the
+// refusal, shown as help under its errors rather than as more errors. They are
+// kept among the submission errors, so they clear with them.
+const REFUSAL_HINTS = 'refusalHints';
 
 export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
   const { closeDialog } = useModal();
@@ -70,7 +77,9 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
           // the server said about this field is shown under it as well.
           .catch((error) => {
             const message = refusedFieldError(error, props.resolve.name);
-            return message ? { [FORM_ERROR]: message } : undefined;
+            return message
+              ? { [FORM_ERROR]: message, [REFUSAL_HINTS]: error?.fieldHint }
+              : undefined;
           })
       }
       render={({
@@ -79,6 +88,7 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
         hasValidationErrors,
         dirty,
         submitError,
+        submitErrors,
         dirtySinceLastSubmit,
       }) => (
         <form onSubmit={handleSubmit}>
@@ -113,7 +123,14 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
               {...props.resolve.fieldProps}
             />
             {submitError && !dirtySinceLastSubmit && (
-              <FieldError error={submitError} />
+              <>
+                <FieldError error={submitError} />
+                {submitErrors?.[REFUSAL_HINTS]?.map((hint: string) => (
+                  <FormText key={hint} as="div">
+                    {hint}
+                  </FormText>
+                ))}
+              </>
             )}
           </ModalDialog>
         </form>

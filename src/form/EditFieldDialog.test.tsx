@@ -226,6 +226,29 @@ describe('EditFieldDialog', () => {
     ).toBeInTheDocument();
   });
 
+  // A hint says what to do about the refusal: it is not one of its errors.
+  it('shows the hints a callback rejects with apart from the errors', async () => {
+    const callback = vi.fn().mockRejectedValue({
+      fieldError: ['Needs another setting.'],
+      fieldHint: ['Set it on the other tab first.'],
+    });
+    renderDialog({
+      scope: { organization: 'AI Platform Services' },
+      name: 'organization',
+      callback,
+      emptyValue: '',
+    });
+
+    await userEvent.type(screen.getByRole('textbox'), ' Ltd');
+    await submit();
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Needs another setting.',
+    );
+    const hint = screen.getByText('Set it on the other tab first.');
+    expect(screen.getByRole('alert')).not.toContainElement(hint);
+  });
+
   it('pre-fills the value at a nested path and submits the edit there', async () => {
     const callback = vi.fn().mockResolvedValue({});
     renderDialog({

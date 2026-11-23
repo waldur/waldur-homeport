@@ -25,6 +25,7 @@ import {
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { propVal } from '@/property/propertyFields';
 import { useNotify } from '@/store/notify';
 import { SimpleTable } from '@/table/SimpleTable';
 import { Column } from '@/table/types';
@@ -162,7 +163,7 @@ const AgentLoadsPanel: FC<{ offeringUuid: string }> = ({ offeringUuid }) => {
       <PropertyList variant="summary" className="mb-5">
         <PropertyItem
           label={translate('Version')}
-          value={data.version}
+          value={propVal.code(data.version, { truncate: 'middle' })}
           hasCopy
         />
         <PropertyItem
@@ -259,9 +260,9 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
         if (error?.fieldError) {
           throw error;
         }
-        const fieldError = describeRefusal(error, path);
-        if (fieldError?.length) {
-          throw { fieldError };
+        const refusal = describeRefusal(error, path);
+        if (refusal?.errors.length) {
+          throw { fieldError: refusal.errors, fieldHint: refusal.hints };
         }
         showErrorResponse(
           error,
@@ -371,6 +372,9 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
             name="agent_configuration.custom_backends"
             label={translate('Custom backends')}
             description={translate(
+              "Your site's own plugins, not in the catalog.",
+            )}
+            dialogDescription={translate(
               "Your site's own plugins, not in the plugin catalog. Their settings are not checked.",
             )}
             labelTooltip={trustHint}
@@ -399,6 +403,9 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
             name="agent_configuration.event_settings.stomp_enabled"
             label={translate('Receive events over STOMP')}
             description={translate(
+              'React to changes at once, instead of polling.',
+            )}
+            dialogDescription={translate(
               'The agent reacts to orders and changes as they happen, instead of polling Waldur.',
             )}
             labelTooltip={trustHint}
@@ -416,7 +423,8 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
           <StringEditField
             name="agent_configuration.event_settings.stomp_ws_host"
             label={translate('STOMP WebSocket host')}
-            description={translate(
+            description={translate('The broker as the agent reaches it.')}
+            dialogDescription={translate(
               'The message broker as the agent reaches it, which may differ from the address Waldur uses.',
             )}
             labelTooltip={trustHint}

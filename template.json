@@ -54562,6 +54562,11 @@
     }
   },
   "Reaching a limit is reported but does not pause access.": {},
+  "React to changes at once, instead of polling.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "React with {label}": {
     "context": {
       "variables": {
@@ -69652,6 +69657,11 @@
       "feature_area": "broadcasts"
     }
   },
+  "The broker as the agent reaches it.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "The browser uploads files up to {size}. Larger files, and whole folders, go faster with an S3 client.": {
     "context": {
       "variables": {
@@ -82305,11 +82315,6 @@
       "feature_area": "settings"
     }
   },
-  "Unit, unit factor and limits are set on the offering's components (Accounting → Components).": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "United Arab Emirates": {},
   "United Kingdom": {},
   "United States": {},
@@ -89548,6 +89553,11 @@
   "Your session has expired, please enter credentials to continue.": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Your site's own plugins, not in the catalog.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Your site's own plugins, not in the plugin catalog. Their settings are not checked.": {

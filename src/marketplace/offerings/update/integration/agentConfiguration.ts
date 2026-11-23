@@ -252,19 +252,46 @@ export const editedPath = (change: Record<string, any>): string => {
   return key;
 };
 
-/** Server errors as `dotted.path: message` lines. */
+// A backend settings message names the backend whose schema refused the
+// value: `<backend>: <message>` (_check_shared_data in mastermind's
+// agent_configuration.py).
+const BACKEND_MESSAGE = /^([a-z][\w-]*): (.+)$/;
+
+/**
+ * Server errors as `dotted.path: message` lines. A message about one backend
+ * is put after the path, `dotted.path (backend): message`, one line per
+ * backend.
+ */
 const flattenErrors = (errors: unknown, prefix = ''): string[] => {
-  const line = (message: string) =>
-    prefix ? `${prefix}: ${message}` : message;
+  const line = (message: string, backend?: string) => {
+    const where = backend ? `${prefix} (${backend})` : prefix;
+    return where ? `${where}: ${message}` : message;
+  };
   if (errors === undefined || errors === null) {
     return [];
   }
   if (Array.isArray(errors)) {
-    return errors.every((item) => typeof item === 'string')
-      ? [line(errors.join(' '))]
-      : errors.flatMap((item, index) =>
-          flattenErrors(item, `${prefix}[${index}]`),
-        );
+    if (!errors.every((item) => typeof item === 'string')) {
+      return errors.flatMap((item, index) =>
+        flattenErrors(item, `${prefix}[${index}]`),
+      );
+    }
+    const plain: string[] = [];
+    const byBackend = new Map<string, string[]>();
+    errors.forEach((message) => {
+      const match = prefix ? BACKEND_MESSAGE.exec(message) : null;
+      if (match) {
+        byBackend.set(match[1], [...(byBackend.get(match[1]) ?? []), match[2]]);
+      } else {
+        plain.push(message);
+      }
+    });
+    return [
+      ...(plain.length ? [line(plain.join(' '))] : []),
+      ...[...byBackend].map(([backend, messages]) =>
+        line(messages.join(' '), backend),
+      ),
+    ];
   }
   if (typeof errors === 'object') {
     return Object.entries(errors).flatMap(([key, value]) =>
@@ -273,44 +300,6 @@ const flattenErrors = (errors: unknown, prefix = ''): string[] => {
   }
   return [line(String(errors))];
 };
-
-// Fields the agent takes from the offering's own components, which
-// backend_components refuses (OFFERING_COMPONENT_FIELDS in mastermind).
-const OFFERING_COMPONENT_FIELDS = new Set([
-  'type',
-  'name',
-  'billing_type',
-  'limit_amount',
-  'backend_id',
-  'product_code',
-  'measured_unit',
-  'unit_factor',
-  'accounting_type',
-  'label',
-  'limit',
-  'description',
-  'min_value',
-  'max_value',
-  'max_available_limit',
-  'default_limit',
-  'limit_period',
-  'article_code',
-  'is_boolean',
-  'is_prepaid',
-  'min_prepaid_duration',
-  'max_prepaid_duration',
-  'prepaid_duration_step',
-]);
-
-const namesOfferingComponentField = (errors: unknown) =>
-  Boolean(errors) &&
-  typeof errors === 'object' &&
-  Object.values(errors).some(
-    (fields) =>
-      fields &&
-      typeof fields === 'object' &&
-      Object.keys(fields).some((name) => OFFERING_COMPONENT_FIELDS.has(name)),
-  );
 
 // A body that is not about the configuration: a detail, a list of messages,
 // or field errors, shown plainly rather than as `detail: …` or `0: …`.
@@ -328,73 +317,73 @@ const plainErrors = (body: Record<string, any>): string[] => {
   return flattenErrors(body);
 };
 
+/** Why a save was refused, and what to do about it, as lines. */
+export interface Refusal {
+  errors: string[];
+  /** Where to go to make the save possible: guidance, not an error. */
+  hints: string[];
+}
+
 /**
- * What to show under an edit field when saving it was refused, as lines; or
- * nothing, when the refusal is not one to show there (a server error, say).
+ * What to show under an edit field when saving it was refused; or nothing,
+ * when the refusal is not one to show there (a server error, say).
  *
  * A save sends the whole configuration, so a 400 may be about another part
  * of it -- most often the backend settings a newly chosen backend requires --
- * which is listed too, with where to fix it. A 403 names the settings that
- * need the permission to change the agent configuration.
+ * which is listed too, with a hint at where to fix it. A 403 names the
+ * settings that need the permission to change the agent configuration.
  */
 export const describeRefusal = (
   error: any,
   path: string,
-): string[] | undefined => {
+): Refusal | undefined => {
   const status = error?.status ?? error?.response?.status;
   const body = getErrorBody(error);
   if (status === 403) {
     // The server's detail names the settings; it is shown as sent, since it
     // may be translated.
-    const lines = [
+    const errors = [
       translate(
         "This change needs the permission to change the offering's agent configuration. Ask an organization owner or staff.",
       ),
     ];
     if (typeof body?.detail === 'string') {
-      lines.push(body.detail);
+      errors.push(body.detail);
     }
-    return lines;
+    return { errors, hints: [] };
   }
   if (status !== 400 || !body) {
     return undefined;
   }
   const errors = body.agent_configuration;
   if (errors === undefined) {
-    return plainErrors(body);
+    return { errors: plainErrors(body), hints: [] };
   }
   if (!errors || typeof errors !== 'object' || Array.isArray(errors)) {
-    return flattenErrors(errors);
+    return { errors: flattenErrors(errors), hints: [] };
   }
   const own = get(errors, path);
   const others = cloneDeep(errors);
   unset(others, path);
   const otherLines = flattenErrors(others);
-  const lines = [...flattenErrors(own), ...otherLines];
-  if (path === 'backend_components' && namesOfferingComponentField(own)) {
-    lines.push(
-      translate(
-        "Unit, unit factor and limits are set on the offering's components (Accounting → Components).",
-      ),
-    );
-  }
+  const hints: string[] = [];
   const refuses = (key: string) =>
     path !== key && otherLines.some((line) => line.startsWith(`${key}.`));
   // A backend whose settings the current one refuses cannot be reached one
   // field at a time: roles and settings are saved together instead.
   if (path !== ROLES_AND_SETTINGS && refuses('backend_settings')) {
-    lines.push(
+    hints.push(
       translate(
         'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Backends tab.',
       ),
     );
   }
   if (refuses('backend_components')) {
-    lines.push(
+    hints.push(
       translate(
         'Fix the backend components on the Backend settings tab first.',
       ),
     );
   }
-  return lines;
+  return { errors: [...flattenErrors(own), ...otherLines], hints };
 };

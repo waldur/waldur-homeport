@@ -203,14 +203,18 @@ describe('describeRefusal', () => {
         }),
         'agent_settings.resource_import_enabled',
       ),
-    ).toEqual([
-      "This change needs the permission to change the offering's agent configuration. Ask an organization owner or staff.",
-      'You do not have permission to change where the site agent connects or what it runs: agent_settings.resource_import_enabled.',
-    ]);
+    ).toEqual({
+      errors: [
+        "This change needs the permission to change the offering's agent configuration. Ask an organization owner or staff.",
+        'You do not have permission to change where the site agent connects or what it runs: agent_settings.resource_import_enabled.',
+      ],
+      hints: [],
+    });
   });
 
   // A new backend is refused for the settings it requires: say where to add
-  // them.
+  // them, as a hint rather than another error. The server names the backend
+  // in the message; it goes after the path.
   it('lists the backend settings a chosen backend requires', () => {
     expect(
       describeRefusal(
@@ -224,11 +228,15 @@ describe('describeRefusal', () => {
         }),
         'reporting_backend',
       ),
-    ).toEqual([
-      'backend_settings.target_api_url: waldur: This setting is required.',
-      'backend_settings.target_offering_uuid: waldur: This setting is required.',
-      'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Backends tab.',
-    ]);
+    ).toEqual({
+      errors: [
+        'backend_settings.target_api_url (waldur): This setting is required.',
+        'backend_settings.target_offering_uuid (waldur): This setting is required.',
+      ],
+      hints: [
+        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Backends tab.',
+      ],
+    });
   });
 
   it('shows errors in a JSON block as dotted paths', () => {
@@ -245,10 +253,12 @@ describe('describeRefusal', () => {
         }),
         'backend_components',
       ),
-    ).toEqual([
-      'cpu.unit_factor: Set this on the offering component itself.',
-      "Unit, unit factor and limits are set on the offering's components (Accounting → Components).",
-    ]);
+    ).toEqual({
+      // The dialog's description already points at the offering's
+      // components; the refusal does not repeat it.
+      errors: ['cpu.unit_factor: Set this on the offering component itself.'],
+      hints: [],
+    });
   });
 
   it('shows the error of the field itself as it is', () => {
@@ -265,7 +275,10 @@ describe('describeRefusal', () => {
         }),
         'event_settings.stomp_ws_port',
       ),
-    ).toEqual(['Ensure this value is less than or equal to 65535.']);
+    ).toEqual({
+      errors: ['Ensure this value is less than or equal to 65535.'],
+      hints: [],
+    });
   });
 
   it('does not send the combined editor to itself', () => {
@@ -278,7 +291,33 @@ describe('describeRefusal', () => {
         }),
         ROLES_AND_SETTINGS,
       ),
-    ).toEqual(['backend_settings.api_url: ceph_s3: Unknown setting.']);
+    ).toEqual({
+      errors: ['backend_settings.api_url (ceph_s3): Unknown setting.'],
+      hints: [],
+    });
+  });
+
+  it('puts each backend of a setting on its own line', () => {
+    expect(
+      describeRefusal(
+        refused(400, {
+          agent_configuration: {
+            backend_settings: {
+              qos_default: [
+                'Unknown setting.',
+                'slurm: Invalid value.',
+                'waldur: This setting is required.',
+              ],
+            },
+          },
+        }),
+        'backend_settings',
+      ).errors,
+    ).toEqual([
+      'qos_default: Unknown setting.',
+      'qos_default (slurm): Invalid value.',
+      'qos_default (waldur): This setting is required.',
+    ]);
   });
 
   it('points component errors of another field to the components', () => {
@@ -291,19 +330,19 @@ describe('describeRefusal', () => {
         }),
         'reporting_backend',
       ),
-    ).toEqual([
-      'backend_components.cpu.factor: Unknown setting.',
-      'Fix the backend components on the Backend settings tab first.',
-    ]);
+    ).toEqual({
+      errors: ['backend_components.cpu.factor: Unknown setting.'],
+      hints: ['Fix the backend components on the Backend settings tab first.'],
+    });
   });
 
   it('shows a detail or a list of messages plainly', () => {
     expect(
       describeRefusal(refused(400, { detail: 'Offering is archived.' }), 'x'),
-    ).toEqual(['Offering is archived.']);
+    ).toEqual({ errors: ['Offering is archived.'], hints: [] });
     expect(
       describeRefusal(refused(400, { 0: 'Not now.', 1: 'Try later.' }), 'x'),
-    ).toEqual(['Not now.', 'Try later.']);
+    ).toEqual({ errors: ['Not now.', 'Try later.'], hints: [] });
   });
 
   it('leaves other failures to a notification', () => {
