@@ -12,6 +12,7 @@ import {
   BooleanEditField,
   CommaSeparatedListEditField,
   EditFieldProvider,
+  NumberEditField,
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
@@ -228,6 +229,18 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               )}
               description={translate(
                 'DNS hostnames pushed as SCIM entitlements when SCIM entitlements are enabled. Stored lowercased. Do not use ssh:// URLs, user@host, or host:port. These hosts are not shown in the resource access dropdown.',
+              )}
+            />
+          )}
+          {scimEntitlementsEnabled && (
+            <NumberEditField
+              name="plugin_options.scim_login_port"
+              label={translate('SCIM login port')}
+              placeholder="22"
+              min={1}
+              max={65535}
+              description={translate(
+                'SSH port clients should use for every host in SCIM login nodes. When unset, clients use port 22. Outbound SCIM entitlements carry the hostname only and ignore this value.',
               )}
             />
           )}
