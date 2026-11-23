@@ -14,8 +14,10 @@ import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import iconButtonNeedsAccessibleName from './rules/icon-button-needs-accessible-name.js';
 import noArbitraryBorderWidth from './rules/no-arbitrary-border-width.js';
 import noArbitraryLeading from './rules/no-arbitrary-leading.js';
+import noBrowserLocaleDate from './rules/no-browser-locale-date.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
+import noDisplayDateTokens from './rules/no-display-date-tokens.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
 import noHandRolledModalFooter from './rules/no-hand-rolled-modal-footer.js';
 import noHandRolledTable from './rules/no-hand-rolled-table.js';
@@ -58,6 +60,8 @@ export default {
     'enforce-dialog-button-order': enforceDialogButtonOrder,
     'no-hand-rolled-table': noHandRolledTable,
     'no-native-date-input': noNativeDateInput,
+    'no-display-date-tokens': noDisplayDateTokens,
+    'no-browser-locale-date': noBrowserLocaleDate,
     'no-raw-code-element': noRawCodeElement,
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
     'no-direct-client-usage': noDirectClientUsage,

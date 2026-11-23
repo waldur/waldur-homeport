@@ -32,6 +32,15 @@ describe('getEndDateStatus', () => {
     });
   });
 
+  it('reads a timestamped end date as the day it names', () => {
+    // UTC midnight of the 28th is still the 27th west of UTC; the badge must
+    // agree with daysUntilAccessEnds, which counts calendar days.
+    expect(status('2026-11-10T00:00:00Z', '2026-11-28T00:00:00Z')).toEqual({
+      kind: 'grace',
+      daysLeft: 13,
+    });
+  });
+
   it('is on the last day of the grace period the day before it ends', () => {
     expect(status('2026-11-10', '2026-11-15')).toEqual({
       kind: 'grace',

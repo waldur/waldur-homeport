@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo } from 'react';
 import { Offering, OrderDetails, OfferingComponent } from 'waldur-js-client';
 
+import { formatTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
@@ -155,7 +156,7 @@ const getContext = (order: OrderDetails, offering: Offering): Context => {
     approved = translate('{user} has approved it on {date} at {time}.', {
       user: order.consumer_reviewed_by,
       date: DateTime.fromISO(order.consumer_reviewed_at).toISODate(),
-      time: DateTime.fromISO(order.consumer_reviewed_at).toFormat('HH:mm'),
+      time: formatTime(DateTime.fromISO(order.consumer_reviewed_at)),
     });
   }
   return { user, approved, order, components: offering.components };

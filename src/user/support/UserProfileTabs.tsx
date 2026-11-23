@@ -1202,7 +1202,7 @@ export const UserProfileTabs = ({
             count={tabCount(stats.staff)}
             title={
               <>
-                <StaffOnlyIndicator className="me-1" />
+                <StaffOnlyIndicator className="me-1" inControl />
                 {translate('Internal')}
                 <MissingBadge stats={stats.staff} />
               </>

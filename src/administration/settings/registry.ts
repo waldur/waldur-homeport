@@ -217,6 +217,13 @@ export const getSettingGroupLocations = (): Record<
       pageTitle: marketplaceSettingsPage,
       tabTitle: translate('POSIX ID pools'),
     },
+    [translate('S3 bucket browser')]: {
+      state: 'admin-marketplace-settings',
+      params: { tab: 's3-bucket-browser' },
+      category: marketplaceCategory,
+      pageTitle: marketplaceSettingsPage,
+      tabTitle: translate('S3 bucket browser'),
+    },
 
     // Software catalog (Marketplace › Software catalog)
     [translate('Software catalog general')]: {

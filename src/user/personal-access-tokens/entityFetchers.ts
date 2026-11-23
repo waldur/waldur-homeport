@@ -1,33 +1,28 @@
 import {
-  callManagingOrganisationsList,
-  customersList,
-  marketplacePublicOfferingsList,
-  marketplaceResourceProjectsList,
-  marketplaceResourcesList,
-  marketplaceServiceProvidersList,
-  projectsList,
-  proposalProposalsList,
-  proposalPublicCallsList,
+  BindableEntity,
+  BindableEntityTypeEnum,
+  personalAccessTokensAvailableBindingEntitiesList,
 } from 'waldur-js-client';
 
-import { createLoadOptions, AsyncSelectLoader } from '@/form/select';
+import { AsyncSelectLoader } from '@/form/select';
 
 /**
- * Maps a TYPE_MAP key (as returned by personalAccessTokensAvailableBindingTargets)
- * to the SDK list function for entities of that type. Keys must match the
- * backend's `permissions.enums.TYPE_MAP`.
+ * Loads the entities of one type a token can be restricted to: those the
+ * user holds a permission on (or under), the same check the create endpoint
+ * makes. The endpoint returns its best matches unpaginated, so a search
+ * narrows them and there is never a next page.
  */
-export const ENTITY_LOADERS: Record<string, AsyncSelectLoader<any>> = {
-  customer: createLoadOptions(customersList, 'query'),
-  project: createLoadOptions(projectsList, 'query'),
-  offering: createLoadOptions(marketplacePublicOfferingsList, 'query'),
-  resource: createLoadOptions(marketplaceResourcesList, 'query'),
-  resource_project: createLoadOptions(marketplaceResourceProjectsList, 'name'),
-  service_provider: createLoadOptions(marketplaceServiceProvidersList, 'none'),
-  call: createLoadOptions(proposalPublicCallsList, 'name'),
-  proposal: createLoadOptions(proposalProposalsList, 'name'),
-  call_organizer: createLoadOptions(callManagingOrganisationsList, 'none'),
-};
+export const createBindableEntityLoader =
+  (type: string): AsyncSelectLoader<BindableEntity> =>
+  async (query) => {
+    const response = await personalAccessTokensAvailableBindingEntitiesList({
+      query: {
+        type: type as BindableEntityTypeEnum,
+        ...(query ? { query } : {}),
+      },
+    });
+    return { options: response.data ?? [], hasMore: false };
+  };
 
 const TYPE_LABELS: Record<string, string> = {
   customer: 'Organization',

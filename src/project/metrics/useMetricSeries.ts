@@ -1,5 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { marketplaceMetricSeriesRetrieve } from 'waldur-js-client';
+import {
+  marketplaceMetricSeriesRetrieve,
+  MetricSeriesResponse,
+} from 'waldur-js-client';
+
+import { emptyIfNotFound } from './emptyIfNotFound';
 
 export const useMetricSeries = (query: {
   offering_metric_uuid: string;
@@ -14,9 +19,19 @@ export const useMetricSeries = (query: {
   useQuery({
     queryKey: ['metric-series', query],
     queryFn: () =>
-      marketplaceMetricSeriesRetrieve({ query }).then(
-        (response) => response.data,
-      ),
+      marketplaceMetricSeriesRetrieve({ query })
+        .then((response) => response.data)
+        .catch(
+          emptyIfNotFound<MetricSeriesResponse>({
+            // The backend reports the bucketing it picked, never "auto"; with
+            // no points to bucket, raw is as true as any.
+            granularity:
+              query.granularity && query.granularity !== 'auto'
+                ? query.granularity
+                : 'raw',
+            series: [],
+          }),
+        ),
     // While another span loads, the last one stays in view, as long as it
     // is bucketed alike: daily points read as raw ones would be nonsense.
     placeholderData: (previous, previousQuery) => {

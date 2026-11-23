@@ -18,10 +18,16 @@ export const CreateHealthMonitorDialog: FC<
       openstackHealthMonitorsCreate({
         body: {
           pool: resource.url,
+          // Create only: an empty field leaves the serializer default in place
+          // (blank name, delay 5, timeout 5, max_retries 3).
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default applies
           name: formData.name || undefined,
           type: formData.type,
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default applies
           delay: formData.delay ? Number(formData.delay) : undefined,
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default applies
           timeout: formData.timeout ? Number(formData.timeout) : undefined,
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, server default applies
           max_retries: formData.max_retries
             ? Number(formData.max_retries)
             : undefined,

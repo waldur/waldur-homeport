@@ -2,7 +2,7 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef } from 'react';
 import { OfferingComponent, ProviderPlanDetails } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -44,9 +44,14 @@ const getColumns = (
     render: ({ row }) => (
       <>
         {row.name}{' '}
-        <Tooltip label={row.type} side="right">
-          <InfoIcon weight="bold" />
-        </Tooltip>
+        <HelpIcon
+          label={row.type}
+          aria-label={translate('Component type')}
+          icon={InfoIcon}
+          size="1em"
+          side="right"
+          className="text-inherit"
+        />
       </>
     ),
   },

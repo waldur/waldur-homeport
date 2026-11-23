@@ -208,6 +208,10 @@ export const PermissionOptions = [
         value: 'OFFERING.ARCHIVE_PLAN',
       },
       {
+        label: translate('Change where a site agent connects, what it runs and what access it grants'),
+        value: 'OFFERING.UPDATE_AGENT_CONFIGURATION',
+      },
+      {
         label: translate('Create offering'),
         value: 'OFFERING.CREATE',
       },
@@ -282,6 +286,10 @@ export const PermissionOptions = [
       {
         label: translate('Pause offering'),
         value: 'OFFERING.PAUSE',
+      },
+      {
+        label: translate('Run the offering\'s site agent: register it and report what it ran'),
+        value: 'OFFERING.MANAGE_AGENT',
       },
       {
         label: translate('Unpause offering'),

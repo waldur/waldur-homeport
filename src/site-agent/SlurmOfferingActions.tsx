@@ -17,6 +17,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 import { isSiteAgentOfferingType } from './constants';
+import { CreateAgentTokenMenuItem } from './CreateAgentTokenMenuItem';
 
 const SiteAgentConfigDialog = lazyComponent(() =>
   import('./SiteAgentConfigDialog').then((m) => ({
@@ -130,6 +131,9 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
           >
             {translate('Generate Site Agent Config')}
           </Menu.Item>
+        )}
+        {showSiteAgentConfig && (
+          <CreateAgentTokenMenuItem offering={offering} />
         )}
         {showLdapAgentEnv && (
           <Menu.Item onSelect={openLdapAgentEnv}>

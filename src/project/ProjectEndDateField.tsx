@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
@@ -25,7 +26,7 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
       if (
         !row.resources_count ||
         !row.end_date ||
-        projectEndDate < parseDate(null)
+        projectEndDate < DateTime.now()
       )
         return Promise.resolve(null);
 

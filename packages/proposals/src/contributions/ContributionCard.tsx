@@ -6,7 +6,7 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { translate } from 'waldur-i18n-runtime';
+import { getDateLocale, translate } from 'waldur-i18n-runtime';
 import {
   ProposalWorkflowStepInstance,
   StepContribution,
@@ -60,7 +60,7 @@ export const delegationLine = (
 };
 
 const formatDate = (value: string) =>
-  new Date(value).toLocaleDateString(undefined, {
+  new Date(value).toLocaleDateString(getDateLocale(), {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

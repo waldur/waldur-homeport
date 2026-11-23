@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import {
   marketplaceMetricBreakdownList,
+  MetricBreakdownItem,
   ProjectMetric,
   ResourceMetric,
 } from 'waldur-js-client';
@@ -15,6 +16,8 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+
+import { emptyIfNotFound } from './emptyIfNotFound';
 
 // The backend's name for breaking a project's figure down by its resources.
 const BY_RESOURCE = 'resource';
@@ -54,7 +57,7 @@ export const MetricBreakdownDialog: FC<{
           group_by: attribute,
           start: item.period_start,
         },
-      });
+      }).catch(emptyIfNotFound({ data: [] as MetricBreakdownItem[] }));
       const rows = data.map((entry) => {
         const label = byResource
           ? entry.resource_name

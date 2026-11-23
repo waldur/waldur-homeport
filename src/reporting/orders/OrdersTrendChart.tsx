@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatDate, formatDayMonth } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { BarChart } from '@/reporting/users/charts/BarChart';
 
@@ -15,7 +16,7 @@ export const OrdersTrendChart: FC<OrdersTrendChartProps> = ({ dailyStats }) => {
   const chartData = useMemo(
     () =>
       dailyStats.map((d) => ({
-        name: DateTime.fromISO(d.date).toFormat('MMM dd'),
+        name: formatDayMonth(DateTime.fromISO(d.date)),
         value: d.total,
       })),
     [dailyStats],
@@ -25,7 +26,7 @@ export const OrdersTrendChart: FC<OrdersTrendChartProps> = ({ dailyStats }) => {
     () => ({
       fields: [translate('Date'), translate('Orders')],
       data: dailyStats.map((d) => [
-        DateTime.fromISO(d.date).toFormat('MMM dd, yyyy'),
+        formatDate(DateTime.fromISO(d.date)),
         d.total,
       ]),
     }),

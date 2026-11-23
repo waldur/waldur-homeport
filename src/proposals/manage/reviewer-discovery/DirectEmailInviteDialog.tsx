@@ -50,7 +50,11 @@ export const DirectEmailInviteDialog = ({
         path: { uuid: resolve.call.uuid },
         body: {
           email: values.email,
+          // A one-off invitation, not an update: omitted fields take the
+          // serializer defaults (no message, 5 assignments).
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- one-off action, server default applies
           invitation_message: values.invitation_message || undefined,
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- one-off action, server default applies
           max_assignments: values.max_assignments
             ? Number(values.max_assignments)
             : undefined,

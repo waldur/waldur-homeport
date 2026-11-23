@@ -10,6 +10,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  SingleProperty,
 } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
@@ -207,14 +208,12 @@ export const RemoteProjectDetail = () => {
                 {translate('Pending sync')}
               </summary>
               <div className="mt-2.5">
-                <PropertyList variant="summary">
-                  <PropertyItem
-                    label={translate('Pending since')}
-                    value={propVal.date(row.pending_since, {
-                      precision: 'datetime',
-                    })}
-                  />
-                </PropertyList>
+                <SingleProperty
+                  label={translate('Pending since')}
+                  value={propVal.date(row.pending_since, {
+                    precision: 'datetime',
+                  })}
+                />
                 <DetailsDiff
                   before={row.last_confirmed_details}
                   after={row.pending_details}

@@ -1,4 +1,4 @@
-import { translate } from 'waldur-i18n-runtime';
+import { getDateLocale, translate } from 'waldur-i18n-runtime';
 import {
   ProposalStates,
   RequestedOfferingStates,
@@ -8,27 +8,49 @@ import { BadgeVariant } from 'waldur-ui';
 
 export const DASH = '—';
 
-export const formatDate = (value?: string | null) =>
-  value
-    ? new Date(value).toLocaleDateString(undefined, {
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+const DATE_ONLY = /^\d{4}-\d{2}-\d{2}$/;
+
+/** A Date for an API value. A date-only value is that day in the local
+ *  zone: `new Date('2026-09-10')` is UTC midnight, the 9th west of UTC. */
+const toDate = (value: string): Date | null => {
+  const date = DATE_ONLY.test(value)
+    ? new Date(
+        Number(value.slice(0, 4)),
+        Number(value.slice(5, 7)) - 1,
+        Number(value.slice(8, 10)),
+      )
+    : new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+};
+
+const startOfDay = (date: Date) =>
+  new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+
+/** 26 Feb 2027, in the app's date locale (not the browser's). */
+export const formatDate = (value?: string | null) => {
+  const date = value ? toDate(value) : null;
+  return date
+    ? date.toLocaleDateString(getDateLocale(), {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
       })
     : DASH;
+};
 
-/** "in 3 days", "2 days ago", "today": how far a due date is. */
+/** "in 3 days", "2 days ago", "today": how far a due date is, in whole
+ *  calendar days, so a date three days out never reads as two. */
 export const formatRelative = (value?: string | null) => {
-  if (!value) {
+  const date = value ? toDate(value) : null;
+  if (!date) {
     return DASH;
   }
-  const days = Math.round(
-    (new Date(value).getTime() - Date.now()) / (24 * 60 * 60 * 1000),
-  );
-  return new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' }).format(
-    days,
-    'day',
-  );
+  const days = Math.round((startOfDay(date) - startOfDay(new Date())) / DAY_MS);
+  return new Intl.RelativeTimeFormat(getDateLocale(), {
+    numeric: 'auto',
+  }).format(days, 'day');
 };
 
 export const formatAmount = (value: number | null | undefined, unit = '') =>

@@ -2,6 +2,7 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { User, userActionsList, UserAction } from 'waldur-js-client';
 
+import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { createFetcher } from '@/table/api';
@@ -50,11 +51,7 @@ const columns: Column<UserAction>[] = [
   {
     title: translate('Due date'),
     render: ({ row }) =>
-      row.due_date ? (
-        <>{new Date(row.due_date).toLocaleDateString()}</>
-      ) : (
-        <>{DASH_ESCAPE_CODE}</>
-      ),
+      row.due_date ? <>{formatDate(row.due_date)}</> : <>{DASH_ESCAPE_CODE}</>,
     id: 'due_date',
   },
   {

@@ -124,6 +124,43 @@ describe('ConnectedAppsList', () => {
     expect(useTable).not.toHaveBeenCalled();
   });
 
+  it.each([
+    [
+      'while impersonating',
+      () => ImpersonationStorage.set('user-uuid'),
+      'Only the user can see and revoke their connected apps.',
+    ],
+    [
+      'for an OIDC access token',
+      () => vi.mocked(getAuthHeader).mockReturnValue('Bearer idp-token'),
+      'Connected apps cannot be managed when you sign in with an access token.',
+    ],
+  ])('shows how to connect above the note %s', (_, setUp, refusal) => {
+    setUp();
+    renderWith([]);
+    const heading = screen.getByText('Connect an AI client');
+    const note = screen.getByText(refusal);
+    expect(
+      heading.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it('opens how to connect while the user has no connected apps', () => {
+    renderWith([]);
+    expect(screen.getByRole('button', { name: 'Toggle' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+  });
+
+  it('collapses how to connect once the user has a connected app', () => {
+    renderWith([app]);
+    expect(screen.getByRole('button', { name: 'Toggle' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+  });
+
   it('loads the list for a Waldur token, as after a local or passkey sign-in', () => {
     vi.mocked(getAuthHeader).mockReturnValue('Token waldur-token');
     renderWith([app]);

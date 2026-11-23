@@ -1,11 +1,9 @@
 import type { ArrowBillingSync, ArrowBillingSyncItem } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
-
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { SimpleTable } from '@/table/SimpleTable';
 
@@ -62,7 +60,6 @@ const BillingSyncItemsTable = ({
 export const BillingSyncItemsDialog = ({
   resolve,
 }: BillingSyncItemsDialogProps) => {
-  const { closeDialog } = useModal();
   const { billingSync } = resolve;
   const { data: items, isLoading } = useArrowBillingSyncItems(billingSync.uuid);
 
@@ -75,12 +72,7 @@ export const BillingSyncItemsDialog = ({
         reference: billingSync.arrow_reference,
       })}
       footer={
-        <BaseButton
-          onClick={closeDialog}
-          variant="secondary"
-          label={translate('Close')}
-          size="lg"
-        />
+        <CloseDialogButton variant="secondary" label={translate('Close')} />
       }
     >
       {isLoading ? (

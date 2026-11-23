@@ -12,6 +12,7 @@ import { OfferingStateActions } from './actions/OfferingStateActions';
 import { OfferingVersionHistoryAction } from './actions/OfferingVersionHistoryAction';
 import { PreviewOfferingAction } from './actions/PreviewOfferingAction';
 import { ARCHIVED, UNAVAILABLE } from './store/constants';
+import { OrderFlowAction } from './update/order-flow/OrderFlowAction';
 
 interface OfferingExtraActionsButtonProps {
   offering: Offering;
@@ -30,7 +31,11 @@ export const OfferingExtraActionsButton: FC<
     offering.state !== UNAVAILABLE &&
     offering.state !== ARCHIVED;
 
-  if (!showPreview && !showVersionHistory && !showLifecycle) {
+  // How orders move is a question about the offering's settings, so it is
+  // asked where they are edited.
+  const showOrderFlow = Boolean(showLifecycleActions);
+
+  if (!showPreview && !showVersionHistory && !showOrderFlow && !showLifecycle) {
     return null;
   }
 
@@ -40,9 +45,11 @@ export const OfferingExtraActionsButton: FC<
       {showVersionHistory && (
         <OfferingVersionHistoryAction offering={offering} />
       )}
-      {showLifecycle && (showPreview || showVersionHistory) && (
-        <Menu.Separator />
-      )}
+      {showOrderFlow && <OrderFlowAction offering={offering} />}
+      {showLifecycle &&
+        (showPreview || showVersionHistory || showOrderFlow) && (
+          <Menu.Separator />
+        )}
       {showLifecycle && (
         <OfferingStateActions
           offering={offering}

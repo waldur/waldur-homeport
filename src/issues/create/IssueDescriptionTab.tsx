@@ -16,6 +16,7 @@ import { TEMPLATE_TYPE_TO_NAME } from '../types/constants';
 
 import { AttachmentsGroup } from './AttachmentsGroup';
 import { AttachmentsList } from './AttachmentsList';
+import { IssueContextHelp } from './IssueContextHelp';
 
 export const IssueDescriptionTab = ({
   context,
@@ -71,6 +72,7 @@ export const IssueDescriptionTab = ({
     <>{translate('Unable to load data.')}</>
   ) : (
     <>
+      <IssueContextHelp />
       {filteredTemplates.length > 0 && (
         <SelectGroup
           name="template"

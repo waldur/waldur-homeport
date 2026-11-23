@@ -64,9 +64,10 @@ const RADIX_MENU_IMPORTS = [
 // waldur-custom/no-unknown-class must not report them. Prefer a data-testid
 // for a new hook; remove an entry here only together with its selector there.
 const UNKNOWN_CLASS_HOOKS = [
-  // The call workflow's SVG diagrams (proposals/workflow-description/diagram)
-  // style these through the <style> element each one renders, which no
-  // stylesheet the rule reads can see.
+  // The SVG diagrams -- the call workflow's (proposals/workflow-description/
+  // diagram) and the offering order flow's (wd-of-*) -- style these through
+  // the <style> element each one renders, which no stylesheet the rule reads
+  // can see.
   '^(?:wd|wg|pg)-[\\w-]+$',
   // Marks a disabled step's row for the role and notification matrices'
   // tests; its badge, not a style, tells the user.
@@ -115,7 +116,7 @@ export default tseslint
 
         // Custom local rules
         'waldur-custom/no-template-in-translate': 'error',
-        'waldur-custom/no-undefined-in-mutation-body': 'warn',
+        'waldur-custom/no-undefined-in-mutation-body': 'error',
         'waldur-custom/enforce-actions-dropdown-in-tables': 'warn',
         'waldur-custom/enforce-badge-icon-patterns': 'error',
         'waldur-custom/enforce-badge-props-consistency': 'error',
@@ -129,6 +130,13 @@ export default tseslint
         // Zero instances remain: every native date/time input was replaced by
         // the waldur-ui pickers. See the rule's docblock.
         'waldur-custom/no-native-date-input': 'error',
+        // Display dates go through the src/core/dateUtils formatters (Intl
+        // presets in the date locale), never a Luxon token string such as
+        // 'd LLL yyyy'. See the rule's docblock.
+        'waldur-custom/no-display-date-tokens': 'error',
+        // Native date formatting takes getDateLocale(), never the browser's
+        // locale (no argument, undefined) or getUserLocale().
+        'waldur-custom/no-browser-locale-date': 'error',
         // Zero instances remain: inline code and keys are waldur-ui's Code
         // and Kbd, and nothing styles a bare <code> any more.
         'waldur-custom/no-raw-code-element': 'error',
@@ -153,9 +161,10 @@ export default tseslint
           },
         ],
         // A PropertyList must not contain only a single, lone property item.
-        // For a single item, use direct Tailwind CSS or merge into an adjacent
-        // list. A warning while existing single-item lists are converted.
-        'waldur-custom/no-lone-property-item-in-list': 'warn',
+        // For a single item, use waldur-ui's SingleProperty or merge it into
+        // an adjacent list. A lone *EditField is exempt: its row takes its
+        // columns from the list.
+        'waldur-custom/no-lone-property-item-in-list': 'error',
         // Tailwind's `border` sets only the width: a bare one needs a colour.
         // Autofixes to `border border-secondary`.
         'waldur-custom/require-border-color': 'error',
@@ -199,9 +208,9 @@ export default tseslint
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
         'waldur-custom/icon-button-needs-accessible-name': 'error',
-        // Existing call sites are migrated to HelpIcon incrementally; promote to
-        // 'error' once the count is zero.
-        'waldur-custom/no-tooltip-on-bare-icon': 'warn',
+        // A Tooltip around a bare icon is hover-only: use HelpIcon or
+        // WarningTip, or put the Tooltip on the button that holds the icon.
+        'waldur-custom/no-tooltip-on-bare-icon': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',

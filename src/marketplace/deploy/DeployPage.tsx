@@ -2,6 +2,7 @@ import { useRouter } from '@uirouter/react';
 import { get } from 'es-toolkit/compat';
 import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
+import { DateTime } from 'luxon';
 import {
   FC,
   createRef,
@@ -96,7 +97,7 @@ export const BaseDeployPage = ({
   const isProjectInactive = useMemo(() => {
     if (project?.end_date) {
       const endDate = parseDate(project?.end_date);
-      const now = parseDate(null);
+      const now = DateTime.now();
       return endDate.hasSame(now, 'day') || endDate < now;
     }
     return false;

@@ -1,4 +1,4 @@
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
@@ -418,6 +418,63 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     await waitFor(() => {
       const [row] = getValues().attributes.networks;
       expect(row.subnet.uuid).toBe(SUBNET_NAMELESS.uuid);
+    });
+  });
+
+  // The subnet help sits inside the select's control, which opens its menu
+  // on a tap or on Space/arrow keys anywhere within it.
+  describe('subnet details help', () => {
+    const renderSeeded = () => {
+      vi.mocked(openstackSubnetsList).mockResolvedValue(
+        mockListResponse([SUBNET]),
+      );
+      renderStep({
+        attributes: {
+          networks: [{ subnet: SUBNET, floatingIp: SKIP_FIP }],
+        },
+      });
+      return screen.findByRole('button', { name: 'Subnet details' });
+    };
+
+    it.each(['[Space]', '{ArrowDown}'])(
+      'does not open the subnet menu on %s',
+      async (key) => {
+        const user = userEvent.setup();
+        const help = await renderSeeded();
+        help.focus();
+        await user.keyboard(key);
+        expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      },
+    );
+
+    it('does not open the subnet menu on a tap', async () => {
+      const help = await renderSeeded();
+      // react-select reads the first touch through TouchList.item(), which
+      // jsdom's TouchEvent does not build from a plain array.
+      const touch = (type: string) => {
+        const touches = Object.assign([{ clientX: 0, clientY: 0 }], {
+          item(this: unknown[], i: number) {
+            return this[i];
+          },
+        });
+        const event = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperties(event, {
+          touches: { value: touches },
+          changedTouches: { value: touches },
+        });
+        fireEvent(help, event);
+      };
+      touch('touchstart');
+      touch('touchend');
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('control: a key on the select itself opens the menu', async () => {
+      const user = userEvent.setup();
+      await renderSeeded();
+      screen.getByRole('combobox', { name: /Subnet/ }).focus();
+      await user.keyboard('{ArrowDown}');
+      expect(await screen.findByRole('listbox')).toBeInTheDocument();
     });
   });
 });

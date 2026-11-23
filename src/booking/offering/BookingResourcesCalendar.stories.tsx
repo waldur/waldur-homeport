@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DateTime } from 'luxon';
 import { expect, waitFor, within } from 'storybook/test';
 
+import { formatLongDate } from '@/core/dateUtils';
 import {
   isDayDisabled,
   pickDay,
@@ -107,9 +108,7 @@ export const PickBookedDay: Story = {
     await pickDay(bookedDay);
     const canvas = within(canvasElement);
     await waitFor(() =>
-      expect(
-        canvas.getByText(bookedDay.toFormat('dd LLLL yyyy')),
-      ).toBeInTheDocument(),
+      expect(canvas.getByText(formatLongDate(bookedDay))).toBeInTheDocument(),
     );
     await expect(canvas.getByText('Alpha Lab')).toBeInTheDocument();
     await expect(canvas.queryByText('Beta Institute')).toBeNull();

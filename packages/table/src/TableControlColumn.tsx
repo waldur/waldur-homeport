@@ -1,11 +1,15 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FC, useEffect, useRef } from 'react';
 import { FieldErrorMessage } from 'waldur-form';
 import { translate } from 'waldur-i18n-runtime';
-import { Checkbox, Radio, Tooltip } from 'waldur-ui';
+import { Checkbox, Radio, WarningTip } from 'waldur-ui';
 
 import { TableProps } from './types';
+
+// The row's error mark sits in the cell's left gutter, beside the check
+// control; a click on it must not toggle the row.
+const ERROR_MARK_CLASSNAME =
+  'absolute left-0 text-[var(--color-warning-600)] dark:text-[var(--color-error-300)]';
 
 interface TableControlHeadProps {
   fieldType?: TableProps['fieldType'];
@@ -93,24 +97,22 @@ export const TableControlCell: FC<TableControlCellProps> = ({
         {fieldType && fieldProps ? (
           <>
             {rowError ? (
-              <Tooltip label={<FieldErrorMessage error={rowError} />}>
-                <WarningCircleIcon
-                  weight="bold"
-                  size={16}
-                  className="absolute left-0 leading-none text-[var(--color-warning-600)] dark:text-[var(--color-error-300)]"
-                />
-              </Tooltip>
+              <WarningTip
+                label={<FieldErrorMessage error={rowError} />}
+                aria-label={translate('Error')}
+                onClick={(e) => e.stopPropagation()}
+                className={ERROR_MARK_CLASSNAME}
+              />
             ) : (
               isChecked &&
               fieldProps.meta.touched &&
               fieldProps.meta.error && (
-                <Tooltip label={fieldProps.meta.error}>
-                  <WarningCircleIcon
-                    weight="bold"
-                    size={16}
-                    className="absolute left-0 leading-none text-[var(--color-warning-600)] dark:text-[var(--color-error-300)]"
-                  />
-                </Tooltip>
+                <WarningTip
+                  label={fieldProps.meta.error}
+                  aria-label={translate('Error')}
+                  onClick={(e) => e.stopPropagation()}
+                  className={ERROR_MARK_CLASSNAME}
+                />
               )
             )}
             {fieldType === 'radio' ? (

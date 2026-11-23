@@ -20,7 +20,8 @@ export interface HelpIconProps extends Omit<
   label: ReactNode;
   /** Phosphor icon to draw. Defaults to a question mark. */
   icon?: Icon;
-  size?: number;
+  /** Pixels, or any CSS length such as `1em` to follow the text size. */
+  size?: number | string;
   weight?: IconWeight;
   /** Colour of the icon: muted by default, or the warning colour. */
   tone?: 'muted' | 'warning';

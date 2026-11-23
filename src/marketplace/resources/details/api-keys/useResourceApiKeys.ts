@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 import {
   marketplaceResourceApiKeysList,
-  marketplaceResourceApiKeysRevealRetrieve,
+  marketplaceResourceApiKeysReveal,
   Resource,
   ResourceApiKeyState,
   ResourceApiKeyStatus,
@@ -50,7 +50,7 @@ export const useRevealedApiKey = (keyUuid: string): RevealedApiKey => {
   const query = useQuery({
     queryKey: revealKey(keyUuid),
     queryFn: () =>
-      marketplaceResourceApiKeysRevealRetrieve({
+      marketplaceResourceApiKeysReveal({
         path: { uuid: keyUuid },
       }).then((response) => response.data),
     enabled: false,

@@ -4,13 +4,13 @@ import { WorkflowDescription } from 'waldur-js-client';
 import { Select } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
+import { ExportButtons } from '@/core/diagram/ExportButtons';
+import { ScrollRegion } from '@/core/diagram/ScrollRegion';
 import { translate } from '@/i18n';
 
 import { PanelHeaderControls } from '../PanelHeaderControls';
 
 import { postAwardPlans, roundPlans } from './schedule';
-import { ScrollRegion } from './ScrollRegion';
-import { ExportButtons } from './WorkflowDiagramPanel';
 import { WorkflowGantt } from './WorkflowGantt';
 
 import './WorkflowDiagram.scss';

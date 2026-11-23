@@ -1,0 +1,50 @@
+{
+  "name": "waldur-ai-inference",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Proof of concept: a project's inference services, their models, the user's API keys and what they spend, for people who never see the marketplace.",
+  "type": "module",
+  "waldur": {
+    "deploy": false,
+    "title": "AI inference",
+    "description": "Models, API keys and spend of your projects' inference services.",
+    "visibleTo": {
+      "features": [],
+      "roles": []
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:subpath": "DEV_SUBPATH=1 VITE_API_URL=${VITE_API_URL:-/} vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "@sentry/react": "^8.55.0",
+    "@tanstack/react-query": "^5.80.6",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-redux": "^8.0.0",
+    "redux": "^4.2.1",
+    "waldur-api-client": "workspace:*",
+    "waldur-boot-splash": "workspace:*",
+    "waldur-charts": "workspace:*",
+    "waldur-design-tokens": "workspace:*",
+    "waldur-i18n-runtime": "workspace:*",
+    "waldur-notifications": "workspace:*",
+    "waldur-runtime-config": "workspace:*",
+    "waldur-shell": "workspace:*",
+    "waldur-table": "workspace:*",
+    "waldur-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.3",
+    "vite": "^8.0.16"
+  }
+}

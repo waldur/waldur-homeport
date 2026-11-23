@@ -3,7 +3,7 @@ import type { MatrixEvent, Room } from 'matrix-js-sdk';
 import { ENV } from '@/core/config';
 import { stripHtml } from '@/core/sanitize';
 import { translate } from '@/i18n';
-import { getUserLocale } from '@/i18n/LanguageUtilsService';
+import { getDateLocale } from '@/i18n/LanguageUtilsService';
 
 import { parseEncryptedFile } from './attachmentCrypto';
 import {
@@ -293,7 +293,7 @@ export function htmlToPlainText(html: string): string {
 
 export function formatTime(timestamp: number): string {
   const date = new Date(timestamp);
-  return date.toLocaleTimeString(getUserLocale(), {
+  return date.toLocaleTimeString(getDateLocale(), {
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -304,7 +304,7 @@ export function formatRelativeTime(timestamp: number): string {
   if (!timestamp) return '';
   const date = new Date(timestamp);
   const now = new Date();
-  const locale = getUserLocale();
+  const locale = getDateLocale();
   if (date.toDateString() === now.toDateString()) {
     return date.toLocaleTimeString(locale, {
       hour: '2-digit',
@@ -328,7 +328,7 @@ export function formatDateSeparator(timestamp: number): string {
   if (date.toDateString() === yesterday.toDateString())
     return translate('Yesterday');
 
-  return date.toLocaleDateString(getUserLocale(), {
+  return date.toLocaleDateString(getDateLocale(), {
     weekday: 'long',
     month: 'long',
     day: 'numeric',

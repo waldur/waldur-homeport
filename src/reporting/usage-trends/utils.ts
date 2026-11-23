@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 
 import { generateBrandColors } from 'waldur-design-tokens';
 
+import { formatMonth, formatShortMonth } from '@/core/dateUtils';
 import { getBrandColor } from '@/core/utils';
 import { getChartThemeColors } from '@/dashboard/chartColors';
 import { getChartBrandColor } from '@/dashboard/constants';
@@ -107,7 +108,7 @@ export const calculateGrowthStats = (
     monthOverMonthGrowth,
     yearOverYearGrowth,
     peakMonth: peakData.period
-      ? DateTime.fromFormat(peakData.period, 'yyyy-MM').toFormat('MMMM yyyy')
+      ? formatMonth(DateTime.fromFormat(peakData.period, 'yyyy-MM'))
       : '',
     peakUsage: peakData.total_usage,
   };
@@ -182,7 +183,7 @@ export const formatUsageTrendChart = (
   );
 
   const dates = sortedData.map((d) =>
-    DateTime.fromFormat(d.period, 'yyyy-MM').toFormat('MMM yyyy'),
+    formatShortMonth(DateTime.fromFormat(d.period, 'yyyy-MM')),
   );
   const usageValues = sortedData.map((d) => d.total_usage);
   const resourceCounts = sortedData.map((d) => d.resource_count);

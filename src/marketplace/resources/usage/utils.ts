@@ -13,7 +13,7 @@ import {
 import { buttonVariants } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { parseDate } from '@/core/dateUtils';
+import { formatMonth, formatShortMonth, parseDate } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
 import { lazyComponent } from '@/core/lazyComponent';
 import { getChartThemeColors } from '@/dashboard/chartColors';
@@ -242,7 +242,7 @@ export const getUsagePeriods = (
     numberOfMonths = Math.ceil(Math.abs(_months));
   }
   const periods = getMonthsPeriods(numberOfMonths);
-  const labels = periods.map((date) => date.toFormat('LLLL yyyy'));
+  const labels = periods.map((date) => formatMonth(date));
   return { periods, labels };
 };
 
@@ -344,11 +344,10 @@ export const getTotalUsagePeriod = (
   const minDate = dateObjects.reduce((a, b) => (a < b ? a : b));
   const maxDate = dateObjects.reduce((a, b) => (a > b ? a : b));
 
-  const _period = minDate.toFormat('MM/yyyy');
-  if (minDate !== maxDate) {
-    return _period + ` - ${maxDate.toFormat('MM/yyyy')}`;
+  if (minDate.hasSame(maxDate, 'month')) {
+    return formatShortMonth(minDate);
   }
-  return _period;
+  return `${formatShortMonth(minDate)} – ${formatShortMonth(maxDate)}`;
 };
 
 const getUsageBasedOfferingComponents = (components: OfferingComponent[]) => {

@@ -1,5 +1,6 @@
 import {
   LanguageUtilsService,
+  getDateLocale,
   getUserLocale,
   loadSharedLocale,
   numberFormatter,
@@ -8,7 +9,7 @@ import {
 import { ENV } from '@/core/config';
 import { LanguageStorage } from '@/core/StorageManager';
 
-export { LanguageUtilsService, getUserLocale, numberFormatter };
+export { LanguageUtilsService, getDateLocale, getUserLocale, numberFormatter };
 
 /** Wires the shared i18n runtime to this app's ENV/storage. Call once before checkLanguage(). */
 export function initLanguageUtils() {

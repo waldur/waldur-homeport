@@ -3,6 +3,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { DateTime, Settings } from 'luxon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { formatDate } from '@/core/dateUtils';
 import { useProject } from '@/workspace/hooks';
 
 import { GracePeriodWarningBar } from './GracePeriodWarningBar';
@@ -37,10 +38,14 @@ describe('GracePeriodWarningBar', () => {
     render(<GracePeriodWarningBar />);
 
     expect(
-      screen.getByText(/remain active until the end of 29 Sep 2026/),
+      screen.getByText(
+        new RegExp(
+          `remain active until the end of ${formatDate('2026-09-29')}`,
+        ),
+      ),
     ).toBeInTheDocument();
     expect(screen.getByText('13 days remaining')).toBeInTheDocument();
-    expect(screen.queryByText(/30 Sep 2026/)).toBeNull();
+    expect(screen.queryByText(new RegExp(formatDate('2026-09-30')))).toBeNull();
     expect(screen.queryByText('14 days remaining')).toBeNull();
   });
 

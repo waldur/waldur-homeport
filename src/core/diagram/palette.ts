@@ -160,4 +160,7 @@ export const paletteVars = (palette: DiagramPalette) =>
     '--wd-negative': palette.negative,
     '--wd-warning': palette.warning,
     '--wd-line': palette.boxStroke,
+    '--wd-box-fill': palette.boxFill,
+    '--wd-box-stroke': palette.boxStroke,
+    '--wd-disabled-fill': palette.disabledFill,
   }) as CSSProperties;

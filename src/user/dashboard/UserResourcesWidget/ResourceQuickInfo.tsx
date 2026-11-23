@@ -16,6 +16,7 @@ import { LONG_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { ModelCard1 } from '@/core/ModelCard1';
+import { markdownToPlainText } from '@/core/sanitize';
 import { translate } from '@/i18n';
 import {
   findResourcePlan,
@@ -179,7 +180,10 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
             />
             <PropertyItem
               label={translate('Description')}
-              value={offering?.description}
+              value={
+                offering?.description &&
+                markdownToPlainText(offering.description)
+              }
             />
             <PropertyItem
               label={translate('Components')}

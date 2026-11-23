@@ -1,7 +1,11 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { IssueTypeEnum, supportIssuesCreate } from 'waldur-js-client';
+import {
+  IssueRequest,
+  IssueTypeEnum,
+  supportIssuesCreate,
+} from 'waldur-js-client';
 
 import { FormField } from 'waldur-ui';
 
@@ -17,6 +21,19 @@ import { useNotify } from '@/store/notify';
 
 import { DangerActionPanelProps } from './DangerActionPanelProps';
 
+// The issue's resource is a hyperlinked field: it takes the resource URL,
+// and the backend derives the project and customer from it.
+export const constructDangerActionPayload = (
+  props: Pick<DangerActionPanelProps, 'issueSummary' | 'resource'>,
+  reason: string,
+): IssueRequest => ({
+  type: ISSUE_IDS.CHANGE_REQUEST as IssueTypeEnum,
+  description: reason,
+  summary: props.issueSummary,
+  is_reported_manually: true,
+  ...(props.resource && { resource: props.resource.url }),
+});
+
 export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
   props,
 ) => {
@@ -27,13 +44,7 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
   const handleSubmit = async () => {
     try {
       const issue = await supportIssuesCreate({
-        body: {
-          type: ISSUE_IDS.CHANGE_REQUEST as IssueTypeEnum,
-          description: reason,
-          summary: props.issueSummary,
-          is_reported_manually: true,
-          resource: props.resource ? props.resource.name : undefined,
-        },
+        body: constructDangerActionPayload(props, reason),
       }).then((response) => response.data);
       showSuccess(props.sucessMessage);
       router.stateService.go('support.detail', { issue_uuid: issue.uuid });

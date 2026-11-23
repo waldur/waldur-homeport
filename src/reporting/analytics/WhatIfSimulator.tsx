@@ -223,12 +223,14 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
           {translate('Scenario parameters')}
           {hasChanges && (
             <Tooltip label={translate('Reset to defaults')}>
-              <ArrowCounterClockwiseIcon
-                size={16}
-                weight="bold"
+              <button
+                type="button"
+                aria-label={translate('Reset to defaults')}
                 onClick={resetParams}
-                className="ms-1.5"
-              />
+                className="ms-1.5 inline-flex cursor-pointer border-0 bg-transparent p-0 align-middle text-inherit"
+              >
+                <ArrowCounterClockwiseIcon size={16} weight="bold" />
+              </button>
             </Tooltip>
           )}
         </h6>

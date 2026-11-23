@@ -1,10 +1,23 @@
 import { DateTime, Settings } from 'luxon';
 import { afterEach, describe, expect, it } from 'vitest';
 
+import { LanguageUtilsService } from 'waldur-i18n-runtime';
+
 import {
   daysUntilAccessEnds,
+  formatDate,
+  formatDateTime,
+  formatDateTimeWithSeconds,
+  formatDayMonth,
+  formatMonth,
   formatRelative,
+  formatRelativeWithHour,
+  formatShortMonth,
+  formatTime,
+  formatUptime,
   lastAccessDate,
+  parseCalendarDate,
+  parseDate,
 } from './dateUtils';
 
 describe('formatRelative', () => {
@@ -139,5 +152,107 @@ describe('exclusive end dates', () => {
     freezeAt('2026-09-30T09:00:00');
 
     expect(daysUntilAccessEnds('2026-09-30')).toBe(-1);
+  });
+});
+
+describe('display formatters', () => {
+  afterEach(() => {
+    LanguageUtilsService.currentLanguage = undefined;
+  });
+
+  const setLanguage = (code: string) => {
+    LanguageUtilsService.currentLanguage = { code, label: code };
+  };
+
+  const instant = DateTime.fromISO('2027-02-26T14:05:00');
+
+  it('writes English dates day-first', () => {
+    setLanguage('en');
+    expect(formatDate(instant)).toBe('26 Feb 2027');
+    expect(formatDateTime(instant)).toBe('26 Feb 2027, 14:05');
+    expect(formatTime(instant)).toBe('14:05');
+    expect(formatMonth(instant)).toBe('February 2027');
+    expect(formatShortMonth(instant)).toBe('Feb 2027');
+    expect(formatDayMonth(instant)).toBe('26 Feb');
+  });
+
+  it('keeps seconds where an event log needs them', () => {
+    setLanguage('en');
+    expect(
+      formatDateTimeWithSeconds(DateTime.fromISO('2027-02-26T14:05:09')),
+    ).toBe('26 Feb 2027, 14:05:09');
+  });
+
+  it('names a month on its own in the nominative case', () => {
+    // MMMM is the genitive ("of February"), right only after a day.
+    setLanguage('ru');
+    expect(formatMonth(instant)).toBe('февраль 2027 г.');
+    setLanguage('fi');
+    expect(formatMonth(instant)).toBe('helmikuu 2027');
+  });
+
+  it('follows the locale pattern instead of a fixed token string', () => {
+    // 'd LLL yyyy' gave "26 02 2027" in Lithuanian and "26 февр 2027" (wrong
+    // case, no year marker) in Russian.
+    setLanguage('lt');
+    expect(formatDate(instant)).toBe('2027-02-26');
+    setLanguage('ru');
+    expect(formatDate(instant)).toBe('26 февр. 2027 г.');
+  });
+
+  it('shows a dash for a missing date instead of today', () => {
+    expect(formatDate(null)).toBe('—');
+    expect(formatDateTime(undefined)).toBe('—');
+    expect(formatRelative(null)).toBe('—');
+    expect(parseDate(null).isValid).toBe(false);
+  });
+
+  it('translates durations', () => {
+    const fixedNow = DateTime.fromISO('2026-09-03T12:00:00').toMillis();
+    Settings.now = () => fixedNow;
+    setLanguage('en');
+    expect(formatUptime('2026-09-01T09:00:00')).toBe('2d 3h');
+    setLanguage('de');
+    expect(formatUptime('2026-09-01T09:00:00')).toBe('2 T, 3h');
+    Settings.now = () => Date.now();
+  });
+});
+
+describe('formatRelativeWithHour', () => {
+  afterEach(() => {
+    Settings.now = () => Date.now();
+  });
+
+  it('counts down hours and minutes within a day', () => {
+    const fixedNow = DateTime.fromISO('2026-09-01T12:00:00').toMillis();
+    Settings.now = () => fixedNow;
+    expect(formatRelativeWithHour('2026-09-01T15:05:00')).toBe(
+      '3 hours, 5 minutes',
+    );
+  });
+
+  it('never rounds the minutes up to a full hour', () => {
+    const fixedNow = DateTime.fromISO('2026-09-01T12:00:00').toMillis();
+    Settings.now = () => fixedNow;
+    expect(formatRelativeWithHour('2026-09-01T14:59:50')).toBe(
+      '2 hours, 59 minutes',
+    );
+  });
+
+  it('reads a past date as relative, not as zero minutes', () => {
+    const fixedNow = DateTime.fromISO('2026-09-01T12:00:00').toMillis();
+    Settings.now = () => fixedNow;
+    expect(formatRelativeWithHour('2026-09-01T09:00:00')).toBe('3 hours ago');
+    expect(formatRelativeWithHour('2026-08-29T12:00:00')).toBe('3 days ago');
+  });
+});
+
+describe('parseCalendarDate', () => {
+  it('keeps the date a timestamp names in its own offset', () => {
+    // West of UTC a local conversion makes this the 29th.
+    expect(parseCalendarDate('2026-09-30T00:00:00Z').toISODate()).toBe(
+      '2026-09-30',
+    );
+    expect(parseCalendarDate('2026-09-30').toISODate()).toBe('2026-09-30');
   });
 });

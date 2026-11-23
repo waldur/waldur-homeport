@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { Badge } from 'waldur-ui';
 
-import { parseDate } from '@/core/dateUtils';
+import { formatLongDate, parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -29,7 +29,7 @@ export const EndingField = ({
       text:
         diffNowDays > 0 ? endDateParsed.toRelative() : translate('Has ended'),
       date: dateFirst
-        ? endDateParsed.toFormat('DDD')
+        ? formatLongDate(endDateParsed)
         : endDateParsed.toISODate(),
     };
   }, [endDate]);

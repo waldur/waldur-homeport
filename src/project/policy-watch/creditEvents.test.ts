@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { formatDate } from '@/core/dateUtils';
+
 import { buildCreditEvents, CreditEventInput } from './creditEvents';
 
 // Local midnight, not an instant pinned to UTC: the event dates are formatted
@@ -70,7 +72,8 @@ describe('buildCreditEvents', () => {
     expect(expiry.title).toBe('Credit has expired');
     expect(expiry.consequence).toContain('July 2026');
     expect(expiry.consequence).toContain('written off');
-    expect(expiry.consequence).toContain('1 Sep 2026');
+    // "1 Sept 2026" in en-GB: the expectation goes through the formatter.
+    expect(expiry.consequence).toContain(formatDate('2026-09-01'));
     // No claim that any of it is still spendable.
     expect(expiry.consequence).not.toContain('can still be spent');
   });

@@ -297,10 +297,14 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                 max_group_gid: toId(values.max_group_gid),
               }),
               description: values.description,
+              // Exactly one scope is sent; both are create-only (protected)
+              // fields, so there is nothing to clear on update.
+              // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, exactly one scope key is sent
               service_provider:
                 values.scope === 'service_provider'
                   ? props.resolve.providerUuid
                   : undefined,
+              // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, exactly one scope key is sent
               offering:
                 values.scope === 'offering' ? values.offering?.uuid : undefined,
             },

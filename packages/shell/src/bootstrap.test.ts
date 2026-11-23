@@ -59,3 +59,27 @@ describe('whenMicroAppBootstrapped', () => {
     expect(await settled(whenMicroAppBootstrapped())).toBe(true);
   });
 });
+
+describe('requireSession', () => {
+  it('hands a visitor with no session to onSessionExpired at once', () => {
+    localStorage.removeItem('waldur/auth/token');
+    const onSessionExpired = vi.fn();
+    void bootstrapMicroApp({ requireSession: true, onSessionExpired });
+    expect(onSessionExpired).toHaveBeenCalledTimes(1);
+  });
+
+  it('lets a signed-in visitor in', () => {
+    localStorage.setItem('waldur/auth/token', 'abc');
+    const onSessionExpired = vi.fn();
+    void bootstrapMicroApp({ requireSession: true, onSessionExpired });
+    expect(onSessionExpired).not.toHaveBeenCalled();
+    localStorage.removeItem('waldur/auth/token');
+  });
+
+  it('leaves a signed-out visitor alone without it', () => {
+    localStorage.removeItem('waldur/auth/token');
+    const onSessionExpired = vi.fn();
+    void bootstrapMicroApp({ onSessionExpired });
+    expect(onSessionExpired).not.toHaveBeenCalled();
+  });
+});

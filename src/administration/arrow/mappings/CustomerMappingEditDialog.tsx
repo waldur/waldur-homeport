@@ -5,14 +5,15 @@ import {
   adminArrowCustomerMappingsPartialUpdate,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { AsyncSelectGroup, BooleanGroup, StringGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -28,20 +29,19 @@ interface CustomerMappingEditDialogProps {
 interface FormValues {
   arrow_reference: string;
   arrow_company_name?: string;
-  waldur_customer: { uuid: string; name: string };
+  waldur_customer: { url: string; uuid: string; name: string };
   is_active: boolean;
 }
 
 export const CustomerMappingEditDialog = ({
   resolve,
 }: CustomerMappingEditDialogProps) => {
-  const { closeDialog } = useModal();
   const { mapping, refetch } = resolve;
 
   const loadOrganizations = useMemo(
     () =>
       organizationAutocomplete({
-        field: ['name', 'uuid'],
+        field: ['name', 'uuid', 'url'],
         o: 'name',
       }),
     [],
@@ -53,8 +53,11 @@ export const CustomerMappingEditDialog = ({
         path: { uuid: mapping.uuid },
         body: {
           arrow_reference: values.arrow_reference,
-          arrow_company_name: values.arrow_company_name,
-          waldur_customer: values.waldur_customer.uuid,
+          // final-form turns an emptied input into undefined, which the
+          // request would drop, keeping the old name.
+          arrow_company_name: values.arrow_company_name ?? '',
+          // Unlike create, update takes the customer as a hyperlink.
+          waldur_customer: values.waldur_customer.url,
           is_active: values.is_active,
         },
       }),
@@ -69,10 +72,9 @@ export const CustomerMappingEditDialog = ({
     ],
   });
 
+  // DRF reports most rejections as field errors, not `detail`.
   const mutationError = submitMutation.error
-    ? submitMutation.error.response?.data?.detail ||
-      submitMutation.error.message ||
-      translate('Failed to update mapping')
+    ? format(submitMutation.error) || translate('Failed to update mapping')
     : null;
 
   return (
@@ -86,6 +88,7 @@ export const CustomerMappingEditDialog = ({
         arrow_reference: mapping.arrow_reference,
         arrow_company_name: mapping.arrow_company_name,
         waldur_customer: {
+          url: mapping.waldur_customer,
           uuid: mapping.waldur_customer_uuid,
           name: mapping.waldur_customer_name,
         },
@@ -97,11 +100,9 @@ export const CustomerMappingEditDialog = ({
             title={translate('Edit Customer Mapping')}
             footer={
               <>
-                <BaseButton
-                  onClick={closeDialog}
+                <CloseDialogButton
                   variant="secondary"
                   label={translate('Cancel')}
-                  size="lg"
                 />
                 <SubmitButton
                   submitting={submitMutation.isPending}

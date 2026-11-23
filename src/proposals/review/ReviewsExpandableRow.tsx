@@ -6,7 +6,7 @@ import {
   proposalReviewsRetrieve,
 } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import { PropertyList, PropertyItem, SingleProperty } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -83,12 +83,10 @@ export const ReviewsExpandableRow = ({ row }: { row: ProposalReview }) => {
           </PropertyList>
         </div>
         <div>
-          <PropertyList variant="summary">
-            <PropertyItem
-              label={translate('Project summary')}
-              value={data.proposal.project_summary}
-            />
-          </PropertyList>
+          <SingleProperty
+            label={translate('Project summary')}
+            value={data.proposal.project_summary}
+          />
         </div>
       </div>
       {review && (

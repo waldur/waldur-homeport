@@ -2,7 +2,7 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Notification, notificationMessagesList } from 'waldur-js-client';
 
-import { HelpIcon, Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -48,13 +48,12 @@ export const NotificationList = () => {
             <>
               {row.key}
               {hasOverriddenTemplate(row) && (
-                <Tooltip label={translate('Content is overridden')}>
-                  <PencilSimpleIcon
-                    size={16}
-                    weight="bold"
-                    className="ms-2.5 text-quaternary"
-                  />
-                </Tooltip>
+                <HelpIcon
+                  label={translate('Content is overridden')}
+                  aria-label={translate('Content is overridden')}
+                  icon={PencilSimpleIcon}
+                  className="ms-2.5 text-quaternary"
+                />
               )}
               {row.description && (
                 <HelpIcon label={row.description} className="ms-1.5" />

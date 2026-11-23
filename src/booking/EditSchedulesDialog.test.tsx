@@ -51,7 +51,7 @@ describe('EditSchedulesDialog', () => {
     renderDialog();
     expect(screen.getByText('Update schedule')).toBeInTheDocument();
     expect(screen.getByText(/Period 1/i)).toBeInTheDocument();
-    expect(screen.getByText(/27 October 2023/i)).toBeInTheDocument();
+    expect(screen.getByText(/27 Oct 2023/i)).toBeInTheDocument();
   });
 
   it('handles submission with original data', async () => {
@@ -118,11 +118,11 @@ describe('EditSchedulesDialog', () => {
     const user = userEvent.setup();
     renderDialog();
 
-    expect(screen.getByText(/27 October 2023/i)).toBeInTheDocument();
+    expect(screen.getByText(/27 Oct 2023/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /Remove period/i }));
 
-    expect(screen.queryByText(/27 October 2023/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/27 Oct 2023/i)).not.toBeInTheDocument();
   });
 
   it('can change the time slot duration', async () => {

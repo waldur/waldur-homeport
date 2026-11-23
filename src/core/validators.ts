@@ -74,6 +74,15 @@ export const maxItems = (n: number) => (value) =>
 export const lessThanOrEqual = (n) => (value: number) =>
   value && value > n ? translate('Must be {n} or less.', { n }) : undefined;
 
+/**
+ * Unlike `greaterThan`, this also rejects 0; an empty value is left to
+ * `required`.
+ */
+export const atLeast = (n: number) => (value?: number | string | null) =>
+  value !== undefined && value !== null && value !== '' && Number(value) < n
+    ? translate('Must be at least {n}.', { n })
+    : undefined;
+
 export const greaterThan = (n) => (value: number) =>
   value && value <= n
     ? translate('Must be greater than {n}.', { n })

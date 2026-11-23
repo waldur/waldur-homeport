@@ -56,7 +56,7 @@ describe('CustomerCreditDialog', () => {
           customer: 'customer-url',
           value: '100',
           minimal_consumption_logic: 'fixed',
-          offerings: undefined,
+          offerings: [],
         }),
       });
     });

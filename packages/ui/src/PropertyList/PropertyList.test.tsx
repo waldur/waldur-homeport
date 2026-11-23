@@ -12,6 +12,7 @@ import {
   PropertyItem,
   PropertyList,
 } from './PropertyList';
+import { SingleProperty } from './SingleProperty';
 
 describe('PropertyList', () => {
   it('renders semantic <dl>, <dt>, and <dd> with aria-labelledby association', () => {
@@ -974,5 +975,47 @@ describe('PropertyList', () => {
       expect(screen.getByText('Basic account attributes')).toBeInTheDocument();
       expect(screen.getByText('Alice')).toBeInTheDocument();
     });
+  });
+});
+
+describe('SingleProperty', () => {
+  it('renders a description list whose value is named by its term', () => {
+    render(<SingleProperty label="Plan" value="Small" />);
+    expect(screen.getByRole('term')).toHaveTextContent('Plan:');
+    expect(screen.getByRole('definition', { name: 'Plan:' })).toHaveTextContent(
+      'Small',
+    );
+  });
+
+  it('takes a summary list term width and spacing', () => {
+    render(<SingleProperty label="Plan" value="Small" data-testid="plan" />);
+    const dl = screen.getByTestId('plan');
+    expect(dl.style.getPropertyValue('--dt-width')).toBe('min(12.5rem, 45%)');
+    expect(dl).toHaveClass('mb-1');
+  });
+
+  it('leaves out an empty value in summary', () => {
+    const { container } = render(<SingleProperty label="Plan" value={null} />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it('keeps an empty value as a dash when asked', () => {
+    render(<SingleProperty label="Plan" value="" hideIfEmpty={false} />);
+    expect(screen.getByRole('definition', { name: 'Plan:' })).toHaveTextContent(
+      'Not specified',
+    );
+  });
+
+  it('renders a formatted property node', () => {
+    render(
+      <SingleProperty
+        variant="divided"
+        label="Policy"
+        value={{ __isFormattedProperty: true, node: <b>Open</b>, text: 'Open' }}
+      />,
+    );
+    expect(
+      screen.getByRole('definition', { name: 'Policy' }),
+    ).toHaveTextContent('Open');
   });
 });

@@ -6,7 +6,7 @@ import {
   callTemplatesPartialUpdate,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
 
 import { format } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
@@ -43,7 +43,6 @@ interface FormValues {
 }
 
 const SavedWithWarnings: FC<{ template: CallTemplate }> = ({ template }) => {
-  const { closeDialog } = useModal();
   return (
     <ModalDialog
       title={translate('Call template saved')}
@@ -53,10 +52,9 @@ const SavedWithWarnings: FC<{ template: CallTemplate }> = ({ template }) => {
       )}
       footer={
         <div className="min-w-[150px]">
-          <BaseButton
+          <CloseDialogButton
             variant="primary"
             label={translate('Close')}
-            onClick={closeDialog}
             className="w-full"
           />
         </div>

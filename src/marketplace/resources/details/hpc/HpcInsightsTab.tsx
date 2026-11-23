@@ -27,6 +27,7 @@ import { formatDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { getDateLocale } from '@/i18n/LanguageUtilsService';
 import { useModal } from '@/modal/actions';
 
 import { HpcErrorAlert } from './HpcErrorAlert';
@@ -47,7 +48,7 @@ const HpcJobOutputDialog = lazyComponent(() =>
 );
 
 const formatWindowTime = (epochSeconds: number) =>
-  new Date(epochSeconds * 1000).toLocaleString(undefined, {
+  new Date(epochSeconds * 1000).toLocaleString(getDateLocale(), {
     weekday: 'short',
     day: 'numeric',
     month: 'short',

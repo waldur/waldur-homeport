@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { translate } from 'waldur-i18n-runtime';
+import { getDateLocale, translate } from 'waldur-i18n-runtime';
 import { isEmptyValue, Tooltip } from 'waldur-ui';
 
 import { DASH_ESCAPE_CODE } from './constants';
@@ -189,7 +189,10 @@ export function getNoResultTitle({ verboseName, hasFilter = false }) {
 
 /** Now, as the app writes a date and time: 26 Feb 2027, 14:00. The name a
  * saved filter gets when the user gives none. */
-export const formatNow = () => DateTime.now().toFormat('d LLL yyyy, t');
+export const formatNow = () =>
+  DateTime.now().toLocaleString(DateTime.DATETIME_MED, {
+    locale: getDateLocale(),
+  });
 
 /** Where a table's saved filters are stored. Homeport and every micro-app
  * share one origin and this key, so a filter saved in one shows up in the

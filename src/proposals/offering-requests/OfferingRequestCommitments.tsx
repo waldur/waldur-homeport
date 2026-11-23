@@ -5,7 +5,7 @@ import {
   ProviderRequestedOffering,
 } from 'waldur-js-client';
 
-import { PropertyItem, PropertyList } from 'waldur-ui';
+import { SingleProperty } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import {
@@ -157,9 +157,11 @@ export const OfferingRequestCommitments: FC<{
   row: ProviderRequestedOffering;
 }> = ({ row }) => (
   <div data-testid="offering-request-commitments">
-    <PropertyList variant="summary" termWidth="sm">
-      <PropertyItem label={translate('Plan')} value={getRequestPlanName(row)} />
-    </PropertyList>
+    <SingleProperty
+      termWidth="sm"
+      label={translate('Plan')}
+      value={getRequestPlanName(row)}
+    />
     <h5 className="mt-3 mb-1.5">{translate('What a proposal may ask for')}</h5>
     <RulesTable row={row} />
     <h5 className="mt-3 mb-1.5">{translate('What the call awards')}</h5>

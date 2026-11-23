@@ -103,6 +103,12 @@ export default defineConfig({
         changeOrigin: true,
         ws: true,
       },
+      // apps/ai-inference, same arrangement (its dev:subpath script).
+      '/ai-inference': {
+        target: 'http://localhost:5183',
+        changeOrigin: true,
+        ws: true,
+      },
     },
   },
   plugins,

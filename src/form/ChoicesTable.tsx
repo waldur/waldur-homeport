@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  Tooltip,
+  HelpIcon,
 } from 'waldur-ui';
 
 import {
@@ -48,7 +48,7 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
           <TableRow
             key={choice.uuid}
             onKeyUp={(e) => {
-              if (e.nativeEvent.keyCode === 13) {
+              if (e.nativeEvent.keyCode === 13 && !choice.disabled) {
                 return props.input.onChange(choice);
               }
             }}
@@ -61,10 +61,21 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
           >
             {enableSelect && (
               <TableCell>
-                {choice.disabled ? (
-                  <Tooltip label={choice.disabledReason}>
-                    <ProhibitIcon weight="bold" />
-                  </Tooltip>
+                {choice.disabled && !choice.disabledReason ? (
+                  // Nothing to explain: the glyph alone, named.
+                  <ProhibitIcon
+                    weight="bold"
+                    role="img"
+                    aria-label={translate('Unavailable')}
+                  />
+                ) : choice.disabled ? (
+                  <HelpIcon
+                    label={choice.disabledReason}
+                    aria-label={translate('Unavailable')}
+                    icon={ProhibitIcon}
+                    size="1em"
+                    className="text-inherit"
+                  />
                 ) : (
                   <Radio
                     aria-label={translate('Select row')}

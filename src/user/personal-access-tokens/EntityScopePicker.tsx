@@ -1,9 +1,10 @@
-import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
+import { BindableEntity } from 'waldur-js-client';
 
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 
-import { ENTITY_LOADERS } from './entityFetchers';
+import { createBindableEntityLoader } from './entityFetchers';
 
 interface EntityScopePickerProps {
   type: string | null;
@@ -13,10 +14,12 @@ interface EntityScopePickerProps {
   'aria-label'?: string;
 }
 
+const getEntityLabel = (entity: BindableEntity) =>
+  entity.context ? `${entity.name} (${entity.context})` : entity.name;
+
 /**
- * Async picker for a single entity of the chosen TYPE_MAP type.
- * Resets the selection when `type` changes — selecting "Customer" then switching
- * to "Project" must not keep the customer UUID around.
+ * Picks one entity of the chosen type that the user can restrict a token
+ * to. The type's row resets the entity when the type changes.
  */
 export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
   type,
@@ -25,17 +28,10 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
   isDisabled,
   'aria-label': ariaLabel,
 }) => {
-  // Reset the selected entity if the type changes underneath us.
-  useEffect(() => {
-    if (value && type && !ENTITY_LOADERS[type]) {
-      onChange(null);
-    }
-  }, [type, value, onChange]);
-
-  const loadOptions = useMemo(() => {
-    if (!type || !ENTITY_LOADERS[type]) return null;
-    return ENTITY_LOADERS[type];
-  }, [type]);
+  const loadOptions = useMemo(
+    () => (type ? createBindableEntityLoader(type) : null),
+    [type],
+  );
 
   const handleChange = useCallback(
     (selected) => onChange(selected ?? null),
@@ -62,10 +58,14 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
       onChange={handleChange}
       loadOptions={loadOptions}
       defaultOptions
-      getOptionValue={(option) => option.uuid}
-      getOptionLabel={(option) => option.name || option.customer_name}
+      getOptionValue={(option: BindableEntity) => option.uuid}
+      getOptionLabel={getEntityLabel}
       placeholder={translate('Search...')}
-      noOptionsMessage={() => translate('No matches')}
+      noOptionsMessage={({ inputValue }) =>
+        inputValue
+          ? translate('No matches')
+          : translate('No entities you can restrict a token to')
+      }
       isClearable
       isDisabled={isDisabled}
     />

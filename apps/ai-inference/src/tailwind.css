@@ -1,0 +1,12 @@
+/**
+ * Tailwind entry point, with the core Waldur design tokens.
+ * See apps/provider-calls/src/tailwind.css for why the shared packages are
+ * listed as explicit @source paths.
+ */
+@import 'tailwindcss';
+@import 'waldur-design-tokens/index.css';
+
+@source '../../../packages/ui/src';
+@source '../../../packages/shell/src';
+@source '../../../packages/table/src';
+@source '../../../packages/charts/src';

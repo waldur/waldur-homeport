@@ -33,6 +33,8 @@ interface LimitColumnsOptions {
   parentName?: string;
   /** Calculated from order options: shown, not edited. */
   derivedTypes: { has: (type: string) => boolean };
+  /** Whose limit the user may raise but not lower. */
+  increaseOnlyTypes?: { has: (type: string) => boolean };
   /** Shown without an input, as part of a preview. */
   readOnly?: boolean;
 }
@@ -63,6 +65,7 @@ export const getLimitColumns = ({
   limits,
   parentName,
   derivedTypes,
+  increaseOnlyTypes,
   readOnly,
 }: LimitColumnsOptions): Column<LimitTableRow>[] => [
   {
@@ -103,18 +106,25 @@ export const getLimitColumns = ({
           ) : null}
         </>
       ) : (
-        <FinalFormField
-          name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
-          parse={getLimitParser(component)}
-          format={formatIntField}
-          validate={composeValidators(
-            ...getResourceComponentValidator(limits[component.type]),
-          )}
-          min={0}
-          component={LimitInput}
-          offeringComponent={component}
-          limits={limits[component.type]}
-        />
+        <>
+          <FinalFormField
+            name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
+            parse={getLimitParser(component)}
+            format={formatIntField}
+            validate={composeValidators(
+              ...getResourceComponentValidator(limits[component.type]),
+            )}
+            min={0}
+            component={LimitInput}
+            offeringComponent={component}
+            limits={limits[component.type]}
+          />
+          {increaseOnlyTypes?.has(component.type) ? (
+            <FormText as="div" variant="muted">
+              {translate('Can only be increased')}
+            </FormText>
+          ) : null}
+        </>
       );
     },
   },

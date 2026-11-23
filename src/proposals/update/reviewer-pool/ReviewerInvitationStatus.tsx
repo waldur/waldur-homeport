@@ -1,7 +1,7 @@
 import { ShieldWarningIcon, WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, WarningTip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatRelative } from '@/core/dateUtils';
@@ -53,13 +53,12 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
       />
       {row.invitation_status === 'pending' &&
         isExpiringS(row.invitation_expires_at) && (
-          <Tooltip
+          <WarningTip
             label={translate('Expires {date}', {
               date: formatRelative(row.invitation_expires_at),
             })}
-          >
-            <WarningIcon size={16} weight="bold" className="text-warning" />
-          </Tooltip>
+            icon={WarningIcon}
+          />
         )}
       {row.override_reason && (
         <Tooltip

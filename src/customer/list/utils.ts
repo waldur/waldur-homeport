@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 
+import { formatMonth } from '@/core/dateUtils';
 import { PeriodOption } from '@/form/types';
 
 export const makeAccountingPeriods = (
@@ -11,7 +12,7 @@ export const makeAccountingPeriods = (
   for (let i = 0; i <= diff.months; i++) {
     const month = date.month;
     const year = date.year;
-    const label = date.toFormat('MMMM, yyyy');
+    const label = formatMonth(date);
     choices.push({
       label,
       value: { year, month, current: i === 0 },

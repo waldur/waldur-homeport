@@ -33,3 +33,4 @@ export {
   TERM_WIDTH_PRESETS,
   resolveTermWidth,
 } from './internals';
+export { SingleProperty, type SinglePropertyProps } from './SingleProperty';

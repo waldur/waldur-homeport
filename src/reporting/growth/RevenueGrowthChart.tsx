@@ -6,6 +6,7 @@ import { invoicesGrowthRetrieve } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
 import { ENV } from '@/core/config';
+import { formatMonthName } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -43,7 +44,7 @@ const formatGrowthChart = (growthChartData?): EChartsOption => {
         axisPointer: { type: 'shadow' },
         data: (growthChartData.periods || []).map((row, index) => {
           const date = DateTime.fromFormat(row, 'yyyy-M');
-          const monthName = date.toFormat('MMMM');
+          const monthName = formatMonthName(date);
           const year = date.toFormat('yyyy');
           return index === growthChartData.periods.length - 1
             ? `${monthName}, ${year} (${translate('estimated')})`

@@ -8,7 +8,7 @@ import {
   ResourceEndDateChangeRequest,
 } from 'waldur-js-client';
 
-import { PropertyList, PropertyItem } from 'waldur-ui';
+import { SingleProperty } from 'waldur-ui';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { ReviewStateField } from '@/core/ReviewStateField';
@@ -34,13 +34,11 @@ const isPending = (row: { state: string }) =>
 
 const ExpandableRow = ({ row }: { row: ResourceEndDateChangeRequest }) => (
   <ExpandableContainer>
-    <PropertyList variant="summary">
-      <PropertyItem
-        label={translate('Comment')}
-        value={row.comment}
-        hideIfEmpty={false}
-      />
-    </PropertyList>
+    <SingleProperty
+      label={translate('Comment')}
+      value={row.comment}
+      hideIfEmpty={false}
+    />
   </ExpandableContainer>
 );
 

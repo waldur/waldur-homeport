@@ -28,6 +28,8 @@ export const CreateListenerDialog: FC<ActionDialogProps> = ({
     mutationFn: (formData: any) =>
       openstackListenersCreate({
         body: {
+          // Create only, and the serializer's name field does not allow blank.
+          // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body -- create-only, '' is rejected by the serializer
           name: formData.name || undefined,
           load_balancer: resource.url,
           protocol: formData.protocol,

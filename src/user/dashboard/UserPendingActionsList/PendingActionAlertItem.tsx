@@ -4,6 +4,7 @@ import { UserAction } from 'waldur-js-client';
 
 import { AlertItem, Badge, BaseButton, Tooltip } from 'waldur-ui';
 
+import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
@@ -101,7 +102,7 @@ export const PendingActionAlertItem: FC<{
             <div className="text-quaternary mt-1.5 small">
               <BellSlashIcon size={14} className="me-1" weight="bold" />
               {translate('Silenced until {date}', {
-                date: new Date(row.silenced_until).toLocaleDateString(),
+                date: formatDate(row.silenced_until),
               })}
             </div>
           )}

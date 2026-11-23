@@ -7,6 +7,7 @@ import { loadData } from '@/marketplace/resources/change-limits/utils';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import { UpdateResourceOptionDialog } from './UpdateResourceOptionDialog';
 
@@ -242,6 +243,127 @@ describe('UpdateResourceOptionDialog', () => {
       expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'The change has been submitted as an order.',
       );
+    });
+  });
+
+  describe('formula option deriving a limit that may only grow', () => {
+    const formula = {
+      type: 'component_formula',
+      label: 'Net storage',
+      component_formula_config: {
+        targets: [{ component_type: 'data', formula: 'input * 2' }],
+      },
+    };
+    const resource = {
+      uuid: 'res-1',
+      attributes: { storage: 200 },
+      options: {},
+      limits: { data: 400 },
+    } as any;
+    const offering = {
+      uuid: 'off-1',
+      type: 'Marketplace.Basic',
+      options: { order: ['storage'], options: { storage: formula } },
+      resource_options: {
+        order: ['storage'],
+        options: {
+          storage: { type: 'component_formula', label: 'Net storage' },
+        },
+      },
+      components: [
+        {
+          type: 'data',
+          name: 'Data',
+          measured_unit: 'GB',
+          billing_type: 'limit',
+          limit_increase_only: true,
+        },
+      ],
+    } as any;
+    const lowered =
+      'Calculated Data (200) is below its current limit of 400, which can only be increased.';
+
+    const renderFormula = () => {
+      vi.mocked(loadData).mockResolvedValue({
+        resource,
+        offering,
+        plan: { name: 'Standard', unit: 'month', prices: { data: 0.1 } },
+        limitSerializer: (v) => v,
+        usages: {},
+        limits: { data: 400 },
+        initialValues: { limits: { data: 400 } },
+        offeringLimits: {},
+        concealBillingInfo: false,
+      } as any);
+      renderDialog({
+        resolve: {
+          resource,
+          offering,
+          option: {
+            name: 'storage',
+            type: 'component_formula',
+            label: 'Net storage',
+          },
+          refetch: vi.fn(),
+        },
+      });
+    };
+
+    const enter = async (value: string) => {
+      const user = userEvent.setup();
+      const input = await screen.findByDisplayValue('200');
+      await user.clear(input);
+      await user.type(input, value);
+      await user.tab();
+      return user;
+    };
+
+    it('refuses a value that would lower the limit', async () => {
+      renderFormula();
+      await enter('100');
+      expect(await screen.findByText(lowered)).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Update' })).toBeDisabled();
+    });
+
+    it('accepts a value that raises the limit', async () => {
+      renderFormula();
+      await enter('300');
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: 'Update' })).toBeEnabled();
+      });
+      expect(screen.queryByText(lowered)).not.toBeInTheDocument();
+    });
+
+    it('lets staff lower the limit', async () => {
+      vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+      try {
+        renderFormula();
+        await enter('100');
+        await waitFor(() => {
+          expect(screen.getByRole('button', { name: 'Update' })).toBeEnabled();
+        });
+        expect(screen.queryByText(lowered)).not.toBeInTheDocument();
+      } finally {
+        vi.mocked(useUser).mockReturnValue({} as any);
+      }
+    });
+
+    it('shows the server refusing the derived limit next to the field', async () => {
+      vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+      const refusal =
+        'The limit of Data can only be increased: it is 400 now, and 200 was requested.';
+      vi.mocked(marketplaceResourcesUpdateOptions).mockRejectedValue({
+        limits: [refusal],
+        status: 400,
+      });
+      try {
+        renderFormula();
+        const user = await enter('100');
+        await user.click(screen.getByRole('button', { name: 'Update' }));
+        expect(await screen.findByText(refusal)).toBeInTheDocument();
+      } finally {
+        vi.mocked(useUser).mockReturnValue({} as any);
+      }
     });
   });
 

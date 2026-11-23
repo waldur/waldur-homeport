@@ -9,6 +9,7 @@ import {
   WorkflowReportStep,
 } from 'waldur-js-client';
 
+import { formatShortMonth } from '@/core/dateUtils';
 import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
@@ -193,7 +194,7 @@ export const buildMonthsOptions = (
   xAxis: {
     type: 'category',
     data: months.map((month) =>
-      DateTime.fromISO(month.month).toFormat('LLL yyyy'),
+      formatShortMonth(DateTime.fromISO(month.month)),
     ),
     axisLabel: { color: colors.muted },
   },

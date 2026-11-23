@@ -37,6 +37,7 @@ const makeExportData = (
       unit_factor: 1,
       limit_period: null,
       limit_amount: 0,
+      limit_increase_only: false,
       article_code: '',
       backend_id: '',
     },

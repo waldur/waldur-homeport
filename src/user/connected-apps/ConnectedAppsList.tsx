@@ -19,6 +19,7 @@ import { isImpersonating } from '@/user/termsGate';
 
 import { ConnectedAppActions } from './ConnectedAppActions';
 import { connectedAppsTable } from './constants';
+import { McpConnectGuide } from './McpConnectGuide';
 
 const describeRegistration = (source: RegistrationSourceEnum): string => {
   switch (source) {
@@ -83,16 +84,25 @@ const ConnectedAppsTable: FunctionComponent = () => {
   ];
 
   return (
-    <Table
-      {...props}
-      columns={columns}
-      showPageSizeSelector={true}
-      verboseName={translate('connected apps')}
-      emptyMessage={translate(
-        'Apps you allow to access your account, such as AI assistants connected through MCP, appear here.',
-      )}
-      rowActions={ConnectedAppActions}
-    />
+    <>
+      <McpConnectGuide
+        hasApps={
+          props.loading && !props.rows.length
+            ? undefined
+            : props.rows.length > 0
+        }
+      />
+      <Table
+        {...props}
+        columns={columns}
+        showPageSizeSelector={true}
+        verboseName={translate('connected apps')}
+        emptyMessage={translate(
+          'Apps you allow to access your account, such as AI assistants connected through MCP, appear here.',
+        )}
+        rowActions={ConnectedAppActions}
+      />
+    </>
   );
 };
 
@@ -113,7 +123,10 @@ const getRefusal = (): string | null => {
 export const ConnectedAppsList: FunctionComponent = () => {
   const refusal = getRefusal();
   return refusal ? (
-    <AlertItem variant="info" title={refusal} />
+    <>
+      <McpConnectGuide hasApps={false} />
+      <AlertItem variant="info" title={refusal} />
+    </>
   ) : (
     <ConnectedAppsTable />
   );

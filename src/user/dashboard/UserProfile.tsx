@@ -13,6 +13,7 @@ import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 import { useUser } from '@/workspace/hooks';
 
+import { ServiceAccountBadge } from '../ServiceAccountBadge';
 import { formatUserIsActive } from '../support/utils';
 
 import { UserActions } from './UserActions';
@@ -41,6 +42,11 @@ export const UserProfile = ({
       title={
         <div className="flex flex-wrap gap-3 mb-2.5">
           <h3 className="mb-0">{user.full_name}</h3>
+          {user.is_service_account && (
+            <div>
+              <ServiceAccountBadge show />
+            </div>
+          )}
           {(showStatus || user.is_staff || user.is_support) && (
             <div>
               <StateIndicator

@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
 import { ChartCard } from '@/core/ChartCard';
+import { formatShortMonth } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { AreaChart } from '@/reporting/users/charts/AreaChart';
 
@@ -20,7 +21,7 @@ export const ResourceCreationTrendChart: FC<
   const chartData = useMemo(
     () =>
       (monthly || []).map((m) => ({
-        name: DateTime.fromFormat(m.month, 'yyyy-MM').toFormat('MMM yyyy'),
+        name: formatShortMonth(DateTime.fromFormat(m.month, 'yyyy-MM')),
         value: m.count,
       })),
     [monthly],
@@ -30,7 +31,7 @@ export const ResourceCreationTrendChart: FC<
     () => ({
       fields: [translate('Month'), translate('New resources')],
       data: (monthly || []).map((m) => [
-        DateTime.fromFormat(m.month, 'yyyy-MM').toFormat('MMM yyyy'),
+        formatShortMonth(DateTime.fromFormat(m.month, 'yyyy-MM')),
         m.count,
       ]),
     }),

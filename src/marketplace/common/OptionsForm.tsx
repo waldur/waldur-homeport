@@ -92,6 +92,7 @@ const getFormulaValidator = (option, name) => (value, allValues?) => {
     allValues.limits,
     getComponentsByType(offering.components),
     allValues.derivedFallback,
+    allValues.derivedFloors,
   );
 };
 

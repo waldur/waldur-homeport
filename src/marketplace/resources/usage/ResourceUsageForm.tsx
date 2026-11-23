@@ -34,13 +34,8 @@ import { UI_STALE_TIME } from '@/core/constants';
 import { parseDate } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { required } from '@/core/validators';
-import {
-  FieldError,
-  NumberField,
-  TextField,
-  SelectGroup,
-  StringGroup,
-} from '@/form';
+import { NumberField, TextField, SelectGroup, StringGroup } from '@/form';
+import { FieldErrorMessage } from '@/form/FieldError';
 import { RadioGroupField } from '@/form/RadioGroupField';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
@@ -80,6 +75,17 @@ const StaticPlanField: FunctionComponent = () => {
   return (
     <SummaryField label={translate('Period')} value={input.value?.label} />
   );
+};
+
+/** The accessible name of an error mark: the message itself when it is
+ *  text, so a screen reader hears what is wrong, not just that something is. */
+const getErrorName = (error: unknown): string => {
+  const messages = (Array.isArray(error) ? error : [error]).filter(
+    (message): message is string => typeof message === 'string' && !!message,
+  );
+  return messages.length
+    ? translate('Error: {message}', { message: messages.join(' ') })
+    : translate('Error');
 };
 
 export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
@@ -337,38 +343,43 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                 const isHidden = wrappedComponents.some(
                   (c) => component.uuid === c.uuid,
                 );
+                const hint = isHidden
+                  ? undefined
+                  : getBillingTypeLabelOrDash(component.billing_type);
+                const error = errors.components?.[component.type];
                 return (
                   <TabsTrigger
                     key={component.uuid}
                     value={component.uuid}
-                    hint={
-                      isHidden
-                        ? undefined
-                        : getBillingTypeLabelOrDash(component.billing_type)
+                    hint={hint}
+                    // The tab is a button and cannot hold one: its own
+                    // tooltip carries the error, ahead of the billing type.
+                    // The message is not an alert here, or every focus of the
+                    // tab would announce it again.
+                    tooltip={
+                      error && !isHidden ? (
+                        <>
+                          <div className="text-start">
+                            <FieldErrorMessage error={error} />
+                          </div>
+                          <div className="mt-1">{hint}</div>
+                        </>
+                      ) : undefined
                     }
+                    tooltipProps={{ autoWidth: true }}
                     className={
                       isHidden
                         ? 'invisible h-0 overflow-hidden !p-0 border-0'
                         : undefined
                     }
                   >
-                    {Boolean(errors.components?.[component.type]) && (
-                      <Tooltip
-                        label={
-                          isHidden ? null : (
-                            <FieldError
-                              error={errors.components[component.type]}
-                            />
-                          )
-                        }
-                        autoWidth
-                      >
-                        <WarningCircleIcon
-                          size={18}
-                          weight="bold"
-                          className="text-danger me-1"
-                        />
-                      </Tooltip>
+                    {Boolean(error) && (
+                      <WarningCircleIcon
+                        size={18}
+                        weight="bold"
+                        aria-hidden="true"
+                        className="text-danger me-1"
+                      />
                     )}
                     {component.name}
                   </TabsTrigger>
@@ -407,19 +418,30 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                             onClick={() => selectTab(component.uuid)}
                           >
                             {Boolean(errors.components?.[component.type]) && (
+                              // A menu item cannot hold a button: the mark
+                              // is a named image, read with the item.
                               <Tooltip
                                 label={
-                                  <FieldError
+                                  <FieldErrorMessage
                                     error={errors.components[component.type]}
                                   />
                                 }
                                 autoWidth
                               >
-                                <WarningCircleIcon
-                                  size={18}
-                                  weight="bold"
-                                  className="text-danger me-1"
-                                />
+                                <span
+                                  role="img"
+                                  aria-label={getErrorName(
+                                    errors.components[component.type],
+                                  )}
+                                  className="inline-flex"
+                                >
+                                  <WarningCircleIcon
+                                    size={18}
+                                    weight="bold"
+                                    aria-hidden="true"
+                                    className="text-danger me-1"
+                                  />
+                                </span>
                               </Tooltip>
                             )}
                             {component.name}
