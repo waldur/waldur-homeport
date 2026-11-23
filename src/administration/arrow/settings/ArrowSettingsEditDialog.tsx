@@ -5,13 +5,13 @@ import {
   adminArrowSettingsPartialUpdate,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { StringGroup, SecretGroup, SelectGroup, BooleanGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -41,7 +41,6 @@ interface FormValues {
 export const ArrowSettingsEditDialog = ({
   resolve,
 }: ArrowSettingsEditDialogProps) => {
-  const { closeDialog } = useModal();
   const { settings, refetch } = resolve;
 
   const submitMutation = useManagedMutation<any, any, FormValues>({
@@ -93,11 +92,9 @@ export const ArrowSettingsEditDialog = ({
             title={translate('Edit Arrow Settings')}
             footer={
               <>
-                <BaseButton
-                  onClick={closeDialog}
+                <CloseDialogButton
                   variant="secondary"
                   label={translate('Cancel')}
-                  size="lg"
                 />
                 <SubmitButton
                   submitting={submitMutation.isPending}

@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 import { useDiscoverLicenses } from '../api';
@@ -25,7 +25,6 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
   resolve,
 }) => {
   const { mapping } = resolve;
-  const { closeDialog } = useModal();
 
   const { data, isLoading, error, refetch } = useDiscoverLicenses(mapping.uuid);
 
@@ -33,6 +32,9 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
     <ModalDialog
       title={translate('Link Resources to Arrow Licenses')}
       subtitle={mapping.arrow_company_name}
+      footer={
+        <CloseDialogButton variant="secondary" label={translate('Close')} />
+      }
     >
       {isLoading ? (
         <LoadingSpinner />
@@ -77,16 +79,6 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
                 )}
               />
             )}
-
-          {/* Close button */}
-          <div className="flex justify-end">
-            <BaseButton
-              onClick={closeDialog}
-              variant="secondary"
-              label={translate('Close')}
-              size="lg"
-            />
-          </div>
         </div>
       ) : null}
     </ModalDialog>
