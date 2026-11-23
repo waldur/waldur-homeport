@@ -25,6 +25,7 @@ import { useTable } from '@/table/useTable';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
 import { CategoryRowActions } from './CategoryRowActions';
+import { CategoryStructurePanel } from './structure/CategoryStructurePanel';
 
 const ADMIN_CATEGORIES_FILTER_FORM_ID = 'AdminCategoriesListFilter';
 
@@ -42,6 +43,7 @@ const categoryFields: MarketplaceCategoriesListData['query'] = {
     'offering_count',
     'group',
     'url',
+    'sections',
   ],
 };
 
@@ -166,12 +168,17 @@ export const AdminCategoriesPage: FunctionComponent<
           render: ({ row }) => <>{row.offering_count}</>,
         },
         {
+          title: translate('Sections'),
+          render: ({ row }) => <>{row.sections?.length ?? 0}</>,
+        },
+        {
           title: translate('Description'),
           render: ({ row }) => <>{truncate(row.description, 60)}</>,
         },
       ]}
       verboseName={translate('Categories')}
       initialSorting={{ field: 'group__title', mode: 'asc' }}
+      expandableRow={CategoryStructurePanel}
       rowActions={({ row }) => (
         <CategoryRowActions row={row} refetch={tableProps.fetch} />
       )}
