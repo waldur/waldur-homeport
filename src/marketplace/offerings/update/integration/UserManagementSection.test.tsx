@@ -139,6 +139,7 @@ describe('DefaultUserManagementSection account settings', () => {
         ...inheritedOffering.plugin_options,
         enable_scim_entitlements: true,
         scim_login_nodes: ['login.example.org', 'login2.example.org'],
+        scim_login_port: 2222,
       },
     });
 
@@ -146,12 +147,15 @@ describe('DefaultUserManagementSection account settings', () => {
     expect(
       screen.getByText('login.example.org, login2.example.org'),
     ).toBeInTheDocument();
+    expect(screen.getByText('SCIM login port')).toBeInTheDocument();
+    expect(screen.getByText('2222')).toBeInTheDocument();
   });
 
   it('hides SCIM login nodes when SCIM entitlements are disabled', () => {
     renderSection('offering-users');
 
     expect(screen.queryByText('SCIM login nodes')).not.toBeInTheDocument();
+    expect(screen.queryByText('SCIM login port')).not.toBeInTheDocument();
   });
 
   it('blocks combining robot-account mode with automatic offering users', () => {
