@@ -2113,7 +2113,7 @@
   "Action": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "mappings"
+      "feature_area": "billing"
     }
   },
   "Action Required:": {
@@ -3952,7 +3952,8 @@
   },
   "After": {
     "context": {
-      "feature_area": "openportal"
+      "primary_ui_type": "title",
+      "feature_area": "billing"
     }
   },
   "After importing a license or linking a resource to Arrow, you can backport historical consumption data. This creates usage records for billing.": {
@@ -4253,6 +4254,11 @@
       "feature_area": "mappings"
     }
   },
+  "All Arrow resources": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "All POSIX identifiers across the offering accounts. A UID is allocated once per pool, so the accounts on every offering of a provider that has no override pool share one row.": {
     "context": {
       "feature_area": "user"
@@ -4437,7 +4443,7 @@
   },
   "All resources": {
     "context": {
-      "feature_area": "billing"
+      "feature_area": "sidebar"
     }
   },
   "All resources have been imported.": {
@@ -5900,6 +5906,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "credits"
+    }
+  },
+  "Apply changes": {
+    "context": {
+      "feature_area": "billing"
     }
   },
   "Apply changes ({count})": {
@@ -9402,7 +9413,7 @@
   },
   "Back": {
     "context": {
-      "feature_area": "consumption"
+      "feature_area": "billing"
     }
   },
   "Back to all sign-in options": {
@@ -9745,7 +9756,8 @@
   "Become a customer of our portal. Provision IT services from the catalog and manage your team from one place.": {},
   "Before": {
     "context": {
-      "feature_area": "openportal"
+      "primary_ui_type": "title",
+      "feature_area": "billing"
     }
   },
   "Before / at the step": {
@@ -9921,6 +9933,11 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Billing changes": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Billing changes with this plan": {
     "context": {
       "feature_area": "change-plan"
@@ -10031,12 +10048,6 @@
   "Billing sync reads invoices through this export type; without one it does nothing.": {
     "context": {
       "feature_area": "setup"
-    }
-  },
-  "Billing sync triggered": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "billing"
     }
   },
   "Billing synchronization": {
@@ -11508,7 +11519,7 @@
   "Canada": {},
   "Cancel": {
     "context": {
-      "feature_area": "billing"
+      "feature_area": "consumption"
     }
   },
   "Cancel & reload": {
@@ -11978,7 +11989,7 @@
   "Change": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "cost-policies"
+      "feature_area": "billing"
     }
   },
   "Change \"{offeringName}\" from {currentLabel} to {targetLabel}. Existing components, plans, resources, orders, and offering users are preserved.": {
@@ -12662,6 +12673,11 @@
       "feature_area": "options"
     }
   },
+  "Choose": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Choose Sign-in Method": {
     "context": {
       "feature_area": "layouts"
@@ -12753,6 +12769,11 @@
     }
   },
   "Choose all users, organizations or offerings.": {},
+  "Choose an Arrow billing action, preview what it changes on invoices, then apply it.": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Choose an export type first; sync needs one.": {
     "context": {
       "feature_area": "setup"
@@ -13738,6 +13759,7 @@
       "feature_area": "organizations"
     }
   },
+  "Compare Arrow's final billing for an ended month with what was invoiced, and add the difference to the current invoice as adjustments. Nothing new is fetched.": {},
   "Compare permissions": {
     "context": {
       "feature_area": "roles"
@@ -15323,12 +15345,6 @@
     }
   },
   "Consumption sync interval in hours (default: hourly)": {},
-  "Consumption sync triggered": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "debug"
-    }
-  },
   "Contact": {
     "context": {
       "primary_ui_type": "title",
@@ -26367,18 +26383,6 @@
       "feature_area": "resources"
     }
   },
-  "Failed to trigger consumption sync": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "debug"
-    }
-  },
-  "Failed to trigger reconciliation": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "billing"
-    }
-  },
   "Failed to trigger sampling.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -26388,7 +26392,7 @@
   "Failed to trigger sync": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "billing"
+      "feature_area": "mappings"
     }
   },
   "Failed to unblock assignment item.": {
@@ -26708,6 +26712,13 @@
       "primary_ui_type": "label"
     }
   },
+  "Fetch Arrow's billing lines for the month and put them on the invoices. Licenses billed through consumption are skipped.": {},
+  "Fetch consumption from Arrow for a month and preview what it changes on invoices before applying it.": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
+  "Fetch each license's consumption for the month from Arrow and update its consumption item while the invoice is open.": {},
   "Fetch historical consumption data from Arrow and create usage records for billing.": {
     "context": {
       "feature_area": "resources"
@@ -33129,7 +33140,7 @@
   "Item": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "resources"
+      "feature_area": "billing"
     }
   },
   "Item name": {
@@ -34251,6 +34262,11 @@
       "feature_area": "openstack"
     }
   },
+  "Leave empty to include every Arrow resource.": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Leave empty to keep the current URL ({destination}).": {
     "context": {
       "variables": {
@@ -34289,11 +34305,6 @@
   "Leave empty to show all of them.": {
     "context": {
       "feature_area": "openstack"
-    }
-  },
-  "Leave empty to sync all resources. Select a resource to sync only its billing lines.": {
-    "context": {
-      "feature_area": "billing"
     }
   },
   "Leave empty to take the offerings out of their group.": {
@@ -36679,11 +36690,6 @@
       "feature_area": "policy-watch"
     }
   },
-  "Manually trigger consumption data synchronization from Arrow.": {
-    "context": {
-      "feature_area": "debug"
-    }
-  },
   "Map Arrow Customers to Waldur": {
     "context": {
       "feature_area": "setup"
@@ -36707,11 +36713,6 @@
   "Map allocation units to credits. For example, 1 credit is 4 GPU hours.": {
     "context": {
       "feature_area": "project-templates"
-    }
-  },
-  "Map an Arrow vendor to an offering (Vendor Offerings tab) to pick a single resource.": {
-    "context": {
-      "feature_area": "billing"
     }
   },
   "Map categories": {
@@ -38804,7 +38805,7 @@
   "Month": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "consumption"
+      "feature_area": "billing"
     }
   },
   "Month the cost was incurred": {
@@ -42136,7 +42137,7 @@
   },
   "No resources found": {
     "context": {
-      "feature_area": "billing"
+      "feature_area": "consumption"
     }
   },
   "No resources found for this customer": {
@@ -43574,6 +43575,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Nothing changed on any invoice.": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Nothing changes: the offering sets these values itself or they stay the same.": {
     "context": {
       "feature_area": "accounts"
@@ -43752,6 +43758,16 @@
   "Nothing was imported.": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Nothing would change": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
+  "Nothing would change on any invoice.": {
+    "context": {
+      "feature_area": "billing"
     }
   },
   "Notification": {
@@ -45303,6 +45319,11 @@
   "Only a metric that never received data can be removed; otherwise archive it.": {
     "context": {
       "feature_area": "metrics"
+    }
+  },
+  "Only a month that has ended can be settled.": {
+    "context": {
+      "feature_area": "billing"
     }
   },
   "Only a proposal manager can change the proposal team.": {
@@ -51169,7 +51190,7 @@
   "Preview changes": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "details",
+      "feature_area": "billing",
       "action_type": "create"
     }
   },
@@ -51236,6 +51257,16 @@
   "Preview sequence": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "Preview taken {time}. Invoices already issued are never changed; differences for them appear on the current invoice.": {
+    "context": {
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      },
+      "feature_area": "billing"
     }
   },
   "Preview {proposal} as…": {
@@ -55204,13 +55235,6 @@
       "feature_area": "ranking"
     }
   },
-  "Reconcile": {
-    "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "billing",
-      "action_type": "create"
-    }
-  },
   "Reconcile usernames": {
     "context": {
       "feature_area": "integration"
@@ -55226,12 +55250,6 @@
   "Reconciliation process": {
     "context": {
       "feature_area": "settings"
-    }
-  },
-  "Reconciliation triggered": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "billing"
     }
   },
   "Record a group your directory already holds, so the project keeps its GID and Waldur never hands that GID to anything else. The project needs no resource yet.": {
@@ -58114,7 +58132,7 @@
   "Resource": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "consumption"
+      "feature_area": "billing"
     }
   },
   "Resource (optional)": {
@@ -62993,7 +63011,7 @@
   },
   "Select billing period": {
     "context": {
-      "feature_area": "billing"
+      "feature_area": "import-usage"
     }
   },
   "Select category...": {
@@ -63578,11 +63596,6 @@
   "Select the Service Desk project that will be used for support tickets.": {
     "context": {
       "feature_area": "steps"
-    }
-  },
-  "Select the billing period to sync": {
-    "context": {
-      "feature_area": "billing"
     }
   },
   "Select the duplicate support users to merge into {name}. Their issues, comments and attachments will be re-pointed to it and the duplicates deleted.": {
@@ -65035,6 +65048,11 @@
   },
   "Settings that describe an offering itself, such as its plans and components.": {},
   "Settings update": {},
+  "Settle a past month": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Settled": {
     "context": {
       "primary_ui_type": "label",
@@ -68435,11 +68453,9 @@
       "feature_area": "providers"
     }
   },
-  "Sync billing": {
+  "Sync billing lines": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "billing",
-      "action_type": "create"
+      "primary_ui_type": "label"
     }
   },
   "Sync completed": {
@@ -68449,6 +68465,7 @@
   },
   "Sync consumption": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "debug"
     }
   },
@@ -70038,6 +70055,11 @@
       "feature_area": "policies"
     }
   },
+  "The billing action failed": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "The billing model changes from {current} to {target} on the day of the switch.": {
     "context": {
       "variables": {
@@ -70288,6 +70310,11 @@
   "The change is ordered with the limits calculated from the new value:": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "The changes are being applied": {
+    "context": {
+      "feature_area": "billing"
     }
   },
   "The changes have been submitted.": {
@@ -72454,6 +72481,11 @@
     }
   },
   "The report month has ended, so the billing is treated as validated (checked every 12 hours). Later syncs leave it unchanged.": {},
+  "The request failed": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "The request failed.": {
     "context": {
       "feature_area": "shell"
@@ -72724,6 +72756,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "proposal"
+    }
+  },
+  "The run reported problems; some changes may be missing.": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
+  "The run reported problems; the preview may be incomplete.": {
+    "context": {
+      "feature_area": "billing"
     }
   },
   "The scenario was added to the template.": {
@@ -76613,11 +76655,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "settings"
-    }
-  },
-  "Trigger Consumption Sync": {
-    "context": {
-      "feature_area": "debug"
     }
   },
   "Triggers": {
@@ -96632,6 +96669,52 @@
         }
       },
       "feature_area": "ai-assistant"
+    }
+  },
+  "{invoices} invoice(s) changed: {created} new, {updated} changed, {deleted} removed item(s); total {delta}.": {
+    "context": {
+      "variables": {
+        "invoices": {
+          "type": "unknown"
+        },
+        "created": {
+          "type": "date"
+        },
+        "updated": {
+          "type": "date"
+        },
+        "deleted": {
+          "type": "unknown"
+        },
+        "delta": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "billing",
+      "action_type": "create"
+    }
+  },
+  "{invoices} invoice(s) would change: {created} new, {updated} changed, {deleted} removed item(s); total {delta}.": {
+    "context": {
+      "variables": {
+        "invoices": {
+          "type": "unknown"
+        },
+        "created": {
+          "type": "date"
+        },
+        "updated": {
+          "type": "date"
+        },
+        "deleted": {
+          "type": "unknown"
+        },
+        "delta": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "billing",
+      "action_type": "create"
     }
   },
   "{label} ({panel})": {
