@@ -9,6 +9,7 @@ import { getTabbableAfter, getTabbables } from '@/navigation/tabbables';
 import { SearchInput } from './SearchInput';
 import { SearchPopover } from './SearchPopover';
 import { useSearch } from './useSearch';
+import { getShortcutHint } from './utils';
 
 import './SearchToggle.scss';
 
@@ -115,7 +116,11 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
         <div className="flex items-center" id="searchContainer" ref={anchorRef}>
           {compact ? (
             <IconButton
-              label={translate('Search')}
+              // The tooltip names the shortcut; the accessible name stays
+              // "Search" and the shortcut is announced separately.
+              label={`${translate('Search')} (${getShortcutHint()})`}
+              aria-label={translate('Search')}
+              aria-keyshortcuts="Control+k Meta+k"
               onClick={() => setShow(true)}
               icon={<MagnifyingGlassIcon weight="bold" />}
             />

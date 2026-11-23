@@ -129,9 +129,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
       }
       right={
         <>
-          {Boolean(user) && (
-            <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
-          )}
+          {Boolean(user) && <SearchToggle compact />}
           {Boolean(user) && showSupportDrawer && <QuickIssueDrawerToggle />}
           {Boolean(user) && <ConfirmationDrawerToggle />}
           {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
