@@ -10,9 +10,9 @@ import { SITE_AGENT_TEMPLATE } from '@/user/personal-access-tokens/wizard/tokenP
 
 /**
  * The offering as a site-agent token target, or null when the user cannot
- * create a working token for it. Only an offering's own managers can: the
- * backend lists the offering when their role there holds what the agent
- * needs.
+ * create a working token for it. The backend lists the offering to its
+ * managers and to the owners of its organization, when the organization is
+ * a service provider and their role there holds what the agent needs.
  */
 const fetchSiteAgentTokenTarget = async (
   offeringUuid: string,

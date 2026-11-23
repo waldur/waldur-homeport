@@ -3252,11 +3252,6 @@
       "feature_area": "create-review"
     }
   },
-  "Add yourself as this offering's manager to create an agent token.": {
-    "context": {
-      "feature_area": "site-agent"
-    }
-  },
   "Add {amount} of credit for this month": {
     "context": {
       "variables": {

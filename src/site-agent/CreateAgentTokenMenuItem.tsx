@@ -5,10 +5,7 @@ import { Menu } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { SITE_AGENT_TEMPLATE } from '@/user/personal-access-tokens/wizard/tokenPayload';
-import { useUser } from '@/workspace/hooks';
 
 import { useSiteAgentTokenTarget } from './useSiteAgentTokenTarget';
 
@@ -22,48 +19,27 @@ interface CreateAgentTokenMenuItemProps {
   offering: {
     uuid: string;
     name: string;
-    customer_uuid?: string | null;
   };
 }
 
 /**
  * The Actions menu's entry that opens the token wizard for this offering's
- * site agent. Enabled for the
- * offering's managers, for whom the backend lists it as a target. Someone
- * who can manage the offering's team but is not its manager (an owner, say)
- * sees it disabled, since adding themselves as manager fixes that; anyone
- * else does not see it.
+ * site agent. Shown when the backend lists the offering as a target for the
+ * user: to the offering's managers and to the owners of its organization,
+ * when that organization is a service provider. Anyone else, and an offering
+ * whose organization is not a service provider, gets no entry.
  */
 export const CreateAgentTokenMenuItem: FC<CreateAgentTokenMenuItemProps> = ({
   offering,
 }) => {
   const { openDialog } = useModal();
-  const user = useUser();
   const { data: target, isLoading } = useSiteAgentTokenTarget(offering.uuid);
 
-  if (isLoading) return null;
-
-  if (!target) {
-    const canManageTeam = hasPermission(user, {
-      permission: PermissionEnum.UPDATE_OFFERING,
-      customerId: offering.customer_uuid ?? undefined,
-      offeringId: offering.uuid,
-    });
-    if (!canManageTeam) return null;
-  }
+  if (isLoading || !target) return null;
 
   return (
     <Menu.Item
-      disabled={!target}
-      tooltip={
-        target
-          ? undefined
-          : translate(
-              "Add yourself as this offering's manager to create an agent token.",
-            )
-      }
       onSelect={() =>
-        target &&
         openDialog(PersonalAccessTokenCreateDialog, {
           size: 'lg',
           resolve: {
