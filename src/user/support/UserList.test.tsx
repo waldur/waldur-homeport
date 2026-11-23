@@ -1,8 +1,14 @@
+import { screen } from '@testing-library/react';
 import { vi, describe, it, expect } from 'vitest';
 
 import { RoleEnum } from '@/permissions/enums';
+import { renderWithProviders } from '@/test/harness';
 
-import { formatRoleFilter, getOrganizationsWhereOwner } from './UserList';
+import {
+  formatRoleFilter,
+  FullNameField,
+  getOrganizationsWhereOwner,
+} from './UserList';
 
 vi.mock('@/core/filters', () => ({
   getInitialValues: vi.fn().mockImplementation((arg) => arg),
@@ -67,5 +73,40 @@ describe('getOrganizationsWhereOwner', () => {
     const actual = getOrganizationsWhereOwner(user);
     const expected = 'Blackberry, Tomson';
     expect(actual).toEqual(expected);
+  });
+});
+
+describe('FullNameField', () => {
+  it('marks a service account', () => {
+    renderWithProviders(
+      <FullNameField
+        row={
+          {
+            uuid: 'u1',
+            full_name: 'Agent HPC',
+            is_service_account: true,
+          } as any
+        }
+      />,
+    );
+    expect(screen.getByTestId('service-account-badge')).toBeInTheDocument();
+  });
+
+  it('leaves a person unmarked', () => {
+    renderWithProviders(
+      <FullNameField
+        row={
+          {
+            uuid: 'u2',
+            full_name: 'Jane Doe',
+            is_service_account: false,
+          } as any
+        }
+      />,
+    );
+    expect(screen.getByText('Jane Doe')).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('service-account-badge'),
+    ).not.toBeInTheDocument();
   });
 });

@@ -1,31 +1,50 @@
-import { Plus, Trash } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
-import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
-import { Field, Form, useForm, useFormState } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
+import React, { useCallback, useMemo, useRef } from 'react';
 import {
+  PatTemplate,
+  PatTemplateTarget,
   personalAccessTokensAvailableBindingTargetsList,
   personalAccessTokensAvailableScopesList,
+  personalAccessTokensAgentUser,
   personalAccessTokensCreate,
-  PersonalAccessTokenCreateRequest,
+  personalAccessTokensTemplatesList,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
+import { Wizard } from 'waldur-wizard';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { required } from '@/core/validators';
-import { StringGroup, SelectGroup, DateGroup } from '@/form';
-import { FormGroup } from '@/form';
-import { SelectField } from '@/form/select/SelectField';
-import { SubmitButton } from '@/form/SubmitButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { OWN_ERROR_STATE } from '@/core/queryRetry';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import {
+  buildSiteAgentTokenConfig,
+  getAbsoluteApiUrl,
+} from '@/site-agent/siteAgentTokenConfig';
 import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
-import { labelForType } from './entityFetchers';
-import { EntityScopePicker } from './EntityScopePicker';
-import { getScopeOptions } from './scopeOptions';
+import { getScopeGroups } from './scopeOptions';
+import {
+  buildAgentUserPayload,
+  buildTokenPayload,
+  getTokenFor,
+  CUSTOM_PURPOSE,
+  getDefaultExpiry,
+  getTokenWizardSteps,
+  SITE_AGENT_TEMPLATE,
+  TokenWizardValues,
+  validateTokenWizard,
+} from './wizard/tokenPayload';
+import {
+  describeBinding,
+  TokenWizardData,
+  TokenWizardStep,
+} from './wizard/TokenWizardSteps';
 
 const PersonalAccessTokenSecretDialog = lazyComponent(() =>
   import('./PersonalAccessTokenSecretDialog').then((module) => ({
@@ -33,297 +52,258 @@ const PersonalAccessTokenSecretDialog = lazyComponent(() =>
   })),
 );
 
+export interface PersonalAccessTokenPreset {
+  /** The template, such as the site agent's. */
+  template: string;
+  /** The entity the token is bound to. */
+  target: PatTemplateTarget;
+  /** The offering the token is created from, for the agent configuration. */
+  offering?: { uuid: string; name: string };
+}
+
 interface PersonalAccessTokenCreateDialogProps {
   resolve: {
     refetch?: () => void;
+    /** Purpose and target already chosen: the wizard starts at Permissions. */
+    preset?: PersonalAccessTokenPreset;
   };
 }
 
-// Scopes that are inherently global and cannot be combined with entity bindings.
-// Keep in sync with the backend serializer's exclusivity check.
-const GLOBAL_SCOPES = new Set(['STAFF.ACCESS', 'SUPPORT.ACCESS']);
+const STEP_FORMS = Array(5).fill(TokenWizardStep);
 
-/**
- * Effect-only child: when the user toggles a global scope on, drop any
- * bindings they already added — submitting both would 400 from the backend.
- * Lives inside <Form> so it can use the final-form hooks; renders nothing.
- */
-const ClearBindingsOnGlobalScope: FunctionComponent = () => {
-  const form = useForm();
-  const { values } = useFormState<FormValues>({
-    subscription: { values: true },
-  });
-  const hasGlobalScope = (values.scopes ?? []).some((s) =>
-    GLOBAL_SCOPES.has(s),
-  );
-  const bindingsLength = (values.allowed_scopes ?? []).length;
-  useEffect(() => {
-    if (hasGlobalScope && bindingsLength > 0) {
-      form.change('allowed_scopes', []);
-    }
-  }, [hasGlobalScope, bindingsLength, form]);
-  return null;
+/** The offering a site agent's configuration names: a site-agent token is
+ * always bound to one offering. */
+const getAgentOffering = (
+  target: PatTemplateTarget,
+  preset?: PersonalAccessTokenPreset,
+) => {
+  if (preset?.offering) return preset.offering;
+  // Offerings are addressed by their plain UUID elsewhere in Waldur.
+  return { uuid: target.uuid.replace(/-/g, ''), name: target.name };
 };
-
-interface BindingRow {
-  type: string | null;
-  // The full entity object kept around for displaying the chosen item; only
-  // the uuid is sent to the API.
-  entity: { uuid: string; name: string } | null;
-}
-
-interface FormValues {
-  name: string;
-  scopes: string[];
-  expires_at: string;
-  allowed_scopes: BindingRow[];
-  allowed_networks?: string;
-}
 
 export const PersonalAccessTokenCreateDialog: React.FC<
   PersonalAccessTokenCreateDialogProps
-> = ({ resolve: { refetch } }) => {
+> = ({ resolve: { refetch, preset } }) => {
   const { showErrorResponse } = useNotify();
+  // Only shows the dedicated-user choice; the backend enforces who may use it.
+  const isStaff = !!useUser()?.is_staff;
   const { openDialog, closeDialog } = useModal();
 
-  const [availableScopes, setAvailableScopes] = useState<Set<string>>();
-  // permission -> Set of TYPE_MAP keys the user can bind that permission to
-  const [bindingTargets, setBindingTargets] =
-    useState<Record<string, Set<string>>>();
+  const templatesQuery = useQuery({
+    queryKey: ['personal-access-token-templates'],
+    queryFn: () =>
+      personalAccessTokensTemplatesList().then((res) => res.data ?? []),
+    meta: OWN_ERROR_STATE,
+    // A refetch must not swap the templates under a wizard in progress.
+    staleTime: Infinity,
+  });
+  const scopesQuery = useQuery({
+    queryKey: ['personal-access-token-available-scopes'],
+    queryFn: () =>
+      personalAccessTokensAvailableScopesList().then((res) => res.data ?? []),
+    enabled: !preset,
+    meta: OWN_ERROR_STATE,
+    staleTime: Infinity,
+  });
+  const bindingTargetsQuery = useQuery({
+    queryKey: ['personal-access-token-binding-targets'],
+    queryFn: () =>
+      personalAccessTokensAvailableBindingTargetsList().then(
+        (res) => res.data ?? [],
+      ),
+    enabled: !preset,
+    meta: OWN_ERROR_STATE,
+    staleTime: Infinity,
+  });
 
-  useEffect(() => {
-    personalAccessTokensAvailableScopesList().then((res) => {
-      setAvailableScopes(new Set(res.data.map((s) => s.permission)));
-    });
-    personalAccessTokensAvailableBindingTargetsList().then((res) => {
-      const map: Record<string, Set<string>> = {};
-      for (const row of res.data) {
-        map[row.permission] = new Set(row.types);
-      }
-      setBindingTargets(map);
-    });
-  }, []);
-
-  const scopeOptions = useMemo(
-    () => (availableScopes ? getScopeOptions(availableScopes) : []),
-    [availableScopes],
+  // A template that does not load leaves Custom, which needs nothing else.
+  const templates: PatTemplate[] = useMemo(
+    () => templatesQuery.data ?? [],
+    [templatesQuery.data],
   );
 
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const minDate = tomorrow.toISOString().split('T')[0];
+  const data: TokenWizardData = useMemo(
+    () => ({
+      templates,
+      scopeGroups: getScopeGroups(
+        new Set((scopesQuery.data ?? []).map((s) => s.permission)),
+      ),
+      bindingTypes: Array.from(
+        new Set((bindingTargetsQuery.data ?? []).flatMap((row) => row.types)),
+      ),
+      isStaff,
+      bindingTargets: Object.fromEntries(
+        (bindingTargetsQuery.data ?? []).map((row) => [
+          row.permission,
+          row.types,
+        ]),
+      ),
+    }),
+    [templates, scopesQuery.data, bindingTargetsQuery.data, isStaff],
+  );
 
-  const processRequest = React.useCallback(
-    async (values: FormValues) => {
-      const payload: PersonalAccessTokenCreateRequest = {
-        name: values.name,
-        scopes: values.scopes,
-        expires_at: values.expires_at,
-        allowed_scopes: (values.allowed_scopes ?? [])
-          .filter((b) => b.type && b.entity?.uuid)
-          .map((b) => ({ type: b.type as string, uuid: b.entity!.uuid })),
-        allowed_networks: (values.allowed_networks ?? '')
-          .split(',')
-          .map((entry: string) => entry.trim())
-          .filter(Boolean),
-      };
+  const steps = useMemo(
+    () =>
+      getTokenWizardSteps({
+        hasTemplates: templates.length > 0,
+        preset: !!preset,
+      }),
+    [templates.length, preset],
+  );
+
+  // Computed once, when the wizard first renders: new initial values would
+  // reset the form and lose what the user has entered.
+  const initialValuesRef = useRef<Partial<TokenWizardValues>>();
+  const getInitialValues = (): Partial<TokenWizardValues> => {
+    if (initialValuesRef.current) return initialValuesRef.current;
+    const presetTemplate = preset
+      ? templates.find((t) => t.key === preset.template)
+      : undefined;
+    const name = presetTemplate
+      ? `${presetTemplate.name}: ${preset!.offering?.name ?? preset!.target.name}`
+      : '';
+    initialValuesRef.current = {
+      purpose: presetTemplate
+        ? presetTemplate.key
+        : templates.length === 0
+          ? CUSTOM_PURPOSE
+          : undefined,
+      target: presetTemplate ? preset!.target : null,
+      features: [],
+      scopes: [],
+      allowed_scopes: [],
+      name,
+      generatedName: name || undefined,
+      expires_at: presetTemplate
+        ? getDefaultExpiry(presetTemplate.default_lifetime_days)
+        : '',
+    };
+    return initialValuesRef.current;
+  };
+
+  const validate = useCallback(
+    (values: TokenWizardValues) =>
+      validateTokenWizard(
+        values,
+        templates,
+        data.bindingTargets,
+        describeBinding,
+      ),
+    [templates, data.bindingTargets],
+  );
+
+  const handleSubmit = useCallback(
+    async (values: TokenWizardValues) => {
+      const template = templates.find((t) => t.key === values.purpose);
       try {
-        const response = await personalAccessTokensCreate({ body: payload });
-        const created = response.data;
+        const forAgentUser =
+          !!template && getTokenFor(values, template, isStaff) === 'agent_user';
+        let created: { token: string; name: string };
+        let username: string | undefined;
+        if (forAgentUser) {
+          const response = await personalAccessTokensAgentUser({
+            body: buildAgentUserPayload(values, template!),
+          });
+          created = response.data;
+          username = response.data.username;
+        } else {
+          const response = await personalAccessTokensCreate({
+            body: buildTokenPayload(values, template),
+          });
+          created = response.data;
+        }
+        let agentConfig: string | undefined;
+        if (template?.key === SITE_AGENT_TEMPLATE) {
+          agentConfig = buildSiteAgentTokenConfig({
+            token: created.token,
+            apiUrl: getAbsoluteApiUrl(),
+            // The payload was refused above when there is no target.
+            offering: getAgentOffering(values.target!, preset),
+          });
+        }
         if (refetch) {
-          await refetch();
+          try {
+            await refetch();
+          } catch {
+            // The token exists: its secret must still be shown, once.
+          }
         }
         closeDialog();
         openDialog(PersonalAccessTokenSecretDialog, {
           size: 'lg',
-          resolve: { token: created.token, tokenName: created.name },
+          resolve: {
+            token: created.token,
+            tokenName: created.name,
+            agentConfig,
+            username,
+          },
         });
       } catch (e) {
         showErrorResponse(e, translate('Unable to create token.'));
       }
     },
-    [showErrorResponse, openDialog, closeDialog, refetch],
+    [
+      templates,
+      preset,
+      isStaff,
+      showErrorResponse,
+      openDialog,
+      closeDialog,
+      refetch,
+    ],
   );
 
-  return (
-    <Form<FormValues>
-      onSubmit={processRequest}
-      mutators={{ ...arrayMutators }}
-      initialValues={{
-        name: '',
-        scopes: [],
-        expires_at: '',
-        allowed_scopes: [],
-      }}
-      render={({ handleSubmit, submitting, invalid, values }) => {
-        const selectedScopes = values.scopes ?? [];
-        const hasGlobalScope = selectedScopes.some((s) => GLOBAL_SCOPES.has(s));
-        // Union of bindable types across all currently selected permissions.
-        const allowedTypes = new Set<string>();
-        if (bindingTargets) {
-          for (const scope of selectedScopes) {
-            const types = bindingTargets[scope];
-            if (types) for (const t of types) allowedTypes.add(t);
+  const loading =
+    templatesQuery.isLoading ||
+    (!preset && (scopesQuery.isLoading || bindingTargetsQuery.isLoading));
+
+  // Opened for a template the user cannot use (any more), or one that did
+  // not load: there is nothing to preselect, and Custom is not set up here.
+  const presetUnavailable =
+    !loading && !!preset && !templates.some((t) => t.key === preset.template);
+
+  if (presetUnavailable) {
+    return (
+      <ModalDialog
+        title={translate('Create personal access token')}
+        footer={<CloseDialogButton />}
+      >
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={
+            templatesQuery.isError
+              ? translate('Unable to load token templates.')
+              : translate('You can no longer create this kind of token here.')
           }
-        }
-        const typeOptions = Array.from(allowedTypes)
-          .sort()
-          .map((t) => ({ value: t, label: labelForType(t) }));
+          body={translate(
+            'Try again later, or create a token with custom permissions from your profile.',
+          )}
+        />
+      </ModalDialog>
+    );
+  }
 
-        return (
-          <form onSubmit={handleSubmit}>
-            <ClearBindingsOnGlobalScope />
-            <ModalDialog
-              title={translate('Create personal access token')}
-              footer={
-                <SubmitButton
-                  disabled={invalid}
-                  submitting={submitting}
-                  label={translate('Create token')}
-                  variant="primary"
-                />
-              }
-            >
-              <div>
-                <StringGroup
-                  name="name"
-                  validate={required}
-                  placeholder={translate('e.g. CI/CD pipeline token')}
-                  label={translate('Token name')}
-                  required
-                />
-                <SelectGroup
-                  name="scopes"
-                  validate={required}
-                  isMulti
-                  simpleValue
-                  options={scopeOptions}
-                  placeholder={translate('Select permissions...')}
-                  label={translate('Permissions')}
-                  required
-                  description={translate(
-                    'Select the permissions this token should have. The token can only use permissions you currently hold.',
-                  )}
-                />
+  if (loading) {
+    return (
+      <ModalDialog title={translate('Create personal access token')}>
+        <LoadingSpinner />
+      </ModalDialog>
+    );
+  }
 
-                <FormGroup
-                  group
-                  label={translate('Restrict to specific entities')}
-                  description={
-                    hasGlobalScope
-                      ? translate(
-                          'STAFF.ACCESS and SUPPORT.ACCESS are global — they cannot be combined with entity bindings.',
-                        )
-                      : translate(
-                          'Optional. Limit the token to actions on the listed organizations / projects / calls / etc. Empty list = unrestricted within the permissions above.',
-                        )
-                  }
-                >
-                  <FieldArray name="allowed_scopes">
-                    {({ fields }) => (
-                      <>
-                        {fields.map((name, index) => {
-                          const row = (values.allowed_scopes ?? [])[index] as
-                            BindingRow | undefined;
-                          return (
-                            <div
-                              key={name}
-                              className="flex items-start gap-1.5 mb-1.5"
-                            >
-                              <div style={{ flex: '0 0 220px' }}>
-                                <Field name={`${name}.type`}>
-                                  {({ input, meta }) => (
-                                    <SelectField
-                                      input={input}
-                                      meta={meta}
-                                      simpleValue
-                                      options={typeOptions}
-                                      aria-label={`${translate('Type')} ${index + 1}`}
-                                      placeholder={translate('Type')}
-                                      isDisabled={
-                                        hasGlobalScope ||
-                                        typeOptions.length === 0
-                                      }
-                                    />
-                                  )}
-                                </Field>
-                              </div>
-                              <div className="grow">
-                                <Field name={`${name}.entity`}>
-                                  {({ input }) => (
-                                    <EntityScopePicker
-                                      aria-label={`${translate('Entity')} ${index + 1}`}
-                                      type={row?.type ?? null}
-                                      value={input.value || null}
-                                      onChange={input.onChange}
-                                      isDisabled={hasGlobalScope}
-                                    />
-                                  )}
-                                </Field>
-                              </div>
-                              <BaseButton
-                                variant="text-danger"
-                                onClick={() => fields.remove(index)}
-                                disabled={hasGlobalScope}
-                                disabledReason={translate(
-                                  'Not available when a global scope is selected.',
-                                )}
-                                tooltip={translate('Remove')}
-                                iconNode={<Trash />}
-                              />
-                            </div>
-                          );
-                        })}
-                        <BaseButton
-                          variant="tertiary"
-                          size="sm"
-                          onClick={() =>
-                            fields.push({ type: null, entity: null })
-                          }
-                          disabled={hasGlobalScope || typeOptions.length === 0}
-                          disabledReason={
-                            hasGlobalScope
-                              ? translate(
-                                  'Not available when a global scope is selected.',
-                                )
-                              : typeOptions.length === 0
-                                ? translate(
-                                    'Select at least one permission above to enable bindings.',
-                                  )
-                                : undefined
-                          }
-                          iconNode={<Plus />}
-                          label={translate('Add binding')}
-                        />
-                      </>
-                    )}
-                  </FieldArray>
-                </FormGroup>
-
-                <DateGroup
-                  name="expires_at"
-                  validate={required}
-                  minDate={minDate}
-                  placeholder={translate('Select expiration date')}
-                  label={translate('Expiration date')}
-                  required
-                  description={translate(
-                    'The token will stop working after this date.',
-                  )}
-                />
-
-                <StringGroup
-                  name="allowed_networks"
-                  label={translate('Allowed networks')}
-                  description={translate(
-                    'Optional comma-separated list of CIDR networks, e.g. 203.0.113.0/24. Leave empty to allow any source.',
-                  )}
-                />
-              </div>
-            </ModalDialog>
-          </form>
-        );
-      }}
+  return (
+    <Wizard<TokenWizardValues>
+      title={translate('Create personal access token')}
+      steps={steps}
+      wizardForms={STEP_FORMS}
+      onSubmit={handleSubmit}
+      submitLabel={translate('Create token')}
+      initialValues={getInitialValues()}
+      mutators={{ ...arrayMutators }}
+      validate={validate}
+      data={data}
     />
   );
 };

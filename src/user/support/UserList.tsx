@@ -22,6 +22,7 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { ServiceAccountBadge } from '@/user/ServiceAccountBadge';
 
 import { EXTRA_PROFILE_FIELDS } from './extraProfileFields';
 import { IsdBadges } from './IsdBadges';
@@ -60,12 +61,15 @@ const EmailField = ({ row }: { row: User }) => {
   );
 };
 
-const FullNameField = ({ row }: { row: User }) => (
-  <Link
-    state="support-user-manage"
-    params={{ user_uuid: row.uuid }}
-    label={renderFieldOrDash(row.full_name)}
-  />
+export const FullNameField = ({ row }: { row: User }) => (
+  <span className="inline-flex items-center gap-1.5">
+    <Link
+      state="support-user-manage"
+      params={{ user_uuid: row.uuid }}
+      label={renderFieldOrDash(row.full_name)}
+    />
+    <ServiceAccountBadge show={row.is_service_account} />
+  </span>
 );
 
 const OrganizationField = ({ row }: { row: User }) => (
@@ -253,7 +257,7 @@ export const UserList: FunctionComponent = () => {
       title: translate('Full name'),
       render: FullNameField,
       orderField: 'full_name',
-      keys: ['full_name'],
+      keys: ['full_name', 'is_service_account'],
       id: 'full_name',
       copyField: (row) => row.full_name,
     },

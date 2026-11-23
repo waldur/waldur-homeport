@@ -43,12 +43,6 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
     saveFile(blob, 'waldur-site-agent-config.yaml');
   }, [config]);
 
-  // Check if config contains placeholder secrets
-  const hasPlaceholders =
-    config.includes('<YOUR_API_TOKEN_HERE>') ||
-    config.includes('<YOUR_') ||
-    config.includes('PLACEHOLDER');
-
   return (
     <ModalDialog
       title={translate('Site Agent Configuration')}
@@ -89,6 +83,30 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
         </div>
       }
     >
+      <SiteAgentConfigView config={config} />
+    </ModalDialog>
+  );
+};
+
+interface SiteAgentConfigViewProps {
+  config: string;
+  /** What the editor shows, when it differs from the config: a masked token. */
+  displayedConfig?: string;
+}
+
+/** The configuration in a read-only editor, with what is left to do. */
+export const SiteAgentConfigView: FC<SiteAgentConfigViewProps> = ({
+  config,
+  displayedConfig,
+}) => {
+  // Check if config contains placeholder secrets
+  const hasPlaceholders =
+    config.includes('<YOUR_API_TOKEN_HERE>') ||
+    config.includes('<YOUR_') ||
+    config.includes('PLACEHOLDER');
+
+  return (
+    <>
       {hasPlaceholders && (
         <AlertItem
           type="floating"
@@ -102,7 +120,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
 
       <div className="border border-secondary rounded-lg overflow-hidden">
         <MonacoEditor
-          value={config}
+          value={displayedConfig ?? config}
           onChange={() => {}}
           language="yaml"
           theme="vs-dark"
@@ -116,11 +134,13 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
           <strong>{translate('Next steps:')}</strong>
         </p>
         <ol className="mb-0 ps-2.5">
-          <li>
-            {translate(
-              'Replace placeholder values with actual credentials and settings.',
-            )}
-          </li>
+          {hasPlaceholders && (
+            <li>
+              {translate(
+                'Replace placeholder values with actual credentials and settings.',
+              )}
+            </li>
+          )}
           <li>
             {translate(
               'Save this file as config.yaml in your waldur-site-agent installation directory.',
@@ -133,6 +153,6 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
           </li>
         </ol>
       </div>
-    </ModalDialog>
+    </>
   );
 };

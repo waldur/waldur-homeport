@@ -114,3 +114,21 @@ describe('TeamTableComponent with concealed member identity', () => {
     expect(dashed).toHaveLength(3);
   });
 });
+
+describe('TeamTableComponent service accounts', () => {
+  it('marks a service account next to its name', async () => {
+    renderTable(true, { ...row, is_service_account: true } as typeof row);
+    await screen.findByText('John Doe');
+    expect(screen.getByTestId('service-account-badge')).toHaveTextContent(
+      'Service account',
+    );
+  });
+
+  it('leaves a person unmarked', async () => {
+    renderTable(true, { ...row, is_service_account: false } as typeof row);
+    await screen.findByText('John Doe');
+    expect(
+      screen.queryByTestId('service-account-badge'),
+    ).not.toBeInTheDocument();
+  });
+});
