@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { WorkflowDescription } from 'waldur-js-client';
 
+import { diagramPalette } from '@/core/diagram/palette';
 import { renderWithProviders } from '@/test/harness';
 import { ThemeContext, ThemeName } from '@/theme/types';
 
 import { DESCRIPTION } from '../description.fixture';
 
-import { diagramPalette } from './palette';
 import { ProposalStepsChart } from './ProposalStepsGantt';
 import { SwimlaneDiagram } from './SwimlaneDiagram';
 import { WorkflowGantt } from './WorkflowGantt';

@@ -4406,6 +4406,11 @@
       "feature_area": "reports"
     }
   },
+  "All rules, in the order they are asked": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "All selected VPCs must be in OK state.": {
     "context": {
       "feature_area": "mass-actions"
@@ -4990,6 +4995,12 @@
       "primary_ui_type": "label"
     }
   },
+  "Always": {},
+  "Always happens": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "Always included": {
     "context": {
       "primary_ui_type": "label",
@@ -5192,6 +5203,11 @@
   "An option with this internal name already exists.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "An order can end here": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "An organization cannot be its own affiliate.": {
@@ -5741,6 +5757,15 @@
       "primary_ui_type": "label"
     }
   },
+  "Applies: {outcome}": {
+    "context": {
+      "variables": {
+        "outcome": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Apply": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -5920,6 +5945,9 @@
       "feature_area": "list"
     }
   },
+  "Approved by provider owner": {},
+  "Approved by service manager": {},
+  "Approvers approve own": {},
   "Approving changes the end date of this resource immediately. Continue?": {
     "context": {
       "feature_area": "request-end-date-change"
@@ -8629,6 +8657,7 @@
     }
   },
   "Auto-apply compensations when Arrow validates billing": {},
+  "Auto-approval disabled": {},
   "Auto-approval limit": {
     "context": {
       "primary_ui_type": "label",
@@ -8655,6 +8684,7 @@
       "feature_area": "list"
     }
   },
+  "Auto-approved roles": {},
   "Auto-approved?": {
     "context": {
       "feature_area": "list"
@@ -9542,6 +9572,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Basic offering": {},
   "Basics": {},
   "Batch expired": {
     "context": {
@@ -10364,6 +10395,7 @@
       "feature_area": "reviewer-pool"
     }
   },
+  "Built in": {},
   "Builtin components are billed as configured on the Components tab.": {},
   "Bulgaria": {},
   "Bulk import": {
@@ -12289,6 +12321,11 @@
   "Checked": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Checked when the order is placed": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Checked {checked} reviewers, generated {created} suggestions.": {
@@ -14997,6 +15034,7 @@
       "feature_area": "details"
     }
   },
+  "Consumer review": {},
   "Consumer reviewed at": {
     "context": {
       "feature_area": "details"
@@ -21007,6 +21045,7 @@
       "feature_area": "documents"
     }
   },
+  "Does not apply": {},
   "Does not apply to this deployment.": {},
   "Domain": {
     "context": {
@@ -21052,6 +21091,11 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "Done when processing returns": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Dotted arrow": {
@@ -23958,13 +24002,18 @@
   "Erred": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "api-keys"
+      "feature_area": "order-flow"
     }
   },
   "Erred resources": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "provider"
+    }
+  },
+  "Erred, can retry": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Error": {
@@ -24849,6 +24898,7 @@
       "feature_area": "orders"
     }
   },
+  "Execution": {},
   "Execution log": {
     "context": {
       "feature_area": "policies"
@@ -29587,6 +29637,17 @@
       "feature_area": "actions"
     }
   },
+  "Holder of role: {role}": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "order-flow"
+    }
+  },
   "Holders of an evaluator role": {
     "context": {
       "feature_area": "workflow"
@@ -29916,6 +29977,16 @@
   "How often each instance is read: 5 to 1440 minutes, every 6 hours when empty. Every read is one Nova API call per instance. People who manage an instance can have it read faster for a while.": {
     "context": {
       "feature_area": "openstack"
+    }
+  },
+  "How orders for {offering} move from placement to done, and which settings decide each step.": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "order-flow"
     }
   },
   "How parent resource limits are enforced on child resource projects. Default is none.": {
@@ -37231,6 +37302,15 @@
       "feature_area": "qos"
     }
   },
+  "May apply: {outcome}": {
+    "context": {
+      "variables": {
+        "outcome": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "May request changes": {},
   "May tell the applicant too much": {
     "context": {
@@ -42656,6 +42736,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Not editable on the offering": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "Not encrypted": {
     "context": {
       "feature_area": "livekit"
@@ -42831,6 +42916,7 @@
       "feature_area": "proposal"
     }
   },
+  "Not reached: an earlier rule decides": {},
   "Not reached: rejected at {step}": {
     "context": {
       "variables": {
@@ -42910,6 +42996,7 @@
       "feature_area": "wizard"
     }
   },
+  "Not reviewed for this type": {},
   "Not run yet": {
     "context": {
       "feature_area": "scenarios"
@@ -44168,6 +44255,7 @@
     }
   },
   "Offering role groups": {},
+  "Offering setting": {},
   "Offering shared?": {
     "context": {
       "feature_area": "details"
@@ -44868,6 +44956,11 @@
       }
     }
   },
+  "Only for some orders": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "Only groups whose short name matches one of these are selected. A trailing * matches by prefix. Leave empty to match any group.": {
     "context": {
       "feature_area": "sram"
@@ -44987,6 +45080,7 @@
       "feature_area": "questions"
     }
   },
+  "Only sometimes": {},
   "Only staff can add roles.": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -46160,6 +46254,16 @@
       "feature_area": "resource-pending"
     }
   },
+  "Order flow": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
+  "Order flow diagram": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "Order has been approved.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -46220,6 +46324,11 @@
       "feature_area": "details"
     }
   },
+  "Order kind": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "Order now": {
     "context": {
       "primary_ui_type": "label",
@@ -46231,11 +46340,13 @@
       "feature_area": "options"
     }
   },
+  "Order placed": {},
   "Order slug": {
     "context": {
       "feature_area": "details"
     }
   },
+  "Order start date": {},
   "Order statistics and trends for provider": {
     "context": {
       "feature_area": "reporting"
@@ -46271,6 +46382,12 @@
       "feature_area": "deploy"
     }
   },
+  "Ordered by": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
+  "Orderer": {},
   "Orders": {
     "context": {
       "primary_ui_type": "title",
@@ -46296,6 +46413,16 @@
   "Orders created by users holding one of these project or organization roles (on the target project or its organization) skip consumer approval for this offering, regardless of the order-approval permission. Provider review and purchase-order requirements still apply. Independent of the visibility restriction above. Staff-only setting.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Orders of this kind now, by state: {states}": {
+    "context": {
+      "variables": {
+        "states": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "order-flow"
     }
   },
   "Orders pending approval": {
@@ -49370,6 +49497,7 @@
       "feature_area": "data-access"
     }
   },
+  "Platform setting": {},
   "Platform support staff": {
     "context": {
       "feature_area": "data-access"
@@ -50305,6 +50433,7 @@
       "feature_area": "auth"
     }
   },
+  "Pre-approved allocation": {},
   "Pre-filled from the source call. The copy always starts in Draft state.": {
     "context": {
       "feature_area": "details"
@@ -51043,6 +51172,7 @@
       "feature_area": "inputs"
     }
   },
+  "Private offering": {},
   "Private person": {
     "context": {
       "feature_area": "details"
@@ -51357,6 +51487,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Project auto-approval": {},
   "Project classification": {
     "context": {
       "primary_ui_type": "title",
@@ -51981,6 +52112,7 @@
       "feature_area": "details"
     }
   },
+  "Project start": {},
   "Project summary": {
     "context": {
       "primary_ui_type": "label",
@@ -52905,6 +53037,7 @@
       "feature_area": "reporting"
     }
   },
+  "Provider owner terminates": {},
   "Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.": {
     "context": {
       "feature_area": "actions"
@@ -52927,6 +53060,7 @@
       "feature_area": "reporting"
     }
   },
+  "Provider review": {},
   "Provider reviewed at": {
     "context": {
       "feature_area": "details"
@@ -52989,6 +53123,7 @@
       "feature_area": "maintenance"
     }
   },
+  "Provider’s own projects": {},
   "Provides distributed storage for the cluster": {
     "context": {
       "feature_area": "common"
@@ -55500,6 +55635,7 @@
       "feature_area": "integration"
     }
   },
+  "Remote auto-approval": {},
   "Remote category": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -59829,6 +59965,7 @@
       "feature_area": "roles"
     }
   },
+  "Role permission": {},
   "Role removed from profile.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -60390,6 +60527,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "cluster"
+    }
+  },
+  "Rules that decide this step": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Rules to look at": {
@@ -61514,6 +61656,7 @@
       "feature_area": "hpc"
     }
   },
+  "Script auto-approval": {},
   "Script for creation of a resource": {
     "context": {
       "primary_ui_type": "label"
@@ -64549,6 +64692,16 @@
       "feature_area": "project-groups"
     }
   },
+  "Show all rules ({count} more)": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "order-flow"
+    }
+  },
   "Show all {count} lines": {
     "context": {
       "variables": {
@@ -64623,6 +64776,11 @@
   "Show credit field in project create dialog.": {
     "context": {
       "feature_area": "features"
+    }
+  },
+  "Show current orders": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Show custom metrics: the project Metrics tab and the offering metrics a provider adopts.": {
@@ -64766,6 +64924,11 @@
       "feature_area": "options"
     }
   },
+  "Show order flow": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "Show order-period totals": {
     "context": {
       "feature_area": "integration"
@@ -64859,6 +65022,11 @@
   "Show shared": {
     "context": {
       "feature_area": "vm-type-overview"
+    }
+  },
+  "Show skipped steps": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Show start date field in project create dialog.": {
@@ -65271,6 +65439,7 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Site agent offering": {},
   "Site agent reports API key usage per day": {
     "context": {
       "feature_area": "integration"
@@ -65976,6 +66145,7 @@
       "feature_area": "organizations"
     }
   },
+  "Staff orders skip it": {},
   "Staff publish call templates; until then, start from a blank call or import a call file.": {
     "context": {
       "feature_area": "templates"
@@ -82208,6 +82378,7 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Until a PO is attached": {},
   "Untitled": {
     "context": {
       "feature_area": "ai-assistant"
@@ -85975,6 +86146,11 @@
   "Waiting on the applicant": {
     "context": {
       "feature_area": "dry-run"
+    }
+  },
+  "Waits for a report back": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "Waits for a separate manual advance after the step is completed.": {
@@ -89790,6 +89966,11 @@
       "feature_area": "openstack"
     }
   },
+  "depends on the order": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
   "derived from the offering": {
     "context": {
       "feature_area": "wizard"
@@ -90708,6 +90889,16 @@
       "feature_area": "workflow-description"
     }
   },
+  "median {duration}": {
+    "context": {
+      "variables": {
+        "duration": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "order-flow"
+    }
+  },
   "meeting notes": {
     "context": {
       "feature_area": "meeting-notes"
@@ -90933,6 +91124,7 @@
       "feature_area": "views"
     }
   },
+  "off": {},
   "offering accounts": {
     "context": {
       "feature_area": "accounts"
@@ -92002,6 +92194,16 @@
   "the service provider": {
     "context": {
       "feature_area": "posix-id-pools"
+    }
+  },
+  "the step is skipped": {
+    "context": {
+      "feature_area": "order-flow"
+    }
+  },
+  "the step runs": {
+    "context": {
+      "feature_area": "order-flow"
     }
   },
   "the step's actor": {
@@ -93113,6 +93315,15 @@
       "feature_area": "mappings"
     }
   },
+  "{count} d": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "{count} data access log(s) have been deleted.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -93348,6 +93559,15 @@
       "feature_area": "create"
     }
   },
+  "{count} h": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "{count} held": {
     "context": {
       "variables": {
@@ -93498,6 +93718,15 @@
         }
       },
       "feature_area": "pubsub"
+    }
+  },
+  "{count} min": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{count} minutes": {
@@ -94566,6 +94795,24 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "{count} rules decide": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "{count} s": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{count} samples, {first} – {last}": {

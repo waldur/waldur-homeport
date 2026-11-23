@@ -11,6 +11,7 @@ import {
 import { FC, KeyboardEvent, MouseEvent, Ref, useMemo } from 'react';
 import { WorkflowDescription, WorkflowDescriptionStep } from 'waldur-js-client';
 
+import { DiagramPalette, useDiagramPalette } from '@/core/diagram/palette';
 import { translate } from '@/i18n';
 import { StepFormPage } from '@/proposals/update/workflow-steps/stepForm';
 import { outcomeLabel } from '@/proposals/workflow/constants';
@@ -39,7 +40,6 @@ import {
   TerminalKind,
 } from './layout';
 import { progressFill, StepProgressOverlay } from './overlay';
-import { DiagramPalette, useDiagramPalette } from './palette';
 
 // The colours live in the drawing itself, so an exported SVG or PNG looks
 // as it does on the page, in the theme it was drawn in.

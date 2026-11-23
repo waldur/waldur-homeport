@@ -1,6 +1,6 @@
 import { WorkflowProgress, WorkflowProgressStep } from 'waldur-js-client';
 
-import { DiagramPalette } from './palette';
+import { DiagramPalette } from '@/core/diagram/palette';
 
 export type StepProgressOverlay = Pick<
   WorkflowProgressStep,

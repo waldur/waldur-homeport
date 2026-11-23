@@ -5,6 +5,7 @@ import { CallWorkflowStep, ResponsibleRoleEnum } from 'waldur-js-client';
 
 import { HelpIcon, PropertyCard } from 'waldur-ui';
 
+import { ScrollRegion } from '@/core/diagram/ScrollRegion';
 import { translate } from '@/i18n';
 import {
   WorkflowStepDetail,
@@ -18,7 +19,6 @@ import {
   transitionModeLabel,
 } from '@/proposals/workflow/constants';
 import { configuredStages } from '@/proposals/workflow/stages';
-import { ScrollRegion } from '@/proposals/workflow-description/diagram/ScrollRegion';
 
 import './WorkflowSequencePreview.scss';
 

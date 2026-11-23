@@ -1,9 +1,9 @@
 import { FC, Ref, useId, useMemo } from 'react';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
+import { DiagramPalette, useDiagramPalette } from '@/core/diagram/palette';
 import { translate } from '@/i18n';
 
-import { DiagramPalette, useDiagramPalette } from './palette';
 import { dayTicks, RoundPlan } from './schedule';
 
 const LABEL_WIDTH = 220;
