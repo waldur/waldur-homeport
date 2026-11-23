@@ -117,8 +117,8 @@ overrides:
     is_finalized:
       label: Status
       enumOverrides:
-        true: Finalized
-        false: Pending
+        true: Settled
+        false: Not settled
 
   sram_groups:
     filters:
@@ -496,11 +496,11 @@ overrides:
       options:
         - label: Pending
           value: 1
-        - label: Syncing
-          value: 2
         - label: Synced
+          value: 2
+        - label: Validated
           value: 3
-        - label: Failed
+        - label: Reconciled
           value: 4
     report_period_from:
       label: Period from

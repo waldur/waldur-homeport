@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import {
   adminArrowCustomerMappingsDestroy,
   ArrowCustomerMapping,
@@ -6,6 +7,8 @@ import {
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
+
+import { arrowQueryKeys } from '../api';
 
 interface CustomerMappingsBulkDeleteActionProps {
   rows: ArrowCustomerMapping[];
@@ -16,6 +19,7 @@ export const CustomerMappingsBulkDeleteAction = ({
   rows,
   refetch,
 }: CustomerMappingsBulkDeleteActionProps) => {
+  const queryClient = useQueryClient();
   const confirmationMessage = (
     <div>
       <p>
@@ -37,7 +41,13 @@ export const CustomerMappingsBulkDeleteAction = ({
 
   const { mutate, isPending } = useBatchMutation<ArrowCustomerMapping, void>({
     rows,
-    refetch,
+    refetch: () => {
+      refetch();
+      // Deleted customers can be mapped again.
+      queryClient.invalidateQueries({
+        queryKey: arrowQueryKeys.availableCustomers(),
+      });
+    },
     mutationFn: (row) =>
       adminArrowCustomerMappingsDestroy({ path: { uuid: row.uuid } }),
     successMessage: translate(

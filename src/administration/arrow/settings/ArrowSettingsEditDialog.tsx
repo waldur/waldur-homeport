@@ -7,6 +7,7 @@ import {
 
 import { AlertItem } from 'waldur-ui';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { StringGroup, SecretGroup, SelectGroup, BooleanGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
@@ -67,18 +68,22 @@ export const ArrowSettingsEditDialog = ({
     invalidateQueries: [{ queryKey: arrowQueryKeys.settings() }],
   });
 
+  // DRF reports most rejections as field errors, not `detail`.
   const mutationError = submitMutation.error
-    ? submitMutation.error.response?.data?.detail ||
-      submitMutation.error.message ||
-      translate('Failed to update settings')
+    ? format(submitMutation.error) || translate('Failed to update settings')
     : null;
 
   return (
     <Form<FormValues>
-      onSubmit={(values) => submitMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        submitMutation.mutateAsync(values).catch(() => {
+          // Shown in the dialog from submitMutation.error.
+        })
+      }
       initialValues={{
         api_url: settings.api_url,
-        api_key: settings.api_key || '',
+        // The API never returns the key; an empty field keeps the stored one.
+        api_key: '',
         export_type_reference: settings.export_type_reference || '',
         classification_filter: settings.classification_filter || '',
         sync_enabled: settings.sync_enabled,
@@ -115,7 +120,9 @@ export const ArrowSettingsEditDialog = ({
             <SecretGroup
               name="api_key"
               label={translate('API Key')}
-              description={translate('Arrow API key for authentication')}
+              description={translate(
+                'Leave empty to keep the current key. Enter a new key to replace it.',
+              )}
             />
 
             <StringGroup

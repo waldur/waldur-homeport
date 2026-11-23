@@ -18,7 +18,11 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { arrowQueryKeys } from '../api';
+import {
+  arrowQueryKeys,
+  useActiveVendorOfferingMappings,
+  useArrowSettings,
+} from '../api';
 
 interface BillingSyncDialogProps {
   resolve: {
@@ -55,12 +59,26 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
     null,
   );
 
+  const { data: settings } = useArrowSettings();
+  const { data: vendorMappings } = useActiveVendorOfferingMappings(
+    settings?.uuid,
+  );
+  // Only resources of offerings an Arrow vendor is mapped to have Arrow
+  // billing lines.
+  const mappedOfferingUuids = useMemo(
+    () =>
+      Array.from(new Set((vendorMappings ?? []).map((m) => m.offering_uuid))),
+    [vendorMappings],
+  );
   const loadResources = useMemo(
     () =>
       resourceAutocomplete({
         field: ['name', 'url', 'uuid', 'backend_id'],
+        // One comma-separated value: the backend keeps only the last of
+        // repeated params.
+        offering_uuid: [mappedOfferingUuids.join(',')],
       }),
-    [],
+    [mappedOfferingUuids],
   );
 
   const syncMutation = useManagedMutation<any, any, void>({
@@ -80,9 +98,8 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
     refetch,
 
     invalidateQueries: [
-      {
-        queryKey: arrowQueryKeys.billingSyncs(),
-      },
+      { queryKey: arrowQueryKeys.billingSyncs() },
+      { queryKey: [...arrowQueryKeys.all, 'billingSyncStateCounts'] },
     ],
   });
 
@@ -99,9 +116,8 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
     refetch,
 
     invalidateQueries: [
-      {
-        queryKey: arrowQueryKeys.billingSyncs(),
-      },
+      { queryKey: arrowQueryKeys.billingSyncs() },
+      { queryKey: [...arrowQueryKeys.all, 'billingSyncStateCounts'] },
     ],
   });
 
@@ -147,6 +163,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
       <FormField className="mb-2.5">
         <FormLabel>{translate('Resource (optional)')}</FormLabel>
         <AsyncSelect
+          key={mappedOfferingUuids.join(',')}
           placeholder={translate('All resources')}
           loadOptions={loadResources}
           getOptionValue={(option: Resource) => option.uuid}
@@ -157,12 +174,17 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           onChange={(value) => setSelectedResource(value as Resource)}
           noOptionsMessage={() => translate('No resources found')}
           isClearable
-          isDisabled={isPending}
+          // Without mapped offerings the filter would match every resource.
+          isDisabled={isPending || mappedOfferingUuids.length === 0}
         />
         <FormText variant="muted">
-          {translate(
-            'Leave empty to sync all resources. Select a resource to sync only its billing lines.',
-          )}
+          {mappedOfferingUuids.length
+            ? translate(
+                'Leave empty to sync all resources. Select a resource to sync only its billing lines.',
+              )
+            : translate(
+                'Map an Arrow vendor to an offering (Vendor Offerings tab) to pick a single resource.',
+              )}
         </FormText>
       </FormField>
     </ModalDialog>

@@ -15,6 +15,7 @@ import {
 } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
@@ -60,11 +61,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
         form.change('selectedMappings', initialMappings);
         form.change('discoveryComplete', true);
       } catch (e: any) {
-        setError(
-          e.response?.data?.detail ||
-            e.message ||
-            translate('Failed to discover customers'),
-        );
+        setError(format(e) || translate('Failed to discover customers'));
       }
     };
     discover();

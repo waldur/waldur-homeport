@@ -69,6 +69,8 @@ export const CustomerMappingEditDialog = ({
       {
         queryKey: arrowQueryKeys.customerMappings(),
       },
+      // Deactivating or moving a mapping changes who can be mapped anew.
+      { queryKey: arrowQueryKeys.availableCustomers() },
     ],
   });
 
