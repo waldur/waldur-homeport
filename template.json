@@ -18169,7 +18169,11 @@
       "feature_area": "openstack-instance"
     }
   },
-  "Dark theme": {},
+  "Dark theme": {
+    "context": {
+      "feature_area": "theme"
+    }
+  },
   "Dashboard": {
     "context": {
       "primary_ui_type": "title",
@@ -67764,12 +67768,12 @@
   },
   "Switch to dark mode": {
     "context": {
-      "feature_area": "header"
+      "feature_area": "theme"
     }
   },
   "Switch to light mode": {
     "context": {
-      "feature_area": "header"
+      "feature_area": "theme"
     }
   },
   "Switch to one month": {
