@@ -87,16 +87,18 @@ describe('CreateAgentTokenMenuItem', () => {
     });
   });
 
-  it('is disabled with a hint for an owner who is not the offering manager', async () => {
+  it('is enabled for an owner of the service provider organization', async () => {
+    // The backend lists the offering to the owners of its organization when
+    // the organization is a service provider.
     asUser('CUSTOMER.OWNER');
-    mockTargets([]);
+    mockTargets([offeringTarget]);
     render();
     await waitFor(() => expect(button()).toBeInTheDocument());
-    expect(button()).toHaveAttribute('aria-disabled', 'true');
+    expect(button()).not.toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('is hidden from a user who cannot manage the offering team', async () => {
-    asUser('PROJECT.MEMBER');
+  it('is hidden when the backend lists no target, as for an owner of an organization that is not a service provider', async () => {
+    asUser('CUSTOMER.OWNER');
     mockTargets([]);
     render();
     await waitFor(() =>
