@@ -141,8 +141,8 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                   <div>{prefix}</div>
                   <div className="text-quaternary small mt-1">
                     {translate(
-                      'Consumption items appear as "{prefix}: {resource name}" and adjustments as "{prefix} adjustment: {resource name} (additional charge|credit)".',
-                      { prefix },
+                      'Consumption items appear as "{prefix}: {resource}" and adjustments as "{prefix} adjustment: {resource} (additional charge or credit for the month)".',
+                      { prefix, resource: translate('resource name') },
                     )}
                   </div>
                 </>

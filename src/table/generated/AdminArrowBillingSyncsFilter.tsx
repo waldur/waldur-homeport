@@ -12,15 +12,15 @@ export const StateOptions: StateOption[] = [
     value: 1,
   },
   {
-    label: translate('Syncing'),
+    label: translate('Synced'),
     value: 2,
   },
   {
-    label: translate('Synced'),
+    label: translate('Validated'),
     value: 3,
   },
   {
-    label: translate('Failed'),
+    label: translate('Reconciled'),
     value: 4,
   },
 ];
@@ -37,27 +37,27 @@ export const AdminArrowBillingSyncsFilter: FunctionComponent<
       title={translate('State')}
       name="state"
       getValueLabel={(value: StateOption) => value?.label}
-      placeholder={translate('State')}
       options={StateOptions}
       getOptionValue={(option: StateOption) => String(option.value)}
       getOptionLabel={(option: StateOption) => option.label}
       isClearable={true}
+      placeholder={translate('State')}
     />
     <SelectFilter
       title={translate('Period from')}
       name="report_period_from"
       getValueLabel={(value: any) => value?.label}
-      placeholder={translate('Period from')}
       options={props.billingPeriods}
       isClearable={true}
+      placeholder={translate('Period from')}
     />
     <SelectFilter
       title={translate('Period to')}
       name="report_period_to"
       getValueLabel={(value: any) => value?.label}
-      placeholder={translate('Period to')}
       options={props.billingPeriods}
       isClearable={true}
+      placeholder={translate('Period to')}
     />
   </>
 );

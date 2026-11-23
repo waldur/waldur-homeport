@@ -4,6 +4,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { AlertItem } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { url, required } from '@/core/validators';
 import { SubmitButton, StringGroup, SecretGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -40,11 +41,7 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
         setError(data.error || translate('Invalid credentials'));
       }
     } catch (e: any) {
-      setError(
-        e.response?.data?.detail ||
-          e.message ||
-          translate('Failed to validate credentials'),
-      );
+      setError(format(e) || translate('Failed to validate credentials'));
     } finally {
       setValidating(false);
     }

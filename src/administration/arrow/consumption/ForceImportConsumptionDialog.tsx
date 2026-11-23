@@ -17,6 +17,7 @@ import {
   toIsoMonth,
 } from 'waldur-ui';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
 import { SubmitButton } from '@/form';
@@ -197,9 +198,7 @@ export const ForceImportConsumptionDialog = ({
     },
     onError: (error: any) => {
       const errorMessage =
-        error?.response?.data?.error ||
-        error?.message ||
-        translate('Failed to preview consumption data');
+        format(error) || translate('Failed to preview consumption data');
       showError(errorMessage);
     },
   });
@@ -236,9 +235,7 @@ export const ForceImportConsumptionDialog = ({
     },
     onError: (error: any) => {
       const errorMessage =
-        error?.response?.data?.error ||
-        error?.message ||
-        translate('Failed to force import consumption data');
+        format(error) || translate('Failed to force import consumption data');
       showError(errorMessage);
     },
   });

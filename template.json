@@ -3506,6 +3506,11 @@
       "feature_area": "actions"
     }
   },
+  "Adjustment": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "Admin": {
     "context": {
       "primary_ui_type": "label",
@@ -3939,6 +3944,11 @@
   "After the load": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "After the month ends, Arrow's final billing is compared with what was invoiced (Awaiting final billing).": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "After the pool is built, create assignment batches for accepted pool members and send them to the reviewers. In the \"Create assignment\" menu, use \"Manual assignment\", or \"Compute affinities\" and then \"Generate assignments\".": {},
@@ -5469,6 +5479,11 @@
   "Any delivery": {
     "context": {
       "feature_area": "generated"
+    }
+  },
+  "Any difference is added to the current invoice as an adjustment, and the record is Settled. Issued invoices are never changed.": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "Any existing review or scores from this reviewer will be discarded.": {
@@ -7623,11 +7638,6 @@
       "feature_area": "settings"
     }
   },
-  "Arrow API key for authentication": {
-    "context": {
-      "feature_area": "settings"
-    }
-  },
   "Arrow Billing Lines": {
     "context": {
       "feature_area": "mappings"
@@ -7715,6 +7725,11 @@
     }
   },
   "Arrow company display name (End User Company Name). Used for billing sync grouping to match export lines to customer mappings.": {},
+  "Arrow consumption": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "Arrow customer ID (e.g., XSP661245)": {},
   "Arrow integration configured successfully": {
     "context": {
@@ -8770,6 +8785,11 @@
       "feature_area": "update-internal-ips"
     }
   },
+  "Automatic consumption sync is off": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "Automatic reviewer matching": {
     "context": {
       "feature_area": "configuration"
@@ -9099,6 +9119,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "reports"
+    }
+  },
+  "Awaiting final billing": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "Awaiting review": {
@@ -9797,11 +9822,6 @@
       "feature_area": "details"
     }
   },
-  "Billing Period": {
-    "context": {
-      "feature_area": "consumption"
-    }
-  },
   "Billing Sync": {
     "context": {
       "primary_ui_type": "title"
@@ -9918,12 +9938,22 @@
       "feature_area": "mappings"
     }
   },
+  "Billing sync": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Billing sync fetches monthly billing reports from Arrow and creates corresponding records in Waldur. Billing sync records that are validated or reconciled are not updated again.": {
     "context": {
       "feature_area": "settings"
     }
   },
   "Billing sync interval in hours": {},
+  "Billing sync reads invoices through this export type; without one it does nothing.": {
+    "context": {
+      "feature_area": "setup"
+    }
+  },
   "Billing sync triggered": {
     "context": {
       "primary_ui_type": "success_message",
@@ -11356,6 +11386,11 @@
       "action_type": "filter"
     }
   },
+  "Can be changed later in the Arrow settings.": {
+    "context": {
+      "feature_area": "setup"
+    }
+  },
   "Can be handed the offering's part in calls for proposals, such as a technical assessment. Sees nothing of the offering's settings, orders or team.": {
     "context": {
       "feature_area": "team"
@@ -12634,6 +12669,11 @@
     }
   },
   "Choose all users, organizations or offerings.": {},
+  "Choose an export type first; sync needs one.": {
+    "context": {
+      "feature_area": "setup"
+    }
+  },
   "Choose an organization from the dropdown above to view its projects.": {
     "context": {
       "feature_area": "project-detail"
@@ -12881,23 +12921,7 @@
       "feature_area": "ai-assistant"
     }
   },
-  "Cleanup": {
-    "context": {
-      "feature_area": "debug"
-    }
-  },
   "Cleanup Consumption Data": {
-    "context": {
-      "feature_area": "debug"
-    }
-  },
-  "Cleanup completed": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "debug"
-    }
-  },
-  "Cleanup result:": {
     "context": {
       "feature_area": "debug"
     }
@@ -14643,11 +14667,6 @@
       "feature_area": "policies"
     }
   },
-  "Confirmed amount from Arrow billing export. Empty until reconciliation is run.": {
-    "context": {
-      "feature_area": "consumption"
-    }
-  },
   "Confirmed by declaration": {
     "context": {
       "feature_area": "proposal-roles"
@@ -15052,6 +15071,16 @@
   "Consumed (Sell)": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "resources"
+    }
+  },
+  "Consumed (buy)": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
+  "Consumed (sell)": {
+    "context": {
       "feature_area": "consumption"
     }
   },
@@ -15155,14 +15184,14 @@
       "feature_area": "resources"
     }
   },
-  "Consumption items appear as \"{prefix}: {resource name}\" and adjustments as \"{prefix} adjustment: {resource name} (additional charge|credit)\".": {
+  "Consumption items appear as \"{prefix}: {resource}\" and adjustments as \"{prefix} adjustment: {resource} (additional charge or credit for the month)\".": {
     "context": {
       "variables": {
         "prefix": {
           "type": "unknown"
         },
-        "resource name": {
-          "type": "string"
+        "resource": {
+          "type": "unknown"
         }
       },
       "feature_area": "settings"
@@ -15187,6 +15216,11 @@
   "Consumption records track each linked license's consumption per month. The hourly consumption sync runs only while ARROW_CONSUMPTION_SYNC_ENABLED and the settings' sync are both on.": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Consumption sync": {
+    "context": {
+      "feature_area": "billing"
     }
   },
   "Consumption sync interval in hours (default: hourly)": {},
@@ -16115,6 +16149,11 @@
   "Counts all usage since the resource started. Never resets: once reached, it holds until the customer raises or clears it.": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "Counts every consumption record a cleanup without filters would remove, except months already billed on an issued invoice or settled by an import. Nothing is deleted.": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Counts members who joined or left the project during the digest period (the last 7, 14, or 30 days, matching the frequency), grouped by role. Shown only when the team changed.": {
@@ -20617,6 +20656,11 @@
       "feature_area": "providers"
     }
   },
+  "Disabled globally": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Disabled resource actions": {
     "context": {
       "feature_area": "integration"
@@ -21406,6 +21450,22 @@
   "Dry run shows what actions would be triggered without applying changes. Evaluate runs the full evaluation synchronously — it applies actions and creates evaluation logs.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Dry run: {records} consumption records would be removed ({items} invoice items, {compensations} compensation items affected).": {
+    "context": {
+      "variables": {
+        "records": {
+          "type": "unknown"
+        },
+        "items": {
+          "type": "unknown"
+        },
+        "compensations": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "debug"
     }
   },
   "Due": {
@@ -23005,6 +23065,11 @@
   "Enable automated daily updates for EESSI software catalog": {},
   "Enable automated daily updates for Spack software catalog": {},
   "Enable automatic assignment of tickets to support users.": {},
+  "Enable automatic billing sync": {
+    "context": {
+      "feature_area": "setup"
+    }
+  },
   "Enable automatic cleanup of old catalog data": {},
   "Enable automatic creation of offering users": {
     "context": {
@@ -24301,6 +24366,11 @@
       "feature_area": "cookies"
     }
   },
+  "Estimate": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "Estimate usage of {component}": {
     "context": {
       "variables": {
@@ -24309,6 +24379,11 @@
         }
       },
       "feature_area": "plan"
+    }
+  },
+  "Estimate: the month is still running. Awaiting final billing: the month has ended, Arrow's final billing has not been applied yet. Settled: the final amount has been charged, with any difference added to the current invoice.": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "Estimated compensation": {
@@ -25346,6 +25421,11 @@
       "feature_area": "manage"
     }
   },
+  "Export type for billing sync": {
+    "context": {
+      "feature_area": "setup"
+    }
+  },
   "Exporting": {
     "context": {
       "feature_area": "matrix"
@@ -25637,11 +25717,6 @@
       "feature_area": "organizations"
     }
   },
-  "Failed Records": {
-    "context": {
-      "feature_area": "billing"
-    }
-  },
   "Failed orders": {
     "context": {
       "primary_ui_type": "label",
@@ -25670,12 +25745,6 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "assignments"
-    }
-  },
-  "Failed to cleanup consumption": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "debug"
     }
   },
   "Failed to connect to the assistant.": {
@@ -26064,6 +26133,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "steps"
+    }
+  },
+  "Failed to preview the consumption cleanup": {
+    "context": {
+      "primary_ui_type": "error_message"
     }
   },
   "Failed to purge all queues: {error}": {
@@ -26959,6 +27033,11 @@
   "Final (Sell)": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "resources"
+    }
+  },
+  "Final (sell)": {
+    "context": {
       "feature_area": "consumption"
     }
   },
@@ -26995,8 +27074,7 @@
   "Final sell amount from billing export. Reconciliation matches by ARS Subscription ID.": {},
   "Finalized": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "consumption"
+      "feature_area": "resources"
     }
   },
   "Finalized — will overwrite": {
@@ -29909,6 +29987,11 @@
   "How Arrow Integration works": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "How Arrow consumption is billed": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "How Conflict of Interest detection works": {
@@ -34046,6 +34129,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Leave empty to keep the current key. Enter a new key to replace it.": {
+    "context": {
+      "feature_area": "settings"
+    }
+  },
   "Leave empty to keep the current password unchanged.": {
     "context": {
       "feature_area": "create-user-steps"
@@ -36478,6 +36566,11 @@
       "feature_area": "project-templates"
     }
   },
+  "Map an Arrow vendor to an offering (Vendor Offerings tab) to pick a single resource.": {
+    "context": {
+      "feature_area": "billing"
+    }
+  },
   "Map categories": {
     "context": {
       "primary_ui_type": "label"
@@ -38567,7 +38660,7 @@
   "Month": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "credits"
+      "feature_area": "consumption"
     }
   },
   "Month the cost was incurred": {
@@ -42583,7 +42676,7 @@
   "None": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "demo-presets"
+      "feature_area": "setup"
     }
   },
   "None completed yet": {
@@ -43170,6 +43263,11 @@
   "Not set: placeholder roles carry no permissions.": {
     "context": {
       "feature_area": "sram"
+    }
+  },
+  "Not settled": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Not shared: this offering holds its own accounts": {
@@ -48438,12 +48536,7 @@
   "Pending": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "consumption"
-    }
-  },
-  "Pending Records": {
-    "context": {
-      "feature_area": "billing"
+      "feature_area": "resources"
     }
   },
   "Pending account linking": {
@@ -48658,11 +48751,6 @@
   "Pending: Terms and conditions not accepted": {
     "context": {
       "feature_area": "support"
-    }
-  },
-  "Pending: provisional amount from Arrow API. Finalized: confirmed by billing export. Reconciled: adjustment applied if final differs from consumed.": {
-    "context": {
-      "feature_area": "consumption"
     }
   },
   "Pending: submitted or in review. Closed: rejected or canceled. Amounts are in each component’s unit, per its limit period as requested; a pool counts each award over its whole length.": {
@@ -50889,6 +50977,11 @@
   "Preview changes to account settings": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Preview cleanup": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Preview commands": {
@@ -54927,6 +55020,7 @@
   },
   "Reconciled": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "consumption"
     }
   },
@@ -55018,7 +55112,7 @@
   "Recorded": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "meeting-notes"
+      "feature_area": "consumption"
     }
   },
   "Recorded as granted credit: it is spent first and expires on the end date. To record a prepayment, create the credit with 0 and top it up.": {
@@ -55047,6 +55141,11 @@
     }
   },
   "Records being created, changed or deleted in the admin panel.": {},
+  "Records only change when you run Debug → Sync consumption. Turn on \"Arrow consumption sync enabled\" under Sync settings to update them automatically.": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "Recover": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -56067,11 +56166,6 @@
   "Remove organization": {
     "context": {
       "feature_area": "details"
-    }
-  },
-  "Remove orphaned or stale consumption records.": {
-    "context": {
-      "feature_area": "debug"
     }
   },
   "Remove password": {
@@ -64678,6 +64772,12 @@
   },
   "Settings that describe an offering itself, such as its plans and components.": {},
   "Settings update": {},
+  "Settled": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "consumption"
+    }
+  },
   "Setup": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -68047,11 +68147,6 @@
       "feature_area": "reviewer"
     }
   },
-  "Sync Status": {
-    "context": {
-      "feature_area": "billing"
-    }
-  },
   "Sync all users": {
     "context": {
       "feature_area": "providers"
@@ -68098,6 +68193,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "mappings"
+    }
+  },
+  "Sync is paused in the Arrow settings, so records only change when you run Debug → Sync consumption. Resume sync on the Overview tab to update them automatically.": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "Sync maintenance with SLURM reservations": {
@@ -68157,11 +68257,6 @@
   "Synced": {
     "context": {
       "primary_ui_type": "label"
-    }
-  },
-  "Synced Records": {
-    "context": {
-      "feature_area": "billing"
     }
   },
   "Synced passkey": {},
@@ -68227,11 +68322,6 @@
   "Synchronized from identity provider": {
     "context": {
       "feature_area": "support"
-    }
-  },
-  "Syncing": {
-    "context": {
-      "primary_ui_type": "label"
     }
   },
   "Syncing historical consumption": {
@@ -69444,6 +69534,11 @@
   "The amount cannot be changed.": {
     "context": {
       "feature_area": "resource-requests-step"
+    }
+  },
+  "The amount on Arrow's final billing for the month. Empty until the month has ended and been reconciled.": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "The announcement has been updated.": {
@@ -73323,6 +73418,11 @@
       "feature_area": "shared"
     }
   },
+  "This Arrow account has no billing export types. Set one in the Arrow settings once it has.": {
+    "context": {
+      "feature_area": "setup"
+    }
+  },
   "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": {
     "context": {
       "feature_area": "support"
@@ -76520,7 +76620,7 @@
   "UUID": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "consumption"
+      "feature_area": "event-subscriptions"
     }
   },
   "Un-downscaled": {},
@@ -83681,6 +83781,11 @@
       "feature_area": "usage"
     }
   },
+  "Usage reported by Arrow so far, at sell price. This is what the month's invoice item charges while the month runs.": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "Usage reports not yet loaded": {
     "context": {
       "feature_area": "reports"
@@ -85363,7 +85468,11 @@
     }
   },
   "Validate TLS certificate of FreeIPA web interface / REST API": {},
-  "Validated": {},
+  "Validated": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Validated At": {
     "context": {
       "primary_ui_type": "title",
@@ -87495,6 +87604,16 @@
   "Which target plan each source plan becomes. A plan a moved resource or order uses must be mapped.": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "While a month runs, each license gets one \"{prefix}\" item on that month's invoice, updated on every consumption sync (Estimate).": {
+    "context": {
+      "variables": {
+        "prefix": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "consumption"
     }
   },
   "While changes are requested": {
@@ -91953,6 +92072,11 @@
   "resource invitations": {
     "context": {
       "feature_area": "projects"
+    }
+  },
+  "resource name": {
+    "context": {
+      "feature_area": "settings"
     }
   },
   "resource options": {

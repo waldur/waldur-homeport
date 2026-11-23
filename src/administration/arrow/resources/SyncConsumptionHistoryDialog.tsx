@@ -15,6 +15,7 @@ import {
   toIsoMonth,
 } from 'waldur-ui';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -79,9 +80,7 @@ export const SyncConsumptionHistoryDialog = ({
     },
     onError: (error: any) => {
       const errorMessage =
-        error?.response?.data?.error ||
-        error?.message ||
-        translate('Failed to sync consumption history');
+        format(error) || translate('Failed to sync consumption history');
       showError(errorMessage);
     },
   });

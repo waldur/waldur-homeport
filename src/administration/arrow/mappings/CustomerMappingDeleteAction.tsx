@@ -16,7 +16,10 @@ export const CustomerMappingDeleteAction = ({
 }) => {
   const { mutate, isPending } = useManagedMutation<any, any, string>({
     mutationFn: (uuid) => adminArrowCustomerMappingsDestroy({ path: { uuid } }),
-    invalidateQueries: [{ queryKey: arrowQueryKeys.customerMappings() }],
+    invalidateQueries: [
+      { queryKey: arrowQueryKeys.customerMappings() },
+      { queryKey: arrowQueryKeys.availableCustomers() },
+    ],
     refetch,
     successMessage: translate('Customer mapping has been deleted.'),
     errorMessage: translate('Unable to delete customer mapping.'),

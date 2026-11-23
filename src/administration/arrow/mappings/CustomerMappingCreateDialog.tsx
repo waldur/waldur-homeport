@@ -102,7 +102,10 @@ export const CustomerMappingCreateDialog = ({
       setError(format(e) || translate('Failed to create mapping'));
     },
 
-    invalidateQueries: [{ queryKey: arrowQueryKeys.customerMappings() }],
+    invalidateQueries: [
+      { queryKey: arrowQueryKeys.customerMappings() },
+      { queryKey: arrowQueryKeys.availableCustomers() },
+    ],
   });
 
   if (isLoadingSettings || isLoadingAvailable) {

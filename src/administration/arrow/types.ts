@@ -21,4 +21,7 @@ export interface ArrowSetupFormValues {
   suggestions: CustomerMappingSuggestion[];
   exportTypes: ExportTypeCompatibility[];
   selectedMappings: Record<string, string>; // arrow_reference -> waldur_customer_uuid
+  // Unset until the admin picks one; the preview step defaults it.
+  export_type_reference?: string;
+  sync_enabled?: boolean;
 }

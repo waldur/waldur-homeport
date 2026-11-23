@@ -26,7 +26,8 @@ export const ArrowCustomerMappingAutocomplete: FunctionComponent<
 > = (props) => {
   const loadOptions = useMemo(
     () =>
-      createLoadOptions(adminArrowCustomerMappingsList, 'waldur_customer', {
+      // Matches organization, Arrow company and reference, as the label shows.
+      createLoadOptions(adminArrowCustomerMappingsList, 'query' as any, {
         is_active: true,
       }),
     [],

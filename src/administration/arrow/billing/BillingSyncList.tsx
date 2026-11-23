@@ -74,7 +74,7 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
     syncFiltersToURL: true,
     fetchData: createFetcher(adminArrowBillingSyncsList),
     filter,
-    queryField: 'arrow_reference',
+    queryField: 'query',
     mandatoryFields,
   });
 

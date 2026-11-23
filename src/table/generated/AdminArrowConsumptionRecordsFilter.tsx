@@ -13,11 +13,11 @@ import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const IsFinalizedOptions: IsFinalizedOption[] = [
   {
-    label: translate('Pending'),
+    label: translate('Not settled'),
     value: false,
   },
   {
-    label: translate('Finalized'),
+    label: translate('Settled'),
     value: true,
   },
 ];
@@ -32,22 +32,22 @@ export const AdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
       title={translate('Organization')}
       name="customer_uuid"
       getValueLabel={(value: Customer) => value?.name}
-      placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
       defaultOptions
       getOptionValue={(option: Customer) => String(option.uuid || '')}
       getOptionLabel={(option: Customer) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Organization')}
     />
     <SelectFilter
       title={translate('Status')}
       name="is_finalized"
       getValueLabel={(value: IsFinalizedOption) => value?.label}
-      placeholder={translate('Status')}
       options={IsFinalizedOptions}
       getOptionValue={(option: IsFinalizedOption) => String(option.value)}
       getOptionLabel={(option: IsFinalizedOption) => option.label}
       isClearable={true}
+      placeholder={translate('Status')}
     />
   </>
 );
