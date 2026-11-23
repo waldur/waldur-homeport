@@ -6,28 +6,37 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
-const BillingSyncDialog = lazyComponent(() =>
-  import('./BillingSyncDialog').then((module) => ({
-    default: module.BillingSyncDialog,
+import type { BillingAction } from './BillingChangesWizard';
+
+const BillingChangesWizard = lazyComponent(() =>
+  import('./BillingChangesWizard').then((module) => ({
+    default: module.BillingChangesWizard,
   })),
 );
 
 interface BillingSyncButtonProps {
-  refetch: () => void;
+  refetch?: () => void;
+  action?: BillingAction;
+  label?: string;
 }
 
-export const BillingSyncButton = ({ refetch }: BillingSyncButtonProps) => {
+/** Opens the Billing changes wizard: choose, preview, then apply. */
+export const BillingSyncButton = ({
+  refetch,
+  action,
+  label,
+}: BillingSyncButtonProps) => {
   const { openDialog } = useModal();
 
   return (
     <BaseButton
-      onClick={() => {
-        openDialog(BillingSyncDialog, {
-          resolve: { refetch },
-          size: 'lg',
-        });
-      }}
-      label={translate('Sync billing')}
+      onClick={() =>
+        openDialog(BillingChangesWizard, {
+          resolve: { refetch, action },
+          size: 'xl',
+        })
+      }
+      label={label || translate('Billing changes')}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
       variant="primary"
       size="lg"
