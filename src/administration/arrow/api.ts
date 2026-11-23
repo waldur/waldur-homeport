@@ -8,6 +8,7 @@ import {
   adminArrowSettingsDiscoverCustomers,
   adminArrowSettingsList,
   adminArrowSettingsValidateCredentials,
+  adminArrowVendorOfferingMappingsList,
   type ArrowCredentialsRequest,
   type DiscoverCustomersRequestRequest,
 } from 'waldur-js-client';
@@ -34,6 +35,8 @@ export const arrowQueryKeys = {
     [...arrowQueryKeys.all, 'consumptionStatistics'] as const,
   consumptionStatus: () =>
     [...arrowQueryKeys.all, 'consumptionStatus'] as const,
+  vendorOfferingMappings: (settingsUuid?: string) =>
+    [...arrowQueryKeys.all, 'vendorOfferingMappings', settingsUuid] as const,
 };
 
 // === Query Hooks ===
@@ -48,6 +51,19 @@ export const useArrowSettings = () =>
       return response.data?.[0] ?? null;
     },
     staleTime: FAST_STALE_TIME,
+  });
+
+/** Fetch active Arrow vendor → Waldur offering mappings */
+export const useActiveVendorOfferingMappings = (settingsUuid?: string) =>
+  useQuery({
+    queryKey: arrowQueryKeys.vendorOfferingMappings(settingsUuid),
+    queryFn: async () => {
+      const response = await adminArrowVendorOfferingMappingsList({
+        query: { settings_uuid: settingsUuid, is_active: true, page_size: 200 },
+      });
+      return response.data || [];
+    },
+    enabled: Boolean(settingsUuid),
   });
 
 /** Fetch available Arrow customers (not yet mapped) with suggestions */

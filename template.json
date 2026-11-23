@@ -7678,7 +7678,7 @@
   },
   "Arrow settings not configured": {
     "context": {
-      "feature_area": "mappings"
+      "feature_area": "consumption"
     }
   },
   "Arrow settings updated": {
@@ -11984,6 +11984,12 @@
   "Change vs the previous 30 days": {},
   "Change vs the same days of the previous month": {},
   "Change vs the same days of the previous quarter": {},
+  "Change where a site agent connects, what it runs and what access it grants": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "Changed": {
     "context": {
       "feature_area": "proposal"
@@ -25658,6 +25664,11 @@
   "Failed to load Arrow customers. Please try again.": {
     "context": {
       "feature_area": "mappings"
+    }
+  },
+  "Failed to load Arrow offering mappings": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "Failed to load Arrow settings": {
@@ -41001,6 +41012,11 @@
       "feature_area": "credits"
     }
   },
+  "No offerings are mapped to Arrow vendors. Map a vendor to an offering first.": {
+    "context": {
+      "feature_area": "consumption"
+    }
+  },
   "No offerings found": {
     "context": {
       "feature_area": "broadcasts"
@@ -41558,11 +41574,6 @@
   "No resources recommended.": {
     "context": {
       "feature_area": "ranking"
-    }
-  },
-  "No resources with backend ID": {
-    "context": {
-      "feature_area": "consumption"
     }
   },
   "No response": {
@@ -43338,7 +43349,7 @@
   "Number of days to retain SLURM policy evaluation log entries before automatic cleanup.": {},
   "Number of days to retain old catalog versions": {},
   "Number of days to retain table size history data.": {},
-  "Number of days to retain user data access logs before automatic cleanup.": {},
+  "Number of days to retain user data access logs before automatic cleanup. 0 keeps them forever.": {},
   "Number of extra days after project end date before resources are terminated. Overrides customer-level setting (organization default: {days} days).": {
     "context": {
       "variables": {
@@ -44795,7 +44806,7 @@
       "feature_area": "manage"
     }
   },
-  "Only resources with an Arrow license reference are shown": {
+  "Only resources of offerings mapped to an Arrow vendor are shown": {
     "context": {
       "feature_area": "consumption"
     }
@@ -60443,6 +60454,11 @@
       "feature_area": "integration"
     }
   },
+  "SCIM login port": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "SCIM user synchronization has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -60670,6 +60686,11 @@
     }
   },
   "SSH keys being added or removed.": {},
+  "SSH port clients should use for every host in SCIM login nodes. When unset, clients use port 22. Outbound SCIM entitlements carry the hostname only and ignore this value.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "SSH public key": {
     "context": {
       "primary_ui_type": "label",

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
@@ -18,6 +18,7 @@ import {
 } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingErred } from '@/core/LoadingErred';
 import { SubmitButton } from '@/form';
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
@@ -27,6 +28,8 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { SimpleTable } from '@/table/SimpleTable';
+
+import { useArrowSettings, useActiveVendorOfferingMappings } from '../api';
 
 type Phase = 'form' | 'preview' | 'result';
 
@@ -127,13 +130,52 @@ export const ForceImportConsumptionDialog = ({
   const [periodTo, setPeriodTo] = useState(defaultRange.end);
   const [previewData, setPreviewData] = useState<PreviewPeriod[]>([]);
 
+  const settingsQuery = useArrowSettings();
+  const settings = settingsQuery.data;
+  const mappingsQuery = useActiveVendorOfferingMappings(settings?.uuid);
+  const vendorMappings = mappingsQuery.data;
+  const isLoadingOfferings =
+    settingsQuery.isLoading || (Boolean(settings) && mappingsQuery.isLoading);
+  const offeringsError = settingsQuery.error || mappingsQuery.error;
+
+  // Only resources of offerings that an Arrow vendor is mapped to can have
+  // Arrow consumption.
+  const mappedOfferingUuids = useMemo(
+    () =>
+      Array.from(new Set((vendorMappings ?? []).map((m) => m.offering_uuid))),
+    [vendorMappings],
+  );
+
   const loadResources = useMemo(
     () =>
       resourceAutocomplete({
-        field: ['name', 'url', 'uuid', 'backend_id', 'offering_name'],
+        field: [
+          'name',
+          'url',
+          'uuid',
+          'backend_id',
+          'offering_name',
+          'offering_uuid',
+        ],
+        // The backend reads one comma-separated value; repeated params would
+        // keep only the last offering.
+        offering_uuid: [mappedOfferingUuids.join(',')],
       }),
-    [],
+    [mappedOfferingUuids],
   );
+
+  // Drop a picked resource whose offering is no longer mapped, but only while
+  // picking: preview and import act on the resource already chosen.
+  const offeringsKey = mappedOfferingUuids.join(',');
+  useEffect(() => {
+    if (
+      phase === 'form' &&
+      selectedResource &&
+      !mappedOfferingUuids.includes(selectedResource.offering_uuid)
+    ) {
+      setSelectedResource(null);
+    }
+  }, [phase, selectedResource, mappedOfferingUuids]);
 
   const previewMutation = useMutation({
     mutationFn: async () => {
@@ -209,9 +251,41 @@ export const ForceImportConsumptionDialog = ({
         )}
       </p>
 
+      {offeringsError ? (
+        <LoadingErred
+          message={translate('Failed to load Arrow offering mappings')}
+          loadData={() =>
+            settings ? mappingsQuery.refetch() : settingsQuery.refetch()
+          }
+        />
+      ) : isLoadingOfferings ? null : !settings ? (
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-2.5"
+          title={translate('Arrow settings not configured')}
+        />
+      ) : mappedOfferingUuids.length === 0 ? (
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-2.5"
+          title={translate(
+            'No offerings are mapped to Arrow vendors. Map a vendor to an offering first.',
+          )}
+        />
+      ) : null}
+
       <FormField className="mb-2.5">
         <FormLabel>{translate('Resource')}</FormLabel>
         <AsyncSelect
+          key={offeringsKey}
+          isDisabled={
+            isLoadingOfferings ||
+            Boolean(offeringsError) ||
+            mappedOfferingUuids.length === 0
+          }
+          isLoading={isLoadingOfferings}
           placeholder={translate('Select resource...')}
           loadOptions={loadResources}
           getOptionValue={(option: Resource) => option.uuid}
@@ -220,12 +294,12 @@ export const ForceImportConsumptionDialog = ({
           }
           value={selectedResource}
           onChange={(value) => setSelectedResource(value as Resource)}
-          noOptionsMessage={() => translate('No resources with backend ID')}
+          noOptionsMessage={() => translate('No resources found')}
           isClearable
         />
         <FormText variant="muted">
           {translate(
-            'Only resources with an Arrow license reference are shown',
+            'Only resources of offerings mapped to an Arrow vendor are shown',
           )}
         </FormText>
       </FormField>
