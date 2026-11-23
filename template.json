@@ -5115,7 +5115,7 @@
   "Amount": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "affiliate-earnings"
+      "feature_area": "resources"
     }
   },
   "Amount ({currency})": {
@@ -32622,7 +32622,7 @@
   "Invoice": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "payments"
+      "feature_area": "resources"
     }
   },
   "Invoice Item Prefix": {
@@ -32744,7 +32744,7 @@
   },
   "Invoice items": {
     "context": {
-      "feature_area": "details"
+      "feature_area": "resources"
     }
   },
   "Invoice items have been removed.": {
@@ -33126,6 +33126,12 @@
     }
   },
   "Italy": {},
+  "Item": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "resources"
+    }
+  },
   "Item name": {
     "context": {
       "primary_ui_type": "title",
@@ -33155,6 +33161,11 @@
       "primary_ui_type": "title",
       "feature_area": "billing",
       "action_type": "read"
+    }
+  },
+  "Items appear when consumption or billing is synced from Arrow, or when a license is imported.": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "Items on closed invoices": {
@@ -33650,7 +33661,7 @@
   "Kind": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "metrics"
+      "feature_area": "resources"
     }
   },
   "Kind of credit": {
@@ -41311,6 +41322,11 @@
       "feature_area": "list"
     }
   },
+  "No invoice items for this resource yet.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "No invoices": {
     "context": {
       "feature_area": "details"
@@ -47327,7 +47343,7 @@
   "Other": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "service-desk"
+      "feature_area": "resources"
     }
   },
   "Other (manual input)": {
@@ -76497,6 +76513,11 @@
       }
     }
   },
+  "Total, canceled invoices excluded": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "Total:": {
     "context": {
       "feature_area": "reallocate-limits"
@@ -79640,6 +79661,11 @@
   "Unable to load the email configuration": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "Unable to load the invoice items.": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "Unable to load the preview.": {
@@ -86489,6 +86515,11 @@
   "View identities": {
     "context": {
       "feature_area": "posix-id-pools"
+    }
+  },
+  "View invoice items": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "View items": {
