@@ -4,7 +4,7 @@ import {
   ArrowConsumptionRecord,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, HelpIcon, PropertyItem } from 'waldur-ui';
+import { AlertItem, HelpIcon, PropertyItem } from 'waldur-ui';
 
 import { formatMonth } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -25,31 +25,7 @@ import { useTable } from '@/table/useTable';
 import { useArrowConsumptionStatus, useArrowSettings } from '../api';
 
 import { ForceImportConsumptionButton } from './ForceImportConsumptionButton';
-
-const monthHasEnded = (billingPeriod: string) => {
-  const start = new Date(`${billingPeriod}T00:00:00`);
-  const nextMonth = new Date(start.getFullYear(), start.getMonth() + 1, 1);
-  return nextMonth <= new Date();
-};
-
-const RecordStatus = ({ row }: { row: ArrowConsumptionRecord }) => {
-  if (row.is_finalized) {
-    return (
-      <Badge variant="success" shape="pill" tone="outline">
-        {translate('Settled')}
-      </Badge>
-    );
-  }
-  return monthHasEnded(row.billing_period) ? (
-    <Badge variant="warning" shape="pill" tone="outline">
-      {translate('Awaiting final billing')}
-    </Badge>
-  ) : (
-    <Badge variant="neutral" shape="pill" tone="outline">
-      {translate('Estimate')}
-    </Badge>
-  );
-};
+import { RecordStatus } from './RecordStatus';
 
 const HowConsumptionIsBilled = () => {
   const { data: status } = useArrowConsumptionStatus();

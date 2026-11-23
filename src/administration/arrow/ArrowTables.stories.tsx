@@ -367,7 +367,8 @@ export const ConsumptionRecords: Story = {
 };
 
 export const ConsumptionHistoryDialog: Story = {
-  play: showsFixture('2026-01-01'),
+  // Months show as "January 2026".
+  play: showsFixture('January 2026'),
   render: () => (
     <ViewConsumptionHistoryDialog resolve={{ resource: RESOURCE }} />
   ),

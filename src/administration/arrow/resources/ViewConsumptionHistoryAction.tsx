@@ -14,15 +14,14 @@ const ViewConsumptionHistoryDialog = lazyComponent(() =>
 
 export const ViewConsumptionHistoryAction: DropdownActionItemType<Resource> = ({
   row,
+  refetch,
 }) => {
-  if (!row.backend_id) {
-    return null;
-  }
   return (
     <DialogActionItem
       title={translate('View consumption history')}
       modalComponent={ViewConsumptionHistoryDialog}
       resource={row}
+      extraResolve={{ refetch }}
       iconNode={<ClockCounterClockwiseIcon weight="bold" />}
     />
   );

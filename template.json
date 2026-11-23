@@ -7742,8 +7742,14 @@
       "feature_area": "debug"
     }
   },
+  "Arrow license": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "resources"
+    }
+  },
   "Arrow license reference (e.g., XSP12345)": {},
-  "Arrow license reference set by import, by linking resources, or with \"Set backend ID\". Used by \"Sync consumption history\" and by the customer billing summary.": {},
+  "Arrow license reference set by import, by linking resources, or with \"Link to Arrow license\". Used by \"Sync consumption history\" and by the customer billing summary.": {},
   "Arrow licenses can be imported as Waldur marketplace resources. The import wizard guides you through selecting a customer, offering, project, and licenses.": {
     "context": {
       "feature_area": "settings"
@@ -7751,6 +7757,11 @@
   },
   "Arrow partner name (auto-discovered)": {},
   "Arrow partner reference (auto-discovered)": {},
+  "Arrow resources are those of offerings mapped to an Arrow vendor. Map a vendor to an offering first.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "Arrow settings deleted": {
     "context": {
       "primary_ui_type": "success_message",
@@ -9397,7 +9408,7 @@
   "Backend ID": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "resources"
+      "feature_area": "sram"
     }
   },
   "Backend ID display label": {
@@ -15063,12 +15074,6 @@
       "feature_area": "consumption"
     }
   },
-  "Consumed (Sell)": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "resources"
-    }
-  },
   "Consumed (buy)": {
     "context": {
       "feature_area": "consumption"
@@ -15076,6 +15081,7 @@
   },
   "Consumed (sell)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -15175,6 +15181,11 @@
     }
   },
   "Consumption history": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
+  "Consumption is tracked per Arrow license. Link the resource to its license first (Link to Arrow license in the row menu, or Link resources on the customer mapping).": {
     "context": {
       "feature_area": "resources"
     }
@@ -27025,14 +27036,9 @@
       "feature_area": "consumption"
     }
   },
-  "Final (Sell)": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "resources"
-    }
-  },
   "Final (sell)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -27067,11 +27073,6 @@
     }
   },
   "Final sell amount from billing export. Reconciliation matches by ARS Subscription ID.": {},
-  "Finalized": {
-    "context": {
-      "feature_area": "resources"
-    }
-  },
   "Finalized — will overwrite": {
     "context": {
       "feature_area": "consumption"
@@ -28594,6 +28595,11 @@
   "Go back to the app and connect it again. If it keeps failing, contact your Waldur administrator.": {
     "context": {
       "feature_area": "oauth"
+    }
+  },
+  "Go to Vendor Offerings": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "Go to configuration": {
@@ -34794,8 +34800,9 @@
   "Lines already written on invoices. They are not moved: they are rewritten in place, as far as the invoice policy allows.": {},
   "Link": {
     "context": {
-      "primary_ui_type": "title",
-      "feature_area": "mappings"
+      "primary_ui_type": "submit_button",
+      "feature_area": "mappings",
+      "action_type": "create"
     }
   },
   "Link OpenStack Instance": {
@@ -34814,6 +34821,11 @@
   "Link resources": {
     "context": {
       "feature_area": "mappings"
+    }
+  },
+  "Link to Arrow license": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "Link to Waldur Resource": {},
@@ -40202,6 +40214,11 @@
       "feature_area": "setup"
     }
   },
+  "No Arrow offerings yet": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "No CPU targets are available for this catalog version. Sync the catalog or choose another version.": {
     "context": {
       "feature_area": "software-catalogs"
@@ -40748,7 +40765,12 @@
       "feature_area": "mappings"
     }
   },
-  "No consumption records found for this resource.": {
+  "No consumption records: the resource has no license.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
+  "No consumption synced for this license yet. Use Sync history to fetch it from Arrow.": {
     "context": {
       "feature_area": "resources"
     }
@@ -45040,6 +45062,11 @@
       "feature_area": "service-providers"
     }
   },
+  "One record per month, created when consumption for this license is synced from Arrow.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "One resource": {
     "context": {
       "feature_area": "service-providers"
@@ -48531,7 +48558,7 @@
   "Pending": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "resources"
+      "feature_area": "celery"
     }
   },
   "Pending account linking": {
@@ -55140,6 +55167,11 @@
       "feature_area": "chat"
     }
   },
+  "Records appear as the consumption sync runs, or right away with Sync history, which fetches the past months from Arrow.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "Records being created, changed or deleted in the admin panel.": {},
   "Records only change when you run Debug → Sync consumption. Turn on \"Arrow consumption sync enabled\" under Sync settings to update them automatically.": {
     "context": {
@@ -58614,6 +58646,11 @@
   "Resources keep their values under this name, so it cannot be changed. To pair with another order option, delete this option and add a new one.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Resources of offerings mapped to an Arrow vendor on the Vendor Offerings tab. A resource linked to a license in another offering is billed through Arrow but is not listed here.": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "Resources of the organization by project, with limits and usage": {
@@ -68195,6 +68232,11 @@
       "feature_area": "mappings"
     }
   },
+  "Sync history": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "Sync is paused in the Arrow settings, so records only change when you run Debug → Sync consumption. Resume sync on the Overview tab to update them automatically.": {
     "context": {
       "feature_area": "consumption"
@@ -69386,6 +69428,16 @@
       "feature_area": "mappings"
     }
   },
+  "The ArrowSphere license reference (XSP…) this resource is billed through. Consumption and billing lines are matched to the resource by it. Empty means the resource is not linked to a license yet: use Link to Arrow license in the row menu.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
+  "The ArrowSphere license reference (XSP…). Consumption and billing lines for this license will be billed through this resource.": {
+    "context": {
+      "feature_area": "resources"
+    }
+  },
   "The CPU quota is over the limit": {
     "context": {
       "feature_area": "deploy"
@@ -69443,7 +69495,7 @@
       "feature_area": "pubsub"
     }
   },
-  "The Resources tab shows all Waldur resources that are not terminated. Use \"Set backend ID\" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.": {
+  "The Resources tab shows the resources, not terminated, of offerings mapped to an Arrow vendor. Use \"Link to Arrow license\" in the row menu to link a resource to its license, or the Import button to create new resources from Arrow licenses.": {
     "context": {
       "feature_area": "settings"
     }
@@ -71556,6 +71608,16 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "The organization {organization} is not mapped to an Arrow customer. Map it on the Customer Mappings tab first.": {
+    "context": {
+      "variables": {
+        "organization": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "resources"
+    }
+  },
   "The outcome you record stands in for the work the step is still waiting for.": {
     "context": {
       "feature_area": "workflow"
@@ -72885,6 +72947,11 @@
   "The value shown to the customer is the component limit multiplied by this factor": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "The vendor's own subscription ID (for example the Azure subscription), as found by the resource sync. Shown only when it differs from the Arrow license.": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "The volume is read with {instance}, the instance it is attached to: read {instance} and its volumes more often for a while. Afterwards they are read at the usual interval again.": {
@@ -74473,6 +74540,11 @@
   "This resource has no buckets yet.": {
     "context": {
       "feature_area": "s3-browser"
+    }
+  },
+  "This resource is not linked to an Arrow license": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "This resource is paused, so none of its keys is served.": {
@@ -79196,6 +79268,11 @@
   "Unable to load templates": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Unable to load the Arrow vendor mappings.": {
+    "context": {
+      "feature_area": "resources"
     }
   },
   "Unable to load the POSIX groups of this project.": {
@@ -85681,6 +85758,12 @@
   "Vendor offering mappings": {
     "context": {
       "feature_area": "vendorOfferings"
+    }
+  },
+  "Vendor subscription": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "resources"
     }
   },
   "Venue": {
