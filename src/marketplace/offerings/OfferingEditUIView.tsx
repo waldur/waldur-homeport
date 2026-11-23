@@ -21,6 +21,7 @@ import {
 } from '../common/registry';
 
 import { isAdvancedIntegrationVisible } from './update/integration/advancedIntegration';
+import { isAgentConfigurationVisible } from './update/integration/agentConfiguration';
 import { offeringOwnsPricing } from './utils';
 
 const OverviewSection = lazyComponent(() =>
@@ -44,6 +45,12 @@ const ResourceDisplayOptionsSection = lazyComponent(() =>
 const BackendIdRulesSection = lazyComponent(() =>
   import('./update/integration/BackendIdRulesSection').then((module) => ({
     default: module.BackendIdRulesSection,
+  })),
+);
+
+const AgentConfigurationSection = lazyComponent(() =>
+  import('./update/integration/AgentConfigurationSection').then((module) => ({
+    default: module.AgentConfigurationSection,
   })),
 );
 
@@ -139,6 +146,11 @@ const buildIntegrationTab = (offering: Offering): PageBarTab => {
         key: 'credentials',
         component: CredentialsSection,
         title: translate('Credentials'),
+      },
+      isAgentConfigurationVisible(offering) && {
+        key: 'agent-configuration',
+        component: AgentConfigurationSection,
+        title: translate('Agent configuration'),
       },
       {
         key: 'lifecycle-policy',

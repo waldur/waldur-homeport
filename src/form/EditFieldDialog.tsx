@@ -20,6 +20,9 @@ import { FieldError } from './FieldError';
  * dialog can show it under the field, not only in the notification.
  */
 const refusedFieldError = (error: any, name: string) => {
+  // A callback that knows better what to say about its field -- one that
+  // saves a larger object than the field, say -- rejects with `fieldError`.
+  if (error?.fieldError) return error.fieldError;
   if ((error?.status ?? error?.response?.status) !== 400) return undefined;
   const body = getErrorBody(error);
   if (!body) return undefined;
