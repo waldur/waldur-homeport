@@ -15,6 +15,7 @@ import { Column, TableProps } from '@/table/types';
 import { MemberSyncStateIndicator } from '@/user/affiliations/MemberSyncStateIndicator';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { exportRoleField } from '@/user/affiliations/RolePopover';
+import { ServiceAccountBadge } from '@/user/ServiceAccountBadge';
 
 export const renderRoleExpirationDate = (row) => {
   return row.expiration_time
@@ -62,6 +63,7 @@ interface GenericTeamMember extends Partial<GenericPermission> {
   email?: string;
   image?: string;
   full_name?: string;
+  is_service_account?: boolean;
 }
 
 export const TeamTableComponent = <
@@ -83,21 +85,28 @@ export const TeamTableComponent = <
       {
         title: translate('Member'),
         render: ({ row }) => (
-          <div className="flex items-center gap-1.5">
+          <div className="flex min-w-0 items-center gap-1.5">
             <Avatar
               name={getField(row, 'full_name')}
               src={getField(row, 'image')}
               size={32}
             />
-            <p className="mb-0">
+            <p className="mb-0 min-w-0 truncate">
               {getField(row, 'full_name') || DASH_ESCAPE_CODE}
             </p>
+            <ServiceAccountBadge show={getField(row, 'is_service_account')} />
           </div>
         ),
 
         export: getKey('full_name'),
         id: 'member',
-        keys: [getKey('full_name'), getKey('username'), getKey('image')],
+        keys: [
+          getKey('full_name'),
+          getKey('username'),
+          getKey('image'),
+          // Only the role rows (user_*) carry the flag.
+          ...(prefix === 'user_' ? [getKey('is_service_account')] : []),
+        ],
         copyField: (row) => getField(row, 'full_name'),
       },
       {

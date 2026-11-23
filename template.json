@@ -1035,6 +1035,12 @@
   },
   "A network port — either an interface on a router or a NIC attached to an instance.": {},
   "A network shared into this tenant from another tenant via a Neutron RBAC policy.": {},
+  "A new dedicated agent user (recommended)": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "wizard"
+    }
+  },
   "A new invitation will be emailed to \"{reviewer}\" with a new link and expiry date. Links from earlier invitation emails will stop working.": {
     "context": {
       "variables": {
@@ -1118,6 +1124,11 @@
     }
   },
   "A provider-level network used as the tenant’s upstream gateway; supplies floating IPs.": {},
+  "A purpose gives the token exactly the permissions it needs.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "A re-sync was already requested recently.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -1216,6 +1227,16 @@
   "A suspended or blocked reviewer is no longer invited or offered reviews and cannot accept pending ones. Work already accepted stays.": {
     "context": {
       "feature_area": "reviewer-registry"
+    }
+  },
+  "A user that only manages {offering}, with a token restricted to it.": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
     }
   },
   "A virtual L3 router that connects internal subnets to each other and to the external network.": {},
@@ -2660,7 +2681,7 @@
   },
   "Add binding": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Add call attachments": {
@@ -3229,6 +3250,11 @@
   "Add your notes here": {
     "context": {
       "feature_area": "create-review"
+    }
+  },
+  "Add yourself as this offering's manager to create an agent token.": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Add {amount} of credit for this month": {
@@ -11984,6 +12010,12 @@
   "Change vs the previous 30 days": {},
   "Change vs the same days of the previous month": {},
   "Change vs the same days of the previous quarter": {},
+  "Change where a site agent connects, what it runs and what access it grants": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "Changed": {
     "context": {
       "feature_area": "proposal"
@@ -12481,6 +12513,11 @@
       "feature_area": "provider"
     }
   },
+  "Choose a purpose.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Choose a resource from the dropdown above to view its limit and usage history.": {
     "context": {
       "feature_area": "project-detail"
@@ -12509,6 +12546,11 @@
   "Choose a template first": {
     "context": {
       "feature_area": "resource-requests-step"
+    }
+  },
+  "Choose a type and an entity for every restriction, or remove it.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Choose all users, organizations or offerings.": {},
@@ -12593,6 +12635,11 @@
       "feature_area": "settings"
     }
   },
+  "Choose the permissions and the entities the token is restricted to yourself.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Choose the service provider this maintenance announcement applies to": {
     "context": {
       "feature_area": "create"
@@ -12611,6 +12658,16 @@
   "Choose what this call asks applicants for. Name and project duration are always required. A field cannot be made required once the call has proposals.": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "Choose when the token expires.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Choose where the token is used.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Choose which roles to rename, then select a preset to fill in their names. You can adjust individual names in the next step.": {
@@ -16214,6 +16271,11 @@
       "feature_area": "site-agents"
     }
   },
+  "Create agent token": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "Create an organization": {
     "context": {
       "feature_area": "create"
@@ -16676,9 +16738,7 @@
   },
   "Create token": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "personal-access-tokens",
-      "action_type": "create"
+      "feature_area": "personal-access-tokens"
     }
   },
   "Create user": {
@@ -16749,6 +16809,11 @@
     }
   },
   "Created by billing sync for each non-zero billing export line, in the invoice of the report month.": {},
+  "Created for an integration such as a site agent; it signs in with its token.": {
+    "context": {
+      "feature_area": "user"
+    }
+  },
   "Created from a template": {
     "context": {
       "feature_area": "workflow-check"
@@ -23856,7 +23921,7 @@
   "Entitlement": {},
   "Entity": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Env variables": {
@@ -24964,7 +25029,7 @@
   },
   "Expiration date": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Expiration time": {
@@ -27852,6 +27917,11 @@
       "feature_area": "reporting"
     }
   },
+  "Full staff access": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Full text search": {
     "context": {
       "primary_ui_type": "label"
@@ -28260,6 +28330,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Global access cannot be combined with entity restrictions. Remove the restrictions in the Target step to grant it.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Global consumer": {
     "context": {
       "feature_area": "pubsub"
@@ -28273,6 +28348,16 @@
   "Global federation of identity providers for researchers.": {
     "context": {
       "feature_area": "providers"
+    }
+  },
+  "Global staff or support access cannot be combined with entity restrictions.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Global staff or support access cannot be combined with entity restrictions. Remove the restrictions in the Target step, or clear the global access.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Go back": {
@@ -29389,6 +29474,11 @@
   "Hide thresholds": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "Hide token": {
+    "context": {
+      "feature_area": "personal-access-tokens"
     }
   },
   "Hide workflow": {
@@ -33821,6 +33911,16 @@
       "feature_area": "site-agent"
     }
   },
+  "Leave empty to use {username}. The user has no password and can only act through its tokens.": {
+    "context": {
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "feature_area": "wizard"
+    }
+  },
   "Leave it to decide by hand": {
     "context": {
       "primary_ui_type": "label"
@@ -34092,6 +34192,11 @@
   "Limit horizon": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Limit how long and from where the token can be used.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Limit period": {
@@ -37127,6 +37232,18 @@
       "feature_area": "workflow-description"
     }
   },
+  "Me, restricted to this offering": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "wizard"
+    }
+  },
+  "Me, with full staff access": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "wizard"
+    }
+  },
   "Mean": {
     "context": {
       "primary_ui_type": "title"
@@ -38920,6 +39037,11 @@
       "feature_area": "actions"
     }
   },
+  "Name and limits": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Name cannot be changed for synced request types.": {
     "context": {
       "feature_area": "request-types"
@@ -39023,6 +39145,11 @@
   "Name the set of roles this profile provides. After saving, add roles to it on the profile page; they become assignable on every offering bound to the profile.": {
     "context": {
       "feature_area": "profiles"
+    }
+  },
+  "Name the token.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Name your project": {
@@ -39621,6 +39748,11 @@
   "New usage policy": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "New user": {
+    "context": {
+      "feature_area": "personal-access-tokens"
     }
   },
   "New username": {
@@ -40554,6 +40686,11 @@
       "feature_area": "endpoints"
     }
   },
+  "No entities you can restrict a token to": {
+    "context": {
+      "feature_area": "personal-access-tokens"
+    }
+  },
   "No error message reported.": {
     "context": {
       "feature_area": "resource-pending"
@@ -41185,6 +41322,11 @@
   "No permissions found": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "No permissions match the search.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "No personal identity fields are enabled.": {
@@ -42294,6 +42436,16 @@
       "feature_area": "bulk"
     }
   },
+  "None of the selected permissions can be restricted to {bindings}. Choose a permission that applies there, or remove the restriction in the Target step.": {
+    "context": {
+      "variables": {
+        "bindings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
+    }
+  },
   "None of the selected proposals is at a decision step that can be taken for several at once. The allocation decision, assessments and steps taken per round are decided on each proposal.": {
     "context": {
       "feature_area": "manage"
@@ -42322,6 +42474,11 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "None of your permissions can be restricted to an entity.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "None yet": {
@@ -42444,9 +42601,9 @@
       "feature_area": "commands"
     }
   },
-  "Not available when a global scope is selected.": {
+  "Not available while the token carries global staff or support access.": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Not awarded": {},
@@ -42736,6 +42893,16 @@
   "Not requested": {
     "context": {
       "feature_area": "resource-requests-step"
+    }
+  },
+  "Not restricted": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Not restricted (staff access)": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Not run yet": {
@@ -43338,7 +43505,7 @@
   "Number of days to retain SLURM policy evaluation log entries before automatic cleanup.": {},
   "Number of days to retain old catalog versions": {},
   "Number of days to retain table size history data.": {},
-  "Number of days to retain user data access logs before automatic cleanup.": {},
+  "Number of days to retain user data access logs before automatic cleanup. 0 keeps them forever.": {},
   "Number of extra days after project end date before resources are terminated. Overrides customer-level setting (organization default: {days} days).": {
     "context": {
       "variables": {
@@ -44849,6 +45016,11 @@
       "feature_area": "roles"
     }
   },
+  "Only the entities where you can grant everything this token needs are listed.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Only the lead contributes": {},
   "Only the lead of this role contributes": {
     "context": {
@@ -45736,7 +45908,7 @@
   },
   "Optional comma-separated list of CIDR networks, e.g. 203.0.113.0/24. Leave empty to allow any source.": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Optional company name for display": {
@@ -45768,6 +45940,11 @@
   "Optional explanation for the outcome": {
     "context": {
       "feature_area": "workflow"
+    }
+  },
+  "Optional features": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Optional information and supporting documents": {
@@ -45835,9 +46012,9 @@
       "feature_area": "proposals"
     }
   },
-  "Optional. Limit the token to actions on the listed organizations / projects / calls / etc. Empty list = unrestricted within the permissions above.": {
+  "Optional. Limit the token to actions on the listed organizations, projects, calls and so on. Leave empty for a token that is not restricted to any entity; only then can it carry the global staff or support permissions.": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Optional. Past it, the request lapses and the step returns to you; nothing is decided automatically.": {
@@ -58371,6 +58548,11 @@
       "feature_area": "details"
     }
   },
+  "Restrict the token to the entities it should act on, or leave it unrestricted.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Restrict this policy to a single resource. When set, only that resource is measured and its actions apply to it alone.": {
     "context": {
       "feature_area": "cost-policies"
@@ -58383,7 +58565,7 @@
   },
   "Restrict to specific entities": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Restrict who may join": {
@@ -58401,6 +58583,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "auth"
+    }
+  },
+  "Restricted to": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Restricted, because of type.": {},
@@ -60258,6 +60445,12 @@
       "feature_area": "features"
     }
   },
+  "Run the offering's site agent: register it and report what it ran": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "Run the preview first.": {
     "context": {
       "feature_area": "wizard"
@@ -60439,6 +60632,11 @@
   },
   "SCIM attribute holding the value matched against SCIM_USER_MATCH_WALDUR_ATTRIBUTE, e.g. userName, emails, or an extension path such as urn:mace:surf.nl:sram:scim:extension:User.eduPersonUniqueId.": {},
   "SCIM login nodes": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "SCIM login port": {
     "context": {
       "feature_area": "integration"
     }
@@ -60670,6 +60868,11 @@
     }
   },
   "SSH keys being added or removed.": {},
+  "SSH port clients should use for every host in SCIM login nodes. When unset, clients use port 22. Outbound SCIM entitlements carry the hostname only and ignore this value.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "SSH public key": {
     "context": {
       "primary_ui_type": "label",
@@ -60680,11 +60883,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "robot-accounts"
-    }
-  },
-  "STAFF.ACCESS and SUPPORT.ACCESS are global — they cannot be combined with entity bindings.": {
-    "context": {
-      "feature_area": "personal-access-tokens"
     }
   },
   "STARTTLS (EMAIL_USE_TLS)": {
@@ -61486,6 +61684,16 @@
       "feature_area": "landing"
     }
   },
+  "Search permissions": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Search permissions...": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Search presets": {
     "context": {
       "feature_area": "call-templates"
@@ -62074,11 +62282,6 @@
       "feature_area": "mappings"
     }
   },
-  "Select at least one permission above to enable bindings.": {
-    "context": {
-      "feature_area": "personal-access-tokens"
-    }
-  },
   "Select at least one permission.": {
     "context": {
       "feature_area": "roles"
@@ -62194,7 +62397,7 @@
   },
   "Select expiration date": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "Select external network…": {
@@ -62424,11 +62627,6 @@
   "Select permissions": {
     "context": {
       "feature_area": "common"
-    }
-  },
-  "Select permissions...": {
-    "context": {
-      "feature_area": "personal-access-tokens"
     }
   },
   "Select plan...": {
@@ -62738,11 +62936,6 @@
   "Select the option this one depends on.": {
     "context": {
       "feature_area": "options"
-    }
-  },
-  "Select the permissions this token should have. The token can only use permissions you currently hold.": {
-    "context": {
-      "feature_area": "personal-access-tokens"
     }
   },
   "Select the project within {customer} where resources will be created.": {
@@ -64721,6 +64914,11 @@
       "feature_area": "options"
     }
   },
+  "Show token": {
+    "context": {
+      "feature_area": "personal-access-tokens"
+    }
+  },
   "Show total only": {
     "context": {
       "primary_ui_type": "label",
@@ -65058,6 +65256,11 @@
       "feature_area": "policies"
     }
   },
+  "Site agent configuration": {
+    "context": {
+      "feature_area": "personal-access-tokens"
+    }
+  },
   "Site agent connection data unavailable": {
     "context": {
       "feature_area": "rabbitmq"
@@ -65357,6 +65560,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "reviewer"
+    }
+  },
+  "Some answers are missing": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Some components are not editable here": {
@@ -65726,6 +65934,7 @@
       "feature_area": "project"
     }
   },
+  "Staff access": {},
   "Staff accounts can only be deleted from the user profile.": {
     "context": {
       "feature_area": "support"
@@ -72052,9 +72261,34 @@
       "feature_area": "policies"
     }
   },
-  "The token will stop working after this date.": {
+  "The token acts as you. It stops working if you lose the role that grants its permissions.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The token belongs to this user, who manages only this offering and has no password.": {
     "context": {
       "feature_area": "personal-access-tokens"
+    }
+  },
+  "The token can only use permissions you hold yourself.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The token is shown once after it is created. Check what it can do before creating it.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The token will stop working after this date.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The token works only on the entity you choose here, and only as long as you keep your role on it.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "The type of organization the user belongs to": {
@@ -72070,6 +72304,11 @@
   "The unit of allocation for this instance, e.g. NHR": {
     "context": {
       "feature_area": "openportal-remote"
+    }
+  },
+  "The user has no password and can only act through its tokens.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "The user's current country of residence": {
@@ -73922,6 +74161,16 @@
       "feature_area": "attachments"
     }
   },
+  "This token carries global staff or support access and is not restricted to any entity.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "This token gets full staff access: it can do everything you can as staff, everywhere, not only on this offering. Recommended: give a dedicated user the offering manager role on this offering and create the agent token as that user, so the token is restricted to the offering.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "This token won't be shown again, but you can regenerate it later.": {
     "context": {
       "feature_area": "service-accounts"
@@ -74665,7 +74914,23 @@
       "primary_ui_type": "label"
     }
   },
+  "Token for": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Token for access user": {},
+  "Token for {target}": {
+    "context": {
+      "variables": {
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard",
+      "action_type": "read"
+    }
+  },
   "Token has been deleted.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -75480,6 +75745,11 @@
   "Try again in a moment.": {
     "context": {
       "feature_area": "preview"
+    }
+  },
+  "Try again later, or create a token with custom permissions from your profile.": {
+    "context": {
+      "feature_area": "personal-access-tokens"
     }
   },
   "Try other calls, another round or other dates.": {
@@ -78516,6 +78786,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "access"
+    }
+  },
+  "Unable to load token templates.": {
+    "context": {
+      "feature_area": "personal-access-tokens"
     }
   },
   "Unable to load usage for the whole order.": {
@@ -84270,6 +84545,11 @@
     }
   },
   "Username of FreeIPA user with administrative privileges.": {},
+  "Username of the new user": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Username of the service account.": {
     "context": {
       "feature_area": "service-accounts"
@@ -86092,6 +86372,11 @@
       "feature_area": "options"
     }
   },
+  "What can the token do?": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "What changes": {
     "context": {
       "primary_ui_type": "title",
@@ -86206,6 +86491,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "provider-calls"
+    }
+  },
+  "What is the token for?": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "What it grants": {
@@ -86673,6 +86963,11 @@
     }
   },
   "Where usage and resources land": {},
+  "Where will the token be used?": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Whether clusters get dedicated load balancer nodes. Defaults to always included.": {
     "context": {
       "feature_area": "options"
@@ -86810,6 +87105,11 @@
     }
   },
   "Who is mailed on each event of each step.": {},
+  "Who is the token for?": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Who is told of which event of {step}.": {
     "context": {
       "variables": {
@@ -87937,6 +88237,11 @@
     }
   },
   "You can find offerings to order in the service catalog": {},
+  "You can no longer create this kind of token here.": {
+    "context": {
+      "feature_area": "personal-access-tokens"
+    }
+  },
   "You can not create group invitations.": {
     "context": {
       "feature_area": "actions"
@@ -89480,6 +89785,11 @@
       "feature_area": "openstack"
     }
   },
+  "derived from the offering": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "differences": {
     "context": {
       "feature_area": "roles"
@@ -89554,7 +89864,7 @@
   },
   "e.g. CI/CD pipeline token": {
     "context": {
-      "feature_area": "personal-access-tokens"
+      "feature_area": "wizard"
     }
   },
   "e.g. Cluster Admin, Project Member": {
@@ -90502,6 +90812,19 @@
   "never resets": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "new user {username}, offering manager of {offering}": {
+    "context": {
+      "variables": {
+        "username": {
+          "type": "string"
+        },
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
     }
   },
   "no": {
