@@ -159,7 +159,9 @@ const InvoiceItemLine: FC<{
           </span>
         ) : (
           <>
-            {item.details.offering_component_name}
+            {/* Items not priced from an offering component (manual, imported
+                or integration items) carry their label in name only. */}
+            {item.details.offering_component_name || item.name}
             {item.article_code && (
               <small className="block">
                 {translate('Article code')}: {item.article_code}
