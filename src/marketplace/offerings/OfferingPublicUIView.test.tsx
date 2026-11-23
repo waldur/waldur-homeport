@@ -56,3 +56,46 @@ describe('OfferingPublicUIView My requests tab', () => {
     expect(myRequests(0)).toBeUndefined();
   });
 });
+
+describe('OfferingPublicUIView category section tabs', () => {
+  const category = {
+    sections: [
+      {
+        key: 'support',
+        title: 'Support',
+        is_standalone: false,
+        attributes: [{ key: 'email', title: 'E-mail', type: 'string' }],
+      },
+      {
+        key: 'hardware',
+        title: 'Hardware',
+        is_standalone: true,
+        attributes: [{ key: 'gpu', title: 'GPU', type: 'string' }],
+      },
+    ],
+  } as any;
+
+  it('gives a standalone section with values a tab after Description', () => {
+    const tabs = getTabs(
+      offering({ attributes: { email: 'a@b.c', gpu: 'A100' } }),
+      category,
+    ).map((tab) => tab.key);
+    expect(tabs.slice(0, 2)).toEqual(['description', 'section-hardware']);
+  });
+
+  it('leaves out a standalone section without values', () => {
+    const tabs = getTabs(
+      offering({ attributes: { email: 'a@b.c' } }),
+      category,
+    ).map((tab) => tab.key);
+    expect(tabs).not.toContain('section-hardware');
+  });
+
+  it('shows Description for attributes alone, without any text', () => {
+    const tabs = getTabs(
+      offering({ description: '', attributes: { email: 'a@b.c' } }),
+      category,
+    ).map((tab) => tab.key);
+    expect(tabs).toContain('description');
+  });
+});

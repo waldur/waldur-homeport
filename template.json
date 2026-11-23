@@ -2673,10 +2673,26 @@
       "feature_area": "tos"
     }
   },
+  "Add at least one option.": {},
   "Add at least one question.": {},
   "Add at least one worker group to configure this datacenter": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Add attribute": {
+    "context": {
+      "feature_area": "structure"
+    }
+  },
+  "Add attribute to {section}": {
+    "context": {
+      "variables": {
+        "section": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "structure"
     }
   },
   "Add auto-provisioning rule": {
@@ -2991,7 +3007,12 @@
   },
   "Add option": {
     "context": {
-      "feature_area": "options"
+      "feature_area": "structure"
+    }
+  },
+  "Add options first": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "Add pair": {
@@ -3120,6 +3141,21 @@
   "Add rule": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Add section": {
+    "context": {
+      "feature_area": "structure"
+    }
+  },
+  "Add section to {category}": {
+    "context": {
+      "variables": {
+        "category": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "structure"
     }
   },
   "Add slide": {
@@ -8538,6 +8574,7 @@
   },
   "Attribute": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "admin"
     }
   },
@@ -19284,7 +19321,8 @@
   "Default user attributes exposed to service providers (OfferingUser API) when no explicit config exists.": {},
   "Default value": {
     "context": {
-      "feature_area": "options"
+      "primary_ui_type": "title",
+      "feature_area": "structure"
     }
   },
   "Default value for new subnets DNS name servers. Should be defined as list.": {
@@ -22101,6 +22139,11 @@
       "primary_ui_type": "title"
     }
   },
+  "Edit attribute": {
+    "context": {
+      "feature_area": "structure"
+    }
+  },
   "Edit auto-provisioning rule": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -22587,6 +22630,11 @@
   "Edit science domain": {
     "context": {
       "feature_area": "manage"
+    }
+  },
+  "Edit section": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "Edit service account": {
@@ -35788,6 +35836,11 @@
       "feature_area": "issues"
     }
   },
+  "Long text": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Longest: {duration}": {
     "context": {
       "variables": {
@@ -39105,6 +39158,11 @@
       "feature_area": "settings"
     }
   },
+  "Multiple choice": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Multiple files": {
     "context": {
       "primary_ui_type": "label"
@@ -40971,6 +41029,11 @@
   "No decision date is known: set the round dates or the call's target time to decision.": {
     "context": {
       "feature_area": "diagram"
+    }
+  },
+  "No default": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "No demo presets": {
@@ -44735,6 +44798,11 @@
       "feature_area": "images"
     }
   },
+  "Offerings in this category must set a value whenever their attributes are saved.": {
+    "context": {
+      "feature_area": "structure"
+    }
+  },
   "Offerings of {organization}. An offering already in another group moves to this one.": {
     "context": {
       "variables": {
@@ -44761,6 +44829,11 @@
   "Offerings shown / clicks": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Offerings store the key of the option they select, so a saved option keeps its key when renamed. An offering that uses a removed option must choose another value before its attributes can be saved again.": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "Offerings, offering groups and merges.": {
@@ -44863,6 +44936,11 @@
   "On deletion": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "On offering pages, show this section on a tab of its own instead of with the other attributes.": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "On pace": {
@@ -46305,6 +46383,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "options"
+    }
+  },
+  "Option title": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "Optional": {
@@ -56161,6 +56244,12 @@
       "feature_area": "team"
     }
   },
+  "Remove attribute": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "structure"
+    }
+  },
   "Remove awarded resource": {
     "context": {
       "primary_ui_type": "title",
@@ -56267,6 +56356,11 @@
       "feature_area": "openstack-lbaas"
     }
   },
+  "Remove option": {
+    "context": {
+      "feature_area": "structure"
+    }
+  },
   "Remove organization": {
     "context": {
       "feature_area": "details"
@@ -56312,6 +56406,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "options"
+    }
+  },
+  "Remove section": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "structure"
     }
   },
   "Remove selected affiliations": {
@@ -56404,6 +56504,26 @@
   "Remove the termination date so the resource is not scheduled for expiration.": {
     "context": {
       "feature_area": "mass-actions"
+    }
+  },
+  "Remove the {title} attribute? Offerings keep the values they hold for it, but they are no longer shown.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "structure"
+    }
+  },
+  "Remove the {title} section and all of its attributes? Offerings keep the values they hold for them, but they are no longer shown.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "structure"
     }
   },
   "Remove this goal?": {
@@ -62283,7 +62403,14 @@
   },
   "Section": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "project-digest"
+    }
+  },
+  "Sections": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "admin"
     }
   },
   "Sections to include": {
@@ -64002,6 +64129,12 @@
       "feature_area": "assignments"
     }
   },
+  "Separate tab": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "structure"
+    }
+  },
   "Separately, a workflow step with Conflict of interest confirmation asks evaluators to confirm the Conflict-of-interest declaration before they start.": {
     "context": {
       "feature_area": "coi-settings"
@@ -64670,6 +64803,11 @@
       "feature_area": "bulk"
     }
   },
+  "Set on save": {
+    "context": {
+      "feature_area": "structure"
+    }
+  },
   "Set organization groups for {customerName}": {
     "context": {
       "variables": {
@@ -65021,6 +65159,11 @@
       "feature_area": "openportal"
     }
   },
+  "Short text": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Short title for the project, which explains the project goal as much as possible.": {
     "context": {
       "feature_area": "create"
@@ -65123,6 +65266,11 @@
   "Show as": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "Show as a separate tab": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "Show as chart": {
@@ -65787,6 +65935,11 @@
   "Single account": {
     "context": {
       "feature_area": "course-accounts"
+    }
+  },
+  "Single choice": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Single select": {
@@ -69774,6 +69927,24 @@
       "feature_area": "anonymous"
     }
   },
+  "The attribute has been added.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "structure"
+    }
+  },
+  "The attribute has been removed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "structure"
+    }
+  },
+  "The attribute has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "structure"
+    }
+  },
   "The award differs from your request": {
     "context": {
       "feature_area": "proposal"
@@ -72593,6 +72764,24 @@
   "The scope of this role has been deleted.": {
     "context": {
       "feature_area": "affiliations"
+    }
+  },
+  "The section has been added.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "structure"
+    }
+  },
+  "The section has been removed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "structure"
+    }
+  },
+  "The section has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "structure"
     }
   },
   "The selected VPCs share no limit components that can be changed together. Narrow the selection to VPCs of the same offering.": {
@@ -77013,6 +77202,12 @@
       "primary_ui_type": "error_message"
     }
   },
+  "Unable to add the attribute.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "structure"
+    }
+  },
   "Unable to add the award response.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -77041,6 +77236,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "scenarios"
+    }
+  },
+  "Unable to add the section.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "structure"
     }
   },
   "Unable to add user.": {
@@ -80196,6 +80397,12 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Unable to remove the attribute.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "structure"
+    }
+  },
   "Unable to remove the awarded resource.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -80236,6 +80443,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "ranking"
+    }
+  },
+  "Unable to remove the section.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "structure"
     }
   },
   "Unable to remove the selected attachments.": {
@@ -82177,6 +82390,12 @@
       "feature_area": "site-agents"
     }
   },
+  "Unable to update the attribute.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "structure"
+    }
+  },
   "Unable to update the awarded duration.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -82275,6 +82494,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "role-mapping"
+    }
+  },
+  "Unable to update the section.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "structure"
     }
   },
   "Unable to update token quota.": {
@@ -84331,6 +84556,7 @@
       "feature_area": "plans"
     }
   },
+  "Used for offerings that do not set a value of their own.": {},
   "Used in invoice item descriptions": {},
   "Used only for this verification.": {},
   "Used to deliver personalized ads and track performance. (Currently unavailable)": {
@@ -85810,6 +86036,11 @@
   "Values must be valid for the selected option.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Values that offerings already hold are not converted when the type changes.": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "Values that trigger this question": {
@@ -88598,6 +88829,7 @@
   },
   "Yes/No": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "onboarding-setup"
     }
   },
@@ -90169,6 +90401,11 @@
   "attachments": {
     "context": {
       "feature_area": "support-users"
+    }
+  },
+  "attributes": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "authorized as {role}": {
@@ -92439,6 +92676,11 @@
   "seconds": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "sections": {
+    "context": {
+      "feature_area": "structure"
     }
   },
   "security group": {

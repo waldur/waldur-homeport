@@ -16,11 +16,15 @@ import { isAuthenticated } from '@/auth/AuthService';
 import { fetchResultCount } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
-import { isEmpty } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { isValidAttribute } from '@/marketplace/offerings/details/utils';
+import {
+  getFilledSections,
+  hasOfferingReferenceData,
+  SECTION_TAB_PREFIX,
+  splitSections,
+} from '@/marketplace/offerings/details/offeringSections';
 import { LayoutSlot } from '@/navigation/slots';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -42,6 +46,11 @@ const OfferingResourceRequests = lazyComponent(() =>
 const PublicOfferingInfo = lazyComponent(() =>
   import('./details/PublicOfferingInfo').then((module) => ({
     default: module.PublicOfferingInfo,
+  })),
+);
+const PublicOfferingSectionTab = lazyComponent(() =>
+  import('./details/PublicOfferingSectionTab').then((module) => ({
+    default: module.PublicOfferingSectionTab,
   })),
 );
 const PublicOfferingComponents = lazyComponent(() =>
@@ -112,22 +121,15 @@ export const getTabs = (
     return [];
   }
 
-  const hasValidAttributes = category
-    ? category.sections.length > 0 &&
-      !isEmpty(offering.attributes) &&
-      category.sections.some((section) =>
-        section.attributes.some(
-          (attr) =>
-            Object.prototype.hasOwnProperty.call(
-              offering.attributes,
-              attr.key,
-            ) && isValidAttribute(offering.attributes[attr.key]),
-        ),
-      )
-    : false;
+  const { grouped, standalone } = splitSections(
+    getFilledSections(category?.sections, offering.attributes),
+  );
 
   const showDescriptionTab =
-    offering?.full_description || offering?.description || hasValidAttributes;
+    offering?.full_description ||
+    offering?.description ||
+    grouped.length > 0 ||
+    hasOfferingReferenceData(offering);
 
   const showGettingStartedTab = offering?.getting_started;
 
@@ -137,6 +139,12 @@ export const getTabs = (
       key: 'description',
       component: PublicOfferingInfo,
     },
+    // Sections marked "Show as a separate tab" follow the description.
+    ...standalone.map((section) => ({
+      title: section.title,
+      key: `${SECTION_TAB_PREFIX}${section.key}`,
+      component: PublicOfferingSectionTab,
+    })),
     showGettingStartedTab
       ? {
           title: translate('Getting started'),
