@@ -288,7 +288,7 @@ export const PermissionOptions = [
         value: 'OFFERING.PAUSE',
       },
       {
-        label: translate('Run the offering\'s site agent: register it and report what it ran'),
+        label: translate('Run the offering\'s site agent: register it, read its configuration and report what it ran'),
         value: 'OFFERING.MANAGE_AGENT',
       },
       {
