@@ -1,9 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { isEqual } from 'es-toolkit';
-import { FormApi } from 'final-form';
-import arrayMutators from 'final-form-arrays';
 import { FC, useMemo, useState } from 'react';
-import { Form } from 'react-final-form';
 import {
   Checklist,
   checklistsAdminQuestionDependenciesCreate,
@@ -23,28 +20,20 @@ import {
   QuestionAdminRequest,
 } from 'waldur-js-client';
 
-import { Checkbox, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
-
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { AtLeast } from '@/core/types';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CHECKLIST_TABLE_ID } from '@/marketplace-checklist/constants';
 import { shouldRemoveOnboardingMetadata } from '@/marketplace-checklist/onboardingMetadata';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
-import { CHECKLIST_FLAGS } from '@/marketplace-checklist/utils';
+import { RANGE_QUESTION_TYPES } from '@/marketplace-checklist/utils';
 import { useModal } from '@/modal/actions';
-import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
-import { QuestionGeneralForm } from './QuestionGeneralForm';
-import { QuestionGuidanceForm } from './QuestionGuidanceForm';
-import { QuestionReviewTriggersForm } from './QuestionReviewTriggersForm';
-import { QuestionVisibilityForm } from './QuestionVisibilityForm';
+import { QuestionForm } from './QuestionForm';
 
 interface QuestionFormDialogProps {
   resolve: {
@@ -53,6 +42,9 @@ interface QuestionFormDialogProps {
   };
   initialValues?: ChecklistQuestionForm;
 }
+
+const toBound = (value) =>
+  value === null || value === undefined || value === '' ? null : value;
 
 export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
   resolve: { checklist, question },
@@ -137,11 +129,10 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
 
   // Store the question if it saved, to avoid recreating it if there is an error with options, deps or conditions.
   const [savedQuestion, setSavedQuestion] = useState<QuestionAdmin>(null);
-  const [createAnother, setCreateAnother] = useState(false);
   const isEdit = Boolean(question?.uuid);
 
   // FIX THIS: complete the function - user guidance and trigger remained
-  const onSubmit = async (formData: ChecklistQuestionForm, form: FormApi) => {
+  const onSubmit = async (formData: ChecklistQuestionForm) => {
     try {
       const body: QuestionAdminRequest = {
         checklist: checklist.url,
@@ -153,9 +144,10 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
         order: formData.order,
       };
 
-      if (['number', 'rating'].includes(formData.question_type)) {
-        body.min_value = formData.min_value || null;
-        body.max_value = formData.max_value || null;
+      if (RANGE_QUESTION_TYPES.includes(formData.question_type)) {
+        // A bound of 0 is a bound; only an empty field means none.
+        body.min_value = toBound(formData.min_value);
+        body.max_value = toBound(formData.max_value);
       }
 
       if (formData.question_type === 'likert') {
@@ -415,13 +407,10 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
           ? translate('Question has been updated.')
           : translate('Question has been added.'),
       );
-      if (createAnother) {
-        form.restart();
-        setCreateAnother(false);
-        setSavedQuestion(null);
-      } else {
-        closeDialog();
-      }
+      // Only a retry after a partial failure reuses it; "Create another"
+      // must create a new question.
+      setSavedQuestion(null);
+      return true;
     } catch (e) {
       showErrorResponse(
         e,
@@ -429,6 +418,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
           ? translate('Unable to update question.')
           : translate('Unable to add question.'),
       );
+      return false;
     }
   };
 
@@ -441,89 +431,14 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
   }
 
   return (
-    <Form
-      onSubmit={onSubmit}
-      mutators={{ ...arrayMutators }}
+    <QuestionForm
+      title={isEdit ? translate('Edit question') : translate('Add question')}
       initialValues={initialValuesWithDeps}
-      render={({ handleSubmit, submitting, pristine, invalid, values }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={
-              isEdit ? translate('Edit question') : translate('Add question')
-            }
-            bodyClassName="h-[500px] max-h-[500px]"
-            footer={
-              <>
-                {!isEdit && (
-                  <Checkbox
-                    label={translate('Create another')}
-                    disabled={submitting}
-                    checked={createAnother}
-                    onCheckedChange={setCreateAnother}
-                    className="me-auto"
-                    id="check-another"
-                  />
-                )}
-                <CloseDialogButton />
-                <SubmitButton
-                  disabled={invalid || pristine}
-                  submitting={submitting}
-                  label={
-                    isEdit ? translate('Save changes') : translate('Confirm')
-                  }
-                  variant="primary"
-                />
-              </>
-            }
-          >
-            <Tabs mount="visited" defaultValue="general">
-              <TabsList className="mb-4">
-                <TabsTrigger value="general">
-                  {translate('General')}
-                </TabsTrigger>
-                {CHECKLIST_FLAGS.questionFormUserGuidance && (
-                  <TabsTrigger value="user-guidance">
-                    {translate('User guidance')}
-                  </TabsTrigger>
-                )}
-                {CHECKLIST_FLAGS.questionFormVisibility && (
-                  <TabsTrigger value="visibility">
-                    {translate('Visibility')}
-                  </TabsTrigger>
-                )}
-                {CHECKLIST_FLAGS.questionFormTriggers && (
-                  <TabsTrigger value="triggers">
-                    {translate('Triggers')}
-                  </TabsTrigger>
-                )}
-              </TabsList>
-              <div className="tab-content">
-                <TabsContent value="general">
-                  <QuestionGeneralForm values={values} checklist={checklist} />
-                </TabsContent>
-                {CHECKLIST_FLAGS.questionFormUserGuidance && (
-                  <TabsContent value="user-guidance">
-                    <QuestionGuidanceForm values={values} />
-                  </TabsContent>
-                )}
-                {CHECKLIST_FLAGS.questionFormVisibility && (
-                  <TabsContent value="visibility">
-                    <QuestionVisibilityForm
-                      checklistUuid={checklist.uuid}
-                      question={question || savedQuestion}
-                    />
-                  </TabsContent>
-                )}
-                {CHECKLIST_FLAGS.questionFormTriggers && (
-                  <TabsContent value="triggers">
-                    <QuestionReviewTriggersForm />
-                  </TabsContent>
-                )}
-              </div>
-            </Tabs>
-          </ModalDialog>
-        </form>
-      )}
+      isEdit={isEdit}
+      onSubmit={onSubmit}
+      onDone={closeDialog}
+      checklist={checklist}
+      question={question || savedQuestion}
     />
   );
 };

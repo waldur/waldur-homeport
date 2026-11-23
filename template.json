@@ -909,11 +909,6 @@
       "feature_area": "workflow-steps"
     }
   },
-  "A checklist of the feedback survey type.": {
-    "context": {
-      "feature_area": "feedback"
-    }
-  },
   "A client-accessible domain name override in case OpenStack is returning an internal domain. Leave empty to use the domain returned by OpenStack.": {
     "context": {
       "feature_area": "openstack"
@@ -1129,6 +1124,11 @@
       "feature_area": "wizard"
     }
   },
+  "A question whose text is already in this survey is not copied, as each question needs its own text. Copied questions that depend on it are shown depending on the one already here.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "A re-sync was already requested recently.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -1222,6 +1222,15 @@
         }
       },
       "feature_area": "ticketDraft"
+    }
+  },
+  "A survey can have at most {count} questions.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "A suspended or blocked reviewer is no longer invited or offered reviews and cannot accept pending ones. Work already accepted stays.": {
@@ -2579,6 +2588,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Add a question, or copy the questions of another survey.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Add a resource request to the proposal.": {
     "context": {
       "feature_area": "resource-requests-step"
@@ -2659,6 +2673,7 @@
       "feature_area": "tos"
     }
   },
+  "Add at least one question.": {},
   "Add at least one worker group to configure this datacenter": {
     "context": {
       "feature_area": "common"
@@ -2908,6 +2923,11 @@
     }
   },
   "Add more conditions to configure logic combination": {
+    "context": {
+      "feature_area": "questions"
+    }
+  },
+  "Add more questions before setting visibility conditions.": {
     "context": {
       "feature_area": "questions"
     }
@@ -4965,6 +4985,16 @@
   "Already in the pool": {
     "context": {
       "feature_area": "reviewer-suggestions"
+    }
+  },
+  "Already in this survey, so not copied: {questions}": {
+    "context": {
+      "variables": {
+        "questions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
     }
   },
   "Already mapped": {
@@ -7843,7 +7873,7 @@
   },
   "Ask all users": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Ask an administrator, or {applyLink}.": {
@@ -8537,6 +8567,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "feedback"
+    }
+  },
+  "Audience & schedule": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "wizard"
     }
   },
   "Audio": {
@@ -11994,6 +12030,11 @@
       "feature_area": "actions"
     }
   },
+  "Change or delete one of them.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Change panel": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -14307,6 +14348,11 @@
       "feature_area": "questions"
     }
   },
+  "Conditional": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Conditional Cascade": {
     "context": {
       "primary_ui_type": "label"
@@ -14321,6 +14367,16 @@
   "Conditions": {
     "context": {
       "feature_area": "contributions"
+    }
+  },
+  "Conditions on this question changed for: {questions}. Check when they are shown.": {
+    "context": {
+      "variables": {
+        "questions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
     }
   },
   "Conditions: {conditions}": {
@@ -15551,6 +15607,11 @@
   "Copy proposal-to-project role mappings.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Copy questions from another survey": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Copy requested offerings (reset to \"Requested\" state).": {
@@ -16844,7 +16905,7 @@
   },
   "Create survey": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Create tag": {
@@ -18604,7 +18665,7 @@
   },
   "Days the prompt stays hidden after it is shown or postponed.": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Days to answer": {
@@ -19688,6 +19749,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "project-templates"
+    }
+  },
+  "Delete question": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Delete question?": {
@@ -21771,6 +21837,7 @@
       "feature_area": "lifecycle"
     }
   },
+  "Each question needs its own text.": {},
   "Each round closes {n} days after its start.": {
     "context": {
       "variables": {
@@ -22560,7 +22627,7 @@
   },
   "Edit survey": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Edit tags": {
@@ -26898,7 +26965,7 @@
   },
   "Fill in the required fields.": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Fill in the role details and select at least one permission.": {
@@ -30123,7 +30190,7 @@
   },
   "How many times a user is prompted at most.": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "How much credit do I have left?": {
@@ -32062,7 +32129,7 @@
   },
   "Intro": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Invalid JSON format": {
@@ -33077,6 +33144,11 @@
   "Its proposals are being evaluated.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Its questions are added after the ones above.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Its results are published.": {
@@ -37140,7 +37212,7 @@
   },
   "Max prompts": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Max proposals per reviewer": {
@@ -37501,6 +37573,7 @@
       "feature_area": "vmware"
     }
   },
+  "Maximum value cannot be less than the minimum value.": {},
   "Maximum wall time in minutes": {
     "context": {
       "feature_area": "qos"
@@ -38885,7 +38958,7 @@
   },
   "Move down": {
     "context": {
-      "feature_area": "workflow-steps"
+      "feature_area": "wizard"
     }
   },
   "Move item": {
@@ -38986,7 +39059,7 @@
   },
   "Move up": {
     "context": {
-      "feature_area": "workflow-steps"
+      "feature_area": "wizard"
     }
   },
   "Move {count} project(s) to organization": {
@@ -41869,6 +41942,11 @@
   "No publications added.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "No questions yet": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "No queue found": {
@@ -54131,16 +54209,10 @@
       "feature_area": "checklists"
     }
   },
-  "Questionnaire": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "feedback"
-    }
-  },
   "Questions": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "compliance"
+      "feature_area": "wizard"
     }
   },
   "Questions for the current workflow step. Additional questions may appear based on answers.": {
@@ -65529,7 +65601,7 @@
   },
   "Shown above the questions. Tell respondents that staff will see who answered.": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Shown based on: {questions}": {
@@ -65540,6 +65612,11 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "Shown depending on other answers.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Shown on the call card in place of the initials of its name.": {},
@@ -65968,7 +66045,7 @@
   "Snapshots count": {},
   "Snooze days": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Social and economic geography": {
@@ -68040,7 +68117,7 @@
   "Survey has been created.": {
     "context": {
       "primary_ui_type": "success_message",
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Survey has been deleted.": {
@@ -68052,7 +68129,7 @@
   "Survey has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Suspend": {
@@ -73190,6 +73267,11 @@
       "feature_area": "change-plan"
     }
   },
+  "There are no other questions yet": {
+    "context": {
+      "feature_area": "questions"
+    }
+  },
   "There are no other volume types available.": {
     "context": {
       "feature_area": "actions"
@@ -73382,6 +73464,16 @@
   "These proposals had no decision and were rejected; their applicants have been told:": {
     "context": {
       "feature_area": "lifecycle"
+    }
+  },
+  "These questions are shown depending on the answer to this one: {questions}. Deleting it removes those conditions, so they are always shown.": {
+    "context": {
+      "variables": {
+        "questions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
     }
   },
   "These restrictions are configured at the organization level and apply to all projects within this organization.": {
@@ -74064,7 +74156,17 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "This is the first question.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "This is the first step.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "This is the last question.": {
     "context": {
       "feature_area": "wizard"
     }
@@ -76390,6 +76492,16 @@
       "feature_area": "email"
     }
   },
+  "Two questions have the same text: {questions}": {
+    "context": {
+      "variables": {
+        "questions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
+    }
+  },
   "Two shared secrets, generated by Setup or supplied by the deployment. The AS token authenticates Waldur when calling the homeserver API. The HS token authenticates the homeserver when sending events to Waldur via webhook.": {},
   "Two-Stage Reviewer Workflow:": {
     "context": {
@@ -77366,6 +77478,12 @@
       "feature_area": "steps"
     }
   },
+  "Unable to copy the questions.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "wizard"
+    }
+  },
   "Unable to create OpenStack load balancer.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -77790,7 +77908,7 @@
   "Unable to create survey.": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Unable to create tag": {
@@ -81997,7 +82115,7 @@
   "Unable to update survey.": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Unable to update tag.": {
@@ -85265,7 +85383,7 @@
   },
   "Users have been prompted, so the questionnaire can't be changed.": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "Users have been removed from project successfully.": {
@@ -88007,7 +88125,7 @@
   "With STOMP events off, the agent does not sync memberships at all. Turn on Receive events over STOMP, or choose another option.": {},
   "With both organizations and offerings selected, only users of those offerings in those organizations are asked.": {
     "context": {
-      "feature_area": "feedback"
+      "feature_area": "wizard"
     }
   },
   "With errors": {

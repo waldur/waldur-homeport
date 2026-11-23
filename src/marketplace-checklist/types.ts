@@ -1,8 +1,19 @@
 import {
   ChecklistOperators,
   DependencyLogicOperatorEnum,
+  QuestionAdmin,
+  QuestionOptionsAdmin,
   QuestionTypeEnum,
 } from 'waldur-js-client';
+
+// What the visibility tab needs of another question: a saved one, or an unsaved
+// one keyed by its local key in uuid and url.
+export type VisibilityQuestion = Pick<
+  QuestionAdmin,
+  'uuid' | 'url' | 'description' | 'question_type'
+> & {
+  question_options?: Array<Pick<QuestionOptionsAdmin, 'uuid' | 'label'>>;
+};
 
 export interface ChecklistQuestionForm {
   description: string; // Question
@@ -13,6 +24,10 @@ export interface ChecklistQuestionForm {
   min_value?: string; // Number question type
   max_value?: string; // Number question type
   options?: string[]; // Select question type
+  // Kept in step with options by the form, so an option keeps its key when
+  // others are removed or moved. Only unsaved questions, which have no option
+  // uuids yet, carry them.
+  option_keys?: string[];
   guidance?: Array<{
     answer: string;
     solution: string;
