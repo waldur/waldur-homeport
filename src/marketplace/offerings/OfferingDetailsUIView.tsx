@@ -16,6 +16,7 @@ import { translate } from '@/i18n';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { TENANT_TYPE } from '@/openstack/constants';
+import { offersSlurmPeriodicPolicy } from '@/site-agent/constants';
 
 const OfferingDashboard = lazyComponent(() =>
   import('./details/dashboard/OfferingDashboard').then((module) => ({
@@ -264,7 +265,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           component: OfferingUsagePolicies,
           visible: true,
         },
-        offering.plugin_options?.slurm_periodic_policy_enabled
+        offersSlurmPeriodicPolicy(offering)
           ? {
               key: 'slurm-policy',
               title: translate('SLURM policy'),
