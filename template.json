@@ -4436,6 +4436,11 @@
       "feature_area": "article-codes"
     }
   },
+  "All records": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "All related events": {
     "context": {
       "feature_area": "dashboard"
@@ -13026,6 +13031,16 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Clean up": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
+  "Clean up consumption data": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "Cleanup Consumption Data": {
     "context": {
       "feature_area": "debug"
@@ -14755,6 +14770,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Confirm the deletion first": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "Confirm with passkey": {
     "context": {
       "feature_area": "auth"
@@ -16269,11 +16289,6 @@
   "Counts all usage since the resource started. Never resets: once reached, it holds until the customer raises or clears it.": {
     "context": {
       "feature_area": "update"
-    }
-  },
-  "Counts every consumption record a cleanup without filters would remove, except months already billed on an issued invoice or settled by an import. Nothing is deleted.": {
-    "context": {
-      "feature_area": "debug"
     }
   },
   "Counts members who joined or left the project during the digest period (the last 7, 14, or 30 days, matching the frequency), grouped by role. Shown only when the team changed.": {
@@ -19446,6 +19461,11 @@
       "feature_area": "api-keys"
     }
   },
+  "Delete Arrow consumption records so the next sync fetches them again. Months on an issued invoice or settled by an import are always kept.": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "Delete SRAM project rule": {
     "context": {
       "primary_ui_type": "title",
@@ -19573,6 +19593,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "actions"
+    }
+  },
+  "Delete consumption records for chosen months or a resource, after a preview, so the next sync fetches them again. Months on an issued invoice or settled by an import are kept.": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Delete credit and {count} project allocation(s)": {
@@ -19829,6 +19854,11 @@
   "Delete queues by pattern": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "Delete records": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Delete remote synchronization": {
@@ -21578,22 +21608,6 @@
       "feature_area": "policies"
     }
   },
-  "Dry run: {records} consumption records would be removed ({items} invoice items, {compensations} compensation items affected).": {
-    "context": {
-      "variables": {
-        "records": {
-          "type": "unknown"
-        },
-        "items": {
-          "type": "unknown"
-        },
-        "compensations": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "debug"
-    }
-  },
   "Due": {
     "context": {
       "primary_ui_type": "title",
@@ -21994,6 +22008,11 @@
   "Earlier steps whose public parts the applicant reads while this step runs and afterwards: reviews without private comments, and the submitted contributions of steps with contributors.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "Earliest": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Earliest approve": {
@@ -26272,11 +26291,6 @@
       "feature_area": "steps"
     }
   },
-  "Failed to preview the consumption cleanup": {
-    "context": {
-      "primary_ui_type": "error_message"
-    }
-  },
   "Failed to purge all queues: {error}": {
     "context": {
       "primary_ui_type": "error_message",
@@ -28121,6 +28135,11 @@
   "From date": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "From month": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "From period": {
@@ -30461,6 +30480,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "issues"
+    }
+  },
+  "I understand that these records and invoice items will be deleted": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "I understand the consequences.": {
@@ -34142,6 +34166,11 @@
   "Later, the call manager will assign specific proposals to you. At that time:": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Latest": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Latest Updates": {
@@ -38936,6 +38965,8 @@
       "feature_area": "details"
     }
   },
+  "Months already compared with Arrow's final billing.": {},
+  "Months whose final Arrow billing has not been compared yet.": {},
   "More": {
     "context": {
       "feature_area": "ai-assistant"
@@ -40908,6 +40939,11 @@
       "feature_area": "mappings"
     }
   },
+  "No consumption record would be deleted.": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "No consumption records: the resource has no license.": {
     "context": {
       "feature_area": "resources"
@@ -42058,6 +42094,11 @@
   "No queues to purge": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "No record would be deleted": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "No registered reviewer matches.": {
@@ -55356,6 +55397,11 @@
       "feature_area": "chat"
     }
   },
+  "Records": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "Records appear as the consumption sync runs, or right away with Sync history, which fetches the past months from Arrow.": {
     "context": {
       "feature_area": "resources"
@@ -56728,6 +56774,11 @@
   "Removing the organization will delete all related resources.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Removing them would let the next sync bill those months again.": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "Removing...": {
@@ -65059,6 +65110,12 @@
       "feature_area": "consumption"
     }
   },
+  "Settled and unsettled months alike.": {},
+  "Settled only": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Setup": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -71742,6 +71799,11 @@
       "feature_area": "details"
     }
   },
+  "The next consumption sync fetches those months from Arrow again and recreates them.": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "The next {count} steps start together.": {
     "context": {
       "variables": {
@@ -72443,6 +72505,11 @@
     }
   },
   "The ranking was fixed when the round went to its decision.": {},
+  "The records are being deleted": {
+    "context": {
+      "feature_area": "debug"
+    }
+  },
   "The registration that makes Waldur an appservice on the homeserver: tokens, bot user ID, webhook URL, and namespace declarations. Synapse reads it from a file; Tuwunel takes it through the admin room.": {},
   "The relay accepted the message": {
     "context": {
@@ -75649,6 +75716,11 @@
   "To manually link a resource, find the resource in Waldur and set its backend_id to the Arrow License Reference (e.g., XSP12345).": {
     "context": {
       "feature_area": "mappings"
+    }
+  },
+  "To month": {
+    "context": {
+      "feature_area": "debug"
     }
   },
   "To period": {
@@ -83200,6 +83272,11 @@
   "Unset vice-chair": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "Unsettled only": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Unsubmitted drafts are canceled.": {
@@ -96717,6 +96794,20 @@
       "action_type": "create"
     }
   },
+  "{issued} record(s) kept because their month is on an issued invoice, {imported} kept because an import settled their month.": {
+    "context": {
+      "variables": {
+        "issued": {
+          "type": "unknown"
+        },
+        "imported": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "debug",
+      "action_type": "import"
+    }
+  },
   "{label} ({panel})": {
     "context": {
       "variables": {
@@ -98593,6 +98684,38 @@
       },
       "feature_area": "ai-assistant",
       "action_type": "read"
+    }
+  },
+  "{records} consumption record(s) deleted, with {items} consumption invoice item(s) and {compensations} adjustment item(s).": {
+    "context": {
+      "variables": {
+        "records": {
+          "type": "unknown"
+        },
+        "items": {
+          "type": "unknown"
+        },
+        "compensations": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "debug"
+    }
+  },
+  "{records} consumption record(s) would be deleted, with {items} consumption invoice item(s) and {compensations} adjustment item(s) on open invoices.": {
+    "context": {
+      "variables": {
+        "records": {
+          "type": "unknown"
+        },
+        "items": {
+          "type": "unknown"
+        },
+        "compensations": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "debug"
     }
   },
   "{relative} ago, {date}": {
