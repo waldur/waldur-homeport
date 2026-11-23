@@ -6,6 +6,8 @@ import { translate } from '@/i18n';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { DropdownActionItemType } from '@/table/types';
 
+import { getArrowLicense } from './arrowLicense';
+
 const SyncConsumptionHistoryDialog = lazyComponent(() =>
   import('./SyncConsumptionHistoryDialog').then((module) => ({
     default: module.SyncConsumptionHistoryDialog,
@@ -16,7 +18,7 @@ export const SyncConsumptionHistoryAction: DropdownActionItemType<Resource> = ({
   row,
   refetch,
 }) => {
-  if (!row.backend_id) {
+  if (!getArrowLicense(row)) {
     return null;
   }
   return (

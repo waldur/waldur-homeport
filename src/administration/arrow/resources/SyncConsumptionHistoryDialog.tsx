@@ -23,10 +23,14 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
+import { getArrowLicense } from './arrowLicense';
+
 interface SyncConsumptionHistoryDialogProps {
   resolve: {
     resource: Resource;
     refetch?: () => void;
+    /** Called instead of closing the dialog once the sync succeeds. */
+    onSynced?: () => void;
   };
 }
 
@@ -45,7 +49,7 @@ const getDefaultDateRange = () => {
 export const SyncConsumptionHistoryDialog = ({
   resolve,
 }: SyncConsumptionHistoryDialogProps) => {
-  const { resource, refetch } = resolve;
+  const { resource, refetch, onSynced } = resolve;
   const { showError, showSuccess } = useNotify();
 
   const { closeDialog } = useModal();
@@ -76,7 +80,11 @@ export const SyncConsumptionHistoryDialog = ({
       );
       showSuccess(message);
       refetch?.();
-      closeDialog();
+      if (onSynced) {
+        onSynced();
+      } else {
+        closeDialog();
+      }
     },
     onError: (error: any) => {
       const errorMessage =
@@ -91,10 +99,12 @@ export const SyncConsumptionHistoryDialog = ({
       subtitle={
         <>
           <span className="font-medium">{resource.name}</span>
-          {resource.backend_id && (
+          {getArrowLicense(resource) && (
             <>
               {' '}
-              <span className="text-quaternary">({resource.backend_id})</span>
+              <span className="text-quaternary">
+                ({getArrowLicense(resource)})
+              </span>
             </>
           )}
         </>

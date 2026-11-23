@@ -506,7 +506,7 @@ const RESOURCE_ATTRIBUTE_FIELDS = [
     arrowField: 'License Reference (XSP...)',
     waldurField: 'backend_id',
     description: translate(
-      'Arrow license reference set by import, by linking resources, or with "Set backend ID". Used by "Sync consumption history" and by the customer billing summary.',
+      'Arrow license reference set by import, by linking resources, or with "Link to Arrow license". Used by "Sync consumption history" and by the customer billing summary.',
     ),
   },
   {
@@ -945,7 +945,7 @@ export const ArrowHowItWorksDialog: FC = () => {
             className="mt-3"
             title={translate('Resources tab:')}
             body={translate(
-              'The Resources tab shows all Waldur resources that are not terminated. Use "Set backend ID" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.',
+              'The Resources tab shows the resources, not terminated, of offerings mapped to an Arrow vendor. Use "Link to Arrow license" in the row menu to link a resource to its license, or the Import button to create new resources from Arrow licenses.',
             )}
           />
         </section>

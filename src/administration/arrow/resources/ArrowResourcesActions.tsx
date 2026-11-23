@@ -1,8 +1,8 @@
 import type { Resource } from 'waldur-js-client';
 
-import { SetBackendIdAction } from '@/marketplace/resources/SetBackendIdAction';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 
+import { LinkArrowLicenseAction } from './LinkArrowLicenseAction';
 import { SyncConsumptionHistoryAction } from './SyncConsumptionHistoryAction';
 import { ViewConsumptionHistoryAction } from './ViewConsumptionHistoryAction';
 
@@ -17,7 +17,7 @@ export const ArrowResourcesActions = ({
 }: ArrowResourcesActionsProps) => {
   return (
     <ActionsMenu>
-      <SetBackendIdAction resource={row} refetch={refetch} />
+      <LinkArrowLicenseAction row={row} refetch={refetch} />
       <ViewConsumptionHistoryAction row={row} refetch={refetch} />
       <SyncConsumptionHistoryAction row={row} refetch={refetch} />
     </ActionsMenu>
