@@ -15,6 +15,7 @@ import { translate } from '@/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 import { Role } from '@/permissions/types';
 import { getRoleLabels, getRoles } from '@/permissions/utils';
+import { isSiteAgentOfferingType } from '@/site-agent/constants';
 
 import { OfferingEditPanelProps } from './types';
 import {
@@ -81,6 +82,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
   // integration settings. Editing them from an empty render would overwrite
   // recipients the user cannot see.
   const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
+  const isSiteAgent = isSiteAgentOfferingType(props.offering.type);
 
   return (
     <EditFieldProvider scope={props.offering} callback={update}>
@@ -364,20 +366,26 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
               'When enabled, every limit-billing component must have a positive value when creating or updating a resource project. Use this for backends that reject projects without resource quotas (e.g. the rancher-keycloak-operator).',
             )}
           />
-          <BooleanEditField
-            name="plugin_options.slurm_periodic_policy_enabled"
-            label={translate('Enable SLURM periodic usage policy')}
-            description={translate(
-              'When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.',
-            )}
-          />
-          <BooleanEditField
-            name="plugin_options.slurm_maintenance_sync_enabled"
-            label={translate('Sync maintenance with SLURM reservations')}
-            description={translate(
-              'When enabled, the site agent turns published maintenance announcements for this offering into SLURM maintenance reservations, so the scheduler holds back jobs that would run into them: a full outage reserves all nodes, a partial outage the partitions it names. Maintenance reservations made on the cluster come back as draft announcements to review.',
-            )}
-          />
+          {/* Both reach SLURM through the site agent; no other offering
+              type reads them. */}
+          {isSiteAgent && (
+            <BooleanEditField
+              name="plugin_options.slurm_periodic_policy_enabled"
+              label={translate('Enable SLURM periodic usage policy')}
+              description={translate(
+                'When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.',
+              )}
+            />
+          )}
+          {isSiteAgent && (
+            <BooleanEditField
+              name="plugin_options.slurm_maintenance_sync_enabled"
+              label={translate('Sync maintenance with SLURM reservations')}
+              description={translate(
+                'When enabled, the site agent turns published maintenance announcements for this offering into SLURM maintenance reservations, so the scheduler holds back jobs that would run into them: a full outage reserves all nodes, a partial outage the partitions it names. Maintenance reservations made on the cluster come back as draft announcements to review.',
+              )}
+            />
+          )}
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="provisioning" title={translate('Provisioning')}>
