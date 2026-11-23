@@ -43,7 +43,9 @@ export const FieldErrorMessage: FunctionComponent<FieldErrorProps> = ({
           error.length === 1 ? (
             error[0]
           ) : (
-            <ul className="mb-0 ps-2.5">
+            // A list reads at body line height, an item apart: at the
+            // one-line help text's height, wrapped items ran together.
+            <ul className="mb-0 list-disc space-y-1 ps-4 leading-5">
               {error.map((e, i) => (
                 <li key={i}>{e}</li>
               ))}
