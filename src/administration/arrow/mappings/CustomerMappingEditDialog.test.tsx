@@ -16,6 +16,7 @@ const mockMapping = {
   uuid: 'mapping-uuid',
   arrow_reference: 'ARROW-123',
   arrow_company_name: 'Arrow Company',
+  waldur_customer: 'https://example.com/api/customers/customer-uuid/',
   waldur_customer_uuid: 'customer-uuid',
   waldur_customer_name: 'Waldur Customer',
   is_active: true,
@@ -90,7 +91,7 @@ describe('CustomerMappingEditDialog', () => {
         body: expect.objectContaining({
           arrow_reference: 'ARROW-123-UPDATED',
           is_active: false,
-          waldur_customer: 'customer-uuid',
+          waldur_customer: 'https://example.com/api/customers/customer-uuid/',
         }),
       });
       expect(mockRefetch).toHaveBeenCalled();
@@ -101,7 +102,11 @@ describe('CustomerMappingEditDialog', () => {
     const user = userEvent.setup();
     vi.mocked(customersList).mockResolvedValue(
       mockListResponse([
-        { name: 'New Organization', uuid: 'new-customer-uuid' },
+        {
+          name: 'New Organization',
+          uuid: 'new-customer-uuid',
+          url: 'https://example.com/api/customers/new-customer-uuid/',
+        },
       ]),
     );
 
@@ -126,20 +131,20 @@ describe('CustomerMappingEditDialog', () => {
       expect(adminArrowCustomerMappingsPartialUpdate).toHaveBeenCalledWith({
         path: { uuid: 'mapping-uuid' },
         body: expect.objectContaining({
-          waldur_customer: 'new-customer-uuid',
+          waldur_customer:
+            'https://example.com/api/customers/new-customer-uuid/',
         }),
       });
     });
   });
 
-  it('displays mutation error when update fails', async () => {
+  it('displays the field error when update fails', async () => {
     const user = userEvent.setup();
+    // The API client spreads a DRF error body onto the error object.
     const error = {
-      response: {
-        data: {
-          detail: 'Custom API Error Message',
-        },
-      },
+      status: 400,
+      statusText: 'Bad Request',
+      waldur_customer: ['Invalid hyperlink - No URL match.'],
     };
     vi.mocked(adminArrowCustomerMappingsPartialUpdate).mockRejectedValue(error);
 
@@ -153,7 +158,9 @@ describe('CustomerMappingEditDialog', () => {
     await user.click(saveButton);
 
     await waitFor(() => {
-      expect(screen.getByText('Custom API Error Message')).toBeInTheDocument();
+      expect(
+        screen.getByText(/waldur_customer: Invalid hyperlink - No URL match\./),
+      ).toBeInTheDocument();
       expect(mockRefetch).not.toHaveBeenCalled();
     });
   });

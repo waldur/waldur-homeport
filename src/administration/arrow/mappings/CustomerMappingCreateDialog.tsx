@@ -8,14 +8,15 @@ import {
   WaldurCustomerBrief,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
 
+import { format } from '@/core/ErrorMessageFormatter';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -39,8 +40,6 @@ interface FormValues {
 export const CustomerMappingCreateDialog = ({
   resolve,
 }: CustomerMappingCreateDialogProps) => {
-  const { closeDialog } = useModal();
-
   const [error, setError] = useState<string | null>(null);
   const { data: settings, isLoading: isLoadingSettings } = useArrowSettings();
   const {
@@ -100,11 +99,7 @@ export const CustomerMappingCreateDialog = ({
     refetch: resolve.refetch,
 
     onError: (e: any) => {
-      setError(
-        e.response?.data?.detail ||
-          e.message ||
-          translate('Failed to create mapping'),
-      );
+      setError(format(e) || translate('Failed to create mapping'));
     },
 
     invalidateQueries: [{ queryKey: arrowQueryKeys.customerMappings() }],
@@ -123,7 +118,12 @@ export const CustomerMappingCreateDialog = ({
 
   if (!settings) {
     return (
-      <ModalDialog title={translate('Create Customer Mapping')}>
+      <ModalDialog
+        title={translate('Create Customer Mapping')}
+        footer={
+          <CloseDialogButton variant="secondary" label={translate('Close')} />
+        }
+      >
         <AlertItem
           type="floating"
           variant="warning"
@@ -138,12 +138,7 @@ export const CustomerMappingCreateDialog = ({
       <ModalDialog
         title={translate('Create Customer Mapping')}
         footer={
-          <BaseButton
-            onClick={closeDialog}
-            variant="secondary"
-            label={translate('Close')}
-            size="lg"
-          />
+          <CloseDialogButton variant="secondary" label={translate('Close')} />
         }
       >
         <AlertItem
@@ -160,12 +155,7 @@ export const CustomerMappingCreateDialog = ({
       <ModalDialog
         title={translate('Create Customer Mapping')}
         footer={
-          <BaseButton
-            onClick={closeDialog}
-            variant="secondary"
-            label={translate('Close')}
-            size="lg"
-          />
+          <CloseDialogButton variant="secondary" label={translate('Close')} />
         }
       >
         <AlertItem
@@ -189,11 +179,9 @@ export const CustomerMappingCreateDialog = ({
             title={translate('Create Customer Mapping')}
             footer={
               <>
-                <BaseButton
-                  onClick={closeDialog}
+                <CloseDialogButton
                   variant="secondary"
                   label={translate('Cancel')}
-                  size="lg"
                 />
                 <SubmitButton
                   submitting={createMappingMutation.isPending}
