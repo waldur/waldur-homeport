@@ -1,0 +1,49 @@
+// The drawing keeps its own size: a wide flow scrolls sideways rather than
+// shrink its text.
+.order-flow-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+
+  svg {
+    display: block;
+  }
+
+  [role='button']:focus {
+    outline: none;
+  }
+}
+
+.order-flow-legend {
+  // The colours come from the drawing's palette, set on the list.
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-box {
+    display: inline-block;
+    width: 18px;
+    height: 12px;
+    border: 1px solid var(--wd-box-stroke);
+    border-radius: 3px;
+    background: var(--wd-box-fill);
+  }
+
+  .legend-conditional {
+    border-color: var(--wd-condition);
+    background: var(--wd-condition-soft);
+  }
+
+  .legend-skipped {
+    border-style: dashed;
+    background: var(--wd-disabled-fill);
+  }
+
+  .legend-line {
+    display: inline-block;
+    width: 24px;
+    border-top: 2px dashed var(--wd-negative);
+  }
+}

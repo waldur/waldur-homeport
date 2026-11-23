@@ -1,57 +1,22 @@
-import { FileSvgIcon, ImageIcon } from '@phosphor-icons/react';
 import { FC, useId, useMemo, useRef, useState } from 'react';
 import { WorkflowDescription } from 'waldur-js-client';
 
-import { BaseButton, Select, Switch } from 'waldur-ui';
+import { Select, Switch } from 'waldur-ui';
 
+import { ExportButtons } from '@/core/diagram/ExportButtons';
+import { paletteVars, useDiagramPalette } from '@/core/diagram/palette';
+import { ScrollRegion } from '@/core/diagram/ScrollRegion';
 import { translate } from '@/i18n';
-import { useNotify } from '@/store/notify';
 
 import { PanelHeaderControls } from '../PanelHeaderControls';
 import { useCallWorkflowProgress } from '../queries';
 import { OpenStep } from '../RoleMatrix';
 
 import { describeDiagram, DiagramTextList } from './diagramText';
-import { downloadPng, downloadSvg } from './exportSvg';
 import { progressByStep, progressLegend } from './overlay';
-import { paletteVars, useDiagramPalette } from './palette';
-import { ScrollRegion } from './ScrollRegion';
 import { SwimlaneDiagram, useDiagramLayout } from './SwimlaneDiagram';
 
 import './WorkflowDiagram.scss';
-
-export const ExportButtons: FC<{
-  getSvg: () => SVGSVGElement | null;
-  name: string;
-}> = ({ getSvg, name }) => {
-  const { showError } = useNotify();
-  return (
-    <>
-      <BaseButton
-        variant="tertiary"
-        size="lg"
-        label={translate('SVG')}
-        iconNode={<FileSvgIcon weight="bold" />}
-        onClick={() => {
-          const svg = getSvg();
-          if (svg) downloadSvg(svg, name);
-        }}
-      />
-      <BaseButton
-        variant="tertiary"
-        size="lg"
-        label={translate('PNG')}
-        iconNode={<ImageIcon weight="bold" />}
-        onClick={() => {
-          const svg = getSvg();
-          if (svg) {
-            downloadPng(svg, name).catch((error) => showError(error.message));
-          }
-        }}
-      />
-    </>
-  );
-};
 
 const Legend: FC<{ progress: boolean }> = ({ progress }) => {
   const palette = useDiagramPalette();

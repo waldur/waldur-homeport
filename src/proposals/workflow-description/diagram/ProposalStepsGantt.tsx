@@ -8,6 +8,8 @@ import {
 import { AccordionCard, BaseButton } from 'waldur-ui';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { DiagramPalette, useDiagramPalette } from '@/core/diagram/palette';
+import { ScrollRegion } from '@/core/diagram/ScrollRegion';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { getProposalStateOptions } from '@/proposals/utils';
@@ -20,8 +22,6 @@ import { renderFieldOrDash } from '@/table/utils';
 import { recipientLabel, triggerLabel } from '../mail/labels';
 import { useProposalWorkflowTimeline } from '../queries';
 
-import { DiagramPalette, useDiagramPalette } from './palette';
-import { ScrollRegion } from './ScrollRegion';
 import { WorkflowMailDialog } from './WorkflowMailDialog';
 
 import './WorkflowDiagram.scss';

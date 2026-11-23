@@ -64,9 +64,10 @@ const RADIX_MENU_IMPORTS = [
 // waldur-custom/no-unknown-class must not report them. Prefer a data-testid
 // for a new hook; remove an entry here only together with its selector there.
 const UNKNOWN_CLASS_HOOKS = [
-  // The call workflow's SVG diagrams (proposals/workflow-description/diagram)
-  // style these through the <style> element each one renders, which no
-  // stylesheet the rule reads can see.
+  // The SVG diagrams -- the call workflow's (proposals/workflow-description/
+  // diagram) and the offering order flow's (wd-of-*) -- style these through
+  // the <style> element each one renders, which no stylesheet the rule reads
+  // can see.
   '^(?:wd|wg|pg)-[\\w-]+$',
   // Marks a disabled step's row for the role and notification matrices'
   // tests; its badge, not a style, tells the user.
