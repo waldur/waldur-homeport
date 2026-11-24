@@ -28,7 +28,7 @@ export const EndDateGroup = ({ create }: { create?: boolean }) => {
       }
       label={translate('End date')}
       help={translate(
-        'The date is inclusive. Once reached (plus any configured grace period), all project resources will be scheduled for termination.',
+        "The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.",
       )}
       required={isMandatoryFromBackend}
     />

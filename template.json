@@ -70869,21 +70869,6 @@
       "feature_area": "details"
     }
   },
-  "The date is inclusive. Once reached (plus any configured grace period), all project resources will be scheduled for termination.": {
-    "context": {
-      "feature_area": "create"
-    }
-  },
-  "The date is inclusive. Once reached, resource will be scheduled for termination.": {
-    "context": {
-      "feature_area": "steps"
-    }
-  },
-  "The date is inclusive. Once reached, resources will be scheduled for termination.": {
-    "context": {
-      "feature_area": "mass-actions"
-    }
-  },
   "The date the user has joined": {
     "context": {
       "feature_area": "support"
@@ -72438,6 +72423,11 @@
       "feature_area": "projects"
     }
   },
+  "The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "The proposal ends {state}": {
     "context": {
       "variables": {
@@ -72648,6 +72638,11 @@
     }
   },
   "The resource is paused, so this key is not served.": {},
+  "The resource is scheduled for termination on this date, so the day before is the last full day of use.": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "The resource pool has been saved.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -72662,6 +72657,11 @@
     }
   },
   "The resource's usage reached its limit. It resumes on its own once usage is under the limit again: when a limit is raised or a new period begins.": {},
+  "The resources are scheduled for termination on this date, so the day before is the last full day of use.": {
+    "context": {
+      "feature_area": "mass-actions"
+    }
+  },
   "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response has been submitted.": {
     "context": {

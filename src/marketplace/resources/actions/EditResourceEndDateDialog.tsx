@@ -126,7 +126,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                           'Termination date is after end date. Resource will end with the project.',
                         )
                       : translate(
-                          'The date is inclusive. Once reached, resource will be scheduled for termination.',
+                          'The resource is scheduled for termination on this date, so the day before is the last full day of use.',
                         )
                   }
                   minDate={terminationDateBounds.minDate}
