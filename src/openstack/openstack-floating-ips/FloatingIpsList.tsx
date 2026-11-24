@@ -13,6 +13,7 @@ import { ResourceSummary } from '@/resource/summary/ResourceSummary';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { INSTANCE_TYPE } from '../constants';
 import { CreateFloatingIpAction } from '../openstack-tenant/actions/CreateFloatingIpAction';
@@ -51,6 +52,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
   const tableProps = useTable({
     table: 'openstack-floating-ips',
     fetchData: createFetcher(openstackFloatingIpsList),
+    queryField: 'query',
     filter,
   });
   return (
@@ -81,6 +83,13 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
               : '',
         },
         {
+          title: translate('Mapped public IP'),
+          // Only where the provider maps floating IPs into a public range.
+          visible: (tableProps.rows ?? []).some((row) => row.external_address),
+          render: ({ row }) => <>{renderFieldOrDash(row.external_address)}</>,
+          copyField: (row) => row.external_address || '',
+        },
+        {
           title: translate('Instance'),
           render: ({ row }) => {
             if (!row.instance_uuid) {
@@ -100,6 +109,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
           },
         },
       ]}
+      hasQuery
       verboseName={translate('floating IPs')}
       title={translate('Floating IPs')}
       showPageSizeSelector

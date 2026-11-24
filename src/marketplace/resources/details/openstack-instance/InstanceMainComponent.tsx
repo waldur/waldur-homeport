@@ -64,7 +64,7 @@ export const InstanceMainComponent = ({
           />
 
           <PropertyItem
-            label={translate('External IPs')}
+            label={translate('Mapped public IPs')}
             value={propVal.list(resourceScope.external_address)}
             hasCopy
           />

@@ -29,6 +29,20 @@ import { OpenStackTenant } from './types';
 
 const TABLE_ID = 'openstack-ports';
 
+// One entry per floating IP in both columns, so the nth mapped IP belongs to
+// the nth floating IP even when some floating IPs are not mapped.
+const floatingIps = (port: OpenStackPort) =>
+  (port.floating_ip_addresses ?? []).map((fip) =>
+    renderFieldOrDash(fip.address),
+  );
+
+const mappedPublicIps = (port: OpenStackPort) => {
+  const fips = port.floating_ip_addresses ?? [];
+  return fips.some((fip) => fip.external_address)
+    ? fips.map((fip) => renderFieldOrDash(fip.external_address))
+    : [];
+};
+
 export const TenantPortsList: FunctionComponent<{
   resourceScope: OpenStackTenant;
 }> = ({ resourceScope }) => {
@@ -80,6 +94,7 @@ export const TenantPortsList: FunctionComponent<{
         'network_name',
         'network_uuid',
         'fixed_ips',
+        'floating_ip_addresses',
         'port_security_enabled',
         'allowed_address_pairs',
         'security_groups',
@@ -122,6 +137,32 @@ export const TenantPortsList: FunctionComponent<{
             row.fixed_ips && row.fixed_ips.length > 0
               ? row.fixed_ips.map((fip) => fip.ip_address).join(', ')
               : '',
+        },
+        {
+          title: translate('Floating IPs'),
+          render: ({ row }) => (
+            <>{renderFieldOrDash(floatingIps(row).join(', '))}</>
+          ),
+          copyField: (row) =>
+            (row.floating_ip_addresses ?? [])
+              .map((fip) => fip.address)
+              .filter(Boolean)
+              .join(', '),
+        },
+        {
+          title: translate('Mapped public IPs'),
+          // Only where the provider maps floating IPs into a public range.
+          visible: (props.rows ?? []).some(
+            (row) => mappedPublicIps(row).length > 0,
+          ),
+          render: ({ row }) => (
+            <>{renderFieldOrDash(mappedPublicIps(row).join(', '))}</>
+          ),
+          copyField: (row) =>
+            (row.floating_ip_addresses ?? [])
+              .map((fip) => fip.external_address)
+              .filter(Boolean)
+              .join(', '),
         },
         {
           title: translate('MAC address'),

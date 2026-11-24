@@ -16,9 +16,17 @@ import './SearchItem.scss';
 export interface SearchItemProps {
   title: string;
   subtitle?: string;
+  /** A further line, e.g. which address of the item the search matched. */
+  detail?: string;
   image?: string;
   to: string;
   params?: { [key: string]: string };
+  /**
+   * Added to the link only, e.g. the tab that shows what the search matched.
+   * Favourites and recent searches keep `params`, so the item is the same
+   * one however it was found.
+   */
+  linkParams?: { [key: string]: string };
   badge?: ReactNode;
   actions?: ReactNode;
   onClick?(item: SearchItemProps);
@@ -50,7 +58,11 @@ export const SearchItem = (props: SearchItemProps) => {
     <div className="search-result-item flex items-center py-1.5 px-4 hover:bg-[var(--bg-brand-primary-alt)] cursor-pointer">
       <Link
         state={props.to}
-        params={props.params}
+        params={
+          props.linkParams
+            ? { ...props.params, ...props.linkParams }
+            : props.params
+        }
         className="search-result-item__link flex text-brand items-center me-3"
         onClick={(e) => {
           if (props.onClick) {
@@ -69,6 +81,9 @@ export const SearchItem = (props: SearchItemProps) => {
           <span className="text-sm">{props.title}</span>
           {Boolean(props.subtitle) && (
             <span className="text-xs text-quaternary">{props.subtitle}</span>
+          )}
+          {Boolean(props.detail) && (
+            <span className="text-xs text-tertiary">{props.detail}</span>
           )}
         </div>
       </Link>
