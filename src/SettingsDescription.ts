@@ -2513,7 +2513,7 @@ export const SettingsDescription = [
     items: [
       {
         key: 'PAT_ENABLED',
-        description: translate('Enable Personal Access Token authentication.'),
+        description: translate('Give personal access tokens to every user. While off, only users with the per-user personal access tokens flag can create and use them.'),
         default: false,
         type: 'boolean',
       },
