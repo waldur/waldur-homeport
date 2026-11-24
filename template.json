@@ -5084,6 +5084,11 @@
     }
   },
   "Also governed by the marketplace plan limits. Changing it here overrides the plan and may cause drift with billing — use \"Change limits\" to adjust the plan.": {},
+  "Also show it to signed-out visitors, on the login page and public pages, while it is active.": {
+    "context": {
+      "feature_area": "announcements"
+    }
+  },
   "Alternative names": {
     "context": {
       "feature_area": "reviewer"
@@ -29748,6 +29753,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Hidden": {
+    "context": {
+      "feature_area": "announcements"
+    }
+  },
   "Hidden answers aren't saved.": {
     "context": {
       "feature_area": "options"
@@ -35851,7 +35861,7 @@
   "Login page": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "settings"
+      "feature_area": "announcements"
     }
   },
   "Login page layout style.": {},
@@ -61178,7 +61188,7 @@
       "feature_area": "features"
     }
   },
-  "Run the offering's site agent: register it and report what it ran": {
+  "Run the offering's site agent: register it, read its configuration and report what it ran": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
@@ -65586,6 +65596,11 @@
     }
   },
   "Show offering cover image as a banner above the name on the offering page.": {},
+  "Show on the login page": {
+    "context": {
+      "feature_area": "announcements"
+    }
+  },
   "Show only when": {
     "context": {
       "feature_area": "options"
@@ -65856,6 +65871,11 @@
       },
       "feature_area": "UserResourcesWidget",
       "action_type": "read"
+    }
+  },
+  "Shown": {
+    "context": {
+      "feature_area": "announcements"
     }
   },
   "Shown above the questions. Tell respondents that staff will see who answered.": {

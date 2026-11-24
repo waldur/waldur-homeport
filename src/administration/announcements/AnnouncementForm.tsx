@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import {
+  BooleanGroup,
   DateTimeGroup,
   MarkdownGroup,
   SelectGroup,
@@ -109,6 +110,14 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
               name="description"
               label={translate('Announcement')}
               required
+            />
+
+            <BooleanGroup
+              name="visible_to_anonymous_users"
+              label={translate('Show on the login page')}
+              description={translate(
+                'Also show it to signed-out visitors, on the login page and public pages, while it is active.',
+              )}
             />
           </ModalDialog>
         </form>

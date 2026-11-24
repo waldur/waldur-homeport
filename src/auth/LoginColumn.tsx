@@ -13,6 +13,7 @@ import { AuthHeader } from './AuthHeader';
 import { AuthHeaderControls } from './AuthHeaderControls';
 import { IdentityProviderSelector } from './IdentityProviderSelector';
 import { LocalLoginButton, LocalLoginForm } from './LocalLogin';
+import { LoginAnnouncementBars } from './LoginAnnouncementBars';
 import { LoginLogo } from './LoginLogo';
 import { PoweredBy } from './PoweredBy';
 import { useAuthFeatures } from './useAuthFeatures';
@@ -35,6 +36,7 @@ export const LoginColumn = () => {
 
   return (
     <div className="login-column">
+      <LoginAnnouncementBars />
       <div className="login-header">
         <LanguageSelectorBox />
         <AuthHeaderControls />

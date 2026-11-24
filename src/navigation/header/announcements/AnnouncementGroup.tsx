@@ -13,11 +13,13 @@ import { AdminAnnouncementBar } from './AdminAnnouncementBar';
 interface AnnouncementGroupProps {
   announcements: AdminAnnouncement[];
   onShowMore: (announcement: AdminAnnouncement) => void;
+  colored?: boolean;
 }
 
 export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
   announcements,
   onShowMore,
+  colored,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -65,6 +67,7 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
             key={announcement.uuid}
             announcement={announcement}
             onShowMore={onShowMore}
+            colored={colored}
           />
         ))}
     </div>

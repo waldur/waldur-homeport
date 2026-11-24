@@ -39,6 +39,10 @@ import {
   // Types
   LandingPageLayout,
 } from './layouts';
+import {
+  LAYOUTS_WITH_FORM_COLUMN,
+  LoginAnnouncementBars,
+} from './LoginAnnouncementBars';
 import { useLayoutSwitcher } from './useLayoutSwitcher';
 import { getOauthURL } from './utils';
 
@@ -100,6 +104,7 @@ export const LandingPage = () => {
   return (
     <>
       <CookiesConsent />
+      {!LAYOUTS_WITH_FORM_COLUMN.has(layout) && <LoginAnnouncementBars />}
       <LayoutComponent />
     </>
   );
