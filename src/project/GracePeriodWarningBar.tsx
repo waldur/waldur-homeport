@@ -75,7 +75,7 @@ const GracePeriodMessage: FC<{
   return (
     <>
       {translate(
-        'This project ended on {endDate}. Resources will remain active until the end of {lastActiveDate}.',
+        'This project ended on {endDate}. Its resources are terminated after {lastActiveDate}, unless they end earlier; resources that support pausing are paused until then.',
         { endDate, lastActiveDate },
       )}{' '}
       <span className={urgencyClass}>
