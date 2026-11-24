@@ -31,13 +31,13 @@ export const Warning: Story = {
   args: {
     title: 'Grace period active:',
     children:
-      'This project ended on 01.10.2026. Resources will remain active until 15.10.2026.',
+      'This project ended on 01.10.2026. Its resources are terminated after 15.10.2026, unless they end earlier; resources that support pausing are paused until then.',
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText('Grace period active:')).toBeVisible();
     await expect(
-      canvas.getByText(/Resources will remain active until/),
+      canvas.getByText(/resources are terminated after/),
     ).toBeVisible();
 
     // Status tint is applied (guards against the arbitrary-value classes
@@ -150,7 +150,7 @@ export const Stacked: Story = {
         You can view this organization but cannot make any changes.
       </LayoutWarningBar>
       <LayoutWarningBar title="Grace period active:">
-        Resources will remain active until 15.10.2026.
+        Project resources are terminated after 15.10.2026.
       </LayoutWarningBar>
     </>
   ),

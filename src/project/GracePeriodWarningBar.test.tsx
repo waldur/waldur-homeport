@@ -40,13 +40,25 @@ describe('GracePeriodWarningBar', () => {
     expect(
       screen.getByText(
         new RegExp(
-          `remain active until the end of ${formatDate('2026-09-29')}`,
+          `resources are terminated after ${formatDate('2026-09-29')}`,
         ),
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('13 days remaining')).toBeInTheDocument();
     expect(screen.queryByText(new RegExp(formatDate('2026-09-30')))).toBeNull();
     expect(screen.queryByText('14 days remaining')).toBeNull();
+  });
+
+  // Offerings that support pausing pause the project's resources for the
+  // whole grace period, so the banner must not promise they stay usable.
+  it('says resources may end earlier and are paused where pausing is supported', () => {
+    render(<GracePeriodWarningBar />);
+
+    expect(
+      screen.getByText(/resources that support pausing are paused/),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/unless they end earlier/)).toBeInTheDocument();
+    expect(screen.queryByText(/remain active/)).toBeNull();
   });
 
   it('says so plainly on the last usable day', () => {
