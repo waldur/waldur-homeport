@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
@@ -6,11 +5,12 @@ import { Resource } from 'waldur-js-client';
 import { NativeSelect, SingleProperty } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
-import { formatDate, parseDate } from '@/core/dateUtils';
+import { formatDate } from '@/core/dateUtils';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 
+import { getRenewedEndDate } from './getRenewedEndDate';
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
 
@@ -67,10 +67,9 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
 
   const newEndDateText = useMemo(() => {
     if (!extensionMonths) return null;
-    const base = resources[0].end_date
-      ? parseDate(resources[0].end_date)
-      : DateTime.now();
-    return formatDate(base.plus({ months: extensionMonths }));
+    return formatDate(
+      getRenewedEndDate(resources[0].end_date, extensionMonths),
+    );
   }, [extensionMonths, resources]);
 
   return (
