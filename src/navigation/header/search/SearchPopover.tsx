@@ -21,6 +21,7 @@ import { translate } from '@/i18n';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
+import { IpMatch } from './ipMatch';
 import { NoResult } from './NoResult';
 import { RecentSearchItem } from './RecentSearchItem';
 import { useRecentSearch } from './RecentSearchService';
@@ -52,6 +53,14 @@ interface TabContentProps
   clearSearch(): void;
   close(): void;
 }
+
+// Open the tab that lists the object whose address matched the search.
+const ipMatchParams = (match?: IpMatch | null) => {
+  const params: Record<string, string> = {};
+  if (match?.tab) params.tab = match.tab;
+  if (match?.object) params.object = match.object;
+  return params;
+};
 
 const SectionTitle = ({ title, className = '' }) => (
   <h6
@@ -261,6 +270,8 @@ const AllResultsTabContent = ({
                       image={resource.offering_thumbnail}
                       title={resource.name}
                       subtitle={`${resource.customer_name} / ${resource.project_name} / ${resource.category_title}`}
+                      linkParams={ipMatchParams(resource.ip_match)}
+                      detail={resource.ip_match?.label}
                       isFavorite={isFavorite}
                       addFavoritePage={addFavoritePage}
                       removeFavorite={removeFavorite}
@@ -423,6 +434,8 @@ const ResourcesTabContent = ({
                   image={resource.offering_thumbnail}
                   title={resource.name}
                   subtitle={`${resource.customer_name} / ${resource.project_name}`}
+                  linkParams={ipMatchParams(resource.ip_match)}
+                  detail={resource.ip_match?.label}
                   isFavorite={isFavorite}
                   addFavoritePage={addFavoritePage}
                   removeFavorite={removeFavorite}

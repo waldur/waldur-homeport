@@ -16,6 +16,8 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { RootState } from '@/store/reducers';
 import { useUser } from '@/workspace/hooks';
 
+import { getIpMatch } from './ipMatch';
+
 const queryFn =
   (query) =>
   async ({ signal }) => {
@@ -48,6 +50,7 @@ const queryFn =
           'project_name',
           'project_uuid',
           'state',
+          'backend_metadata',
         ],
       },
     });
@@ -66,7 +69,12 @@ const queryFn =
       customersCount,
       projects: projects.data,
       projectsCount,
-      resources: resources.data,
+      // Matched against the query these results were fetched for, not the
+      // one being typed, so the label always describes this result.
+      resources: resources.data.map((resource) => ({
+        ...resource,
+        ip_match: getIpMatch(resource, query),
+      })),
       resourcesCount,
       resultsCount: customersCount + projectsCount + resourcesCount,
     };

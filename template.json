@@ -25840,7 +25840,7 @@
   "External IPs": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-instance"
+      "feature_area": "openstack-security-groups"
     }
   },
   "External Matrix clients are not enabled on this server.": {
@@ -27732,7 +27732,7 @@
   "Floating IP": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack"
+      "feature_area": "search"
     }
   },
   "Floating IP count": {},
@@ -27756,6 +27756,27 @@
   "Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Floating IP {address}": {
+    "context": {
+      "variables": {
+        "address": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "search",
+      "action_type": "create"
+    }
+  },
+  "Floating IP {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "search"
     }
   },
   "Floating IPs": {
@@ -32226,6 +32247,17 @@
       "feature_area": "core"
     }
   },
+  "Internal IP {address}": {
+    "context": {
+      "variables": {
+        "address": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "search",
+      "action_type": "create"
+    }
+  },
   "Internal LiveKit base URL. Falls back to http://livekit:7880 when blank.": {},
   "Internal Server Error": {},
   "Internal address": {
@@ -35442,7 +35474,7 @@
   "Load balancer": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "openstack-tenant"
+      "feature_area": "search"
     }
   },
   "Load balancer \"{name}\" created.": {
@@ -35499,6 +35531,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "openstack-lbaas"
+    }
+  },
+  "Load balancer {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "search"
     }
   },
   "Load balancers": {
@@ -36929,9 +36971,27 @@
       "feature_area": "offering-merges"
     }
   },
+  "Mapped public IP": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "openstack-floating-ips"
+    }
+  },
+  "Mapped public IP {address}": {
+    "context": {
+      "variables": {
+        "address": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "search",
+      "action_type": "create"
+    }
+  },
   "Mapped public IPs": {
     "context": {
-      "feature_area": "openstack-tenant"
+      "primary_ui_type": "title",
+      "feature_area": "openstack-instance"
     }
   },
   "Mapping": {
@@ -50999,6 +51059,16 @@
       "feature_area": "deploy"
     }
   },
+  "Port {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "search"
+    }
+  },
   "Portal": {
     "context": {
       "primary_ui_type": "title",
@@ -61207,6 +61277,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "openstack-tenant"
+    }
+  },
+  "Router {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "search"
     }
   },
   "Routers": {
@@ -98535,6 +98615,51 @@
         }
       },
       "feature_area": "project"
+    }
+  },
+  "{object} on {target}": {
+    "context": {
+      "variables": {
+        "object": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "search",
+      "action_type": "read"
+    }
+  },
+  "{object}: public IP {address}, mapped from {mapped_from}": {
+    "context": {
+      "variables": {
+        "object": {
+          "type": "unknown"
+        },
+        "address": {
+          "type": "unknown"
+        },
+        "mapped_from": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "search",
+      "action_type": "create"
+    }
+  },
+  "{object}: {address}": {
+    "context": {
+      "variables": {
+        "object": {
+          "type": "unknown"
+        },
+        "address": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "search",
+      "action_type": "create"
     }
   },
   "{offeringName} offering has been moved to {organizationName} organization.": {

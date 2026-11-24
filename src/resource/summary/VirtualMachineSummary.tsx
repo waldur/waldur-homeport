@@ -48,10 +48,13 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         value={<IPList value={props.resource.external_ips} />}
       />
 
-      <PropertyItem
-        label={translate('Mapped public IPs')}
-        value={<IPList value={props.resource.external_address} />}
-      />
+      {/* Only where the provider maps floating IPs into a public range. */}
+      {props.resource.external_address?.length ? (
+        <PropertyItem
+          label={translate('Mapped public IPs')}
+          value={<IPList value={props.resource.external_address} />}
+        />
+      ) : null}
 
       <PropertyItem
         label={translate('SSH key')}
