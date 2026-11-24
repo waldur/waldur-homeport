@@ -10,6 +10,7 @@ import {
   mergeAgentConfiguration,
   replacedKeys,
   ROLES_AND_SETTINGS,
+  splitSecretsByBlock,
   validateJsonObject,
   validateRolesAndSettings,
 } from './agentConfiguration';
@@ -431,5 +432,74 @@ describe('changedSinceOpened', () => {
   it('guards nothing for a single field', () => {
     expect(replacedKeys('reporting_backend')).toEqual([]);
     expect(replacedKeys('agent_settings.resource_import_enabled')).toEqual([]);
+  });
+});
+
+describe('splitSecretsByBlock', () => {
+  const secret = (field: string, requirement: string) => ({
+    field: `backend_settings.${field}`,
+    requirement,
+  });
+  const fields = (secrets: { field: string }[]) =>
+    secrets.map(({ field }) => field.replace('backend_settings.', ''));
+
+  it('needs a secret once its block is set', () => {
+    const secrets = [secret('ldap.bind_password', 'required_with_parent')];
+    expect(fields(splitSecretsByBlock(secrets, {}).ifConfigured)).toEqual([
+      'ldap.bind_password',
+    ]);
+    // An empty block is set: the agent then requires its secrets.
+    expect(fields(splitSecretsByBlock(secrets, { ldap: {} }).needed)).toEqual([
+      'ldap.bind_password',
+    ]);
+    expect(
+      fields(splitSecretsByBlock(secrets, { ldap: null }).ifConfigured),
+    ).toEqual(['ldap.bind_password']);
+    expect(
+      fields(splitSecretsByBlock(secrets, { ldap: { uri: 'x' } }).needed),
+    ).toEqual(['ldap.bind_password']);
+  });
+
+  it('always needs a required secret', () => {
+    const { needed } = splitSecretsByBlock(
+      [secret('ldap.bind_password', 'required')],
+      undefined,
+    );
+    expect(fields(needed)).toEqual(['ldap.bind_password']);
+  });
+
+  it('needs an optional secret only once its sub-block is set', () => {
+    const secrets = [secret('ldap.welcome_email.smtp_password', 'optional')];
+    expect(
+      splitSecretsByBlock(secrets, { ldap: { uri: 'x' } }).ifConfigured,
+    ).toHaveLength(1);
+    expect(
+      splitSecretsByBlock(secrets, {
+        ldap: { welcome_email: { host: 'smtp' } },
+      }).needed,
+    ).toHaveLength(1);
+  });
+
+  it('needs a top-level secret', () => {
+    expect(
+      splitSecretsByBlock([secret('token', 'optional')], {}).needed,
+    ).toHaveLength(1);
+  });
+
+  it('needs a secret of a collection once it has an entry', () => {
+    const mapping = [secret('servers.*.password', 'required_with_parent')];
+    const list = [secret('ldap[].bind_password', 'required_with_parent')];
+    expect(
+      splitSecretsByBlock(mapping, { servers: {} }).ifConfigured,
+    ).toHaveLength(1);
+    expect(
+      splitSecretsByBlock(mapping, { servers: { a: {} } }).needed,
+    ).toHaveLength(1);
+    expect(splitSecretsByBlock(list, { ldap: [] }).ifConfigured).toHaveLength(
+      1,
+    );
+    expect(
+      splitSecretsByBlock(list, { ldap: [{ uri: 'x' }] }).needed,
+    ).toHaveLength(1);
   });
 });

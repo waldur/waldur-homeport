@@ -44,6 +44,7 @@ import {
   mergeAgentConfiguration,
   replacedKeys,
   ROLES_AND_SETTINGS,
+  splitSecretsByBlock,
   validateRolesAndSettings,
 } from './agentConfiguration';
 import { JsonObjectEditField, jsonObjectValidator } from './JsonObjectField';
@@ -153,6 +154,10 @@ const AgentLoadsPanel: FC<{ offeringUuid: string }> = ({ offeringUuid }) => {
       </p>
     );
   }
+  const { needed, ifConfigured } = splitSecretsByBlock(
+    data.secrets,
+    data.offering?.backend_settings,
+  );
   return (
     <>
       <p className="text-secondary mb-4">
@@ -174,13 +179,26 @@ const AgentLoadsPanel: FC<{ offeringUuid: string }> = ({ offeringUuid }) => {
       <h3 className="text-base font-semibold mb-2">
         {translate('Secrets the agent configuration file must hold')}
       </h3>
-      {data.secrets.length ? (
-        <SimpleTable columns={getSecretColumns()} rows={data.secrets} />
+      {needed.length ? (
+        <SimpleTable columns={getSecretColumns()} rows={needed} />
       ) : (
         <p className="text-tertiary">
           {translate('The backends in use need no secrets.')}
         </p>
       )}
+      {ifConfigured.length ? (
+        <>
+          <h3 className="text-base font-semibold mt-5 mb-2">
+            {translate('Secrets needed only once their block is configured')}
+          </h3>
+          <p className="text-secondary mb-2">
+            {translate(
+              'The backends can use these settings, but this offering does not configure the block that holds them. Leave them out of the agent configuration file until it does.',
+            )}
+          </p>
+          <SimpleTable columns={getSecretColumns()} rows={ifConfigured} />
+        </>
+      ) : null}
     </>
   );
 };

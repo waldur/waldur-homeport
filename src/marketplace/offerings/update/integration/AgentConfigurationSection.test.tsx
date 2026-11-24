@@ -395,7 +395,40 @@ describe('AgentConfigurationSection', () => {
     );
   });
 
-  it('shows the version and the secrets the agent needs', async () => {
+  it('lists the secret of an unset block apart from those needed', async () => {
+    openTab('agent-loads');
+    renderSection();
+    expect(await screen.findByText('abc123')).toBeInTheDocument();
+    expect(
+      screen.getByText('The backends in use need no secrets.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Secrets needed only once their block is configured'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('backend_settings.ldap.bind_password'),
+    ).toBeInTheDocument();
+  });
+
+  it('shows the secret of a configured block as needed', async () => {
+    vi.mocked(
+      marketplaceProviderOfferingsSiteAgentConfigRetrieve,
+    ).mockResolvedValue({
+      data: {
+        offering: {
+          backend_type: 'slurm',
+          backend_settings: { ldap: { uri: 'ldap://ldap.example.com' } },
+        },
+        secrets: [
+          {
+            field: 'backend_settings.ldap.bind_password',
+            backend: 'slurm',
+            requirement: 'required_with_parent',
+          },
+        ],
+        version: 'abc123',
+      },
+    } as any);
     openTab('agent-loads');
     renderSection();
     expect(await screen.findByText('abc123')).toBeInTheDocument();
@@ -405,5 +438,11 @@ describe('AgentConfigurationSection', () => {
     expect(
       screen.getByText('Required once its block is set'),
     ).toBeInTheDocument();
+    expect(
+      screen.queryByText('The backends in use need no secrets.'),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Secrets needed only once their block is configured'),
+    ).not.toBeInTheDocument();
   });
 });
