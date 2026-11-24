@@ -8,6 +8,7 @@ import svgr from 'vite-plugin-svgr';
 import { waldurBootSplash } from 'waldur-boot-splash/vite';
 
 import { collectMicroApps } from './scripts/micro-apps-registry.mjs';
+import phosphorWeightsPlugin from './vite-plugin-phosphor-weights.js';
 import reactDisplayNamePlugin from './vite-plugin-react-displayname.js';
 
 // Tailwind is imported by src/index.tsx for the real app bundle;
@@ -41,6 +42,7 @@ const plugins: PluginOption[] = [
       plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
     },
   }),
+  phosphorWeightsPlugin(),
   reactDisplayNamePlugin(),
   waldurBootSplash({ defaultName: 'Waldur' }),
 ];

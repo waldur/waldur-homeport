@@ -16341,6 +16341,7 @@ __metadata:
     livekit-client: "npm:2.20.0"
     loglevel: "npm:^1.9.2"
     luxon: "npm:^3.7.2"
+    magic-string: "npm:^0.30.21"
     markdown-to-jsx: "npm:^7.7.4"
     marked: "npm:^18.0.3"
     matrix-js-sdk: "npm:~43.0.0"
