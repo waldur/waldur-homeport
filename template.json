@@ -62481,6 +62481,11 @@
       "feature_area": "single-import"
     }
   },
+  "Secrets needed only once their block is configured": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Secrets the agent configuration file must hold": {
     "context": {
       "feature_area": "integration"
@@ -70100,6 +70105,11 @@
   "The backend may not keep this precision": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "The backends can use these settings, but this offering does not configure the block that holds them. Leave them out of the agent configuration file until it does.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "The backends in use need no secrets.": {

@@ -1,4 +1,11 @@
-import { cloneDeep, get, isEqual, unset } from 'es-toolkit/compat';
+import {
+  cloneDeep,
+  get,
+  isEmpty,
+  isEqual,
+  isPlainObject,
+  unset,
+} from 'es-toolkit/compat';
 import {
   AgentConfiguration,
   AgentConfigurationRequest,
@@ -386,4 +393,60 @@ export const describeRefusal = (
     );
   }
   return { errors: [...flattenErrors(own), ...otherLines], hints };
+};
+
+// Whether the block that holds the secret at this field, such as
+// backend_settings.ldap.bind_password, is in the served backend settings.
+// A top-level secret's block is backend_settings itself; a secret inside a
+// mapping (*) or list ([]) of entries needs the collection to have one. A
+// block is set once it is an object, even an empty one, as the agent counts it.
+const isSecretBlockSet = (
+  backendSettings: Record<string, unknown>,
+  field: string,
+): boolean => {
+  const parts = field.split('.');
+  if (parts[0] !== 'backend_settings') {
+    return true;
+  }
+  let node: unknown = backendSettings;
+  for (const part of parts.slice(1, -1)) {
+    if (part === '*') {
+      return !isEmpty(node);
+    }
+    node = isPlainObject(node)
+      ? (node as Record<string, unknown>)[part.replace(/\[\]$/, '')]
+      : undefined;
+    if (part.endsWith('[]')) {
+      return !isEmpty(node);
+    }
+    if (!isPlainObject(node)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+// The secrets the agent needs now, and those it needs only once their block
+// is configured. The API lists every secret the backends declare, whether the
+// offering uses its block or not: the agent relies on that to refuse a local
+// secret whose block Waldur does not serve.
+export const splitSecretsByBlock = <
+  T extends { field: string; requirement: string },
+>(
+  secrets: T[],
+  backendSettings: Record<string, unknown> | undefined,
+): { needed: T[]; ifConfigured: T[] } => {
+  const needed: T[] = [];
+  const ifConfigured: T[] = [];
+  for (const secret of secrets) {
+    if (
+      secret.requirement === 'required' ||
+      isSecretBlockSet(backendSettings ?? {}, secret.field)
+    ) {
+      needed.push(secret);
+    } else {
+      ifConfigured.push(secret);
+    }
+  }
+  return { needed, ifConfigured };
 };
