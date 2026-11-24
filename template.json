@@ -14559,6 +14559,11 @@
       "feature_area": "template"
     }
   },
+  "Configuration source": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "Configurations have been updated": {
     "context": {
       "primary_ui_type": "success_message",
@@ -25055,6 +25060,11 @@
   "Everyone on the proposal team now.": {
     "context": {
       "feature_area": "manage"
+    }
+  },
+  "Everything in the file": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Everything that happened on this access request that your role lets you see.": {
@@ -54955,6 +54965,11 @@
       "feature_area": "metrics"
     }
   },
+  "Read from Waldur": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Read the CPU, memory, network and disk counters of the instances in this offering's tenants, and of the volumes attached to them, from the Nova API, and show them on their projects' Metrics tab. Turning this off hides the metrics; what was collected is deleted after the archive grace period.": {
     "context": {
       "feature_area": "openstack"
@@ -71139,6 +71154,8 @@
       "feature_area": "metrics"
     }
   },
+  "The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs a site agent that supports configuration_source.": {},
+  "The file holds the whole configuration. A change made in Waldur needs a new file.": {},
   "The file is empty.": {
     "context": {
       "feature_area": "hpc"

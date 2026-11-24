@@ -14,6 +14,7 @@ import {
   FormText,
   LinkButton,
   NativeSelect,
+  RadioGroup,
 } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -26,6 +27,28 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { SITE_AGENT_PLUGIN } from './constants';
 import { SiteAgentConfigPreview } from './SiteAgentConfigPreview';
+
+// Where the agent takes each offering's configuration from: the whole of it
+// from this file, or only how to reach Waldur and the secrets, the rest read
+// from Waldur when the agent starts.
+type ConfigurationSource = 'local' | 'waldur';
+
+const getSourceOptions = () => [
+  {
+    value: 'local' as const,
+    label: translate('Everything in the file'),
+    description: translate(
+      'The file holds the whole configuration. A change made in Waldur needs a new file.',
+    ),
+  },
+  {
+    value: 'waldur' as const,
+    label: translate('Read from Waldur'),
+    description: translate(
+      'The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs a site agent that supports configuration_source.',
+    ),
+  },
+];
 
 interface SiteAgentConfigDialogProps {
   resolve: {
@@ -49,6 +72,8 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
   const [selectedOfferings, setSelectedOfferings] = useState<string[]>(
     fixedOffering ? [fixedOffering.uuid] : [],
   );
+  const [configurationSource, setConfigurationSource] =
+    useState<ConfigurationSource>('local');
   const [includePolicySettings, setIncludePolicySettings] = useState(true);
   const [apiUrl, setApiUrl] = useState('');
   const [timezone, setTimezone] = useState('');
@@ -75,7 +100,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             path: { uuid: provider.uuid },
             body: {
               offering_uuids: selectedOfferings,
-              include_policy_settings: includePolicySettings,
+              // Sent only when not the server's default, 'local'; Waldur
+              // always serves the policy settings to an agent reading them.
+              ...(configurationSource === 'waldur'
+                ? { configuration_source: configurationSource }
+                : { include_policy_settings: includePolicySettings }),
               ...(apiUrl && { waldur_api_url: apiUrl }),
               ...(timezone && { timezone }),
             },
@@ -227,19 +256,29 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       {/* Common configuration options - shown for both fixed offering and multi-select cases */}
       {(fixedOffering || (offerings && offerings.length > 0)) && (
         <>
-          <FormField className="mb-3">
-            <Checkbox
-              id="include-policy-settings"
-              checked={includePolicySettings}
-              onChange={(e) => setIncludePolicySettings(e.target.checked)}
-              label={translate('Include SLURM policy settings')}
-            />
-            <FormText variant="muted">
-              {translate(
-                'When enabled, includes SLURM periodic usage policy configuration if available.',
-              )}
-            </FormText>
-          </FormField>
+          <RadioGroup<ConfigurationSource>
+            className="mb-3"
+            label={translate('Configuration source')}
+            options={getSourceOptions()}
+            value={configurationSource}
+            onValueChange={setConfigurationSource}
+          />
+
+          {configurationSource === 'local' && (
+            <FormField className="mb-3">
+              <Checkbox
+                id="include-policy-settings"
+                checked={includePolicySettings}
+                onChange={(e) => setIncludePolicySettings(e.target.checked)}
+                label={translate('Include SLURM policy settings')}
+              />
+              <FormText variant="muted">
+                {translate(
+                  'When enabled, includes SLURM periodic usage policy configuration if available.',
+                )}
+              </FormText>
+            </FormField>
+          )}
 
           <FormField className="mb-3">
             <FormLabel>{translate('API URL (optional)')}</FormLabel>
