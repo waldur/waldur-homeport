@@ -101,6 +101,16 @@ export const AnnouncementsList = () => {
       id: 'is_active',
     },
     {
+      title: translate('Login page'),
+      render: ({ row }) =>
+        row.visible_to_anonymous_users
+          ? translate('Shown')
+          : translate('Hidden'),
+      keys: ['visible_to_anonymous_users'],
+      id: 'visible_to_anonymous_users',
+      optional: true,
+    },
+    {
       title: 'Created at',
       render: ({ row }) => formatDateTime(row.created),
       keys: ['created'],

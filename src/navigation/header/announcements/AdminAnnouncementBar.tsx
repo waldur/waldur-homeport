@@ -39,7 +39,9 @@ export const getMaintenanceByline = (
 export const AdminAnnouncementBar: FC<{
   announcement: AdminAnnouncement;
   onShowMore: (announcement: AdminAnnouncement) => void;
-}> = ({ announcement, onShowMore }) => (
+  /** Tint warning and danger bars in their colour. */
+  colored?: boolean;
+}> = ({ announcement, onShowMore, colored }) => (
   <AnnouncementBar
     title={announcement.maintenance_name || undefined}
     byline={getMaintenanceByline(announcement)}
@@ -47,6 +49,7 @@ export const AdminAnnouncementBar: FC<{
     icon={ANNOUNCEMENT_ICON[announcement.type].icon}
     variant={ANNOUNCEMENT_ICON[announcement.type].variant}
     ellipsis
+    colored={colored}
     onShowMore={() => onShowMore(announcement)}
     // The message already carries the schedule; only the affected offerings'
     // impact is unique to the dialog.

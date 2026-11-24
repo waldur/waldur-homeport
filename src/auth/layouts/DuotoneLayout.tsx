@@ -13,6 +13,7 @@ import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
 import { HeroButton } from '../HeroButton';
 import { getHeroBackgroundImage } from '../heroImage';
+import { LoginAnnouncementBars } from '../LoginAnnouncementBars';
 import { LoginLogo } from '../LoginLogo';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
@@ -33,6 +34,7 @@ export const DuotoneLayout = () => {
   return (
     <div className="layout-duotone">
       <div className="layout-duotone-login">
+        <LoginAnnouncementBars />
         <div className="layout-duotone-header">
           <LanguageSelectorBox />
           <AuthHeaderControls />

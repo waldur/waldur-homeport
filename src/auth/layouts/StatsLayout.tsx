@@ -11,6 +11,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 
 import { AuthHeader } from '../AuthHeader';
 import { AuthHeaderControls } from '../AuthHeaderControls';
+import { LoginAnnouncementBars } from '../LoginAnnouncementBars';
 import { LoginLogo } from '../LoginLogo';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
@@ -55,6 +56,7 @@ export const StatsLayout = () => {
         </div>
       </div>
       <div className="layout-stats-login">
+        <LoginAnnouncementBars />
         <div className="layout-stats-header">
           <LanguageSelectorBox />
           <AuthHeaderControls />
