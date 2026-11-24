@@ -36,6 +36,20 @@ describe('TablePagination', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
+  it('renders nothing when one page holds every result and its size is fixed', () => {
+    const { container } = renderPagination({
+      currentPage: 1,
+      resultCount: 8,
+      showPageSizeSelector: false,
+    });
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it('keeps the rows-per-page choice when one page holds every result', () => {
+    renderPagination({ currentPage: 1, resultCount: 8 });
+    expect(screen.getByText('1-8 of 8 items')).toBeInTheDocument();
+  });
+
   it('marks the current page and moves to another', async () => {
     const { gotoPage } = renderPagination();
     const nav = screen.getByRole('navigation', { name: 'Pagination' });

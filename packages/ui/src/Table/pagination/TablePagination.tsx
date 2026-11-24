@@ -36,7 +36,7 @@ export interface TablePaginationProps extends PaginationState {
  * A table's footer: "Rows per page", the page numbers, "11-20 of 42 items"
  * and prev/next. Below the md breakpoint it collapses to
  * "‹ Page 2 of 5 ›". Renders nothing when every result fits on one compact
- * page.
+ * page, or on the first page when there is no "Rows per page" to change.
  *
  * The root sets `data-slot="table-pagination"` and reads `--pagination-px` /
  * `--pagination-pt` hooks for page layouts that adjust its padding
@@ -56,7 +56,10 @@ export const TablePagination = ({
   bordered = true,
   className,
 }: TablePaginationProps) => {
-  if (resultCount <= PAGE_SIZE_COMPACT) {
+  if (
+    resultCount <= PAGE_SIZE_COMPACT ||
+    (!showPageSizeSelector && currentPage === 1 && resultCount <= pageSize)
+  ) {
     return null;
   }
 
