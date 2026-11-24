@@ -1068,6 +1068,11 @@
       "feature_area": "plan"
     }
   },
+  "A parameter must be a mapping of its fields.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "A paused key cannot be rotated.": {
     "context": {
       "feature_area": "api-keys"
@@ -3003,6 +3008,11 @@
   "Add offering partition": {
     "context": {
       "feature_area": "partitions"
+    }
+  },
+  "Add offering template": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "Add option": {
@@ -5288,6 +5298,28 @@
       "feature_area": "bulk"
     }
   },
+  "An offering template already holds the name of every preset.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "offering-templates",
+      "action_type": "create"
+    }
+  },
+  "An offering template carries an offering, its components, plans and agent configuration, with the parameters a service provider fills in to create an offering from it. Secrets, files, screenshots, organizations and resources are never part of it.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
+  "An offering template named {name} already exists: rename or delete it to load this preset again.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "offering-templates"
+    }
+  },
   "An offering that still has resources is not deleted; any offering refused is reported with the reason.": {
     "context": {
       "feature_area": "bulk"
@@ -6594,6 +6626,16 @@
         }
       },
       "feature_area": "vendorOfferings"
+    }
+  },
+  "Are you sure you want to delete the offering template {name}? Offerings created from it are not affected.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "offering-templates"
     }
   },
   "Are you sure you want to delete the offering {offering_name} ?": {
@@ -10010,7 +10052,7 @@
   "Billing period": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "plan"
+      "feature_area": "offering-templates"
     }
   },
   "Billing period ({unit}) differs from the current plan.": {
@@ -10073,7 +10115,7 @@
   "Billing type": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "views"
+      "feature_area": "offering-templates"
     }
   },
   "Binary runtime": {
@@ -14267,7 +14309,7 @@
   "Components": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "offering-templates"
     }
   },
   "Components awarded": {
@@ -18972,6 +19014,11 @@
       "feature_area": "configuration"
     }
   },
+  "Declared parameters": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Decline": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -21253,6 +21300,7 @@
   },
   "Document": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "call-templates"
     }
   },
@@ -21260,6 +21308,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "documents"
+    }
+  },
+  "Document of version {number}": {
+    "context": {
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-templates"
     }
   },
   "Document removed successfully": {
@@ -21844,6 +21902,16 @@
       "feature_area": "policies"
     }
   },
+  "Each change to the document of {name} is kept as a version. Offerings created from the template keep the version they were created from.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "offering-templates"
+    }
+  },
   "Each component is set to its formula. A formula may use input (the value entered), numbers, + - * / and parentheses, for example input * 2 * 0.25. Results are rounded up to the precision of the component.": {
     "context": {
       "feature_area": "options"
@@ -21880,6 +21948,11 @@
     }
   },
   "Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.": {},
+  "Each parameter is a value asked for when an offering is created from the template, written into the document at its target paths. Declare them under parameters in the document; the API checks every target path when the template is saved.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Each partition may accept the proposal under conditions. Off, it accepts or rejects it.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -22447,6 +22520,11 @@
   "Edit offering partition": {
     "context": {
       "feature_area": "partitions"
+    }
+  },
+  "Edit offering template": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "Edit option": {
@@ -29818,6 +29896,11 @@
       "feature_area": "features"
     }
   },
+  "Hide parameters": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Hide password": {
     "context": {
       "feature_area": "resource"
@@ -32235,6 +32318,11 @@
       "feature_area": "wizard"
     }
   },
+  "Invalid": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Invalid JSON format": {
     "context": {
       "feature_area": "single-import"
@@ -33101,6 +33189,12 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "It is unpublished: publish it from the offering templates page to offer it to service providers.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "actions"
     }
   },
   "It is used as default page title if it's not specified explicitly.": {},
@@ -35438,6 +35532,11 @@
       "feature_area": "reports"
     }
   },
+  "Load offering template presets": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Load preset": {
     "context": {
       "feature_area": "call-templates"
@@ -35479,6 +35578,17 @@
         }
       },
       "feature_area": "call-templates"
+    }
+  },
+  "Loaded {count} offering templates.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-templates"
     }
   },
   "Loading": {
@@ -37765,7 +37875,7 @@
   "Measured unit": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "offerings"
+      "feature_area": "offering-templates"
     }
   },
   "Mechanical engineering": {
@@ -44324,6 +44434,11 @@
       "feature_area": "call-templates"
     }
   },
+  "Offer the template to every service provider when they create an offering.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Offer via call": {
     "context": {
       "feature_area": "actions"
@@ -44764,10 +44879,44 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Offering template created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-templates"
+    }
+  },
+  "Offering template deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-templates"
+    }
+  },
+  "Offering template updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-templates"
+    }
+  },
+  "Offering template {name} created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "actions"
+    }
+  },
+  "Offering templates": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Offering type": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "offering-merges"
+      "feature_area": "offering-templates"
     }
   },
   "Offering type has been updated.": {
@@ -45875,6 +46024,12 @@
   "Open now": {
     "context": {
       "feature_area": "provider-calls"
+    }
+  },
+  "Open offering templates": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "actions"
     }
   },
   "Open or closed": {
@@ -48234,6 +48389,11 @@
       "feature_area": "panels"
     }
   },
+  "Parameters": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Parent": {
     "context": {
       "primary_ui_type": "title",
@@ -49990,7 +50150,7 @@
   "Plans": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "wizard"
+      "feature_area": "offering-templates"
     }
   },
   "Plans below safety margin": {},
@@ -51179,6 +51339,11 @@
       "feature_area": "call-templates"
     }
   },
+  "Presets are starting points shipped with this portal. Each one loaded becomes an offering template of its own, which keeps no link to the preset.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Press {shortcut} to add the highlighted item to favorites or remove it.": {
     "context": {
       "variables": {
@@ -51727,6 +51892,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "hygiene"
+    }
+  },
+  "Problems": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-templates"
     }
   },
   "Process of importing Arrow licenses as Waldur marketplace resources. Select a customer mapping, choose a vendor offering, pick a project, then select licenses to import.": {},
@@ -53989,6 +54160,11 @@
   "Published templates are offered to every call manager.": {
     "context": {
       "feature_area": "call-templates"
+    }
+  },
+  "Published templates are offered to every service provider.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "Published {date}": {
@@ -61790,7 +61966,7 @@
   },
   "Save as template": {
     "context": {
-      "feature_area": "transfer"
+      "feature_area": "actions"
     }
   },
   "Save changes": {
@@ -61887,6 +62063,11 @@
   "Saved paths the workflow must keep passing.": {
     "context": {
       "feature_area": "workflow-description"
+    }
+  },
+  "Saves the offering, its components, plans and agent configuration as an offering template. Secrets, files, screenshots, organizations and resources are left out.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Saving a scenario with the key of an existing one replaces it.": {
@@ -65310,7 +65491,7 @@
   "Should extra issue field mappings be applied": {},
   "Show": {
     "context": {
-      "feature_area": "marketplace"
+      "feature_area": "offering-templates"
     }
   },
   "Show OpenStack tenant migrations action and tab": {
@@ -65616,6 +65797,16 @@
       "feature_area": "integration"
     }
   },
+  "Show parameters ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-templates"
+    }
+  },
   "Show password": {
     "context": {
       "feature_area": "resource"
@@ -65740,6 +65931,16 @@
   "Show the check details": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Show the document of version {number}": {
+    "context": {
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-templates"
     }
   },
   "Show the keys of all resources": {
@@ -65893,6 +66094,11 @@
       "feature_area": "create"
     }
   },
+  "Shown below": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Shown depending on other answers.": {
     "context": {
       "feature_area": "wizard"
@@ -65902,6 +66108,16 @@
   "Shown to call managers choosing a template.": {
     "context": {
       "feature_area": "call-templates"
+    }
+  },
+  "Shown to service providers choosing a template.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
+  "Shown to service providers choosing a template. Left empty, the offering's description is used.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Shown to the call’s managers.": {
@@ -69097,6 +69313,11 @@
       "feature_area": "wizard"
     }
   },
+  "Target paths": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Target plan": {
     "context": {
       "feature_area": "offering-merges"
@@ -69393,7 +69614,7 @@
   "Template name": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "resource-requests-step"
+      "feature_area": "actions"
     }
   },
   "Template removed": {
@@ -70990,6 +71211,26 @@
       "feature_area": "chat"
     }
   },
+  "The document declares no parameters.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
+  "The document is not valid JSON or YAML: {reason}": {
+    "context": {
+      "variables": {
+        "reason": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-templates"
+    }
+  },
+  "The document must be a mapping of sections, such as offering, components and plans.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "The draft is being canceled.": {
     "context": {
       "feature_area": "ticketDraft"
@@ -71891,6 +72132,16 @@
   "The offering has no components!": {
     "context": {
       "feature_area": "import"
+    }
+  },
+  "The offering in the export format, as JSON or YAML, with its agent configuration and parameters.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
+  "The offering in the export format, as JSON or YAML, with its agent configuration and parameters. Changing it creates a new version.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "The offering that remains. Prepare its plans and components before merging.": {
@@ -73235,9 +73486,29 @@
       "feature_area": "scenarios"
     }
   },
+  "The template declares no parameters.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
+  "The template defines no components.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
+  "The template defines no plans.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "The template defines no workflow steps.": {
     "context": {
       "feature_area": "call-templates"
+    }
+  },
+  "The template has no versions yet.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "The template's own changes since": {
@@ -73308,6 +73579,11 @@
   "The type of organization you belong to": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "The type of the offerings created from the template.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "The unit of allocation for this instance, e.g. NHR": {
@@ -74867,6 +75143,11 @@
   "This portal does not let apps connect to Waldur accounts. If you need it, contact your Waldur administrator.": {
     "context": {
       "feature_area": "oauth"
+    }
+  },
+  "This portal ships no presets.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "This preview shows policy impact based on example values. Select a resource to see projections based on real usage.": {
@@ -78865,6 +79146,12 @@
       "feature_area": "offering-merges"
     }
   },
+  "Unable to delete the offering template.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-templates"
+    }
+  },
   "Unable to delete the panel.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -79557,6 +79844,12 @@
       "feature_area": "users"
     }
   },
+  "Unable to load offering template presets.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-templates"
+    }
+  },
   "Unable to load offering user.": {
     "context": {
       "feature_area": "details"
@@ -79888,6 +80181,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "changelog"
+    }
+  },
+  "Unable to load the versions of the template.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "Unable to load this offering.": {
@@ -81142,6 +81440,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "meeting-notes"
+    }
+  },
+  "Unable to save the offering as a template.": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
+  "Unable to save the offering template.": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "Unable to save the ranking.": {
@@ -82628,6 +82936,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
+    }
+  },
+  "Unable to update the offering template.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-templates"
     }
   },
   "Unable to update the panel.": {
@@ -86440,7 +86754,7 @@
   "Version history": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "actions"
+      "feature_area": "offering-templates"
     }
   },
   "Version history: {name}": {
@@ -92196,6 +92510,11 @@
   "offering resources": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "offering templates": {
+    "context": {
+      "feature_area": "offering-templates"
     }
   },
   "offering → billing_type → component (3-level hierarchy)": {
@@ -98305,6 +98624,19 @@
         }
       },
       "feature_area": "dry-run"
+    }
+  },
+  "{path} (parameter {key})": {
+    "context": {
+      "variables": {
+        "path": {
+          "type": "url"
+        },
+        "key": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-templates"
     }
   },
   "{pct} of {amount} expected": {
