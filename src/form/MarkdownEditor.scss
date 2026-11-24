@@ -2,13 +2,14 @@
   // The editor is a form control and was the only one with no boundary: its
   // body ran straight into whatever field followed it. Same border and radius
   // as .form-control so it sits in a form as one of them.
-  border: 1px solid var(--color-gray-300);
+  border: 1px solid var(--input-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
 
-  // --color-gray-N is the same in both themes; dark reads the dark gray ramp.
-  [data-theme='dark'] & {
-    border-color: var(--color-gray-dark-300);
+  // The toolbar's block-type select paints with --basePageBg, which MDXEditor's
+  // dark theme leaves light (see the popup container below).
+  &.dark-theme {
+    --basePageBg: var(--baseBg);
   }
 
   .mdxeditor-source-editor .cm-scroller,
@@ -29,14 +30,10 @@
 
   // Only the preview draws its own box: the editor now carries one itself.
   &.markdown-editor-preview {
-    border: 1px solid var(--color-gray-300);
+    border: 1px solid var(--input-border);
     padding: 16px;
     min-height: 200px;
     background-color: var(--bg-secondary);
-
-    [data-theme='dark'] & {
-      border-color: var(--color-gray-dark-300);
-    }
   }
 }
 
