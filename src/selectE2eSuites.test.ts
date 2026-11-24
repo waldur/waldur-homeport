@@ -30,7 +30,9 @@ describe('selectE2eSuites', () => {
     [['src/EventsEnums.ts']],
     [['package.json']],
     [['yarn.lock']],
-    [['locales/et.json']],
+    [['locales/en.json']],
+    [['locales/en-GB.json']],
+    [['locales/et.json', 'src/table/Table.tsx']],
     [['docker/rootfs/etc/nginx/nginx.conf']],
     [['vite.config.ts']],
   ])('a change to shared code or the image (%j) selects all', (files) => {
@@ -43,6 +45,8 @@ describe('selectE2eSuites', () => {
     [['src/test/harness.tsx']],
     [['src/customer/__snapshots__/Details.test.tsx.snap']],
     [['.gitlab-ci.yml', 'docs/tables.md', 'scripts/bundle-budget.mjs']],
+    [['locales/et.json']],
+    [['locales/et.json', 'locales/nl-BE.json']],
     [['']],
   ])('a change no suite exercises (%j) selects none', (files) => {
     expect(selectE2eSuites(files)).toBe('none');

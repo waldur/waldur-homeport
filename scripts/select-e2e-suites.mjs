@@ -32,6 +32,11 @@ const IMAGE_FILES = [
   'generate-filters-config.yaml',
 ];
 
+// Every E2E browser context pins locale en-US, and each catalog is its own
+// lazily imported chunk (packages/i18n-runtime/src/loadSharedLocale.ts), so a
+// change to any other language's catalog cannot alter what a suite sees.
+const UNTESTED_LOCALE = /^locales\/(?!en(-[A-Z]{2})?\.json$)[^/]+\.json$/;
+
 const TEST_FILE =
   /(\.test\.tsx?|\.stories\.tsx)$|\/__snapshots__\/|^src\/test\//;
 
@@ -39,6 +44,7 @@ const TEST_FILE =
 export function selectE2eSuites(files) {
   const areas = new Set();
   for (const file of files.filter(Boolean)) {
+    if (UNTESTED_LOCALE.test(file)) continue;
     if (file.startsWith('src/')) {
       if (TEST_FILE.test(file)) continue;
       const area = Object.keys(AREAS).find((name) =>
