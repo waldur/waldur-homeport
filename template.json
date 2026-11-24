@@ -94828,16 +94828,6 @@
       "feature_area": "plan"
     }
   },
-  "{count} months from now": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "renew-allocation"
-    }
-  },
   "{count} months: {from} to {to}.": {
     "context": {
       "variables": {

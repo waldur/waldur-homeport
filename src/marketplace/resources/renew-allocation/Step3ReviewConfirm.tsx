@@ -14,7 +14,7 @@ import {
 } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
-import { formatDate, parseDate } from '@/core/dateUtils';
+import { formatDate } from '@/core/dateUtils';
 import { StringGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -24,6 +24,7 @@ import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseO
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
 
+import { getRenewedEndDate } from './getRenewedEndDate';
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
 
@@ -93,11 +94,9 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
 
   const extensionMonths = Number(values.extension_months) || 0;
 
-  const newEndDate = resource?.end_date
-    ? formatDate(parseDate(resource.end_date).plus({ months: extensionMonths }))
-    : extensionMonths
-      ? translate('{count} months from now', { count: extensionMonths })
-      : 'N/A';
+  const newEndDate = extensionMonths
+    ? formatDate(getRenewedEndDate(resource?.end_date, extensionMonths))
+    : 'N/A';
 
   const departmentToInvoice = [resource?.customer_name, resource?.project_name]
     .filter(Boolean)
