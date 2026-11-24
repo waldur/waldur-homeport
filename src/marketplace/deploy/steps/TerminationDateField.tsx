@@ -218,7 +218,7 @@ export const TerminationDateField = ({
       name="attributes.end_date"
       label={translate('Termination date')}
       description={translate(
-        'The date is inclusive. Once reached, resource will be scheduled for termination.',
+        'The resource is scheduled for termination on this date, so the day before is the last full day of use.',
       )}
       {...dateFieldProps}
     />

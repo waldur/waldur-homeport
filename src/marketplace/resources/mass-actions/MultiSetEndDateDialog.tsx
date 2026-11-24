@@ -138,7 +138,7 @@ export const MultiSetEndDateDialog: FC<MultiSetEndDateDialogProps> = (
                   name="end_date"
                   label={translate('Termination date')}
                   description={translate(
-                    'The date is inclusive. Once reached, resources will be scheduled for termination.',
+                    'The resources are scheduled for termination on this date, so the day before is the last full day of use.',
                   )}
                   minDate={sharedTerminationDateBounds.minDate}
                   maxDate={sharedTerminationDateBounds.maxDate}
