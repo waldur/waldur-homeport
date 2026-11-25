@@ -3,6 +3,7 @@ import {
   PauseIcon,
   PlayIcon,
   UsersThreeIcon,
+  PlusIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
@@ -240,30 +241,7 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
       subtitle={translate(
         'Users matched by any active rule get it, in addition to everyone it is switched on for.',
       )}
-      footer={
-        <>
-          <CloseDialogButton label={translate('Close')} />
-          {canEdit ? (
-            <BaseButton
-              variant="primary"
-              size="lg"
-              className="min-w-dialog-action"
-              label={translate('Add rule')}
-              onClick={() =>
-                openDialog(FeatureRuleFormDialog, {
-                  resolve: {
-                    featureKey,
-                    featureLabel,
-                    refetch: tableProps.fetch,
-                    back,
-                  },
-                  size: 'lg',
-                })
-              }
-            />
-          ) : null}
-        </>
-      }
+      footer={<CloseDialogButton label={translate('Close')} />}
     >
       <Table<FeatureRule>
         {...tableProps}
@@ -312,6 +290,26 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
           />
         )}
       />
+      {canEdit ? (
+        <BaseButton
+          variant="tertiary"
+          size="sm"
+          iconNode={<PlusIcon weight="bold" />}
+          className="mt-2"
+          label={translate('Add rule')}
+          onClick={() =>
+            openDialog(FeatureRuleFormDialog, {
+              resolve: {
+                featureKey,
+                featureLabel,
+                refetch: tableProps.fetch,
+                back,
+              },
+              size: 'lg',
+            })
+          }
+        />
+      ) : null}
     </ModalDialog>
   );
 };
