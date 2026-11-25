@@ -1243,6 +1243,11 @@
       "feature_area": "reviewer-registry"
     }
   },
+  "A user matches when every group of criteria you fill in matches: listed users, organizations, roles and identity attributes.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "A user that only manages {offering}, with a token restricted to it.": {
     "context": {
       "variables": {
@@ -3150,7 +3155,17 @@
   },
   "Add rule": {
     "context": {
-      "feature_area": "common"
+      "feature_area": "feature-rules"
+    }
+  },
+  "Add rule for {feature}": {
+    "context": {
+      "variables": {
+        "feature": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Add section": {
@@ -5659,6 +5674,12 @@
   "Apartment number": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "App": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "micro-apps"
     }
   },
   "Apparent": {
@@ -8671,7 +8692,7 @@
   "Audience": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "feedback"
+      "feature_area": "feature-rules"
     }
   },
   "Audience & schedule": {
@@ -11563,6 +11584,11 @@
       "feature_area": "proposal"
     }
   },
+  "Can be targeted": {
+    "context": {
+      "feature_area": "support"
+    }
+  },
   "Can only be increased": {
     "context": {
       "feature_area": "change-limits"
@@ -12275,6 +12301,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "Change who gets it": {
+    "context": {
+      "feature_area": "micro-apps"
     }
   },
   "Changed": {
@@ -13049,6 +13080,16 @@
   "Claims not exposed": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Claims: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Clarification": {
@@ -17437,7 +17478,8 @@
   },
   "Criteria": {
     "context": {
-      "feature_area": "workflow-steps"
+      "primary_ui_type": "title",
+      "feature_area": "feature-rules"
     }
   },
   "Criteria name (e.g., Efficiency)": {
@@ -19962,6 +20004,12 @@
       "feature_area": "mail"
     }
   },
+  "Delete rules without effect": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "feature-rules"
+    }
+  },
   "Delete screenshot": {
     "context": {
       "primary_ui_type": "label",
@@ -20063,6 +20111,24 @@
         }
       },
       "feature_area": "proposal-roles"
+    }
+  },
+  "Delete the {count} rules for {keys}? They cannot be restored.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "keys": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
+  "Delete them": {
+    "context": {
+      "feature_area": "feature-rules"
     }
   },
   "Delete this organization credit?": {
@@ -20178,6 +20244,11 @@
   },
   "Deleting a cluster also deletes the infrastructure its Kubernetes nodes run on:": {},
   "Deleting an OpenStack tenant also deletes all resources created within it.": {},
+  "Deleting the rules…": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Deleting...": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -20289,6 +20360,11 @@
   "Deploy Longhorn block storage after cluster is deployed": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Deployed": {
+    "context": {
+      "feature_area": "micro-apps"
     }
   },
   "Deployment": {},
@@ -21373,6 +21449,16 @@
   },
   "Does not apply": {},
   "Does not apply to this deployment.": {},
+  "Does not match {user}": {
+    "context": {
+      "variables": {
+        "user": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
   "Domain": {
     "context": {
       "primary_ui_type": "title",
@@ -22262,6 +22348,11 @@
       "feature_area": "structure"
     }
   },
+  "Edit audience": {
+    "context": {
+      "feature_area": "micro-apps"
+    }
+  },
   "Edit auto-provisioning rule": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -22730,6 +22821,16 @@
   "Edit rule": {
     "context": {
       "feature_area": "offerings"
+    }
+  },
+  "Edit rule for {feature}": {
+    "context": {
+      "variables": {
+        "feature": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Edit rule: {event} → {audience}": {
@@ -23253,7 +23354,6 @@
       "feature_area": "providers"
     }
   },
-  "Enable Personal Access Token authentication.": {},
   "Enable Post-Logout Redirect": {
     "context": {
       "feature_area": "steps"
@@ -25133,6 +25233,7 @@
       "action_type": "read"
     }
   },
+  "Everyone": {},
   "Everyone (anonymous)": {},
   "Everyone evaluating on the call reads the proposal's step list.": {},
   "Everyone is signed out, you included. While the preset loads, the portal is unavailable; then it opens the sign-in page.": {
@@ -26687,7 +26788,8 @@
   },
   "Feature": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "support"
     }
   },
   "Feature is disabled.": {},
@@ -27158,7 +27260,7 @@
   },
   "Filter": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "rules"
     }
   },
   "Filter by": {
@@ -27828,6 +27930,7 @@
       "feature_area": "blocks"
     }
   },
+  "Follows the micro-apps feature": {},
   "Font family used in the UI.": {},
   "For 1 hour": {
     "context": {
@@ -28759,6 +28862,7 @@
       "feature_area": "accounts"
     }
   },
+  "Give personal access tokens to every user. While off, only users with the per-user personal access tokens flag can create and use them.": {},
   "Give this passkey a name you will recognize later, then follow your device prompt. Nothing secret leaves your device.": {
     "context": {
       "feature_area": "passkeys"
@@ -31551,6 +31655,12 @@
     }
   },
   "In the pool": {},
+  "In this portal": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "micro-apps"
+    }
+  },
   "In use": {
     "context": {
       "primary_ui_type": "label",
@@ -35356,6 +35466,9 @@
       "feature_area": "roles"
     }
   },
+  "Listed for everyone the app is meant for.": {},
+  "Listed for the users the app is meant for while the micro-apps feature is on, as before settings existed.": {},
+  "Listed only for the users its rules match, among those the app is meant for.": {},
   "Listener \"{name}\" created.": {
     "context": {
       "primary_ui_type": "title",
@@ -37229,6 +37342,19 @@
       "feature_area": "reviewer-pool"
     }
   },
+  "Matches at least {count} of the first {checked} active users checked.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "checked": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
   "Matches every authenticated user — no filter is configured.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -37244,6 +37370,26 @@
       },
       "feature_area": "auto-provisioning-rules",
       "action_type": "filter"
+    }
+  },
+  "Matches {count} active users.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
+  "Matches {user}": {
+    "context": {
+      "variables": {
+        "user": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Matching configuration": {
@@ -38071,6 +38217,16 @@
       "feature_area": "user-roles"
     }
   },
+  "Members of an organization in any of these groups match.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
+  "Members of any of these organizations or of their projects match.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Members of the proposal's panel": {
     "context": {
       "feature_area": "proposal-roles"
@@ -38513,6 +38669,22 @@
   },
   "Mexico": {},
   "MiB": {},
+  "Micro-app setting has been saved.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "micro-apps"
+    }
+  },
+  "Micro-apps": {
+    "context": {
+      "feature_area": "micro-apps"
+    }
+  },
+  "Micro-apps with a setting": {
+    "context": {
+      "feature_area": "support"
+    }
+  },
   "Microphone": {
     "context": {
       "primary_ui_type": "label",
@@ -40065,6 +40237,7 @@
       "feature_area": "policies"
     }
   },
+  "Never listed, and opening it shows that it is not available.": {},
   "Never reported": {
     "context": {
       "feature_area": "usage-monitoring"
@@ -41189,6 +41362,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "No criteria: this rule matches no one. To turn the feature on for everyone, use its switch instead.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "No current preview": {
     "context": {
       "feature_area": "wizard"
@@ -41862,6 +42040,7 @@
       "feature_area": "demo-presets"
     }
   },
+  "No one": {},
   "No open round": {
     "context": {
       "feature_area": "call-management"
@@ -41894,7 +42073,7 @@
   },
   "No organization groups": {
     "context": {
-      "feature_area": "organizations"
+      "feature_area": "feature-rules"
     }
   },
   "No organization groups are configured in the system. The policy will automatically apply to all organizations.": {
@@ -42831,6 +43010,11 @@
       "feature_area": "details"
     }
   },
+  "No users": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "No users are assigned this role.": {
     "context": {
       "feature_area": "roles"
@@ -43353,6 +43537,11 @@
   "Not delivering": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Not deployed": {
+    "context": {
+      "feature_area": "micro-apps"
     }
   },
   "Not editable on the offering": {
@@ -44477,7 +44666,11 @@
       "feature_area": "reports"
     }
   },
-  "Off": {},
+  "Off": {
+    "context": {
+      "feature_area": "support"
+    }
+  },
   "Off track": {
     "context": {
       "feature_area": "reports"
@@ -44487,6 +44680,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "mappings"
+    }
+  },
+  "Offer the app to selected users first.": {
+    "context": {
+      "feature_area": "micro-apps"
     }
   },
   "Offer the template to every call manager when they create a call.": {
@@ -44508,6 +44706,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "reports"
+    }
+  },
+  "Offered to": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "micro-apps"
     }
   },
   "Offered: {amount}": {
@@ -45240,6 +45444,11 @@
       "feature_area": "matrix"
     }
   },
+  "On for everyone": {
+    "context": {
+      "feature_area": "support"
+    }
+  },
   "On offering pages, show this section on a tab of its own instead of with the other attributes.": {
     "context": {
       "feature_area": "structure"
@@ -45326,6 +45535,16 @@
   "On this page": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "On through rules ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "support"
     }
   },
   "On time": {},
@@ -45649,6 +45868,11 @@
   "Only draft offerings can be deleted": {
     "context": {
       "feature_area": "bulk"
+    }
+  },
+  "Only features that are on": {
+    "context": {
+      "feature_area": "support"
     }
   },
   "Only for deployments using: {conditions}.": {
@@ -47351,7 +47575,17 @@
   "Organization groups": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "organizations"
+      "feature_area": "feature-rules"
+    }
+  },
+  "Organization groups: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Organization has been created.": {
@@ -47612,6 +47846,16 @@
   "Organizations owner": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Organizations: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Origin": {
@@ -55348,7 +55592,7 @@
   "Reason": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "pubsub"
     }
   },
   "Reason (optional)": {
@@ -60969,6 +61213,16 @@
       "feature_area": "roles"
     }
   },
+  "Roles: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
   "Rollback ratio": {
     "context": {
       "feature_area": "database-stats"
@@ -61357,10 +61611,40 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Rule has been activated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feature-rules"
+    }
+  },
+  "Rule has been created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feature-rules"
+    }
+  },
+  "Rule has been deactivated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feature-rules"
+    }
+  },
+  "Rule has been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feature-rules"
+    }
+  },
   "Rule has been successfully created": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Rule has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feature-rules"
     }
   },
   "Rule name": {
@@ -61371,13 +61655,13 @@
   },
   "Rule value": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "rules"
     }
   },
   "Rules": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-security-groups"
+      "feature_area": "feature-rules"
     }
   },
   "Rules have been updated.": {
@@ -61394,6 +61678,12 @@
   "Rules to look at": {
     "context": {
       "feature_area": "workflow-description"
+    }
+  },
+  "Rules without effect have been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "feature-rules"
     }
   },
   "Run": {
@@ -64173,6 +64463,17 @@
   "Selected target uses limit_period=total — there is only one lifetime period to plot.": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "Selected users": {},
+  "Selected users ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Selected users have been successfully removed.": {
@@ -70001,6 +70302,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Test for a user": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Test match": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -70014,6 +70320,16 @@
         }
       },
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Test rule for {feature}": {
+    "context": {
+      "variables": {
+        "feature": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Text": {
@@ -71453,6 +71769,11 @@
   "The external network to use as the gateway for this router.": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "The feature is already on for everyone, so this rule changes nothing.": {
+    "context": {
+      "feature_area": "feature-rules"
     }
   },
   "The field to be used for looking up the user.": {
@@ -73192,6 +73513,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "The rule is inactive, so it turns nothing on until it is activated.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "The rule matches no SRAM group. Check the source, labels and group short names.": {
     "context": {
       "feature_area": "sram"
@@ -73809,6 +74135,16 @@
       "feature_area": "reports"
     }
   },
+  "The {count} rules that pick its users will be deleted.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "micro-apps"
+    }
+  },
   "The {spendable} still drawable lasts this long at {burn}/day. The rest of this allocation stays unavailable, and costs start landing on the invoice uncompensated.": {
     "context": {
       "variables": {
@@ -74279,6 +74615,16 @@
       "feature_area": "provider-calls"
     }
   },
+  "They target {keys}: features that can no longer be turned on for selected users, or micro-apps without a setting.": {
+    "context": {
+      "variables": {
+        "keys": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
   "They total {total} and cannot be drawn without this credit.": {
     "context": {
       "variables": {
@@ -74384,6 +74730,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "oauth"
+    }
+  },
+  "This app is not available to you": {
+    "context": {
+      "feature_area": "shell"
     }
   },
   "This app is set up for another server": {
@@ -77213,6 +77564,11 @@
       "feature_area": "database-stats"
     }
   },
+  "Turn this feature on for selected users": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Turning project groups off": {
     "context": {
       "feature_area": "accounts"
@@ -78228,6 +78584,11 @@
       "feature_area": "wizard"
     }
   },
+  "Unable to count the users this rule matches.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Unable to create OpenStack load balancer.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -78700,6 +79061,12 @@
         }
       },
       "feature_area": "hpc"
+    }
+  },
+  "Unable to create the rule.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feature-rules"
     }
   },
   "Unable to create the support ticket.": {
@@ -79258,7 +79625,13 @@
   "Unable to delete the rule.": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "mail"
+      "feature_area": "feature-rules"
+    }
+  },
+  "Unable to delete the rules.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feature-rules"
     }
   },
   "Unable to delete the user agreement.": {
@@ -80195,6 +80568,11 @@
   "Unable to load the email configuration": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "Unable to load the features of this user.": {
+    "context": {
+      "feature_area": "support"
     }
   },
   "Unable to load the invoice items.": {
@@ -81525,6 +81903,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "meeting-notes"
+    }
+  },
+  "Unable to save the micro-app setting.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "micro-apps"
     }
   },
   "Unable to save the offering as a template.": {
@@ -83075,6 +83459,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "role-mapping"
+    }
+  },
+  "Unable to update the rule.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "feature-rules"
     }
   },
   "Unable to update the section.": {
@@ -85647,7 +86037,7 @@
   },
   "User value": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "rules"
     }
   },
   "User was saved but password could not be updated.": {
@@ -86204,6 +86594,16 @@
       "feature_area": "team"
     }
   },
+  "Users holding any of these roles, in any scope, match.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
+  "Users matched by any active rule get it, in addition to everyone it is switched on for.": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Users must have ALL of these assurance levels to be allowed.": {
     "context": {
       "feature_area": "restrictions"
@@ -86242,6 +86642,16 @@
   "Users with any of these nationalities will be allowed.": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "Users: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "Uses the existing project \"{name}\".": {
@@ -88699,6 +89109,26 @@
       "feature_area": "evaluators"
     }
   },
+  "Who gets {app}": {
+    "context": {
+      "variables": {
+        "app": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "micro-apps"
+    }
+  },
+  "Who gets {feature}": {
+    "context": {
+      "variables": {
+        "feature": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "feature-rules"
+    }
+  },
   "Who is included in matching:": {
     "context": {
       "feature_area": "matching"
@@ -88804,6 +89234,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "details"
+    }
+  },
+  "Whole portal": {
+    "context": {
+      "feature_area": "support"
     }
   },
   "Whom the evaluators suggested, and why. The same person may be listed once by account and once by an address typed for them. The applicant does not see them.": {
@@ -90381,6 +90816,11 @@
       "feature_area": "oauth"
     }
   },
+  "Your administrator has not enabled it for your account.": {
+    "context": {
+      "feature_area": "shell"
+    }
+  },
   "Your answer is being sent.": {
     "context": {
       "feature_area": "oauth"
@@ -91569,6 +92009,11 @@
       "feature_area": "proposals"
     }
   },
+  "e.g. Pilot group": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "e.g. Rancher cluster, SLURM allocation": {
     "context": {
       "feature_area": "profiles"
@@ -92353,6 +92798,11 @@
   "metrics": {
     "context": {
       "feature_area": "metrics"
+    }
+  },
+  "micro-apps": {
+    "context": {
+      "feature_area": "micro-apps"
     }
   },
   "milli CPUs": {},
@@ -95010,6 +95460,16 @@
         }
       },
       "feature_area": "scenarios"
+    }
+  },
+  "{count} feature rules have no effect": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "feature-rules"
     }
   },
   "{count} field(s)": {

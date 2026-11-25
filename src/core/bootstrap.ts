@@ -9,6 +9,7 @@ import {
 import { afterBootstrap } from '@/afterBootstrap';
 import { ENV } from '@/core/config';
 import { BOOTSTRAP_QUERY_KEY } from '@/core/queryClient';
+import { rememberPublicFeatures } from '@/features/userFeatures';
 
 import { initApiClient } from './api';
 import { setupAuthCore } from './authCoreSetup';
@@ -30,6 +31,7 @@ async function loadPublicConfig() {
   try {
     const config = await fetchRuntimeConfig();
     Object.assign(ENV, config);
+    rememberPublicFeatures();
   } catch (error) {
     throw describeConfigError(error, ENV.apiEndpoint);
   }

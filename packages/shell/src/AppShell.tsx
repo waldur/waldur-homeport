@@ -11,6 +11,7 @@ import { NotificationProvider } from 'waldur-notifications';
 import type { RuntimeConfigData } from 'waldur-runtime-config';
 import {
   ConfirmModalRoot,
+  EmptyState,
   IconButton,
   ModalProvider,
   ModalRoot,
@@ -25,10 +26,18 @@ import {
 } from 'waldur-ui';
 
 import { whenMicroAppBootstrapped } from './bootstrap';
-import { useExternalLinks } from './microApps';
+import {
+  isMicroAppOffered,
+  mergeFeatureFlags,
+  useExternalLinks,
+} from './microApps';
 import { QuickShortcutsMenu, useAppShortcuts } from './QuickShortcutsMenu';
 import { ShellErrorBoundary } from './ShellErrorBoundary';
-import { CurrentUserProvider, useCurrentUser } from './useCurrentUser';
+import {
+  CurrentUserProvider,
+  useCurrentUser,
+  useCurrentUserSettled,
+} from './useCurrentUser';
 import { UserMenu } from './UserMenu';
 import { ShellLanguageProvider } from './useShellLanguage';
 import { ShellThemeProvider } from './useShellTheme';
@@ -199,15 +208,28 @@ function AppShellContent({
             isStaff: currentUser.isStaff,
             isSupport: currentUser.isSupport,
             roleNames: currentUser.roleNames,
+            microApps: currentUser.microApps,
           }
         : null,
     [currentUser],
   );
+  const features = useMemo(
+    () => mergeFeatureFlags(runtimeConfig?.FEATURES, currentUser?.features),
+    [runtimeConfig?.FEATURES, currentUser?.features],
+  );
+  const userSettled = useCurrentUserSettled();
+  // The operator switched this app off for the signed-in user: say so rather
+  // than render pages whose menu entry the user was never shown. Until
+  // /users/me/ answers, an app's pages wait, so they neither flash nor start
+  // their requests for a user the app turns out to be off for.
+  const waitingForUser = Boolean(appName) && !userSettled;
+  const offered =
+    !currentUser || isMicroAppOffered(appName, currentUser.microApps);
   const appShortcuts = useAppShortcuts({
     baseUrl: appBaseUrl(),
     currentApp: appName,
     viewer,
-    features: runtimeConfig?.FEATURES,
+    features,
     portalTitle: runtimeConfig?.plugins?.WALDUR_CORE?.SHORT_PAGE_TITLE,
   });
   const links = useExternalLinks(!onShortcutsClick && Boolean(currentUser));
@@ -307,7 +329,20 @@ function AppShellContent({
               such content belongs in a portal (dialogs, menus and toasts
               already are). */}
           <div className="flex flex-1 flex-col overflow-y-auto [container-type:size] [--layout-sticky-top:0px] [--layout-sticky-height:100cqh]">
-            <ShellErrorBoundary>{children}</ShellErrorBoundary>
+            <ShellErrorBoundary>
+              {waitingForUser ? null : offered ? (
+                children
+              ) : (
+                <EmptyState
+                  className="m-auto"
+                  title={translate('This app is not available to you')}
+                  message={translate(
+                    'Your administrator has not enabled it for your account.',
+                  )}
+                  data-testid="micro-app-not-available"
+                />
+              )}
+            </ShellErrorBoundary>
           </div>
           {footer}
         </SidebarInset>

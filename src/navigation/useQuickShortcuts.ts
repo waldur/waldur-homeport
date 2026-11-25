@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { externalLinksList } from 'waldur-js-client';
+import { externalLinksList, UserMe } from 'waldur-js-client';
 
 import { activeRoleNames, useAppShortcuts } from 'waldur-shell';
 
@@ -10,8 +10,9 @@ import { useUser } from '@/workspace/hooks';
 
 /**
  * What the quick shortcuts menu lists in the portal: the deployment's
- * micro-apps the user may see (micro-apps.json, behind the
- * user.show_micro_apps feature), then the staff-managed external links.
+ * micro-apps the user may see (micro-apps.json, behind the operator's
+ * setting for the app, or the user.show_micro_apps feature for an app without
+ * one), then the staff-managed external links.
  * Shared by the sidebar's brand row and the mobile header, which shows the
  * menu while the sidebar is a drawer without that row.
  */
@@ -34,6 +35,9 @@ export const useQuickShortcuts = () => {
             isStaff: Boolean(user.is_staff),
             isSupport: Boolean(user.is_support),
             roleNames: activeRoleNames(user.permissions),
+            // The store holds /users/me/ narrowed to User (see
+            // UsersService.getCurrentUser); the operator's settings ride along.
+            microApps: (user as Partial<Pick<UserMe, 'micro_apps'>>).micro_apps,
           }
         : null,
     [user],

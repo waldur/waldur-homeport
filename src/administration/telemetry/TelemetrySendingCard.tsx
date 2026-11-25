@@ -4,8 +4,8 @@ import { featureValues } from 'waldur-js-client';
 import { HelpIcon, PropertyCard, Switch } from 'waldur-ui';
 
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
-import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
+import { setPublicFeature } from '@/features/userFeatures';
 import { DeploymentFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -23,10 +23,7 @@ export const TelemetrySendingCard = () => {
     setSubmitting(true);
     try {
       await featureValues({ body: { deployment: { send_metrics: value } } });
-      ENV.FEATURES = {
-        ...ENV.FEATURES,
-        deployment: { ...ENV.FEATURES?.deployment, send_metrics: value },
-      };
+      setPublicFeature('deployment', 'send_metrics', value);
       setEnabled(value);
       showSuccess(
         value

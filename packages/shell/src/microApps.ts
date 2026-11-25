@@ -35,12 +35,47 @@ const isFeatureOn = (features: FeatureFlags, feature: string) => {
   return Boolean(features?.[section]?.[key]);
 };
 
+/**
+ * The operator's setting for each micro-app that has one, as /users/me/
+ * answers it for the viewer: on or off. An app that is absent has no setting
+ * and follows the user.show_micro_apps feature.
+ */
+export type MicroAppSettings = Record<string, boolean> | undefined;
+
 export interface ShortcutsViewer {
   isStaff: boolean;
   isSupport?: boolean;
   /** The names of the roles the viewer holds now. */
   roleNames: string[];
+  /** The operator's settings for the viewer, from /users/me/ micro_apps. */
+  microApps?: MicroAppSettings;
 }
+
+/**
+ * Whether the operator offers the micro-app `name` to the viewer at all. Only
+ * an explicit "off" refuses: an app without a setting is not the operator's
+ * call, and the backend still decides what the user may do in it.
+ */
+export const isMicroAppOffered = (
+  name: string | undefined,
+  microApps: MicroAppSettings,
+): boolean => !name || microApps?.[name] !== false;
+
+/**
+ * The flags the backend sends everyone, with the user's own values of the
+ * user-scoped flags (/users/me/ features) laid over them.
+ */
+export const mergeFeatureFlags = (
+  base: FeatureFlags,
+  overlay: Record<string, Record<string, boolean>> | undefined,
+): FeatureFlags => {
+  if (!overlay) return base;
+  const merged: Record<string, Record<string, boolean>> = { ...base };
+  for (const [section, values] of Object.entries(overlay)) {
+    merged[section] = { ...merged[section], ...values };
+  }
+  return merged;
+};
 
 /** Whether `viewer` is shown `app` in the quick shortcuts menu. */
 export const isMicroAppVisible = (
@@ -48,7 +83,12 @@ export const isMicroAppVisible = (
   viewer: ShortcutsViewer,
   features: FeatureFlags,
 ): boolean => {
-  if (!isFeatureOn(features, MICRO_APPS_FEATURE)) return false;
+  const setting = viewer.microApps?.[app.name];
+  // An operator's setting decides; without one the global flag does.
+  if (setting === false) return false;
+  if (setting === undefined && !isFeatureOn(features, MICRO_APPS_FEATURE)) {
+    return false;
+  }
   if (
     !app.visibleTo.features.every((feature) => isFeatureOn(features, feature))
   ) {

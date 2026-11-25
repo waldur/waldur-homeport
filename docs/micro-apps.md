@@ -223,8 +223,24 @@ out (pass `appName` to `AppShell`). An app that does not pass it looks for
 the registry under its own path, finds none, and lists neither the apps
 nor the way back to the portal.
 
-Nothing is listed until staff turn on the **`user.show_micro_apps`** feature
-(Administration → Features). Then each app is shown to the users its
+Who an app is offered to is the operator's decision, made per app in
+**Administration → User interface → Micro-apps**:
+
+| Setting            | Listed for                                                         |
+| ------------------ | ------------------------------------------------------------------ |
+| none (the default) | the users below while the **`user.show_micro_apps`** feature is on |
+| **Off**            | nobody; opening the app shows "This app is not available to you"   |
+| **Everyone**       | the users below, whatever `user.show_micro_apps` says              |
+| **Selected users** | the users below whom one of the app's feature rules matches        |
+
+A setting lives in the backend (`/api/micro-app-settings/`), its audience in
+feature rules keyed `micro_apps.<name>` (`/api/feature-rules/`), and
+`/users/me/` answers the result for the signed-in user as `micro_apps`, a
+`name -> bool` map of the apps that have a setting. An app without an entry
+follows the feature, as every app did before settings existed. Removing a
+setting removes its rules too.
+
+Whatever the setting, an app is only ever listed for the users its
 `package.json` names:
 
 ```json
@@ -261,8 +277,10 @@ written by `scripts/micro-apps-registry.mjs`:
   lists only the links.
 
 The visibility rules are evaluated in the browser from `users/me` (the
-user's active roles) and the runtime feature flags; they decide what the
-menu offers, not who may use an app. An app still has to handle a user it
+user's active roles, the user's own feature flags and `micro_apps`) and the
+runtime feature flags; they decide what the menu offers, not who may use an
+app. `AppShell` also shows "not available" to a signed-in user whose
+`micro_apps` entry for the app is `false`. An app still has to handle a user it
 has nothing for, and the backend still decides what the user may do. The
 registry itself is public, like the apps: anyone, signed in or not, can
 read every app's name, description and rules, `staffOnly` ones included.

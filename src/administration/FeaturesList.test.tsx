@@ -1,11 +1,20 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { vi, describe, expect, beforeEach, it } from 'vitest';
-import { featureValues } from 'waldur-js-client';
+import {
+  featureRulesList,
+  featureValues,
+  metadataFeaturesRetrieve,
+} from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import {
+  applyUserFeatures,
+  rememberPublicFeatures,
+} from '@/features/userFeatures';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { FeaturesList } from './FeaturesList';
@@ -60,7 +69,7 @@ describe('FeaturesList', () => {
       is_staff: false,
       is_support: true,
     } as any);
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     expect(screen.queryByTestId('billing.enabled')).not.toBeInTheDocument();
     expect(
@@ -75,7 +84,7 @@ describe('FeaturesList', () => {
       state: { name: 'admin-features' } as any,
       params: { setting: 'billing.enabled' },
     });
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     const row = screen.getByTestId('feature-billing.enabled');
     expect(row).toHaveAttribute('id', 'feature-billing.enabled');
@@ -83,7 +92,7 @@ describe('FeaturesList', () => {
   });
 
   it('names each switch by its feature description, which toggles it', async () => {
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     const billing = screen.getByRole('checkbox', {
       name: 'Enable billing functionality',
@@ -94,7 +103,7 @@ describe('FeaturesList', () => {
   });
 
   it('renders all feature sections', () => {
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     // Check if section titles are rendered
     expect(screen.getByText('Billing features')).toBeInTheDocument();
@@ -110,7 +119,7 @@ describe('FeaturesList', () => {
   });
 
   it('initializes form with correct values', () => {
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     // Get checkboxes
     const billingCheckbox = screen.getByTestId('billing.enabled');
@@ -122,7 +131,7 @@ describe('FeaturesList', () => {
   });
 
   it('handles successful form submission', async () => {
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     // Get checkboxes
     const billingCheckbox = screen.getByTestId('billing.enabled');
@@ -164,7 +173,7 @@ describe('FeaturesList', () => {
     const error = new Error('API Error');
     vi.mocked(featureValues).mockRejectedValueOnce(error as never);
 
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     // Submit form
     const submitButton = screen.getByRole('button', { name: /Save/i });
@@ -185,7 +194,7 @@ describe('FeaturesList', () => {
       params: { q: 'zzz-no-match' },
     });
 
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     // Only the top-level "no results" empty state should render, exactly once.
     // Previously the active tab pane rendered a second one (duplication bug).
@@ -208,7 +217,7 @@ describe('FeaturesList', () => {
       params: { q: 'billing' },
     });
 
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     expect(
       screen.getByText('Enable billing functionality'),
@@ -225,7 +234,7 @@ describe('FeaturesList', () => {
       () => new Promise((resolve) => setTimeout(resolve, 100)) as any,
     );
 
-    render(<FeaturesList />);
+    renderWithProviders(<FeaturesList />);
 
     const submitButton = screen.getByRole('button', { name: /Save/i });
 
@@ -238,5 +247,53 @@ describe('FeaturesList', () => {
     await waitFor(() => {
       expect(submitButton).not.toBeDisabled();
     });
+  });
+
+  it('edits the public values, not the staff member’s own', () => {
+    rememberPublicFeatures();
+    // A rule turns support.enabled on for the signed-in staff member only.
+    applyUserFeatures({ support: { enabled: true } });
+    renderWithProviders(<FeaturesList />);
+
+    // The Support tab is not the open one, so its switch is found by test id.
+    expect(screen.getByTestId('support.enabled')).not.toBeChecked();
+  });
+
+  it('offers the audience of user-scoped features with their rule count', async () => {
+    vi.mocked(metadataFeaturesRetrieve).mockResolvedValue({
+      data: {
+        features: [
+          {
+            key: 'billing',
+            description: 'Billing features',
+            items: [{ key: 'enabled', description: '', scope: 'user' }],
+          },
+          {
+            key: 'support',
+            description: 'Support features',
+            items: [{ key: 'enabled', description: '', scope: 'deployment' }],
+          },
+        ],
+        feature_enums: {},
+      },
+    } as any);
+    vi.mocked(featureRulesList).mockResolvedValue({
+      data: [
+        { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+        { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
+      ],
+      response: { headers: new Headers({ 'x-result-count': '2' }) },
+    } as any);
+    renderWithProviders(<FeaturesList />);
+
+    expect(
+      await screen.findByTestId('feature-audience-billing.enabled'),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByTestId('feature-audience-count-billing.enabled'),
+    ).toHaveTextContent('1');
+    expect(
+      screen.queryByTestId('feature-audience-support.enabled'),
+    ).not.toBeInTheDocument();
   });
 });

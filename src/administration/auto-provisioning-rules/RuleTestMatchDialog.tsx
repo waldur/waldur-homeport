@@ -1,29 +1,16 @@
-import {
-  CheckCircleIcon,
-  WarningCircleIcon,
-  XCircleIcon,
-} from '@phosphor-icons/react';
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 import {
   autoprovisioningRulesTestMatch,
-  type FilterCheckResult,
   type Rule,
   type RuleTestMatchResponse,
 } from 'waldur-js-client';
 
-import {
-  AlertItem,
-  Badge,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
+import { FilterOutcomeTable } from '@/administration/rules/FilterOutcomeTable';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { SubmitButton, AsyncSelectGroup } from '@/form';
@@ -40,52 +27,6 @@ interface UserOption {
   email?: string;
   url?: string;
 }
-
-const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
-  const valueOf = (value: unknown): string => {
-    if (value === null || value === undefined || value === '') return '—';
-    if (Array.isArray(value)) {
-      return value.length ? value.join(', ') : '—';
-    }
-    // The claims filter reports a map; without this it renders as
-    // "[object Object]".
-    if (typeof value === 'object') {
-      const entries = Object.entries(value as Record<string, unknown>);
-      if (!entries.length) return '—';
-      return entries
-        .map(([key, values]) => {
-          const rendered = Array.isArray(values)
-            ? renderFieldOrDash(values.join(', '))
-            : String(values);
-          return `${key}: ${rendered}`;
-        })
-        .join(' · ');
-    }
-    return String(value);
-  };
-  const iconClass = !result.configured
-    ? 'text-quaternary'
-    : result.matched
-      ? 'text-success'
-      : 'text-danger';
-  return (
-    <TableRow>
-      <TableCell>
-        {!result.configured ? (
-          <WarningCircleIcon size={16} weight="bold" className={iconClass} />
-        ) : result.matched ? (
-          <CheckCircleIcon size={16} weight="bold" className={iconClass} />
-        ) : (
-          <XCircleIcon size={16} weight="bold" className={iconClass} />
-        )}
-      </TableCell>
-      <TableCell>{result.name}</TableCell>
-      <TableCell>{valueOf(result.rule_value)}</TableCell>
-      <TableCell>{valueOf(result.user_value)}</TableCell>
-      <TableCell className="text-quaternary">{result.reason}</TableCell>
-    </TableRow>
-  );
-};
 
 // Existing accounts get the project at their next login, new ones at sign-up.
 const projectActionLabel = (
@@ -143,22 +84,7 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
       )}
 
       <h6 className="mt-3 mb-1.5">{translate('Filter outcomes')}</h6>
-      <Table density="compact" className="align-middle">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-6" />
-            <TableHead>{translate('Filter')}</TableHead>
-            <TableHead>{translate('Rule value')}</TableHead>
-            <TableHead>{translate('User value')}</TableHead>
-            <TableHead>{translate('Reason')}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {result.filter_results.map((fr) => (
-            <FilterRow key={fr.name} result={fr} />
-          ))}
-        </TableBody>
-      </Table>
+      <FilterOutcomeTable results={result.filter_results} />
 
       {result.customer_lookup_performed && (
         <>

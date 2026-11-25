@@ -19,6 +19,7 @@ import { router } from '@/router';
 import { UserProfileHero } from '@/user/dashboard/UserProfileHero';
 import { arePasskeysEnabled } from '@/user/passkeys/utils';
 import { useUser } from '@/workspace/hooks';
+import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import {
   clearBlockedNavigation,
@@ -77,6 +78,11 @@ const ReviewerProfileTab = lazyComponent(() =>
 const StaffPasskeysList = lazyComponent(() =>
   import('@/user/passkeys/StaffPasskeysList').then((module) => ({
     default: module.StaffPasskeysList,
+  })),
+);
+const UserFeaturesTab = lazyComponent(() =>
+  import('@/user/support/UserFeaturesTab').then((module) => ({
+    default: module.UserFeaturesTab,
   })),
 );
 const DataAccessTab = lazyComponent(() =>
@@ -235,6 +241,14 @@ export const UserManageContainer = ({ isPersonal }) => {
             key: 'roles',
             component: UserAffiliationsList,
             title: translate('Roles and permissions'),
+          },
+        // Features - staff/support: which flags and micro-apps are on for
+        // this user, and why
+        checkIsStaffOrSupport(currentUser) &&
+          !isPersonal && {
+            key: 'features',
+            component: UserFeaturesTab,
+            title: translate('Features'),
           },
         // Data access - staff/support viewing any user, or user viewing own profile
         isFeatureVisible(UserFeatures.show_data_access) &&

@@ -53,6 +53,7 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   },
   single_datacenter_k8s_config: (value) => JSON.stringify(value),
   multi_datacenter_k8s_config: (value) => JSON.stringify(value),
+  k8s_egress_rules: (value) => JSON.stringify(value),
 };
 
 // Ends of blocks and lines become spaces first, so "<p>Line one</p><p>Line

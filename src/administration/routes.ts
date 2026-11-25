@@ -416,6 +416,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-micro-apps',
+    url: 'micro-apps/',
+    parent: 'admin-user-interface',
+    component: lazyComponent(() =>
+      import('./micro-apps/MicroAppsList').then((module) => ({
+        default: module.MicroAppsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Micro-apps'),
+    },
+  },
+
+  {
     name: 'admin-branding',
     url: 'branding/?tab&q&setting',
     params: {

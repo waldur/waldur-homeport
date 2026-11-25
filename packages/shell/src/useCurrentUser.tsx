@@ -23,6 +23,10 @@ export interface CurrentUser {
   /** The names of the user's active roles, for the quick shortcuts menu's
    * visibility rules (see microApps.ts). */
   roleNames: string[];
+  /** The user's values of the user-scoped feature flags. */
+  features?: Record<string, Record<string, boolean>>;
+  /** The operator's micro-app settings for the user (see microApps.ts). */
+  microApps?: Record<string, boolean>;
 }
 
 /** The names of the roles a user holds now: active, not expired. */
@@ -64,11 +68,14 @@ export const toCurrentUser = (data: UsersMeData): CurrentUser => ({
   token: data.token ?? undefined,
   ipAddress: data.ip_address,
   roleNames: activeRoleNames(data.permissions),
+  features: data.features,
+  microApps: data.micro_apps,
 });
 
 const CurrentUserContext = createContext<CurrentUser | null | undefined>(
   undefined,
 );
+const CurrentUserSettledContext = createContext(false);
 
 /**
  * Constructed once, inside AppShell, rather than by each app. By the time
@@ -83,6 +90,7 @@ const CurrentUserContext = createContext<CurrentUser | null | undefined>(
  */
 export function CurrentUserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<CurrentUser | null>(null);
+  const [settled, setSettled] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -91,17 +99,30 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
         if (cancelled || !result.data) return;
         setUser(toCurrentUser(result.data));
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setSettled(true);
+      });
     return () => {
       cancelled = true;
     };
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={user}>
-      {children}
-    </CurrentUserContext.Provider>
+    <CurrentUserSettledContext.Provider value={settled}>
+      <CurrentUserContext.Provider value={user}>
+        {children}
+      </CurrentUserContext.Provider>
+    </CurrentUserSettledContext.Provider>
   );
+}
+
+/**
+ * Whether /users/me/ has answered, either way. The current user is null both
+ * while it loads and after it failed; this tells the two apart.
+ */
+export function useCurrentUserSettled(): boolean {
+  return useContext(CurrentUserSettledContext);
 }
 
 /** Must be called from inside <AppShell> — its Provider is what fetches the value. */
