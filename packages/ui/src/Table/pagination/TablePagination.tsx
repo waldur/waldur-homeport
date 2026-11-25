@@ -4,7 +4,6 @@ import { translate } from 'waldur-i18n-runtime';
 import { BaseButton } from '../../Button';
 import { cn } from '../../cn';
 
-import { PAGE_SIZE_COMPACT } from './constants';
 import { PageSizeSelect } from './PageSizeSelect';
 import { Pagination, PAGINATION_ITEM_CLASSNAME } from './Pagination';
 import { PaginationState } from './types';
@@ -35,9 +34,8 @@ export interface TablePaginationProps extends PaginationState {
 /**
  * A table's footer: "Rows per page", the page numbers, "11-20 of 42 items"
  * and prev/next. Below the md breakpoint it collapses to
- * "‹ Page 2 of 5 ›". Renders nothing when every result fits on one compact
- * page, or when the first page holds all of up to ten results and there is
- * no "Rows per page" to change.
+ * "‹ Page 2 of 5 ›". Renders nothing when one page holds all of up to ten
+ * results.
  *
  * The root sets `data-slot="table-pagination"` and reads `--pagination-px` /
  * `--pagination-pt` hooks for page layouts that adjust its padding
@@ -57,12 +55,7 @@ export const TablePagination = ({
   bordered = true,
   className,
 }: TablePaginationProps) => {
-  if (
-    resultCount <= PAGE_SIZE_COMPACT ||
-    (!showPageSizeSelector &&
-      currentPage === 1 &&
-      resultCount <= Math.min(pageSize, 10))
-  ) {
+  if (resultCount <= Math.min(pageSize, 10)) {
     return null;
   }
 
