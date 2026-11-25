@@ -274,7 +274,8 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
               ),
           },
         ]}
-        hideTitle
+        title={translate('Rules')}
+        fullWidth
         verboseName={translate('rules')}
         minHeight={1}
         // The card draws the one border; a table in a dialog adds its own.
