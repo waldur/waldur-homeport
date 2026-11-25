@@ -94826,7 +94826,7 @@
   },
   "rules": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "administration"
     }
   },
   "running": {},

@@ -45,6 +45,7 @@ import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
 import { getPublicFeatures } from '@/features/userFeatures';
 import { DeploymentFeatures } from '@/FeaturesEnums';
+import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -99,7 +100,8 @@ const FeatureRow = ({
   const featureKey = `${sectionKey}.${item.key}`;
   const form = useForm();
   const { openDialog } = useModal();
-  const turnedOff = useField(`audienceOff.${featureKey}`, {
+  // The audience chosen on this page, until saved; unset, it follows the rules.
+  const chosenAudience = useField(`audience.${featureKey}`, {
     subscription: { value: true },
   }).input.value;
   const openRules = () =>
@@ -148,41 +150,34 @@ const FeatureRow = ({
             {({ input }) => {
               const state: AudienceState = input.value
                 ? 'everyone'
-                : ruleCount > 0 && !turnedOff
-                  ? 'audience'
-                  : 'off';
+                : chosenAudience || (ruleCount > 0 ? 'audience' : 'off');
               return (
-                <SegmentedControl<AudienceState>
-                  id={inputId}
-                  size="sm"
-                  options={getAudienceOptions(ruleCount)}
-                  value={state}
-                  onValueChange={(value) =>
-                    form.batch(() => {
-                      input.onChange(value === 'everyone');
-                      // Off hides the rules on save; the other states keep them.
-                      form.change(
-                        `audienceOff.${featureKey}`,
-                        value === 'off' && ruleCount > 0,
-                      );
-                      if (value === 'audience') openRules();
-                    })
-                  }
-                  // A radio cannot be re-chosen: a click on the chosen
-                  // Selected users reopens its rules.
-                  onClickCapture={(event) => {
-                    if (
-                      state === 'audience' &&
-                      (event.target as HTMLElement).closest(
-                        '[role="radio"][aria-checked="true"]',
-                      )
-                    ) {
-                      openRules();
+                <>
+                  {state === 'audience' ? (
+                    <CompactEditButton
+                      fieldName={translate('rules')}
+                      onClick={openRules}
+                      data-testid={`feature-rules-edit-${featureKey}`}
+                    />
+                  ) : null}
+                  <SegmentedControl<AudienceState>
+                    id={inputId}
+                    size="sm"
+                    options={getAudienceOptions(ruleCount)}
+                    value={state}
+                    onValueChange={(value) =>
+                      form.batch(() => {
+                        input.onChange(value === 'everyone');
+                        form.change(
+                          `audience.${featureKey}`,
+                          value === 'everyone' ? undefined : value,
+                        );
+                      })
                     }
-                  }}
-                  aria-labelledby={labelId}
-                  data-testid={featureKey}
-                />
+                    aria-labelledby={labelId}
+                    data-testid={featureKey}
+                  />
+                </>
               );
             }}
           </Field>
@@ -349,14 +344,14 @@ export const FeaturesList = () => {
   const publicFeatures = useMemo(() => getPublicFeatures(), []);
   const rules = useFeatureRules(canReadRules);
   const queryClient = useQueryClient();
-  const saveFeaturesCallback = async ({ audienceOff = {}, ...formData }) => {
+  const saveFeaturesCallback = async ({ audience = {}, ...formData }) => {
     try {
       await featureValues({ body: formData });
       // A user-scoped feature switched Off from Selected users: its rules
       // are deactivated, not deleted, so they can be turned back on.
-      const offKeys = Object.entries(audienceOff).flatMap(([section, items]) =>
-        Object.entries(items as Record<string, boolean>)
-          .filter(([, off]) => off)
+      const offKeys = Object.entries(audience).flatMap(([section, items]) =>
+        Object.entries(items as Record<string, AudienceState>)
+          .filter(([, state]) => state === 'off')
           .map(([key]) => `${section}.${key}`),
       );
       await Promise.all(

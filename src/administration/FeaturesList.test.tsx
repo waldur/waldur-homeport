@@ -352,6 +352,27 @@ describe('FeaturesList', () => {
     });
   });
 
+  it('offers editing the rules only once Selected users is chosen', async () => {
+    rememberPublicFeatures();
+    mockScopesAndRules([]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() => expect(stateOf('billing.enabled')).toBe('Everyone'));
+    expect(
+      screen.queryByTestId('feature-rules-edit-billing.enabled'),
+    ).not.toBeInTheDocument();
+    await userEvent.click(
+      within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+        name: 'Selected users (0)',
+        hidden: true,
+      }),
+    );
+    expect(stateOf('billing.enabled')).toBe('Selected users (0)');
+    expect(
+      screen.getByTestId('feature-rules-edit-billing.enabled'),
+    ).toBeInTheDocument();
+  });
+
   it('shows support the audience of user-scoped features read-only', async () => {
     vi.mocked(useUser).mockReturnValue({
       is_staff: false,
