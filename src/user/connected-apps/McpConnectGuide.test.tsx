@@ -118,14 +118,9 @@ describe('McpConnectGuide', () => {
   });
 
   describe('token block', () => {
-    it('is hidden from a user who cannot create tokens', () => {
-      renderAs(member, false);
-      expect(row(TOKEN)).not.toBeInTheDocument();
-    });
-
-    it('shows to a user allowed to create tokens, with a link to them', async () => {
+    it('shows to every user while tokens are on, with a link to them', async () => {
       const user = userEvent.setup();
-      renderAs({ ...member, can_use_personal_access_tokens: true }, false);
+      renderAs(member, false);
       expect(row(TOKEN)).toBeInTheDocument();
       await user.click(screen.getByText(TOKEN));
       expect(screen.getByText('Authorization: Bearer <token>')).toBeVisible();
@@ -134,12 +129,19 @@ describe('McpConnectGuide', () => {
       ).toHaveAttribute('href', '#profile-personal-access-tokens');
     });
 
-    it('shows to staff', () => {
-      renderAs({ ...member, is_staff: true }, false);
+    it('shows to a flagged user while tokens are off', () => {
+      ENV.plugins.WALDUR_CORE.PAT_ENABLED = false;
+      renderAs({ ...member, can_use_personal_access_tokens: true }, false);
       expect(row(TOKEN)).toBeInTheDocument();
     });
 
-    it('is hidden when tokens are turned off', () => {
+    it('is hidden from a user without the flag while tokens are off', () => {
+      ENV.plugins.WALDUR_CORE.PAT_ENABLED = false;
+      renderAs(member, false);
+      expect(row(TOKEN)).not.toBeInTheDocument();
+    });
+
+    it('is hidden from staff without the flag while tokens are off', () => {
       ENV.plugins.WALDUR_CORE.PAT_ENABLED = false;
       renderAs({ ...member, is_staff: true }, false);
       expect(row(TOKEN)).not.toBeInTheDocument();

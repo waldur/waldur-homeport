@@ -64,6 +64,10 @@ describe('PatEvents', () => {
     ['revoked', 'the token has been revoked'],
     ['user_inactive', 'the owner account is inactive'],
     [
+      'pats_disabled',
+      'personal access tokens are turned off and the owner is not allowed them',
+    ],
+    [
       'permission_revoked',
       'the owner may no longer use personal access tokens',
     ],

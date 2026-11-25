@@ -15,6 +15,7 @@ import { ENV } from '@/core/config';
 import { ExternalLink } from '@/core/ExternalLink';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { canUsePersonalAccessTokens } from '@/user/personal-access-tokens/canUsePersonalAccessTokens';
 import { useUser } from '@/workspace/hooks';
 
 const DOCS_URL =
@@ -53,11 +54,7 @@ export const McpConnectGuide: FunctionComponent<McpConnectGuideProps> = ({
   // The backend splits the setting on whitespace; the first URL is the main one.
   const url =
     ENV.plugins.WALDUR_CORE.MCP_RESOURCE_URLS?.split(/\s+/).find(Boolean);
-  const canUseTokens = Boolean(
-    ENV.plugins.WALDUR_CORE.PAT_ENABLED &&
-    user &&
-    (user.is_staff || user.can_use_personal_access_tokens),
-  );
+  const canUseTokens = canUsePersonalAccessTokens(user);
   const isStaffOrSupport = Boolean(user?.is_staff || user?.is_support);
 
   return (

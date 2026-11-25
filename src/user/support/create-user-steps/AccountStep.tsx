@@ -8,6 +8,7 @@ import { Field, useForm, useFormState } from 'react-final-form';
 import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
+import { ENV } from '@/core/config';
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
 import { StringGroup, BooleanGroup, TextGroup } from '@/form';
@@ -136,9 +137,15 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         name="can_use_personal_access_tokens"
         type="checkbox"
         label={translate('Personal access tokens')}
-        description={translate(
-          'Designates whether the user is allowed to create and use personal access tokens.',
-        )}
+        description={
+          ENV.plugins.WALDUR_CORE.PAT_ENABLED
+            ? translate(
+                'Personal access tokens are enabled for every user. This flag only takes effect while they are turned off.',
+              )
+            : translate(
+                'Allows the user to create and use personal access tokens, which are not enabled for every user.',
+              )
+        }
       />
       <h6 className="font-medium mb-3 mt-5">
         {translate('Password')}

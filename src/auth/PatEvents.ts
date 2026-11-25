@@ -14,6 +14,12 @@ const getRejectionReasonLabel = (reason: string) => {
       return translate('the token has been revoked');
     case 'user_inactive':
       return translate('the owner account is inactive');
+    case 'pats_disabled':
+      return translate(
+        'personal access tokens are turned off and the owner is not allowed them',
+      );
+    // Events from before waldur/waldur-mastermind#1315 carry this reason for
+    // the same check.
     case 'permission_revoked':
       return translate('the owner may no longer use personal access tokens');
     default:
