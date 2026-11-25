@@ -1,6 +1,7 @@
 import {
   MagnifyingGlassIcon,
   PauseIcon,
+  PlusCircleIcon,
   PlayIcon,
   UsersThreeIcon,
 } from '@phosphor-icons/react';
@@ -14,9 +15,8 @@ import {
   featureRulesPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
-import { AddButton } from '@/core/AddButton';
 import { EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -274,14 +274,18 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
               ),
           },
         ]}
-        title={translate('Rules')}
+        hideTitle
         verboseName={translate('rules')}
         minHeight={1}
         // The card draws the one border; a table in a dialog adds its own.
         className="[&_[data-slot=table-responsive]]:border-0"
         tableActions={
           canEdit ? (
-            <AddButton
+            <BaseButton
+              variant="primary"
+              size="md"
+              iconNode={<PlusCircleIcon weight="bold" />}
+              label={translate('Add rule')}
               onClick={() =>
                 openDialog(FeatureRuleFormDialog, {
                   resolve: {

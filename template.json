@@ -3179,7 +3179,7 @@
   },
   "Add rule": {
     "context": {
-      "feature_area": "common"
+      "feature_area": "feature-rules"
     }
   },
   "Add rule for {feature}": {
@@ -62423,7 +62423,7 @@
   "Rules": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "feature-rules"
+      "feature_area": "openstack-security-groups"
     }
   },
   "Rules for the networks behind the customer’s gateway.": {

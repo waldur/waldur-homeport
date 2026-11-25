@@ -130,8 +130,11 @@ export function TableToolbarActions() {
             portal?.toolbar ? 'flex-wrap' : 'page-max-sm:flex-wrap',
             'whitespace-nowrap gap-3',
             // With a title, the title takes the free width, so the selection
-            // bar sits beside the search instead of in the middle.
-            showTitle ? 'ms-auto justify-end' : 'grow justify-between',
+            // bar sits beside the search instead of in the middle. With
+            // neither title nor search, the actions still sit on the right.
+            showTitle || !config.hasQuery
+              ? 'ms-auto justify-end'
+              : 'grow justify-between',
           )}
         >
           {config.hasQuery && (
