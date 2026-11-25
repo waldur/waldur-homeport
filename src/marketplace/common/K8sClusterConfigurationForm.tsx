@@ -560,6 +560,14 @@ export const K8sClusterConfigurationForm: React.FC<
             administrative_access_rules: rules,
           })
         }
+        egressPolicy={defaultConfigs}
+        egressRules={clusterConfig.egress_rules || []}
+        onEgressRulesChange={(rules) =>
+          setClusterConfig({
+            ...clusterConfig,
+            egress_rules: rules,
+          })
+        }
       />
     </K8sOptionCard>
   );

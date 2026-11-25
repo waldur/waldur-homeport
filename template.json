@@ -2821,6 +2821,11 @@
       "feature_area": "documents"
     }
   },
+  "Add egress rule": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Add email": {
     "context": {
       "feature_area": "list"
@@ -3250,6 +3255,11 @@
     }
   },
   "Add the commands to run after the setup lines.": {},
+  "Add the networks or domains the cluster needs to reach.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Add the resource figures up": {
     "context": {
       "primary_ui_type": "label"
@@ -4830,6 +4840,11 @@
       "feature_area": "features"
     }
   },
+  "Allow domain name destinations": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Allow inbound SCIM to manage user SSH public keys via the sshPublicKeys attribute of the Waldur User extension. When enabled, SCIM is authoritative: a full-replace (PUT / PATCH replace) that omits a key deletes it, including keys the user added via the UI. Off by default because SSH keys grant access.": {},
   "Allow live volume resize": {
     "context": {
@@ -5130,6 +5145,16 @@
     }
   },
   "Always": {},
+  "Always allowed by the provider": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Always allowed once a cluster has egress rules, and shown to customers read-only.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Always happens": {
     "context": {
       "feature_area": "order-flow"
@@ -5580,6 +5605,7 @@
   },
   "Any": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "sram"
     }
   },
@@ -9754,6 +9780,24 @@
   "Base image name": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Baseline destinations": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Baseline rule {name}: {error}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "error": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "Basic": {
@@ -18304,6 +18348,11 @@
       "feature_area": "update"
     }
   },
+  "Customers may set egress rules": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Customers pay upfront for the full subscription period. Requires end date.": {},
   "Customize for this call": {
     "context": {
@@ -20553,6 +20602,16 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Destination type": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Destinations every restricted cluster needs, such as DNS, NTP, image registries and OS mirrors.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Destroy": {
     "context": {
       "feature_area": "actions"
@@ -20828,7 +20887,7 @@
   "Direction": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "common"
+      "feature_area": "openstack-security-groups"
     }
   },
   "Direction of the traffic: Ingress or Egress": {
@@ -21462,7 +21521,7 @@
   "Domain": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "affiliations"
+      "feature_area": "common"
     }
   },
   "Domain name": {
@@ -23084,6 +23143,43 @@
     }
   },
   "Egress": {},
+  "Egress rule {name}: {error}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "error": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Egress rule {position}": {
+    "context": {
+      "variables": {
+        "position": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Egress rules": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Egress: {rules}": {
+    "context": {
+      "variables": {
+        "rules": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Either way, a later and smaller proposal still gets its chance.": {
     "context": {
       "feature_area": "lifecycle"
@@ -24123,6 +24219,12 @@
       "feature_area": "organizations"
     }
   },
+  "Enter a destination.": {},
+  "Enter a domain name, such as registry.example.com, or a wildcard such as *.example.com.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Enter a keyword or phrase describing your expertise": {
     "context": {
       "feature_area": "reviewer"
@@ -24187,6 +24289,7 @@
       "feature_area": "create"
     }
   },
+  "Enter a name.": {},
   "Enter a name...": {
     "context": {
       "feature_area": "create"
@@ -24243,6 +24346,7 @@
       "feature_area": "project-templates"
     }
   },
+  "Enter an IPv4 or IPv6 network, such as 10.0.0.0/8 or 2001:db8::/32.": {},
   "Enter at least one accepted value for \"{claim}\".": {
     "context": {
       "variables": {
@@ -30737,6 +30841,7 @@
   },
   "IAAS or SAAS classification": {},
   "IAAS/SAAS classification (default: IAAS). Stored only: billing and consumption sync do not filter by it.": {},
+  "ICMP has no ports.": {},
   "ID": {
     "context": {
       "primary_ui_type": "title",
@@ -31687,6 +31792,15 @@
   "Inbound SCIM is disabled": {
     "context": {
       "feature_area": "sram"
+    }
+  },
+  "Inbound rules: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "Incident": {
@@ -33966,6 +34080,11 @@
       "feature_area": "create"
     }
   },
+  "Kubernetes Egress Rules": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Kubernetes Version Configuration": {
     "context": {
       "feature_area": "options"
@@ -33995,6 +34114,16 @@
   "Kubernetes version": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Kubernetes {version}": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "LDAP Admin Credentials": {
@@ -34714,6 +34843,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Let customers restrict the outbound traffic of their clusters to a list of destinations. A cluster without egress rules keeps unrestricted outbound traffic.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Let it lapse": {
     "context": {
       "feature_area": "dry-run"
@@ -34731,6 +34865,7 @@
     }
   },
   "Let users search the bundled Waldur documentation: the AI assistant's and MCP's search_docs tool, and the /api/docs-search/ endpoint. Turn it off to keep the Waldur documentation out of answers, for example when this portal provides its own documentation to end users.": {},
+  "Lets customers change the egress rules of a cluster after ordering. It pairs with the Kubernetes configuration order option and follows its egress settings and baseline destinations.": {},
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
   "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. New resources start without keys instead of with two shared ones; existing resources keep theirs. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
     "context": {
@@ -41523,6 +41658,11 @@
       "feature_area": "diagram"
     }
   },
+  "No egress rules": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "No eligible roles found.": {
     "context": {
       "feature_area": "profiles"
@@ -47975,6 +48115,31 @@
       "action_type": "read"
     }
   },
+  "Otherwise customers can list networks (CIDR) only. Enforcing domain rules needs a DNS-aware firewall or network policy.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Outbound destinations the cluster may reach: networks or domain names. Leave protocol and ports empty to allow any traffic to a destination.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Outbound networks the cluster may reach. Leave protocol and ports empty to allow any traffic to a destination.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Outbound traffic is denied except to the destinations below and the provider’s baseline destinations.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Outbound traffic is unrestricted. Adding a rule denies outbound traffic to anything not listed here or among the provider’s baseline destinations.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Outcome": {
     "context": {
       "primary_ui_type": "label",
@@ -51348,7 +51513,12 @@
   "Ports": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-instance"
+      "feature_area": "common"
+    }
+  },
+  "Ports go from 1 to 65535.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Portugal": {},
@@ -56864,6 +57034,16 @@
   "Remove documents": {
     "context": {
       "feature_area": "meeting-notes"
+    }
+  },
+  "Remove egress rule {position}": {
+    "context": {
+      "variables": {
+        "position": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "Remove external gateway": {
@@ -65612,6 +65792,7 @@
       "feature_area": "mappings"
     }
   },
+  "Set the first port of the range too.": {},
   "Set to 'deployment' by the init_matrix_settings management command to record that the appservice tokens come from the deployment's own secret and are re-seeded on every sync. While it is set, the Setup wizard refuses to rotate them, because the rotation would be reverted at the next deploy while the homeserver kept the old registration. Blank means the deployment was configured by hand and the wizard owns the tokens. Clear it when the deployment stops seeding Matrix, so the wizard can rotate them again.": {},
   "Set to draft": {
     "context": {
@@ -66684,6 +66865,11 @@
   "Single sign-on using SAML2-based identity federation.": {
     "context": {
       "feature_area": "providers"
+    }
+  },
+  "Single site": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Single site, 3 controllers": {
@@ -72113,6 +72299,7 @@
     }
   },
   "The last operation on this resource failed.": {},
+  "The last port must not be lower than the first one.": {},
   "The last task reported an error": {
     "context": {
       "feature_area": "offering-merges"
@@ -75382,6 +75569,11 @@
       "feature_area": "roles"
     }
   },
+  "This offering accepts network destinations only.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "This offering cannot be subscribed to for less than {count} months, which is longer than the call allows.": {
     "context": {
       "variables": {
@@ -75390,6 +75582,11 @@
         }
       },
       "feature_area": "plan"
+    }
+  },
+  "This offering does not accept egress rules.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "This offering has been archived.": {
@@ -76125,6 +76322,11 @@
         }
       },
       "feature_area": "ai-assistant"
+    }
+  },
+  "Three sites": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Three sites, 1 controller each": {
@@ -91338,6 +91540,17 @@
       "feature_area": "details"
     }
   },
+  "any port": {},
+  "any protocol": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "any traffic": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "application": {
     "context": {
       "feature_area": "apps"
@@ -97411,6 +97624,19 @@
         }
       },
       "feature_area": "dry-run"
+    }
+  },
+  "{field} of egress rule {position}": {
+    "context": {
+      "variables": {
+        "field": {
+          "type": "unknown"
+        },
+        "position": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "{field} of {step}": {

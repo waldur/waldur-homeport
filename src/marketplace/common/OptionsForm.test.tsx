@@ -500,10 +500,40 @@ describe('OptionsForm Integration', () => {
           'cluster',
           undefined,
         );
-        // An optional cluster config must not block the form. OptionsForm is
-        // also used by the resource option dialogs, where a rejected submit has
-        // nowhere to surface and would take every other option down with it.
-        expect(params.validate).toBeUndefined();
+        // An optional cluster config must not block the form for being
+        // incomplete. OptionsForm is also used by the resource option dialogs,
+        // where a rejected submit has nowhere to surface and would take every
+        // other option down with it.
+        expect(params.validate(incompleteConfig)).toBeUndefined();
+      },
+    );
+
+    it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+      'refuses invalid egress rules of an optional %s',
+      (type) => {
+        const { params } = getComponentAndParams(
+          {
+            type,
+            label: 'Cluster',
+            required: false,
+            default_configs: { egress_rules_enabled: false },
+          },
+          'cluster',
+          undefined,
+        );
+        // The server refuses them, so the card says why before submitting.
+        expect(
+          params.validate({
+            ...incompleteConfig,
+            egress_rules: [
+              {
+                name: 'Out',
+                destination_type: 'cidr',
+                destination: '10.0.0.0/8',
+              },
+            ],
+          }),
+        ).toEqual([expect.stringMatching(/does not accept egress rules/)]);
       },
     );
 

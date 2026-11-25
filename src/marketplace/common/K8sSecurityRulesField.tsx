@@ -34,7 +34,9 @@ interface K8sSecurityRule {
   port_range_min: number;
   port_range_max: number;
   cidr: string;
-  direction: 'ingress' | 'egress';
+  // Always ingress: outbound destinations are listed in egress_rules. Kept on
+  // every row for the provider automation that reads it.
+  direction: 'ingress';
   description?: string;
 }
 
@@ -213,7 +215,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
       port_range_max:
         rules[index].port_range_max || rules[index].port_range_min,
       cidr: rules[index].cidr || '0.0.0.0/0',
-      direction: rules[index].direction || 'ingress',
+      direction: 'ingress',
       description: rules[index].description,
     };
     // Update the specific fields
@@ -366,26 +368,6 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
                   />
                 ),
                 width: '17%',
-              },
-              {
-                title: translate('Direction'),
-                render: ({ row }) => (
-                  <SelectField
-                    input={{
-                      name: 'direction_' + row.uuid,
-                      value: row.direction || 'ingress',
-                      onChange: (v) =>
-                        editRuleField(row.uuid, { direction: v }),
-                    }}
-                    options={[
-                      { value: 'ingress', label: 'Ingress' },
-                      { value: 'egress', label: 'Egress' },
-                    ]}
-                    simpleValue
-                    variant="tableCell"
-                  />
-                ),
-                width: '16%',
               },
               {
                 title: translate('CIDR'),

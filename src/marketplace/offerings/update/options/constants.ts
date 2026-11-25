@@ -118,6 +118,13 @@ export const FIELD_TYPES: Array<{
     label: translate('Multi-Datacenter Kubernetes Configuration'),
   },
   {
+    value: 'k8s_egress_rules',
+    label: translate('Kubernetes Egress Rules'),
+    description: translate(
+      'Lets customers change the egress rules of a cluster after ordering. It pairs with the Kubernetes configuration order option and follows its egress settings and baseline destinations.',
+    ),
+  },
+  {
     value: 'storage_folder_manager',
     label: translate('Storage Folder Manager'),
   },
@@ -125,6 +132,24 @@ export const FIELD_TYPES: Array<{
 
 // A sum has no value of its own to change after ordering.
 export const ORDER_ONLY_FIELD_TYPES: OptionFieldTypeEnum[] = ['component_sum'];
+
+// Egress rules are ordered in the Kubernetes configuration; this type only
+// changes them on an existing resource.
+export const RESOURCE_ONLY_FIELD_TYPES: OptionFieldTypeEnum[] = [
+  'k8s_egress_rules',
+];
+
+const K8S_CONFIG_FIELD_TYPES = [
+  'single_datacenter_k8s_config',
+  'multi_datacenter_k8s_config',
+];
+
+/** The offering's Kubernetes configuration order options. */
+export const getK8sConfigOrderOptions = (offering) =>
+  Object.entries(offering?.options?.options || {}).filter(
+    ([, option]: [string, any]) =>
+      K8S_CONFIG_FIELD_TYPES.includes(option?.type),
+  );
 
 /** Description of Component Formula on the resource options tab. */
 export const getPairedFormulaDescription = () =>

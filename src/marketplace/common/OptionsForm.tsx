@@ -44,6 +44,8 @@ import {
 } from './derivedLimits';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
+import { validateEgressRules } from './k8sEgressRules';
+import { K8sEgressRulesOptionField } from './K8sEgressRulesOptionField';
 import { ALL_MODELS } from './modelSelection';
 import { ModelSelectionField } from './ModelSelectionField';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
@@ -137,6 +139,16 @@ const validateK8sConfig = (value) => {
  * `FormGroup` must not draw a label row of its own — otherwise the option shows
  * up as a stray asterisk and help icon with no field name next to them.
  */
+const getK8sValidator = (option) => (value) => {
+  const errors = [
+    ...((option.required && validateK8sConfig(value)) || []),
+    // Egress rules are checked whether or not the option is required: the
+    // server refuses invalid ones, and the card shows why.
+    ...validateEgressRules(value?.egress_rules, option.default_configs),
+  ];
+  return errors.length ? errors : undefined;
+};
+
 const getK8sParams = (option) => ({
   hideLabel: true,
   // The generic `FormFieldError` only renders once a field is touched, and
@@ -148,7 +160,7 @@ const getK8sParams = (option) => ({
   // option must never block the form — and since `OptionsForm` is also used by
   // the resource option dialogs, which have no place to surface a blocked
   // submit, that would leave every other option in the form unsavable too.
-  validate: option.required ? validateK8sConfig : undefined,
+  validate: getK8sValidator(option),
 });
 
 const VALIDATOR_MAPPING = {
@@ -376,6 +388,20 @@ export const getComponentAndParams = (
     case 'multi_datacenter_k8s_config':
       OptionField = K8sClusterConfigurationForm;
       params = getK8sParams(option);
+      break;
+    // A resource option: the egress rules of an existing cluster.
+    case 'k8s_egress_rules':
+      OptionField = K8sEgressRulesOptionField;
+      params = {
+        hideLabel: true,
+        // Shown in the section itself: its inputs never blur the field.
+        hideError: true,
+        field: option,
+        validate: (value) => {
+          const errors = validateEgressRules(value, option.default_configs);
+          return errors.length ? errors : undefined;
+        },
+      };
       break;
   }
 

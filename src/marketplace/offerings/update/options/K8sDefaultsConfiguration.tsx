@@ -1,12 +1,23 @@
 import React from 'react';
-import { useField } from 'react-final-form';
+import { Field, useField } from 'react-final-form';
 import { LoadBalancerModeEnum, TopologyModeEnum } from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
 
 import { required } from '@/core/validators';
-import { StringGroup, NumberGroup, SelectGroup } from '@/form';
+import {
+  BooleanGroup,
+  FieldError,
+  StringGroup,
+  NumberGroup,
+  SelectGroup,
+} from '@/form';
 import { translate } from '@/i18n';
+import {
+  K8sEgressRule,
+  validateEgressRule,
+} from '@/marketplace/common/k8sEgressRules';
+import { K8sEgressRulesEditor } from '@/marketplace/common/K8sEgressRulesTable';
 import { K8sFormSection } from '@/marketplace/common/K8sFormSection';
 
 const getLoadBalancerModeOptions = (): Array<{
@@ -29,6 +40,86 @@ const getTopologyModeOptions = (): Array<{
   },
   { value: 'customer_choice', label: translate('Customer chooses') },
 ];
+
+const validateBaselineRules = (rules: K8sEgressRule[] | undefined) => {
+  const errors = (rules || []).flatMap((rule, index) => {
+    const error = validateEgressRule(rule, true);
+    return error
+      ? [
+          translate('Baseline rule {name}: {error}', {
+            name: rule.name?.trim() || index + 1,
+            error,
+          }),
+        ]
+      : [];
+  });
+  return errors.length ? errors : undefined;
+};
+
+const BaselineRulesField = ({ input, meta }) => (
+  <>
+    <K8sEgressRulesEditor
+      rules={input.value || []}
+      onChange={input.onChange}
+      allowDomains
+      emptyMessage={translate(
+        'Destinations every restricted cluster needs, such as DNS, NTP, image registries and OS mirrors.',
+      )}
+    />
+    {meta.error && (
+      <div className="mt-2">
+        <FieldError error={meta.error} />
+      </div>
+    )}
+  </>
+);
+
+/** Whether customers may restrict outbound traffic, and to what. */
+const EgressPolicySection = ({ name }: { name: string }) => {
+  const {
+    input: { value: enabled },
+  } = useField<boolean>(`${name}.egress_rules_enabled`, {
+    subscription: { value: true },
+  });
+  return (
+    <K8sFormSection
+      title={translate('Egress rules')}
+      subtitle={translate(
+        'Let customers restrict the outbound traffic of their clusters to a list of destinations. A cluster without egress rules keeps unrestricted outbound traffic.',
+      )}
+      topSeparator
+    >
+      <BooleanGroup
+        name={`${name}.egress_rules_enabled`}
+        label={translate('Customers may set egress rules')}
+      />
+      {enabled && (
+        <>
+          <BooleanGroup
+            name={`${name}.egress_domain_rules_allowed`}
+            label={translate('Allow domain name destinations')}
+            description={translate(
+              'Otherwise customers can list networks (CIDR) only. Enforcing domain rules needs a DNS-aware firewall or network policy.',
+            )}
+          />
+          <h6 className="text-secondary mt-4 mb-1">
+            {translate('Baseline destinations')}
+          </h6>
+          <p className="text-quaternary mb-3">
+            {translate(
+              'Always allowed once a cluster has egress rules, and shown to customers read-only.',
+            )}
+          </p>
+          <Field
+            name={`${name}.egress_baseline_rules`}
+            component={BaselineRulesField}
+            validate={validateBaselineRules}
+          />
+        </>
+      )}
+    </K8sFormSection>
+  );
+};
 
 export const K8sDefaultsConfiguration: React.FC<{}> = () => {
   const name = 'default_configs';
@@ -366,6 +457,8 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </div>
         </div>
       </K8sFormSection>
+
+      <EgressPolicySection name={name} />
     </>
   );
 };

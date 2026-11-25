@@ -39,4 +39,28 @@ describe('getOptionTypes', () => {
     );
     expect(formula.description).toMatch(/after ordering/);
   });
+
+  it('offers egress rules only as a resource option paired with one cluster option', () => {
+    const k8s = {
+      options: {
+        options: {
+          cluster: { type: 'single_datacenter_k8s_config', label: 'Cluster' },
+        },
+      },
+    };
+    expect(typesOf('options', k8s)).not.toContain('k8s_egress_rules');
+    expect(typesOf('resource_options', {})).not.toContain('k8s_egress_rules');
+    expect(typesOf('resource_options', k8s)).toContain('k8s_egress_rules');
+    const twoClusters = {
+      options: {
+        options: {
+          ...k8s.options.options,
+          other: { type: 'multi_datacenter_k8s_config', label: 'Other' },
+        },
+      },
+    };
+    expect(typesOf('resource_options', twoClusters)).not.toContain(
+      'k8s_egress_rules',
+    );
+  });
 });

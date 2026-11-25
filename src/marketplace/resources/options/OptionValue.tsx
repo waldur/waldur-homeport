@@ -5,6 +5,7 @@ import { formatDate, formatTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { translate } from '@/i18n';
+import { formatEgressRules } from '@/marketplace/common/k8sEgressRules';
 import { isAllModels } from '@/marketplace/common/modelSelection';
 import { isEmptyOptionValue } from '@/marketplace/common/requiredOptions';
 
@@ -15,6 +16,53 @@ const toBackendId = (value) =>
   value && typeof value === 'object'
     ? (value.backend_id ?? value.value)
     : value;
+
+const countRules = (value, key: string) =>
+  Array.isArray(value?.[key]) ? value[key].length : 0;
+
+/**
+ * A cluster configuration in one line: version, topology, sites, the number
+ * of inbound rules, and the outbound destinations in full, as those decide
+ * what the cluster can reach.
+ */
+const formatK8sConfig = (value) => {
+  if (!value || typeof value !== 'object') {
+    return value;
+  }
+  const parts: string[] = [];
+  if (value.kubernetes_version) {
+    parts.push(
+      translate('Kubernetes {version}', { version: value.kubernetes_version }),
+    );
+  }
+  if (value.topology) {
+    parts.push(
+      value.topology === '3-datacenter'
+        ? translate('Three sites')
+        : value.topology === '1-datacenter'
+          ? translate('Single site')
+          : value.topology,
+    );
+  }
+  if (Array.isArray(value.datacenters)) {
+    parts.push(
+      translate('Datacenters: {count}', { count: value.datacenters.length }),
+    );
+  }
+  parts.push(
+    translate('Inbound rules: {count}', {
+      count:
+        countRules(value, 'public_access_rules') +
+        countRules(value, 'administrative_access_rules'),
+    }),
+  );
+  parts.push(
+    translate('Egress: {rules}', {
+      rules: formatEgressRules(value.egress_rules),
+    }),
+  );
+  return parts.join(' · ');
+};
 
 const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   integer: (value) => value,
@@ -51,9 +99,10 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
     }
     return value;
   },
-  single_datacenter_k8s_config: (value) => JSON.stringify(value),
-  multi_datacenter_k8s_config: (value) => JSON.stringify(value),
-  k8s_egress_rules: (value) => JSON.stringify(value),
+  single_datacenter_k8s_config: formatK8sConfig,
+  multi_datacenter_k8s_config: formatK8sConfig,
+  k8s_egress_rules: (value) =>
+    formatEgressRules(Array.isArray(value) ? value : []),
 };
 
 // Ends of blocks and lines become spaces first, so "<p>Line one</p><p>Line
