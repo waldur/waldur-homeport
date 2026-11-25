@@ -8802,7 +8802,7 @@
   "Audience": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "feature-rules"
+      "feature_area": "feedback"
     }
   },
   "Audience & schedule": {
@@ -23069,6 +23069,11 @@
       "feature_area": "mail"
     }
   },
+  "Edit rules": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
   "Edit schedules": {
     "context": {
       "feature_area": "booking"
@@ -25610,7 +25615,8 @@
   },
   "Everyone": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "administration"
     }
   },
   "Everyone (anonymous)": {},
@@ -41293,7 +41299,7 @@
   "No": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "administration"
+      "feature_area": "affiliates"
     }
   },
   "No API key to browse with": {
@@ -45271,7 +45277,7 @@
   "Off": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "support"
+      "feature_area": "administration"
     }
   },
   "Off track": {
@@ -65238,7 +65244,11 @@
       "feature_area": "views"
     }
   },
-  "Selected users": {},
+  "Selected users": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Selected users ({count})": {
     "context": {
       "primary_ui_type": "label",
@@ -65247,7 +65257,7 @@
           "type": "number"
         }
       },
-      "feature_area": "feature-rules"
+      "feature_area": "administration"
     }
   },
   "Selected users have been successfully removed.": {
@@ -76086,6 +76096,7 @@
       "feature_area": "exporters"
     }
   },
+  "This feature can only be turned on for everyone.": {},
   "This feature is disabled": {
     "context": {
       "feature_area": "error"
@@ -78556,11 +78567,6 @@
   "Tuple statistics": {
     "context": {
       "feature_area": "database-stats"
-    }
-  },
-  "Turn this feature on for selected users": {
-    "context": {
-      "feature_area": "feature-rules"
     }
   },
   "Turning project groups off": {
@@ -88588,6 +88594,11 @@
       "feature_area": "roles"
     }
   },
+  "View rules": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
   "View script": {
     "context": {
       "feature_area": "blocks"
@@ -90870,7 +90881,7 @@
   "Yes": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "administration"
+      "feature_area": "affiliates"
     }
   },
   "Yes, from {from} to {until}, written on: {where}": {
@@ -94826,7 +94837,7 @@
   },
   "rules": {
     "context": {
-      "feature_area": "administration"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "running": {},

@@ -1,4 +1,4 @@
-import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import { DotsThreeVerticalIcon, UsersThreeIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
@@ -23,14 +23,13 @@ import {
   Menu,
   PropertyCard,
   SegmentedControl,
-  Switch,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
+  Tooltip,
 } from 'waldur-ui';
 
-import { FeatureAudienceButton } from '@/administration/feature-rules/FeatureAudienceButton';
 import { OrphanedRulesNotice } from '@/administration/feature-rules/OrphanedRulesNotice';
 import {
   countActiveRules,
@@ -45,13 +44,13 @@ import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
 import { getPublicFeatures } from '@/features/userFeatures';
 import { DeploymentFeatures } from '@/FeaturesEnums';
-import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useUrlTab } from '@/navigation/useUrlTab';
+import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionsMenu } from '@/table/ActionsDropdown';
+import { ActionsDropdown, ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
 import { useUser } from '@/workspace/hooks';
 import { checkIsStaff, checkIsStaffOrSupport } from '@/workspace/selectors';
@@ -67,14 +66,21 @@ const FeatureRulesDialog = lazyComponent(() =>
 
 type AudienceState = 'off' | 'everyone' | 'audience';
 
-const getAudienceOptions = (ruleCount: number) => [
+/** Every row has the same three states; only user-scoped flags can target users. */
+const getAudienceOptions = (ruleCount: number, isUserScoped: boolean) => [
   { value: 'off' as const, label: translate('Off') },
   { value: 'everyone' as const, label: translate('Everyone') },
   {
     value: 'audience' as const,
-    label: translate('Selected users ({count})', { count: ruleCount }),
+    label: isUserScoped
+      ? translate('Selected users ({count})', { count: ruleCount })
+      : translate('Selected users'),
+    disabled: !isUserScoped,
   },
 ];
+
+const getNotUserScopedReason = () =>
+  translate('This feature can only be turned on for everyone.');
 
 /**
  * One feature toggle: its description names the switch through a real
@@ -136,70 +142,71 @@ const FeatureRow = ({
           </div>
         ) : null}
       </div>
-      <div className="flex shrink-0 items-center gap-4 pe-[3px]">
-        {canReadRules && isUserScoped && !canEdit ? (
-          <FeatureAudienceButton
-            featureKey={featureKey}
-            featureLabel={item.description}
-            ruleCount={ruleCount}
-            canEdit={canEdit}
-          />
-        ) : null}
-        {canEdit && isUserScoped ? (
+      <div className="flex shrink-0 items-center gap-2 pe-[3px]">
+        {canEdit ? (
           <Field name={featureKey}>
             {({ input }) => {
               const state: AudienceState = input.value
                 ? 'everyone'
                 : chosenAudience || (ruleCount > 0 ? 'audience' : 'off');
-              return (
-                <>
-                  {state === 'audience' ? (
-                    <CompactEditButton
-                      fieldName={translate('rules')}
-                      onClick={openRules}
-                      data-testid={`feature-rules-edit-${featureKey}`}
-                    />
-                  ) : null}
-                  <SegmentedControl<AudienceState>
-                    id={inputId}
-                    size="sm"
-                    options={getAudienceOptions(ruleCount)}
-                    value={state}
-                    onValueChange={(value) =>
-                      form.batch(() => {
-                        input.onChange(value === 'everyone');
-                        form.change(
-                          `audience.${featureKey}`,
-                          value === 'everyone' ? undefined : value,
-                        );
-                      })
-                    }
-                    aria-labelledby={labelId}
-                    data-testid={featureKey}
-                  />
-                </>
+              const control = (
+                <SegmentedControl<AudienceState>
+                  id={inputId}
+                  size="sm"
+                  options={getAudienceOptions(ruleCount, isUserScoped)}
+                  // One width for every row, whatever its labels.
+                  fullWidth
+                  className="w-112"
+                  itemClassName="min-w-0 basis-0"
+                  value={state}
+                  onValueChange={(value) =>
+                    form.batch(() => {
+                      input.onChange(value === 'everyone');
+                      form.change(
+                        `audience.${featureKey}`,
+                        value === 'everyone' ? undefined : value,
+                      );
+                    })
+                  }
+                  aria-labelledby={labelId}
+                  data-testid={featureKey}
+                />
+              );
+              return isUserScoped ? (
+                control
+              ) : (
+                <Tooltip label={getNotUserScopedReason()}>{control}</Tooltip>
               );
             }}
-          </Field>
-        ) : canEdit ? (
-          <Field name={featureKey} type="checkbox">
-            {({ input }) => (
-              <Switch
-                id={inputId}
-                checked={Boolean(input.checked)}
-                onCheckedChange={input.onChange}
-                aria-labelledby={labelId}
-                data-testid={featureKey}
-              />
-            )}
           </Field>
         ) : (
           <Field name={featureKey}>
             {({ input }) => (
-              <span>{input.value ? translate('Yes') : translate('No')}</span>
+              <span>
+                {input.value
+                  ? translate('Everyone')
+                  : isUserScoped && ruleCount > 0
+                    ? translate('Selected users ({count})', {
+                        count: ruleCount,
+                      })
+                    : translate('Off')}
+              </span>
             )}
           </Field>
         )}
+        {canReadRules ? (
+          <ActionsDropdown data-testid={`feature-actions-${featureKey}`}>
+            <ActionItem
+              title={
+                canEdit ? translate('Edit rules') : translate('View rules')
+              }
+              iconNode={<UsersThreeIcon weight="bold" />}
+              action={openRules}
+              disabled={!isUserScoped}
+              tooltip={isUserScoped ? undefined : getNotUserScopedReason()}
+            />
+          </ActionsDropdown>
+        ) : null}
       </div>
     </li>
   );

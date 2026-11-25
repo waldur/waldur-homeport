@@ -46,6 +46,20 @@ vi.mock('@/features/FeaturesDescription', () => ({
   ],
 }));
 
+// The checked segment of a feature's control, in any tab.
+const stateOf = (feature: string) =>
+  within(screen.getByTestId(feature))
+    .getAllByRole('radio', { hidden: true })
+    .find((radio) => radio.getAttribute('aria-checked') === 'true').textContent;
+
+const choose = (feature: string, state: string) =>
+  userEvent.click(
+    within(screen.getByTestId(feature)).getByRole('radio', {
+      name: state,
+      hidden: true,
+    }),
+  );
+
 describe('FeaturesList', () => {
   beforeEach(() => {
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
@@ -65,7 +79,7 @@ describe('FeaturesList', () => {
     vi.mocked(featureValues).mockReset();
   });
 
-  it('shows feature values without switches for support', () => {
+  it('shows feature states as text for support', () => {
     vi.mocked(useUser).mockReturnValue({
       is_staff: false,
       is_support: true,
@@ -76,8 +90,8 @@ describe('FeaturesList', () => {
     expect(
       screen.queryByRole('button', { name: /Save/i }),
     ).not.toBeInTheDocument();
-    expect(screen.getByText('Yes')).toBeInTheDocument();
-    expect(screen.getByText('No')).toBeInTheDocument();
+    expect(screen.getByText('Everyone')).toBeInTheDocument();
+    expect(screen.getByText('Off')).toBeInTheDocument();
   });
 
   it('anchors and highlights the feature linked with ?setting=', () => {
@@ -92,15 +106,17 @@ describe('FeaturesList', () => {
     expect(row).toHaveClass('bg-warning-subtle');
   });
 
-  it('names each switch by its feature description, which toggles it', async () => {
+  it('names each state control by its feature description', async () => {
     renderWithProviders(<FeaturesList />);
 
-    const billing = screen.getByRole('checkbox', {
-      name: 'Enable billing functionality',
-    });
-    expect(billing).toBeChecked();
-    await userEvent.click(screen.getByText('Enable billing functionality'));
-    expect(billing).not.toBeChecked();
+    expect(
+      screen.getByRole('radiogroup', {
+        name: 'Enable billing functionality',
+        hidden: true,
+      }),
+    ).toBeInTheDocument();
+    await choose('billing.enabled', 'Off');
+    expect(stateOf('billing.enabled')).toBe('Off');
   });
 
   it('renders all feature sections', () => {
@@ -122,29 +138,18 @@ describe('FeaturesList', () => {
   it('initializes form with correct values', () => {
     renderWithProviders(<FeaturesList />);
 
-    // Get checkboxes
-    const billingCheckbox = screen.getByTestId('billing.enabled');
-    const supportCheckbox = screen.getByTestId('support.enabled');
-
-    // Check initial values
-    expect(billingCheckbox).toBeChecked();
-    expect(supportCheckbox).not.toBeChecked();
+    expect(stateOf('billing.enabled')).toBe('Everyone');
+    expect(stateOf('support.enabled')).toBe('Off');
   });
 
   it('handles successful form submission', async () => {
     renderWithProviders(<FeaturesList />);
 
-    // Get checkboxes
-    const billingCheckbox = screen.getByTestId('billing.enabled');
-    const supportCheckbox = screen.getByTestId('support.enabled');
+    await choose('billing.enabled', 'Off');
+    await choose('support.enabled', 'Everyone');
 
-    // Toggle checkboxes
-    await userEvent.click(billingCheckbox);
-    await userEvent.click(supportCheckbox);
-
-    // Verify new values
-    expect(billingCheckbox).not.toBeChecked();
-    expect(supportCheckbox).toBeChecked();
+    expect(stateOf('billing.enabled')).toBe('Off');
+    expect(stateOf('support.enabled')).toBe('Everyone');
 
     // Submit form
     const submitButton = screen.getByRole('button', { name: /Save/i });
@@ -256,8 +261,7 @@ describe('FeaturesList', () => {
     applyUserFeatures({ support: { enabled: true } });
     renderWithProviders(<FeaturesList />);
 
-    // The Support tab is not the open one, so its switch is found by test id.
-    expect(screen.getByTestId('support.enabled')).not.toBeChecked();
+    expect(stateOf('support.enabled')).toBe('Off');
   });
 
   const mockScopesAndRules = (rules: any[]) => {
@@ -286,13 +290,6 @@ describe('FeaturesList', () => {
     } as any);
   };
 
-  // The checked segment of a feature's control, in any tab.
-  const stateOf = (feature: string) =>
-    within(screen.getByTestId(feature))
-      .getAllByRole('radio', { hidden: true })
-      .find((radio) => radio.getAttribute('aria-checked') === 'true')
-      .textContent;
-
   it('gives user-scoped features Off, Everyone and Selected users with their rule count', async () => {
     ENV.FEATURES = {
       billing: { enabled: false },
@@ -308,14 +305,13 @@ describe('FeaturesList', () => {
     await waitFor(() =>
       expect(stateOf('billing.enabled')).toBe('Selected users (1)'),
     );
-    // A deployment-scoped feature keeps its switch.
+    // A deployment-scoped feature cannot target selected users.
     expect(
-      within(screen.getByTestId('feature-support.enabled')).queryAllByRole(
-        'radio',
-        { hidden: true },
-      ),
-    ).toHaveLength(0);
-    expect(screen.getByTestId('support.enabled')).not.toBeChecked();
+      within(screen.getByTestId('support.enabled')).getByRole('radio', {
+        name: 'Selected users',
+        hidden: true,
+      }),
+    ).toBeDisabled();
   });
 
   it('deactivates the rules of a feature switched Off from Selected users', async () => {
@@ -352,28 +348,12 @@ describe('FeaturesList', () => {
     });
   });
 
-  it('offers editing the rules only once Selected users is chosen', async () => {
-    rememberPublicFeatures();
-    mockScopesAndRules([]);
-    renderWithProviders(<FeaturesList />);
-
-    await waitFor(() => expect(stateOf('billing.enabled')).toBe('Everyone'));
-    expect(
-      screen.queryByTestId('feature-rules-edit-billing.enabled'),
-    ).not.toBeInTheDocument();
-    await userEvent.click(
-      within(screen.getByTestId('billing.enabled')).getByRole('radio', {
-        name: 'Selected users (0)',
-        hidden: true,
-      }),
-    );
-    expect(stateOf('billing.enabled')).toBe('Selected users (0)');
-    expect(
-      screen.getByTestId('feature-rules-edit-billing.enabled'),
-    ).toBeInTheDocument();
-  });
-
   it('shows support the audience of user-scoped features read-only', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
     vi.mocked(useUser).mockReturnValue({
       is_staff: false,
       is_support: true,
@@ -383,8 +363,6 @@ describe('FeaturesList', () => {
     ]);
     renderWithProviders(<FeaturesList />);
 
-    expect(
-      await screen.findByTestId('feature-audience-count-billing.enabled'),
-    ).toHaveTextContent('1');
+    expect(await screen.findByText('Selected users (1)')).toBeInTheDocument();
   });
 });
