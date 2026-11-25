@@ -25608,7 +25608,11 @@
       "action_type": "read"
     }
   },
-  "Everyone": {},
+  "Everyone": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Everyone (anonymous)": {},
   "Everyone evaluating on the call reads the proposal's step list.": {},
   "Everyone is signed out, you included. While the preset loads, the portal is unavailable; then it opens the sign-in page.": {
@@ -45266,6 +45270,7 @@
   },
   "Off": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "support"
     }
   },
@@ -65236,6 +65241,7 @@
   "Selected users": {},
   "Selected users ({count})": {
     "context": {
+      "primary_ui_type": "label",
       "variables": {
         "count": {
           "type": "number"

@@ -1,4 +1,5 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import {
@@ -9,8 +10,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Field, Form } from 'react-final-form';
-import { featureValues } from 'waldur-js-client';
+import { Field, Form, useField, useForm } from 'react-final-form';
+import { featureRulesPartialUpdate, featureValues } from 'waldur-js-client';
 
 import {
   Badge,
@@ -21,6 +22,7 @@ import {
   CardTitle,
   Menu,
   PropertyCard,
+  SegmentedControl,
   Switch,
   Tabs,
   TabsContent,
@@ -31,16 +33,20 @@ import {
 import { FeatureAudienceButton } from '@/administration/feature-rules/FeatureAudienceButton';
 import { OrphanedRulesNotice } from '@/administration/feature-rules/OrphanedRulesNotice';
 import {
-  useActiveRuleCounts,
+  countActiveRules,
+  FEATURE_RULES_QUERY_KEY,
+  useFeatureRules,
   useUserScopedFeatureKeys,
 } from '@/administration/feature-rules/utils';
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
+import { lazyComponent } from '@/core/lazyComponent';
 import { SaveButton } from '@/core/SaveButton';
 import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
 import { getPublicFeatures } from '@/features/userFeatures';
 import { DeploymentFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { useNotify } from '@/store/notify';
@@ -51,6 +57,23 @@ import { checkIsStaff, checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import { FEATURE_PLUGIN_SECTION_KEYS } from './settings/registry';
 import { useHighlightSettingRow } from './settings/useHighlightSettingRow';
+
+const FeatureRulesDialog = lazyComponent(() =>
+  import('./feature-rules/FeatureRulesDialog').then((module) => ({
+    default: module.FeatureRulesDialog,
+  })),
+);
+
+type AudienceState = 'off' | 'everyone' | 'audience';
+
+const getAudienceOptions = (ruleCount: number) => [
+  { value: 'off' as const, label: translate('Off') },
+  { value: 'everyone' as const, label: translate('Everyone') },
+  {
+    value: 'audience' as const,
+    label: translate('Selected users ({count})', { count: ruleCount }),
+  },
+];
 
 /**
  * One feature toggle: its description names the switch through a real
@@ -74,6 +97,16 @@ const FeatureRow = ({
   ruleCount: number;
 }) => {
   const featureKey = `${sectionKey}.${item.key}`;
+  const form = useForm();
+  const { openDialog } = useModal();
+  const turnedOff = useField(`audienceOff.${featureKey}`, {
+    subscription: { value: true },
+  }).input.value;
+  const openRules = () =>
+    openDialog(FeatureRulesDialog, {
+      resolve: { featureKey, featureLabel: item.description, canEdit },
+      size: 'xl',
+    });
   const isHighlighted = useHighlightSettingRow(featureKey, 'feature-');
   const inputId = `feature-input-${featureKey}`;
   const labelId = `feature-label-${featureKey}`;
@@ -102,7 +135,7 @@ const FeatureRow = ({
         ) : null}
       </div>
       <div className="flex shrink-0 items-center gap-4 pe-[3px]">
-        {canReadRules && isUserScoped ? (
+        {canReadRules && isUserScoped && !canEdit ? (
           <FeatureAudienceButton
             featureKey={featureKey}
             featureLabel={item.description}
@@ -110,7 +143,50 @@ const FeatureRow = ({
             canEdit={canEdit}
           />
         ) : null}
-        {canEdit ? (
+        {canEdit && isUserScoped ? (
+          <Field name={featureKey}>
+            {({ input }) => {
+              const state: AudienceState = input.value
+                ? 'everyone'
+                : ruleCount > 0 && !turnedOff
+                  ? 'audience'
+                  : 'off';
+              return (
+                <SegmentedControl<AudienceState>
+                  id={inputId}
+                  size="sm"
+                  options={getAudienceOptions(ruleCount)}
+                  value={state}
+                  onValueChange={(value) =>
+                    form.batch(() => {
+                      input.onChange(value === 'everyone');
+                      // Off hides the rules on save; the other states keep them.
+                      form.change(
+                        `audienceOff.${featureKey}`,
+                        value === 'off' && ruleCount > 0,
+                      );
+                      if (value === 'audience') openRules();
+                    })
+                  }
+                  // A radio cannot be re-chosen: a click on the chosen
+                  // Selected users reopens its rules.
+                  onClickCapture={(event) => {
+                    if (
+                      state === 'audience' &&
+                      (event.target as HTMLElement).closest(
+                        '[role="radio"][aria-checked="true"]',
+                      )
+                    ) {
+                      openRules();
+                    }
+                  }}
+                  aria-labelledby={labelId}
+                  data-testid={featureKey}
+                />
+              );
+            }}
+          </Field>
+        ) : canEdit ? (
           <Field name={featureKey} type="checkbox">
             {({ input }) => (
               <Switch
@@ -140,7 +216,7 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
   const canReadRules = Boolean(checkIsStaffOrSupport(user));
   // Both are one request each, shared through the query cache by every row.
   const userScopedKeys = useUserScopedFeatureKeys(canReadRules);
-  const ruleCounts = useActiveRuleCounts(canReadRules);
+  const ruleCounts = countActiveRules(useFeatureRules(canReadRules));
   return (
     <ul className="m-0 list-none p-0">
       {section.items.map((item) => (
@@ -271,9 +347,33 @@ export const FeaturesList = () => {
 
   // Never ENV.FEATURES: it holds the staff member's own targeted values.
   const publicFeatures = useMemo(() => getPublicFeatures(), []);
-  const saveFeaturesCallback = async (formData) => {
+  const rules = useFeatureRules(canReadRules);
+  const queryClient = useQueryClient();
+  const saveFeaturesCallback = async ({ audienceOff = {}, ...formData }) => {
     try {
       await featureValues({ body: formData });
+      // A user-scoped feature switched Off from Selected users: its rules
+      // are deactivated, not deleted, so they can be turned back on.
+      const offKeys = Object.entries(audienceOff).flatMap(([section, items]) =>
+        Object.entries(items as Record<string, boolean>)
+          .filter(([, off]) => off)
+          .map(([key]) => `${section}.${key}`),
+      );
+      await Promise.all(
+        rules
+          .filter(
+            (rule) => rule.is_active && offKeys.includes(rule.feature_key),
+          )
+          .map((rule) =>
+            featureRulesPartialUpdate({
+              path: { uuid: rule.uuid },
+              body: { is_active: false },
+            }),
+          ),
+      );
+      await queryClient.invalidateQueries({
+        queryKey: FEATURE_RULES_QUERY_KEY,
+      });
       showSuccess(translate('Features have been updated.'));
       location.reload();
     } catch (e) {

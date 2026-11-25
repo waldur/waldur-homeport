@@ -1,9 +1,10 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { vi, describe, expect, beforeEach, it } from 'vitest';
 import {
   featureRulesList,
+  featureRulesPartialUpdate,
   featureValues,
   metadataFeaturesRetrieve,
 } from 'waldur-js-client';
@@ -259,7 +260,7 @@ describe('FeaturesList', () => {
     expect(screen.getByTestId('support.enabled')).not.toBeChecked();
   });
 
-  it('offers the audience of user-scoped features with their rule count', async () => {
+  const mockScopesAndRules = (rules: any[]) => {
     vi.mocked(metadataFeaturesRetrieve).mockResolvedValue({
       data: {
         features: [
@@ -278,22 +279,91 @@ describe('FeaturesList', () => {
       },
     } as any);
     vi.mocked(featureRulesList).mockResolvedValue({
-      data: [
-        { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
-        { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
-      ],
-      response: { headers: new Headers({ 'x-result-count': '2' }) },
+      data: rules,
+      response: {
+        headers: new Headers({ 'x-result-count': `${rules.length}` }),
+      },
     } as any);
+  };
+
+  // The checked segment of a feature's control, in any tab.
+  const stateOf = (feature: string) =>
+    within(screen.getByTestId(feature))
+      .getAllByRole('radio', { hidden: true })
+      .find((radio) => radio.getAttribute('aria-checked') === 'true')
+      .textContent;
+
+  it('gives user-scoped features Off, Everyone and Selected users with their rule count', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+      { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
+    ]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(stateOf('billing.enabled')).toBe('Selected users (1)'),
+    );
+    // A deployment-scoped feature keeps its switch.
+    expect(
+      within(screen.getByTestId('feature-support.enabled')).queryAllByRole(
+        'radio',
+        { hidden: true },
+      ),
+    ).toHaveLength(0);
+    expect(screen.getByTestId('support.enabled')).not.toBeChecked();
+  });
+
+  it('deactivates the rules of a feature switched Off from Selected users', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+    ]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(stateOf('billing.enabled')).toBe('Selected users (1)'),
+    );
+    await userEvent.click(
+      within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+        name: 'Off',
+        hidden: true,
+      }),
+    );
+    expect(stateOf('billing.enabled')).toBe('Off');
+    await userEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() =>
+      expect(featureRulesPartialUpdate).toHaveBeenCalledWith({
+        path: { uuid: 'r1' },
+        body: { is_active: false },
+      }),
+    );
+    expect(featureValues).toHaveBeenCalledWith({
+      body: { billing: { enabled: false }, support: { enabled: false } },
+    });
+  });
+
+  it('shows support the audience of user-scoped features read-only', async () => {
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      is_support: true,
+    } as any);
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+    ]);
     renderWithProviders(<FeaturesList />);
 
     expect(
-      await screen.findByTestId('feature-audience-billing.enabled'),
-    ).toBeInTheDocument();
-    expect(
       await screen.findByTestId('feature-audience-count-billing.enabled'),
     ).toHaveTextContent('1');
-    expect(
-      screen.queryByTestId('feature-audience-support.enabled'),
-    ).not.toBeInTheDocument();
   });
 });
