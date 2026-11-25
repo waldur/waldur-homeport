@@ -5,7 +5,6 @@
   "description": "Proof of concept: a project's inference services, their models, the user's API keys and what they spend, for people who never see the marketplace.",
   "type": "module",
   "waldur": {
-    "deploy": false,
     "title": "AI inference",
     "description": "Models, API keys and spend of your projects' inference services.",
     "visibleTo": {

@@ -55,9 +55,9 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 
 ## Deployment and infra
 
-| Guide                          | Covers                                                                               |
-| ------------------------------ | ------------------------------------------------------------------------------------ |
-| [micro-apps.md](micro-apps.md) | `apps/*` build/serve pipeline, `ASSET_PATH`, `waldur.deploy`, adding a new micro-app |
+| Guide                          | Covers                                                                                        |
+| ------------------------------ | --------------------------------------------------------------------------------------------- |
+| [micro-apps.md](micro-apps.md) | `apps/*` build/serve pipeline, `ASSET_PATH`, offering apps at runtime, adding a new micro-app |
 
 ## Localization and terminology
 

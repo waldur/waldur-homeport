@@ -4,8 +4,8 @@ A micro-app for people whose projects have inference services (an
 OpenAI-compatible gateway such as CBorg, ALCF or LivChat): the models they
 can call, their API keys and what those keys spend. They never see
 offerings, plans or orders. Built on `waldur-shell` like
-`apps/provider-calls`; `waldur.deploy` is `false`, so production images
-leave it out.
+`apps/provider-calls`. Every image holds it; users are offered it in
+Administration → User interface → Micro-apps.
 
 Design canvas: <https://claude.ai/artifact/YQgLjByXpXYEVV5ffKsxoG>
 

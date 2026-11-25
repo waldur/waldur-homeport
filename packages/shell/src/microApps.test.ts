@@ -111,12 +111,37 @@ describe('isMicroAppVisible with an operator setting', () => {
 });
 
 describe('isMicroAppOffered', () => {
-  it('refuses only an app the operator set off', () => {
-    expect(isMicroAppOffered('a', { a: false })).toBe(false);
-    expect(isMicroAppOffered('a', { a: true })).toBe(true);
-    expect(isMicroAppOffered('a', {})).toBe(true);
-    expect(isMicroAppOffered('a', undefined)).toBe(true);
-    expect(isMicroAppOffered(undefined, { a: false })).toBe(true);
+  const user = (microApps?: Record<string, boolean>) => ({
+    isStaff: false,
+    isSupport: false,
+    microApps,
+  });
+
+  it('follows the operator’s setting when the app has one', () => {
+    expect(isMicroAppOffered('a', user({ a: false }), ON)).toBe(false);
+    expect(isMicroAppOffered('a', user({ a: true }), {})).toBe(true);
+    expect(
+      isMicroAppOffered('a', { ...user({ a: false }), isStaff: true }, ON),
+    ).toBe(false);
+  });
+
+  it('follows the feature for an app without a setting', () => {
+    expect(isMicroAppOffered('a', user({}), {})).toBe(false);
+    expect(isMicroAppOffered('a', user(undefined), {})).toBe(false);
+    expect(isMicroAppOffered('a', user({}), ON)).toBe(true);
+  });
+
+  it('lets staff and support try out an app without a setting', () => {
+    expect(isMicroAppOffered('a', { ...user({}), isStaff: true }, {})).toBe(
+      true,
+    );
+    expect(isMicroAppOffered('a', { ...user({}), isSupport: true }, {})).toBe(
+      true,
+    );
+  });
+
+  it('does not gate the portal itself', () => {
+    expect(isMicroAppOffered(undefined, user({}), {})).toBe(true);
   });
 });
 

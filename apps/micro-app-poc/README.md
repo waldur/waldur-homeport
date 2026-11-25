@@ -114,13 +114,13 @@ over to the other.
 
 ## Deployment
 
-**Not shipped in production, but live-tested on every MR.** This app's
-`package.json` sets `"waldur": { "deploy": false }`, so real production
-images skip it — but CI/preview builds override that, so it's still built,
-served, and reachable at `/micro-app-poc/` in every MR's live k8s preview.
+**Shipped everywhere, offered to nobody by default.** Every image holds this
+app, at `/micro-app-poc/` (and in every MR's live k8s preview); staff and
+support can open it, and other users only once an operator offers it in
+Administration → User interface → Micro-apps.
 It's a portability proof, not a deployable. See
 [docs/micro-apps.md](../../docs/micro-apps.md) for how the `apps/*` build,
-routing, and `waldur.deploy` opt-out actually work, and how to add a new,
+routing and runtime offering actually work, and how to add a new,
 actually-deployable micro-app.
 
 ## What this surfaced

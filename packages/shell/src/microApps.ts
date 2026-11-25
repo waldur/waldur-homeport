@@ -52,14 +52,27 @@ export interface ShortcutsViewer {
 }
 
 /**
- * Whether the operator offers the micro-app `name` to the viewer at all. Only
- * an explicit "off" refuses: an app without a setting is not the operator's
- * call, and the backend still decides what the user may do in it.
+ * Whether the viewer may open the micro-app `name` at its address. The
+ * operator's setting decides; an app without one is open while the
+ * user.show_micro_apps feature is on, and to staff and support always, so they
+ * can try an app out before offering it. Every image holds every app, so this
+ * is what keeps an app nobody turned on from being opened by its URL. The
+ * backend still decides what the user may do in it.
  */
 export const isMicroAppOffered = (
   name: string | undefined,
-  microApps: MicroAppSettings,
-): boolean => !name || microApps?.[name] !== false;
+  viewer: Pick<ShortcutsViewer, 'isStaff' | 'isSupport' | 'microApps'>,
+  features: FeatureFlags,
+): boolean => {
+  if (!name) return true;
+  const setting = viewer.microApps?.[name];
+  if (setting !== undefined) return setting;
+  return (
+    isFeatureOn(features, MICRO_APPS_FEATURE) ||
+    viewer.isStaff ||
+    Boolean(viewer.isSupport)
+  );
+};
 
 /**
  * The flags the backend sends everyone, with the user's own values of the
