@@ -7,7 +7,11 @@ export type { MicroAppBootstrapConfig } from './bootstrap';
 export { createSharedStorage } from './sharedStorage';
 
 export { useShellTheme } from './useShellTheme';
-export { activeRoleNames, useCurrentUser } from './useCurrentUser';
+export {
+  activeRoleNames,
+  useCurrentUser,
+  useCurrentUserSettled,
+} from './useCurrentUser';
 export { useShellLanguage } from './useShellLanguage';
 
 export { UserMenu } from './UserMenu';
@@ -20,13 +24,20 @@ export { useBatchMutation } from './useBatchMutation';
 export {
   MICRO_APPS_FEATURE,
   fetchMicroApps,
+  isMicroAppOffered,
   isMicroAppVisible,
+  mergeFeatureFlags,
   portalBase,
   resetMicroAppsRegistry,
   useExternalLinks,
   useMicroApps,
 } from './microApps';
-export type { FeatureFlags, MicroAppEntry, ShortcutsViewer } from './microApps';
+export type {
+  FeatureFlags,
+  MicroAppEntry,
+  MicroAppSettings,
+  ShortcutsViewer,
+} from './microApps';
 export { QuickShortcutsMenu, useAppShortcuts } from './QuickShortcutsMenu';
 export type {
   AppShortcut,

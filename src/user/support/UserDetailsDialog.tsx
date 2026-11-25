@@ -21,6 +21,7 @@ import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
+import { UserFeaturesTab } from './UserFeaturesTab';
 import { UserIdentityBridgeTab } from './UserIdentityBridgeTab';
 
 interface UserDetailsDialogProps {
@@ -85,6 +86,11 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
                   {translate('Data access')}
                 </TabsTrigger>
               )}
+            {checkIsStaffOrSupport(currentUser) ? (
+              <TabsTrigger value="features">
+                {translate('Features')}
+              </TabsTrigger>
+            ) : null}
             {isFeatureVisible(UserFeatures.show_identity_bridge) &&
               currentUser.is_staff && (
                 <TabsTrigger value="identity-bridge">
@@ -140,6 +146,11 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
                   <DataAccessDialogContent user={user} />
                 </TabsContent>
               )}
+            {checkIsStaffOrSupport(currentUser) ? (
+              <TabsContent value="features">
+                <UserFeaturesTab user={user} />
+              </TabsContent>
+            ) : null}
             {isFeatureVisible(UserFeatures.show_identity_bridge) &&
               currentUser.is_staff && (
                 <TabsContent value="identity-bridge">

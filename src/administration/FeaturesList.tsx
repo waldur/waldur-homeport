@@ -28,11 +28,17 @@ import {
   TabsTrigger,
 } from 'waldur-ui';
 
+import { FeatureAudienceButton } from '@/administration/feature-rules/FeatureAudienceButton';
+import { OrphanedRulesNotice } from '@/administration/feature-rules/OrphanedRulesNotice';
+import {
+  useActiveRuleCounts,
+  useUserScopedFeatureKeys,
+} from '@/administration/feature-rules/utils';
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
-import { ENV } from '@/core/config';
 import { SaveButton } from '@/core/SaveButton';
 import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
+import { getPublicFeatures } from '@/features/userFeatures';
 import { DeploymentFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -41,6 +47,7 @@ import { useNotify } from '@/store/notify';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
 import { useUser } from '@/workspace/hooks';
+import { checkIsStaff, checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import { FEATURE_PLUGIN_SECTION_KEYS } from './settings/registry';
 import { useHighlightSettingRow } from './settings/useHighlightSettingRow';
@@ -54,10 +61,17 @@ const FeatureRow = ({
   sectionKey,
   item,
   canEdit,
+  canReadRules,
+  isUserScoped,
+  ruleCount,
 }: {
   sectionKey: string;
   item: FeatureSection['items'][number];
   canEdit: boolean;
+  /** Staff and support may see a user-scoped feature's rules. */
+  canReadRules: boolean;
+  isUserScoped: boolean;
+  ruleCount: number;
 }) => {
   const featureKey = `${sectionKey}.${item.key}`;
   const isHighlighted = useHighlightSettingRow(featureKey, 'feature-');
@@ -87,7 +101,15 @@ const FeatureRow = ({
           </div>
         ) : null}
       </div>
-      <div className="shrink-0 pe-[3px]">
+      <div className="flex shrink-0 items-center gap-4 pe-[3px]">
+        {canReadRules && isUserScoped ? (
+          <FeatureAudienceButton
+            featureKey={featureKey}
+            featureLabel={item.description}
+            ruleCount={ruleCount}
+            canEdit={canEdit}
+          />
+        ) : null}
         {canEdit ? (
           <Field name={featureKey} type="checkbox">
             {({ input }) => (
@@ -113,7 +135,12 @@ const FeatureRow = ({
 };
 
 const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
-  const canEdit = Boolean(useUser()?.is_staff);
+  const user = useUser();
+  const canEdit = checkIsStaff(user);
+  const canReadRules = Boolean(checkIsStaffOrSupport(user));
+  // Both are one request each, shared through the query cache by every row.
+  const userScopedKeys = useUserScopedFeatureKeys(canReadRules);
+  const ruleCounts = useActiveRuleCounts(canReadRules);
   return (
     <ul className="m-0 list-none p-0">
       {section.items.map((item) => (
@@ -122,6 +149,9 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
           sectionKey={section.key}
           item={item}
           canEdit={canEdit}
+          canReadRules={canReadRules}
+          isUserScoped={userScopedKeys.has(`${section.key}.${item.key}`)}
+          ruleCount={ruleCounts[`${section.key}.${item.key}`] ?? 0}
         />
       ))}
     </ul>
@@ -169,7 +199,9 @@ const FEATURES_TABS = [
 
 export const FeaturesList = () => {
   const { showErrorResponse, showSuccess } = useNotify();
-  const canEdit = Boolean(useUser()?.is_staff);
+  const user = useUser();
+  const canEdit = checkIsStaff(user);
+  const canReadRules = Boolean(checkIsStaffOrSupport(user));
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
   const { activeKey, handleSelect } = useUrlTab(FEATURES_TABS, 'tab');
@@ -237,6 +269,8 @@ export const FeaturesList = () => {
     );
   };
 
+  // Never ENV.FEATURES: it holds the staff member's own targeted values.
+  const publicFeatures = useMemo(() => getPublicFeatures(), []);
   const saveFeaturesCallback = async (formData) => {
     try {
       await featureValues({ body: formData });
@@ -290,7 +324,7 @@ export const FeaturesList = () => {
   return (
     <Form
       onSubmit={saveFeaturesCallback}
-      initialValues={ENV.FEATURES}
+      initialValues={publicFeatures}
       render={({ handleSubmit, submitting, dirty }) => (
         <form onSubmit={handleSubmit}>
           <Card bordered>
@@ -313,6 +347,7 @@ export const FeaturesList = () => {
               </div>
             </CardHeader>
             <CardContent className="pt-2">
+              {canReadRules ? <OrphanedRulesNotice canEdit={canEdit} /> : null}
               <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
                 <div
                   className="flex items-end gap-1"

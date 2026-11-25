@@ -2,7 +2,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   fetchMicroApps,
+  isMicroAppOffered,
   isMicroAppVisible,
+  mergeFeatureFlags,
   MicroAppEntry,
   portalBase,
   resetMicroAppsRegistry,
@@ -72,6 +74,69 @@ describe('isMicroAppVisible', () => {
       false,
     );
     expect(isMicroAppVisible(staffOnly, viewer([], true), ON)).toBe(true);
+  });
+});
+
+describe('isMicroAppVisible with an operator setting', () => {
+  const withSetting = (setting: boolean, roleNames: string[] = []) => ({
+    ...viewer(roleNames),
+    microApps: { 'provider-calls': setting },
+  });
+
+  it('lists an app set on even while the micro-apps feature is off', () => {
+    expect(isMicroAppVisible(app(), withSetting(true), {})).toBe(true);
+  });
+
+  it('hides an app set off even while the micro-apps feature is on', () => {
+    expect(isMicroAppVisible(app(), withSetting(false), ON)).toBe(false);
+  });
+
+  it('keeps the app’s own prerequisites', () => {
+    const forManagers = app({ roles: ['OFFERING.MANAGER'] });
+    expect(isMicroAppVisible(forManagers, withSetting(true), {})).toBe(false);
+    expect(
+      isMicroAppVisible(
+        forManagers,
+        withSetting(true, ['OFFERING.MANAGER']),
+        {},
+      ),
+    ).toBe(true);
+  });
+
+  it('follows the feature for an app without a setting', () => {
+    const other = { ...viewer(), microApps: { 'other-app': true } };
+    expect(isMicroAppVisible(app(), other, {})).toBe(false);
+    expect(isMicroAppVisible(app(), other, ON)).toBe(true);
+  });
+});
+
+describe('isMicroAppOffered', () => {
+  it('refuses only an app the operator set off', () => {
+    expect(isMicroAppOffered('a', { a: false })).toBe(false);
+    expect(isMicroAppOffered('a', { a: true })).toBe(true);
+    expect(isMicroAppOffered('a', {})).toBe(true);
+    expect(isMicroAppOffered('a', undefined)).toBe(true);
+    expect(isMicroAppOffered(undefined, { a: false })).toBe(true);
+  });
+});
+
+describe('mergeFeatureFlags', () => {
+  it('lays the user’s values over the public ones, section by section', () => {
+    expect(
+      mergeFeatureFlags(
+        { user: { ssh_keys: true, show_slug: false }, deployment: { x: true } },
+        { user: { show_slug: true } },
+      ),
+    ).toEqual({
+      user: { ssh_keys: true, show_slug: true },
+      deployment: { x: true },
+    });
+  });
+
+  it('leaves the public flags untouched', () => {
+    const base = { user: { show_slug: false } };
+    mergeFeatureFlags(base, { user: { show_slug: true } });
+    expect(base.user.show_slug).toBe(false);
   });
 });
 

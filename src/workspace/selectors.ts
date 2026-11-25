@@ -29,6 +29,8 @@ export const getProject = (state: RootState): Project =>
 export const isStaff = (state: RootState): boolean =>
   getUser(state) && getUser(state).is_staff;
 
+export const checkIsStaff = (user: User): boolean => Boolean(user?.is_staff);
+
 export const checkIsStaffOrSupport = (user: User): boolean =>
   user && (user.is_staff || user.is_support);
 
