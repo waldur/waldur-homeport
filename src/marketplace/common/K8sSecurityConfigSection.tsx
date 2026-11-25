@@ -2,6 +2,8 @@ import React from 'react';
 
 import { translate } from '@/i18n';
 
+import { K8sEgressPolicy, K8sEgressRule } from './k8sEgressRules';
+import { K8sEgressRulesSection } from './K8sEgressRulesSection';
 import { K8sFormSection } from './K8sFormSection';
 import K8sSecurityRulesField from './K8sSecurityRulesField';
 
@@ -28,6 +30,9 @@ interface K8sSecurityConfigSectionProps {
   onPublicAccessRulesChange: (rules: any[]) => void;
   administrativeAccessRules: any[];
   onAdministrativeAccessRulesChange: (rules: any[]) => void;
+  egressPolicy?: K8sEgressPolicy;
+  egressRules: K8sEgressRule[];
+  onEgressRulesChange: (rules: K8sEgressRule[]) => void;
 }
 
 export const K8sSecurityConfigSection: React.FC<
@@ -37,6 +42,9 @@ export const K8sSecurityConfigSection: React.FC<
   onPublicAccessRulesChange,
   administrativeAccessRules,
   onAdministrativeAccessRulesChange,
+  egressPolicy,
+  egressRules,
+  onEgressRulesChange,
 }) => {
   return (
     <K8sFormSection
@@ -84,6 +92,17 @@ export const K8sSecurityConfigSection: React.FC<
         }}
         meta={DEFAULT_FIELD_META}
       />
+
+      {/* Also shown when the offering stopped taking egress rules but the
+          value still has some, so that they can be removed. */}
+      {(egressPolicy?.egress_rules_enabled || egressRules.length > 0) && (
+        <K8sEgressRulesSection
+          policy={egressPolicy || {}}
+          rules={egressRules}
+          onChange={onEgressRulesChange}
+          className="mt-4"
+        />
+      )}
     </K8sFormSection>
   );
 };

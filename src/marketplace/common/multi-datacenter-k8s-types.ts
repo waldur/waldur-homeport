@@ -8,9 +8,17 @@
  * 4. Per-Datacenter Worker/Storage Groups with flavor selection
  */
 
-import { LoadBalancerModeEnum, TopologyModeEnum } from 'waldur-js-client';
+import type {
+  K8sDefaultConfiguration,
+  LoadBalancerModeEnum,
+  TopologyModeEnum,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+
+import { K8sEgressRule } from './k8sEgressRules';
+
+export type { K8sDefaultConfiguration };
 
 export interface LocalOpenStackFlavor {
   uuid: string;
@@ -53,30 +61,13 @@ export interface MultiDatacenterK8sClusterConfig {
   datacenters: DatacenterConfiguration[];
   public_access_rules?: any[]; // Security rules for public access
   administrative_access_rules?: any[]; // Security rules for admin access
+  // Outbound destinations; any rule makes outbound traffic deny by default.
+  egress_rules?: K8sEgressRule[];
   install_longhorn?: boolean; // Optional Longhorn distributed storage installation
   // Whether the cluster gets load balancer nodes. Absent in orders placed
   // before the provider could make the load balancer optional, which always
   // had one.
   load_balancer?: boolean;
-}
-
-export interface K8sDefaultConfiguration {
-  default_controller_vcpus?: number;
-  default_controller_ram_gb?: number;
-  default_controller_system_disk_gb?: number;
-  default_controller_etcd_disk_gb?: number;
-  default_lb_vcpus?: number;
-  default_lb_ram_gb?: number;
-  default_lb_system_disk_gb?: number;
-  default_lb_logs_disk_gb?: number;
-  load_balancer_mode?: LoadBalancerModeEnum;
-  topology_mode?: TopologyModeEnum;
-  minimal_worker_vcpus?: number;
-  minimal_worker_ram_gb?: number;
-  default_worker_data_disk_gb?: number;
-  default_storage_data_disk_gb?: number;
-  default_storage_san_disk_gb?: number;
-  available_kubernetes_versions?: string;
 }
 
 // Default configurations - used internally

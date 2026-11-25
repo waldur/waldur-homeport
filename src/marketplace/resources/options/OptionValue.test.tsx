@@ -63,3 +63,32 @@ describe('formatOptionValue', () => {
     expect(formatOptionValue({ type: 'string' } as any, undefined)).toBeNull();
   });
 });
+
+describe('Kubernetes option values', () => {
+  const egress = [
+    { name: 'Storage', destination_type: 'cidr', destination: '10.20.0.0/16' },
+  ];
+
+  it('summarises a cluster configuration instead of dumping JSON', () => {
+    expect(
+      formatOptionValue({ type: 'single_datacenter_k8s_config' } as any, {
+        kubernetes_version: '1.30.0',
+        topology: '1-datacenter',
+        datacenters: [{}],
+        public_access_rules: [{}, {}],
+        egress_rules: egress,
+      }),
+    ).toBe(
+      'Kubernetes 1.30.0 · Single site · Datacenters: 1 · Inbound rules: 2 · Egress: Storage: 10.20.0.0/16 (any traffic)',
+    );
+  });
+
+  it('lists the egress rules of a resource', () => {
+    expect(
+      OptionValue({
+        option: { type: 'k8s_egress_rules', label: 'Egress' } as any,
+        value: egress,
+      }),
+    ).toBe('Storage: 10.20.0.0/16 (any traffic)');
+  });
+});
