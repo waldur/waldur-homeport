@@ -23069,11 +23069,6 @@
       "feature_area": "mail"
     }
   },
-  "Edit rules": {
-    "context": {
-      "feature_area": "administration"
-    }
-  },
   "Edit schedules": {
     "context": {
       "feature_area": "booking"
@@ -88594,11 +88589,6 @@
       "feature_area": "roles"
     }
   },
-  "View rules": {
-    "context": {
-      "feature_area": "administration"
-    }
-  },
   "View script": {
     "context": {
       "feature_area": "blocks"
@@ -94837,7 +94827,7 @@
   },
   "rules": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "administration"
     }
   },
   "running": {},

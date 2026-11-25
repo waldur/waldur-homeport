@@ -1,4 +1,4 @@
-import { DotsThreeVerticalIcon, UsersThreeIcon } from '@phosphor-icons/react';
+import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
@@ -44,13 +44,13 @@ import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
 import { getPublicFeatures } from '@/features/userFeatures';
 import { DeploymentFeatures } from '@/FeaturesEnums';
+import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useUrlTab } from '@/navigation/useUrlTab';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdown, ActionsMenu } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
 import { useUser } from '@/workspace/hooks';
 import { checkIsStaff, checkIsStaffOrSupport } from '@/workspace/selectors';
@@ -194,17 +194,13 @@ const FeatureRow = ({
           </Field>
         )}
         {canReadRules ? (
-          <ActionsDropdown data-testid={`feature-actions-${featureKey}`}>
-            <ActionItem
-              title={
-                canEdit ? translate('Edit rules') : translate('View rules')
-              }
-              iconNode={<UsersThreeIcon weight="bold" />}
-              action={openRules}
-              disabled={!isUserScoped}
-              tooltip={isUserScoped ? undefined : getNotUserScopedReason()}
-            />
-          </ActionsDropdown>
+          <CompactEditButton
+            fieldName={translate('rules')}
+            tooltip={isUserScoped ? undefined : getNotUserScopedReason()}
+            disabled={!isUserScoped}
+            onClick={openRules}
+            data-testid={`feature-rules-edit-${featureKey}`}
+          />
         ) : null}
       </div>
     </li>
