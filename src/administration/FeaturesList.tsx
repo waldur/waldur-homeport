@@ -154,10 +154,9 @@ const FeatureRow = ({
                   id={inputId}
                   size="sm"
                   options={getAudienceOptions(ruleCount, isUserScoped)}
-                  // One width for every row, whatever its labels.
+                  // One overall width for every row, whatever its rule count.
                   fullWidth
-                  className="w-112"
-                  itemClassName="min-w-0 basis-0"
+                  className="w-80"
                   value={state}
                   onValueChange={(value) =>
                     form.batch(() => {
