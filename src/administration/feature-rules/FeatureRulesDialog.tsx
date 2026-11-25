@@ -14,13 +14,14 @@ import {
   featureRulesPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
-import { CreateModalButton, EditModalButton } from '@/core/buttons';
+import { EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -239,6 +240,30 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
       subtitle={translate(
         'Users matched by any active rule get it, in addition to everyone it is switched on for.',
       )}
+      footer={
+        <>
+          <CloseDialogButton label={translate('Close')} />
+          {canEdit ? (
+            <BaseButton
+              variant="primary"
+              size="lg"
+              className="min-w-dialog-action"
+              label={translate('Add rule')}
+              onClick={() =>
+                openDialog(FeatureRuleFormDialog, {
+                  resolve: {
+                    featureKey,
+                    featureLabel,
+                    refetch: tableProps.fetch,
+                    back,
+                  },
+                  size: 'lg',
+                })
+              }
+            />
+          ) : null}
+        </>
+      }
     >
       <Table<FeatureRule>
         {...tableProps}
@@ -271,7 +296,11 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
               ),
           },
         ]}
-        title={translate('Rules')}
+        hideTitle
+        hasActionBar={false}
+        cardBordered={false}
+        fullWidth
+        minHeight={1}
         verboseName={translate('rules')}
         expandableRow={MatchedUsers}
         rowActions={({ row }) => (
@@ -282,20 +311,6 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
             actions={canEdit ? STAFF_ACTIONS : SUPPORT_ACTIONS}
           />
         )}
-        tableActions={
-          canEdit ? (
-            <CreateModalButton
-              dialog={FeatureRuleFormDialog}
-              resolve={{
-                featureKey,
-                featureLabel,
-                refetch: tableProps.fetch,
-                back,
-              }}
-              title={translate('Add rule')}
-            />
-          ) : null
-        }
       />
     </ModalDialog>
   );
