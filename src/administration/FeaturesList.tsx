@@ -154,9 +154,9 @@ const FeatureRow = ({
                   id={inputId}
                   size="sm"
                   options={getAudienceOptions(ruleCount, isUserScoped)}
-                  // One overall width for every row, whatever its rule count.
-                  fullWidth
-                  className="w-80"
+                  // Off and Everyone share one width and Selected users has its
+                  // own, so every row's control lines up whatever its rule count.
+                  itemClassName="w-24 last-of-type:w-36"
                   value={state}
                   onValueChange={(value) =>
                     form.batch(() => {
