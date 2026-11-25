@@ -45,6 +45,16 @@ describe('TablePagination', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
+  it('keeps the counter above ten results even when one page holds them', () => {
+    renderPagination({
+      currentPage: 1,
+      pageSize: 25,
+      resultCount: 15,
+      showPageSizeSelector: false,
+    });
+    expect(screen.getByText('1-15 of 15 items')).toBeInTheDocument();
+  });
+
   it('keeps the rows-per-page choice when one page holds every result', () => {
     renderPagination({ currentPage: 1, resultCount: 8 });
     expect(screen.getByText('1-8 of 8 items')).toBeInTheDocument();
