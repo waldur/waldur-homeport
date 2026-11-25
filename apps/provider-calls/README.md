@@ -11,8 +11,8 @@ assessments of their own unless an offering has no manager and they stand
 in. Offering evaluators, who hold no organisation role, see their tasks on
 the Inbox and Team work pages.
 
-`waldur.deploy` is `false`: CI and MR previews build it, production images
-leave it out.
+Every image holds it; users are offered it in Administration → User
+interface → Micro-apps.
 
 ## Pages
 

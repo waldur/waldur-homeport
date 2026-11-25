@@ -5,7 +5,6 @@
   "description": "Proof of concept: a service provider's work in calls for proposals (offering requests, the offering team's assessments, proposals and demand) as a standalone micro-app.",
   "type": "module",
   "waldur": {
-    "deploy": false,
     "title": "Calls for providers",
     "description": "Requests from calls, your team's assessments, awards and demand.",
     "visibleTo": {

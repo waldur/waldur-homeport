@@ -7,8 +7,8 @@
 //
 // With a dist directory it lists the apps that directory holds, the way
 // docker/entrypoint.sh finds them for nginx (dist/<name>/index.orig.html),
-// so the registry never names an app the image left out (waldur.deploy:
-// false). Without one (the dev server) it lists every apps/* member.
+// so the registry names only apps the image serves. Without one (the dev
+// server) it lists every apps/* member.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';

@@ -218,13 +218,13 @@ function AppShellContent({
     [runtimeConfig?.FEATURES, currentUser?.features],
   );
   const userSettled = useCurrentUserSettled();
-  // The operator switched this app off for the signed-in user: say so rather
-  // than render pages whose menu entry the user was never shown. Until
+  // The app is not offered to the signed-in user (switched off, or nobody
+  // turned it on): say so rather than render pages whose menu entry the user
+  // was never shown. Until
   // /users/me/ answers, an app's pages wait, so they neither flash nor start
   // their requests for a user the app turns out to be off for.
   const waitingForUser = Boolean(appName) && !userSettled;
-  const offered =
-    !currentUser || isMicroAppOffered(appName, currentUser.microApps);
+  const offered = !viewer || isMicroAppOffered(appName, viewer, features);
   const appShortcuts = useAppShortcuts({
     baseUrl: appBaseUrl(),
     currentApp: appName,

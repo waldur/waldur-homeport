@@ -60,8 +60,8 @@ This needs the micro-app's own `vite.config.ts` to set its `base` to match
 paths (`/@vite/client`, `/@fs/*`) collide between the two dev servers
 sharing one origin. Currently hardcoded to `micro-app-poc`'s one proxy
 entry/port; generalizing to every `apps/*` member automatically would need
-a small discoverable ports registry (e.g. extending the `waldur.deploy`
-package.json convention below with a `devPort` field) — not worth it with
+a small discoverable ports registry (e.g. a `devPort` field in the
+`waldur` block of the app's package.json) — not worth it with
 only one real example today.
 
 ## Boot splash
@@ -159,42 +159,20 @@ SPA fallback instead. (This exact bug existed briefly during development;
 verified fixed by simulating the full pipeline locally with both an empty
 and a set `ASSET_PATH`.)
 
-## Opting out of production: `waldur.deploy`
+## Every image holds every app
 
-A micro-app that should stay buildable/typecheckable/live-testable but
-never reach a real deployment (a demo or proof-of-concept, not a
-deployable) opts out via its own `package.json`:
-
-```json
-{
-  "waldur": { "deploy": false }
-}
-```
-
-The Dockerfile's `apps/*` loop checks this (via a one-line `node -e`
-read of the app's `package.json`) before building/copying it. **Absent
-this field, an app ships by default** — the flag is opt-out, not opt-in,
-so a real new micro-app needs no `package.json` change to be deployed.
-
-### Live-testing without shipping
-
-`waldur.deploy: false` only controls _production_ images. CI/preview
-builds override it with a second Dockerfile arg,
-`INCLUDE_DEPLOY_FALSE_APPS=true`, so every `apps/*` member — including
-opted-out ones — is still built, packaged, served, and `API_URL`-substituted
-on every MR:
-
-| Job (`.gitlab-ci.yml`)                   | `INCLUDE_DEPLOY_FALSE_APPS` | Purpose                                       |
-| ---------------------------------------- | :-------------------------: | --------------------------------------------- |
-| `Build test docker image` (E2E image)    |           `true`            | Image the downstream E2E suite runs against   |
-| `Build test docker image` (k8s preview)  |           `true`            | Feeds `Test k8s deployment`'s live MR preview |
-| `Publish YOLO docker image`              |       unset (`false`)       | Real `develop`-branch production image        |
-| `Publish latest docker image`            |       unset (`false`)       | Retags YOLO → `latest`                        |
-| `Publish multiarch ... specific version` |       unset (`false`)       | Real tagged-release production image          |
+Every `apps/*` member is built into every image: production, E2E and the
+MR's k8s preview alike. Whether a user is offered an app is decided at
+runtime, per app, by the operator's setting (see
+[Listing an app in the quick shortcuts](#listing-an-app-in-the-quick-shortcuts)),
+not by what the image contains. An app nobody turned on stays hidden: an app
+without a setting follows the `user.show_micro_apps` feature, which is off by
+default, both in the menu and at its address.
 
 So `apps/micro-app-poc` is reachable at `/micro-app-poc/` (or
-`/<mr-id>/micro-app-poc/` under the preview env's `ASSET_PATH`) in every
-MR's live k8s preview, while never appearing in a real `Publish` image.
+`/<mr-id>/micro-app-poc/` under the preview env's `ASSET_PATH`) for staff in
+every MR's live k8s preview and every deployment, and for nobody else until
+an operator offers it.
 
 ## CI coverage
 
@@ -206,8 +184,8 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
   gated on `Dockerfile`, `docker/**/*`, `apps/**/*` (the Dockerfile builds
   `apps/*` into the image now, so a change there affects the built image).
 - **`Build test docker image`** + **`Test k8s deployment`** — the real
-  end-to-end check: builds the E2E/preview images (with
-  `INCLUDE_DEPLOY_FALSE_APPS=true`) and deploys the preview one to a live,
+  end-to-end check: builds the E2E/preview images and deploys the preview
+  one to a live,
   browsable k8s environment at `https://helm-testing.waldur.com/<mr-id>/`.
 
 ## Listing an app in the quick shortcuts
@@ -246,7 +224,6 @@ Whatever the setting, an app is only ever listed for the users its
 ```json
 {
   "waldur": {
-    "deploy": false,
     "title": "Calls for providers",
     "description": "Requests, assessments and awards in calls",
     "visibleTo": {
@@ -268,8 +245,7 @@ The registry is `micro-apps.json` next to the portal's `index.html`,
 written by `scripts/micro-apps-registry.mjs`:
 
 - **In the image**, the Dockerfile runs it after the `apps/*` loop over
-  `dist/`, so it lists exactly the apps that image holds: an app left out
-  by `waldur.deploy: false` is left out of the menu too. nginx serves it
+  `dist/`, so it lists exactly the apps that image holds. nginx serves it
   uncached (`docker/nginx-tpl.conf`).
 - **On the dev server**, the root `vite.config.ts` serves it for every
   `apps/*` member, read again on each request.
@@ -280,8 +256,13 @@ The visibility rules are evaluated in the browser from `users/me` (the
 user's active roles, the user's own feature flags and `micro_apps`) and the
 runtime feature flags; they decide what the menu offers, not who may use an
 app. `AppShell` also shows "not available" to a signed-in user whose
-`micro_apps` entry for the app is `false`. An app still has to handle a user it
-has nothing for, and the backend still decides what the user may do. The
+`micro_apps` entry for the app is `false`, or who has no entry for it while
+`user.show_micro_apps` is off for them; staff and support can open an app
+without an entry, to try it out before offering it. That gate is what keeps
+an app nobody turned on from being opened by its address, since every image
+holds every app. The gate does not check `visibleTo`, so an app still has to
+handle a user it has nothing for, and the backend still decides what the user
+may do. The
 registry itself is public, like the apps: anyone, signed in or not, can
 read every app's name, description and rules, `staffOnly` ones included.
 
@@ -306,9 +287,9 @@ read every app's name, description and rules, `staffOnly` ones included.
    / `confirm()` from `waldur-ui`, as in the main app (see
    [modals.md](modals.md)). For `useManagedMutation` from `waldur-shell`,
    wrap the app in a react-query `QueryClientProvider`.
-3. Decide whether it ships: omit `"waldur": { "deploy": false }` to ship by
-   default, or add it if it's a demo/POC that should stay CI/preview-only
-   (see above).
+3. It ships in every image; nobody but staff and support can open it until
+   an operator offers it or turns on `user.show_micro_apps` (see
+   [Every image holds every app](#every-image-holds-every-app)).
 4. To list it in the quick shortcuts, give its `waldur` block a `title`
    (and `description`, `visibleTo`), and pass its directory name as
    `appName` to `AppShell` — see

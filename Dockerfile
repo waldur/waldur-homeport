@@ -60,20 +60,15 @@ RUN yarn vite build --base=$ASSET_PATH
 # Every apps/* member is a standalone micro-app, built and served alongside
 # the root app on this same image/domain/port, nested into dist/<name>/ so
 # the single COPY below ships it too — no per-app COPY lines. See
-# docs/micro-apps.md for the full pipeline (nginx routing, ASSET_PATH,
-# the waldur.deploy opt-out below, and INCLUDE_DEPLOY_FALSE_APPS's CI/prod
-# split).
-ARG INCLUDE_DEPLOY_FALSE_APPS=false
+# docs/micro-apps.md for the full pipeline (nginx routing, ASSET_PATH).
+# Every image holds every app; who is offered one is the operator's setting
+# at runtime (Administration → User interface → Micro-apps).
 RUN for app_dir in apps/*/; do \
       [ -d "$app_dir" ] || continue; \
       name=$(basename "$app_dir"); \
-      if [ "$INCLUDE_DEPLOY_FALSE_APPS" = "true" ] || node -e "process.exit(require('./$app_dir/package.json').waldur?.deploy === false ? 1 : 0)"; then \
-        vite build "$app_dir" --base="${ASSET_PATH}$name/"; \
-        cp -r "$app_dir/dist" "dist/$name"; \
-        cp "$app_dir/dist/index.html" "dist/$name/index.orig.html"; \
-      else \
-        echo "Skipping $app_dir (waldur.deploy=false in its package.json)"; \
-      fi; \
+      vite build "$app_dir" --base="${ASSET_PATH}$name/"; \
+      cp -r "$app_dir/dist" "dist/$name"; \
+      cp "$app_dir/dist/index.html" "dist/$name/index.orig.html"; \
     done
 
 # The registry the quick shortcuts menu lists micro-apps from: the apps this
