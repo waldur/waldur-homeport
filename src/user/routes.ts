@@ -25,19 +25,11 @@ import {
 } from '@/workspace/selectors';
 
 import { arePasskeysEnabled } from './passkeys/utils';
+import { canUsePersonalAccessTokens as canUserUsePersonalAccessTokens } from './personal-access-tokens/canUsePersonalAccessTokens';
 import { UsersService } from './UsersService';
 
-// PAT is gated globally (PAT_ENABLED) and then per-user: staff are implicitly
-// allowed, other users need the can_use_personal_access_tokens flag.
-const canUsePersonalAccessTokens = (state) => {
-  if (!ENV.plugins.WALDUR_CORE.PAT_ENABLED) {
-    return false;
-  }
-  const user = getUser(state);
-  return Boolean(
-    user && (user.is_staff || user.can_use_personal_access_tokens),
-  );
-};
+const canUsePersonalAccessTokens = (state) =>
+  canUserUsePersonalAccessTokens(getUser(state));
 
 const isMcpEnabled = () => Boolean(ENV.plugins.WALDUR_CORE.MCP_ENABLED);
 

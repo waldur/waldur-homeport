@@ -5009,6 +5009,11 @@
       "feature_area": "policies"
     }
   },
+  "Allows the user to create and use personal access tokens, which are not enabled for every user.": {
+    "context": {
+      "feature_area": "create-user-steps"
+    }
+  },
   "Allows to hide domain field in organization detail.": {
     "context": {
       "feature_area": "features"
@@ -20423,11 +20428,6 @@
     }
   },
   "Designates whether the user is a global support user.": {
-    "context": {
-      "feature_area": "create-user-steps"
-    }
-  },
-  "Designates whether the user is allowed to create and use personal access tokens.": {
     "context": {
       "feature_area": "create-user-steps"
     }
@@ -49789,6 +49789,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "administration"
+    }
+  },
+  "Personal access tokens are enabled for every user. This flag only takes effect while they are turned off.": {
+    "context": {
+      "feature_area": "create-user-steps"
     }
   },
   "Personal details required for D&B Denmark lookup": {
@@ -92834,6 +92839,11 @@
   "personal access tokens": {
     "context": {
       "feature_area": "personal-access-tokens"
+    }
+  },
+  "personal access tokens are turned off and the owner is not allowed them": {
+    "context": {
+      "feature_area": "auth"
     }
   },
   "planned {days} days": {
