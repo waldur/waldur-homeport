@@ -3,7 +3,6 @@ import {
   PauseIcon,
   PlayIcon,
   UsersThreeIcon,
-  PlusIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
@@ -15,8 +14,9 @@ import {
   featureRulesPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
+import { AddButton } from '@/core/AddButton';
 import { EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -274,12 +274,28 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
               ),
           },
         ]}
-        hideTitle
-        hasActionBar={false}
-        cardBordered={false}
-        fullWidth
-        minHeight={1}
+        title={translate('Rules')}
         verboseName={translate('rules')}
+        minHeight={1}
+        // The card draws the one border; a table in a dialog adds its own.
+        className="[&_[data-slot=table-responsive]]:border-0"
+        tableActions={
+          canEdit ? (
+            <AddButton
+              onClick={() =>
+                openDialog(FeatureRuleFormDialog, {
+                  resolve: {
+                    featureKey,
+                    featureLabel,
+                    refetch: tableProps.fetch,
+                    back,
+                  },
+                  size: 'lg',
+                })
+              }
+            />
+          ) : null
+        }
         expandableRow={MatchedUsers}
         rowActions={({ row }) => (
           <ActionsDropdown
@@ -290,26 +306,6 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
           />
         )}
       />
-      {canEdit ? (
-        <BaseButton
-          variant="tertiary"
-          size="sm"
-          iconNode={<PlusIcon weight="bold" />}
-          className="mt-2"
-          label={translate('Add rule')}
-          onClick={() =>
-            openDialog(FeatureRuleFormDialog, {
-              resolve: {
-                featureKey,
-                featureLabel,
-                refetch: tableProps.fetch,
-                back,
-              },
-              size: 'lg',
-            })
-          }
-        />
-      ) : null}
     </ModalDialog>
   );
 };
