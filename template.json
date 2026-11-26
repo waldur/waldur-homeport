@@ -616,7 +616,7 @@
   },
   "1 error": {
     "context": {
-      "feature_area": "workflow-check"
+      "feature_area": "offering-templates"
     }
   },
   "1 member": {
@@ -694,7 +694,7 @@
   "1 version behind": {},
   "1 warning": {
     "context": {
-      "feature_area": "workflow-check"
+      "feature_area": "offering-templates"
     }
   },
   "10 - Very positive": {
@@ -15412,6 +15412,11 @@
       "feature_area": "quotas"
     }
   },
+  "Consistency findings": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "Console Access": {
     "context": {
       "feature_area": "steps"
@@ -27358,7 +27363,7 @@
   "Field": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "steps"
+      "feature_area": "offering-templates"
     }
   },
   "Field Mapping": {
@@ -27848,7 +27853,7 @@
   "Finding": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "workflow-check"
+      "feature_area": "offering-templates"
     }
   },
   "Finding reviewers": {
@@ -36213,6 +36218,12 @@
       "primary_ui_type": "submit_button",
       "feature_area": "lifecycle",
       "action_type": "create"
+    }
+  },
+  "Loaded 1 offering template.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-templates"
     }
   },
   "Loaded {count} call templates.": {
@@ -66541,7 +66552,7 @@
   "Severity": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "hygiene"
+      "feature_area": "offering-templates"
     }
   },
   "Share": {
@@ -89613,6 +89624,11 @@
       "feature_area": "scenarios"
     }
   },
+  "What the site agent would do differently from what the template says. An offering cannot be created from a template with an error.": {
+    "context": {
+      "feature_area": "offering-templates"
+    }
+  },
   "What the step can be completed with.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -96554,7 +96570,7 @@
           "type": "number"
         }
       },
-      "feature_area": "workflow-check"
+      "feature_area": "offering-templates"
     }
   },
   "{count} event types": {
@@ -98253,7 +98269,7 @@
           "type": "number"
         }
       },
-      "feature_area": "workflow-check"
+      "feature_area": "offering-templates"
     }
   },
   "{count} with findings": {

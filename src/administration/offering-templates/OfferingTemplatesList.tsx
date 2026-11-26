@@ -12,6 +12,7 @@ import { useTable } from '@/table/useTable';
 
 import { OfferingTemplateCreateButton } from './OfferingTemplateCreateButton';
 import { OfferingTemplateExpandableRow } from './OfferingTemplateExpandableRow';
+import { OfferingTemplateFindingsBadges } from './OfferingTemplateFindings';
 import { OfferingTemplateLoadPresetButton } from './OfferingTemplateLoadPresetButton';
 import { OfferingTemplatePublishToggle } from './OfferingTemplatePublishToggle';
 import { OfferingTemplateRowActions } from './OfferingTemplateRowActions';
@@ -29,7 +30,12 @@ export const OfferingTemplatesList = () => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => row.name,
+          render: ({ row }) => (
+            <span className="inline-flex gap-2 items-center flex-wrap">
+              {row.name}
+              <OfferingTemplateFindingsBadges row={row} />
+            </span>
+          ),
           orderField: 'name',
         },
         {

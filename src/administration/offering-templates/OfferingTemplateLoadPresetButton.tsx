@@ -12,6 +12,7 @@ import {
   Badge,
   BaseButton,
   Checkbox,
+  Code,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
@@ -57,6 +58,9 @@ const PresetOption: FC<{
         label={
           <span className="inline-flex gap-1.5 items-center flex-wrap">
             {preset.name}
+            <Code className="text-xs" data-testid="preset-key">
+              {preset.key}
+            </Code>
             <Badge variant="neutral" size="sm">
               {getLabel(preset.offering_type)}
             </Badge>
@@ -139,9 +143,11 @@ export const OfferingTemplateLoadPresetDialog: FC<{
     refetch: resolve.refetch,
     onSuccess: (response) =>
       showSuccess(
-        translate('Loaded {count} offering templates.', {
-          count: response.data.created,
-        }),
+        response.data.created === 1
+          ? translate('Loaded 1 offering template.')
+          : translate('Loaded {count} offering templates.', {
+              count: response.data.created,
+            }),
       ),
   });
 

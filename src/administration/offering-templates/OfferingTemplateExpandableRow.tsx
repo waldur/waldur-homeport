@@ -6,6 +6,7 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { SimpleTable } from '@/table/SimpleTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { OfferingTemplateFindingsTable } from './OfferingTemplateFindings';
 import { OfferingTemplateParametersTable } from './OfferingTemplateParametersTable';
 import { documentList } from './templateDocument';
 
@@ -43,6 +44,20 @@ export const OfferingTemplateExpandableRow: FC<{ row: OfferingTemplate }> = ({
     <ExpandableContainer>
       {row.description ? (
         <p className="text-quaternary mb-3">{row.description}</p>
+      ) : null}
+      {row.configuration_findings?.length ? (
+        <Section
+          title={translate('Consistency findings')}
+          empty=""
+          isEmpty={false}
+        >
+          <p className="text-quaternary text-sm mb-2.5">
+            {translate(
+              'What the site agent would do differently from what the template says. An offering cannot be created from a template with an error.',
+            )}
+          </p>
+          <OfferingTemplateFindingsTable row={row} />
+        </Section>
       ) : null}
       <Section
         title={translate('Components')}
@@ -103,7 +118,10 @@ export const OfferingTemplateExpandableRow: FC<{ row: OfferingTemplate }> = ({
         empty={translate('The template declares no parameters.')}
         isEmpty={!row.parameters?.length}
       >
-        <OfferingTemplateParametersTable parameters={row.parameters ?? []} />
+        <OfferingTemplateParametersTable
+          parameters={row.parameters ?? []}
+          scrollable={false}
+        />
       </Section>
     </ExpandableContainer>
   );
