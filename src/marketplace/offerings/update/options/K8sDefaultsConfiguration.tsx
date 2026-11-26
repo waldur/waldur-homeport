@@ -124,11 +124,6 @@ const EgressPolicySection = ({ name }: { name: string }) => {
 export const K8sDefaultsConfiguration: React.FC<{}> = () => {
   const name = 'default_configs';
   const {
-    input: { value: optionType },
-  } = useField<{ value?: string }>('type', {
-    subscription: { value: true },
-  });
-  const {
     input: { value: loadBalancerMode },
   } = useField<LoadBalancerModeEnum>(`${name}.load_balancer_mode`, {
     subscription: { value: true },
@@ -177,15 +172,11 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           name={`${name}.topology_mode`}
           label={translate('Cluster topology')}
           description={translate(
-            'Where the controller nodes run: three in one site, or one in each of three sites. When not set, the option type decides.',
+            'Where the controller nodes run: three in one site, or one in each of three sites. When not set, the customer chooses.',
           )}
           options={getTopologyModeOptions()}
-          placeholder={
-            optionType?.value === 'multi_datacenter_k8s_config'
-              ? translate('Three sites, 1 controller each')
-              : translate('Single site, 3 controllers')
-          }
-          // Clearing hands the choice back to the option type.
+          placeholder={translate('Customer chooses')}
+          // Clearing hands the choice to the customer.
           isClearable
           parse={(value) => value || undefined}
           simpleValue

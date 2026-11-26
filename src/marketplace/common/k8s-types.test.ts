@@ -8,9 +8,10 @@ import {
   getInitialTopology,
   getTopologyMode,
   hasLoadBalancer,
+  isK8sConfigFieldType,
   isTopologyAllowed,
   validateMultiDatacenterConfiguration,
-} from './multi-datacenter-k8s-types';
+} from './k8s-types';
 
 describe('createDefaultClusterConfig', () => {
   it('preselects the first version the offering advertises', () => {
@@ -116,55 +117,40 @@ describe('load balancer mode', () => {
   );
 });
 
+describe('Kubernetes option type', () => {
+  it('recognises only the cluster type', () => {
+    expect(isK8sConfigFieldType('k8s_cluster_config')).toBe(true);
+    expect(isK8sConfigFieldType('single_datacenter_k8s_config')).toBe(false);
+    expect(isK8sConfigFieldType('k8s_egress_rules')).toBe(false);
+    expect(isK8sConfigFieldType(undefined)).toBe(false);
+  });
+});
+
 describe('topology mode', () => {
-  it('falls back to the option type when the offering sets no mode', () => {
-    expect(getTopologyMode('single_datacenter_k8s_config')).toBe(
-      '1-datacenter',
-    );
-    expect(getTopologyMode('multi_datacenter_k8s_config')).toBe('3-datacenter');
-    expect(getTopologyMode('multi_datacenter_k8s_config', {})).toBe(
+  it('lets the customer choose when the offering sets no mode', () => {
+    expect(getTopologyMode()).toBe('customer_choice');
+    expect(getTopologyMode({})).toBe('customer_choice');
+    expect(getTopologyMode({ topology_mode: '3-datacenter' })).toBe(
       '3-datacenter',
     );
-  });
-
-  it('lets the offering mode override the option type', () => {
-    expect(
-      getTopologyMode('single_datacenter_k8s_config', {
-        topology_mode: '3-datacenter',
-      }),
-    ).toBe('3-datacenter');
-    expect(
-      getTopologyMode('multi_datacenter_k8s_config', {
-        topology_mode: 'customer_choice',
-      }),
-    ).toBe('customer_choice');
   });
 
   it('ignores a stored topology under a fixed mode', () => {
     expect(
       getInitialTopology(
-        'single_datacenter_k8s_config',
         { topology: '3-datacenter' },
         { topology_mode: '1-datacenter' },
       ),
     ).toBe('1-datacenter');
   });
 
-  it('keeps the customer pick, starting from the option type', () => {
+  it('keeps the customer pick, starting a fresh form with a single site', () => {
     const configs = { topology_mode: 'customer_choice' as const };
-    expect(
-      getInitialTopology(
-        'single_datacenter_k8s_config',
-        { topology: '3-datacenter' },
-        configs,
-      ),
-    ).toBe('3-datacenter');
-    expect(
-      getInitialTopology('single_datacenter_k8s_config', undefined, configs),
-    ).toBe('1-datacenter');
-    expect(
-      getInitialTopology('multi_datacenter_k8s_config', undefined, configs),
-    ).toBe('3-datacenter');
+    expect(getInitialTopology({ topology: '3-datacenter' }, configs)).toBe(
+      '3-datacenter',
+    );
+    expect(getInitialTopology(undefined, configs)).toBe('1-datacenter');
+    expect(getInitialTopology(undefined)).toBe('1-datacenter');
   });
 
   it('rebuilds the sites and keeps cluster-wide choices on a switch', () => {
@@ -199,7 +185,7 @@ describe('topology mode', () => {
     expect(config.topology).toBe('3-datacenter');
     expect(config.datacenters).toBe(stored.datacenters);
     expect(
-      isTopologyAllowed(config, 'single_datacenter_k8s_config', {
+      isTopologyAllowed(config, {
         topology_mode: '1-datacenter',
       }),
     ).toBe(false);
@@ -225,37 +211,19 @@ describe('topology mode', () => {
   });
 
   it.each([
-    // [type, mode, topology, datacenter count, allowed]
-    ['single_datacenter_k8s_config', undefined, '1-datacenter', 1, true],
-    ['single_datacenter_k8s_config', undefined, '3-datacenter', 3, false],
-    ['multi_datacenter_k8s_config', undefined, '3-datacenter', 3, true],
-    ['multi_datacenter_k8s_config', '1-datacenter', '3-datacenter', 3, false],
-    ['single_datacenter_k8s_config', '3-datacenter', '3-datacenter', 3, true],
-    [
-      'single_datacenter_k8s_config',
-      'customer_choice',
-      '3-datacenter',
-      3,
-      true,
-    ],
-    [
-      'single_datacenter_k8s_config',
-      'customer_choice',
-      '1-datacenter',
-      1,
-      true,
-    ],
-    [
-      'single_datacenter_k8s_config',
-      'customer_choice',
-      '1-datacenter',
-      3,
-      false,
-    ],
-    ['single_datacenter_k8s_config', '1-datacenter', '1-datacenter', 2, false],
+    // [mode, topology, datacenter count, allowed]
+    [undefined, '1-datacenter', 1, true],
+    [undefined, '3-datacenter', 3, true],
+    [undefined, '1-datacenter', 3, false],
+    ['1-datacenter', '3-datacenter', 3, false],
+    ['3-datacenter', '3-datacenter', 3, true],
+    ['customer_choice', '3-datacenter', 3, true],
+    ['customer_choice', '1-datacenter', 1, true],
+    ['customer_choice', '1-datacenter', 3, false],
+    ['1-datacenter', '1-datacenter', 2, false],
   ] as const)(
-    'checks %s with mode %s against a %s config of %i site(s)',
-    (type, mode, topology, count, allowed) => {
+    'checks mode %s against a %s config of %i site(s)',
+    (mode, topology, count, allowed) => {
       const config = {
         topology,
         datacenters: createDefaultClusterConfig(
@@ -263,7 +231,7 @@ describe('topology mode', () => {
         ).datacenters.slice(0, count),
       };
       expect(
-        isTopologyAllowed(config, type, mode ? { topology_mode: mode } : {}),
+        isTopologyAllowed(config, mode ? { topology_mode: mode } : {}),
       ).toBe(allowed);
     },
   );

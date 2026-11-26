@@ -153,7 +153,7 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
               />
               {/* The controllers' etcd disks and the load balancers' log disks
                 are counted here, with the node groups' data disks
-                (multi-datacenter-k8s-types.ts). */}
+                (k8s-types.ts). */}
               <PropertyItem
                 label={translate('Data, etcd and logs')}
                 value={propVal.count(totalResources.totalDataStorage, {

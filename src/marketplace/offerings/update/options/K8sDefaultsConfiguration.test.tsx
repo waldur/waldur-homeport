@@ -28,7 +28,13 @@ describe('K8sDefaultsConfiguration load balancer mode', () => {
   });
 
   it('shows the selected mode and keeps sizing when optional', () => {
-    renderComponent({ default_configs: { load_balancer_mode: 'optional' } });
+    // A fixed topology, so "Customer chooses" names only the load balancer.
+    renderComponent({
+      default_configs: {
+        load_balancer_mode: 'optional',
+        topology_mode: '1-datacenter',
+      },
+    });
 
     expect(screen.getByText('Customer chooses')).toBeInTheDocument();
     expect(screen.getByText('vCPUs per Load Balancer')).toBeInTheDocument();
@@ -48,19 +54,14 @@ describe('K8sDefaultsConfiguration load balancer mode', () => {
 });
 
 describe('K8sDefaultsConfiguration topology mode', () => {
-  it('shows the option type topology when no mode is set', () => {
-    renderComponent({ type: { value: 'multi_datacenter_k8s_config' } });
+  it('shows that the customer chooses when no mode is set', () => {
+    renderComponent({
+      type: { value: 'k8s_cluster_config' },
+      default_configs: { load_balancer_mode: 'required' },
+    });
 
     expect(screen.getByText('Cluster topology')).toBeInTheDocument();
-    expect(
-      screen.getByText('Three sites, 1 controller each'),
-    ).toBeInTheDocument();
-  });
-
-  it('shows the single-site default for a single-datacenter option', () => {
-    renderComponent({ type: { value: 'single_datacenter_k8s_config' } });
-
-    expect(screen.getByText('Single site, 3 controllers')).toBeInTheDocument();
+    expect(screen.getByText('Customer chooses')).toBeInTheDocument();
   });
 
   it.each([
@@ -69,7 +70,7 @@ describe('K8sDefaultsConfiguration topology mode', () => {
     ['customer_choice', 'Customer chooses'],
   ])('shows the selected %s mode', (mode, label) => {
     renderComponent({
-      type: { value: 'single_datacenter_k8s_config' },
+      type: { value: 'k8s_cluster_config' },
       default_configs: { topology_mode: mode, load_balancer_mode: 'disabled' },
     });
 
@@ -81,7 +82,7 @@ describe('K8sDefaultsConfiguration topology mode', () => {
     render(
       <Form
         onSubmit={onSubmit}
-        initialValues={{ type: { value: 'single_datacenter_k8s_config' } }}
+        initialValues={{ type: { value: 'k8s_cluster_config' } }}
         render={({ handleSubmit, invalid }) => (
           <form onSubmit={handleSubmit}>
             <K8sDefaultsConfiguration />
@@ -108,7 +109,7 @@ describe('K8sDefaultsConfiguration topology mode', () => {
       <Form
         onSubmit={onSubmit}
         initialValues={{
-          type: { value: 'multi_datacenter_k8s_config' },
+          type: { value: 'k8s_cluster_config' },
           // Versions are mandatory now, so the form cannot submit without them.
           default_configs: { available_kubernetes_versions: '1.34.0' },
         }}
@@ -121,14 +122,16 @@ describe('K8sDefaultsConfiguration topology mode', () => {
       />,
     );
 
+    await userEvent.click(
+      screen.getByRole('combobox', { name: /Cluster topology/ }),
+    );
     await userEvent.click(screen.getByText('Three sites, 1 controller each'));
-    await userEvent.click(screen.getByText('Customer chooses'));
     await userEvent.click(screen.getByRole('button', { name: 'Save' }));
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
         default_configs: {
-          topology_mode: 'customer_choice',
+          topology_mode: '3-datacenter',
           available_kubernetes_versions: '1.34.0',
         },
       }),
@@ -137,14 +140,15 @@ describe('K8sDefaultsConfiguration topology mode', () => {
     );
   });
 
-  it('can be cleared back to the option type default', async () => {
+  it('can be cleared back to the customer choosing', async () => {
     const onSubmit = vi.fn();
     render(
       <Form
         onSubmit={onSubmit}
         initialValues={{
-          type: { value: 'multi_datacenter_k8s_config' },
+          type: { value: 'k8s_cluster_config' },
           default_configs: {
+            load_balancer_mode: 'required',
             topology_mode: '1-datacenter',
             available_kubernetes_versions: '1.30.0',
           },
@@ -165,10 +169,8 @@ describe('K8sDefaultsConfiguration topology mode', () => {
     );
     await userEvent.keyboard('{Backspace}{Escape}');
 
-    // The placeholder names the type's own topology again.
-    expect(
-      screen.getByText('Three sites, 1 controller each'),
-    ).toBeInTheDocument();
+    // The placeholder says the customer chooses again.
+    expect(screen.getByText('Customer chooses')).toBeInTheDocument();
     expect(
       screen.queryByText('Single site, 3 controllers'),
     ).not.toBeInTheDocument();
@@ -177,6 +179,7 @@ describe('K8sDefaultsConfiguration topology mode', () => {
 
     const [values] = onSubmit.mock.calls[0];
     expect(values.default_configs).toEqual({
+      load_balancer_mode: 'required',
       available_kubernetes_versions: '1.30.0',
     });
   });

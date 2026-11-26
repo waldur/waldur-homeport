@@ -825,6 +825,7 @@
     }
   },
   "A /0 mask is not allowed: it matches every address.": {},
+  "A Kubernetes cluster: version, one or three sites, node groups and access rules. You set the node sizes, the versions, the topology and the load balancer.": {},
   "A Matrix protocol mechanism that allows Waldur to register as a service on the homeserver. The homeserver pushes events to Waldur via a webhook, and Waldur can create rooms and invite users on behalf of a bot user. Messages are sent by the Matrix bot.": {},
   "A POSIX-friendly unique identifier for the offering.": {
     "context": {
@@ -18337,7 +18338,8 @@
   },
   "Customer chooses": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "options"
     }
   },
   "Customer credits": {},
@@ -34439,6 +34441,11 @@
       "feature_area": "create"
     }
   },
+  "Kubernetes Cluster Configuration": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Kubernetes Egress Rules": {
     "context": {
       "primary_ui_type": "label"
@@ -40090,11 +40097,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "onboarding-setup"
-    }
-  },
-  "Multi-Datacenter Kubernetes Configuration": {
-    "context": {
-      "primary_ui_type": "label"
     }
   },
   "Multilingual logos have been updated.": {
@@ -67567,12 +67569,6 @@
   },
   "Single site, 3 controllers": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "options"
-    }
-  },
-  "Single-Datacenter Kubernetes Configuration": {
-    "context": {
       "primary_ui_type": "label"
     }
   },
@@ -77191,8 +77187,7 @@
   },
   "Three sites, 1 controller each": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "options"
+      "primary_ui_type": "label"
     }
   },
   "Threshold": {
@@ -90072,7 +90067,7 @@
       "feature_area": "common"
     }
   },
-  "Where the controller nodes run: three in one site, or one in each of three sites. When not set, the option type decides.": {
+  "Where the controller nodes run: three in one site, or one in each of three sites. When not set, the customer chooses.": {
     "context": {
       "feature_area": "options"
     }

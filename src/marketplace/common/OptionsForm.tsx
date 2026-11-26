@@ -47,12 +47,12 @@ import {
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { validateIpsecValue } from './ipsecVpn';
 import { IpsecVpnConfigField } from './IpsecVpnConfigField';
+import { validateMultiDatacenterConfiguration } from './k8s-types';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import { validateEgressRules } from './k8sEgressRules';
 import { K8sEgressRulesOptionField } from './K8sEgressRulesOptionField';
 import { ALL_MODELS } from './modelSelection';
 import { ModelSelectionField } from './ModelSelectionField';
-import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
 import { getOptionPatternValidator } from './optionPattern';
 import { getOptionTransformValidator } from './optionTransform';
 import { OptionTransformPreview } from './OptionTransformPreview';
@@ -439,10 +439,8 @@ export const getComponentAndParams = (
       };
       break;
 
-    // Both types render one form; the topology comes from
-    // default_configs.topology_mode, falling back to the type.
-    case 'single_datacenter_k8s_config':
-    case 'multi_datacenter_k8s_config':
+    // The topology comes from default_configs.topology_mode.
+    case 'k8s_cluster_config':
       OptionField = K8sClusterConfigurationForm;
       params = getK8sParams(option);
       break;

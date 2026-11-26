@@ -18,10 +18,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-import {
-  LocalOpenStackFlavor,
-  K8sDefaultConfiguration,
-} from './multi-datacenter-k8s-types';
+import { LocalOpenStackFlavor, K8sDefaultConfiguration } from './k8s-types';
 
 interface K8sFlavorSelectionTableProps {
   offeringUuid: string;

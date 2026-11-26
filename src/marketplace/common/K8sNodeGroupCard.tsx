@@ -8,14 +8,14 @@ import { BaseInputField } from '@/form/InputField';
 import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
 
-import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
 import {
   DatacenterNodeGroup,
   getDefaultDatacenterDiskConfig,
   getDefaultStorageDiskConfig,
   K8sDefaultConfiguration,
   LocalOpenStackFlavor,
-} from './multi-datacenter-k8s-types';
+} from './k8s-types';
+import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
 
 interface NodeGroupCardProps {
   nodeGroup: DatacenterNodeGroup;

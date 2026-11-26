@@ -5,6 +5,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { isK8sConfigFieldType } from '@/marketplace/common/k8s-types';
 
 // Storage folder permission choices - values from SDK DefaultPermissionEnum
 export const STORAGE_FOLDER_PERMISSIONS: Array<{
@@ -114,12 +115,11 @@ export const FIELD_TYPES: Array<{
     ),
   },
   {
-    value: 'single_datacenter_k8s_config',
-    label: translate('Single-Datacenter Kubernetes Configuration'),
-  },
-  {
-    value: 'multi_datacenter_k8s_config',
-    label: translate('Multi-Datacenter Kubernetes Configuration'),
+    value: 'k8s_cluster_config',
+    label: translate('Kubernetes Cluster Configuration'),
+    description: translate(
+      'A Kubernetes cluster: version, one or three sites, node groups and access rules. You set the node sizes, the versions, the topology and the load balancer.',
+    ),
   },
   {
     value: 'k8s_egress_rules',
@@ -164,16 +164,10 @@ export const RESOURCE_ONLY_FIELD_TYPES: OptionFieldTypeEnum[] = [
   'k8s_egress_rules',
 ];
 
-const K8S_CONFIG_FIELD_TYPES = [
-  'single_datacenter_k8s_config',
-  'multi_datacenter_k8s_config',
-];
-
 /** The offering's Kubernetes configuration order options. */
 export const getK8sConfigOrderOptions = (offering) =>
   Object.entries(offering?.options?.options || {}).filter(
-    ([, option]: [string, any]) =>
-      K8S_CONFIG_FIELD_TYPES.includes(option?.type),
+    ([, option]: [string, any]) => isK8sConfigFieldType(option?.type),
   );
 
 /**

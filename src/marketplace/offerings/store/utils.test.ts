@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { dropHiddenPrepaidSettings, formatOption } from './utils';
 
 describe('formatOption', () => {
-  it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+  it.each(['k8s_cluster_config'])(
     'drops cleared Kubernetes settings from a %s option',
     (type) => {
       const item = formatOption({
@@ -30,7 +30,7 @@ describe('formatOption', () => {
     const item = formatOption({
       name: 'cluster',
       label: 'Cluster',
-      type: { value: 'single_datacenter_k8s_config', label: '' },
+      type: { value: 'k8s_cluster_config', label: '' },
       default_configs: { topology_mode: 'customer_choice' },
     } as any);
 

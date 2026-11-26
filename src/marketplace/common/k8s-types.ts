@@ -1,5 +1,5 @@
 /**
- * Multi-Datacenter Kubernetes Cluster Configuration Types
+ * Kubernetes Cluster Configuration Types
  *
  * Supports the correct logical flow:
  * 1. Kubernetes Version
@@ -58,6 +58,9 @@ export interface DatacenterConfiguration {
 }
 
 export type K8sClusterTopology = '1-datacenter' | '3-datacenter';
+
+export const isK8sConfigFieldType = (fieldType: string | undefined) =>
+  fieldType === 'k8s_cluster_config';
 
 export interface MultiDatacenterK8sClusterConfig {
   kubernetes_version: string;
@@ -178,43 +181,31 @@ export const getLoadBalancerMode = (
   defaultConfigs?: K8sDefaultConfiguration,
 ): LoadBalancerModeEnum => defaultConfigs?.load_balancer_mode || 'required';
 
-/**
- * The provider's topology setting. Options that predate it take the topology
- * from their type: one site for single_datacenter_k8s_config, three sites for
- * multi_datacenter_k8s_config.
- */
+/** The provider's topology setting; when it is not set the customer chooses. */
 export const getTopologyMode = (
-  fieldType: string | undefined,
   defaultConfigs?: K8sDefaultConfiguration,
-): TopologyModeEnum =>
-  defaultConfigs?.topology_mode ||
-  (fieldType === 'multi_datacenter_k8s_config'
-    ? '3-datacenter'
-    : '1-datacenter');
+): TopologyModeEnum => defaultConfigs?.topology_mode || 'customer_choice';
 
 const isClusterTopology = (value: unknown): value is K8sClusterTopology =>
   value === '1-datacenter' || value === '3-datacenter';
 
 /**
  * The topology the form starts with. A fixed mode always wins. With
- * customer_choice the stored pick is kept, and a fresh form starts from the
- * option type's topology.
+ * customer_choice the stored pick is kept, and a fresh form starts with a
+ * single site.
  */
 export const getInitialTopology = (
-  fieldType: string | undefined,
   value: Partial<MultiDatacenterK8sClusterConfig> | undefined,
   defaultConfigs?: K8sDefaultConfiguration,
 ): K8sClusterTopology => {
-  const mode = getTopologyMode(fieldType, defaultConfigs);
+  const mode = getTopologyMode(defaultConfigs);
   if (mode !== 'customer_choice') {
     return mode;
   }
   if (isClusterTopology(value?.topology)) {
     return value.topology;
   }
-  return fieldType === 'multi_datacenter_k8s_config'
-    ? '3-datacenter'
-    : '1-datacenter';
+  return '1-datacenter';
 };
 
 export const getTopologyOptions = (): Array<{
@@ -372,10 +363,9 @@ export const getInitialClusterConfig = (
  */
 export const isTopologyAllowed = (
   config: Pick<MultiDatacenterK8sClusterConfig, 'topology' | 'datacenters'>,
-  fieldType: string | undefined,
   defaultConfigs?: K8sDefaultConfiguration,
 ): boolean => {
-  const mode = getTopologyMode(fieldType, defaultConfigs);
+  const mode = getTopologyMode(defaultConfigs);
   if (mode !== 'customer_choice' && config.topology !== mode) {
     return false;
   }
