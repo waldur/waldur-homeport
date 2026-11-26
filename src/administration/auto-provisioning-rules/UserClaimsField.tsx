@@ -1,4 +1,4 @@
-import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { FC, Fragment } from 'react';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
@@ -19,6 +19,7 @@ import {
 import { StringField } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { translate } from '@/i18n';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { ClaimRow, validateUserClaims } from './utils';
 
@@ -37,10 +38,10 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
 }) => (
   <>
     {fields.length > 0 && (
-      <Table scrollable={false} className="px-0 mb-1.5">
+      <Table scrollable={false}>
         <TableHeader>
           <TableRow divided={false}>
-            <TableHead className="w-40">{translate('Claim')}</TableHead>
+            <TableHead className="w-1/2">{translate('Claim')}</TableHead>
             <TableHead>{translate('Accepted values')}</TableHead>
             <TableHead className="w-[5px]" />
           </TableRow>
@@ -72,13 +73,7 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
                   </Field>
                 </TableCell>
                 <TableCell>
-                  <BaseButton
-                    iconNode={<TrashIcon weight="bold" />}
-                    tooltip={translate('Remove')}
-                    onClick={() => fields.remove(index)}
-                    variant="danger"
-                    size="lg"
-                  />
+                  <RemovalActionButton action={() => fields.remove(index)} />
                 </TableCell>
               </TableRow>
             </Fragment>
@@ -88,15 +83,17 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
     )}
     <div>
       <BaseButton
-        iconNode={<PlusCircleIcon weight="bold" />}
-        tooltip={translate('Add claim')}
+        label={translate('Add claim')}
+        iconNode={<PlusIcon weight="bold" />}
         onClick={() => fields.push({ claim: '', values: [] })}
         variant="tertiary"
         size="lg"
       />
     </div>
     {typeof meta.error === 'string' && (
-      <div className="text-danger small mt-1.5">{meta.error}</div>
+      <FormText variant="danger" role="alert">
+        {meta.error}
+      </FormText>
     )}
   </>
 );
@@ -111,7 +108,7 @@ export const UserClaimsField: FC = () => (
     <FieldArray name="user_claims" validate={validateUserClaims}>
       {(props) => <ClaimRows {...props} />}
     </FieldArray>
-    <FormText variant="muted">
+    <FormText variant="muted" className="mt-2">
       {translate(
         'All claims must match; within one claim any value matches. A value ending in "*" matches by prefix, e.g. "urn:mace:example.org:group:hpc-*". The claim must be listed in the identity provider\'s extra fields for Waldur to receive it.',
       )}

@@ -62423,7 +62423,7 @@
   "Rules": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-security-groups"
+      "feature_area": "feature-rules"
     }
   },
   "Rules for the networks behind the customer’s gateway.": {
