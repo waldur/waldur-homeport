@@ -298,3 +298,102 @@ describe('Option form validation', () => {
     });
   });
 });
+
+describe('Network option policies', () => {
+  const cidrOption = { type: 'cidr', label: 'Cluster network' };
+
+  it('checks a cidr policy under default_configs', () => {
+    expect(
+      validateOptionForm({
+        name: 'net',
+        type: { value: 'cidr' },
+        default_configs: { prefix_length_min: 28, prefix_length_max: 16 },
+      }).default_configs,
+    ).toEqual({
+      prefix_length_max:
+        'The largest prefix length must not be lower than the smallest.',
+    });
+  });
+
+  it('lets an IPsec option keep clear of cidr options of its own set', () => {
+    const context = {
+      options: {
+        order: ['net'],
+        options: { net: cidrOption },
+      } as any,
+    };
+    const values = (no_overlap_with) => ({
+      name: 'vpn',
+      type: { value: 'ipsec_vpn_config' },
+      default_configs: { no_overlap_with },
+    });
+    expect(
+      validateOptionForm(values(['net']), context).default_configs,
+    ).toBeUndefined();
+    expect(
+      validateOptionForm(values(['other']), context).default_configs,
+    ).toEqual({
+      no_overlap_with: 'other: not a cidr option of this offering.',
+    });
+  });
+
+  it('lets a resource IPsec option name an order cidr option', () => {
+    expect(
+      validateOptionForm(
+        {
+          name: 'vpn',
+          type: { value: 'ipsec_vpn_config' },
+          default_configs: { no_overlap_with: ['net'] },
+        },
+        {
+          options: { order: [], options: {} } as any,
+          orderOptions: { order: ['net'], options: { net: cidrOption } } as any,
+        },
+      ).default_configs,
+    ).toBeUndefined();
+  });
+
+  it('checks the IPsec defaults against the allowed proposals', () => {
+    expect(
+      validateOptionForm({
+        name: 'vpn',
+        type: { value: 'ipsec_vpn_config' },
+        default_configs: {
+          provider_gateway_ip: 'not an address',
+          phase2: {
+            encryption: ['aes128'],
+            defaults: { encryption: 'aes256' },
+          },
+        },
+      }).default_configs,
+    ).toEqual({
+      provider_gateway_ip: 'Enter a valid IPv4 or IPv6 address.',
+      phase2: {
+        defaults: {
+          encryption: 'The default must be one of the allowed values.',
+        },
+      },
+    });
+  });
+});
+
+describe('Secret option policies', () => {
+  it('checks the lengths as the server does', () => {
+    expect(
+      validateOptionForm({
+        name: 'psk',
+        type: { value: 'secret' },
+        default_configs: { min_length: 300, max_length: 255 },
+      }).default_configs,
+    ).toEqual({
+      max_length: 'The longest length must not be lower than the shortest.',
+    });
+    expect(
+      validateOptionForm({
+        name: 'psk',
+        type: { value: 'secret' },
+        default_configs: { max_length: 70000 },
+      }).default_configs,
+    ).toEqual({ max_length: 'Enter at most 65536.' });
+  });
+});

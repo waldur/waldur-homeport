@@ -1,6 +1,8 @@
 import { OfferingOptions } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { validateCidrPolicy } from '@/marketplace/common/cidrOptions';
+import { validateIpsecPolicy } from '@/marketplace/common/ipsecVpn';
 import {
   getOptionPatternValidator,
   isPatternFieldType,
@@ -8,12 +10,20 @@ import {
   MAX_PATTERN_LENGTH,
 } from '@/marketplace/common/optionPattern';
 import { isVisibleIfFieldType } from '@/marketplace/common/optionVisibility';
+import { validateSecretPolicy } from '@/marketplace/common/secretOptions';
+
+import { getCidrOptionCandidates } from './constants';
 
 export interface OptionFormContext {
   /** The offering's `options` or `resource_options` being edited. */
   options?: OfferingOptions;
   /** Key of the edited option; omitted when a new option is being added. */
   optionKey?: string;
+  /**
+   * The offering's order options, when resource options are edited: a
+   * resource IPsec option may keep clear of an order cidr option.
+   */
+  orderOptions?: OfferingOptions;
 }
 
 /**
@@ -204,5 +214,21 @@ export const validateOptionForm = (values, context: OptionFormContext = {}) => {
     errors.visible_if = visibleIfErrors;
   }
   Object.assign(errors, validatePattern(values));
+  const policyErrors =
+    values.type?.value === 'cidr'
+      ? validateCidrPolicy(values.default_configs)
+      : values.type?.value === 'ipsec_vpn_config'
+        ? validateIpsecPolicy(
+            values.default_configs,
+            getCidrOptionCandidates(context.options, context.orderOptions).map(
+              (candidate) => candidate.value,
+            ),
+          )
+        : values.type?.value === 'secret'
+          ? validateSecretPolicy(values.default_configs)
+          : undefined;
+  if (policyErrors) {
+    errors.default_configs = policyErrors;
+  }
   return errors;
 };

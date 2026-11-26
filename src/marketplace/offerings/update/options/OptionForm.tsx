@@ -21,9 +21,14 @@ import { DisplayLimitConfiguration } from './DisplayLimitConfiguration';
 import { DisplayNameField } from './DisplayNameField';
 import { InternalNameField } from './InternalNameField';
 import { K8sDefaultsConfiguration } from './K8sDefaultsConfiguration';
+import {
+  CidrPolicyConfiguration,
+  IpsecPolicyConfiguration,
+} from './NetworkOptionConfiguration';
 import { NumericOptionConfig } from './NumericOptionConfig';
 import { OptionTypeGroup } from './OptionTypeGroup';
 import { PatternConfiguration } from './PatternConfiguration';
+import { SecretOptionConfiguration } from './SecretOptionConfiguration';
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 import { StringOptionConfig } from './StringOptionConfig';
 import { TransformConfiguration } from './TransformConfiguration';
@@ -68,6 +73,9 @@ const OPTION_COMPONENTS = {
   storage_folder_manager: StorageFolderConfiguration,
   single_datacenter_k8s_config: K8sDefaultsConfiguration,
   multi_datacenter_k8s_config: K8sDefaultsConfiguration,
+  cidr: CidrPolicyConfiguration,
+  ipsec_vpn_config: IpsecPolicyConfiguration,
+  secret: SecretOptionConfiguration,
 };
 
 /**
@@ -220,7 +228,7 @@ export const OptionSettingsForm = ({
 
   return (
     <>
-      <OptionComponent offering={offering} />
+      <OptionComponent offering={offering} resourceType={resourceType} />
       {/* Read from the resource, so an order option cannot hold one. */}
       {resourceType === 'resource_options' &&
       values.type?.value === 'integer' ? (

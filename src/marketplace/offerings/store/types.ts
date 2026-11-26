@@ -3,9 +3,9 @@ import {
   ComponentFormulaConfig,
   ComponentMultiplierConfig,
   ComponentSumConfig,
+  OptionDefaultConfigs,
 } from 'waldur-js-client';
 
-import { K8sDefaultConfiguration } from '@/marketplace/common/multi-datacenter-k8s-types';
 import { OptionTransform } from '@/marketplace/common/optionTransform';
 import { Option } from '@/marketplace/common/registry';
 
@@ -31,7 +31,7 @@ export interface OptionFormData {
   component_multiplier_config?: ComponentMultiplierConfig;
   component_formula_config?: ComponentFormulaConfig;
   component_sum_config?: ComponentSumConfig;
-  default_configs?: K8sDefaultConfiguration;
+  default_configs?: OptionDefaultConfigs;
   validators?: Array<{
     type: Option | string;
     target_field: Option | string;

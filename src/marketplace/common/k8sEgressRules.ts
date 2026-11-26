@@ -1,6 +1,6 @@
 import type {
-  K8sDefaultConfiguration,
   K8sEgressRule as ApiK8sEgressRule,
+  OptionDefaultConfigs,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -16,7 +16,7 @@ import {
 export type K8sEgressRule = ApiK8sEgressRule & { uuid?: string };
 
 export type K8sEgressPolicy = Pick<
-  K8sDefaultConfiguration,
+  OptionDefaultConfigs,
   | 'egress_rules_enabled'
   | 'egress_domain_rules_allowed'
   | 'egress_baseline_rules'
@@ -48,7 +48,7 @@ export const getDestinationTypeOptions = (allowDomains: boolean) => [
 const isValidEgressCidr = (value: string) =>
   Boolean(value) && (!validateIPv4CIDR(value) || !validateIPv6CIDR(value));
 
-const isValidEgressDomain = (value: string) =>
+export const isValidEgressDomain = (value: string) =>
   Boolean(value) &&
   value.length <= MAX_DOMAIN_LENGTH &&
   DOMAIN_PATTERN.test(value);

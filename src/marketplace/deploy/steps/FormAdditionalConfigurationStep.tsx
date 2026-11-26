@@ -22,6 +22,7 @@ export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
         customer={customer}
         allModelsOption={getAllModelsOption(props.offering.resource_options)}
         orderForm
+        secretInputs
       />
     </StepAccordionCard>
   );

@@ -108,3 +108,17 @@ describe('isEmptyOptionValue', () => {
     }
   });
 });
+
+describe('missingRequiredOptions and secrets', () => {
+  it('never counts a secret, which stored values do not hold', () => {
+    expect(
+      missingRequiredOptions(
+        {
+          order: ['psk'],
+          options: { psk: { type: 'secret', label: 'Key', required: true } },
+        } as any,
+        {},
+      ),
+    ).toEqual([]);
+  });
+});

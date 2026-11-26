@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
@@ -966,5 +966,398 @@ describe('OptionsForm Integration', () => {
       await user.click(screen.getByRole('button', { name: 'Submit' }));
       expect(onSubmit.mock.calls[0][0].attributes.models).toEqual(['llama']);
     });
+  });
+});
+
+describe('Network options', () => {
+  const NETWORK = {
+    type: 'cidr',
+    label: 'Cluster network',
+    default_configs: {
+      ip_version: 'ipv4',
+      prefix_length_min: 16,
+      prefix_length_max: 28,
+      allowed_ranges: ['10.0.0.0/8'],
+    },
+  };
+  const VPN = {
+    type: 'ipsec_vpn_config',
+    label: 'Site-to-site VPN',
+    default_configs: {
+      provider_gateway_ip: '203.0.113.10',
+      provider_local_subnets: ['10.0.0.0/16'],
+      no_overlap_with: ['net'],
+    },
+  };
+
+  const renderOptions = (options, initialValues = {}) => {
+    const onSubmit = vi.fn();
+    renderWithProviders(
+      <Form
+        onSubmit={onSubmit}
+        initialValues={initialValues}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <OptionsForm options={options} />
+            <button type="submit">Submit</button>
+          </form>
+        )}
+      />,
+    );
+    return onSubmit;
+  };
+
+  it('validates a cidr value against the policy', () => {
+    const { params } = getComponentAndParams(NETWORK, 'net', undefined);
+    expect(params.validate('10.20.0.5/16')).toBe(
+      '10.20.0.5/16 has host bits set. Did you mean 10.20.0.0/16?',
+    );
+    expect(params.validate('10.20.0.0/16')).toBeUndefined();
+  });
+
+  it('says what the policy accepts and refuses a wrong network', async () => {
+    const onSubmit = renderOptions({
+      order: ['net'],
+      options: { net: NETWORK },
+    });
+    expect(
+      screen.getByText('IPv4, prefix /16 to /28, inside 10.0.0.0/8'),
+    ).toBeInTheDocument();
+    const input = screen.getByPlaceholderText('10.0.0.0/16');
+    await userEvent.type(input, '10.0.0.0/8');
+    await userEvent.tab();
+    expect(
+      screen.getByText(
+        'The network is too large: the prefix length must be at least /16.',
+      ),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).not.toHaveBeenCalled();
+    await userEvent.clear(input);
+    await userEvent.type(input, '10.20.0.0/16');
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      attributes: { net: '10.20.0.0/16' },
+    });
+  });
+
+  it('edits a list of networks when the policy has multiple', async () => {
+    const onSubmit = renderOptions({
+      order: ['nets'],
+      options: {
+        nets: {
+          type: 'cidr',
+          label: 'Networks',
+          default_configs: { multiple: true },
+        },
+      },
+    });
+    await userEvent.type(
+      screen.getByRole('textbox', { name: 'Network 1' }),
+      '10.0.0.0/16',
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Add network' }));
+    await userEvent.type(
+      screen.getByRole('textbox', { name: 'Network 2' }),
+      '10.0.1.0/24',
+    );
+    expect(
+      screen.getByText('10.0.1.0/24 overlaps 10.0.0.0/16.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('leaves an optional VPN unset until it is switched on', async () => {
+    const onSubmit = renderOptions({
+      order: ['vpn'],
+      options: { vpn: VPN },
+    });
+    expect(screen.queryByText('Provider end')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit.mock.calls[0][0]).toEqual({});
+  });
+
+  it('submits a VPN with the proposals on the offering defaults', async () => {
+    const onSubmit = renderOptions({
+      order: ['net', 'vpn'],
+      options: { net: NETWORK, vpn: { ...VPN, required: true } },
+    });
+    // The provider's end, read-only.
+    expect(screen.getByText('203.0.113.10')).toBeInTheDocument();
+    await userEvent.type(
+      within(screen.getByTestId('cidr-option-field')).getByRole('textbox'),
+      '10.20.0.0/16',
+    );
+    await userEvent.type(
+      screen.getByPlaceholderText('198.51.100.10'),
+      '198.51.100.10',
+    );
+    const subnet = screen.getByRole('textbox', { name: 'Remote subnet 1' });
+    await userEvent.type(subnet, '10.20.1.0/24');
+    expect(
+      screen.getByText(
+        '10.20.1.0/24 overlaps 10.20.0.0/16 of Cluster network.',
+      ),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).not.toHaveBeenCalled();
+    await userEvent.clear(subnet);
+    await userEvent.type(subnet, '192.168.10.0/24');
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit.mock.calls[0][0].attributes.vpn).toEqual({
+      peer_gateway_ip: '198.51.100.10',
+      peer_id: '',
+      remote_subnets: ['192.168.10.0/24'],
+      ike_version: 'ikev2',
+      phase1: {
+        encryption: 'aes256',
+        integrity: 'sha256',
+        dh_group: 14,
+        lifetime: 28800,
+      },
+      phase2: {
+        encryption: 'aes256',
+        integrity: 'sha256',
+        pfs_group: 14,
+        lifetime: 3600,
+      },
+      dpd: null,
+    });
+  });
+
+  it('checks a stored VPN against the resource’s other networks', () => {
+    const { params } = getComponentAndParams(VPN, 'vpn', undefined);
+    expect(
+      params.validate(
+        {
+          peer_gateway_ip: '198.51.100.10',
+          remote_subnets: ['10.20.1.0/24'],
+        },
+        { attributes: {}, networkContext: { net: '10.20.0.0/16' } },
+      ),
+    ).toEqual({
+      remote_subnets: ['10.20.1.0/24 overlaps 10.20.0.0/16 of net.'],
+    });
+  });
+});
+
+describe('Secret options', () => {
+  const SECRET = {
+    type: 'secret',
+    label: 'VPN pre-shared key',
+    required: true,
+    default_configs: { min_length: 8, max_length: 255 },
+  };
+
+  const renderSecret = (option, formProps: Record<string, any> = {}) => {
+    const onSubmit = vi.fn();
+    renderWithProviders(
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <OptionsForm
+              options={{ order: ['psk'], options: { psk: option } } as any}
+              {...formProps}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        )}
+      />,
+    );
+    return onSubmit;
+  };
+
+  it('asks for a secret only where an order is placed', () => {
+    renderSecret(SECRET);
+    expect(screen.queryByText('VPN pre-shared key')).not.toBeInTheDocument();
+  });
+
+  it('leaves a required secret out where it is not asked for', async () => {
+    const onSubmit = renderSecret(SECRET);
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it('takes a secret in a password field, checked against the policy', async () => {
+    const onSubmit = renderSecret(SECRET, { secretInputs: true });
+    // A password field has no role; its label names it.
+    const input = screen.getByLabelText('VPN pre-shared key');
+    expect(input).toHaveAttribute('type', 'password');
+    expect(
+      screen.getByText(/8 to 255 characters, on one line\./),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).not.toHaveBeenCalled();
+    await userEvent.type(input, 'short');
+    await userEvent.tab();
+    expect(screen.getByText('Enter 8 to 255 characters.')).toBeInTheDocument();
+    await userEvent.type(input, '-but-now-long');
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      attributes: { psk: 'short-but-now-long' },
+    });
+  });
+
+  it('takes a multi-line secret in a masked text area', () => {
+    renderSecret(
+      { ...SECRET, default_configs: { multiline: true } },
+      { secretInputs: true },
+    );
+    const textarea = within(
+      screen.getByTestId('secret-option-field'),
+    ).getByRole('textbox');
+    expect(textarea).toHaveClass('[font-family:text-security-disc]');
+    expect(textarea).toHaveAttribute('spellcheck', 'false');
+  });
+
+  it('asks nothing for a secret the provider sets, required or not', async () => {
+    const onSubmit = renderSecret(
+      { ...SECRET, default_configs: { secret_source: 'provider' } },
+      { secretInputs: true },
+    );
+    expect(
+      screen.getByText('Set by the provider after provisioning.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).toHaveBeenCalled();
+  });
+});
+
+describe('Required network option', () => {
+  it('holds back an order without the network', async () => {
+    const onSubmit = vi.fn();
+    renderWithProviders(
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <OptionsForm
+              options={
+                {
+                  order: ['net'],
+                  options: {
+                    net: { type: 'cidr', label: 'Network', required: true },
+                  },
+                } as any
+              }
+            />
+            <button type="submit">Submit</button>
+          </form>
+        )}
+      />,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(screen.getByText('This field is required.')).toBeInTheDocument();
+  });
+});
+
+describe('IPsec option hints', () => {
+  const renderVpn = (initialValues = {}) =>
+    renderWithProviders(
+      <Form
+        onSubmit={vi.fn()}
+        initialValues={initialValues}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <OptionsForm
+              options={
+                {
+                  order: ['net', 'vpn'],
+                  options: {
+                    net: { type: 'cidr', label: 'Cluster network' },
+                    vpn: {
+                      type: 'ipsec_vpn_config',
+                      label: 'VPN',
+                      required: true,
+                      default_configs: {
+                        provider_local_subnets: ['10.0.0.0/16'],
+                        no_overlap_with: ['net'],
+                      },
+                    },
+                  },
+                } as any
+              }
+            />
+          </form>
+        )}
+      />,
+    );
+
+  it('names what the remote subnets must keep clear of', () => {
+    renderVpn();
+    expect(
+      screen.getByText(
+        /must not overlap the provider’s subnets or Cluster network\./,
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('keeps the one row of a required list and avoids the provider subnet', () => {
+    renderVpn();
+    const row = screen.getByRole('textbox', { name: 'Remote subnet 1' });
+    expect(row).toHaveAttribute('placeholder', '192.168.10.0/24');
+    expect(
+      screen.queryByRole('button', { name: 'Remove Remote subnet 1' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('says the proposals start on the defaults only on the order form', () => {
+    renderVpn();
+    expect(
+      screen.getByText(/Set to the offering’s defaults\./),
+    ).toBeInTheDocument();
+  });
+
+  it('calls stored proposals the tunnel’s own', () => {
+    renderVpn({
+      attributes: {
+        vpn: {
+          peer_gateway_ip: '198.51.100.10',
+          remote_subnets: ['192.168.10.0/24'],
+        },
+      },
+    });
+    expect(
+      screen.getByText(/The proposals of this tunnel\./),
+    ).toBeInTheDocument();
+  });
+});
+
+describe('Secret option hint', () => {
+  it('gives way to the error, which says the same', async () => {
+    renderWithProviders(
+      <Form
+        onSubmit={vi.fn()}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <OptionsForm
+              secretInputs
+              options={
+                {
+                  order: ['psk'],
+                  options: {
+                    psk: {
+                      type: 'secret',
+                      label: 'Key',
+                      default_configs: { min_length: 8, max_length: 255 },
+                    },
+                  },
+                } as any
+              }
+            />
+          </form>
+        )}
+      />,
+    );
+    expect(screen.getByText(/8 to 255 characters/)).toBeInTheDocument();
+    await userEvent.type(screen.getByLabelText('Key'), 'short');
+    await userEvent.tab();
+    expect(screen.getByText('Enter 8 to 255 characters.')).toBeInTheDocument();
+    expect(
+      screen.queryByText(/8 to 255 characters, on one line/),
+    ).not.toBeInTheDocument();
   });
 });

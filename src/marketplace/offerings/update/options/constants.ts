@@ -1,4 +1,8 @@
-import { DefaultPermissionEnum, OptionFieldTypeEnum } from 'waldur-js-client';
+import {
+  DefaultPermissionEnum,
+  OfferingOptions,
+  OptionFieldTypeEnum,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 
@@ -128,6 +132,27 @@ export const FIELD_TYPES: Array<{
     value: 'storage_folder_manager',
     label: translate('Storage Folder Manager'),
   },
+  {
+    value: 'cidr',
+    label: translate('Network (CIDR)'),
+    description: translate(
+      'A network in CIDR form, such as 10.20.0.0/16, or a list of them. You set the IP version, the prefix lengths and the ranges it must lie inside or keep out of.',
+    ),
+  },
+  {
+    value: 'ipsec_vpn_config',
+    label: translate('IPsec VPN'),
+    description: translate(
+      'A site-to-site IPsec tunnel: the customer enters their gateway and the networks behind it. You set the allowed proposals, the defaults and your end of the tunnel.',
+    ),
+  },
+  {
+    value: 'secret',
+    label: translate('Secret'),
+    description: translate(
+      'A value kept encrypted, such as a VPN pre-shared key, an API token or a private key. The customer enters it, or you set it on the resource; it is never shown with the other settings.',
+    ),
+  },
 ];
 
 // A sum has no value of its own to change after ordering.
@@ -150,6 +175,27 @@ export const getK8sConfigOrderOptions = (offering) =>
     ([, option]: [string, any]) =>
       K8S_CONFIG_FIELD_TYPES.includes(option?.type),
   );
+
+/**
+ * The cidr options an IPsec option's remote subnets can be kept apart from:
+ * those of its own options set and, for a resource option, the order options,
+ * whose values the resource's attributes hold.
+ */
+export const getCidrOptionCandidates = (
+  options?: OfferingOptions,
+  orderOptions?: OfferingOptions,
+) => {
+  const seen = new Set<string>();
+  return [options, orderOptions].flatMap((set) =>
+    Object.entries(set?.options || {}).flatMap(([key, option]) => {
+      if (option?.type !== 'cidr' || seen.has(key)) {
+        return [];
+      }
+      seen.add(key);
+      return [{ value: key, label: `${option.label || key} (${key})` }];
+    }),
+  );
+};
 
 /** Description of Component Formula on the resource options tab. */
 export const getPairedFormulaDescription = () =>

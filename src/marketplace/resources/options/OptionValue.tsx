@@ -1,13 +1,20 @@
 import { ReactNode } from 'react';
-import { OptionField, OptionFieldTypeEnum } from 'waldur-js-client';
+import {
+  OptionField,
+  OptionFieldTypeEnum,
+  ResourceOptionSecretStatus,
+} from 'waldur-js-client';
 
 import { formatDate, formatTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { translate } from '@/i18n';
+import { formatCidrValue } from '@/marketplace/common/cidrOptions';
+import { formatIpsecValue } from '@/marketplace/common/ipsecVpn';
 import { formatEgressRules } from '@/marketplace/common/k8sEgressRules';
 import { isAllModels } from '@/marketplace/common/modelSelection';
 import { isEmptyOptionValue } from '@/marketplace/common/requiredOptions';
+import { formatSecretStatus } from '@/marketplace/common/secretOptions';
 
 // OpenStack tenant/instance selectors submit the backend_id string (or an
 // array of them). Legacy records may still hold the full option object, so
@@ -103,6 +110,10 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   multi_datacenter_k8s_config: formatK8sConfig,
   k8s_egress_rules: (value) =>
     formatEgressRules(Array.isArray(value) ? value : []),
+  cidr: (value) => formatCidrValue(value),
+  ipsec_vpn_config: (value) => formatIpsecValue(value),
+  // Never the value: a typed secret, as in an order's summary, reads "Set".
+  secret: () => formatSecretStatus({ is_set: true }),
 };
 
 // Ends of blocks and lines become spaces first, so "<p>Line one</p><p>Line
@@ -161,10 +172,19 @@ export const formatOptionValue = (
 export const OptionValue = ({
   option,
   value,
+  secretStatus,
 }: {
   option: OptionField;
   value;
+  /** Whether a secret option is set, from the resource's option_secrets. */
+  secretStatus?: ResourceOptionSecretStatus;
 }) => {
+  // A stored secret has no value to show; its status says whether it is set.
+  if (option.type === 'secret') {
+    return formatSecretStatus(
+      secretStatus ?? { is_set: !isEmptyOptionValue(value) },
+    );
+  }
   if (isEmptyOptionValue(value)) {
     return 'N/A';
   }

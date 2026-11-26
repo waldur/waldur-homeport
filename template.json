@@ -1028,6 +1028,7 @@
       "feature_area": "diagram"
     }
   },
+  "A network in CIDR form, such as 10.20.0.0/16, or a list of them. You set the IP version, the prefix lengths and the ranges it must lie inside or keep out of.": {},
   "A network port — either an interface on a router or a NIC attached to an instance.": {},
   "A network shared into this tenant from another tenant via a Neutron RBAC policy.": {},
   "A new dedicated agent user (recommended)": {
@@ -1200,6 +1201,12 @@
       "feature_area": "views"
     }
   },
+  "A site-to-site IPsec tunnel between your network and the provider’s.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "A site-to-site IPsec tunnel: the customer enters their gateway and the networks behind it. You set the allowed proposals, the defaults and your end of the tunnel.": {},
   "A site-wide role cannot manage an organization's team.": {
     "context": {
       "feature_area": "roles"
@@ -1258,6 +1265,7 @@
       "feature_area": "wizard"
     }
   },
+  "A value kept encrypted, such as a VPN pre-shared key, an API token or a private key. The customer enters it, or you set it on the resource; it is never shown with the other settings.": {},
   "A virtual L3 router that connects internal subnets to each other and to the external network.": {},
   "A virtual machine running in this tenant.": {},
   "AI Assistant Not Enabled": {
@@ -1578,6 +1586,11 @@
     }
   },
   "Accept SCIM provisioning from SURF Research Access Management (SRAM) at /scim/v2/sram/. Also requires SCIM_INBOUND_ENABLED and a staff service-account token registered as the service's SCIM bearer token in SRAM.": {},
+  "Accept a gateway on a private, loopback, link-local or CGNAT address, for tunnels over a private network.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Accept all": {
     "context": {
       "feature_area": "cookies"
@@ -2568,6 +2581,11 @@
       "feature_area": "freeipa"
     }
   },
+  "Add a Network (CIDR) option to this offering to keep the subnets clear of its networks.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Add a detailed explanation of what the offering includes.": {
     "context": {
       "feature_area": "overview"
@@ -2968,6 +2986,7 @@
       "feature_area": "common"
     }
   },
+  "Add network": {},
   "Add new": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -3231,7 +3250,7 @@
   },
   "Add subnet": {
     "context": {
-      "feature_area": "update-internal-ips"
+      "feature_area": "common"
     }
   },
   "Add support user": {
@@ -3255,6 +3274,16 @@
     }
   },
   "Add the commands to run after the setup lines.": {},
+  "Add the networks behind your gateway that use the tunnel.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Add the networks in CIDR form.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Add the networks or domains the cluster needs to reach.": {
     "context": {
       "feature_area": "common"
@@ -3733,6 +3762,11 @@
   "Advanced settings": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Advanced: IKE and IPsec proposals": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Advanced: edit formula": {
@@ -4810,9 +4844,19 @@
       "feature_area": "questions"
     }
   },
+  "Allow IKEv1": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Allow a GID outside the project group range": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Allow a private peer address": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Allow access on the Waldur page that opens in your browser.": {
@@ -4913,9 +4957,19 @@
       "feature_area": "details"
     }
   },
+  "Allowed DH groups": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Allowed MIME types": {
     "context": {
       "feature_area": "questions"
+    }
+  },
+  "Allowed PFS groups": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Allowed QoS": {
@@ -4980,9 +5034,19 @@
       "feature_area": "invitations"
     }
   },
+  "Allowed encryption": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Allowed file extensions": {
     "context": {
       "feature_area": "questions"
+    }
+  },
+  "Allowed integrity": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Allowed key types: {types}": {
@@ -5009,6 +5073,11 @@
   "Allowed organization types": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Allowed ranges": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Allowed values: {min} to {max}": {
@@ -8182,6 +8251,11 @@
       "feature_area": "review"
     }
   },
+  "Assigned by the provider after provisioning.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Assigned checklist": {
     "context": {
       "feature_area": "details"
@@ -8439,6 +8513,16 @@
   "At most": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "At most {count} networks.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "At most {high}.": {
@@ -12377,6 +12461,16 @@
       "feature_area": "type-based"
     }
   },
+  "Changed {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "options"
+    }
+  },
   "Changelog": {
     "context": {
       "feature_area": "administration"
@@ -12606,6 +12700,11 @@
   "Check name": {
     "context": {
       "feature_area": "footer"
+    }
+  },
+  "Check that the peer is still there, and act when it stops answering.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Check the Waldur address in the app's settings, then connect it again. If the address is right, contact your Waldur administrator.": {
@@ -13017,6 +13116,11 @@
       "feature_area": "configuration"
     }
   },
+  "Choose what to do when the peer is lost.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Choose when the token expires.": {
     "context": {
       "feature_area": "wizard"
@@ -13410,6 +13514,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "Close the tunnel": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Closed": {
@@ -18348,12 +18457,42 @@
       "feature_area": "update"
     }
   },
+  "Customers do not type it; you or your site agent set it on the resource.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Customers may enter several networks": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Customers may reveal it": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Customers may set egress rules": {
     "context": {
       "feature_area": "options"
     }
   },
   "Customers pay upfront for the full subscription period. Requires end date.": {},
+  "Customers type it when ordering, and can replace it on the resource.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Customer’s gateway": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Customer’s subnets": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Customize for this call": {
     "context": {
       "feature_area": "mail"
@@ -18418,6 +18557,11 @@
   },
   "Cyprus": {},
   "Czech Republic": {},
+  "DH group": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "DHCP": {
     "context": {
       "primary_ui_type": "label",
@@ -18953,6 +19097,11 @@
   "Dead letter queue": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Dead peer detection": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Dead tuple ratio": {
@@ -19547,6 +19696,11 @@
         }
       },
       "feature_area": "settings"
+    }
+  },
+  "Defaults": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Define IP range that will be used for automatic assignment to instances.": {},
@@ -20846,6 +21000,11 @@
   "Differs from the request": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Diffie-Hellman group": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Digest configuration updated successfully.": {
@@ -23786,7 +23945,7 @@
   },
   "Encryption": {
     "context": {
-      "feature_area": "s3-browser"
+      "feature_area": "common"
     }
   },
   "Encryption is being reset.": {
@@ -24230,6 +24389,19 @@
       "feature_area": "reviewer"
     }
   },
+  "Enter a lifetime from {min} to {max} seconds.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Enter a message for the customer...": {
     "context": {
       "feature_area": "actions"
@@ -24300,8 +24472,19 @@
       "feature_area": "openstack"
     }
   },
+  "Enter a network in CIDR notation, such as 10.0.0.0/16.": {},
   "Enter a number of days.": {},
   "Enter a number.": {},
+  "Enter a prefix length from 0 to {max}.": {
+    "context": {
+      "variables": {
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Enter a reason for declining": {
     "context": {
       "feature_area": "proposal"
@@ -24317,6 +24500,7 @@
       "feature_area": "project-templates"
     }
   },
+  "Enter a single network.": {},
   "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.": {
     "context": {
       "feature_area": "rule-editor"
@@ -24328,9 +24512,24 @@
     }
   },
   "Enter a valid CIDR address.": {},
+  "Enter a valid IPv4 or IPv6 address.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Enter a value besides the prefix and suffix.": {},
   "Enter a whole number of days, 1 or more.": {},
   "Enter a whole number of days, at least 1.": {},
+  "Enter a whole number of seconds, 1 or more.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Enter a whole number, 1 or more.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Enter a whole number.": {
     "context": {
       "feature_area": "common"
@@ -24346,7 +24545,22 @@
       "feature_area": "project-templates"
     }
   },
+  "Enter an IP address, a domain name or an identity such as vpn@example.com.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Enter an IPv4 or IPv6 network, such as 10.0.0.0/8 or 2001:db8::/32.": {},
+  "Enter an IPv{version} network.": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Enter at least one accepted value for \"{claim}\".": {
     "context": {
       "variables": {
@@ -24358,6 +24572,31 @@
     }
   },
   "Enter at least one group.": {},
+  "Enter at least one network.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Enter at most {count} networks.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Enter at most {count}.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Enter claim name (e.g., preferred_username)": {
     "context": {
       "feature_area": "steps"
@@ -24490,6 +24729,11 @@
       "feature_area": "actions"
     }
   },
+  "Enter the IP address of your VPN gateway, such as 198.51.100.10.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Enter the cost threshold (e.g. 1000 EUR)": {
     "context": {
       "feature_area": "cost-policies"
@@ -24549,6 +24793,18 @@
   "Enter your username": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Enter {min} to {max} characters.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Entire site": {},
@@ -25331,6 +25587,16 @@
       "feature_area": "settings"
     }
   },
+  "Every setting is optional; the order form explains what applies.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Every setting is optional; without any, customers may enter any IPv4 or IPv6 network.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Every submitted proposal, up to the decision.": {},
   "Every year service provider can report up to the amount requested by user.": {
     "context": {
@@ -25486,6 +25752,11 @@
   "Excluded by the applicant": {
     "context": {
       "feature_area": "reviewer-suggestions"
+    }
+  },
+  "Excluded ranges": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Exclusive topology access required": {
@@ -28077,6 +28348,11 @@
       "feature_area": "project-groups"
     }
   },
+  "For a PEM key or a kubeconfig: customers get a text area, and line breaks are allowed.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "For a meeting after the cut-off: the call managers open the step for the round's proposals together, each of its people writes one round report covering their proposals, and the step is completed for the round, never on one proposal. Needs evaluation at the cut-off.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -28522,6 +28798,19 @@
       "feature_area": "plan"
     }
   },
+  "From {min} to {max} seconds.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "From {price}": {
     "context": {
       "variables": {
@@ -28737,7 +29026,7 @@
   },
   "Gateway IP": {
     "context": {
-      "feature_area": "deploy"
+      "feature_area": "common"
     }
   },
   "Gateway IP of this subnet": {
@@ -30276,6 +30565,11 @@
       "feature_area": "actions"
     }
   },
+  "Hold traffic until the peer is back": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Holder of role: {role}": {
     "context": {
       "primary_ui_type": "label",
@@ -30865,6 +31159,11 @@
       "feature_area": "reports"
     }
   },
+  "IKE version": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "IP": {
     "context": {
       "primary_ui_type": "title",
@@ -30905,7 +31204,7 @@
   },
   "IP version": {
     "context": {
-      "feature_area": "openstack-subnet"
+      "feature_area": "options"
     }
   },
   "IPs is outside the allocation pool": {
@@ -30913,21 +31212,43 @@
       "feature_area": "update-internal-ips"
     }
   },
+  "IPsec VPN": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "common"
+    }
+  },
   "IPv4": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "cluster"
+      "feature_area": "common"
+    }
+  },
+  "IPv4 only": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "IPv4 or IPv6": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
     }
   },
   "IPv6": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "cluster"
+      "feature_area": "common"
     }
   },
   "IPv6 address mode": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "IPv6 only": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "IPv6 router advertisement mode": {
@@ -32416,6 +32737,11 @@
       "feature_area": "service-providers"
     }
   },
+  "Integrity": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Intent": {
     "context": {
       "primary_ui_type": "label",
@@ -32566,7 +32892,7 @@
   },
   "Interval": {
     "context": {
-      "feature_area": "reports"
+      "feature_area": "common"
     }
   },
   "Intro": {
@@ -33447,6 +33773,11 @@
       "feature_area": "create"
     }
   },
+  "It is stored encrypted and never shown with the other settings.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "It is unpublished: publish it from the offering templates page to offer it to service providers.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -33466,6 +33797,11 @@
     }
   },
   "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {},
+  "It replaces the current value, if there is one.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "It resumes on its own once under its limits again, or when a limit is raised.": {
     "context": {
       "feature_area": "api-keys"
@@ -33849,6 +34185,11 @@
   "Keep forever": {
     "context": {
       "feature_area": "openstack-backup"
+    }
+  },
+  "Keep it secret. Each reveal is recorded in the resource’s events.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Keep running": {
@@ -34636,6 +34977,11 @@
       "primary_ui_type": "title"
     }
   },
+  "Leave an allowed list empty to allow every choice but the weak ones (SHA-1, groups 2 and 5).": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Leave call": {
     "context": {
       "feature_area": "call"
@@ -34931,6 +35277,16 @@
   "Lifecycle rules": {
     "context": {
       "feature_area": "s3-browser"
+    }
+  },
+  "Lifetime": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Lifetime (seconds)": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Lifetime will be updated and reset upon saving the form. Token lifetime is prolonged each time a successful API call with the token is done.": {
@@ -36124,6 +36480,11 @@
       "feature_area": "common"
     }
   },
+  "Local subnets": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Local users": {},
   "Localization": {
     "context": {
@@ -36310,6 +36671,21 @@
   "Long text": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Longest length": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Longest lifetime (seconds)": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Longest prefix length": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Longest: {duration}": {
@@ -39521,6 +39897,11 @@
     }
   },
   "Most metric points accepted in a single report request.": {},
+  "Most networks": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Most used checklists": {
     "context": {
       "primary_ui_type": "title"
@@ -39880,6 +40261,11 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "Must not overlap": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Must start with a country prefix ie EE34501234215": {
@@ -40258,6 +40644,16 @@
       "feature_area": "blocks"
     }
   },
+  "Network (CIDR)": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Network (CIDR) options whose networks the subnets must keep clear of, such as the cluster network.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Network ACL has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -40319,6 +40715,11 @@
       "feature_area": "actions"
     }
   },
+  "Network rules": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Network rules for cluster administration and monitoring": {
     "context": {
       "feature_area": "common"
@@ -40343,6 +40744,15 @@
   "Network traffic": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Network {position}": {
+    "context": {
+      "variables": {
+        "position": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Networking": {
@@ -42625,6 +43035,11 @@
       "feature_area": "managed-projects"
     }
   },
+  "No remote subnets": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "No reports found": {
     "context": {
       "feature_area": "reports"
@@ -43409,6 +43824,18 @@
       "feature_area": "setup"
     }
   },
+  "None (no PFS)": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
+    }
+  },
+  "None (no perfect forward secrecy)": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "common"
+    }
+  },
   "None completed yet": {
     "context": {
       "feature_area": "diagram"
@@ -43507,6 +43934,21 @@
   "None of your permissions can be restricted to an entity.": {
     "context": {
       "feature_area": "wizard"
+    }
+  },
+  "None ticked: every algorithm but SHA-1.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "None ticked: every algorithm.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "None ticked: every group but 2 and 5.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "None yet": {
@@ -43998,6 +44440,11 @@
   "Not set: placeholder roles carry no permissions.": {
     "context": {
       "feature_area": "sram"
+    }
+  },
+  "Not set: the provider sets it after provisioning": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Not settled": {
@@ -45708,6 +46155,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "maintenance"
+    }
+  },
+  "On: users who may reveal the resource’s API keys can read the value back. Off: customers see only whether it is set. It starts on for a secret you set and off for one the customer enters.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Onboard organization": {
@@ -48115,6 +48567,11 @@
       "action_type": "read"
     }
   },
+  "Otherwise customers can choose IKEv2 only.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Otherwise customers can list networks (CIDR) only. Enforcing domain rules needs a DNS-aware firewall or network policy.": {
     "context": {
       "feature_area": "options"
@@ -48565,6 +49022,11 @@
   "PDF, PNG/JPG/JPEG, DOC/DOCX/ODT (max. 25 MB)": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "PFS group": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "PID": {
@@ -49443,6 +49905,27 @@
       "feature_area": "hpc"
     }
   },
+  "Peer ID": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Peer gateway public IP": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Peer {address}": {
+    "context": {
+      "variables": {
+        "address": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common",
+      "action_type": "create"
+    }
+  },
   "Pending": {
     "context": {
       "primary_ui_type": "title",
@@ -50269,6 +50752,46 @@
   "Personnummer required for Swedish business registration": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Phase 1 (IKE)": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Phase 1 (IKE) proposals": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Phase 1: {proposal}": {
+    "context": {
+      "variables": {
+        "proposal": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Phase 2 (IPsec)": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Phase 2 (IPsec) proposals": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Phase 2: {proposal}": {
+    "context": {
+      "variables": {
+        "proposal": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "Philosophy, ethics and religion": {
@@ -54181,6 +54704,7 @@
       "feature_area": "resource"
     }
   },
+  "Provider end": {},
   "Provider info": {
     "context": {
       "primary_ui_type": "title",
@@ -56931,6 +57455,22 @@
       "feature_area": "remote-offering-sync"
     }
   },
+  "Remote subnet {position}": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "position": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Remote subnets": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Remote synchronization": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -57330,6 +57870,16 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "Remove {item}": {
+    "context": {
+      "variables": {
+        "item": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "Remove {name} from this offering group? The offering itself is not changed.": {
@@ -59833,6 +60383,11 @@
       "feature_area": "site-agent"
     }
   },
+  "Restart the tunnel": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Restart the waldur-site-agent service to apply the new configuration.": {
     "context": {
       "feature_area": "site-agent"
@@ -60200,6 +60755,16 @@
   "Reveal": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Reveal the secret {option}": {
+    "context": {
+      "variables": {
+        "option": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "Reveal the shared API keys of resources used by the project or organization": {
@@ -61844,6 +62409,11 @@
       "feature_area": "feature-rules"
     }
   },
+  "Rules for the networks behind the customer’s gateway.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Rules have been updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -63228,6 +63798,7 @@
   "Seconds to cache successful token introspection results. Reduces load on the introspection endpoint. Set to 0 to disable caching. Default: 300 (5 minutes).": {},
   "Secret": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "demo-presets"
     }
   },
@@ -63240,6 +63811,12 @@
   "Secret options will be imported and may overwrite existing secrets.": {
     "context": {
       "feature_area": "single-import"
+    }
+  },
+  "Secrets": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "details"
     }
   },
   "Secrets needed only once their block is configured": {
@@ -65329,7 +65906,7 @@
   },
   "Set": {
     "context": {
-      "feature_area": "create-user-steps"
+      "feature_area": "options"
     }
   },
   "Set GID": {
@@ -65528,6 +66105,11 @@
   },
   "Set by the deployment on every deploy. Change it there and redeploy.": {},
   "Set by the longest subscription requested.": {},
+  "Set by the provider after provisioning.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Set columns in {name} category": {
     "context": {
       "variables": {
@@ -65713,6 +66295,11 @@
       "feature_area": "service-providers"
     }
   },
+  "Set secret": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Set security groups": {
     "context": {
       "feature_area": "actions"
@@ -65793,11 +66380,26 @@
     }
   },
   "Set the first port of the range too.": {},
+  "Set the secret {option}": {
+    "context": {
+      "variables": {
+        "option": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
+    }
+  },
   "Set to 'deployment' by the init_matrix_settings management command to record that the appservice tokens come from the deployment's own secret and are re-seeded on every sync. While it is set, the Setup wizard refuses to rotate them, because the rotation would be reverted at the next deploy while the homeserver kept the old registration. Blank means the deployment was configured by hand and the wizard owns the tokens. Clear it when the deployment stops seeding Matrix, so the wizard can rotate them again.": {},
   "Set to draft": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "actions"
+    }
+  },
+  "Set to the offering’s defaults. Change them only to match your gateway.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Set to true if this category is for OpenStack VM. Only one category can have \"true\" value.": {
@@ -65821,6 +66423,11 @@
     }
   },
   "Set up provider helpdesk": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Set up this VPN tunnel": {
     "context": {
       "feature_area": "common"
     }
@@ -65914,6 +66521,11 @@
   "Setup steps:": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Several lines": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Several people are typing...": {
@@ -66046,6 +66658,21 @@
   "Shorter time limit": {
     "context": {
       "feature_area": "hpc"
+    }
+  },
+  "Shortest length": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Shortest lifetime (seconds)": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Shortest prefix length": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Shortly": {},
@@ -66675,6 +67302,11 @@
   "Shown to call managers choosing a template.": {
     "context": {
       "feature_area": "call-templates"
+    }
+  },
+  "Shown to customers when they order. You can change it per resource afterwards.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Shown to service providers choosing a template.": {
@@ -68376,6 +69008,11 @@
   "Storage size in GiB": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Stored encrypted and never shown with the other settings: customers and you see only whether it is set, and reveal it where allowed.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Stores API configuration and partner info. Only one active settings record per deployment; completing setup again replaces it.": {
@@ -70628,6 +71265,11 @@
     }
   },
   "The HPC service could not be reached.": {},
+  "The IKE identity of your gateway, if not its IP address: a domain name or vpn@example.com.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "The OAuth2/OIDC client ID registered with your identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -71671,6 +72313,11 @@
       "feature_area": "actions"
     }
   },
+  "The customer enters it": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "The customer enters one number, and each chosen limit component is set to a formula of it, such as input * 2. The calculated limits are priced like any other and cannot be edited by the customer.": {},
   "The customer has submitted this signed Purchase Order for your review.": {
     "context": {
@@ -71720,6 +72367,16 @@
   "The decisions on these proposals could not be carried out": {
     "context": {
       "feature_area": "lifecycle"
+    }
+  },
+  "The default lifetime must be within the lifetime limits.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "The default must be one of the allowed values.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The default must not exceed the maximum.": {
@@ -72293,6 +72950,16 @@
       "feature_area": "api-keys"
     }
   },
+  "The largest network allowed, such as 16.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "The largest prefix length must not be lower than the smallest.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "The last closed invoice": {
     "context": {
       "feature_area": "manage"
@@ -72322,6 +72989,16 @@
   },
   "The login page logo in dark mode. Falls back to LOGIN_LOGO when not set; language-specific logos apply to the light logo only.": {},
   "The logo image rendered in the disclaimer area below the footer.": {},
+  "The longest length must not be lower than the shortest.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "The longest lifetime must not be shorter than the shortest.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "The longest token lifetime you can choose is {duration}.": {
     "context": {
       "variables": {
@@ -72628,6 +73305,41 @@
   "The name the group has in the directory. Leave empty to use the project’s short name.": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "The network is too large: the prefix length must be at least /{length}.": {
+    "context": {
+      "variables": {
+        "length": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "The network is too small: the prefix length must be at most /{length}.": {
+    "context": {
+      "variables": {
+        "length": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "The network must lie inside one of these. Any network when empty.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "The network must not overlap any of these, such as networks your platform uses itself.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "The networks behind your gateway.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The new limits below will be applied to all {count} selected VPCs.": {
@@ -73343,9 +74055,19 @@
       "feature_area": "rounds"
     }
   },
+  "The proposals of this tunnel. Change them only to match your gateway.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "The provider fulfilling each order": {
     "context": {
       "feature_area": "workflow"
+    }
+  },
+  "The provider or its site agent sets it": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "The provider reports this resource as {state}.": {
@@ -73357,6 +74079,7 @@
       }
     }
   },
+  "The provider sets this secret; leave it out.": {},
   "The public view is currently inactive as this call is archived or draft.": {
     "context": {
       "feature_area": "details"
@@ -73787,6 +74510,33 @@
       "feature_area": "affiliations"
     }
   },
+  "The secret cannot be changed while the resource is {state}.": {
+    "context": {
+      "variables": {
+        "state": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
+    }
+  },
+  "The secret has been set.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "options"
+    }
+  },
+  "The secret is not set yet.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "The secret may not hold control characters.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "The secret must be a single line, without control characters.": {},
   "The section has been added.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -73881,6 +74631,11 @@
     }
   },
   "The slug template cannot be changed once proposals exist for this call.": {},
+  "The smallest network allowed, such as 28.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "The source has no components.": {
     "context": {
       "feature_area": "wizard"
@@ -74137,6 +74892,11 @@
   "The time period over which usage is accumulated and limits are applied.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "The timeout must not be shorter than the interval.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The token acts as you. It stops working if you lose the role that grants its permissions.": {
@@ -74780,6 +75540,16 @@
   "They join the step as they arrive. To open it now, give a reason; it is recorded on the round.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "They must not overlap {networks}.": {
+    "context": {
+      "variables": {
+        "networks": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "They stay held and their applicants have not been told. Retry once the cause is fixed.": {
@@ -75567,6 +76337,11 @@
   "This offering": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "This offering accepts IKEv2 only.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "This offering accepts network destinations only.": {
@@ -81864,6 +82639,7 @@
       "feature_area": "api-keys"
     }
   },
+  "Unable to reveal the secret.": {},
   "Unable to revoke Terms of service consent.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -82314,6 +83090,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "resources"
+    }
+  },
+  "Unable to set the secret.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "options"
     }
   },
   "Unable to set {count} offering(s) as down.": {
@@ -84363,6 +85145,11 @@
       "feature_area": "policies"
     }
   },
+  "Up to 256 when not set.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Up to {amount}": {
     "context": {
       "variables": {
@@ -84370,6 +85157,16 @@
           "type": "number"
         }
       }
+    }
+  },
+  "Up to {count} characters.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "Up to {maximum}": {
@@ -88796,6 +89593,11 @@
       "feature_area": "update"
     }
   },
+  "What the order form starts with. Most customers keep them, so pick what your gateway prefers.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "What the prepayment is for": {
     "context": {
       "feature_area": "credits"
@@ -89096,6 +89898,11 @@
       "feature_area": "diagram"
     }
   },
+  "When the peer is lost": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "When the round is completed": {
     "context": {
       "feature_area": "lifecycle"
@@ -89366,6 +90173,11 @@
   "Who sees, reads, contributes to, completes and is told about each step.": {
     "context": {
       "feature_area": "workflow-description"
+    }
+  },
+  "Who sets it": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Who takes part": {
@@ -90861,6 +91673,11 @@
       "feature_area": "coi-review"
     }
   },
+  "You may not read this secret back.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "You must accept the Terms of Service and privacy policy to access all features. To accept, please check the box below.": {
     "context": {
       "feature_area": "support"
@@ -91109,6 +91926,16 @@
   },
   "Your details help us confirm your authorization to represent the organization and make the onboarding process faster and more reliable.": {},
   "Your details help us confirm your authorization to represent the organization.": {},
+  "Your end": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Your end of the tunnel": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Your expertise will be matched to suitable proposals": {
     "context": {
       "feature_area": "invitations"
@@ -91740,6 +92567,16 @@
   "budgets": {
     "context": {
       "feature_area": "lifecycle"
+    }
+  },
+  "by the customer": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "by the provider": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "by {name}": {
@@ -92800,6 +93637,16 @@
       "feature_area": "options"
     }
   },
+  "inside {ranges}": {
+    "context": {
+      "variables": {
+        "ranges": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "instances": {
     "context": {
       "feature_area": "openstack-security-groups"
@@ -93127,6 +93974,7 @@
       "feature_area": "offering-merges"
     }
   },
+  "no PFS": {},
   "no actions": {
     "context": {
       "feature_area": "s3-browser"
@@ -93157,6 +94005,16 @@
   "not needed": {
     "context": {
       "feature_area": "diagram"
+    }
+  },
+  "not overlapping {ranges}": {
+    "context": {
+      "variables": {
+        "ranges": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "not run yet": {
@@ -93549,6 +94407,49 @@
       "feature_area": "openstack-instance"
     }
   },
+  "prefix /{length}": {
+    "context": {
+      "variables": {
+        "length": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "prefix /{length} or longer": {
+    "context": {
+      "variables": {
+        "length": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "prefix /{length} or shorter": {
+    "context": {
+      "variables": {
+        "length": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "prefix /{min} to /{max}": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "previous members": {
     "context": {
       "feature_area": "projects"
@@ -93932,6 +94833,11 @@
       "feature_area": "workflow-description"
     }
   },
+  "s": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "scenarios": {
     "context": {
       "feature_area": "scenarios"
@@ -94287,6 +95193,11 @@
       "feature_area": "workflow-description"
     }
   },
+  "the provider’s subnets": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "the reviewer responded": {
     "context": {
       "feature_area": "reviewer-suggestions"
@@ -94494,6 +95405,16 @@
           "type": "number"
         }
       }
+    }
+  },
+  "up to {count} networks": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "up to {limit} per bucket": {
@@ -94747,6 +95668,17 @@
           "type": "unknown"
         }
       },
+      "action_type": "create"
+    }
+  },
+  "{address} is not a public address. Enter the public IP address of your VPN gateway.": {
+    "context": {
+      "variables": {
+        "address": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common",
       "action_type": "create"
     }
   },
@@ -97639,6 +98571,19 @@
       "feature_area": "common"
     }
   },
+  "{field} of {phase}": {
+    "context": {
+      "variables": {
+        "field": {
+          "type": "unknown"
+        },
+        "phase": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "{field} of {step}": {
     "context": {
       "variables": {
@@ -98116,6 +99061,30 @@
         }
       },
       "feature_area": "chat"
+    }
+  },
+  "{min} to {max} characters, on one line.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{min} to {max} characters; several lines are allowed.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{month} invoice": {
@@ -98711,6 +99680,58 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{network} is not an IPv{version} network.": {
+    "context": {
+      "variables": {
+        "network": {
+          "type": "unknown"
+        },
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "{network} is not inside the allowed ranges: {ranges}.": {
+    "context": {
+      "variables": {
+        "network": {
+          "type": "unknown"
+        },
+        "ranges": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "{network} overlaps the excluded range {range}.": {
+    "context": {
+      "variables": {
+        "network": {
+          "type": "unknown"
+        },
+        "range": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "{network} overlaps {other}.": {
+    "context": {
+      "variables": {
+        "network": {
+          "type": "unknown"
+        },
+        "other": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "{n} Created": {
@@ -99415,6 +100436,16 @@
         }
       },
       "feature_area": "review"
+    }
+  },
+  "{options}: not a cidr option of this offering.": {
+    "context": {
+      "variables": {
+        "options": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "{outside} is in months outside “Earlier invoices from” and “Earlier invoices until”, which this credit does not pay.": {
@@ -100902,6 +101933,35 @@
       "action_type": "create"
     }
   },
+  "{subnet} overlaps the provider's subnet {provider_subnet}.": {
+    "context": {
+      "variables": {
+        "subnet": {
+          "type": "unknown"
+        },
+        "provider_subnet": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "{subnet} overlaps {network} of {option}.": {
+    "context": {
+      "variables": {
+        "subnet": {
+          "type": "unknown"
+        },
+        "network": {
+          "type": "unknown"
+        },
+        "option": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "{successCount} permissions have been successfully revoked.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -101569,6 +102629,32 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "{value} has host bits set. Did you mean {network}?": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        },
+        "network": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "{value} is not allowed. Choose one of: {allowed}.": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        },
+        "allowed": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "{value} kWh": {

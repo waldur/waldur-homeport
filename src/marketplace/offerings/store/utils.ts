@@ -27,6 +27,66 @@ export const formatPlan = (plan: PlanFormData) =>
       : {}),
   }) as ProviderPlanDetailsRequest;
 
+const CIDR_POLICY_KEYS = [
+  'ip_version',
+  'prefix_length_min',
+  'prefix_length_max',
+  'allowed_ranges',
+  'excluded_ranges',
+  'multiple',
+  'max_items',
+];
+
+const OPTION_POLICY_KEYS: Record<string, string[]> = {
+  cidr: CIDR_POLICY_KEYS,
+  secret: [
+    'secret_source',
+    'customer_can_reveal',
+    'min_length',
+    'max_length',
+    'multiline',
+  ],
+  ipsec_vpn_config: [
+    'ikev1_allowed',
+    'allow_private_peer',
+    'provider_gateway_ip',
+    'provider_local_subnets',
+    'remote_subnets',
+    'no_overlap_with',
+    'phase1',
+    'phase2',
+  ],
+};
+
+/**
+ * A policy without unset entries: undefined, null, blank, empty lists and
+ * objects. A null kept as a default is "no PFS" (phase 2's pfs_group), and a
+ * null inside a list of groups allows it, so those stay.
+ */
+const cleanPolicy = (
+  value: Record<string, any>,
+): Record<string, any> | null => {
+  const kept = Object.fromEntries(
+    Object.entries(value).flatMap(([key, item]) => {
+      if (item === null) {
+        return key === 'pfs_group' ? [[key, item]] : [];
+      }
+      if (item === undefined || item === '') {
+        return [];
+      }
+      if (Array.isArray(item)) {
+        return item.length ? [[key, item]] : [];
+      }
+      if (typeof item === 'object') {
+        const nested = cleanPolicy(item);
+        return nested ? [[key, nested]] : [];
+      }
+      return [[key, item]];
+    }),
+  );
+  return Object.keys(kept).length ? kept : null;
+};
+
 export const formatOption = (option: OptionFormData) => {
   const {
     type,
@@ -84,6 +144,12 @@ export const formatOption = (option: OptionFormData) => {
     item.component_sum_config = component_sum_config;
   }
 
+  // A secret has no default value; the server refuses one, which a type
+  // change from a string would otherwise leave behind.
+  if (item.type === 'secret') {
+    delete item.default;
+  }
+
   // A sum has nothing to fill in; a Required ticked under another type would
   // make the order form impossible to submit.
   if (item.type === 'component_sum') {
@@ -99,6 +165,22 @@ export const formatOption = (option: OptionFormData) => {
     // A cleared setting (for example topology_mode set back to "the type
     // decides") must disappear rather than reach the backend as null.
     item.default_configs = omitBy(default_configs, (value) => value == null);
+  }
+
+  // A network or secret option's policy: only its own keys, without what a cleared
+  // field leaves behind, which the server would refuse.
+  const policyKeys = OPTION_POLICY_KEYS[item.type];
+  if (default_configs && policyKeys) {
+    const kept = cleanPolicy(
+      Object.fromEntries(
+        Object.entries(default_configs).filter(([key]) =>
+          policyKeys.includes(key),
+        ),
+      ),
+    );
+    if (kept) {
+      item.default_configs = kept;
+    }
   }
 
   // Handle validators for cross-field validation

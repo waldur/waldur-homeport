@@ -72,6 +72,9 @@ export const missingRequiredOptions = (
         !option.default &&
         option.type !== 'boolean' &&
         !NO_INPUT_TYPES.includes(option.type) &&
+        // A secret is taken out of the values before they are stored, and
+        // is asked for only where an order is placed.
+        option.type !== 'secret' &&
         !hidden.has(key) &&
         isEmptyOptionValue(values[key])
       );

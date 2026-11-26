@@ -28,6 +28,7 @@ import {
 } from '@/marketplace/details/plan/effectiveComponents';
 import { getHpcWorkspaceMode } from '@/marketplace/resources/details/hpc/queries';
 import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
+import { hasOptionSecrets } from '@/marketplace/resources/options/optionSecrets';
 import { shouldShowLimitChangeRequestsTab } from '@/marketplace/resources/request-limits-change/utils';
 import { retrieveResourceOffering } from '@/marketplace/resources/usage/utils';
 import { PageBarTab } from '@/navigation/types';
@@ -317,7 +318,8 @@ export const getResourceTabs = ({
     });
   }
 
-  if (offering.resource_options?.order?.length) {
+  // Also for the secrets of order options alone.
+  if (offering.resource_options?.order?.length || hasOptionSecrets(resource)) {
     tabs.push({
       key: 'resource-options',
       title: translate('Options'),
@@ -716,6 +718,19 @@ export const getProviderResourceTabs = ({
   const apiKeysTab = getApiKeysTab(resource, offering);
   if (apiKeysTab) {
     tabs.push(apiKeysTab);
+  }
+  // The provider sets the secrets its offering asks it for, and reads those
+  // the customer entered, through the provider endpoints.
+  if (hasOptionSecrets(resource)) {
+    tabs.push({
+      key: 'secrets',
+      title: translate('Secrets'),
+      component: lazyComponent(() =>
+        import('../options/OptionSecretsCard').then((module) => ({
+          default: module.ProviderOptionSecretsTab,
+        })),
+      ),
+    });
   }
   return tabs;
 };

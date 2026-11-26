@@ -79,3 +79,24 @@ describe('formatOrderForCreate hidden options', () => {
     });
   });
 });
+
+describe('formatOrderForCreate network options', () => {
+  it('submits an IPsec value whole and a list of networks as is', () => {
+    const offering = makeOffering({
+      order: ['vpn', 'nets'],
+      options: {
+        vpn: { type: 'ipsec_vpn_config' },
+        nets: { type: 'cidr', default_configs: { multiple: true } },
+      },
+    });
+    const vpn = {
+      peer_gateway_ip: '198.51.100.10',
+      remote_subnets: ['192.168.10.0/24'],
+      ike_version: 'ikev2',
+    };
+    const body = formatOrderForCreate(offering, {
+      attributes: { vpn, nets: ['10.20.0.0/16'] },
+    } as any);
+    expect(body.attributes).toMatchObject({ vpn, nets: ['10.20.0.0/16'] });
+  });
+});
