@@ -36704,6 +36704,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Logout could not be completed.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Logout failed": {
     "context": {
       "feature_area": "callbacks"
@@ -57411,6 +57416,11 @@
       "feature_area": "project-templates"
     }
   },
+  "Remote SAML2 logout has failed.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Remote accounts": {
     "context": {
       "primary_ui_type": "title",
@@ -72952,6 +72962,11 @@
       "feature_area": "matrix"
     }
   },
+  "The identity provider asked to log out a different session.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "The identity provider's response could not be processed. Please try again or contact support.": {
     "context": {
       "feature_area": "callbacks"
@@ -73100,6 +73115,11 @@
   },
   "The login page logo in dark mode. Falls back to LOGIN_LOGO when not set; language-specific logos apply to the light logo only.": {},
   "The logo image rendered in the disclaimer area below the footer.": {},
+  "The logout message could not be processed.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "The longest length must not be lower than the shortest.": {
     "context": {
       "feature_area": "common"
@@ -91366,6 +91386,11 @@
   "You are not eligible to apply to this call.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "You are not logged in to any identity provider.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "You are not offered new review work at the moment. Contact the platform operator for details.": {
