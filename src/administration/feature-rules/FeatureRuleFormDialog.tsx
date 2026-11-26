@@ -133,7 +133,14 @@ export const FeatureRuleFormDialog: FC<FeatureRuleFormDialogProps> = ({
                 <SubmitButton
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Create')}
-                  disabled={invalid}
+                  // A new rule needs a criterion; an existing one emptied by
+                  // deletions elsewhere can still be saved or turned off.
+                  disabled={invalid || (!isEdit && !hasCriterion(values))}
+                  disabledReason={
+                    !isEdit && !hasCriterion(values)
+                      ? translate('Fill in at least one criterion.')
+                      : undefined
+                  }
                   variant="primary"
                 />
               </>

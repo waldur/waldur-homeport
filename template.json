@@ -1689,7 +1689,7 @@
   },
   "Accepted values": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "primary_ui_type": "title"
     }
   },
   "Accepted, requested": {
@@ -13197,7 +13197,8 @@
   "Civil/national ID number": {},
   "Claim": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "primary_ui_type": "title",
+      "feature_area": "tickets"
     }
   },
   "Claim \"{claim}\" is listed twice. Put all of its accepted values in one row.": {
@@ -27577,6 +27578,13 @@
   "Fill in all required LDAP admin fields to generate.": {
     "context": {
       "feature_area": "site-agent"
+    }
+  },
+  "Fill in at least one criterion.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "feature-rules",
+      "action_type": "create"
     }
   },
   "Fill in empty email fields before adding more": {
