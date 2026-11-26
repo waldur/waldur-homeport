@@ -87,7 +87,7 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
         iconNode={<PlusIcon weight="bold" />}
         onClick={() => fields.push({ claim: '', values: [] })}
         variant="tertiary"
-        size="lg"
+        size="sm"
       />
     </div>
     {typeof meta.error === 'string' && (
