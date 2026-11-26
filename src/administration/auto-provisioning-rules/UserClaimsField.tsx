@@ -1,5 +1,5 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
@@ -25,79 +25,82 @@ import { ClaimRow, validateUserClaims } from './utils';
 interface ClaimTableRow {
   uuid: string;
   name: string;
-  index: number;
+  remove: () => void;
 }
+
+// Cells are module-level components: a column built during render would be a
+// new component each time, remounting the inputs and swallowing a click.
+const ClaimCell: FC<{ row: ClaimTableRow }> = ({ row }) => (
+  <Field name={`${row.name}.claim`}>
+    {({ input, meta }) => (
+      <StringField
+        input={input}
+        meta={meta}
+        placeholder="roles, entitlements"
+      />
+    )}
+  </Field>
+);
+
+const ValuesCell: FC<{ row: ClaimTableRow }> = ({ row }) => (
+  <Field name={`${row.name}.values`}>
+    {({ input, meta }) => (
+      <CommaSeparatedListField
+        input={input}
+        meta={meta}
+        placeholder="acme-owner, acme-admin"
+      />
+    )}
+  </Field>
+);
+
+const RemoveCell: FC<{ row: ClaimTableRow }> = ({ row }) => (
+  <RemovalActionButton size="md" action={row.remove} />
+);
+
+const getColumns = () => [
+  { title: translate('Claim'), headerClassName: 'w-1/2', render: ClaimCell },
+  { title: translate('Accepted values'), render: ValuesCell },
+  { title: '', headerClassName: 'w-[5px]', render: RemoveCell },
+];
 
 const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
   fields,
   meta,
-}) => (
-  <>
-    {fields.length > 0 && (
-      // Shares the block with the label and help text, so it carries a border.
-      <Card variant="table" bordered className="mb-2">
-        <SimpleTable<ClaimTableRow>
-          rows={fields.map((name, index) => ({ uuid: name, name, index }))}
-          columns={[
-            {
-              title: translate('Claim'),
-              headerClassName: 'w-1/2',
-              render: ({ row }) => (
-                <Field name={`${row.name}.claim`}>
-                  {({ input, meta }) => (
-                    <StringField
-                      input={input}
-                      meta={meta}
-                      placeholder="roles, entitlements"
-                    />
-                  )}
-                </Field>
-              ),
-            },
-            {
-              title: translate('Accepted values'),
-              render: ({ row }) => (
-                <Field name={`${row.name}.values`}>
-                  {({ input, meta }) => (
-                    <CommaSeparatedListField
-                      input={input}
-                      meta={meta}
-                      placeholder="acme-owner, acme-admin"
-                    />
-                  )}
-                </Field>
-              ),
-            },
-            {
-              title: '',
-              headerClassName: 'w-[5px]',
-              render: ({ row }) => (
-                <RemovalActionButton
-                  size="md"
-                  action={() => fields.remove(row.index)}
-                />
-              ),
-            },
-          ]}
+}) => {
+  const columns = useMemo(getColumns, []);
+  return (
+    <>
+      {fields.length > 0 && (
+        // Shares the block with the label and help text, so it carries a border.
+        <Card variant="table" bordered className="mb-2">
+          <SimpleTable<ClaimTableRow>
+            rows={fields.map((name, index) => ({
+              uuid: name,
+              name,
+              remove: () => fields.remove(index),
+            }))}
+            columns={columns}
+          />
+        </Card>
+      )}
+      <div>
+        <BaseButton
+          label={translate('Add claim')}
+          iconNode={<PlusIcon weight="bold" />}
+          onClick={() => fields.push({ claim: '', values: [] })}
+          variant="tertiary"
+          size="sm"
         />
-      </Card>
-    )}
-    <div>
-      <BaseButton
-        label={translate('Add claim')}
-        iconNode={<PlusIcon weight="bold" />}
-        onClick={() => fields.push({ claim: '', values: [] })}
-        variant="tertiary"
-        size="sm"
-      />
-    </div>
-    {typeof meta.error === 'string' && (
-      <FormText variant="danger" role="alert">
-        {meta.error}
-      </FormText>
-    )}
-  </>
-);
+      </div>
+      {typeof meta.error === 'string' && (
+        <FormText variant="danger" role="alert">
+          {meta.error}
+        </FormText>
+      )}
+    </>
+  );
+};
 
 export const UserClaimsField: FC = () => (
   <FormField className="mb-5.5">
