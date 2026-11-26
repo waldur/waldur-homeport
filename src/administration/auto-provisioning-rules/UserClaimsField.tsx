@@ -1,25 +1,15 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import { FC, Fragment } from 'react';
+import { FC } from 'react';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import {
-  BaseButton,
-  FormField,
-  FormLabel,
-  FormText,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'waldur-ui';
+import { BaseButton, Card, FormField, FormLabel, FormText } from 'waldur-ui';
 
 import { StringField } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { translate } from '@/i18n';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
+import { SimpleTable } from '@/table/SimpleTable';
 
 import { ClaimRow, validateUserClaims } from './utils';
 
@@ -32,54 +22,65 @@ import { ClaimRow, validateUserClaims } from './utils';
  * what decide whether a role is granted — a typo should be visible, not buried
  * in unparsed JSON.
  */
+interface ClaimTableRow {
+  uuid: string;
+  name: string;
+  index: number;
+}
+
 const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
   fields,
   meta,
 }) => (
   <>
     {fields.length > 0 && (
-      <Table scrollable={false}>
-        <TableHeader>
-          <TableRow divided={false}>
-            <TableHead className="w-1/2">{translate('Claim')}</TableHead>
-            <TableHead>{translate('Accepted values')}</TableHead>
-            <TableHead className="w-[5px]" />
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {fields.map((name, index) => (
-            <Fragment key={name}>
-              <TableRow divided={false}>
-                <TableCell>
-                  <Field name={`${name}.claim`}>
-                    {({ input, meta }) => (
-                      <StringField
-                        input={input}
-                        meta={meta}
-                        placeholder="roles, entitlements"
-                      />
-                    )}
-                  </Field>
-                </TableCell>
-                <TableCell>
-                  <Field name={`${name}.values`}>
-                    {({ input, meta }) => (
-                      <CommaSeparatedListField
-                        input={input}
-                        meta={meta}
-                        placeholder="acme-owner, acme-admin"
-                      />
-                    )}
-                  </Field>
-                </TableCell>
-                <TableCell>
-                  <RemovalActionButton action={() => fields.remove(index)} />
-                </TableCell>
-              </TableRow>
-            </Fragment>
-          ))}
-        </TableBody>
-      </Table>
+      // Shares the block with the label and help text, so it carries a border.
+      <Card variant="table" bordered className="mb-2">
+        <SimpleTable<ClaimTableRow>
+          rows={fields.map((name, index) => ({ uuid: name, name, index }))}
+          columns={[
+            {
+              title: translate('Claim'),
+              headerClassName: 'w-1/2',
+              render: ({ row }) => (
+                <Field name={`${row.name}.claim`}>
+                  {({ input, meta }) => (
+                    <StringField
+                      input={input}
+                      meta={meta}
+                      placeholder="roles, entitlements"
+                    />
+                  )}
+                </Field>
+              ),
+            },
+            {
+              title: translate('Accepted values'),
+              render: ({ row }) => (
+                <Field name={`${row.name}.values`}>
+                  {({ input, meta }) => (
+                    <CommaSeparatedListField
+                      input={input}
+                      meta={meta}
+                      placeholder="acme-owner, acme-admin"
+                    />
+                  )}
+                </Field>
+              ),
+            },
+            {
+              title: '',
+              headerClassName: 'w-[5px]',
+              render: ({ row }) => (
+                <RemovalActionButton
+                  size="md"
+                  action={() => fields.remove(row.index)}
+                />
+              ),
+            },
+          ]}
+        />
+      </Card>
     )}
     <div>
       <BaseButton
