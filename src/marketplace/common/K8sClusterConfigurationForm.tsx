@@ -19,12 +19,6 @@ import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { useCustomer } from '@/workspace/hooks';
 
-import { K8sFormSection } from './K8sFormSection';
-import { K8sKubernetesConfigSection } from './K8sKubernetesConfigSection';
-import { K8sNodeGroupCard } from './K8sNodeGroupCard';
-import { K8sOptionCard } from './K8sOptionCard';
-import { K8sSecurityConfigSection } from './K8sSecurityConfigSection';
-import { K8sTotalResourcesCard } from './K8sTotalResourcesCard';
 import {
   MultiDatacenterK8sClusterConfig,
   DatacenterConfiguration,
@@ -43,7 +37,13 @@ import {
   getDefaultDatacenterDiskConfig,
   hasLoadBalancer,
   K8sDefaultConfiguration,
-} from './multi-datacenter-k8s-types';
+} from './k8s-types';
+import { K8sFormSection } from './K8sFormSection';
+import { K8sKubernetesConfigSection } from './K8sKubernetesConfigSection';
+import { K8sNodeGroupCard } from './K8sNodeGroupCard';
+import { K8sOptionCard } from './K8sOptionCard';
+import { K8sSecurityConfigSection } from './K8sSecurityConfigSection';
+import { K8sTotalResourcesCard } from './K8sTotalResourcesCard';
 
 interface K8sClusterConfigurationFormProps extends FormField {
   field: {
@@ -332,9 +332,8 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
 };
 
 /**
- * Order form for both Kubernetes option types. The topology comes from the
- * offering's topology_mode, or from the option type when it is not set; with
- * customer_choice the customer picks it here.
+ * Order form for a Kubernetes cluster option. The topology comes from the
+ * offering's topology_mode; when it is not set the customer picks it here.
  */
 export const K8sClusterConfigurationForm: React.FC<
   K8sClusterConfigurationFormProps
@@ -344,7 +343,7 @@ export const K8sClusterConfigurationForm: React.FC<
   // Extract default configurations from the field (set via EditOptionDialog)
   const defaultConfigs: K8sDefaultConfiguration | undefined = (field as any)
     ?.default_configs;
-  const topologyMode = getTopologyMode(field.type, defaultConfigs);
+  const topologyMode = getTopologyMode(defaultConfigs);
 
   // The value is stored directly as the cluster config
   const fieldValue = input?.value as MultiDatacenterK8sClusterConfig;
@@ -352,18 +351,14 @@ export const K8sClusterConfigurationForm: React.FC<
   const [clusterConfig, setClusterConfig] =
     useState<MultiDatacenterK8sClusterConfig>(() =>
       getInitialClusterConfig(
-        getInitialTopology(field.type, fieldValue, defaultConfigs),
+        getInitialTopology(fieldValue, defaultConfigs),
         fieldValue || undefined,
         defaultConfigs,
       ),
     );
   const [topologyChanged, setTopologyChanged] = useState(false);
   const topology = clusterConfig.topology;
-  const topologyAllowed = isTopologyAllowed(
-    clusterConfig,
-    field.type,
-    defaultConfigs,
-  );
+  const topologyAllowed = isTopologyAllowed(clusterConfig, defaultConfigs);
 
   const [availableInfrastructures, setAvailableInfrastructures] = useState<
     any[]

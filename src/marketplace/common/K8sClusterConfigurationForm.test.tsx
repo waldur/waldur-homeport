@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import {
   K8sDefaultConfiguration,
   MultiDatacenterK8sClusterConfig,
-} from './multi-datacenter-k8s-types';
+} from './k8s-types';
+import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 
 vi.mock('./K8sSecurityConfigSection', () => ({
   K8sSecurityConfigSection: () => (
@@ -15,12 +15,9 @@ vi.mock('./K8sSecurityConfigSection', () => ({
   ),
 }));
 
-type FieldType = 'single_datacenter_k8s_config' | 'multi_datacenter_k8s_config';
-
 const mockOnChange = vi.fn();
 
 const renderComponent = (
-  type: FieldType,
   defaultConfigs?: K8sDefaultConfiguration,
   value?: MultiDatacenterK8sClusterConfig,
 ) =>
@@ -28,7 +25,7 @@ const renderComponent = (
     <K8sClusterConfigurationForm
       field={
         {
-          type,
+          type: 'k8s_cluster_config',
           label: 'K8s cluster',
           default_configs: defaultConfigs,
         } as any
@@ -50,13 +47,13 @@ describe('K8sClusterConfigurationForm', () => {
     vi.clearAllMocks();
   });
 
-  describe('single_datacenter_k8s_config without a topology mode', () => {
+  describe('single-site topology mode', () => {
     it('renders one datacenter and fetches OpenStack infrastructures', async () => {
       mockInfrastructures([
         { uuid: 'infra-1', name: 'OpenStack A', customer_name: 'Customer A' },
       ]);
 
-      renderComponent('single_datacenter_k8s_config');
+      renderComponent({ topology_mode: '1-datacenter' });
 
       await waitFor(() => {
         expect(marketplacePublicOfferingsList).toHaveBeenCalled();
@@ -95,7 +92,7 @@ describe('K8sClusterConfigurationForm', () => {
         { uuid: 'infra-1', name: 'OpenStack A', customer_name: 'Customer A' },
       ]);
 
-      renderComponent('single_datacenter_k8s_config');
+      renderComponent({ topology_mode: '1-datacenter' });
 
       await waitFor(() => {
         expect(marketplacePublicOfferingsList).toHaveBeenCalled();
@@ -125,7 +122,7 @@ describe('K8sClusterConfigurationForm', () => {
         screen.queryByText(new RegExp(`^${count} nodes,`));
 
       it('is mandatory when the offering sets no mode', async () => {
-        renderComponent('single_datacenter_k8s_config');
+        renderComponent({ topology_mode: '1-datacenter' });
 
         expect(
           screen.getByText(/Load balancer nodes \(Mandatory\)/),
@@ -142,7 +139,8 @@ describe('K8sClusterConfigurationForm', () => {
       });
 
       it('can be switched off when optional', async () => {
-        renderComponent('single_datacenter_k8s_config', {
+        renderComponent({
+          topology_mode: '1-datacenter',
           load_balancer_mode: 'optional',
         });
 
@@ -165,7 +163,8 @@ describe('K8sClusterConfigurationForm', () => {
       });
 
       it('is not offered when disabled', async () => {
-        renderComponent('single_datacenter_k8s_config', {
+        renderComponent({
+          topology_mode: '1-datacenter',
           load_balancer_mode: 'disabled',
         });
 
@@ -185,13 +184,13 @@ describe('K8sClusterConfigurationForm', () => {
     });
   });
 
-  describe('multi_datacenter_k8s_config without a topology mode', () => {
+  describe('three-site topology mode', () => {
     it('renders three datacenters and fetches OpenStack infrastructures', async () => {
       mockInfrastructures([
         { uuid: 'infra-1', name: 'OpenStack DC1', customer_name: 'Customer 1' },
       ]);
 
-      renderComponent('multi_datacenter_k8s_config');
+      renderComponent({ topology_mode: '3-datacenter' });
 
       await waitFor(() => {
         expect(marketplacePublicOfferingsList).toHaveBeenCalled();
@@ -230,7 +229,7 @@ describe('K8sClusterConfigurationForm', () => {
       beforeEach(() => mockInfrastructures());
 
       it('shows one mandatory load balancer per datacenter by default', () => {
-        renderComponent('multi_datacenter_k8s_config');
+        renderComponent({ topology_mode: '3-datacenter' });
 
         expect(
           screen.getAllByText(/Load balancer nodes \(Mandatory\)/),
@@ -238,7 +237,8 @@ describe('K8sClusterConfigurationForm', () => {
       });
 
       it('drops the load balancer from every datacenter at once', async () => {
-        renderComponent('multi_datacenter_k8s_config', {
+        renderComponent({
+          topology_mode: '3-datacenter',
           load_balancer_mode: 'optional',
         });
 
@@ -260,7 +260,8 @@ describe('K8sClusterConfigurationForm', () => {
       });
 
       it('is not offered when disabled', () => {
-        renderComponent('multi_datacenter_k8s_config', {
+        renderComponent({
+          topology_mode: '3-datacenter',
           load_balancer_mode: 'disabled',
         });
 
@@ -278,8 +279,8 @@ describe('K8sClusterConfigurationForm', () => {
   describe('fixed topology mode', () => {
     beforeEach(() => mockInfrastructures());
 
-    it('shows three sites for a single-datacenter option set to 3-datacenter', async () => {
-      renderComponent('single_datacenter_k8s_config', {
+    it('shows three sites when set to 3-datacenter', async () => {
+      renderComponent({
         topology_mode: '3-datacenter',
       });
 
@@ -294,8 +295,8 @@ describe('K8sClusterConfigurationForm', () => {
       expect(lastValue().datacenters).toHaveLength(3);
     });
 
-    it('shows one site for a multi-datacenter option set to 1-datacenter', async () => {
-      renderComponent('multi_datacenter_k8s_config', {
+    it('shows one site when set to 1-datacenter', async () => {
+      renderComponent({
         topology_mode: '1-datacenter',
       });
 
@@ -311,6 +312,22 @@ describe('K8sClusterConfigurationForm', () => {
     });
   });
 
+  describe('no topology mode', () => {
+    it('lets the customer choose, starting with one site', async () => {
+      mockInfrastructures();
+      renderComponent();
+
+      await waitFor(() =>
+        expect(marketplacePublicOfferingsList).toHaveBeenCalled(),
+      );
+      expect(
+        screen.getByText('Single site, 3 controllers'),
+      ).toBeInTheDocument();
+      expect(screen.getByText('Datacenter 1')).toBeInTheDocument();
+      expect(screen.queryByText('Datacenter 2')).not.toBeInTheDocument();
+    });
+  });
+
   describe('customer_choice topology mode', () => {
     beforeEach(() => mockInfrastructures());
 
@@ -320,14 +337,14 @@ describe('K8sClusterConfigurationForm', () => {
     };
 
     it('lets the customer switch between one and three sites', async () => {
-      renderComponent('single_datacenter_k8s_config', {
+      renderComponent({
         topology_mode: 'customer_choice',
         available_kubernetes_versions: '1.30.0',
         load_balancer_mode: 'optional',
       });
 
       expect(screen.getByText('Cluster topology')).toBeInTheDocument();
-      // Starts from the option type's topology.
+      // A fresh form starts with a single site.
       expect(
         screen.getByText('Single site, 3 controllers'),
       ).toBeInTheDocument();
@@ -378,14 +395,14 @@ describe('K8sClusterConfigurationForm', () => {
       mockInfrastructures([
         { uuid: 'infra-1', name: 'OpenStack A', customer_name: 'Customer A' },
       ]);
-      renderComponent('multi_datacenter_k8s_config', {
+      renderComponent({
         topology_mode: 'customer_choice',
       });
 
       await waitFor(() => {
         expect(marketplacePublicOfferingsList).toHaveBeenCalled();
       });
-      // A multi-datacenter option starts with three sites.
+      await chooseTopology('Three sites, 1 controller each');
       expect(screen.getByText('Datacenter 3')).toBeInTheDocument();
 
       await userEvent.click(
@@ -409,7 +426,6 @@ describe('K8sClusterConfigurationForm', () => {
 
     it('keeps the stored pick', () => {
       renderComponent(
-        'single_datacenter_k8s_config',
         { topology_mode: 'customer_choice' },
         {
           kubernetes_version: '1.30.0',
@@ -467,8 +483,7 @@ describe('K8sClusterConfigurationForm', () => {
 
     it('is kept unchanged when it fits the offering', async () => {
       renderComponent(
-        'multi_datacenter_k8s_config',
-        undefined,
+        { topology_mode: '3-datacenter' },
         storedCluster(3, '3-datacenter'),
       );
 
@@ -480,44 +495,25 @@ describe('K8sClusterConfigurationForm', () => {
       expect(mockOnChange).not.toHaveBeenCalled();
     });
 
-    it.each([
-      [
-        'a fixed mode',
-        'single_datacenter_k8s_config' as const,
-        { topology_mode: '1-datacenter' as const },
-      ],
-      ['the option type', 'single_datacenter_k8s_config' as const, undefined],
-      [
-        'a fixed mode on a multi-datacenter option',
-        'multi_datacenter_k8s_config' as const,
-        { topology_mode: '1-datacenter' as const },
-      ],
-    ])(
-      'keeps a three-site cluster that %s no longer allows',
-      async (_, type, defaultConfigs) => {
-        const stored = storedCluster(3, '3-datacenter');
-        renderComponent(type, defaultConfigs, stored);
+    it('keeps a three-site cluster that a single-site mode no longer allows', async () => {
+      const stored = storedCluster(3, '3-datacenter');
+      renderComponent({ topology_mode: '1-datacenter' }, stored);
 
-        await waitFor(() =>
-          expect(marketplacePublicOfferingsList).toHaveBeenCalled(),
-        );
-        expect(screen.getByText(warning)).toBeInTheDocument();
-        // Rendered with its own topology: three sites, one controller each.
-        expect(screen.getByText('Datacenter 3')).toBeInTheDocument();
-        expect(screen.getAllByText('1 controller')).toHaveLength(3);
-        expect(
-          screen.queryByText(/Datacenters were reset/),
-        ).not.toBeInTheDocument();
-        expect(mockOnChange).not.toHaveBeenCalled();
-      },
-    );
+      await waitFor(() =>
+        expect(marketplacePublicOfferingsList).toHaveBeenCalled(),
+      );
+      expect(screen.getByText(warning)).toBeInTheDocument();
+      // Rendered with its own topology: three sites, one controller each.
+      expect(screen.getByText('Datacenter 3')).toBeInTheDocument();
+      expect(screen.getAllByText('1 controller')).toHaveLength(3);
+      expect(
+        screen.queryByText(/Datacenters were reset/),
+      ).not.toBeInTheDocument();
+      expect(mockOnChange).not.toHaveBeenCalled();
+    });
 
     it('keeps a legacy value without topology, inferring it from its sites', async () => {
-      renderComponent(
-        'single_datacenter_k8s_config',
-        { topology_mode: '1-datacenter' },
-        storedCluster(3),
-      );
+      renderComponent({ topology_mode: '1-datacenter' }, storedCluster(3));
 
       await waitFor(() =>
         expect(marketplacePublicOfferingsList).toHaveBeenCalled(),
@@ -534,7 +530,6 @@ describe('K8sClusterConfigurationForm', () => {
 
     it('lets the customer move a mismatched cluster to an allowed topology', async () => {
       renderComponent(
-        'single_datacenter_k8s_config',
         { topology_mode: 'customer_choice' },
         storedCluster(2, '3-datacenter'),
       );

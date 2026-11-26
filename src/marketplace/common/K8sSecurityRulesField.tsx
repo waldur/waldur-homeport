@@ -24,7 +24,7 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
-import { validateNumberOrRange } from './multi-datacenter-k8s-types';
+import { validateNumberOrRange } from './k8s-types';
 
 interface K8sSecurityRule {
   uuid: string;

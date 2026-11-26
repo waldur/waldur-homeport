@@ -106,8 +106,7 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
     }
     return value;
   },
-  single_datacenter_k8s_config: formatK8sConfig,
-  multi_datacenter_k8s_config: formatK8sConfig,
+  k8s_cluster_config: formatK8sConfig,
   k8s_egress_rules: (value) =>
     formatEgressRules(Array.isArray(value) ? value : []),
   cidr: (value) => formatCidrValue(value),

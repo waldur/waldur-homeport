@@ -6,7 +6,6 @@ import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 
-import { K8sFormSection } from './K8sFormSection';
 import {
   K8sClusterTopology,
   K8sDefaultConfiguration,
@@ -15,7 +14,8 @@ import {
   getLoadBalancerMode,
   validateK8sConfiguration,
   isK8sConfigurationComplete,
-} from './multi-datacenter-k8s-types';
+} from './k8s-types';
+import { K8sFormSection } from './K8sFormSection';
 
 interface K8sKubernetesConfigSectionProps {
   defaultConfigs?: K8sDefaultConfiguration;

@@ -426,24 +426,14 @@ describe('OptionsForm Integration', () => {
 
     it('mounts complex component types without crashing and passes correct field mappings', () => {
       const options = {
-        order: [
-          'cond_cascade',
-          'comp_mult',
-          'folder_mgr',
-          'k8s_single',
-          'k8s_multi',
-        ],
+        order: ['cond_cascade', 'comp_mult', 'folder_mgr', 'k8s_cluster'],
         options: {
           cond_cascade: { type: 'conditional_cascade', label: 'Cascade' },
           comp_mult: { type: 'component_multiplier', label: 'Multiplier' },
           folder_mgr: { type: 'storage_folder_manager', label: 'Folder Mgr' },
-          k8s_single: {
-            type: 'single_datacenter_k8s_config',
-            label: 'K8s Single',
-          },
-          k8s_multi: {
-            type: 'multi_datacenter_k8s_config',
-            label: 'K8s Multi',
+          k8s_cluster: {
+            type: 'k8s_cluster_config',
+            label: 'K8s Cluster',
           },
         },
       };
@@ -457,12 +447,9 @@ describe('OptionsForm Integration', () => {
       expect(
         screen.getByTestId('mock-component-multiplier'),
       ).toBeInTheDocument();
-      // Both Kubernetes types render the one cluster form.
+      // The cluster type renders the cluster form.
       expect(
-        screen.getByTestId('mock-k8s-single_datacenter_k8s_config'),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByTestId('mock-k8s-multi_datacenter_k8s_config'),
+        screen.getByTestId('mock-k8s-k8s_cluster_config'),
       ).toBeInTheDocument();
       // Storage folder manager isn't explicitly mocked above, but it renders a FormGroup/Select natively.
       expect(screen.getByText('Folder Mgr')).toBeInTheDocument();
@@ -492,7 +479,7 @@ describe('OptionsForm Integration', () => {
       ],
     };
 
-    it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+    it.each(['k8s_cluster_config'])(
       'does not validate completeness of an optional %s',
       (type) => {
         const { params } = getComponentAndParams(
@@ -508,7 +495,7 @@ describe('OptionsForm Integration', () => {
       },
     );
 
-    it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+    it.each(['k8s_cluster_config'])(
       'refuses invalid egress rules of an optional %s',
       (type) => {
         const { params } = getComponentAndParams(
@@ -537,7 +524,7 @@ describe('OptionsForm Integration', () => {
       },
     );
 
-    it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+    it.each(['k8s_cluster_config'])(
       'validates completeness of a required %s',
       (type) => {
         const { params } = getComponentAndParams(
@@ -560,7 +547,7 @@ describe('OptionsForm Integration', () => {
         order: ['cluster'],
         options: {
           cluster: {
-            type: 'single_datacenter_k8s_config',
+            type: 'k8s_cluster_config',
             label: 'Cluster config',
             help_text: 'Size your cluster',
             required: true,
@@ -569,7 +556,7 @@ describe('OptionsForm Integration', () => {
       });
 
       expect(
-        screen.getByTestId('mock-k8s-single_datacenter_k8s_config'),
+        screen.getByTestId('mock-k8s-k8s_cluster_config'),
       ).toBeInTheDocument();
       // No label row at all: no help tooltip and no label to hang the
       // required marker on. K8sOptionCard names the block instead.
