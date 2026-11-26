@@ -1248,7 +1248,7 @@ export const SettingsDescription = [
       },
       {
         key: 'OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE',
-        description: translate('The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.'),
+        description: translate('The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_uninvited code.'),
         default: 'Account creation is blocked for uninvited users.',
         type: 'text_field',
       },
@@ -1260,7 +1260,7 @@ export const SettingsDescription = [
       },
       {
         key: 'OIDC_BLOCKED_LOGIN_RESPONSE_MESSAGE',
-        description: translate('The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.'),
+        description: translate('The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_blocked code.'),
         default: 'Access to this deployment is restricted.',
         type: 'text_field',
       },
