@@ -1,4 +1,3 @@
-import Markdown from 'markdown-to-jsx';
 import { FC, useCallback, useMemo, useRef } from 'react';
 import {
   NestedRequestedOffering,
@@ -65,12 +64,10 @@ export const CallTab: FC<{ call: PublicCall }> = ({ call }) => (
         }
       />
     ) : null}
-    {call.description ? (
-      <PropertyItem
-        label={translate('Description')}
-        value={<Markdown>{call.description}</Markdown>}
-      />
-    ) : null}
+    <PropertyItem
+      label={translate('Description')}
+      value={propVal.richText(call.description, { format: 'markdown' })}
+    />
   </PropertyList>
 );
 
