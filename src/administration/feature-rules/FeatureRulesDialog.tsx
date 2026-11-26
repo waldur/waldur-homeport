@@ -275,18 +275,18 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
           },
         ]}
         title={translate('Rules')}
-        fullWidth
-        headerClassName="min-h-15"
+        headerClassName="min-h-[40px] py-0"
+        titleClassName="h4 font-medium text-secondary"
         hideRefresh
         verboseName={translate('rules')}
-        minHeight={1}
+        minHeight="auto"
         // The card draws the one border; a table in a dialog adds its own.
         className="[&_[data-slot=table-responsive]]:border-0"
         tableActions={
           canEdit ? (
             <BaseButton
               variant="primary"
-              size="md"
+              size="sm"
               iconNode={<PlusCircleIcon weight="bold" />}
               label={translate('Add rule')}
               onClick={() =>
