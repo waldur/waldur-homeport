@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { userAgreementsDestroy } from 'waldur-js-client';
 
+import { USER_AGREEMENT_QUERY_KEYS } from '@/about/useAvailableUserAgreements';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -28,6 +29,7 @@ export const UserAgreementDeleteButton: FC<{ row; refetch }> = ({
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => userAgreementsDestroy({ path: { uuid: row.uuid } }),
     refetch,
+    invalidateQueries: USER_AGREEMENT_QUERY_KEYS,
     confirmation: {
       title: translate('Delete user agreement'),
       body: translate(
