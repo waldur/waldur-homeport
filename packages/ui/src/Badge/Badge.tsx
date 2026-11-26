@@ -169,7 +169,7 @@ export const BADGE_STYLES: Record<
 
 // CVA only handles structural layout variants now.
 const badgeVariants = cva(
-  'badge inline-flex items-center justify-center border border-secondary text-sm leading-5 font-medium transition-colors',
+  'badge inline-flex items-center justify-center whitespace-nowrap border border-secondary text-sm leading-5 font-medium transition-colors',
   {
     variants: {
       size: {
