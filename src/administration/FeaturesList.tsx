@@ -112,7 +112,12 @@ const FeatureRow = ({
   }).input.value;
   const openRules = () =>
     openDialog(FeatureRulesDialog, {
-      resolve: { featureKey, featureLabel: item.description, canEdit },
+      // Dialog titles carry no full stop; the descriptions end with one.
+      resolve: {
+        featureKey,
+        featureLabel: item.description.replace(/\.$/, ''),
+        canEdit,
+      },
       size: 'xl',
     });
   const isHighlighted = useHighlightSettingRow(featureKey, 'feature-');

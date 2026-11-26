@@ -127,6 +127,9 @@ export const FeatureRuleFormDialog: FC<FeatureRuleFormDialogProps> = ({
               )
             }
             iconColor="success"
+            subtitle={translate(
+              'A user matches when every group of criteria you fill in matches: listed users, organizations, roles and identity attributes.',
+            )}
             footer={
               <>
                 <CloseDialogButton onClick={resolve.back} />
@@ -146,11 +149,6 @@ export const FeatureRuleFormDialog: FC<FeatureRuleFormDialogProps> = ({
               </>
             }
           >
-            <p className="text-sm text-quaternary">
-              {translate(
-                'A user matches when every group of criteria you fill in matches: listed users, organizations, roles and identity attributes.',
-              )}
-            </p>
             <StringGroup
               name="description"
               label={translate('Description')}
