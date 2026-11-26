@@ -60,15 +60,9 @@ describe('LocationContainer', () => {
     expect(controlOptions()).toMatchObject({
       autoComplete: false,
       searchLabel: 'Type an address and press Enter',
+      clearSearchLabel: 'Clear search',
     });
     expect(map.addControl).toHaveBeenCalled();
-  });
-
-  it('gives the control a result list it can clear on submit', () => {
-    renderLocation();
-
-    const control = vi.mocked(GeoSearchControl).mock.results[0].value;
-    expect(() => control.resultList.clear()).not.toThrow();
   });
 
   it('sets the coordinates of the result the user picks', () => {

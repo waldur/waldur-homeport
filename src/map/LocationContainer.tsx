@@ -65,6 +65,7 @@ export const LocationContainer = ({ input: { value, onChange }, ...props }) => {
           autoClose={true}
           autoComplete={false}
           searchLabel={translate('Type an address and press Enter')}
+          clearSearchLabel={translate('Clear search')}
           keepResult={false}
           updateMap={true}
           onLocationFound={(loc) => {

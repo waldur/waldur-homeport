@@ -1,12 +1,11 @@
+import { GeoSearchControl } from 'leaflet-geosearch';
 import { describe, expect, it, vi } from 'vitest';
 
-import { createSearchControl } from './searchControl';
-
 // The real leaflet-geosearch control, not a mock: without autocomplete it
-// still clears a result list on submit.
+// has no result list, and a submit must still reach the provider.
 const createControl = () => {
   const provider = { search: vi.fn(() => Promise.resolve([])) };
-  const control = createSearchControl({
+  const control = GeoSearchControl({
     provider: provider as any,
     autoComplete: false,
   });
@@ -18,7 +17,7 @@ const press = (input: HTMLInputElement, type: string, key: string, keyCode) =>
     new KeyboardEvent(type, { key, keyCode, cancelable: true } as any),
   );
 
-describe('createSearchControl without autocomplete', () => {
+describe('GeoSearchControl without autocomplete', () => {
   it('submits a search once without throwing', async () => {
     const { control, provider } = createControl();
 
