@@ -30,6 +30,8 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { useCustomer } from '@/workspace/hooks';
 
+import { CidrOptionField } from './CidrOptionField';
+import { validateCidrValue } from './cidrOptions';
 import { ComponentMultiplierField } from './ComponentMultiplierField';
 import { ConditionalCascadeField } from './ConditionalCascadeField';
 import {
@@ -43,6 +45,8 @@ import {
   getFormulaInputError,
 } from './derivedLimits';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
+import { validateIpsecValue } from './ipsecVpn';
+import { IpsecVpnConfigField } from './IpsecVpnConfigField';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import { validateEgressRules } from './k8sEgressRules';
 import { K8sEgressRulesOptionField } from './K8sEgressRulesOptionField';
@@ -53,6 +57,8 @@ import { getOptionPatternValidator } from './optionPattern';
 import { getOptionTransformValidator } from './optionTransform';
 import { OptionTransformPreview } from './OptionTransformPreview';
 import { getHiddenOptionKeys } from './optionVisibility';
+import { SecretOptionField } from './SecretOptionField';
+import { resolveSecretPolicy, validateSecretValue } from './secretOptions';
 import { StorageFolderManagerField } from './StorageFolderManagerField';
 import { DeployFormData } from './types';
 
@@ -163,6 +169,48 @@ const getK8sParams = (option) => ({
   validate: getK8sValidator(option),
 });
 
+/**
+ * Checks an IPsec value as the server will. The networks it must not overlap
+ * are other options' values: those on the form, or, in a dialog that edits
+ * the one option, the resource's stored ones (`networkContext`).
+ */
+const getIpsecValidator =
+  (option, optionLabels: Record<string, string>) => (value, allValues?) => {
+    if (!value && !option.required) {
+      return undefined;
+    }
+    return validateIpsecValue(value || undefined, option.default_configs, {
+      overlapValues: {
+        ...allValues?.networkContext,
+        ...allValues?.attributes,
+      },
+      optionLabels,
+    });
+  };
+
+/**
+ * Labels of the options an IPsec option may name: those of the form, and
+ * those the caller knows of, such as the offering's other options when a
+ * dialog edits one option of a resource.
+ */
+const getOptionLabels = (
+  options?: OfferingOptions,
+  known?: Record<string, string>,
+) => ({
+  ...Object.fromEntries(
+    Object.entries(options?.options || {}).map(([name, other]) => [
+      name,
+      other?.label || name,
+    ]),
+  ),
+  ...known,
+});
+
+/** A secret the provider sets: the customer has nothing to give for it. */
+const isProvidedSecret = (option) =>
+  option?.type === 'secret' &&
+  !resolveSecretPolicy(option.default_configs).customerSets;
+
 const VALIDATOR_MAPPING = {
   gt: greaterThanField,
   gte: greaterThanOrEqualField,
@@ -200,8 +248,13 @@ export const buildOptionValidator = (
   }
 
   // Boolean fields skip `required`: an unchecked switch is undefined, which
-  // `required` rejects, silently blocking submission.
-  if (option.required && option.type !== 'boolean') {
+  // `required` rejects, silently blocking submission. A secret the provider
+  // sets is not the customer's to give, required or not (as on the server).
+  if (
+    option.required &&
+    option.type !== 'boolean' &&
+    !isProvidedSecret(option)
+  ) {
     validators.push(required);
   }
 
@@ -250,6 +303,10 @@ export const getComponentAndParams = (
   customer,
   loaders?: any,
   allModelsOption?: string,
+  context: {
+    options?: OfferingOptions;
+    optionLabels?: Record<string, string>;
+  } = {},
 ) => {
   let OptionField: FC<Partial<FormGroupProps>> = StringField;
   let params: Record<string, any> = {};
@@ -403,10 +460,51 @@ export const getComponentAndParams = (
         },
       };
       break;
+    case 'cidr':
+      OptionField = CidrOptionField;
+      params = {
+        // Shown by the field: a list's rows never blur it.
+        hideError: true,
+        field: option,
+        validate: (value) =>
+          validateCidrValue(value, option.default_configs, option.required),
+      };
+      break;
+    case 'secret':
+      OptionField = SecretOptionField;
+      params = {
+        field: option,
+        validate: (value) => validateSecretValue(value, option.default_configs),
+      };
+      break;
+    case 'ipsec_vpn_config':
+      OptionField = IpsecVpnConfigField;
+      params = {
+        // It renders its own titled card and the errors next to each input.
+        hideLabel: true,
+        hideError: true,
+        field: option,
+        optionLabels: getOptionLabels(context.options, context.optionLabels),
+        validate: getIpsecValidator(
+          option,
+          getOptionLabels(context.options, context.optionLabels),
+        ),
+      };
+      break;
   }
 
   return { OptionField, params };
 };
+
+// Types whose own check is part of validateFn, with Required and the
+// cross-field rules; passed on their own it would replace them.
+const COMPOSED_VALIDATOR_TYPES = [
+  'component_formula',
+  'component_multiplier',
+  'cidr',
+  'ipsec_vpn_config',
+  'secret',
+];
 
 // One array for every render: react-final-form registers the field again
 // whenever its initialValue changes identity.
@@ -426,6 +524,8 @@ export const OptionsForm = ({
   customer: preferedCustomer,
   allModelsOption,
   orderForm,
+  secretInputs,
+  optionLabels,
 }: {
   options: OfferingOptions;
   customer?: DeployFormData['customer'];
@@ -437,6 +537,14 @@ export const OptionsForm = ({
   // Not for edits of several resources at once, where an untouched field
   // must stay unset.
   orderForm?: boolean;
+  // Secret options are asked for: only where an order is placed. Elsewhere
+  // (a proposal's resource request, editing several resources) a secret
+  // would be stored with the other values or given to every resource, so
+  // its field is left out.
+  secretInputs?: boolean;
+  // Labels of options outside `options` that an option may name, such as
+  // the cidr options an IPsec option keeps clear of.
+  optionLabels?: Record<string, string>;
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
   const form = useForm();
@@ -484,12 +592,16 @@ export const OptionsForm = ({
           if (!option || hiddenKeys.has(key)) {
             return null;
           }
+          if (option.type === 'secret' && !secretInputs) {
+            return null;
+          }
           const { OptionField, params } = getComponentAndParams(
             option,
             key,
             customer,
             { loadTenants, loadInstances },
             allModelsOption,
+            { options, optionLabels },
           );
 
           const orderedModels = orderForm && key === allModelsOption;
@@ -515,17 +627,18 @@ export const OptionsForm = ({
               label={hideLabel ? undefined : option.label}
               help={hideLabel ? undefined : option.help_text}
               helpEnd
-              required={hideLabel ? undefined : option.required}
+              required={
+                hideLabel || isProvidedSecret(option)
+                  ? undefined
+                  : option.required
+              }
             >
               {(() => {
                 const { key: remountKey, ...fieldParams } = params;
                 // The range and formula checks are part of validateFn, with
                 // Required and the cross-field rules; passed on their own they
                 // would replace them.
-                if (
-                  option.type === 'component_formula' ||
-                  option.type === 'component_multiplier'
-                ) {
+                if (COMPOSED_VALIDATOR_TYPES.includes(option.type)) {
                   delete fieldParams.validate;
                 }
                 return (

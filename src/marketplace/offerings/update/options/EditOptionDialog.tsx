@@ -93,6 +93,10 @@ export const EditOptionDialog = ({ resolve }) => {
         validateOptionForm(values, {
           options: resolve.offering[resolve.type],
           optionKey: resolve.option.name,
+          orderOptions:
+            resolve.type === 'resource_options'
+              ? resolve.offering.options
+              : undefined,
         })
       }
       onSubmit={(values) => updateMutation.mutateAsync(values)}

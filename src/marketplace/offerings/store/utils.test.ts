@@ -261,3 +261,85 @@ describe('dropHiddenPrepaidSettings', () => {
     ).toMatchObject({ is_prepaid: false });
   });
 });
+
+describe('formatOption for network options', () => {
+  it('keeps only the cidr policy keys, without cleared fields', () => {
+    expect(
+      formatOption({
+        name: 'net',
+        label: 'Network',
+        type: { value: 'cidr', label: 'Network (CIDR)' },
+        default_configs: {
+          ip_version: 'ipv4',
+          prefix_length_min: 16,
+          prefix_length_max: undefined,
+          allowed_ranges: [],
+          excluded_ranges: ['10.96.0.0/12'],
+          // Left behind by a type change.
+          egress_rules_enabled: true,
+        },
+      } as any).default_configs,
+    ).toEqual({
+      ip_version: 'ipv4',
+      prefix_length_min: 16,
+      excluded_ranges: ['10.96.0.0/12'],
+    });
+  });
+
+  it('keeps "no PFS" in an IPsec policy and drops empty sections', () => {
+    expect(
+      formatOption({
+        name: 'vpn',
+        label: 'VPN',
+        type: { value: 'ipsec_vpn_config', label: 'IPsec VPN' },
+        default_configs: {
+          ikev1_allowed: false,
+          provider_gateway_ip: '',
+          remote_subnets: { ip_version: undefined },
+          phase1: { encryption: [], defaults: { lifetime: undefined } },
+          phase2: { pfs_groups: [14, null], defaults: { pfs_group: null } },
+        },
+      } as any).default_configs,
+    ).toEqual({
+      ikev1_allowed: false,
+      phase2: { pfs_groups: [14, null], defaults: { pfs_group: null } },
+    });
+  });
+
+  it('sends no default_configs for an empty policy', () => {
+    expect(
+      formatOption({
+        name: 'net',
+        label: 'Network',
+        type: { value: 'cidr', label: 'Network (CIDR)' },
+        default_configs: { allowed_ranges: [] },
+      } as any),
+    ).not.toHaveProperty('default_configs');
+  });
+});
+
+describe('formatOption for secret options', () => {
+  it('keeps the secret policy and never sends a default value', () => {
+    const item = formatOption({
+      name: 'psk',
+      label: 'Key',
+      type: { value: 'secret', label: 'Secret' },
+      // Left behind by a change from a string option.
+      default: 'not-a-secret',
+      default_configs: {
+        secret_source: 'customer',
+        customer_can_reveal: undefined,
+        min_length: 8,
+        max_length: 255,
+        multiline: false,
+      },
+    } as any);
+    expect(item).not.toHaveProperty('default');
+    expect(item.default_configs).toEqual({
+      secret_source: 'customer',
+      min_length: 8,
+      max_length: 255,
+      multiline: false,
+    });
+  });
+});

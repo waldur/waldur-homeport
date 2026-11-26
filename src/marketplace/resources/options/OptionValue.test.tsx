@@ -92,3 +92,73 @@ describe('Kubernetes option values', () => {
     ).toBe('Storage: 10.20.0.0/16 (any traffic)');
   });
 });
+
+describe('Network option values', () => {
+  it('shows a network, or a list of them', () => {
+    expect(
+      OptionValue({ option: { type: 'cidr' } as any, value: '10.20.0.0/16' }),
+    ).toBe('10.20.0.0/16');
+    expect(
+      formatOptionValue({ type: 'cidr' } as any, ['10.20.0.0/16', 'fd00::/64']),
+    ).toBe('10.20.0.0/16, fd00::/64');
+  });
+
+  it('summarises an IPsec tunnel instead of dumping JSON', () => {
+    expect(
+      OptionValue({
+        option: { type: 'ipsec_vpn_config', label: 'VPN' } as any,
+        value: {
+          peer_gateway_ip: '198.51.100.10',
+          remote_subnets: ['192.168.10.0/24'],
+          ike_version: 'ikev2',
+          phase1: {
+            encryption: 'aes256',
+            integrity: 'sha256',
+            dh_group: 19,
+            lifetime: 28800,
+          },
+          phase2: {
+            encryption: 'aes256gcm16',
+            integrity: 'sha384',
+            pfs_group: null,
+            lifetime: 3600,
+          },
+          dpd: null,
+          provider: {
+            gateway_ip: '203.0.113.10',
+            local_subnets: ['10.0.0.0/16'],
+          },
+        },
+      }),
+    ).toBe(
+      'Peer 198.51.100.10 · IKEv2 · Phase 1: AES-256, SHA-256, ECP 256 (group 19) · Phase 2: AES-256-GCM, SHA-384, no PFS · 192.168.10.0/24 ↔ 10.0.0.0/16',
+    );
+  });
+});
+
+describe('Secret option values', () => {
+  const SECRET = { type: 'secret', label: 'Key' } as any;
+
+  it('says whether a secret is set, from the resource status', () => {
+    expect(
+      OptionValue({
+        option: SECRET,
+        value: undefined,
+        secretStatus: { is_set: true, source: 'customer', modified: null },
+      }),
+    ).toBe('Set');
+    expect(
+      OptionValue({
+        option: SECRET,
+        value: undefined,
+        secretStatus: { is_set: false, source: null, modified: null },
+      }),
+    ).toBe('Not set');
+  });
+
+  it('never shows a typed secret', () => {
+    expect(OptionValue({ option: SECRET, value: 'hunter2-key' })).toBe('Set');
+    expect(formatOptionValue(SECRET, 'hunter2-key')).toBe('Set');
+    expect(formatOptionValue(SECRET, undefined)).toBeNull();
+  });
+});

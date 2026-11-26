@@ -10,6 +10,12 @@ import { getDerivedLimitInputs } from '../../common/derivedLimits';
 import { getHiddenOptionKeys } from '../../common/optionVisibility';
 import { MultiEditOptionsAction } from '../mass-actions/MultiEditOptionsAction';
 
+import { hasOptionSecrets } from './optionSecrets';
+import {
+  formatSecretStatusValue,
+  OptionSecretsCard,
+  SecretActions,
+} from './OptionSecretsCard';
 import { OptionValue } from './OptionValue';
 import { UpdateResourceOptionButton } from './UpdateResourceOptionButton';
 
@@ -88,7 +94,23 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
     [resourceOptions?.options, props.resource.options],
   );
 
+  // Secrets of order options alone have no row below: they are listed
+  // apart, with what can be done about them.
+  const secretsCard = (
+    <OptionSecretsCard
+      resource={props.resource}
+      offering={props.offering}
+      refetch={props.refetch}
+      names={Object.keys(props.resource.option_secrets || {}).filter(
+        (name) => resourceOptions?.options?.[name]?.type !== 'secret',
+      )}
+    />
+  );
+
   if (!resourceOptions?.order?.length) {
+    if (hasOptionSecrets(props.resource)) {
+      return secretsCard;
+    }
     return (
       <div className="flex flex-wrap justify-center">
         <div className="w-full sm:w-4/12">
@@ -112,74 +134,106 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
   );
 
   return (
-    <PropertyCard
-      bordered
-      title={title}
-      refetch={props.refetch}
-      loading={props.isLoading}
-      actions={
-        props.resource.state === 'OK' &&
-        // Formula inputs are left out of editing several options at once.
-        resourceOptions.order.some(
-          (key) => resourceOptions.options[key]?.type !== 'component_formula',
-        ) && (
-          <MultiEditOptionsAction
-            rows={[props.resource]}
-            refetch={props.refetch}
-            asButton
-          />
-        )
-      }
-    >
-      <PropertyList>
-        {resourceOptions.order?.map((key) => {
-          // Options hidden by the resource's current values have no value
-          // and cannot be edited on their own; the full options dialog shows
-          // them once the controlling option is changed.
-          if (hiddenKeys.has(key)) {
-            return null;
-          }
-          const option = {
-            ...resourceOptions.options[key],
-            name: key,
-          };
-          const isPendingChange = pendingChange?.changedKeys.includes(key);
-          // A formula input ordered before its resource option existed is
-          // only in the resource's order attributes.
-          const currentValue =
-            option.type === 'component_formula'
-              ? getDerivedLimitInputs(props.resource, props.offering)[key]
-              : props.resource.options && props.resource.options[key];
-
-          return (
-            <PropertyItem
-              key={key}
-              label={option.label}
-              value={
-                isPendingChange ? (
-                  <PendingChangeValue
-                    option={option}
-                    currentValue={currentValue}
-                    oldValue={pendingChange.oldOptions[key]}
-                    newValue={pendingChange.newOptions[key]}
-                  />
-                ) : (
-                  <OptionValue option={option} value={currentValue} />
-                )
-              }
-              description={option.help_text}
-              actions={
-                <UpdateResourceOptionButton
-                  resource={props.resource}
-                  offering={props.offering}
-                  refetch={props.refetch}
-                  option={option}
-                />
-              }
+    <>
+      <PropertyCard
+        bordered
+        title={title}
+        refetch={props.refetch}
+        loading={props.isLoading}
+        actions={
+          props.resource.state === 'OK' &&
+          // Formula inputs and secrets are left out of editing several
+          // options at once.
+          resourceOptions.order.some(
+            (key) =>
+              !['component_formula', 'secret'].includes(
+                resourceOptions.options[key]?.type,
+              ),
+          ) && (
+            <MultiEditOptionsAction
+              rows={[props.resource]}
+              refetch={props.refetch}
+              asButton
             />
-          );
-        })}
-      </PropertyList>
-    </PropertyCard>
+          )
+        }
+      >
+        <PropertyList>
+          {resourceOptions.order?.map((key) => {
+            // Options hidden by the resource's current values have no value
+            // and cannot be edited on their own; the full options dialog shows
+            // them once the controlling option is changed.
+            if (hiddenKeys.has(key)) {
+              return null;
+            }
+            const option = {
+              ...resourceOptions.options[key],
+              name: key,
+            };
+            // A secret is never shown nor edited with the others: its row
+            // says whether it is set, and replaces or reveals it on its own.
+            if (option.type === 'secret') {
+              return (
+                <PropertyItem
+                  key={key}
+                  label={option.label}
+                  value={formatSecretStatusValue(
+                    props.resource.option_secrets?.[key],
+                    option.default_configs,
+                    false,
+                  )}
+                  description={option.help_text}
+                  actions={
+                    <SecretActions
+                      resource={props.resource}
+                      name={key}
+                      label={option.label}
+                      policy={option.default_configs}
+                      refetch={props.refetch}
+                    />
+                  }
+                />
+              );
+            }
+            const isPendingChange = pendingChange?.changedKeys.includes(key);
+            // A formula input ordered before its resource option existed is
+            // only in the resource's order attributes.
+            const currentValue =
+              option.type === 'component_formula'
+                ? getDerivedLimitInputs(props.resource, props.offering)[key]
+                : props.resource.options && props.resource.options[key];
+
+            return (
+              <PropertyItem
+                key={key}
+                label={option.label}
+                value={
+                  isPendingChange ? (
+                    <PendingChangeValue
+                      option={option}
+                      currentValue={currentValue}
+                      oldValue={pendingChange.oldOptions[key]}
+                      newValue={pendingChange.newOptions[key]}
+                    />
+                  ) : (
+                    <OptionValue option={option} value={currentValue} />
+                  )
+                }
+                description={option.help_text}
+                actions={
+                  <UpdateResourceOptionButton
+                    resource={props.resource}
+                    offering={props.offering}
+                    refetch={props.refetch}
+                    option={option}
+                  />
+                }
+              />
+            );
+          })}
+        </PropertyList>
+      </PropertyCard>
+      <div className="mt-5">{secretsCard}</div>
+    </>
   );
 };

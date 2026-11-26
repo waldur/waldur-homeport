@@ -76,8 +76,11 @@ const formatAttributes = (
       // Submitted as entered; the server stores it as an attribute and does
       // not derive a limit from it (component_formula options do that).
       newAttributes[key] = value;
-    } else if (optionConfig?.type === 'storage_folder_manager') {
-      // For storage folder manager, keep the whole object structure
+    } else if (
+      optionConfig?.type === 'storage_folder_manager' ||
+      optionConfig?.type === 'ipsec_vpn_config'
+    ) {
+      // Keep the whole object structure.
       newAttributes[key] = value;
     } else if (
       optionConfig?.type === 'single_datacenter_k8s_config' ||

@@ -83,6 +83,21 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
     };
   }, [name, option, isFormula, offering]);
 
+  // The dialog holds this one option; an IPsec option names others, such
+  // as the cidr options its subnets keep clear of.
+  const optionLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        [offering?.options, offering?.resource_options].flatMap((set) =>
+          Object.entries(set?.options || {}).map(([key, other]) => [
+            key,
+            other?.label || key,
+          ]),
+        ),
+      ),
+    [offering],
+  );
+
   const initialValues = useMemo(
     () => ({
       attributes: {
@@ -98,6 +113,16 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
               [ALL_MODELS]
             : (props.resolve.resource?.options?.[name] ?? null),
       },
+      // The networks an IPsec option's remote subnets must not overlap: the
+      // resource's other options, and its ordered values. Not submitted.
+      ...(option.type === 'ipsec_vpn_config'
+        ? {
+            networkContext: {
+              ...(props.resolve.resource?.attributes as object),
+              ...(props.resolve.resource?.options as object),
+            },
+          }
+        : {}),
       // What the formula validator checks derived limits against; only the
       // attributes are submitted.
       ...(isFormula
@@ -117,6 +142,7 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
     [
       name,
       isFormula,
+      option.type,
       offering,
       props.resolve.resource,
       allModelsOption,
@@ -179,6 +205,7 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
               <OptionsForm
                 options={options}
                 allModelsOption={allModelsOption}
+                optionLabels={optionLabels}
               />
               {isFormula ? (
                 <FormulaChangePreview

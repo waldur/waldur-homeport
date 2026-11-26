@@ -475,6 +475,8 @@ export const ResourcesEnum = {
   marketplace_resource_limit_change_request_approved: 'marketplace_resource_limit_change_request_approved',
   marketplace_resource_limit_change_request_created: 'marketplace_resource_limit_change_request_created',
   marketplace_resource_limit_change_request_rejected: 'marketplace_resource_limit_change_request_rejected',
+  marketplace_resource_option_secret_revealed: 'marketplace_resource_option_secret_revealed',
+  marketplace_resource_option_secret_set: 'marketplace_resource_option_secret_set',
   marketplace_resource_paused: 'marketplace_resource_paused',
   marketplace_resource_project_created: 'marketplace_resource_project_created',
   marketplace_resource_project_recovered: 'marketplace_resource_project_recovered',

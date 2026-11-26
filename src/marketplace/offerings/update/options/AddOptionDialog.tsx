@@ -53,7 +53,13 @@ export const AddOptionDialog = ({ resolve }) => {
       submitLabel={translate('Create')}
       initialValues={{ type: FIELD_TYPES[0] }}
       validate={(values) =>
-        validateOptionForm(values, { options: resolve.offering[resolve.type] })
+        validateOptionForm(values, {
+          options: resolve.offering[resolve.type],
+          orderOptions:
+            resolve.type === 'resource_options'
+              ? resolve.offering.options
+              : undefined,
+        })
       }
       onSubmit={(values) => addMutation.mutateAsync(values)}
       resourceType={resolve.type}

@@ -9,8 +9,8 @@
  */
 
 import type {
-  K8sDefaultConfiguration,
   LoadBalancerModeEnum,
+  OptionDefaultConfigs,
   TopologyModeEnum,
 } from 'waldur-js-client';
 
@@ -18,7 +18,11 @@ import { translate } from '@/i18n';
 
 import { K8sEgressRule } from './k8sEgressRules';
 
-export type { K8sDefaultConfiguration };
+/**
+ * The default_configs of a Kubernetes option. The SDK has one type for the
+ * policy of every option type; the Kubernetes forms read its cluster keys.
+ */
+export type K8sDefaultConfiguration = OptionDefaultConfigs;
 
 export interface LocalOpenStackFlavor {
   uuid: string;
