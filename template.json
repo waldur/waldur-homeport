@@ -1942,6 +1942,11 @@
       "action_type": "read"
     }
   },
+  "Access to this deployment is restricted.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Access token": {
     "context": {
       "feature_area": "auth"
@@ -1978,6 +1983,11 @@
     }
   },
   "Account and access": {},
+  "Account creation is blocked for uninvited users.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Account deactivated": {
     "context": {
       "feature_area": "reviewer-registry"
@@ -8899,6 +8909,11 @@
   "Authentication methods": {
     "context": {
       "feature_area": "charts"
+    }
+  },
+  "Authentication request has been denied by identity provider. Please check your credentials.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "Authentication required": {
@@ -62703,6 +62718,11 @@
       "feature_area": "integration"
     }
   },
+  "SAML2 authentication failed.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "SAN": {
     "context": {
       "feature_area": "common"
@@ -67473,6 +67493,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "passkeys"
+    }
+  },
+  "Sign-in could not be completed. Please try again.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "Sign-in from AI clients is not set up on this server yet. Ask your administrator to configure it.": {
@@ -72931,6 +72956,11 @@
       "feature_area": "matrix"
     }
   },
+  "The identity provider's response could not be processed. Please try again or contact support.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "The image rendered at hero section of Call Management landing page. Please, use a wide image (min. 1920×600px) with no text or logos. Keep the center area clean, and choose a darker image for dark mode or a brighter image for light mode.": {},
   "The image rendered at hero section of HomePort landing page.": {},
   "The image rendered at hero section of Marketplace landing page. Please, use a wide image (min. 1920×600px) with no text or logos. Keep the center area clean, and choose a darker image for dark mode or a brighter image for light mode.": {},
@@ -76872,6 +76902,16 @@
   "This setting is not changed on a page of the call; the finding says what to do.": {
     "context": {
       "feature_area": "workflow-check"
+    }
+  },
+  "This sign-in cannot be completed for this email address. Please contact support.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
+  "This sign-in has expired or was already used. Please sign in again.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "This sign-in request cannot be used": {
@@ -86876,6 +86916,11 @@
   "User domain name": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "User email is not provided. Account creation is blocked.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "User field": {
