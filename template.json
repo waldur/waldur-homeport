@@ -26282,6 +26282,19 @@
       }
     }
   },
+  "Extension, {start} to {end}": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
   "Extensions": {
     "context": {
       "feature_area": "details"
@@ -41913,6 +41926,11 @@
       "feature_area": "managed-projects"
     }
   },
+  "No credit — lower limits apply at once, the extension starts at the current end date": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "No criteria defined yet.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -49259,6 +49277,11 @@
   "Paid now": {
     "context": {
       "feature_area": "cost-policies"
+    }
+  },
+  "Paid-up period at the new limits": {
+    "context": {
+      "feature_area": "renew-allocation"
     }
   },
   "Panel": {
@@ -58190,6 +58213,11 @@
       "feature_area": "renew-allocation"
     }
   },
+  "Renewal with lower prepaid limits": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Reopen": {
     "context": {
       "feature_area": "meeting-notes"
@@ -60382,6 +60410,28 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "robot-accounts"
+    }
+  },
+  "Rest of current term, until {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
+  "Rest of current term, {start} to {end}": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Restart": {
@@ -69038,6 +69088,11 @@
       "feature_area": "details"
     }
   },
+  "Stretch paid-up term — the value left is spread over the lower limits": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "String": {
     "context": {
       "primary_ui_type": "label"
@@ -70905,6 +70960,12 @@
       "feature_area": "offering-merges"
     }
   },
+  "Term": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "type-based"
+    }
+  },
   "Terminate": {
     "context": {
       "primary_ui_type": "label",
@@ -71828,6 +71889,19 @@
   "The camera is in use by another application.": {
     "context": {
       "action_type": "read"
+    }
+  },
+  "The capacity already paid for lasts until {paidUp} at the lower limits; the extension runs from then. New end date: {date}": {
+    "context": {
+      "variables": {
+        "paidUp": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "renew-allocation"
     }
   },
   "The category group has been created.": {
@@ -84805,6 +84879,12 @@
       "feature_area": "plans"
     }
   },
+  "Units × months": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "type-based"
+    }
+  },
   "University": {
     "context": {
       "primary_ui_type": "label"
@@ -85131,6 +85211,16 @@
     }
   },
   "Until a PO is attached": {},
+  "Until {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
   "Untitled": {
     "context": {
       "feature_area": "ai-assistant"
@@ -89365,6 +89455,11 @@
         }
       },
       "feature_area": "offerings"
+    }
+  },
+  "What a renewal that only lowers prepaid limits does with the value already paid for the rest of the current term. Neither option refunds or credits it; stretching spreads it over the lower limits, so the paid-up period lasts longer and the extension starts when it runs out. Default is no credit.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "What are inodes? Each file and directory uses one inode. This setting determines how many individual files users can store per TB. Example: 7000 inodes/TB means users can store up to 7,000 files per terabyte of space.": {

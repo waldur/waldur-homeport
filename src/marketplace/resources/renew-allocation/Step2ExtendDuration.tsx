@@ -5,14 +5,13 @@ import { Resource } from 'waldur-js-client';
 import { NativeSelect, SingleProperty } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
-import { formatDate } from '@/core/dateUtils';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { propVal } from '@/property/propertyFields';
 
-import { getRenewedEndDate } from './getRenewedEndDate';
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
+import { useRenewedEndDates } from './useRenewedEndDates';
 
 const SelectFieldInline = ({ input, options }) => (
   <NativeSelect
@@ -65,12 +64,10 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
 
   const extensionMonths = Number(values.extension_months) || 0;
 
-  const newEndDateText = useMemo(() => {
-    if (!extensionMonths) return null;
-    return formatDate(
-      getRenewedEndDate(resources[0].end_date, extensionMonths),
-    );
-  }, [extensionMonths, resources]);
+  const { newEndDate: newEndDateText, paidUpEndDate } = useRenewedEndDates(
+    resources[0],
+    extensionMonths,
+  );
 
   return (
     <WizardModal {...props}>
@@ -92,7 +89,12 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
                 'New end dates will be calculated automatically for all resources.',
               )
             : newEndDateText
-              ? translate('New end date: {date}', { date: newEndDateText })
+              ? paidUpEndDate
+                ? translate(
+                    'The capacity already paid for lasts until {paidUp} at the lower limits; the extension runs from then. New end date: {date}',
+                    { paidUp: paidUpEndDate, date: newEndDateText },
+                  )
+                : translate('New end date: {date}', { date: newEndDateText })
               : null
         }
       >
