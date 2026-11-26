@@ -7,6 +7,12 @@ import { MobileMenu } from './MobileMenu';
 import { useFooterLinks } from './useFooterLinks';
 
 vi.mock('./useFooterLinks');
+vi.mock('@/about/useAvailableUserAgreements', () => ({
+  useAvailableUserAgreements: () => ({
+    hasPrivacyPolicy: true,
+    hasTermsOfService: true,
+  }),
+}));
 
 /**
  * Regression test for a real production crash: a Radix menu item throws

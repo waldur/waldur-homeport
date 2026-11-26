@@ -3,6 +3,7 @@ import { userAgreementsPartialUpdate } from 'waldur-js-client';
 
 import { FormHeading } from 'waldur-ui';
 
+import { USER_AGREEMENT_QUERY_KEYS } from '@/about/useAvailableUserAgreements';
 import { ENV } from '@/core/config';
 import { MarkdownGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -38,6 +39,7 @@ export const UserAgreementsEditDialog = ({
       }),
     successMessage: translate('User agreement was updated'),
     refetch: resolve.refetch,
+    invalidateQueries: USER_AGREEMENT_QUERY_KEYS,
   });
 
   return (

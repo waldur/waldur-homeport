@@ -27,6 +27,13 @@ vi.mock('@/core/Link', () => ({
     <a href={`#${state}`}>{label || children}</a>
   ),
 }));
+const agreements = vi.hoisted(() => ({
+  hasPrivacyPolicy: true,
+  hasTermsOfService: true,
+}));
+vi.mock('@/about/useAvailableUserAgreements', () => ({
+  useAvailableUserAgreements: () => agreements,
+}));
 vi.mock('../cookies/CookieSettingsDialog', () => ({
   CookieSettingsDialog: () => <div>Cookie Settings Dialog</div>,
 }));
@@ -34,6 +41,8 @@ vi.mock('../cookies/CookieSettingsDialog', () => ({
 describe('LegalPrivacyMenu', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    agreements.hasPrivacyPolicy = true;
+    agreements.hasTermsOfService = true;
   });
 
   it('renders legal and privacy links', () => {
@@ -48,6 +57,32 @@ describe('LegalPrivacyMenu', () => {
     expect(
       screen.getByRole('link', { name: 'Terms of service' }),
     ).toHaveAttribute('href', '#about.tos');
+  });
+
+  it('hides links to agreements without content', () => {
+    agreements.hasPrivacyPolicy = false;
+    agreements.hasTermsOfService = false;
+    render(<LegalPrivacyMenu />);
+
+    expect(screen.getByText('Cookie settings')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: 'Privacy policy' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: 'Terms of service' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('shows only the agreement that has content', () => {
+    agreements.hasPrivacyPolicy = false;
+    render(<LegalPrivacyMenu />);
+
+    expect(
+      screen.queryByRole('link', { name: 'Privacy policy' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'Terms of service' }),
+    ).toBeInTheDocument();
   });
 
   it('opens cookie settings dialog', async () => {

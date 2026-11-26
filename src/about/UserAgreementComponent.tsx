@@ -34,7 +34,8 @@ export const UserAgreementComponent: FunctionComponent<
           language: currentLanguage,
         },
       });
-      return response.data[0];
+      // React Query treats undefined as a failed query.
+      return response.data[0] ?? null;
     },
   });
   if (loading) {
@@ -44,7 +45,7 @@ export const UserAgreementComponent: FunctionComponent<
     return <>{translate('Unable to load page')}</>;
   }
 
-  if (!option) {
+  if (!option?.content?.trim()) {
     return (
       <h2>
         {props.title} {translate('is not defined.')}

@@ -16,6 +16,9 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       title: () => translate('About'),
+      // The tabs would list every page here, including an empty agreement or
+      // a disabled About us page; the footer links only to the ones that exist.
+      hideHeaderMenu: true,
     },
   },
   {
