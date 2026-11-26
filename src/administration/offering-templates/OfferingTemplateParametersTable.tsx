@@ -9,6 +9,14 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { ParameterView, readParameter } from './templateDocument';
 
+/** A dotted path that wraps at its dots, not inside a name. */
+const pathWithBreaks = (path: string) =>
+  path
+    .split('.')
+    .flatMap((part, index, parts) =>
+      index < parts.length - 1 ? [part, '.', <wbr key={index} />] : [part],
+    );
+
 interface ParameterRow {
   index: number;
   parameter: ParameterView;
@@ -78,8 +86,8 @@ const getColumns = (withProblems: boolean): Column<ParameterRow>[] => [
       row.parameter.paths.length ? (
         <span className="flex flex-col gap-0.5">
           {row.parameter.paths.map((path, index) => (
-            <Code key={index} className="text-xs break-all">
-              {path}
+            <Code key={index} className="text-xs break-words">
+              {pathWithBreaks(path)}
             </Code>
           ))}
         </span>
@@ -97,12 +105,15 @@ interface OfferingTemplateParametersTableProps {
   parameters: unknown[];
   /** Messages from the API for a parameter, by its position in the list. */
   problems?: Record<number, string[]>;
+  /** Scroll within a fixed height, for a dialog. A page section shows every
+   * parameter instead. */
+  scrollable?: boolean;
 }
 
 /** The parameters a template asks for when an offering is created from it. */
 export const OfferingTemplateParametersTable: FC<
   OfferingTemplateParametersTableProps
-> = ({ parameters, problems }) => {
+> = ({ parameters, problems, scrollable = true }) => {
   const rows = parameters.map((item, index) => {
     const parameter = readParameter(item);
     const refusals = problems?.[index] ?? [];
@@ -118,7 +129,7 @@ export const OfferingTemplateParametersTable: FC<
     };
   });
   return (
-    <div className="max-h-80 overflow-auto">
+    <div className={scrollable ? 'max-h-80 overflow-auto' : 'overflow-x-auto'}>
       <SimpleTable<ParameterRow>
         columns={getColumns(rows.some((row) => row.problems.length > 0))}
         rows={rows}

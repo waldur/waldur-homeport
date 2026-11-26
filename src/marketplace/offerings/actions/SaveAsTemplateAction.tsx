@@ -15,7 +15,7 @@ const SaveAsTemplateDialog = lazyComponent(() =>
 );
 
 interface SaveAsTemplateActionProps {
-  row: ProviderOffering;
+  row: Pick<ProviderOffering, 'uuid' | 'name' | 'type'>;
   refetch?: () => void;
 }
 

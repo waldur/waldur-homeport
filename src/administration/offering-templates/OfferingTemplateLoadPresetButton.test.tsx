@@ -54,6 +54,12 @@ describe('OfferingTemplateLoadPresetDialog', () => {
     } as any);
   });
 
+  it('shows each preset key, the name load_preset takes', async () => {
+    renderDialog();
+    const keys = await screen.findAllByTestId('preset-key');
+    expect(keys.map((key) => key.textContent)).toEqual(['slurm', 'litellm']);
+  });
+
   it('disables a preset whose name a template already holds', async () => {
     renderDialog();
     const taken = await screen.findByRole('checkbox', {
@@ -105,7 +111,7 @@ describe('OfferingTemplateLoadPresetDialog', () => {
     );
     await waitFor(() =>
       expect(useNotify().showSuccess).toHaveBeenCalledWith(
-        'Loaded 1 offering templates.',
+        'Loaded 1 offering template.',
       ),
     );
   });
