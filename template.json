@@ -37316,6 +37316,11 @@
       "feature_area": "roles"
     }
   },
+  "Manage service provider": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Manage site agent identities, services, and processors for event-based integrations.": {
     "context": {
       "feature_area": "site-agents"
@@ -55025,6 +55030,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "robot-accounts"
+    }
+  },
+  "Public profile": {
+    "context": {
+      "feature_area": "dashboard"
     }
   },
   "Public projects are visible to anonymous users and allow membership applications.": {
