@@ -1250,7 +1250,7 @@
       "feature_area": "reviewer-registry"
     }
   },
-  "A user matches when every group of criteria you fill in matches: listed users, organizations, roles and identity attributes.": {
+  "A user matches when every group of criteria you fill in matches: listed users, organizations, roles and identity attributes": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -4351,7 +4351,7 @@
     }
   },
   "All citizenships": {},
-  "All claims must match; within one claim any value matches. A value ending in \"*\" matches by prefix, e.g. \"urn:mace:example.org:group:hpc-*\". The claim must be listed in the identity provider's extra fields for Waldur to receive it.": {},
+  "All claims must match; within one claim any value matches. A value ending in \"*\" matches by prefix, e.g. \"urn:mace:example.org:group:hpc-*\". The claim must be listed in the identity provider's extra fields for Waldur to receive it": {},
   "All conditions match (AND)": {
     "context": {
       "primary_ui_type": "label",
@@ -27580,7 +27580,7 @@
       "feature_area": "site-agent"
     }
   },
-  "Fill in at least one criterion.": {
+  "Fill in at least one criterion": {
     "context": {
       "primary_ui_type": "submit_button",
       "feature_area": "feature-rules",
@@ -35975,9 +35975,9 @@
       "feature_area": "roles"
     }
   },
-  "Listed for everyone the app is meant for.": {},
-  "Listed for the users the app is meant for while the micro-apps feature is on, as before settings existed.": {},
-  "Listed only for the users its rules match, among those the app is meant for.": {},
+  "Listed for everyone the app is meant for": {},
+  "Listed for the users the app is meant for while the micro-apps feature is on, as before settings existed": {},
+  "Listed only for the users its rules match, among those the app is meant for": {},
   "Listener \"{name}\" created.": {
     "context": {
       "primary_ui_type": "title",
@@ -37877,7 +37877,7 @@
       "feature_area": "reviewer-pool"
     }
   },
-  "Matches at least {count} of the first {checked} active users checked.": {
+  "Matches at least {count} of the first {checked} active users checked": {
     "context": {
       "variables": {
         "count": {
@@ -37907,7 +37907,7 @@
       "action_type": "filter"
     }
   },
-  "Matches {count} active users.": {
+  "Matches {count} active users": {
     "context": {
       "variables": {
         "count": {
@@ -38752,12 +38752,12 @@
       "feature_area": "user-roles"
     }
   },
-  "Members of an organization in any of these groups match.": {
+  "Members of an organization in any of these groups match": {
     "context": {
       "feature_area": "feature-rules"
     }
   },
-  "Members of any of these organizations or of their projects match.": {
+  "Members of any of these organizations or of their projects match": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -40806,7 +40806,7 @@
       "feature_area": "policies"
     }
   },
-  "Never listed, and opening it shows that it is not available.": {},
+  "Never listed, and opening it shows that it is not available": {},
   "Never reported": {
     "context": {
       "feature_area": "usage-monitoring"
@@ -41931,7 +41931,7 @@
       "feature_area": "workflow-steps"
     }
   },
-  "No criteria: this rule matches no one. To turn the feature on for everyone, use its switch instead.": {
+  "No criteria: this rule matches no one. To turn the feature on for everyone, use its switch instead": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -68149,6 +68149,11 @@
       "feature_area": "steps"
     }
   },
+  "Space-separated regular expressions matched against the email address. End a pattern with $ so that lookalike domains such as example.com.attacker.net do not match": {
+    "context": {
+      "feature_area": "feature-rules"
+    }
+  },
   "Space-separated regular expressions matched against the email address. End a pattern with $ so that lookalike domains such as example.com.attacker.net do not match.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -72644,7 +72649,7 @@
       "feature_area": "openstack-tenant"
     }
   },
-  "The feature is already on for everyone, so this rule changes nothing.": {
+  "The feature is already on for everyone, so this rule changes nothing": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -74453,7 +74458,7 @@
       "feature_area": "offering-merges"
     }
   },
-  "The rule is inactive, so it turns nothing on until it is activated.": {
+  "The rule is inactive, so it turns nothing on until it is activated": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -75112,7 +75117,7 @@
       "feature_area": "reports"
     }
   },
-  "The {count} rules that pick its users will be deleted.": {
+  "The {count} rules that pick its users will be deleted": {
     "context": {
       "variables": {
         "count": {
@@ -76099,7 +76104,7 @@
       "feature_area": "exporters"
     }
   },
-  "This feature can only be turned on for everyone.": {},
+  "This feature can only be turned on for everyone": {},
   "This feature is disabled": {
     "context": {
       "feature_area": "error"
@@ -87619,12 +87624,12 @@
       "feature_area": "team"
     }
   },
-  "Users holding any of these roles, in any scope, match.": {
+  "Users holding any of these roles, in any scope, match": {
     "context": {
       "feature_area": "feature-rules"
     }
   },
-  "Users matched by any active rule get it, in addition to everyone it is switched on for.": {
+  "Users matched by any active rule get it, in addition to everyone it is switched on for": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -87632,6 +87637,11 @@
   "Users must have ALL of these assurance levels to be allowed.": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "Users must hold ALL of these assurance levels to match": {
+    "context": {
+      "feature_area": "feature-rules"
     }
   },
   "Users must hold ALL of these assurance levels to match.": {
@@ -88595,6 +88605,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "View rules": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "View script": {

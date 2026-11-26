@@ -114,7 +114,7 @@ export const UserClaimsField: FC = () => (
     </FieldArray>
     <FormText variant="muted" className="mt-2">
       {translate(
-        'All claims must match; within one claim any value matches. A value ending in "*" matches by prefix, e.g. "urn:mace:example.org:group:hpc-*". The claim must be listed in the identity provider\'s extra fields for Waldur to receive it.',
+        'All claims must match; within one claim any value matches. A value ending in "*" matches by prefix, e.g. "urn:mace:example.org:group:hpc-*". The claim must be listed in the identity provider\'s extra fields for Waldur to receive it',
       )}
     </FormText>
   </FormField>

@@ -178,9 +178,9 @@ const MatchedUsers: FC<{ row: FeatureRule }> = ({ row }) => {
       <div className="flex items-center gap-1.5">
         <UsersThreeIcon weight="bold" />
         {data.complete
-          ? translate('Matches {count} active users.', { count: data.count })
+          ? translate('Matches {count} active users', { count: data.count })
           : translate(
-              'Matches at least {count} of the first {checked} active users checked.',
+              'Matches at least {count} of the first {checked} active users checked',
               { count: data.count, checked: data.checked },
             )}
       </div>
@@ -239,7 +239,7 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
     <ModalDialog
       title={translate('Who gets {feature}', { feature: featureLabel })}
       subtitle={translate(
-        'Users matched by any active rule get it, in addition to everyone it is switched on for.',
+        'Users matched by any active rule get it, in addition to everyone it is switched on for',
       )}
       footer={<CloseDialogButton label={translate('Close')} />}
     >

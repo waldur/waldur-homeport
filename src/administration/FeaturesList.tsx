@@ -32,8 +32,8 @@ import {
 
 import { OrphanedRulesNotice } from '@/administration/feature-rules/OrphanedRulesNotice';
 import {
-  countActiveRules,
   FEATURE_RULES_QUERY_KEY,
+  useActiveRuleCounts,
   useFeatureRules,
   useUserScopedFeatureKeys,
 } from '@/administration/feature-rules/utils';
@@ -80,7 +80,7 @@ const getAudienceOptions = (ruleCount: number, isUserScoped: boolean) => [
 ];
 
 const getNotUserScopedReason = () =>
-  translate('This feature can only be turned on for everyone.');
+  translate('This feature can only be turned on for everyone');
 
 /**
  * One feature toggle: its description names the switch through a real
@@ -201,7 +201,13 @@ const FeatureRow = ({
         {canReadRules ? (
           <CompactEditButton
             fieldName={translate('rules')}
-            tooltip={isUserScoped ? undefined : getNotUserScopedReason()}
+            tooltip={
+              !isUserScoped
+                ? getNotUserScopedReason()
+                : canEdit
+                  ? undefined
+                  : translate('View rules')
+            }
             disabled={!isUserScoped}
             onClick={openRules}
             data-testid={`feature-rules-edit-${featureKey}`}
@@ -218,7 +224,7 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
   const canReadRules = Boolean(checkIsStaffOrSupport(user));
   // Both are one request each, shared through the query cache by every row.
   const userScopedKeys = useUserScopedFeatureKeys(canReadRules);
-  const ruleCounts = countActiveRules(useFeatureRules(canReadRules));
+  const ruleCounts = useActiveRuleCounts(canReadRules);
   return (
     <ul className="m-0 list-none p-0">
       {section.items.map((item) => (
