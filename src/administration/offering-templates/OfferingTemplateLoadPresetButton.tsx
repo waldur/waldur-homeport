@@ -65,7 +65,9 @@ const PresetOption: FC<{
               {getLabel(preset.offering_type)}
             </Badge>
             {preset.name_taken ? (
-              <Badge variant="neutral">{translate('Name in use')}</Badge>
+              <Badge variant="neutral" size="sm">
+                {translate('Name in use')}
+              </Badge>
             ) : null}
           </span>
         }
