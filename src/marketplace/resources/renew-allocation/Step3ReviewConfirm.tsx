@@ -14,7 +14,6 @@ import {
 } from 'waldur-ui';
 import { WizardModal, WizardStepProps } from 'waldur-wizard';
 
-import { formatDate } from '@/core/dateUtils';
 import { StringGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -24,9 +23,9 @@ import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseO
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
 
-import { getRenewedEndDate } from './getRenewedEndDate';
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
+import { useRenewedEndDates } from './useRenewedEndDates';
 
 const LimitChangesSummary: FC<{
   resource: Resource;
@@ -94,9 +93,10 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
 
   const extensionMonths = Number(values.extension_months) || 0;
 
-  const newEndDate = extensionMonths
-    ? formatDate(getRenewedEndDate(resource?.end_date, extensionMonths))
-    : 'N/A';
+  const { newEndDate, paidUpEndDate } = useRenewedEndDates(
+    resource,
+    extensionMonths,
+  );
 
   const departmentToInvoice = [resource?.customer_name, resource?.project_name]
     .filter(Boolean)
@@ -127,6 +127,12 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
                   : translate('{count} months', { count: extensionMonths })
               }
             />
+            {paidUpEndDate ? (
+              <PropertyItem
+                label={translate('Paid-up period at the new limits')}
+                value={translate('Until {date}', { date: paidUpEndDate })}
+              />
+            ) : null}
             <PropertyItem
               label={translate('New end date')}
               value={newEndDate}

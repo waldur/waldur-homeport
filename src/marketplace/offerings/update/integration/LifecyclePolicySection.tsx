@@ -41,6 +41,21 @@ const RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS = [
   },
 ];
 
+const RENEWAL_LIMIT_DECREASE_POLICY_OPTIONS = [
+  {
+    value: 'no_credit',
+    label: translate(
+      'No credit — lower limits apply at once, the extension starts at the current end date',
+    ),
+  },
+  {
+    value: 'stretch_paid_term',
+    label: translate(
+      'Stretch paid-up term — the value left is spread over the lower limits',
+    ),
+  },
+];
+
 // Mirrors MAX_ORDER_NOTIFICATION_EMAILS / MAX_ORDER_NOTIFICATION_ROLES in the
 // marketplace serializers, which reject a longer list with a 400.
 const MAX_ORDER_NOTIFICATION_RECIPIENTS = 10;
@@ -451,6 +466,16 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             label={translate('Conceal billing data')}
             description={translate(
               'Hides pricing and components tabs in offering details to conceal billing information',
+            )}
+          />
+          <SelectEditField
+            name="plugin_options.renewal_limit_decrease_policy"
+            label={translate('Renewal with lower prepaid limits')}
+            options={RENEWAL_LIMIT_DECREASE_POLICY_OPTIONS}
+            simpleValue
+            isClearable
+            description={translate(
+              'What a renewal that only lowers prepaid limits does with the value already paid for the rest of the current term. Neither option refunds or credits it; stretching spreads it over the lower limits, so the paid-up period lasts longer and the extension starts when it runs out. Default is no credit.',
             )}
           />
         </TabbedSection.Tab>
