@@ -1,11 +1,11 @@
 import { LatLng, LeafletEvent } from 'leaflet';
+import { GeoSearchControl, SearchControlOptions } from 'leaflet-geosearch';
 import { useEffect, FunctionComponent, useRef } from 'react';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/assets/css/leaflet.css';
 
 import { useMap } from './MapContext';
-import { createSearchControl, SearchControlOptions } from './searchControl';
 
 type GeoSearchControlElementProps = SearchControlOptions & {
   onLocationFound(location: LatLng): void;
@@ -25,7 +25,8 @@ export const GeoSearchControlElement: FunctionComponent<
 
   useEffect(() => {
     const { onLocationFound: _onLocationFound, ...options } = latest.current;
-    const searchControl = createSearchControl(options);
+    // A factory that returns the control: no `new` needed.
+    const searchControl = GeoSearchControl(options);
 
     map.addControl(searchControl);
 

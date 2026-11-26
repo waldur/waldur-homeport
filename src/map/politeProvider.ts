@@ -50,8 +50,8 @@ const normalize = (query: string) =>
  *   without reporting it.
  * - A request is aborted after 10 seconds.
  * - After a 429 or 403 nothing is sent for a minute.
- * - A failed request finds nothing instead of rejecting, which the control
- *   does not handle, and is reported through onError.
+ * - A failed request finds nothing instead of rejecting, and is reported
+ *   through onError.
  */
 export class PoliteOpenStreetMapProvider extends OpenStreetMapProvider {
   private lastRequestAt = -Infinity;
@@ -122,7 +122,7 @@ export class PoliteOpenStreetMapProvider extends OpenStreetMapProvider {
     }
   }
 
-  /** leaflet-geosearch's own fetch takes no signal and ignores the status. */
+  /** leaflet-geosearch's own fetch has no timeout and drops the status. */
   private async request(query: string): Promise<SearchResults> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
