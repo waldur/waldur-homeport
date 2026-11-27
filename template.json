@@ -42435,7 +42435,7 @@
       "feature_area": "workflow-steps"
     }
   },
-  "No criteria: this rule matches no one. To turn the feature on for everyone, use its switch instead": {
+  "No criteria: this rule matches no one. To turn the feature on for everyone, choose Everyone on the Features page instead": {
     "context": {
       "feature_area": "feature-rules"
     }
@@ -65975,20 +65975,15 @@
       "feature_area": "views"
     }
   },
-  "Selected users": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
+  "Selected users": {},
   "Selected users ({count})": {
     "context": {
-      "primary_ui_type": "label",
       "variables": {
         "count": {
           "type": "number"
         }
       },
-      "feature_area": "administration"
+      "feature_area": "micro-apps"
     }
   },
   "Selected users have been successfully removed.": {
@@ -77115,7 +77110,6 @@
       "feature_area": "exporters"
     }
   },
-  "This feature can only be turned on for everyone": {},
   "This feature is disabled": {
     "context": {
       "feature_area": "error"

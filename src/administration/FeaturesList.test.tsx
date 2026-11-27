@@ -14,6 +14,7 @@ import {
   applyUserFeatures,
   rememberPublicFeatures,
 } from '@/features/userFeatures';
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
@@ -307,11 +308,77 @@ describe('FeaturesList', () => {
     );
     // A deployment-scoped feature cannot target selected users.
     expect(
-      within(screen.getByTestId('support.enabled')).getByRole('radio', {
-        name: 'Selected users',
+      within(screen.getByTestId('support.enabled')).queryByRole('radio', {
+        name: /Selected users/,
         hidden: true,
       }),
-    ).toBeDisabled();
+    ).not.toBeInTheDocument();
+  });
+
+  // The global modal mock: one openDialog shared by every useModal() call.
+  const openDialog = () => useModal().openDialog;
+
+  it('opens the rules when Selected users is chosen with none to turn on', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: true },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(
+        within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+          name: 'Selected users',
+          hidden: true,
+        }),
+      ).toBeInTheDocument(),
+    );
+    await choose('billing.enabled', 'Selected users');
+
+    expect(openDialog()).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        resolve: expect.objectContaining({ featureKey: 'billing.enabled' }),
+      }),
+    );
+    // Off until a rule exists; saving turns the global value off.
+    expect(stateOf('billing.enabled')).toBe('Off');
+  });
+
+  it('resumes the paused rules of a feature switched to Selected users', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: false },
+      { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
+    ]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(
+        within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+          name: 'Selected users',
+          hidden: true,
+        }),
+      ).toBeInTheDocument(),
+    );
+    await choose('billing.enabled', 'Selected users');
+    expect(stateOf('billing.enabled')).toBe('Selected users (2)');
+    expect(openDialog()).not.toHaveBeenCalled();
+    await userEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() =>
+      expect(featureRulesPartialUpdate).toHaveBeenCalledTimes(2),
+    );
+    expect(featureRulesPartialUpdate).toHaveBeenCalledWith({
+      path: { uuid: 'r1' },
+      body: { is_active: true },
+    });
   });
 
   it('deactivates the rules of a feature switched Off from Selected users', async () => {

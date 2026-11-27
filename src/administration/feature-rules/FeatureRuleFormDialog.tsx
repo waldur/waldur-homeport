@@ -252,7 +252,7 @@ export const FeatureRuleFormDialog: FC<FeatureRuleFormDialogProps> = ({
                 variant="warning"
                 type="floating"
                 title={translate(
-                  'No criteria: this rule matches no one. To turn the feature on for everyone, use its switch instead',
+                  'No criteria: this rule matches no one. To turn the feature on for everyone, choose Everyone on the Features page instead',
                 )}
               />
             )}

@@ -1,5 +1,4 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import {
@@ -27,13 +26,12 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  Tooltip,
 } from 'waldur-ui';
 
 import { OrphanedRulesNotice } from '@/administration/feature-rules/OrphanedRulesNotice';
 import {
-  FEATURE_RULES_QUERY_KEY,
   useActiveRuleCounts,
+  useInactiveRuleCounts,
   useFeatureRules,
   useUserScopedFeatureKeys,
 } from '@/administration/feature-rules/utils';
@@ -66,26 +64,24 @@ const FeatureRulesDialog = lazyComponent(() =>
 
 type AudienceState = 'off' | 'everyone' | 'audience';
 
-/** Every row has the same three states; only user-scoped flags can target users. */
+const getAudienceLabel = (ruleCount: number) =>
+  ruleCount > 0
+    ? translate('Selected users ({count})', { count: ruleCount })
+    : translate('Selected users');
+
+/** Only user-scoped flags can target users; the others are Off or Everyone. */
 const getAudienceOptions = (ruleCount: number, isUserScoped: boolean) => [
   { value: 'off' as const, label: translate('Off') },
   { value: 'everyone' as const, label: translate('Everyone') },
-  {
-    value: 'audience' as const,
-    label: isUserScoped
-      ? translate('Selected users ({count})', { count: ruleCount })
-      : translate('Selected users'),
-    disabled: !isUserScoped,
-  },
+  ...(isUserScoped
+    ? [{ value: 'audience' as const, label: getAudienceLabel(ruleCount) }]
+    : []),
 ];
 
-const getNotUserScopedReason = () =>
-  translate('This feature can only be turned on for everyone');
-
 /**
- * One feature toggle: its description names the switch through a real
+ * One feature's audience: its description names the control through a real
  * `<label>`, so the row reads as a form control, not a property. Without the
- * right to edit, the value reads Yes or No.
+ * right to edit, the audience reads as text.
  */
 const FeatureRow = ({
   sectionKey,
@@ -94,6 +90,7 @@ const FeatureRow = ({
   canReadRules,
   isUserScoped,
   ruleCount,
+  pausedRuleCount,
 }: {
   sectionKey: string;
   item: FeatureSection['items'][number];
@@ -101,17 +98,29 @@ const FeatureRow = ({
   /** Staff and support may see a user-scoped feature's rules. */
   canReadRules: boolean;
   isUserScoped: boolean;
+  /** Active rules for the key. */
   ruleCount: number;
+  /** Inactive rules for the key, which Selected users turns back on. */
+  pausedRuleCount: number;
 }) => {
   const featureKey = `${sectionKey}.${item.key}`;
+  const audienceField = `audience.${featureKey}`;
   const form = useForm();
   const { openDialog } = useModal();
   // The audience chosen on this page, until saved; unset, it follows the rules.
-  const chosenAudience = useField(`audience.${featureKey}`, {
+  const chosenAudience = useField(audienceField, {
     subscription: { value: true },
   }).input.value;
-  const openRules = () =>
-    openDialog(FeatureRulesDialog, {
+  // Choosing Selected users with no active rules resumes the paused ones on
+  // save, so the label already counts them.
+  const resumesPaused =
+    chosenAudience === 'audience' && ruleCount === 0 && pausedRuleCount > 0;
+  const openRules = () => {
+    // Rules edited in the dialog apply at once and are the newer intent: the
+    // row follows them again instead of an unsaved Off or Selected users,
+    // which would otherwise pause or resume them on save.
+    form.change(audienceField, undefined);
+    return openDialog(FeatureRulesDialog, {
       // Dialog titles carry no full stop; the descriptions end with one.
       resolve: {
         featureKey,
@@ -120,6 +129,7 @@ const FeatureRow = ({
       },
       size: 'xl',
     });
+  };
   const isHighlighted = useHighlightSettingRow(featureKey, 'feature-');
   const inputId = `feature-input-${featureKey}`;
   const labelId = `feature-label-${featureKey}`;
@@ -154,32 +164,51 @@ const FeatureRow = ({
               const state: AudienceState = input.value
                 ? 'everyone'
                 : chosenAudience || (ruleCount > 0 ? 'audience' : 'off');
-              const control = (
-                <SegmentedControl<AudienceState>
-                  id={inputId}
-                  size="sm"
-                  options={getAudienceOptions(ruleCount, isUserScoped)}
-                  // Off and Everyone share one width and Selected users has its
-                  // own, so every row's control lines up whatever its rule count.
-                  itemClassName="w-24 last-of-type:w-36"
-                  value={state}
-                  onValueChange={(value) =>
-                    form.batch(() => {
-                      input.onChange(value === 'everyone');
-                      form.change(
-                        `audience.${featureKey}`,
-                        value === 'everyone' ? undefined : value,
-                      );
-                    })
-                  }
-                  aria-labelledby={labelId}
-                  data-testid={featureKey}
-                />
-              );
-              return isUserScoped ? (
-                control
-              ) : (
-                <Tooltip label={getNotUserScopedReason()}>{control}</Tooltip>
+              const onValueChange = (value: AudienceState) => {
+                if (value === 'audience' && !ruleCount && !pausedRuleCount) {
+                  // Nothing to turn on yet: the rules are where the audience
+                  // is picked, and the row shows it once a rule exists.
+                  input.onChange(false);
+                  openRules();
+                  return;
+                }
+                form.batch(() => {
+                  input.onChange(value === 'everyone');
+                  form.change(
+                    audienceField,
+                    value === 'everyone' ? undefined : value,
+                  );
+                });
+              };
+              return (
+                <>
+                  <SegmentedControl<AudienceState>
+                    id={inputId}
+                    size="sm"
+                    options={getAudienceOptions(
+                      resumesPaused ? pausedRuleCount : ruleCount,
+                      isUserScoped,
+                    )}
+                    // Off and Everyone share one width and Selected users has
+                    // its own, so every row's control lines up whatever its
+                    // rule count.
+                    itemClassName={
+                      isUserScoped ? 'w-24 last-of-type:w-36' : 'w-24'
+                    }
+                    value={state}
+                    onValueChange={onValueChange}
+                    aria-labelledby={labelId}
+                    data-testid={featureKey}
+                  />
+                  {isUserScoped ? null : (
+                    // Holds Selected users' place, so Off and Everyone line up
+                    // with the rows that can target users.
+                    <span
+                      aria-hidden
+                      className="-ms-2 w-[calc(var(--spacing)*36-1px)] shrink-0"
+                    />
+                  )}
+                </>
               );
             }}
           </Field>
@@ -190,9 +219,7 @@ const FeatureRow = ({
                 {input.value
                   ? translate('Everyone')
                   : isUserScoped && ruleCount > 0
-                    ? translate('Selected users ({count})', {
-                        count: ruleCount,
-                      })
+                    ? getAudienceLabel(ruleCount)
                     : translate('Off')}
               </span>
             )}
@@ -201,16 +228,13 @@ const FeatureRow = ({
         {canReadRules ? (
           <CompactEditButton
             fieldName={translate('rules')}
-            tooltip={
-              !isUserScoped
-                ? getNotUserScopedReason()
-                : canEdit
-                  ? undefined
-                  : translate('View rules')
-            }
-            disabled={!isUserScoped}
+            tooltip={canEdit ? undefined : translate('View rules')}
             onClick={openRules}
             data-testid={`feature-rules-edit-${featureKey}`}
+            // Only user-scoped features have rules; the others keep the
+            // pencil's place so the controls stay in one column.
+            className={isUserScoped ? undefined : 'invisible'}
+            disabled={!isUserScoped}
           />
         ) : null}
       </div>
@@ -225,6 +249,7 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
   // Both are one request each, shared through the query cache by every row.
   const userScopedKeys = useUserScopedFeatureKeys(canReadRules);
   const ruleCounts = useActiveRuleCounts(canReadRules);
+  const pausedRuleCounts = useInactiveRuleCounts(canReadRules);
   return (
     <ul className="m-0 list-none p-0">
       {section.items.map((item) => (
@@ -236,6 +261,7 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
           canReadRules={canReadRules}
           isUserScoped={userScopedKeys.has(`${section.key}.${item.key}`)}
           ruleCount={ruleCounts[`${section.key}.${item.key}`] ?? 0}
+          pausedRuleCount={pausedRuleCounts[`${section.key}.${item.key}`] ?? 0}
         />
       ))}
     </ul>
@@ -356,32 +382,40 @@ export const FeaturesList = () => {
   // Never ENV.FEATURES: it holds the staff member's own targeted values.
   const publicFeatures = useMemo(() => getPublicFeatures(), []);
   const rules = useFeatureRules(canReadRules);
-  const queryClient = useQueryClient();
   const saveFeaturesCallback = async ({ audience = {}, ...formData }) => {
     try {
       await featureValues({ body: formData });
-      // A user-scoped feature switched Off from Selected users: its rules
-      // are deactivated, not deleted, so they can be turned back on.
-      const offKeys = Object.entries(audience).flatMap(([section, items]) =>
-        Object.entries(items as Record<string, AudienceState>)
-          .filter(([, state]) => state === 'off')
-          .map(([key]) => `${section}.${key}`),
+      // Off pauses a user-scoped feature's rules rather than deleting them,
+      // and Selected users with none active resumes the paused ones.
+      const chosen = Object.entries(audience).flatMap(([section, items]) =>
+        Object.entries(items as Record<string, AudienceState>).map(
+          ([key, state]) => [`${section}.${key}`, state] as const,
+        ),
+      );
+      const keysChosen = (state: AudienceState) =>
+        new Set<string>(
+          chosen.filter(([, s]) => s === state).map(([key]) => key),
+        );
+      const offKeys = keysChosen('off');
+      const resumeKeys = keysChosen('audience');
+      const hasActiveRule = new Set(
+        rules.filter((rule) => rule.is_active).map((rule) => rule.feature_key),
       );
       await Promise.all(
         rules
-          .filter(
-            (rule) => rule.is_active && offKeys.includes(rule.feature_key),
+          .filter((rule) =>
+            rule.is_active
+              ? offKeys.has(rule.feature_key)
+              : resumeKeys.has(rule.feature_key) &&
+                !hasActiveRule.has(rule.feature_key),
           )
           .map((rule) =>
             featureRulesPartialUpdate({
               path: { uuid: rule.uuid },
-              body: { is_active: false },
+              body: { is_active: !rule.is_active },
             }),
           ),
       );
-      await queryClient.invalidateQueries({
-        queryKey: FEATURE_RULES_QUERY_KEY,
-      });
       showSuccess(translate('Features have been updated.'));
       location.reload();
     } catch (e) {

@@ -202,6 +202,20 @@ export const useActiveRuleCounts = (enabled: boolean) => {
   return useMemo(() => countActiveRules(rules), [rules]);
 };
 
+/** Inactive rules per feature key: what turning a feature Off left paused. */
+export const useInactiveRuleCounts = (enabled: boolean) => {
+  const rules = useFeatureRules(enabled);
+  return useMemo(
+    () =>
+      countActiveRules(
+        rules
+          .filter((rule) => rule.is_active === false)
+          .map((rule) => ({ ...rule, is_active: true })),
+      ),
+    [rules],
+  );
+};
+
 const EMPTY_KEYS: ReadonlySet<string> = new Set();
 
 /**
