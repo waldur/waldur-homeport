@@ -676,6 +676,15 @@
       "feature_area": "changelog"
     }
   },
+  "1 setting, {set} set": {
+    "context": {
+      "variables": {
+        "set": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "1 star": {
     "context": {
       "feature_area": "create-review"
@@ -3754,6 +3763,11 @@
       "feature_area": "offerings"
     }
   },
+  "Advanced (JSON)": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Advanced Options": {
     "context": {
       "feature_area": "list"
@@ -4132,6 +4146,17 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
+    }
+  },
+  "Agent configuration file (.yaml, .yml - max. 512 KiB)": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "Agent configuration has been imported.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "agent-import"
     }
   },
   "Agent configuration has been updated.": {
@@ -5203,6 +5228,11 @@
       }
     }
   },
+  "Also create the periodic usage policy": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Also delete chat history exports": {
     "context": {
       "feature_area": "matrix"
@@ -5212,6 +5242,11 @@
   "Also show it to signed-out visitors, on the login page and public pages, while it is active.": {
     "context": {
       "feature_area": "announcements"
+    }
+  },
+  "Also update the periodic usage policy": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Alternative names": {
@@ -9776,11 +9811,6 @@
       "feature_area": "site-agents"
     }
   },
-  "Backends": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Background task workers, the message broker and event publishing.": {
     "context": {
       "feature_area": "system-management"
@@ -10385,6 +10415,16 @@
   "Block output operations": {
     "context": {
       "feature_area": "celery"
+    }
+  },
+  "Block {number}": {
+    "context": {
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      },
+      "feature_area": "agent-import"
     }
   },
   "Blocked": {
@@ -12298,6 +12338,11 @@
       "feature_area": "service-providers"
     }
   },
+  "Change its actions": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Change limits": {
     "context": {
       "primary_ui_type": "title",
@@ -12403,7 +12448,7 @@
       "feature_area": "proposal"
     }
   },
-  "Change the backends and their settings in one save with \"Edit roles and backend settings together\" on the Backends tab.": {
+  "Change the backends and their settings in one save with \"Edit roles and backend settings together\" on the Advanced (JSON) tab.": {
     "context": {
       "feature_area": "integration"
     }
@@ -12500,7 +12545,7 @@
   "Changes": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "managed-projects"
+      "feature_area": "agent-import"
     }
   },
   "Changes ({count})": {
@@ -12707,6 +12752,11 @@
       "feature_area": "hygiene"
     }
   },
+  "Check again": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Check for updates": {
     "context": {
       "feature_area": "marketplace"
@@ -12731,6 +12781,11 @@
   "Check the Waldur address in the app's settings, then connect it again. If the address is right, contact your Waldur administrator.": {
     "context": {
       "feature_area": "oauth"
+    }
+  },
+  "Check the configuration again with your values and choices first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Check user access": {
@@ -12788,6 +12843,11 @@
   "Checking system health status and verifying all services are operational...": {
     "context": {
       "feature_area": "dashboard"
+    }
+  },
+  "Checking the configuration": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Checking the existing roles of this user...": {
@@ -12933,6 +12993,11 @@
   "Choose Sign-in Method": {
     "context": {
       "feature_area": "layouts"
+    }
+  },
+  "Choose a YAML file (.yaml or .yml).": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Choose a project from the dropdown above to view resource usage details.": {
@@ -13112,6 +13177,11 @@
       "feature_area": "settings"
     }
   },
+  "Choose the offering to import first.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Choose the permissions and the entities the token is restricted to yourself.": {
     "context": {
       "feature_area": "wizard"
@@ -13125,6 +13195,11 @@
   "Choose the username to keep for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory.": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Choose what happens when the periodic usage policy fires first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Choose what should be restored along with the project:": {
@@ -13160,6 +13235,11 @@
   "Choose who takes them over": {
     "context": {
       "feature_area": "provider-calls"
+    }
+  },
+  "Choose...": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Chosen at order time": {
@@ -13997,6 +14077,11 @@
   },
   "Common footer in html format for all emails.": {},
   "Common footer in txt format for all emails.": {},
+  "Common to all backends": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Communication": {
     "context": {
       "primary_ui_type": "title",
@@ -14455,6 +14540,11 @@
       "feature_area": "options"
     }
   },
+  "Component differences": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Component has been removed.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -14797,6 +14887,12 @@
   "Configuration Guide": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Configuration file": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "agent-import"
     }
   },
   "Configuration generated successfully.": {
@@ -23574,6 +23670,11 @@
       "feature_area": "mail"
     }
   },
+  "Empty text": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Enable": {
     "context": {
       "feature_area": "notifications"
@@ -24775,6 +24876,16 @@
   "Enter the offering's name as it will appear to users.": {
     "context": {
       "feature_area": "overview"
+    }
+  },
+  "Enter the required settings: {settings}.": {
+    "context": {
+      "variables": {
+        "settings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
     }
   },
   "Enter username(s)": {
@@ -27658,6 +27769,11 @@
       "action_type": "create"
     }
   },
+  "Fill in the settings the file leaves to the environment first.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Fill the template with your organization details, then upload it in the next step.": {
     "context": {
       "feature_area": "import"
@@ -28030,9 +28146,14 @@
       "feature_area": "cost-policies"
     }
   },
-  "Fix the backend components on the Backend settings tab first.": {
+  "Fix the backend components on the Advanced (JSON) tab first.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Fix the errors in the file first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Fix the errors shown above first.": {
@@ -28811,6 +28932,11 @@
           "type": "string"
         }
       }
+    }
+  },
+  "From the plugin catalog. A setting left unset takes its default; secrets stay in the agent configuration file.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "From the provider account": {
@@ -31642,6 +31768,11 @@
       "feature_area": "options"
     }
   },
+  "Ignored": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Image": {
     "context": {
       "primary_ui_type": "title",
@@ -31814,6 +31945,11 @@
       "feature_area": "single-import"
     }
   },
+  "Import agent configuration": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Import backend resources": {
     "context": {
       "feature_area": "integration"
@@ -31851,6 +31987,11 @@
   "Import config": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Import configuration": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Import files": {
@@ -31972,6 +32113,11 @@
       "feature_area": "single-import"
     }
   },
+  "Import the site agent's configuration file, as it runs on the agent host, into this offering's agent configuration. Nothing is saved until you review the changes and import them.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Import type": {
     "context": {
       "primary_ui_type": "label"
@@ -32000,6 +32146,7 @@
   },
   "Imported": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "import"
     }
   },
@@ -32118,6 +32265,16 @@
   "In the evaluation, from submission to the award. In an extension, which the team of an accepted proposal asks for as often as needed. In the closing, for the final report at the end of the allocation.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "In the file: {placeholder}": {
+    "context": {
+      "variables": {
+        "placeholder": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "agent-import"
     }
   },
   "In the pool": {},
@@ -35137,6 +35294,11 @@
       "feature_area": "wizard"
     }
   },
+  "Leave it empty to keep the actions the policy has. They decide what happens when a project exceeds its periodic allocation.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Leave it to decide by hand": {
     "context": {
       "primary_ui_type": "label"
@@ -37933,6 +38095,12 @@
     }
   },
   "Matches reviewer expertise keywords against proposal text. Keywords are weighted by proficiency level: Expert (100%), Familiar (70%). Basic keywords are not used.": {},
+  "Matches this offering": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "agent-import"
+    }
+  },
   "Matches users by: {filters}.": {
     "context": {
       "variables": {
@@ -42646,6 +42814,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "No offerings were found in the file.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "No offerings.": {
     "context": {
       "feature_area": "demo-presets"
@@ -43440,6 +43613,16 @@
   "No setting changes.": {
     "context": {
       "feature_area": "demo-presets"
+    }
+  },
+  "No settings in the plugin catalog: edit them as JSON on the Advanced (JSON) tab.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "No settings match.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "No single date is valid for all selected resources, for example because a project has ended or a resource starts after another project ends. Select fewer resources or clear the termination date.": {
@@ -44574,7 +44757,21 @@
       "feature_area": "proposal-roles"
     }
   },
-  "Not valid JSON.": {},
+  "Not valid JSON.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Not valid JSON: {settings}.": {
+    "context": {
+      "variables": {
+        "settings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "Not verified": {
     "context": {
       "feature_area": "details"
@@ -45823,6 +46020,11 @@
   "Offering templates": {
     "context": {
       "feature_area": "offering-templates"
+    }
+  },
+  "Offering to import": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Offering type": {
@@ -47791,6 +47993,11 @@
   "Or an e-mail address": {
     "context": {
       "feature_area": "reviewer-suggestions"
+    }
+  },
+  "Or paste the configuration": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Order": {
@@ -50428,6 +50635,11 @@
   "Periodic cost components": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "Periodic usage policy": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Periodically take usernames from the backend.": {
@@ -59175,7 +59387,8 @@
   "Required": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "onboarding-setup"
+      "feature_area": "onboarding-setup",
+      "has_api_calls": true
     }
   },
   "Required assurance levels": {
@@ -63882,6 +64095,11 @@
       "feature_area": "async"
     }
   },
+  "Search settings": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Search...": {
     "context": {
       "feature_area": "roles"
@@ -63925,6 +64143,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Secrets in the file are not imported: they stay in the configuration file on the agent host.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "Secrets left out": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Secrets needed only once their block is configured": {
@@ -66580,17 +66808,18 @@
       "feature_area": "changelog"
     }
   },
-  "Settings of the backends above, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Settings of the backends, as JSON. No secrets.": {
     "context": {
       "feature_area": "integration"
     }
   },
+  "Settings of the role backends, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Settings that describe an offering itself, such as its plans and components.": {},
+  "Settings to fill in": {},
   "Settings update": {},
   "Settle a past month": {
     "context": {
@@ -68247,6 +68476,16 @@
   },
   "Specific team role required for users to provision resources from this offering": {
     "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Specific to {backend}": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
       "feature_area": "integration"
     }
   },
@@ -70553,6 +70792,11 @@
       "feature_area": "contributions"
     }
   },
+  "Take the agent's settings from its configuration file.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Take the budget as spent": {
     "context": {
       "primary_ui_type": "label",
@@ -72104,6 +72348,12 @@
       "feature_area": "contributions"
     }
   },
+  "The configuration cannot be imported": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The configuration must be smaller than 512 KiB.": {},
   "The configuration the site agent loads for this offering. Secrets are not part of it: the agent takes them from its own configuration file.": {
     "context": {
       "feature_area": "integration"
@@ -72780,6 +73030,26 @@
       "feature_area": "metrics"
     }
   },
+  "The file changes nothing in the agent configuration.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file configures several offerings. Choose the one to import into this offering.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file differs from the offering's components. They stay as they are unless you choose to update them from the file.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file has policy settings, and the offering has no periodic usage policy yet.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs a site agent that supports configuration_source.": {},
   "The file holds the whole configuration. A change made in Waldur needs a new file.": {},
   "The file is empty.": {
@@ -72806,6 +73076,12 @@
   "The file is not valid YAML or JSON.": {
     "context": {
       "feature_area": "transfer"
+    }
+  },
+  "The file takes these settings from environment variables on the agent host. Enter the values Waldur should hold, then check the configuration again.": {},
+  "The file's policy settings, against the offering's periodic usage policy.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The final report has been opened.": {
@@ -73564,6 +73840,11 @@
       "feature_area": "import-users"
     }
   },
+  "The offering already has this configuration: there is nothing to import.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "The offering can now be requested via a call.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -73583,6 +73864,11 @@
   "The offering has no components!": {
     "context": {
       "feature_area": "import"
+    }
+  },
+  "The offering has no such component: add it with its price first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The offering in the export format, as JSON or YAML, with its agent configuration and parameters.": {
@@ -73883,6 +74169,11 @@
       "feature_area": "cost-policies"
     }
   },
+  "The policy already has these settings.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "The policy counts the full cost, whatever credit paid: {total}, at or below the {limit} limit.": {
     "context": {
       "variables": {
@@ -74048,6 +74339,11 @@
   "The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.": {
     "context": {
       "feature_area": "wizard"
+    }
+  },
+  "The preview does not reflect your values and choices yet.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The project and the resources of the offerings whose team accepted the extension move to the new end date once it is approved. More resources are ordered from those offerings, whose providers approve the orders as usual.": {
@@ -75090,6 +75386,11 @@
       "feature_area": "offering-templates"
     }
   },
+  "The unit and unit factor change how the limits and usage of existing resources are converted and billed. The label renames the component customers see.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "The unit of allocation for this instance, e.g. NHR": {
     "context": {
       "feature_area": "openportal-remote"
@@ -76116,6 +76417,11 @@
   "This date is not available.": {
     "context": {
       "feature_area": "DatePicker"
+    }
+  },
+  "This decides what happens when a project exceeds its periodic allocation.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "This decision will be logged for audit purposes.": {
@@ -79605,6 +79911,12 @@
       "feature_area": "create"
     }
   },
+  "Unable to check the agent configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "agent-import"
+    }
+  },
   "Unable to check version update: {error}": {
     "context": {
       "primary_ui_type": "error_message",
@@ -81146,6 +81458,12 @@
       "feature_area": "import"
     }
   },
+  "Unable to import the agent configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "agent-import"
+    }
+  },
   "Unable to import the ranking.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -82101,6 +82419,12 @@
   "Unable to read the file details": {
     "context": {
       "feature_area": "s3-browser"
+    }
+  },
+  "Unable to read the file.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "agent-import"
     }
   },
   "Unable to read the metrics now.": {
@@ -85801,6 +86125,11 @@
       "feature_area": "oauth"
     }
   },
+  "Update the offering": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Update thumbnail": {
     "context": {
       "primary_ui_type": "label",
@@ -85816,6 +86145,19 @@
   "Update user account details.": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Update {field} of {component}": {
+    "context": {
+      "variables": {
+        "field": {
+          "type": "unknown"
+        },
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "agent-import"
     }
   },
   "Update {name} settings": {
@@ -85913,6 +86255,11 @@
       "feature_area": "api-keys"
     }
   },
+  "Updating components affects existing resources": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Updating floating IPs": {},
   "Updating internal IPs": {},
   "Updating quotas": {},
@@ -85979,6 +86326,11 @@
       "feature_area": "create"
     }
   },
+  "Upload agent configuration file": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Upload an image": {
     "context": {
       "feature_area": "form"
@@ -86039,6 +86391,11 @@
   "Upload offering file": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Upload or paste an agent configuration file first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Upload supporting documentation": {
@@ -86708,6 +87065,16 @@
     }
   },
   "Used for offerings that do not set a value of their own.": {},
+  "Used for {roles}": {
+    "context": {
+      "variables": {
+        "roles": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "Used in invoice item descriptions": {},
   "Used only for this verification.": {},
   "Used to deliver personalized ads and track performance. (Currently unavailable)": {
@@ -89247,6 +89614,11 @@
     }
   },
   "Waldur deployment settings": {},
+  "Waldur does not store secrets. They stay in the agent's configuration file on the agent host.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Waldur holds no recovery key for you yet. Open the chat in Waldur first: it sets up encryption, or asks for the recovery key you already use in another Matrix app.": {
     "context": {
       "feature_area": "matrix"
@@ -90092,6 +90464,11 @@
   "When the peer is lost": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "When the policy fires": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "When the round is completed": {
@@ -93081,6 +93458,16 @@
   "default access subnets": {
     "context": {
       "feature_area": "access-subnets"
+    }
+  },
+  "default: {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
     }
   },
   "deleted": {
@@ -96129,6 +96516,26 @@
       }
     }
   },
+  "{backend} needs these settings, which are not set yet. They are saved with the backend.": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
+  "{backend}, which the other roles keep using, needs these settings, which are not set yet. They are saved with the backend.": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "{behaviour} behavioral, {cosmetic} cosmetic": {
     "context": {
       "variables": {
@@ -98259,6 +98666,18 @@
           "type": "number"
         },
         "parts": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{count} settings, {set} set": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "set": {
           "type": "unknown"
         }
       }

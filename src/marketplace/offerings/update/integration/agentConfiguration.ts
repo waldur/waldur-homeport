@@ -47,6 +47,14 @@ const BLOCK_KEYS = ['event_settings', 'agent_settings'] as const;
 const JSON_KEYS = ['backend_settings', 'backend_components'];
 
 /**
+ * The key of a change that sets some backend settings and keeps the rest, as
+ * opposed to `backend_settings`, which replaces the whole object. A setting
+ * given as empty (undefined, null or '') is removed: the agent then uses its
+ * default.
+ */
+export const BACKEND_SETTINGS_UPDATE = 'backend_settings_update';
+
+/**
  * Whether the offering page shows the agent configuration: a site-agent
  * offering, read by someone the backend shows the configuration to. It is
  * dropped from the payload of anyone who may not see the offering's secret
@@ -104,8 +112,9 @@ export const validateJsonObject = (value: unknown): string | undefined => {
  * The agent configuration to send after changing part of it.
  *
  * update_integration replaces the whole configuration, so the change is laid
- * over the stored one. Event and agent settings are merged key by key; the
- * JSON blocks and every other key are replaced as a whole. An emptied value
+ * over the stored one. Event and agent settings are merged key by key, and
+ * so are backend settings given as `BACKEND_SETTINGS_UPDATE`; the JSON blocks
+ * and every other key are replaced as a whole. An emptied value
  * is left out rather than sent: the serializer refuses a blank host or a null
  * switch, and the agent reads a missing key as its default. A switch saved at
  * the agent's default is left out too: written out it would change the
@@ -132,6 +141,18 @@ export const mergeAgentConfiguration = (
         },
       );
       next[key] = withoutUnset(block);
+    } else if (key === BACKEND_SETTINGS_UPDATE) {
+      const settings = { ...(next.backend_settings ?? {}) };
+      Object.entries((value as Record<string, unknown>) ?? {}).forEach(
+        ([name, item]) => {
+          if (item === undefined || item === null || item === '') {
+            delete settings[name];
+          } else {
+            settings[name] = item;
+          }
+        },
+      );
+      next.backend_settings = settings;
     } else if (JSON_KEYS.includes(key)) {
       next[key] = parseJsonObject(value);
     } else {
@@ -314,7 +335,7 @@ const BACKEND_MESSAGE = /^([a-z][\w-]*): (.+)$/;
  * is put after the path, `dotted.path (backend): message`, one line per
  * backend.
  */
-const flattenErrors = (errors: unknown, prefix = ''): string[] => {
+export const flattenErrors = (errors: unknown, prefix = ''): string[] => {
   const line = (message: string, backend?: string) => {
     const where = backend ? `${prefix} (${backend})` : prefix;
     return where ? `${where}: ${message}` : message;
@@ -426,15 +447,13 @@ export const describeRefusal = (
   if (path !== ROLES_AND_SETTINGS && refuses('backend_settings')) {
     hints.push(
       translate(
-        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Backends tab.',
+        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Advanced (JSON) tab.',
       ),
     );
   }
   if (refuses('backend_components')) {
     hints.push(
-      translate(
-        'Fix the backend components on the Backend settings tab first.',
-      ),
+      translate('Fix the backend components on the Advanced (JSON) tab first.'),
     );
   }
   return { errors: [...flattenErrors(own), ...otherLines], hints };
