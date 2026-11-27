@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, ReactNode, useMemo } from 'react';
 import {
   marketplacePublicOfferingsFacetsList,
   marketplacePublicOfferingsList,
@@ -113,6 +113,8 @@ export const PublicOfferingsList: FunctionComponent<{
   variant?: CardStyleType;
   title?: string;
   onTagClick?(tag: NestedTag): void;
+  /** Actions in the list's header, such as adding an offering. */
+  tableActions?: ReactNode;
 }> = ({
   filter,
   showCategory,
@@ -121,6 +123,7 @@ export const PublicOfferingsList: FunctionComponent<{
   variant,
   title,
   onTagClick,
+  tableActions,
 }) => {
   const contextCardStyle = useCardStyle();
   const resolvedVariant = variant ?? contextCardStyle;
@@ -255,6 +258,7 @@ export const PublicOfferingsList: FunctionComponent<{
       showPageSizeSelector={true}
       title={title || translate('Offerings')}
       rowActions={RowActions}
+      tableActions={tableActions}
       hasOptionalColumns
     />
   );

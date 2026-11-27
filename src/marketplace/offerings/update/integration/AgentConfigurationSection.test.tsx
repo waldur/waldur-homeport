@@ -5,9 +5,9 @@ import { set } from 'es-toolkit/compat';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceProviderOfferingsRetrieve,
-  marketplaceProviderOfferingsSiteAgentConfigRetrieve,
   marketplaceProviderOfferingsUpdateIntegration,
   marketplaceSiteAgentPluginsList,
+  marketplaceProviderOfferingsSiteAgentConfigRetrieve,
 } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
@@ -157,21 +157,6 @@ describe('AgentConfigurationSection', () => {
         },
         { name: 'ldap', roles: ['username_management'] },
       ],
-    } as any);
-    vi.mocked(
-      marketplaceProviderOfferingsSiteAgentConfigRetrieve,
-    ).mockResolvedValue({
-      data: {
-        offering: { backend_type: 'slurm' },
-        secrets: [
-          {
-            field: 'backend_settings.ldap.bind_password',
-            backend: 'slurm',
-            requirement: 'required_with_parent',
-          },
-        ],
-        version: 'abc123',
-      },
     } as any);
     vi.mocked(marketplaceProviderOfferingsUpdateIntegration).mockResolvedValue({
       data: undefined,
@@ -327,6 +312,14 @@ describe('AgentConfigurationSection', () => {
         'order_processing_backend',
       );
     });
+  });
+
+  it('offers what the agent loads from its header, and no template differences without a template', () => {
+    renderSection();
+    expect(screen.getByTestId('agent-loads-button')).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('template-differences-button'),
+    ).not.toBeInTheDocument();
   });
 
   it('is not shown on an offering without a site agent', () => {
@@ -939,56 +932,5 @@ describe('AgentConfigurationSection', () => {
     expect(editButtons['agent_configuration.backend_components'].value).toEqual(
       {},
     );
-  });
-
-  it('lists the secret of an unset block apart from those needed', async () => {
-    openTab('agent-loads');
-    renderSection();
-    expect(await screen.findByText('abc123')).toBeInTheDocument();
-    expect(
-      screen.getByText('The backends in use need no secrets.'),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText('Secrets needed only once their block is configured'),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText('backend_settings.ldap.bind_password'),
-    ).toBeInTheDocument();
-  });
-
-  it('shows the secret of a configured block as needed', async () => {
-    vi.mocked(
-      marketplaceProviderOfferingsSiteAgentConfigRetrieve,
-    ).mockResolvedValue({
-      data: {
-        offering: {
-          backend_type: 'slurm',
-          backend_settings: { ldap: { uri: 'ldap://ldap.example.com' } },
-        },
-        secrets: [
-          {
-            field: 'backend_settings.ldap.bind_password',
-            backend: 'slurm',
-            requirement: 'required_with_parent',
-          },
-        ],
-        version: 'abc123',
-      },
-    } as any);
-    openTab('agent-loads');
-    renderSection();
-    expect(await screen.findByText('abc123')).toBeInTheDocument();
-    expect(
-      screen.getByText('backend_settings.ldap.bind_password'),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText('Required once its block is set'),
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByText('The backends in use need no secrets.'),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText('Secrets needed only once their block is configured'),
-    ).not.toBeInTheDocument();
   });
 });

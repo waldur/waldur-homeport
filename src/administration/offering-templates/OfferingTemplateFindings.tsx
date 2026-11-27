@@ -51,13 +51,14 @@ export const OfferingTemplateFindingsBadges: FC<{ row: OfferingTemplate }> = ({
   ) : null;
 };
 
-/** The findings, one per row, errors first as the API sends them. */
-export const OfferingTemplateFindingsTable: FC<{ row: OfferingTemplate }> = ({
-  row,
-}) => (
+/** Findings of the site-agent consistency rules, one per row, errors
+ * first as the API sends them: a template's, a dry run's or an offering's. */
+export const ConfigurationFindingsTable: FC<{
+  findings: OfferingConfigurationFinding[];
+}> = ({ findings }) => (
   <SimpleTable<OfferingConfigurationFinding & { index: number }>
     rowKey="index"
-    rows={findingsOf(row).map((finding, index) => ({ ...finding, index }))}
+    rows={findings.map((finding, index) => ({ ...finding, index }))}
     columns={[
       {
         title: translate('Severity'),
@@ -87,3 +88,7 @@ export const OfferingTemplateFindingsTable: FC<{ row: OfferingTemplate }> = ({
     ]}
   />
 );
+
+export const OfferingTemplateFindingsTable: FC<{ row: OfferingTemplate }> = ({
+  row,
+}) => <ConfigurationFindingsTable findings={findingsOf(row)} />;

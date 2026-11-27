@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+import { CreateOfferingForProviderButton } from '@/marketplace/offerings/list/CreateOfferingButton';
 import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
@@ -34,6 +35,10 @@ export const AllOfferingsList = () => {
     [filters],
   );
 
+  // The organization the page is filtered by, which Add offering opens on.
+  const organizationUuid = filters.find((item) => item.name === 'organization')
+    ?.value?.uuid;
+
   return (
     <CardStyleProvider cardStyle={cardStyle}>
       <MarketplaceScopeBar />
@@ -42,6 +47,9 @@ export const AllOfferingsList = () => {
         showOrganization
         initialMode={initialMode}
         filter={contextFilter}
+        tableActions={
+          <CreateOfferingForProviderButton providerUuid={organizationUuid} />
+        }
       />
     </CardStyleProvider>
   );

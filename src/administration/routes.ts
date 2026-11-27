@@ -1149,23 +1149,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-offering-templates',
-    url: 'offering-templates/',
-    parent: 'admin-configuration',
-    component: lazyComponent(() =>
-      import('./offering-templates/AdministrationOfferingTemplates').then(
-        (module) => ({
-          default: module.AdministrationOfferingTemplates,
-        }),
-      ),
-    ),
-    data: {
-      breadcrumb: () => translate('Offering templates'),
-      permissions: [isStaff],
-    },
-  },
-
-  {
     name: 'admin-matrix-chat',
     url: 'matrix-chat/?tab&setting',
     params: { tab: { dynamic: true }, setting: { dynamic: true } },

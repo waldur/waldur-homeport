@@ -472,6 +472,7 @@
   "Please search for your organization": "Please search for your organisation",
   "Please select at least one license to import": "Please select at least one licence to import",
   "Please select organization first": "Please select organisation first",
+  "Plugins of your own, not in the site agent plugin catalog. Listed here, they can be chosen for a role above.": "Plugins of your own, not in the site agent plugin catalogue. Listed here, they can be chosen for a role above.",
   "Press {shortcut} to add the highlighted item to favorites or remove it.": "Press {shortcut} to add the highlighted item to favourites or remove it.",
   "Previously saved credit value for this organization: {credits}": "Previously saved credit value for this organisation: {credits}",
   "Process of importing Arrow licenses as Waldur marketplace resources. Select a customer mapping, choose a vendor offering, pick a project, then select licenses to import.": "Process of importing Arrow licences as Waldur marketplace resources. Select a customer mapping, choose a vendor offering, pick a project, then select licences to import.",

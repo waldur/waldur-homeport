@@ -1211,6 +1211,11 @@
       "feature_area": "views"
     }
   },
+  "A site-agent offering set up from a published offering template.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "A site-to-site IPsec tunnel between your network and the provider’s.": {
     "context": {
       "feature_area": "common"
@@ -1374,6 +1379,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "settings"
+    }
+  },
+  "API endpoint": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "API key": {
@@ -4226,6 +4236,11 @@
       "feature_area": "site-agents"
     }
   },
+  "Agent roles": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Agent service": {
     "context": {
       "feature_area": "site-agents"
@@ -5468,6 +5483,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "offering-templates",
       "action_type": "create"
+    }
+  },
+  "An offering template also sets up components, plans and the site agent configuration, and checks them before the offering is created.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "An offering template carries an offering, its components, plans and agent configuration, with the parameters a service provider fills in to create an offering from it. Secrets, files, screenshots, organizations and resources are never part of it.": {
@@ -8566,6 +8586,16 @@
       "primary_ui_type": "label"
     }
   },
+  "At most {count} characters.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "At most {count} networks.": {
     "context": {
       "variables": {
@@ -9977,7 +10007,11 @@
     }
   },
   "Basic offering": {},
-  "Basics": {},
+  "Basics": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Batch expired": {
     "context": {
       "feature_area": "assignments"
@@ -10907,6 +10941,11 @@
     }
   },
   "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": {},
+  "By backend ID": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "By category": {
     "context": {
       "primary_ui_type": "label",
@@ -12532,6 +12571,11 @@
       "feature_area": "type-based"
     }
   },
+  "Changed since it was created": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Changed {date}": {
     "context": {
       "variables": {
@@ -12759,7 +12803,12 @@
   },
   "Check again": {
     "context": {
-      "feature_area": "agent-import"
+      "feature_area": "from-template"
+    }
+  },
+  "Check configuration": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Check for updates": {
@@ -12806,6 +12855,11 @@
   "Checked": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Checked against the offering's components, plans and agent configuration. A change to any of them is checked when you check again.": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Checked when the order is placed": {
@@ -12860,6 +12914,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "team",
       "action_type": "create"
+    }
+  },
+  "Checking the offering…": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Checking the outgoing mail configuration...": {
@@ -13085,6 +13144,11 @@
       "feature_area": "resource-requests-step"
     }
   },
+  "Choose a template first.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Choose a type and an entity for every restriction, or remove it.": {
     "context": {
       "feature_area": "wizard"
@@ -13168,6 +13232,15 @@
   "Choose offerings": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Choose one of: {choices}.": {
+    "context": {
+      "variables": {
+        "choices": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.": {},
@@ -14892,6 +14965,11 @@
   "Configuration Guide": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Configuration checks": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Configuration file": {
@@ -17027,6 +17105,11 @@
       "feature_area": "actions"
     }
   },
+  "Create from template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Create group invitation": {
     "context": {
       "feature_area": "actions"
@@ -17470,6 +17553,11 @@
         }
       },
       "feature_area": "workflow-check"
+    }
+  },
+  "Created from version": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Created when final billing export arrives and differs from provisional amount by 0.01 or more. Added to current month invoice.": {},
@@ -18283,7 +18371,7 @@
   },
   "Custom backends": {
     "context": {
-      "feature_area": "integration"
+      "feature_area": "from-template"
     }
   },
   "Custom claim": {
@@ -21120,6 +21208,11 @@
       "feature_area": "type-based"
     }
   },
+  "Different from the latest version": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Different from your view": {
     "context": {
       "feature_area": "dry-run"
@@ -21795,6 +21888,16 @@
   },
   "Does not apply": {},
   "Does not apply to this deployment.": {},
+  "Does not match the pattern {pattern}.": {
+    "context": {
+      "variables": {
+        "pattern": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "Does not match {user}": {
     "context": {
       "variables": {
@@ -24438,6 +24541,11 @@
       }
     }
   },
+  "Enter a backend ID": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "Enter a claim name first": {
     "context": {
       "feature_area": "steps"
@@ -24607,7 +24715,11 @@
   },
   "Enter a network in CIDR notation, such as 10.0.0.0/16.": {},
   "Enter a number of days.": {},
-  "Enter a number.": {},
+  "Enter a number.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Enter a prefix length from 0 to {max}.": {
     "context": {
       "variables": {
@@ -25670,6 +25782,7 @@
       "action_type": "read"
     }
   },
+  "Every offering whose backend ID matches, such as all offerings of one cluster. Archived offerings are left out.": {},
   "Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organization managing it.": {
     "context": {
       "feature_area": "configuration"
@@ -26065,12 +26178,22 @@
     }
   },
   "Expected resource growth pattern": {},
+  "Expected text.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Expected total": {
     "context": {
       "feature_area": "details"
     }
   },
   "Expected user growth rate": {},
+  "Expected yes or no.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Experimental AI & external processing": {
     "context": {
       "feature_area": "ai-assistant"
@@ -26789,6 +26912,12 @@
     }
   },
   "Failed to generate configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "site-agent"
+    }
+  },
+  "Failed to generate configuration. Check that an offering has a matching backend ID.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "site-agent"
@@ -28744,6 +28873,16 @@
       }
     }
   },
+  "Format: {pattern}": {
+    "context": {
+      "variables": {
+        "pattern": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "Former institution": {
     "context": {
       "primary_ui_type": "label"
@@ -29303,7 +29442,7 @@
       "feature_area": "site-agent"
     }
   },
-  "Generate a YAML configuration file for waldur-site-agent based on selected SLURM offerings.": {
+  "Generate a YAML configuration file for waldur-site-agent from the selected site agent offerings.": {
     "context": {
       "feature_area": "site-agent"
     }
@@ -29332,6 +29471,11 @@
   "Generate assignments refuses more reviewers per proposal than Max reviewers per proposal, and a reviewer's load is the smaller of Maximum assignments in the reviewer pool and Max proposals per reviewer. The Assignment algorithm setting is not applied yet: reviewers are always picked by affinity, best first.": {
     "context": {
       "feature_area": "matching"
+    }
+  },
+  "Generate configuration file": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Generate link": {
@@ -32052,6 +32196,11 @@
       "action_type": "create"
     }
   },
+  "Import notes": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Import offering": {
     "context": {
       "feature_area": "list"
@@ -33789,6 +33938,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "affiliations"
+    }
+  },
+  "Is exactly": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Is external": {
@@ -41275,6 +41429,11 @@
       "feature_area": "actions"
     }
   },
+  "New offering from a template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "New offering merge": {
     "context": {
       "feature_area": "wizard"
@@ -41598,11 +41757,6 @@
   "No POSIX identifiers found.": {
     "context": {
       "feature_area": "user"
-    }
-  },
-  "No SLURM offerings found for this service provider. Create a SLURM offering first.": {
-    "context": {
-      "feature_area": "site-agent"
     }
   },
   "No SRAM collaborations have been provisioned yet. They appear here after SRAM pushes them over SCIM.": {
@@ -42296,6 +42450,7 @@
       "feature_area": "analytics"
     }
   },
+  "No differences.": {},
   "No discount — add a tier to grant one.": {
     "context": {
       "feature_area": "plans"
@@ -42819,6 +42974,11 @@
       "feature_area": "accounts"
     }
   },
+  "No offering templates": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "No offerings": {
     "context": {
       "feature_area": "credits"
@@ -42968,6 +43128,11 @@
   "No overridden settings": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "No parameters": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "No participants in this room.": {
@@ -45548,7 +45713,8 @@
   },
   "Off": {
     "context": {
-      "feature_area": "support"
+      "primary_ui_type": "label",
+      "feature_area": "from-template"
     }
   },
   "Off track": {
@@ -46023,6 +46189,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Offering template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Offering template created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -46054,6 +46225,7 @@
   },
   "Offering templates": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "offering-templates"
     }
   },
@@ -46227,7 +46399,7 @@
       "feature_area": "structure"
     }
   },
-  "Offerings, offering groups and merges.": {
+  "Offerings, offering groups, merges and offering templates.": {
     "context": {
       "feature_area": "marketplace"
     }
@@ -49645,6 +49817,7 @@
   },
   "Parameters": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "offering-templates"
     }
   },
@@ -51478,6 +51651,11 @@
       "feature_area": "offering-templates"
     }
   },
+  "Plans and prices": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Plans below safety margin": {},
   "Plans of the orders": {},
   "Plans of the resources": {},
@@ -51987,6 +52165,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "settings"
+    }
+  },
+  "Plugins of your own, not in the site agent plugin catalog. Listed here, they can be chosen for a role above.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Pods": {
@@ -59735,6 +59918,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Resolve the errors before creating the offering.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Resolve the username conflicts first: switching to per service provider accounts is refused until then.": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -64205,11 +64393,6 @@
       "feature_area": "agent-import"
     }
   },
-  "Secrets needed only once their block is configured": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Secrets the agent configuration file must hold": {
     "context": {
       "feature_area": "integration"
@@ -64469,11 +64652,6 @@
   "Select Resource": {
     "context": {
       "feature_area": "policies"
-    }
-  },
-  "Select SLURM Offerings": {
-    "context": {
-      "feature_area": "site-agent"
     }
   },
   "Select Service Desk Project": {
@@ -65266,6 +65444,11 @@
   "Select service provider...": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Select site agent offerings": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Select software catalog...": {
@@ -66197,7 +66380,7 @@
   },
   "Service provider not found for this offering.": {
     "context": {
-      "feature_area": "site-agent"
+      "feature_area": "integration"
     }
   },
   "Service provider organization": {
@@ -66869,6 +67052,7 @@
     }
   },
   "Settings that describe an offering itself, such as its plans and components.": {},
+  "Settings the chosen backends need": {},
   "Settings to fill in": {},
   "Settings update": {},
   "Settle a past month": {
@@ -68669,6 +68853,11 @@
       "feature_area": "templates"
     }
   },
+  "Staff publish offering templates under Administration → Offerings → Offering templates.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Staffing": {
     "context": {
       "primary_ui_type": "title",
@@ -68883,6 +69072,11 @@
       "feature_area": "discussions"
     }
   },
+  "Start from a template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Start from the portal's wording": {
     "context": {
       "feature_area": "mail"
@@ -68986,6 +69180,11 @@
   "Starts from the portal's wording.": {
     "context": {
       "feature_area": "mail"
+    }
+  },
+  "Starts with": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "State": {
@@ -71180,6 +71379,11 @@
   },
   "Template based": {},
   "Template details": {},
+  "Template differences": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Template edited successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -72004,11 +72208,6 @@
       "feature_area": "update"
     }
   },
-  "The backends can use these settings, but this offering does not configure the block that holds them. Leave them out of the agent configuration file until it does.": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "The backends in use need no secrets.": {
     "context": {
       "feature_area": "integration"
@@ -72310,10 +72509,25 @@
       "feature_area": "matrix"
     }
   },
+  "The check refused the offering: see above.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "The checklist was assigned to the selected offerings": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "compliance"
+    }
+  },
+  "The checks found nothing to fix.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
+  "The checks found only warnings, which may be intended.": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "The chosen call or round is not one you can report on here.": {
@@ -73105,7 +73319,7 @@
       "feature_area": "agent-import"
     }
   },
-  "The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs a site agent that supports configuration_source.": {},
+  "The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs waldur-site-agent 1.0.8-rc.16 or later: an older agent ignores configuration_source without a warning.": {},
   "The file holds the whole configuration. A change made in Waldur needs a new file.": {},
   "The file is empty.": {
     "context": {
@@ -73900,10 +74114,20 @@
       "feature_area": "agent-import"
     }
   },
+  "The offering can be created; the warnings below may be intended.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "The offering can now be requested via a call.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
+    }
+  },
+  "The offering cannot be created as it is": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "The offering could not be attached automatically. Please add it in the resource requests step.": {
@@ -74961,6 +75185,11 @@
       "feature_area": "billing"
     }
   },
+  "The same filter is available without the file: GET marketplace-service-providers/<uuid>/site_agent_config/ with backend_id or backend_id_startswith.": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "The scenario was added to the template.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -75095,6 +75324,11 @@
       "feature_area": "actions"
     }
   },
+  "The service provider has no site agent offerings. Create one first.": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "The service was active for the last 10 minutes": {},
   "The service wasn't active for the last 10 minutes": {},
   "The service's default goal. Click to set this project's own.": {
@@ -75115,6 +75349,16 @@
   "The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations. It saves the settings with sync disabled and no export type reference: set both in the settings to start syncing.": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "The site agent cannot work with the offering as it is: fix the errors below.": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
+  "The site agent could not work with this offering. Go back and change the values or roles the errors name.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "The site agent executes sacctmgr commands on the SLURM cluster to enforce the policy: it sets fairshare and the {limitType} limits on the resource account, and resets RawUsage on the first sync of a new period when usage reset is enabled (never for a total period). Settings that already match the cluster are skipped. The QoS is switched separately when the resource is paused, downscaled or restored.": {
@@ -75366,6 +75610,7 @@
       "feature_area": "call-templates"
     }
   },
+  "The template does not set these, and the backends cannot run without them.": {},
   "The template has no versions yet.": {
     "context": {
       "feature_area": "offering-templates"
@@ -76613,7 +76858,7 @@
   },
   "This field is required.": {
     "context": {
-      "feature_area": "project"
+      "feature_area": "from-template"
     }
   },
   "This file contains CHANGEME placeholder values that must be replaced with actual credentials before use.": {
@@ -77396,6 +77641,11 @@
   "This table has no columns to export.": {
     "context": {
       "action_type": "export"
+    }
+  },
+  "This template asks for nothing: the offering is created as the template describes it.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "This template includes all required fields for HPC project import: {fields} (required) etc.": {
@@ -79982,6 +80232,11 @@
       "feature_area": "agent-import"
     }
   },
+  "Unable to check the offering.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Unable to check version update: {error}": {
     "context": {
       "primary_ui_type": "error_message",
@@ -80008,6 +80263,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "rounds"
+    }
+  },
+  "Unable to compare the offering with its template.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Unable to complete onboarding approval.": {
@@ -81829,6 +82089,11 @@
       "feature_area": "offering-templates"
     }
   },
+  "Unable to load offering templates.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Unable to load offering user.": {
     "context": {
       "feature_area": "details"
@@ -82154,6 +82419,11 @@
   "Unable to load the sign-in request.": {
     "context": {
       "feature_area": "oauth"
+    }
+  },
+  "Unable to load the site agent plugins.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Unable to load the suggested reviewers.": {
@@ -89985,6 +90255,11 @@
       "feature_area": "integration"
     }
   },
+  "What a script, or a site agent with configuration_source: waldur, fetches to get this configuration.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "What are inodes? Each file and directory uses one inode. This setting determines how many individual files users can store per TB. Example: 7000 inodes/TB means users can store up to 7,000 files per terabyte of space.": {
     "context": {
       "feature_area": "options"
@@ -96181,6 +96456,17 @@
       "feature_area": "vendorOfferings"
     }
   },
+  "version {version}": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "vhosts": {
     "context": {
       "feature_area": "rabbitmq"
@@ -96575,7 +96861,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "integration"
+      "feature_area": "from-template"
     }
   },
   "{backend} (default)": {
@@ -99125,6 +99411,19 @@
       }
     }
   },
+  "{description} The template uses {backend}.": {
+    "context": {
+      "variables": {
+        "description": {
+          "type": "string"
+        },
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "{description} for {name}": {
     "context": {
       "variables": {
@@ -100267,7 +100566,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "call-management"
+      "feature_area": "from-template"
     }
   },
   "{name}: not sorted. Sort ascending": {
@@ -102294,6 +102593,19 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{setting} ({backend})": {
+    "context": {
+      "variables": {
+        "setting": {
+          "type": "unknown"
+        },
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
     }
   },
   "{setting}, on {event}": {

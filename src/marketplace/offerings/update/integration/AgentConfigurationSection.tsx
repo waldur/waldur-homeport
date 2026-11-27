@@ -4,16 +4,14 @@ import {
   AgentConfiguration,
   AgentPlugin,
   marketplaceProviderOfferingsRetrieve,
-  marketplaceProviderOfferingsSiteAgentConfigRetrieve,
   marketplaceProviderOfferingsUpdateIntegration,
   marketplaceSiteAgentPluginsList,
-  SiteAgentOfferingSecret,
+  marketplaceProviderOfferingsSiteAgentConfigRetrieve,
 } from 'waldur-js-client';
 
-import { Code, PropertyItem, PropertyList } from 'waldur-ui';
+import { PropertyList } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { atLeast, composeValidators, lessThanOrEqual } from '@/core/validators';
 import {
   CommaSeparatedListEditField,
@@ -25,10 +23,7 @@ import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { getDateLocale } from '@/i18n/LanguageUtilsService';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { propVal } from '@/property/propertyFields';
 import { useNotify } from '@/store/notify';
-import { SimpleTable } from '@/table/SimpleTable';
-import { Column } from '@/table/types';
 
 import { ImportAgentConfigurationButton } from './agent-import/ImportAgentConfigurationButton';
 import {
@@ -42,15 +37,17 @@ import {
   describeRefusal,
   editedPath,
   expandRolesAndSettings,
+  getRoleDescriptions,
+  getRoleLabels,
   getRolesAndSettings,
   isAgentConfigurationVisible,
   mergeAgentConfiguration,
   replacedKeys,
   withDefaultRoles,
   ROLES_AND_SETTINGS,
-  splitSecretsByBlock,
   validateRolesAndSettings,
 } from './agentConfiguration';
+import { AgentConfigurationActions } from './AgentConfigurationActions';
 import {
   BackendSettingsBlock,
   RoleBackendEditField,
@@ -92,26 +89,6 @@ const getMembershipSyncOptions = () => [
   { value: 'off', label: translate('By polling') },
 ];
 
-const getRoleLabels = (): Record<AgentRoleField, string> => ({
-  order_processing_backend: translate('Order processing'),
-  membership_sync_backend: translate('Membership sync'),
-  reporting_backend: translate('Reporting'),
-  username_management_backend: translate('Username management'),
-});
-
-const getRoleDescriptions = (): Record<AgentRoleField, string> => ({
-  order_processing_backend: translate(
-    'Creates, updates and terminates resources on the backend.',
-  ),
-  membership_sync_backend: translate(
-    "Keeps the backend's users in step with resource teams.",
-  ),
-  reporting_backend: translate('Reports usage from the backend to Waldur.'),
-  username_management_backend: translate(
-    'Gives offering users their usernames on the backend.',
-  ),
-});
-
 // "Membership sync and Reporting", in the UI language.
 const joinLabels = (labels: string[]) =>
   new Intl.ListFormat(getDateLocale(), { type: 'conjunction' }).format(labels);
@@ -138,94 +115,6 @@ const renderRole = (
     });
   }
   return translate('Off');
-};
-
-const getRequirementLabels = () => ({
-  required: translate('Required'),
-  required_with_parent: translate('Required once its block is set'),
-  optional: translate('Optional'),
-});
-
-const getSecretColumns = (): Column<SiteAgentOfferingSecret>[] => [
-  {
-    title: translate('Setting'),
-    render: ({ row }) => <Code>{row.field}</Code>,
-  },
-  { title: translate('Backend'), render: ({ row }) => row.backend },
-  {
-    title: translate('Needed'),
-    render: ({ row }) =>
-      getRequirementLabels()[row.requirement] ?? row.requirement,
-  },
-];
-
-const AgentLoadsPanel: FC<{ offeringUuid: string }> = ({ offeringUuid }) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['site-agent-config', offeringUuid],
-    queryFn: () =>
-      marketplaceProviderOfferingsSiteAgentConfigRetrieve({
-        path: { uuid: offeringUuid },
-      }).then((response) => response.data),
-    refetchOnWindowFocus: false,
-  });
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-  if (error || !data) {
-    return (
-      <p className="text-danger">
-        {translate("Unable to load the agent's configuration.")}
-      </p>
-    );
-  }
-  const { needed, ifConfigured } = splitSecretsByBlock(
-    data.secrets,
-    data.offering?.backend_settings,
-  );
-  return (
-    <>
-      <p className="text-secondary mb-4">
-        {translate(
-          'The configuration the site agent loads for this offering. Secrets are not part of it: the agent takes them from its own configuration file.',
-        )}
-      </p>
-      <PropertyList variant="summary" className="mb-5">
-        <PropertyItem
-          label={translate('Version')}
-          value={propVal.code(data.version, { truncate: 'middle' })}
-          hasCopy
-        />
-        <PropertyItem
-          label={translate('Backend type')}
-          value={data.offering?.backend_type}
-        />
-      </PropertyList>
-      <h3 className="text-base font-semibold mb-2">
-        {translate('Secrets the agent configuration file must hold')}
-      </h3>
-      {needed.length ? (
-        <SimpleTable columns={getSecretColumns()} rows={needed} />
-      ) : (
-        <p className="text-tertiary">
-          {translate('The backends in use need no secrets.')}
-        </p>
-      )}
-      {ifConfigured.length ? (
-        <>
-          <h3 className="text-base font-semibold mt-5 mb-2">
-            {translate('Secrets needed only once their block is configured')}
-          </h3>
-          <p className="text-secondary mb-2">
-            {translate(
-              'The backends can use these settings, but this offering does not configure the block that holds them. Leave them out of the agent configuration file until it does.',
-            )}
-          </p>
-          <SimpleTable columns={getSecretColumns()} rows={ifConfigured} />
-        </>
-      ) : null}
-    </>
-  );
 };
 
 export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
@@ -532,10 +421,13 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
       <TabbedSection
         title={translate('Agent configuration')}
         actions={
-          <ImportAgentConfigurationButton
-            offering={offering}
-            refetch={refetch}
-          />
+          <>
+            <AgentConfigurationActions offering={offering} />
+            <ImportAgentConfigurationButton
+              offering={offering}
+              refetch={refetch}
+            />
+          </>
         }
       >
         <TabbedSection.Tab id="agent-roles" title={translate('Roles')} plain>
@@ -749,14 +641,6 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
             dialogSize="xl"
             validate={jsonObjectValidator}
           />
-        </TabbedSection.Tab>
-
-        <TabbedSection.Tab
-          id="agent-loads"
-          title={translate('What the agent loads')}
-          plain
-        >
-          <AgentLoadsPanel offeringUuid={offering.uuid} />
         </TabbedSection.Tab>
       </TabbedSection>
     </EditFieldProvider>
