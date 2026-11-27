@@ -293,6 +293,14 @@ describe('the pages of the step dialogs', () => {
     ]);
   });
 
+  it("ends the configure dialog on the step's emails, then the check", () => {
+    expect(
+      stepFormPages(kind('assessment'), EMPTY_STEP_VALUES, {
+        withCheck: true,
+      }).slice(-3),
+    ).toEqual(['timing', 'emails', 'check']);
+  });
+
   it('leaves out a page with no field to show', () => {
     const onlyBasics = {
       ...kind('decision'),

@@ -1,10 +1,15 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
-import { FC, Fragment, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
-import { CallWorkflowStep, StepKind } from 'waldur-js-client';
+import {
+  CallWorkflowStep,
+  StepKind,
+  WorkflowDescriptionRule,
+} from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, PropertyItem, PropertyList } from 'waldur-ui';
 
+import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
 import {
   useCallProposalRoles,
@@ -22,7 +27,11 @@ import {
 } from '@/proposals/workflow/constants';
 import { countStatusLabels } from '@/proposals/workflow/statusLabels';
 import { fromStepForm } from '@/proposals/workflow-description/formAdapter';
-import { StepMailsSection } from '@/proposals/workflow-description/mail/StepMailsSection';
+import {
+  recipientLabel,
+  triggerLabel,
+} from '@/proposals/workflow-description/mail/labels';
+import { stepMailRules } from '@/proposals/workflow-description/mail/StepMailsSection';
 import { useCallWorkflowDescription } from '@/proposals/workflow-description/queries';
 import { formatStepSummary } from '@/proposals/workflow-description/summary';
 
@@ -80,6 +89,15 @@ const FIELD_LABELS = (): Partial<Record<keyof StepFormValues, string>> => ({
     'Scores more than this many points apart',
   ),
   status_labels: translate('Status labels'),
+  phase: translate('Runs'),
+  round_scoped: translate('Runs once per round'),
+  project_end_offset_days: translate('Days before the project ends'),
+});
+
+const PHASE_LABELS = (): Record<string, string> => ({
+  evaluation: translate('In the evaluation'),
+  extension: translate('In an extension request'),
+  closing: translate('In the closing (final report)'),
 });
 
 const NOT_SET = () => translate('Not set');
@@ -178,6 +196,8 @@ export const StepCheckPage: FC<CheckPageProps> = ({
         return values.run_condition_outcomes.length
           ? values.run_condition_outcomes.map(outcomeLabel).join(', ')
           : NOT_SET();
+      case 'phase':
+        return PHASE_LABELS()[values.phase] ?? String(values.phase);
       case 'on_negative':
         return onNegativeLabel(values.on_negative);
       case 'transition_mode':
@@ -240,35 +260,62 @@ export const StepCheckPage: FC<CheckPageProps> = ({
               )}
               {stepFormPageLabel(page)}
             </h6>
-            <BaseButton
-              variant="text-primary"
-              size="sm"
-              label={translate('Change')}
+            <CompactEditButton
+              fieldName={stepFormPageLabel(page)}
               onClick={() => onChange(page)}
             />
           </div>
-          <dl className="grid grid-cols-1 sm:grid-cols-12 gap-x-5 mb-0">
-            {pageFields(page, kind, values, { showEnableSwitch }).map(
-              (field) => (
-                <Fragment key={field}>
-                  <dt className="sm:col-span-5 text-quaternary font-normal">
-                    {labels[field] ?? field}
-                  </dt>
-                  <dd className="sm:col-span-7">{format(field)}</dd>
-                </Fragment>
-              ),
-            )}
-          </dl>
+          {page === 'emails' ? (
+            <EmailsSummary
+              rules={
+                description
+                  ? stepMailRules(description, step?.key ?? '')
+                  : undefined
+              }
+            />
+          ) : (
+            <PropertyList variant="summary" termWidth="md">
+              {pageFields(page, kind, values, { showEnableSwitch }).map(
+                (field) => (
+                  <PropertyItem
+                    key={field}
+                    label={labels[field] ?? field}
+                    value={format(field)}
+                  />
+                ),
+              )}
+            </PropertyList>
+          )}
         </section>
       ))}
-      {step && (
-        <StepMailsSection
-          callUuid={callUuid}
-          stepKey={step.key}
-          stepName={stepName(step)}
-          description={description}
-        />
-      )}
     </div>
   );
 };
+
+/** The step's emails on the Check page: each event, and who is mailed.
+ * No rules yet (the call's description is loading or failed) says so rather
+ * than that the step sends no email. */
+const EmailsSummary: FC<{ rules?: WorkflowDescriptionRule[] }> = ({ rules }) =>
+  rules === undefined ? (
+    <p className="text-quaternary mb-0">
+      {translate("The step's emails are not available.")}
+    </p>
+  ) : rules.length ? (
+    <PropertyList variant="summary" termWidth="md">
+      {rules.map((rule, index) => (
+        <PropertyItem
+          key={index}
+          label={triggerLabel(rule.trigger, rule.days_before)}
+          value={
+            recipientLabel(rule.recipient) +
+            (rule.proposal_role ? ` (${rule.proposal_role})` : '') +
+            (rule.enabled ? '' : ` · ${translate('Disabled')}`)
+          }
+        />
+      ))}
+    </PropertyList>
+  ) : (
+    <p className="text-quaternary mb-0">
+      {translate('The step sends no email.')}
+    </p>
+  );

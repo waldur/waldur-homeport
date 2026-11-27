@@ -116,7 +116,7 @@ describe('a step discussion while Matrix chat is disabled', () => {
     await user.click(await screen.findByLabelText(/^Discussion/));
     await goToPage(user, 'Check');
     const evaluation = await screen.findByTestId('step-check-evaluation');
-    expect(within(evaluation).getByText('Discussion')).toBeInTheDocument();
+    expect(within(evaluation).getByText('Discussion:')).toBeInTheDocument();
 
     const body = await savedBody(user);
     expect(body.has_discussion).toBe(false);
