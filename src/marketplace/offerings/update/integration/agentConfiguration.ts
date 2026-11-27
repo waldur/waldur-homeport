@@ -198,6 +198,51 @@ const agentRoles = (configuration: Record<string, any>) =>
       field !== 'username_management_backend' && Boolean(configuration[field]),
   );
 
+// What the agent runs for a role while no agent role is set.
+export const DEFAULT_ROLE_BACKENDS: Record<AgentRoleField, string> = {
+  order_processing_backend: 'slurm',
+  membership_sync_backend: 'slurm',
+  reporting_backend: 'slurm',
+  username_management_backend: 'base',
+};
+
+/**
+ * With no agent role set, every agent role runs slurm, and the page shows
+ * them so. Once one is set the others mean off: a save that sets the first
+ * one keeps the others on the backend they showed instead. So does a save
+ * that turns one off (`change` clears it): the others keep slurm, and the
+ * cleared one is off, rather than the save changing nothing.
+ */
+export const withDefaultRoles = (
+  current: Record<string, any>,
+  next: Record<string, any>,
+  change: Record<string, any> = {},
+): Record<string, any> => {
+  const cleared = AGENT_ROLE_FIELDS.filter(
+    ({ field }) =>
+      field !== 'username_management_backend' &&
+      field in change &&
+      !change[field],
+  ).map(({ field }) => field);
+  if (
+    agentRoles(current).length ||
+    (!agentRoles(next).length && !cleared.length)
+  ) {
+    return next;
+  }
+  const filled = { ...next };
+  AGENT_ROLE_FIELDS.forEach(({ field }) => {
+    if (
+      field !== 'username_management_backend' &&
+      !filled[field] &&
+      !cleared.includes(field)
+    ) {
+      filled[field] = DEFAULT_ROLE_BACKENDS[field];
+    }
+  });
+  return filled;
+};
+
 /**
  * Why a save that clears the last agent role is refused: with no role set
  * the agent configuration is generated with slurm for every role, which is
