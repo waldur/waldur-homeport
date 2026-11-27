@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { panelRequestBody } from './CallPanelFormDialog';
-import { formatPanelDomains } from './utils';
+import { formatPanelDomains, getPanelRowActions } from './utils';
 
 describe('formatPanelDomains', () => {
   it('lists domains, then sub-domains, by code and name', () => {
@@ -51,5 +51,27 @@ describe('panelRequestBody', () => {
 
   it('drops a chair taken off the members', () => {
     expect(panelRequestBody({ ...values, members: ['u2'] }).chair).toBeNull();
+  });
+});
+
+describe('getPanelRowActions', () => {
+  it('offers the sheets only to those who may export the call', () => {
+    expect(getPanelRowActions({ canExport: false, isReadOnly: false })).toEqual(
+      ['edit', 'delete'],
+    );
+    expect(getPanelRowActions({ canExport: true, isReadOnly: false })).toEqual([
+      'export',
+      'edit',
+      'delete',
+    ]);
+  });
+
+  it('keeps the sheets on a call that can no longer change', () => {
+    expect(getPanelRowActions({ canExport: true, isReadOnly: true })).toEqual([
+      'export',
+    ]);
+    expect(getPanelRowActions({ canExport: false, isReadOnly: true })).toEqual(
+      [],
+    );
   });
 });

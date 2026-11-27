@@ -4480,6 +4480,11 @@
       "feature_area": "table"
     }
   },
+  "All panel sheets (Excel)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "All partitions": {
     "context": {
       "feature_area": "create"
@@ -12210,7 +12215,7 @@
   "Chair": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "team"
+      "feature_area": "review"
     }
   },
   "Challenge code": {
@@ -25343,6 +25348,21 @@
       "feature_area": "update"
     }
   },
+  "Evaluations": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Evaluations (CSV)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
+  "Evaluations (Excel)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "Evaluator": {
     "context": {
       "primary_ui_type": "title",
@@ -25622,6 +25642,16 @@
   "Every setting is optional; without any, customers may enter any IPv4 or IPv6 network.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Every step contribution (CSV)": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Every step contribution (Excel)": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Every submitted proposal, up to the decision.": {},
@@ -40367,6 +40397,11 @@
       "feature_area": "marketplace"
     }
   },
+  "My panels": {
+    "context": {
+      "feature_area": "review"
+    }
+  },
   "My proposals": {
     "context": {
       "feature_area": "sidebar"
@@ -46422,6 +46457,11 @@
       "feature_area": "plan"
     }
   },
+  "One workbook, with a sheet per panel.": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "One-time": {
     "context": {
       "primary_ui_type": "label",
@@ -49365,6 +49405,16 @@
     }
   },
   "Panel review": {},
+  "Panel sheet (CSV)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
+  "Panel sheet (Excel)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "Panel: {name}": {
     "context": {
       "variables": {
@@ -71841,6 +71891,11 @@
       "feature_area": "proposal-roles"
     }
   },
+  "The call has no panels yet.": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "The call has no reviewers — add them in the Team tab.": {
     "context": {
       "feature_area": "proposal-roles"
@@ -73747,6 +73802,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "panels"
+    }
+  },
+  "The panels of {calls} could not be loaded. Refresh to try again.": {
+    "context": {
+      "variables": {
+        "calls": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "review"
     }
   },
   "The passkey was registered, but your account could not be refreshed. Reload the page to continue.": {
@@ -80895,6 +80960,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "reviewer"
+    }
+  },
+  "Unable to download the export.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "manage"
     }
   },
   "Unable to download the file.": {
@@ -94444,7 +94515,7 @@
   },
   "panels": {
     "context": {
-      "feature_area": "panels"
+      "feature_area": "review"
     }
   },
   "partition {partition}": {
