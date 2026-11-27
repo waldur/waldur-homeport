@@ -66,7 +66,33 @@ const CurrentTermRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
   );
 };
 
-const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
+// Up to two decimals: the backend keeps the formula's exact result.
+export const formatDiscountPercent = (percent: string | number) =>
+  Number(Number(percent).toFixed(2));
+
+// The volume discount the invoice will give the line above it, as the backend
+// priced it for the new limit.
+const DiscountRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) =>
+  Number(item.discount_total) > 0 ? (
+    <TableRow>
+      <TableCell colSpan={2} className="text-success">
+        <span className="ps-4">
+          {'↳ '}
+          {translate('{percent}% volume discount', {
+            percent: formatDiscountPercent(item.discount_percent),
+          })}
+        </span>
+      </TableCell>
+      <TableCell className="text-end whitespace-nowrap text-success">
+        {'− '}
+        {defaultCurrency(item.discount_total)}
+      </TableCell>
+    </TableRow>
+  ) : null;
+
+const ComponentPriceRow: FC<{ item: RenewalEstimateComponent }> = ({
+  item,
+}) => {
   if (item.term === 'current_term') {
     return <CurrentTermRow item={item} />;
   }
@@ -109,6 +135,13 @@ const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
   );
 };
 
+const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => (
+  <>
+    <ComponentPriceRow item={item} />
+    <DiscountRow item={item} />
+  </>
+);
+
 export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
   resource,
   extensionMonths,
@@ -133,7 +166,14 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
 
   if (shouldConcealPrices) return null;
   if (isLoading) return <LoadingSpinner />;
-  if (!data || parseFloat(data.total) === 0) return null;
+  // Before discounts: a renewal discounted to nothing still shows its lines.
+  if (
+    !data ||
+    parseFloat(data.subscription_total) +
+      parseFloat(data.limit_change_total) ===
+      0
+  )
+    return null;
 
   const subscriptionItems = data.components.filter(
     (c) => c.billing_type === 'prepaid',
@@ -164,7 +204,11 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
                 {translate('Subscription subtotal')}
               </TableCell>
               <TableCell className="text-end whitespace-nowrap">
-                {defaultCurrency(data.subscription_total)}
+                {/* The discounts are on prepaid lines, so they come off here. */}
+                {defaultCurrency(
+                  parseFloat(data.subscription_total) -
+                    parseFloat(data.discount_total),
+                )}
               </TableCell>
             </TableRow>
           )}
@@ -191,6 +235,15 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
               {defaultCurrency(data.total)}
             </TableCell>
           </TableRow>
+          {data.discount_deferred ? (
+            // Aggregated over the organization's resources, so only the month's
+            // invoice can price it.
+            <TableRow>
+              <TableCell colSpan={3} className="text-end text-quaternary small">
+                {translate('Volume discount applied on your invoice')}
+              </TableCell>
+            </TableRow>
+          ) : null}
         </TableFooter>
       </Table>
     </div>
