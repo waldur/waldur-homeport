@@ -1229,6 +1229,16 @@
   },
   "A snapshot of all messages in a room, read and decrypted by the Matrix bot and saved as an encrypted JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically when a room is disabled or its project is deleted. Exports older than the retention period are deleted, except the newest of each room.": {},
   "A step done by the requested offerings' teams cannot have a discussion: one room would hold the teams of every offering the proposal requests.": {},
+  "A step is decided for at most {max} proposals at once. Select fewer, or filter the list first.": {
+    "context": {
+      "variables": {
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "A step the call team handles internally.": {},
   "A submitted proposal requests this offering, so its rules no longer change.": {},
   "A summary of the conversation goes to the helpdesk, and only you can confirm it.": {
@@ -10910,7 +10920,7 @@
   "By": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "workflow-check"
+      "feature_area": "manage"
     }
   },
   "By OECD code": {
@@ -12894,9 +12904,27 @@
       }
     }
   },
+  "Checking": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "Checking eligibility…": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Checking in the background: {processed} of {total}. Nothing is decided yet.": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Checking system health status and verifying all services are operational...": {
@@ -14358,18 +14386,6 @@
       "feature_area": "offering-users"
     }
   },
-  "Complete ({count})": {
-    "context": {
-      "primary_ui_type": "submit_button",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "manage",
-      "action_type": "create"
-    }
-  },
   "Complete a step for the round": {
     "context": {
       "feature_area": "rounds"
@@ -14537,16 +14553,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "reports"
-    }
-  },
-  "Completed: {count}": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "manage"
     }
   },
   "Completes": {},
@@ -19378,6 +19384,18 @@
       "feature_area": "debug"
     }
   },
+  "Decide ({count})": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage",
+      "action_type": "create"
+    }
+  },
   "Decide a step": {
     "context": {
       "feature_area": "manage"
@@ -19404,7 +19422,8 @@
   },
   "Decided": {
     "context": {
-      "feature_area": "lifecycle"
+      "primary_ui_type": "title",
+      "feature_area": "manage"
     }
   },
   "Decided and held until the round publishes its results: what the allocation decision grants, beside the request. Reopen the decision to change it.": {
@@ -19418,11 +19437,34 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Decided: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "Decides automatically": {},
   "Deciding": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "reports"
+      "feature_area": "manage"
+    }
+  },
+  "Deciding in the background: {processed} of {total}. You can close this dialog and read the result again from the call.": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Decimal places": {
@@ -43898,6 +43940,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "No step of this call has been decided in bulk yet.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "No storage data available.": {
     "context": {
       "feature_area": "reports"
@@ -45091,6 +45138,11 @@
   "Nothing changes: the offering sets these values itself or they stay the same.": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Nothing has been decided yet. This is what deciding the step would do now; confirm to decide.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Nothing has changed.": {
@@ -46824,7 +46876,7 @@
       "feature_area": "panels"
     }
   },
-  "One outcome and reason for every selected proposal standing on the step. Each is completed as from its own page; one that is refused is listed and the others go on.": {
+  "One outcome and reason for every selected proposal standing on the step. You see first which proposals will be decided and which refused, and why.": {
     "context": {
       "feature_area": "manage"
     }
@@ -52957,6 +53009,18 @@
       "primary_ui_type": "label"
     }
   },
+  "Preview ({count})": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage",
+      "action_type": "create"
+    }
+  },
   "Preview Configuration": {
     "context": {
       "feature_area": "steps"
@@ -57360,6 +57424,12 @@
   "Refreshing…": {
     "context": {
       "feature_area": "livekit"
+    }
+  },
+  "Refused": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "manage"
     }
   },
   "Refused by the provider": {},
@@ -69208,6 +69278,19 @@
       "feature_area": "hpc"
     }
   },
+  "Started by {name} on {date}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.": {
     "context": {
       "variables": {
@@ -69532,6 +69615,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "update"
+    }
+  },
+  "Steps decided in bulk": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Steps for the offering team": {
@@ -75284,6 +75372,11 @@
       "feature_area": "billing"
     }
   },
+  "The run stopped before it was done.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "The same filter is available without the file: GET marketplace-service-providers/<uuid>/site_agent_config/ with backend_id or backend_id_startswith.": {
     "context": {
       "feature_area": "site-agent"
@@ -77663,6 +77756,19 @@
   "This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "This run has stopped moving at {processed} of {total}. It is picked up again shortly, or given up and marked as failed.": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "This section is only for single select and multi select questions.": {
@@ -80366,6 +80472,12 @@
       "feature_area": "from-template"
     }
   },
+  "Unable to check the proposals.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "manage"
+    }
+  },
   "Unable to check version update: {error}": {
     "context": {
       "primary_ui_type": "error_message",
@@ -81047,6 +81159,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "reviewer-registry"
+    }
+  },
+  "Unable to decide the step.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "manage"
     }
   },
   "Unable to decline invitation.": {
@@ -82911,6 +83029,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "metrics"
+    }
+  },
+  "Unable to read which steps the selected proposals stand on.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Unable to recalculate user actions.": {
@@ -91385,6 +91508,26 @@
   "Widget field allows to customize table cell rendering": {
     "context": {
       "feature_area": "admin"
+    }
+  },
+  "Will be decided: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
+  "Will be refused: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Will be removed": {
@@ -101831,6 +101974,18 @@
       }
     }
   },
+  "{processed} of {total}": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "{projectName} project has been moved to {organizationName} organization.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -102906,6 +103061,19 @@
         },
         "count": {
           "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
+  "{step} as {outcome}": {
+    "context": {
+      "variables": {
+        "step": {
+          "type": "unknown"
+        },
+        "outcome": {
+          "type": "unknown"
         }
       },
       "feature_area": "manage"
