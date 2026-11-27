@@ -13,7 +13,7 @@ import { SingleProperty } from 'waldur-ui';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -67,7 +67,7 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
   // be reviewed by whoever raised it.
   const canReview = useMemo(
     () =>
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.SET_PROJECT_END_DATE,
         projectId: project?.uuid,
         customerId: project?.customer_uuid,

@@ -91,4 +91,43 @@ describe('canRequestProjectEndDateChange', () => {
     const user = userWithRole('customer', 'customer-2', [REQUEST]);
     expect(canRequestProjectEndDateChange(user, PROJECT)).toBe(false);
   });
+  it('returns false for support without a role that may ask', () => {
+    expect(
+      canRequestProjectEndDateChange(makeUser({ is_support: true }), PROJECT),
+    ).toBe(false);
+  });
+
+  it('ignores a service provider role on the organization', () => {
+    // The backend checks the project and its organization; a role held on
+    // the organization's service provider grants neither asking nor setting.
+    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([role('ASK', [REQUEST])]);
+    const asker = makeUser({
+      permissions: [
+        {
+          scope_type: 'service_provider',
+          scope_uuid: 'provider-1',
+          customer_uuid: 'customer-1',
+          role_name: 'ASK',
+        },
+      ] as Permission[],
+    });
+    expect(canRequestProjectEndDateChange(asker, PROJECT)).toBe(false);
+
+    vi.spyOn(ENV, 'roles', 'get').mockReturnValue([
+      role('ASK', [REQUEST]),
+      role('SET', [SET]),
+    ]);
+    const setter = makeUser({
+      permissions: [
+        { scope_type: 'project', scope_uuid: 'project-1', role_name: 'ASK' },
+        {
+          scope_type: 'service_provider',
+          scope_uuid: 'provider-1',
+          customer_uuid: 'customer-1',
+          role_name: 'SET',
+        },
+      ] as Permission[],
+    });
+    expect(canRequestProjectEndDateChange(setter, PROJECT)).toBe(true);
+  });
 });

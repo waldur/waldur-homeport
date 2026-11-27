@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
@@ -53,17 +53,20 @@ export const RequestEndDateChangeAction: ActionItemType = ({
 
   // Anyone who can change the date themselves uses the ordinary end date
   // dialog; the backend refuses to create a request for them. Project managers
-  // are not among them — managing limits does not carry the end date.
+  // are not among them — managing limits does not carry the end date. Both
+  // checks follow the backend: a role on the project or its organization, or
+  // a site-wide one — never a role on the organization's service provider.
   const canChangeDirectly =
-    hasPermission(user, {
+    hasConsumerPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_END_DATE,
+      projectId: resource.project_uuid,
       customerId: resource.customer_uuid,
     }) ||
     user?.is_staff ||
     user?.is_support;
 
   // Asking is a permission of its own, as for limit change requests.
-  const canRequest = hasPermission(user, {
+  const canRequest = hasConsumerPermission(user, {
     permission: PermissionEnum.REQUEST_RESOURCE_END_DATE_CHANGE,
     projectId: resource.project_uuid,
     customerId: resource.customer_uuid,

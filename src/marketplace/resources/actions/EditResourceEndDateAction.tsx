@@ -10,7 +10,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 import { useUser } from '@/workspace/hooks';
@@ -65,11 +65,15 @@ export const EditResourceEndDateAction: ActionItemType = ({
       },
     });
 
-  // Setting the date takes this one permission. Everyone else — project
-  // managers included — asks via RequestEndDateChangeAction.
+  // Setting the date takes this one permission, on the resource's project or
+  // its organization as the backend checks it. Everyone else — project
+  // managers included — asks via RequestEndDateChangeAction, which hides on
+  // exactly this condition. A role on the organization's service provider acts
+  // for the provider (EditResourceEndDateByProviderAction), not here.
   if (
-    !hasPermission(user, {
+    !hasConsumerPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_END_DATE,
+      projectId: _resource.project_uuid,
       customerId: _resource.customer_uuid,
     })
   ) {

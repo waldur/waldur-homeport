@@ -3,13 +3,15 @@ import { Project, User } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 import { ChangeEndDateRequestFlowDialog } from './ChangeEndDateRequestFlowDialog';
 
 /** Mirrors the backend: asking is a permission of its own, and whoever sets
- * the date directly (and so approves requests) has nobody to ask. */
+ * the date directly (and so approves requests) has nobody to ask. Both are
+ * checked on the project and its organization (or site-wide), as there; a
+ * role on the organization's service provider counts for neither. */
 export const canRequestProjectEndDateChange = (
   user: User | null | undefined,
   project: Pick<Project, 'uuid' | 'customer_uuid'>,
@@ -19,12 +21,12 @@ export const canRequestProjectEndDateChange = (
   }
   const scopes = { projectId: project.uuid, customerId: project.customer_uuid };
   return (
-    !hasPermission(user, {
+    !hasConsumerPermission(user, {
       permission: PermissionEnum.SET_PROJECT_END_DATE,
       ...scopes,
     }) &&
     Boolean(
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.REQUEST_PROJECT_END_DATE_CHANGE,
         ...scopes,
       }),

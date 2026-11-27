@@ -11,11 +11,15 @@ import { useUser } from '@/workspace/hooks';
 import { RequestEndDateChangeAction } from './RequestEndDateChangeAction';
 
 // The user may ask (the request permission), but not change it directly.
+// An entry is a permission held on the organization, or `<permission>@project`
+// for one held only on the project.
 const granted = vi.hoisted(() => ({ permissions: new Set<string>() }));
 
 vi.mock('@/permissions/hasPermission', () => ({
-  hasPermission: (_user, request) =>
-    granted.permissions.has(request.permission),
+  hasConsumerPermission: (_user, request) =>
+    (!!request.customerId && granted.permissions.has(request.permission)) ||
+    (!!request.projectId &&
+      granted.permissions.has(`${request.permission}@project`)),
 }));
 
 // What an OpenStack menu passes: the plugin resource, which carries no end
@@ -25,11 +29,13 @@ const pluginResource = {
   state: 'OK',
   marketplace_resource_uuid: 'marketplace-uuid',
   customer_uuid: 'customer-uuid',
+  project_uuid: 'project-uuid',
 };
 const marketplaceResource = {
   uuid: 'marketplace-uuid',
   state: 'OK',
   customer_uuid: 'customer-uuid',
+  project_uuid: 'project-uuid',
   offering_type: 'OpenStack.Tenant',
   end_date: '2026-11-25',
   project_end_date: '2027-06-30',
@@ -122,5 +128,27 @@ describe('RequestEndDateChangeAction', () => {
 
     expect(screen.queryByText('Request end date change')).toBeNull();
     expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled();
+  });
+
+  it('hides the action from a project role that sets the date directly', () => {
+    // The backend refuses the request for RESOURCE.SET_END_DATE held on the
+    // project as well as on its organization.
+    granted.permissions.add('RESOURCE.SET_END_DATE@project');
+
+    renderAction({ resource: pluginResource, marketplaceResource });
+
+    expect(screen.queryByText('Request end date change')).toBeNull();
+    expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled();
+  });
+
+  it('shows the action to a role that may ask only on the project', async () => {
+    granted.permissions = new Set(['RESOURCE.REQUEST_END_DATE_CHANGE@project']);
+    mockOffering({ plugin_options: optedIn, components: [] });
+
+    renderAction({ resource: pluginResource, marketplaceResource });
+
+    expect(
+      await screen.findByText('Request end date change'),
+    ).toBeInTheDocument();
   });
 });

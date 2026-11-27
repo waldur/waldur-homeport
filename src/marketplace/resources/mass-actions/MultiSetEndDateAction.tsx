@@ -6,7 +6,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
@@ -33,7 +33,7 @@ export const MultiSetEndDateAction = ({
       rows.filter(
         (resource) =>
           SELECTABLE_STATES.has(resource.state) &&
-          hasPermission(user, {
+          hasConsumerPermission(user, {
             permission: PermissionEnum.SET_RESOURCE_END_DATE,
             projectId: resource.project_uuid,
             customerId: resource.customer_uuid,
