@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { EditSchedulesButton } from '@/booking/EditSchedulesButton';
+import { CheckOrX } from '@/core/CheckOrX';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import {
@@ -251,6 +252,16 @@ export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
               val ||
               translate('Quota (flavor-derived)')
             }
+          />
+          <BooleanEditField
+            name="plugin_options.bill_inactive_instances"
+            label={translate('Bill stopped instances')}
+            description={translate(
+              'Under usage-based billing, bill the cores, RAM and other compute of instances that are not running (shut off, suspended or shelved). When off, an instance is left out of a billing interval only if it stayed stopped for the whole of it; the interval in which it stops is still billed. Paused instances and instances in error are always billed, and storage is billed either way.',
+            )}
+            // Unset means on: the backend bills stopped instances by default.
+            format={(value) => value ?? true}
+            renderValue={(value) => <CheckOrX value={value ?? true} />}
           />
         </TabbedSection.Tab>
 
