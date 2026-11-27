@@ -19,6 +19,7 @@ export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
     >
       <OptionsForm
         options={props.offering.options}
+        offeringUuid={props.offering.uuid}
         customer={customer}
         allModelsOption={getAllModelsOption(props.offering.resource_options)}
         orderForm

@@ -1,18 +1,36 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Field, useField } from 'react-final-form';
-import { LoadBalancerModeEnum, TopologyModeEnum } from 'waldur-js-client';
+import { Field, FieldRenderProps, useField } from 'react-final-form';
+import {
+  InfrastructureModeEnum,
+  LoadBalancerModeEnum,
+  marketplacePublicOfferingsList,
+  TopologyModeEnum,
+} from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
 
+import { MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import {
   BooleanGroup,
   FieldError,
+  FormGroup,
+  SelectField,
   StringGroup,
   NumberGroup,
   SelectGroup,
 } from '@/form';
 import { translate } from '@/i18n';
+import {
+  getAllowedTopologies,
+  getDatacenterCount,
+  getTopologyOptions,
+  K8sClusterTopology,
+  K8sDefaultConfiguration,
+  validateFixedSites,
+} from '@/marketplace/common/k8s-types';
 import {
   K8sEgressRule,
   validateEgressRule,
@@ -40,6 +58,192 @@ const getTopologyModeOptions = (): Array<{
   },
   { value: 'customer_choice', label: translate('Customer chooses') },
 ];
+
+const getInfrastructureModeOptions = (): Array<{
+  value: InfrastructureModeEnum;
+  label: string;
+}> => [
+  { value: 'customer_choice', label: translate('Customer picks') },
+  { value: 'provider_fixed', label: translate('Provider fixes the sites') },
+];
+
+type FixedSites = K8sDefaultConfiguration['fixed_openstack_offerings'];
+
+/**
+ * The OpenStack tenant offerings clusters may be deployed to: active or
+ * paused ones the Kubernetes offering's organisation may use, its own or
+ * shared with it, as the server requires (allowed_customer_uuid applies the
+ * same rule).
+ */
+const useTenantOfferings = (customerUuid?: string) =>
+  useQuery({
+    queryKey: ['k8s-fixed-site-tenant-offerings', customerUuid],
+    queryFn: () =>
+      marketplacePublicOfferingsList({
+        query: {
+          type: ['OpenStack.Tenant'],
+          state: ['Active', 'Paused'],
+          allowed_customer_uuid: customerUuid,
+          field: ['uuid', 'name', 'customer_name'],
+          o: ['name'],
+          page_size: MAX_PAGE_SIZE,
+        },
+      }).then((response) => response.data),
+    staleTime: UI_STALE_TIME,
+  });
+
+const FixedSitesField = ({
+  input,
+  meta,
+  topologies,
+  customerUuid,
+}: FieldRenderProps<FixedSites> & {
+  topologies: K8sClusterTopology[];
+  customerUuid?: string;
+}) => {
+  const { data, isLoading, error } = useTenantOfferings(customerUuid);
+  const sites: FixedSites = input.value || {};
+  const known = (data || []).map((offering) => ({
+    value: offering.uuid,
+    label: `${offering.name} (${offering.customer_name})`,
+  }));
+  const topologyLabels = Object.fromEntries(
+    getTopologyOptions().map((option) => [option.value, option.label]),
+  );
+
+  const setSite = (topology: K8sClusterTopology, index: number, uuid) => {
+    const list = Array.from(
+      { length: getDatacenterCount(topology) },
+      (_, i) => (i === index ? uuid : sites[topology]?.[i]) || null,
+    );
+    input.onChange({ ...sites, [topology]: list });
+  };
+
+  return (
+    <>
+      {error ? (
+        <AlertItem
+          type="floating"
+          variant="error"
+          className="mb-4"
+          title={translate('Unable to load OpenStack tenant offerings.')}
+        />
+      ) : null}
+      {topologies.map((topology) => {
+        const count = getDatacenterCount(topology);
+        return (
+          <div key={topology} className="mb-4">
+            <h6 className="text-secondary mb-2">{topologyLabels[topology]}</h6>
+            {/* Full width: tenant offering names are long. */}
+            <div className="grid grid-cols-1">
+              {Array.from({ length: count }, (_, index) => {
+                const value = sites[topology]?.[index] || null;
+                // A stored site the provider no longer sees keeps its UUID.
+                const options =
+                  value && !known.some((option) => option.value === value)
+                    ? [...known, { value, label: value }]
+                    : known;
+                const label =
+                  count === 1
+                    ? translate('Site')
+                    : translate('Site {n}', { n: index + 1 });
+                return (
+                  <FormGroup key={index} label={label} required space={4}>
+                    <SelectField
+                      input={{
+                        name: `${input.name}.${topology}.${index}`,
+                        value,
+                        onChange: (uuid) => setSite(topology, index, uuid),
+                        onBlur: () => input.onBlur(),
+                      }}
+                      aria-label={`${topologyLabels[topology]}: ${label}`}
+                      options={options}
+                      placeholder={translate(
+                        'Select OpenStack tenant offering...',
+                      )}
+                      isLoading={isLoading}
+                      isClearable
+                      simpleValue
+                    />
+                  </FormGroup>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+      {meta.error ? <FieldError error={meta.error} /> : null}
+    </>
+  );
+};
+
+/**
+ * Whether the customer or the provider picks the OpenStack infrastructure of
+ * each site, and the provider's sites.
+ */
+const InfrastructureModeFields = ({
+  name,
+  customerUuid,
+}: {
+  name: string;
+  // The organisation of the Kubernetes offering, whose tenant offerings the
+  // sites must be.
+  customerUuid?: string;
+}) => {
+  const {
+    input: { value: infrastructureMode },
+  } = useField<InfrastructureModeEnum>(`${name}.infrastructure_mode`, {
+    subscription: { value: true },
+  });
+  const {
+    input: { value: topologyMode },
+  } = useField<TopologyModeEnum>(`${name}.topology_mode`, {
+    subscription: { value: true },
+  });
+  const topologies = getAllowedTopologies({
+    topology_mode: topologyMode || undefined,
+  });
+  return (
+    <>
+      <SelectGroup
+        space={4}
+        name={`${name}.infrastructure_mode`}
+        label={translate('Site infrastructure')}
+        description={translate(
+          'Who picks the OpenStack tenant offering each site is deployed to. When not set, the customer picks.',
+        )}
+        options={getInfrastructureModeOptions()}
+        placeholder={translate('Customer picks')}
+        // Clearing hands the choice to the customer.
+        isClearable
+        parse={(value) => value || undefined}
+        simpleValue
+      />
+      {infrastructureMode === 'provider_fixed' && (
+        <>
+          <p className="text-quaternary mb-3">
+            {translate(
+              'Clusters are deployed to these sites, in this order. Customers can only pick flavors that every site has.',
+            )}
+          </p>
+          <Field
+            name={`${name}.fixed_openstack_offerings`}
+            component={FixedSitesField}
+            topologies={topologies}
+            customerUuid={customerUuid}
+            validate={(value, allValues: any) => {
+              const errors = validateFixedSites(
+                value,
+                allValues?.[name] as K8sDefaultConfiguration,
+              );
+              return errors.length ? errors : undefined;
+            }}
+          />
+        </>
+      )}
+    </>
+  );
+};
 
 const validateBaselineRules = (rules: K8sEgressRule[] | undefined) => {
   const errors = (rules || []).flatMap((rule, index) => {
@@ -121,7 +325,9 @@ const EgressPolicySection = ({ name }: { name: string }) => {
   );
 };
 
-export const K8sDefaultsConfiguration: React.FC<{}> = () => {
+export const K8sDefaultsConfiguration: React.FC<{
+  offering?: { customer_uuid?: string };
+}> = ({ offering }) => {
   const name = 'default_configs';
   const {
     input: { value: loadBalancerMode },
@@ -180,6 +386,10 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           isClearable
           parse={(value) => value || undefined}
           simpleValue
+        />
+        <InfrastructureModeFields
+          name={name}
+          customerUuid={offering?.customer_uuid}
         />
       </K8sFormSection>
 

@@ -13832,6 +13832,11 @@
       "feature_area": "common"
     }
   },
+  "Clusters are deployed to these sites, in this order. Customers can only pick flavors that every site has.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Co-authorship (Old)": {
     "context": {
       "primary_ui_type": "label"
@@ -18606,6 +18611,12 @@
       "feature_area": "import-usage"
     }
   },
+  "Customer picks": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
+    }
+  },
   "Customer project roles": {
     "context": {
       "primary_ui_type": "title",
@@ -18949,6 +18960,7 @@
   },
   "Data disk": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "common"
     }
   },
@@ -19036,6 +19048,11 @@
     }
   },
   "Datacenter configuration": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Datacenters were reset for the new topology. Define the node groups again.": {
     "context": {
       "feature_area": "common"
     }
@@ -19940,6 +19957,11 @@
   "Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.": {
     "context": {
       "feature_area": "access-subnets"
+    }
+  },
+  "Defined once and deployed on every site, each with the flavor of that site.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Degraded": {
@@ -34154,6 +34176,11 @@
       "feature_area": "create"
     }
   },
+  "It is kept as it is. To change its node groups, move it to the current sites first.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "It is stored encrypted and never shown with the other settings.": {
     "context": {
       "feature_area": "common"
@@ -40444,6 +40471,11 @@
       "feature_area": "list"
     }
   },
+  "Move to the current sites": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Move up": {
     "context": {
       "feature_area": "wizard"
@@ -44205,6 +44237,11 @@
       "feature_area": "create"
     }
   },
+  "Node group": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Node group #{n}": {
     "context": {
       "variables": {
@@ -44221,6 +44258,11 @@
     }
   },
   "Node groups": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Node groups (all sites)": {
     "context": {
       "feature_area": "common"
     }
@@ -51381,6 +51423,11 @@
       "feature_area": "reviewer-suggestions"
     }
   },
+  "Pick all three sites of the three-site layout.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Pick at least one outcome.": {},
   "Pick from the affiliations configured for this organization.": {
     "context": {
@@ -51390,6 +51437,11 @@
   "Pick from the full registry. The default list for this organization is highlighted.": {
     "context": {
       "feature_area": "manage"
+    }
+  },
+  "Pick the site of the single-site layout.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Pick two different periods to see the comparison.": {
@@ -55216,6 +55268,11 @@
     }
   },
   "Provider end": {},
+  "Provider fixes the sites": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Provider info": {
     "context": {
       "primary_ui_type": "title",
@@ -64619,6 +64676,16 @@
       "feature_area": "common"
     }
   },
+  "Select OpenStack flavor for {type} nodes on all sites": {
+    "context": {
+      "variables": {
+        "type": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Select OpenStack infrastructure...": {
     "context": {
       "feature_area": "common"
@@ -64632,6 +64699,11 @@
   "Select OpenStack tenant": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Select OpenStack tenant offering...": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Select QoS profiles...": {
@@ -66679,6 +66751,11 @@
       "feature_area": "common"
     }
   },
+  "Set by the service provider": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Set columns in {name} category": {
     "context": {
       "variables": {
@@ -68090,6 +68167,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Site": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Site Agent": {},
   "Site Agent Configuration": {
     "context": {
@@ -68140,6 +68222,21 @@
   "Site agents": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Site infrastructure": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Site {n}": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "Site-wide": {
@@ -75190,6 +75287,16 @@
       "feature_area": "site-agent"
     }
   },
+  "The same node groups as {datacenter}, with the flavors of this site.": {
+    "context": {
+      "variables": {
+        "datacenter": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "The scenario was added to the template.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -75379,6 +75486,11 @@
         }
       },
       "feature_area": "site-agent"
+    }
+  },
+  "The sites of this cluster are set by the service provider and cannot be shown here.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The slug template cannot be changed once proposals exist for this call.": {},
@@ -75624,6 +75736,11 @@
   "The text of this mail was not kept.": {
     "context": {
       "feature_area": "diagram"
+    }
+  },
+  "The three sites of the three-site layout must differ.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The threshold is reached and this action has been applied.": {
@@ -76664,6 +76781,11 @@
   "This claim may not be a verified email address": {
     "context": {
       "feature_area": "providers"
+    }
+  },
+  "This cluster runs on other sites than the service provider now offers.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "This cluster was configured with a different topology than the offering now allows.": {
@@ -81861,6 +81983,11 @@
       "feature_area": "matrix"
     }
   },
+  "Unable to load OpenStack tenant offerings.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Unable to load SSH key settings.": {
     "context": {
       "feature_area": "ssh-keys"
@@ -82424,6 +82551,11 @@
   "Unable to load the site agent plugins.": {
     "context": {
       "feature_area": "from-template"
+    }
+  },
+  "Unable to load the sites of this offering.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Unable to load the suggested reviewers.": {
@@ -91082,6 +91214,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "proposal-roles"
+    }
+  },
+  "Who picks the OpenStack tenant offering each site is deployed to. When not set, the customer picks.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Who sees, reads, contributes to, completes and is told about each step.": {
