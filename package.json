@@ -129,7 +129,7 @@
     "waldur-design-tokens": "workspace:*",
     "waldur-form": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
-    "waldur-js-client": "8.1.5-rc.5.dev.20261127204102.746",
+    "waldur-js-client": "8.1.5-rc.5.dev.20261127210128.750",
     "waldur-notifications": "workspace:*",
     "waldur-proposals": "workspace:*",
     "waldur-runtime-config": "workspace:*",

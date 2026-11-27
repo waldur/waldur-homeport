@@ -8,7 +8,11 @@
  * 4. Per-Datacenter Worker/Storage Groups with flavor selection
  */
 
+import { isEqual } from 'es-toolkit';
 import type {
+  InfrastructureModeEnum,
+  K8sCommonFlavor,
+  K8sSite,
   LoadBalancerModeEnum,
   OptionDefaultConfigs,
   TopologyModeEnum,
@@ -52,7 +56,8 @@ export interface DatacenterConfiguration {
   openstack_infrastructure?: {
     uuid: string;
     name: string;
-    customer_name: string;
+    // Absent on a site the provider fixed: the customer did not pick it.
+    customer_name?: string;
   };
   node_groups: DatacenterNodeGroup[];
 }
@@ -252,7 +257,7 @@ export const getDefaultStorageDiskConfig = (
   virtual_san_disk_size_gb: defaultConfigs?.default_storage_san_disk_gb || 500,
 });
 
-const getDatacenterCount = (topology: K8sClusterTopology): number =>
+export const getDatacenterCount = (topology: K8sClusterTopology): number =>
   topology === '1-datacenter' ? 1 : 3;
 
 export const createDefaultClusterConfig = (
@@ -374,6 +379,238 @@ export const isTopologyAllowed = (
     config.datacenters.length === getDatacenterCount(config.topology)
   );
 };
+
+/**
+ * The flavors every fixed site has, and a key naming where they come from
+ * (offering, option, topology), so cached flavor lists are not mixed up.
+ */
+export interface CommonFlavorSource {
+  key: string;
+  flavors: K8sCommonFlavor[];
+}
+
+/** Who picks the OpenStack infrastructure of each site; unset, the customer. */
+export const getInfrastructureMode = (
+  defaultConfigs?: K8sDefaultConfiguration,
+): InfrastructureModeEnum =>
+  defaultConfigs?.infrastructure_mode || 'customer_choice';
+
+export const isProviderFixed = (defaultConfigs?: K8sDefaultConfiguration) =>
+  getInfrastructureMode(defaultConfigs) === 'provider_fixed';
+
+/** The topologies the offering's topology_mode lets a cluster have. */
+export const getAllowedTopologies = (
+  defaultConfigs?: K8sDefaultConfiguration,
+): K8sClusterTopology[] => {
+  const mode = getTopologyMode(defaultConfigs);
+  return mode === 'customer_choice' ? ['1-datacenter', '3-datacenter'] : [mode];
+};
+
+type FixedSites = K8sDefaultConfiguration['fixed_openstack_offerings'];
+
+/**
+ * The provider's site lists, checked as the server checks them when the
+ * option is saved: every allowed topology needs its number of distinct sites.
+ */
+export const validateFixedSites = (
+  sites: FixedSites | '' | undefined,
+  defaultConfigs?: K8sDefaultConfiguration,
+): string[] =>
+  getAllowedTopologies(defaultConfigs).flatMap((topology) => {
+    const picked = ((sites || {})[topology] || []).filter(Boolean);
+    const count = getDatacenterCount(topology);
+    if (picked.length !== count) {
+      return [
+        count === 1
+          ? translate('Pick the site of the single-site layout.')
+          : translate('Pick all three sites of the three-site layout.'),
+      ];
+    }
+    if (new Set(picked).size !== count) {
+      return [
+        translate('The three sites of the three-site layout must differ.'),
+      ];
+    }
+    return [];
+  });
+
+/**
+ * The option's settings as they are saved: the site lists only with
+ * provider_fixed, and only for the topologies the option allows, so lists
+ * left behind by another setting are not kept unseen.
+ */
+export const cleanFixedSitesPolicy = <T extends K8sDefaultConfiguration>(
+  defaultConfigs: T,
+): T => {
+  const { fixed_openstack_offerings: sites, ...rest } = defaultConfigs;
+  if (!isProviderFixed(defaultConfigs) || !sites) {
+    return rest as T;
+  }
+  return {
+    ...rest,
+    fixed_openstack_offerings: Object.fromEntries(
+      getAllowedTopologies(defaultConfigs)
+        .filter((topology) => sites[topology])
+        .map((topology) => [topology, sites[topology].filter(Boolean)]),
+    ),
+  } as T;
+};
+
+const meetsMinimums = (
+  cores: number,
+  ramMb: number,
+  defaultConfigs?: K8sDefaultConfiguration,
+) => {
+  const minimalVcpus = defaultConfigs?.minimal_worker_vcpus;
+  const minimalRamGb = defaultConfigs?.minimal_worker_ram_gb;
+  return (
+    (!minimalVcpus || cores >= minimalVcpus) &&
+    (!minimalRamGb || ramMb >= minimalRamGb * 1024)
+  );
+};
+
+/** Whether a flavor may run worker nodes: the offering's worker minimums. */
+export const meetsWorkerMinimums = (
+  flavor: Pick<LocalOpenStackFlavor, 'vcpus' | 'ram'>,
+  defaultConfigs?: K8sDefaultConfiguration,
+) => meetsMinimums(flavor.vcpus, flavor.ram, defaultConfigs);
+
+/**
+ * Common flavors a node group may use: worker groups only those meeting the
+ * offering's worker minimums, as the server checks them.
+ */
+export const filterCommonFlavors = (
+  flavors: K8sCommonFlavor[],
+  nodeGroupType: DatacenterNodeGroup['type'],
+  defaultConfigs?: K8sDefaultConfiguration,
+): K8sCommonFlavor[] =>
+  nodeGroupType === 'worker'
+    ? flavors.filter((flavor) =>
+        meetsMinimums(flavor.cores, flavor.ram, defaultConfigs),
+      )
+    : flavors;
+
+const normalizeUuid = (uuid: string | undefined) =>
+  (uuid || '').replace(/-/g, '').toLowerCase();
+
+/**
+ * How a cluster's sites relate to the provider's current ones: none set yet
+ * (a fresh order or a topology switch), the same sites in the same order, or
+ * others, such as a resource's sites before the provider changed them.
+ */
+export const getFixedSitesState = (
+  datacenters: DatacenterConfiguration[],
+  sites: K8sSite[],
+): 'empty' | 'match' | 'mismatch' => {
+  if (datacenters.every((datacenter) => !datacenter.openstack_infrastructure)) {
+    return 'empty';
+  }
+  const same =
+    datacenters.length === sites.length &&
+    datacenters.every(
+      (datacenter, index) =>
+        normalizeUuid(datacenter.openstack_infrastructure?.uuid) ===
+        normalizeUuid(sites[index].uuid),
+    );
+  return same ? 'match' : 'mismatch';
+};
+
+/** A node group id the datacenter does not use yet. */
+export const getNewNodeGroupId = (datacenter: DatacenterConfiguration) => {
+  const taken = new Set(datacenter.node_groups.map((group) => group.id));
+  let n = datacenter.node_groups.length + 1;
+  while (taken.has(`${datacenter.id}-group-${n}`)) {
+    n += 1;
+  }
+  return `${datacenter.id}-group-${n}`;
+};
+
+/**
+ * Whether switching the topology would discard anything the customer chose
+ * for the sites: an infrastructure they picked, or node groups other than the
+ * defaults. Sites the provider fixed are not the customer's choice.
+ */
+export const hasSiteChoices = (
+  config: MultiDatacenterK8sClusterConfig,
+  defaultConfigs?: K8sDefaultConfiguration,
+) => {
+  const defaults = createDefaultClusterConfig(
+    config.topology,
+    defaultConfigs,
+  ).datacenters;
+  const providerFixed = isProviderFixed(defaultConfigs);
+  return config.datacenters.some(
+    (datacenter, index) =>
+      (!providerFixed && Boolean(datacenter.openstack_infrastructure)) ||
+      !isEqual(datacenter.node_groups, defaults[index]?.node_groups),
+  );
+};
+
+/** A common flavor as one site's own: that site's flavor UUID. */
+export const getSiteFlavor = (
+  flavors: K8sCommonFlavor[],
+  name: string | undefined,
+  siteIndex: number,
+): LocalOpenStackFlavor | undefined => {
+  const flavor = name && flavors.find((item) => item.name === name);
+  const site = flavor && flavor.sites[siteIndex];
+  if (!site) {
+    return undefined;
+  }
+  return {
+    uuid: site.flavor_uuid,
+    name: flavor.name,
+    vcpus: flavor.cores,
+    ram: flavor.ram,
+    disk: flavor.disk,
+  };
+};
+
+// The first site's group ids, renamed for another site: dc1-worker-1 is
+// dc2-worker-1 on the second.
+const getMirroredGroupId = (id: string, siteIndex: number) => {
+  if (siteIndex === 0) {
+    return id;
+  }
+  const n = siteIndex + 1;
+  if (id.startsWith('dc1-')) {
+    return `dc${n}-${id.slice('dc1-'.length)}`;
+  }
+  if (id.startsWith('datacenter-1-')) {
+    return `datacenter-${n}-${id.slice('datacenter-1-'.length)}`;
+  }
+  return `dc${n}-${id}`;
+};
+
+/**
+ * The datacenters of a cluster on the sites the provider fixed: one per site,
+ * in order, each with the same node groups, and each group's flavor that
+ * site's own flavor of the same name. A flavor the sites do not share is
+ * dropped, so the customer picks it again.
+ */
+export const mirrorFixedSiteDatacenters = (
+  sites: K8sSite[],
+  flavors: K8sCommonFlavor[],
+  nodeGroups: DatacenterNodeGroup[],
+): DatacenterConfiguration[] =>
+  sites.map((site, siteIndex) => ({
+    id: `datacenter-${siteIndex + 1}`,
+    name: `Datacenter ${siteIndex + 1}`,
+    openstack_infrastructure: { uuid: site.uuid, name: site.name },
+    node_groups: nodeGroups.map((group) => {
+      const { openstack_flavor: _flavor, ...rest } = group;
+      const flavor = getSiteFlavor(
+        flavors,
+        group.openstack_flavor?.name,
+        siteIndex,
+      );
+      const mirrored = {
+        ...rest,
+        id: getMirroredGroupId(group.id, siteIndex),
+      };
+      return flavor ? { ...mirrored, openstack_flavor: flavor } : mirrored;
+    }),
+  }));
 
 export const getControllerNodesCount = (
   topology: K8sClusterTopology,
@@ -536,10 +773,14 @@ export const calculateTotalClusterResources = (
 
 const validateDatacenterConfiguration = (
   datacenter: DatacenterConfiguration,
+  defaultConfigs?: K8sDefaultConfiguration,
 ): string[] => {
   const errors: string[] = [];
+  const providerFixed = isProviderFixed(defaultConfigs);
 
-  if (!datacenter.openstack_infrastructure) {
+  // On fixed sites the customer picks no infrastructure; a missing site is
+  // reported once for the whole cluster.
+  if (!providerFixed && !datacenter.openstack_infrastructure) {
     errors.push(
       `${datacenter.name}: OpenStack infrastructure must be selected`,
     );
@@ -560,6 +801,15 @@ const validateDatacenterConfiguration = (
     if (!group.openstack_flavor) {
       errors.push(
         `${datacenter.name} ${group.type} group ${index + 1}: OpenStack flavor must be selected`,
+      );
+    } else if (
+      providerFixed &&
+      group.type === 'worker' &&
+      !meetsWorkerMinimums(group.openstack_flavor, defaultConfigs)
+    ) {
+      // The server refuses such a worker flavor on fixed sites.
+      errors.push(
+        `${datacenter.name} ${group.type} group ${index + 1}: Flavor ${group.openstack_flavor.name} is below the minimum for worker nodes`,
       );
     }
 
@@ -591,6 +841,7 @@ const validateDatacenterConfiguration = (
 
 export const validateMultiDatacenterConfiguration = (
   config: MultiDatacenterK8sClusterConfig,
+  defaultConfigs?: K8sDefaultConfiguration,
 ): string[] => {
   const errors: string[] = [];
 
@@ -609,9 +860,26 @@ export const validateMultiDatacenterConfiguration = (
     );
   }
 
-  config.datacenters.forEach((datacenter) => {
-    errors.push(...validateDatacenterConfiguration(datacenter));
-  });
+  if (isProviderFixed(defaultConfigs)) {
+    if (
+      config.datacenters.some(
+        (datacenter) => !datacenter.openstack_infrastructure,
+      )
+    ) {
+      errors.push("The provider's sites of the cluster are not set");
+    }
+    // The other sites repeat the first one's node groups, so their errors
+    // would only repeat its own.
+    config.datacenters.slice(0, 1).forEach((datacenter) => {
+      errors.push(
+        ...validateDatacenterConfiguration(datacenter, defaultConfigs),
+      );
+    });
+  } else {
+    config.datacenters.forEach((datacenter) => {
+      errors.push(...validateDatacenterConfiguration(datacenter));
+    });
+  }
 
   // Validate Longhorn storage requirements
   if (config.install_longhorn) {

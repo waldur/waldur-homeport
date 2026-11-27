@@ -131,9 +131,9 @@ const getMultiplierValidator = (option) => (value) => {
 };
 
 // Validator for K8s configuration fields - returns array for proper tooltip formatting
-const validateK8sConfig = (value) => {
+const validateK8sConfig = (value, defaultConfigs?) => {
   if (!value) return undefined;
-  const errors = validateMultiDatacenterConfiguration(value);
+  const errors = validateMultiDatacenterConfiguration(value, defaultConfigs);
   if (errors.length > 0) {
     return errors;
   }
@@ -147,7 +147,8 @@ const validateK8sConfig = (value) => {
  */
 const getK8sValidator = (option) => (value) => {
   const errors = [
-    ...((option.required && validateK8sConfig(value)) || []),
+    ...((option.required && validateK8sConfig(value, option.default_configs)) ||
+      []),
     // Egress rules are checked whether or not the option is required: the
     // server refuses invalid ones, and the card shows why.
     ...validateEgressRules(value?.egress_rules, option.default_configs),
@@ -155,7 +156,7 @@ const getK8sValidator = (option) => (value) => {
   return errors.length ? errors : undefined;
 };
 
-const getK8sParams = (option) => ({
+const getK8sParams = (option, key: string, offeringUuid?: string) => ({
   hideLabel: true,
   // The generic `FormFieldError` only renders once a field is touched, and
   // these forms never blur an input; `K8sOptionCard` renders `meta.error`.
@@ -167,6 +168,9 @@ const getK8sParams = (option) => ({
   // the resource option dialogs, which have no place to surface a blocked
   // submit, that would leave every other option in the form unsavable too.
   validate: getK8sValidator(option),
+  // Where the sites a provider fixed are looked up.
+  optionName: key,
+  offeringUuid,
 });
 
 /**
@@ -306,6 +310,8 @@ export const getComponentAndParams = (
   context: {
     options?: OfferingOptions;
     optionLabels?: Record<string, string>;
+    // The offering whose options these are.
+    offeringUuid?: string;
   } = {},
 ) => {
   let OptionField: FC<Partial<FormGroupProps>> = StringField;
@@ -442,7 +448,7 @@ export const getComponentAndParams = (
     // The topology comes from default_configs.topology_mode.
     case 'k8s_cluster_config':
       OptionField = K8sClusterConfigurationForm;
-      params = getK8sParams(option);
+      params = getK8sParams(option, key, context.offeringUuid);
       break;
     // A resource option: the egress rules of an existing cluster.
     case 'k8s_egress_rules':
@@ -524,6 +530,7 @@ export const OptionsForm = ({
   orderForm,
   secretInputs,
   optionLabels,
+  offeringUuid,
 }: {
   options: OfferingOptions;
   customer?: DeployFormData['customer'];
@@ -543,6 +550,9 @@ export const OptionsForm = ({
   // Labels of options outside `options` that an option may name, such as
   // the cidr options an IPsec option keeps clear of.
   optionLabels?: Record<string, string>;
+  // The offering whose options these are; the order form also holds it as
+  // the `offering` value.
+  offeringUuid?: string;
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
   const form = useForm();
@@ -599,7 +609,11 @@ export const OptionsForm = ({
             customer,
             { loadTenants, loadInstances },
             allModelsOption,
-            { options, optionLabels },
+            {
+              options,
+              optionLabels,
+              offeringUuid: offeringUuid ?? values?.offering?.uuid,
+            },
           );
 
           const orderedModels = orderForm && key === allModelsOption;
