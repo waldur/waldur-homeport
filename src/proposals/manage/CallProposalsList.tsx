@@ -36,6 +36,7 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { Call } from '../types';
 import { canExportCall, canUpdateCall } from '../utils';
 
+import { BulkStepDecisionsButton } from './BulkStepDecisionsButton';
 import { buildCallExportUrl } from './callExportUrl';
 import { makeProposalsBulkActions } from './ProposalsBulkActions';
 import { ProposalStepCell } from './ProposalStepCell';
@@ -233,6 +234,14 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
       expandableRow={ProposalExpandableRow}
       enableMultiSelect={canActOnSelection}
       multiSelectActions={bulkActions}
+      tableActions={
+        canActOnSelection ? (
+          <BulkStepDecisionsButton
+            callUuid={call.uuid}
+            refetch={tableProps.fetch}
+          />
+        ) : undefined
+      }
       rowActions={({ row }) => (
         // The row actions read whether the call is archived from here.
         <ArchivedCallContext.Provider value={isCallArchived(call)}>

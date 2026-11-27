@@ -79,7 +79,7 @@ export const makeProposalsBulkActions =
               disabled={count === 0}
               onSelect={() =>
                 openDialog(DecideProposalStepsDialog, {
-                  resolve: { proposals: rows, refetch },
+                  resolve: { callUuid: call.uuid, proposals: rows, refetch },
                 })
               }
             >

@@ -1,98 +1,138 @@
-import { Proposal, ProposalWorkflowStepInstance } from 'waldur-js-client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
+import {
+  BulkStepDecision,
+  BulkStepDecisionResult,
+  BulkStepDecisionSummary,
+  proposalBulkStepDecisionsList,
+  proposalBulkStepDecisionsRetrieve,
+} from 'waldur-js-client';
 
-import { format, getErrorBody } from '@/core/ErrorMessageFormatter';
+/** How often a run in the background is read again while it moves. */
+const RUN_POLL_INTERVAL = 2000;
 
-interface StepTarget {
-  proposal: Pick<Proposal, 'uuid' | 'name'>;
-  instance: ProposalWorkflowStepInstance;
-}
+/** How often a run that has stopped moving is read again: the backend
+ * picks it up again after ten minutes, or gives it up. */
+const SLOW_POLL_INTERVAL = 30000;
 
-/** The selected proposals standing on one step of the call. */
-export interface StepGroup {
-  callStepUuid: string;
-  stepName: string;
-  allowedOutcomes: string[];
-  targets: StepTarget[];
-}
+/** The most proposals one run takes (the backend's limit). */
+export const MAX_BULK_PROPOSALS = 2000;
 
-/**
- * Whether a call manager can take the step for many proposals at once with
- * one outcome and one reason: a plain decision. The allocation decision
- * settles each award and its budget, an assessment waits for its
- * contributors, a round step is taken once per round, and an applicant
- * action is the applicant's -- all of those stay on each proposal's page.
- */
-const isDecidableInBulk = (instance: ProposalWorkflowStepInstance) =>
-  instance.status === 'active' &&
-  instance.kind === 'decision' &&
-  !instance.is_allocation_decision &&
-  !instance.round_scoped;
+/** A run that has recorded nothing for this long has stopped moving. */
+const STALE_AFTER_MS = 30 * 60 * 1000;
 
-/** The selection grouped by the step each proposal stands on, largest group
- * first. A proposal running steps side by side may stand in two groups. */
-export const groupByDecisionStep = (
-  states: {
-    proposal: Pick<Proposal, 'uuid' | 'name'>;
-    instances: ProposalWorkflowStepInstance[];
-  }[],
-): StepGroup[] => {
-  const groups = new Map<string, StepGroup>();
-  for (const { proposal, instances } of states) {
-    for (const instance of instances.filter(isDecidableInBulk)) {
-      const group = groups.get(instance.call_step_uuid) ?? {
-        callStepUuid: instance.call_step_uuid,
-        stepName: instance.step_name,
-        allowedOutcomes: instance.allowed_outcomes ?? [],
-        targets: [],
-      };
-      group.targets.push({ proposal, instance });
-      groups.set(instance.call_step_uuid, group);
-    }
-  }
-  return [...groups.values()].sort(
-    (a, b) => b.targets.length - a.targets.length,
-  );
+/** Whether the run has stopped: every proposal decided or refused, or the
+ * run failed. */
+export const isFinished = (run?: Pick<BulkStepDecisionSummary, 'state'>) =>
+  run?.state === 'done' || run?.state === 'failed';
+
+/** Whether the run goes on and has recorded a proposal lately. Read
+ * against this browser's clock, so it only slows the polling down. */
+export const isMoving = (
+  run?: Pick<BulkStepDecisionSummary, 'state' | 'modified'>,
+) =>
+  Boolean(run) &&
+  !isFinished(run) &&
+  (!run.modified ||
+    Date.now() - new Date(run.modified).getTime() < STALE_AFTER_MS);
+
+/** How often to read a run, or runs, again: quickly while one moves,
+ * slowly while one is stalled, never once all have stopped. */
+const pollInterval = (
+  runs: Pick<BulkStepDecisionSummary, 'state' | 'modified'>[],
+) => {
+  if (runs.some(isMoving)) return RUN_POLL_INTERVAL;
+  if (runs.some((run) => !isFinished(run))) return SLOW_POLL_INTERVAL;
+  return false;
 };
 
-/** What the backend said when it refused one proposal. */
-const refusalOf = (error): string => {
-  const detail = getErrorBody(error)?.detail;
-  if (Array.isArray(detail)) return detail.join(' ');
-  if (typeof detail === 'string') return detail;
-  return format(error);
-};
-
-export interface BulkFailure {
-  name: string;
-  reason: string;
-}
+export const refusedOf = (results: BulkStepDecisionResult[]) =>
+  results.filter((result) => result.status === 'refused');
 
 /**
- * Run `action` on each item, a few at a time: one refusal does not stop the
- * others, and each is reported with the item's name.
+ * A run deciding -- or previewing -- one step for many proposals. While it
+ * goes on in the background, only its summary is read again (counts, not
+ * the results so far); once it has stopped, its results are read once. A
+ * run decided within the request comes back finished, with its results,
+ * and is not read again.
  */
-export const runEach = async <T>(
-  items: T[],
-  action: (item: T) => Promise<unknown>,
-  nameOf: (item: T) => string,
-  concurrency = 4,
-): Promise<{ done: number; failures: BulkFailure[] }> => {
-  let done = 0;
-  const failures: BulkFailure[] = [];
-  let next = 0;
-  const worker = async () => {
-    while (next < items.length) {
-      const item = items[next++];
-      try {
-        await action(item);
-        done += 1;
-      } catch (error) {
-        failures.push({ name: nameOf(item), reason: refusalOf(error) });
-      }
-    }
-  };
-  await Promise.all(
-    Array.from({ length: Math.min(concurrency, items.length) }, worker),
-  );
-  return { done, failures };
+export const useBulkStepDecision = (
+  uuid: string,
+  initial?: BulkStepDecision,
+) => {
+  const initiallyFinished = isFinished(initial);
+  const summary = useQuery<BulkStepDecisionSummary>({
+    queryKey: ['BulkStepDecisionSummary', uuid],
+    queryFn: () =>
+      proposalBulkStepDecisionsList({ query: { uuid } }).then(
+        (response) => response.data[0],
+      ),
+    initialData: initial,
+    enabled: Boolean(uuid) && !initiallyFinished,
+    refetchInterval: (query) =>
+      query.state.data ? pollInterval([query.state.data]) : RUN_POLL_INTERVAL,
+    refetchOnWindowFocus: false,
+  });
+  const finished = isFinished(summary.data ?? initial);
+  const detail = useQuery<BulkStepDecision>({
+    queryKey: ['BulkStepDecision', uuid],
+    queryFn: () =>
+      proposalBulkStepDecisionsRetrieve({ path: { uuid } }).then(
+        (response) => response.data,
+      ),
+    initialData: initiallyFinished && initial?.results ? initial : undefined,
+    enabled: Boolean(uuid) && finished,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+  const data: BulkStepDecision | undefined =
+    detail.data ??
+    (summary.data ? { ...summary.data, results: [] } : undefined);
+  return { data, isLoading: !data };
+};
+
+const runsOfCallKey = (callUuid: string) => ['BulkStepDecisions', callUuid];
+
+/** The call's runs deciding a step in bulk, latest first, as summaries:
+ * read again while one of them goes on. */
+export const useBulkRunsOfCall = (callUuid: string) =>
+  useQuery({
+    queryKey: runsOfCallKey(callUuid),
+    queryFn: () =>
+      proposalBulkStepDecisionsList({
+        query: { call_uuid: callUuid, dry_run: false, page_size: 50 },
+      }).then((response) => response.data),
+    refetchInterval: (query) => pollInterval(query.state.data ?? []),
+    refetchOnWindowFocus: false,
+  });
+
+export const invalidateRunsOfCall = (queryClient, callUuid: string) =>
+  queryClient.invalidateQueries({ queryKey: runsOfCallKey(callUuid) });
+
+/**
+ * Watch the call's runs, and once one that was going on stops, read the
+ * proposals again: their steps and `onChange` (the proposals list). For a
+ * run whose dialog was closed before it ended.
+ */
+export const useWhenRunsFinish = (callUuid: string, onChange?: () => void) => {
+  const queryClient = useQueryClient();
+  const { data: runs } = useBulkRunsOfCall(callUuid);
+  const going = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    if (!runs) return;
+    const finishedNow = runs.filter(
+      (run) => going.current.has(run.uuid) && isFinished(run),
+    );
+    going.current = new Set(
+      runs.filter((run) => !isFinished(run)).map((run) => run.uuid),
+    );
+    if (!finishedNow.length) return;
+    queryClient.invalidateQueries({
+      predicate: (query) => query.queryKey[0] === 'proposalWorkflowStates',
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['BulkDecisionSteps', callUuid],
+    });
+    onChange?.();
+  }, [runs, queryClient, callUuid, onChange]);
 };
