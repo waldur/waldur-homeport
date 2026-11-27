@@ -15,7 +15,7 @@ import { ReviewStateField } from '@/core/ReviewStateField';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -110,15 +110,14 @@ export const ResourceEndDateChangeRequests: FunctionComponent<Props> = ({
 
   // Requesters reach this table too — the list scopes rows to their own — so
   // they can follow what became of what they asked for. Only someone who may
-  // decide gets the row actions.
-  const canDecide =
-    user?.is_staff ||
-    user?.is_support ||
-    hasPermission(user, {
-      permission: PermissionEnum.SET_RESOURCE_END_DATE,
-      projectId: resource.project_uuid,
-      customerId: resource.customer_uuid,
-    });
+  // decide gets the row actions: as on the backend, RESOURCE.SET_END_DATE on
+  // the project or its organization (staff hold every permission). Support
+  // and provider-side roles are refused there, so they get no buttons here.
+  const canDecide = hasConsumerPermission(user, {
+    permission: PermissionEnum.SET_RESOURCE_END_DATE,
+    projectId: resource.project_uuid,
+    customerId: resource.customer_uuid,
+  });
 
   const tabs = useMemo(
     () => [
