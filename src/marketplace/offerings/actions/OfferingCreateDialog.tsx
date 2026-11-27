@@ -21,6 +21,7 @@ import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { getCreatableOfferings } from '@/marketplace/common/registry';
+import { CreateFromTemplateHint } from '@/marketplace/offerings/from-template/CreateFromTemplateHint';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -32,11 +33,15 @@ interface OfferingCreateDialogProps {
   resolve: {
     fetch;
     showProvider?: boolean;
+    /** The provider the picker opens on. */
+    initialProvider?: { name: string; url: string; uuid: string };
+    /** The providers the picker offers; every service provider otherwise. */
+    providers?: { name: string; url: string; uuid: string }[];
   };
 }
 
 export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
-  resolve: { fetch, showProvider = false },
+  resolve: { fetch, showProvider = false, initialProvider, providers },
 }) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['OfferingCreateDialog'],
@@ -59,6 +64,11 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
         is_service_provider: true,
       }),
     [],
+  );
+
+  const initialValues = useMemo(
+    () => (initialProvider ? { organisation: initialProvider } : undefined),
+    [initialProvider],
   );
 
   const saveOfferingMutation = useManagedMutation<
@@ -112,6 +122,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
   return (
     <Form<OfferingCreateFormData>
       onSubmit={(values) => saveOfferingMutation.mutateAsync(values)}
+      initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit} data-testid="offering-create-dialog">
           <ModalDialog
@@ -131,7 +142,25 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
             iconColor="success"
           >
             <div>
-              {showProvider && (
+              <CreateFromTemplateHint
+                fetch={fetch}
+                showProvider={showProvider}
+              />
+              {showProvider && providers ? (
+                <SelectGroup
+                  name="organisation"
+                  label={translate('Service provider')}
+                  validate={required}
+                  required
+                  placeholder={translate('Select service provider...')}
+                  options={providers}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.url}
+                  isClearable={false}
+                  disabled={submitting}
+                  data-testid="offering-provider"
+                />
+              ) : showProvider ? (
                 <AsyncSelectGroup
                   name="organisation"
                   label={translate('Service provider')}
@@ -145,7 +174,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                   isClearable={true}
                   disabled={submitting}
                 />
-              )}
+              ) : null}
               <StringGroup
                 name="name"
                 label={translate('Name')}

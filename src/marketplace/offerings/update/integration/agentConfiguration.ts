@@ -27,6 +27,26 @@ export const AGENT_ROLE_FIELDS = [
 
 export type AgentRoleField = (typeof AGENT_ROLE_FIELDS)[number]['field'];
 
+export const getRoleLabels = (): Record<AgentRoleField, string> => ({
+  order_processing_backend: translate('Order processing'),
+  membership_sync_backend: translate('Membership sync'),
+  reporting_backend: translate('Reporting'),
+  username_management_backend: translate('Username management'),
+});
+
+export const getRoleDescriptions = (): Record<AgentRoleField, string> => ({
+  order_processing_backend: translate(
+    'Creates, updates and terminates resources on the backend.',
+  ),
+  membership_sync_backend: translate(
+    "Keeps the backend's users in step with resource teams.",
+  ),
+  reporting_backend: translate('Reports usage from the backend to Waldur.'),
+  username_management_backend: translate(
+    'Gives offering users their usernames on the backend.',
+  ),
+});
+
 // What the agent uses for a switch the configuration leaves out
 // (waldur_site_agent/common/structures.py). Shown as the value of an unset
 // switch, and not written back when saved unchanged from it.

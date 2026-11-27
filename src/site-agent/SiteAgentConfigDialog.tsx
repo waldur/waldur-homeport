@@ -45,9 +45,33 @@ const getSourceOptions = () => [
     value: 'waldur' as const,
     label: translate('Read from Waldur'),
     description: translate(
-      'The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs a site agent that supports configuration_source.',
+      'The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs waldur-site-agent 1.0.8-rc.16 or later: an older agent ignores configuration_source without a warning.',
     ),
   },
+];
+
+// How the offerings are chosen: one by one, or by backend ID, which picks
+// every offering of a cluster (alps-dora-q, alps-dora-u, ...) by its prefix.
+type SelectionMode = 'pick' | 'backend_id';
+type BackendIdMatch = 'startswith' | 'exact';
+
+const getSelectionOptions = () => [
+  {
+    value: 'pick' as const,
+    label: translate('Choose offerings'),
+  },
+  {
+    value: 'backend_id' as const,
+    label: translate('By backend ID'),
+    description: translate(
+      'Every offering whose backend ID matches, such as all offerings of one cluster. Archived offerings are left out.',
+    ),
+  },
+];
+
+const getMatchOptions = () => [
+  { value: 'startswith' as const, label: translate('Starts with') },
+  { value: 'exact' as const, label: translate('Is exactly') },
 ];
 
 interface SiteAgentConfigDialogProps {
@@ -72,6 +96,14 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
   const [selectedOfferings, setSelectedOfferings] = useState<string[]>(
     fixedOffering ? [fixedOffering.uuid] : [],
   );
+  const [selectionMode, setSelectionMode] = useState<SelectionMode>('pick');
+  const [backendId, setBackendId] = useState('');
+  const [backendIdMatch, setBackendIdMatch] =
+    useState<BackendIdMatch>('startswith');
+  const byBackendId = !fixedOffering && selectionMode === 'backend_id';
+  const nothingSelected = byBackendId
+    ? !backendId.trim()
+    : selectedOfferings.length === 0;
   const [configurationSource, setConfigurationSource] =
     useState<ConfigurationSource>('local');
   const [includePolicySettings, setIncludePolicySettings] = useState(true);
@@ -79,7 +111,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
   const [timezone, setTimezone] = useState('');
   const [generatedConfig, setGeneratedConfig] = useState<string | null>(null);
 
-  // Fetch SLURM offerings for this service provider
+  // Fetch the site agent offerings of this service provider
   const { data: offerings, isLoading: offeringsLoading } = useQuery({
     queryKey: ['site-agent-offerings', provider.uuid],
     queryFn: async () => {
@@ -99,7 +131,13 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
           await marketplaceServiceProvidersGenerateSiteAgentConfig({
             path: { uuid: provider.uuid },
             body: {
-              offering_uuids: selectedOfferings,
+              ...(byBackendId
+                ? {
+                    [backendIdMatch === 'exact'
+                      ? 'backend_id'
+                      : 'backend_id_startswith']: backendId.trim(),
+                  }
+                : { offering_uuids: selectedOfferings }),
               // Sent only when not the server's default, 'local'; Waldur
               // always serves the policy settings to an agent reading them.
               ...(configurationSource === 'waldur'
@@ -115,7 +153,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
         setGeneratedConfig(data);
       },
       successMessage: translate('Configuration generated successfully.'),
-      errorMessage: translate('Failed to generate configuration.'),
+      errorMessage: byBackendId
+        ? translate(
+            'Failed to generate configuration. Check that an offering has a matching backend ID.',
+          )
+        : translate('Failed to generate configuration.'),
       closeModal: false,
     });
 
@@ -175,7 +217,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
     <ModalDialog
       title={translate('Generate Site Agent Configuration')}
       subtitle={translate(
-        'Generate a YAML configuration file for waldur-site-agent based on selected SLURM offerings.',
+        'Generate a YAML configuration file for waldur-site-agent from the selected site agent offerings.',
       )}
       footer={
         <>
@@ -183,10 +225,12 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
           <BaseButton
             pending={isGenerating}
             label={translate('Generate Configuration')}
-            disabled={selectedOfferings.length === 0}
+            disabled={nothingSelected}
             disabledReason={
-              selectedOfferings.length === 0
-                ? translate('Please select at least one offering')
+              nothingSelected
+                ? byBackendId
+                  ? translate('Enter a backend ID')
+                  : translate('Please select at least one offering')
                 : undefined
             }
             onClick={() => generateConfig()}
@@ -213,44 +257,88 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
           type="floating"
           variant="info"
           title={translate(
-            'No SLURM offerings found for this service provider. Create a SLURM offering first.',
+            'The service provider has no site agent offerings. Create one first.',
           )}
         />
       ) : (
-        <FormField className="mb-3">
-          <FormLabel>{translate('Select SLURM Offerings')}</FormLabel>
-          <div className="mb-1.5">
-            <LinkButton onClick={handleSelectAll}>
-              {selectedOfferings.length === offerings.length
-                ? translate('Deselect all')
-                : translate('Select all')}
-            </LinkButton>
-          </div>
-          <div className="border border-secondary rounded-lg p-2.5 overflow-y-auto max-h-50">
-            {offerings.map((offering) => (
-              <Checkbox
-                id={`offering-${offering.uuid}`}
-                checked={selectedOfferings.includes(offering.uuid)}
-                onChange={() => handleOfferingToggle(offering.uuid)}
-                key={offering.uuid}
-                className="mb-1.5"
-                label={
-                  <span>
-                    {offering.name}
-                    <span className="text-quaternary ms-1.5">
-                      ({offering.uuid.slice(0, 8)}...)
-                    </span>
-                  </span>
-                }
-              />
-            ))}
-          </div>
-          <FormText variant="muted">
-            {translate('{count} offering(s) selected', {
-              count: selectedOfferings.length,
-            })}
-          </FormText>
-        </FormField>
+        <>
+          <RadioGroup<SelectionMode>
+            className="mb-3"
+            label={translate('Offerings')}
+            options={getSelectionOptions()}
+            value={selectionMode}
+            onValueChange={setSelectionMode}
+          />
+          {byBackendId ? (
+            <FormField className="mb-3">
+              <FormLabel>{translate('Backend ID')}</FormLabel>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-3 gap-y-2">
+                <NativeSelect
+                  value={backendIdMatch}
+                  onChange={(e) =>
+                    setBackendIdMatch(e.target.value as BackendIdMatch)
+                  }
+                  aria-label={translate('Match')}
+                  data-testid="backend-id-match"
+                >
+                  {getMatchOptions().map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </NativeSelect>
+                <BaseInputField
+                  containerClassName="sm:col-span-2"
+                  placeholder="alps-dora"
+                  value={backendId}
+                  onChange={(e) => setBackendId(e.target.value)}
+                  aria-label={translate('Backend ID')}
+                  data-testid="backend-id"
+                />
+              </div>
+              <FormText variant="muted">
+                {translate(
+                  'The same filter is available without the file: GET marketplace-service-providers/<uuid>/site_agent_config/ with backend_id or backend_id_startswith.',
+                )}
+              </FormText>
+            </FormField>
+          ) : (
+            <FormField className="mb-3">
+              <FormLabel>{translate('Select site agent offerings')}</FormLabel>
+              <div className="mb-1.5">
+                <LinkButton onClick={handleSelectAll}>
+                  {selectedOfferings.length === offerings.length
+                    ? translate('Deselect all')
+                    : translate('Select all')}
+                </LinkButton>
+              </div>
+              <div className="border border-secondary rounded-lg p-2.5 overflow-y-auto max-h-50">
+                {offerings.map((offering) => (
+                  <Checkbox
+                    id={`offering-${offering.uuid}`}
+                    checked={selectedOfferings.includes(offering.uuid)}
+                    onChange={() => handleOfferingToggle(offering.uuid)}
+                    key={offering.uuid}
+                    className="mb-1.5"
+                    label={
+                      <span>
+                        {offering.name}
+                        <span className="text-quaternary ms-1.5">
+                          ({offering.uuid.slice(0, 8)}...)
+                        </span>
+                      </span>
+                    }
+                  />
+                ))}
+              </div>
+              <FormText variant="muted">
+                {translate('{count} offering(s) selected', {
+                  count: selectedOfferings.length,
+                })}
+              </FormText>
+            </FormField>
+          )}
+        </>
       )}
 
       {/* Common configuration options - shown for both fixed offering and multi-select cases */}
