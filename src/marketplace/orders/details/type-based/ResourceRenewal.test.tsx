@@ -106,6 +106,68 @@ describe('ResourceRenewal', () => {
     expect(screen.getByText(/768\.00/)).toBeInTheDocument();
   });
 
+  it('takes the quoted volume discount off the total', () => {
+    const order = buildOrder();
+    order.limits = { gpu: 120 };
+    order.attributes = {
+      ...order.attributes,
+      old_limits: { gpu: 120 },
+      cost_lines: [
+        {
+          component_type: 'gpu',
+          term: 'extension',
+          start: '2027-11-25',
+          end: '2028-11-25',
+          current_limit: '120',
+          new_limit: '120',
+          quantity: '1440.0000000000',
+          unit_price: '2.56',
+          total: '3686.40',
+          discount_percent: '10',
+          discount_total: '368.64',
+          discount_deferred: false,
+        },
+      ],
+    };
+
+    render(<ResourceRenewal order={order} offering={buildOffering()} />);
+
+    expect(screen.getByText(/3,?686\.40/)).toBeInTheDocument();
+    expect(screen.getByText(/368\.64/)).toBeInTheDocument();
+    expect(screen.getByText(/10% volume discount/)).toBeInTheDocument();
+    // 3686.40 less the discount: what the order costs.
+    expect(screen.getByText(/3,?317\.76/)).toBeInTheDocument();
+  });
+
+  it('notes a discount that only the invoice can price', () => {
+    const order = buildOrder();
+    order.attributes = {
+      ...order.attributes,
+      cost_lines: [
+        {
+          component_type: 'gpu',
+          term: 'extension',
+          start: '2027-11-25',
+          end: '2028-11-25',
+          current_limit: '40',
+          new_limit: '100',
+          quantity: '600.0000000000',
+          unit_price: '0.5',
+          total: '300.00',
+          discount_percent: '0',
+          discount_total: '0',
+          discount_deferred: true,
+        },
+      ],
+    };
+
+    render(<ResourceRenewal order={order} offering={buildOffering()} />);
+
+    expect(
+      screen.getByText('Volume discount applied on your invoice'),
+    ).toBeInTheDocument();
+  });
+
   it('shows no plan price for a renewal recorded with no cost lines', () => {
     const order = buildOrder();
     order.attributes = { ...order.attributes, cost_lines: [] };

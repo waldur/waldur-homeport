@@ -13,6 +13,7 @@ import {
   getLimitChangeRequirements,
 } from '@/marketplace/resources/change-limits/utils';
 import { getLimitIncrease } from '@/marketplace/resources/renew-allocation/getLimitIncrease';
+import { formatDiscountPercent } from '@/marketplace/resources/renew-allocation/RenewalCostBreakdown';
 import { PriceTooltip } from '@/price/PriceTooltip';
 import { propVal } from '@/property/propertyFields';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -35,6 +36,11 @@ interface RenewalCostLine {
   quantity: string;
   unit_price: string;
   total: string;
+  // The volume discount the invoice gives the line, recorded on renewals
+  // placed since it is quoted; included in the order's cost.
+  discount_percent?: string;
+  discount_total?: string;
+  discount_deferred?: boolean;
 }
 
 interface RenewalAttributes {
@@ -58,6 +64,9 @@ const getTermLabel = (line: RenewalCostLine) =>
         start: formatDate(parseCalendarDate(line.start)),
         end: formatDate(parseCalendarDate(line.end)),
       });
+
+const getLineDiscount = (line: RenewalCostLine) =>
+  Number(line.discount_total ?? 0);
 
 const getLineUnits = (line: RenewalCostLine) =>
   line.term === 'current_term'
@@ -260,20 +269,49 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
             },
             {
               title: translate('Cost'),
-              render: ({ row }) => defaultCurrency(row.total),
+              render: ({ row }) => (
+                <>
+                  {defaultCurrency(row.total)}
+                  {getLineDiscount(row) > 0 ? (
+                    <div className="text-success small whitespace-nowrap">
+                      {'− '}
+                      {defaultCurrency(getLineDiscount(row))}{' '}
+                      {translate('{percent}% volume discount', {
+                        percent: formatDiscountPercent(row.discount_percent),
+                      })}
+                    </div>
+                  ) : null}
+                </>
+              ),
             },
           ]}
           totalRow={(columnCount) => (
-            <tr className="font-semibold">
-              <td colSpan={columnCount - 1} className="text-primary text-end">
-                {translate('Total renewal cost')}
-              </td>
-              <td className="text-primary">
-                {defaultCurrency(
-                  costLines.reduce((sum, line) => sum + Number(line.total), 0),
-                )}
-              </td>
-            </tr>
+            <>
+              <tr className="font-semibold">
+                <td colSpan={columnCount - 1} className="text-primary text-end">
+                  {translate('Total renewal cost')}
+                </td>
+                <td className="text-primary">
+                  {defaultCurrency(
+                    costLines.reduce(
+                      (sum, line) =>
+                        sum + Number(line.total) - getLineDiscount(line),
+                      0,
+                    ),
+                  )}
+                </td>
+              </tr>
+              {costLines.some((line) => line.discount_deferred) ? (
+                <tr>
+                  <td
+                    colSpan={columnCount}
+                    className="text-quaternary text-end small"
+                  >
+                    {translate('Volume discount applied on your invoice')}
+                  </td>
+                </tr>
+              ) : null}
+            </>
           )}
         />
       ) : null}
