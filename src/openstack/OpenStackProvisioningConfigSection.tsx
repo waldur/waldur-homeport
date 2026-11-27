@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { MergedPluginOptions } from 'waldur-js-client';
 
 import { EditSchedulesButton } from '@/booking/EditSchedulesButton';
 import { CheckOrX } from '@/core/CheckOrX';
@@ -35,6 +36,12 @@ const getInstanceMetricOptions = () => [
   { value: 'volume.io', label: translate('Volume throughput') },
   { value: 'volume.operations', label: translate('Volume I/O operations') },
 ];
+
+// Checked against the SDK, so a rename of the backend option fails the build.
+const BILL_INACTIVE_INSTANCES =
+  'bill_inactive_instances' satisfies keyof MergedPluginOptions;
+type BillInactiveInstances =
+  MergedPluginOptions[typeof BILL_INACTIVE_INSTANCES];
 
 const BILLING_SOURCE_OPTIONS = [
   { value: 'quota', label: translate('Quota (flavor-derived)') },
@@ -254,14 +261,16 @@ export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
             }
           />
           <BooleanEditField
-            name="plugin_options.bill_inactive_instances"
+            name={`plugin_options.${BILL_INACTIVE_INSTANCES}`}
             label={translate('Bill stopped instances')}
             description={translate(
               'Under usage-based billing, bill the cores, RAM and other compute of instances that are not running (shut off, suspended or shelved). When off, an instance is left out of a billing interval only if it stayed stopped for the whole of it; the interval in which it stops is still billed. Paused instances and instances in error are always billed, and storage is billed either way.',
             )}
             // Unset means on: the backend bills stopped instances by default.
-            format={(value) => value ?? true}
-            renderValue={(value) => <CheckOrX value={value ?? true} />}
+            format={(value: BillInactiveInstances) => value ?? true}
+            renderValue={(value: BillInactiveInstances) => (
+              <CheckOrX value={value ?? true} />
+            )}
           />
         </TabbedSection.Tab>
 
