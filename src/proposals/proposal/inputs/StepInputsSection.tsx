@@ -20,6 +20,7 @@ import {
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { Proposal } from '@/proposals/types';
 import { outcomeLabel } from '@/proposals/workflow/constants';
 import { proposalWorkflowStatesKey } from '@/proposals/workflow/queries';
@@ -215,6 +216,7 @@ const ResponseStepCard: FC<StepCardProps> = ({
   isApplicant,
   refetch,
 }) => {
+  const archived = useArchivedCallReason(step);
   const openState = useSectionOpenState();
   const { data: outputs, isError } = useStepInputs(
     proposal.uuid,
@@ -332,11 +334,13 @@ const ResponseStepCard: FC<StepCardProps> = ({
               iconNode={<PaperPlaneTiltIcon weight="bold" />}
               onClick={() => submit.mutate()}
               pending={submit.isPending}
-              disabled={hasForm && unanswered > 0}
+              disabled={(hasForm && unanswered > 0) || !!archived}
               disabledReason={
-                hasForm && unanswered > 0
-                  ? translate('Save answers to the required questions first.')
-                  : undefined
+                archived
+                  ? archived
+                  : hasForm && unanswered > 0
+                    ? translate('Save answers to the required questions first.')
+                    : undefined
               }
             />
           </div>

@@ -5,6 +5,12 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
+import {
+  ArchivedCallContext,
+  isRowOfArchivedCall,
+  useArchivedCallReason,
+} from '../archivedCall';
+
 import { ReviewDeleteAction } from './ReviewDeleteAction';
 import { ReviewViewAction } from './ReviewViewAction';
 
@@ -12,6 +18,8 @@ export const ReviewsRowActions = ({ row, fetch }) => {
   const { state } = useCurrentStateAndParams();
 
   const user = useUser();
+  // Known from the page, or from the row on lists across calls.
+  const archived = Boolean(useArchivedCallReason()) || isRowOfArchivedCall(row);
   const canDelete = hasPermission(user, {
     permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
     scopeId: row.call_uuid,
@@ -29,12 +37,15 @@ export const ReviewsRowActions = ({ row, fetch }) => {
   }
 
   return (
-    <ActionsDropdown
-      row={row}
-      refetch={fetch}
-      actions={[ReviewViewAction, canDelete && ReviewDeleteAction].filter(
-        Boolean,
-      )}
-    />
+    // An archived call's reviews are not removed (ReviewDeleteAction).
+    <ArchivedCallContext.Provider value={archived}>
+      <ActionsDropdown
+        row={row}
+        refetch={fetch}
+        actions={[ReviewViewAction, canDelete && ReviewDeleteAction].filter(
+          Boolean,
+        )}
+      />
+    </ArchivedCallContext.Provider>
   );
 };

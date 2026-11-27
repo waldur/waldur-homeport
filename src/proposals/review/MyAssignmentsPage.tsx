@@ -18,6 +18,8 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+import { ArchivedCallContext, isRowOfArchivedCall } from '../archivedCall';
+
 import { AcceptAssignmentAction } from './AcceptAssignmentAction';
 import { DeclineAssignmentAction } from './DeclineAssignmentAction';
 import { fetchMyAssignmentBatches } from './fetchMyAssignmentBatches';
@@ -177,7 +179,10 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
         </div>
       )}
 
-      <AssignmentItemsTable items={batch.items} batchUuid={row.uuid} />
+      {/* An archived call takes no answer: Accept and Decline say why. */}
+      <ArchivedCallContext.Provider value={isRowOfArchivedCall(row)}>
+        <AssignmentItemsTable items={batch.items} batchUuid={row.uuid} />
+      </ArchivedCallContext.Provider>
     </ExpandableContainer>
   );
 };

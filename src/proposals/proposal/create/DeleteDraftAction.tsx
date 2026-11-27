@@ -7,6 +7,7 @@ import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { usesCallVocabulary } from '@/proposals/presentation';
 
 /**
@@ -17,6 +18,7 @@ import { usesCallVocabulary } from '@/proposals/presentation';
 export const DeleteDraftAction: FC<{
   proposal: { uuid: string; name: string };
 }> = ({ proposal }) => {
+  const archived = useArchivedCallReason();
   const router = useRouter();
   const remove = useManagedMutation<any, any, void>({
     mutationFn: () =>
@@ -37,6 +39,8 @@ export const DeleteDraftAction: FC<{
   return (
     <BaseButton
       onClick={() => remove.mutate()}
+      disabled={!!archived}
+      disabledReason={archived}
       label={translate('Delete draft')}
       iconNode={<TrashIcon weight="bold" />}
       variant="text-danger"

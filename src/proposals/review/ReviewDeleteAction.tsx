@@ -2,9 +2,11 @@ import { proposalReviewsDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const ReviewDeleteAction = (props) => {
+  const archived = useArchivedCallReason();
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       proposalReviewsDestroy({ path: { uuid: props.row.uuid } }),
@@ -32,7 +34,8 @@ export const ReviewDeleteAction = (props) => {
     <RemovalActionItem
       title={translate('Remove')}
       action={mutate}
-      disabled={isPending}
+      disabled={isPending || Boolean(archived)}
+      tooltip={archived}
     />
   );
 };

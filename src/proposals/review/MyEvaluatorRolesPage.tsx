@@ -20,6 +20,7 @@ import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
+import { getArchivedCallReason, isRowOfArchivedCall } from '../archivedCall';
 import { CoiDeclaration } from '../coi-declaration/CoiDeclaration';
 import { coiStateLabel } from '../proposal-roles/constants';
 
@@ -55,7 +56,8 @@ const ConfirmNoConflictAction: FC<{
     <ActionItem
       title={translate('Confirm no conflict of interest')}
       action={() => mutate()}
-      disabled={isPending}
+      disabled={isPending || isRowOfArchivedCall(row)}
+      tooltip={isRowOfArchivedCall(row) ? getArchivedCallReason() : undefined}
       iconNode={<ShieldCheckIcon weight="bold" />}
     />
   );

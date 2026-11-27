@@ -34328,6 +34328,7 @@
       "feature_area": "cost-policies"
     }
   },
+  "Its evaluation is closed until the call is activated again. The award stage continues: the award response, provisioning, extensions and the final report.": {},
   "Its outcome": {
     "context": {
       "primary_ui_type": "label",
@@ -72447,6 +72448,7 @@
     }
   },
   "The call is active, so its allocation decision stays on the step it is on.": {},
+  "The call is archived: its evaluation is closed until the call is activated again.": {},
   "The call is connecting.": {
     "context": {
       "feature_area": "call",
@@ -74038,8 +74040,8 @@
       "feature_area": "chat"
     }
   },
-  "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_uninvited code.": {},
-  "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_blocked code.": {},
+  "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
+  "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
   "The message was deleted, but its earlier versions could not all be found. Some may remain on the server.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -76659,6 +76661,11 @@
   "This call has no resource pools, so there is nothing to measure awards against. Requests and awards are listed below.": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "This call is archived": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "This call is archived and cannot be edited.": {},

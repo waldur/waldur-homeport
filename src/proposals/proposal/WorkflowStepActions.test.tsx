@@ -12,6 +12,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
+import { ArchivedCallContext, getArchivedCallReason } from '../archivedCall';
 import { ReopenDecisionDialog } from '../workflow/ReopenDecisionDialog';
 
 import { WorkflowStepActions } from './WorkflowStepActions';
@@ -78,6 +79,17 @@ describe('WorkflowStepActions reopen decision', () => {
     vi.mocked(useUser).mockReturnValue(callManager as any);
     renderActions();
     expect(reopenButton()).toBeInTheDocument();
+  });
+
+  it('is disabled with the reason while the call is archived', () => {
+    vi.mocked(useUser).mockReturnValue(callManager as any);
+    renderWithProviders(
+      <ArchivedCallContext.Provider value>
+        <WorkflowStepActions proposal={proposal} refetch={vi.fn()} />
+      </ArchivedCallContext.Provider>,
+    );
+    expect(reopenButton()).toBeDisabled();
+    expect(reopenButton()).toHaveAccessibleDescription(getArchivedCallReason());
   });
 
   it('is offered to staff', () => {

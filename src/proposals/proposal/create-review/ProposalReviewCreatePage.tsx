@@ -16,6 +16,8 @@ import {
   proposalReviewsRetrieve,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -23,6 +25,11 @@ import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
+import {
+  ArchivedCallContext,
+  getArchivedCallReason,
+  isCallArchived,
+} from '@/proposals/archivedCall';
 import { ProposalReview } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
 
@@ -49,7 +56,8 @@ const loadData = async (reviewUuid: string) => {
   }).then((response) => response.data);
   const call = await proposalPublicCallsRetrieve({
     path: { uuid: review.call_uuid },
-    query: { field: ['uuid', 'customer_uuid', 'manager_uuid'] },
+    // state: an archived call's reviews are read-only (isCallArchived).
+    query: { field: ['uuid', 'customer_uuid', 'manager_uuid', 'state'] },
   }).then((res) => res.data);
   return { review, proposal, call };
 };
@@ -115,6 +123,8 @@ export const ProposalReviewCreatePage = () => {
     [data, setReviewObject, reviewObject],
   );
 
+  const callArchived = isCallArchived(data?.call);
+
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (error) {
@@ -122,7 +132,7 @@ export const ProposalReviewCreatePage = () => {
   }
 
   return (
-    <>
+    <ArchivedCallContext.Provider value={callArchived}>
       {/* The review's score/comments are written in the SubmitReviewDialog
           (opened from the sidebar), not inline. This Form only provides
           react-final-form context to the read-only step components below. */}
@@ -137,6 +147,15 @@ export const ProposalReviewCreatePage = () => {
                   call={data.call}
                 />
                 <ReviewHeader review={data.review} proposal={data.proposal} />
+                {callArchived && (
+                  <AlertItem
+                    variant="info"
+                    className="mt-4"
+                    title={translate('This call is archived')}
+                    body={getArchivedCallReason()}
+                    data-testid="review-call-archived"
+                  />
+                )}
               </div>
             </SidebarLayout.Header>
             <SidebarLayout.Container>
@@ -151,7 +170,10 @@ export const ProposalReviewCreatePage = () => {
                       params={{
                         proposal: data.proposal,
                         reviews: reviewObject ? [reviewObject] : [],
-                        onAddCommentClick: openCommentFormDialog,
+                        // No comments are added to a review of an archived call.
+                        onAddCommentClick: callArchived
+                          ? undefined
+                          : openCommentFormDialog,
                         readOnly: true,
                       }}
                     />
@@ -170,6 +192,6 @@ export const ProposalReviewCreatePage = () => {
           </form>
         )}
       </Form>
-    </>
+    </ArchivedCallContext.Provider>
   );
 };

@@ -20,6 +20,7 @@ import { translate } from '@/i18n';
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { useNotify } from '@/store/notify';
 import { openSupportDrawer } from '@/support/openSupportDrawer';
 import { useUser } from '@/workspace/hooks';
@@ -147,6 +148,9 @@ interface StepDiscussionButtonProps {
   invalidateQueries?: InvalidateQueryFilters[];
   /** Reloads what shows its state, once an open settles. */
   refetch?(): void;
+  /** The proposal's step it is about: an award-stage one's discussion goes
+   * on in an archived call. None for a round step's. */
+  step?: { phase?: string | null; step?: string | null } | null;
 }
 
 /**
@@ -160,9 +164,12 @@ export const StepDiscussionButton: FC<StepDiscussionButtonProps> = ({
   panelName,
   invalidateQueries,
   refetch,
+  step,
 }) => {
   const { openDialog } = useModal();
   const open = useOpenStepDiscussion({ invalidateQueries, refetch });
+  // No discussion is started or joined on an archived call's steps.
+  const archived = useArchivedCallReason(step);
   const action = discussionAction(discussion, isMatrixChatEnabled());
   if (!action) return null;
 
@@ -202,7 +209,7 @@ export const StepDiscussionButton: FC<StepDiscussionButtonProps> = ({
   }
   const starts = action.kind === 'start' || action.kind === 'restart';
   const disabledReason =
-    action.kind === 'restart' ? undefined : action.disabledReason;
+    archived ?? (action.kind === 'restart' ? undefined : action.disabledReason);
   const button = (
     <BaseButton
       variant={starts ? 'primary' : 'tertiary'}
