@@ -126,6 +126,64 @@ describe('AgentConfigurationSection', () => {
     expect(screen.getByText('base (default)')).toBeInTheDocument();
   });
 
+  describe('with no agent role set', () => {
+    const withoutRoles = {
+      ...siteAgentOffering,
+      agent_configuration: { event_settings: { stomp_enabled: true } },
+    };
+
+    beforeEach(() => {
+      vi.mocked(marketplaceProviderOfferingsRetrieve).mockResolvedValue({
+        data: { agent_configuration: withoutRoles.agent_configuration },
+      } as any);
+    });
+
+    it('shows and opens each role on the backend the agent runs', () => {
+      renderSection(withoutRoles);
+      expect(screen.getAllByText('slurm (default)')).toHaveLength(3);
+      expect(
+        editButtons['agent_configuration.order_processing_backend'].value,
+      ).toBe('slurm');
+      expect(
+        editButtons['agent_configuration.username_management_backend'].value,
+      ).toBe('base');
+    });
+
+    it('keeps the other roles on slurm when the first one is set', async () => {
+      renderSection(withoutRoles);
+      await editButtons['agent_configuration.reporting_backend'].save(
+        'cscs-dwdi-compute',
+      );
+      expect(savedConfiguration()).toEqual({
+        event_settings: { stomp_enabled: true },
+        order_processing_backend: 'slurm',
+        membership_sync_backend: 'slurm',
+        reporting_backend: 'cscs-dwdi-compute',
+      });
+    });
+
+    it('turns a role off and keeps the others on slurm', async () => {
+      renderSection(withoutRoles);
+      await editButtons['agent_configuration.reporting_backend'].save(null);
+      expect(savedConfiguration()).toEqual({
+        event_settings: { stomp_enabled: true },
+        order_processing_backend: 'slurm',
+        membership_sync_backend: 'slurm',
+      });
+    });
+
+    it('sets no role when another setting is saved', async () => {
+      openTab('agent-settings');
+      renderSection(withoutRoles);
+      await editButtons[
+        'agent_configuration.agent_settings.resource_import_enabled'
+      ].save(true);
+      expect(savedConfiguration()).not.toHaveProperty(
+        'order_processing_backend',
+      );
+    });
+  });
+
   it('is not shown on an offering without a site agent', () => {
     const { container } = renderSection({
       ...siteAgentOffering,

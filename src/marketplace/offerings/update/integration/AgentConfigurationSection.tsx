@@ -36,6 +36,7 @@ import {
   AgentRoleField,
   changedSinceOpened,
   clearedLastRole,
+  DEFAULT_ROLE_BACKENDS,
   describeRefusal,
   editedPath,
   expandRolesAndSettings,
@@ -43,6 +44,7 @@ import {
   isAgentConfigurationVisible,
   mergeAgentConfiguration,
   replacedKeys,
+  withDefaultRoles,
   ROLES_AND_SETTINGS,
   splitSecretsByBlock,
   validateRolesAndSettings,
@@ -98,7 +100,8 @@ const getTrustHint = () =>
   );
 
 // Shown for a role left unset: with no role set at all the agent runs SLURM
-// for the three agent roles, and base for username management.
+// for the three agent roles, and base for username management. `value` is
+// the stored one: the editor opens on the default, which is not stored.
 const renderRole = (
   value: string | undefined,
   field: AgentRoleField,
@@ -107,12 +110,12 @@ const renderRole = (
   if (value) {
     return value;
   }
-  if (field === 'username_management_backend') {
-    return translate('{backend} (default)', { backend: 'base' });
+  if (field === 'username_management_backend' || !anyAgentRole) {
+    return translate('{backend} (default)', {
+      backend: DEFAULT_ROLE_BACKENDS[field],
+    });
   }
-  return anyAgentRole
-    ? translate('Off')
-    : translate('{backend} (default)', { backend: 'slurm' });
+  return translate('Off');
 };
 
 const getRequirementLabels = () => ({
@@ -239,7 +242,11 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
           ],
         };
       }
-      const next = mergeAgentConfiguration(current, change);
+      const next = withDefaultRoles(
+        current,
+        mergeAgentConfiguration(current, change),
+        change,
+      );
       const refusal = clearedLastRole(current, next, path);
       if (refusal) {
         throw { fieldError: [refusal] };
@@ -296,9 +303,24 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
   // reads as the agent's default, the membership sync switch as a choice.
   const scope = useMemo(() => {
     const configuration: AgentConfiguration = stored ?? {};
+    // A role's editor opens on the backend it shows: with no agent role set
+    // that is the default for each, and base for username management.
+    const noAgentRole = !AGENT_ROLE_FIELDS.some(
+      ({ field }) =>
+        field !== 'username_management_backend' &&
+        Boolean(configuration[field]),
+    );
+    const roles = Object.fromEntries(
+      AGENT_ROLE_FIELDS.filter(
+        ({ field }) =>
+          !configuration[field] &&
+          (noAgentRole || field === 'username_management_backend'),
+      ).map(({ field }) => [field, DEFAULT_ROLE_BACKENDS[field]]),
+    );
     return {
       agent_configuration: {
         ...configuration,
+        ...roles,
         // The JSON editors open on an empty object, not a blank page.
         backend_settings: configuration.backend_settings ?? {},
         [ROLES_AND_SETTINGS]: getRolesAndSettings(configuration),
@@ -383,7 +405,9 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
               options={roleOptions[field]}
               simpleValue
               isClearable
-              renderValue={(value) => renderRole(value, field, anyAgentRole)}
+              renderValue={() =>
+                renderRole(stored?.[field], field, anyAgentRole)
+              }
             />
           ))}
           <CommaSeparatedListEditField
