@@ -24,7 +24,30 @@ export const jsonObjectValidator = (value: unknown): string | undefined => {
   return undefined;
 };
 
-type JsonObjectFieldProps = FieldRenderProps<any>;
+/** A JSON value editor's validator: the text must be JSON of any kind. */
+export const jsonValueValidator = (value: unknown): string | undefined => {
+  if (typeof value !== 'string' || !value.trim()) {
+    return undefined;
+  }
+  try {
+    JSON.parse(value);
+  } catch {
+    return translate('Not valid JSON.');
+  }
+  return undefined;
+};
+
+/** The text any JSON value is edited as; an unset one as an empty editor. */
+const formatJsonValue = (value: unknown): string =>
+  typeof value === 'string'
+    ? value
+    : value === undefined || value === null
+      ? ''
+      : JSON.stringify(value, null, 2);
+
+type JsonObjectFieldProps = FieldRenderProps<any> & {
+  formatText?: (value: unknown) => string;
+};
 
 // Monaco's line height at its 14px font, and room for its padding.
 const LINE_HEIGHT = 19;
@@ -39,8 +62,12 @@ const editorHeight = (text: string) =>
     Math.max(MIN_HEIGHT, (text.split('\n').length + 2) * LINE_HEIGHT),
   );
 
-const JsonObjectField: FC<JsonObjectFieldProps> = ({ input, meta }) => {
-  const text = formatJsonObject(input.value);
+const JsonTextField: FC<JsonObjectFieldProps> = ({
+  input,
+  meta,
+  formatText = formatJsonObject,
+}) => {
+  const text = formatText(input.value);
   return (
     <>
       <div className="border border-secondary rounded-lg overflow-hidden">
@@ -64,6 +91,16 @@ const renderJsonObject = (value: unknown): ReactNode =>
   ) : undefined;
 
 /** An edit field holding a JSON object, edited as text in Monaco. */
-export const JsonObjectEditField = withEditField(JsonObjectField, {
+export const JsonObjectEditField = withEditField(JsonTextField, {
   displayValue: renderJsonObject,
 });
+
+const JsonValueField: FC<FieldRenderProps<any>> = (props) => (
+  <JsonTextField {...props} formatText={formatJsonValue} />
+);
+
+/**
+ * An edit field holding any JSON value (a list, a nested object), edited as
+ * text in Monaco. Pass `jsonValueValidator` as its `validate`.
+ */
+export const JsonValueEditField = withEditField(JsonValueField);
