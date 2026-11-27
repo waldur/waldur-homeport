@@ -18,10 +18,9 @@ import {
   getSpendingLimitLabel,
 } from '@/marketplace/common/spendingLimits';
 import { TENANT_TYPE } from '@/openstack/constants';
-import { VMWARE_VM } from '@/vmware/constants';
 
 import { ResourceDisplayLimits } from '../types';
-import { getBillingTypeLabelOrDash } from '../usage/utils';
+import { getBillingTypeLabelOrDash, getDisplayUnit } from '../usage/utils';
 
 import { QuotaCell } from './QuotaCell';
 import { QuotaSingleView } from './QuotaSingleView';
@@ -132,31 +131,6 @@ export const getResourceComponentEntries = (
 const normalize = (value: number, factor: number) => {
   const result = (value || 0) / (factor || 1);
   return Number.isInteger(result) ? result.toFixed() : result.toFixed(2);
-};
-
-const UNIT_CONVERSIONS: Record<string, Record<number, string>> = {
-  MB: { 1024: 'GB', 1048576: 'TB' },
-  GB: { 1024: 'TB' },
-  KB: { 1024: 'MB', 1048576: 'GB' },
-};
-
-// Offering types whose components declare the unit a value is shown in, with
-// `factor` only converting the stored amount into it: VMware and OpenStack
-// tenants store RAM and disk in MiB under measured_unit "GB" and factor 1024.
-// Promoting that unit again would render gigabytes as terabytes.
-const OFFERING_TYPES_WITH_DISPLAY_UNITS = [TENANT_TYPE, VMWARE_VM];
-
-export const getDisplayUnit = (
-  measuredUnit: string | undefined,
-  factor: number | null | undefined,
-  offeringType?: string,
-): string => {
-  if (!measuredUnit) return '';
-  if (OFFERING_TYPES_WITH_DISPLAY_UNITS.includes(offeringType)) {
-    return measuredUnit;
-  }
-  if (!factor || factor === 1) return measuredUnit;
-  return UNIT_CONVERSIONS[measuredUnit]?.[factor] ?? measuredUnit;
 };
 
 /**

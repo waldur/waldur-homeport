@@ -19,8 +19,10 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { getChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { getBillingTypes } from '@/marketplace/common/billingTypes';
+import { TENANT_TYPE } from '@/openstack/constants';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
+import { VMWARE_VM } from '@/vmware/constants';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 
@@ -28,10 +30,62 @@ import { ComponentUsage, ComponentUserUsage } from './types';
 const TOOLTIP_OFFSET = 4;
 const MAX_SHOW_ITEMS = 5;
 
+const UNIT_CONVERSIONS: Record<string, Record<number, string>> = {
+  MB: { 1024: 'GB', 1048576: 'TB' },
+  GB: { 1024: 'TB' },
+  KB: { 1024: 'MB', 1048576: 'GB' },
+};
+
+// Offering types whose components declare the unit a value is shown in, with
+// `factor` only converting the stored amount into it: VMware and OpenStack
+// tenants store RAM and disk in MiB under measured_unit "GB" and factor 1024.
+// Promoting that unit again would render gigabytes as terabytes.
+const OFFERING_TYPES_WITH_DISPLAY_UNITS = [TENANT_TYPE, VMWARE_VM];
+
+export const getDisplayUnit = (
+  measuredUnit: string | undefined,
+  factor: number | null | undefined,
+  offeringType?: string,
+): string => {
+  if (!measuredUnit) return '';
+  if (OFFERING_TYPES_WITH_DISPLAY_UNITS.includes(offeringType)) {
+    return measuredUnit;
+  }
+  if (!factor || factor === 1) return measuredUnit;
+  return UNIT_CONVERSIONS[measuredUnit]?.[factor] ?? measuredUnit;
+};
+
 interface RowData {
   value: number;
   description: string;
   details?: Array<any>;
+}
+
+interface ReferenceLine {
+  name: string;
+  value: number;
+  color: string;
+  // Usage often sits just under the limit, so its label goes below its line
+  // at the left and the limit's above its line at the right, where neither
+  // covers the other or the latest bar.
+  labelPosition: 'insideStartBottom' | 'insideEndTop';
+}
+
+const NICE_STEPS = [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
+
+// The smallest round number at or above `value`, so an axis stretched to fit
+// a reference line still ends on a readable tick.
+const niceCeil = (value: number): number => {
+  if (!(value > 0)) return value;
+  const magnitude = 10 ** Math.floor(Math.log10(value));
+  const step = NICE_STEPS.find((s) => s * magnitude >= value) ?? 10;
+  return step * magnitude;
+};
+
+interface ChartPresentation {
+  unit?: string;
+  usageSeriesName?: string;
+  referenceLines?: ReferenceLine[];
 }
 
 const formatChart = (
@@ -42,9 +96,20 @@ const formatChart = (
   limits: RowData[] = [],
   openDialog?: (details) => void,
   alwaysShowLimit: boolean = false,
+  {
+    unit = name,
+    usageSeriesName = translate('Usage'),
+    referenceLines = [],
+  }: ChartPresentation = {},
 ) => {
   const limitSeriesName = translate('Limit');
+  const unitSuffix = unit ? ` ${escape(unit)}` : '';
   const showLimitSeries = alwaysShowLimit || limits.some((l) => l.value > 0);
+  // ECharts sizes the axis to the bars only, so a limit above the highest bar
+  // would fall off the chart. Leave headroom for the label above the line.
+  const referenceMax = referenceLines.length
+    ? Math.max(...referenceLines.map((line) => line.value))
+    : undefined;
   return {
     tooltip: {
       trigger: 'axis',
@@ -89,7 +154,7 @@ const formatChart = (
             return;
           }
 
-          tooltip += `<br/>${param.marker} ${escape(param.seriesName)}: <b>${formatUsageValue(val, true, 2)}</b>`;
+          tooltip += `<br/>${param.marker} ${escape(param.seriesName)}: <b>${formatUsageValue(val, true, 2)}</b>${unitSuffix}`;
           if (description) {
             tooltip += ` (${escape(description)})`;
           }
@@ -142,6 +207,13 @@ const formatChart = (
         },
         axisLine: { show: true },
         axisTick: { show: true },
+        ...(referenceMax != null
+          ? {
+              // Returning undefined keeps ECharts' own rounded maximum.
+              max: ({ max }: { min: number; max: number }) =>
+                referenceMax > max ? niceCeil(referenceMax * 1.05) : undefined,
+            }
+          : {}),
       },
     ],
     series: [
@@ -158,10 +230,27 @@ const formatChart = (
         : []),
       {
         type: 'bar',
-        name: translate('Usage'),
+        name: usageSeriesName,
         data: usages,
         color,
         barMaxWidth: 50,
+        ...(referenceLines.length
+          ? {
+              markLine: {
+                symbol: 'none',
+                silent: true,
+                data: referenceLines.map((line) => ({
+                  yAxis: line.value,
+                  lineStyle: { color: line.color, type: 'dashed', width: 1.5 },
+                  label: {
+                    formatter: `${line.name}: ${formatUsageValue(line.value, true, 2)}${unit ? ` ${unit}` : ''}`,
+                    color: line.color,
+                    position: line.labelPosition,
+                  },
+                })),
+              },
+            }
+          : {}),
       },
     ],
   };
@@ -246,14 +335,39 @@ export const getUsagePeriods = (
   return { periods, labels };
 };
 
+/**
+ * What the chart knows about the resource beyond its usage reports. Values are
+ * in the stored unit, like the reports, and are scaled by the component's
+ * factor together with them.
+ */
+export interface UsageChartContext {
+  offeringType?: string;
+  currentUsage?: number;
+  currentLimit?: number;
+}
+
 export const getEChartOptions = (
-  component: Pick<OfferingComponent, 'type' | 'measured_unit' | 'billing_type'>,
+  component: Pick<
+    OfferingComponent,
+    'type' | 'measured_unit' | 'billing_type'
+  > &
+    Partial<Pick<OfferingComponent, 'factor'>>,
   usages: any[],
   userUsages: Pick<ComponentUserUsage, 'component_type' | 'billing_period'>[],
   months: number,
   color: string,
   openDialog?: (userUsage: ComponentUserUsage[]) => void,
+  { offeringType, currentUsage, currentLimit }: UsageChartContext = {},
 ) => {
+  const factor = component.factor || 1;
+  const unit = getDisplayUnit(
+    component.measured_unit,
+    component.factor,
+    offeringType,
+  );
+  // A limit-based component is billed on the highest amount it held during
+  // the month, which is what each monthly report carries.
+  const isLimitBased = component.billing_type === 'limit';
   const { labels, periods } = getUsagePeriods(usages, months);
   const filteredUsages = usages.filter(
     (usage) => (usage.component_type || usage.type) === component.type,
@@ -266,24 +380,54 @@ export const getEChartOptions = (
     periods,
     filteredUsages,
     filteredUserUsages,
-    (u) => u.total_consumed || u.usage,
+    (u) => (u.total_consumed || u.usage) / factor,
   );
 
   const formattedLimits = getFormattedUsages(
     periods,
     filteredUsages,
     [],
-    (u) => u.total_allocated,
+    (u) => u.total_allocated / factor,
   );
 
+  const referenceLines: ReferenceLine[] = [];
+  if (isLimitBased && currentUsage != null) {
+    referenceLines.push({
+      name: translate('Now'),
+      value: currentUsage / factor,
+      color: getChartThemeColors().notice,
+      labelPosition: 'insideStartBottom',
+    });
+  }
+  if (isLimitBased && currentLimit != null) {
+    referenceLines.push({
+      name: translate('Limit'),
+      value: currentLimit / factor,
+      color: getChartThemeColors().muted,
+      labelPosition: 'insideEndTop',
+    });
+  }
+  // Resource usage reports carry no monthly limit, so when today's limit is
+  // known it is drawn as a line instead of a row of empty limit bars.
+  const hasMonthlyLimits = formattedLimits.some((l) => l.value > 0);
+  const alwaysShowLimit =
+    isLimitBased && (currentLimit == null || hasMonthlyLimits);
+
   return formatChart(
-    component.measured_unit,
+    unit,
     color,
     labels,
     formattedUsages,
     formattedLimits,
     openDialog,
-    component.billing_type === 'limit',
+    alwaysShowLimit,
+    {
+      unit,
+      usageSeriesName: isLimitBased
+        ? translate('Monthly peak')
+        : translate('Usage'),
+      referenceLines,
+    },
   );
 };
 
@@ -422,6 +566,7 @@ export const getComponentsAndUsages = async (
   }
 
   const components = getUsageBasedOfferingComponents(offering.components);
+  const offeringType = offering.type;
 
   const date_after = months
     ? DateTime.now().startOf('month').minus({ months }).toFormat('yyyy-MM-dd')
@@ -456,10 +601,10 @@ export const getComponentsAndUsages = async (
         },
       }),
     );
-    return { components, usages, userUsages };
+    return { components, usages, userUsages, offeringType };
   } catch (error) {
     if (error?.response?.status === 404) {
-      return { components, usages: [], userUsages: [] };
+      return { components, usages: [], userUsages: [], offeringType };
     }
     throw new Error(
       `Error while getting usages for resource: ${resource_uuid}, ${error.message}`,

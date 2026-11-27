@@ -37,6 +37,8 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
       customer_name: resource.customer_name,
       project_name: resource.project_name,
       backend_id: resource.backend_id,
+      current_usages: resource.current_usages,
+      limits: resource.limits,
     }),
     [resource],
   );

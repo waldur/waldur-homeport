@@ -63,6 +63,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
             components={offering.components}
             usages={usages}
             months={12}
+            offeringType={offering.type}
             colors={generateColors(offering.components.length, {
               colorStart: 0.25,
               colorEnd: 0.65,

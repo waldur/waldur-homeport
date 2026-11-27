@@ -22437,6 +22437,11 @@
       "feature_area": "policies"
     }
   },
+  "Each bar shows the highest amount recorded in that month. The dashed lines show current usage and the current limit.": {
+    "context": {
+      "feature_area": "usage"
+    }
+  },
   "Each change to the document of {name} is kept as a version. Offerings created from the template keep the version they were created from.": {
     "context": {
       "variables": {
@@ -40182,6 +40187,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Monthly peak": {
+    "context": {
+      "feature_area": "usage"
+    }
+  },
   "Monthly revenue": {
     "context": {
       "primary_ui_type": "title",
@@ -45420,7 +45430,8 @@
   },
   "Now": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "usage"
     }
   },
   "Now {value}.": {

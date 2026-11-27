@@ -15,7 +15,8 @@ interface ResourceUsageTabsContainerProps {
   resource: Pick<
     Resource,
     'name' | 'uuid' | 'customer_name' | 'project_name' | 'backend_id'
-  >;
+  > &
+    Partial<Pick<Resource, 'current_usages' | 'limits'>>;
   data: {
     components: OfferingComponent[];
     usages: Pick<ComponentUsage, 'billing_period' | 'type' | 'usage'>[];
@@ -23,6 +24,7 @@ interface ResourceUsageTabsContainerProps {
       ComponentUserUsage,
       'username' | 'component_type' | 'billing_period'
     >[];
+    offeringType?: string;
   };
   months?: number;
   hideHeader?: boolean;
@@ -54,6 +56,9 @@ export const ResourceUsageTabsContainer: FunctionComponent<
         usages={data.usages}
         userUsages={userUsages}
         months={months}
+        offeringType={data.offeringType}
+        currentUsages={resource.current_usages}
+        currentLimits={resource.limits}
         colors={generateColors(data.components.length, {
           colorStart: 0.25,
           colorEnd: 0.65,
