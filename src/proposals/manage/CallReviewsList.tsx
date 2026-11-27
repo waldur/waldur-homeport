@@ -1,8 +1,11 @@
+import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import {
   proposalReviewsList,
   proposalReviewsFacetsList,
 } from 'waldur-js-client';
+
+import { Menu } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { downloadFile } from '@/form/upload/FileDownloader';
@@ -29,6 +32,7 @@ import { Call } from '../types';
 import { canExportCall } from '../utils';
 
 import { buildCallExportUrl } from './callExportUrl';
+import { usePanelExport } from './usePanelExport';
 
 // Counts what each filter can still take; see '@/table/facets'.
 const reviewFacets = { fetch: proposalReviewsFacetsList };
@@ -77,6 +81,18 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
         ),
     }),
     [call, formFilters],
+  );
+
+  // Every contribution to the call's steps -- individual and consolidated
+  // reports, technical assessments -- with the answers to the steps' forms:
+  // most of an evaluation is not a review.
+  const downloadEvaluations = usePanelExport(call);
+  const evaluationsFilter = useMemo(
+    () => ({
+      round_uuid: formFilters.round_uuid,
+      proposal_uuid: formFilters.proposal_uuid,
+    }),
+    [formFilters.round_uuid, formFilters.proposal_uuid],
   );
 
   const tableProps = useTable({
@@ -163,6 +179,42 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
       formId={ProposalReviewsFilterFormId}
       enableExport
       fullExport={canExport ? fullExport : undefined}
+      tableActions={
+        canExport ? (
+          <Menu>
+            <Menu.TriggerButton variant="tertiary" size="sm">
+              <DownloadSimpleIcon weight="bold" />
+              {translate('Evaluations')}
+            </Menu.TriggerButton>
+            <Menu.Content look="actions" side="bottom">
+              <Menu.Item
+                onSelect={() =>
+                  downloadEvaluations(
+                    'export-evaluations',
+                    'xlsx',
+                    undefined,
+                    evaluationsFilter,
+                  )
+                }
+              >
+                {translate('Every step contribution (Excel)')}
+              </Menu.Item>
+              <Menu.Item
+                onSelect={() =>
+                  downloadEvaluations(
+                    'export-evaluations',
+                    'csv',
+                    undefined,
+                    evaluationsFilter,
+                  )
+                }
+              >
+                {translate('Every step contribution (CSV)')}
+              </Menu.Item>
+            </Menu.Content>
+          </Menu>
+        ) : undefined
+      }
     />
   );
 };

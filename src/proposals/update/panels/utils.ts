@@ -12,3 +12,21 @@ export const formatPanelDomains = (
       domain.code ? `${domain.code} ${domain.name}` : domain.name,
     )
     .join(', ');
+
+export type PanelRowAction = 'export' | 'edit' | 'delete';
+
+/**
+ * What a panel's row offers: its sheets to those who may export the call's
+ * evaluations, whatever state the call is in, and editing while the call
+ * can still change.
+ */
+export const getPanelRowActions = ({
+  canExport,
+  isReadOnly,
+}: {
+  canExport: boolean;
+  isReadOnly?: boolean;
+}): PanelRowAction[] => [
+  ...(canExport ? (['export'] as const) : []),
+  ...(isReadOnly ? [] : (['edit', 'delete'] as const)),
+];
