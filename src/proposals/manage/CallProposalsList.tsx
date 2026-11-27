@@ -25,6 +25,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
+import { ArchivedCallContext, isCallArchived } from '../archivedCall';
 import {
   ComplianceStatusBadge,
   formatComplianceStatus,
@@ -99,7 +100,11 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
   const bulkActions = useMemo(
     () =>
       canActOnSelection
-        ? makeProposalsBulkActions(call, { canAssignReviewers, canExport })
+        ? makeProposalsBulkActions(call, {
+            canAssignReviewers,
+            canExport,
+            archived: isCallArchived(call),
+          })
         : undefined,
     [canActOnSelection, call, canAssignReviewers, canExport],
   );
@@ -229,13 +234,16 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
       enableMultiSelect={canActOnSelection}
       multiSelectActions={bulkActions}
       rowActions={({ row }) => (
-        <ProposalRowActions
-          row={{
-            ...row,
-            call_uuid: call.uuid,
-          }}
-          refetch={tableProps.fetch}
-        />
+        // The row actions read whether the call is archived from here.
+        <ArchivedCallContext.Provider value={isCallArchived(call)}>
+          <ProposalRowActions
+            row={{
+              ...row,
+              call_uuid: call.uuid,
+            }}
+            refetch={tableProps.fetch}
+          />
+        </ArchivedCallContext.Provider>
       )}
       filters={<ProposalProposalsFilter callUuid={call.uuid} hideCall />}
       formId={ProposalProposalsFilterFormId}

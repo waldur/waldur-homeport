@@ -5,6 +5,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
+import { getArchivedCallReason } from '../archivedCall';
+
 import { ProposalRowActions } from './ProposalRowActions';
 
 const assignment = vi.hoisted(() => ({
@@ -28,8 +30,10 @@ const row = {
   call_managing_organisation_uuid: 'org-1',
 };
 
-const open = async () => {
-  renderWithProviders(<ProposalRowActions row={row} refetch={vi.fn()} />);
+const open = async (props: Record<string, unknown> = {}) => {
+  renderWithProviders(
+    <ProposalRowActions row={{ ...row, ...props }} refetch={vi.fn()} />,
+  );
   await userEvent.setup().click(screen.getByRole('button'));
 };
 
@@ -58,6 +62,21 @@ describe('ProposalRowActions', () => {
       name: /Assign reviewer/,
     });
     expect(item).not.toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it("says a proposal of an archived call takes no reviewer, from the row's call_state", async () => {
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'manager',
+      is_staff: false,
+      permissions: [],
+    } as any);
+    assignment.value = { canManage: true, blocker: null };
+    await open({ call_state: 'archived' });
+    const item = await screen.findByRole('menuitem', {
+      name: /Assign reviewer/,
+    });
+    expect(item).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.getByText(getArchivedCallReason())).toBeInTheDocument();
   });
 
   it('says why a proposal cannot take a reviewer now', async () => {

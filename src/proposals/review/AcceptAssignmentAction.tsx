@@ -6,6 +6,7 @@ import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 
 interface AcceptAssignmentActionProps {
   item: MyAssignmentItem;
@@ -16,6 +17,8 @@ export const AcceptAssignmentAction: FC<AcceptAssignmentActionProps> = ({
   item,
   batchUuid,
 }) => {
+  // No review is taken on for an archived call.
+  const archived = useArchivedCallReason();
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       assignmentItemsAccept({
@@ -36,6 +39,8 @@ export const AcceptAssignmentAction: FC<AcceptAssignmentActionProps> = ({
       iconNode={<CheckIcon weight="bold" />}
       variant="success"
       pending={isPending}
+      disabled={Boolean(archived)}
+      disabledReason={archived}
       size="sm"
     />
   );

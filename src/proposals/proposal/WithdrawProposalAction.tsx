@@ -7,6 +7,7 @@ import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { useUser } from '@/workspace/hooks';
 
@@ -38,6 +39,7 @@ export const WithdrawProposalAction: FC<{
   proposal: Proposal;
   refetch: () => void;
 }> = ({ proposal, refetch }) => {
+  const archived = useArchivedCallReason();
   const user = useUser();
   const { data } = useQuery({
     queryKey: proposalWorkflowStatesKey(proposal.uuid),
@@ -91,6 +93,8 @@ export const WithdrawProposalAction: FC<{
     <BaseButton
       variant="tertiary"
       onClick={() => withdraw.mutate()}
+      disabled={!!archived}
+      disabledReason={archived}
       pending={withdraw.isPending}
       className="w-full mt-1.5"
       iconNode={<ArrowUUpLeftIcon weight="bold" />}

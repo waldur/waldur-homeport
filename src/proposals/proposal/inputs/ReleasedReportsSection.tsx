@@ -16,6 +16,10 @@ import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import {
+  archivedReasonForStep,
+  useArchivedCallReason,
+} from '@/proposals/archivedCall';
 import { Proposal } from '@/proposals/types';
 import { proposalWorkflowStatesKey } from '@/proposals/workflow/queries';
 
@@ -141,6 +145,7 @@ export const ReleasedReportsSection: FC<ReleasedReportsSectionProps> = ({
   releasable,
   refetch,
 }) => {
+  const archived = useArchivedCallReason();
   const openState = useSectionOpenState();
   const { openDialog } = useModal();
   const { data: reports, isError } = useReleasedReports(proposal.uuid);
@@ -180,6 +185,8 @@ export const ReleasedReportsSection: FC<ReleasedReportsSectionProps> = ({
             <BaseButton
               variant="tertiary"
               label={translate('Release to applicant')}
+              disabled={!!archivedReasonForStep(archived, step)}
+              disabledReason={archivedReasonForStep(archived, step)}
               iconNode={<ShareFatIcon weight="bold" />}
               onClick={() =>
                 openDialog(ReleaseReportDialog, {

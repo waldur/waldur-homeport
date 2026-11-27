@@ -5,6 +5,7 @@ import { proposalProposalsListUsersList } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { RoleEnum } from '@/permissions/enums';
 import { GenericPermission } from '@/permissions/types';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { Proposal } from '@/proposals/types';
 import { invalidateProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { useUser } from '@/workspace/hooks';
@@ -76,14 +77,17 @@ export const useProposalTeamRules = (proposal: Proposal | undefined) => {
   );
 
   const locked = useProposalEditLocked();
+  // An archived call's proposals are read-only, their teams included.
+  const archivedReason = useArchivedCallReason();
 
   return useMemo(() => {
     if (!proposal) {
       return undefined;
     }
-    // Locked until the viewer, off the team, unlocks editing: the team reads
-    // as it is, and nobody is added, invited or removed meanwhile.
-    if (locked) {
+    // Locked until the viewer, off the team, unlocks editing -- or for
+    // good while the call is archived: the team reads as it is, and nobody
+    // is added, invited or removed meanwhile.
+    if (locked || archivedReason) {
       return {
         grantableRoles: [],
         dropdown: null,
@@ -92,9 +96,11 @@ export const useProposalTeamRules = (proposal: Proposal | undefined) => {
         readOnly: true,
         canRemoveRow: () => false,
         getRemoveDisabledReason: getRemoveReason,
-        teamNote: translate(
-          'Read-only until you unlock editing at the top of the page.',
-        ),
+        teamNote:
+          archivedReason ??
+          translate(
+            'Read-only until you unlock editing at the top of the page.',
+          ),
         onTeamChange,
       };
     }
@@ -131,5 +137,13 @@ export const useProposalTeamRules = (proposal: Proposal | undefined) => {
       teamNote,
       onTeamChange,
     };
-  }, [user, proposal, locked, canRemoveRow, getRemoveReason, onTeamChange]);
+  }, [
+    user,
+    proposal,
+    locked,
+    archivedReason,
+    canRemoveRow,
+    getRemoveReason,
+    onTeamChange,
+  ]);
 };

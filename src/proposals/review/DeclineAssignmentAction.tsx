@@ -6,6 +6,7 @@ import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 
 interface DeclineAssignmentActionProps {
   item: MyAssignmentItem;
@@ -16,6 +17,7 @@ export const DeclineAssignmentAction: FC<DeclineAssignmentActionProps> = ({
   item,
   batchUuid,
 }) => {
+  const archived = useArchivedCallReason();
   // The confirmation resolves with the reason typed into it, which the call
   // manager reads on the batch: a conflict of interest is reported this way.
   const { mutate, isPending } = useManagedMutation<
@@ -63,6 +65,8 @@ export const DeclineAssignmentAction: FC<DeclineAssignmentActionProps> = ({
       iconNode={<XIcon weight="bold" />}
       variant="danger"
       pending={isPending}
+      disabled={Boolean(archived)}
+      disabledReason={archived}
       size="sm"
     />
   );

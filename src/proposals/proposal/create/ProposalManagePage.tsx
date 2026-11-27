@@ -7,7 +7,7 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { useBreadcrumbs } from 'waldur-ui';
+import { AlertItem, useBreadcrumbs } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -17,6 +17,12 @@ import { goToNotFound } from '@/error/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
+import {
+  ArchivedCallContext,
+  getArchivedCallNoticeBody,
+  isCallArchived,
+  isRowOfArchivedCall,
+} from '@/proposals/archivedCall';
 import {
   useCallManagedProposalBreadcrumbItems,
   useParticipantProposalBreadcrumbItems,
@@ -216,6 +222,44 @@ export const ProposalManagePage = () => {
   const providerUuid: string | undefined = isOfferingTeamView
     ? uuid
     : undefined;
+  const { data: call, isLoading: isLoadingCall } = useQuery({
+    queryKey: ['ProposalCall', proposal?.call_uuid],
+    queryFn: () =>
+      proposalPublicCallsRetrieve({
+        path: { uuid: proposal.call_uuid },
+        query: {
+          field: [
+            'uuid',
+            'name',
+            'customer_uuid',
+            // Both name the call-manager breadcrumb chain.
+            'customer_name',
+            'manager_uuid',
+            'compliance_checklist',
+            'compliance_checklist_name',
+            // Drives which Project details fields the form asks for.
+            'proposal_field_config',
+            // Tells the applicant when review of a submitted proposal starts.
+            'evaluation_start',
+            // The lengths the applicant chooses the project's duration from.
+            'allowed_duration_months',
+            // An archived call's proposals are read-only (isCallArchived).
+            'state',
+            // Cast: compliance_checklist* are protected-call fields, so the
+            // list is not assignable to keyof PublicCall.
+          ] as any,
+        },
+      }).then((res) => res.data),
+    enabled: !!proposal?.call_uuid,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
+
+  // An archived call is read-only: no form, every write action disabled
+  // with the reason (useArchivedCallReason). The backend refuses them too.
+  // From the call, or from the proposal itself should the call not load.
+  const callArchived = isCallArchived(call) || isRowOfArchivedCall(proposal);
+
   // Proposal administrators edit the draft as well; submitting stays with
   // its creator, its managers and staff.
   const hasPermissionToEdit = proposal && canEditProposal(user, proposal);
@@ -225,7 +269,8 @@ export const ProposalManagePage = () => {
   const formOpen =
     (proposal?.state === 'draft' || changesRequested) &&
     isEditPage &&
-    hasPermissionToEdit;
+    hasPermissionToEdit &&
+    !callArchived;
   // Someone off the proposal's team who could change it -- its form, or its
   // team -- staff, say: it stays locked until they unlock editing on
   // purpose, for this visit only.
@@ -255,37 +300,6 @@ export const ProposalManagePage = () => {
     () => ({ locked: !editingUnlocked }),
     [editingUnlocked],
   );
-
-  const { data: call } = useQuery({
-    queryKey: ['ProposalCall', proposal?.call_uuid],
-    queryFn: () =>
-      proposalPublicCallsRetrieve({
-        path: { uuid: proposal.call_uuid },
-        query: {
-          field: [
-            'uuid',
-            'name',
-            'customer_uuid',
-            // Both name the call-manager breadcrumb chain.
-            'customer_name',
-            'manager_uuid',
-            'compliance_checklist',
-            'compliance_checklist_name',
-            // Drives which Project details fields the form asks for.
-            'proposal_field_config',
-            // Tells the applicant when review of a submitted proposal starts.
-            'evaluation_start',
-            // The lengths the applicant chooses the project's duration from.
-            'allowed_duration_months',
-            // Cast: compliance_checklist* are protected-call fields, so the
-            // list is not assignable to keyof PublicCall.
-          ] as any,
-        },
-      }).then((res) => res.data),
-    enabled: !!proposal?.call_uuid,
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
-  });
 
   const { data: reviews, isLoading: isLoadingReviews } = useQuery({
     queryKey: ['ProposalReviews', proposal_uuid],
@@ -365,6 +379,9 @@ export const ProposalManagePage = () => {
     legacyProvider ||
     isLoading ||
     isLoadingReviews ||
+    // Until the call's state is known, nothing is offered for editing: it
+    // may be archived.
+    isLoadingCall ||
     (!proposal && !error)
   ) {
     return <LoadingSpinner />;
@@ -384,118 +401,129 @@ export const ProposalManagePage = () => {
   }
 
   return (
-    <ProposalEditLockContext.Provider value={lockValue}>
-      {/* `!`: the header's own stylesheet pads its bottom by 2rem, which would
+    <ArchivedCallContext.Provider value={callArchived}>
+      <ProposalEditLockContext.Provider value={lockValue}>
+        {/* `!`: the header's own stylesheet pads its bottom by 2rem, which would
           outrank a plain utility; 16px matches the gap between the cards below. */}
-      <SidebarLayout.Header className="pb-4!" fluid>
-        <div className="w-full">
-          {isCallManagerView ? (
-            <CallManagerBreadcrumbs call={call} proposal={proposal} />
-          ) : providerUuid ? (
-            <ProviderBreadcrumbs
-              providerUuid={providerUuid}
+        <SidebarLayout.Header className="pb-4!" fluid>
+          <div className="w-full">
+            {isCallManagerView ? (
+              <CallManagerBreadcrumbs call={call} proposal={proposal} />
+            ) : providerUuid ? (
+              <ProviderBreadcrumbs
+                providerUuid={providerUuid}
+                proposal={proposal}
+              />
+            ) : isOnProposalTeam(user, proposal) ? (
+              <ApplicantBreadcrumbs proposal={proposal} />
+            ) : results ? (
+              <ResultsBreadcrumbs
+                organizationUuid={results}
+                proposal={proposal}
+              />
+            ) : (
+              <ParticipantBreadcrumbs proposal={proposal} />
+            )}
+            {rejectedReview && (
+              <RejectedReviewNotice
+                review={rejectedReview}
+                hasAccess
+                className="mb-4"
+              />
+            )}
+            <ProposalRoleBasedTabs
+              review={userReview}
               proposal={proposal}
+              call={call}
             />
-          ) : isOnProposalTeam(user, proposal) ? (
-            <ApplicantBreadcrumbs proposal={proposal} />
-          ) : results ? (
-            <ResultsBreadcrumbs
-              organizationUuid={results}
-              proposal={proposal}
-            />
-          ) : (
-            <ParticipantBreadcrumbs proposal={proposal} />
-          )}
-          {rejectedReview && (
-            <RejectedReviewNotice
-              review={rejectedReview}
-              hasAccess
-              className="mb-4"
-            />
-          )}
-          <ProposalRoleBasedTabs
-            review={userReview}
-            proposal={proposal}
-            call={call}
-          />
-          {/* The applicant preview says so itself (ProposalDetails), where
+            {/* The applicant preview says so itself (ProposalDetails), where
               it knows whether the viewer also works on the page. */}
-          <ProposalViewNotice
-            proposal={proposal}
-            preview={false}
-            providerUuid={providerUuid}
-          />
-          <ProposalHeader
-            proposal={proposal}
-            className="mb-5.5"
-            // A utility, not a decision: beside the title, not in the sidebar.
-            actions={
-              isCallManagerView ? (
-                <div className="flex flex-wrap gap-1.5">
-                  {proposal.state !== 'draft' && (
-                    <ProposalPreviewAction proposal={proposal} />
-                  )}
-                  <DownloadProposalPdfAction proposal={proposal} />
-                </div>
-              ) : undefined
-            }
-          />
-          {editsAsOutsider && (
-            <ProposalEditLock
+            <ProposalViewNotice
               proposal={proposal}
-              unlocked={editingUnlocked}
-              formEditable={Boolean(formOpen)}
-              onChange={(unlocked) =>
-                setUnlockedFor(unlocked ? proposal.uuid : null)
+              preview={false}
+              providerUuid={providerUuid}
+            />
+            <ProposalHeader
+              proposal={proposal}
+              className="mb-5.5"
+              // A utility, not a decision: beside the title, not in the sidebar.
+              actions={
+                isCallManagerView ? (
+                  <div className="flex flex-wrap gap-1.5">
+                    {proposal.state !== 'draft' && (
+                      <ProposalPreviewAction proposal={proposal} />
+                    )}
+                    <DownloadProposalPdfAction proposal={proposal} />
+                  </div>
+                ) : undefined
               }
             />
-          )}
-          {/* No stepper while the proposal is a draft: the applicant hasn't
+            {callArchived && (
+              <AlertItem
+                variant="info"
+                className="mb-4"
+                title={translate('This call is archived')}
+                body={getArchivedCallNoticeBody()}
+                data-testid="proposal-call-archived"
+              />
+            )}
+            {editsAsOutsider && !callArchived && (
+              <ProposalEditLock
+                proposal={proposal}
+                unlocked={editingUnlocked}
+                formEditable={Boolean(formOpen)}
+                onChange={(unlocked) =>
+                  setUnlockedFor(unlocked ? proposal.uuid : null)
+                }
+              />
+            )}
+            {/* No stepper while the proposal is a draft: the applicant hasn't
               submitted yet, so no workflow has started — the page shows the
               editable submission form instead. The stepper only appears from
               the submitted state onwards. */}
-          {proposal.state !== 'draft' && (
-            <WorkflowTimeline
-              proposal={proposal}
-              // The call team and an offering's team follow the real steps;
-              // the applicant, and a preview of their page, the stand-ins.
-              showDetails={isCallManagerView || isOfferingTeamView}
-              evaluationStart={call?.evaluation_start}
-            />
-          )}
-          {/* Planned against actual, for the call team only: the endpoint
+            {proposal.state !== 'draft' && (
+              <WorkflowTimeline
+                proposal={proposal}
+                // The call team and an offering's team follow the real steps;
+                // the applicant, and a preview of their page, the stand-ins.
+                showDetails={isCallManagerView || isOfferingTeamView}
+                evaluationStart={call?.evaluation_start}
+              />
+            )}
+            {/* Planned against actual, for the call team only: the endpoint
               answers anyone else 404 and this then draws nothing. */}
-          {proposal.state !== 'draft' && isCallManagerView && (
-            <ProposalStepsGantt
-              proposalUuid={proposal.uuid}
-              // Evaluated at the round's cut-off, a submitted proposal starts
-              // no step before it: its plan starts there.
-              startsAt={
-                call?.evaluation_start === 'at_cutoff' &&
-                proposal.state === 'submitted'
-                  ? proposal.round?.cutoff_time
-                  : undefined
-              }
-            />
-          )}
-        </div>
-      </SidebarLayout.Header>
-      {formOpen && editingUnlocked ? (
-        <ProposalSubmissionStep
-          proposal={proposal}
-          call={call}
-          refetch={refetch}
-          reviews={submittedReviews}
-          canSubmitProposal={hasPermissionToSubmit}
-        />
-      ) : (
-        <ProposalDetails
-          proposal={proposal}
-          reviews={submittedReviews}
-          review={userReview}
-          refetch={refetch}
-        />
-      )}
-    </ProposalEditLockContext.Provider>
+            {proposal.state !== 'draft' && isCallManagerView && (
+              <ProposalStepsGantt
+                proposalUuid={proposal.uuid}
+                // Evaluated at the round's cut-off, a submitted proposal starts
+                // no step before it: its plan starts there.
+                startsAt={
+                  call?.evaluation_start === 'at_cutoff' &&
+                  proposal.state === 'submitted'
+                    ? proposal.round?.cutoff_time
+                    : undefined
+                }
+              />
+            )}
+          </div>
+        </SidebarLayout.Header>
+        {formOpen && editingUnlocked ? (
+          <ProposalSubmissionStep
+            proposal={proposal}
+            call={call}
+            refetch={refetch}
+            reviews={submittedReviews}
+            canSubmitProposal={hasPermissionToSubmit}
+          />
+        ) : (
+          <ProposalDetails
+            proposal={proposal}
+            reviews={submittedReviews}
+            review={userReview}
+            refetch={refetch}
+          />
+        )}
+      </ProposalEditLockContext.Provider>
+    </ArchivedCallContext.Provider>
   );
 };
