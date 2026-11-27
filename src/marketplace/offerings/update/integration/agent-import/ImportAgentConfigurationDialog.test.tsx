@@ -12,7 +12,10 @@ import { AgentConfigurationImport, importAgentConfiguration } from './api';
 import { ImportAgentConfigurationButton } from './ImportAgentConfigurationButton';
 import { ImportAgentConfigurationDialog } from './ImportAgentConfigurationDialog';
 
-vi.mock('./api', () => ({ importAgentConfiguration: vi.fn() }));
+vi.mock('./api', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./api')>()),
+  importAgentConfiguration: vi.fn(),
+}));
 
 const OFFERING_UUID = 'offering-uuid';
 

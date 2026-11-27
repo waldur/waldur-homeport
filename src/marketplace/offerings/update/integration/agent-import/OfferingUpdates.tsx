@@ -21,6 +21,7 @@ import {
   AgentPolicyActionChoice,
   AgentPolicyChange,
   AgentPolicyPreview,
+  toComponentField,
 } from './api';
 import { isSameComponentField } from './importModel';
 import { renderImportValue } from './renderImportValue';
@@ -71,9 +72,13 @@ const ComponentChoiceCell: FC<{ row: ComponentRow }> = ({ row }) => {
             field: row.field,
             component: row.component,
           })}
-          checked={selected.some((item) => isSameComponentField(item, row))}
+          checked={selected.some((item) =>
+            isSameComponentField(item, toComponentField(row)),
+          )}
           disabled={disabled || !row.applicable}
-          onCheckedChange={(checked) => onToggle(row, checked)}
+          onCheckedChange={(checked) =>
+            onToggle(toComponentField(row), checked)
+          }
         />,
       )}
       {reason ? (
