@@ -11552,6 +11552,11 @@
       "feature_area": "provider-calls"
     }
   },
+  "Call managers', staff and support lists.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Call managing organization": {
     "context": {
       "primary_ui_type": "label",
@@ -11830,6 +11835,16 @@
   "Can be targeted": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Can include counts, e.g. {example}.": {
+    "context": {
+      "variables": {
+        "example": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-steps"
     }
   },
   "Can only be increased": {
@@ -16756,6 +16771,16 @@
   "Counts all usage since the resource started. Never resets: once reached, it holds until the customer raises or clears it.": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "Counts available: {placeholders}.": {
+    "context": {
+      "variables": {
+        "placeholders": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-steps"
     }
   },
   "Counts members who joined or left the project during the digest period (the last 7, 14, or 30 days, matching the frequency), grouped by role. Shown only when the team changed.": {
@@ -34987,19 +35012,6 @@
       "feature_area": "sram"
     }
   },
-  "Labels other than the applicant's may show counts of the step's work: {placeholders}. For example: \"{example}\".": {
-    "context": {
-      "variables": {
-        "placeholders": {
-          "type": "unknown"
-        },
-        "example": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "workflow-steps"
-    }
-  },
   "Language": {
     "context": {
       "primary_ui_type": "title",
@@ -46295,6 +46307,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Offering teams' lists, for steps they work on.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Offering template": {
     "context": {
       "feature_area": "from-template"
@@ -46658,11 +46675,6 @@
       "feature_area": "reviewer-suggestions"
     }
   },
-  "On the applicant's proposal list and progress tracker.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
   "On the critical path": {
     "context": {
       "feature_area": "diagram"
@@ -46680,21 +46692,6 @@
   },
   "On the invoice open when it is paid. Earlier invoices stay as they were issued.": {},
   "On the paid month’s own invoice. This changes the total of an invoice already issued, and possibly paid.": {},
-  "On the proposal lists and step lists of the call managers, staff and support. Empty labels fall back to the evaluators'.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
-  "On the proposal lists and step lists of the evaluators working on the step: reviewers, panel members, evaluator roles. Also what the call team and the offering teams read where their own labels are left empty.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
-  "On the proposal lists and step lists of the offering teams, for the steps they work on, such as a technical assessment of their offering. Empty labels fall back to the evaluators'.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
   "On this page": {
     "context": {
       "feature_area": "proposal"
@@ -54787,6 +54784,11 @@
     }
   },
   "Proposal fields and applicant visibility": {},
+  "Proposal list and progress tracker.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Proposal lists": {
     "context": {
       "feature_area": "configuration"
@@ -61994,6 +61996,11 @@
       "feature_area": "reviewer-suggestions"
     }
   },
+  "Reviewers' and panel members' lists. Also the fallback for the call team and offering teams.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Reviews": {
     "context": {
       "primary_ui_type": "title",
@@ -62644,6 +62651,16 @@
   "Roles this rule granted will be revoked the next time a user who no longer matches signs in. Roles granted by a person, and roles granted by other rules, are never touched.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Roles – {call}": {
+    "context": {
+      "variables": {
+        "call": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-description"
     }
   },
   "Roles, where they apply, and service profiles.": {
@@ -74139,8 +74156,8 @@
       "feature_area": "chat"
     }
   },
-  "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
-  "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
+  "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_uninvited code.": {},
+  "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_blocked code.": {},
   "The message was deleted, but its earlier versions could not all be found. Some may remain on the server.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -75671,11 +75688,22 @@
       "feature_area": "workflow-steps"
     }
   },
+  "The step sends no email.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
+  "The step sends no email: no notification rule of the call mails anyone on its events.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "The step starts together with the step before it, and the steps after both wait until both have ended.": {
     "context": {
       "feature_area": "workflow-steps"
     }
   },
+  "The step's emails are not available.": {},
   "The steps of the workflow, and the one waiting for your decision.": {
     "context": {
       "feature_area": "dry-run"
@@ -82692,6 +82720,11 @@
   "Unable to load the sites of this offering.": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Unable to load the step's emails.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "Unable to load the suggested reviewers.": {
@@ -90565,7 +90598,7 @@
     }
   },
   "What do you want to achieve by using Waldur? Please describe your main objectives or expected outcomes.": {},
-  "What each audience's dashboard calls this step, shown as entered. Leave a label empty to keep the one the portal shows today.": {
+  "What each audience sees as this step's status. Leave empty to keep the default.": {
     "context": {
       "feature_area": "workflow-steps"
     }
@@ -99920,6 +99953,43 @@
       "feature_area": "project-groups"
     }
   },
+  "{files} were not attached: the proposal already has documents with the same content.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "files": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{file} has the same content as {other}, which is already attached. To replace it, remove {other} first.": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        },
+        "other": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{file} has the same content as {other}, which is already in the list.": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        },
+        "other": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "{file} is already in the list.": {
     "context": {
       "variables": {
@@ -99931,6 +100001,17 @@
     }
   },
   "{file} was not attached": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{file} was not attached: the proposal already has a document with the same content.": {
     "context": {
       "primary_ui_type": "error_message",
       "variables": {

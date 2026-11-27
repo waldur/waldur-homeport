@@ -652,7 +652,13 @@ export const stepSubmissionErrors = (
  * the dialogs show them a page at a time.
  */
 export type StepFormPage =
-  'basics' | 'participants' | 'evaluation' | 'inputs' | 'timing' | 'check';
+  | 'basics'
+  | 'participants'
+  | 'evaluation'
+  | 'inputs'
+  | 'timing'
+  | 'emails'
+  | 'check';
 
 const STEP_FORM_PAGES: StepFormPage[] = [
   'basics',
@@ -669,6 +675,7 @@ export const stepFormPageLabel = (page: StepFormPage): string =>
     evaluation: translate('Outcome and review'),
     inputs: translate('Inputs and visibility'),
     timing: translate('Timing'),
+    emails: translate('Emails'),
     check: translate('Check'),
   })[page];
 
@@ -862,7 +869,12 @@ export const stepFieldShown = (
 export const stepFormPages = (
   kind: StepKind | undefined,
   values: StepFormValues,
-  options: { showEnableSwitch?: boolean; withCheck?: boolean } = {},
+  options: {
+    showEnableSwitch?: boolean;
+    /** The configure dialog's pages, for a saved step: its emails, then
+     * the page reading back what will be saved. */
+    withCheck?: boolean;
+  } = {},
 ): StepFormPage[] => {
   if (!kind) return ['basics'];
   const fields = Object.keys(FIELD_PAGES) as (keyof StepFormValues)[];
@@ -875,8 +887,9 @@ export const stepFormPages = (
           stepFieldShown(field, kind, values, options),
       ),
   );
-  // The configure dialog ends on a page reading back what will be saved.
-  return options.withCheck ? [...pages, 'check'] : pages;
+  // The configure dialog ends on the step's emails, which only a saved step
+  // has, and on a page reading back what will be saved.
+  return options.withCheck ? [...pages, 'emails', 'check'] : pages;
 };
 
 /** The fields `page` shows for a step of `kind` with `values`, as the check

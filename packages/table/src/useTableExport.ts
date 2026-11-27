@@ -84,6 +84,7 @@ export function useTableExport(table: string | undefined, props?) {
     exportKeys,
     exportRow,
     exportData,
+    exportTitle,
     fetchData,
     ...options
   } = table ? getTableOptions(table) : ({} as TableOptionsType);
@@ -245,11 +246,11 @@ export function useTableExport(table: string | undefined, props?) {
         const { default: saveAsJson } = await import('./exporters/json');
         const rows = await fetchApiRows(config, signal);
         if (signal.aborted) return;
-        saveAsJson(table, rows);
+        saveAsJson(exportTitle || table, rows);
       } else {
         const data = await fetchRows(config, signal);
         if (signal.aborted) return;
-        await exportAs(config.format, table, data);
+        await exportAs(config.format, exportTitle || table, data);
       }
       if (signal.aborted) return;
       showSuccess(

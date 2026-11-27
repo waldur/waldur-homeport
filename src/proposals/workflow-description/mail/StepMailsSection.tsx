@@ -40,14 +40,21 @@ export const StepMailsSection: FC<SectionProps> = (props) => {
   const { description, stepKey } = props;
   const rows = useMemo<Row[]>(
     () =>
-      (
-        description?.steps.find((step) => step.key === stepKey)
-          ?.notifications ?? []
-      ).map((rule, index) => ({ ...rule, id: String(index) })),
+      stepMailRules(description, stepKey).map((rule, index) => ({
+        ...rule,
+        id: String(index),
+      })),
     [description, stepKey],
   );
   return rows.length ? <StepMailsTable {...props} rows={rows} /> : null;
 };
+
+/** The notification rules that mail someone on the step's events. */
+export const stepMailRules = (
+  description: WorkflowDescription | undefined,
+  stepKey: string,
+): WorkflowDescriptionRule[] =>
+  description?.steps.find((step) => step.key === stepKey)?.notifications ?? [];
 
 const StepMailsTable: FC<SectionProps & { rows: Row[] }> = ({
   callUuid,
@@ -102,7 +109,7 @@ const StepMailsTable: FC<SectionProps & { rows: Row[] }> = ({
   ];
   return (
     <section data-testid="step-check-mails">
-      <h6 className="mb-1">{translate('Notifications')}</h6>
+      <h6 className="mb-1">{translate('Emails')}</h6>
       <p className="text-quaternary text-xs mb-1.5">
         {translate(
           'The mail this step sends: see it as it would be sent, change its rule, or word it for this call.',
@@ -112,6 +119,8 @@ const StepMailsTable: FC<SectionProps & { rows: Row[] }> = ({
         {...tableProps}
         // A few rows, nested: no room kept for a full page of them.
         minHeight="auto"
+        fullWidth
+        cardBordered={false}
         rows={rows}
         columns={columns}
         rowKey="id"

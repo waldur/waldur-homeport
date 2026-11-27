@@ -48,6 +48,10 @@ import {
   isComplianceAnswerFilled,
 } from './complianceUtils';
 import { DeleteDraftAction } from './DeleteDraftAction';
+import {
+  documentDisplayName,
+  duplicatesOfAttached,
+} from './documentDuplicates';
 import { isProposalFieldFilled } from './proposalFields';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
@@ -180,7 +184,7 @@ export const ProposalSubmissionStep: FC<{
   const actingForApplicant = useActingForApplicant(proposal);
   const confirmApplicantChange = useConfirmApplicantChange(proposal);
 
-  const { showErrorResponse, showSuccess } = useNotify();
+  const { showError, showErrorResponse, showSuccess } = useNotify();
 
   const queryClient = useQueryClient();
   const proposal_uuid = proposal.uuid;
@@ -438,12 +442,52 @@ export const ProposalSubmissionStep: FC<{
     [queryClient, proposal_uuid, refetch],
   );
 
+  // A refused file that is a copy of a document the proposal holds leaves
+  // the pending list: nothing more can come of it. Any other refused file
+  // stays, for the applicant to remove or replace. Returns how many do.
+  const settleAttached = useCallback(
+    async (
+      formValues: any,
+      { uploaded, refused }: AttachedDocuments,
+    ): Promise<number> => {
+      const duplicates = await duplicatesOfAttached(
+        refused.map(({ file }) => file),
+        uploaded,
+        proposal.supporting_documentation ?? [],
+      );
+      await settleSaved(formValues, [...uploaded, ...duplicates]);
+      if (duplicates.length) {
+        const names = duplicates.map((file) => documentDisplayName(file.name));
+        showError(
+          duplicates.length === 1
+            ? translate(
+                '{file} was not attached: the proposal already has a document with the same content.',
+                { file: names[0] },
+              )
+            : translate(
+                '{files} were not attached: the proposal already has documents with the same content.',
+                { files: names.join(', ') },
+              ),
+        );
+      }
+      const remaining = refused.filter(
+        ({ file }) => !duplicates.includes(file),
+      );
+      reportRefusedDocuments(remaining);
+      return remaining.length;
+    },
+    [
+      proposal.supporting_documentation,
+      settleSaved,
+      reportRefusedDocuments,
+      showError,
+    ],
+  );
+
   const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
     mutationFn: async (formValues: any) => {
       try {
-        const { uploaded, refused } = await saveEditableParts(formValues);
-        await settleSaved(formValues, uploaded);
-        reportRefusedDocuments(refused);
+        await settleAttached(formValues, await saveEditableParts(formValues));
         showSuccess(
           usesCallVocabulary()
             ? translate('Proposal updated successfully')
@@ -481,13 +525,16 @@ export const ProposalSubmissionStep: FC<{
         return { [FORM_ERROR]: 'cancelled' };
       }
       try {
-        const { uploaded, refused } = await saveEditableParts(formValues);
-        if (refused.length) {
-          // The applicant stays on the page: what was saved leaves the form
-          // as after a draft save, the refused files stay pending for them
-          // to remove or replace, and the proposal is not submitted.
-          await settleSaved(formValues, uploaded);
-          reportRefusedDocuments(refused);
+        const attached = await saveEditableParts(formValues);
+        // A file refused for anything but being a copy of a document the
+        // proposal already holds keeps the applicant on the page: what was
+        // saved leaves the form as after a draft save, that file stays
+        // pending for them to remove or replace, and the proposal is not
+        // submitted. Copies alone hold nothing back.
+        if (
+          attached.refused.length &&
+          (await settleAttached(formValues, attached))
+        ) {
           return { [FORM_ERROR]: 'documents' };
         }
         if (changesRequested) {

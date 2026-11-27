@@ -7,7 +7,7 @@ import { useTable } from './useTable';
 /** How the table's Export writes its rows, when its columns do not say. */
 type RowsTableExport<T> = Pick<
   TableOptionsType<T>,
-  'exportFields' | 'exportRow' | 'exportData'
+  'exportFields' | 'exportRow' | 'exportData' | 'exportTitle'
 >;
 
 /**

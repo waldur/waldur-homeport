@@ -51,9 +51,11 @@ describe('StatusLabelsFields', () => {
     expect(
       screen.getByTestId('status-labels-offering_team'),
     ).toBeInTheDocument();
-    expect(screen.getByTestId('status-labels-counts')).toHaveTextContent(
-      '{submitted}',
-    );
+    // The counts hint sits on the evaluators', call team's and offering
+    // teams' labels, never the applicant's.
+    const hints = screen.getAllByTestId('status-labels-counts');
+    expect(hints).toHaveLength(3);
+    expect(hints[0]).toHaveTextContent('{submitted}');
   });
 
   it('asks for applicant labels on the decision of an extension request', () => {
