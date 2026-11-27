@@ -72,7 +72,12 @@ export const CustomerProfile = ({
         </div>
       </div>
     }
-    actions={<CustomerActions customer={customer} />}
+    actions={
+      <CustomerActions
+        customer={customer}
+        fromServiceProvider={fromServiceProvider}
+      />
+    }
   >
     {fromServiceProvider ? (
       <div>
