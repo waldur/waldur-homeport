@@ -16,6 +16,7 @@ import {
   getTotalUsagePeriod,
   getUsagePeriods,
   getEChartOptions,
+  getDisplayUnit,
 } from './utils';
 
 export interface UsageExportDropdownProps {
@@ -23,10 +24,11 @@ export interface UsageExportDropdownProps {
     name: string;
   };
   data: {
-    components: Pick<
+    components: (Pick<
       OfferingComponent,
       'name' | 'type' | 'measured_unit' | 'billing_type'
-    >[];
+    > &
+      Partial<Pick<OfferingComponent, 'factor'>>)[];
     usages: Pick<
       ComponentUsage,
       | 'component_type'
@@ -40,6 +42,7 @@ export interface UsageExportDropdownProps {
       ComponentUserUsage,
       'component_type' | 'billing_period' | 'username'
     >[];
+    offeringType?: string;
   };
   users: ProjectUser[];
   months: number;
@@ -56,6 +59,8 @@ const exportAsPng = (props: UsageExportDropdownProps) => {
       props.data.userUsages,
       props.months,
       color,
+      undefined,
+      { offeringType: props.data.offeringType },
     );
 
     const hasData = options.series.some((serie) =>
@@ -150,9 +155,14 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
         translate('Date'),
       ]
         .concat(
-          props.data.components.map(
-            (c) => c.name + (c.measured_unit ? '/' + c.measured_unit : ''),
-          ),
+          props.data.components.map((c) => {
+            const unit = getDisplayUnit(
+              c.measured_unit,
+              c.factor,
+              props.data.offeringType,
+            );
+            return c.name + (unit ? '/' + unit : '');
+          }),
         )
         .filter(Boolean);
 
@@ -165,6 +175,7 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
           userUsages?.filter(
             (usage) => usage.component_type === component.type,
           ),
+          (u) => (u.total_consumed || u.usage) / (component.factor || 1),
         ),
       );
 
@@ -185,11 +196,14 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
               if (hasUserUsage) {
                 const userRecord: any[] = [username, label];
                 userRecord.push(
-                  ...allFormattedUsages.map((compUsages) => {
+                  ...allFormattedUsages.map((compUsages, componentIndex) => {
                     const userUsage = compUsages[monthIndex]?.details.find(
                       (uu) => uu.username === username,
                     );
-                    return userUsage?.usage || '0';
+                    const factor = components[componentIndex].factor || 1;
+                    return userUsage?.usage
+                      ? Number(userUsage.usage) / factor
+                      : '0';
                   }),
                 );
                 exportData.data.push(userRecord);

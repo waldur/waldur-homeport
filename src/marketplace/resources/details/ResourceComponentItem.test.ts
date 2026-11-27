@@ -5,9 +5,10 @@ import { OfferingComponent } from 'waldur-js-client';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { VMWARE_VM } from '@/vmware/constants';
 
+import { getDisplayUnit } from '../usage/utils';
+
 import {
   formatQuotaUnits,
-  getDisplayUnit,
   getQuotaCellProps,
   getResetsText,
   getResetsValue,
