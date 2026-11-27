@@ -18,6 +18,9 @@ interface ResourceUsageTabsProps {
     'username' | 'component_type' | 'billing_period'
   >[];
   months?: number;
+  offeringType?: string;
+  currentUsages?: Record<string, number>;
+  currentLimits?: Record<string, number>;
   colors: string[];
   displayMode?: 'chart' | 'table';
   hasExport?: boolean;
@@ -45,6 +48,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
             <ResourceUsageTable
               offeringComponent={component}
               resource={props.resource}
+              offeringType={props.offeringType}
             />
           ) : (
             <div className="flex justify-center">
@@ -56,6 +60,11 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
                 months={props.months}
                 chartColor={props.colors[index]}
                 hasExport={props.hasExport}
+                context={{
+                  offeringType: props.offeringType,
+                  currentUsage: props.currentUsages?.[component.type],
+                  currentLimit: props.currentLimits?.[component.type],
+                }}
               />
             </div>
           )}

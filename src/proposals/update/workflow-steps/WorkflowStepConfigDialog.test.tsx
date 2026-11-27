@@ -371,7 +371,9 @@ describe('WorkflowStepConfigDialog', () => {
     await screen.findByLabelText(/^Name/);
     await goToPage(user, 'Check');
     const basics = await screen.findByTestId('step-check-basics');
-    await user.click(within(basics).getByRole('button', { name: 'Change' }));
+    await user.click(
+      within(basics).getByRole('button', { name: 'Edit Basics' }),
+    );
     expect(screen.getByLabelText(/^Name/)).toBeVisible();
     await user.click(screen.getByRole('button', { name: 'Back to check' }));
     expect(await screen.findByTestId('step-check-page')).toBeInTheDocument();

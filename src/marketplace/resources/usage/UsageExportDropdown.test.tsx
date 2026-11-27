@@ -91,6 +91,75 @@ describe('useUsageExport', () => {
     );
   });
 
+  it('exports OpenStack RAM in GB, not the MiB it is stored in', () => {
+    const props = {
+      ...defaultProps,
+      data: {
+        components: [
+          {
+            name: 'RAM',
+            type: 'ram',
+            measured_unit: 'GB',
+            billing_type: 'limit',
+            factor: 1024,
+          },
+        ],
+        usages: [{ type: 'ram', billing_period: '2024-01-01', usage: 233472 }],
+        userUsages: [],
+        offeringType: 'OpenStack.Tenant',
+      },
+    };
+
+    const { result } = renderHook(() => useUsageExport(props as any));
+    result.current('csv');
+
+    expect(exportAs).toHaveBeenCalledWith(
+      'csv',
+      'Usage history - Test Resource',
+      {
+        fields: ['Date', 'RAM/GB'],
+        data: [
+          ['January 2024', 228],
+          ['Total', 228],
+        ],
+      },
+    );
+  });
+
+  it('names the promoted unit in the header when the factor converts it', () => {
+    const props = {
+      ...defaultProps,
+      data: {
+        components: [
+          {
+            name: 'Disk',
+            type: 'disk',
+            measured_unit: 'MB',
+            billing_type: 'usage',
+            factor: 1024,
+          },
+        ],
+        usages: [{ type: 'disk', billing_period: '2024-01-01', usage: 2048 }],
+        userUsages: [],
+      },
+    };
+
+    const { result } = renderHook(() => useUsageExport(props as any));
+    result.current('csv');
+
+    expect(exportAs).toHaveBeenCalledWith(
+      'csv',
+      'Usage history - Test Resource',
+      {
+        fields: ['Date', 'Disk/GB'],
+        data: [
+          ['January 2024', 2],
+          ['Total', 2],
+        ],
+      },
+    );
+  });
+
   it('should export only the users passed in (mirrors the chart user filter)', () => {
     // Data contains usage for two users, but the caller narrows the filter
     // to user_1 only — the export must not leak the unselected user's rows.

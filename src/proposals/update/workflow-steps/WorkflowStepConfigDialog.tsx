@@ -9,7 +9,7 @@ import {
   StepKind,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, EmptyState } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
@@ -24,9 +24,14 @@ import {
   useWorkflowStepKinds,
 } from '@/proposals/workflow/queries';
 import {
+  StepMailsSection,
+  stepMailRules,
+} from '@/proposals/workflow-description/mail/StepMailsSection';
+import {
   callWorkflowCheckKey,
   callWorkflowDescriptionKey,
   callWorkflowHistoryKey,
+  useCallWorkflowDescription,
 } from '@/proposals/workflow-description/queries';
 import { useNotify } from '@/store/notify';
 
@@ -99,6 +104,40 @@ const useFocusField = (field: string | undefined) => {
     }, 0);
     return () => window.clearTimeout(timer);
   }, [field]);
+};
+
+/** The mail the step sends, each to see, re-rule or word for the call. */
+const StepEmailsPage: FC<{ call: Call; step: CallWorkflowStep }> = ({
+  call,
+  step,
+}) => {
+  const { data: description, isLoading } = useCallWorkflowDescription(
+    call.uuid,
+  );
+  if (isLoading) return <LoadingSpinner />;
+  if (!description) {
+    return (
+      <AlertItem
+        variant="error"
+        title={translate("Unable to load the step's emails.")}
+      />
+    );
+  }
+  return stepMailRules(description, step.key).length ? (
+    <StepMailsSection
+      callUuid={call.uuid}
+      stepKey={step.key}
+      stepName={stepName(step)}
+      description={description}
+    />
+  ) : (
+    <EmptyState
+      size="sm"
+      message={translate(
+        'The step sends no email: no notification rule of the call mails anyone on its events.',
+      )}
+    />
+  );
 };
 
 /**
@@ -196,6 +235,7 @@ const StepConfigForm: FC<
           <LoadingSpinner />
         ) : (
           <>
+            {page === 'emails' && <StepEmailsPage call={call} step={step} />}
             {page === 'check' && (
               <StepCheckPage
                 pages={pages}

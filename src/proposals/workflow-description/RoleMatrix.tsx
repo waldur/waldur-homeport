@@ -273,6 +273,9 @@ export const RoleMatrix: FC<RoleMatrixProps> = ({
   const exportRef = useRef({ description, actors });
   exportRef.current = { description, actors };
   const tableProps = useRowsTable('WorkflowRoleMatrix', rows, rows, {
+    exportTitle: translate('Roles – {call}', {
+      call: description.call.name,
+    }),
     exportFields: roleMatrixExportFields,
     exportData: (steps) =>
       roleMatrixExportRows(

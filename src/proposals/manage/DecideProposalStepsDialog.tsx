@@ -1,13 +1,16 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
+  BulkStepDecision,
+  DecidableWorkflowStep,
   OutcomeEnum,
   Proposal,
-  proposalProposalsCompleteWorkflowStep,
+  proposalProtectedCallsDecidableWorkflowSteps,
+  proposalProtectedCallsDecideWorkflowSteps,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -16,12 +19,16 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { outcomeLabel } from '@/proposals/workflow/constants';
-import {
-  fetchProposalWorkflowStates,
-  proposalWorkflowStatesKey,
-} from '@/proposals/workflow/queries';
+import { proposalWorkflowStatesKey } from '@/proposals/workflow/queries';
+import { useNotify } from '@/store/notify';
 
-import { BulkFailure, groupByDecisionStep, runEach } from './bulkSteps';
+import { BulkStepDecisionResults } from './BulkStepDecisionResults';
+import {
+  invalidateRunsOfCall,
+  isFinished,
+  MAX_BULK_PROPOSALS,
+  useBulkStepDecision,
+} from './bulkSteps';
 
 interface DecideValues {
   step: string;
@@ -31,86 +38,154 @@ interface DecideValues {
 
 interface DecideProposalStepsDialogProps {
   resolve: {
+    callUuid: string;
     proposals: Pick<Proposal, 'uuid' | 'name'>[];
     refetch?(): void;
   };
 }
 
-interface Outcome {
-  done: number;
-  failures: BulkFailure[];
-  leftAlone: number;
-}
-
 /**
  * A call manager takes one decision step -- the administrative or
  * eligibility check, say -- for a selection of proposals at once: one
- * outcome, one reason. Each proposal is completed on its own, through the
- * same action as its page, so the backend's gates still decide; a refusal
- * stops only that proposal and is listed by name.
+ * outcome, one reason. The backend decides each proposal as from its own
+ * page, in its own transaction, so its gates still decide. The manager
+ * sees first which proposals will be decided and which refused, and why;
+ * then confirms. A large selection is decided in the background: the
+ * dialog follows its progress, and may be closed meanwhile.
  */
 export const DecideProposalStepsDialog: FC<DecideProposalStepsDialogProps> = ({
-  resolve: { proposals, refetch },
+  resolve: { callUuid, proposals, refetch },
 }) => {
   const queryClient = useQueryClient();
-  const [result, setResult] = useState<Outcome>();
+  const { showErrorResponse } = useNotify();
+  const [preview, setPreview] = useState<{
+    values: DecideValues;
+    group: DecidableWorkflowStep;
+    result: BulkStepDecision;
+  }>();
+  const [run, setRun] = useState<BulkStepDecision>();
+  const [deciding, setDeciding] = useState(false);
+  const proposalUuids = useMemo(
+    () => proposals.map((proposal) => proposal.uuid),
+    [proposals],
+  );
 
-  const { data: groups, isLoading } = useQuery({
-    queryKey: ['BulkDecisionSteps', proposals.map((p) => p.uuid)],
-    queryFn: async () =>
-      groupByDecisionStep(
-        await Promise.all(
-          proposals.map(async (proposal) => ({
-            proposal,
-            instances: await fetchProposalWorkflowStates(proposal.uuid),
-          })),
-        ),
-      ),
+  const tooMany = proposalUuids.length > MAX_BULK_PROPOSALS;
+  const {
+    data: groups,
+    isLoading,
+    isError,
+    refetch: readStepsAgain,
+  } = useQuery({
+    queryKey: ['BulkDecisionSteps', callUuid, proposalUuids],
+    queryFn: () =>
+      proposalProtectedCallsDecidableWorkflowSteps({
+        path: { uuid: callUuid },
+        body: { proposal_uuids: proposalUuids },
+      }).then((response) => response.data),
+    enabled: !tooMany,
     refetchOnWindowFocus: false,
   });
+
+  // A large preview, and a large run, go on in the background: both are
+  // read again until they stop.
+  const { data: previewRun } = useBulkStepDecision(
+    preview?.result.uuid ?? '',
+    preview?.result.uuid ? preview.result : undefined,
+  );
+  const { data: runData } = useBulkStepDecision(run?.uuid ?? '', run);
+  const shownPreview = preview?.result.uuid ? previewRun : preview?.result;
+  const shownRun = runData ?? run;
 
   const stepChoices = useMemo(
     () =>
       (groups ?? []).map((group) => ({
-        value: group.callStepUuid,
+        value: group.call_step_uuid,
         label: translate('{step} ({count})', {
-          step: group.stepName,
-          count: group.targets.length,
+          step: group.step_name,
+          count: group.proposal_uuids.length,
         }),
       })),
     [groups],
   );
 
-  const submit = async (values: DecideValues) => {
-    const group = groups.find((g) => g.callStepUuid === values.step);
-    const outcome = await runEach(
-      group.targets,
-      ({ proposal, instance }) =>
-        proposalProposalsCompleteWorkflowStep({
-          path: { uuid: proposal.uuid },
-          body: {
-            step_uuid: instance.uuid,
-            outcome: values.outcome,
-            outcome_reason: values.outcome_reason || '',
-          },
-        }),
-      ({ proposal }) => proposal.name,
-    );
-    group.targets.forEach(({ proposal }) =>
-      queryClient.invalidateQueries({
-        queryKey: proposalWorkflowStatesKey(proposal.uuid),
-      }),
-    );
-    setResult({
-      ...outcome,
-      leftAlone: proposals.length - group.targets.length,
-    });
-    if (outcome.done) refetch?.();
+  const request = (
+    values: DecideValues,
+    group: DecidableWorkflowStep,
+    dryRun: boolean,
+  ) =>
+    proposalProtectedCallsDecideWorkflowSteps({
+      path: { uuid: callUuid },
+      body: {
+        call_step_uuid: group.call_step_uuid,
+        outcome: values.outcome,
+        outcome_reason: values.outcome_reason || '',
+        proposal_uuids: group.proposal_uuids,
+        dry_run: dryRun,
+      },
+    }).then((response) => response.data);
+
+  const showPreview = async (values: DecideValues) => {
+    const group = groups.find((g) => g.call_step_uuid === values.step);
+    try {
+      setPreview({ values, group, result: await request(values, group, true) });
+    } catch (error) {
+      showErrorResponse(error, translate('Unable to check the proposals.'));
+    }
   };
+
+  const decide = async () => {
+    setDeciding(true);
+    try {
+      setRun(await request(preview.values, preview.group, false));
+      // The call's runs are watched again: this one ends in the background.
+      invalidateRunsOfCall(queryClient, callUuid);
+    } catch (error) {
+      showErrorResponse(error, translate('Unable to decide the step.'));
+    } finally {
+      setDeciding(false);
+    }
+  };
+
+  // Once the run stops, what it changed is read again: the proposals list,
+  // each decided proposal's steps, the steps the selection stands on, and
+  // the call's runs.
+  const reported = useRef(false);
+  useEffect(() => {
+    if (reported.current || !shownRun || !isFinished(shownRun)) return;
+    reported.current = true;
+    (shownRun.results ?? [])
+      .filter((result) => result.status === 'decided')
+      .forEach((result) =>
+        queryClient.invalidateQueries({
+          queryKey: proposalWorkflowStatesKey(result.proposal_uuid),
+        }),
+      );
+    queryClient.invalidateQueries({
+      queryKey: ['BulkDecisionSteps', callUuid],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['BulkStepDecisions', callUuid],
+    });
+    if (shownRun.decided_count) refetch?.();
+  }, [shownRun, queryClient, callUuid, refetch]);
 
   const title = translate('Decide a step ({count} selected)', {
     count: proposals.length,
   });
+
+  if (tooMany) {
+    return (
+      <ModalDialog title={title} footer={<CloseDialogButton />}>
+        <p className="mb-0">
+          {translate(
+            'A step is decided for at most {max} proposals at once. Select fewer, or filter the list first.',
+            { max: MAX_BULK_PROPOSALS },
+          )}
+        </p>
+      </ModalDialog>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -120,49 +195,74 @@ export const DecideProposalStepsDialog: FC<DecideProposalStepsDialogProps> = ({
     );
   }
 
-  if (result) {
+  if (isError) {
+    return (
+      <ModalDialog
+        title={title}
+        footer={
+          <>
+            <CloseDialogButton variant="tertiary" />
+            <BaseButton
+              variant="primary"
+              label={translate('Try again')}
+              onClick={() => readStepsAgain()}
+            />
+          </>
+        }
+      >
+        <p className="mb-0">
+          {translate(
+            'Unable to read which steps the selected proposals stand on.',
+          )}
+        </p>
+      </ModalDialog>
+    );
+  }
+
+  if (run) {
     return (
       <ModalDialog
         title={title}
         footer={<CloseDialogButton label={translate('Done')} />}
       >
-        <div className="flex flex-col gap-3">
-          {result.done > 0 && (
-            <AlertItem
-              type="floating"
-              variant="success"
-              title={translate('Completed: {count}', {
-                count: result.done,
-              })}
+        <BulkStepDecisionResults
+          run={shownRun}
+          leftAlone={proposals.length - preview.group.proposal_uuids.length}
+        />
+      </ModalDialog>
+    );
+  }
+
+  if (preview) {
+    const previewDone = isFinished(shownPreview);
+    const willDecide = previewDone ? shownPreview.decided_count : 0;
+    return (
+      <ModalDialog
+        title={title}
+        subtitle={translate(
+          'Nothing has been decided yet. This is what deciding the step would do now; confirm to decide.',
+        )}
+        footer={
+          <>
+            <BaseButton
+              variant="tertiary"
+              label={translate('Back')}
+              onClick={() => setPreview(undefined)}
             />
-          )}
-          {result.failures.length > 0 && (
-            <AlertItem
-              type="floating"
-              variant="error"
-              title={translate('Refused: {count}', {
-                count: result.failures.length,
-              })}
-              body={
-                <ul className="mb-0 ps-4" data-testid="bulk-failures">
-                  {result.failures.map((failure) => (
-                    <li key={failure.name}>
-                      <span className="font-medium">{failure.name}</span>:{' '}
-                      {failure.reason}
-                    </li>
-                  ))}
-                </ul>
-              }
-            />
-          )}
-          {result.leftAlone > 0 && (
-            <p className="text-tertiary mb-0">
-              {translate('Not at this step, so left alone: {count}', {
-                count: result.leftAlone,
-              })}
-            </p>
-          )}
-        </div>
+            {previewDone && willDecide > 0 && (
+              <SubmitButton
+                submitting={deciding}
+                onClick={decide}
+                label={translate('Decide ({count})', { count: willDecide })}
+              />
+            )}
+          </>
+        }
+      >
+        <BulkStepDecisionResults
+          run={shownPreview ?? preview.result}
+          leftAlone={proposals.length - preview.group.proposal_uuids.length}
+        />
       </ModalDialog>
     );
   }
@@ -181,26 +281,27 @@ export const DecideProposalStepsDialog: FC<DecideProposalStepsDialogProps> = ({
 
   return (
     <Form<DecideValues>
-      onSubmit={submit}
-      initialValues={{ step: groups[0].callStepUuid }}
+      onSubmit={showPreview}
+      initialValues={{ step: groups[0].call_step_uuid }}
     >
       {({ handleSubmit, submitting, values }) => {
-        const group = groups.find((g) => g.callStepUuid === values.step);
-        const leftAlone = proposals.length - (group?.targets.length ?? 0);
+        const group = groups.find((g) => g.call_step_uuid === values.step);
+        const leftAlone =
+          proposals.length - (group?.proposal_uuids.length ?? 0);
         return (
           <form onSubmit={handleSubmit}>
             <ModalDialog
               title={title}
               subtitle={translate(
-                'One outcome and reason for every selected proposal standing on the step. Each is completed as from its own page; one that is refused is listed and the others go on.',
+                'One outcome and reason for every selected proposal standing on the step. You see first which proposals will be decided and which refused, and why.',
               )}
               footer={
                 <>
                   <CloseDialogButton variant="tertiary" />
                   <SubmitButton
                     submitting={submitting}
-                    label={translate('Complete ({count})', {
-                      count: group?.targets.length ?? 0,
+                    label={translate('Preview ({count})', {
+                      count: group?.proposal_uuids.length ?? 0,
                     })}
                   />
                 </>
@@ -221,11 +322,11 @@ export const DecideProposalStepsDialog: FC<DecideProposalStepsDialogProps> = ({
                 required
                 validate={(value) =>
                   required(value) ||
-                  (group?.allowedOutcomes.includes(value)
+                  (group?.allowed_outcomes.includes(value)
                     ? undefined
                     : translate('Choose an outcome of this step.'))
                 }
-                choices={(group?.allowedOutcomes ?? []).map((outcome) => ({
+                choices={(group?.allowed_outcomes ?? []).map((outcome) => ({
                   value: outcome,
                   label: outcomeLabel(outcome),
                 }))}
@@ -245,7 +346,7 @@ export const DecideProposalStepsDialog: FC<DecideProposalStepsDialogProps> = ({
                       })
                     : translate('Not at {step}, so left alone: {count}', {
                         count: leftAlone,
-                        step: group?.stepName,
+                        step: group?.step_name,
                       })}
                 </p>
               )}

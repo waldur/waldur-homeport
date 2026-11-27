@@ -11,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+import { MyPanelsTable } from './MyPanelsTable';
 import { MyReviewsLayout } from './MyReviewsLayout';
 import { useMyWorkTitle } from './myWorkTitle';
 import { useMyReviewsTabs } from './tabs';
@@ -166,6 +167,7 @@ export const MyCallsPage: FC = () => {
         hasOptionalColumns
         hasQuery
       />
+      <MyPanelsTable />
     </MyReviewsLayout>
   );
 };

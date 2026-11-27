@@ -17,6 +17,7 @@ import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 
 import { getProviderBreadcrumbItems } from '../utils';
 
+import { ManageProviderLink } from './ManageProviderLink';
 import { ProviderCallsTab } from './ProviderCallsTab';
 import { ProviderDashboardTab } from './ProviderDashboardTab';
 import { ProviderOfferingsTab } from './ProviderOfferingsTab';
@@ -67,6 +68,9 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
       logoAlt={data.provider.customer_name}
       logoTooltip={data.provider.customer_name}
       logoCircle
+      actions={
+        <ManageProviderLink customerUuid={data.provider.customer_uuid} />
+      }
       title={
         <div className="flex items-center self-stretch gap-5 text-quaternary mb-1">
           {data.provider.customer_country && (

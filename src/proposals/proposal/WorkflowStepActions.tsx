@@ -23,6 +23,7 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useUser } from '@/workspace/hooks';
 
+import { useArchivedCallReason } from '../archivedCall';
 import { Proposal } from '../types';
 import { CompleteWorkflowStepDialog } from '../workflow/CompleteWorkflowStepDialog';
 import {
@@ -122,6 +123,9 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
 }) => {
   const user = useUser();
   const { openDialog } = useModal();
+  // An archived call's evaluation stands still: every action here is
+  // disabled -- unless the step is award-stage work, which goes on.
+  const archived = useArchivedCallReason(activeStep);
 
   const {
     awaitingManualAdvance,
@@ -222,19 +226,21 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
   const completeButton = (
     <BaseButton
       variant="primary"
-      disabled={completeBlockedByChecklist}
+      disabled={completeBlockedByChecklist || !!archived}
       disabledReason={
-        completeBlockedByChecklist
-          ? (activeStep?.contributor_source ?? 'none') !== 'none'
-            ? // Its form is filled on the contributions, by those who
-              // contribute: nothing to answer here.
-              translate(
-                'The required questions are answered on the step’s contributions, by those who contribute to it.',
-              )
-            : translate(
-                'Answer the required checklist questions before completing this step.',
-              )
-          : undefined
+        archived
+          ? archived
+          : completeBlockedByChecklist
+            ? (activeStep?.contributor_source ?? 'none') !== 'none'
+              ? // Its form is filled on the contributions, by those who
+                // contribute: nothing to answer here.
+                translate(
+                  'The required questions are answered on the step’s contributions, by those who contribute to it.',
+                )
+              : translate(
+                  'Answer the required checklist questions before completing this step.',
+                )
+            : undefined
       }
       onClick={() =>
         openDialog(CompleteWorkflowStepDialog, {
@@ -267,6 +273,8 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
       variant="tertiary"
       onClick={() => cancelRequest.mutate()}
       pending={cancelRequest.isPending}
+      disabled={!!archived}
+      disabledReason={archived}
       iconNode={<XCircleIcon weight="bold" />}
       label={translate('Cancel request for changes')}
       size="sm"
@@ -306,6 +314,8 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
       {canReopenDecision && (
         <BaseButton
           variant="tertiary"
+          disabled={!!archived}
+          disabledReason={archived}
           onClick={() =>
             openDialog(ReopenDecisionDialog, {
               resolve: { proposal, refetch },
@@ -322,6 +332,8 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
           variant="primary"
           onClick={() => advanceStep.mutate()}
           pending={advanceStep.isPending}
+          disabled={!!archived}
+          disabledReason={archived}
           className="w-full mt-1.5"
           iconNode={<ArrowRightIcon weight="bold" />}
           label={translate('Advance workflow')}
@@ -365,6 +377,8 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
       {canRequestChanges && (
         <BaseButton
           variant="tertiary"
+          disabled={!!archived}
+          disabledReason={archived}
           onClick={() =>
             openDialog(RequestChangesDialog, {
               resolve: { proposal, step: activeStep, refetch },
@@ -394,6 +408,8 @@ const StepActionsCard: FC<StepActionsCardProps> = ({
           {roundScoped ? null : completeButton}
           <BaseButton
             variant="danger"
+            disabled={!!archived}
+            disabledReason={archived}
             onClick={() => rejectStep.mutate()}
             className="w-full mt-1.5"
             iconNode={<XCircleIcon weight="bold" />}

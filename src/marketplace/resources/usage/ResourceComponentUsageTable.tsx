@@ -15,11 +15,16 @@ import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { getMissingUsagePolicyLabel } from './missingUsagePolicy';
+import { getDisplayUnit } from './utils';
 
 export const ResourceComponentUsageTable: FC<
   TableWithPortal<{
     resource: Pick<Resource, 'uuid'>;
-    offeringComponent?: Pick<OfferingComponent, 'type'>;
+    offeringComponent?: Pick<OfferingComponent, 'type'> &
+      Partial<
+        Pick<OfferingComponent, 'measured_unit' | 'billing_type' | 'factor'>
+      >;
+    offeringType?: string;
   }>
 > = ({ portal, ...props }) => {
   const filter = useMemo(() => {
@@ -37,6 +42,17 @@ export const ResourceComponentUsageTable: FC<
     fetchData: createFetcher(marketplaceComponentUsagesList),
     filter,
   });
+  const factor = props.offeringComponent?.factor || 1;
+  const unit = getDisplayUnit(
+    props.offeringComponent?.measured_unit,
+    props.offeringComponent?.factor,
+    props.offeringType,
+  );
+  // Limit-based components report the highest amount held during the month.
+  const usageTitle =
+    props.offeringComponent?.billing_type === 'limit'
+      ? translate('Monthly peak')
+      : translate('Usage');
   const columns = [
     {
       title: translate('Billing period'),
@@ -44,8 +60,10 @@ export const ResourceComponentUsageTable: FC<
       orderField: 'billing_period',
     },
     {
-      title: translate('Usage'),
-      render: ({ row }) => <>{formatUsageValue(row.usage)}</>,
+      title: unit ? `${usageTitle} (${unit})` : usageTitle,
+      render: ({ row }) => (
+        <>{formatUsageValue(Number(row.usage) / factor, false, 2)}</>
+      ),
       orderField: 'usage',
     },
     {

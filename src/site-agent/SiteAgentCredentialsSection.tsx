@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import { PropertyItem } from 'waldur-ui';
 
-import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { BaseCredentialsSection } from '@/marketplace/offerings/update/integration/BaseCredentialsSection';
 import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integration/types';
 import { SlurmOfferingActions } from '@/site-agent/SlurmOfferingActions';
+import { waldurApiUrl } from '@/site-agent/waldurApiUrl';
 
 export const SiteAgentCredentialsSection: FC<OfferingEditPanelProps> = (
   props,
@@ -19,7 +19,7 @@ export const SiteAgentCredentialsSection: FC<OfferingEditPanelProps> = (
     >
       <PropertyItem
         label={translate('Waldur API URL')}
-        value={ENV.apiEndpoint}
+        value={waldurApiUrl()}
         hasCopy
       />
 

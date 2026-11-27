@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  BACKEND_SETTINGS_UPDATE,
   changedSinceOpened,
   clearedLastRole,
   describeRefusal,
@@ -31,6 +32,30 @@ describe('mergeAgentConfiguration', () => {
     expect(
       mergeAgentConfiguration(stored, { reporting_backend: 'slurm' }),
     ).toEqual({ ...stored, reporting_backend: 'slurm' });
+  });
+
+  it('sets one backend setting and keeps the others', () => {
+    expect(
+      mergeAgentConfiguration(stored, {
+        [BACKEND_SETTINGS_UPDATE]: { partition: 'gpu' },
+      }),
+    ).toEqual({
+      ...stored,
+      backend_settings: {
+        default_account: 'root',
+        customer_prefix: 'c_',
+        partition: 'gpu',
+      },
+    });
+  });
+
+  // The agent then uses the setting's default.
+  it('removes a backend setting given as empty', () => {
+    expect(
+      mergeAgentConfiguration(stored, {
+        [BACKEND_SETTINGS_UPDATE]: { customer_prefix: '', other: null },
+      }).backend_settings,
+    ).toEqual({ default_account: 'root' });
   });
 
   it('merges event and agent settings key by key', () => {
@@ -235,7 +260,7 @@ describe('describeRefusal', () => {
         'backend_settings.target_offering_uuid (waldur): This setting is required.',
       ],
       hints: [
-        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Backends tab.',
+        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Advanced (JSON) tab.',
       ],
     });
   });
@@ -333,7 +358,7 @@ describe('describeRefusal', () => {
       ),
     ).toEqual({
       errors: ['backend_components.cpu.factor: Unknown setting.'],
-      hints: ['Fix the backend components on the Backend settings tab first.'],
+      hints: ['Fix the backend components on the Advanced (JSON) tab first.'],
     });
   });
 

@@ -179,9 +179,13 @@ export const WorkflowDiffView: FC<{
     ) : null;
   };
   const columns: Column<DiffRow>[] = [
+    // What and Change hold a name and a badge: sized to them, so Details,
+    // which holds the field changes and the before/after sentences, gets
+    // the rest of the width.
     {
       title: translate('What'),
       ellipsis: false,
+      width: '22%',
       render: ({ row }) => (
         // A cosmetic change reads quieter by weight, not by fading: faded
         // text falls under 4.5:1, and the "Cosmetic" badge says it in words.
@@ -204,6 +208,7 @@ export const WorkflowDiffView: FC<{
     },
     {
       title: translate('Change'),
+      width: '12%',
       render: ({ row }) => (
         <div className="flex flex-wrap gap-1">
           <Badge

@@ -676,6 +676,15 @@
       "feature_area": "changelog"
     }
   },
+  "1 setting, {set} set": {
+    "context": {
+      "variables": {
+        "set": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "1 star": {
     "context": {
       "feature_area": "create-review"
@@ -825,6 +834,7 @@
     }
   },
   "A /0 mask is not allowed: it matches every address.": {},
+  "A Kubernetes cluster: version, one or three sites, node groups and access rules. You set the node sizes, the versions, the topology and the load balancer.": {},
   "A Matrix protocol mechanism that allows Waldur to register as a service on the homeserver. The homeserver pushes events to Waldur via a webhook, and Waldur can create rooms and invite users on behalf of a bot user. Messages are sent by the Matrix bot.": {},
   "A POSIX-friendly unique identifier for the offering.": {
     "context": {
@@ -1201,6 +1211,11 @@
       "feature_area": "views"
     }
   },
+  "A site-agent offering set up from a published offering template.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "A site-to-site IPsec tunnel between your network and the provider’s.": {
     "context": {
       "feature_area": "common"
@@ -1214,6 +1229,16 @@
   },
   "A snapshot of all messages in a room, read and decrypted by the Matrix bot and saved as an encrypted JSON file. Optionally includes media files in a ZIP archive. Can be triggered manually, on a schedule, or automatically when a room is disabled or its project is deleted. Exports older than the retention period are deleted, except the newest of each room.": {},
   "A step done by the requested offerings' teams cannot have a discussion: one room would hold the teams of every offering the proposal requests.": {},
+  "A step is decided for at most {max} proposals at once. Select fewer, or filter the list first.": {
+    "context": {
+      "variables": {
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "A step the call team handles internally.": {},
   "A submitted proposal requests this offering, so its rules no longer change.": {},
   "A summary of the conversation goes to the helpdesk, and only you can confirm it.": {
@@ -1364,6 +1389,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "settings"
+    }
+  },
+  "API endpoint": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "API key": {
@@ -1942,6 +1972,11 @@
       "action_type": "read"
     }
   },
+  "Access to this deployment is restricted.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Access token": {
     "context": {
       "feature_area": "auth"
@@ -1978,6 +2013,11 @@
     }
   },
   "Account and access": {},
+  "Account creation is blocked for uninvited users.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Account deactivated": {
     "context": {
       "feature_area": "reviewer-registry"
@@ -3743,6 +3783,11 @@
       "feature_area": "offerings"
     }
   },
+  "Advanced (JSON)": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Advanced Options": {
     "context": {
       "feature_area": "list"
@@ -4123,6 +4168,17 @@
       "feature_area": "offerings"
     }
   },
+  "Agent configuration file (.yaml, .yml - max. 512 KiB)": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "Agent configuration has been imported.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "agent-import"
+    }
+  },
   "Agent configuration has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -4188,6 +4244,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "site-agents"
+    }
+  },
+  "Agent roles": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Agent service": {
@@ -4467,6 +4528,11 @@
   "All pages": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "All panel sheets (Excel)": {
+    "context": {
+      "feature_area": "panels"
     }
   },
   "All partitions": {
@@ -5192,6 +5258,11 @@
       }
     }
   },
+  "Also create the periodic usage policy": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Also delete chat history exports": {
     "context": {
       "feature_area": "matrix"
@@ -5201,6 +5272,11 @@
   "Also show it to signed-out visitors, on the login page and public pages, while it is active.": {
     "context": {
       "feature_area": "announcements"
+    }
+  },
+  "Also update the periodic usage policy": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Alternative names": {
@@ -5417,6 +5493,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "offering-templates",
       "action_type": "create"
+    }
+  },
+  "An offering template also sets up components, plans and the site agent configuration, and checks them before the offering is created.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "An offering template carries an offering, its components, plans and agent configuration, with the parameters a service provider fills in to create an offering from it. Secrets, files, screenshots, organizations and resources are never part of it.": {
@@ -8515,6 +8596,16 @@
       "primary_ui_type": "label"
     }
   },
+  "At most {count} characters.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "At most {count} networks.": {
     "context": {
       "variables": {
@@ -8899,6 +8990,11 @@
   "Authentication methods": {
     "context": {
       "feature_area": "charts"
+    }
+  },
+  "Authentication request has been denied by identity provider. Please check your credentials.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "Authentication required": {
@@ -9760,11 +9856,6 @@
       "feature_area": "site-agents"
     }
   },
-  "Backends": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Background task workers, the message broker and event publishing.": {
     "context": {
       "feature_area": "system-management"
@@ -9926,7 +10017,11 @@
     }
   },
   "Basic offering": {},
-  "Basics": {},
+  "Basics": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Batch expired": {
     "context": {
       "feature_area": "assignments"
@@ -10060,6 +10155,11 @@
   "Biannual": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Bill stopped instances": {
+    "context": {
+      "feature_area": "openstack"
     }
   },
   "Billed as {source} on the source but as {target} on the target.": {
@@ -10364,6 +10464,16 @@
   "Block output operations": {
     "context": {
       "feature_area": "celery"
+    }
+  },
+  "Block {number}": {
+    "context": {
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      },
+      "feature_area": "agent-import"
     }
   },
   "Blocked": {
@@ -10810,7 +10920,7 @@
   "By": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "workflow-check"
+      "feature_area": "manage"
     }
   },
   "By OECD code": {
@@ -10841,6 +10951,11 @@
     }
   },
   "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": {},
+  "By backend ID": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "By category": {
     "context": {
       "primary_ui_type": "label",
@@ -11437,6 +11552,11 @@
       "feature_area": "provider-calls"
     }
   },
+  "Call managers', staff and support lists.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Call managing organization": {
     "context": {
       "primary_ui_type": "label",
@@ -11715,6 +11835,16 @@
   "Can be targeted": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Can include counts, e.g. {example}.": {
+    "context": {
+      "variables": {
+        "example": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-steps"
     }
   },
   "Can only be increased": {
@@ -12189,7 +12319,7 @@
   "Chair": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "team"
+      "feature_area": "review"
     }
   },
   "Challenge code": {
@@ -12275,6 +12405,11 @@
   "Change in the preview": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "Change its actions": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Change limits": {
@@ -12382,7 +12517,7 @@
       "feature_area": "proposal"
     }
   },
-  "Change the backends and their settings in one save with \"Edit roles and backend settings together\" on the Backends tab.": {
+  "Change the backends and their settings in one save with \"Edit roles and backend settings together\" on the Advanced (JSON) tab.": {
     "context": {
       "feature_area": "integration"
     }
@@ -12461,6 +12596,11 @@
       "feature_area": "type-based"
     }
   },
+  "Changed since it was created": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Changed {date}": {
     "context": {
       "variables": {
@@ -12479,7 +12619,7 @@
   "Changes": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "managed-projects"
+      "feature_area": "agent-import"
     }
   },
   "Changes ({count})": {
@@ -12686,6 +12826,16 @@
       "feature_area": "hygiene"
     }
   },
+  "Check again": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
+  "Check configuration": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "Check for updates": {
     "context": {
       "feature_area": "marketplace"
@@ -12712,6 +12862,11 @@
       "feature_area": "oauth"
     }
   },
+  "Check the configuration again with your values and choices first.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Check user access": {
     "context": {
       "feature_area": "openportal"
@@ -12725,6 +12880,11 @@
   "Checked": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Checked against the offering's components, plans and agent configuration. A change to any of them is checked when you check again.": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Checked when the order is placed": {
@@ -12759,9 +12919,27 @@
       }
     }
   },
+  "Checking": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "Checking eligibility…": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Checking in the background: {processed} of {total}. Nothing is decided yet.": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Checking system health status and verifying all services are operational...": {
@@ -12769,11 +12947,21 @@
       "feature_area": "dashboard"
     }
   },
+  "Checking the configuration": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Checking the existing roles of this user...": {
     "context": {
       "primary_ui_type": "submit_button",
       "feature_area": "team",
       "action_type": "create"
+    }
+  },
+  "Checking the offering…": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Checking the outgoing mail configuration...": {
@@ -12914,6 +13102,11 @@
       "feature_area": "layouts"
     }
   },
+  "Choose a YAML file (.yaml or .yml).": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Choose a project from the dropdown above to view resource usage details.": {
     "context": {
       "feature_area": "project-detail"
@@ -12992,6 +13185,11 @@
   "Choose a template first": {
     "context": {
       "feature_area": "resource-requests-step"
+    }
+  },
+  "Choose a template first.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Choose a type and an entity for every restriction, or remove it.": {
@@ -13079,6 +13277,15 @@
       "primary_ui_type": "label"
     }
   },
+  "Choose one of: {choices}.": {
+    "context": {
+      "variables": {
+        "choices": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.": {},
   "Choose specific proposals to find matching reviewers.": {},
   "Choose the OpenStack tenant that will provide infrastructure for this datacenter": {
@@ -13089,6 +13296,11 @@
   "Choose the date range (defaults to last 12 months)": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Choose the offering to import first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Choose the permissions and the entities the token is restricted to yourself.": {
@@ -13104,6 +13316,11 @@
   "Choose the username to keep for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory.": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Choose what happens when the periodic usage policy fires first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Choose what should be restored along with the project:": {
@@ -13139,6 +13356,11 @@
   "Choose who takes them over": {
     "context": {
       "feature_area": "provider-calls"
+    }
+  },
+  "Choose...": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Chosen at order time": {
@@ -13654,6 +13876,11 @@
       "feature_area": "common"
     }
   },
+  "Clusters are deployed to these sites, in this order. Customers can only pick flavors that every site has.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Co-authorship (Old)": {
     "context": {
       "primary_ui_type": "label"
@@ -13977,6 +14204,11 @@
   },
   "Common footer in html format for all emails.": {},
   "Common footer in txt format for all emails.": {},
+  "Common to all backends": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Communication": {
     "context": {
       "primary_ui_type": "title",
@@ -14170,18 +14402,6 @@
       "feature_area": "offering-users"
     }
   },
-  "Complete ({count})": {
-    "context": {
-      "primary_ui_type": "submit_button",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "manage",
-      "action_type": "create"
-    }
-  },
   "Complete a step for the round": {
     "context": {
       "feature_area": "rounds"
@@ -14351,16 +14571,6 @@
       "feature_area": "reports"
     }
   },
-  "Completed: {count}": {
-    "context": {
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      },
-      "feature_area": "manage"
-    }
-  },
   "Completes": {},
   "Completes the step": {},
   "Completes the step with one outcome for every proposal of the round where it is active. Proposals elsewhere in their evaluation are skipped and listed.": {
@@ -14433,6 +14643,11 @@
   "Component Type": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Component differences": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Component has been removed.": {
@@ -14777,6 +14992,17 @@
   "Configuration Guide": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Configuration checks": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
+  "Configuration file": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "agent-import"
     }
   },
   "Configuration generated successfully.": {
@@ -16548,6 +16774,16 @@
       "feature_area": "update"
     }
   },
+  "Counts available: {placeholders}.": {
+    "context": {
+      "variables": {
+        "placeholders": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-steps"
+    }
+  },
   "Counts members who joined or left the project during the digest period (the last 7, 14, or 30 days, matching the frequency), grouped by role. Shown only when the team changed.": {
     "context": {
       "feature_area": "project-digest"
@@ -16904,6 +17140,11 @@
   "Create floating IP": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Create from template": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Create group invitation": {
@@ -17349,6 +17590,11 @@
         }
       },
       "feature_area": "workflow-check"
+    }
+  },
+  "Created from version": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Created when final billing export arrives and differs from provisional amount by 0.01 or more. Added to current month invoice.": {},
@@ -18162,7 +18408,7 @@
   },
   "Custom backends": {
     "context": {
-      "feature_area": "integration"
+      "feature_area": "from-template"
     }
   },
   "Custom claim": {
@@ -18338,7 +18584,8 @@
   },
   "Customer chooses": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "options"
     }
   },
   "Customer credits": {},
@@ -18394,6 +18641,12 @@
   "Customer name, Item name, Amount": {
     "context": {
       "feature_area": "import-usage"
+    }
+  },
+  "Customer picks": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
     }
   },
   "Customer project roles": {
@@ -18739,6 +18992,7 @@
   },
   "Data disk": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "common"
     }
   },
@@ -18826,6 +19080,11 @@
     }
   },
   "Datacenter configuration": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Datacenters were reset for the new topology. Define the node groups again.": {
     "context": {
       "feature_area": "common"
     }
@@ -19151,6 +19410,18 @@
       "feature_area": "debug"
     }
   },
+  "Decide ({count})": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage",
+      "action_type": "create"
+    }
+  },
   "Decide a step": {
     "context": {
       "feature_area": "manage"
@@ -19177,7 +19448,8 @@
   },
   "Decided": {
     "context": {
-      "feature_area": "lifecycle"
+      "primary_ui_type": "title",
+      "feature_area": "manage"
     }
   },
   "Decided and held until the round publishes its results: what the allocation decision grants, beside the request. Reopen the decision to change it.": {
@@ -19191,11 +19463,34 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Decided: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "Decides automatically": {},
   "Deciding": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "reports"
+      "feature_area": "manage"
+    }
+  },
+  "Deciding in the background: {processed} of {total}. You can close this dialog and read the result again from the call.": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Decimal places": {
@@ -19730,6 +20025,11 @@
   "Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.": {
     "context": {
       "feature_area": "access-subnets"
+    }
+  },
+  "Defined once and deployed on every site, each with the flavor of that site.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Degraded": {
@@ -20998,6 +21298,11 @@
       "feature_area": "type-based"
     }
   },
+  "Different from the latest version": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Different from your view": {
     "context": {
       "feature_area": "dry-run"
@@ -21673,6 +21978,16 @@
   },
   "Does not apply": {},
   "Does not apply to this deployment.": {},
+  "Does not match the pattern {pattern}.": {
+    "context": {
+      "variables": {
+        "pattern": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "Does not match {user}": {
     "context": {
       "variables": {
@@ -22210,6 +22525,11 @@
   "Each Waldur resource maps to its own SLURM account, so when multiple Waldur offerings target the same SLURM cluster, their resources use separate accounts. SLURM uses a hierarchical Fair Tree algorithm where usage propagates up the account tree.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Each bar shows the highest amount recorded in that month. The dashed lines show current usage and the current limit.": {
+    "context": {
+      "feature_area": "usage"
     }
   },
   "Each change to the document of {name} is kept as a version. Offerings created from the template keep the version they were created from.": {
@@ -23553,6 +23873,11 @@
       "feature_area": "mail"
     }
   },
+  "Empty text": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Enable": {
     "context": {
       "feature_area": "notifications"
@@ -24311,6 +24636,11 @@
       }
     }
   },
+  "Enter a backend ID": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "Enter a claim name first": {
     "context": {
       "feature_area": "steps"
@@ -24480,7 +24810,11 @@
   },
   "Enter a network in CIDR notation, such as 10.0.0.0/16.": {},
   "Enter a number of days.": {},
-  "Enter a number.": {},
+  "Enter a number.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Enter a prefix length from 0 to {max}.": {
     "context": {
       "variables": {
@@ -24754,6 +25088,16 @@
   "Enter the offering's name as it will appear to users.": {
     "context": {
       "feature_area": "overview"
+    }
+  },
+  "Enter the required settings: {settings}.": {
+    "context": {
+      "variables": {
+        "settings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
     }
   },
   "Enter username(s)": {
@@ -25322,6 +25666,21 @@
       "feature_area": "update"
     }
   },
+  "Evaluations": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Evaluations (CSV)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
+  "Evaluations (Excel)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "Evaluator": {
     "context": {
       "primary_ui_type": "title",
@@ -25518,6 +25877,7 @@
       "action_type": "read"
     }
   },
+  "Every offering whose backend ID matches, such as all offerings of one cluster. Archived offerings are left out.": {},
   "Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organization managing it.": {
     "context": {
       "feature_area": "configuration"
@@ -25601,6 +25961,16 @@
   "Every setting is optional; without any, customers may enter any IPv4 or IPv6 network.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Every step contribution (CSV)": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Every step contribution (Excel)": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Every submitted proposal, up to the decision.": {},
@@ -25908,12 +26278,22 @@
     }
   },
   "Expected resource growth pattern": {},
+  "Expected text.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Expected total": {
     "context": {
       "feature_area": "details"
     }
   },
   "Expected user growth rate": {},
+  "Expected yes or no.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Experimental AI & external processing": {
     "context": {
       "feature_area": "ai-assistant"
@@ -26288,6 +26668,19 @@
       }
     }
   },
+  "Extension, {start} to {end}": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
   "Extensions": {
     "context": {
       "feature_area": "details"
@@ -26619,6 +27012,12 @@
     }
   },
   "Failed to generate configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "site-agent"
+    }
+  },
+  "Failed to generate configuration. Check that an offering has a matching backend ID.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "site-agent"
@@ -27636,6 +28035,11 @@
       "action_type": "create"
     }
   },
+  "Fill in the settings the file leaves to the environment first.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Fill the template with your organization details, then upload it in the next step.": {
     "context": {
       "feature_area": "import"
@@ -28008,9 +28412,14 @@
       "feature_area": "cost-policies"
     }
   },
-  "Fix the backend components on the Backend settings tab first.": {
+  "Fix the backend components on the Advanced (JSON) tab first.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Fix the errors in the file first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Fix the errors shown above first.": {
@@ -28571,6 +28980,16 @@
       }
     }
   },
+  "Format: {pattern}": {
+    "context": {
+      "variables": {
+        "pattern": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "Former institution": {
     "context": {
       "primary_ui_type": "label"
@@ -28789,6 +29208,11 @@
           "type": "string"
         }
       }
+    }
+  },
+  "From the plugin catalog. A setting left unset takes its default; secrets stay in the agent configuration file.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "From the provider account": {
@@ -29125,7 +29549,7 @@
       "feature_area": "site-agent"
     }
   },
-  "Generate a YAML configuration file for waldur-site-agent based on selected SLURM offerings.": {
+  "Generate a YAML configuration file for waldur-site-agent from the selected site agent offerings.": {
     "context": {
       "feature_area": "site-agent"
     }
@@ -29154,6 +29578,11 @@
   "Generate assignments refuses more reviewers per proposal than Max reviewers per proposal, and a reviewer's load is the smaller of Maximum assignments in the reviewer pool and Max proposals per reviewer. The Assignment algorithm setting is not applied yet: reviewers are always picked by affinity, best first.": {
     "context": {
       "feature_area": "matching"
+    }
+  },
+  "Generate configuration file": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Generate link": {
@@ -31620,6 +32049,11 @@
       "feature_area": "options"
     }
   },
+  "Ignored": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Image": {
     "context": {
       "primary_ui_type": "title",
@@ -31792,6 +32226,11 @@
       "feature_area": "single-import"
     }
   },
+  "Import agent configuration": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Import backend resources": {
     "context": {
       "feature_area": "integration"
@@ -31831,6 +32270,11 @@
       "feature_area": "deploy"
     }
   },
+  "Import configuration": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Import files": {
     "context": {
       "feature_area": "single-import"
@@ -31857,6 +32301,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "keys",
       "action_type": "create"
+    }
+  },
+  "Import notes": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Import offering": {
@@ -31950,6 +32399,11 @@
       "feature_area": "single-import"
     }
   },
+  "Import the site agent's configuration file, as it runs on the agent host, into this offering's agent configuration. Nothing is saved until you review the changes and import them.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Import type": {
     "context": {
       "primary_ui_type": "label"
@@ -31978,6 +32432,7 @@
   },
   "Imported": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "import"
     }
   },
@@ -32096,6 +32551,16 @@
   "In the evaluation, from submission to the award. In an extension, which the team of an accepted proposal asks for as often as needed. In the closing, for the final report at the end of the allocation.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "In the file: {placeholder}": {
+    "context": {
+      "variables": {
+        "placeholder": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "agent-import"
     }
   },
   "In the pool": {},
@@ -33582,6 +34047,11 @@
       "feature_area": "affiliations"
     }
   },
+  "Is exactly": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Is external": {
     "context": {
       "primary_ui_type": "title",
@@ -33791,6 +34261,11 @@
       "feature_area": "create"
     }
   },
+  "It is kept as it is. To change its node groups, move it to the current sites first.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "It is stored encrypted and never shown with the other settings.": {
     "context": {
       "feature_area": "common"
@@ -33938,6 +34413,7 @@
       "feature_area": "cost-policies"
     }
   },
+  "Its evaluation is closed until the call is activated again. The award stage continues: the award response, provisioning, extensions and the final report.": {},
   "Its outcome": {
     "context": {
       "primary_ui_type": "label",
@@ -34439,6 +34915,11 @@
       "feature_area": "create"
     }
   },
+  "Kubernetes Cluster Configuration": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Kubernetes Egress Rules": {
     "context": {
       "primary_ui_type": "label"
@@ -34542,19 +35023,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "sram"
-    }
-  },
-  "Labels other than the applicant's may show counts of the step's work: {placeholders}. For example: \"{example}\".": {
-    "context": {
-      "variables": {
-        "placeholders": {
-          "type": "unknown"
-        },
-        "example": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "workflow-steps"
     }
   },
   "Language": {
@@ -35108,6 +35576,11 @@
         }
       },
       "feature_area": "wizard"
+    }
+  },
+  "Leave it empty to keep the actions the policy has. They decide what happens when a project exceeds its periodic allocation.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Leave it to decide by hand": {
@@ -36682,6 +37155,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Logout could not be completed.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Logout failed": {
     "context": {
       "feature_area": "callbacks"
@@ -37294,6 +37772,11 @@
       "feature_area": "roles"
     }
   },
+  "Manage service provider": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Manage site agent identities, services, and processors for event-based integrations.": {
     "context": {
       "feature_area": "site-agents"
@@ -37896,6 +38379,12 @@
     }
   },
   "Matches reviewer expertise keywords against proposal text. Keywords are weighted by proficiency level: Expert (100%), Familiar (70%). Basic keywords are not used.": {},
+  "Matches this offering": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "agent-import"
+    }
+  },
   "Matches users by: {filters}.": {
     "context": {
       "variables": {
@@ -39793,6 +40282,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Monthly peak": {
+    "context": {
+      "feature_area": "usage"
+    }
+  },
   "Monthly revenue": {
     "context": {
       "primary_ui_type": "title",
@@ -40055,6 +40549,11 @@
       "feature_area": "list"
     }
   },
+  "Move to the current sites": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Move up": {
     "context": {
       "feature_area": "wizard"
@@ -40090,11 +40589,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "onboarding-setup"
-    }
-  },
-  "Multi-Datacenter Kubernetes Configuration": {
-    "context": {
-      "primary_ui_type": "label"
     }
   },
   "Multilingual logos have been updated.": {
@@ -40333,6 +40827,11 @@
   "My offerings": {
     "context": {
       "feature_area": "marketplace"
+    }
+  },
+  "My panels": {
+    "context": {
+      "feature_area": "review"
     }
   },
   "My proposals": {
@@ -41040,6 +41539,11 @@
       "feature_area": "actions"
     }
   },
+  "New offering from a template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "New offering merge": {
     "context": {
       "feature_area": "wizard"
@@ -41363,11 +41867,6 @@
   "No POSIX identifiers found.": {
     "context": {
       "feature_area": "user"
-    }
-  },
-  "No SLURM offerings found for this service provider. Create a SLURM offering first.": {
-    "context": {
-      "feature_area": "site-agent"
     }
   },
   "No SRAM collaborations have been provisioned yet. They appear here after SRAM pushes them over SCIM.": {
@@ -41926,6 +42425,11 @@
       "feature_area": "managed-projects"
     }
   },
+  "No credit — lower limits apply at once, the extension starts at the current end date": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "No criteria defined yet.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -42056,6 +42560,7 @@
       "feature_area": "analytics"
     }
   },
+  "No differences.": {},
   "No discount — add a tier to grant one.": {
     "context": {
       "feature_area": "plans"
@@ -42579,6 +43084,11 @@
       "feature_area": "accounts"
     }
   },
+  "No offering templates": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "No offerings": {
     "context": {
       "feature_area": "credits"
@@ -42607,6 +43117,11 @@
   "No offerings of an allowed type": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "No offerings were found in the file.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "No offerings.": {
@@ -42723,6 +43238,11 @@
   "No overridden settings": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "No parameters": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "No participants in this room.": {
@@ -43405,6 +43925,16 @@
       "feature_area": "demo-presets"
     }
   },
+  "No settings in the plugin catalog: edit them as JSON on the Advanced (JSON) tab.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "No settings match.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "No single date is valid for all selected resources, for example because a project has ended or a resource starts after another project ends. Select fewer resources or clear the termination date.": {
     "context": {
       "feature_area": "mass-actions"
@@ -43443,6 +43973,11 @@
   "No step comes before this one.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "No step of this call has been decided in bulk yet.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "No storage data available.": {
@@ -43785,6 +44320,11 @@
       "feature_area": "create"
     }
   },
+  "Node group": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Node group #{n}": {
     "context": {
       "variables": {
@@ -43801,6 +44341,11 @@
     }
   },
   "Node groups": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Node groups (all sites)": {
     "context": {
       "feature_area": "common"
     }
@@ -44537,7 +45082,21 @@
       "feature_area": "proposal-roles"
     }
   },
-  "Not valid JSON.": {},
+  "Not valid JSON.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Not valid JSON: {settings}.": {
+    "context": {
+      "variables": {
+        "settings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "Not verified": {
     "context": {
       "feature_area": "details"
@@ -44614,6 +45173,11 @@
   "Nothing changes: the offering sets these values itself or they stay the same.": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Nothing has been decided yet. This is what deciding the step would do now; confirm to decide.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Nothing has changed.": {
@@ -44986,7 +45550,8 @@
   },
   "Now": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "usage"
     }
   },
   "Now {value}.": {
@@ -45755,6 +46320,16 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Offering teams' lists, for steps they work on.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
+  "Offering template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Offering template created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -45786,7 +46361,13 @@
   },
   "Offering templates": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "offering-templates"
+    }
+  },
+  "Offering to import": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Offering type": {
@@ -45954,7 +46535,7 @@
       "feature_area": "structure"
     }
   },
-  "Offerings, offering groups and merges.": {
+  "Offerings, offering groups, merges and offering templates.": {
     "context": {
       "feature_area": "marketplace"
     }
@@ -46107,11 +46688,6 @@
       "feature_area": "reviewer-suggestions"
     }
   },
-  "On the applicant's proposal list and progress tracker.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
   "On the critical path": {
     "context": {
       "feature_area": "diagram"
@@ -46129,21 +46705,6 @@
   },
   "On the invoice open when it is paid. Earlier invoices stay as they were issued.": {},
   "On the paid month’s own invoice. This changes the total of an invoice already issued, and possibly paid.": {},
-  "On the proposal lists and step lists of the call managers, staff and support. Empty labels fall back to the evaluators'.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
-  "On the proposal lists and step lists of the evaluators working on the step: reviewers, panel members, evaluator roles. Also what the call team and the offering teams read where their own labels are left empty.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
-  "On the proposal lists and step lists of the offering teams, for the steps they work on, such as a technical assessment of their offering. Empty labels fall back to the evaluators'.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
   "On this page": {
     "context": {
       "feature_area": "proposal"
@@ -46336,7 +46897,7 @@
       "feature_area": "panels"
     }
   },
-  "One outcome and reason for every selected proposal standing on the step. Each is completed as from its own page; one that is refused is listed and the others go on.": {
+  "One outcome and reason for every selected proposal standing on the step. You see first which proposals will be decided and which refused, and why.": {
     "context": {
       "feature_area": "manage"
     }
@@ -46384,6 +46945,11 @@
   "One time cost": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "One workbook, with a sheet per panel.": {
+    "context": {
+      "feature_area": "panels"
     }
   },
   "One-time": {
@@ -47755,6 +48321,11 @@
   "Or an e-mail address": {
     "context": {
       "feature_area": "reviewer-suggestions"
+    }
+  },
+  "Or paste the configuration": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Order": {
@@ -49275,6 +49846,11 @@
       "feature_area": "cost-policies"
     }
   },
+  "Paid-up period at the new limits": {
+    "context": {
+      "feature_area": "renew-allocation"
+    }
+  },
   "Panel": {
     "context": {
       "primary_ui_type": "title",
@@ -49324,6 +49900,16 @@
     }
   },
   "Panel review": {},
+  "Panel sheet (CSV)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
+  "Panel sheet (Excel)": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "Panel: {name}": {
     "context": {
       "variables": {
@@ -49347,6 +49933,7 @@
   },
   "Parameters": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "offering-templates"
     }
   },
@@ -50389,6 +50976,11 @@
       "feature_area": "plan"
     }
   },
+  "Periodic usage policy": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Periodically take usernames from the backend.": {
     "context": {
       "feature_area": "integration"
@@ -50905,6 +51497,11 @@
       "feature_area": "reviewer-suggestions"
     }
   },
+  "Pick all three sites of the three-site layout.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Pick at least one outcome.": {},
   "Pick from the affiliations configured for this organization.": {
     "context": {
@@ -50914,6 +51511,11 @@
   "Pick from the full registry. The default list for this organization is highlighted.": {
     "context": {
       "feature_area": "manage"
+    }
+  },
+  "Pick the site of the single-site layout.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Pick two different periods to see the comparison.": {
@@ -51173,6 +51775,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offering-templates"
+    }
+  },
+  "Plans and prices": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Plans below safety margin": {},
@@ -51684,6 +52291,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "settings"
+    }
+  },
+  "Plugins of your own, not in the site agent plugin catalog. Listed here, they can be chosen for a role above.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Pods": {
@@ -52416,6 +53028,18 @@
   "Preview & import": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Preview ({count})": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage",
+      "action_type": "create"
     }
   },
   "Preview Configuration": {
@@ -54173,6 +54797,11 @@
     }
   },
   "Proposal fields and applicant visibility": {},
+  "Proposal list and progress tracker.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Proposal lists": {
     "context": {
       "feature_area": "configuration"
@@ -54730,6 +55359,11 @@
     }
   },
   "Provider end": {},
+  "Provider fixes the sites": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Provider info": {
     "context": {
       "primary_ui_type": "title",
@@ -54999,6 +55633,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "robot-accounts"
+    }
+  },
+  "Public profile": {
+    "context": {
+      "feature_area": "dashboard"
     }
   },
   "Public projects are visible to anonymous users and allow membership applications.": {
@@ -56813,6 +57452,12 @@
       "feature_area": "livekit"
     }
   },
+  "Refused": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "manage"
+    }
+  },
   "Refused by the provider": {},
   "Refused: {count}": {
     "context": {
@@ -57383,6 +58028,11 @@
   "Remote Role Name": {
     "context": {
       "feature_area": "project-templates"
+    }
+  },
+  "Remote SAML2 logout has failed.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "Remote accounts": {
@@ -58202,6 +58852,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "renew-allocation"
+    }
+  },
+  "Renewal with lower prepaid limits": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Reopen": {
@@ -59119,7 +59774,8 @@
   "Required": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "onboarding-setup"
+      "feature_area": "onboarding-setup",
+      "has_api_calls": true
     }
   },
   "Required assurance levels": {
@@ -59414,6 +60070,11 @@
   "Resolve in merge wizard": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Resolve the errors before creating the offering.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Resolve the username conflicts first: switching to per service provider accounts is refused until then.": {
@@ -60398,6 +61059,28 @@
       "feature_area": "robot-accounts"
     }
   },
+  "Rest of current term, until {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
+  "Rest of current term, {start} to {end}": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Restart": {
     "context": {
       "primary_ui_type": "title"
@@ -61326,6 +62009,11 @@
       "feature_area": "reviewer-suggestions"
     }
   },
+  "Reviewers' and panel members' lists. Also the fallback for the call team and offering teams.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Reviews": {
     "context": {
       "primary_ui_type": "title",
@@ -61976,6 +62664,16 @@
   "Roles this rule granted will be revoked the next time a user who no longer matches signs in. Roles granted by a person, and roles granted by other rules, are never touched.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Roles – {call}": {
+    "context": {
+      "variables": {
+        "call": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-description"
     }
   },
   "Roles, where they apply, and service profiles.": {
@@ -62665,6 +63363,11 @@
   "S3 gateway": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "SAML2 authentication failed.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "SAN": {
@@ -63799,6 +64502,11 @@
       "feature_area": "async"
     }
   },
+  "Search settings": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Search...": {
     "context": {
       "feature_area": "roles"
@@ -63844,9 +64552,14 @@
       "feature_area": "details"
     }
   },
-  "Secrets needed only once their block is configured": {
+  "Secrets in the file are not imported: they stay in the configuration file on the agent host.": {
     "context": {
-      "feature_area": "integration"
+      "feature_area": "agent-import"
+    }
+  },
+  "Secrets left out": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Secrets the agent configuration file must hold": {
@@ -64075,6 +64788,16 @@
       "feature_area": "common"
     }
   },
+  "Select OpenStack flavor for {type} nodes on all sites": {
+    "context": {
+      "variables": {
+        "type": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Select OpenStack infrastructure...": {
     "context": {
       "feature_area": "common"
@@ -64088,6 +64811,11 @@
   "Select OpenStack tenant": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Select OpenStack tenant offering...": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Select QoS profiles...": {
@@ -64108,11 +64836,6 @@
   "Select Resource": {
     "context": {
       "feature_area": "policies"
-    }
-  },
-  "Select SLURM Offerings": {
-    "context": {
-      "feature_area": "site-agent"
     }
   },
   "Select Service Desk Project": {
@@ -64905,6 +65628,11 @@
   "Select service provider...": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Select site agent offerings": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Select software catalog...": {
@@ -65841,7 +66569,7 @@
   },
   "Service provider not found for this offering.": {
     "context": {
-      "feature_area": "site-agent"
+      "feature_area": "integration"
     }
   },
   "Service provider organization": {
@@ -66136,6 +66864,11 @@
   "Set by the deployment on every deploy. Change it there and redeploy.": {},
   "Set by the longest subscription requested.": {},
   "Set by the provider after provisioning.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Set by the service provider": {
     "context": {
       "feature_area": "common"
     }
@@ -66502,17 +67235,19 @@
       "feature_area": "changelog"
     }
   },
-  "Settings of the backends above, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "Settings of the backends, as JSON. No secrets.": {
     "context": {
       "feature_area": "integration"
     }
   },
+  "Settings of the role backends, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Settings that describe an offering itself, such as its plans and components.": {},
+  "Settings the chosen backends need": {},
+  "Settings to fill in": {},
   "Settings update": {},
   "Settle a past month": {
     "context": {
@@ -67444,6 +68179,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Sign-in could not be completed. Please try again.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "Sign-in from AI clients is not set up on this server yet. Ask your administrator to configure it.": {
     "context": {
       "feature_area": "connected-apps"
@@ -67536,18 +68276,17 @@
   },
   "Single site, 3 controllers": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "options"
-    }
-  },
-  "Single-Datacenter Kubernetes Configuration": {
-    "context": {
       "primary_ui_type": "label"
     }
   },
   "Sir": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Site": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Site Agent": {},
@@ -67600,6 +68339,21 @@
   "Site agents": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Site infrastructure": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Site {n}": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "Site-wide": {
@@ -68178,6 +68932,16 @@
       "feature_area": "integration"
     }
   },
+  "Specific to {backend}": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "Specify the name of the organization the user is affiliated with": {
     "context": {
       "feature_area": "support"
@@ -68306,6 +69070,11 @@
   "Staff publish call templates; until then, start from a blank call or import a call file.": {
     "context": {
       "feature_area": "templates"
+    }
+  },
+  "Staff publish offering templates under Administration → Offerings → Offering templates.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Staffing": {
@@ -68522,6 +69291,11 @@
       "feature_area": "discussions"
     }
   },
+  "Start from a template": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "Start from the portal's wording": {
     "context": {
       "feature_area": "mail"
@@ -68553,6 +69327,19 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "hpc"
+    }
+  },
+  "Started by {name} on {date}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.": {
@@ -68625,6 +69412,11 @@
   "Starts from the portal's wording.": {
     "context": {
       "feature_area": "mail"
+    }
+  },
+  "Starts with": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "State": {
@@ -68876,6 +69668,11 @@
       "feature_area": "update"
     }
   },
+  "Steps decided in bulk": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "Steps for the offering team": {
     "context": {
       "feature_area": "provider-calls"
@@ -69060,6 +69857,11 @@
   "Street": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Stretch paid-up term — the value left is spread over the lower limits": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "String": {
@@ -70476,6 +71278,11 @@
       "feature_area": "contributions"
     }
   },
+  "Take the agent's settings from its configuration file.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Take the budget as spent": {
     "context": {
       "primary_ui_type": "label",
@@ -70809,6 +71616,11 @@
   },
   "Template based": {},
   "Template details": {},
+  "Template differences": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Template edited successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -70927,6 +71739,12 @@
   "Tenants with more than one offering of a type. Resolve a group to merge its duplicates into the recommended keeper; blockers and warnings are those of that merge with the suggested mapping.": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Term": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "type-based"
     }
   },
   "Terminate": {
@@ -71627,11 +72445,6 @@
       "feature_area": "update"
     }
   },
-  "The backends can use these settings, but this offering does not configure the block that holds them. Leave them out of the agent configuration file until it does.": {
-    "context": {
-      "feature_area": "integration"
-    }
-  },
   "The backends in use need no secrets.": {
     "context": {
       "feature_area": "integration"
@@ -71758,6 +72571,11 @@
       "feature_area": "proposal-roles"
     }
   },
+  "The call has no panels yet.": {
+    "context": {
+      "feature_area": "panels"
+    }
+  },
   "The call has no reviewers — add them in the Team tab.": {
     "context": {
       "feature_area": "proposal-roles"
@@ -71769,6 +72587,7 @@
     }
   },
   "The call is active, so its allocation decision stays on the step it is on.": {},
+  "The call is archived: its evaluation is closed until the call is activated again.": {},
   "The call is connecting.": {
     "context": {
       "feature_area": "call",
@@ -71854,6 +72673,19 @@
       "action_type": "read"
     }
   },
+  "The capacity already paid for lasts until {paidUp} at the lower limits; the extension runs from then. New end date: {date}": {
+    "context": {
+      "variables": {
+        "paidUp": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
   "The category group has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -71915,10 +72747,25 @@
       "feature_area": "matrix"
     }
   },
+  "The check refused the offering: see above.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "The checklist was assigned to the selected offerings": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "compliance"
+    }
+  },
+  "The checks found nothing to fix.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
+  "The checks found only warnings, which may be intended.": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "The chosen call or round is not one you can report on here.": {
@@ -72008,6 +72855,12 @@
       "feature_area": "contributions"
     }
   },
+  "The configuration cannot be imported": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The configuration must be smaller than 512 KiB.": {},
   "The configuration the site agent loads for this offering. Secrets are not part of it: the agent takes them from its own configuration file.": {
     "context": {
       "feature_area": "integration"
@@ -72684,7 +73537,27 @@
       "feature_area": "metrics"
     }
   },
-  "The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs a site agent that supports configuration_source.": {},
+  "The file changes nothing in the agent configuration.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file configures several offerings. Choose the one to import into this offering.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file differs from the offering's components. They stay as they are unless you choose to update them from the file.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file has policy settings, and the offering has no periodic usage policy yet.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The file holds only how to reach Waldur and the secrets; the agent reads the rest from Waldur when it starts. Needs waldur-site-agent 1.0.8-rc.16 or later: an older agent ignores configuration_source without a warning.": {},
   "The file holds the whole configuration. A change made in Waldur needs a new file.": {},
   "The file is empty.": {
     "context": {
@@ -72710,6 +73583,12 @@
   "The file is not valid YAML or JSON.": {
     "context": {
       "feature_area": "transfer"
+    }
+  },
+  "The file takes these settings from environment variables on the agent host. Enter the values Waldur should hold, then check the configuration again.": {},
+  "The file's policy settings, against the offering's periodic usage policy.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The final report has been opened.": {
@@ -72881,6 +73760,16 @@
       "feature_area": "matrix"
     }
   },
+  "The identity provider asked to log out a different session.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
+  "The identity provider's response could not be processed. Please try again or contact support.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "The image rendered at hero section of Call Management landing page. Please, use a wide image (min. 1920×600px) with no text or logos. Keep the center area clean, and choose a darker image for dark mode or a brighter image for light mode.": {},
   "The image rendered at hero section of HomePort landing page.": {},
   "The image rendered at hero section of Marketplace landing page. Please, use a wide image (min. 1920×600px) with no text or logos. Keep the center area clean, and choose a darker image for dark mode or a brighter image for light mode.": {},
@@ -73024,6 +73913,11 @@
   },
   "The login page logo in dark mode. Falls back to LOGIN_LOGO when not set; language-specific logos apply to the light logo only.": {},
   "The logo image rendered in the disclaimer area below the footer.": {},
+  "The logout message could not be processed.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
   "The longest length must not be lower than the shortest.": {
     "context": {
       "feature_area": "common"
@@ -73285,8 +74179,8 @@
       "feature_area": "chat"
     }
   },
-  "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
-  "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
+  "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_uninvited code.": {},
+  "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked. Public: the login-failed page reads it from the configuration for the oidc_blocked code.": {},
   "The message was deleted, but its earlier versions could not all be found. Some may remain on the server.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -73453,10 +74347,25 @@
       "feature_area": "import-users"
     }
   },
+  "The offering already has this configuration: there is nothing to import.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
+  "The offering can be created; the warnings below may be intended.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "The offering can now be requested via a call.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
+    }
+  },
+  "The offering cannot be created as it is": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "The offering could not be attached automatically. Please add it in the resource requests step.": {
@@ -73472,6 +74381,11 @@
   "The offering has no components!": {
     "context": {
       "feature_area": "import"
+    }
+  },
+  "The offering has no such component: add it with its price first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The offering in the export format, as JSON or YAML, with its agent configuration and parameters.": {
@@ -73638,6 +74552,16 @@
       "feature_area": "panels"
     }
   },
+  "The panels of {calls} could not be loaded. Refresh to try again.": {
+    "context": {
+      "variables": {
+        "calls": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "review"
+    }
+  },
   "The passkey was registered, but your account could not be refreshed. Reload the page to continue.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -73770,6 +74694,11 @@
         }
       },
       "feature_area": "cost-policies"
+    }
+  },
+  "The policy already has these settings.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The policy counts the full cost, whatever credit paid: {total}, at or below the {limit} limit.": {
@@ -73937,6 +74866,11 @@
   "The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.": {
     "context": {
       "feature_area": "wizard"
+    }
+  },
+  "The preview does not reflect your values and choices yet.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The project and the resources of the offerings whose team accepted the extension move to the new end date once it is approved. More resources are ordered from those offerings, whose providers approve the orders as usual.": {
@@ -74489,6 +75423,26 @@
       "feature_area": "billing"
     }
   },
+  "The run stopped before it was done.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "The same filter is available without the file: GET marketplace-service-providers/<uuid>/site_agent_config/ with backend_id or backend_id_startswith.": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
+  "The same node groups as {datacenter}, with the flavors of this site.": {
+    "context": {
+      "variables": {
+        "datacenter": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "The scenario was added to the template.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -74623,6 +75577,11 @@
       "feature_area": "actions"
     }
   },
+  "The service provider has no site agent offerings. Create one first.": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
   "The service was active for the last 10 minutes": {},
   "The service wasn't active for the last 10 minutes": {},
   "The service's default goal. Click to set this project's own.": {
@@ -74645,6 +75604,16 @@
       "feature_area": "settings"
     }
   },
+  "The site agent cannot work with the offering as it is: fix the errors below.": {
+    "context": {
+      "feature_area": "site-agent"
+    }
+  },
+  "The site agent could not work with this offering. Go back and change the values or roles the errors name.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
   "The site agent executes sacctmgr commands on the SLURM cluster to enforce the policy: it sets fairshare and the {limitType} limits on the resource account, and resets RawUsage on the first sync of a new period when usage reset is enabled (never for a total period). Settings that already match the cluster are skipped. The QoS is switched separately when the resource is paused, downscaled or restored.": {
     "context": {
       "variables": {
@@ -74663,6 +75632,11 @@
         }
       },
       "feature_area": "site-agent"
+    }
+  },
+  "The sites of this cluster are set by the service provider and cannot be shown here.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The slug template cannot be changed once proposals exist for this call.": {},
@@ -74737,11 +75711,22 @@
       "feature_area": "workflow-steps"
     }
   },
+  "The step sends no email.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
+  "The step sends no email: no notification rule of the call mails anyone on its events.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "The step starts together with the step before it, and the steps after both wait until both have ended.": {
     "context": {
       "feature_area": "workflow-steps"
     }
   },
+  "The step's emails are not available.": {},
   "The steps of the workflow, and the one waiting for your decision.": {
     "context": {
       "feature_area": "dry-run"
@@ -74894,6 +75879,7 @@
       "feature_area": "call-templates"
     }
   },
+  "The template does not set these, and the backends cannot run without them.": {},
   "The template has no versions yet.": {
     "context": {
       "feature_area": "offering-templates"
@@ -74907,6 +75893,11 @@
   "The text of this mail was not kept.": {
     "context": {
       "feature_area": "diagram"
+    }
+  },
+  "The three sites of the three-site layout must differ.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "The threshold is reached and this action has been applied.": {
@@ -74977,6 +75968,11 @@
   "The type of the offerings created from the template.": {
     "context": {
       "feature_area": "offering-templates"
+    }
+  },
+  "The unit and unit factor change how the limits and usage of existing resources are converted and billed. The label renames the component customers see.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "The unit of allocation for this instance, e.g. NHR": {
@@ -75822,6 +76818,11 @@
       "feature_area": "reports"
     }
   },
+  "This call is archived": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "This call is archived and cannot be edited.": {},
   "This call is archived and no longer accepts proposals.": {},
   "This call is archived and read-only.": {
@@ -75944,6 +76945,11 @@
       "feature_area": "providers"
     }
   },
+  "This cluster runs on other sites than the service provider now offers.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "This cluster was configured with a different topology than the offering now allows.": {
     "context": {
       "feature_area": "common"
@@ -76005,6 +77011,11 @@
   "This date is not available.": {
     "context": {
       "feature_area": "DatePicker"
+    }
+  },
+  "This decides what happens when a project exceeds its periodic allocation.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "This decision will be logged for audit purposes.": {
@@ -76132,7 +77143,7 @@
   },
   "This field is required.": {
     "context": {
-      "feature_area": "project"
+      "feature_area": "from-template"
     }
   },
   "This file contains CHANGEME placeholder values that must be replaced with actual credentials before use.": {
@@ -76810,6 +77821,19 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "This run has stopped moving at {processed} of {total}. It is picked up again shortly, or given up and marked as failed.": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "This section is only for single select and multi select questions.": {
     "context": {
       "feature_area": "questions"
@@ -76823,6 +77847,16 @@
   "This setting is not changed on a page of the call; the finding says what to do.": {
     "context": {
       "feature_area": "workflow-check"
+    }
+  },
+  "This sign-in cannot be completed for this email address. Please contact support.": {
+    "context": {
+      "feature_area": "callbacks"
+    }
+  },
+  "This sign-in has expired or was already used. Please sign in again.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "This sign-in request cannot be used": {
@@ -76905,6 +77939,11 @@
   "This table has no columns to export.": {
     "context": {
       "action_type": "export"
+    }
+  },
+  "This template asks for nothing: the offering is created as the template describes it.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "This template includes all required fields for HPC project import: {fields} (required) etc.": {
@@ -77142,8 +78181,7 @@
   },
   "Three sites, 1 controller each": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "options"
+      "primary_ui_type": "label"
     }
   },
   "Threshold": {
@@ -79481,6 +80519,23 @@
       "feature_area": "create"
     }
   },
+  "Unable to check the agent configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "agent-import"
+    }
+  },
+  "Unable to check the offering.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
+  "Unable to check the proposals.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "manage"
+    }
+  },
   "Unable to check version update: {error}": {
     "context": {
       "primary_ui_type": "error_message",
@@ -79507,6 +80562,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "rounds"
+    }
+  },
+  "Unable to compare the offering with its template.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Unable to complete onboarding approval.": {
@@ -80159,6 +81219,12 @@
       "feature_area": "reviewer-registry"
     }
   },
+  "Unable to decide the step.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "manage"
+    }
+  },
   "Unable to decline invitation.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -80773,6 +81839,12 @@
       "feature_area": "reviewer"
     }
   },
+  "Unable to download the export.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "manage"
+    }
+  },
   "Unable to download the file.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -81022,6 +82094,12 @@
       "feature_area": "import"
     }
   },
+  "Unable to import the agent configuration.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "agent-import"
+    }
+  },
   "Unable to import the ranking.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -81086,6 +82164,11 @@
   "Unable to load Matrix settings.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Unable to load OpenStack tenant offerings.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Unable to load SSH key settings.": {
@@ -81314,6 +82397,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "offering-templates"
+    }
+  },
+  "Unable to load offering templates.": {
+    "context": {
+      "feature_area": "from-template"
     }
   },
   "Unable to load offering user.": {
@@ -81641,6 +82729,21 @@
   "Unable to load the sign-in request.": {
     "context": {
       "feature_area": "oauth"
+    }
+  },
+  "Unable to load the site agent plugins.": {
+    "context": {
+      "feature_area": "from-template"
+    }
+  },
+  "Unable to load the sites of this offering.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Unable to load the step's emails.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "Unable to load the suggested reviewers.": {
@@ -81979,10 +83082,21 @@
       "feature_area": "s3-browser"
     }
   },
+  "Unable to read the file.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "agent-import"
+    }
+  },
   "Unable to read the metrics now.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "metrics"
+    }
+  },
+  "Unable to read which steps the selected proposals stand on.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Unable to recalculate user actions.": {
@@ -84659,6 +85773,11 @@
       "feature_area": "lifecycle"
     }
   },
+  "Under usage-based billing, bill the cores, RAM and other compute of instances that are not running (shut off, suspended or shelved). When off, an instance is left out of a billing interval only if it stayed stopped for the whole of it; the interval in which it stops is still billed. Paused instances and instances in error are always billed, and storage is billed either way.": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "Under way": {
     "context": {
       "feature_area": "diagram"
@@ -84823,6 +85942,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "plans"
+    }
+  },
+  "Units × months": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "type-based"
     }
   },
   "University": {
@@ -85151,6 +86276,16 @@
     }
   },
   "Until a PO is attached": {},
+  "Until {date}": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "renew-allocation"
+    }
+  },
   "Untitled": {
     "context": {
       "feature_area": "ai-assistant"
@@ -85656,6 +86791,11 @@
       "feature_area": "oauth"
     }
   },
+  "Update the offering": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Update thumbnail": {
     "context": {
       "primary_ui_type": "label",
@@ -85671,6 +86811,19 @@
   "Update user account details.": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Update {field} of {component}": {
+    "context": {
+      "variables": {
+        "field": {
+          "type": "unknown"
+        },
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "agent-import"
     }
   },
   "Update {name} settings": {
@@ -85768,6 +86921,11 @@
       "feature_area": "api-keys"
     }
   },
+  "Updating components affects existing resources": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Updating floating IPs": {},
   "Updating internal IPs": {},
   "Updating quotas": {},
@@ -85834,6 +86992,11 @@
       "feature_area": "create"
     }
   },
+  "Upload agent configuration file": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Upload an image": {
     "context": {
       "feature_area": "form"
@@ -85894,6 +87057,11 @@
   "Upload offering file": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Upload or paste an agent configuration file first.": {
+    "context": {
+      "feature_area": "agent-import"
     }
   },
   "Upload supporting documentation": {
@@ -86563,6 +87731,16 @@
     }
   },
   "Used for offerings that do not set a value of their own.": {},
+  "Used for {roles}": {
+    "context": {
+      "variables": {
+        "roles": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "Used in invoice item descriptions": {},
   "Used only for this verification.": {},
   "Used to deliver personalized ads and track performance. (Currently unavailable)": {
@@ -86806,6 +87984,11 @@
   "User domain name": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "User email is not provided. Account creation is blocked.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "User field": {
@@ -89107,6 +90290,11 @@
     }
   },
   "Waldur deployment settings": {},
+  "Waldur does not store secrets. They stay in the agent's configuration file on the agent host.": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "Waldur holds no recovery key for you yet. Open the chat in Waldur first: it sets up encryption, or asks for the recovery key you already use in another Matrix app.": {
     "context": {
       "feature_area": "matrix"
@@ -89397,6 +90585,16 @@
       "feature_area": "offerings"
     }
   },
+  "What a renewal that only lowers prepaid limits does with the value already paid for the rest of the current term. Neither option refunds or credits it; stretching spreads it over the lower limits, so the paid-up period lasts longer and the extension starts when it runs out. Default is no credit.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "What a script, or a site agent with configuration_source: waldur, fetches to get this configuration.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "What are inodes? Each file and directory uses one inode. This setting determines how many individual files users can store per TB. Example: 7000 inodes/TB means users can store up to 7,000 files per terabyte of space.": {
     "context": {
       "feature_area": "options"
@@ -89429,7 +90627,7 @@
     }
   },
   "What do you want to achieve by using Waldur? Please describe your main objectives or expected outcomes.": {},
-  "What each audience's dashboard calls this step, shown as entered. Leave a label empty to keep the one the portal shows today.": {
+  "What each audience sees as this step's status. Leave empty to keep the default.": {
     "context": {
       "feature_area": "workflow-steps"
     }
@@ -89949,6 +91147,11 @@
       "feature_area": "common"
     }
   },
+  "When the policy fires": {
+    "context": {
+      "feature_area": "agent-import"
+    }
+  },
   "When the round is completed": {
     "context": {
       "feature_area": "lifecycle"
@@ -90007,7 +91210,7 @@
       "feature_area": "common"
     }
   },
-  "Where the controller nodes run: three in one site, or one in each of three sites. When not set, the option type decides.": {
+  "Where the controller nodes run: three in one site, or one in each of three sites. When not set, the customer chooses.": {
     "context": {
       "feature_area": "options"
     }
@@ -90216,6 +91419,11 @@
       "feature_area": "proposal-roles"
     }
   },
+  "Who picks the OpenStack tenant offering each site is deployed to. When not set, the customer picks.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Who sees, reads, contributes to, completes and is told about each step.": {
     "context": {
       "feature_area": "workflow-description"
@@ -90373,6 +91581,26 @@
   "Widget field allows to customize table cell rendering": {
     "context": {
       "feature_area": "admin"
+    }
+  },
+  "Will be decided: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
+  "Will be refused: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "manage"
     }
   },
   "Will be removed": {
@@ -91261,6 +92489,11 @@
   "You are not eligible to apply to this call.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "You are not logged in to any identity provider.": {
+    "context": {
+      "feature_area": "callbacks"
     }
   },
   "You are not offered new review work at the moment. Contact the platform operator for details.": {
@@ -92933,6 +94166,16 @@
       "feature_area": "access-subnets"
     }
   },
+  "default: {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
   "deleted": {
     "context": {
       "feature_area": "openstack"
@@ -94294,7 +95537,7 @@
   },
   "panels": {
     "context": {
-      "feature_area": "panels"
+      "feature_area": "review"
     }
   },
   "partition {partition}": {
@@ -95573,6 +96816,17 @@
       "feature_area": "vendorOfferings"
     }
   },
+  "version {version}": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "vhosts": {
     "context": {
       "feature_area": "rabbitmq"
@@ -95967,7 +97221,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "integration"
+      "feature_area": "from-template"
     }
   },
   "{backend} (default)": {
@@ -95977,6 +97231,26 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{backend} needs these settings, which are not set yet. They are saved with the backend.": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
+    }
+  },
+  "{backend}, which the other roles keep using, needs these settings, which are not set yet. They are saved with the backend.": {
+    "context": {
+      "variables": {
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "integration"
     }
   },
   "{behaviour} behavioral, {cosmetic} cosmetic": {
@@ -98114,6 +99388,18 @@
       }
     }
   },
+  "{count} settings, {set} set": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "set": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "{count} slides configured": {
     "context": {
       "variables": {
@@ -98485,6 +99771,19 @@
       }
     }
   },
+  "{description} The template uses {backend}.": {
+    "context": {
+      "variables": {
+        "description": {
+          "type": "string"
+        },
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "{description} for {name}": {
     "context": {
       "variables": {
@@ -98683,6 +99982,43 @@
       "feature_area": "project-groups"
     }
   },
+  "{files} were not attached: the proposal already has documents with the same content.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "files": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{file} has the same content as {other}, which is already attached. To replace it, remove {other} first.": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        },
+        "other": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{file} has the same content as {other}, which is already in the list.": {
+    "context": {
+      "variables": {
+        "file": {
+          "type": "unknown"
+        },
+        "other": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "{file} is already in the list.": {
     "context": {
       "variables": {
@@ -98694,6 +100030,17 @@
     }
   },
   "{file} was not attached": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "file": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "{file} was not attached: the proposal already has a document with the same content.": {
     "context": {
       "primary_ui_type": "error_message",
       "variables": {
@@ -99627,7 +100974,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "call-management"
+      "feature_area": "from-template"
     }
   },
   "{name}: not sorted. Sort ascending": {
@@ -100748,6 +102095,18 @@
       }
     }
   },
+  "{processed} of {total}": {
+    "context": {
+      "variables": {
+        "processed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "{projectName} project has been moved to {organizationName} organization.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -101656,6 +103015,19 @@
       }
     }
   },
+  "{setting} ({backend})": {
+    "context": {
+      "variables": {
+        "setting": {
+          "type": "unknown"
+        },
+        "backend": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "from-template"
+    }
+  },
   "{setting}, on {event}": {
     "context": {
       "variables": {
@@ -101810,6 +103182,19 @@
         },
         "count": {
           "type": "number"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
+  "{step} as {outcome}": {
+    "context": {
+      "variables": {
+        "step": {
+          "type": "unknown"
+        },
+        "outcome": {
+          "type": "unknown"
         }
       },
       "feature_area": "manage"

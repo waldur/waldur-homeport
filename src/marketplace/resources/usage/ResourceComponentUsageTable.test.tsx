@@ -76,4 +76,31 @@ describe('ResourceComponentUsageTable', () => {
     );
     expect(container.textContent).toBe('August 2026');
   });
+
+  it('shows a limit-based OpenStack component as a monthly peak in GB', () => {
+    tableSpy.mockClear();
+
+    render(
+      <ResourceComponentUsageTable
+        resource={resource as any}
+        offeringComponent={
+          {
+            type: 'ram',
+            measured_unit: 'GB',
+            billing_type: 'limit',
+            factor: 1024,
+          } as any
+        }
+        offeringType="OpenStack.Tenant"
+        portal={{}}
+      />,
+    );
+
+    const { columns } = tableSpy.mock.calls[0][0];
+    const column = columns.find((c) => c.title === 'Monthly peak (GB)');
+    const { container } = render(
+      column.render({ row: { usage: '233472.00' } }),
+    );
+    expect(container.textContent).toBe('228');
+  });
 });

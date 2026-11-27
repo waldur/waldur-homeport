@@ -8,14 +8,16 @@ import { BaseInputField } from '@/form/InputField';
 import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
 
-import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
 import {
+  CommonFlavorSource,
   DatacenterNodeGroup,
   getDefaultDatacenterDiskConfig,
   getDefaultStorageDiskConfig,
   K8sDefaultConfiguration,
   LocalOpenStackFlavor,
-} from './multi-datacenter-k8s-types';
+  meetsWorkerMinimums,
+} from './k8s-types';
+import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
 
 interface NodeGroupCardProps {
   nodeGroup: DatacenterNodeGroup;
@@ -26,6 +28,10 @@ interface NodeGroupCardProps {
   onRemove: () => void;
   canRemove: boolean;
   defaultConfigs?: K8sDefaultConfiguration;
+  // On sites the provider fixed: the flavors every site has.
+  commonFlavors?: CommonFlavorSource;
+  // The group is deployed on every site at once.
+  allSites?: boolean;
 }
 
 const nodeProfileOptions = [
@@ -45,6 +51,8 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
   onRemove,
   canRemove,
   defaultConfigs,
+  commonFlavors,
+  allSites,
 }) => {
   const isStorageGroup = nodeGroup.type === 'storage';
   const selectedFlavor = nodeGroup.openstack_flavor;
@@ -59,9 +67,17 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
         ? getDefaultStorageDiskConfig(defaultConfigs)
         : getDefaultDatacenterDiskConfig(defaultConfigs);
 
+    // A flavor picked for storage nodes may be too small for workers, which
+    // the flavor picker would not have offered.
+    const keepsFlavor =
+      newType !== 'worker' ||
+      !nodeGroup.openstack_flavor ||
+      meetsWorkerMinimums(nodeGroup.openstack_flavor, defaultConfigs);
+
     onUpdate({
       type: newType,
       disk_config: newDiskConfig,
+      ...(keepsFlavor ? {} : { openstack_flavor: undefined }),
     });
   };
 
@@ -146,6 +162,8 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               nodeGroupType={nodeGroup.type}
               datacenterName={datacenterName}
               minimalSettings={defaultConfigs}
+              commonFlavors={commonFlavors}
+              allSites={allSites}
             />
           </FormGroup>
         </div>

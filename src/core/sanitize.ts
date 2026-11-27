@@ -25,6 +25,10 @@ const ALLOWED_TAGS = [
   'em',
   'b',
   'i',
+  'del',
+  's',
+  'sup',
+  'sub',
   'ul',
   'ol',
   'li',
@@ -52,8 +56,10 @@ const ALLOWED_TAGS = [
  * Allowed attributes.
  * - `data-*` excluded to prevent framework attribute hijacking.
  * - Event handlers (`onclick`, etc.) are blocked by DOMPurify by default.
+ * - `class` excluded: the app's utility classes would let authored content
+ *   restyle itself, e.g. a link positioned over the whole page.
  */
-const ALLOWED_ATTR = ['href', 'src', 'title', 'alt', 'class', 'download'];
+const ALLOWED_ATTR = ['href', 'src', 'title', 'alt', 'download'];
 
 /**
  * Only allow safe URL schemes.

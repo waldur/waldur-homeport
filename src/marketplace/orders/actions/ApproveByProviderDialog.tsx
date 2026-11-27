@@ -64,7 +64,15 @@ const OptionRow: FC<{
   submittedValue: any;
   resourceOptions: any;
   hiddenKeys: ReadonlySet<string>;
-}> = ({ optionKey, option, submittedValue, resourceOptions, hiddenKeys }) => {
+  offeringUuid?: string;
+}> = ({
+  optionKey,
+  option,
+  submittedValue,
+  resourceOptions,
+  hiddenKeys,
+  offeringUuid,
+}) => {
   const { values } = useFormState({ subscription: { values: true } });
   const { OptionField, params } = getComponentAndParams(
     option,
@@ -72,6 +80,7 @@ const OptionRow: FC<{
     null,
     undefined,
     getAllModelsOption(resourceOptions),
+    { offeringUuid },
   );
   const validateFn = buildOptionValidator(
     option,
@@ -127,7 +136,13 @@ const SubmittedOptionRows: FC<{
   resourceOptions: any;
   currentOptions: Record<string, any>;
   userSubmittedOptions: Record<string, any>;
-}> = ({ resourceOptions, currentOptions, userSubmittedOptions }) => {
+  offeringUuid?: string;
+}> = ({
+  resourceOptions,
+  currentOptions,
+  userSubmittedOptions,
+  offeringUuid,
+}) => {
   const { values } = useFormState({ subscription: { values: true } });
   const hiddenKeys = useMemo(
     () =>
@@ -152,6 +167,7 @@ const SubmittedOptionRows: FC<{
             submittedValue={submittedValue}
             resourceOptions={resourceOptions}
             hiddenKeys={hiddenKeys}
+            offeringUuid={offeringUuid}
           />
         );
       })}
@@ -307,6 +323,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                           resourceOptions={resourceOptions}
                           currentOptions={currentOptions}
                           userSubmittedOptions={userSubmittedOptions}
+                          offeringUuid={offeringQuery.data?.uuid}
                         />
                       </TableBody>
                     </Table>
@@ -314,6 +331,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                 ) : (
                   <OptionsForm
                     options={resourceOptions}
+                    offeringUuid={offeringQuery.data?.uuid}
                     allModelsOption={getAllModelsOption(resourceOptions)}
                   />
                 )}

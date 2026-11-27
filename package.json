@@ -97,7 +97,7 @@
     "js-yaml": "^4.3.1",
     "jszip": "^3.10.1",
     "leaflet": "^1.9.4",
-    "leaflet-geosearch": "^3.11.1",
+    "leaflet-geosearch": "^5.3.0",
     "livekit-client": "2.20.0",
     "loglevel": "^1.9.2",
     "luxon": "^3.7.2",
@@ -129,7 +129,7 @@
     "waldur-design-tokens": "workspace:*",
     "waldur-form": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
-    "waldur-js-client": "8.1.5-rc.4.dev.20261126062705.734",
+    "waldur-js-client": "8.1.5-rc.5.dev.20261127210128.752",
     "waldur-notifications": "workspace:*",
     "waldur-proposals": "workspace:*",
     "waldur-runtime-config": "workspace:*",
@@ -398,7 +398,8 @@
     "mermaid/katex": "^0.18.2",
     "postcss-selector-parser": "^7.1.6",
     "source-map-js": "^1.2.2",
-    "@types/react-window-infinite-loader/@types/react-window": "^1.8.8"
+    "@types/react-window-infinite-loader/@types/react-window": "^1.8.8",
+    "leaflet-geosearch/leaflet": "^1.9.4"
   },
   "packageManager": "yarn@4.18.0+sha512.fcb8716fe7cd0eece141ffc18b92193a9df9204c1ba83189c288835223fc0bbe64af473bab0d5e9927a7daeb5caf2bb07eb2787cc9338ca040ea125f2a1f2f7e"
 }

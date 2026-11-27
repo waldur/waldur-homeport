@@ -4,20 +4,14 @@ import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 
+import { documentDisplayName, sameFile } from './documentDuplicates';
+
 interface DocumentationFilesProps {
   files: Array<ProposalDocumentation>;
   pending?: FileList | File[];
   onChange?(value): void;
   onDeleteExisting?(file: ProposalDocumentation): void;
 }
-
-/**
- * What counts as the same pending file, before anything is uploaded: the
- * browser gives no content hash, so name, size and modification time stand
- * in. Used to list a file once and to cancel the one the applicant means.
- */
-export const sameFile = (a: File, b: File) =>
-  a.name === b.name && a.size === b.size && a.lastModified === b.lastModified;
 
 const pendingFileKey = (file: File) =>
   `${file.name}:${file.size}:${file.lastModified}`;
@@ -32,11 +26,7 @@ export const DocumentationFiles = (props: DocumentationFilesProps) => {
         (props.files.map((file) => ({
           key: file.file,
           ...file,
-          // Extract the file name from a given file path
-          file_name: file.file_name
-            .split('/')
-            .pop()
-            .replace(/_[^_]+\./, '.'),
+          file_name: documentDisplayName(file.file_name),
         })) as any)
       }
       uploading={pendingFiles.map((file) => ({

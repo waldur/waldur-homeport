@@ -35,6 +35,35 @@ describe('OpenStackProvisioningConfigSection', () => {
     vi.clearAllMocks();
   });
 
+  it.each([
+    [undefined, 'Enabled'],
+    [true, 'Enabled'],
+    [false, 'Disabled'],
+  ])(
+    'shows billing of stopped instances as %s → %s',
+    async (value, expected) => {
+      const user = userEvent.setup();
+      renderWithProviders(
+        <OpenStackProvisioningConfigSection
+          offering={{
+            ...mockOffering,
+            plugin_options: {
+              ...mockOffering.plugin_options,
+              bill_inactive_instances: value,
+            },
+          }}
+          refetch={vi.fn()}
+        />,
+      );
+
+      await user.click(screen.getByRole('tab', { name: /Billing/i }));
+
+      expect(
+        screen.getByRole('definition', { name: 'Bill stopped instances' }),
+      ).toHaveTextContent(expected);
+    },
+  );
+
   it('renders provisioning config, navigates to IP mapping tab and opens edit modal', async () => {
     const user = userEvent.setup();
 

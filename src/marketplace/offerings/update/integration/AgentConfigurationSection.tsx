@@ -4,49 +4,66 @@ import {
   AgentConfiguration,
   AgentPlugin,
   marketplaceProviderOfferingsRetrieve,
-  marketplaceProviderOfferingsSiteAgentConfigRetrieve,
   marketplaceProviderOfferingsUpdateIntegration,
   marketplaceSiteAgentPluginsList,
-  SiteAgentOfferingSecret,
+  marketplaceProviderOfferingsSiteAgentConfigRetrieve,
 } from 'waldur-js-client';
 
-import { Code, PropertyItem, PropertyList } from 'waldur-ui';
+import { PropertyList } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { atLeast, composeValidators, lessThanOrEqual } from '@/core/validators';
 import {
   CommaSeparatedListEditField,
   EditFieldProvider,
   NumberEditField,
-  SelectEditField,
   StringEditField,
 } from '@/form/editFields';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
+import { getDateLocale } from '@/i18n/LanguageUtilsService';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { propVal } from '@/property/propertyFields';
 import { useNotify } from '@/store/notify';
-import { SimpleTable } from '@/table/SimpleTable';
-import { Column } from '@/table/types';
 
+import { ImportAgentConfigurationButton } from './agent-import/ImportAgentConfigurationButton';
 import {
   AGENT_ROLE_FIELDS,
   AGENT_SWITCH_DEFAULTS,
   AgentRoleField,
+  BACKEND_SETTINGS_UPDATE,
   changedSinceOpened,
   clearedLastRole,
+  DEFAULT_ROLE_BACKENDS,
   describeRefusal,
   editedPath,
   expandRolesAndSettings,
+  getRoleDescriptions,
+  getRoleLabels,
   getRolesAndSettings,
   isAgentConfigurationVisible,
   mergeAgentConfiguration,
   replacedKeys,
+  withDefaultRoles,
   ROLES_AND_SETTINGS,
-  splitSecretsByBlock,
   validateRolesAndSettings,
 } from './agentConfiguration';
+import { AgentConfigurationActions } from './AgentConfigurationActions';
+import {
+  BackendSettingsBlock,
+  RoleBackendEditField,
+  toRoleChoice,
+  validateRoleChoice,
+} from './BackendSettingsFields';
+import {
+  BackendSetting,
+  getBackendSettings,
+  getBackendsInUse,
+  getCommonSettingKeys,
+  getMissingRequiredSettings,
+  getRoleBackend,
+  getSettingInitialValue,
+  toSettingValue,
+} from './backendSettingsSchema';
 import { JsonObjectEditField, jsonObjectValidator } from './JsonObjectField';
 import {
   getMembershipSyncWarning,
@@ -72,25 +89,9 @@ const getMembershipSyncOptions = () => [
   { value: 'off', label: translate('By polling') },
 ];
 
-const getRoleLabels = (): Record<AgentRoleField, string> => ({
-  order_processing_backend: translate('Order processing'),
-  membership_sync_backend: translate('Membership sync'),
-  reporting_backend: translate('Reporting'),
-  username_management_backend: translate('Username management'),
-});
-
-const getRoleDescriptions = (): Record<AgentRoleField, string> => ({
-  order_processing_backend: translate(
-    'Creates, updates and terminates resources on the backend.',
-  ),
-  membership_sync_backend: translate(
-    "Keeps the backend's users in step with resource teams.",
-  ),
-  reporting_backend: translate('Reports usage from the backend to Waldur.'),
-  username_management_backend: translate(
-    'Gives offering users their usernames on the backend.',
-  ),
-});
+// "Membership sync and Reporting", in the UI language.
+const joinLabels = (labels: string[]) =>
+  new Intl.ListFormat(getDateLocale(), { type: 'conjunction' }).format(labels);
 
 const getTrustHint = () =>
   translate(
@@ -98,7 +99,8 @@ const getTrustHint = () =>
   );
 
 // Shown for a role left unset: with no role set at all the agent runs SLURM
-// for the three agent roles, and base for username management.
+// for the three agent roles, and base for username management. `value` is
+// the stored one: the editor opens on the default, which is not stored.
 const renderRole = (
   value: string | undefined,
   field: AgentRoleField,
@@ -107,100 +109,12 @@ const renderRole = (
   if (value) {
     return value;
   }
-  if (field === 'username_management_backend') {
-    return translate('{backend} (default)', { backend: 'base' });
+  if (field === 'username_management_backend' || !anyAgentRole) {
+    return translate('{backend} (default)', {
+      backend: DEFAULT_ROLE_BACKENDS[field],
+    });
   }
-  return anyAgentRole
-    ? translate('Off')
-    : translate('{backend} (default)', { backend: 'slurm' });
-};
-
-const getRequirementLabels = () => ({
-  required: translate('Required'),
-  required_with_parent: translate('Required once its block is set'),
-  optional: translate('Optional'),
-});
-
-const getSecretColumns = (): Column<SiteAgentOfferingSecret>[] => [
-  {
-    title: translate('Setting'),
-    render: ({ row }) => <Code>{row.field}</Code>,
-  },
-  { title: translate('Backend'), render: ({ row }) => row.backend },
-  {
-    title: translate('Needed'),
-    render: ({ row }) =>
-      getRequirementLabels()[row.requirement] ?? row.requirement,
-  },
-];
-
-const AgentLoadsPanel: FC<{ offeringUuid: string }> = ({ offeringUuid }) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['site-agent-config', offeringUuid],
-    queryFn: () =>
-      marketplaceProviderOfferingsSiteAgentConfigRetrieve({
-        path: { uuid: offeringUuid },
-      }).then((response) => response.data),
-    refetchOnWindowFocus: false,
-  });
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-  if (error || !data) {
-    return (
-      <p className="text-danger">
-        {translate("Unable to load the agent's configuration.")}
-      </p>
-    );
-  }
-  const { needed, ifConfigured } = splitSecretsByBlock(
-    data.secrets,
-    data.offering?.backend_settings,
-  );
-  return (
-    <>
-      <p className="text-secondary mb-4">
-        {translate(
-          'The configuration the site agent loads for this offering. Secrets are not part of it: the agent takes them from its own configuration file.',
-        )}
-      </p>
-      <PropertyList variant="summary" className="mb-5">
-        <PropertyItem
-          label={translate('Version')}
-          value={propVal.code(data.version, { truncate: 'middle' })}
-          hasCopy
-        />
-        <PropertyItem
-          label={translate('Backend type')}
-          value={data.offering?.backend_type}
-        />
-      </PropertyList>
-      <h3 className="text-base font-semibold mb-2">
-        {translate('Secrets the agent configuration file must hold')}
-      </h3>
-      {needed.length ? (
-        <SimpleTable columns={getSecretColumns()} rows={needed} />
-      ) : (
-        <p className="text-tertiary">
-          {translate('The backends in use need no secrets.')}
-        </p>
-      )}
-      {ifConfigured.length ? (
-        <>
-          <h3 className="text-base font-semibold mt-5 mb-2">
-            {translate('Secrets needed only once their block is configured')}
-          </h3>
-          <p className="text-secondary mb-2">
-            {translate(
-              'The backends can use these settings, but this offering does not configure the block that holds them. Leave them out of the agent configuration file until it does.',
-            )}
-          </p>
-          <SimpleTable columns={getSecretColumns()} rows={ifConfigured} />
-        </>
-      ) : null}
-    </>
-  );
+  return translate('Off');
 };
 
 export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
@@ -239,7 +153,11 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
           ],
         };
       }
-      const next = mergeAgentConfiguration(current, change);
+      const next = withDefaultRoles(
+        current,
+        mergeAgentConfiguration(current, change),
+        change,
+      );
       const refusal = clearedLastRole(current, next, path);
       if (refusal) {
         throw { fieldError: [refusal] };
@@ -254,27 +172,14 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
     invalidateQueries: [{ queryKey: ['site-agent-config', offering.uuid] }],
   });
 
-  const update = useCallback(
-    (formData: { agent_configuration?: Record<string, any> }) => {
-      let change = { ...formData.agent_configuration };
-      let path = editedPath(change);
-      if (ROLES_AND_SETTINGS in change) {
-        change = expandRolesAndSettings(change[ROLES_AND_SETTINGS]);
-        path = ROLES_AND_SETTINGS;
-      }
-      const events = change.event_settings;
-      if (events && 'stomp_membership_sync_enabled' in events) {
-        change.event_settings = {
-          ...events,
-          stomp_membership_sync_enabled: fromMembershipSyncChoice(
-            events.stomp_membership_sync_enabled,
-          ),
-        };
-      }
+  // Every save goes through here: one change, laid over the configuration as
+  // it is now, and the path of the field that made it.
+  const save = useCallback(
+    (change: Record<string, unknown>, path: string) =>
       // A refusal the dialog can show under the field is shown there and not
       // as a notification too; anything else, such as a server error, is a
       // notification.
-      return mutateAsync({ change, path }).catch((error) => {
+      mutateAsync({ change, path }).catch((error) => {
         if (error?.fieldError) {
           throw error;
         }
@@ -287,18 +192,168 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
           translate('Unable to update the agent configuration.'),
         );
         throw error;
+      }),
+    [mutateAsync, showErrorResponse],
+  );
+
+  const { data: plugins } = useQuery({
+    queryKey: ['site-agent-plugins'],
+    queryFn: () =>
+      marketplaceSiteAgentPluginsList().then((response) => response.data),
+    refetchOnWindowFocus: false,
+    staleTime: UI_STALE_TIME,
+  });
+
+  // The keys every plugin with settings declares, for the "Common to all
+  // backends" group.
+  const commonKeys = useMemo(() => getCommonSettingKeys(plugins), [plugins]);
+
+  // A tab per backend in use that has settings, in role order, with the roles
+  // it serves. While no role is set that is slurm, the default.
+  const backendTabs = useMemo(
+    () =>
+      getBackendsInUse(stored ?? {})
+        .map((backend) => ({
+          backend,
+          settings: getBackendSettings(backend, plugins) ?? [],
+          roles: AGENT_ROLE_FIELDS.filter(
+            ({ field }) => getRoleBackend(stored ?? {}, field) === backend,
+          ).map(({ field }) => field),
+        }))
+        .filter(({ settings }) => settings.length > 0),
+    [plugins, stored],
+  );
+
+  // What the agent is served now: with no role set, the generator fills in
+  // slurm's settings (and an update keeps them), so a setting it serves is
+  // not missing although it is not stored.
+  const { data: served } = useQuery({
+    queryKey: ['site-agent-config', offering.uuid],
+    queryFn: () =>
+      marketplaceProviderOfferingsSiteAgentConfigRetrieve({
+        path: { uuid: offering.uuid },
+      }).then((response) => response.data),
+    refetchOnWindowFocus: false,
+    enabled: isAgentConfigurationVisible(offering),
+  });
+
+  // The required settings a role on this backend would leave unset: those of
+  // every backend the save would leave in use, the role's own included.
+  const getMissingSettingsFor = useCallback(
+    (field: AgentRoleField, backend: string | null): BackendSetting[] => {
+      if (!backend) {
+        return [];
+      }
+      const current: Record<string, any> = stored ?? {};
+      const next = withDefaultRoles(current, { ...current, [field]: backend });
+      return getMissingRequiredSettings(getBackendsInUse(next), plugins, {
+        ...served?.offering?.backend_settings,
+        ...current.backend_settings,
       });
     },
-    [mutateAsync, showErrorResponse],
+    [plugins, stored, served],
+  );
+
+  const update = useCallback(
+    (formData: { agent_configuration?: Record<string, any> }) => {
+      let change = { ...formData.agent_configuration };
+      let path = editedPath(change);
+      if (ROLES_AND_SETTINGS in change) {
+        change = expandRolesAndSettings(change[ROLES_AND_SETTINGS]);
+        path = ROLES_AND_SETTINGS;
+      }
+      // A role chosen with the settings its backend needs: one save of both.
+      AGENT_ROLE_FIELDS.forEach(({ field }) => {
+        const value = change[field];
+        if (value && typeof value === 'object') {
+          const choice = toRoleChoice(value);
+          const missing = getMissingSettingsFor(field, choice.backend);
+          change[field] = choice.backend;
+          if (missing.length) {
+            change[BACKEND_SETTINGS_UPDATE] = Object.fromEntries(
+              missing.map((setting) => [
+                setting.key,
+                toSettingValue(setting, choice.settings[setting.key]),
+              ]),
+            );
+          }
+        }
+      });
+      const events = change.event_settings;
+      if (events && 'stomp_membership_sync_enabled' in events) {
+        change.event_settings = {
+          ...events,
+          stomp_membership_sync_enabled: fromMembershipSyncChoice(
+            events.stomp_membership_sync_enabled,
+          ),
+        };
+      }
+      return save(change, path);
+    },
+    [save, getMissingSettingsFor],
+  );
+
+  // Per backend tab: a setting is saved, and its editor opens, by the schema
+  // of the backend whose tab it is edited on — a key two backends declare
+  // may have a different type in each.
+  const backendSettingsEditing = useMemo(
+    () =>
+      Object.fromEntries(
+        backendTabs.map(({ backend, settings }) => {
+          // One backend setting, merged into the others.
+          const update = (formData: {
+            agent_configuration?: Record<string, any>;
+          }) => {
+            const [[key, value]] = Object.entries(
+              formData.agent_configuration?.backend_settings ?? {},
+            );
+            const setting = settings.find((item) => item.key === key);
+            return save(
+              {
+                [BACKEND_SETTINGS_UPDATE]: {
+                  [key]: setting ? toSettingValue(setting, value) : value,
+                },
+              },
+              `backend_settings.${key}`,
+            );
+          };
+          // What a setting's editor opens on: its value, or the default the
+          // agent uses while it is unset.
+          const values = { ...stored?.backend_settings };
+          settings.forEach((setting) => {
+            if (values[setting.key] === undefined) {
+              values[setting.key] = getSettingInitialValue(setting);
+            }
+          });
+          const scope = { agent_configuration: { backend_settings: values } };
+          return [backend, { update, scope }];
+        }),
+      ),
+    [backendTabs, save, stored],
   );
 
   // What the rows show and the edit dialogs start from: a switch left unset
   // reads as the agent's default, the membership sync switch as a choice.
   const scope = useMemo(() => {
     const configuration: AgentConfiguration = stored ?? {};
+    // A role's editor opens on the backend it shows: with no agent role set
+    // that is the default for each, and base for username management.
+    const noAgentRole = !AGENT_ROLE_FIELDS.some(
+      ({ field }) =>
+        field !== 'username_management_backend' &&
+        Boolean(configuration[field]),
+    );
+    const roles = Object.fromEntries(
+      AGENT_ROLE_FIELDS.filter(
+        ({ field }) =>
+          !configuration[field] &&
+          (noAgentRole || field === 'username_management_backend'),
+      ).map(({ field }) => [field, DEFAULT_ROLE_BACKENDS[field]]),
+    );
     return {
       agent_configuration: {
         ...configuration,
+        ...roles,
         // The JSON editors open on an empty object, not a blank page.
         backend_settings: configuration.backend_settings ?? {},
         [ROLES_AND_SETTINGS]: getRolesAndSettings(configuration),
@@ -317,14 +372,6 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
       },
     };
   }, [stored]);
-
-  const { data: plugins } = useQuery({
-    queryKey: ['site-agent-plugins'],
-    queryFn: () =>
-      marketplaceSiteAgentPluginsList().then((response) => response.data),
-    refetchOnWindowFocus: false,
-    staleTime: UI_STALE_TIME,
-  });
 
   const roleOptions = useMemo(() => {
     const custom = stored?.custom_backends ?? [];
@@ -371,50 +418,84 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
 
   return (
     <EditFieldProvider scope={scope} callback={update}>
-      <TabbedSection title={translate('Agent configuration')}>
-        <TabbedSection.Tab id="agent-backends" title={translate('Backends')}>
-          {AGENT_ROLE_FIELDS.map(({ field }) => (
-            <SelectEditField
-              key={field}
-              name={`agent_configuration.${field}`}
-              label={roleLabels[field]}
-              description={roleDescriptions[field]}
-              labelTooltip={trustHint}
-              options={roleOptions[field]}
-              simpleValue
-              isClearable
-              renderValue={(value) => renderRole(value, field, anyAgentRole)}
+      <TabbedSection
+        title={translate('Agent configuration')}
+        actions={
+          <>
+            <AgentConfigurationActions offering={offering} />
+            <ImportAgentConfigurationButton
+              offering={offering}
+              refetch={refetch}
             />
-          ))}
-          <CommaSeparatedListEditField
-            name="agent_configuration.custom_backends"
-            label={translate('Custom backends')}
-            description={translate(
-              "Your site's own plugins, not in the catalog.",
-            )}
-            dialogDescription={translate(
-              "Your site's own plugins, not in the plugin catalog. Their settings are not checked.",
-            )}
-            labelTooltip={trustHint}
-          />
-          <JsonObjectEditField
-            name={`agent_configuration.${ROLES_AND_SETTINGS}`}
-            label={translate('Edit roles and backend settings together')}
-            description={translate(
-              'Switch to backends whose settings the current ones refuse.',
-            )}
-            dialogDescription={translate(
-              'The four role backends and backend_settings, saved in one request. Use it to switch to a backend whose settings the current one refuses, or that requires settings the current one does not know. A role left blank is cleared. Secrets stay in the agent configuration file.',
-            )}
-            labelTooltip={trustHint}
-            dialogSize="xl"
-            validate={composeValidators(
-              jsonObjectValidator,
-              validateRolesAndSettings,
-            )}
-            renderValue={() => translate('Edit as JSON')}
-          />
+          </>
+        }
+      >
+        <TabbedSection.Tab id="agent-roles" title={translate('Roles')} plain>
+          <PropertyList>
+            {AGENT_ROLE_FIELDS.map(({ field }) => {
+              const getMissingSettings = (backend: string | null) =>
+                getMissingSettingsFor(field, backend);
+              const backend = getRoleBackend(stored ?? {}, field);
+              const noSchema =
+                backend &&
+                plugins &&
+                !getBackendSettings(backend, plugins)?.length;
+              return (
+                <RoleBackendEditField
+                  key={field}
+                  name={`agent_configuration.${field}`}
+                  label={roleLabels[field]}
+                  description={roleDescriptions[field]}
+                  labelTooltip={trustHint}
+                  options={roleOptions[field]}
+                  isClearable
+                  getMissingSettings={getMissingSettings}
+                  validate={validateRoleChoice(getMissingSettings)}
+                  renderValue={() => (
+                    <>
+                      {renderRole(stored?.[field], field, anyAgentRole)}
+                      {noSchema ? (
+                        <span className="block text-sm text-secondary">
+                          {translate(
+                            'No settings in the plugin catalog: edit them as JSON on the Advanced (JSON) tab.',
+                          )}
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                />
+              );
+            })}
+          </PropertyList>
         </TabbedSection.Tab>
+
+        {backendTabs.map(({ backend, settings, roles }) => (
+          <TabbedSection.Tab
+            key={backend}
+            id={`agent-backend-${backend}`}
+            title={backend}
+            plain
+          >
+            <p className="text-secondary mb-3" data-testid="backend-used-for">
+              {translate('Used for {roles}', {
+                roles: joinLabels(roles.map((field) => roleLabels[field])),
+              })}
+            </p>
+            <EditFieldProvider
+              scope={backendSettingsEditing[backend]?.scope}
+              callback={backendSettingsEditing[backend]?.update}
+            >
+              <BackendSettingsBlock
+                key={backend}
+                backend={backend}
+                settings={settings}
+                commonKeys={commonKeys}
+                values={stored?.backend_settings ?? {}}
+                labelTooltip={trustHint}
+              />
+            </EditFieldProvider>
+          </TabbedSection.Tab>
+        ))}
 
         <TabbedSection.Tab id="agent-events" title={translate('Events')}>
           <StateSwitchEditField
@@ -508,8 +589,36 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
 
         <TabbedSection.Tab
           id="agent-backend-settings"
-          title={translate('Backend settings')}
+          title={translate('Advanced (JSON)')}
         >
+          <CommaSeparatedListEditField
+            name="agent_configuration.custom_backends"
+            label={translate('Custom backends')}
+            description={translate(
+              "Your site's own plugins, not in the catalog.",
+            )}
+            dialogDescription={translate(
+              "Your site's own plugins, not in the plugin catalog. Their settings are not checked.",
+            )}
+            labelTooltip={trustHint}
+          />
+          <JsonObjectEditField
+            name={`agent_configuration.${ROLES_AND_SETTINGS}`}
+            label={translate('Edit roles and backend settings together')}
+            description={translate(
+              'Switch to backends whose settings the current ones refuse.',
+            )}
+            dialogDescription={translate(
+              'The four role backends and backend_settings, saved in one request. Use it to switch to a backend whose settings the current one refuses, or that requires settings the current one does not know. A role left blank is cleared. Secrets stay in the agent configuration file.',
+            )}
+            labelTooltip={trustHint}
+            dialogSize="xl"
+            validate={composeValidators(
+              jsonObjectValidator,
+              validateRolesAndSettings,
+            )}
+            renderValue={() => translate('Edit as JSON')}
+          />
           <JsonObjectEditField
             name="agent_configuration.backend_settings"
             label={translate('Backend settings')}
@@ -517,7 +626,7 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
               'Settings of the backends, as JSON. No secrets.',
             )}
             dialogDescription={translate(
-              'Settings of the backends above, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.',
+              'Settings of the role backends, as a JSON object. Secrets stay in the agent configuration file on the agent host; Waldur refuses them. Settings the plugin catalog marks sensitive, and any the backends do not declare, need the permission to change the agent configuration.',
             )}
             dialogSize="xl"
             validate={jsonObjectValidator}
@@ -532,14 +641,6 @@ export const AgentConfigurationSection: FC<OfferingEditPanelProps> = ({
             dialogSize="xl"
             validate={jsonObjectValidator}
           />
-        </TabbedSection.Tab>
-
-        <TabbedSection.Tab
-          id="agent-loads"
-          title={translate('What the agent loads')}
-          plain
-        >
-          <AgentLoadsPanel offeringUuid={offering.uuid} />
         </TabbedSection.Tab>
       </TabbedSection>
     </EditFieldProvider>

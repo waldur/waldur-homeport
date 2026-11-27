@@ -14,14 +14,16 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { createFetcher } from '@/table/api';
+import { createClientPaginatedFetcher, createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
 import {
+  CommonFlavorSource,
   LocalOpenStackFlavor,
   K8sDefaultConfiguration,
-} from './multi-datacenter-k8s-types';
+  filterCommonFlavors,
+} from './k8s-types';
 
 interface K8sFlavorSelectionTableProps {
   offeringUuid: string;
@@ -30,6 +32,11 @@ interface K8sFlavorSelectionTableProps {
   nodeGroupType: 'worker' | 'storage';
   datacenterName: string;
   minimalSettings?: K8sDefaultConfiguration;
+  // On sites the provider fixed: the flavors every site has, listed instead
+  // of the offering's own. Rows carry the first site's flavor UUID.
+  commonFlavors?: CommonFlavorSource;
+  // The flavor is used on every site at once.
+  allSites?: boolean;
 }
 
 interface FlavorSelectionModalProps {
@@ -39,6 +46,8 @@ interface FlavorSelectionModalProps {
     nodeGroupType: 'worker' | 'storage';
     datacenterName: string;
     minimalSettings?: K8sDefaultConfiguration;
+    commonFlavors?: CommonFlavorSource;
+    allSites?: boolean;
   };
   initialValues?: {
     flavor: OpenStackFlavor;
@@ -52,14 +61,39 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
     nodeGroupType,
     datacenterName,
     minimalSettings,
+    commonFlavors,
+    allSites,
   },
   initialValues,
 }) => {
   const { closeDialog } = useModal();
   const [query, setQuery] = useState('');
 
+  // Common flavors are already in memory: filtered here by the worker
+  // minimums, which the server applies to the offering's own flavors.
+  const commonRows = useMemo(
+    () =>
+      commonFlavors
+        ? filterCommonFlavors(
+            commonFlavors.flavors,
+            nodeGroupType,
+            minimalSettings,
+          ).map((flavor) => ({
+            uuid: flavor.sites[0]?.flavor_uuid,
+            name: flavor.name,
+            cores: flavor.cores,
+            ram: flavor.ram,
+            disk: flavor.disk,
+          }))
+        : undefined,
+    [commonFlavors, nodeGroupType, minimalSettings],
+  );
+
   // Build filter with server-side filtering for minimal requirements
   const filter = useMemo(() => {
+    if (commonRows) {
+      return { name: query || undefined };
+    }
     const baseFilter: Record<string, unknown> = {
       offering_uuid: offeringUuid,
       name: query || undefined,
@@ -77,13 +111,19 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
     }
 
     return baseFilter;
-  }, [offeringUuid, query, nodeGroupType, minimalSettings]);
+  }, [commonRows, offeringUuid, query, nodeGroupType, minimalSettings]);
 
   const tableProps = useTable({
-    table: `k8s-flavor-selection-${offeringUuid}`,
-    fetchData: createFetcher(openstackFlavorsList),
+    // The source names the offering, option and topology the sites belong
+    // to; worker and storage groups list different common flavors.
+    table: commonRows
+      ? `k8s-common-flavor-selection-${commonFlavors.key}-${nodeGroupType}`
+      : `k8s-flavor-selection-${offeringUuid}`,
+    fetchData: commonRows
+      ? createClientPaginatedFetcher(commonRows, { queryField: 'name' })
+      : createFetcher(openstackFlavorsList),
     filter,
-    staleTime: UI_STALE_TIME,
+    staleTime: commonRows ? undefined : UI_STALE_TIME,
   });
 
   const handleConfirmSelection = (formData) => {
@@ -111,13 +151,20 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
       {({ handleSubmit, invalid, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate(
-              'Select OpenStack flavor for {datacenter} {type} nodes',
-              {
-                datacenter: datacenterName,
-                type: nodeGroupType,
-              },
-            )}
+            title={
+              allSites
+                ? translate(
+                    'Select OpenStack flavor for {type} nodes on all sites',
+                    { type: nodeGroupType },
+                  )
+                : translate(
+                    'Select OpenStack flavor for {datacenter} {type} nodes',
+                    {
+                      datacenter: datacenterName,
+                      type: nodeGroupType,
+                    },
+                  )
+            }
             subtitle={
               showMinimalSettingsLabels && (
                 <span className="text-quaternary">
@@ -196,6 +243,8 @@ export const K8sFlavorSelectionTable: React.FC<
   nodeGroupType,
   datacenterName,
   minimalSettings,
+  commonFlavors,
+  allSites,
 }) => {
   const { openDialog } = useModal();
   const openModal = () =>
@@ -206,6 +255,8 @@ export const K8sFlavorSelectionTable: React.FC<
         nodeGroupType: nodeGroupType,
         datacenterName: datacenterName,
         minimalSettings: minimalSettings,
+        commonFlavors,
+        allSites,
       },
       initialValues: selectedFlavor
         ? {

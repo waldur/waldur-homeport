@@ -23,40 +23,71 @@ const AudienceFields: FC<{
   const name = (state: string) => `status_labels.${audience}.${state}`;
   const validate = (value: string) => statusLabelProblem(audience, value);
   return (
-    <fieldset className="mb-5" data-testid={`status-labels-${audience}`}>
-      <legend className="text-sm font-medium">{title}</legend>
-      <p className="text-quaternary">{description}</p>
-      <StringGroup
-        name={name('active')}
-        label={translate('While the step runs')}
-        maxLength={255}
-        validate={validate}
-      />
-      {changesRequested && (
+    // 16px between the inputs of one audience, and a divider between
+    // audiences with 12px either side.
+    <fieldset
+      className="mb-3 border-t border-secondary pt-3 first-of-type:border-t-0 first-of-type:pt-0"
+      data-testid={`status-labels-${audience}`}
+    >
+      <legend className="text-sm font-semibold text-primary mb-1">
+        {title}
+      </legend>
+      <p className="text-quaternary mb-3">{description}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
         <StringGroup
-          name={name('changes_requested')}
-          label={translate('While changes are requested')}
+          name={name('active')}
+          label={translate('While the step runs')}
+          description={
+            audience === 'applicant' ? undefined : (
+              <span data-testid="status-labels-counts">
+                {translate('Can include counts, e.g. {example}.', {
+                  example: '{submitted} of {expected} reviews submitted',
+                })}
+              </span>
+            )
+          }
+          tooltip={
+            audience === 'applicant'
+              ? undefined
+              : translate('Counts available: {placeholders}.', {
+                  placeholders: STATUS_LABEL_PLACEHOLDERS.map(
+                    (placeholder) => `{${placeholder}}`,
+                  ).join(', '),
+                })
+          }
+          spaceless
           maxLength={255}
           validate={validate}
         />
-      )}
-      <StringGroup
-        name={name('completed')}
-        label={translate('Once the step has ended')}
-        maxLength={255}
-        validate={validate}
-      />
-      {outcomes.map((outcome) => (
+        {changesRequested && (
+          <StringGroup
+            name={name('changes_requested')}
+            label={translate('While changes are requested')}
+            spaceless
+            maxLength={255}
+            validate={validate}
+          />
+        )}
         <StringGroup
-          key={outcome}
-          name={`status_labels.${audience}.outcomes.${outcome}`}
-          label={translate('Ended as {outcome}', {
-            outcome: outcomeLabel(outcome),
-          })}
+          name={name('completed')}
+          label={translate('Once the step has ended')}
+          spaceless
           maxLength={255}
           validate={validate}
         />
-      ))}
+        {outcomes.map((outcome) => (
+          <StringGroup
+            key={outcome}
+            name={`status_labels.${audience}.outcomes.${outcome}`}
+            label={translate('Ended as {outcome}', {
+              outcome: outcomeLabel(outcome),
+            })}
+            spaceless
+            maxLength={255}
+            validate={validate}
+          />
+        ))}
+      </div>
     </fieldset>
   );
 };
@@ -76,26 +107,27 @@ export const StatusLabelsFields: FC<{
     )?.outcomes ?? [];
   const changesRequested = Boolean(values.allows_change_requests);
   return (
-    <div data-testid="status-labels">
-      <h3 className="text-base mb-1.5">{translate('Status labels')}</h3>
+    <div
+      className="border-t border-secondary pt-5 mt-2"
+      data-testid="status-labels"
+    >
+      <h4 className="mb-1.5">{translate('Status labels')}</h4>
       <p className="text-quaternary mb-3">
         {translate(
-          "What each audience's dashboard calls this step, shown as entered. Leave a label empty to keep the one the portal shows today.",
+          "What each audience sees as this step's status. Leave empty to keep the default.",
         )}
       </p>
       {applicantLabelsApply({ ...values, kind: kind.id }) ? (
         <AudienceFields
           audience="applicant"
           title={translate('Applicant')}
-          description={translate(
-            "On the applicant's proposal list and progress tracker.",
-          )}
+          description={translate('Proposal list and progress tracker.')}
           outcomes={outcomes}
           changesRequested={changesRequested}
         />
       ) : (
         <p
-          className="text-quaternary"
+          className="text-quaternary mb-3"
           data-testid="status-labels-applicant-hidden"
         >
           {translate(
@@ -103,22 +135,11 @@ export const StatusLabelsFields: FC<{
           )}
         </p>
       )}
-      <p className="text-quaternary" data-testid="status-labels-counts">
-        {translate(
-          'Labels other than the applicant\'s may show counts of the step\'s work: {placeholders}. For example: "{example}".',
-          {
-            placeholders: STATUS_LABEL_PLACEHOLDERS.map(
-              (placeholder) => `{${placeholder}}`,
-            ).join(', '),
-            example: '{submitted} of {expected} reviews submitted',
-          },
-        )}
-      </p>
       <AudienceFields
         audience="evaluators"
         title={translate('Evaluators')}
         description={translate(
-          'On the proposal lists and step lists of the evaluators working on the step: reviewers, panel members, evaluator roles. Also what the call team and the offering teams read where their own labels are left empty.',
+          "Reviewers' and panel members' lists. Also the fallback for the call team and offering teams.",
         )}
         outcomes={outcomes}
         changesRequested={changesRequested}
@@ -126,9 +147,7 @@ export const StatusLabelsFields: FC<{
       <AudienceFields
         audience="call_team"
         title={translate('Call team')}
-        description={translate(
-          "On the proposal lists and step lists of the call managers, staff and support. Empty labels fall back to the evaluators'.",
-        )}
+        description={translate("Call managers', staff and support lists.")}
         outcomes={outcomes}
         changesRequested={changesRequested}
       />
@@ -136,7 +155,7 @@ export const StatusLabelsFields: FC<{
         audience="offering_team"
         title={translate('Offering teams')}
         description={translate(
-          "On the proposal lists and step lists of the offering teams, for the steps they work on, such as a technical assessment of their offering. Empty labels fall back to the evaluators'.",
+          "Offering teams' lists, for steps they work on.",
         )}
         outcomes={outcomes}
         changesRequested={changesRequested}

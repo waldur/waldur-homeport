@@ -71,7 +71,7 @@ describe('Kubernetes option values', () => {
 
   it('summarises a cluster configuration instead of dumping JSON', () => {
     expect(
-      formatOptionValue({ type: 'single_datacenter_k8s_config' } as any, {
+      formatOptionValue({ type: 'k8s_cluster_config' } as any, {
         kubernetes_version: '1.30.0',
         topology: '1-datacenter',
         datacenters: [{}],

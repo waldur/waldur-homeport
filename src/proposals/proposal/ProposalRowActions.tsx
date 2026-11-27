@@ -3,6 +3,11 @@ import { ChatTextIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import {
+  getArchivedCallReason,
+  isRowOfArchivedCall,
+  useArchivedCallReason,
+} from '@/proposals/archivedCall';
 import { Call } from '@/proposals/types';
 import { canUpdateCall } from '@/proposals/utils';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -28,6 +33,12 @@ const NotifyProposalsDialog = lazyComponent(() =>
 export const ProposalRowActions = ({ row, refetch }) => {
   const { openDialog } = useModal();
   const user = useUser();
+  // No reviewer joins a proposal of an archived call: known from the page
+  // (the call's own list) or from the row (the lists across calls).
+  const archivedOnPage = useArchivedCallReason();
+  const archived =
+    archivedOnPage ??
+    (isRowOfArchivedCall(row) ? getArchivedCallReason() : undefined);
 
   // Those managing the call's reviews see the action; while the proposal
   // cannot take a reviewer, it says why.
@@ -45,8 +56,8 @@ export const ProposalRowActions = ({ row, refetch }) => {
         <>
           <ActionItem
             title={translate('Assign reviewer')}
-            disabled={Boolean(blocker)}
-            tooltip={blocker ?? undefined}
+            disabled={Boolean(blocker) || Boolean(archived)}
+            tooltip={archived ?? blocker ?? undefined}
             action={() =>
               openDialog(CreateManualAssignmentDialog, {
                 resolve: {
@@ -59,7 +70,7 @@ export const ProposalRowActions = ({ row, refetch }) => {
             }
             iconNode={<ChatTextIcon weight="bold" />}
           />
-          {!blocker && (
+          {!blocker && !archived && (
             <ReviewProposalMyselfAction row={row} refetch={refetch} />
           )}
         </>

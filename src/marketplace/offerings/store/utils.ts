@@ -5,6 +5,10 @@ import {
   ProviderPlanDetailsRequest,
 } from 'waldur-js-client';
 
+import {
+  cleanFixedSitesPolicy,
+  isK8sConfigFieldType,
+} from '@/marketplace/common/k8s-types';
 import { isUniqueOptionFieldType } from '@/marketplace/common/optionErrors';
 import { isPatternFieldType } from '@/marketplace/common/optionPattern';
 import { isTransformFieldType } from '@/marketplace/common/optionTransform';
@@ -157,14 +161,13 @@ export const formatOption = (option: OptionFormData) => {
   }
 
   // Handle default_configs for K8s config types
-  if (
-    default_configs &&
-    (item.type === 'single_datacenter_k8s_config' ||
-      item.type === 'multi_datacenter_k8s_config')
-  ) {
-    // A cleared setting (for example topology_mode set back to "the type
-    // decides") must disappear rather than reach the backend as null.
-    item.default_configs = omitBy(default_configs, (value) => value == null);
+  if (default_configs && isK8sConfigFieldType(item.type)) {
+    // A cleared setting (for example topology_mode set back to "the customer
+    // chooses") must disappear rather than reach the backend as null.
+    // The provider's sites are kept only while the provider fixes them.
+    item.default_configs = cleanFixedSitesPolicy(
+      omitBy(default_configs, (value) => value == null),
+    );
   }
 
   // A network or secret option's policy: only its own keys, without what a cleared

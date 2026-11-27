@@ -290,7 +290,7 @@ describe('ResourceUsageChart', () => {
     expect(result.series).toHaveLength(2);
     expect(result.series[0].name).toBe('Limit');
     expect(result.series[0].data[0].value).toBe(100);
-    expect(result.series[1].name).toBe('Usage');
+    expect(result.series[1].name).toBe('Monthly peak');
   });
 
   it('should omit Limit row from tooltip when its value is zero on usage-based components', () => {
@@ -390,12 +390,12 @@ describe('ResourceUsageChart', () => {
       {
         axisValue: 'March 2024',
         marker: '',
-        seriesName: 'Usage',
+        seriesName: 'Monthly peak',
         data: result.series[1].data[0],
       },
     ]);
     expect(marchTooltip).not.toContain('Limit:');
-    expect(marchTooltip).toContain('Usage: <b>0</b>');
+    expect(marchTooltip).toContain('Monthly peak: <b>0</b>');
   });
 
   describe('getUsageHistoryPeriodOptions', () => {
@@ -587,5 +587,112 @@ describe('ResourceUsageChart', () => {
 
     expect(tooltip.split('&lt;img src=x onerror=alert(1)&gt;')).toHaveLength(6);
     expect(tooltip).not.toContain('<img');
+  });
+
+  describe('limit-based components', () => {
+    const ram = {
+      type: 'ram',
+      name: 'RAM',
+      measured_unit: 'GB',
+      billing_type: 'limit',
+      factor: 1024,
+    } as OfferingComponent;
+    const ramUsages = [
+      { type: 'ram', usage: 233472, billing_period: '2024-03-01' },
+    ] as ComponentUsage[];
+
+    it('shows OpenStack RAM in GB, not the MiB it is stored in', () => {
+      const result = getEChartOptions(ram, ramUsages, [], 1, '#1f77b4', null, {
+        offeringType: 'OpenStack.Tenant',
+      });
+
+      expect(result.yAxis[0].name).toBe('GB');
+      expect(result.series.at(-1).data[0].value).toBe(228);
+    });
+
+    it('converts the unit when the factor promotes it', () => {
+      const result = getEChartOptions(
+        { ...ram, measured_unit: 'MB' },
+        ramUsages,
+        [],
+        1,
+        '#1f77b4',
+      );
+
+      expect(result.yAxis[0].name).toBe('GB');
+      expect(result.series.at(-1).data[0].value).toBe(228);
+    });
+
+    it('names the bar a monthly peak and draws the current usage and limit', () => {
+      const result = getEChartOptions(ram, ramUsages, [], 1, '#1f77b4', null, {
+        offeringType: 'OpenStack.Tenant',
+        currentUsage: 229376,
+        currentLimit: 245760,
+      });
+
+      // Monthly limits are not reported per resource, so the empty bars give
+      // way to today's limit as a line.
+      expect(result.series).toHaveLength(1);
+      const peak = result.series[0];
+      expect(peak.name).toBe('Monthly peak');
+      expect(peak.markLine.data.map((line) => line.yAxis)).toEqual([224, 240]);
+      expect(peak.markLine.data.map((line) => line.label.formatter)).toEqual([
+        'Now: 224 GB',
+        'Limit: 240 GB',
+      ]);
+    });
+
+    it('stretches the axis to a limit above the highest bar', () => {
+      const result = getEChartOptions(ram, ramUsages, [], 1, '#1f77b4', null, {
+        offeringType: 'OpenStack.Tenant',
+        currentUsage: 88064,
+        currentLimit: 131072,
+      });
+      const { max } = result.yAxis[0];
+
+      // Bars at 94 GB under a 128 GB limit: the axis ends on a round tick past it.
+      expect(max({ min: 0, max: 94 })).toBe(150);
+      // Bars already above the limit keep ECharts' own maximum.
+      expect(max({ min: 0, max: 228 })).toBeUndefined();
+    });
+
+    it('leaves the axis alone without reference lines', () => {
+      const result = getEChartOptions(ram, ramUsages, [], 1, '#1f77b4', null, {
+        offeringType: 'OpenStack.Tenant',
+      });
+
+      expect(result.yAxis[0].max).toBeUndefined();
+    });
+
+    it('draws no current-usage line for usage-based components', () => {
+      const result = getEChartOptions(
+        { ...ram, billing_type: 'usage' },
+        ramUsages,
+        [],
+        1,
+        '#1f77b4',
+        null,
+        { currentUsage: 10, currentLimit: 20 },
+      );
+
+      expect(result.series.at(-1).name).toBe('Usage');
+      expect(result.series.at(-1).markLine).toBeUndefined();
+    });
+
+    it('puts the unit after each value in the tooltip', () => {
+      const result = getEChartOptions(ram, ramUsages, [], 1, '#1f77b4', null, {
+        offeringType: 'OpenStack.Tenant',
+      });
+      const tooltip = (result.tooltip.formatter as any)([
+        {
+          axisValue: 'March 2024',
+          marker: '',
+          seriesName: 'Monthly peak',
+          data: result.series.at(-1).data[0],
+        },
+      ]);
+
+      expect(tooltip).toContain('Monthly peak: <b>228</b> GB');
+    });
   });
 });

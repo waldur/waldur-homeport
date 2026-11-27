@@ -464,8 +464,12 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
     return kindField ? <>{kindField}</> : null;
   }
 
-  // The Check page is the dialog's own, not a page of fields.
-  const sections: Record<Exclude<StepFormPage, 'check'>, ReactNode> = {
+  // The Emails and Check pages are the configure dialog's own, not pages
+  // of fields.
+  const sections: Record<
+    Exclude<StepFormPage, 'emails' | 'check'>,
+    ReactNode
+  > = {
     basics: (
       <>
         {kindField}
@@ -1068,7 +1072,7 @@ export const WorkflowStepFormFields: FC<WorkflowStepFormFieldsProps> = ({
       )}
       {has('has_discussion') && <SyncDiscussion kind={kind} values={values} />}
       {pages.map((key) =>
-        key === 'check' ? null : (
+        key === 'emails' || key === 'check' ? null : (
           <div
             key={key}
             hidden={key !== page}

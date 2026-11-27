@@ -1,5 +1,6 @@
 import { Offering, OrderCreateRequest } from 'waldur-js-client';
 
+import { isK8sConfigFieldType } from '@/marketplace/common/k8s-types';
 import { getHiddenOptionKeys } from '@/marketplace/common/optionVisibility';
 import {
   getFormLimitSerializer,
@@ -82,10 +83,7 @@ const formatAttributes = (
     ) {
       // Keep the whole object structure.
       newAttributes[key] = value;
-    } else if (
-      optionConfig?.type === 'single_datacenter_k8s_config' ||
-      optionConfig?.type === 'multi_datacenter_k8s_config'
-    ) {
+    } else if (isK8sConfigFieldType(optionConfig?.type)) {
       // For K8s config, parse JSON string if needed
       newAttributes[key] =
         typeof value === 'string' ? JSON.parse(value) : value;

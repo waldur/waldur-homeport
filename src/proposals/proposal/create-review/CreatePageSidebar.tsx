@@ -9,6 +9,7 @@ import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ScrollSpyNav } from '@/navigation/ScrollSpyNav';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { useCallFixedDuration } from '@/proposals/callQueries';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { Proposal, ProposalReview } from '@/proposals/types';
@@ -32,6 +33,7 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
   proposal,
   refetch,
 }) => {
+  const archived = useArchivedCallReason();
   const { openDialog } = useModal();
   // A stable identity matters: ScrollSpyNav re-derives the sections it
   // tracks whenever this array changes.
@@ -81,12 +83,16 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
               openDialog(SubmitReviewDialog, { resolve: { review, refetch } })
             }
             label={translate('Submit review')}
+            disabled={!!archived}
+            disabledReason={archived}
             variant="primary"
             className="w-full mt-1.5"
             size="lg"
           />
           <BaseButton
             onClick={() => rejectMutation.mutate()}
+            disabled={!!archived}
+            disabledReason={archived}
             label={translate('Send back')}
             variant="danger"
             className="w-full mt-1.5"

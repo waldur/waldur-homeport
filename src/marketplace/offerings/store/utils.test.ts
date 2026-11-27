@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { dropHiddenPrepaidSettings, formatOption } from './utils';
 
 describe('formatOption', () => {
-  it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+  it.each(['k8s_cluster_config'])(
     'drops cleared Kubernetes settings from a %s option',
     (type) => {
       const item = formatOption({
@@ -30,11 +30,72 @@ describe('formatOption', () => {
     const item = formatOption({
       name: 'cluster',
       label: 'Cluster',
-      type: { value: 'single_datacenter_k8s_config', label: '' },
+      type: { value: 'k8s_cluster_config', label: '' },
       default_configs: { topology_mode: 'customer_choice' },
     } as any);
 
     expect(item.default_configs).toEqual({ topology_mode: 'customer_choice' });
+  });
+
+  describe('fixed sites', () => {
+    const format = (defaultConfigs) =>
+      formatOption({
+        name: 'cluster',
+        label: 'Cluster',
+        type: { value: 'k8s_cluster_config', label: '' },
+        default_configs: defaultConfigs,
+      } as any).default_configs;
+
+    it('keeps the sites of every allowed topology with provider_fixed', () => {
+      expect(
+        format({
+          infrastructure_mode: 'provider_fixed',
+          fixed_openstack_offerings: {
+            '1-datacenter': ['a'],
+            '3-datacenter': ['a', 'b', 'c'],
+          },
+        }),
+      ).toEqual({
+        infrastructure_mode: 'provider_fixed',
+        fixed_openstack_offerings: {
+          '1-datacenter': ['a'],
+          '3-datacenter': ['a', 'b', 'c'],
+        },
+      });
+    });
+
+    it('drops the sites of a topology the option no longer allows', () => {
+      expect(
+        format({
+          infrastructure_mode: 'provider_fixed',
+          topology_mode: '3-datacenter',
+          fixed_openstack_offerings: {
+            '1-datacenter': ['a'],
+            '3-datacenter': ['a', 'b', 'c'],
+          },
+        }).fixed_openstack_offerings,
+      ).toEqual({ '3-datacenter': ['a', 'b', 'c'] });
+    });
+
+    it.each([undefined, null, 'customer_choice'])(
+      'drops the sites when the mode is %s',
+      (mode) => {
+        const item = format({
+          infrastructure_mode: mode,
+          fixed_openstack_offerings: { '1-datacenter': ['a'] },
+          available_kubernetes_versions: '1.30.0',
+        });
+        expect(item).not.toHaveProperty('fixed_openstack_offerings');
+        expect(item).toEqual(
+          mode === 'customer_choice'
+            ? {
+                infrastructure_mode: 'customer_choice',
+                available_kubernetes_versions: '1.30.0',
+              }
+            : { available_kubernetes_versions: '1.30.0' },
+        );
+      },
+    );
   });
 });
 

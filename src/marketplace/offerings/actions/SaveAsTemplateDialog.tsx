@@ -59,7 +59,10 @@ export const SaveAsTemplateDialog: FC<SaveAsTemplateDialogProps> = ({
           actions: [
             {
               label: translate('Open offering templates'),
-              onClick: () => router.stateService.go('admin-offering-templates'),
+              onClick: () =>
+                router.stateService.go('admin-marketplace-offerings', {
+                  tab: 'templates',
+                }),
               primary: true,
             },
           ],

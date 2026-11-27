@@ -4,6 +4,8 @@ import {
   htmlToPlainText,
   markdownToPlainText,
   parseMarkdown,
+  parseMarkdownLinksOnly,
+  sanitizeHtml,
 } from './sanitize';
 
 describe('htmlToPlainText', () => {
@@ -82,5 +84,26 @@ describe('markdownToPlainText', () => {
 describe('parseMarkdown', () => {
   it('does not throw on deeply nested markdown', () => {
     expect(typeof parseMarkdown('>'.repeat(3000) + 'x')).toBe('string');
+  });
+});
+
+describe('class attributes', () => {
+  const overlay =
+    '<a href="https://example.com/" class="fixed inset-0 z-[9999]">Sign in</a>';
+
+  it('are removed from sanitized HTML', () => {
+    expect(sanitizeHtml(overlay)).toBe(
+      '<a href="https://example.com/">Sign in</a>',
+    );
+  });
+
+  it('are removed from links-only markdown', () => {
+    expect(parseMarkdownLinksOnly(overlay)).not.toContain('class');
+  });
+
+  it('are removed from code blocks rendered from markdown', () => {
+    const html = parseMarkdown('```js\nlet x;\n```');
+    expect(html).not.toContain('class');
+    expect(html).toContain('<pre><code>let x;');
   });
 });

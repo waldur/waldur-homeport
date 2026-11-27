@@ -69,6 +69,7 @@ export const StepDiscussionsSection: FC<StepDiscussionsSectionProps> = ({
           <StepDiscussionButton
             discussion={row.discussion!}
             target={{ proposal_step_uuid: row.uuid }}
+            step={row}
             invalidateQueries={[
               { queryKey: proposalWorkflowStatesKey(proposalUuid) },
             ]}

@@ -38,6 +38,7 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { useArchivedCallReason } from '@/proposals/archivedCall';
 import { useAwardedResources } from '@/proposals/awardedResources';
 import { CoiDeclaration } from '@/proposals/coi-declaration/CoiDeclaration';
 import { getRequestedLines } from '@/proposals/provider-calls/requestedLines';
@@ -333,6 +334,7 @@ const ContributionCard: FC<ContributionCardProps> = ({
   awarded,
   refetch,
 }) => {
+  const archived = useArchivedCallReason(step);
   const { openDialog } = useModal();
   const canReopen = useCanReopen(proposal, step, contribution, workflowStates);
   const reopen = useManagedMutation<any, any, { input: string }>({
@@ -533,12 +535,16 @@ const ContributionCard: FC<ContributionCardProps> = ({
                 label={translate('Decline')}
                 iconNode={<XIcon weight="bold" />}
                 onClick={() => decline.mutate()}
+                disabled={!!archived}
+                disabledReason={archived}
               />
               <BaseButton
                 variant="primary"
                 label={translate('Accept')}
                 iconNode={<CheckIcon weight="bold" />}
                 onClick={() => accept.mutate()}
+                disabled={!!archived}
+                disabledReason={archived}
               />
             </>
           )}
@@ -548,12 +554,16 @@ const ContributionCard: FC<ContributionCardProps> = ({
               label={translate('Take back')}
               iconNode={<ArrowUUpLeftIcon weight="bold" />}
               onClick={() => takeBack.mutate()}
+              disabled={!!archived}
+              disabledReason={archived}
             />
           )}
           {canDelegate && (
             <BaseButton
               variant="tertiary"
               label={translate('Hand on')}
+              disabled={!!archived}
+              disabledReason={archived}
               iconNode={<ShareFatIcon weight="bold" />}
               onClick={() =>
                 openDialog(DelegateContributionDialog, {
@@ -572,6 +582,8 @@ const ContributionCard: FC<ContributionCardProps> = ({
             label={translate('Request changes')}
             iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
             onClick={() => reopen.mutate()}
+            disabled={!!archived}
+            disabledReason={archived}
             pending={reopen.isPending}
             data-testid="reopen-contribution"
           />
@@ -588,11 +600,15 @@ const ContributionCard: FC<ContributionCardProps> = ({
               }
               iconNode={<PencilSimpleIcon weight="bold" />}
               onClick={() => setEditing(!editing)}
+              disabled={!!archived}
+              disabledReason={archived}
             />
           )}
           <BaseButton
             variant="primary"
             label={translate('Submit contribution')}
+            disabled={!!archived}
+            disabledReason={archived}
             iconNode={<PaperPlaneTiltIcon weight="bold" />}
             onClick={() =>
               openDialog(SubmitContributionDialog, {

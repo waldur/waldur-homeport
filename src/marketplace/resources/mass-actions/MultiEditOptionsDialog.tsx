@@ -137,6 +137,7 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
             ) : editableOptions?.order.length ? (
               <OptionsForm
                 options={editableOptions}
+                offeringUuid={offeringQuery.data?.uuid}
                 allModelsOption={getAllModelsOption(editableOptions)}
               />
             ) : (

@@ -39,6 +39,9 @@ export interface TableOptionsType<RowType = any> {
   exportKeys?: string[];
   exportData?: (rows: RowType[], props: any) => string[][];
   exportRow?: (row: RowType, props: any) => string[];
+  /** The title and file name of the table's exports; the table's id
+   * otherwise. */
+  exportTitle?: string;
   filter?;
   mandatoryFields?: string[];
   initialFilters?: Record<string, any>;

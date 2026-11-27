@@ -7,13 +7,18 @@ import { TableWithTabs } from '@/table/TableWithTabs';
 import { useResourceUsageTabs } from './utils';
 
 interface ResourceUsageTableProps {
-  offeringComponent: Pick<OfferingComponent, 'billing_type' | 'name'>;
+  offeringComponent: Pick<
+    OfferingComponent,
+    'billing_type' | 'name' | 'type' | 'measured_unit' | 'factor'
+  >;
   resource: Pick<Resource, 'name'>;
+  offeringType?: string;
 }
 
 export const ResourceUsageTable: FunctionComponent<ResourceUsageTableProps> = ({
   offeringComponent,
   resource,
+  offeringType,
 }) => {
   const tabs = useResourceUsageTabs();
 
@@ -24,6 +29,7 @@ export const ResourceUsageTable: FunctionComponent<ResourceUsageTableProps> = ({
       data={{
         offeringComponent,
         resource,
+        offeringType,
       }}
     />
   );

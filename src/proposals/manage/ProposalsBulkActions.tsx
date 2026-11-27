@@ -41,13 +41,16 @@ interface BulkOptions {
   canAssignReviewers: boolean;
   /** May download the call's exports. */
   canExport: boolean;
+  /** The call is archived: its proposals are read-only, so no step is
+   * decided and no reviewer assigned; messages and exports remain. */
+  archived?: boolean;
 }
 
 /** What a call manager can do to the selected proposals of a call at once. */
 export const makeProposalsBulkActions =
   (
     call: Pick<Call, 'uuid' | 'url' | 'slug'>,
-    { canAssignReviewers, canExport }: BulkOptions,
+    { canAssignReviewers, canExport, archived }: BulkOptions,
   ): FC<{ rows: Proposal[]; refetch: () => void; size?: ButtonSize }> =>
   ({ rows, refetch, size = 'lg' }) => {
     const { openDialog } = useModal();
@@ -70,18 +73,20 @@ export const makeProposalsBulkActions =
           {translate('All actions')}
         </Menu.TriggerButton>
         <Menu.Content look="actions" side="bottom">
-          <Menu.Item
-            icon={<CheckSquareIcon weight="bold" />}
-            disabled={count === 0}
-            onSelect={() =>
-              openDialog(DecideProposalStepsDialog, {
-                resolve: { proposals: rows, refetch },
-              })
-            }
-          >
-            {`${translate('Decide a step')} (${count})`}
-          </Menu.Item>
-          {canAssignReviewers && (
+          {!archived && (
+            <Menu.Item
+              icon={<CheckSquareIcon weight="bold" />}
+              disabled={count === 0}
+              onSelect={() =>
+                openDialog(DecideProposalStepsDialog, {
+                  resolve: { callUuid: call.uuid, proposals: rows, refetch },
+                })
+              }
+            >
+              {`${translate('Decide a step')} (${count})`}
+            </Menu.Item>
+          )}
+          {canAssignReviewers && !archived && (
             <Menu.Item
               icon={<ChatTextIcon weight="bold" />}
               disabled={count === 0}

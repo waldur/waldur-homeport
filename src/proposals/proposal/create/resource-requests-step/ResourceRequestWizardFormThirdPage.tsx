@@ -46,6 +46,7 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
       {_offering?.options ? (
         <OptionsForm
           options={_offering.options}
+          offeringUuid={_offering.uuid}
           allModelsOption={getAllModelsOption(_offering.resource_options)}
           orderForm
         />

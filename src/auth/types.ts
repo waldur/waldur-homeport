@@ -48,6 +48,10 @@ export type ServiceAccessMode = 'calls' | 'marketplace' | 'both';
 export type MatrixExternalLoginMethod = 'none' | 'password' | 'oidc';
 
 interface CoreConfiguration {
+  /** Shown on the login-failed page for the `oidc_blocked` code. */
+  OIDC_BLOCKED_LOGIN_RESPONSE_MESSAGE?: string;
+  /** Shown on the login-failed page for the `oidc_uninvited` code. */
+  OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE?: string;
   INVITATION_USE_WEBHOOKS: boolean;
   /** Staff and support accounts must hold a passkey and have satisfied it. */
   PASSKEY_ENFORCED_FOR_STAFF?: boolean;

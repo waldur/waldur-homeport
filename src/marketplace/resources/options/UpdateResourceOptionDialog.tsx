@@ -204,6 +204,7 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
             <>
               <OptionsForm
                 options={options}
+                offeringUuid={offering?.uuid}
                 allModelsOption={allModelsOption}
                 optionLabels={optionLabels}
               />

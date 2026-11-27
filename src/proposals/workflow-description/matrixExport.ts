@@ -48,11 +48,7 @@ export const roleMatrixExportRows = (
           yesNo(cell.completes.value),
           yesNo(cell.notified.value),
           cell.notified.triggers
-            .map((t) =>
-              t.days_before != null
-                ? `${t.trigger} (${t.days_before})`
-                : t.trigger,
-            )
+            .map((t) => triggerLabel(t.trigger, t.days_before))
             .join(', '),
           cell.actor === 'applicant'
             ? applicantLabelText(step.applicant.label_kind, step.name)

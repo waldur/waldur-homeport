@@ -19,6 +19,10 @@ import {
 } from '@/permissions/hasPermission';
 import { ProposalActivitySection } from '@/proposals/activity/ProposalActivitySection';
 import {
+  isAwardStageStep,
+  useArchivedCallReason,
+} from '@/proposals/archivedCall';
+import {
   asCostRow,
   compareAward,
   hasReachedAllocationDecision,
@@ -138,6 +142,11 @@ export const ProposalDetails = ({
 
   const { openDialog } = useModal();
   const user = useUser();
+  // An archived call's evaluation is closed: its sections read as they are,
+  // with no control to change them (the page's notice says why). The award
+  // stage's sections go on.
+  const archivedReason = useArchivedCallReason();
+  const archived = Boolean(archivedReason);
   const canCreateReview = useCanCreateReview(proposal);
 
   const { view, preview: previewCandidate } = useProposalView(proposal);
@@ -456,6 +465,8 @@ export const ProposalDetails = ({
           <AllocationOutcomeSection
             proposal={proposal}
             awardRows={awardRows}
+            // Provisioning is the award stage's: it goes on in an archived
+            // call.
             canProvision={
               isCallManagerView ||
               checkScope(
@@ -479,7 +490,7 @@ export const ProposalDetails = ({
           <ProjectDetailsSummary
             proposal={proposal}
             reviews={reviews}
-            canChangePanel={canChangePanel}
+            canChangePanel={canChangePanel && !archived}
             refetch={refetch}
           />
           {hasCompliance && (
@@ -495,7 +506,7 @@ export const ProposalDetails = ({
           {canQueryAwards && (
             <AwardedResourcesSection
               proposal={proposal}
-              editable={awardsEditable}
+              editable={awardsEditable && !archived}
               decisionOpen={isAwardDecisionOpen(proposal, activeStep)}
               decisionHeld={proposal.decision_held === true}
               refetch={refetch}
@@ -519,7 +530,10 @@ export const ProposalDetails = ({
             <StepChecklistSection
               proposal={proposal}
               step={activeStep}
-              canEdit={canEditActiveStepChecklist}
+              canEdit={
+                canEditActiveStepChecklist &&
+                (!archived || isAwardStageStep(activeStep))
+              }
               refetch={refetch}
             />
           )}
@@ -541,20 +555,20 @@ export const ProposalDetails = ({
             <ProposalEvaluatorsSection
               proposal={proposal}
               roles={callProposalRoles ?? []}
-              canManage={canManageEvaluators}
+              canManage={canManageEvaluators && !archived}
               changesAnyHolder={changesAnyHolder(user, proposal)}
             />
           )}
           {show.myReviewerSuggestions && (
             <MyReviewerSuggestionsSection
               proposal={proposal}
-              canSuggest={suggestionAccess.canSuggest}
+              canSuggest={suggestionAccess.canSuggest && !archived}
             />
           )}
           {show.suggestedReviewers && (
             <SuggestedReviewersSection
               proposal={proposal}
-              canInvite={canInviteSuggested}
+              canInvite={canInviteSuggested && !archived}
             />
           )}
           {show.team && (
@@ -615,6 +629,8 @@ export const ProposalDetails = ({
             !isReviewInFinalState(review.state) && (
               <BaseButton
                 variant="primary"
+                disabled={archived}
+                disabledReason={archivedReason}
                 onClick={() =>
                   openDialog(SubmitReviewDialog, {
                     resolve: { review, refetch },
@@ -629,6 +645,8 @@ export const ProposalDetails = ({
           {isCallManagerView && canCreateReview && (
             <BaseButton
               variant="secondary"
+              disabled={archived}
+              disabledReason={archivedReason}
               onClick={() =>
                 openDialog(CreateManualAssignmentDialog, {
                   resolve: {

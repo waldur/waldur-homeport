@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { AgreementTypeEnum, userAgreementsCreate } from 'waldur-js-client';
 
+import { USER_AGREEMENT_QUERY_KEYS } from '@/about/useAvailableUserAgreements';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { SubmitButton, SelectGroup, MarkdownGroup } from '@/form';
@@ -43,6 +44,7 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
     successMessage: translate('User agreement has been created'),
     errorMessage: translate('Unable to create a user agreement.'),
     refetch: resolve?.refetch,
+    invalidateQueries: USER_AGREEMENT_QUERY_KEYS,
   });
 
   return (

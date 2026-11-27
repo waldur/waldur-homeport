@@ -44,7 +44,7 @@ describe('getOptionTypes', () => {
     const k8s = {
       options: {
         options: {
-          cluster: { type: 'single_datacenter_k8s_config', label: 'Cluster' },
+          cluster: { type: 'k8s_cluster_config', label: 'Cluster' },
         },
       },
     };
@@ -55,7 +55,7 @@ describe('getOptionTypes', () => {
       options: {
         options: {
           ...k8s.options.options,
-          other: { type: 'multi_datacenter_k8s_config', label: 'Other' },
+          other: { type: 'k8s_cluster_config', label: 'Other' },
         },
       },
     };

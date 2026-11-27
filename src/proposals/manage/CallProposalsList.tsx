@@ -25,6 +25,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
+import { ArchivedCallContext, isCallArchived } from '../archivedCall';
 import {
   ComplianceStatusBadge,
   formatComplianceStatus,
@@ -35,6 +36,7 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { Call } from '../types';
 import { canExportCall, canUpdateCall } from '../utils';
 
+import { BulkStepDecisionsButton } from './BulkStepDecisionsButton';
 import { buildCallExportUrl } from './callExportUrl';
 import { makeProposalsBulkActions } from './ProposalsBulkActions';
 import { ProposalStepCell } from './ProposalStepCell';
@@ -99,7 +101,11 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
   const bulkActions = useMemo(
     () =>
       canActOnSelection
-        ? makeProposalsBulkActions(call, { canAssignReviewers, canExport })
+        ? makeProposalsBulkActions(call, {
+            canAssignReviewers,
+            canExport,
+            archived: isCallArchived(call),
+          })
         : undefined,
     [canActOnSelection, call, canAssignReviewers, canExport],
   );
@@ -228,14 +234,25 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
       expandableRow={ProposalExpandableRow}
       enableMultiSelect={canActOnSelection}
       multiSelectActions={bulkActions}
+      tableActions={
+        canActOnSelection ? (
+          <BulkStepDecisionsButton
+            callUuid={call.uuid}
+            refetch={tableProps.fetch}
+          />
+        ) : undefined
+      }
       rowActions={({ row }) => (
-        <ProposalRowActions
-          row={{
-            ...row,
-            call_uuid: call.uuid,
-          }}
-          refetch={tableProps.fetch}
-        />
+        // The row actions read whether the call is archived from here.
+        <ArchivedCallContext.Provider value={isCallArchived(call)}>
+          <ProposalRowActions
+            row={{
+              ...row,
+              call_uuid: call.uuid,
+            }}
+            refetch={tableProps.fetch}
+          />
+        </ArchivedCallContext.Provider>
       )}
       filters={<ProposalProposalsFilter callUuid={call.uuid} hideCall />}
       formId={ProposalProposalsFilterFormId}

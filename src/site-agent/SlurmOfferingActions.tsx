@@ -10,6 +10,7 @@ import { Menu } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
+import { isAgentConfigurationVisible } from '@/marketplace/offerings/update/integration/agentConfiguration';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -22,6 +23,12 @@ import { CreateAgentTokenMenuItem } from './CreateAgentTokenMenuItem';
 const SiteAgentConfigDialog = lazyComponent(() =>
   import('./SiteAgentConfigDialog').then((m) => ({
     default: m.SiteAgentConfigDialog,
+  })),
+);
+
+const ConfigurationChecksDialog = lazyComponent(() =>
+  import('./ConfigurationChecksDialog').then((m) => ({
+    default: m.ConfigurationChecksDialog,
   })),
 );
 
@@ -64,6 +71,12 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
       size: 'lg',
     });
   };
+
+  const openConfigurationChecks = () =>
+    openDialog(ConfigurationChecksDialog, {
+      resolve: { offering: { uuid: offering.uuid, name: offering.name } },
+      size: 'lg',
+    });
 
   const openLdapAgentEnv = () => {
     openDialog(LdapAgentEnvDialog, {
@@ -130,6 +143,14 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
             }
           >
             {translate('Generate Site Agent Config')}
+          </Menu.Item>
+        )}
+        {showSiteAgentConfig && isAgentConfigurationVisible(offering) && (
+          <Menu.Item
+            onSelect={openConfigurationChecks}
+            data-testid="check-configuration"
+          >
+            {translate('Check configuration')}
           </Menu.Item>
         )}
         {showSiteAgentConfig && (

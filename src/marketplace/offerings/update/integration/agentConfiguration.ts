@@ -27,6 +27,26 @@ export const AGENT_ROLE_FIELDS = [
 
 export type AgentRoleField = (typeof AGENT_ROLE_FIELDS)[number]['field'];
 
+export const getRoleLabels = (): Record<AgentRoleField, string> => ({
+  order_processing_backend: translate('Order processing'),
+  membership_sync_backend: translate('Membership sync'),
+  reporting_backend: translate('Reporting'),
+  username_management_backend: translate('Username management'),
+});
+
+export const getRoleDescriptions = (): Record<AgentRoleField, string> => ({
+  order_processing_backend: translate(
+    'Creates, updates and terminates resources on the backend.',
+  ),
+  membership_sync_backend: translate(
+    "Keeps the backend's users in step with resource teams.",
+  ),
+  reporting_backend: translate('Reports usage from the backend to Waldur.'),
+  username_management_backend: translate(
+    'Gives offering users their usernames on the backend.',
+  ),
+});
+
 // What the agent uses for a switch the configuration leaves out
 // (waldur_site_agent/common/structures.py). Shown as the value of an unset
 // switch, and not written back when saved unchanged from it.
@@ -45,6 +65,14 @@ export const AGENT_SWITCH_DEFAULTS = {
 // OFFERING.UPDATE_AGENT_CONFIGURATION; the section marks them.
 const BLOCK_KEYS = ['event_settings', 'agent_settings'] as const;
 const JSON_KEYS = ['backend_settings', 'backend_components'];
+
+/**
+ * The key of a change that sets some backend settings and keeps the rest, as
+ * opposed to `backend_settings`, which replaces the whole object. A setting
+ * given as empty (undefined, null or '') is removed: the agent then uses its
+ * default.
+ */
+export const BACKEND_SETTINGS_UPDATE = 'backend_settings_update';
 
 /**
  * Whether the offering page shows the agent configuration: a site-agent
@@ -104,8 +132,9 @@ export const validateJsonObject = (value: unknown): string | undefined => {
  * The agent configuration to send after changing part of it.
  *
  * update_integration replaces the whole configuration, so the change is laid
- * over the stored one. Event and agent settings are merged key by key; the
- * JSON blocks and every other key are replaced as a whole. An emptied value
+ * over the stored one. Event and agent settings are merged key by key, and
+ * so are backend settings given as `BACKEND_SETTINGS_UPDATE`; the JSON blocks
+ * and every other key are replaced as a whole. An emptied value
  * is left out rather than sent: the serializer refuses a blank host or a null
  * switch, and the agent reads a missing key as its default. A switch saved at
  * the agent's default is left out too: written out it would change the
@@ -132,6 +161,18 @@ export const mergeAgentConfiguration = (
         },
       );
       next[key] = withoutUnset(block);
+    } else if (key === BACKEND_SETTINGS_UPDATE) {
+      const settings = { ...(next.backend_settings ?? {}) };
+      Object.entries((value as Record<string, unknown>) ?? {}).forEach(
+        ([name, item]) => {
+          if (item === undefined || item === null || item === '') {
+            delete settings[name];
+          } else {
+            settings[name] = item;
+          }
+        },
+      );
+      next.backend_settings = settings;
     } else if (JSON_KEYS.includes(key)) {
       next[key] = parseJsonObject(value);
     } else {
@@ -197,6 +238,51 @@ const agentRoles = (configuration: Record<string, any>) =>
     ({ field }) =>
       field !== 'username_management_backend' && Boolean(configuration[field]),
   );
+
+// What the agent runs for a role while no agent role is set.
+export const DEFAULT_ROLE_BACKENDS: Record<AgentRoleField, string> = {
+  order_processing_backend: 'slurm',
+  membership_sync_backend: 'slurm',
+  reporting_backend: 'slurm',
+  username_management_backend: 'base',
+};
+
+/**
+ * With no agent role set, every agent role runs slurm, and the page shows
+ * them so. Once one is set the others mean off: a save that sets the first
+ * one keeps the others on the backend they showed instead. So does a save
+ * that turns one off (`change` clears it): the others keep slurm, and the
+ * cleared one is off, rather than the save changing nothing.
+ */
+export const withDefaultRoles = (
+  current: Record<string, any>,
+  next: Record<string, any>,
+  change: Record<string, any> = {},
+): Record<string, any> => {
+  const cleared = AGENT_ROLE_FIELDS.filter(
+    ({ field }) =>
+      field !== 'username_management_backend' &&
+      field in change &&
+      !change[field],
+  ).map(({ field }) => field);
+  if (
+    agentRoles(current).length ||
+    (!agentRoles(next).length && !cleared.length)
+  ) {
+    return next;
+  }
+  const filled = { ...next };
+  AGENT_ROLE_FIELDS.forEach(({ field }) => {
+    if (
+      field !== 'username_management_backend' &&
+      !filled[field] &&
+      !cleared.includes(field)
+    ) {
+      filled[field] = DEFAULT_ROLE_BACKENDS[field];
+    }
+  });
+  return filled;
+};
 
 /**
  * Why a save that clears the last agent role is refused: with no role set
@@ -269,7 +355,7 @@ const BACKEND_MESSAGE = /^([a-z][\w-]*): (.+)$/;
  * is put after the path, `dotted.path (backend): message`, one line per
  * backend.
  */
-const flattenErrors = (errors: unknown, prefix = ''): string[] => {
+export const flattenErrors = (errors: unknown, prefix = ''): string[] => {
   const line = (message: string, backend?: string) => {
     const where = backend ? `${prefix} (${backend})` : prefix;
     return where ? `${where}: ${message}` : message;
@@ -381,15 +467,13 @@ export const describeRefusal = (
   if (path !== ROLES_AND_SETTINGS && refuses('backend_settings')) {
     hints.push(
       translate(
-        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Backends tab.',
+        'Change the backends and their settings in one save with "Edit roles and backend settings together" on the Advanced (JSON) tab.',
       ),
     );
   }
   if (refuses('backend_components')) {
     hints.push(
-      translate(
-        'Fix the backend components on the Backend settings tab first.',
-      ),
+      translate('Fix the backend components on the Advanced (JSON) tab first.'),
     );
   }
   return { errors: [...flattenErrors(own), ...otherLines], hints };
