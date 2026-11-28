@@ -111,6 +111,76 @@ describe('usePublicCallApply', () => {
       );
     });
 
+    describe('at the proposal limit', () => {
+      const CAPACITY =
+        'You have reached the maximum of 3 active projects or pending proposals.';
+      const reasons = (...codes: string[]) =>
+        vi
+          .mocked(proposalPublicCallsCheckEligibilityRetrieve)
+          .mockResolvedValue({
+            data: {
+              is_eligible: false,
+              restrictions: [],
+              reasons: codes.map((code) =>
+                code === 'applicant_capacity'
+                  ? { code, message: CAPACITY, limit: 3, held: 3 }
+                  : { code, message: "User nationality 'DE' is not allowed" },
+              ),
+            },
+          } as any);
+      const render = () =>
+        renderHook(() =>
+          usePublicCallApply(restricted(round('r-open', 'open'))),
+        );
+
+      it('says the limit is why Apply is disabled', async () => {
+        reasons('applicant_capacity');
+        const { result } = render();
+        await waitFor(() => expect(result.current.ineligible).toBe(true));
+        expect(result.current.disabledReason).toBe(CAPACITY);
+        expect(result.current.capacityMessage).toBe(CAPACITY);
+      });
+
+      // An older backend answers without reasons.
+      it.each([[undefined], [[]]])(
+        'keeps the generic wording without reasons (%j)',
+        async (reasonList) => {
+          vi.mocked(
+            proposalPublicCallsCheckEligibilityRetrieve,
+          ).mockResolvedValue({
+            data: {
+              is_eligible: false,
+              restrictions: [CAPACITY],
+              reasons: reasonList,
+            },
+          } as any);
+          const { result } = render();
+          await waitFor(() => expect(result.current.ineligible).toBe(true));
+          expect(result.current.disabledReason).toBe(
+            'You are not eligible to apply to this call.',
+          );
+          expect(result.current.capacityMessage).toBeUndefined();
+        },
+      );
+
+      // The user-restriction wording is untranslated and third-person.
+      it.each([
+        [['user_restrictions']],
+        [['user_restrictions', 'applicant_capacity']],
+      ])(
+        'keeps the generic wording when a user restriction fails (%j)',
+        async (codes) => {
+          reasons(...codes);
+          const { result } = render();
+          await waitFor(() => expect(result.current.ineligible).toBe(true));
+          expect(result.current.disabledReason).toBe(
+            'You are not eligible to apply to this call.',
+          );
+          expect(result.current.capacityMessage).toBeUndefined();
+        },
+      );
+    });
+
     it('lets an eligible applicant apply', async () => {
       eligibility(true);
       const { result } = renderHook(() =>

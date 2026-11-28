@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback, useMemo } from 'react';
 import {
+  EligibilityReason,
   NestedRound,
   proposalPublicCallsCheckEligibilityRetrieve,
   ProtectedRound,
@@ -24,6 +25,19 @@ const ProposalCreateDialog = lazyComponent(() =>
     default: module.AddProposalDialog,
   })),
 );
+
+/**
+ * The backend's message when the applicant's only failing check is the
+ * organization's limit on proposals held at once. That message is translated
+ * and addressed to the applicant, and tells them they only need to wait. The
+ * user-restriction messages are neither, so any of those keeps the generic
+ * wording (and an older backend without `reasons` does too).
+ */
+const getCapacityMessage = (reasons?: EligibilityReason[]) =>
+  reasons?.length &&
+  reasons.every((reason) => reason.code === 'applicant_capacity')
+    ? reasons[0].message
+    : undefined;
 
 export const usePublicCallApply = (
   call: Call,
@@ -70,6 +84,7 @@ export const usePublicCallApply = (
   // A failed check leaves Apply enabled: proposal creation re-validates the
   // user, so the backend still refuses an ineligible applicant.
   const ineligible = eligibility?.is_eligible === false;
+  const capacityMessage = getCapacityMessage(eligibility?.reasons);
 
   const disabledReason =
     call.state === 'archived'
@@ -77,7 +92,8 @@ export const usePublicCallApply = (
       : !activeRound
         ? translate('No open round available.')
         : ineligible
-          ? translate('You are not eligible to apply to this call.')
+          ? capacityMessage ||
+            translate('You are not eligible to apply to this call.')
           : eligibilityLoading
             ? translate('Checking eligibility…')
             : undefined;
@@ -115,5 +131,12 @@ export const usePublicCallApply = (
     [activeRound, ineligible, user, router, call],
   );
 
-  return { activeRound, hidden, handleApply, ineligible, disabledReason };
+  return {
+    activeRound,
+    hidden,
+    handleApply,
+    ineligible,
+    disabledReason,
+    capacityMessage,
+  };
 };

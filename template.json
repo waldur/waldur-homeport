@@ -92621,6 +92621,11 @@
       "feature_area": "staff-request"
     }
   },
+  "You cannot apply to this call yet.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "You cannot see who evaluates this proposal.": {
     "context": {
       "feature_area": "evaluators"

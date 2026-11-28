@@ -23,7 +23,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
 }) => {
   const status = useMemo(() => getCallStatus(call), [call]);
   // Shares the Apply button's eligibility query, so no second request.
-  const { hidden, ineligible } = usePublicCallApply(call);
+  const { hidden, ineligible, capacityMessage } = usePublicCallApply(call);
 
   return (
     <PublicDashboardHero
@@ -68,10 +68,17 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
           <AlertItem
             type="floating"
             variant="warning"
-            title={translate('You are not eligible to apply to this call.')}
-            body={translate(
-              'Your account does not satisfy the applicant eligibility requirements of this call.',
-            )}
+            title={
+              capacityMessage
+                ? translate('You cannot apply to this call yet.')
+                : translate('You are not eligible to apply to this call.')
+            }
+            body={
+              capacityMessage ||
+              translate(
+                'Your account does not satisfy the applicant eligibility requirements of this call.',
+              )
+            }
           />
         )
       }
