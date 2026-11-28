@@ -1,9 +1,10 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { vi, describe, expect, beforeEach, it } from 'vitest';
 import {
   featureRulesList,
+  featureRulesPartialUpdate,
   featureValues,
   metadataFeaturesRetrieve,
 } from 'waldur-js-client';
@@ -13,6 +14,7 @@ import {
   applyUserFeatures,
   rememberPublicFeatures,
 } from '@/features/userFeatures';
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
@@ -45,6 +47,20 @@ vi.mock('@/features/FeaturesDescription', () => ({
   ],
 }));
 
+// The checked segment of a feature's control, in any tab.
+const stateOf = (feature: string) =>
+  within(screen.getByTestId(feature))
+    .getAllByRole('radio', { hidden: true })
+    .find((radio) => radio.getAttribute('aria-checked') === 'true').textContent;
+
+const choose = (feature: string, state: string) =>
+  userEvent.click(
+    within(screen.getByTestId(feature)).getByRole('radio', {
+      name: state,
+      hidden: true,
+    }),
+  );
+
 describe('FeaturesList', () => {
   beforeEach(() => {
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
@@ -64,7 +80,7 @@ describe('FeaturesList', () => {
     vi.mocked(featureValues).mockReset();
   });
 
-  it('shows feature values without switches for support', () => {
+  it('shows feature states as text for support', () => {
     vi.mocked(useUser).mockReturnValue({
       is_staff: false,
       is_support: true,
@@ -75,8 +91,8 @@ describe('FeaturesList', () => {
     expect(
       screen.queryByRole('button', { name: /Save/i }),
     ).not.toBeInTheDocument();
-    expect(screen.getByText('Yes')).toBeInTheDocument();
-    expect(screen.getByText('No')).toBeInTheDocument();
+    expect(screen.getByText('Everyone')).toBeInTheDocument();
+    expect(screen.getByText('Off')).toBeInTheDocument();
   });
 
   it('anchors and highlights the feature linked with ?setting=', () => {
@@ -91,15 +107,17 @@ describe('FeaturesList', () => {
     expect(row).toHaveClass('bg-warning-subtle');
   });
 
-  it('names each switch by its feature description, which toggles it', async () => {
+  it('names each state control by its feature description', async () => {
     renderWithProviders(<FeaturesList />);
 
-    const billing = screen.getByRole('checkbox', {
-      name: 'Enable billing functionality',
-    });
-    expect(billing).toBeChecked();
-    await userEvent.click(screen.getByText('Enable billing functionality'));
-    expect(billing).not.toBeChecked();
+    expect(
+      screen.getByRole('radiogroup', {
+        name: 'Enable billing functionality',
+        hidden: true,
+      }),
+    ).toBeInTheDocument();
+    await choose('billing.enabled', 'Off');
+    expect(stateOf('billing.enabled')).toBe('Off');
   });
 
   it('renders all feature sections', () => {
@@ -121,29 +139,18 @@ describe('FeaturesList', () => {
   it('initializes form with correct values', () => {
     renderWithProviders(<FeaturesList />);
 
-    // Get checkboxes
-    const billingCheckbox = screen.getByTestId('billing.enabled');
-    const supportCheckbox = screen.getByTestId('support.enabled');
-
-    // Check initial values
-    expect(billingCheckbox).toBeChecked();
-    expect(supportCheckbox).not.toBeChecked();
+    expect(stateOf('billing.enabled')).toBe('Everyone');
+    expect(stateOf('support.enabled')).toBe('Off');
   });
 
   it('handles successful form submission', async () => {
     renderWithProviders(<FeaturesList />);
 
-    // Get checkboxes
-    const billingCheckbox = screen.getByTestId('billing.enabled');
-    const supportCheckbox = screen.getByTestId('support.enabled');
+    await choose('billing.enabled', 'Off');
+    await choose('support.enabled', 'Everyone');
 
-    // Toggle checkboxes
-    await userEvent.click(billingCheckbox);
-    await userEvent.click(supportCheckbox);
-
-    // Verify new values
-    expect(billingCheckbox).not.toBeChecked();
-    expect(supportCheckbox).toBeChecked();
+    expect(stateOf('billing.enabled')).toBe('Off');
+    expect(stateOf('support.enabled')).toBe('Everyone');
 
     // Submit form
     const submitButton = screen.getByRole('button', { name: /Save/i });
@@ -255,11 +262,10 @@ describe('FeaturesList', () => {
     applyUserFeatures({ support: { enabled: true } });
     renderWithProviders(<FeaturesList />);
 
-    // The Support tab is not the open one, so its switch is found by test id.
-    expect(screen.getByTestId('support.enabled')).not.toBeChecked();
+    expect(stateOf('support.enabled')).toBe('Off');
   });
 
-  it('offers the audience of user-scoped features with their rule count', async () => {
+  const mockScopesAndRules = (rules: any[]) => {
     vi.mocked(metadataFeaturesRetrieve).mockResolvedValue({
       data: {
         features: [
@@ -278,22 +284,152 @@ describe('FeaturesList', () => {
       },
     } as any);
     vi.mocked(featureRulesList).mockResolvedValue({
-      data: [
-        { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
-        { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
-      ],
-      response: { headers: new Headers({ 'x-result-count': '2' }) },
+      data: rules,
+      response: {
+        headers: new Headers({ 'x-result-count': `${rules.length}` }),
+      },
     } as any);
+  };
+
+  it('gives user-scoped features Off, Everyone and Selected users with their rule count', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+      { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
+    ]);
     renderWithProviders(<FeaturesList />);
 
+    await waitFor(() =>
+      expect(stateOf('billing.enabled')).toBe('Selected users (1)'),
+    );
+    // A deployment-scoped feature cannot target selected users.
     expect(
-      await screen.findByTestId('feature-audience-billing.enabled'),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByTestId('feature-audience-count-billing.enabled'),
-    ).toHaveTextContent('1');
-    expect(
-      screen.queryByTestId('feature-audience-support.enabled'),
+      within(screen.getByTestId('support.enabled')).queryByRole('radio', {
+        name: /Selected users/,
+        hidden: true,
+      }),
     ).not.toBeInTheDocument();
+  });
+
+  // The global modal mock: one openDialog shared by every useModal() call.
+  const openDialog = () => useModal().openDialog;
+
+  it('opens the rules when Selected users is chosen with none to turn on', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: true },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(
+        within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+          name: 'Selected users',
+          hidden: true,
+        }),
+      ).toBeInTheDocument(),
+    );
+    await choose('billing.enabled', 'Selected users');
+
+    expect(openDialog()).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        resolve: expect.objectContaining({ featureKey: 'billing.enabled' }),
+      }),
+    );
+    // Off until a rule exists; saving turns the global value off.
+    expect(stateOf('billing.enabled')).toBe('Off');
+  });
+
+  it('resumes the paused rules of a feature switched to Selected users', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: false },
+      { uuid: 'r2', feature_key: 'billing.enabled', is_active: false },
+    ]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(
+        within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+          name: 'Selected users',
+          hidden: true,
+        }),
+      ).toBeInTheDocument(),
+    );
+    await choose('billing.enabled', 'Selected users');
+    expect(stateOf('billing.enabled')).toBe('Selected users (2)');
+    expect(openDialog()).not.toHaveBeenCalled();
+    await userEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() =>
+      expect(featureRulesPartialUpdate).toHaveBeenCalledTimes(2),
+    );
+    expect(featureRulesPartialUpdate).toHaveBeenCalledWith({
+      path: { uuid: 'r1' },
+      body: { is_active: true },
+    });
+  });
+
+  it('deactivates the rules of a feature switched Off from Selected users', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+    ]);
+    renderWithProviders(<FeaturesList />);
+
+    await waitFor(() =>
+      expect(stateOf('billing.enabled')).toBe('Selected users (1)'),
+    );
+    await userEvent.click(
+      within(screen.getByTestId('billing.enabled')).getByRole('radio', {
+        name: 'Off',
+        hidden: true,
+      }),
+    );
+    expect(stateOf('billing.enabled')).toBe('Off');
+    await userEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() =>
+      expect(featureRulesPartialUpdate).toHaveBeenCalledWith({
+        path: { uuid: 'r1' },
+        body: { is_active: false },
+      }),
+    );
+    expect(featureValues).toHaveBeenCalledWith({
+      body: { billing: { enabled: false }, support: { enabled: false } },
+    });
+  });
+
+  it('shows support the audience of user-scoped features read-only', async () => {
+    ENV.FEATURES = {
+      billing: { enabled: false },
+      support: { enabled: false },
+    } as any;
+    rememberPublicFeatures();
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      is_support: true,
+    } as any);
+    mockScopesAndRules([
+      { uuid: 'r1', feature_key: 'billing.enabled', is_active: true },
+    ]);
+    renderWithProviders(<FeaturesList />);
+
+    expect(await screen.findByText('Selected users (1)')).toBeInTheDocument();
   });
 });

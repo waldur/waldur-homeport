@@ -1,6 +1,7 @@
 import {
   MagnifyingGlassIcon,
   PauseIcon,
+  PlusCircleIcon,
   PlayIcon,
   UsersThreeIcon,
 } from '@phosphor-icons/react';
@@ -14,13 +15,14 @@ import {
   featureRulesPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
-import { CreateModalButton, EditModalButton } from '@/core/buttons';
+import { EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -176,9 +178,9 @@ const MatchedUsers: FC<{ row: FeatureRule }> = ({ row }) => {
       <div className="flex items-center gap-1.5">
         <UsersThreeIcon weight="bold" />
         {data.complete
-          ? translate('Matches {count} active users.', { count: data.count })
+          ? translate('Matches {count} active users', { count: data.count })
           : translate(
-              'Matches at least {count} of the first {checked} active users checked.',
+              'Matches at least {count} of the first {checked} active users checked',
               { count: data.count, checked: data.checked },
             )}
       </div>
@@ -237,8 +239,9 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
     <ModalDialog
       title={translate('Who gets {feature}', { feature: featureLabel })}
       subtitle={translate(
-        'Users matched by any active rule get it, in addition to everyone it is switched on for.',
+        'Users matched by any active rule get it, in addition to everyone it is switched on for',
       )}
+      footer={<CloseDialogButton label={translate('Close')} />}
     >
       <Table<FeatureRule>
         {...tableProps}
@@ -272,7 +275,34 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
           },
         ]}
         title={translate('Rules')}
+        headerClassName="min-h-[40px] py-0"
+        titleClassName="h4 font-medium text-secondary"
+        hideRefresh
         verboseName={translate('rules')}
+        minHeight="auto"
+        // The card draws the one border; a table in a dialog adds its own.
+        className="[&_[data-slot=table-responsive]]:border-0"
+        tableActions={
+          canEdit ? (
+            <BaseButton
+              variant="primary"
+              size="sm"
+              iconNode={<PlusCircleIcon weight="bold" />}
+              label={translate('Add rule')}
+              onClick={() =>
+                openDialog(FeatureRuleFormDialog, {
+                  resolve: {
+                    featureKey,
+                    featureLabel,
+                    refetch: tableProps.fetch,
+                    back,
+                  },
+                  size: 'lg',
+                })
+              }
+            />
+          ) : null
+        }
         expandableRow={MatchedUsers}
         rowActions={({ row }) => (
           <ActionsDropdown
@@ -282,20 +312,6 @@ export const FeatureRulesDialog: FC<FeatureRulesDialogProps> = ({
             actions={canEdit ? STAFF_ACTIONS : SUPPORT_ACTIONS}
           />
         )}
-        tableActions={
-          canEdit ? (
-            <CreateModalButton
-              dialog={FeatureRuleFormDialog}
-              resolve={{
-                featureKey,
-                featureLabel,
-                refetch: tableProps.fetch,
-                back,
-              }}
-              title={translate('Add rule')}
-            />
-          ) : null
-        }
       />
     </ModalDialog>
   );

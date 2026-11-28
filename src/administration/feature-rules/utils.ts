@@ -180,11 +180,10 @@ export const countActiveRules = (rules: FeatureRule[]) =>
     return counts;
   }, {});
 
-/**
- * Active rules per feature key. Only staff and support may list rules, so
- * nobody else asks.
- */
-export const useActiveRuleCounts = (enabled: boolean) => {
+const NO_RULES: FeatureRule[] = [];
+
+/** Every feature rule. Only staff and support may list rules, so nobody else asks. */
+export const useFeatureRules = (enabled: boolean) => {
   const { data } = useQuery({
     queryKey: FEATURE_RULES_QUERY_KEY,
     queryFn: () =>
@@ -194,7 +193,27 @@ export const useActiveRuleCounts = (enabled: boolean) => {
     enabled,
     staleTime: 30_000,
   });
-  return useMemo(() => (data ? countActiveRules(data) : {}), [data]);
+  return data ?? NO_RULES;
+};
+
+/** Active rules per feature key. */
+export const useActiveRuleCounts = (enabled: boolean) => {
+  const rules = useFeatureRules(enabled);
+  return useMemo(() => countActiveRules(rules), [rules]);
+};
+
+/** Inactive rules per feature key: what turning a feature Off left paused. */
+export const useInactiveRuleCounts = (enabled: boolean) => {
+  const rules = useFeatureRules(enabled);
+  return useMemo(
+    () =>
+      countActiveRules(
+        rules
+          .filter((rule) => rule.is_active === false)
+          .map((rule) => ({ ...rule, is_active: true })),
+      ),
+    [rules],
+  );
 };
 
 const EMPTY_KEYS: ReadonlySet<string> = new Set();

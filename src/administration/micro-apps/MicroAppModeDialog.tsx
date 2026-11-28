@@ -29,14 +29,14 @@ const CHOICES: MicroAppChoice[] = ['feature', 'off', 'all', 'audience'];
 const choiceDescription = (choice: MicroAppChoice) =>
   ({
     feature: translate(
-      'Listed for the users the app is meant for while the micro-apps feature is on, as before settings existed.',
+      'Listed for the users the app is meant for while the micro-apps feature is on, as before settings existed',
     ),
     off: translate(
-      'Never listed, and opening it shows that it is not available.',
+      'Never listed, and opening it shows that it is not available',
     ),
-    all: translate('Listed for everyone the app is meant for.'),
+    all: translate('Listed for everyone the app is meant for'),
     audience: translate(
-      'Listed only for the users its rules match, among those the app is meant for.',
+      'Listed only for the users its rules match, among those the app is meant for',
     ),
   })[choice];
 
@@ -106,7 +106,7 @@ export const MicroAppModeDialog: FC<MicroAppModeDialogProps> = ({
                 variant="warning"
                 type="floating"
                 title={translate(
-                  'The {count} rules that pick its users will be deleted.',
+                  'The {count} rules that pick its users will be deleted',
                   { count: row.setting.rules_count },
                 )}
               />

@@ -116,7 +116,7 @@ export const FeatureRuleTestMatchDialog: FC<
                     variant="warning"
                     type="floating"
                     title={translate(
-                      'The rule is inactive, so it turns nothing on until it is activated.',
+                      'The rule is inactive, so it turns nothing on until it is activated',
                     )}
                     className="mb-2.5"
                   />
@@ -126,7 +126,7 @@ export const FeatureRuleTestMatchDialog: FC<
                     variant="info"
                     type="floating"
                     title={translate(
-                      'The feature is already on for everyone, so this rule changes nothing.',
+                      'The feature is already on for everyone, so this rule changes nothing',
                     )}
                     className="mb-2.5"
                   />
